@@ -62,7 +62,7 @@
 			"name": "keyword.operator.cpp"
 		},
 		{
-			"match": "\\b(class|decltype|wchar_t|char16_t|char32_t)\\b",
+			"match": "\\b(decltype|wchar_t|char16_t|char32_t)\\b",
 			"name": "storage.type.cpp"
 		},
 		{
@@ -144,18 +144,24 @@
                 ]
         },
         "template_definition_argument" : {
-            "match" : "\\s*(typename|class|\\w) +(?:([a-zA-Z_][a-zA-Z_0-9]*)|(\\.\\.\\.))(,?)\\s*",
+            "match" : "\\s*(?:(typename)|(class)|(\\w)) +(?:([a-zA-Z_][a-zA-Z_0-9]*)|(\\.\\.\\.))(,?)\\s*",
             "captures" : {
                 "1" : {
-                    "name" : "storage.type.template.cpp"
+                    "name" : "storage.type.typename.template.cpp"
                 },
                 "2" : {
-                    "name" : "entity.name.type.template.cpp"
+                    "name" : "storage.type.class.template.cpp"
                 },
                 "3" : {
-                    "name" : "meta.template.operator.ellipsis"
+                    "name" : "storage.type.other.template.cpp"
                 },
                 "4" : {
+                    "name" : "entity.name.type.template.cpp"
+                },
+                "5" : {
+                    "name" : "meta.template.operator.ellipsis"
+                },
+                "6" : {
                     "name" : "meta.template.operator.comma.cpp"
                 }
             }
@@ -256,7 +262,7 @@
 							"name": "keyword.control.cpp"
 						},
 						"2": {
-							"name": "storage.type.cpp"
+							"name": "storage.type.namespace.cpp"
 						},
 						"3": {
 							"name": "entity.name.type.cpp"
@@ -269,7 +275,7 @@
 					"begin": "\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+",
 					"beginCaptures": {
 						"1": {
-							"name": "storage.type.cpp"
+							"name": "storage.type.namespace.cpp"
 						},
 						"2": {
 							"name": "entity.name.type.cpp"
@@ -314,21 +320,24 @@
 					]
 				},
 				{
-					"begin": "\\b(class|struct)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
+					"begin": "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
 					"beginCaptures": {
 						"1": {
-							"name": "storage.type.cpp"
+							"name": "storage.type.class.cpp"
 						},
 						"2": {
+							"name": "storage.type.struct.cpp"
+						},
+						"3": {
 							"name": "entity.name.type.cpp"
 						},
-						"4": {
+						"5": {
 							"name": "storage.type.modifier.cpp"
 						},
-						"5": {
+						"6": {
 							"name": "entity.name.type.inherited.cpp"
 						},
-						"6": {
+						"7": {
 							"patterns": [
 								{
 									"match": "(public|protected|private)",
