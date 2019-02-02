@@ -305,6 +305,17 @@
 		}
 	],
 	"repository": {
+        "probably_a_parameter" : {
+            "match" : "(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?==)|(?<=[&*>a-zA-Z0-9_\\]\\)])\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=,|\\)))",
+            "captures" : {
+                "1" : {
+                    "name" : "variable.parameter.probably.defaulted.c"
+                },
+                "2" : {
+                    "name" : "variable.parameter.probably.c"
+                }
+            }
+        },
         "operator_overload" : {
             "begin": "((?:\\b[A-Za-z_][A-Za-z0-9_]*\\b::)*)(operator)([-*&<>=+!][-*&<>=+!]?|\\(\\)|\\[\\])\\s*(\\()",
             "beginCaptures": {
@@ -329,6 +340,9 @@
             },
             "name": "meta.function.c",
             "patterns": [
+                {
+                    "include" : "#probably_a_parameter"
+                },
                 {
                     "include": "#function-innards"
                 }
@@ -1878,6 +1892,7 @@
 					"include": "#vararg_ellipses"
 				},
 				{
+                    "name" : "meta.function.definition.parameters",
 					"begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
 					"beginCaptures": {
 						"1": {
@@ -1894,6 +1909,9 @@
 						}
 					},
 					"patterns": [
+                        {
+                            "include": "#probably_a_parameter"
+                        },
 						{
 							"include": "#function-innards"
 						}
