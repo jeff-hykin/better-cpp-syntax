@@ -43,6 +43,9 @@
 			"name": "constant.language.cpp"
 		},
 		{
+			"include" : "#template_definition"
+		},
+		{
 			"match": "\\btemplate\\b\\s*",
 			"name": "storage.type.template.cpp"
 		},
@@ -117,6 +120,46 @@
 		}
 	],
 	"repository": {
+        "template_definition": {
+            "begin": "\\b(template)\\s*(<)\\s*",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.template.cpp"
+				},
+				"2": {
+					"name": "meta.template.angle-brackets.start.cpp"
+				}
+			},
+			"end": ">",
+			"endCaptures": {
+				"0": {
+					"name": "meta.template.angle-brackets.end.cpp"
+				}
+			},
+			"name": "template.definition",
+            "patterns": [
+                    {
+                        "include": "#template_definition_argument"
+                    }
+                ]
+        },
+        "template_definition_argument" : {
+            "match" : "\\s*(typename|class|\\w) +(?:([a-zA-Z_][a-zA-Z_0-9]*)|(\\.\\.\\.))(,?)\\s*",
+            "captures" : {
+                "1" : {
+                    "name" : "storage.type.template.cpp"
+                },
+                "2" : {
+                    "name" : "entity.name.type.template.cpp"
+                },
+                "3" : {
+                    "name" : "meta.template.operator.ellipsis"
+                },
+                "4" : {
+                    "name" : "meta.template.operator.comma.cpp"
+                }
+            }
+        },
 		"angle_brackets": {
 			"begin": "<",
 			"end": ">",
