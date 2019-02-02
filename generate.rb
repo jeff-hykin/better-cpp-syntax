@@ -275,7 +275,7 @@ $__any_fixed_type = /(#{any_modifier_only_word})?#{white_space}((?:#{any_singlul
 $_with_reference = /\s*(&|&&)\s*/
 $_with_dereference = /\s*(|\**)\s*/
 with_ref_and_deref = /\s*(?:&|&&|\**)\s*/
-
+function_cannot_be = /while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas/
 
 possible_type_endings = /[&*>a-zA-Z0-9_\]\)]/
 
