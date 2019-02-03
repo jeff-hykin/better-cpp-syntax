@@ -20,7 +20,7 @@
 		},
 		{
 			"match": "\\b(private:|protected:|public:)",
-			"name": "storage.type.access.modifier.cpp"
+			"name": "storage.type.modifier.access.cpp"
 		},
 		{
 			"match": "\\b(catch|try|throw|using)\\b",
@@ -332,7 +332,7 @@
 							"name": "entity.name.type.cpp"
 						},
 						"5": {
-							"name": "storage.type.modifier.cpp"
+							"name": "storage.type.modifier.access.cpp"
 						},
 						"6": {
 							"name": "entity.name.type.inherited.cpp"
@@ -341,7 +341,7 @@
 							"patterns": [
 								{
 									"match": "(public|protected|private)",
-									"name": "storage.type.modifier.cpp"
+									"name": "storage.type.modifier.access.cpp"
 								},
 								{
 									"match": "[_A-Za-z][_A-Za-z0-9]*",
