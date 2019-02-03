@@ -336,7 +336,7 @@
             "begin": "((?:\\b[A-Za-z_][A-Za-z0-9_]*\\b::)*)(operator)([-*&<>=+!][-*&<>=+!]?|\\(\\)|\\[\\])\\s*(\\()",
             "beginCaptures": {
                 "1": {
-                    "name": "support.operator.scope.c"
+                    "name": "entity.scope.c"
                 },
                 "2": {
                     "name": "keyword.operator.overload.c"
