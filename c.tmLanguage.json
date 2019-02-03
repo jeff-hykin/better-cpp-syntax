@@ -348,8 +348,13 @@
                 }
             ]
         },
-		"access": {
-			"captures": {
+		"access-method": {
+            "name" : "meta.function-call.member.c",
+			"begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.object.c"
+				},
 				"2": {
 					"name": "punctuation.separator.dot-access.c"
 				},
@@ -357,10 +362,80 @@
 					"name": "punctuation.separator.pointer-access.c"
 				},
 				"4": {
-					"name": "variable.other.member.c"
+                    "patterns" : [
+                        {
+                            "match" : "\\.",
+                            "name" : "punctuation.separator.dot-access.c"
+                        },
+                        {
+                            "match" : "->",
+                            "name" : "punctuation.separator.pointer-access.c"
+                        },
+                        {
+                            "match" : "[a-zA-Z_][a-zA-Z_0-9]*",
+                            "name" : "variable.object.c"
+                        },
+                        {
+                            "name" : "everything.else",
+                            "match" : ".+"
+                        }
+                    ]
+				},
+				"5": {
+					"name": "entity.name.function.member.c"
+				},
+				"6": {
+					"name": "punctuation.section.arguments.begin.bracket.round.function.member.c"
 				}
 			},
-			"match": "((\\.)|(->))\\s*(([a-zA-Z_][a-zA-Z_0-9]*)\\b(?!\\s*\\())?"
+            "end" : "\\)",
+            "endCaptures" : {
+                "0" : {
+                    "name" : "punctuation.section.arguments.end.bracket.round.function.member.c"
+                }
+            },
+			"patterns": [
+				{
+					"include": "#function-call-innards"
+				}
+			]
+		},
+		"access-member": {
+            "match": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)",
+			"captures": {
+				"1": {
+					"name": "variable.object.c"
+				},
+				"2": {
+					"name": "punctuation.separator.dot-access.c"
+				},
+				"3": {
+					"name": "punctuation.separator.pointer-access.c"
+				},
+				"4": {
+                    "patterns" : [
+                        {
+                            "match" : "\\.",
+                            "name" : "punctuation.separator.dot-access.c"
+                        },
+                        {
+                            "match" : "->",
+                            "name" : "punctuation.separator.pointer-access.c"
+                        },
+                        {
+                            "match" : "[a-zA-Z_][a-zA-Z_0-9]*",
+                            "name" : "variable.object.c"
+                        },
+                        {
+                            "name" : "everything.else",
+                            "match" : ".+"
+                        }
+                    ]
+				},
+				"5": {
+					"name": "variable.other.member.c"
+				}
+			}
 		},
 		"block": {
 			"patterns": [
@@ -398,7 +473,10 @@
 					"include": "#preprocessor-rule-conditional-block"
 				},
 				{
-					"include": "#access"
+					"include": "#access-method"
+				},
+				{
+					"include": "#access-member"
 				},
 				{
 					"include": "#libc"
@@ -683,7 +761,10 @@
 					},
 					"patterns": [
 						{
-							"include": "#access"
+							"include": "#access-method"
+						},
+						{
+							"include": "#access-member"
 						},
 						{
 							"include": "#libc"
@@ -1775,7 +1856,10 @@
 					]
 				},
 				{
-					"include": "#access"
+					"include": "#access-method"
+				},
+				{
+					"include": "#access-member"
 				},
 				{
 					"include": "#libc"
@@ -1826,7 +1910,10 @@
 					"include": "#vararg_ellipses"
 				},
 				{
-					"include": "#access"
+					"include": "#access-method"
+				},
+				{
+					"include": "#access-member"
 				},
 				{
 					"include": "#operators"
@@ -1950,7 +2037,10 @@
 					"include": "#storage_types"
 				},
 				{
-					"include": "#access"
+					"include": "#access-method"
+				},
+				{
+					"include": "#access-member"
 				},
 				{
 					"include": "#operators"
