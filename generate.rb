@@ -57,7 +57,7 @@ word_operators = [
     # INCOMEPLETE
 ]
 
-
+all_symbol_operators =  [math_operators, logic_operators, comparision_operators, bitwise_operators, assignment_operators, special_operators].flatten
 
 non_var_declare_type = [
     "friend",
@@ -269,6 +269,7 @@ variable_name = /\b[a-zA-Z_][a-zA-Z_0-9]*\b/
 $_variable_name = /\b([a-zA-Z_][a-zA-Z_0-9]*)\b/
 $_match_any_number_of_scopes = /((?:\b[A-Za-z_][A-Za-z0-9_]*\b::)*)/
 any_non_var_declare_type = "\\b(?:#{non_var_declare_type*"|"})\\b"
+any_operator = "#{all_symbol_operators.map {|each| Regexp.escape(each) }.join('|')}"
 any_modifier_only_word = "\\b(?:#{type_modifier_only_list*"|"})\\b"
 any_singlular_type = "\\b(?:#{basic_type_specifiers*"|" + known_types*"|"})\\b"
 $__any_fixed_type = /(#{any_modifier_only_word})?#{white_space}((?:#{any_singlular_type}#{white_space})+)/
@@ -298,5 +299,5 @@ $__probably_a_type = boundaryDoesNotStartWith(any_non_var_declare_type).and($_ma
 # had to do this one manually because the readable/english way was timing out durning runtime (in the editor)
 $__probably_a_parameter = /(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\s*(?==)|(?:(?<=[a-zA-Z0-9_])\s+|(?<=[&*>\]\)])\s*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=(?:\[\]|)(,|\))))/
 
-p $__probably_a_parameter.to_s
-
+# p $__probably_a_parameter.to_s
+p any_operator
