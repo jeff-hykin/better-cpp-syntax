@@ -285,15 +285,24 @@
 			"include": "#line_continuation_character"
 		},
 		{
-			"match": "(\\[)|(\\])",
-			"captures": {
-				"1": {
-					"name": "punctuation.definition.begin.bracket.square.c"
-				},
-				"2": {
-					"name": "punctuation.definition.end.bracket.square.c"
-				}
-			}
+            "name" : "meta.bracket.square.access.c",
+            "begin" : "\\[",
+            "beginCaptures" : {
+                "0" : {
+                    "name": "punctuation.definition.begin.bracket.square.c"
+                }
+            },
+            "end" : "\\]",
+            "endCaptures" : {
+                "0" : {
+                    "name": "punctuation.definition.end.bracket.square.c"
+                }
+            },
+            "patterns" : [
+                {
+                    "include" : "#function-call-innards"
+                }
+            ]
 		},
 		{
 			"match": ";",
