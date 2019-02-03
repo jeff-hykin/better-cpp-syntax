@@ -282,7 +282,12 @@
                             "name": "entity.name.type.cpp"
                         }
                     },
-                    "end": "(;)",
+                    "end": ";",
+                    "endCaptures" : {
+                        "0" : {
+                            "name" : "punctuation.terminator.statement.c"
+                        }
+                    },
                     "name": "meta.using-namespace-declaration.cpp"
                 },
                 {
