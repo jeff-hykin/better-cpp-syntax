@@ -920,8 +920,12 @@
         "storage_types": {
             "patterns": [
                 {
-                    "match": "\\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\b",
+                    "match": "\\b(auto|bool|_Bool|char|_Complex|double|float|_Imaginary|int|long|short|signed|typedef|unsigned|void)\\b",
                     "name": "storage.type.c"
+                },
+                {
+                    "match" : "\\b(asm|__asm__|enum|struct|union)\\b",
+                    "name" : "storage.type.$1.c"
                 }
             ]
         },
