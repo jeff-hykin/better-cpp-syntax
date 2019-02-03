@@ -284,11 +284,18 @@
 		{
 			"include": "#line_continuation_character"
 		},
+        {
+            "name" : "storage.modifier.array.bracket.square.c",
+            "match" : "\\[\\s*\\]"
+        },
 		{
             "name" : "meta.bracket.square.access.c",
-            "begin" : "\\[",
+            "begin" : "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))(\\[)",
             "beginCaptures" : {
-                "0" : {
+                "1" : {
+                    "name" : "variable.object.c"
+                },
+                "2" : {
                     "name": "punctuation.definition.begin.bracket.square.c"
                 }
             },
@@ -491,16 +498,28 @@
 					"include": "#c_function_call"
 				},
 				{
-					"captures": {
+                    "name": "meta.initialization.c",
+					"begin": "(?x)\n(?:\n  (?:\n    (?=\\s)(?<!else|new|return)\n    (?<=\\w) \\s+  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
+                    "beginCaptures": {
 						"1": {
 							"name": "variable.other.c"
 						},
 						"2": {
-							"name": "punctuation.definition.parameters.c"
+							"name": "punctuation.section.parens.begin.bracket.round.initialization.c"
 						}
 					},
-					"match": "(?x)\n(?:\n  (?:\n    (?=\\s)(?<!else|new|return)\n    (?<=\\w) \\s+  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
-					"name": "meta.initialization.c"
+                    "end" : "\\)",
+                    "endCaptures" : {
+                        "0" : {
+                            "name" : "punctuation.section.parens.end.bracket.round.initialization.c"
+                        }
+                    },
+                    "patterns" : [
+                        {
+                            "include" : "#function-call-innards"
+                        }
+                    ]
+					
 				},
 				{
 					"begin": "{",
