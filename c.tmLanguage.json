@@ -329,12 +329,8 @@
             "include": "#line_continuation_character"
         },
         {
-            "name": "storage.modifier.array.bracket.square.c",
-            "match": "\\[\\s*\\]"
-        },
-        {
             "name": "meta.bracket.square.access.c",
-            "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)",
+            "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
             "beginCaptures": {
                 "1": {
                     "name": "variable.object.c"
@@ -356,6 +352,10 @@
             ]
         },
         {
+            "name": "storage.modifier.array.bracket.square.c",
+            "match": "\\[\\s*\\]"
+        },
+        {
             "match": ";",
             "name": "punctuation.terminator.statement.c"
         },
@@ -366,7 +366,7 @@
     ],
     "repository": {
         "probably_a_parameter": {
-            "match": "(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?==)|(?<=[&*>a-zA-Z0-9_\\]\\)])\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=,|\\)))",
+            "match": "(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?==)|(?<=[&*>a-zA-Z0-9_\\]\\)])\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=(?:\\[\\]|)(?:,|\\))))",
             "captures": {
                 "1": {
                     "name": "variable.parameter.probably.defaulted.c"
@@ -702,6 +702,7 @@
             ]
         },
         "parens": {
+            "name" : "punctuation.section.parens",
             "begin": "\\(",
             "beginCaptures": {
                 "0": {
@@ -721,6 +722,7 @@
             ]
         },
         "parens-block": {
+            "name" : "punctuation.section.parens.block",
             "begin": "\\(",
             "beginCaptures": {
                 "0": {
