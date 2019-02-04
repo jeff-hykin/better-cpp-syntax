@@ -1,0 +1,45 @@
+{
+	"name": "better-cpp-syntax",
+	"displayName": "Better C++ Syntax",
+	"description": "The standard C++ syntax is broken and limited; this extension improves it.",
+	"version": "1.0.1",
+	"engines": {
+		"vscode": "^1.0.0"
+	},
+	"author": {
+		"name": "Jeff Hykin"
+	},
+	"publisher": "jeff-hykin",
+	"contributes": {
+		"languages": [
+			{
+				"id": "Better C++",
+				"aliases": [
+					"cpp",
+					"c++",
+					"better c++",
+					"better cpp"
+				],
+				"extensions": [
+					".cpp",
+					".h"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "c++",
+				"scopeName": "source.cpp",
+				"path": "./syntaxes/cpp.tmLanguage.json"
+			}
+		]
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"repository": {
+		"url": "https://github.com/jeff-hykin/cpp-textmate-grammer",
+		"type": "git"
+	}
+}
