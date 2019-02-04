@@ -268,7 +268,7 @@ white_space = /\s*/
 white_space_boundary = /(?<=\s)(?=\S)/
 variable_name = /\b[a-zA-Z_][a-zA-Z_0-9]*\b/
 $_variable_name = /\b([a-zA-Z_][a-zA-Z_0-9]*)\b/
-$_match_any_number_of_scopes = /((?:\b[A-Za-z_][A-Za-z0-9_]*\b::)*)/
+$_match_any_number_of_scopes = /((?:\b[A-Za-z_][A-Za-z0-9_]*(?:<[\s<>\w]*?)?::)*)/
 any_non_var_declare_type = "\\b(?:#{non_var_declare_type*"|"})\\b"
 any_operator = "#{all_symbol_operators.map {|each| Regexp.escape(each) }.join('|')}"
 any_modifier_only_word = "\\b(?:#{type_modifier_only_list*"|"})\\b"

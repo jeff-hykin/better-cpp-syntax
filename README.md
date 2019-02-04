@@ -24,8 +24,10 @@ It adds:
 Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammer
 
 ## Are their any planned improvements?
+Pull requests are welcome! Theres no way one person can test every syntax combination.
+
 Future additions:
-- Pull requests are welcome!
+- Improve the scope :: operator tags
 - Tagging for type-casting statements
 - Tagging for template-usage (rather than only template definition)
 - Tagging for custom types

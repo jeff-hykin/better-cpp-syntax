@@ -377,16 +377,16 @@
             }
         },
         "operator_overload": {
-            "begin": "((?:\\b[A-Za-z_][A-Za-z0-9_]*\\b::)*)(operator)(\\+|\\-|\\*|/|%|\\+\\+|\\-\\-|&&|\\|\\||!|==|!=|<|<=|>|>=\\ |&|\\||\\^|~|<<|>>|=|\\+=|\\-=|\\*=|/=|%=|<<=|>>=|&=|\\^=|\\|=|,|\\.|\\->|\\[\\]|\\(\\)|\\?:)\\s*(\\()",
+            "begin": "((?:\\b[A-Za-z_][A-Za-z0-9_]*(<[\\s<>\\w]*?)?::)*)(operator)(\\+|\\-|\\*|/|%|\\+\\+|\\-\\-|&&|\\|\\||!|==|!=|<|<=|>|>=\\ |&|\\||\\^|~|<<|>>|=|\\+=|\\-=|\\*=|/=|%=|<<=|>>=|&=|\\^=|\\|=|,|\\.|\\->|\\[\\]|\\(\\)|\\?:)\\s*(\\()",
             "beginCaptures": {
                 "1": {
                     "name": "entity.scope.c"
                 },
                 "2": {
-                    "name": "keyword.operator.overload.c"
+                    "name": "entity.name.operator.overload.$3.c"
                 },
                 "3": {
-                    "name": "keyword.operator.overloadee.c"
+                    "name": "entity.name.operator.overloadee.$3.c"
                 },
                 "4": {
                     "name": "punctuation.section.parameters.begin.bracket.round.c"
@@ -544,7 +544,7 @@
                 },
                 {
                     "name": "meta.initialization.c",
-                    "begin": "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
+                    "begin": "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(?<!and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
                     "beginCaptures": {
                         "1": {
                             "name": "variable.other.c"
