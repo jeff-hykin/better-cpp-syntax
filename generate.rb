@@ -261,8 +261,9 @@ end
 
 
 
-
-
+# 
+# Helper patterns for contstructing regular expressions
+# 
 white_space = /\s*/
 white_space_boundary = /(?<=\s)(?=\S)/
 variable_name = /\b[a-zA-Z_][a-zA-Z_0-9]*\b/
@@ -282,22 +283,9 @@ possible_type_endings = /[&*>a-zA-Z0-9_\]\)]/
 preceding_object = /([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\]\)]))/
 control_statements_with_paraentheses = /if|for|while|switch|catch/
 
-# problems:
-    # no diff between function call and function definition
-    # meta.initialization.c matches things it shouldnt (function calls)
-
-# edgecase decltype
-# edgecase function pointers
-# edgecase literal static arrays ex: char[]
-
-# template
-# repeated types
-
-
-$__probably_a_type = boundaryDoesNotStartWith(any_non_var_declare_type).and($_match_any_number_of_scopes).then($_variable_name)
 
 # had to do this one manually because the readable/english way was timing out durning runtime (in the editor)
 $__probably_a_parameter = /(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\s*(?==)|(?:(?<=[a-zA-Z0-9_])\s+|(?<=[&*>\]\)])\s*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=(?:\[\]|)(,|\))))/
 
-# p $__probably_a_parameter.to_s
-p any_operator
+# Output the regex in a form for the .json file
+p $__probably_a_parameter.to_s
