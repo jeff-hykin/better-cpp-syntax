@@ -2,7 +2,7 @@
 	"name": "better-cpp-syntax",
 	"displayName": "Better C++ Syntax",
 	"description": "The standard C++ syntax is broken and limited; this extension improves it.",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"engines": {
 		"vscode": "^1.0.0"
 	},
@@ -11,23 +11,6 @@
 	},
 	"publisher": "jeff-hykin",
 	"contributes": {
-		"languages": [
-			{
-				"id": "cpp",
-				"aliases": [
-					"cpp",
-					"c++",
-					"better c++",
-					"better cpp"
-				],
-				"extensions": [
-					".cpp",
-                    ".c",
-					".h"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		],
 		"grammars": [
 			{
 				"language": "cpp",
