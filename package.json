@@ -2,7 +2,7 @@
 	"name": "better-cpp-syntax",
 	"displayName": "Better C++ Syntax",
 	"description": "The standard C++ syntax is broken and limited; this extension improves it.",
-	"version": "1.0.1",
+	"version": "1.0.5",
 	"engines": {
 		"vscode": "^1.0.0"
 	},
@@ -13,7 +13,7 @@
 	"contributes": {
 		"languages": [
 			{
-				"id": "Better C++",
+				"id": "cpp",
 				"aliases": [
 					"cpp",
 					"c++",
@@ -22,6 +22,7 @@
 				],
 				"extensions": [
 					".cpp",
+                    ".c",
 					".h"
 				],
 				"configuration": "./language-configuration.json"
@@ -29,9 +30,14 @@
 		],
 		"grammars": [
 			{
-				"language": "c++",
+				"language": "cpp",
 				"scopeName": "source.cpp",
 				"path": "./syntaxes/cpp.tmLanguage.json"
+			},
+			{
+				"language": "c",
+				"scopeName": "source.c",
+				"path": "./syntaxes/c.tmLanguage.json"
 			}
 		]
 	},

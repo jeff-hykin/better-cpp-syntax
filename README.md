@@ -1,6 +1,7 @@
 # cpp-textmate-grammer
 An update to the syntax highlighting of c++ code
 
+NOTE: currently the importing of the syntax is broken. This will be fixed shortly.
 
 This fixes:
 - The issue of single quotes inside #error and #warning being highlighted when then shouldn't be 
