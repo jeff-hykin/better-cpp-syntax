@@ -1,34 +1,35 @@
 {
-	"name": "better-cpp-syntax",
-	"displayName": "Better C++ Syntax",
-	"description": "The standard C++ syntax has a decent number of bugs, this extension remedies them",
-	"version": "1.0.14",
-	"engines": {
-		"vscode": "^1.0.0"
-	},
-	"author": {
-		"name": "Jeff Hykin"
-	},
-	"publisher": "jeff-hykin",
-	"contributes": {
-		"grammars": [
-			{
-				"language": "cpp",
-				"scopeName": "source.cpp",
-				"path": "./syntaxes/cpp.tmLanguage.json"
-			},
-			{
-				"language": "c",
-				"scopeName": "source.c",
-				"path": "./syntaxes/c.tmLanguage.json"
-			}
-		]
-	},
-	"categories": [
-		"Programming Languages"
-	],
-	"repository": {
-		"url": "https://github.com/jeff-hykin/cpp-textmate-grammer",
-		"type": "git"
-	}
+    "name": "better-cpp-syntax",
+    "displayName": "Better C++ Syntax",
+    "description": "The standard C++ syntax has a decent number of bugs, this extension remedies them",
+    "icon": "icon.png",
+    "version": "1.0.15",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "author": {
+        "name": "Jeff Hykin"
+    },
+    "publisher": "jeff-hykin",
+    "contributes": {
+        "grammars": [
+            {
+                "language": "cpp",
+                "scopeName": "source.cpp",
+                "path": "./syntaxes/cpp.tmLanguage.json"
+            },
+            {
+                "language": "c",
+                "scopeName": "source.c",
+                "path": "./syntaxes/c.tmLanguage.json"
+            }
+        ]
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "repository": {
+        "url": "https://github.com/jeff-hykin/cpp-textmate-grammer",
+        "type": "git"
+    }
 }
