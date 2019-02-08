@@ -38,3 +38,10 @@ Future additions:
 - Tagging for custom types
 - Better support for function pointer tagging
 - Better support for dereferenced/pointer tagging
+
+## Did you write all of this youself?
+No, absolutely not. This is only a modication of https://github.com/atom/language-c;
+
+## Did you write all the improvements yourself?
+Nope, the #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
+Thanks fnadeau! that was a well written soltuion.
