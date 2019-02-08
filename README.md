@@ -1,4 +1,4 @@
-# cpp-textmate-grammer
+# cpp-textmate-grammar
 An update to the syntax highlighting of c++ code
 
 ## What does this do?
@@ -26,7 +26,7 @@ It adds:
 ![with-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240803-8fd84980-2897-11e9-987c-9c71c19d52fa.png)
 
 ## What if I see a highlighting bug
-Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammer
+Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
 
 ## Are their any planned improvements?
 Pull requests are welcome! Theres no way one person can test every syntax combination.
