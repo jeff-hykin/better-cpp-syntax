@@ -1,4 +1,4 @@
-# What does this do? ()?
+# What does this do?
 It improves the highlighting of C++ and C code (See screenshots). 
 
 ## And how do I use it?
