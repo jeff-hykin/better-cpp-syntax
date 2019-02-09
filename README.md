@@ -33,6 +33,7 @@ Pull requests are welcome! Theres no way one person can test every syntax combin
 
 Future additions:
 - Improve the scope :: operator tags
+- Fix the ## issue (https://github.com/atom/language-c/issues/318)
 - Tagging for type-casting statements
 - Tagging for template-usage (rather than only template definition)
 - Tagging for custom types
