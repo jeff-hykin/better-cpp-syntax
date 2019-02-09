@@ -25,7 +25,7 @@ It adds:
 - Parameter highlighting
 - better object identification
 
-Planned Future fixes/featues:
+Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues
 - Fix more of the easy-to-fix bugs from https://github.com/atom/language-c/issues
   - Fix the ## issue (https://github.com/atom/language-c/issues/318)
