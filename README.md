@@ -1,7 +1,7 @@
 # What does this do?
 It improves the highlighting of C++ and C code (See screenshots). 
 
-## And how do I use it?
+## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all C++/C files.
 
 ### Normal C++
