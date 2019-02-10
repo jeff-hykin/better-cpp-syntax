@@ -19,8 +19,10 @@ It fixes:
 - The missing operator overloading symbols
 - The failure to tag operator overloading functions as functions
 - The failure to tag implicit operator overrides
+- The marking of some %'s as invalid inside of strings
 - The highlighting of namespaces with ::'s https://github.com/atom/language-c/issues/260 
 - The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
+- And many many more issues
 
 It adds:
 - Parameter highlighting
@@ -37,7 +39,6 @@ Planned future fixes/featues:
   - Fix multiple inheritance https://github.com/atom/language-c/issues/245
   - Escaping the percent sign https://github.com/atom/language-c/issues/289
 - Fix function-pointer tagging
-- Fix constructor tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for probably-a-custom-type words
