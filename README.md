@@ -48,9 +48,7 @@ Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
 I love regular expressions, and I plan on actively maintaining this.
 
 ## So whats the deal with the built-in C++ stynax?
-There's missing keywords, misspelled keywords, there's copy-and-pasted patterns, duplicated logic, and groups that were matched but forgot to ever be tagged. The standard tagging for C++ (in for both Atom and VS Code) looks like a bunch of hacked-together solutions with no standards, it is very suprising. The regex and pattern matching is so complicated to read that I think nobody wants to change it.
-
-I'm working on standardizing it by having the json files be generated completely by a ruby file. It makes the regex readable and get rid of the need to copy and paste patterns.
+There's missing keywords, misspelled keywords, there's copy-and-pasted patterns, duplicated logic, and groups that were matched but forgot to ever be tagged. The standard tagging for C++ looks like a bunch of hacked-together solutions with no standards, it is very suprising. The regex and pattern matching is so complicated to read that I think nobody wants to change it. I hope to change this by having the json files be generated completely by a ruby file. It makes the regex readable and gets rid of the need to copy and paste patterns.
 
 ## Did you write all of this youself?
 No, absolutely not. This is only a modifcation of https://github.com/atom/language-c;

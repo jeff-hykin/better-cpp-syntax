@@ -333,8 +333,7 @@ end
 
 
 # todo
-    # replace the strings with regex literals
-    # get rid of the C dependency for C++
+    # replace all strings with regex literals
     # add adjectives:
         # canHaveBrackets
         # mustHaveBrackets
@@ -345,19 +344,14 @@ end
         # cannotBeFunctionName
         # cannotBeVariableName
     # have all patterns with keywords be dynamically generated
-
+    # lambda -> 
+    # operator with words/space
 
 # Edgecases to remember
     # ... inside of catch()
     # operator overload for user-defined literal 
     # labels for goto
     # lambda syntax
-
-# fixme
-    # lambda -> 
-    # operator with words/space
-
-
 #
 # Helpers
 #
@@ -387,7 +381,8 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # 
 character_in_variable_name = /[a-zA-Z0-9_]/
 variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
-variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)  # word bounds are inefficient, but they are accurate
+# word bounds are inefficient, but they are accurate
+variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)
 
 # 
 # Scope resolution
@@ -463,7 +458,7 @@ cpp_grammar = {
         "Also the ruby source is very open to merge requests, so please make one if something could be improved",
         "This file essentially an updated/improved fork of the atom syntax https://github.com/atom/language-c/blob/master/grammars/c%2B%2B.cson",
     ],
-    version: "https://github.com/atom/language-c/commit/3a269f88b12e512fb9495dc006a1dabf325d3d7f",
+    version: "https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/generate.rb",
     name: "C++",
     scopeName: "source.cpp",
     patterns: [
