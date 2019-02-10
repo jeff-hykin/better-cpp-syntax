@@ -327,6 +327,10 @@ for each in $tokens
     if each[:isPrimitive] != true and each[:isType] == true
         each[:isNotPrimitive] = true
     end
+    # isPreprocessorDirective
+    if each[:isPreprocessorDirective] != true
+        each[:isNotPreprocessorDirective] = true
+    end
 end
 
 
@@ -453,10 +457,10 @@ member_pattern_5_groups = before_the_access_operator_1_group.then(member_operato
 # 
 # Functions
 # 
-        cant_be_a_function_name = anyTokenThat(:isWord)
+        cant_be_a_function_name = anyTokenThat(:isWord, :isNotPreprocessorDirective)
         # this next line needs to be updated (its legacy)
         probably_intended_scope_resolve = /(?:[A-Za-z_][A-Za-z0-9_]*+|::)++/
-    avoid_keywords = lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
+    avoid_keywords = lookBehindToAvoid(character_in_variable_name).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
 function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
 
