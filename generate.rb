@@ -2647,7 +2647,7 @@ cpp_grammar = {
         },
         {
             match: -/\bdelete\b(\s*\[\])?|\bnew\b(?!\])/,
-            name: "keyword.operator.memory.cpp"
+            name: "keyword.control.cpp"
         },
         {
             match: -/\b(f|m)[A-Z]\w*\b/,
