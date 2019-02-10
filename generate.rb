@@ -233,8 +233,6 @@ $tokens = [
     { representation: "NULL"                 , name: "NULL"             , isLiteral: true },
     { representation: "true"                 , name: "true"             , isLiteral: true },
     { representation: "false"                , name: "false"            , isLiteral: true },
-    { representation: "TRUE"                 , name: "TRUE"             , isLiteral: true },
-    { representation: "FALSE"                , name: "FALSE"            , isLiteral: true },
     { representation: "nullptr"              , name: "nullptr"          , isLiteral: true },
     # type creators
     { representation: "class"                , name: "class"           , isTypeCreator: true},
@@ -333,6 +331,8 @@ end
 
 
 # todo
+    # turn off #constructor
+    # fix parens block punctuation.section.parens.block
     # replace all strings with regex literals
     # add adjectives:
         # canHaveBrackets
@@ -346,6 +346,7 @@ end
     # have all patterns with keywords be dynamically generated
     # lambda -> 
     # operator with words/space
+    # add user-defined constants variable.other.constant.user-defined.cpp
 
 # Edgecases to remember
     # ... inside of catch()
@@ -355,7 +356,7 @@ end
 #
 # Helpers
 #
-def tokensThatMatchAll(*arguments)
+def anyTokenThat(*arguments)
     matches = $tokens.select do |each_token|
         output = true
         for each_adjective in arguments
@@ -369,6 +370,8 @@ def tokensThatMatchAll(*arguments)
     return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
 end
 
+
+
 # type modifiers
 with_reference   = maybe(@spaces).then(  /&/.or /&&/  ).maybe(@spaces)
 with_dereference = maybe(@spaces).zeroOrMoreOf( /\*/  ).maybe(@spaces)
@@ -380,9 +383,20 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # variable
 # 
 character_in_variable_name = /[a-zA-Z0-9_]/
+# todo: make a better name for this function
+variableBounds = ->(regex_pattern) do
+    lookBehindToAvoid(character_in_variable_name).then(regex_pattern).lookAheadToAvoid(character_in_variable_name)
+end
 variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
 # word bounds are inefficient, but they are accurate
-variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)
+variable_name = variableBounds[variable_name_without_bounds]
+
+# 
+# Constants
+# 
+builtin_constants_1_group = variableBounds[newGroup(anyTokenThat(:isLiteral))]
+probably_user_constant_1_group = variableBounds[lookAheadToAvoid(anyTokenThat(:isWord)).then(newGroup(/[A-Z][_A-Z]*/))]
+constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
 
 # 
 # Scope resolution
@@ -400,9 +414,9 @@ preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name
 # 
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
 look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
-primitive_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
-non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isNotPrimitive)).lookAheadToAvoid(character_in_variable_name)
-known_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isType)).lookAheadToAvoid(character_in_variable_name)
+primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
+non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isNotPrimitive)).lookAheadToAvoid(character_in_variable_name)
+known_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isType)).lookAheadToAvoid(character_in_variable_name)
 
 # 
 # Probably a parameter
@@ -420,9 +434,9 @@ probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably
 # operator overload
 # 
         # symbols can have spaces
-        operator_symbols = maybe(@spaces).then(tokensThatMatchAll(:canAppearAfterOperatorKeyword, :isSymbol))
+        operator_symbols = maybe(@spaces).then(anyTokenThat(:canAppearAfterOperatorKeyword, :isSymbol))
         # words must have spaces, the variable_name_without_bounds is for implicit overloads
-        operator_wordish = @spaces.then(tokensThatMatchAll(:canAppearAfterOperatorKeyword, :isWordish).or(variable_name_without_bounds))
+        operator_wordish = @spaces.then(anyTokenThat(:canAppearAfterOperatorKeyword, :isWordish).or(variable_name_without_bounds))
     after_operator_keyword = operator_symbols.or(operator_wordish)
 operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/)).then(newGroup(after_operator_keyword)).maybe(@spaces).then(newGroup(/\(/))
 
@@ -434,13 +448,13 @@ operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/))
         subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(/\./.or(/->/)).maybe(@spaces)
     subsequent_members_1_group = newGroup(zeroOrMoreOf(subsequent_object_with_operator))
     # try to avoid matching types to help with this not matching during lambda functions
-    final_memeber_1_group = @word_boundary.lookAheadToAvoid(tokensThatMatchAll(:isType)).then(newGroup(variable_name_without_bounds)).then(@word_boundary).lookAheadToAvoid(/\(/)
+    final_memeber_1_group = @word_boundary.lookAheadToAvoid(anyTokenThat(:isType)).then(newGroup(variable_name_without_bounds)).then(@word_boundary).lookAheadToAvoid(/\(/)
 member_pattern_5_groups = before_the_access_operator_1_group.then(member_operator_2_groups).then(subsequent_members_1_group).then(final_memeber_1_group)
 
 # 
 # Functions
 # 
-        cant_be_a_function_name = tokensThatMatchAll(:isWord)
+        cant_be_a_function_name = anyTokenThat(:isWord)
         # this next line needs to be updated (its legacy)
         probably_intended_scope_resolve = /(?:[A-Za-z_][A-Za-z0-9_]*+|::)++/
     avoid_keywords = lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
@@ -451,6 +465,14 @@ function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
 # Namespace
 # 
 namespace_pattern_2_groups = @word_boundary.then(newGroup(/namespace/)).maybe(@spaces).thenNewGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds))
+
+# 
+# preprocessor
+#
+    # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
+    preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
+preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
+
 cpp_grammar = {
     information_for_contributors: [
         "This code was auto generated by a much-more-readble ruby file: https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/generate.rb",
@@ -493,8 +515,7 @@ cpp_grammar = {
             name: "variable.language.this.cpp"
         },
         {
-            match: -/\bnullptr\b/,
-            name: "constant.language.cpp"
+            include: "#constants"
         },
         {
             include: "#template_definition"
@@ -607,10 +628,6 @@ cpp_grammar = {
             name: "variable.other.readwrite.static.mac-classic.c"
         },
         {
-            match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
-            name: "constant.language.c"
-        },
-        {
             include: "#operators-c"
         },
         {
@@ -623,7 +640,7 @@ cpp_grammar = {
             include: "#strings-c"
         },
         {
-            begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
+            begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{-preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
             beginCaptures: {
                 "1" => {
                     name: "keyword.control.directive.define.c"
@@ -812,7 +829,7 @@ cpp_grammar = {
             name: "meta.preprocessor.c",
             patterns: [
                 {
-                    match: "[a-zA-Z_$][\\w$]*",
+                    match: -preprocessor_name_no_bounds,
                     name: "entity.name.function.preprocessor.c"
                 },
                 {
@@ -928,6 +945,15 @@ cpp_grammar = {
         }
     ],
     repository: {
+        "constants" => {
+            match: -builtin_constants_1_group,
+            name: "constant.cpp",
+            captures: {
+                "1" => {
+                    name: "constant.language.built-in.$1.cpp"
+                },
+            }
+        },
         "scope_resolution" => {
             name: "punctuation.separator.namespace.access.cpp",
             match: -preceding_scopes_4_groups,
@@ -2149,11 +2175,10 @@ cpp_grammar = {
                     include: "#operators-c"
                 },
                 {
-                    match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
-                    name: "constant.language.c"
+                    include: "#constants"
                 },
                 {
-                    match: "[a-zA-Z_$][\\w$]*",
+                    match: -preprocessor_name_no_bounds,
                     name: "entity.name.function.preprocessor.c"
                 },
                 {

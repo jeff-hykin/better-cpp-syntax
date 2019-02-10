@@ -36,10 +36,11 @@ Planned future fixes/featues:
   - Fix the ## issue https://github.com/atom/language-c/issues/318
   - Fix multiple inheritance https://github.com/atom/language-c/issues/245
   - Escaping the percent sign https://github.com/atom/language-c/issues/289
+- Fix function-pointer tagging
+- Fix constructor tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for probably-a-custom-type words
-- Better support for function pointer tagging
 - Better support for dereferenced/pointer tagging
 - Add support for lambda highlighting (this is going to be tough)
 
