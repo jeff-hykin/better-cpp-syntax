@@ -939,7 +939,7 @@ c_grammar = {
                             name: "punctuation.separator.pointer-access.c"
                         },
                         {
-                            match: variable_name_without_bounds,
+                            match: -variable_name_without_bounds,
                             name: "variable.object.c"
                         },
                         {
@@ -1193,6 +1193,10 @@ c_grammar = {
             patterns: [
                 {
                     include: "#block_innards"
+                },
+                {
+                    match: -lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
+                    name: "punctuation.range-based.cpp"
                 }
             ]
         },

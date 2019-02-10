@@ -24,6 +24,7 @@ It adds:
 - Template definition syntax highlighting
 - Parameter highlighting
 - better object identification
+- tag for the colon in ranged-based for loops
 
 Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues

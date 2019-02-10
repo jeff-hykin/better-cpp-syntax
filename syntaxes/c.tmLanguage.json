@@ -485,7 +485,7 @@
                             "name": "punctuation.separator.pointer-access.c"
                         },
                         {
-                            "match": "(?-mix:[a-zA-Z_][a-zA-Z0-9_]*)",
+                            "match": "[a-zA-Z_][a-zA-Z0-9_]*",
                             "name": "variable.object.c"
                         },
                         {
@@ -739,6 +739,10 @@
             "patterns": [
                 {
                     "include": "#block_innards"
+                },
+                {
+                    "match": "(?<!:):(?!:)",
+                    "name": "punctuation.range-based.cpp"
                 }
             ]
         },
