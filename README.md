@@ -19,6 +19,8 @@ It fixes:
 - The missing operator overloading symbols
 - The failure to tag operator overloading functions as functions
 - The failure to tag implicit operator overrides
+- Escaping the percent sign https://github.com/atom/language-c/issues/289
+- The highlighting of namespaces with ::'s https://github.com/atom/language-c/issues/260 
 - The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
 
 It adds:
@@ -26,13 +28,14 @@ It adds:
 - Additional specificity for many existing tags
 - Template definition syntax highlighting (including C++ 2020 syntaxes)
 - Better object identification
+- Improved scope resultion `::` syntax
 - Tags for the colon in ranged-based for loops
 
 Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues
 - Fix more of the easy-to-fix bugs from https://github.com/atom/language-c/issues
-  - Fix the ## issue (https://github.com/atom/language-c/issues/318)
-  - Improve the scope resultion `::` syntax-tags
+  - Fix the ## issue https://github.com/atom/language-c/issues/318
+  - Fix multiple inheritance https://github.com/atom/language-c/issues/245
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for probably-a-custom-type words
