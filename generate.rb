@@ -2,10 +2,9 @@ require 'json'
 require_relative './readable_regex.rb'
 
 
-adjectives = [
-    :isControlFlow,
+$adjectives = [
     :isOperator,
-    :isWord,
+    :isWordish,
     :isOperatorAlias,
     :canAppearAfterOperatorKeyword,
     :isPostFixOperator,
@@ -14,6 +13,7 @@ adjectives = [
     :evaledLeftToRight,
     :evaledRightToLeft,
     :presedence,
+    :isControlFlow,
     :isLogicicalOperator,
     :isAssignmentOperator,
     :isComparisionOperator,
@@ -33,7 +33,7 @@ adjectives = [
     :isAccessSpecifier,
 ]
 
-tokens = [
+$tokens = [
     # operators
     { representation: "::"                   , name: "scope-resolution"               , isOperator: true,                                      isBinaryOperator:  true, presedence:  1   , evaledLeftToRight: true, isInFixOperator:   true },
     { representation: "++"                   , name: "post-increment"                 , isOperator: true, canAppearAfterOperatorKeyword: true, isUrnaryOperator:  true, presedence:  2.1 , evaledLeftToRight: true, isPostFixOperator: true },
@@ -305,6 +305,18 @@ tokens = [
     { representation: "transaction_safe_dynamic"   , name: "transaction_safe_dynamic"   },
 ]
 
+# 
+# attach adjectives
+# 
+for each in $tokens
+    if each[:representation] =~ /[a-zA-Z0-9_]/
+        each[:isWordish] = true
+    else
+        each[:isSymbol] = true
+    end
+end
+
+
 # todo
     # replace the strings with regex literals
     # get rid of the C dependency for C++
@@ -331,10 +343,22 @@ tokens = [
     # operator with words/space
 
 
-# variable
-character_in_variable_name = /[a-zA-Z0-9_]/
-variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
-variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)  # word bounds are inefficient, but they are accurate
+#
+# Helpers
+#
+def tokensThatMatchAll(*arguments)
+    matches = $tokens.select do |each_token|
+        output = true
+        for each_adjective in arguments
+            if each_token[each_adjective] != true
+                output = false
+                break
+            end
+        end
+        output
+    end
+    return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
+end
 
 # type modifiers
 with_reference   = maybe(@spaces).then(  /&/.or /&&/  ).maybe(@spaces)
@@ -342,6 +366,22 @@ with_dereference = maybe(@spaces).zeroOrMoreOf( /\*/  ).maybe(@spaces)
 
 # misc
 builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
+
+# 
+# variable
+# 
+character_in_variable_name = /[a-zA-Z0-9_]/
+variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
+variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)  # word bounds are inefficient, but they are accurate
+
+# 
+# Scope resolution
+#
+                characters_in_template_call = /[\s<>,\w]/
+            template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
+        one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
+    precending_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
+maybe_scope_resoleved_variable_2_groups = precending_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
 
 # 
 # types
@@ -362,13 +402,18 @@ look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(s
 probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably_a_normal_parameter_1_group)
 
 
-# 
-# Scope resolution
-#
-        characters_in_template_call = /[\s<>,\w]/
-    one_scope_resolution = variable_name_without_bounds.zeroOrMoreOf(characters_in_template_call).then(/::/)
-precending_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
 
+
+
+# 
+# operator overload
+# 
+        # symbols can have spaces
+        operator_symbols = maybe(@spaces).then(tokensThatMatchAll(:canAppearAfterOperatorKeyword, :isSymbol))
+        # words must have spaces
+        operator_wordish = @spaces.then(tokensThatMatchAll(:canAppearAfterOperatorKeyword, :isWordish))
+    after_operator_keyword = operator_symbols.or(operator_wordish)
+operator_overload_4_groups = precending_scopes_1_group.then(newGroup(/operator/)).then(newGroup(after_operator_keyword)).maybe(@spaces).then(newGroup(/\(/))
 
 
 
@@ -752,7 +797,7 @@ c_grammar = {
             }
         },
         "operator_overload" => {
-            begin: "((?:\\b[A-Za-z_][A-Za-z0-9_]*(?:<[\\s<>\\w]*?)?::)*)(operator)(\\+|\\-|\\*|/|%|\\+\\+|\\-\\-|&&|\\|\\||!|==|!=|<|<=|>|>=\\ |&|\\||\\^|~|<<|>>|=|\\+=|\\-=|\\*=|/=|%=|<<=|>>=|&=|\\^=|\\|=|,|\\.|\\->|\\[\\]|\\(\\)|\\?:)\\s*(\\()",
+            begin: -operator_overload_4_groups,
             beginCaptures: {
                 "1" => {
                     name: "entity.scope.c"
@@ -767,7 +812,7 @@ c_grammar = {
                     name: "punctuation.section.parameters.begin.bracket.round.c"
                 }
             },
-            end: "\\)",
+            end: -/\)/,
             endCaptures: {
                 "0" => {
                     name: "punctuation.section.parameters.end.bracket.round.c"
