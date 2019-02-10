@@ -1732,7 +1732,17 @@ cpp_grammar = {
             patterns: [
                 {
                     match: "\\b((0(x|X)[0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?)|(0(b|B)[01]([01']*[01])?)|(([0-9]([0-9']*[0-9])?\\.?[0-9]*([0-9']*[0-9])?)|(\\.[0-9]([0-9']*[0-9])?))((e|E)(\\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-                    name: "constant.numeric.c"
+                    name: "constant.numeric.c",
+                    captures: {
+                        "0" => {
+                            patterns: [
+                                {
+                                    match: /[^\d\.]+/,
+                                    name: "keyword.other.unit.cpp",
+                                },
+                            ]
+                        },
+                    },
                 }
             ]
         },
