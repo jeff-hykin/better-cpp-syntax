@@ -32,7 +32,7 @@
             "name": "keyword.control.cpp"
         },
         {
-            "match": "(?-mix:\\b(f|m)[A-Z]\\w*\\b)",
+            "match": "\\b(f|m)[A-Z]\\w*\\b",
             "name": "variable.other.readwrite.member.cpp"
         },
         {

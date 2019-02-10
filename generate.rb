@@ -2623,42 +2623,42 @@ cpp_grammar = {
             include: "#strings"
         },
         {
-            match: "\\b(friend|explicit|virtual|override|final|noexcept)\\b",
+            match: -/\b(friend|explicit|virtual|override|final|noexcept)\b/,
             name: "storage.modifier.cpp"
         },
         {
-            match: "\\b(private:|protected:|public:)",
+            match: -/\b(private:|protected:|public:)/,
             name: "storage.type.modifier.access.cpp"
         },
         {
-            match: "\\b(catch|try|throw|using)\\b",
+            match: -/\b(catch|try|throw|using)\b/,
             name: "keyword.control.cpp"
         },
         {
-            match: "\\bdelete\\b(\\s*\\[\\])?|\\bnew\\b(?!])",
+            match: -/\bdelete\b(\s*\[\])?|\bnew\b(?!\])/,
             name: "keyword.control.cpp"
         },
         {
-            match: /\b(f|m)[A-Z]\w*\b/,
+            match: -/\b(f|m)[A-Z]\w*\b/,
             name: "variable.other.readwrite.member.cpp"
         },
         {
-            match: "\\bthis\\b",
+            match: -/\bthis\b/,
             name: "variable.language.this.cpp"
         },
         {
-            match: "\\bnullptr\\b",
+            match: -/\bnullptr\b/,
             name: "constant.language.cpp"
         },
         {
             include: "#template_definition"
         },
         {
-            match: "\\btemplate\\b\\s*",
+            match: -/\btemplate\b\s*/,
             name: "storage.type.template.cpp"
         },
         {
-            match: "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*",
+            match: -/\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\b\s*/,
             name: "keyword.operator.cast.cpp"
         },
         {
@@ -2677,15 +2677,15 @@ cpp_grammar = {
             }
         },
         {
-            match: "\\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\b",
+            match: -/\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\b/,
             name: "keyword.operator.cpp"
         },
         {
-            match: "\\b(decltype|wchar_t|char16_t|char32_t)\\b",
+            match: -/\b(decltype|wchar_t|char16_t|char32_t)\b/,
             name: "storage.type.cpp"
         },
         {
-            match: "\\b(constexpr|export|mutable|typename|thread_local)\\b",
+            match: -/\b(constexpr|export|mutable|typename|thread_local)\b/,
             name: "storage.modifier.cpp"
         },
         {
@@ -2698,7 +2698,7 @@ cpp_grammar = {
                     name: "punctuation.definition.parameters.begin.c"
                 }
             },
-            end: "\\)",
+            end: -/\)/,
             endCaptures: {
                 "0" => {
                     name: "punctuation.definition.parameters.end.c"
@@ -2721,7 +2721,7 @@ cpp_grammar = {
                     name: "punctuation.definition.parameters.begin.c"
                 }
             },
-            end: "\\)",
+            end: -/\)/,
             endCaptures: {
                 "0" => {
                     name: "punctuation.definition.parameters.end.c"
