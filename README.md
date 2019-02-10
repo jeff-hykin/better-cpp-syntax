@@ -22,10 +22,10 @@ It fixes:
 - The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
 
 It adds:
+- Parameter highlighting
 - Additional specificity for many existing tags
 - Template definition syntax highlighting (including C++ 2020 syntaxes)
-- Parameter highlighting
-- better object identification
+- Better object identification
 - Tags for the colon in ranged-based for loops
 
 Planned future fixes/featues:
@@ -45,9 +45,9 @@ Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
 I love regular expressions, and I plan on actively maintaining this.
 
 ## So whats the deal with the built-in C++ stynax?
-The standard C++ sytax (for both Atom and VS Code) looks like a bunch of hacked-together solutions with no standards. The regex and pattern matching is so complicated to read that I think nobody wants to change it. There's missing keywords, misspelled keywords, theres copy-and-pasted patterns everywhere, there's duplicated logic, there's groups that were matched but forgot to ever be tagged.
+There's missing keywords, misspelled keywords, there's copy-and-pasted patterns, duplicated logic, and groups that were matched but forgot to ever be tagged. The standard tagging for C++ (in for both Atom and VS Code) looks like a bunch of hacked-together solutions with no standards, it is very suprising. The regex and pattern matching is so complicated to read that I think nobody wants to change it.
 
-I hope I will have the time to standardize it by having the .json files be generated completely by the ruby file. It will make the regex readable and prevent code duplication (which will make the code actually maintainable).
+I'm working on standardizing it by having the json files be generated completely by a ruby file. It makes the regex readable and get rid of the need to copy and paste patterns.
 
 ## Did you write all of this youself?
 No, absolutely not. This is only a modifcation of https://github.com/atom/language-c;
