@@ -415,6 +415,7 @@ look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(s
 primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
 non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isNotPrimitive)).lookAheadToAvoid(character_in_variable_name)
 known_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isType)).lookAheadToAvoid(character_in_variable_name)
+posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(character_in_variable_name).then(/_t/)  ]
 
 # 
 # Probably a parameter
@@ -884,7 +885,7 @@ cpp_grammar = {
             name: "support.type.mac-classic.c"
         },
         {
-            match: "\\b([A-Za-z0-9_]+_t)\\b",
+            match: -posix_reserved_types,
             name: "support.type.posix-reserved.c"
         },
         {
