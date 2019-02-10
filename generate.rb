@@ -331,7 +331,6 @@ end
 
 
 # todo
-    # turn off #constructor
     # fix parens block punctuation.section.parens.block
     # replace all strings with regex literals
     # add adjectives:
@@ -1754,7 +1753,7 @@ cpp_grammar = {
             ]
         },
         "parens-block-c" => {
-            name: "punctuation.section.parens.block",
+            name: "meta.block.parens.cpp",
             begin: "\\(",
             beginCaptures: {
                 "0" => {
