@@ -18,13 +18,14 @@ It fixes:
 - The failure of highlighting for the semicolon after namespaces
 - The missing operator overloading symbols
 - The failure to tag operator overloading functions as functions
+- The failure to tag implicit operator overrides
 
 It adds:
 - Additional specificity for many existing tags
-- Template definition syntax highlighting
+- Template definition syntax highlighting (including C++ 2020 syntaxes)
 - Parameter highlighting
 - better object identification
-- tag for the colon in ranged-based for loops
+- Tags for the colon in ranged-based for loops
 
 Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues
@@ -45,7 +46,7 @@ I love regular expressions, and I plan on actively maintaining this.
 ## So whats the deal with the built-in C++ stynax?
 The standard C++ sytax (for both Atom and VS Code) looks like a bunch of hacked-together solutions with no standards. The regex and pattern matching is so complicated to read that I think nobody wants to change it. There's missing keywords, misspelled keywords, theres copy-and-pasted patterns everywhere, there's duplicated logic, there's groups that were matched but forgot to ever be tagged.
 
-I hope I will have the time to standardize it by having the .json files be generated completely by the ruby file. This will make the regex patterns readable and maintainable, it will prevent code duplication, and those together will make the code much easier to maintain.
+I hope I will have the time to standardize it by having the .json files be generated completely by the ruby file. It will make the regex readable and prevent code duplication (which will make the code actually maintainable).
 
 ## Did you write all of this youself?
 No, absolutely not. This is only a modifcation of https://github.com/atom/language-c;
