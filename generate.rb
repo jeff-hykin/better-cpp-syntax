@@ -1,18 +1,5 @@
 require 'json'
-
-# extend Regexp to make expressions very readable
-class Regexp
-    def or(other_regex)
-        return /#{self}|#{other_regex}/
-    end
-    def and(other_regex)
-        return /#{self}#{other_regex}/
-    end
-    def then(other_regex)
-        return /#{self}#{other_regex}/
-    end
-end
-
+require_relative './readable_regex.rb'
 
 
 adjectives = [
@@ -319,7 +306,6 @@ tokens = [
 ]
 
 # todo
-    # include the C++ json
     # replace the strings with regex literals
     # get rid of the C dependency for C++
     # add adjectives:
@@ -344,24 +330,46 @@ tokens = [
     # lambda -> 
     # operator with words/space
 
-# 
-# Helper patterns for contstructing regular expressions
-# 
-optional_white_space = /\s*/
-white_space_boundary = /(?<=\s)(?=\S)/
-variable_name = /\b[a-zA-Z_][a-zA-Z_0-9]*\b/
-$_variable_name = /\b([a-zA-Z_][a-zA-Z_0-9]*)\b/
-$_match_any_number_of_scopes = /((?:\b[A-Za-z_][A-Za-z0-9_]*(?:<[\s<>,\w]*?)?::)*)/
-$_with_reference = /\s*(&|&&)\s*/
-$_with_dereference = /\s*(|\**)\s*/
-with_ref_and_deref = /\s*(?:&|&&|\**)\s*/
+
+# variable
+character_in_variable_name = /[a-zA-Z0-9_]/
+variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
+variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_boundary)  # word bounds are inefficient, but they are accurate
+
+# type modifiers
+with_reference   = maybe(@spaces).then(  /&/.or /&&/  ).maybe(@spaces)
+with_dereference = maybe(@spaces).zeroOrMoreOf( /\*/  ).maybe(@spaces)
+
+# misc
 builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
-possible_type_endings = /[&*>a-zA-Z0-9_\]\)]/
-preceding_object = /([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\]\)]))/
+
+# 
+# types
+# 
+    symbols_that_can_appear_after_a_type = /[&*>\]\)]/
+look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
 
 
-# had to do this one manually because the readable/english way was timing out durning runtime (in the editor)
-$__probably_a_parameter = /(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\s*(?==)|(?:(?<=[a-zA-Z0-9_])\s+|(?<=[&*>\]\)])\s*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(?=(?:\[\]|)(,|\))))/
+# 
+# Probably a parameter
+#
+            array_brackets = /\[\]/.maybe(@spaces)
+            comma_or_closing_paraenthese = /,/.or(/\)/)
+        stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
+    probably_a_normal_parameter_1_group = look_behind_for_type.then(newGroup(variable_name_without_bounds)).then(stuff_after_a_parameter)
+    # below uses variable_name_without_bounds for performance (timeout) reasons
+    probably_a_default_parameter_1_group = newGroup(variable_name_without_bounds).maybe(@spaces).lookAheadFor("=")
+probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably_a_normal_parameter_1_group)
+
+
+# 
+# Scope resolution
+#
+        characters_in_template_call = /[\s<>,\w]/
+    one_scope_resolution = variable_name_without_bounds.zeroOrMoreOf(characters_in_template_call).then(/::/)
+precending_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
+
+
 
 
 c_grammar = {
@@ -733,7 +741,7 @@ c_grammar = {
     ],
     repository: {
         "probably_a_parameter" => {
-            match: "(?-mix:([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?==)|(?:(?<=[a-zA-Z0-9_])\\s+|(?<=[&*>\\]\\)])\\s*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?=(?:\\[\\]\\s*|)(,|\\))))",
+            match: probably_a_parameter_2_groups,
             captures: {
                 "1" => {
                     name: "variable.parameter.probably.defaulted.c"
@@ -2553,7 +2561,7 @@ cpp_grammar = {
             name: "keyword.control.cpp"
         },
         {
-            match: "\\b(f|m)[A-Z]\\w*\\b",
+            match: /\b(f|m)[A-Z]\w*\b/,
             name: "variable.other.readwrite.member.cpp"
         },
         {
