@@ -1131,7 +1131,7 @@ cpp_grammar = {
                     begin: "(?x)\n(:)\n(\n  (?=\n    \\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n    \\s* (\\() # opening bracket\n  )\n)",
                     beginCaptures: {
                         "1" => {
-                            name: "punctuation.definition.parameters.c"
+                            name: "punctuation.definition.initializer-list.parameters.c"
                         }
                     },
                     end: "(?=\\{)",
