@@ -23,6 +23,7 @@ $adjectives = [
     :requiresParentheseBlockImmediately,
     :isExceptionRelated,
     :isPrimitive,
+    :isNotPrimitive,
     :isType,
     :isNotType,
     :isLiteral,
@@ -324,6 +325,10 @@ for each in $tokens
     if each[:isType] != true
         each[:isNotType] = true
     end
+    # isNotPrimitive
+    if each[:isPrimitive] != true and each[:isType] == true
+        each[:isNotPrimitive] = true
+    end
 end
 
 
@@ -392,14 +397,16 @@ variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_bou
         one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
 maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
-preceding_scopes_3_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds.maybe(@spaces).maybe(template_call_match))).then(newGroup(/::/))
+preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds).maybe(@spaces).maybe(newGroup(template_call_match))).then(newGroup(/::/))
 
 # 
 # types
 # 
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
 look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
-
+primitive_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
+non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isNotPrimitive)).lookAheadToAvoid(character_in_variable_name)
+known_types = lookBehindToAvoid(character_in_variable_name).then(tokensThatMatchAll(:isType)).lookAheadToAvoid(character_in_variable_name)
 
 # 
 # Probably a parameter
@@ -1373,13 +1380,17 @@ c_grammar = {
         "storage_types" => {
             patterns: [
                 {
-                    match: "\\b(auto|bool|_Bool|char|_Complex|double|float|_Imaginary|int|long|short|signed|typedef|unsigned|void)\\b",
-                    name: "storage.type.c"
+                    match: -non_primitive_types.or(/_Bool|_Complex|_Imaginary/),
+                    name: "storage.type.built-in.c",
                 },
                 {
-                    match: "\\b(asm|__asm__|enum|struct|union)\\b",
+                    match: -primitive_types,
+                    name: "storage.type.built-in.primitive.c",
+                },
+                {
+                    match: -/\b(asm|__asm__|enum|struct|union)\b/,
                     name: "storage.type.$1.c"
-                }
+                },
             ]
         },
         "vararg_ellipses" => {
@@ -2636,7 +2647,7 @@ cpp_grammar = {
         },
         {
             match: -/\bdelete\b(\s*\[\])?|\bnew\b(?!\])/,
-            name: "keyword.control.cpp"
+            name: "keyword.operator.memory.cpp"
         },
         {
             match: -/\b(f|m)[A-Z]\w*\b/,
@@ -2662,19 +2673,7 @@ cpp_grammar = {
             name: "keyword.operator.cast.cpp"
         },
         {
-            name: "punctuation.separator.namespace.access.cpp",
-            match: -preceding_scopes_3_groups,
-            captures: {
-                "1" => {
-                    name: "entity.scope.c"
-                },
-                "2" => {
-                    name: "entity.scope.name.c"
-                },
-                "3" => {
-                    name: "punctuation.separator.namespace.access.cpp"
-                }
-            }
+            include: "#scope_resolution"
         },
         {
             match: -/\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\b/,
@@ -2739,6 +2738,42 @@ cpp_grammar = {
         }
     ],
     repository: {
+        "scope_resolution" => {
+            name: "punctuation.separator.namespace.access.cpp",
+            match: -preceding_scopes_4_groups,
+            captures: {
+                "1" => {
+                    name: "entity.scope.c",
+                    patterns: [
+                        {
+                            include: "#scope_resolution"
+                        }
+                    ]
+                },
+                "2" => {
+                    name: "entity.scope.name.c"
+                },
+                "3" => {
+                    patterns: [
+                        {
+                            match: -non_primitive_types,
+                            name: "storage.type.built-in.cpp",
+                        },
+                        {
+                            match: -primitive_types,
+                            name: "storage.type.built-in.primitive.cpp",
+                        },
+                        {
+                            match: -variable_name,
+                            name: "storage.type.user-defined.cpp",
+                        }
+                    ]
+                },
+                "4" => {
+                    name: "punctuation.separator.namespace.access.cpp"
+                }
+            }
+        },
         "template_definition" => {
             begin: "\\b(template)\\s*(<)\\s*",
             beginCaptures: {
