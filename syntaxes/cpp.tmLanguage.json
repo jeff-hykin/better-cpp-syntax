@@ -671,7 +671,7 @@
                             "name": "storage.type.namespace.cpp"
                         },
                         "3": {
-                            "name": "entity.name.type.cpp"
+                            "name": "entity.name.type.namespace.cpp"
                         }
                     },
                     "end": ";",
@@ -683,13 +683,22 @@
                     "name": "meta.using-namespace-declaration.cpp"
                 },
                 {
-                    "begin": "\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+",
+                    "begin": "\\b(namespace)\\s*((?:[a-zA-Z_][a-zA-Z0-9_]*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_][a-zA-Z0-9_]*)",
                     "beginCaptures": {
                         "1": {
                             "name": "storage.type.namespace.cpp"
                         },
                         "2": {
-                            "name": "entity.name.type.cpp"
+                            "patterns": [
+                                {
+                                    "match": "(?-mix:\\b[a-zA-Z_][a-zA-Z0-9_]*\\b)",
+                                    "name": "entity.name.type.cpp"
+                                },
+                                {
+                                    "match": "::",
+                                    "name": "punctuation.separator.namespace.access.cpp"
+                                }
+                            ]
                         }
                     },
                     "captures": {
