@@ -469,7 +469,7 @@ cpp_grammar = {
             include: "#strings"
         },
         {
-            match: -/\b(friend|explicit|virtual|override|final|noexcept)\b/,
+            match: -/\b(typedef|friend|explicit|virtual|override|final|noexcept)\b/,
             name: "storage.modifier.cpp"
         },
         {
@@ -3168,8 +3168,6 @@ cpp_grammar = {
 
 
 def convertAndSaveToJson(hash_obj, json_file_location)
-    # todo, convert raw regex to string
-    # todo, escape everything
     new_file = File.open(json_file_location, "w")
     new_file.write(hash_obj.to_json)
     new_file.close
