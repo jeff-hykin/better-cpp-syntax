@@ -335,6 +335,7 @@ end
 
 
 # todo
+    # fix initializer list "functions"
     # replace all strings with regex literals
     # add adjectives:
         # canHaveBrackets
@@ -901,7 +902,7 @@ cpp_grammar = {
         {
             begin: -function_definition_pattern,
             end: -lookBehindFor(/\)/), # old pattern: "(?<=\\))(?!\\w)",
-            name: "meta.function.c",
+            name: "meta.function.definition.c",
             patterns: [
                 {
                     include: "#function-innards-c"
@@ -3101,7 +3102,7 @@ cpp_grammar = {
                             name: "punctuation.section.parameters.begin.bracket.round.c"
                         }
                     },
-                    end: "\\)",
+                    end: -/\)|:/,
                     endCaptures: {
                         "0" => {
                             name: "punctuation.section.parameters.end.bracket.round.c"
