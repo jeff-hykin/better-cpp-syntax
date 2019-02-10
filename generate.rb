@@ -1091,7 +1091,7 @@ cpp_grammar = {
                             name: "punctuation.definition.parameters.c"
                         }
                     },
-                    match: "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|enumerate|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
+                    match: "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
                     name: "meta.function-call.c"
                 },
                 {
@@ -1102,7 +1102,7 @@ cpp_grammar = {
         "constructor" => {
             patterns: [
                 {
-                    begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch|enumerate)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
+                    begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
                     beginCaptures: {
                         "1" => {
                             name: "entity.name.function.constructor.cpp"
@@ -1628,7 +1628,7 @@ cpp_grammar = {
             ]
         },
         "c_function_call" => {
-            begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+            begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
             end: "(?<=\\))(?!\\w)",
             name: "meta.function-call.c",
             patterns: [
@@ -2912,7 +2912,7 @@ cpp_grammar = {
                     name: "punctuation.section.parens.end.bracket.round.c"
                 },
                 {
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
                     end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
                     name: "meta.function.c",
                     patterns: [
@@ -3031,7 +3031,7 @@ cpp_grammar = {
                     include: "#operators-c"
                 },
                 {
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                     beginCaptures: {
                         "1" => {
                             name: "entity.name.function.c"
@@ -3092,7 +3092,7 @@ cpp_grammar = {
                 },
                 {
                     name: "meta.function.definition.parameters",
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                     beginCaptures: {
                         "1" => {
                             name: "entity.name.function.c"
@@ -3158,7 +3158,7 @@ cpp_grammar = {
                     include: "#operators-c"
                 },
                 {
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                     beginCaptures: {
                         "1" => {
                             name: "entity.name.function.c"
