@@ -19,7 +19,7 @@ It fixes:
 - The missing operator overloading symbols
 - The failure to tag operator overloading functions as functions
 - The failure to tag implicit operator overrides
-- Fix the issue of the C++ stynax depending (and getting screwed up by) the C syntax
+- The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
 
 It adds:
 - Additional specificity for many existing tags
