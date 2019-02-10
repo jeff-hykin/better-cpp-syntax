@@ -382,6 +382,7 @@ variable_name = @word_boundary.then(variable_name_without_bounds).then(@word_bou
         one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
 maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
+preceding_scopes_3_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds.maybe(@spaces).maybe(template_call_match))).then(newGroup(/::/))
 
 # 
 # types
@@ -400,9 +401,6 @@ look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(s
     # below uses variable_name_without_bounds for performance (timeout) reasons
     probably_a_default_parameter_1_group = newGroup(variable_name_without_bounds).maybe(@spaces).lookAheadFor("=")
 probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably_a_normal_parameter_1_group)
-
-
-
 
 
 # 
@@ -2669,7 +2667,7 @@ cpp_grammar = {
         },
         {
             name: "punctuation.separator.namespace.access.cpp",
-            match: "((?:[a-zA-Z_][a-zA-Z_0-9]*(<[\\s<>\\w]*?)?::)*)([a-zA-Z_][a-zA-Z_0-9]*(<[\\s<>\\w]*?)?)(::)",
+            match: -preceding_scopes_3_groups,
             captures: {
                 "1" => {
                     name: "entity.scope.c"
