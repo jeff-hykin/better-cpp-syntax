@@ -1120,7 +1120,7 @@ cpp_grammar = {
                             include: "#probably_a_parameter"
                         },
                         {
-                            include: "#function-innards"
+                            include: "#function-innards-c"
                         }
                     ]
                 },
