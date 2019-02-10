@@ -331,7 +331,6 @@ end
 
 
 # todo
-    # fix parens block punctuation.section.parens.block
     # replace all strings with regex literals
     # add adjectives:
         # canHaveBrackets
@@ -1366,7 +1365,7 @@ cpp_grammar = {
                             name: "constant.character.escape.cpp"
                         },
                         {
-                            include: "source.c#string_placeholder"
+                            include: "#string_placeholder-c"
                         }
                     ]
                 },
@@ -1932,7 +1931,7 @@ cpp_grammar = {
                 },
                 {
                     match: "\\\\.",
-                    name: "invalid.illegal.unknown-escape.c"
+                    name: "invalid.illegal.1.unknown-escape.c"
                 }
             ]
         },
@@ -1942,14 +1941,16 @@ cpp_grammar = {
                     match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
                     name: "constant.other.placeholder.c"
                 },
-                {
-                    match: "(%)(?!\"\\s*(PRI|SCN))",
-                    captures: {
-                        "1" => {
-                            name: "invalid.illegal.placeholder.c"
-                        }
-                    }
-                }
+                # I don't think these are actual escapes, and they incorrectly mark valid strings
+                # It might be related to printf and format from C (which is low priority for C++)
+                # {
+                #     match: "(%)(?!\"\\s*(PRI|SCN))",
+                #     captures: {
+                #         "1" => {
+                #             name: "constant.other.placeholder.c"
+                #         }
+                #     }
+                # }
             ]
         },
         "storage_types-c" => {
