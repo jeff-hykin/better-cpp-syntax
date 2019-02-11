@@ -551,16 +551,16 @@ cpp_grammar = {
             begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
             beginCaptures: {
                 "1" => {
-                    name: "entity.name.function.cpp"
+                    name: "entity.name.function.destructor.cpp"
                 },
                 "2" => {
-                    name: "punctuation.definition.parameters.begin.c"
+                    name: "punctuation.definition.parameters.begin.destructor.cpp"
                 }
             },
             end: -/\)/,
             endCaptures: {
                 "0" => {
-                    name: "punctuation.definition.parameters.end.c"
+                    name: "punctuation.definition.parameters.end.destructor.cpp"
                 }
             },
             name: "meta.function.destructor.cpp",
@@ -1132,13 +1132,13 @@ cpp_grammar = {
                             name: "entity.name.function.constructor.cpp"
                         },
                         "2" => {
-                            name: "punctuation.definition.parameters.begin.c"
+                            name: "punctuation.definition.parameters.begin.constructor.cpp"
                         }
                     },
                     end: "\\)",
                     endCaptures: {
                         "0" => {
-                            name: "punctuation.definition.parameters.end.c"
+                            name: "punctuation.definition.parameters.end.constructor.cpp"
                         }
                     },
                     name: "meta.function.constructor.cpp",
