@@ -440,7 +440,7 @@ probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably
         # symbols can have spaces
         operator_symbols = maybe(@spaces).then(anyTokenThat(:canAppearAfterOperatorKeyword, :isSymbol))
         # words must have spaces, the variable_name_without_bounds is for implicit overloads
-        operator_wordish = @spaces.then(anyTokenThat(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(/&/)))
+        operator_wordish = @spaces.then(anyTokenThat(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
     after_operator_keyword = operator_symbols.or(operator_wordish)
 operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/)).then(newGroup(after_operator_keyword)).maybe(@spaces).then(newGroup(/\(/))
 
