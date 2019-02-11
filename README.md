@@ -26,6 +26,7 @@ It fixes:
 
 It adds:
 - Parameter highlighting
+- Highlighting of templated function calls `aFunction<int>(arguments)`
 - Additional specificity for many existing tags
 - Template definition syntax highlighting (including C++ 2020 syntaxes)
 - Better object identification

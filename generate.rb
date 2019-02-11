@@ -949,6 +949,38 @@ cpp_grammar = {
         }
     ],
     repository: {
+        "template-call-innards" => {
+            name: "meta.template.call.cpp",
+            match: -template_call_match,
+            captures: {
+                "0" => {
+                    patterns: [
+                        {
+                            include: "#storage_types-c",
+                        },
+                        {
+                            include: "#constants",
+                        },
+                        {
+                            include: "#scope_resolution",
+                        },
+                        {
+                            match: -variable_name,
+                            name: "storage.type.user-defined.cpp",
+                        },
+                        {
+                            include: "#operators-c"
+                        },
+                        {
+                            include: "#numbers-c"
+                        },
+                        {
+                            include: "#strings"
+                        },
+                    ]
+                }
+            }
+        },
         "constants" => {
             match: -builtin_constants_1_group,
             name: "constant.cpp",
@@ -976,16 +1008,7 @@ cpp_grammar = {
                 "3" => {
                     patterns: [
                         {
-                            match: -non_primitive_types,
-                            name: "storage.type.built-in.cpp",
-                        },
-                        {
-                            match: -primitive_types,
-                            name: "storage.type.built-in.primitive.cpp",
-                        },
-                        {
-                            match: -variable_name,
-                            name: "storage.type.user-defined.cpp",
+                            include: "#template-call-innards"
                         }
                     ]
                 },
@@ -1629,7 +1652,7 @@ cpp_grammar = {
             ]
         },
         "c_function_call" => {
-            begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+            begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{-maybe(template_call_match)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
             end: "(?<=\\))(?!\\w)",
             name: "meta.function-call.c",
             patterns: [
@@ -3093,14 +3116,14 @@ cpp_grammar = {
                 },
                 {
                     name: "meta.function.definition.parameters",
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                     beginCaptures: {
                         "1" => {
                             name: "entity.name.function.c"
                         },
                         "2" => {
                             name: "punctuation.section.parameters.begin.bracket.round.c"
-                        }
+                        },
                     },
                     end: -/\)|:/,
                     endCaptures: {
@@ -3159,14 +3182,21 @@ cpp_grammar = {
                     include: "#operators-c"
                 },
                 {
-                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                    begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                     beginCaptures: {
                         "1" => {
-                            name: "entity.name.function.c"
+                            name: "entity.name.function.call.c"
                         },
                         "2" => {
+                            patterns: [
+                                {
+                                    include: "#template-call-innards"
+                                }
+                            ]
+                        },
+                        "3" => {
                             name: "punctuation.section.arguments.begin.bracket.round.c"
-                        }
+                        },
                     },
                     end: "\\)",
                     endCaptures: {
