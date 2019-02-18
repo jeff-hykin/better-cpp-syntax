@@ -23,9 +23,7 @@ $adjectives = [
     :requiresParentheseBlockImmediately,
     :isExceptionRelated,
     :isPrimitive,
-    :isNotPrimitive,
     :isType,
-    :isNotType,
     :isLiteral,
     :isTypeCreator,
     :isGenericTypeModifier,
@@ -319,23 +317,12 @@ for each in $tokens
     if each[:representation] =~ /\A[a-zA-Z_][a-zA-Z0-9_]*\z/
         each[:isWord] = true
     end
-    # isNotType
-    if each[:isType] != true
-        each[:isNotType] = true
-    end
-    # isNotPrimitive
-    if each[:isPrimitive] != true and each[:isType] == true
-        each[:isNotPrimitive] = true
-    end
-    # isPreprocessorDirective
-    if each[:isPreprocessorDirective] != true
-        each[:isNotPreprocessorDirective] = true
-    end
 end
 
 
 # todo
     # fix initializer list "functions"
+    # fix the ... inside of macros
     # replace all strings with regex literals
     # add adjectives:
         # canHaveBrackets
@@ -359,11 +346,33 @@ end
 #
 # Helpers
 #
+class NegatedSymbol
+    def initialize(a_symbol)
+        @symbol = a_symbol
+    end
+    def to_s
+        return "not(#{@symbol.to_s})"
+    end
+    def to_sym
+        return @symbol
+    end
+end
+class Symbol
+    def !@
+        return NegatedSymbol.new(self)
+    end
+end
 def anyTokenThat(*arguments)
     matches = $tokens.select do |each_token|
         output = true
         for each_adjective in arguments
-            if each_token[each_adjective] != true
+            # make sure to fail on negated symbols
+            if each_adjective.is_a? NegatedSymbol
+                if each_token[each_adjective.to_sym] == true
+                    output = false
+                    break
+                end
+            elsif each_token[each_adjective] != true
                 output = false
                 break
             end
@@ -372,7 +381,6 @@ def anyTokenThat(*arguments)
     end
     return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
 end
-
 
 
 # type modifiers
@@ -402,6 +410,12 @@ probably_user_constant_1_group = variableBounds[lookAheadToAvoid(anyTokenThat(:i
 constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
 
 # 
+# Keywords
+# 
+any_operator_keyword = anyTokenThat(:isOperator, :isWord)
+control_flow_keywords = anyTokenThat(:isControlFlow)
+
+# 
 # Scope resolution
 #
                 characters_in_template_call = /[\s<>,\w]/
@@ -418,7 +432,7 @@ preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
 look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
 primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
-non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isNotPrimitive)).lookAheadToAvoid(character_in_variable_name)
+non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(not(:isPrimitive), :isType)).lookAheadToAvoid(character_in_variable_name)
 known_types = lookBehindToAvoid(character_in_variable_name).then(anyTokenThat(:isType)).lookAheadToAvoid(character_in_variable_name)
 posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(character_in_variable_name).then(/_t/)  ]
 
@@ -458,7 +472,7 @@ member_pattern_5_groups = before_the_access_operator_1_group.then(member_operato
 # 
 # Functions
 # 
-        cant_be_a_function_name = anyTokenThat(:isWord, :isNotPreprocessorDirective)
+        cant_be_a_function_name = anyTokenThat(:isWord,  not(:isPreprocessorDirective))
         # this next line needs to be updated (its legacy)
         probably_intended_scope_resolve = /(?:[A-Za-z_][A-Za-z0-9_]*+|::)++/
     avoid_keywords = lookBehindToAvoid(character_in_variable_name).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
