@@ -1,4 +1,5 @@
 require 'json'
+require 'yaml'
 require_relative './readable_regex.rb'
 
 
@@ -3252,11 +3253,16 @@ cpp_grammar = {
 }
 
 
-def convertAndSaveToJson(hash_obj, json_file_location)
-    new_file = File.open(json_file_location, "w")
+def convertAndSave(hash_obj, file_location)
+    # to json
+    new_file = File.open(file_location+".json", "w")
     new_file.write(hash_obj.to_json)
+    new_file.close
+    # to yaml
+    new_file = File.open(file_location+".yaml", "w")
+    new_file.write(hash_obj.to_yaml)
     new_file.close
 end
 
 # Save
-convertAndSaveToJson(cpp_grammar, "./syntaxes/cpp.tmLanguage.json")
+convertAndSave(cpp_grammar, "./syntaxes/cpp.tmLanguage")
