@@ -120,4 +120,5 @@ end
 @character = /\w/
 @word = /\w+/
 @word_boundary = /\b/
-@white_space_boundary = /(?<=\s)(?=\S)/
+@white_space_start_boundary = /(?<=\s)(?=\S)/
+@white_space_end_boundary = /(?<=\S)(?=\s)/
