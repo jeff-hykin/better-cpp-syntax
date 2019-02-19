@@ -1652,11 +1652,11 @@ cpp_grammar.data[:repository] = {
         patterns: [
             {
                 match: -non_primitive_types.or(/_Bool|_Complex|_Imaginary/),
-                name: "storage.type.built-in",
+                name: "storage.type.language",
             },
             {
                 match: -primitive_types,
-                name: "storage.type.built-in.primitive",
+                name: "storage.type.language.primitive",
             },
             {
                 match: -/\b(asm|__asm__|enum|struct|union)\b/,
