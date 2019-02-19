@@ -1,3 +1,4 @@
+require 'json'
 require 'yaml'
 
 # TODO
@@ -198,6 +199,10 @@ module GrammarHelper
     def tagNameToRepoName(tag_name)
         tag_name.to_s.gsub /\./, '-'
     end
+    
+    def isAGoodTagName(name)
+        return ( (name != nil) and (name != "") and (name.to_i == 0))
+    end
 
     class SimpleTag
         include GrammarHelper
@@ -219,14 +224,26 @@ module GrammarHelper
                 group_number += 1
                 group_name = each_pair[0]
                 group_pattern = each_pair[1]
-                default_tag = group_name.to_s
+                default_tag = ""
+                # if the group name is more than just a number, the use it as the default tag
+                if isAGoodTagName(group_name.to_s)
+                    default_tag = group_name.to_s
+                end
+                
                 # remove all the capture groups from the pattern if its regex
                 if group_pattern.is_a? Regexp
                     group_pattern = turnOffNumberedCaptureGroups(group_pattern)
-                    default_tag = "#{@tag_name}.#{default_tag}"
+                    if isAGoodTagName(default_tag)
+                        default_tag = "#{@tag_name}.#{default_tag}"
+                    end
                 elsif (group_pattern.is_a? SimpleTag) or (group_pattern.is_a? TagRange)
-                    # add additional specificity of this parent tag name
-                    default_tag = group_pattern.withTag("#{group_pattern.tag_name}.#{@tag_name}").to_h
+                    new_tag_name = "#{group_pattern.tag_name}.#{@tag_name}"
+                    if isAGoodTagName(group_pattern.tag_name) and isAGoodTagName(new_tag_name)
+                        # add additional specificity of this parent tag name
+                        default_tag = group_pattern.withTag(new_tag_name).to_h
+                    else  
+                        default_tag = group_pattern.to_h
+                    end
                     # then switch the group pattern to be only the regex
                     group_pattern = turnOffNumberedCaptureGroups(group_pattern.pattern)
                 end
@@ -247,9 +264,14 @@ module GrammarHelper
         def to_h
             captures = {}
             for each in @groups
-                each_name = each[0]
+                each_group_name = each[0]
                 each_values = each[1]
                 tag = each_values[:tag]
+                # if the tag is not a good name, then ignore it 
+                # (otherwise the tag will just be a number/nil/empty and there will be no way to not-name a group)
+                if (tag.is_a? String) and not isAGoodTagName(tag)
+                    next
+                end
                 # if its just a string then use it as the name of the tag
                 if each_values[:tag].is_a? String
                     tag = {
@@ -266,12 +288,12 @@ module GrammarHelper
                         }
                     end
                 end
+                # assign the correct name to the correct group number
                 captures[each_values[:number].to_s] = tag
             end
-            # this is technically redundant but can be helpful (setting a capture 0 and a tag name )
-            captures["0"] = { name: @tag_name}
+            # use the "0" capture group tag in favor over the name key
+            captures["0"] = { name: underscoresToDashes(@tag_name)}
             return {
-                name: underscoresToDashes(@tag_name),
                 match: @pattern.remove_default_mode_modifiers,
                 captures: captures
             }
@@ -369,16 +391,43 @@ module GrammarHelper
     class Grammar
         include GrammarHelper
         attr_accessor :data
-        # TODO: add more functionality
         def initialize(name:nil, scope_name:nil, global_patterns:[], repository:{}, **other)
             @data = {
                 name: name,
                 scopeName: scope_name,
+                **other,
                 patterns: global_patterns,
                 repository: repository,
-                **other
             }
+            @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
             @@current_grammar = @data
+        end
+        
+        def addLanguageEndings(data)
+            if data.is_a? Array 
+                for each in data
+                    addLanguageEndings(each)
+                end
+            else
+                for each in data
+                    key = each[0]
+                    value = each[1]
+                    
+                    if value.is_a? Array
+                        for each_sub_hash in value
+                            addLanguageEndings(each_sub_hash)
+                        end
+                    elsif value.is_a? Hash
+                        addLanguageEndings(value)
+                    elsif key.to_s == "name"
+                        # if it doesnt already have the ending then add it
+                        if not (value =~ /#{@language_ending}\z/)
+                            value += ".#{@language_ending}"
+                            data[key] = value
+                        end
+                    end
+                end
+            end
         end
         
         def to_h
@@ -386,10 +435,25 @@ module GrammarHelper
             for each in @data[:patterns]
                 patterns.push(each.to_h)
             end
-            return {
+            output = {
+                **@data,
                 patterns: patterns,
-                **@data
             }
+            addLanguageEndings(output[:repository])
+            addLanguageEndings(output[:patterns])
+            return output
+        end
+        
+        def saveAsJsonTo(file_location)
+            new_file = File.open(file_location+".json", "w")
+            new_file.write(self.to_h.to_json)
+            new_file.close
+        end
+        
+        def saveAsYamlTo(file_location)
+            new_file = File.open(file_location+".yaml", "w")
+            new_file.write(self.to_h.to_yaml)
+            new_file.close
         end
     end
     
