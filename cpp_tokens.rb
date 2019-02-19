@@ -4,7 +4,10 @@ include GrammarHelper
 # 
 # C++ specific tokens
 # 
-
+    # TODO: 
+        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations 
+        # https://en.cppreference.com/w/cpp/language/declarations
+        # look at https://en.cppreference.com/w/cpp/language/function to implement better member function syntax
 adjectives = [
     :isOperator,
     :isWordish,
@@ -30,7 +33,6 @@ adjectives = [
     :isLiteral,
     :isTypeCreator,
     :isGenericTypeModifier,
-    :isLeftHandSideTypeModifier,
     :isSpecifier,
     :isLambdaSpecifier,
     :isAccessSpecifier,
@@ -219,17 +221,6 @@ tokens = [
     { representation: "intmax_t"             , name: "intmax_t"             , isType: true },
     { representation: "uintmax_t"            , name: "uintmax_t"            , isType: true },
     { representation: "uintmax_t"            , name: "uintmax_t"            , isType: true },
-    # type modifiers
-    { representation: "const"                , name: "const"            , isGenericTypeModifier: true },
-    { representation: "static"               , name: "static"           , isGenericTypeModifier: true },
-    { representation: "volatile"             , name: "volatile"         , isGenericTypeModifier: true },
-    { representation: "register"             , name: "register"         , isGenericTypeModifier: true },
-    { representation: "restrict"             , name: "restrict"         , isGenericTypeModifier: true },
-    { representation: "constexpr"            , name: "constexpr"        , isLeftHandSideTypeModifier: true },
-    { representation: "extern"               , name: "extern"           , isLeftHandSideTypeModifier: true },
-    { representation: "inline"               , name: "inline"           , isLeftHandSideTypeModifier: true },
-    { representation: "mutable"              , name: "mutable"          , isLeftHandSideTypeModifier: true },
-    { representation: "friend"               , name: "friend"           , isLeftHandSideTypeModifier: true },
     # literals
     { representation: "NULL"                 , name: "NULL"             , isLiteral: true },
     { representation: "true"                 , name: "true"             , isLiteral: true },
@@ -240,9 +231,27 @@ tokens = [
     { representation: "struct"               , name: "struct"          , isTypeCreator: true},
     { representation: "union"                , name: "union"           , isTypeCreator: true},
     { representation: "enum"                 , name: "enum"            , isTypeCreator: true},
-    # specifiers
-    { representation: "explicit"             , name: "explicit"         , isSpecifier: true },
-    { representation: "virtual"              , name: "virtual"          , isSpecifier: true },
+    # storage specifiers https://en.cppreference.com/w/cpp/language/declarations 
+    { representation: "const"                , name: "const"            , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "static"               , name: "static"           , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "volatile"             , name: "volatile"         , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "register"             , name: "register"         , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "restrict"             , name: "restrict"         , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "extern"               , name: "extern"           , isSpecifier: true, isStorageSpecifier: true, isClassSpecifier: true },
+    # function specifiers/qualifiers
+    { representation: "inline"               , name: "inline"           , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParameters: true },
+    { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParameters: true },
+    { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParameters: true },
+    { representation: "const"                , name: "const"            , functionQualifier: true, canAppearAfterParameters: true },
+    { representation: "noexcept"             , name: "noexcept"         , isSpecifier: true ,      canAppearAfterParameters: true },
+    # if statement specifiers see https://en.cppreference.com/w/cpp/language/if
+    { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isIfStatementSpecifier: true },
     # lambda specifiers
     { representation: "mutable"                , name: "mutable"            , isLambdaSpecifier: true },
     { representation: "constexpr"              , name: "constexpr"          , isLambdaSpecifier: true },
@@ -279,7 +288,7 @@ tokens = [
     { representation: "operator"        , name: "operator"      },
     # 
     { representation: "typedef"         , name: "typedef"       },
-    { representation: "decltype"        , name: "decltype"      },
+    { representation: "decltype"        , name: "decltype"      , isSpecifier: true},
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
