@@ -34,6 +34,9 @@ It adds:
 - Additional specificity for many existing tags
 - Many more features
 
+## Is this finished? Can I contribute?
+This project is not even close to finished. The ruby code is very much a work in progress, it's probably going to be another month before the structure is created. Once the structure is established, maintainance and contributions will be easy.
+
 Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues
 - Fix more of the easy-to-fix bugs from https://github.com/atom/language-c/issues
