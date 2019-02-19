@@ -1,7 +1,7 @@
 require 'json'
 require 'yaml'
 require_relative './readable_regex.rb'
-
+include GrammarHelper
 
 $adjectives = [
     :isOperator,
@@ -3254,6 +3254,7 @@ cpp_grammar = {
 
 
 def convertAndSave(hash_obj, file_location)
+    Dir.chdir __dir__
     # to json
     new_file = File.open(file_location+".json", "w")
     new_file.write(hash_obj.to_json)
