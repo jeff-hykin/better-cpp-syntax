@@ -2,7 +2,7 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # put these the class exentions (Regexp, String, etc) inside of the Module
+    # put these the class exentions (Regexp, String, etc) inside of the Module 
 
 # extend Regexp to make expressions very readable
 class Regexp
@@ -307,9 +307,11 @@ module GrammarHelper
     class TagRange
         include GrammarHelper
         attr_accessor :tag_name, :start, :ending, :includes, :repo_name
-        def initialize(tag_as:nil, start_sequence:nil, for_start_tagging:nil, end_sequence:nil, for_end_tagging:nil, internal_patterns:[], is_copy:false)
+        def initialize(tag_as:"", start_sequence:nil, for_start_tagging:nil, end_sequence:nil, for_end_tagging:nil, internal_patterns:[], is_copy:false)
             makeSureGrammarExists()
-            # TODO add nil checks
+            if start_sequence == nil or end_sequence == nil
+                raise "\n\nHey, inside of a TagRange.new there is missing either a start_sequence: or an end_sequence:  (both should be a Hash of TagRanges/SimpleTags)\nThose arguments needs to exist before the code will work\n\n"
+            end
             if not(internal_patterns.is_a? Array)
                 raise "\n\nHey, inside of a TagRange.new there is an internal_patterns: argument\nThat argument needs to be an array but right now its:\n#{internal_patterns}\n\n"
             end
@@ -322,8 +324,16 @@ module GrammarHelper
             # start part
             @tag_name = tag_as
             @repo_name = tagNameToRepoName(@tag_name)
-            @start = SimpleTag.new(tag_as:@tag_name+".begin", pattern_sequence:start_sequence, for_tagging: for_start_tagging)
-            @ending = SimpleTag.new(tag_as:@tag_name+".end", pattern_sequence:end_sequence, for_tagging: for_end_tagging)
+            start_tag = ""
+            if isAGoodTagName(@tag_name+".begin")
+                start_tag = @tag_name+".begin"
+            end
+            @start = SimpleTag.new(tag_as:start_tag, pattern_sequence:start_sequence, for_tagging: for_start_tagging)
+            end_tag = ""
+            if isAGoodTagName(@tag_name+".end")
+                end_tag = @tag_name+".end"
+            end
+            @ending = SimpleTag.new(tag_as:end_tag, pattern_sequence:end_sequence, for_tagging: for_end_tagging)
             @includes = internal_patterns
             # if it is a copy then the includes dont need to be added
             if not is_copy
