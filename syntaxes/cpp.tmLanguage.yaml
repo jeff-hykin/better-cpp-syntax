@@ -297,7 +297,7 @@
     :match: "((?<![a-zA-Z0-9_])(?:NULL|true|false|nullptr)(?![a-zA-Z0-9_]))"
     :captures:
       '0':
-        :name: constant.cpp
+        :name: constant.language.cpp
   scope_resolution:
     :name: punctuation.separator.namespace.access.cpp
     :match: "((?:[a-zA-Z_][a-zA-Z0-9_]*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*)([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"
