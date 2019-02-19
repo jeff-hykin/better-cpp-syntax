@@ -1,7 +1,7 @@
 require 'yaml'
 
 # TODO
-    # put these Regexp and String extensions inside of the Module
+    # put these the class exentions (Regexp, String, etc) inside of the Module
 
 # extend Regexp to make expressions very readable
 class Regexp
@@ -101,6 +101,27 @@ end
 @word_boundary = /\b/
 @white_space_start_boundary = /(?<=\s)(?=\S)/
 @white_space_end_boundary = /(?<=\S)(?=\s)/
+
+#
+# Helpers
+#
+class NegatedSymbol
+    def initialize(a_symbol)
+        @symbol = a_symbol
+    end
+    def to_s
+        return "not(#{@symbol.to_s})"
+    end
+    def to_sym
+        return @symbol
+    end
+end
+
+class Symbol
+    def !@
+        return NegatedSymbol.new(self)
+    end
+end
 
 
 module GrammarHelper
@@ -369,6 +390,38 @@ module GrammarHelper
                 patterns: patterns,
                 **@data
             }
+        end
+    end
+    
+    class TokenHelper
+        attr_accessor :tokens
+        def initialize(tokens, for_each_token:nil)
+            @tokens = tokens
+            if for_each_token != nil
+                for each in @tokens
+                    for_each_token[each]
+                end
+            end
+        end
+        
+        def that(*adjectives)
+            matches = @tokens.select do |each_token|
+                output = true
+                for each_adjective in adjectives
+                    # make sure to fail on negated symbols
+                    if each_adjective.is_a? NegatedSymbol
+                        if each_token[each_adjective.to_sym] == true
+                            output = false
+                            break
+                        end
+                    elsif each_token[each_adjective] != true
+                        output = false
+                        break
+                    end
+                end
+                output
+            end
+            return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
         end
     end
 end
