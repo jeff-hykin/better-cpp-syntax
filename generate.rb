@@ -218,10 +218,6 @@ cpp_grammar.data[:patterns] = [
         }
     },
     {
-        match: -/\b(f|m)[A-Z]\w*\b/,
-        name: "variable.other.readwrite.member"
-    },
-    {
         match: -/\bthis\b/,
         name: "variable.language.this"
     },
@@ -325,18 +321,6 @@ cpp_grammar.data[:patterns] = [
     {
         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
         name: "storage.modifier"
-    },
-    {
-        match: "\\bk[A-Z]\\w*\\b",
-        name: "constant.other.variable.mac-classic"
-    },
-    {
-        match: "\\bg[A-Z]\\w*\\b",
-        name: "variable.other.readwrite.global.mac-classic"
-    },
-    {
-        match: "\\bs[A-Z]\\w*\\b",
-        name: "variable.other.readwrite.static.mac-classic"
     },
     {
         include: "#operators-c"
@@ -587,14 +571,6 @@ cpp_grammar.data[:patterns] = [
     {
         match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
         name: "support.type.stdint"
-    },
-    {
-        match: "\\b(noErr|kNilOptions|kInvalidID|kVariableLengthArray)\\b",
-        name: "support.constant.mac-classic"
-    },
-    {
-        match: "(?x) \\b\n(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam\n|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr\n|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber\n|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64\n|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32\n|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr\n|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\n\\b",
-        name: "support.type.mac-classic"
     },
     {
         match: -posix_reserved_types,
