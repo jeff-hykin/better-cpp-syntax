@@ -12,14 +12,32 @@
 :patterns:
 - :include: "#special_block"
 - :include: "#strings"
-- :match: "\\b(typedef|friend|explicit|virtual|override|final|noexcept)\\b"
-  :name: storage.modifier.cpp
-- :match: "\\b(private:|protected:|public:)"
-  :name: storage.type.modifier.access.cpp
-- :match: "\\b(catch|try|throw|using)\\b"
-  :name: keyword.control.cpp
-- :match: "\\bdelete\\b(\\s*\\[\\])?|\\bnew\\b(?!\\])"
-  :name: keyword.control.cpp
+- :match: "(?<![a-zA-Z0-9_])((?:inline|constexpr|mutable|friend|explicit|virtual))(?![a-zA-Z0-9_])"
+  :name: storage.modifier.specificer.functional.pre-parameters.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])((?:final|override|volatile|const|noexcept))(?![a-zA-Z0-9_])(?=\\s*(?:(?:\\{|;)|[\\n\\r]))"
+  :name: storage.modifier.specifier.functional.post-parameters.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])((?:const|static|volatile|register|restrict|extern))(?![a-zA-Z0-9_])"
+  :name: storage.modifier.specifier.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])((?:private|protected|public)):"
+  :name: storage.type.modifier.access.control.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])(?:throw|try|catch)(?![a-zA-Z0-9_])"
+  :name: keyword.control.exception.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])(using|typedef)(?![a-zA-Z0-9_])"
+  :name: keyword.other.$1.cpp
+- :match: "(?<![a-zA-Z0-9_])((?:delete\\s*\\[\\]|delete|new(?![a-zA-Z0-9_])))"
+  :name: keyword.operator.memory.cpp
+  :captures:
+    '0':
+      :patterns:
+      - :match: delete(\[\])
+        :name: keyword.operator.memory.delete.array.cpp
+        :captures:
+          '1':
+            :name: keyword.operator.memory.delete.array.bracket.cpp
+      - :match: delete
+        :name: keyword.operator.memory.delete.cpp
+      - :match: new
+        :name: keyword.operator.memory.new.cpp
 - :match: "\\b(f|m)[A-Z]\\w*\\b"
   :name: variable.other.readwrite.member.cpp
 - :match: "\\bthis\\b"
@@ -253,7 +271,7 @@
   :name: support.type.posix-reserved.cpp
 - :include: "#block-c"
 - :include: "#parens-c"
-- :begin: "(?<![a-zA-Z0-9_])(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|const|static|volatile|register|restrict|constexpr|extern|inline|mutable|friend|NULL|true|false|nullptr|class|struct|union|enum|explicit|virtual|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|atomic_cancel|atomic_commit|atomic_noexcept|concept|co_await|co_return|co_yield|export|import|module|reflexpr|requires|synchronized|thread_local|audit|axiom|transaction_safe|transaction_safe_dynamic)\\s*\\()(?=[a-zA-Z_][a-zA-Z0-9_]*\\s*\\()"
+- :begin: "(?<![a-zA-Z0-9_])(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|atomic_cancel|atomic_commit|atomic_noexcept|concept|co_await|co_return|co_yield|export|import|module|reflexpr|requires|synchronized|thread_local|audit|axiom|transaction_safe|transaction_safe_dynamic)\\s*\\()(?=[a-zA-Z_][a-zA-Z0-9_]*\\s*\\()"
   :end: "(?<=\\))"
   :name: meta.function.definition.cpp
   :patterns:
@@ -273,7 +291,7 @@
   :patterns:
   - :include: "#function-call-innards-c"
 - :name: storage.modifier.array.bracket.square.cpp
-  :match: "\\[\\s*\\]"
+  :match: "(?-mix:(?<!delete))\\\\[\\\\s*\\\\]"
 - :match: ";"
   :name: punctuation.terminator.statement.cpp
 - :match: ","
@@ -1512,6 +1530,29 @@
     - :include: "#access-method"
     - :include: "#access-member"
     - :include: "#operators-c"
+    - :begin: |-
+        (?x)
+        (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
+        (
+        (?:new)\s*((?:<(?:[\s<>,\w])*>\s*)?) # actual name
+        |
+        (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
+        )
+        \s*(\()
+      :beginCaptures:
+        '1':
+          :name: keyword.operator.memory.new.cpp
+        '2':
+          :patterns:
+          - :include: "#template-call-innards"
+        '3':
+          :name: punctuation.section.arguments.begin.bracket.round.cpp
+      :end: "\\)"
+      :endCaptures:
+        '0':
+          :name: punctuation.section.arguments.end.bracket.round.cpp
+      :patterns:
+      - :include: "#function-call-innards-c"
     - :begin: |-
         (?x)
         (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()

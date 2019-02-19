@@ -70,10 +70,18 @@ probably_user_constant_1_group = variableBounds[lookAheadToAvoid(@cpp_tokens.tha
 constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
 
 # 
-# Keywords
+# Keywords and Keyword-ish things
 # 
 any_operator_keyword = @cpp_tokens.that(:isOperator, :isWord)
 control_flow_keywords = @cpp_tokens.that(:isControlFlow)
+access_control_keywords = lookBehindToAvoid(character_in_variable_name).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
+exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
+functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
+storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
+qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
+other_keywords = variableBounds[ /(using|typedef)/ ]
+memory_operators = lookBehindToAvoid(character_in_variable_name).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/.lookAheadToAvoid(character_in_variable_name))))
+
 
 # 
 # Scope resolution
@@ -159,20 +167,55 @@ cpp_grammar.data[:patterns] = [
         include: "#strings"
     },
     {
-        match: -/\b(typedef|friend|explicit|virtual|override|final|noexcept)\b/,
-        name: "storage.modifier"
+        match: -functional_specifiers_pre_parameters,
+        name: "storage.modifier.specificer.functional.pre-parameters.$1"
     },
     {
-        match: -/\b(private:|protected:|public:)/,
-        name: "storage.type.modifier.access"
+        match: -qualifiers_and_specifiers_post_parameters,
+        name: "storage.modifier.specifier.functional.post-parameters.$1"
     },
     {
-        match: -/\b(catch|try|throw|using)\b/,
-        name: "keyword.control"
+        match: -storage_specifiers,
+        name: "storage.modifier.specifier.$1"
     },
     {
-        match: -/\bdelete\b(\s*\[\])?|\bnew\b(?!\])/,
-        name: "keyword.control"
+        match: -access_control_keywords,
+        name: "storage.type.modifier.access.control.$1"
+    },
+    {
+        match: -exception_keywords,
+        name: "keyword.control.exception.$1"
+    },
+    {
+        match: -other_keywords,
+        name: "keyword.other.$1"
+    },
+    {
+        match: -memory_operators,
+        name: "keyword.operator.memory",
+        captures: {
+            "0" => {
+                patterns: [
+                    {
+                        match: -/delete(\[\])/,
+                        name: "keyword.operator.memory.delete.array",
+                        captures: {
+                            "1" => {
+                                name: "keyword.operator.memory.delete.array.bracket",
+                            }
+                        }
+                    },
+                    {
+                        match: -/delete/,
+                        name: "keyword.operator.memory.delete"
+                    },
+                    {
+                        match: -/new/,
+                        name: "keyword.operator.memory.new"
+                    },
+                ]
+            }
+        }
     },
     {
         match: -/\b(f|m)[A-Z]\w*\b/,
@@ -601,7 +644,7 @@ cpp_grammar.data[:patterns] = [
     },
     {
         name: "storage.modifier.array.bracket.square",
-        match: "\\[\\s*\\]"
+        match: -/#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
     },
     {
         match: ";",
@@ -2836,6 +2879,35 @@ cpp_grammar.data[:repository] = {
             },
             {
                 include: "#operators-c"
+            },
+            {
+                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                beginCaptures: {
+                    "1" => {
+                        name: "keyword.operator.memory.new"
+                    },
+                    "2" => {
+                        patterns: [
+                            {
+                                include: "#template-call-innards"
+                            }
+                        ]
+                    },
+                    "3" => {
+                        name: "punctuation.section.arguments.begin.bracket.round"
+                    },
+                },
+                end: "\\)",
+                endCaptures: {
+                    "0" => {
+                        name: "punctuation.section.arguments.end.bracket.round"
+                    }
+                },
+                patterns: [
+                    {
+                        include: "#function-call-innards-c"
+                    }
+                ]
             },
             {
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
