@@ -245,11 +245,11 @@ tokens = [
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true},
-    { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParameters: true },
-    { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParameters: true },
-    { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParameters: true },
-    { representation: "const"                , name: "const"            , functionQualifier: true, canAppearAfterParameters: true },
-    { representation: "noexcept"             , name: "noexcept"         , isSpecifier: true ,      canAppearAfterParameters: true },
+    { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
+    { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
+    { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
+    { representation: "const"                , name: "const"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
+    { representation: "noexcept"             , name: "noexcept"         , isSpecifier: true ,      canAppearAfterParametersBeforeBody: true },
     # if statement specifiers see https://en.cppreference.com/w/cpp/language/if
     { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isIfStatementSpecifier: true },
     # lambda specifiers
