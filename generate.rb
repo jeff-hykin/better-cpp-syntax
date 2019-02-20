@@ -3,6 +3,7 @@ include GrammarHelper
 require_relative './cpp_tokens.rb'
 
 # todo
+    # create the And() and Or() functions and rework the pattern_sequence args for SimpleTag
     # fix sizeof, alignas and similar
     # fix initializer list "functions"
     # fix the ... inside of macros
@@ -72,7 +73,7 @@ constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant
 # 
 # Keywords and Keyword-ish things
 # 
-any_operator_keyword = @cpp_tokens.that(:isOperator, :isWord)
+any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
 control_flow_keywords = @cpp_tokens.that(:isControlFlow)
 access_control_keywords = lookBehindToAvoid(character_in_variable_name).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
 exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
@@ -239,10 +240,6 @@ cpp_grammar.data[:patterns] = [
         include: "#scope_resolution"
     },
     {
-        match: -/\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\b/,
-        name: "keyword.operator"
-    },
-    {
         match: -/\b(decltype|wchar_t|char16_t|char32_t)\b/,
         name: "storage.type"
     },
@@ -323,7 +320,7 @@ cpp_grammar.data[:patterns] = [
         name: "storage.modifier"
     },
     {
-        include: "#operators-c"
+        include: "#operators"
     },
     {
         include: "#operator_overload"
@@ -652,7 +649,7 @@ cpp_grammar.data[:repository] = {
                         name: "storage.type.user-defined",
                     },
                     {
-                        include: "#operators-c"
+                        include: "#operators"
                     },
                     {
                         include: "#numbers-c"
@@ -1507,11 +1504,11 @@ cpp_grammar.data[:repository] = {
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
     },
-    "operators-c" => {
+    "operators" => {
         patterns: [
             {
-                match: "(?<![\\w$])(sizeof)(?![\\w$])",
-                name: "keyword.operator.sizeof"
+                match: variableBounds[newGroup(any_normal_word_operator_keyword)],
+                name: "keyword.operator.$1"
             },
             {
                 match: "--",
@@ -1886,7 +1883,7 @@ cpp_grammar.data[:repository] = {
                 ]
             },
             {
-                include: "#operators-c"
+                include: "#operators"
             },
             {
                 include: "#constants"
@@ -2727,7 +2724,7 @@ cpp_grammar.data[:repository] = {
                 include: "#access-member"
             },
             {
-                include: "#operators-c"
+                include: "#operators"
             },
             {
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
@@ -2784,7 +2781,7 @@ cpp_grammar.data[:repository] = {
                 include: "#storage_types-c"
             },
             {
-                include: "#operators-c"
+                include: "#operators"
             },
             {
                 include: "#vararg_ellipses-c"
@@ -2854,7 +2851,7 @@ cpp_grammar.data[:repository] = {
                 include: "#access-member"
             },
             {
-                include: "#operators-c"
+                include: "#operators"
             },
             {
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
