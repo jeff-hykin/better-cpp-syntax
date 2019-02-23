@@ -50,7 +50,12 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # 
 # Numbers
 # 
-    # TODO: improve the unit tagging for E and hex 
+    # TODO: improve tagging for:
+        # tag the E in 1001E1101
+        # tag the first single quote in 0x1'2'4'5
+        # tag the ending single quote and number in 1001E1101'1
+        # tag the first single quote in 0b1'0'1'1
+        # fix the F in 0x0.5p10F
     octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
