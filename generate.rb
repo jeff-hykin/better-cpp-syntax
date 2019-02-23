@@ -539,7 +539,7 @@ cpp_grammar.data[:patterns] = [
     },
     {
         match: "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
-        name: "keyword.control"
+        name: "keyword.control.$1"
     },
     {
         include: "#storage_types-c"

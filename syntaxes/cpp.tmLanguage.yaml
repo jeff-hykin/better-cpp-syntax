@@ -96,7 +96,7 @@
 - :include: "#preprocessor-rule-conditional"
 - :include: "#comments-c"
 - :match: "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b"
-  :name: keyword.control.cpp
+  :name: keyword.control.$1.cpp
 - :include: "#storage_types-c"
 - :match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b"
   :name: storage.modifier.cpp
