@@ -65,7 +65,7 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
             hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F]+p\d+/
         full_hex_or_binary = main_hex_or_binary_pattern.maybe(hexadecimal_floating_constant_pattern)
         possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
-        integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9]/)
+        integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9']/)
         decimal_ending = maybe(/\./.then(integer_with_seperators))
     numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)#{-possible_type_endings}\w+/
 # 
@@ -1743,7 +1743,7 @@ cpp_grammar.data[:repository] = {
                 ]
             },
             {
-                begin: "'",
+                begin: lookBehindToAvoid(/[\da-fA-F]/).then(/'/),
                 beginCaptures: {
                     "0" => {
                         name: "punctuation.definition.string.begin"
