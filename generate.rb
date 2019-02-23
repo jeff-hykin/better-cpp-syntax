@@ -83,12 +83,47 @@ qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens
 other_keywords = variableBounds[ /(using|typedef)/ ]
 memory_operators = lookBehindToAvoid(character_in_variable_name).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/.lookAheadToAvoid(character_in_variable_name))))
 
+# 
+# Templates
+# 
+    characters_in_template_call = /[\s<>,\w]/
+template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
+template_call_innards_tagger = {
+    name: "meta.template.call",
+    match: -template_call_match,
+    captures: {
+        "0" => {
+            patterns: [
+                {
+                    include: "#storage_types-c",
+                },
+                {
+                    include: "#constants",
+                },
+                {
+                    include: "#scope_resolution",
+                },
+                {
+                    match: -variable_name,
+                    name: "storage.type.user-defined",
+                },
+                {
+                    include: "#operators"
+                },
+                {
+                    include: "#numbers-c"
+                },
+                {
+                    include: "#strings"
+                },
+            ]
+        }
+    }
+}
 
 # 
 # Scope resolution
 #
-                characters_in_template_call = /[\s<>,\w]/
-            template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
         one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
 maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
@@ -858,38 +893,7 @@ cpp_grammar.data[:patterns] = [
     }
 ]
 cpp_grammar.data[:repository] = {
-    "template-call-innards" => {
-        name: "meta.template.call",
-        match: -template_call_match,
-        captures: {
-            "0" => {
-                patterns: [
-                    {
-                        include: "#storage_types-c",
-                    },
-                    {
-                        include: "#constants",
-                    },
-                    {
-                        include: "#scope_resolution",
-                    },
-                    {
-                        match: -variable_name,
-                        name: "storage.type.user-defined",
-                    },
-                    {
-                        include: "#operators"
-                    },
-                    {
-                        include: "#numbers-c"
-                    },
-                    {
-                        include: "#strings"
-                    },
-                ]
-            }
-        }
-    },
+    "template-call-innards" => template_call_innards_tagger,
     "constants" => constants.to_h,
     "scope_resolution" => scope_resolution_tagger,
     "template_definition" => {
