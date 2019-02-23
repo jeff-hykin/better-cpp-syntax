@@ -2941,5 +2941,5 @@ cpp_grammar.data[:repository] = {
 Dir.chdir __dir__
 
 # Save
-cpp_grammar.saveAsYamlTo("./experimental-syntaxes/cpp.tmLanguage")
-cpp_grammar.saveAsJsonTo("./experimental-syntaxes/cpp.tmLanguage")
+cpp_grammar.saveAsYamlTo("./syntaxes/cpp.tmLanguage")
+cpp_grammar.saveAsJsonTo("./syntaxes/cpp.tmLanguage")
