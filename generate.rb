@@ -508,6 +508,15 @@ namespace_definition_tagger = {
     preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
 preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
 
+# 
+# Support
+# 
+support_type_pattern = @cpp_support.that(:belongsToIostream)
+support_type_function_tokenizer = {
+    match: variableBounds[newGroup(support_type_pattern)],
+    name: "support.variable.iostream.$1",
+}
+
 cpp_grammar.data[:patterns] = [
     {
         include: "#special_block"

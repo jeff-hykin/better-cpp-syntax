@@ -329,3 +329,28 @@ tokens = [
         each[:isWord] = true
     end
 end
+
+
+
+support_tokens = [
+    # io stream
+    { representation: "cin"                        , name: "cin"                        , belongsToIostream: true , isVariable: true},
+    { representation: "wcin"                       , name: "wcin"                       , belongsToIostream: true , isVariable: true},
+    { representation: "cout"                       , name: "cout"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wcout"                      , name: "wcout"                      , belongsToIostream: true , isVariable: true},
+    { representation: "cerr"                       , name: "cerr"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wcerr"                      , name: "wcerr"                      , belongsToIostream: true , isVariable: true},
+    { representation: "clog"                       , name: "clog"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wclog"                      , name: "wclog"                      , belongsToIostream: true , isVariable: true},
+    # stdio
+    { representation: "stderr"                     , name: "stderr"                     , belongsToStdio: true , isVariable: true},
+    { representation: "stdin"                      , name: "stdin"                      , belongsToStdio: true , isVariable: true},
+    { representation: "stdout"                     , name: "stdout"                     , belongsToStdio: true , isVariable: true},
+    { representation: "FILE"                       , name: "FILE"                       , belongsToStdio: true , isType: true},
+    { representation: "fpos_t"                     , name: "fpos_t"                     , belongsToStdio: true , isType: true},
+    { representation: "size_t"                     , name: "size_t"                     , belongsToStdio: true , isType: true},
+    
+]
+
+
+@cpp_support = TokenHelper.new support_tokens
