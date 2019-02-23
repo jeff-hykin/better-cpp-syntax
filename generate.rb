@@ -367,7 +367,7 @@ access_member_tagger = {
 # Functions
 # 
         cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective))
-    avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
+    avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
 function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
 function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call_match)).then(newGroup(/\(/))
