@@ -119,6 +119,91 @@ template_call_innards_tagger = {
         }
     }
 }
+template_definition_tagger = {
+    begin:  lookBehindToAvoid(@standard_character).then(newGroup(/template/)).maybe(@spaces).then(newGroup(/</)),
+    beginCaptures: {
+        "1" => {
+            name: "storage.type.template"
+        },
+        "2" => {
+            name: "punctuation.section.angle-brackets.start.template.definition"
+        }
+    },
+    end: ">",
+    endCaptures: {
+        "0" => {
+            name: "punctuation.section.angle-brackets.end.template.definition"
+        }
+    },
+    name: "template.definition",
+    patterns: [
+        {
+            include: "#scope_resolution"
+        },
+        {
+            include: "#template_definition_argument"
+        },
+        {
+            include: "#template-call-innards"
+        },
+    ]
+}
+template_definition_argument = maybe(@spaces).then(newGroup(variable_name_without_bounds).or(
+        # group 2 and 3 (the normal situation)
+        newGroup(oneOrMoreOf(variable_name_without_bounds.then(@spaces))).then(newGroup(variable_name_without_bounds))
+    ).or(
+        # group 4 5 6 (ellipses)
+        newGroup(variable_name_without_bounds).maybe(@spaces).then(newGroup(/\.\.\./)).maybe(@spaces).then(newGroup(variable_name_without_bounds))
+    ).or(
+        # groups 7 8 9 10 11
+        # TODO: change this regex into readable regex, also improve its matching 
+        /((?:[a-zA-Z_][a-zA-Z_0-9]*\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)\s*(\w+)/
+    ).maybe(@spaces).then(newGroup(/,/).or(lookAheadFor(/>/)))
+)
+template_definition_argument_tagger = {
+    match: -template_definition_argument,
+    captures: {
+        "1" => {
+            name: "storage.type.template.argument.$1"
+        },
+        "2" => {
+            name: "storage.type.template.argument.$2"
+        },
+        "3" => {
+            name: "entity.name.type.template"
+        },
+        "4" => {
+            name: "storage.type.template"
+        },
+        "5" => {
+            name: "keyword.operator.ellipsis.template.definition"
+        },
+        "6" => {
+            name: "entity.name.type.template"
+        },
+        "7" => {
+            name: "storage.type.template"
+        },
+        "8" => {
+            name: "entity.name.type.template"
+        },
+        "9" => {
+            name: "keyword.operator.assignment"
+        },
+        "10" => {
+            name: "keyword.operator.assignment"
+        },
+        "11" => {
+            name: "storage.type.template.argument.$10",
+        },
+        "12" => {
+            name: "constant.language"
+        },
+        "13" => {
+            name: "meta.template.operator.comma"
+        },
+    }
+}
 
 # 
 # Scope resolution
@@ -895,67 +980,8 @@ cpp_grammar.data[:repository] = {
     "template-call-innards" => template_call_innards_tagger,
     "constants" => constants.to_h,
     "scope_resolution" => scope_resolution_tagger,
-    "template_definition" => {
-        begin: "\\b(template)\\s*(<)\\s*",
-        beginCaptures: {
-            "1" => {
-                name: "storage.type.template"
-            },
-            "2" => {
-                name: "punctuation.section.angle-brackets.start.template.definition"
-            }
-        },
-        end: ">",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.angle-brackets.end.template.definition"
-            }
-        },
-        name: "template.definition",
-        patterns: [
-            {
-                include: "#template_definition_argument"
-            }
-        ]
-    },
-    "template_definition_argument" => {
-        match: "\\s*(?:([a-zA-Z_][a-zA-Z_0-9]*\\s*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)|([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_][a-zA-Z_0-9]*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))(,|(?=>))",
-        captures: {
-            "1" => {
-                name: "storage.type.template"
-            },
-            "2" => {
-                name: "storage.type.template"
-            },
-            "3" => {
-                name: "entity.name.type.template"
-            },
-            "4" => {
-                name: "storage.type.template"
-            },
-            "5" => {
-                name: "meta.template.operator.ellipsis"
-            },
-            "6" => {
-                name: "entity.name.type.template"
-            },
-            "7" => {
-                name: "storage.type.template"
-            },
-            "8" => {
-                name: "entity.name.type.template"
-            },
-            "9" => {
-                name: "keyword.operator.assignment"
-            },
-            "10" => {
-                name: "constant.language"
-            },
-            "11" => {
-                name: "meta.template.operator.comma"
-            }
-        }
-    },
+    "template_definition" => template_definition_tagger,
+    "template_definition_argument" => template_definition_argument_tagger,
     "angle_brackets" => {
         begin: "<",
         end: ">",
@@ -1081,7 +1107,12 @@ cpp_grammar.data[:repository] = {
                         ]
                     }
                 },
-                end: "(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))",
+                end: "(?<=\\})|(;)|(?=(\\(|\\)|>|\\[|\\]|=))",
+                endCaptures: {
+                    "1" => {
+                        name: "punctuation.terminator.statement",
+                    },
+                },
                 name: "meta.class-struct-block",
                 patterns: [
                     {

@@ -309,7 +309,7 @@
       '4':
         :name: punctuation.separator.namespace.access.cpp
   template_definition:
-    :begin: "\\b(template)\\s*(<)\\s*"
+    :begin: !ruby/regexp /(?<!\w)(template)\s*(<)/
     :beginCaptures:
       '1':
         :name: storage.type.template.cpp
@@ -321,20 +321,22 @@
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
     :name: template.definition.cpp
     :patterns:
+    - :include: "#scope_resolution"
     - :include: "#template_definition_argument"
+    - :include: "#template-call-innards"
   template_definition_argument:
-    :match: "\\s*(?:([a-zA-Z_][a-zA-Z_0-9]*\\s*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)|([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_][a-zA-Z_0-9]*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))(,|(?=>))"
+    :match: "\\s*(?:(?:(?:([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*))|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))\\s*(?:(,)|(?=>))"
     :captures:
       '1':
-        :name: storage.type.template.cpp
+        :name: storage.type.template.argument.$1.cpp
       '2':
-        :name: storage.type.template.cpp
+        :name: storage.type.template.argument.$2.cpp
       '3':
         :name: entity.name.type.template.cpp
       '4':
         :name: storage.type.template.cpp
       '5':
-        :name: meta.template.operator.ellipsis.cpp
+        :name: keyword.operator.ellipsis.template.definition.cpp
       '6':
         :name: entity.name.type.template.cpp
       '7':
@@ -344,8 +346,12 @@
       '9':
         :name: keyword.operator.assignment.cpp
       '10':
-        :name: constant.language.cpp
+        :name: keyword.operator.assignment.cpp
       '11':
+        :name: storage.type.template.argument.$10.cpp
+      '12':
+        :name: constant.language.cpp
+      '13':
         :name: meta.template.operator.comma.cpp
   angle_brackets:
     :begin: "<"
@@ -478,7 +484,10 @@
             :name: storage.type.modifier.access.cpp
           - :match: "[_A-Za-z][_A-Za-z0-9]*"
             :name: entity.name.type.inherited.cpp
-      :end: "(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))"
+      :end: "(?<=\\})|(;)|(?=(\\(|\\)|>|\\[|\\]|=))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
       :name: meta.class-struct-block.cpp
       :patterns:
       - :include: "#angle_brackets"
