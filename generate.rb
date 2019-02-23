@@ -55,9 +55,13 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
     non_hex_non_octal_units = /[^\d\.A-F]+/
-        hex_start_pattern = /0(x|X)/
+        hex_start_pattern = /0(?:x|X)/
         hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F])?/
-    numeric_pattern = /\b((?:(#{-hex_start_pattern}#{-hex_content_pattern})|(0(b|B)[01]([01']*[01])?))(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\w+/
+    full_hex_pattern = hex_start_pattern.then(hex_content_pattern)
+        binary_start_pattern = /0(?:b|B)/
+        binary_content_pattern = /[01](?:[01']*[01])?/
+    full_binary_pattern = binary_start_pattern.then(binary_content_pattern)
+    numeric_pattern = /\b((?:#{-full_hex_pattern}|#{-full_binary_pattern})(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\w+/
 
 # 
 # variable
