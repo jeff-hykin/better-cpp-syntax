@@ -31,9 +31,9 @@ It adds:
 - Improved scope resultion `::` syntax
 - Highlighting of templated function calls `aFunction<int>(arguments)`
 - Template definition syntax highlighting (including C++ 2020 syntax)
-- Tags for the colon in ranged-based for loops
 - Additional specificity for many existing tags
-- Many more features
+- Tags for the colon in ranged-based for loops
+- Many other features
 
 ## Is this finished? Can I contribute?
 This project is still just getting started. The ruby code is very much a work in progress. It's probably going to be another month before the structure is created. Once the structure is established, maintainance and contributions will be easy.
