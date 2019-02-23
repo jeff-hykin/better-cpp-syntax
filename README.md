@@ -22,7 +22,7 @@ It fixes:
 - The marking of some %'s as invalid inside of strings https://github.com/atom/language-c/issues/289
 - The highlighting of namespaces with ::'s https://github.com/atom/language-c/issues/260 
 - The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
-- And many many more issues
+- And many many more issues (#318, #309, #270, #246, etc)
 
 It adds:
 - Parameter highlighting
@@ -35,13 +35,13 @@ It adds:
 - Many more features
 
 ## Is this finished? Can I contribute?
-This project is not even close to finished. The ruby code is very much a work in progress, it's probably going to be another month before the structure is created. Once the structure is established, maintainance and contributions will be easy.
+This project is still just getting started. The ruby code is very much a work in progress. It's probably going to be another month before the structure is created. Once the structure is established, maintainance and contributions will be easy.
 
 Planned future fixes/featues:
 - Fix more of the syntax-breaking bugs from https://github.com/atom/language-c/issues
 - Fix more of the easy-to-fix bugs from https://github.com/atom/language-c/issues
-  - Fix the ## issue https://github.com/atom/language-c/issues/318
   - Fix multiple inheritance https://github.com/atom/language-c/issues/245
+- Start coding patterns according to the offical C++ syntax specifications
 - Fix function-pointer tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
@@ -57,7 +57,7 @@ I love regular expressions, and I plan on actively maintaining this.
 There's missing keywords, misspelled keywords, there's copy-and-pasted patterns, duplicated logic, and groups that were matched but forgot to ever be tagged. The standard tagging for C++ looks like a bunch of hacked-together solutions with no standards, it is very suprising. The regex and pattern matching is so complicated to read that I think nobody wants to change it. I hope to change this by having the json files be generated completely by a ruby file. It makes the regex readable and gets rid of the need to copy and paste patterns.
 
 ## Did you write all of this youself?
-No, absolutely not. This is only a modifcation of https://github.com/atom/language-c;
+The ruby code is authored by me, but the .json file is a modifcation of https://github.com/atom/language-c;
 
 ## Did you write all the improvements yourself?
 Nope, the #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
