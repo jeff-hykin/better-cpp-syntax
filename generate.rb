@@ -51,7 +51,7 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # Numbers
 # 
     # TODO: improve the unit tagging for E and hex 
-    octal_pattern = lookBehindToAvoid(@standard_character).then(/0/).lookAheadFor(@digit)
+    octal_pattern = lookBehindToAvoid(@standard_character.or(/\./)).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
     non_hex_non_octal_units = /[^\d\.A-F]+/
@@ -122,6 +122,10 @@ template_call_innards_tagger = {
                 },
                 {
                     include: "#strings"
+                },
+                {
+                    match: /,/,
+                    name: "punctuation.separator.comma.template.argument",
                 },
             ]
         }
@@ -208,7 +212,7 @@ template_definition_argument_tagger = {
             name: "constant.language"
         },
         "13" => {
-            name: "meta.template.operator.comma"
+            name: "punctuation.separator.comma.template.argument"
         },
     }
 }

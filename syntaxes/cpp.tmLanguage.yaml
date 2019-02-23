@@ -290,6 +290,8 @@
         - :include: "#operators"
         - :include: "#numbers-c"
         - :include: "#strings"
+        - :match: !ruby/regexp /,/
+          :name: punctuation.separator.comma.template.argument.cpp
   constants:
     :match: "((?<!\\w)(?:NULL|true|false|nullptr)(?!\\w))"
     :captures:
@@ -354,7 +356,7 @@
       '12':
         :name: constant.language.cpp
       '13':
-        :name: meta.template.operator.comma.cpp
+        :name: punctuation.separator.comma.template.argument.cpp
   angle_brackets:
     :begin: "<"
     :end: ">"
@@ -761,7 +763,7 @@
       :captures:
         '0':
           :patterns:
-          - :match: !ruby/regexp /(?<!\w)0(?=\d)/
+          - :match: !ruby/regexp /(?<!(?:\w|\.))0(?=\d)/
             :name: keyword.other.unit.octal.cpp
           - :match: !ruby/regexp /(?<!\w)0(?:x|X)/
             :name: keyword.other.unit.hexadecimal.cpp
