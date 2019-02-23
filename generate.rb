@@ -52,27 +52,24 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # 
     # TODO: improve tagging for:
         # tag the E in 1001E1101
-        # tag the first single quote in 0x1'2'4'5
-        # tag the ending single quote and number in 1001E1101'1
-        # tag the first single quote in 0b1'0'1'1
         # fix the F in 0x0.5p10F
     octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
     non_hex_non_octal_units = /[^\d\.A-F]+/
                     hex_start_pattern = /0(?:x|X)/
-                    hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F])?/
+                    hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?/
                 full_hex_pattern = hex_start_pattern.then(hex_content_pattern)
                     binary_start_pattern = /0(?:b|B)/
-                    binary_content_pattern = /[01](?:[01']*[01])?/
+                    binary_content_pattern = /[01](?:[01']*[01'])?/
                 full_binary_pattern = binary_start_pattern.then(binary_content_pattern)
             main_hex_or_binary_pattern = full_hex_pattern.or(full_binary_pattern)
-            hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F]+p\d+/
+            hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F']+p[\d']+/
         full_hex_or_binary = main_hex_or_binary_pattern.maybe(hexadecimal_floating_constant_pattern)
         possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
         integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9']/)
         decimal_ending = maybe(/\./.then(integer_with_seperators))
-    numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)#{-possible_type_endings}\w+/
+    numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.#{-integer_with_seperators}))((e|E)(\+|-)?#{-integer_with_seperators})?)#{-possible_type_endings}\w+/
 # 
 # variable
 # 
