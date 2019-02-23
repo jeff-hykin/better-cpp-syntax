@@ -151,7 +151,7 @@ function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
 # 
 # Namespace
 # 
-namespace_pattern_2_groups = @word_boundary.then(newGroup(/namespace/)).maybe(@spaces).thenNewGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds))
+namespace_pattern_2_groups = @word_boundary.then(newGroup(/namespace/)).maybe(@spaces).maybe(newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)))
 
 # 
 # preprocessor
@@ -2941,5 +2941,5 @@ cpp_grammar.data[:repository] = {
 Dir.chdir __dir__
 
 # Save
-cpp_grammar.saveAsYamlTo("./syntaxes/cpp.tmLanguage")
-cpp_grammar.saveAsJsonTo("./syntaxes/cpp.tmLanguage")
+cpp_grammar.saveAsYamlTo("./experimental-syntaxes/cpp.tmLanguage")
+cpp_grammar.saveAsJsonTo("./experimental-syntaxes/cpp.tmLanguage")
