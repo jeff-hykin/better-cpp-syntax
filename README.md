@@ -26,6 +26,7 @@ It fixes:
 
 It adds:
 - Parameter highlighting
+- C++14 literal support (`100'000ms`)
 - Better object identification
 - Improved scope resultion `::` syntax
 - Highlighting of templated function calls `aFunction<int>(arguments)`
