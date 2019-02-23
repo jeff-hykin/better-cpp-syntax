@@ -90,10 +90,36 @@ memory_operators = lookBehindToAvoid(character_in_variable_name).then( newGroup(
                 characters_in_template_call = /[\s<>,\w]/
             template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
         one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
-    preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution))
+    preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
 maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
 preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds).maybe(@spaces).maybe(newGroup(template_call_match))).then(newGroup(/::/))
-
+scope_resolution_tagger = {
+    name: "punctuation.separator.namespace.access",
+    match: -preceding_scopes_4_groups,
+    captures: {
+        "1" => {
+            name: "entity.scope",
+            patterns: [
+                {
+                    include: "#scope_resolution"
+                }
+            ]
+        },
+        "2" => {
+            name: "entity.scope.name"
+        },
+        "3" => {
+            patterns: [
+                {
+                    include: "#template-call-innards"
+                }
+            ]
+        },
+        "4" => {
+            name: "punctuation.separator.namespace.access"
+        }
+    }
+}
 
 # 
 # types
@@ -115,7 +141,17 @@ posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(character_in_v
     # below uses variable_name_without_bounds for performance (timeout) reasons
     probably_a_default_parameter_1_group = newGroup(variable_name_without_bounds).maybe(@spaces).lookAheadFor("=")
 probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably_a_normal_parameter_1_group)
-
+probably_a_parameter_tagger = {
+    match: -probably_a_parameter_2_groups,
+    captures: {
+        "1" => {
+            name: "variable.parameter.probably.defaulted"
+        },
+        "2" => {
+            name: "variable.parameter.probably"
+        }
+    }
+}
 
 # 
 # operator overload
@@ -126,6 +162,38 @@ probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably
         operator_wordish = @spaces.then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
     after_operator_keyword = operator_symbols.or(operator_wordish)
 operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/)).then(newGroup(after_operator_keyword)).maybe(@spaces).then(newGroup(/\(/))
+operator_overload_tagger =  {
+    begin: -operator_overload_4_groups,
+    beginCaptures: {
+        "1" => {
+            name: "entity.scope"
+        },
+        "2" => {
+            name: "entity.name.operator.overload"
+        },
+        "3" => {
+            name: "entity.name.operator.overloadee"
+        },
+        "4" => {
+            name: "punctuation.section.parameters.begin.bracket.round"
+        }
+    },
+    end: -/\)/,
+    endCaptures: {
+        "0" => {
+            name: "punctuation.section.parameters.end.bracket.round"
+        }
+    },
+    name: "meta.function.definition.parameters.operator-overload",
+    patterns: [
+        {
+            include: "#probably_a_parameter"
+        },
+        {
+            include: "#function-innards-c"
+        }
+    ]
+}
 
 # 
 # Access member . .* -> ->* 
@@ -137,21 +205,182 @@ operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/))
     # try to avoid matching types to help with this not matching during lambda functions
     final_memeber_1_group = @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(newGroup(variable_name_without_bounds)).then(@word_boundary).lookAheadToAvoid(/\(/)
 member_pattern_5_groups = before_the_access_operator_1_group.then(member_operator_2_groups).then(subsequent_members_1_group).then(final_memeber_1_group)
+access_member_tagger = {
+    name: "variable.object.access",
+    match: -member_pattern_5_groups,
+    captures: {
+        "1" => {
+            name: "variable.object"
+        },
+        "2" => {
+            name: "punctuation.separator.dot-access"
+        },
+        "3" => {
+            name: "punctuation.separator.pointer-access"
+        },
+        "4" => {
+            patterns: [
+                {
+                    match: -/\./,
+                    name: "punctuation.separator.dot-access"
+                },
+                {
+                    match: -/->/,
+                    name: "punctuation.separator.pointer-access"
+                },
+                {
+                    match: -variable_name_without_bounds,
+                    name: "variable.object"
+                },
+                {
+                    match: -/.+/,
+                    name: "everything.else",
+                }
+            ]
+        },
+        "5" => {
+            name: "variable.other.member"
+        }
+    }
+}
 
 # 
 # Functions
 # 
         cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective))
-        # this next line needs to be updated (its legacy)
-        probably_intended_scope_resolve = /(?:[A-Za-z_][A-Za-z0-9_]*+|::)++/
     avoid_keywords = lookBehindToAvoid(character_in_variable_name).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
 function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
+function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call_match)).then(newGroup(/\(/))
+# a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
+function_call_tagger = {
+    begin: -function_call_pattern_4_groups,
+    beginCaptures: {
+        "1" => {
+            patterns: [
+                {
+                    include: "#scope_resolution"
+                }
+            ]
+        },
+        "2" => {
+            name: "entity.name.function.call"
+        },
+        "3" => {
+            patterns: [
+                {
+                    include: "#template-call-innards"
+                }
+            ]
+        },
+        "4" => {
+            name: "punctuation.section.arguments.begin.bracket.round"
+        },
+    },
+    end: "\\)",
+    endCaptures: {
+        "0" => {
+            name: "punctuation.section.arguments.end.bracket.round"
+        }
+    },
+    patterns: [
+        {
+            include: "#function-call-innards-c"
+        }
+    ]
+}
 
 # 
 # Namespace
 # 
-namespace_pattern_2_groups = @word_boundary.then(newGroup(/namespace/)).maybe(@spaces).maybe(newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)))
+using_namespace_pattern_4_groups = /\b(using)\s+(namespace)\s+/.maybe(preceding_scopes_1_group).then(newGroup(variable_name)).lookAheadFor(/;|\n/)
+using_namespace_tagger = {
+    comment: "https://en.cppreference.com/w/cpp/language/namespace",
+    begin: -using_namespace_pattern_4_groups,
+    beginCaptures: {
+        "1" => {
+            name: "keyword.other.using.directive"
+        },
+        "2" => {
+            name: "keyword.other.namespace.directive"
+        },
+        "3" => {
+            patterns: [
+                {
+                    include: "#scope_resolution",
+                },
+            ]
+        },
+        "4" => {
+            name: "entity.name.type.namespace"
+        },
+    },
+    end: ";",
+    endCaptures: {
+        "0" => {
+            name: "punctuation.terminator.statement"
+        }
+    },
+    name: "meta.using-namespace-declaration"
+}
+# https://en.cppreference.com/w/cpp/language/namespace#Using-directives
+namespace_pattern_2_groups = lookBehindToAvoid(character_in_variable_name).then(newGroup(/namespace/)).maybe(@spaces).then(
+    newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)).or(
+        lookAheadFor(/{/)
+    )
+)
+namespace_definition_tagger = {
+    begin: -namespace_pattern_2_groups,
+    beginCaptures: {
+        "1" => {
+            name: "keyword.other.namespace.definition"
+        },
+        "2" => {
+            patterns: [
+                {
+                    match: variable_name,
+                    name: "entity.name.type",
+                },
+                {
+                    match: -/::/,
+                    name: "punctuation.separator.namespace.access"
+                }
+            ]
+        }
+    },
+    end: "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
+    name: "meta.namespace-block",
+    patterns: [
+        {
+            begin: "\\{",
+            beginCaptures: {
+                "0" => {
+                    name: "punctuation.definition.scope"
+                }
+            },
+            end: "\\}",
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.definition.scope"
+                }
+            },
+            patterns: [
+                {
+                    include: "#special_block"
+                },
+                {
+                    include: "#constructor"
+                },
+                {
+                    include: "$base"
+                }
+            ]
+        },
+        {
+            include: "$base"
+        }
+    ]
+}
 
 # 
 # preprocessor
@@ -662,33 +891,7 @@ cpp_grammar.data[:repository] = {
         }
     },
     "constants" => constants.to_h,
-    "scope_resolution" => {
-        name: "punctuation.separator.namespace.access",
-        match: -preceding_scopes_4_groups,
-        captures: {
-            "1" => {
-                name: "entity.scope",
-                patterns: [
-                    {
-                        include: "#scope_resolution"
-                    }
-                ]
-            },
-            "2" => {
-                name: "entity.scope.name"
-            },
-            "3" => {
-                patterns: [
-                    {
-                        include: "#template-call-innards"
-                    }
-                ]
-            },
-            "4" => {
-                name: "punctuation.separator.namespace.access"
-            }
-        }
-    },
+    "scope_resolution" => scope_resolution_tagger,
     "template_definition" => {
         begin: "\\b(template)\\s*(<)\\s*",
         beginCaptures: {
@@ -842,84 +1045,8 @@ cpp_grammar.data[:repository] = {
     },
     "special_block" => {
         patterns: [
-            {
-                begin: "\\b(using)\\b\\s*(namespace)\\b\\s*((?:[_A-Za-z][_A-Za-z0-9]*\\b(::)?)*)",
-                beginCaptures: {
-                    "1" => {
-                        name: "keyword.control"
-                    },
-                    "2" => {
-                        name: "storage.type.namespace"
-                    },
-                    "3" => {
-                        name: "entity.name.type.namespace"
-                    }
-                },
-                end: ";",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.terminator.statement"
-                    }
-                },
-                name: "meta.using-namespace-declaration"
-            },
-            {
-                begin: -namespace_pattern_2_groups,
-                beginCaptures: {
-                    "1" => {
-                        name: "storage.type.namespace"
-                    },
-                    "2" => {
-                        patterns: [
-                            {
-                                match: variable_name,
-                                name: "entity.name.type",
-                            },
-                            {
-                                match: -/::/,
-                                name: "punctuation.separator.namespace.access"
-                            }
-                        ]
-                    }
-                },
-                captures: {
-                    "1" => {
-                        name: "keyword.control.namespace.$2"
-                    }
-                },
-                end: "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
-                name: "meta.namespace-block",
-                patterns: [
-                    {
-                        begin: "\\{",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.definition.scope"
-                            }
-                        },
-                        end: "\\}",
-                        endCaptures: {
-                            "0" => {
-                                name: "punctuation.definition.scope"
-                            }
-                        },
-                        patterns: [
-                            {
-                                include: "#special_block"
-                            },
-                            {
-                                include: "#constructor"
-                            },
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
+            using_namespace_tagger,
+            namespace_definition_tagger,
             {
                 begin: "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
                 beginCaptures: {
@@ -1096,49 +1223,8 @@ cpp_grammar.data[:repository] = {
             }
         ]
     },
-    "probably_a_parameter" => {
-        match: -probably_a_parameter_2_groups,
-        captures: {
-            "1" => {
-                name: "variable.parameter.probably.defaulted"
-            },
-            "2" => {
-                name: "variable.parameter.probably"
-            }
-        }
-    },
-    "operator_overload" => {
-        begin: -operator_overload_4_groups,
-        beginCaptures: {
-            "1" => {
-                name: "entity.scope"
-            },
-            "2" => {
-                name: "entity.name.operator.overload"
-            },
-            "3" => {
-                name: "entity.name.operator.overloadee"
-            },
-            "4" => {
-                name: "punctuation.section.parameters.begin.bracket.round"
-            }
-        },
-        end: -/\)/,
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.parameters.end.bracket.round"
-            }
-        },
-        name: "meta.function.definition.parameters.operator-overload",
-        patterns: [
-            {
-                include: "#probably_a_parameter"
-            },
-            {
-                include: "#function-innards-c"
-            }
-        ]
-    },
+    "probably_a_parameter" => probably_a_parameter_tagger,
+    "operator_overload" => operator_overload_tagger,
     "access-method" => {
         name: "meta.function-call.member",
         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
@@ -1191,44 +1277,7 @@ cpp_grammar.data[:repository] = {
             }
         ]
     },
-    "access-member" => {
-        name: "variable.object.access",
-        match: -member_pattern_5_groups,
-        captures: {
-            "1" => {
-                name: "variable.object"
-            },
-            "2" => {
-                name: "punctuation.separator.dot-access"
-            },
-            "3" => {
-                name: "punctuation.separator.pointer-access"
-            },
-            "4" => {
-                patterns: [
-                    {
-                        match: -/\./,
-                        name: "punctuation.separator.dot-access"
-                    },
-                    {
-                        match: -/->/,
-                        name: "punctuation.separator.pointer-access"
-                    },
-                    {
-                        match: -variable_name_without_bounds,
-                        name: "variable.object"
-                    },
-                    {
-                        match: -/.+/,
-                        name: "everything.else",
-                    }
-                ]
-            },
-            "5" => {
-                name: "variable.other.member"
-            }
-        }
-    },
+    "access-member" => access_member_tagger,
     "block-c" => {
         patterns: [
             {
@@ -2882,35 +2931,7 @@ cpp_grammar.data[:repository] = {
                     }
                 ]
             },
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function.call"
-                    },
-                    "2" => {
-                        patterns: [
-                            {
-                                include: "#template-call-innards"
-                            }
-                        ]
-                    },
-                    "3" => {
-                        name: "punctuation.section.arguments.begin.bracket.round"
-                    },
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.arguments.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function-call-innards-c"
-                    }
-                ]
-            },
+            function_call_tagger,
             {
                 begin: "\\(",
                 beginCaptures: {
