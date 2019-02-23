@@ -55,7 +55,9 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
     non_hex_non_octal_units = /[^\d\.A-F]+/
-    numeric_pattern = /\b((?:(0(x|X)[0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?)|(0(b|B)[01]([01']*[01])?))(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\w+/
+        hex_start_pattern = /0(x|X)/
+        hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F])?/
+    numeric_pattern = /\b((?:(#{-hex_start_pattern}#{-hex_content_pattern})|(0(b|B)[01]([01']*[01])?))(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\w+/
 
 # 
 # variable
