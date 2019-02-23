@@ -97,7 +97,7 @@ end
 @spaces = /\s+/
 @digit = /\d/
 @digits = /\d+/
-@character = /\w/
+@standard_character = /\w/
 @word = /\w+/
 @word_boundary = /\b/
 @white_space_start_boundary = /(?<=\s)(?=\S)/

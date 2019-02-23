@@ -51,12 +51,11 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # 
 # variable
 # 
-character_in_variable_name = /[a-zA-Z0-9_]/
 # todo: make a better name for this function
 variableBounds = ->(regex_pattern) do
-    lookBehindToAvoid(character_in_variable_name).then(regex_pattern).lookAheadToAvoid(character_in_variable_name)
+    lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
 end
-variable_name_without_bounds = /[a-zA-Z_]#{-character_in_variable_name}*/
+variable_name_without_bounds = /[a-zA-Z_]#{-@standard_character}*/
 # word bounds are inefficient, but they are accurate
 variable_name = variableBounds[variable_name_without_bounds]
 
@@ -75,13 +74,13 @@ constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant
 # 
 any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
 control_flow_keywords = @cpp_tokens.that(:isControlFlow)
-access_control_keywords = lookBehindToAvoid(character_in_variable_name).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
+access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
 exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
 functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
 storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
 qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
 other_keywords = variableBounds[ /(using|typedef)/ ]
-memory_operators = lookBehindToAvoid(character_in_variable_name).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/.lookAheadToAvoid(character_in_variable_name))))
+memory_operators = lookBehindToAvoid(@standard_character).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/.lookAheadToAvoid(@standard_character))))
 
 # 
 # Templates
@@ -160,11 +159,11 @@ scope_resolution_tagger = {
 # types
 # 
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-look_behind_for_type = lookBehindFor(character_in_variable_name.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
-primitive_types = lookBehindToAvoid(character_in_variable_name).then(@cpp_tokens.that(:isPrimitive)).lookAheadToAvoid(character_in_variable_name)
-non_primitive_types = lookBehindToAvoid(character_in_variable_name).then(@cpp_tokens.that(not(:isPrimitive), :isType)).lookAheadToAvoid(character_in_variable_name)
-known_types = lookBehindToAvoid(character_in_variable_name).then(@cpp_tokens.that(:isType)).lookAheadToAvoid(character_in_variable_name)
-posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(character_in_variable_name).then(/_t/)  ]
+look_behind_for_type = lookBehindFor(@standard_character.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
+primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isPrimitive)).lookAheadToAvoid(@standard_character)
+non_primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(not(:isPrimitive), :isType)).lookAheadToAvoid(@standard_character)
+known_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isType)).lookAheadToAvoid(@standard_character)
+posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ]
 
 # 
 # Probably a parameter
@@ -283,7 +282,7 @@ access_member_tagger = {
 # Functions
 # 
         cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective))
-    avoid_keywords = lookBehindToAvoid(character_in_variable_name).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
+    avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(cant_be_a_function_name.maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
 function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
 function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call_match)).then(newGroup(/\(/))
@@ -359,7 +358,7 @@ using_namespace_tagger = {
     name: "meta.using-namespace-declaration"
 }
 # https://en.cppreference.com/w/cpp/language/namespace#Using-directives
-namespace_pattern_2_groups = lookBehindToAvoid(character_in_variable_name).then(newGroup(/namespace/)).maybe(@spaces).then(
+namespace_pattern_2_groups = lookBehindToAvoid(@standard_character).then(newGroup(/namespace/)).maybe(@spaces).then(
     newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)).or(
         lookAheadFor(/{/)
     )
