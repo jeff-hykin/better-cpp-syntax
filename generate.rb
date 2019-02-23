@@ -51,10 +51,11 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 # Numbers
 # 
     # TODO: improve the unit tagging for E and hex 
-    octal_pattern = lookBehindToAvoid(@standard_character.or(/\./)).then(/0/).lookAheadFor(@digit)
+    octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
     non_hex_non_octal_units = /[^\d\.A-F]+/
+    numeric_pattern = /\b((?:(0(x|X)[0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?)|(0(b|B)[01]([01']*[01])?))(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\w+/
 
 # 
 # variable
@@ -1536,7 +1537,7 @@ cpp_grammar.data[:repository] = {
         patterns: [
             {
                 # TODO: this pattern needs improving 
-                match: -/\b((?:(0(x|X)[0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?)|(0(b|B)[01]([01']*[01])?))(?:\.[\d+a-fA-F]+p\d+)?|(([0-9]([0-9']*[0-9])?\.?[0-9]*([0-9']*[0-9])?)|(\.[0-9]([0-9']*[0-9])?))((e|E)(\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\b/,
+                match: -numeric_pattern,
                 name: "constant.numeric",
                 captures: {
                     "0" => {
