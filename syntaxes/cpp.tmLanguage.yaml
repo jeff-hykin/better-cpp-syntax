@@ -761,7 +761,7 @@
       :captures:
         '0':
           :patterns:
-          - :match: !ruby/regexp /[^\d\.]+/
+          - :match: !ruby/regexp /[^\d\.A-F]+/
             :name: keyword.other.unit.cpp
   parens-c:
     :name: "punctuation.section.parens-c\b.cpp"

@@ -1529,7 +1529,7 @@ cpp_grammar.data[:repository] = {
                     "0" => {
                         patterns: [
                             {
-                                match: /[^\d\.]+/,
+                                match: /[^\d\.A-F]+/,
                                 name: "keyword.other.unit",
                             },
                         ]
