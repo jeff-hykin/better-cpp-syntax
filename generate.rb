@@ -522,6 +522,10 @@ cpp_grammar.data[:patterns] = [
         include: "#special_block"
     },
     {
+        match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
+        name: "variable.other.macro.argument"
+    },
+    {
         include: "#strings"
     },
     {
@@ -2670,6 +2674,10 @@ cpp_grammar.data[:repository] = {
         patterns: [
             {
                 include: "#vararg_ellipses-c"
+            },
+            {
+                match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
+                name: "variable.other.macro.argument"
             },
             {
                 begin: "{",

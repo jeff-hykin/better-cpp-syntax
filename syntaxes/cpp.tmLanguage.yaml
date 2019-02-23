@@ -11,6 +11,8 @@
 - This file essentially an updated/improved fork of the atom syntax https://github.com/atom/language-c/blob/master/grammars/c%2B%2B.cson
 :patterns:
 - :include: "#special_block"
+- :match: !ruby/regexp /##[a-zA-Z_]\w*(?!\w)/
+  :name: variable.other.macro.argument.cpp
 - :include: "#strings"
 - :match: "(?<!\\w)((?:inline|constexpr|mutable|friend|explicit|virtual))(?!\\w)"
   :name: storage.modifier.specificer.functional.pre-parameters.$1.cpp
@@ -1363,6 +1365,8 @@
   preprocessor-rule-define-line-contents:
     :patterns:
     - :include: "#vararg_ellipses-c"
+    - :match: !ruby/regexp /##?[a-zA-Z_]\w*(?!\w)/
+      :name: variable.other.macro.argument.cpp
     - :begin: "{"
       :beginCaptures:
         '0':
