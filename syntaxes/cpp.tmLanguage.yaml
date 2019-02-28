@@ -769,7 +769,7 @@
             :name: keyword.other.unit.hexadecimal.cpp
           - :match: !ruby/regexp /(?<!\w)0(?:b|B)(?=\d)/
             :name: keyword.other.unit.binary.cpp
-          - :match: !ruby/regexp /[^\d\.A-F]+/
+          - :match: !ruby/regexp /[^\d\.a-fA-F]+/
             :name: keyword.other.unit.cpp
   parens-c:
     :name: "punctuation.section.parens-c\b.cpp"
