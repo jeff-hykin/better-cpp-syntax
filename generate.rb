@@ -69,7 +69,7 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
         possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
         integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9']/)
         decimal_ending = maybe(/\./.then(integer_with_seperators))
-    numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.#{-integer_with_seperators}))((e|E)(\+|-)?#{-integer_with_seperators})?)#{-possible_type_endings}\w+/
+    numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.#{-integer_with_seperators}))((e|E)(\+|-)?#{-integer_with_seperators})?)#{-possible_type_endings}\w*/
 # 
 # variable
 # 
