@@ -568,7 +568,7 @@
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
   probably_a_parameter:
-    :match: "(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=(?:\\w\\s|[&*>\\]\\)]))\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\))))"
+    :match: "(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=\\w\\s|\\*\\/|[&*>\\]\\)])\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\))))"
     :captures:
       '1':
         :name: variable.parameter.probably.defaulted.cpp
@@ -723,8 +723,6 @@
         '0':
           :name: punctuation.definition.comment.end.cpp
       :name: comment.block.cpp
-    - :match: "\\*/.*\\n"
-      :name: invalid.illegal.stray-comment-end.cpp
     - :captures:
         '1':
           :name: meta.toc-list.banner.line.cpp

@@ -270,7 +270,7 @@ scope_resolution_tagger = {
 # types
 # 
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-look_behind_for_type = lookBehindFor(@standard_character.and(@space).or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
+look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
 primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isPrimitive)).lookAheadToAvoid(@standard_character)
 non_primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(not(:isPrimitive), :isType)).lookAheadToAvoid(@standard_character)
 known_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isType)).lookAheadToAvoid(@standard_character)
@@ -1480,10 +1480,6 @@ cpp_grammar.data[:repository] = {
                     }
                 },
                 name: "comment.block"
-            },
-            {
-                match: "\\*/.*\\n",
-                name: "invalid.illegal.stray-comment-end"
             },
             {
                 captures: {
