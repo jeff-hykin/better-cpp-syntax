@@ -47,7 +47,7 @@
 - :match: "\\btemplate\\b\\s*"
   :name: storage.type.template.cpp
 - :match: "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*"
-  :name: keyword.operator.cast.cpp
+  :name: keyword.operator.cast.$1.cpp
 - :include: "#scope_resolution"
 - :match: "\\b(decltype|wchar_t|char16_t|char32_t)\\b"
   :name: storage.type.cpp

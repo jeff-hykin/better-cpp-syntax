@@ -621,7 +621,7 @@ cpp_grammar.data[:patterns] = [
     },
     {
         match: -/\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\b\s*/,
-        name: "keyword.operator.cast"
+        name: "keyword.operator.cast.$1"
     },
     {
         include: "#scope_resolution"
