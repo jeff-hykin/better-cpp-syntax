@@ -351,11 +351,11 @@ operator_overload_tagger =  {
     final_memeber_1_group = @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(newGroup(variable_name_without_bounds)).then(@word_boundary).lookAheadToAvoid(/\(/)
 member_pattern_5_groups = before_the_access_operator_1_group.then(member_operator_2_groups).then(subsequent_members_1_group).then(final_memeber_1_group)
 access_member_tagger = {
-    name: "variable.object.access",
+    name: "variable.other.object.access",
     match: -member_pattern_5_groups,
     captures: {
         "1" => {
-            name: "variable.object"
+            name: "variable.other.object"
         },
         "2" => {
             name: "punctuation.separator.dot-access"
@@ -375,7 +375,7 @@ access_member_tagger = {
                 },
                 {
                     match: -variable_name_without_bounds,
-                    name: "variable.object"
+                    name: "variable.other.object"
                 },
                 {
                     match: -/.+/,
@@ -984,7 +984,7 @@ cpp_grammar.data[:patterns] = [
         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
         beginCaptures: {
             "1" => {
-                name: "variable.object"
+                name: "variable.other.object"
             },
             "2" => {
                 name: "punctuation.definition.begin.bracket.square"
@@ -1303,7 +1303,7 @@ cpp_grammar.data[:repository] = {
         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
         beginCaptures: {
             "1" => {
-                name: "variable.object"
+                name: "variable.other.object"
             },
             "2" => {
                 name: "punctuation.separator.dot-access"
@@ -1323,7 +1323,7 @@ cpp_grammar.data[:repository] = {
                     },
                     {
                         match: "[a-zA-Z_][a-zA-Z_0-9]*",
-                        name: "variable.object"
+                        name: "variable.other.object"
                     },
                     {
                         name: "everything.else",
