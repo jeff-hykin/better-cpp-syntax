@@ -469,7 +469,7 @@ using_namespace_tagger = {
     name: "meta.using-namespace-declaration"
 }
 # https://en.cppreference.com/w/cpp/language/namespace#Using-directives
-namespace_pattern_2_groups = lookBehindToAvoid(@standard_character).then(newGroup(/namespace/)).maybe(@spaces).then(
+namespace_pattern_2_groups = lookBehindToAvoid(@standard_character).then(newGroup(/namespace/)).then(@spaces).then(
     newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)).or(
         lookAheadFor(/{/)
     )

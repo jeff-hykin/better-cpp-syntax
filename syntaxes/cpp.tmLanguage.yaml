@@ -444,7 +444,7 @@
         '0':
           :name: punctuation.terminator.statement.cpp
       :name: meta.using-namespace-declaration.cpp
-    - :begin: "(?<!\\w)(namespace)\\s*(?:((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*)|(?={))"
+    - :begin: "(?<!\\w)(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*)|(?={))"
       :beginCaptures:
         '1':
           :name: keyword.other.namespace.definition.cpp
