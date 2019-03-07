@@ -294,6 +294,8 @@ tokens = [
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
+    { representation: "export"                     , name: "export"                     },
+    { representation: "thread_local"               , name: "thread_local"               },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              , isValidFunctionName: true },
     { representation: "atomic_commit"              , name: "atomic_commit"              , isValidFunctionName: true },
     { representation: "atomic_noexcept"            , name: "atomic_noexcept"            , isValidFunctionName: true },
@@ -301,13 +303,11 @@ tokens = [
     { representation: "co_await"                   , name: "co_await"                   , isValidFunctionName: true },
     { representation: "co_return"                  , name: "co_return"                  , isValidFunctionName: true },
     { representation: "co_yield"                   , name: "co_yield"                   , isValidFunctionName: true },
-    { representation: "export"                     , name: "export"                     , isValidFunctionName: true },
     { representation: "import"                     , name: "import"                     , isValidFunctionName: true },
     { representation: "module"                     , name: "module"                     , isValidFunctionName: true },
     { representation: "reflexpr"                   , name: "reflexpr"                   , isValidFunctionName: true },
     { representation: "requires"                   , name: "requires"                   , isValidFunctionName: true },
     { representation: "synchronized"               , name: "synchronized"               , isValidFunctionName: true },
-    { representation: "thread_local"               , name: "thread_local"               , isValidFunctionName: true },
     # 
     { representation: "audit"                      , name: "audit"                      , isValidFunctionName: true},
     { representation: "axiom"                      , name: "axiom"                      , isValidFunctionName: true},
