@@ -102,7 +102,7 @@ functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that
 storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
 qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
 other_keywords = variableBounds[ /(using|typedef)/ ]
-memory_operators = lookBehindToAvoid(@standard_character).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/.lookAheadToAvoid(@standard_character))))
+memory_operators = lookBehindToAvoid(@standard_character).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/))).lookAheadToAvoid(@standard_character)
 
 # 
 # Templates
