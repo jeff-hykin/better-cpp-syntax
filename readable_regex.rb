@@ -500,36 +500,3 @@ module GrammarHelper
     end
 end
 
-
-# 
-# Example usage:
-# 
-    # include GrammarHelper
-    # grammar = Grammar.new(name:"cpp", scope_name: "source.cpp", version: 10)
-    # var = SimpleTag.new tag_as: "variable", 
-    #                     pattern_sequence: {
-    #                         bound1: /\b/,
-    #                         variable_name: /[a-zA-Z_][A-Za-z_0-9]*/, 
-    #                         bound2: /\b/ 
-    #                     },
-    #                     for_tagging: ->(groups, this_pattern) do
-    #                         groups[:variable_name][:tag] = "variable.name"
-    #                     end
-
-    # a = SimpleTag.new   tag_as: "scope-resolution",
-    #                     pattern_sequence: {
-    #                         source: var,
-    #                         operator: /::/,
-    #                         next_word: lookAheadFor(var.pattern),
-    #                     }
-
-    # string = TagRange.new   tag_as: "string",
-    #                         start_sequence: {
-    #                             double_quote: /"/ 
-    #                         },
-    #                         end_sequence: {
-    #                             double_quote: /"/
-    #                         },
-    #                         internal_patterns: [var]
-
-    # puts grammar.to_h.to_yaml
