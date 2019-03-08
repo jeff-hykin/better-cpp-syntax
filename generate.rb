@@ -50,13 +50,10 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 #
 # Numbers
 #
-    # TODO: improve tagging for:
-        # tag the E in 1001E1101
-        # fix the F in 0x0.5p10F
     octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
-    literal_suffix = newHiddenGroup(newHiddenGroup(/0/.then(/[xXbB]/).then(/[0-9a-fA-F.']++/).maybe(/p/.or(/P/).then(/[0-9']++/))).or(/[0-9.']++/.maybe(/e/.or(/E/).then(/[0-9']++/)))).thenNewGroup(zeroOrMoreOf(/[a-zA-Z]/))
+    literal_suffix = newHiddenGroup(newHiddenGroup(newGroup(/0[xXbB]?/).then(/[0-9a-fA-F.']++/).maybe(newGroup(/p/.or(/P/)).then(/[0-9']++/))).or(/[0-9.']++/.maybe(newGroup(/e/.or(/E/)).then(/[0-9']++/)))).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
                     hex_start_pattern = /0(?:x|X)/
                     hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?/
                 full_hex_pattern = hex_start_pattern.then(hex_content_pattern)
@@ -1551,16 +1548,22 @@ cpp_grammar.data[:repository] = {
                 captures: {
                     "0" => {
                         patterns: [
-                              {
+                            {
                                 match: literal_suffix,
                                 name: "constant.numeric",
                                 captures: {
-                                      "1" => {
-                                            name: "keyword.other.unit",
-                                      },
-                                      "2" => {
-                                            name: "keyword.other.unit",
-                                      },
+                                    "1" => {
+                                        name: "keyword.other.unit",
+                                    },
+                                    "2" => {
+                                        name: "keyword.other.unit",
+                                    },
+                                    "3" => {
+                                        name: "keyword.other.unit",
+                                    },
+                                    "4" => {
+                                        name: "keyword.other.unit",
+                                    },
                                 },
                             },
                             {

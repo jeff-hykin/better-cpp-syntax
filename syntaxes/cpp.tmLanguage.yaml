@@ -761,12 +761,16 @@
       :captures:
         '0':
           :patterns:
-          - :match: !ruby/regexp /(?:0[xXbB][0-9a-fA-F.']++(?:(?:p|P)[0-9']++)?|[0-9.']++(?:(?:e|E)[0-9']++)?)((?:[a-zA-Z])*)/
+          - :match: !ruby/regexp /(?:(0[xXbB]?)[0-9a-fA-F.']++(?:((?:p|P))[0-9']++)?|[0-9.']++(?:((?:e|E))[0-9']++)?)((?:[_a-zA-Z])*)/
             :name: constant.numeric.cpp
             :captures:
               '1':
                 :name: keyword.other.unit.cpp
               '2':
+                :name: keyword.other.unit.cpp
+              '3':
+                :name: keyword.other.unit.cpp
+              '4':
                 :name: keyword.other.unit.cpp
           - :match: !ruby/regexp /(?<!['\.\w])0(?=\d)/
             :name: keyword.other.unit.octal.cpp
