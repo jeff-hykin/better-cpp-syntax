@@ -756,19 +756,24 @@
           :name: constant.character.escape.line-continuation.cpp
   numbers-c:
     :patterns:
-    - :match: "\\b((?:0(?:x|X)[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?|0(?:b|B)[01](?:[01']*[01'])?)(?:\\.[\\d+a-fA-F']+p[\\d']+)?|(([0-9](?:[0-9']*[0-9'])*(?:\\.[0-9](?:[0-9']*[0-9'])*)?)|(\\.[0-9](?:[0-9']*[0-9'])*))((e|E)(\\+|-)?[0-9](?:[0-9']*[0-9'])*)?)(?:L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\w*"
+    - :match: "\\b((?:0(?:x|X)[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?|0(?:b|B)[01](?:[01']*[01'])?)(?:\\.[\\d+a-fA-F']*p[\\d']+)?|(([0-9](?:[0-9']*[0-9'])*(?:\\.(?:[0-9](?:[0-9']*[0-9'])*)?)?)|(\\.[0-9](?:[0-9']*[0-9'])*))((e|E)(\\+|-)?[0-9](?:[0-9']*[0-9'])*)?)(?:L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\w*"
       :name: constant.numeric.cpp
       :captures:
         '0':
           :patterns:
+          - :match: !ruby/regexp /(?:0[xXbB][0-9a-fA-F.']++(?:(?:p|P)[0-9']++)?|[0-9.']++(?:(?:e|E)[0-9']++)?)((?:[a-zA-Z])*)/
+            :name: constant.numeric.cpp
+            :captures:
+              '1':
+                :name: keyword.other.unit.cpp
+              '2':
+                :name: keyword.other.unit.cpp
           - :match: !ruby/regexp /(?<!['\.\w])0(?=\d)/
             :name: keyword.other.unit.octal.cpp
           - :match: !ruby/regexp /(?<!\w)0(?:x|X)/
             :name: keyword.other.unit.hexadecimal.cpp
           - :match: !ruby/regexp /(?<!\w)0(?:b|B)(?=\d)/
             :name: keyword.other.unit.binary.cpp
-          - :match: !ruby/regexp /[^\d\.a-fA-F]+/
-            :name: keyword.other.unit.cpp
   parens-c:
     :name: "punctuation.section.parens-c\b.cpp"
     :begin: "\\("

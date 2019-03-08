@@ -18,18 +18,18 @@ require_relative './cpp_tokens.rb'
         # cannotBeFunctionName
         # cannotBeVariableName
     # have all patterns with keywords be dynamically generated
-    # lambda -> 
+    # lambda ->
     # operator with words/space
     # add user-defined constants variable.other.constant.user-defined.cpp
 
 # Edgecases to remember
     # ... inside of catch()
-    # operator overload for user-defined literal 
+    # operator overload for user-defined literal
     # labels for goto
     # lambda syntax
 
 cpp_grammar = Grammar.new(
-    name:"C++", 
+    name:"C++",
     scope_name: "source.cpp",
     version: "https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/generate.rb",
     information_for_contributors: [
@@ -47,16 +47,16 @@ with_dereference = maybe(@spaces).zeroOrMoreOf( /\*/  ).maybe(@spaces)
 
 # misc
 builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
-# 
+#
 # Numbers
-# 
+#
     # TODO: improve tagging for:
         # tag the E in 1001E1101
         # fix the F in 0x0.5p10F
     octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
     binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
     hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
-    non_hex_non_octal_units = /[^\d\.a-fA-F]+/
+    literal_suffix = newHiddenGroup(newHiddenGroup(/0/.then(/[xXbB]/).then(/[0-9a-fA-F.']++/).maybe(/p/.or(/P/).then(/[0-9']++/))).or(/[0-9.']++/.maybe(/e/.or(/E/).then(/[0-9']++/)))).thenNewGroup(zeroOrMoreOf(/[a-zA-Z]/))
                     hex_start_pattern = /0(?:x|X)/
                     hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?/
                 full_hex_pattern = hex_start_pattern.then(hex_content_pattern)
@@ -64,15 +64,15 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
                     binary_content_pattern = /[01](?:[01']*[01'])?/
                 full_binary_pattern = binary_start_pattern.then(binary_content_pattern)
             main_hex_or_binary_pattern = full_hex_pattern.or(full_binary_pattern)
-            hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F']+p[\d']+/
+            hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F']*p[\d']+/
         full_hex_or_binary = main_hex_or_binary_pattern.maybe(hexadecimal_floating_constant_pattern)
         possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
         integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9']/)
-        decimal_ending = maybe(/\./.then(integer_with_seperators))
+        decimal_ending = maybe(/\./.maybe(integer_with_seperators))
     numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.#{-integer_with_seperators}))((e|E)(\+|-)?#{-integer_with_seperators})?)#{-possible_type_endings}\w*/
-# 
+#
 # variable
-# 
+#
 # todo: make a better name for this function
 variableBounds = ->(regex_pattern) do
     lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
@@ -81,9 +81,9 @@ variable_name_without_bounds = /[a-zA-Z_]#{-@standard_character}*/
 # word bounds are inefficient, but they are accurate
 variable_name = variableBounds[variable_name_without_bounds]
 
-# 
+#
 # Constants
-# 
+#
 constants = SimpleTag.new(tag_as: "constant.language", pattern_sequence: {
     "1" => variableBounds[@cpp_tokens.that(:isLiteral)],
 })
@@ -91,9 +91,9 @@ builtin_constants_1_group = variableBounds[newGroup(@cpp_tokens.that(:isLiteral)
 probably_user_constant_1_group = variableBounds[lookAheadToAvoid(@cpp_tokens.that(:isWord)).then(newGroup(/[A-Z][_A-Z]*/))]
 constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
 
-# 
+#
 # Keywords and Keyword-ish things
-# 
+#
 any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
 control_flow_keywords = @cpp_tokens.that(:isControlFlow)
 access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
@@ -104,9 +104,9 @@ qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens
 other_keywords = variableBounds[ /(using|typedef)/ ]
 memory_operators = lookBehindToAvoid(@standard_character).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/))).lookAheadToAvoid(@standard_character)
 
-# 
+#
 # Templates
-# 
+#
     characters_in_template_call = /[\s<>,\w]/
 template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
 template_call_innards_tagger = {
@@ -182,7 +182,7 @@ template_definition_argument = maybe(@spaces).then(newGroup(variable_name_withou
         newGroup(variable_name_without_bounds).maybe(@spaces).then(newGroup(/\.\.\./)).maybe(@spaces).then(newGroup(variable_name_without_bounds))
     ).or(
         # groups 7 8 9 10 11
-        # TODO: change this regex into readable regex, also improve its matching 
+        # TODO: change this regex into readable regex, also improve its matching
         /((?:[a-zA-Z_][a-zA-Z_0-9]*\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)\s*(\w+)/
     ).maybe(@spaces).then(newGroup(/,/).or(lookAheadFor(/>/)))
 )
@@ -231,7 +231,7 @@ template_definition_argument_tagger = {
     }
 }
 
-# 
+#
 # Scope resolution
 #
         one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
@@ -266,9 +266,9 @@ scope_resolution_tagger = {
     }
 }
 
-# 
+#
 # types
-# 
+#
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
 look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
 primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isPrimitive)).lookAheadToAvoid(@standard_character)
@@ -276,7 +276,7 @@ non_primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.th
 known_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isType)).lookAheadToAvoid(@standard_character)
 posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ]
 
-# 
+#
 # Probably a parameter
 #
             array_brackets = /\[\]/.maybe(@spaces)
@@ -298,9 +298,9 @@ probably_a_parameter_tagger = {
     }
 }
 
-# 
+#
 # operator overload
-# 
+#
         # symbols can have spaces
         operator_symbols = maybe(@spaces).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isSymbol))
         # words must have spaces, the variable_name_without_bounds is for implicit overloads
@@ -340,8 +340,8 @@ operator_overload_tagger =  {
     ]
 }
 
-# 
-# Access member . .* -> ->* 
+#
+# Access member . .* -> ->*
 #
     before_the_access_operator_1_group = newGroup(variable_name_without_bounds).or(lookBehindFor(/\]|\)/)).maybe(@spaces)
     member_operator_2_groups = newGroup(/\./.or(/\.\*/)).or(newGroup(/->/.or(/->\*/))).maybe(@spaces)
@@ -389,9 +389,9 @@ access_member_tagger = {
     }
 }
 
-# 
+#
 # Functions
-# 
+#
         cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
@@ -435,9 +435,9 @@ function_call_tagger = {
     ]
 }
 
-# 
+#
 # Namespace
-# 
+#
 using_namespace_pattern_4_groups = /\b(using)\s+(namespace)\s+/.maybe(preceding_scopes_1_group).then(newGroup(variable_name)).lookAheadFor(/;|\n/)
 using_namespace_tagger = {
     comment: "https://en.cppreference.com/w/cpp/language/namespace",
@@ -527,16 +527,16 @@ namespace_definition_tagger = {
     ]
 }
 
-# 
+#
 # preprocessor
 #
     # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
     preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
 preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
 
-# 
+#
 # Support
-# 
+#
 support_type_pattern = @cpp_support.that(:belongsToIostream)
 support_type_function_tokenizer = {
     match: variableBounds[newGroup(support_type_pattern)],
@@ -680,9 +680,9 @@ cpp_grammar.data[:patterns] = [
             }
         ]
     },
-    # 
+    #
     # C patterns
-    # 
+    #
     {
         include: "#preprocessor-rule-enabled"
     },
@@ -1545,12 +1545,24 @@ cpp_grammar.data[:repository] = {
     "numbers-c" => {
         patterns: [
             {
-                # TODO: this pattern needs improving 
+                # TODO: this pattern needs improving
                 match: -numeric_pattern,
                 name: "constant.numeric",
                 captures: {
                     "0" => {
                         patterns: [
+                              {
+                                match: literal_suffix,
+                                name: "constant.numeric",
+                                captures: {
+                                      "1" => {
+                                            name: "keyword.other.unit",
+                                      },
+                                      "2" => {
+                                            name: "keyword.other.unit",
+                                      },
+                                },
+                            },
                             {
                                 match: octal_pattern,
                                 name: "keyword.other.unit.octal",
@@ -1562,10 +1574,6 @@ cpp_grammar.data[:repository] = {
                             {
                                 match: binary_pattern,
                                 name: "keyword.other.unit.binary",
-                            },
-                            {
-                                match: non_hex_non_octal_units,
-                                name: "keyword.other.unit",
                             },
                         ]
                     },
