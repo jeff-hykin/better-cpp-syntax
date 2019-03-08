@@ -51,6 +51,7 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 #
 # Numbers
 #
+    # FIXME, this is not all of the possible_type_endings (t)
     possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
     valid_numeric_start = lookBehindToAvoid(@standard_character).then(/[0-9\.]/)
     valid_numeric_middle = /[0-9\.xa-fA-Fp\+\-\']/
@@ -71,36 +72,42 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
                 # hexadecimal_floating_constant start
                 newGroup(
                     /p/.or(/P/)
-                # group #4 (number)
+                ).maybe(
+                    # group #4 (plus)
+                    newGroup(/\+/).or(
+                        # group #5 (minus)
+                        newGroup(/\-/)
+                    )
+                # group #6 (number)
                 # hexadecimal_floating_constant contents
                 ).thenNewGroup(
                     /[0-9']++/
                 )
             )
         ).or(
-            # group #5 (number)
+            # group #7 (number)
             # decimal/base-10 start 
             newGroup(
                 /[0-9\.][0-9\.']*/
             ).maybe(
-                # group #6 (unit)
+                # group #8 (unit)
                 # scientific notation
                 newGroup(
                     /[eE]/
                 ).maybe(
-                    # group #7 (plus)
+                    # group #9 (plus)
                     newGroup(/\+/).or(
-                        # group #8 (minus)
+                        # group #10 (minus)
                         newGroup(/\-/)
                     )
-                # group #9 (number)
+                # group #11 (number)
                 # exponent of scientific notation
                 ).thenNewGroup(
                     /[0-9']++/
                 )
             )
         )
-    # group #10 (unit)
+    # group #12 (unit)
     # check if number is a custom literal
     ).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
     
@@ -117,20 +124,18 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
         match: -literal_suffix,
         name: "constant.numeric",
         captures: {
-            "1" => unit_tag_name,
-            "2" => tickmark_seperator_patterns,
-            "3" => unit_tag_name,
-            "4" => tickmark_seperator_patterns,
-            "5" => tickmark_seperator_patterns,
-            "6" => unit_tag_name,
-            "7" => {
-                name: "keyword.operator.plus.exponent"
-            },
-            "8" => {
-                name: "keyword.operator.minus.exponent"
-            },
-            "9" => tickmark_seperator_patterns,
-            "10" => unit_tag_name,
+            "1"  => unit_tag_name,
+            "2"  => tickmark_seperator_patterns,
+            "3"  => unit_tag_name,
+            "4"  => { name: "keyword.operator.plus.exponent.hexadecimal-floating-point-literal" },
+            "5"  => { name: "keyword.operator.minus.exponent.hexadecimal-floating-point-literal" },
+            "6"  => tickmark_seperator_patterns,
+            "7"  => tickmark_seperator_patterns,
+            "8"  => unit_tag_name,
+            "9"  => { name: "keyword.operator.plus.exponent" },
+            "10" => { name: "keyword.operator.minus.exponent" },
+            "11" => tickmark_seperator_patterns,
+            "12" => unit_tag_name,
         },
     }
 #

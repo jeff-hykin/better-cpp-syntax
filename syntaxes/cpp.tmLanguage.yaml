@@ -760,7 +760,7 @@
       :captures:
         '0':
           :patterns:
-          - :match: "(?:(0(?![\\.eE])(?:[xXbB])?)([0-9a-fA-F\\.']+)(?:((?:p|P))([0-9']++))?|([0-9\\.][0-9\\.']*)(?:([eE])(?:(?:(\\+)|(\\-)))?([0-9']++))?)((?:[_a-zA-Z])*)"
+          - :match: "(?:(0(?![\\.eE])(?:[xXbB])?)([0-9a-fA-F\\.']+)(?:((?:p|P))(?:(?:(\\+)|(\\-)))?([0-9']++))?|([0-9\\.][0-9\\.']*)(?:([eE])(?:(?:(\\+)|(\\-)))?([0-9']++))?)((?:[_a-zA-Z])*)"
             :name: constant.numeric.cpp
             :captures:
               '1': &1
@@ -770,15 +770,19 @@
                 - :match: "'"
                   :name: punctuation.separator.constant.numeric.cpp
               '3': *1
-              '4': *2
-              '5': *2
-              '6': *1
-              '7':
+              '4':
+                :name: keyword.operator.plus.exponent.hexadecimal-floating-point-literal.cpp
+              '5':
+                :name: keyword.operator.minus.exponent.hexadecimal-floating-point-literal.cpp
+              '6': *2
+              '7': *2
+              '8': *1
+              '9':
                 :name: keyword.operator.plus.exponent.cpp
-              '8':
+              '10':
                 :name: keyword.operator.minus.exponent.cpp
-              '9': *2
-              '10': *1
+              '11': *2
+              '12': *1
   parens-c:
     :name: "punctuation.section.parens-c\b.cpp"
     :begin: "\\("
