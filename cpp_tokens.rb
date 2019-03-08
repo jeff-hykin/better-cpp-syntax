@@ -8,35 +8,6 @@ include GrammarHelper
         # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations 
         # https://en.cppreference.com/w/cpp/language/declarations
         # look at https://en.cppreference.com/w/cpp/language/function to implement better member function syntax
-adjectives = [
-    :isOperator,
-    :isWordish,
-    :isOperatorAlias,
-    :canAppearAfterOperatorKeyword,
-    :isPostFixOperator,
-    :isPreFixOperator,
-    :isInFixOperator,
-    :evaledLeftToRight,
-    :evaledRightToLeft,
-    :presedence,
-    :isControlFlow,
-    :isLogicicalOperator,
-    :isAssignmentOperator,
-    :isComparisionOperator,
-    :isUrnaryOperator,
-    :isBinaryOperator,
-    :isTernaryOperator,
-    :requiresParentheseBlockImmediately,
-    :isExceptionRelated,
-    :isPrimitive,
-    :isType,
-    :isLiteral,
-    :isTypeCreator,
-    :isGenericTypeModifier,
-    :isSpecifier,
-    :isLambdaSpecifier,
-    :isAccessSpecifier,
-]
 
 tokens = [
     # operators
@@ -294,25 +265,25 @@ tokens = [
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
+    { representation: "concept"                    , name: "concept"                    },
+    { representation: "requires"                   , name: "requires"                   },
     { representation: "export"                     , name: "export"                     },
     { representation: "thread_local"               , name: "thread_local"               },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },
     { representation: "atomic_noexcept"            , name: "atomic_noexcept"            },
-    { representation: "concept"                    , name: "concept"                    },
     { representation: "co_await"                   , name: "co_await"                   },
     { representation: "co_return"                  , name: "co_return"                  },
     { representation: "co_yield"                   , name: "co_yield"                   },
     { representation: "import"                     , name: "import"                     },
     { representation: "module"                     , name: "module"                     },
     { representation: "reflexpr"                   , name: "reflexpr"                   },
-    { representation: "requires"                   , name: "requires"                   },
     { representation: "synchronized"               , name: "synchronized"               },
     # 
-    { representation: "audit"                      , name: "audit"                      , isValidFunctionName: true},
-    { representation: "axiom"                      , name: "axiom"                      , isValidFunctionName: true},
-    { representation: "transaction_safe"           , name: "transaction_safe"           , isValidFunctionName: true},
-    { representation: "transaction_safe_dynamic"   , name: "transaction_safe_dynamic"   , isValidFunctionName: true},
+    { representation: "audit"                      , name: "audit"                      , isSpecialIdentifier: true , isValidFunctionName: true},
+    { representation: "axiom"                      , name: "axiom"                      , isSpecialIdentifier: true , isValidFunctionName: true},
+    { representation: "transaction_safe"           , name: "transaction_safe"           , isSpecialIdentifier: true , isValidFunctionName: true},
+    { representation: "transaction_safe_dynamic"   , name: "transaction_safe_dynamic"   , isSpecialIdentifier: true , isValidFunctionName: true},
 ]
 
 
@@ -349,7 +320,6 @@ support_tokens = [
     { representation: "FILE"                       , name: "FILE"                       , belongsToStdio: true , isType: true},
     { representation: "fpos_t"                     , name: "fpos_t"                     , belongsToStdio: true , isType: true},
     { representation: "size_t"                     , name: "size_t"                     , belongsToStdio: true , isType: true},
-    
 ]
 
 
