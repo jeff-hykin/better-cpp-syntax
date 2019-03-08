@@ -50,23 +50,14 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 #
 # Numbers
 #
-    octal_pattern = lookBehindToAvoid(/['\.\w]/).then(/0/).lookAheadFor(@digit)
-    binary_pattern = lookBehindToAvoid(@standard_character).then(/0/.then(/b/.or(/B/))).lookAheadFor(@digit)
-    hex_pattern  = lookBehindToAvoid(@standard_character).then(/0/.then(/x/.or(/X/)))
-    literal_suffix = newGroup(newHiddenGroup(newGroup(/0/.lookAheadToAvoid(/\./).maybe(/[xXbB]/)).then(/[0-9a-fA-F.']++/).maybe(newGroup(/p/.or(/P/)).then(/[0-9']++/))).or(/[0-9.']++/.maybe(newGroup(/e/.or(/E/)).then(/[0-9']++/)))).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
-                    hex_start_pattern = /0(?:x|X)/
-                    hex_content_pattern = /[0-9a-fA-F](?:[0-9a-fA-F']*[0-9a-fA-F'])?/
-                full_hex_pattern = hex_start_pattern.then(hex_content_pattern)
-                    binary_start_pattern = /0(?:b|B)/
-                    binary_content_pattern = /[01](?:[01']*[01'])?/
-                full_binary_pattern = binary_start_pattern.then(binary_content_pattern)
-            main_hex_or_binary_pattern = full_hex_pattern.or(full_binary_pattern)
-            hexadecimal_floating_constant_pattern = /\.[\d+a-fA-F']*p[\d']+/
-        full_hex_or_binary = main_hex_or_binary_pattern.maybe(hexadecimal_floating_constant_pattern)
-        possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
-        integer_with_seperators = /[0-9]/.zeroOrMoreOf(/[0-9']*[0-9']/)
-        decimal_ending = maybe(/\./.maybe(integer_with_seperators))
-    numeric_pattern = /\b(#{-full_hex_or_binary}|((#{-integer_with_seperators}#{-decimal_ending})|(\.#{-integer_with_seperators}))((e|E)(\+|-)?#{-integer_with_seperators})?)#{-possible_type_endings}\w*/
+numeric_start_anchor = /\b/.or(lookAheadFor(/\.[0-9a-fA-F]/))
+numeric_decimal_pattern = /[0-9.']++/.maybe(newGroup(/e/.or(/E/)).then(/[0-9']++/))
+numeric_prefix = newGroup(/0/.lookAheadToAvoid(/\./).maybe(/[xXbB]/))
+numeric_with_prefix_pattern = numeric_prefix.then(/[0-9a-fA-F.']++/).maybe(newGroup(/p/.or(/P/)).then(/[0-9']++/))
+numeric_pattern = numeric_start_anchor.thenNewGroup(
+    numeric_with_prefix_pattern.or(numeric_decimal_pattern)
+).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
+
 #
 # variable
 #
@@ -1542,51 +1533,28 @@ cpp_grammar.data[:repository] = {
     "numbers-c" => {
         patterns: [
             {
-                # TODO: this pattern needs improving
-                match: -numeric_pattern,
+                match: numeric_pattern,
                 name: "constant.numeric",
                 captures: {
-                    "0" => {
-                        patterns: [
-                            {
-                                match: literal_suffix,
-                                name: "constant.numeric",
-                                captures: {
-                                    "1" => {
-                                        patterns: [
-                                            {
-                                                match: /'/,
-                                                name: "keyword.other.unit",
-                                            },
-                                        ],
-                                    },
-                                    "2" => {
-                                        name: "keyword.other.unit",
-                                    },
-                                    "3" => {
-                                        name: "keyword.other.unit",
-                                    },
-                                    "4" => {
-                                        name: "keyword.other.unit",
-                                    },
-                                    "5" => {
-                                        name: "keyword.other.unit",
-                                    },
-                                },
-                            },
-                            {
-                                match: octal_pattern,
-                                name: "keyword.other.unit.octal",
-                            },
-                            {
-                                match: hex_pattern,
-                                name: "keyword.other.unit.hexadecimal",
-                            },
-                            {
-                                match: binary_pattern,
-                                name: "keyword.other.unit.binary",
-                            },
-                        ]
+                    # "1" => {
+                    #     patterns: [
+                    #         {
+                    #             match: -/'/,
+                    #             name: "keyword.other.unit",
+                    #         },
+                    #     ],
+                    # },
+                    "2" => {
+                        name: "keyword.other.unit",
+                    },
+                    "3" => {
+                        name: "keyword.other.unit",
+                    },
+                    "4" => {
+                        name: "keyword.other.unit",
+                    },
+                    "5" => {
+                        name: "keyword.other.unit",
                     },
                 },
             }
