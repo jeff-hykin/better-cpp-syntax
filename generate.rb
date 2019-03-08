@@ -51,14 +51,88 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
 #
 # Numbers
 #
-numeric_start_anchor = /\b/.or(lookAheadFor(/\.[0-9a-fA-F]/))
-numeric_decimal_pattern = /[0-9.']++/.maybe(newGroup(/e/.or(/E/)).then(/[0-9']++/))
-numeric_prefix = newGroup(/0/.lookAheadToAvoid(/\./).maybe(/[xXbB]/))
-numeric_with_prefix_pattern = numeric_prefix.then(/[0-9a-fA-F.']++/).maybe(newGroup(/p/.or(/P/)).then(/[0-9']++/))
-numeric_pattern = numeric_start_anchor.thenNewGroup(
-    numeric_with_prefix_pattern.or(numeric_decimal_pattern)
-).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
-
+    possible_type_endings = maybe(/L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL/)
+    valid_numeric_start = lookBehindToAvoid(@standard_character).then(/[0-9\.]/)
+    valid_numeric_middle = /[0-9\.xa-fA-Fp\+\-\']/
+    valid_numeric_pre_ending = /[0-9a-fA-F\.]/
+    numeric_pattern = valid_numeric_start.then(zeroOrMoreOf(valid_numeric_middle)).lookBehindFor(valid_numeric_pre_ending).then(possible_type_endings).zeroOrMoreOf(@standard_character)
+    literal_suffix = newHiddenGroup(
+        newHiddenGroup(
+            # group #1 (unit)
+            # octal, hexadecimal, or binary start
+            newGroup(
+                /0/.lookAheadToAvoid(/[\.eE]/).maybe(/[xXbB]/)
+            # group #2 (number)
+            # octal, hexadecimal, or binary contents
+            ).thenNewGroup(
+                /[0-9a-fA-F\.']+/
+            ).maybe(
+                # group #3 (unit)
+                # hexadecimal_floating_constant start
+                newGroup(
+                    /p/.or(/P/)
+                # group #4 (number)
+                # hexadecimal_floating_constant contents
+                ).thenNewGroup(
+                    /[0-9']++/
+                )
+            )
+        ).or(
+            # group #5 (number)
+            # decimal/base-10 start 
+            newGroup(
+                /[0-9\.][0-9\.']*/
+            ).maybe(
+                # group #6 (unit)
+                # scientific notation
+                newGroup(
+                    /[eE]/
+                ).maybe(
+                    # group #7 (plus)
+                    newGroup(/\+/).or(
+                        # group #8 (minus)
+                        newGroup(/\-/)
+                    )
+                # group #9 (number)
+                # exponent of scientific notation
+                ).thenNewGroup(
+                    /[0-9']++/
+                )
+            )
+        )
+    # group #10 (unit)
+    # check if number is a custom literal
+    ).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
+    
+    unit_tag_name = { name: "keyword.other.unit" }
+    tickmark_seperator_patterns = {
+        patterns: [
+            {
+                match: -/'/,
+                name: "punctuation.separator.constant.numeric"
+            },
+        ]
+    }
+    literal_suffix_tag = {
+        match: -literal_suffix,
+        name: "constant.numeric",
+        captures: {
+            "1" => unit_tag_name,
+            "2" => tickmark_seperator_patterns,
+            "3" => unit_tag_name,
+            "4" => tickmark_seperator_patterns,
+            "5" => tickmark_seperator_patterns,
+            "6" => unit_tag_name,
+            "7" => {
+                name: "keyword.operator.plus.exponent"
+            },
+            "8" => {
+                name: "keyword.operator.minus.exponent"
+            },
+            "9" => tickmark_seperator_patterns,
+            "10" => unit_tag_name,
+        },
+    }
 #
 # variable
 #
@@ -1534,28 +1608,13 @@ cpp_grammar.data[:repository] = {
     "numbers-c" => {
         patterns: [
             {
-                match: numeric_pattern,
-                name: "constant.numeric",
+                # TODO: this pattern needs readability improvements
+                match: -numeric_pattern,
                 captures: {
-                    # "1" => {
-                    #     patterns: [
-                    #         {
-                    #             match: -/'/,
-                    #             name: "keyword.other.unit",
-                    #         },
-                    #     ],
-                    # },
-                    "2" => {
-                        name: "keyword.other.unit",
-                    },
-                    "3" => {
-                        name: "keyword.other.unit",
-                    },
-                    "4" => {
-                        name: "keyword.other.unit",
-                    },
-                    "5" => {
-                        name: "keyword.other.unit",
+                    "0" => {
+                        patterns: [
+                            literal_suffix_tag
+                        ]
                     },
                 },
             }
