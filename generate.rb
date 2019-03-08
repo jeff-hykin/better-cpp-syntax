@@ -3,6 +3,7 @@ include GrammarHelper
 require_relative './cpp_tokens.rb'
 
 # todo
+    # change "entity.name.operator" to something better (probably keyword)
     # create the And() and Or() functions and rework the pattern_sequence args for SimpleTag
     # fix sizeof, alignas and similar
     # fix initializer list "functions"
