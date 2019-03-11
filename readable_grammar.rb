@@ -2,12 +2,12 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
-    # rename "name" to "tag_as", and process "include" as a list of symbols (to global_name) and other patterns
-    # make the hash-options come before the pattern
     # check for making a copy of the pattern and mutating/overriding it
     # add the global register functionality
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
+    # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
+    # add optimizations
+        # dont call updateGroupAttributes and dont add a regex group if there are no attributes
 
 
 def turnOffNumberedCaptureGroups(regex)
@@ -49,6 +49,11 @@ class Regexp
         for group_number in 1..@group_attributes.size
             raw_attributes = @group_attributes[group_number - 1]
             
+            # if no attributes then just skip
+            if raw_attributes == {}
+                next
+            end
+            
             # by default carry everything over
             output[:captures][group_number.to_s] = raw_attributes
             # convert "tag_as" into the TextMate "name"
@@ -67,14 +72,17 @@ class Regexp
                 output[:captures][group_number.to_s][:patterns] = []
                 for each_include in raw_attributes[:includes]
                     # if its a string then include it directly
-                    if (each_include.is_a? String)
+                    if (each_include.instance_of? String)
                         output[:captures][group_number.to_s][:patterns].push({ include: each_include })
                     # if its a symbol then include a # to make it a global_name reference
-                    elsif (each_include.is_a? Symbol)
+                    elsif (each_include.instance_of? Symbol)
                         output[:captures][group_number.to_s][:patterns].push({ include: "##{each_include}" })
-                    # if its a pattern, then just include it
-                    elsif (each_include.is_a? Regexp)
+                    # if its a pattern, then convert it to a tag
+                    elsif (each_include.instance_of? Regexp)
                         output[:captures][group_number.to_s][:patterns].push(each_include.to_tag)
+                    # if its a hash, then just add it as-is
+                    elsif (each_include.instance_of? Hash)
+                        output[:captures][group_number.to_s][:patterns].push(each_include)
                     end
                 end
                 # remove includes from the hash
@@ -112,17 +120,44 @@ class Regexp
     def -@()
         return self.removeDefaultModeModifiers
     end
-    # 
+    #
     # English Helpers
-    # 
-    def or(other_regex, attributes={})
+    #
+    def or(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         return /(?:(?:(#{self.removeDefaultModeModifiers}|#{other_regex.removeDefaultModeModifiers})))/.updateGroupAttributes(self, other_regex, attributes)
     end
-    def and(other_regex, attributes={})
+    def and(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         return /(#{self.removeDefaultModeModifiers}#{other_regex.removeDefaultModeModifiers})/.updateGroupAttributes(self, other_regex, attributes)
     end
-    def then(other_regex, attributes={})
-        return self.and(other_regex)
+    def then(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
+        return self.and(other_regex, attributes)
     end
     def lookAheadFor(other_regex)
         return /#{self.removeDefaultModeModifiers}(?=#{other_regex.removeDefaultModeModifiers})/
@@ -136,10 +171,28 @@ class Regexp
     def lookBehindToAvoid(other_regex)
         return /#{self.removeDefaultModeModifiers}(?<!#{other_regex.removeDefaultModeModifiers})/
     end
-    def thenNewPattern(other_regex, attributes={})
+    def thenNewPattern(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         return /#{self.removeDefaultModeModifiers}(#{other_regex.removeDefaultModeModifiers})/.updateGroupAttributes(self, other_regex, attributes)
     end
-    def maybe(other_regex, attributes={})
+    def maybe(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         regex_as_string = other_regex.removeDefaultModeModifiers
         output_pattern = nil
         # if its already a + character
@@ -152,10 +205,28 @@ class Regexp
         end
         return /(#{output_pattern.removeDefaultModeModifiers})/.updateGroupAttributes(self, other_regex, attributes)
     end
-    def oneOrMoreOf(other_regex, attributes={})
+    def oneOrMoreOf(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         return /#{self.removeDefaultModeModifiers}((?:#{other_regex.removeDefaultModeModifiers})+)/.updateGroupAttributes(self, other_regex, attributes)
     end
-    def zeroOrMoreOf(other_regex, attributes={})
+    def zeroOrMoreOf(key_arguments)
+        if key_arguments.instance_of? Regexp
+            other_regex = key_arguments
+            attributes = {}
+        else
+            # make shallow copy
+            other_regex = key_arguments[:match]
+            attributes = key_arguments.to_hash
+            attributes.delete(:match)
+        end
         return /#{self.removeDefaultModeModifiers}((?:#{other_regex.removeDefaultModeModifiers})*)/.updateGroupAttributes(self, other_regex, attributes)
     end
 end
@@ -209,27 +280,27 @@ class Symbol
     end
 end
 
-        def lookAheadFor(regex_pattern)
-            return //.lookAheadFor(regex_pattern)
+        def lookAheadFor(*arguments)
+            return //.lookAheadFor(*arguments)
         end
-        def lookAheadToAvoid(regex_pattern)
-            return //.lookAheadToAvoid(regex_pattern)
+        def lookAheadToAvoid(*arguments)
+            return //.lookAheadToAvoid(*arguments)
         end
-        def lookBehindFor(regex_pattern, attributes={})
-            return //.lookBehindFor(regex_pattern, attributes)
+        def lookBehindFor(*arguments)
+            return //.lookBehindFor(*arguments)
         end
-        def lookBehindToAvoid(regex_pattern, attributes={})
-            return //.lookBehindToAvoid(regex_pattern, attributes)
+        def lookBehindToAvoid(*arguments)
+            ookBehindToAvoid(*arguments)
         end
-        def newPattern(regex_pattern, attributes={})
-            return //.thenNewPattern(regex_pattern, attributes)
+        def newPattern(*arguments)
+            return //.thenNewPattern(*arguments)
         end
-        def maybe(regex_pattern, attributes={})
-            return //.maybe(regex_pattern, attributes)
+        def maybe(*arguments)
+            return //.maybe(*arguments)
         end
-        def oneOrMoreOf(other_regex, attributes={})
-            return //.oneOrMoreOf(other_regex, attributes)
+        def oneOrMoreOf(*arguments)
+            return //.oneOrMoreOf(*arguments)
         end
-        def zeroOrMoreOf(other_regex, attributes={})
-            return //.zeroOrMoreOf(other_regex, attributes)
+        def zeroOrMoreOf(*arguments)
+            return //.zeroOrMoreOf(*arguments)
         end
