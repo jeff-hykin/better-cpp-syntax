@@ -74,6 +74,267 @@ def convertIncludesToPatternList(includes)
     return patterns
 end
 
+class Pattern
+    attr_accessor :repository_name, :has_top_level_group, :regex
+    
+    def initialize(*arguments)
+        @regex = //
+        @only_looking = true
+        if arguments.size != 0
+            self.then(*arguments)
+        end
+    end
+    
+    #
+    # English Helpers
+    #
+    def lookAheadFor      (other_regex) processLookarounds(other_regex, 'lookAheadFor'     ) end
+    def lookAheadToAvoid  (other_regex) processLookarounds(other_regex, 'lookAheadToAvoid' ) end
+    def lookBehindFor     (other_regex) processLookarounds(other_regex, 'lookBehindFor'    ) end
+    def lookBehindToAvoid (other_regex) processLookarounds(other_regex, 'lookBehindToAvoid') end
+    def then         (*arguments) processOperator(arguments, 'then'        ) end
+    def or           (*arguments) processOperator(arguments, 'or'          ) end
+    def maybe        (*arguments) processOperator(arguments, 'maybe'       ) end
+    def oneOrMoreOf  (*arguments) processOperator(arguments, 'oneOrMoreOf' ) end
+    def zeroOrMoreOf (*arguments) processOperator(arguments, 'zeroOrMoreOf') end
+    
+    def to_tag
+        # TODO, if this pattern has a :repository_name then just return { include: #repository_name }
+        regex_as_string = @regex.without_default_mode_modifiers
+        captures = self.captures
+        output = {
+            match: regex_as_string,
+            captures: captures
+        }
+        
+        #
+        # Top level pattern
+        #
+        # summary:
+            # this if statement bascially converts this tag:
+            # {
+            #     match: '(oneThing)'
+            #     captures: {
+            #         '1' : {
+            #             name: "thing.one"
+            #         }
+            #     }
+            # }
+            # into this tag:
+            # {
+            #     match: 'oneThing'
+            #     name: "thing.one"
+            # }
+        if self.has_top_level_group
+            #
+            # remove the group from the regex
+            #
+            # safety check (should always be false unless some other code is broken)
+            if not ( (regex_as_string.size > 1) and (regex_as_string[0] == '(') and (regex_as_string[-1] == ')') )
+                raise "\n\nInside Regexp.to_tag, trying to upgrade a group-1 into a tag name, there doesn't seem to be a group one even though there are attributes\nThis is a library-developer bug as this should never happen.\nThe regex is #{self}\nThe groups are#{self.group_attributes}"
+            end
+            # remove the first and last ()'s
+            output[:match] = regex_as_string[1...-1]
+            
+            #
+            # update the capture groups
+            #
+            # decrement all of them by one (since the first one was removed)
+            new_captures = {}
+            for each_group_number, each_group in captures.each_pair
+                decremented_by_1 = (each_group_number.to_i - 1).to_s
+                new_captures[decremented_by_1] = each_group
+            end
+            zero_group = new_captures['0']
+            # if name is the only value
+            if (zero_group[:name] != nil) and zero_group.keys.size == 1
+                # remove the 0th capture group
+                top_level_group = new_captures.delete('0')
+                # add the name to the output
+                output[:name] = zero_group[:name]
+            end
+            # if all captures have been removed, then remove it from the output
+            if new_captures == {}
+                output.delete(:captures)
+            else
+                output[:captures] = new_captures
+            end
+        end
+        
+        return output
+    end
+    
+    def captures
+        captures = {}
+        for group_number in 1..@group_attributes.size
+            raw_attributes = @group_attributes[group_number - 1]
+            
+            # if no attributes then just skip
+            if raw_attributes == {}
+                next
+            end
+            
+            # by default carry everything over
+            captures[group_number.to_s] = raw_attributes
+            # convert "tag_as" into the TextMate "name"
+            if raw_attributes[:tag_as] != nil
+                captures[group_number.to_s][:name] = raw_attributes[:tag_as]
+                # remove it from the hash
+                raw_attributes.delete(:tag_as)
+            end
+            
+            # check for "includes"
+            if raw_attributes[:includes] != nil
+                if not (raw_attributes[:includes].instance_of? Array)
+                    raise "\n\nWhen converting a pattern into a tag (to_tag) there was a group that had an 'includes', but the includes wasn't an array\nThe pattern is:#{self}\nThe group attributes are: #{raw_attributes}"
+                end
+                # create the pattern list
+                captures[group_number.to_s][:patterns] = convertIncludesToPatternList(raw_attributes[:includes])
+                # remove includes from the hash
+                raw_attributes.delete(:includes)
+            end
+            # TODO add a check for :name, and :patterns and tell them to use tag_as and includes instead
+            # add any other attributes
+            captures[group_number.to_s].merge(raw_attributes)
+        end
+        return captures
+    end
+    
+    def processOperator(arguments, operator)
+        # first parse the arguments
+        other_pattern, attributes = Pattern.processGrammarArguments(arguments, operator)
+        no_attributes = attributes == {}
+        
+        #
+        # Create the new regex
+        #
+        self_as_string = @regex.without_default_mode_modifiers
+        other_regex_as_string = other_pattern.regex.without_default_mode_modifiers
+        case operator
+            when 'then'
+                new_regex = /#{self_as_string}(#{other_regex_as_string})/
+                if no_attributes
+                    new_regex = /#{self_as_string}#{other_regex_as_string}/
+                end
+            when 'or'
+                new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
+                if no_attributes
+                    # the extra (?:(?:)) groups are because ruby will auto-optimize away the outer most one, even if only one is given
+                    new_regex = /(?:(?:#{self_as_string}|#{other_regex_as_string}))/
+                end
+            when 'maybe'
+                new_regex = /#{self_as_string}(#{other_regex_as_string})?/
+                if no_attributes
+                    new_regex = /#{self_as_string}(?:#{other_regex_as_string})?/
+                end
+                # this one is more complicated because it contains an optimization
+                # inefficient (but straightforward way): maybe(/a+/) == /(?:a+)?/
+                # efficient (but more complicated way):  maybe(/a+/) == /a*/
+                # (both forms are functionally equivlent)
+                # the following code implements the more efficient way for single character matches
+                is_an_escaped_character_with_one_or_more_quantifier = (other_regex_as_string.size == 3) and other_regex_as_string[0] == "\\" and other_regex_as_string[-1] == "+"
+                is_a_normal_character_with_one_or_more_quantifier   = (other_regex_as_string.size == 2) and other_regex_as_string[0] != "\\" and other_regex_as_string[-1] == "+"
+                if is_an_escaped_character_with_one_or_more_quantifier or is_a_normal_character_with_one_or_more_quantifier
+                    # replace the last + with a *
+                    optimized_regex_as_string = other_regex_as_string.gsub(/\+\z/, '*')
+                    new_regex = /#{self_as_string}(#{optimized_regex_as_string}*)/
+                    if no_attributes
+                        new_regex = /#{self_as_string}#{optimized_regex_as_string}*/
+                    end
+                end
+            when 'oneOrMoreOf'
+                new_regex = /#{self_as_string}((?:#{other_regex_as_string})+)/
+                if no_attributes
+                    new_regex = /#{self_as_string}((?:#{other_regex_as_string})+)/
+                end
+            when 'zeroOrMoreOf'
+                new_regex = /#{self_as_string}((?:#{other_regex_as_string})*)/
+                if no_attributes
+                    new_regex = /#{self_as_string}(?:#{other_regex_as_string})*/
+                end
+        end
+        @regex = new_regex
+        
+        #
+        # Make changes to capture groups/attributes
+        #
+        # TODO, initialize global_name: whenever there is a global_name inside the attributes, add the pattern to the global grammar object
+        # update the attributes of the new regex
+        if no_attributes
+            @group_attributes = self.group_attributes + other_pattern.group_attributes
+        else
+            @group_attributes = self.group_attributes + [ attributes ] + other_pattern.group_attributes
+        end
+        # if there has not been any consumption (only looking)
+        # and if there are arributes, then those attributes are top-level
+        if @only_looking and (attributes != {})
+            @has_top_level_group = true
+        end
+        @only_looking = false
+        
+        return self
+    end
+    
+    def processLookarounds(other_regex, lookaround_name)
+        #
+        # generate the new regex
+        #
+        self_as_string = @regex.without_default_mode_modifiers
+        other_regex_as_string = other_regex.without_default_mode_modifiers
+        case lookaround_name
+            when 'lookAheadFor'      then new_regex = /#{self_as_string}(?=#{ other_regex_as_string})/
+            when 'lookAheadToAvoid'  then new_regex = /#{self_as_string}(?!#{ other_regex_as_string})/
+            when 'lookBehindFor'     then new_regex = /#{self_as_string}(?<=#{other_regex_as_string})/
+            when 'lookBehindToAvoid' then new_regex = /#{self_as_string}(?<!#{other_regex_as_string})/
+        end
+        @regex = new_regex
+        return self
+    end
+    
+    def self.processGrammarArguments(arguments, error_location)
+        # summary
+        #     the 'under the hood' of this feels complicated, but the resulting behavior is simple
+        #     (this is abstracted into a class-method because its used in many instance functions)
+        #     basically just let the user give either 1. only a pattern, or 2. let them give a Hash that provides more details
+        arg1 = arguments[0]
+        # if only a pattern/regex, set attributes to {}
+        if arg1.instance_of? Pattern
+            other_pattern = arg1
+            attributes = {}
+        elsif arg1.instance_of? Regexp
+            other_pattern = Pattern.new
+            other_pattern.regex = arg1
+        # if its a Hash then extract the regex, and use the rest of the hash as the attributes
+        elsif arg1.instance_of? Hash
+            other_pattern = arg1[:match]
+            if other_pattern.instance_of? Regexp
+                other_pattern = Pattern.new
+                other_pattern.regex = arg1[:match]
+            end
+            # make shallow copy
+            attributes = arg1.to_hash
+            attributes.delete(:match)
+        else
+            raise "\n\nWhen creating a pattern, there is a #{error_location}() that was called, but the argument was not a Regex, Pattern or a Hash.\nThe function doesn't know what to do with the arguments:\n#{arguments}"
+        end
+        return [ other_pattern, attributes ]
+    end
+    
+    #
+    # getter/setter for group_attributes
+    #
+        def group_attributes=(value)
+            @group_attributes = value
+        end
+        
+        def group_attributes
+            if @group_attributes == nil
+                @group_attributes = []
+            end
+            return @group_attributes
+        end
+end
+
 # extend Regexp to make expressions very readable
 class Regexp
     attr_accessor :global_name
@@ -94,7 +355,7 @@ class Regexp
     
     def to_tag
         # TODO, if this pattern has a :global_name then just return { include: #global_name }
-        regex_as_string = self.removeDefaultModeModifiers
+        regex_as_string = self.without_default_mode_modifiers
         captures = self.captures
         output = {
             match: regex_as_string,
@@ -195,7 +456,7 @@ class Regexp
     end
     
     # convert it to a string and have it without the "(?-mix )" part
-    def removeDefaultModeModifiers()
+    def without_default_mode_modifiers()
         as_string = self.to_s
         # if it is the default settings (AKA -mix) then remove it
         if (as_string.size > 6) and (as_string[0..5] == '(?-mix')
@@ -205,9 +466,9 @@ class Regexp
         end
     end
     
-    # an alias operator for "removeDefaultModeModifiers"
+    # an alias operator for "without_default_mode_modifiers"
     def -@()
-        return self.removeDefaultModeModifiers
+        return self.without_default_mode_modifiers
     end
     
     def processRegexOperator(arguments, operator)
@@ -219,8 +480,8 @@ class Regexp
         #
         # Create the new regex
         #
-        self_as_string = self.removeDefaultModeModifiers
-        other_regex_as_string = other_regex.removeDefaultModeModifiers
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
                 new_regex = /#{self_as_string}(#{other_regex_as_string})/
@@ -288,8 +549,8 @@ class Regexp
         #
         # generate the new regex
         #
-        self_as_string = self.removeDefaultModeModifiers
-        other_regex_as_string = other_regex.removeDefaultModeModifiers
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = other_regex.without_default_mode_modifiers
         case lookaround_name
             when 'lookAheadFor'      then new_regex = /#{self_as_string}(?=#{ other_regex_as_string})/
             when 'lookAheadToAvoid'  then new_regex = /#{self_as_string}(?!#{ other_regex_as_string})/
@@ -361,13 +622,13 @@ end
 # Make safe failure for regex methods on strings
 # 
 class String
-    # make the removeDefaultModeModifiers do nothing for strings
-    def removeDefaultModeModifiers()
+    # make the without_default_mode_modifiers do nothing for strings
+    def without_default_mode_modifiers()
         return self
     end
-    # an alias operator for "removeDefaultModeModifiers"
+    # an alias operator for "without_default_mode_modifiers"
     def -@()
-        return self.removeDefaultModeModifiers
+        return self.without_default_mode_modifiers
     end
 end
 

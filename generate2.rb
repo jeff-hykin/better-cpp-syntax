@@ -2,11 +2,11 @@ require_relative './readable_grammar.rb'
 
 
 unit_tag_name = "keyword.other.unit"
-tick_mark_pattern = newPattern(match: /'/, tag_as: "punctuation.separator.constant.numeric")
-hex_binary_or_octal_pattern = newPattern(
+tick_mark_pattern = Pattern.new(match: /'/, tag_as: "punctuation.separator.constant.numeric")
+hex_binary_or_octal_pattern = Pattern.new(
     global_name: :hex_binary_or_octal,
     # octal, hexadecimal, or binary start
-    match: newPattern(
+    match: Pattern.new(
             match: /0/.lookAheadToAvoid(/[\.eE]/).maybe(/[xXbB]/),
             tag_as: unit_tag_name
         # octal, hexadecimal, or binary contents
@@ -15,11 +15,11 @@ hex_binary_or_octal_pattern = newPattern(
             includes: [ tick_mark_pattern ]
         ).maybe(
             # hexadecimal_floating_constant start
-            newPattern(
+            Pattern.new(
                 match: /p/.or(/P/),
                 tag_as: unit_tag_name
             ).maybe(
-                newPattern(
+                Pattern.new(
                     match: /\+/,
                     tag_as: "keyword.operator.plus.exponent.hexadecimal-floating-point-literal",
                 ).or(
@@ -34,20 +34,20 @@ hex_binary_or_octal_pattern = newPattern(
         )
 )
 
-literal_suffix = newPattern(
+literal_suffix = Pattern.new(
     hex_binary_or_octal_pattern.or(
         # decimal/base-10 start 
-        newPattern(
+        Pattern.new(
             match: /[0-9\.][0-9\.']*/,
             includes: [ tick_mark_pattern ]
         ).maybe(
             # scientific notation
-            newPattern(
+            Pattern.new(
                 match: /[eE]/,
                 tag_as: unit_tag_name,
             ).maybe(
                 # plus or minus symbols
-                newPattern(
+                Pattern.new(
                     match: /\+/,
                     tag_as: "keyword.operator.plus.exponent",
                 ).or(
