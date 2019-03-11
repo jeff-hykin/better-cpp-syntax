@@ -1,7 +1,6 @@
 require_relative './readable_grammar.rb'
 
 
-
 unit_tag_name = "keyword.other.unit"
 tick_mark_pattern = newPattern(match: /'/, tag_as: "punctuation.separator.constant.numeric")
 hex_binary_or_octal_pattern = newPattern(
@@ -11,11 +10,10 @@ hex_binary_or_octal_pattern = newPattern(
             match: /0/.lookAheadToAvoid(/[\.eE]/).maybe(/[xXbB]/),
             tag_as: unit_tag_name
         # octal, hexadecimal, or binary contents
-        ).thenNewPattern(
+        ).then(
             match: /[0-9a-fA-F\.']+/,
             includes: [ tick_mark_pattern ]
         ).maybe(
-            # group #3 (unit)
             # hexadecimal_floating_constant start
             newPattern(
                 match: /p/.or(/P/),
@@ -29,7 +27,7 @@ hex_binary_or_octal_pattern = newPattern(
                     tag_as: "keyword.operator.minus.exponent.hexadecimal-floating-point-literal",
                 )
             # hexadecimal_floating_constant contents
-            ).thenNewPattern(
+            ).then(
                 match: /[0-9']++/,
                 includes: [ tick_mark_pattern ]
             )
@@ -57,15 +55,15 @@ literal_suffix = newPattern(
                     tag_as: "keyword.operator.minus.exponent",
                 )
             # exponent of scientific notation
-            ).thenNewPattern(
+            ).then(
                 match: /[0-9']++/,
                 includes: [ tick_mark_pattern ]
             )
         )
     )
 # check if number is a custom literal
-).thenNewPattern(
+).then(
     match: zeroOrMoreOf(/[_a-zA-Z]/),
     tag_as: unit_tag_name
 )
-p hex_binary_or_octal_pattern.to_tag
+puts hex_binary_or_octal_pattern.to_tag.to_json
