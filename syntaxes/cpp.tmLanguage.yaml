@@ -293,7 +293,7 @@
         - :match: !ruby/regexp /,/
           :name: punctuation.separator.comma.template.argument.cpp
   constants:
-    :match: "((?<!\\w)(?:NULL|true|false|nullptr)(?!\\w))"
+    :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     :captures:
       '0':
         :name: constant.language.cpp

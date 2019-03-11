@@ -4,7 +4,6 @@ require_relative './cpp_tokens.rb'
 
 # todo
     # change "entity.name.operator" to something better (probably keyword)
-    # create the And() and Or() functions and rework the pattern_sequence args for SimpleTag
     # fix sizeof, alignas and similar
     # fix initializer list "functions"
     # fix the ... inside of macros
@@ -152,9 +151,12 @@ variable_name = variableBounds[variable_name_without_bounds]
 #
 # Constants
 #
-constants = SimpleTag.new(tag_as: "constant.language", pattern_sequence: {
-    "1" => variableBounds[@cpp_tokens.that(:isLiteral)],
-})
+constants_tagger = {
+    match: -variableBounds[@cpp_tokens.that(:isLiteral)],
+    captures: {
+        "0"=> { name: "constant.language" }
+    }
+}
 builtin_constants_1_group = variableBounds[newGroup(@cpp_tokens.that(:isLiteral))]
 probably_user_constant_1_group = variableBounds[lookAheadToAvoid(@cpp_tokens.that(:isWord)).then(newGroup(/[A-Z][_A-Z]*/))]
 constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
@@ -1085,7 +1087,7 @@ cpp_grammar.data[:patterns] = [
 ]
 cpp_grammar.data[:repository] = {
     "template-call-innards" => template_call_innards_tagger,
-    "constants" => constants.to_h,
+    "constants" => constants_tagger,
     "scope_resolution" => scope_resolution_tagger,
     "template_definition" => template_definition_tagger,
     "template_definition_argument" => template_definition_argument_tagger,
