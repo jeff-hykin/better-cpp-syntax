@@ -13,7 +13,7 @@ hex_binary_or_octal_pattern = newPattern(
         # octal, hexadecimal, or binary contents
         ).thenNewPattern(
             match: /[0-9a-fA-F\.']+/,
-            includes: [ tick_mark_pattern.to_tag ]
+            includes: [ tick_mark_pattern ]
         ).maybe(
             # group #3 (unit)
             # hexadecimal_floating_constant start
@@ -68,4 +68,4 @@ literal_suffix = newPattern(
     match: zeroOrMoreOf(/[_a-zA-Z]/),
     tag_as: unit_tag_name
 )
-puts literal_suffix.to_tag.to_s.gsub(/,/, ",\n")
+p hex_binary_or_octal_pattern.to_tag
