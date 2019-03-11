@@ -157,9 +157,6 @@ constants_tagger = {
         "0"=> { name: "constant.language" }
     }
 }
-builtin_constants_1_group = variableBounds[newGroup(@cpp_tokens.that(:isLiteral))]
-probably_user_constant_1_group = variableBounds[lookAheadToAvoid(@cpp_tokens.that(:isWord)).then(newGroup(/[A-Z][_A-Z]*/))]
-constants_pattern_2_groups = builtin_constants_1_group.or(probably_user_constant_1_group)
 
 #
 # Keywords and Keyword-ish things

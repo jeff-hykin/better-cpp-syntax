@@ -200,10 +200,6 @@ module GrammarHelper
         tag_name.to_s.gsub /\./, '-'
     end
     
-    def isAGoodTagName(name)
-        return ( (name != nil) and (name != "") and (name.to_i == 0))
-    end
-    
     class Grammar
         include GrammarHelper
         attr_accessor :data
