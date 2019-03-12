@@ -266,7 +266,7 @@ class Regexp
         # unescaped ('s can exist in character classes, and character class-style code can exist inside comments.
         # this removes the comments, then finds the character classes: escapes the ('s inside the character classes then 
         # reverse the string so that varaible-length lookaheads can be used instead of fixed length lookbehinds
-        as_string_reverse = regex.to_s.reverse
+        as_string_reverse = self.to_s.reverse
         no_preceding_escape = /(?=(?:(?:\\\\)*)(?:[^\\]|\z))/
         reverse_character_class_match = /(\]#{no_preceding_escape}[\s\S]*?\[#{no_preceding_escape})/
         reverse_comment_match = /(\)#{no_preceding_escape}[^\)]*#\?\(#{no_preceding_escape})/
@@ -310,10 +310,11 @@ class Regexp
                     new_regex = /#{self_as_string}#{other_regex_as_string}/
                 end
             when 'or'
-                new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
+                new_regex = /(?:(?:#{self_as_string}|(#{other_regex_as_string})))/
                 if no_attributes
                     # the extra (?:(?:)) groups are because ruby will auto-optimize away the outer most one, even if only one is given
-                    new_regex = /(?:(?:#{self_as_string}|#{other_regex_as_string}))/
+                    # TODO eventually there should be a better optimization for this
+                    new_regex = /(?:(?:(?:#{self_as_string}|#{other_regex_as_string})))/
                 end
             when 'maybe'
                 # this one is more complicated because it contains an optimization
@@ -321,8 +322,8 @@ class Regexp
                 # efficient (but more complicated way):  maybe(/a+/) == /a*/
                 # (both forms are functionally equivlent)
                 # the following code implements the more efficient way for single character matches
-                is_an_escaped_character_with_one_or_more_quantifier = (other_regex_as_string.size == 3) and other_regex_as_string[0] == "\\" and other_regex_as_string[-1] == "+"
-                is_a_normal_character_with_one_or_more_quantifier   = (other_regex_as_string.size == 2) and other_regex_as_string[0] != "\\" and other_regex_as_string[-1] == "+"
+                is_an_escaped_character_with_one_or_more_quantifier = ((other_regex_as_string.size == 3) and (other_regex_as_string[0] == "\\") and (other_regex_as_string[-1] == "+"))
+                is_a_normal_character_with_one_or_more_quantifier   = ((other_regex_as_string.size == 2) and (other_regex_as_string[0] != "\\") and (other_regex_as_string[-1] == "+"))
                 if is_an_escaped_character_with_one_or_more_quantifier or is_a_normal_character_with_one_or_more_quantifier
                     # replace the last + with a *
                     optimized_regex_as_string = other_regex_as_string.gsub(/\+\z/, '*')
@@ -362,9 +363,8 @@ class Regexp
         else
             new_regex.group_attributes = self.group_attributes + [ attributes ] + other_regex.group_attributes
         end
-        # if there has not been any consumption (only looking)
-        # and if there are arributes, then those attributes are top-level
-        if self.only_looking and attributes != {}
+        # if there are arributes, then those attributes are top-level
+        if (self == //) and (attributes != {})
             new_regex.has_top_level_group = true
         end
         
@@ -394,8 +394,7 @@ class Regexp
         #
         # carry over attributes
         #
-        new_regex.only_looking = self.only_looking
-        new_regex.has_top_level_group = self.has_top_level_group
+        new_regex.group_attributes = self.group_attributes
         return new_regex
     end
     
@@ -420,22 +419,7 @@ class Regexp
         end
         return [ other_regex, attributes ]
     end
-    
-    #
-    # getter/setter for only_looking
-    #
-        def only_looking=(value)
-            @only_looking = value
-        end
-        
-        def only_looking
-            # if self is nothing
-            if (self == //) or @only_looking
-                return true
-            else
-                return false
-            end
-        end
+
     #
     # getter/setter for group_attributes
     #
