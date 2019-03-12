@@ -223,7 +223,27 @@ functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that
 storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
 qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
 other_keywords = variableBounds[ /(using|typedef)/ ]
-memory_operators = lookBehindToAvoid(@standard_character).then( newGroup(/delete/.maybe(@spaces).then(/\[\]/).or(/delete|new/))).lookAheadToAvoid(@standard_character)
+memory_operators = newPattern(
+    repository_name: 'memory_operators',
+    tag_as: "keyword.operator.memory",
+    match: lookBehindToAvoid(
+            @standard_character
+        ).then(
+            newPattern(
+                match: /delete/,
+                tag_as: "keyword.operator.memory.delete.array"
+            ).maybe(@spaces).then(
+                match: /\[\]/,
+                tag_as: "keyword.operator.memory.delete.array.bracket"
+            )
+        ).or(
+            match: /delete/,
+            tag_as: "keyword.operator.memory.delete"
+        ).or(
+            match: /new/,
+            tag_as: "keyword.operator.memory.new"
+        )
+).lookAheadToAvoid(@standard_character)
 
 #
 # Templates
@@ -700,31 +720,7 @@ cpp_grammar.data[:patterns] = [
         name: "keyword.other.$1"
     },
     {
-        match: -memory_operators,
-        name: "keyword.operator.memory",
-        captures: {
-            "0" => {
-                patterns: [
-                    {
-                        match: -/delete(\[\])/,
-                        name: "keyword.operator.memory.delete.array",
-                        captures: {
-                            "1" => {
-                                name: "keyword.operator.memory.delete.array.bracket",
-                            }
-                        }
-                    },
-                    {
-                        match: -/delete/,
-                        name: "keyword.operator.memory.delete"
-                    },
-                    {
-                        match: -/new/,
-                        name: "keyword.operator.memory.new"
-                    },
-                ]
-            }
-        }
+        include: '#memory_operators'
     },
     {
         match: -/\bthis\b/,

@@ -26,20 +26,7 @@
   :name: keyword.control.exception.$1.cpp
 - :match: "(?<!\\w)(using|typedef)(?!\\w)"
   :name: keyword.other.$1.cpp
-- :match: "(?<!\\w)((?:(?:delete\\s*\\[\\]|delete|new)))(?!\\w)"
-  :name: keyword.operator.memory.cpp
-  :captures:
-    '0':
-      :patterns:
-      - :match: delete(\[\])
-        :name: keyword.operator.memory.delete.array.cpp
-        :captures:
-          '1':
-            :name: keyword.operator.memory.delete.array.bracket.cpp
-      - :match: delete
-        :name: keyword.operator.memory.delete.cpp
-      - :match: new
-        :name: keyword.operator.memory.new.cpp
+- :include: "#memory_operators"
 - :match: "\\bthis\\b"
   :name: variable.language.this.cpp
 - :include: "#constants"
@@ -358,6 +345,18 @@
   constants:
     :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     :name: constant.language.cpp
+  memory_operators:
+    :match: "(?:(?:(?<!\\w)(delete)\\s*(\\[\\])|(delete))|(new))"
+    :captures:
+      '1':
+        :name: keyword.operator.memory.delete.array.cpp
+      '2':
+        :name: keyword.operator.memory.delete.array.bracket.cpp
+      '3':
+        :name: keyword.operator.memory.delete.cpp
+      '4':
+        :name: keyword.operator.memory.new.cpp
+    :name: keyword.operator.memory.cpp
   template-call-innards:
     :name: meta.template.call.cpp
     :match: "<(?:[\\s<>,\\w])*>\\s*"

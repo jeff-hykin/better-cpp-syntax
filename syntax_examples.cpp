@@ -95,6 +95,14 @@
     //
         auto a = "things\n\b\v\t";
 //
+// Memory
+//
+    auto a = new int(5);
+    delete a;
+    int *array = new int[100];
+    delete[] array;
+
+//
 //
 // namespaces
 //
