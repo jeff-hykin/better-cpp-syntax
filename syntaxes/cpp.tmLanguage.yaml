@@ -16,7 +16,7 @@
 - :include: "#strings"
 - :match: "(?<!\\w)((?:inline|constexpr|mutable|friend|explicit|virtual))(?!\\w)"
   :name: storage.modifier.specificer.functional.pre-parameters.$1.cpp
-- :match: "(?<!\\w)((?:final|override|volatile|const|noexcept))(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r]))"
+- :match: "(?<!\\w)((?:final|override|volatile|const|noexcept))(?!\\w)(?=\\s*(?:(?:(?:(?:\\{|;))|[\\n\\r])))"
   :name: storage.modifier.specifier.functional.post-parameters.$1.cpp
 - :match: "(?<!\\w)((?:const|static|volatile|register|restrict|extern))(?!\\w)"
   :name: storage.modifier.specifier.$1.cpp
@@ -26,7 +26,7 @@
   :name: keyword.control.exception.$1.cpp
 - :match: "(?<!\\w)(using|typedef)(?!\\w)"
   :name: keyword.other.$1.cpp
-- :match: "(?<!\\w)((?:delete\\s*\\[\\]|delete|new))(?!\\w)"
+- :match: "(?<!\\w)((?:(?:delete\\s*\\[\\]|delete|new)))(?!\\w)"
   :name: keyword.operator.memory.cpp
   :captures:
     '0':
@@ -280,43 +280,39 @@
     :match: "(?<!')'(?!')"
     :name: punctuation.separator.constant.numeric.cpp
   number_literal:
-    :match: "(?:(?:(0[bB])([01](?:(?:[01]|((?<!')'(?!'))))*)|(0[0-7](?:(?:[0-7]|((?<!')'(?!'))))*))|(0[xX])([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:([pP])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?)|([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:([eE])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?(?:((?:(?:(?:(?:(?:(?:LL[uU]|ll[uU])|[uU]LL)|[uU]ll)|ll)|LL)|[uUlL])))?|(?:(0[xX])(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(?:([pP])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?|(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:([eE])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?)?)(?:([lLfF]))?(\\w+(?!\\w))?"
+    :match: "((?:(?:(0[xX])(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F]))))(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?|(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9])\\.|\\.(?=[0-9]))))(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:([lLfF](?!\\w)))?|(?:(?:(?:(?:(?:(0[bB])([01](?:(?:(?:[01]|((?<!')'(?!')))))*)|(0[0-7](?:(?:(?:[0-7]|((?<!')'(?!')))))*)))|(0[xX])([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*)(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?))|([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*)(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:((?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:LL[uU]|ll[uU]))|[uU]LL))|[uU]ll))|ll))|LL))|[uUlL]))(?!\\w)))?)(\\w*))"
     :captures:
-      '1':
-        :name: keyword.other.unit.binary.cpp
       '2':
-        :name: constant.numeric.binary.cpp
-        :patterns:
-        - :include: "#literal_numeric_seperator"
-      '3': &1
-        :name: punctuation.separator.constant.numeric.cpp
-      '4':
-        :name: constant.numeric.octal.cpp
-        :patterns:
-        - :include: "#literal_numeric_seperator"
-      '5': *1
-      '6':
         :name: keyword.other.unit.hexadecimal.cpp
-      '7': &3
+      '3': &1
         :name: constant.numeric.hexadecimal.cpp
         :patterns:
         - :include: "#literal_numeric_seperator"
-      '8': *1
-      '9': &4
+      '4': &2
+        :name: punctuation.separator.constant.numeric.cpp
+      '5':
+        :name: constant.numeric.hexadecimal.cpp
+      '6': *1
+      '7': *2
+      '8': &4
         :name: keyword.other.unit.exponent.hexadecimal.cpp
-      '10': &5
+      '9': &5
         :name: keyword.operator.plus.exponent.hexadecimal.cpp
-      '11': &6
+      '10': &6
         :name: keyword.operator.minus.exponent.hexadecimal.cpp
-      '12': &7
+      '11': &7
         :name: constant.numeric.exponent.hexadecimal.cpp
-      '13': &2
-        :name: constant.numeric.decimal.test.cpp
         :patterns:
         - :include: "#literal_numeric_seperator"
-      '14': *1
-      '15': *2
-      '16': *1
+      '12': &3
+        :name: constant.numeric.decimal.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '13': *2
+      '14':
+        :name: constant.numeric.decimal.point.cpp
+      '15': *3
+      '16': *2
       '17': &8
         :name: keyword.other.unit.exponent.decimal.cpp
       '18': &9
@@ -325,41 +321,40 @@
         :name: keyword.operator.minus.exponent.decimal.cpp
       '20': &11
         :name: constant.numeric.exponent.decimal.cpp
-      '21': *2
-      '22': *1
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '21':
+        :name: keyword.other.unit.suffix.floating-point.cpp
+      '22':
+        :name: keyword.other.unit.binary.cpp
       '23':
-        :name: keyword.other.unit.suffix.integer.cpp
-      '24':
-        :name: keyword.other.unit.hexadecimal.cpp
-      '25': *3
-      '26': *1
+        :name: constant.numeric.binary.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '24': *2
+      '25':
+        :name: constant.numeric.octal.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '26': *2
       '27':
-        :name: constant.numeric.hexadecimal.cpp
-      '28': *3
-      '29': *1
+        :name: keyword.other.unit.hexadecimal.cpp
+      '28': *1
+      '29': *2
       '30': *4
       '31': *5
       '32': *6
       '33': *7
-      '34': *2
-      '35': *1
-      '36': *2
-      '37': *1
-      '38':
-        :name: constant.numeric.decimal.cpp
-      '39': *2
-      '40': *1
-      '41': *8
-      '42': *9
-      '43': *10
-      '44': *11
-      '45': *2
-      '46': *1
-      '47':
-        :name: keyword.other.unit.suffix.floating-point.cpp
-      '48':
+      '34': *3
+      '35': *2
+      '36': *8
+      '37': *9
+      '38': *10
+      '39': *11
+      '40':
+        :name: keyword.other.unit.suffix.integer.cpp
+      '41':
         :name: keyword.other.unit.user-defined.cpp
-    :name: constant.numeric.cpp
   template-call-innards:
     :name: meta.template.call.cpp
     :match: "<(?:[\\s<>,\\w])*>\\s*"
@@ -413,7 +408,7 @@
     - :include: "#template_definition_argument"
     - :include: "#template-call-innards"
   template_definition_argument:
-    :match: "\\s*(?:(?:(?:([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*))|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))\\s*(?:(,)|(?=>))"
+    :match: "\\s*(?:(?:(?:(?:(?:(?:([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*)))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*)))|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+)))\\s*(?:(?:(,)|(?=>)))"
     :captures:
       '1':
         :name: storage.type.template.argument.$1.cpp
@@ -528,7 +523,7 @@
         '0':
           :name: punctuation.terminator.statement.cpp
       :name: meta.using-namespace-declaration.cpp
-    - :begin: "(?<!\\w)(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*)|(?={))"
+    - :begin: "(?<!\\w)(namespace)\\s+(?:(?:((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*)|(?={)))"
       :beginCaptures:
         '1':
           :name: keyword.other.namespace.definition.cpp
@@ -652,14 +647,14 @@
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
   probably_a_parameter:
-    :match: "(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=\\w\\s|\\*\\/|[&*>\\]\\)])\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\))))"
+    :match: "(?:(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=\\w\\s|\\*\\/|[&*>\\]\\)])\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:(?:,|\\))))))"
     :captures:
       '1':
         :name: variable.parameter.probably.defaulted.cpp
       '2':
         :name: variable.parameter.probably.cpp
   operator_overload:
-    :begin: "((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*)\\s*(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))\\s*(\\()"
+    :begin: "((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*)\\s*(operator)((?:(?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))))\\s*(\\()"
     :beginCaptures:
       '1':
         :name: entity.scope.cpp
@@ -709,7 +704,7 @@
     - :include: "#function-call-innards-c"
   access-member:
     :name: variable.other.object.access.cpp
-    :match: "(?:([a-zA-Z_]\\w*)|(?<=\\]|\\)))\\s*(?:((?:\\.|\\.\\*))|((?:->|->\\*)))\\s*((?:[a-zA-Z_]\\w*\\s*(?:\\.|->)\\s*)*)\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))([a-zA-Z_]\\w*)\\b(?!\\()"
+    :match: "(?:(?:([a-zA-Z_]\\w*)|(?<=\\]|\\))))\\s*(?:(?:((?:(?:\\.|\\.\\*)))|((?:(?:->|->\\*)))))\\s*((?:[a-zA-Z_]\\w*\\s*(?:(?:\\.|->))\\s*)*)\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))([a-zA-Z_]\\w*)\\b(?!\\()"
     :captures:
       '1':
         :name: variable.other.object.cpp
@@ -957,7 +952,7 @@
       :name: constant.other.placeholder.cpp
   storage_types-c:
     :patterns:
-    - :match: "(?:(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)|_Bool|_Complex|_Imaginary)"
+    - :match: "(?:(?:(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)|_Bool|_Complex|_Imaginary))"
       :name: storage.type.language.cpp
     - :match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
       :name: storage.type.language.primitive.cpp

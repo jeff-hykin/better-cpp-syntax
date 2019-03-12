@@ -39,102 +39,157 @@ cpp_grammar = Grammar.new(
     ],
 )
 
-# misc
-builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
+#
 #
 # Numbers
 #
-    possible_type_endings = maybe(/[lLuUfF][lLuU][lLuU]/)
-    valid_numeric_start = lookBehindToAvoid(@standard_character).then(/[0-9\.]/)
-    valid_numeric_middle = /[0-9\.xa-fA-Fp\+\-\']/
-    valid_numeric_pre_ending = /[0-9a-fA-F\.]/
-    literal_suffix = newHiddenGroup(
-        newHiddenGroup(
-            # group #1 (unit)
-            # octal, hexadecimal, or binary start
-            newGroup(
-                /0/.lookAheadToAvoid(/[\.eE]/).maybe(/[xXbB]/)
-            # group #2 (number)
-            # octal, hexadecimal, or binary contents
-            ).thenNewGroup(
-                /[0-9a-fA-F\.']+/
-            ).maybe(
-                # group #3 (unit)
-                # hexadecimal_floating_constant start
-                newGroup(
-                    /p/.or(/P/)
-                ).maybe(
-                    # group #4 (plus)
-                    newGroup(/\+/).or(
-                        # group #5 (minus)
-                        newGroup(/\-/)
-                    )
-                # group #6 (number)
-                # hexadecimal_floating_constant contents
-                ).thenNewGroup(
-                    /[0-9']++/
-                )
-            )
-        ).or(
-            # group #7 (number)
-            # decimal/base-10 start 
-            newGroup(
-                /[0-9\.][0-9\.']*/
-            ).maybe(
-                # group #8 (unit)
-                # scientific notation
-                newGroup(
-                    /[eE]/
-                ).maybe(
-                    # group #9 (plus)
-                    newGroup(/\+/).or(
-                        # group #10 (minus)
-                        newGroup(/\-/)
-                    )
-                # group #11 (number)
-                # exponent of scientific notation
-                ).thenNewGroup(
-                    /[0-9']++/
-                )
-            )
+#
+    #
+    # misc
+    #
+        number_seperator_pattern = newPattern(
+            repository_name: 'literal_numeric_seperator',
+            match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
+            tag_as:"punctuation.separator.constant.numeric"
         )
-    # group #12 (unit)
-    # check if number is a custom literal
-    ).thenNewGroup(zeroOrMoreOf(/[_a-zA-Z]/))
-    
-    unit_tag_name = { name: "keyword.other.unit" }
-    tickmark_seperator_patterns = {
-        patterns: [
-            {
-                match: -/'/,
-                name: "punctuation.separator.constant.numeric"
-            },
-        ]
-    }
-    literal_suffix_tag = {
-        match: -literal_suffix,
-        name: "constant.numeric",
-        captures: {
-            "1"  => unit_tag_name,
-            "2"  => tickmark_seperator_patterns,
-            "3"  => unit_tag_name,
-            "4"  => { name: "keyword.operator.plus.exponent.hexadecimal-floating-point-literal" },
-            "5"  => { name: "keyword.operator.minus.exponent.hexadecimal-floating-point-literal" },
-            "6"  => tickmark_seperator_patterns,
-            "7"  => tickmark_seperator_patterns,
-            "8"  => unit_tag_name,
-            "9"  => { name: "keyword.operator.plus.exponent" },
-            "10" => { name: "keyword.operator.minus.exponent" },
-            "11" => tickmark_seperator_patterns,
-            "12" => unit_tag_name,
-        },
-    }
-    numeric_pattern = newPattern(
+        hex_digits = newPattern(
+                match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
+                tag_as: "constant.numeric.hexadecimal",
+                includes: [ number_seperator_pattern ]
+            )
+        decimal_digits = newPattern(
+                match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
+                tag_as: "constant.numeric.decimal",
+                includes: [ number_seperator_pattern ]
+            )
+        # see https://en.cppreference.com/w/cpp/language/floating_literal
+        hex_exponent = newPattern(
+                match: /[pP]/,
+                tag_as: "keyword.other.unit.exponent.hexadecimal",
+            ).maybe(
+                match: /\+/,
+                tag_as: "keyword.operator.plus.exponent.hexadecimal",
+            ).maybe(
+                match: /\-/,
+                tag_as: "keyword.operator.minus.exponent.hexadecimal",
+            ).then(
+                match: decimal_digits.without_numbered_capture_groups,
+                tag_as: "constant.numeric.exponent.hexadecimal",
+                includes: [ number_seperator_pattern ]
+            )
+        decimal_exponent = newPattern(
+                match: /[eE]/,
+                tag_as: "keyword.other.unit.exponent.decimal",
+            ).maybe(
+                match: /\+/,
+                tag_as: "keyword.operator.plus.exponent.decimal",
+            ).maybe(
+                match: /\-/,
+                tag_as: "keyword.operator.minus.exponent.decimal",
+            ).then(
+                match: decimal_digits.without_numbered_capture_groups,
+                tag_as: "constant.numeric.exponent.decimal",
+                includes: [ number_seperator_pattern ]
+            )
+    #
+    # Number Literal
+    #
+    literal_number = newPattern(
         repository_name: 'number_literal',
-        match: valid_numeric_start.then(zeroOrMoreOf(valid_numeric_middle)).lookBehindFor(valid_numeric_pre_ending).then(possible_type_endings).zeroOrMoreOf(@standard_character),
-        patterns: [
-            literal_suffix_tag
-        ]
+        match: newPattern(
+                # Floating point
+                # see https://en.cppreference.com/w/cpp/language/floating_literal
+                newPattern(
+                    floating_literal = newPattern(
+                        # Hex
+                        newPattern(
+                            hex_literal_float = newPattern(
+                                match: /0[xX]/,
+                                tag_as: "keyword.other.unit.hexadecimal",
+                            ).maybe(
+                                hex_digits
+                            ).then(
+                                # lookBehind/Ahead because there needs to be a hex digit on at least one side 
+                                match: lookBehindFor(/[0-9a-fA-F]/).then(/\./).or(/\./.lookAheadFor(/[0-9a-fA-F]/)),
+                                tag_as: "constant.numeric.hexadecimal",
+                            ).maybe(
+                                hex_digits
+                            ).maybe(
+                                hex_exponent
+                            )
+                        # Decimal
+                        ).or(
+                            decimal_literal_float = maybe(
+                                decimal_digits
+                            ).then(
+                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side 
+                                match: lookBehindFor(/[0-9]/).then(/\./).or(/\./.lookAheadFor(/[0-9]/)),
+                                tag_as: "constant.numeric.decimal.point",
+                            ).maybe(
+                                decimal_digits
+                            ).maybe(
+                                decimal_exponent
+                            )
+                        )
+                    # Floating point suffix
+                    ).maybe(
+                        literal_float_suffix = newPattern(
+                            match: /[lLfF]/.lookAheadToAvoid(/\w/),
+                            tag_as: "keyword.other.unit.suffix.floating-point"
+                        )
+                    )
+                # Integer
+                # see https://en.cppreference.com/w/cpp/language/integer_literal
+                ).or(
+                     integer_literal = newPattern(
+                        # Binary
+                        newPattern(
+                            binary_literal_integer = newPattern(
+                                match: /0[bB]/,
+                                tag_as: "keyword.other.unit.binary"
+                            ).then(
+                                match: /[01]/.zeroOrMoreOf(/[01]/.or(number_seperator_pattern)),
+                                tag_as: "constant.numeric.binary",
+                                includes: [ number_seperator_pattern ]
+                            )
+                        # Octal
+                        ).or(
+                            octal_literal_integer = newPattern(
+                                match: /0[0-7]/.zeroOrMoreOf(/[0-7]/.or(number_seperator_pattern)),
+                                tag_as: "constant.numeric.octal",
+                                includes: [ number_seperator_pattern ]
+                            )
+                        # Hex
+                        ).or(
+                            hex_literal_integer = newPattern(
+                                match: /0[xX]/,
+                                tag_as: "keyword.other.unit.hexadecimal",
+                            ).then(
+                                hex_digits
+                            ).maybe(
+                                hex_exponent
+                            )
+                        # Decimal
+                        ).or(
+                            decimal_literal_integer = newPattern(
+                                decimal_digits
+                            ).maybe(
+                                decimal_exponent
+                            )
+                        )
+                    # integer suffix
+                    ).maybe(
+                        literal_integer_suffix = newPattern(
+                            match: /LL[uU]/.or(/ll[uU]/).or(/[uU]LL/).or(/[uU]ll/).or(/ll/).or(/LL/).or(/[uUlL]/).lookAheadToAvoid(/\w/),
+                            tag_as: "keyword.other.unit.suffix.integer"
+                        )
+                    )
+                )
+            # user defined endings
+            ).then(
+                match: /\w*/,
+                tag_as: "keyword.other.unit.user-defined"
+            )
     )
     
 #
