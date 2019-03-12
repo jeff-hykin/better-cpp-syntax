@@ -295,62 +295,61 @@ template_definition = Range.new(
         :template_call_innards,
     ]
 )
-template_definition_argument = maybe(@spaces).then(newGroup(variable_name_without_bounds).or(
-        # group 2 and 3 (the normal situation)
-        newGroup(oneOrMoreOf(variable_name_without_bounds.then(@spaces))).then(newGroup(variable_name_without_bounds))
-    ).or(
-        # group 4 5 6 (ellipses)
-        newGroup(variable_name_without_bounds).maybe(@spaces).then(newGroup(/\.\.\./)).maybe(@spaces).then(newGroup(variable_name_without_bounds))
-    ).or(
-        # groups 7 8 9 10 11
-        # TODO: change this regex into readable regex, also improve its matching
-        /((?:[a-zA-Z_][a-zA-Z_0-9]*\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\s*(=)\s*(\w+)/
-    ).maybe(@spaces).then(newGroup(/,/).or(lookAheadFor(/>/)))
-)
-template_definition_argument_tagger = {
-    match: -template_definition_argument,
-    captures: {
-        "1" => {
-            name: "storage.type.template.argument.$1"
-        },
-        "2" => {
-            name: "storage.type.template.argument.$2"
-        },
-        "3" => {
-            name: "entity.name.type.template"
-        },
-        "4" => {
-            name: "storage.type.template"
-        },
-        "5" => {
-            name: "keyword.operator.ellipsis.template.definition"
-        },
-        "6" => {
-            name: "entity.name.type.template"
-        },
-        "7" => {
-            name: "storage.type.template"
-        },
-        "8" => {
-            name: "entity.name.type.template"
-        },
-        "9" => {
-            name: "keyword.operator.assignment"
-        },
-        "10" => {
-            name: "keyword.operator.assignment"
-        },
-        "11" => {
-            name: "storage.type.template.argument.$10",
-        },
-        "12" => {
-            name: "constant.language"
-        },
-        "13" => {
-            name: "punctuation.separator.comma.template.argument"
-        },
-    }
-}
+template_definition_argument = newPattern(
+    repository_name: 'template_definition_argument',
+    match: maybe(
+            @spaces
+        # case 1: only one word
+        ).then(
+            match: variable_name_without_bounds,
+            tag_as: "storage.type.template.argument.$1",
+        # case 2: normal situation (ex: "typename T")
+        ).or(
+            newPattern( 
+                match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                tag_as: "storage.type.template.argument.$2",
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template",
+            )
+        # case 3: ellipses (ex: "typename... Args")
+        ).or(
+            newPattern(
+                match: variable_name_without_bounds,
+                tag_as: "storage.type.template",
+            ).maybe(@spaces).then(
+                match: /\.\.\./,
+                tag_as: "keyword.operator.ellipsis.template.definition",
+            ).maybe(@spaces).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+            )
+        # case 4: defaulted assignment (ex: "int N = 0")
+        ).or(
+            newPattern(
+                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                tag_as: "storage.type.template",
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+            ).maybe(@spaces).then(
+                match: /[=]/,
+                tag_as: "keyword.operator.assignment"
+            # FIXME, this last group needs to be updated
+            ).maybe(@spaces).then(
+                match: /\w+/,
+                tag_as: "constant.other"
+            )
+        # ending
+        ).maybe(@spaces).then(
+            newPattern(
+                match: /,/,
+                tag_as: "punctuation.separator.comma.template.argument",
+            ).or(
+                lookAheadFor(/>/)
+            )
+        )
+    )
 
 #
 # Scope resolution
@@ -1114,7 +1113,6 @@ cpp_grammar.data[:patterns] = [
 ]
 cpp_grammar.data[:repository].merge!({
     "scope_resolution" => scope_resolution_tagger,
-    "template_definition_argument" => template_definition_argument_tagger,
     "angle_brackets" => {
         begin: "<",
         end: ">",

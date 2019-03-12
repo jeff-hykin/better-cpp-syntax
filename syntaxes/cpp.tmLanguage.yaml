@@ -391,6 +391,31 @@
     - :include: "#scope_resolution"
     - :include: "#template_definition_argument"
     - :include: "#template_call_innards"
+  template_definition_argument:
+    :match: "((?:(?:(?:(?:(?:(?:\\s*([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*)))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*)))|((?:[a-zA-Z_]\\w*\\s+)*)([a-zA-Z_]\\w*)\\s*([=])\\s*(\\w+)))\\s*(?:(?:(,)|(?=>))))"
+    :captures:
+      '2':
+        :name: storage.type.template.argument.$1.cpp
+      '3':
+        :name: storage.type.template.argument.$2.cpp
+      '4':
+        :name: entity.name.type.template.cpp
+      '5':
+        :name: storage.type.template.cpp
+      '6':
+        :name: keyword.operator.ellipsis.template.definition.cpp
+      '7':
+        :name: entity.name.type.template.cpp
+      '8':
+        :name: storage.type.template.cpp
+      '9':
+        :name: entity.name.type.template.cpp
+      '10':
+        :name: keyword.operator.assignment.cpp
+      '11':
+        :name: constant.other.cpp
+      '12':
+        :name: punctuation.separator.comma.template.argument.cpp
   scope_resolution:
     :name: punctuation.separator.namespace.access.cpp
     :match: "((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*([a-zA-Z_]\\w*)\\s*(?:((?:<(?:[\\s<>,\\w])*>\\s*)))?(::)"
@@ -406,35 +431,6 @@
         - :include: "#template_call_innards"
       '4':
         :name: punctuation.separator.namespace.access.cpp
-  template_definition_argument:
-    :match: "\\s*(?:(?:(?:(?:(?:(?:([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*)))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*)))|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+)))\\s*(?:(?:(,)|(?=>)))"
-    :captures:
-      '1':
-        :name: storage.type.template.argument.$1.cpp
-      '2':
-        :name: storage.type.template.argument.$2.cpp
-      '3':
-        :name: entity.name.type.template.cpp
-      '4':
-        :name: storage.type.template.cpp
-      '5':
-        :name: keyword.operator.ellipsis.template.definition.cpp
-      '6':
-        :name: entity.name.type.template.cpp
-      '7':
-        :name: storage.type.template.cpp
-      '8':
-        :name: entity.name.type.template.cpp
-      '9':
-        :name: keyword.operator.assignment.cpp
-      '10':
-        :name: keyword.operator.assignment.cpp
-      '11':
-        :name: storage.type.template.argument.$10.cpp
-      '12':
-        :name: constant.language.cpp
-      '13':
-        :name: punctuation.separator.comma.template.argument.cpp
   angle_brackets:
     :begin: "<"
     :end: ">"
