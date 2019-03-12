@@ -1,5 +1,4 @@
-require_relative './readable_regex.rb'
-include GrammarHelper
+require_relative './readable_grammar.rb'
 
 # 
 # C++ specific tokens
