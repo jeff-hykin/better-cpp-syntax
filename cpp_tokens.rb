@@ -102,6 +102,7 @@ tokens = [
     { representation: "continue"             , name: "continue"                       , isControlFlow: true,                                           },
     { representation: "default"              , name: "default"                        , isControlFlow: true,                                           },
     # primitive type keywords
+    # https://en.cppreference.com/w/cpp/language/types
     { representation: "auto"                 , name: "auto"                           , isPrimitive: true, isType: true},
     { representation: "void"                 , name: "void"                           , isPrimitive: true, isType: true},
     { representation: "char"                 , name: "char"                           , isPrimitive: true, isType: true},
@@ -251,6 +252,7 @@ tokens = [
     # 
     # misc
     # 
+    # https://en.cppreference.com/w/cpp/keyword
     { representation: "this"            , name: "this"          },
     { representation: "template"        , name: "template"      },
     { representation: "namespace"       , name: "namespace"     },
