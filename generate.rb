@@ -254,137 +254,125 @@ memory_operators = newPattern(
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
-template_call = newPattern(
-    repository_name: 'template_call_innards',
-    tag_as: 'meta.template.call',
-    match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
-    includes: [
-        :storage_types_c,
-        :constants,
-        :scope_resolution,
-        newPattern(
-            match: variable_name,
-            tag_as: 'storage.type.user-defined'
-        ),
-        :operators,
-        :number_literal,
-        :strings,
-        newPattern(
-            match: /,/,
-            tag_as: "punctuation.separator.comma.template.argument"
-        )
-    ]
-)
-template_definition = Range.new(
-    repository_name: 'template_definition',
-    tag_as: 'meta.template.definition',
-    start_pattern: lookBehindToAvoid(@standard_character).then(
-            match: /template/,
-            tag_as: "storage.type.template"
-        ).maybe(@spaces).then(
-            match: /</,
-            tag_as: "punctuation.section.angle-brackets.start.template.definition"
-        ),
-    end_pattern: newPattern(
-            match: />/,
-            tag_as: "punctuation.section.angle-brackets.end.template.definition"
-        ),
-    includes: [
-        :scope_resolution,
-        :template_definition_argument,
-        :template_call_innards,
-    ]
-)
-template_definition_argument = newPattern(
-    repository_name: 'template_definition_argument',
-    match: maybe(
-            @spaces
-        # case 1: only one word
-        ).then(
-            match: variable_name_without_bounds,
-            tag_as: "storage.type.template.argument.$1",
-        # case 2: normal situation (ex: "typename T")
-        ).or(
-            newPattern( 
-                match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                tag_as: "storage.type.template.argument.$2",
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template",
-            )
-        # case 3: ellipses (ex: "typename... Args")
-        ).or(
+    template_call = newPattern(
+        repository_name: 'template_call_innards',
+        tag_as: 'meta.template.call',
+        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+        includes: [
+            :storage_types_c,
+            :constants,
+            :scope_resolution,
             newPattern(
-                match: variable_name_without_bounds,
-                tag_as: "storage.type.template",
-            ).maybe(@spaces).then(
-                match: /\.\.\./,
-                tag_as: "keyword.operator.ellipsis.template.definition",
-            ).maybe(@spaces).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template"
-            )
-        # case 4: defaulted assignment (ex: "int N = 0")
-        ).or(
-            newPattern(
-                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                tag_as: "storage.type.template",
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template"
-            ).maybe(@spaces).then(
-                match: /[=]/,
-                tag_as: "keyword.operator.assignment"
-            # FIXME, this last group needs to be updated
-            ).maybe(@spaces).then(
-                match: /\w+/,
-                tag_as: "constant.other"
-            )
-        # ending
-        ).maybe(@spaces).then(
+                match: variable_name,
+                tag_as: 'storage.type.user-defined'
+            ),
+            :operators,
+            :number_literal,
+            :strings,
             newPattern(
                 match: /,/,
-                tag_as: "punctuation.separator.comma.template.argument",
+                tag_as: "punctuation.separator.comma.template.argument"
+            )
+        ]
+    )
+    template_definition = Range.new(
+        repository_name: 'template_definition',
+        tag_as: 'meta.template.definition',
+        start_pattern: lookBehindToAvoid(@standard_character).then(
+                match: /template/,
+                tag_as: "storage.type.template"
+            ).maybe(@spaces).then(
+                match: /</,
+                tag_as: "punctuation.section.angle-brackets.start.template.definition"
+            ),
+        end_pattern: newPattern(
+                match: />/,
+                tag_as: "punctuation.section.angle-brackets.end.template.definition"
+            ),
+        includes: [
+            :scope_resolution,
+            :template_definition_argument,
+            :template_call_innards,
+        ]
+    )
+    template_definition_argument = newPattern(
+        repository_name: 'template_definition_argument',
+        match: maybe(
+                @spaces
+            # case 1: only one word
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "storage.type.template.argument.$1",
+            # case 2: normal situation (ex: "typename T")
             ).or(
-                lookAheadFor(/>/)
+                newPattern( 
+                    match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                    tag_as: "storage.type.template.argument.$2",
+                ).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template",
+                )
+            # case 3: ellipses (ex: "typename... Args")
+            ).or(
+                newPattern(
+                    match: variable_name_without_bounds,
+                    tag_as: "storage.type.template",
+                ).maybe(@spaces).then(
+                    match: /\.\.\./,
+                    tag_as: "keyword.operator.ellipsis.template.definition",
+                ).maybe(@spaces).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template"
+                )
+            # case 4: defaulted assignment (ex: "int N = 0")
+            ).or(
+                newPattern(
+                    match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                    tag_as: "storage.type.template",
+                ).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template"
+                ).maybe(@spaces).then(
+                    match: /[=]/,
+                    tag_as: "keyword.operator.assignment"
+                # FIXME, this last group needs to be updated
+                ).maybe(@spaces).then(
+                    match: /\w+/,
+                    tag_as: "constant.other"
+                )
+            # ending
+            ).maybe(@spaces).then(
+                newPattern(
+                    match: /,/,
+                    tag_as: "punctuation.separator.comma.template.argument",
+                ).or(
+                    lookAheadFor(/>/)
+                )
             )
         )
-    )
 
 #
 # Scope resolution
 #
-        one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
-maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
-preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups))).then(newGroup(/::/))
-scope_resolution_tagger = {
-    name: "punctuation.separator.namespace.access",
-    match: -preceding_scopes_4_groups,
-    captures: {
-        "1" => {
-            name: "entity.scope",
-            patterns: [
-                {
-                    include: "#scope_resolution"
-                }
-            ]
-        },
-        "2" => {
-            name: "entity.scope.name"
-        },
-        "3" => {
-            patterns: [
-                {
-                    include: "#template_call_innards"
-                }
-            ]
-        },
-        "4" => {
-            name: "punctuation.separator.namespace.access"
-        }
-    }
-}
+    scope_resolution = newPattern(
+        repository_name: 'scope_resolution',
+        tag_as: "meta.scope-resolution",
+        match: newPattern(
+                match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+                includes: [ :scope_resolution ], # include self for a recursive call
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.namespace.scope-resolution"
+            ).maybe(@spaces).maybe(
+                match: template_call.without_numbered_capture_groups,
+                includes: [ :template_call_innards ]
+            ).then(
+                match: /::/,
+                tag_as: "punctuation.separator.namespace.access"
+            )
+        )
 
 #
 # types
@@ -434,7 +422,7 @@ operator_overload_tagger =  {
             name: "entity.scope"
         },
         "2" => {
-            name: "entity.name.operator.overload"
+            name: "keyword.other.operator.overload"
         },
         "3" => {
             name: "entity.name.operator.overloadee"
@@ -567,7 +555,7 @@ using_namespace_tagger = {
             name: "keyword.other.using.directive"
         },
         "2" => {
-            name: "keyword.other.namespace.directive"
+            name: "keyword.other.namespace.directive storage.type.namespace.directive"
         },
         "3" => {
             patterns: [
@@ -577,7 +565,7 @@ using_namespace_tagger = {
             ]
         },
         "4" => {
-            name: "entity.name.type.namespace"
+            name: "entity.name.namespace"
         },
     },
     end: ";",
@@ -598,7 +586,7 @@ namespace_definition_tagger = {
     begin: -namespace_pattern_2_groups,
     beginCaptures: {
         "1" => {
-            name: "keyword.other.namespace.definition"
+            name: "keyword.other.namespace.definition storage.type.namespace.definition"
         },
         "2" => {
             patterns: [
@@ -1112,7 +1100,6 @@ cpp_grammar.data[:patterns] = [
     }
 ]
 cpp_grammar.data[:repository].merge!({
-    "scope_resolution" => scope_resolution_tagger,
     "angle_brackets" => {
         begin: "<",
         end: ">",
@@ -1834,7 +1821,7 @@ cpp_grammar.data[:repository].merge!({
             },
             {
                 match: "\\\\.",
-                name: "invalid.illegal.1.unknown-escape"
+                name: "invalid.illegal.unknown-escape"
             }
         ]
     },
@@ -1860,11 +1847,11 @@ cpp_grammar.data[:repository].merge!({
         patterns: [
             {
                 match: -non_primitive_types.or(/_Bool|_Complex|_Imaginary/),
-                name: "storage.type.language",
+                name: "storage.type",
             },
             {
                 match: -primitive_types,
-                name: "storage.type.language.primitive",
+                name: "storage.type.primitive",
             },
             {
                 match: -/\b(asm|__asm__|enum|struct|union)\b/,
