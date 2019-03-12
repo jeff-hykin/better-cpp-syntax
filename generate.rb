@@ -202,7 +202,7 @@ cpp_grammar = Grammar.new(
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = /[a-zA-Z_]#{-@standard_character}*/
+    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
@@ -218,8 +218,7 @@ cpp_grammar = Grammar.new(
 #
 # Types
 #
-    symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-    look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
+    look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]/).maybe(@spaces)
     # why is posix reserved types not in "storage_types"? I don't know, if you can get it in there and everything still works it would be appreciated
     posix_reserved_types = newPattern(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
@@ -250,12 +249,12 @@ cpp_grammar = Grammar.new(
 #
 # Keywords and Keyword-ish things
 #
-    any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
-    control_flow_keywords = @cpp_tokens.that(:isControlFlow)
-    access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
-    exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
-    functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
-    storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
+    any_normal_word_operator_keyword          = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
+    control_flow_keywords                     = @cpp_tokens.that(:isControlFlow)
+    access_control_keywords                   = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
+    exception_keywords                        = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
+    functional_specifiers_pre_parameters      = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
+    storage_specifiers                        = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
     qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
     other_keywords = variableBounds[ /(using|typedef)/ ]
     memory_operators = newPattern(
@@ -381,7 +380,7 @@ cpp_grammar = Grammar.new(
                     lookAheadFor(/>/)
                 )
             )
-        )
+    )
 
 #
 # Scope resolution
@@ -409,66 +408,48 @@ cpp_grammar = Grammar.new(
 #
 # Probably a parameter
 #
-            array_brackets = /\[\]/.maybe(@spaces)
-            comma_or_closing_paraenthese = /,/.or(/\)/)
-        stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    probably_a_normal_parameter_1_group = look_behind_for_type.then(newGroup(variable_name_without_bounds)).then(stuff_after_a_parameter)
-    # below uses variable_name_without_bounds for performance (timeout) reasons
-    probably_a_default_parameter_1_group = newGroup(variable_name_without_bounds).maybe(@spaces).lookAheadFor("=")
-probably_a_parameter_2_groups = probably_a_default_parameter_1_group.or(probably_a_normal_parameter_1_group)
-probably_a_parameter_tagger = {
-    match: -probably_a_parameter_2_groups,
-    captures: {
-        "1" => {
-            name: "variable.parameter.probably.defaulted"
-        },
-        "2" => {
-            name: "variable.parameter.probably"
-        }
-    }
-}
+    array_brackets = /\[\]/.maybe(@spaces)
+    comma_or_closing_paraenthese = /,/.or(/\)/)
+    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
+    probably_a_parameter = newPattern(
+        repository_name: 'probably_a_parameter',
+        match: newPattern(
+            match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
+            tag_as: "variable.parameter.probably.defaulted"
+        ).or(
+            match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
+            tag_as: "variable.parameter.probably"
+        )
+    )
 
 #
 # operator overload
 #
-        # symbols can have spaces
-        operator_symbols = maybe(@spaces).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isSymbol))
-        # words must have spaces, the variable_name_without_bounds is for implicit overloads
-        operator_wordish = @spaces.then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
+    # symbols can have spaces
+    operator_symbols = maybe(@spaces).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isSymbol))
+    # words must have spaces, the variable_name_without_bounds is for implicit overloads
+    operator_wordish = @spaces.then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
     after_operator_keyword = operator_symbols.or(operator_wordish)
-operator_overload_4_groups = preceding_scopes_1_group.then(newGroup(/operator/)).then(newGroup(after_operator_keyword)).maybe(@spaces).then(newGroup(/\(/))
-operator_overload_tagger =  {
-    begin: -operator_overload_4_groups,
-    beginCaptures: {
-        "1" => {
-            name: "entity.scope"
-        },
-        "2" => {
-            name: "keyword.other.operator.overload"
-        },
-        "3" => {
-            name: "entity.name.operator.overloadee"
-        },
-        "4" => {
-            name: "punctuation.section.parameters.begin.bracket.round"
-        }
-    },
-    end: -/\)/,
-    endCaptures: {
-        "0" => {
-            name: "punctuation.section.parameters.end.bracket.round"
-        }
-    },
-    name: "meta.function.definition.parameters.operator-overload",
-    patterns: [
-        {
-            include: "#probably_a_parameter"
-        },
-        {
-            include: "#function-innards-c"
-        }
-    ]
-}
+    operator_overload = Range.new(
+        repository_name: 'operator_overload',
+        tag_as: "meta.function.definition.parameters.operator-overload",
+        start_pattern: newPattern(
+                match: /operator/,
+                tag_as: "keyword.other.operator.overload",
+            ).then(
+                match: after_operator_keyword,
+                tag_as: "entity.name.operator.overloadee",
+                includes: [:scope_resolution]
+            ).maybe(@spaces).then(
+                match: /\(/,
+                tag_as: "punctuation.section.parameters.begin.bracket.round"
+            ),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.parameters.end.bracket.round"
+            ),
+        includes: [:probably_a_parameter, :'function-innards-c' ]
+    )
 
 #
 # Access member . .* -> ->*
@@ -1394,8 +1375,6 @@ cpp_grammar.data[:repository].merge!({
             }
         ]
     },
-    "probably_a_parameter" => probably_a_parameter_tagger,
-    "operator_overload" => operator_overload_tagger,
     "access-method" => {
         name: "meta.function-call.member",
         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",

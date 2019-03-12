@@ -438,6 +438,32 @@
       '4':
         :name: punctuation.separator.namespace.access.cpp
     :name: meta.scope-resolution.cpp
+  probably_a_parameter:
+    :match: "((?:([a-zA-Z_]\\w*\\s*(?==))|((?<=\\w |\\*\\/|[&*>\\]\\)])\\s*[a-zA-Z_]\\w*\\s*(?=(?:\\[\\]\\s*)?(?:(?:,|\\)))))))"
+    :captures:
+      '2':
+        :name: variable.parameter.probably.defaulted.cpp
+      '3':
+        :name: variable.parameter.probably.cpp
+  operator_overload:
+    :name: meta.function.definition.parameters.operator-overload.cpp
+    :begin: !ruby/regexp /(operator)((?:(?:\s*(?:\+\+|\-\-|\(\)|\[\]|\->|\+\+|\-\-|\+|\-|!|~|\*|&|\->\*|\*|\/|%|\+|\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\^|\||&&|\|\||=|\+=|\-=|\*=|\/=|%=|<<=|>>=|&=|\^=|\|=|,)|\s+(?:(?:(?:new|new\[\]|delete|delete\[\])|(?:[a-zA-Z_]\w*\s*(?:(?:<(?:[\s<>,\w])*>\s*))?::)*[a-zA-Z_]\w*\s*(?:&)?)))))\s*(\()/
+    :beginCaptures:
+      '1':
+        :name: keyword.other.operator.overload.cpp
+      '2':
+        :name: entity.name.operator.overloadee.cpp
+        :patterns:
+        - :include: "#scope_resolution"
+      '3':
+        :name: punctuation.section.parameters.begin.bracket.round.cpp
+    :end: !ruby/regexp /(\))/
+    :endCaptures:
+      '1':
+        :name: punctuation.section.parameters.end.bracket.round.cpp
+    :patterns:
+    - :include: "#probably_a_parameter"
+    - :include: "#function-innards-c"
   angle_brackets:
     :begin: "<"
     :end: ">"
@@ -648,32 +674,6 @@
         '1':
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
-  probably_a_parameter:
-    :match: "(?:(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=\\w\\s|\\*\\/|[&*>\\]\\)])\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:(?:,|\\))))))"
-    :captures:
-      '1':
-        :name: variable.parameter.probably.defaulted.cpp
-      '2':
-        :name: variable.parameter.probably.cpp
-  operator_overload:
-    :begin: "((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*(operator)((?:(?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))))\\s*(\\()"
-    :beginCaptures:
-      '1':
-        :name: entity.scope.cpp
-      '2':
-        :name: keyword.other.operator.overload.cpp
-      '3':
-        :name: entity.name.operator.overloadee.cpp
-      '4':
-        :name: punctuation.section.parameters.begin.bracket.round.cpp
-    :end: "\\)"
-    :endCaptures:
-      '0':
-        :name: punctuation.section.parameters.end.bracket.round.cpp
-    :name: meta.function.definition.parameters.operator-overload.cpp
-    :patterns:
-    - :include: "#probably_a_parameter"
-    - :include: "#function-innards-c"
   access-method:
     :name: meta.function-call.member.cpp
     :begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()"
