@@ -276,34 +276,90 @@
 - :match: ","
   :name: punctuation.separator.delimiter.cpp
 :repository:
+  literal_numeric_seperator:
+    :match: "(?<!')'(?!')"
+    :name: punctuation.separator.constant.numeric.cpp
   number_literal:
-    :match: "(?<!\\w)[0-9\\.](?:[0-9\\.xa-fA-Fp\\+\\-\\'])*(?<=[0-9a-fA-F\\.])(?:[lLuUfF][lLuU][lLuU])?(?:\\w)*"
+    :match: "(?:(?:(0[bB])([01](?:(?:[01]|((?<!')'(?!'))))*)|(0[0-7](?:(?:[0-7]|((?<!')'(?!'))))*))|(0[xX])([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:([pP])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?)|([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:([eE])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?(?:((?:(?:(?:(?:(?:(?:LL[uU]|ll[uU])|[uU]LL)|[uU]ll)|ll)|LL)|[uUlL])))?|(?:(0[xX])(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(?:([pP])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?|(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:([eE])(\\+)?(\\-)?(([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)))?)?)(?:([lLfF]))?(\\w+(?!\\w))?"
     :captures:
-      '0':
+      '1':
+        :name: keyword.other.unit.binary.cpp
+      '2':
+        :name: constant.numeric.binary.cpp
         :patterns:
-        - :match: "(?:(0(?![\\.eE])(?:[xXbB])?)([0-9a-fA-F\\.']+)(?:((?:p|P))(?:(?:(\\+)|(\\-)))?([0-9']++))?|([0-9\\.][0-9\\.']*)(?:([eE])(?:(?:(\\+)|(\\-)))?([0-9']++))?)((?:[_a-zA-Z])*)"
-          :name: constant.numeric.cpp
-          :captures:
-            '1': &1
-              :name: keyword.other.unit.cpp
-            '2': &2
-              :patterns:
-              - :match: "'"
-                :name: punctuation.separator.constant.numeric.cpp
-            '3': *1
-            '4':
-              :name: keyword.operator.plus.exponent.hexadecimal-floating-point-literal.cpp
-            '5':
-              :name: keyword.operator.minus.exponent.hexadecimal-floating-point-literal.cpp
-            '6': *2
-            '7': *2
-            '8': *1
-            '9':
-              :name: keyword.operator.plus.exponent.cpp
-            '10':
-              :name: keyword.operator.minus.exponent.cpp
-            '11': *2
-            '12': *1
+        - :include: "#literal_numeric_seperator"
+      '3': &1
+        :name: punctuation.separator.constant.numeric.cpp
+      '4':
+        :name: constant.numeric.octal.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '5': *1
+      '6':
+        :name: keyword.other.unit.hexadecimal.cpp
+      '7': &3
+        :name: constant.numeric.hexadecimal.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '8': *1
+      '9': &4
+        :name: keyword.other.unit.exponent.hexadecimal.cpp
+      '10': &5
+        :name: keyword.operator.plus.exponent.hexadecimal.cpp
+      '11': &6
+        :name: keyword.operator.minus.exponent.hexadecimal.cpp
+      '12': &7
+        :name: constant.numeric.exponent.hexadecimal.cpp
+      '13': &2
+        :name: constant.numeric.decimal.test.cpp
+        :patterns:
+        - :include: "#literal_numeric_seperator"
+      '14': *1
+      '15': *2
+      '16': *1
+      '17': &8
+        :name: keyword.other.unit.exponent.decimal.cpp
+      '18': &9
+        :name: keyword.operator.plus.exponent.decimal.cpp
+      '19': &10
+        :name: keyword.operator.minus.exponent.decimal.cpp
+      '20': &11
+        :name: constant.numeric.exponent.decimal.cpp
+      '21': *2
+      '22': *1
+      '23':
+        :name: keyword.other.unit.suffix.integer.cpp
+      '24':
+        :name: keyword.other.unit.hexadecimal.cpp
+      '25': *3
+      '26': *1
+      '27':
+        :name: constant.numeric.hexadecimal.cpp
+      '28': *3
+      '29': *1
+      '30': *4
+      '31': *5
+      '32': *6
+      '33': *7
+      '34': *2
+      '35': *1
+      '36': *2
+      '37': *1
+      '38':
+        :name: constant.numeric.decimal.cpp
+      '39': *2
+      '40': *1
+      '41': *8
+      '42': *9
+      '43': *10
+      '44': *11
+      '45': *2
+      '46': *1
+      '47':
+        :name: keyword.other.unit.suffix.floating-point.cpp
+      '48':
+        :name: keyword.other.unit.user-defined.cpp
+    :name: constant.numeric.cpp
   template-call-innards:
     :name: meta.template.call.cpp
     :match: "<(?:[\\s<>,\\w])*>\\s*"
