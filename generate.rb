@@ -196,27 +196,27 @@ cpp_grammar = Grammar.new(
     )
     
 #
-# variable
+# Variable
 #
-# todo: make a better name for this function
-variableBounds = ->(regex_pattern) do
-    lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
-end
-variable_name_without_bounds = /[a-zA-Z_]#{-@standard_character}*/
-# word bounds are inefficient, but they are accurate
-variable_name = variableBounds[variable_name_without_bounds]
+    # todo: make a better name for this function
+    variableBounds = ->(regex_pattern) do
+        lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
+    end
+    variable_name_without_bounds = /[a-zA-Z_]#{-@standard_character}*/
+    # word bounds are inefficient, but they are accurate
+    variable_name = variableBounds[variable_name_without_bounds]
 
 #
 # Constants
 #
-language_constants = newPattern(
-    repository_name: 'constants',
-    match: variableBounds[@cpp_tokens.that(:isLiteral)],
-    tag_as: "constant.language"
-)
+    language_constants = newPattern(
+        repository_name: 'constants',
+        match: variableBounds[@cpp_tokens.that(:isLiteral)],
+        tag_as: "constant.language"
+    )
 
 #
-# types
+# Types
 #
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
     look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
@@ -250,37 +250,37 @@ language_constants = newPattern(
 #
 # Keywords and Keyword-ish things
 #
-any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
-control_flow_keywords = @cpp_tokens.that(:isControlFlow)
-access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
-exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
-functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
-storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
-qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
-other_keywords = variableBounds[ /(using|typedef)/ ]
-memory_operators = newPattern(
-    repository_name: 'memory_operators',
-    tag_as: "keyword.operator.memory",
-    match: lookBehindToAvoid(
-            @standard_character
-        ).then(
-            newPattern(
+    any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
+    control_flow_keywords = @cpp_tokens.that(:isControlFlow)
+    access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
+    exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
+    functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
+    storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
+    qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
+    other_keywords = variableBounds[ /(using|typedef)/ ]
+    memory_operators = newPattern(
+        repository_name: 'memory_operators',
+        tag_as: "keyword.operator.memory",
+        match: lookBehindToAvoid(
+                @standard_character
+            ).then(
                 newPattern(
+                    newPattern(
+                        match: /delete/,
+                        tag_as: "keyword.operator.memory.delete.array"
+                    ).maybe(@spaces).then(
+                        match: /\[\]/,
+                        tag_as: "keyword.operator.memory.delete.array.bracket"
+                    )
+                ).or(
                     match: /delete/,
-                    tag_as: "keyword.operator.memory.delete.array"
-                ).maybe(@spaces).then(
-                    match: /\[\]/,
-                    tag_as: "keyword.operator.memory.delete.array.bracket"
+                    tag_as: "keyword.operator.memory.delete"
+                ).or(
+                    match: /new/,
+                    tag_as: "keyword.operator.memory.new"
                 )
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.operator.memory.delete"
-            ).or(
-                match: /new/,
-                tag_as: "keyword.operator.memory.new"
-            )
-        ).lookAheadToAvoid(@standard_character)
-)
+            ).lookAheadToAvoid(@standard_character)
+    )
 
 #
 # Templates
