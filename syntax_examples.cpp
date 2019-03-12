@@ -26,11 +26,10 @@
             1'03'432'43
             123232'1231321
             3'20'94.93'01'23
-            3'20'94.93'1'23
+            3'20'94.93'1'23ka
         // e
             0e1
             1e10f
-            .1e10f
             1.e10
             1.e-10
             1.79769e+308
@@ -59,9 +58,10 @@
             0xa'BC'DEf
             0xABC'DEF
             0x20'394'a'fLL
-        // hex pointer
+        // hex floating point literal
             0x0.5p10F
             0x0.5p10f
+            0x1ffp10
             0x0.23p10
             0x0.234985p10L
             0x139804.234985p10L
@@ -80,6 +80,7 @@
             20ounces
             2000miles
             L"akdjfhald"
+            
     //
     // chars
     //
