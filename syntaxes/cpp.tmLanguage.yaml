@@ -104,7 +104,7 @@
   :name: storage.modifier.cpp
 - :include: "#operators"
 - :include: "#operator_overload"
-- :include: "#numbers-c"
+- :include: "#number_literal"
 - :include: "#strings-c"
 - :begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t
     \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
@@ -205,7 +205,7 @@
   :name: meta.preprocessor.cpp
   :patterns:
   - :include: "#strings-c"
-  - :include: "#numbers-c"
+  - :include: "#number_literal"
   - :include: "#line_continuation_character"
 - :begin: "^\\s*(?:((#)\\s*undef))\\b"
   :beginCaptures:
@@ -231,7 +231,7 @@
   - :include: "#strings-c"
   - :match: "[a-zA-Z_$][\\w\\-$]*"
     :name: entity.other.attribute-name.pragma.preprocessor.cpp
-  - :include: "#numbers-c"
+  - :include: "#number_literal"
   - :include: "#line_continuation_character"
 - :match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b"
   :name: support.type.sys-types.cpp
@@ -276,6 +276,34 @@
 - :match: ","
   :name: punctuation.separator.delimiter.cpp
 :repository:
+  number_literal:
+    :match: "(?<!\\w)[0-9\\.](?:[0-9\\.xa-fA-Fp\\+\\-\\'])*(?<=[0-9a-fA-F\\.])(?:[lLuUfF][lLuU][lLuU])?(?:\\w)*"
+    :captures:
+      '0':
+        :patterns:
+        - :match: "(?:(0(?![\\.eE])(?:[xXbB])?)([0-9a-fA-F\\.']+)(?:((?:p|P))(?:(?:(\\+)|(\\-)))?([0-9']++))?|([0-9\\.][0-9\\.']*)(?:([eE])(?:(?:(\\+)|(\\-)))?([0-9']++))?)((?:[_a-zA-Z])*)"
+          :name: constant.numeric.cpp
+          :captures:
+            '1': &1
+              :name: keyword.other.unit.cpp
+            '2': &2
+              :patterns:
+              - :match: "'"
+                :name: punctuation.separator.constant.numeric.cpp
+            '3': *1
+            '4':
+              :name: keyword.operator.plus.exponent.hexadecimal-floating-point-literal.cpp
+            '5':
+              :name: keyword.operator.minus.exponent.hexadecimal-floating-point-literal.cpp
+            '6': *2
+            '7': *2
+            '8': *1
+            '9':
+              :name: keyword.operator.plus.exponent.cpp
+            '10':
+              :name: keyword.operator.minus.exponent.cpp
+            '11': *2
+            '12': *1
   template-call-innards:
     :name: meta.template.call.cpp
     :match: "<(?:[\\s<>,\\w])*>\\s*"
@@ -288,7 +316,7 @@
         - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
           :name: storage.type.user-defined.cpp
         - :include: "#operators"
-        - :include: "#numbers-c"
+        - :include: "#number_literal"
         - :include: "#strings"
         - :match: !ruby/regexp /,/
           :name: punctuation.separator.comma.template.argument.cpp
@@ -754,35 +782,6 @@
       :captures:
         '1':
           :name: constant.character.escape.line-continuation.cpp
-  numbers-c:
-    :patterns:
-    - :match: "(?<!\\w)[0-9\\.](?:[0-9\\.xa-fA-Fp\\+\\-\\'])*(?<=[0-9a-fA-F\\.])(?:[lLuUfF][lLuU][lLuU])?(?:\\w)*"
-      :captures:
-        '0':
-          :patterns:
-          - :match: "(?:(0(?![\\.eE])(?:[xXbB])?)([0-9a-fA-F\\.']+)(?:((?:p|P))(?:(?:(\\+)|(\\-)))?([0-9']++))?|([0-9\\.][0-9\\.']*)(?:([eE])(?:(?:(\\+)|(\\-)))?([0-9']++))?)((?:[_a-zA-Z])*)"
-            :name: constant.numeric.cpp
-            :captures:
-              '1': &1
-                :name: keyword.other.unit.cpp
-              '2': &2
-                :patterns:
-                - :match: "'"
-                  :name: punctuation.separator.constant.numeric.cpp
-              '3': *1
-              '4':
-                :name: keyword.operator.plus.exponent.hexadecimal-floating-point-literal.cpp
-              '5':
-                :name: keyword.operator.minus.exponent.hexadecimal-floating-point-literal.cpp
-              '6': *2
-              '7': *2
-              '8': *1
-              '9':
-                :name: keyword.operator.plus.exponent.cpp
-              '10':
-                :name: keyword.operator.minus.exponent.cpp
-              '11': *2
-              '12': *1
   parens-c:
     :name: "punctuation.section.parens-c\b.cpp"
     :begin: "\\("
@@ -1003,7 +1002,7 @@
       :name: invalid.illegal.macro-name.cpp
     - :include: "#comments-c"
     - :include: "#strings-c"
-    - :include: "#numbers-c"
+    - :include: "#number_literal"
     - :begin: "\\?"
       :beginCaptures:
         '0':

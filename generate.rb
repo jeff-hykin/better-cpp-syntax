@@ -48,7 +48,6 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
     valid_numeric_start = lookBehindToAvoid(@standard_character).then(/[0-9\.]/)
     valid_numeric_middle = /[0-9\.xa-fA-Fp\+\-\']/
     valid_numeric_pre_ending = /[0-9a-fA-F\.]/
-    numeric_pattern = valid_numeric_start.then(zeroOrMoreOf(valid_numeric_middle)).lookBehindFor(valid_numeric_pre_ending).then(possible_type_endings).zeroOrMoreOf(@standard_character)
     literal_suffix = newHiddenGroup(
         newHiddenGroup(
             # group #1 (unit)
@@ -130,6 +129,14 @@ builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|
             "12" => unit_tag_name,
         },
     }
+    numeric_pattern = newPattern(
+        repository_name: 'number_literal',
+        match: valid_numeric_start.then(zeroOrMoreOf(valid_numeric_middle)).lookBehindFor(valid_numeric_pre_ending).then(possible_type_endings).zeroOrMoreOf(@standard_character),
+        patterns: [
+            literal_suffix_tag
+        ]
+    )
+    
 #
 # variable
 #
@@ -192,7 +199,7 @@ template_call_innards_tagger = {
                     include: "#operators"
                 },
                 {
-                    include: "#numbers-c"
+                    include: "#number_literal"
                 },
                 {
                     include: "#strings"
@@ -773,7 +780,7 @@ cpp_grammar.data[:patterns] = [
         include: "#operator_overload"
     },
     {
-        include: "#numbers-c"
+        include: "#number_literal"
     },
     {
         include: "#strings-c"
@@ -947,7 +954,7 @@ cpp_grammar.data[:patterns] = [
                 include: "#strings-c"
             },
             {
-                include: "#numbers-c"
+                include: "#number_literal"
             },
             {
                 include: "#line_continuation_character"
@@ -997,7 +1004,7 @@ cpp_grammar.data[:patterns] = [
                 name: "entity.other.attribute-name.pragma.preprocessor"
             },
             {
-                include: "#numbers-c"
+                include: "#number_literal"
             },
             {
                 include: "#line_continuation_character"
@@ -1075,7 +1082,7 @@ cpp_grammar.data[:patterns] = [
         name: "punctuation.separator.delimiter"
     }
 ]
-cpp_grammar.data[:repository] = {
+cpp_grammar.data[:repository].merge!({
     "template-call-innards" => template_call_innards_tagger,
     "constants" => constants_tagger,
     "scope_resolution" => scope_resolution_tagger,
@@ -1602,21 +1609,6 @@ cpp_grammar.data[:repository] = {
             }
         ]
     },
-    "numbers-c" => {
-        patterns: [
-            {
-                # TODO: this pattern needs readability improvements
-                match: -numeric_pattern,
-                captures: {
-                    "0" => {
-                        patterns: [
-                            literal_suffix_tag
-                        ]
-                    },
-                },
-            }
-        ]
-    },
     "parens-c" => {
         name: "punctuation.section.parens-c\b",
         begin: "\\(",
@@ -2036,7 +2028,7 @@ cpp_grammar.data[:repository] = {
                 include: "#strings-c"
             },
             {
-                include: "#numbers-c"
+                include: "#number_literal"
             },
             {
                 begin: "\\?",
@@ -3086,7 +3078,7 @@ cpp_grammar.data[:repository] = {
             }
         ]
     }
-}
+})
 
 
 Dir.chdir __dir__
