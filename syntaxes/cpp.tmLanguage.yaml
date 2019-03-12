@@ -348,7 +348,7 @@
     :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     :name: constant.language.cpp
   memory_operators:
-    :match: "(?:(?:(?<!\\w)(delete)\\s*(\\[\\])|(delete))|(new))"
+    :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
     :captures:
       '1':
         :name: keyword.operator.memory.delete.array.cpp

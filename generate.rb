@@ -233,20 +233,22 @@ memory_operators = newPattern(
             @standard_character
         ).then(
             newPattern(
+                newPattern(
+                    match: /delete/,
+                    tag_as: "keyword.operator.memory.delete.array"
+                ).maybe(@spaces).then(
+                    match: /\[\]/,
+                    tag_as: "keyword.operator.memory.delete.array.bracket"
+                )
+            ).or(
                 match: /delete/,
-                tag_as: "keyword.operator.memory.delete.array"
-            ).maybe(@spaces).then(
-                match: /\[\]/,
-                tag_as: "keyword.operator.memory.delete.array.bracket"
+                tag_as: "keyword.operator.memory.delete"
+            ).or(
+                match: /new/,
+                tag_as: "keyword.operator.memory.new"
             )
-        ).or(
-            match: /delete/,
-            tag_as: "keyword.operator.memory.delete"
-        ).or(
-            match: /new/,
-            tag_as: "keyword.operator.memory.new"
-        )
-).lookAheadToAvoid(@standard_character)
+        ).lookAheadToAvoid(@standard_character)
+)
 
 #
 # Templates
