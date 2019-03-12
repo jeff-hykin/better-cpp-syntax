@@ -6,6 +6,10 @@
 //
 //
 
+
+
+
+
     //
     // Digits
     //
@@ -99,75 +103,134 @@
 //
     auto a = new int(5);
     delete a;
+    new (&a_storage_of_callable.callable) type(forward<Callable>(a_callable));
     int *array = new int[100];
     delete[] array;
+    char should_always_be_a_newline;
+    char deleter;
 
 //
 //
 // namespaces
 //
 //
-using namespace std;
-using namespace parent_namespace::std;
+    using namespace std;
+    using namespace parent_namespace::std;
 
-namespace {}
-namespace scoped::console { }
-namespace console {
-    template <typename ANYTYPE> void __MAGIC__show(ANYTYPE input) {
-            // by default use the stream operator with cout
-            std::cout << input;
-        }
-}
+    namespace {}
+    namespace scoped::console { }
+    namespace console {
+        template <typename ANYTYPE> void __MAGIC__show(ANYTYPE input) {
+                // by default use the stream operator with cout
+                std::cout << input;
+            }
+    }
+
+// 
+// Scope resolution
+//
+    std::cout << input;
+    numeric_limits<long double>::infinity();
+    char_traits<ANYTYPE>::eof();
+    numeric_limits<streamsize>::max();
+    Task<ANY_OUTPUT_TYPE, ANY_INPUT_TYPE>::links_to;
+    &TEST_CLASS::name;
+    Event<ANYTYPE>::   ListenersFor[input_event.name]
+
+//
+// Operator keyword
+//
+    ostream& operator<<(ostream& out, const Item& input_) {};
+    Item  operator+( const string&  base        , const int&    repetitions ) {};
+    Item  operator-( const int&     the_input   , const Item&   input_item  ) {};
+    Item  operator/( const Item&    input_item  , const int&    the_input   ) {};
+    Item  operator^( const Item&    input_item  , const int&    the_input   ) {};
+    // implicit conversions
+    operator string() const {};
+    operator double() const {};
+    // custom literal
+    void operator "" _km(long double);
 
 //
 //
 // preprocessor
 //
 //
-#define Infinite    numeric_limits<long double>::infinity()
-#define DoubleMax   1.79769e+308
-#define Pi          3.1415926535897932384626
-#define show(argument) cout << #argument << "\n";
-#ifndef CEKO_LIBRARY
-#define CEKO_LIBRARY
-#endif
+    #define Infinite    numeric_limits<long double>::infinity()
+    #define DoubleMax   1.79769e+308
+    #define Pi          3.1415926535897932384626
+    #define show(argument) cout << #argument << "\n";
+    #ifndef CEKO_LIBRARY
+    #define CEKO_LIBRARY
+    #endif
 
 //
 // templates
 //
-template<int, typename Callable, typename Ret, typename... Args>
-auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...))
-    {
-        static bool used = false;
-        static storage<Callable> a_storage_of_callable;
-        using type = decltype(a_storage_of_callable.callable);
+    template<int, typename Callable, typename Ret, typename... Args>
+    auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...))
+        {
+            static bool used = false;
+            static storage<Callable> a_storage_of_callable;
+            using type = decltype(a_storage_of_callable.callable);
 
-        if(used) {
-            a_storage_of_callable.callable.~type();
+            if(used) {
+                a_storage_of_callable.callable.~type();
+            }
+            new (&a_storage_of_callable.callable) type(forward<Callable>(a_callable));
+            used = true;
+            // lambda 
+            return [](Args... args) -> Ret {
+                return Ret(a_storage_of_callable.callable(forward<Args>(args)...));
+            };
         }
-        new (&a_storage_of_callable.callable) type(forward<Callable>(a_callable));
-        used = true;
-        // lambda 
-        return [](Args... args) -> Ret {
-            return Ret(a_storage_of_callable.callable(forward<Args>(args)...));
-        };
-    }
+        template<typename RETURN_TYPE, int N = 0, typename Callable>
+        RETURN_TYPE* convertToFunctionPointer(Callable&& c)
+            {
+                return internalConversionToFuncPtr<N>(forward<Callable>(c), (RETURN_TYPE*)nullptr);
+            }
 
 
 // 
 // Classes
 //
-class Thing {
-    public:
-    public :
-    private :
-    private:
-    protected:
-        auto a = 1;
-    Thing() {
+    class Thing {
+        public:
+        public :
+        private :
+        private:
+        protected:
+            auto a = 1;
+            Thing() {
+                
+            }
+    };
+    struct Thing2 {
+        public:
+        public :
+        private :
+        private:
+        protected:
+            auto a = 1;
+            Thing() {
+                
+            }
+    };
+
+
+// 
+// Functions
+// 
+    template <class ANYTYPE>
+    string ToBinary(ANYTYPE input)
+        {
+            // depends on #include <bitset>
+            return bitset<8>(input).to_string();
+        }
         
-    }
-}
+
+
+
 int main() {
     return 0;
 }
