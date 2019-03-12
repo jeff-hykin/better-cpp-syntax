@@ -267,7 +267,7 @@
     :match: "(?<!')'(?!')"
     :name: punctuation.separator.constant.numeric.cpp
   number_literal:
-    :match: "((?:(?:(0[xX])(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F]))))(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?|(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9])\\.|\\.(?=[0-9]))))(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:([lLfF](?!\\w)))?|(?:(?:(?:(?:(?:(0[bB])([01](?:(?:(?:[01]|((?<!')'(?!')))))*)|(0[0-7](?:(?:(?:[0-7]|((?<!')'(?!')))))*)))|(0[xX])([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*)(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?))|([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*)(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:((?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:LL[uU]|ll[uU]))|[uU]LL))|[uU]ll))|ll))|LL))|[uUlL]))(?!\\w)))?)(\\w*))"
+    :match: "((?:(?:(0[xX])(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F]))))(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?|(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9])\\.|\\.(?=[0-9]))))(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:([lLfF](?!\\w)))?|(?:(?:(?:(?:(?:(0[bB])((?:(?:(?:[01]|((?<!')'(?!')))))+)|(0)((?:(?:(?:[0-7]|((?<!')'(?!')))))+)))|(0[xX])([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*)(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?))|([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*)(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:((?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:LL[uU]|ll[uU]))|[uU]LL))|[uU]ll))|ll))|LL))|[uUlL]))(?!\\w)))?)(\\w*))"
     :captures:
       '2':
         :name: keyword.other.unit.hexadecimal.cpp
@@ -320,27 +320,29 @@
         - :include: "#literal_numeric_seperator"
       '24': *2
       '25':
+        :name: keyword.other.unit.octal.cpp
+      '26':
         :name: constant.numeric.octal.cpp
         :patterns:
         - :include: "#literal_numeric_seperator"
-      '26': *2
-      '27':
+      '27': *2
+      '28':
         :name: keyword.other.unit.hexadecimal.cpp
-      '28': *1
-      '29': *2
-      '30': *4
-      '31': *5
-      '32': *6
-      '33': *7
-      '34': *3
-      '35': *2
-      '36': *8
-      '37': *9
-      '38': *10
-      '39': *11
-      '40':
-        :name: keyword.other.unit.suffix.integer.cpp
+      '29': *1
+      '30': *2
+      '31': *4
+      '32': *5
+      '33': *6
+      '34': *7
+      '35': *3
+      '36': *2
+      '37': *8
+      '38': *9
+      '39': *10
+      '40': *11
       '41':
+        :name: keyword.other.unit.suffix.integer.cpp
+      '42':
         :name: keyword.other.unit.user-defined.cpp
   constants:
     :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
@@ -373,6 +375,22 @@
         - :include: "#strings"
         - :match: ","
           :name: punctuation.separator.comma.template.argument.cpp
+  template_definition:
+    :name: meta.template.definition.cpp
+    :begin: !ruby/regexp /(?<!\w)(template)\s*(<)/
+    :beginCaptures:
+      '1':
+        :name: storage.type.template.cpp
+      '2':
+        :name: punctuation.section.angle-brackets.start.template.definition.cpp
+    :end: !ruby/regexp /(>)/
+    :endCaptures:
+      '1':
+        :name: punctuation.section.angle-brackets.end.template.definition.cpp
+    :patterns:
+    - :include: "#scope_resolution"
+    - :include: "#template_definition_argument"
+    - :include: "#template_call_innards"
   scope_resolution:
     :name: punctuation.separator.namespace.access.cpp
     :match: "((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*([a-zA-Z_]\\w*)\\s*(?:((?:<(?:[\\s<>,\\w])*>\\s*)))?(::)"
@@ -388,22 +406,6 @@
         - :include: "#template_call_innards"
       '4':
         :name: punctuation.separator.namespace.access.cpp
-  template_definition:
-    :begin: !ruby/regexp /(?<!\w)(template)\s*(<)/
-    :beginCaptures:
-      '1':
-        :name: storage.type.template.cpp
-      '2':
-        :name: punctuation.section.angle-brackets.start.template.definition.cpp
-    :end: ">"
-    :endCaptures:
-      '0':
-        :name: punctuation.section.angle-brackets.end.template.definition.cpp
-    :name: template.definition.cpp
-    :patterns:
-    - :include: "#scope_resolution"
-    - :include: "#template_definition_argument"
-    - :include: "#template_call_innards"
   template_definition_argument:
     :match: "\\s*(?:(?:(?:(?:(?:(?:([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*)))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*)))|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+)))\\s*(?:(?:(,)|(?=>)))"
     :captures:

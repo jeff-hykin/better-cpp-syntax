@@ -148,14 +148,17 @@ cpp_grammar = Grammar.new(
                                 match: /0[bB]/,
                                 tag_as: "keyword.other.unit.binary"
                             ).then(
-                                match: /[01]/.zeroOrMoreOf(/[01]/.or(number_seperator_pattern)),
+                                match: oneOrMoreOf(/[01]/.or(number_seperator_pattern)),
                                 tag_as: "constant.numeric.binary",
                                 includes: [ number_seperator_pattern ]
                             )
                         # Octal
                         ).or(
                             octal_literal_integer = newPattern(
-                                match: /0[0-7]/.zeroOrMoreOf(/[0-7]/.or(number_seperator_pattern)),
+                                match: /0/,
+                                tag_as: "keyword.other.unit.octal"
+                            ).then(
+                                match: oneOrMoreOf(/[0-7]/.or(number_seperator_pattern)),
                                 tag_as: "constant.numeric.octal",
                                 includes: [ number_seperator_pattern ]
                             )
@@ -270,35 +273,26 @@ template_call = newPattern(
         )
     ]
 )
-template_definition_tagger = {
-    begin:  lookBehindToAvoid(@standard_character).then(newGroup(/template/)).maybe(@spaces).then(newGroup(/</)),
-    beginCaptures: {
-        "1" => {
-            name: "storage.type.template"
-        },
-        "2" => {
-            name: "punctuation.section.angle-brackets.start.template.definition"
-        }
-    },
-    end: ">",
-    endCaptures: {
-        "0" => {
-            name: "punctuation.section.angle-brackets.end.template.definition"
-        }
-    },
-    name: "template.definition",
-    patterns: [
-        {
-            include: "#scope_resolution"
-        },
-        {
-            include: "#template_definition_argument"
-        },
-        {
-            include: "#template_call_innards"
-        },
+template_definition = Range.new(
+    repository_name: 'template_definition',
+    tag_as: 'meta.template.definition',
+    start_pattern: lookBehindToAvoid(@standard_character).then(
+            match: /template/,
+            tag_as: "storage.type.template"
+        ).maybe(@spaces).then(
+            match: /</,
+            tag_as: "punctuation.section.angle-brackets.start.template.definition"
+        ),
+    end_pattern: newPattern(
+            match: />/,
+            tag_as: "punctuation.section.angle-brackets.end.template.definition"
+        ),
+    includes: [
+        :scope_resolution,
+        :template_definition_argument,
+        :template_call_innards,
     ]
-}
+)
 template_definition_argument = maybe(@spaces).then(newGroup(variable_name_without_bounds).or(
         # group 2 and 3 (the normal situation)
         newGroup(oneOrMoreOf(variable_name_without_bounds.then(@spaces))).then(newGroup(variable_name_without_bounds))
@@ -1118,7 +1112,6 @@ cpp_grammar.data[:patterns] = [
 ]
 cpp_grammar.data[:repository].merge!({
     "scope_resolution" => scope_resolution_tagger,
-    "template_definition" => template_definition_tagger,
     "template_definition_argument" => template_definition_argument_tagger,
     "angle_brackets" => {
         begin: "<",

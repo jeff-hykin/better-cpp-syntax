@@ -498,16 +498,12 @@ class Range
     def initialize(key_arguments)
         # TODO:
             # tag_content_as
-            # repository_name
-        
-        start_as_tag = key_arguments[:start_pattern].to_tag
-        end_as_tag = key_arguments[:end_pattern].to_tag
         @as_tag = {
             name: key_arguments[:tag_as],
-            begin: start_as_tag[:match],
-            beginCaptures: start_as_tag[:captures],
-            end: end_as_tag[:match],
-            endCaptures: end_as_tag[:captures],
+            begin: key_arguments[:start_pattern],
+            beginCaptures: key_arguments[:start_pattern].captures,
+            end: key_arguments[:end_pattern],
+            endCaptures: key_arguments[:end_pattern].captures,
             patterns: Grammar.convertIncludesToPatternList(key_arguments[:includes])
         }
         
