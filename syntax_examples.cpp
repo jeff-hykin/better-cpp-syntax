@@ -18,18 +18,19 @@
             0.f
             0.L
             0.LL
-            4897430
+            4897430la
+            32094.930123a
             4897430LL
-            32094.930123
             32094.930123F
             32094.930123f
             1'03'432'43
             123232'1231321
             3'20'94.93'01'23
-            3'20'94.93'1'23ka
+            3'20'94.93'1'23
         // e
             0e1
             1e10f
+            1.e10
             1.e10
             1.e-10
             1.79769e+308
@@ -51,7 +52,7 @@
             0xaBCDEf
             0xABCDEF
             0xAB.cdp5f
-            0xAB.cdpa5l
+            0xAB.cdp5l
             0x20394afLL
             0x01
             0xabc'def
@@ -76,6 +77,7 @@
         // custom literals
             29042ms
             0xabcdefmm
+            0xabc'defmm
             0xabcdefyards
             20ounces
             2000miles
