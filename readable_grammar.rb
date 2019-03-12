@@ -149,12 +149,20 @@ class Regexp
             return { include: "##{self.repository_name}" }
         end
         
+        
         regex_as_string = self.without_default_mode_modifiers
         captures = self.captures
         output = {
             match: regex_as_string,
-            captures: captures
+            captures: captures,
         }
+        
+        # if only a pattern list (no :match argument)
+        if regex_as_string == '()'
+            return {
+                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:patterns])
+            }
+        end
         
         #
         # Top level pattern
@@ -295,6 +303,9 @@ class Regexp
     def processRegexOperator(arguments, operator)
         # first parse the arguments
         other_regex, attributes = Regexp.processGrammarArguments(arguments, operator)
+        if other_regex == nil
+            other_regex = //
+        end
         
         no_attributes = attributes == {}
         
