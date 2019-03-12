@@ -153,6 +153,21 @@ auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...))
         };
     }
 
+
+// 
+// Classes
+//
+class Thing {
+    public:
+    public :
+    private :
+    private:
+    protected:
+        auto a = 1;
+    Thing() {
+        
+    }
+}
 int main() {
     return 0;
 }

@@ -96,7 +96,7 @@ cpp_grammar = Grammar.new(
     #
     literal_number = newPattern(
         repository_name: 'number_literal',
-        match: newPattern(
+        match: lookBehindToAvoid(/\w/).then(
                 # Floating point
                 # see https://en.cppreference.com/w/cpp/language/floating_literal
                 newPattern(
@@ -220,7 +220,7 @@ language_constants = newPattern(
 #
 any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
 control_flow_keywords = @cpp_tokens.that(:isControlFlow)
-access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/:/)
+access_control_keywords = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
 exception_keywords = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
 functional_specifiers_pre_parameters = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
 storage_specifiers = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
