@@ -756,7 +756,7 @@
           :name: constant.character.escape.line-continuation.cpp
   numbers-c:
     :patterns:
-    - :match: "(?<!\\w)[0-9\\.](?:[0-9\\.xa-fA-Fp\\+\\-\\'])*(?<=[0-9a-fA-F\\.])(?:L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?(?:\\w)*"
+    - :match: "(?<!\\w)[0-9\\.](?:[0-9\\.xa-fA-Fp\\+\\-\\'])*(?<=[0-9a-fA-F\\.])(?:[lLuUfF][lLuU][lLuU])?(?:\\w)*"
       :captures:
         '0':
           :patterns:
