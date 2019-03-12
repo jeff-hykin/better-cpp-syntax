@@ -216,6 +216,38 @@ language_constants = newPattern(
 )
 
 #
+# types
+#
+    symbols_that_can_appear_after_a_type = /[&*>\]\)]/
+    look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
+    # why is posix reserved types not in "storage_types"? I don't know, if you can get it in there and everything still works it would be appreciated
+    posix_reserved_types = newPattern(
+        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
+        name: "support.type.posix-reserved"
+    )
+    storage_types = newPattern(
+        repository_name: 'storage_types_c',
+        includes: [
+            
+            primitive_types = newPattern(
+                match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
+                tag_as: "storage.type.primitive"
+            ),
+            
+            non_primitive_types = newPattern(
+                match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
+                tag_as: "storage.type"
+            ),
+            
+            # FIXME, these should be changed to each have their own matcher, and struct should be handled the similar to 'class'
+            other_types = newPattern(
+                match: variableBounds[ /(asm|__asm__|enum|union|struct)/ ],
+                tag_as: "storage.type.$1"
+            )
+        ]
+    )
+
+#
 # Keywords and Keyword-ish things
 #
 any_normal_word_operator_keyword = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
@@ -373,16 +405,6 @@ memory_operators = newPattern(
                 tag_as: "punctuation.separator.namespace.access"
             )
         )
-
-#
-# types
-#
-    symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-look_behind_for_type = lookBehindFor(-/#{-@standard_character}#{-@space}|\*\/|#{-symbols_that_can_appear_after_a_type}/).maybe(@spaces)
-primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isPrimitive)).lookAheadToAvoid(@standard_character)
-non_primitive_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(not(:isPrimitive), :isType)).lookAheadToAvoid(@standard_character)
-known_types = lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isType)).lookAheadToAvoid(@standard_character)
-posix_reserved_types =  variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ]
 
 #
 # Probably a parameter
@@ -1040,10 +1062,7 @@ cpp_grammar.data[:patterns] = [
         match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
         name: "support.type.stdint"
     },
-    {
-        match: -posix_reserved_types,
-        name: "support.type.posix-reserved"
-    },
+    posix_reserved_types.to_tag,
     {
         include: "#block-c"
     },
@@ -1841,22 +1860,6 @@ cpp_grammar.data[:repository].merge!({
             #         }
             #     }
             # }
-        ]
-    },
-    "storage_types_c" => {
-        patterns: [
-            {
-                match: -non_primitive_types.or(/_Bool|_Complex|_Imaginary/),
-                name: "storage.type",
-            },
-            {
-                match: -primitive_types,
-                name: "storage.type.primitive",
-            },
-            {
-                match: -/\b(asm|__asm__|enum|struct|union)\b/,
-                name: "storage.type.$1"
-            },
         ]
     },
     "vararg_ellipses-c" => {
