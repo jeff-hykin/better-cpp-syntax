@@ -206,12 +206,11 @@ variable_name = variableBounds[variable_name_without_bounds]
 #
 # Constants
 #
-constants_tagger = {
-    match: -variableBounds[@cpp_tokens.that(:isLiteral)],
-    captures: {
-        "0"=> { name: "constant.language" }
-    }
-}
+language_constants = newPattern(
+    repository_name: 'constants',
+    match: variableBounds[@cpp_tokens.that(:isLiteral)],
+    tag_as: "constant.language"
+)
 
 #
 # Keywords and Keyword-ish things
@@ -1139,7 +1138,6 @@ cpp_grammar.data[:patterns] = [
 ]
 cpp_grammar.data[:repository].merge!({
     "template-call-innards" => template_call_innards_tagger,
-    "constants" => constants_tagger,
     "scope_resolution" => scope_resolution_tagger,
     "template_definition" => template_definition_tagger,
     "template_definition_argument" => template_definition_argument_tagger,

@@ -355,6 +355,9 @@
         :name: keyword.other.unit.suffix.integer.cpp
       '41':
         :name: keyword.other.unit.user-defined.cpp
+  constants:
+    :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
+    :name: constant.language.cpp
   template-call-innards:
     :name: meta.template.call.cpp
     :match: "<(?:[\\s<>,\\w])*>\\s*"
@@ -371,11 +374,6 @@
         - :include: "#strings"
         - :match: !ruby/regexp /,/
           :name: punctuation.separator.comma.template.argument.cpp
-  constants:
-    :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
-    :captures:
-      '0':
-        :name: constant.language.cpp
   scope_resolution:
     :name: punctuation.separator.namespace.access.cpp
     :match: "((?:[a-zA-Z_]\\w*\\s*(?:<(?:[\\s<>,\\w])*>\\s*)?::)*)\\s*([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"
