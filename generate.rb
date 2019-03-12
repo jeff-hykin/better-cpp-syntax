@@ -249,43 +249,27 @@ memory_operators = newPattern(
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
-template_call_match = /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces)
-template_call_innards_tagger = {
-    name: "meta.template.call",
-    match: -template_call_match,
-    captures: {
-        "0" => {
-            patterns: [
-                {
-                    include: "#storage_types-c",
-                },
-                {
-                    include: "#constants",
-                },
-                {
-                    include: "#scope_resolution",
-                },
-                {
-                    match: -variable_name,
-                    name: "storage.type.user-defined",
-                },
-                {
-                    include: "#operators"
-                },
-                {
-                    include: "#number_literal"
-                },
-                {
-                    include: "#strings"
-                },
-                {
-                    match: /,/,
-                    name: "punctuation.separator.comma.template.argument",
-                },
-            ]
-        }
-    }
-}
+template_call = newPattern(
+    repository_name: 'template_call_innards',
+    tag_as: 'meta.template.call',
+    match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+    includes: [
+        :storage_types_c,
+        :constants,
+        :scope_resolution,
+        newPattern(
+            match: variable_name,
+            tag_as: 'storage.type.user-defined'
+        ),
+        :operators,
+        :number_literal,
+        :strings,
+        newPattern(
+            match: /,/,
+            tag_as: "punctuation.separator.comma.template.argument"
+        )
+    ]
+)
 template_definition_tagger = {
     begin:  lookBehindToAvoid(@standard_character).then(newGroup(/template/)).maybe(@spaces).then(newGroup(/</)),
     beginCaptures: {
@@ -311,7 +295,7 @@ template_definition_tagger = {
             include: "#template_definition_argument"
         },
         {
-            include: "#template-call-innards"
+            include: "#template_call_innards"
         },
     ]
 }
@@ -375,10 +359,10 @@ template_definition_argument_tagger = {
 #
 # Scope resolution
 #
-        one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call_match).then(/::/)
+        one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
 maybe_scope_resoleved_variable_2_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds)).then(@word_boundary)
-preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds).maybe(@spaces).maybe(newGroup(template_call_match))).then(newGroup(/::/))
+preceding_scopes_4_groups = preceding_scopes_1_group.then(newGroup(variable_name_without_bounds).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups))).then(newGroup(/::/))
 scope_resolution_tagger = {
     name: "punctuation.separator.namespace.access",
     match: -preceding_scopes_4_groups,
@@ -397,7 +381,7 @@ scope_resolution_tagger = {
         "3" => {
             patterns: [
                 {
-                    include: "#template-call-innards"
+                    include: "#template_call_innards"
                 }
             ]
         },
@@ -537,7 +521,7 @@ access_member_tagger = {
     avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
 function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
-function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call_match)).then(newGroup(/\(/))
+function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups)).then(newGroup(/\(/))
 # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
 function_call_tagger = {
     begin: -function_call_pattern_4_groups,
@@ -555,7 +539,7 @@ function_call_tagger = {
         "3" => {
             patterns: [
                 {
-                    include: "#template-call-innards"
+                    include: "#template_call_innards"
                 }
             ]
         },
@@ -817,7 +801,7 @@ cpp_grammar.data[:patterns] = [
         name: "keyword.control.$1"
     },
     {
-        include: "#storage_types-c"
+        include: "#storage_types_c"
     },
     {
         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
@@ -1133,7 +1117,6 @@ cpp_grammar.data[:patterns] = [
     }
 ]
 cpp_grammar.data[:repository].merge!({
-    "template-call-innards" => template_call_innards_tagger,
     "scope_resolution" => scope_resolution_tagger,
     "template_definition" => template_definition_tagger,
     "template_definition_argument" => template_definition_argument_tagger,
@@ -1562,7 +1545,7 @@ cpp_grammar.data[:repository].merge!({
         ]
     },
     "c_function_call" => {
-        begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{-maybe(template_call_match)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+        begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{-maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
         patterns: [
@@ -1880,7 +1863,7 @@ cpp_grammar.data[:repository].merge!({
             # }
         ]
     },
-    "storage_types-c" => {
+    "storage_types_c" => {
         patterns: [
             {
                 match: -non_primitive_types.or(/_Bool|_Complex|_Imaginary/),
@@ -2932,7 +2915,7 @@ cpp_grammar.data[:repository].merge!({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types-c"
+                include: "#storage_types_c"
             },
             {
                 include: "#vararg_ellipses-c"
@@ -2998,7 +2981,7 @@ cpp_grammar.data[:repository].merge!({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types-c"
+                include: "#storage_types_c"
             },
             {
                 include: "#operators"
@@ -3062,7 +3045,7 @@ cpp_grammar.data[:repository].merge!({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types-c"
+                include: "#storage_types_c"
             },
             {
                 include: "#access-method"
@@ -3074,7 +3057,7 @@ cpp_grammar.data[:repository].merge!({
                 include: "#operators"
             },
             {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{-maybe(template_call_match)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{-maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                 beginCaptures: {
                     "1" => {
                         name: "keyword.operator.memory.new"
@@ -3082,7 +3065,7 @@ cpp_grammar.data[:repository].merge!({
                     "2" => {
                         patterns: [
                             {
-                                include: "#template-call-innards"
+                                include: "#template_call_innards"
                             }
                         ]
                     },
