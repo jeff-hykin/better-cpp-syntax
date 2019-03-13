@@ -98,6 +98,21 @@
     // Strings
     //
         auto a = "things\n\b\v\t";
+
+//
+// type castings
+//
+    dynamic_cast <int> (expression);
+    reinterpret_cast <double> (expression);
+    static_cast <Custom> (expression);
+    const_cast <int> (expression);
+
+//
+// Storage types
+//
+    pthread_rwlockattr_t thing;
+    padfthread_rwlockattr_t thing;
+    
 //
 // Memory
 //
@@ -169,6 +184,10 @@
     ptr_to_original->Start().*thing;
     ptr_to_original->*Start().thing;
     {
+        a_pointer.thread[0]->*thing;
+        a_pointer.*thread[0]->thing;
+        a_pointer->thread[0].*thing;
+        a_pointer->*thread[0].thing;
         a_pointer.thread;
         a_pointer.*thread;
         a_pointer->thread;
