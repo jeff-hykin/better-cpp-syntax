@@ -11,24 +11,11 @@ cpp_grammar = Grammar.new(
     ],
 )
 
-template_definition = Range.new(
-    repository_name: 'template_definition',
-    tag_as: 'meta.template.definition',
-    start_pattern: lookBehindToAvoid(@standard_character).then(
-            match: /template/,
-            tag_as: "storage.type.template"
-        ).maybe(@spaces).then(
-            match: /</,
-            tag_as: "punctuation.section.angle-brackets.start.template.definition"
-        ),
-    end_pattern: newPattern(
-            match: />/,
-            tag_as: "punctuation.section.angle-brackets.end.template.definition"
-        ),
-    includes: [
-        :scope_resolution,
-        :template_definition_argument,
-        :template_call_innards,
-    ]
+macro_argument = newPattern(
+        match: /##/.then(/\w/).lookAheadToAvoid(@standard_character),
+        name: "variable.other.macro.argument"
+    )
+cpp_grammar.initalContextIncludes(
+    :special_block,
+    macro_argument,
 )
-puts template_definition.to_tag.to_yaml

@@ -11,7 +11,7 @@
 - This file essentially an updated/improved fork of the atom syntax https://github.com/atom/language-c/blob/master/grammars/c%2B%2B.cson
 :patterns:
 - :include: "#special_block"
-- :match: !ruby/regexp /##[a-zA-Z_]\w*(?!\w)/
+- :match: "##[a-zA-Z_]\\w*(?!\\w)"
   :name: variable.other.macro.argument.cpp
 - :include: "#strings"
 - :match: "(?<!\\w)((?:inline|constexpr|mutable|friend|explicit|virtual))(?!\\w)"
@@ -27,20 +27,19 @@
 - :match: "(?<!\\w)(using|typedef)(?!\\w)"
   :name: keyword.other.$1.cpp
 - :include: "#memory_operators"
-- :match: "\\bthis\\b"
+- :match: "(?<!\\w)this(?!\\w)"
   :name: variable.language.this.cpp
 - :include: "#constants"
 - :include: "#template_definition"
-- :match: "\\btemplate\\b\\s*"
-  :name: storage.type.template.cpp
-- :match: "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*"
+- :match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
   :name: keyword.operator.cast.$1.cpp
 - :include: "#scope_resolution"
 - :match: "\\b(decltype|wchar_t|char16_t|char32_t)\\b"
   :name: storage.type.cpp
 - :match: "\\b(constexpr|export|mutable|typename|thread_local)\\b"
   :name: storage.modifier.cpp
-- :begin: |-
+- :name: meta.function.destructor.cpp
+  :begin: |-
     (?x)
     (?:
       ^ |                  # beginning of line
@@ -57,10 +56,10 @@
   :endCaptures:
     '0':
       :name: punctuation.definition.parameters.end.destructor.cpp
-  :name: meta.function.destructor.cpp
   :patterns:
   - :include: "$base"
-- :begin: |-
+- :name: meta.function.destructor.prototype.cpp
+  :begin: |-
     (?x)
     (?:
       ^ |                  # beginning of line
@@ -77,22 +76,22 @@
   :endCaptures:
     '0':
       :name: punctuation.definition.parameters.end.cpp
-  :name: meta.function.destructor.prototype.cpp
   :patterns:
   - :include: "$base"
 - :include: "#preprocessor-rule-enabled"
 - :include: "#preprocessor-rule-disabled"
 - :include: "#preprocessor-rule-conditional"
 - :include: "#comments-c"
-- :match: "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b"
+- :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
   :name: keyword.control.$1.cpp
-- :include: "#storage_types_c"
+- :include: "#storage_types"
 - :match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b"
   :name: storage.modifier.cpp
 - :include: "#operator_overload"
 - :include: "#number_literal"
-- :include: "#strings-c"
-- :begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t
+- :include: "#strings_c"
+- :name: meta.preprocessor.macro.cpp
+  :begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t
     \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
     \ ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t#
     varargs ellipsis?\n\t)\n  (\\))\n)?"
@@ -112,17 +111,16 @@
     '9':
       :name: punctuation.definition.parameters.end.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.macro.cpp
   :patterns:
   - :include: "#preprocessor-rule-define-line-contents"
-- :begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
+- :name: meta.preprocessor.diagnostic.cpp
+  :begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.diagnostic.$3.cpp
     '2':
       :name: punctuation.definition.directive.cpp
   :end: "(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.diagnostic.cpp
   :patterns:
   - :begin: "\""
     :beginCaptures:
@@ -152,14 +150,14 @@
     :patterns:
     - :include: "#line_continuation_character"
     - :include: "#comments-c"
-- :begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
+- :name: meta.preprocessor.include.cpp
+  :begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.$3.cpp
     '2':
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.include.cpp
   :patterns:
   - :include: "#line_continuation_character"
   - :begin: "\""
@@ -181,40 +179,40 @@
         :name: punctuation.definition.string.end.cpp
     :name: string.quoted.other.lt-gt.include.cpp
 - :include: "#pragma-mark"
-- :begin: "^\\s*((#)\\s*line)\\b"
+- :name: meta.preprocessor.cpp
+  :begin: "^\\s*((#)\\s*line)\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.line.cpp
     '2':
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.cpp
   :patterns:
-  - :include: "#strings-c"
+  - :include: "#strings_c"
   - :include: "#number_literal"
   - :include: "#line_continuation_character"
-- :begin: "^\\s*(?:((#)\\s*undef))\\b"
+- :name: meta.preprocessor.cpp
+  :begin: "^\\s*(?:((#)\\s*undef))\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.undef.cpp
     '2':
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.cpp
   :patterns:
   - :match: "[a-zA-Z_$][\\w$]*"
     :name: entity.name.function.preprocessor.cpp
   - :include: "#line_continuation_character"
-- :begin: "^\\s*(?:((#)\\s*pragma))\\b"
+- :name: meta.preprocessor.pragma.cpp
+  :begin: "^\\s*(?:((#)\\s*pragma))\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.pragma.cpp
     '2':
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  :name: meta.preprocessor.pragma.cpp
   :patterns:
-  - :include: "#strings-c"
+  - :include: "#strings_c"
   - :match: "[a-zA-Z_$][\\w\\-$]*"
     :name: entity.other.attribute-name.pragma.preprocessor.cpp
   - :include: "#number_literal"
@@ -347,7 +345,7 @@
   constants:
     :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     :name: constant.language.cpp
-  storage_types_c:
+  storage_types:
     :patterns:
     - :match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
       :name: storage.type.primitive.cpp
@@ -373,7 +371,7 @@
       '0':
         :name: meta.template.call.cpp
         :patterns:
-        - :include: "#storage_types_c"
+        - :include: "#storage_types"
         - :include: "#constants"
         - :include: "#scope_resolution"
         - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
@@ -385,13 +383,13 @@
           :name: punctuation.separator.comma.template.argument.cpp
   template_definition:
     :name: meta.template.definition.cpp
-    :begin: !ruby/regexp /(?<!\w)(template)\s*(<)/
+    :begin: "(?<!\\w)(template)\\s*(<)"
     :beginCaptures:
       '1':
         :name: storage.type.template.cpp
       '2':
         :name: punctuation.section.angle-brackets.start.template.definition.cpp
-    :end: !ruby/regexp /(>)/
+    :end: "(>)"
     :endCaptures:
       '1':
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
@@ -447,7 +445,7 @@
         :name: variable.parameter.probably.cpp
   operator_overload:
     :name: meta.function.definition.parameters.operator-overload.cpp
-    :begin: !ruby/regexp /(operator)((?:(?:\s*(?:\+\+|\-\-|\(\)|\[\]|\->|\+\+|\-\-|\+|\-|!|~|\*|&|\->\*|\*|\/|%|\+|\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\^|\||&&|\|\||=|\+=|\-=|\*=|\/=|%=|<<=|>>=|&=|\^=|\|=|,)|\s+(?:(?:(?:new|new\[\]|delete|delete\[\])|(?:[a-zA-Z_]\w*\s*(?:(?:<(?:[\s<>,\w])*>\s*))?::)*[a-zA-Z_]\w*\s*(?:&)?)))))\s*(\()/
+    :begin: "(operator)((?:(?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))))\\s*(\\()"
     :beginCaptures:
       '1':
         :name: keyword.other.operator.overload.cpp
@@ -457,7 +455,7 @@
         - :include: "#scope_resolution"
       '3':
         :name: punctuation.section.parameters.begin.bracket.round.cpp
-    :end: !ruby/regexp /(\))/
+    :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.parameters.end.bracket.round.cpp
@@ -482,7 +480,7 @@
     :name: variable.other.object.access.cpp
   method_access:
     :name: meta.function-call.member.cpp
-    :begin: !ruby/regexp /((?:(?:[a-zA-Z_]\w*|(?<=\]|\))))\s*)(?:((?:(?:\.|\.\*)))|((?:(?:->|->\*))))((?:[a-zA-Z_]\w*\s*(?:(?:(?:(?:\.|\.\*)))|(?:(?:(?:->|->\*))))\s*)*)\s*([a-zA-Z_]\w*)(\()/
+    :begin: "((?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\))))\\s*)(?:((?:(?:\\.|\\.\\*)))|((?:(?:->|->\\*))))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:(?:\\.|\\.\\*)))|(?:(?:(?:->|->\\*))))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()"
     :beginCaptures:
       '1':
         :name: variable.other.object.cpp
@@ -496,7 +494,7 @@
         :name: entity.name.function.member.cpp
       '6':
         :name: punctuation.section.arguments.begin.bracket.round.function.member.cpp
-    :end: !ruby/regexp /(\))/
+    :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
@@ -674,44 +672,6 @@
         - :include: "#special_block"
         - :include: "$base"
       - :include: "$base"
-  strings:
-    :patterns:
-    - :begin: (u|u8|U|L)?"
-      :beginCaptures:
-        '0':
-          :name: punctuation.definition.string.begin.cpp
-        '1':
-          :name: meta.encoding.cpp
-      :end: "\""
-      :endCaptures:
-        '0':
-          :name: punctuation.definition.string.end.cpp
-      :name: string.quoted.double.cpp
-      :patterns:
-      - :match: "\\\\u\\h{4}|\\\\U\\h{8}"
-        :name: constant.character.escape.cpp
-      - :match: \\['"?\\abfnrtv]
-        :name: constant.character.escape.cpp
-      - :match: "\\\\[0-7]{1,3}"
-        :name: constant.character.escape.cpp
-      - :match: "\\\\x\\h+"
-        :name: constant.character.escape.cpp
-      - :include: "#string_placeholder-c"
-    - :begin: (u|u8|U|L)?R"(?:([^ ()\\\t]{0,16})|([^ ()\\\t]*))\(
-      :beginCaptures:
-        '0':
-          :name: punctuation.definition.string.begin.cpp
-        '1':
-          :name: meta.encoding.cpp
-        '3':
-          :name: invalid.illegal.delimiter-too-long.cpp
-      :end: \)\2(\3)"
-      :endCaptures:
-        '0':
-          :name: punctuation.definition.string.end.cpp
-        '1':
-          :name: invalid.illegal.delimiter-too-long.cpp
-      :name: string.quoted.double.raw.cpp
   block-c:
     :patterns:
     - :begin: "{"
@@ -899,7 +859,7 @@
       - :include: "#member_access"
       - :include: "#c_function_call"
       - :include: "$base"
-  strings-c:
+  strings_c:
     :patterns:
     - :begin: "\""
       :beginCaptures:
@@ -1034,7 +994,7 @@
     - :match: "\\bdefined\\b"
       :name: invalid.illegal.macro-name.cpp
     - :include: "#comments-c"
-    - :include: "#strings-c"
+    - :include: "#strings_c"
     - :include: "#number_literal"
     - :begin: "\\?"
       :beginCaptures:
@@ -1491,7 +1451,7 @@
   preprocessor-rule-define-line-functions:
     :patterns:
     - :include: "#comments-c"
-    - :include: "#storage_types_c"
+    - :include: "#storage_types"
     - :include: "#vararg_ellipses-c"
     - :include: "#method_access"
     - :include: "#member_access"
@@ -1530,7 +1490,7 @@
   function-innards-c:
     :patterns:
     - :include: "#comments-c"
-    - :include: "#storage_types_c"
+    - :include: "#storage_types"
     - :include: "#operators"
     - :include: "#vararg_ellipses-c"
     - :name: meta.function.definition.parameters.cpp
@@ -1569,7 +1529,7 @@
   function-call-innards-c:
     :patterns:
     - :include: "#comments-c"
-    - :include: "#storage_types_c"
+    - :include: "#storage_types"
     - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#operators"

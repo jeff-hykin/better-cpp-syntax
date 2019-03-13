@@ -94,7 +94,7 @@ cpp_grammar = Grammar.new(
     #
     # Number Literal
     #
-    literal_number = newPattern(
+    number_literal = newPattern(
         repository_name: 'number_literal',
         match: lookBehindToAvoid(/\w/).then(
                 # Floating point
@@ -225,7 +225,7 @@ cpp_grammar = Grammar.new(
         name: "support.type.posix-reserved"
     )
     storage_types = newPattern(
-        repository_name: 'storage_types_c',
+        repository_name: 'storage_types',
         includes: [
             
             primitive_types = newPattern(
@@ -250,13 +250,39 @@ cpp_grammar = Grammar.new(
 # Keywords and Keyword-ish things
 #
     any_normal_word_operator_keyword          = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
-    control_flow_keywords                     = @cpp_tokens.that(:isControlFlow)
-    access_control_keywords                   = lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/)
-    exception_keywords                        = variableBounds[ @cpp_tokens.that(:isExceptionRelated) ]
-    functional_specifiers_pre_parameters      = variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ]
-    storage_specifiers                        = variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ]
-    qualifiers_and_specifiers_post_parameters = variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/)))
-    other_keywords = variableBounds[ /(using|typedef)/ ]
+    functional_specifiers_pre_parameters = newPattern(
+        match: variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ],
+        tag_as: "storage.modifier.specificer.functional.pre-parameters.$1"
+    )
+    qualifiers_and_specifiers_post_parameters = newPattern(
+        match: variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
+        tag_as: "storage.modifier.specifier.functional.post-parameters.$1"
+    )
+    storage_specifiers = newPattern(
+        match: variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ],
+        tag_as: "storage.modifier.specifier.$1"
+    )
+    access_control_keywords = newPattern(
+        match: lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/),
+        tag_as: "storage.type.modifier.access.control.$1"
+    )
+    exception_keywords = newPattern(
+        match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
+        tag_as: "keyword.control.exception.$1"
+    )
+    other_keywords = newPattern(
+        match: variableBounds[ /(using|typedef)/ ],
+        tag_as: "keyword.other.$1"
+    )
+    the_this_keyword = newPattern(
+        match: variableBounds[ /this/ ],
+        tag_as: "variable.language.this"
+    )
+    # TODO: enhance this to include <>'s
+    type_casting_operators = newPattern(
+        match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
+        tag_as: "keyword.operator.cast.$1"
+    )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
         tag_as: "keyword.operator.memory",
@@ -280,6 +306,11 @@ cpp_grammar = Grammar.new(
                 )
             ).lookAheadToAvoid(@standard_character)
     )
+    control_flow_keywords = newPattern(
+        match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
+        tag_as: "keyword.control.$1"
+    )
+    
 
 #
 # Templates
@@ -290,7 +321,7 @@ cpp_grammar = Grammar.new(
         tag_as: 'meta.template.call',
         match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
         includes: [
-            :storage_types_c,
+            :storage_types,
             :constants,
             :scope_resolution,
             newPattern(
@@ -650,7 +681,11 @@ namespace_definition_tagger = {
 #
     # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
     preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
-preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
+    preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
+    macro_argument = newPattern(
+        match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
+        name: "variable.other.macro.argument"
+    )
 
 #
 # Support
@@ -662,64 +697,21 @@ support_type_function_tokenizer = {
 }
 
 cpp_grammar.initalContextIncludes(
-    {
-        include: "#special_block"
-    },
-    {
-        match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        name: "variable.other.macro.argument"
-    },
-    {
-        include: "#strings"
-    },
-    {
-        match: -functional_specifiers_pre_parameters,
-        name: "storage.modifier.specificer.functional.pre-parameters.$1"
-    },
-    {
-        match: -qualifiers_and_specifiers_post_parameters,
-        name: "storage.modifier.specifier.functional.post-parameters.$1"
-    },
-    {
-        match: -storage_specifiers,
-        name: "storage.modifier.specifier.$1"
-    },
-    {
-        match: -access_control_keywords,
-        name: "storage.type.modifier.access.control.$1"
-    },
-    {
-        match: -exception_keywords,
-        name: "keyword.control.exception.$1"
-    },
-    {
-        match: -other_keywords,
-        name: "keyword.other.$1"
-    },
-    {
-        include: '#memory_operators'
-    },
-    {
-        match: -/\bthis\b/,
-        name: "variable.language.this"
-    },
-    {
-        include: "#constants"
-    },
-    {
-        include: "#template_definition"
-    },
-    {
-        match: -/\btemplate\b\s*/,
-        name: "storage.type.template"
-    },
-    {
-        match: -/\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\b\s*/,
-        name: "keyword.operator.cast.$1"
-    },
-    {
-        include: "#scope_resolution"
-    },
+    :special_block,
+    macro_argument,
+    :strings,
+    functional_specifiers_pre_parameters,
+    qualifiers_and_specifiers_post_parameters,
+    storage_specifiers,
+    access_control_keywords,
+    exception_keywords,
+    other_keywords,
+    :memory_operators,
+    the_this_keyword,
+    language_constants,
+    template_definition,
+    type_casting_operators,
+    scope_resolution,
     {
         match: -/\b(decltype|wchar_t|char16_t|char32_t)\b/,
         name: "storage.type"
@@ -729,6 +721,7 @@ cpp_grammar.initalContextIncludes(
         name: "storage.modifier"
     },
     {
+        name: "meta.function.destructor",
         begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
         beginCaptures: {
             "1" => {
@@ -744,7 +737,6 @@ cpp_grammar.initalContextIncludes(
                 name: "punctuation.definition.parameters.end.destructor"
             }
         },
-        name: "meta.function.destructor",
         patterns: [
             {
                 include: "$base"
@@ -752,6 +744,7 @@ cpp_grammar.initalContextIncludes(
         ]
     },
     {
+        name: "meta.function.destructor.prototype",
         begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
         beginCaptures: {
             "1" => {
@@ -767,7 +760,6 @@ cpp_grammar.initalContextIncludes(
                 name: "punctuation.definition.parameters.end"
             }
         },
-        name: "meta.function.destructor.prototype",
         patterns: [
             {
                 include: "$base"
@@ -777,39 +769,21 @@ cpp_grammar.initalContextIncludes(
     #
     # C patterns
     #
-    {
-        include: "#preprocessor-rule-enabled"
-    },
-    {
-        include: "#preprocessor-rule-disabled"
-    },
-    {
-        include: "#preprocessor-rule-conditional"
-    },
-    {
-        include: "#comments-c"
-    },
-    {
-        match: "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
-        name: "keyword.control.$1"
-    },
-    {
-        include: "#storage_types_c"
-    },
+    "#preprocessor-rule-enabled",
+    "#preprocessor-rule-disabled",
+    "#preprocessor-rule-conditional",
+    "#comments-c",
+    control_flow_keywords,
+    storage_types,
     {
         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
         name: "storage.modifier"
     },
+    operator_overload,
+    number_literal,
+    :strings_c,
     {
-        include: "#operator_overload"
-    },
-    {
-        include: "#number_literal"
-    },
-    {
-        include: "#strings-c"
-    },
-    {
+        name: "meta.preprocessor.macro",
         begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{-preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
         beginCaptures: {
             "1" => {
@@ -835,7 +809,6 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.macro",
         patterns: [
             {
                 include: "#preprocessor-rule-define-line-contents"
@@ -843,6 +816,7 @@ cpp_grammar.initalContextIncludes(
         ]
     },
     {
+        name: "meta.preprocessor.diagnostic",
         begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
         beginCaptures: {
             "1" => {
@@ -853,7 +827,6 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.diagnostic",
         patterns: [
             {
                 begin: "\"",
@@ -911,6 +884,7 @@ cpp_grammar.initalContextIncludes(
         ]
     },
     {
+        name: "meta.preprocessor.include",
         begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
         beginCaptures: {
             "1" => {
@@ -921,7 +895,6 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.include",
         patterns: [
             {
                 include: "#line_continuation_character"
@@ -958,10 +931,9 @@ cpp_grammar.initalContextIncludes(
             }
         ]
     },
+    "#pragma-mark",
     {
-        include: "#pragma-mark"
-    },
-    {
+        name: "meta.preprocessor",
         begin: "^\\s*((#)\\s*line)\\b",
         beginCaptures: {
             "1" => {
@@ -972,10 +944,9 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor",
         patterns: [
             {
-                include: "#strings-c"
+                include: "#strings_c"
             },
             {
                 include: "#number_literal"
@@ -986,6 +957,7 @@ cpp_grammar.initalContextIncludes(
         ]
     },
     {
+        name: "meta.preprocessor",
         begin: "^\\s*(?:((#)\\s*undef))\\b",
         beginCaptures: {
             "1" => {
@@ -996,7 +968,6 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor",
         patterns: [
             {
                 match: -preprocessor_name_no_bounds,
@@ -1008,6 +979,7 @@ cpp_grammar.initalContextIncludes(
         ]
     },
     {
+        name: "meta.preprocessor.pragma",
         begin: "^\\s*(?:((#)\\s*pragma))\\b",
         beginCaptures: {
             "1" => {
@@ -1018,10 +990,9 @@ cpp_grammar.initalContextIncludes(
             }
         },
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.pragma",
         patterns: [
             {
-                include: "#strings-c"
+                include: "#strings_c"
             },
             {
                 match: "[a-zA-Z_$][\\w\\-$]*",
@@ -1048,13 +1019,9 @@ cpp_grammar.initalContextIncludes(
         match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
         name: "support.type.stdint"
     },
-    posix_reserved_types.to_tag,
-    {
-        include: "#block-c"
-    },
-    {
-        include: "#parens-c"
-    },
+    posix_reserved_types,
+    "#block-c",
+    "#parens-c",
     {
         begin: -function_definition_pattern,
         end: -lookBehindFor(/\)/), # old pattern: "(?<=\\))(?!\\w)",
@@ -1065,9 +1032,7 @@ cpp_grammar.initalContextIncludes(
             }
         ]
     },
-    {
-        include: "#line_continuation_character"
-    },
+    "#line_continuation_character",
     {
         name: "meta.bracket.square.access",
         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
@@ -1313,6 +1278,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
+    # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
     "strings" => {
         patterns: [
             {
@@ -1716,7 +1682,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "strings-c" => {
+    "strings_c" => {
         patterns: [
             {
                 begin: "\"",
@@ -1977,7 +1943,7 @@ cpp_grammar.addToRepository({
                 include: "#comments-c"
             },
             {
-                include: "#strings-c"
+                include: "#strings_c"
             },
             {
                 include: "#number_literal"
@@ -2835,7 +2801,7 @@ cpp_grammar.addToRepository({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types_c"
+                include: "#storage_types"
             },
             {
                 include: "#vararg_ellipses-c"
@@ -2901,7 +2867,7 @@ cpp_grammar.addToRepository({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types_c"
+                include: "#storage_types"
             },
             {
                 include: "#operators"
@@ -2965,7 +2931,7 @@ cpp_grammar.addToRepository({
                 include: "#comments-c"
             },
             {
-                include: "#storage_types_c"
+                include: "#storage_types"
             },
             {
                 include: "#method_access"

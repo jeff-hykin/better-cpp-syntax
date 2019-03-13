@@ -593,9 +593,9 @@ class Range
             # tag_content_as
         @as_tag = {
             name: key_arguments[:tag_as],
-            begin: key_arguments[:start_pattern],
+            begin: key_arguments[:start_pattern].without_default_mode_modifiers,
             beginCaptures: key_arguments[:start_pattern].captures,
-            end: key_arguments[:end_pattern],
+            end: key_arguments[:end_pattern].without_default_mode_modifiers,
             endCaptures: key_arguments[:end_pattern].captures,
             patterns: Grammar.convertIncludesToPatternList(key_arguments[:includes])
         }
@@ -611,6 +611,11 @@ class Range
     end
     
     def to_tag
+        if @repository_name != nil
+            return {
+                include: "##{@repository_name}"
+            }
+        end
         return as_tag
     end
 end
