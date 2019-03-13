@@ -572,43 +572,6 @@ cpp_grammar = Grammar.new(
             ),
         includes: [ "#function-call-innards-c" ]
     )
-    function_call_pattern_4_groups = avoid_invalid_function_names.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups)).then(newGroup(/\(/))
-    function_call_tagger = {
-        begin: -function_call_pattern_4_groups,
-        beginCaptures: {
-            "1" => {
-                patterns: [
-                    {
-                        include: "#scope_resolution"
-                    }
-                ]
-            },
-            "2" => {
-                name: "entity.name.function.call"
-            },
-            "3" => {
-                patterns: [
-                    {
-                        include: "#template_call_innards"
-                    }
-                ]
-            },
-            "4" => {
-                name: "punctuation.section.arguments.begin.bracket.round"
-            },
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.arguments.end.bracket.round"
-            }
-        },
-        patterns: [
-            {
-                include: "#function-call-innards-c"
-            }
-        ]
-    }
 
 #
 # Namespace
@@ -2990,7 +2953,7 @@ cpp_grammar.addToRepository({
                     }
                 ]
             },
-            function_call_tagger,
+            function_call.to_tag,
             {
                 begin: "\\(",
                 beginCaptures: {
