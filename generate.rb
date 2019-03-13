@@ -599,64 +599,41 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.terminator.statement"
             ),
         )
-# https://en.cppreference.com/w/cpp/language/namespace#Using-directives
-namespace_pattern_2_groups = lookBehindToAvoid(@standard_character).then(newGroup(/namespace/)).then(@spaces).then(
-    newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)).or(
-        lookAheadFor(/{/)
-    )
-)
-namespace_definition_tagger = {
-    begin: -namespace_pattern_2_groups,
-    beginCaptures: {
-        "1" => {
-            name: "keyword.other.namespace.definition storage.type.namespace.definition"
-        },
-        "2" => {
-            patterns: [
-                {
+    # TODO: add support for namespace name = qualified-namespace ;
+    namespace_definition = Range.new(
+        tag_as: "meta.namespace-block",
+        start_pattern: lookBehindToAvoid(@standard_character).then(
+                match: /namespace/,
+                tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
+            ).then(@spaces).then(
+                # Named namespace (with possible scope )
+                preceding_scopes
+            ).maybe(@spaces).then(
+                newPattern(
                     match: variable_name,
-                    name: "entity.name.type",
-                },
-                {
-                    match: -/::/,
-                    name: "punctuation.separator.namespace.access"
-                }
-            ]
-        }
-    },
-    end: "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
-    name: "meta.namespace-block",
-    patterns: [
-        {
-            begin: "\\{",
-            beginCaptures: {
-                "0" => {
-                    name: "punctuation.definition.scope"
-                }
-            },
-            end: "\\}",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.scope"
-                }
-            },
-            patterns: [
-                {
-                    include: "#special_block"
-                },
-                {
-                    include: "#constructor"
-                },
-                {
-                    include: "$base"
-                }
-            ]
-        },
-        {
-            include: "$base"
-        }
-    ]
-}
+                    tag_as: "entity.name.namespace",
+                # anonymous namespaces
+                ).or(
+                    lookAheadFor(/\{/)
+                )
+            ),
+        end_pattern: lookBehindFor(/\}/).or(lookAheadFor(/;|,|\(|\)|>|\[|\]|=/)),
+        includes: [
+            Range.new(
+                start_pattern: newPattern(
+                        match: /\{/,
+                        tag_as: "punctuation.definition.scope"
+                    ),
+                end_pattern: newPattern(
+                        match: /\}/,
+                        tag_as: "punctuation.definition.scope"
+                    ),
+                includes: [:special_block, :constructor, "$base" ]
+                
+            ),
+            "$base"
+        ]
+    )
 
 #
 # preprocessor
@@ -1138,7 +1115,7 @@ cpp_grammar.addToRepository({
     "special_block" => {
         patterns: [
             using_namespace.to_tag,
-            namespace_definition_tagger,
+            namespace_definition.to_tag,
             {
                 begin: "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
                 beginCaptures: {

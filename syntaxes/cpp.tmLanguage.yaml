@@ -585,26 +585,23 @@
         '1':
           :name: punctuation.terminator.statement.cpp
       :patterns: []
-    - :begin: "(?<!\\w)(namespace)\\s+(?:(?:((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*[a-zA-Z_]\\w*)|(?={)))"
+    - :name: meta.namespace-block.cpp
+      :begin: "(?<!\\w)(namespace)\\s+((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*\\s*)\\s*(?:(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
       :beginCaptures:
         '1':
           :name: keyword.other.namespace.definition storage.type.namespace.definition.cpp
-        '2':
-          :patterns:
-          - :match: !ruby/regexp /(?<!\w)[a-zA-Z_]\w*(?!\w)/
-            :name: entity.name.type.cpp
-          - :match: "::"
-            :name: punctuation.separator.namespace.access.cpp
-      :end: "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))"
-      :name: meta.namespace-block.cpp
+        '2': *14
+        '3':
+          :name: entity.name.namespace.cpp
+      :end: "(?:(?:(?<=\\})|(?=;|,|\\(|\\)|>|\\[|\\]|=)))"
       :patterns:
-      - :begin: "\\{"
+      - :begin: "(\\{)"
         :beginCaptures:
-          '0':
+          '1':
             :name: punctuation.definition.scope.cpp
-        :end: "\\}"
+        :end: "(\\})"
         :endCaptures:
-          '0':
+          '1':
             :name: punctuation.definition.scope.cpp
         :patterns:
         - :include: "#special_block"

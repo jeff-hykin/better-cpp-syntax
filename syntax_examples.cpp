@@ -132,9 +132,12 @@
     using namespace std;
     using namespace std;using namespace std;
     using namespace parent_namespace::std;
+    
+    
 
-    namespace {}
-    namespace scoped::console { }
+    inline namespace {};
+    namespace {};
+    namespace scoped::console { };
     namespace console {
         template <typename ANYTYPE> void __MAGIC__show(ANYTYPE input) {
                 // by default use the stream operator with cout
