@@ -13,27 +13,22 @@ require 'yaml'
         # add a "is alreadly a group" flag to prevent double wrapping
     # TODO: add something (like 'tag_content_as') to support 'contentName' https://macromates.com/manual/en/language_grammars#language_rules
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
+    # TODO: auto generate a tag-name when a pattern/range is used in more than one place
 
 class Grammar
+    attr_accessor :data
+    
+    #
+    # Globally accessible current grammar object
+    #
     @@current_grammar = nil
     def self.current_grammar
         return @@current_grammar
     end
     
-    attr_accessor :data
-    
-    def initialize(name:nil, scope_name:nil, global_patterns:[], repository:{}, **other)
-        @data = {
-            name: name,
-            scopeName: scope_name,
-            **other,
-            patterns: global_patterns,
-            repository: repository,
-        }
-        @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
-        @@current_grammar = self
-    end
-    
+    #
+    # Class Methods
+    #
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
             raise "\n\nHey, I think youre trying to use some of the Grammar tools (like Patterns) before you've defined a grammar\nAt the top of the program just do something like:\ngrammar = Grammar.new( name:'blah', scope_name: 'source.blah' )\nAfter that the other stuff should work\n\n"
@@ -41,6 +36,64 @@ class Grammar
     end
     
     def self.convertIncludesToPatternList(includes)
+        # Summary:
+            # this takes a list, like:
+            #     [
+            #         # symbol thats the name of a repo
+            #         :name_of_thing_in_repo,
+            #         # and/or OOP grammar patterns
+            #         newPattern(
+            #             match: /thing/,
+            #             tag_as: 'a.tag.name'
+            #         ),
+            #         # and/or ranges
+            #         Range.new(
+            #             start_pattern: /thing/,
+            #             end_pattern: /endThing/,
+            #             includes: [ :name_of_thing_in_repo ] # <- this list also uses this convertIncludesToPatternList() function
+            #         ),
+            #         # and/or hashes (hashes need to match the TextMate grammar JSON format)
+            #         {
+            #             match: /some_regex/,
+            #             name: "some.tag.name"
+            #         },
+            #         # another example of the TextMate grammar format
+            #         {
+            #             include: '#name_of_thing_in_repo'
+            #         }
+            #     ]
+            # then it converts that list into a TextMate grammar format like this:
+            #     [
+            #         # symbol conversion
+            #         {
+            #             include: '#name_of_thing_in_repo'
+            #         },
+            #         # pattern conversion
+            #         {
+            #             match: /thing/,
+            #             name: 'a.tag.name'
+            #         },
+            #         # range conversion
+            #         {
+            #             begin: /thing/,
+            #             end: /thing/,
+            #             patterns: [
+            #                 {
+            #                     include: '#name_of_thing_in_repo'
+            #                 }
+            #             ]
+            #         },
+            #         # keeps TextMate hashes the same
+            #         {
+            #             match: /some_regex/,
+            #             name: "some.tag.name"
+            #         },
+            #         # another example of the TextMate grammar format
+            #         {
+            #             include: '#name_of_thing_in_repo'
+            #         }
+            #     ]
+        
         # if input=nil then no patterns
         if includes == nil
             return []
@@ -69,6 +122,24 @@ class Grammar
         return patterns
     end
     
+    #
+    # Constructor
+    #
+    def initialize(name:nil, scope_name:nil, global_patterns:[], repository:{}, **other)
+        @data = {
+            name: name,
+            scopeName: scope_name,
+            **other,
+            patterns: global_patterns,
+            repository: repository,
+        }
+        @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
+        @@current_grammar = self
+    end
+    
+    #
+    # Interal Helpers
+    #
     def addLanguageEndings(data)
         if data.is_a? Array 
             for each in data
@@ -94,6 +165,17 @@ class Grammar
                 end
             end
         end
+    end
+    
+    #
+    # External Helpers
+    #
+    def initalContextIncludes(*arguments)
+        @data[:patterns] += Grammar.convertIncludesToPatternList(arguments)
+    end
+    
+    def addToRepository(hash_of_repos)
+        @data[:repository].merge!(hash_of_repos)
     end
     
     def to_h
