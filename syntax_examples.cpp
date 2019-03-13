@@ -138,6 +138,34 @@
     Event<ANYTYPE>::   ListenersFor[input_event.name]
 
 //
+// member access
+//
+    a_pointer.thread;
+    a_pointer.*thread;
+    a_pointer->thread;
+    a_pointer->*thread;
+    a_pointer.thread[0];
+    a_pointer.*thread[0];
+    a_pointer->thread[0];
+    a_pointer->*thread[0];
+    a_pointer.thread();
+    a_pointer.*thread();
+    ptr_to_original->Start();
+    ptr_to_original->*Start();
+    {
+        a_pointer.thread;
+        a_pointer.*thread;
+        a_pointer->thread;
+        a_pointer->*thread;
+    }
+    {
+        a_pointer.thread();
+        a_pointer.*thread();
+        ptr_to_original->Start();
+        ptr_to_original->*Start();
+    }
+
+//
 // Operator keyword
 //
     ostream& operator<<(ostream& out, const Item& input_) {};
@@ -146,7 +174,7 @@
     Item  operator/( const Item&    input_item  , const int&    the_input   ) {};
     Item  operator^( const Item&    input_item  , const int&    the_input   ) {};
     // implicit conversions
-    operator string() const {};
+    operator std::string() const {};
     operator double() const {};
     // custom literal
     void operator "" _km(long double);
