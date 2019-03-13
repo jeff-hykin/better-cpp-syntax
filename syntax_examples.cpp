@@ -130,6 +130,7 @@
 //
 //
     using namespace std;
+    using namespace std;using namespace std;
     using namespace parent_namespace::std;
 
     namespace {}

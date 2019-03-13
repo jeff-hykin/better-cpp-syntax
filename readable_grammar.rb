@@ -14,6 +14,7 @@ require 'yaml'
     # TODO: add something (like 'tag_content_as') to support 'contentName' https://macromates.com/manual/en/language_grammars#language_rules
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # TODO: auto generate a tag-name when a pattern/range is used in more than one place
+    # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
 
 class Grammar
     attr_accessor :data
@@ -309,6 +310,14 @@ class Regexp
         captures = {}
         for group_number in 1..@group_attributes.size
             raw_attributes = @group_attributes[group_number - 1]
+            
+            # if it has a repository_name, then just use that
+            if ((raw_attributes[:repository_name].is_a? String) and (raw_attributes[:repository_name] != ""))
+                captures[group_number.to_s] = {
+                    patterns: [ { include: "##{raw_attributes[:repository_name]}" } ]
+                }
+                next
+            end
             
             # if no attributes then just skip
             if raw_attributes == {}

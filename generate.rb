@@ -417,15 +417,15 @@ cpp_grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
-    preceding_scopes = zeroOrMoreOf(one_scope_resolution).maybe(@spaces)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
+    preceding_scopes = newPattern(
+        match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+        includes: [ :scope_resolution ]
+    )
     scope_resolution = newPattern(
         repository_name: 'scope_resolution',
         tag_as: "meta.scope-resolution",
-        match: newPattern(
-                match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
-                includes: [ :scope_resolution ], # include self for a recursive call
-            ).then(
+        match: preceding_scopes.then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.namespace.scope-resolution"
             ).maybe(@spaces).maybe(
@@ -553,13 +553,14 @@ cpp_grammar = Grammar.new(
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     function_call = Range.new(
-        start_pattern: newPattern(
-                match: avoid_invalid_function_names.then(preceding_scopes),
-                includes: [ scope_resolution ],
+        start_pattern: avoid_invalid_function_names.then(
+                preceding_scopes
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
             ).maybe(@spaces).maybe(
+                # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
+                # once that^ is done, this can be replaced with just 'template_call'
                 match: template_call.without_numbered_capture_groups,
                 includes: [ :template_call_innards ]
             ).then(
@@ -576,36 +577,28 @@ cpp_grammar = Grammar.new(
 #
 # Namespace
 #
-using_namespace_pattern_4_groups = /\b(using)\s+(namespace)\s+/.maybe(preceding_scopes_1_group).then(newGroup(variable_name)).lookAheadFor(/;|\n/)
-using_namespace_tagger = {
-    comment: "https://en.cppreference.com/w/cpp/language/namespace",
-    begin: -using_namespace_pattern_4_groups,
-    beginCaptures: {
-        "1" => {
-            name: "keyword.other.using.directive"
-        },
-        "2" => {
-            name: "keyword.other.namespace.directive storage.type.namespace.directive"
-        },
-        "3" => {
-            patterns: [
-                {
-                    include: "#scope_resolution",
-                },
-            ]
-        },
-        "4" => {
-            name: "entity.name.namespace"
-        },
-    },
-    end: ";",
-    endCaptures: {
-        "0" => {
-            name: "punctuation.terminator.statement"
-        }
-    },
-    name: "meta.using-namespace-declaration"
-}
+    # see https://en.cppreference.com/w/cpp/language/namespace
+    using_namespace = Range.new(
+        tag_as: "meta.using-namespace-declaration",
+        start_pattern: lookBehindToAvoid(@standard_character).then(
+                match: /using/,
+                tag_as: "keyword.other.using.directive",
+            ).then(@spaces).then(
+                match: /namespace/,
+                tag_as: "keyword.other.namespace.directive storage.type.namespace.directive"
+            ).then(@spaces).maybe(
+                preceding_scopes
+            ).then(
+                match: variable_name,
+                tag_as: "entity.name.namespace"
+            ).lookAheadFor(
+                /;|\n/
+            ),
+        end_pattern: newPattern(
+                match: /;/,
+                tag_as: "punctuation.terminator.statement"
+            ),
+        )
 # https://en.cppreference.com/w/cpp/language/namespace#Using-directives
 namespace_pattern_2_groups = lookBehindToAvoid(@standard_character).then(newGroup(/namespace/)).then(@spaces).then(
     newGroup(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds)).or(
@@ -1144,7 +1137,7 @@ cpp_grammar.addToRepository({
     },
     "special_block" => {
         patterns: [
-            using_namespace_tagger,
+            using_namespace.to_tag,
             namespace_definition_tagger,
             {
                 begin: "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",

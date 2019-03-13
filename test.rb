@@ -11,11 +11,27 @@ cpp_grammar = Grammar.new(
     ],
 )
 
-macro_argument = newPattern(
-        match: /##/.then(/\w/).lookAheadToAvoid(@standard_character),
-        name: "variable.other.macro.argument"
+characters_in_template_call = /[\s<>,\w]/
+    template_call = newPattern(
+        repository_name: 'template_call_innards',
+        tag_as: 'meta.template.call',
+        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+        includes: [
+            :storage_types,
+            :constants,
+            :scope_resolution,
+            newPattern(
+                match: /\w+/,
+                tag_as: 'storage.type.user-defined'
+            ),
+            :operators,
+            :number_literal,
+            :strings,
+            newPattern(
+                match: /,/,
+                tag_as: "punctuation.separator.comma.template.argument"
+            )
+        ]
     )
-cpp_grammar.initalContextIncludes(
-    :special_block,
-    macro_argument,
-)
+thing = /thing1/.then( template_call )
+puts thing.to_tag.to_yaml 
