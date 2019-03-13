@@ -1,5 +1,5 @@
 # What does this do?
-This will get you the bleeding-edge syntax highlighting for C++
+This will get you the bleeding-edge syntax highlighting for C++.
 This used to be a fix, but then VS Code starting using it as the official source for C++ highlighting.
 
 ## How do I use it?
@@ -55,7 +55,7 @@ I love regular expressions, and I plan on actively maintaining this.
 
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
-The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
-There was a pull request on this repo from matter123 that fixed number literals.
-Thanks fnadeau, and matter123!
-The rest of the ruby code is authored by me.
+<br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
+<br>There was a pull request on this repo from matter123 that fixed number literals.
+<br>Thanks fnadeau, and matter123!
+<br>The rest of the ruby code is authored by me.
