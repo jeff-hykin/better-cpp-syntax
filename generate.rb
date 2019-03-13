@@ -2,30 +2,10 @@ require_relative './readable_grammar.rb'
 require_relative './cpp_tokens.rb'
 
 # todo
-    # change "entity.name.operator" to something better (probably keyword)
-    # fix sizeof, alignas and similar
-    # fix initializer list "functions"
+    # fix sizeof, alignas, decltype, and similar
+    # fix initializer list "functions" e.g. `int a{5};` 
     # fix the ... inside of macros
-    # replace all strings with regex literals
-    # add adjectives:
-        # canHaveBrackets
-        # mustHaveBrackets
-        # canBeModifier
-        # canHaveParaentheses
-        # canBeOnRightHandSide
-        # cantHaveParaentheses
-        # cannotBeFunctionName
-        # cannotBeVariableName
     # have all patterns with keywords be dynamically generated
-    # lambda ->
-    # operator with words/space
-    # add user-defined constants variable.other.constant.user-defined.cpp
-
-# Edgecases to remember
-    # ... inside of catch()
-    # operator overload for user-defined literal
-    # labels for goto
-    # lambda syntax
 
 cpp_grammar = Grammar.new(
     name:"C++",
@@ -249,7 +229,6 @@ cpp_grammar = Grammar.new(
 #
 # Keywords and Keyword-ish things
 #
-    any_normal_word_operator_keyword          = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
     functional_specifiers_pre_parameters = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specificer.functional.pre-parameters.$1"
@@ -314,7 +293,7 @@ cpp_grammar = Grammar.new(
 # Operators
 #
     normal_word_operators = newPattern(
-        match: variableBounds[any_normal_word_operator_keyword],
+        match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow)) ],
         tag_as: "keyword.operator.$1",
     )
 
