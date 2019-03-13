@@ -694,30 +694,3 @@ class TokenHelper
         return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
     end
 end
-
-
-
-
-#
-# Deprecated methods
-#
-class Regexp
-    def thenNewGroup(name_or_regex, regex_pattern=nil)
-        # numbered group
-        if regex_pattern == nil
-            return /#{self.without_default_mode_modifiers}(#{name_or_regex.without_default_mode_modifiers})/
-        # named group
-        else
-            return /#{self.without_default_mode_modifiers}(?<#{name_or_regex}>#{regex_pattern.without_default_mode_modifiers})/
-        end
-    end
-    def thenNewHiddenGroup(other_regex)
-        return /#{self.without_default_mode_modifiers}(?:#{other_regex.without_default_mode_modifiers})/
-    end
-end
-def newGroup(name_or_regex, regex_pattern=nil)
-    return //.thenNewGroup(name_or_regex, regex_pattern)
-end
-def newHiddenGroup(regex_pattern)
-    return //.thenNewHiddenGroup(regex_pattern)
-end
