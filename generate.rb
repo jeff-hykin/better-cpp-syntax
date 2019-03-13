@@ -648,7 +648,6 @@ cpp_grammar.initalContextIncludes(
     the_this_keyword,
     language_constants,
     template_definition,
-    type_casting_operators,
     scope_resolution,
     {
         match: -/\b(decltype|wchar_t|char16_t|char32_t)\b/,
@@ -1530,6 +1529,7 @@ cpp_grammar.addToRepository({
     },
     "operators" => {
         patterns: [
+            type_casting_operators.to_tag,
             {
                 include: "#method_access",
             },

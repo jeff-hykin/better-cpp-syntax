@@ -102,10 +102,16 @@
 //
 // type castings
 //
-    dynamic_cast <int> (expression);
+    dynamic_cast <int> (expression + 1 + thing);
     reinterpret_cast <double> (expression);
     static_cast <Custom> (expression);
     const_cast <int> (expression);
+    {
+        dynamic_cast <int> (expression + 1 + thing);
+        reinterpret_cast <double> (expression);
+        static_cast <Custom> (expression);
+        const_cast <int> (expression);
+    }
 
 //
 // Storage types
@@ -299,5 +305,6 @@
 
 
 int main() {
+    int a = ( thing + 10)
     return 0;
 }
