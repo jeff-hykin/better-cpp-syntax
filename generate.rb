@@ -251,19 +251,19 @@ cpp_grammar = Grammar.new(
 #
     any_normal_word_operator_keyword          = @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow))
     functional_specifiers_pre_parameters = newPattern(
-        match: variableBounds[ newGroup(@cpp_tokens.that(:isFunctionSpecifier)) ],
+        match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specificer.functional.pre-parameters.$1"
     )
     qualifiers_and_specifiers_post_parameters = newPattern(
-        match: variableBounds[ newGroup(@cpp_tokens.that(:canAppearAfterParametersBeforeBody)) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
+        match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
         tag_as: "storage.modifier.specifier.functional.post-parameters.$1"
     )
     storage_specifiers = newPattern(
-        match: variableBounds[ newGroup(@cpp_tokens.that(:isStorageSpecifier)) ],
+        match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
         tag_as: "storage.modifier.specifier.$1"
     )
     access_control_keywords = newPattern(
-        match: lookBehindToAvoid(@standard_character).then(newGroup(@cpp_tokens.that(:isAccessSpecifier))).then(/ *:/),
+        match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).then(/ *:/),
         tag_as: "storage.type.modifier.access.control.$1"
     )
     exception_keywords = newPattern(
@@ -310,7 +310,13 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
         tag_as: "keyword.control.$1"
     )
-    
+#
+# Operators
+#
+    normal_word_operators = newPattern(
+        match: variableBounds[any_normal_word_operator_keyword],
+        tag_as: "keyword.operator.$1",
+    )
 
 #
 # Templates
@@ -417,7 +423,6 @@ cpp_grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
-    preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
     preceding_scopes = newPattern(
         match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution ]
@@ -651,11 +656,6 @@ cpp_grammar = Grammar.new(
 #
     # TODO: currently this is used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
-    support_type_pattern = @cpp_support.that(:belongsToIostream)
-    support_type_function_tokenizer = {
-        match: variableBounds[newGroup(support_type_pattern)],
-        name: "support.variable.iostream.$1",
-    }
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -1559,10 +1559,7 @@ cpp_grammar.addToRepository({
             {
                 include: "#member_access",
             },
-            {
-                match: variableBounds[newGroup(any_normal_word_operator_keyword)],
-                name: "keyword.operator.$1"
-            },
+            normal_word_operators.to_tag,
             {
                 match: "--",
                 name: "keyword.operator.decrement"

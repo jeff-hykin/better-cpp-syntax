@@ -14,13 +14,13 @@
 - :match: "##[a-zA-Z_]\\w*(?!\\w)"
   :name: variable.other.macro.argument.cpp
 - :include: "#strings"
-- :match: "(?<!\\w)((?:inline|constexpr|mutable|friend|explicit|virtual))(?!\\w)"
+- :match: "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)"
   :name: storage.modifier.specificer.functional.pre-parameters.$1.cpp
-- :match: "(?<!\\w)((?:final|override|volatile|const|noexcept))(?!\\w)(?=\\s*(?:(?:(?:(?:\\{|;))|[\\n\\r])))"
+- :match: "(?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:(?:(?:\\{|;))|[\\n\\r])))"
   :name: storage.modifier.specifier.functional.post-parameters.$1.cpp
-- :match: "(?<!\\w)((?:const|static|volatile|register|restrict|extern))(?!\\w)"
+- :match: "(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)"
   :name: storage.modifier.specifier.$1.cpp
-- :match: "(?<!\\w)((?:private|protected|public)) *:"
+- :match: "(?<!\\w)(?:private|protected|public) *:"
   :name: storage.type.modifier.access.control.$1.cpp
 - :match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
   :name: keyword.control.exception.$1.cpp
@@ -856,7 +856,7 @@
     :patterns:
     - :include: "#method_access"
     - :include: "#member_access"
-    - :match: !ruby/regexp /(?<!\w)((?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept))(?!\w)/
+    - :match: "(?<!\\w)(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept)(?!\\w)"
       :name: keyword.operator.$1.cpp
     - :match: "--"
       :name: keyword.operator.decrement.cpp
