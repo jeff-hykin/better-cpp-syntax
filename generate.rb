@@ -423,7 +423,7 @@ cpp_grammar = Grammar.new(
     )
 
 #
-# operator overload
+# Operator overload
 #
     # symbols can have spaces
     operator_symbols = maybe(@spaces).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isSymbol))
@@ -452,53 +452,60 @@ cpp_grammar = Grammar.new(
     )
 
 #
-# Access member . .* -> ->*
+# Access . .* -> ->*
 #
-    before_the_access_operator_1_group = newGroup(variable_name_without_bounds).or(lookBehindFor(/\]|\)/)).maybe(@spaces)
-    member_operator_2_groups = newGroup(/\./.or(/\.\*/)).or(newGroup(/->/.or(/->\*/))).maybe(@spaces)
-        subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(/\./.or(/->/)).maybe(@spaces)
-    subsequent_members_1_group = newGroup(zeroOrMoreOf(subsequent_object_with_operator))
-    # try to avoid matching types to help with this not matching during lambda functions
-    final_memeber_1_group = @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(newGroup(variable_name_without_bounds)).then(@word_boundary).lookAheadToAvoid(/\(/)
-member_pattern_5_groups = before_the_access_operator_1_group.then(member_operator_2_groups).then(subsequent_members_1_group).then(final_memeber_1_group)
-access_member_tagger = {
-    name: "variable.other.object.access",
-    match: -member_pattern_5_groups,
-    captures: {
-        "1" => {
-            name: "variable.other.object"
-        },
-        "2" => {
-            name: "punctuation.separator.dot-access"
-        },
-        "3" => {
-            name: "punctuation.separator.pointer-access"
-        },
-        "4" => {
-            patterns: [
-                {
-                    match: -/\./,
-                    name: "punctuation.separator.dot-access"
-                },
-                {
-                    match: -/->/,
-                    name: "punctuation.separator.pointer-access"
-                },
-                {
-                    match: -variable_name_without_bounds,
-                    name: "variable.other.object"
-                },
-                {
-                    match: -/.+/,
-                    name: "everything.else",
-                }
-            ]
-        },
-        "5" => {
-            name: "variable.other.member"
-        }
-    }
-}
+    dot_operator = /\./.or(/\.\*/)
+    arrow_operator = /->/.or(/->\*/)
+    member_operator = newPattern(
+            match: dot_operator,
+            tag_as: "punctuation.separator.dot-access"
+        ).or(
+            match: arrow_operator,
+            tag_as: "punctuation.separator.pointer-access"
+        )
+    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
+    # TODO: the member_access and method_access can probably be simplified considerably
+    # TODO: member_access and method_access might also need additional matching to handle scope resolutions
+    member_access = newPattern(
+        repository_name: 'member_access',
+        tag_as: "variable.other.object.access",
+        match: newPattern(
+            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+            tag_as: "variable.other.object",
+        ).then(
+            member_operator
+        ).then(
+            match: zeroOrMoreOf(subsequent_object_with_operator),
+            includes: [ :member_access, :method_access ]
+        ).then(
+            match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+            tag_as: "variable.other.member"
+        )
+    )
+    method_access = Range.new(
+        repository_name: 'method_access',
+        tag_as: "meta.function-call.member",
+        start_pattern: newPattern(
+                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+                tag_as: "variable.other.object",
+            ).then(
+                member_operator
+            ).then(
+                match: zeroOrMoreOf(subsequent_object_with_operator),
+                includes: [ :member_access, :method_access ]
+            ).maybe(@spaces).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.function.member"
+            ).then(
+                match: /\(/,
+                tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
+            ),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
+            ),
+        includes: ["#function-call-innards-c"],
+    )
 
 #
 # Functions
@@ -654,7 +661,7 @@ support_type_function_tokenizer = {
     name: "support.variable.iostream.$1",
 }
 
-cpp_grammar.data[:patterns] = [
+cpp_grammar.initalContextIncludes(
     {
         include: "#special_block"
     },
@@ -792,9 +799,6 @@ cpp_grammar.data[:patterns] = [
     {
         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
         name: "storage.modifier"
-    },
-    {
-        include: "#operators"
     },
     {
         include: "#operator_overload"
@@ -1031,6 +1035,7 @@ cpp_grammar.data[:patterns] = [
             }
         ]
     },
+    :operators,
     {
         match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
         name: "support.type.sys-types"
@@ -1098,8 +1103,8 @@ cpp_grammar.data[:patterns] = [
         match: ",",
         name: "punctuation.separator.delimiter"
     }
-]
-cpp_grammar.data[:repository].merge!({
+)
+cpp_grammar.addToRepository({
     "angle_brackets" => {
         begin: "<",
         end: ">",
@@ -1375,59 +1380,6 @@ cpp_grammar.data[:repository].merge!({
             }
         ]
     },
-    "access-method" => {
-        name: "meta.function-call.member",
-        begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
-        beginCaptures: {
-            "1" => {
-                name: "variable.other.object"
-            },
-            "2" => {
-                name: "punctuation.separator.dot-access"
-            },
-            "3" => {
-                name: "punctuation.separator.pointer-access"
-            },
-            "4" => {
-                patterns: [
-                    {
-                        match: "\\.",
-                        name: "punctuation.separator.dot-access"
-                    },
-                    {
-                        match: "->",
-                        name: "punctuation.separator.pointer-access"
-                    },
-                    {
-                        match: "[a-zA-Z_][a-zA-Z_0-9]*",
-                        name: "variable.other.object"
-                    },
-                    {
-                        name: "everything.else",
-                        match: ".+"
-                    }
-                ]
-            },
-            "5" => {
-                name: "entity.name.function.member"
-            },
-            "6" => {
-                name: "punctuation.section.arguments.begin.bracket.round.function.member"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.arguments.end.bracket.round.function.member"
-            }
-        },
-        patterns: [
-            {
-                include: "#function-call-innards-c"
-            }
-        ]
-    },
-    "access-member" => access_member_tagger,
     "block-c" => {
         patterns: [
             {
@@ -1464,10 +1416,10 @@ cpp_grammar.data[:repository].merge!({
                 include: "#preprocessor-rule-conditional-block"
             },
             {
-                include: "#access-method"
+                include: "#method_access"
             },
             {
-                include: "#access-member"
+                include: "#member_access"
             },
             {
                 include: "#c_function_call"
@@ -1684,6 +1636,12 @@ cpp_grammar.data[:repository].merge!({
     "operators" => {
         patterns: [
             {
+                include: "#method_access",
+            },
+            {
+                include: "#member_access",
+            },
+            {
                 match: variableBounds[newGroup(any_normal_word_operator_keyword)],
                 name: "keyword.operator.$1"
             },
@@ -1743,10 +1701,10 @@ cpp_grammar.data[:repository].merge!({
                 },
                 patterns: [
                     {
-                        include: "#access-method"
+                        include: "#method_access"
                     },
                     {
-                        include: "#access-member"
+                        include: "#member_access"
                     },
                     {
                         include: "#c_function_call"
@@ -2832,10 +2790,10 @@ cpp_grammar.data[:repository].merge!({
                 ]
             },
             {
-                include: "#access-method"
+                include: "#method_access"
             },
             {
-                include: "#access-member"
+                include: "#member_access"
             },
             {
                 include: "$base"
@@ -2883,10 +2841,10 @@ cpp_grammar.data[:repository].merge!({
                 include: "#vararg_ellipses-c"
             },
             {
-                include: "#access-method"
+                include: "#method_access"
             },
             {
-                include: "#access-member"
+                include: "#member_access"
             },
             {
                 include: "#operators"
@@ -3010,10 +2968,10 @@ cpp_grammar.data[:repository].merge!({
                 include: "#storage_types_c"
             },
             {
-                include: "#access-method"
+                include: "#method_access"
             },
             {
-                include: "#access-member"
+                include: "#member_access"
             },
             {
                 include: "#operators"

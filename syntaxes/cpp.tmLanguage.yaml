@@ -89,7 +89,6 @@
 - :include: "#storage_types_c"
 - :match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b"
   :name: storage.modifier.cpp
-- :include: "#operators"
 - :include: "#operator_overload"
 - :include: "#number_literal"
 - :include: "#strings-c"
@@ -220,6 +219,7 @@
     :name: entity.other.attribute-name.pragma.preprocessor.cpp
   - :include: "#number_literal"
   - :include: "#line_continuation_character"
+- :include: "#operators"
 - :match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b"
   :name: support.type.sys-types.cpp
 - :match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b"
@@ -465,21 +465,43 @@
     - :include: "#probably_a_parameter"
     - :include: "#function-innards-c"
   member_access:
-    :match: "((?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\))))\\s*)(?:((?:(?:\\.|\\.\\*)))|((?:(?:->|->\\*))))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:(?:\\.|\\.\\*))|(?:(?:->|->\\*))))\\s*)*)(\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))[a-zA-Z_]\\w*\\b(?!\\())"
+    :match: "((?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\))))\\s*)(?:((?:(?:\\.|\\.\\*)))|((?:(?:->|->\\*))))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:(?:\\.|\\.\\*)))|(?:(?:(?:->|->\\*))))\\s*)*)(\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))[a-zA-Z_]\\w*\\b(?!\\())"
     :captures:
       '1':
         :name: variable.other.object.cpp
-      '2':
+      '2': &12
         :name: punctuation.separator.dot-access.cpp
-      '3':
+      '3': &13
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
         - :include: "#member_access"
-        - :include: "#access-method"
+        - :include: "#method_access"
       '5':
         :name: variable.other.member.cpp
     :name: variable.other.object.access.cpp
+  method_access:
+    :name: meta.function-call.member.cpp
+    :begin: !ruby/regexp /((?:(?:[a-zA-Z_]\w*|(?<=\]|\))))\s*)(?:((?:(?:\.|\.\*)))|((?:(?:->|->\*))))((?:[a-zA-Z_]\w*\s*(?:(?:(?:(?:\.|\.\*)))|(?:(?:(?:->|->\*))))\s*)*)\s*([a-zA-Z_]\w*)(\()/
+    :beginCaptures:
+      '1':
+        :name: variable.other.object.cpp
+      '2': *12
+      '3': *13
+      '4':
+        :patterns:
+        - :include: "#member_access"
+        - :include: "#method_access"
+      '5':
+        :name: entity.name.function.member.cpp
+      '6':
+        :name: punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    :end: !ruby/regexp /(\))/
+    :endCaptures:
+      '1':
+        :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
+    :patterns:
+    - :include: "#function-call-innards-c"
   angle_brackets:
     :begin: "<"
     :end: ">"
@@ -690,36 +712,6 @@
         '1':
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
-  access-method:
-    :name: meta.function-call.member.cpp
-    :begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()"
-    :beginCaptures:
-      '1':
-        :name: variable.other.object.cpp
-      '2':
-        :name: punctuation.separator.dot-access.cpp
-      '3':
-        :name: punctuation.separator.pointer-access.cpp
-      '4':
-        :patterns:
-        - :match: "\\."
-          :name: punctuation.separator.dot-access.cpp
-        - :match: "->"
-          :name: punctuation.separator.pointer-access.cpp
-        - :match: "[a-zA-Z_][a-zA-Z_0-9]*"
-          :name: variable.other.object.cpp
-        - :name: everything.else.cpp
-          :match: ".+"
-      '5':
-        :name: entity.name.function.member.cpp
-      '6':
-        :name: punctuation.section.arguments.begin.bracket.round.function.member.cpp
-    :end: "\\)"
-    :endCaptures:
-      '0':
-        :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
-    :patterns:
-    - :include: "#function-call-innards-c"
   block-c:
     :patterns:
     - :begin: "{"
@@ -738,7 +730,7 @@
     - :include: "#preprocessor-rule-enabled-block"
     - :include: "#preprocessor-rule-disabled-block"
     - :include: "#preprocessor-rule-conditional-block"
-    - :include: "#access-method"
+    - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#c_function_call"
     - :name: meta.initialization.cpp
@@ -869,6 +861,8 @@
     :name: meta.section.cpp
   operators:
     :patterns:
+    - :include: "#method_access"
+    - :include: "#member_access"
     - :match: !ruby/regexp /(?<!\w)((?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept))(?!\w)/
       :name: keyword.operator.$1.cpp
     - :match: "--"
@@ -901,7 +895,7 @@
         '0':
           :name: keyword.operator.ternary.cpp
       :patterns:
-      - :include: "#access-method"
+      - :include: "#method_access"
       - :include: "#member_access"
       - :include: "#c_function_call"
       - :include: "$base"
@@ -1477,7 +1471,7 @@
       :patterns:
       - :include: "#string_escaped_char-c"
       - :include: "#line_continuation_character"
-    - :include: "#access-method"
+    - :include: "#method_access"
     - :include: "#member_access"
     - :include: "$base"
   preprocessor-rule-define-line-blocks:
@@ -1499,7 +1493,7 @@
     - :include: "#comments-c"
     - :include: "#storage_types_c"
     - :include: "#vararg_ellipses-c"
-    - :include: "#access-method"
+    - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#operators"
     - :begin: |-
@@ -1576,7 +1570,7 @@
     :patterns:
     - :include: "#comments-c"
     - :include: "#storage_types_c"
-    - :include: "#access-method"
+    - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#operators"
     - :begin: |-
