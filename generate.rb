@@ -31,16 +31,16 @@ cpp_grammar = Grammar.new(
             repository_name: 'literal_numeric_seperator',
             match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
             tag_as:"punctuation.separator.constant.numeric"
-        )
+            )
         hex_digits = newPattern(
-                match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
-                tag_as: "constant.numeric.hexadecimal",
-                includes: [ number_seperator_pattern ]
+            match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
+            tag_as: "constant.numeric.hexadecimal",
+            includes: [ number_seperator_pattern ]
             )
         decimal_digits = newPattern(
-                match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
-                tag_as: "constant.numeric.decimal",
-                includes: [ number_seperator_pattern ]
+            match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
+            tag_as: "constant.numeric.decimal",
+            includes: [ number_seperator_pattern ]
             )
         # see https://en.cppreference.com/w/cpp/language/floating_literal
         hex_exponent = newPattern(
@@ -173,7 +173,7 @@ cpp_grammar = Grammar.new(
                 match: /\w*/,
                 tag_as: "keyword.other.unit.user-defined"
             )
-    )
+        )
     
 #
 # Variable
@@ -193,7 +193,7 @@ cpp_grammar = Grammar.new(
         repository_name: 'constants',
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
         tag_as: "constant.language"
-    )
+        )
 
 #
 # Types
@@ -203,7 +203,7 @@ cpp_grammar = Grammar.new(
     posix_reserved_types = newPattern(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
         name: "support.type.posix-reserved"
-    )
+        )
     storage_types = newPattern(
         repository_name: 'storage_types',
         includes: [
@@ -224,7 +224,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "storage.type.$1"
             )
         ]
-    )
+        )
 
 #
 # Keywords and Keyword-ish things
@@ -232,36 +232,36 @@ cpp_grammar = Grammar.new(
     functional_specifiers_pre_parameters = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specificer.functional.pre-parameters.$1"
-    )
+        )
     qualifiers_and_specifiers_post_parameters = newPattern(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
         tag_as: "storage.modifier.specifier.functional.post-parameters.$1"
-    )
+        )
     storage_specifiers = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
         tag_as: "storage.modifier.specifier.$1"
-    )
+        )
     access_control_keywords = newPattern(
         match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).then(/ *:/),
         tag_as: "storage.type.modifier.access.control.$1"
-    )
+        )
     exception_keywords = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
         tag_as: "keyword.control.exception.$1"
-    )
+        )
     other_keywords = newPattern(
         match: variableBounds[ /(using|typedef)/ ],
         tag_as: "keyword.other.$1"
-    )
+        )
     the_this_keyword = newPattern(
         match: variableBounds[ /this/ ],
         tag_as: "variable.language.this"
-    )
+        )
     # TODO: enhance this to include <>'s
     type_casting_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
         tag_as: "keyword.operator.cast.$1"
-    )
+        )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
         tag_as: "keyword.operator.memory",
@@ -284,18 +284,18 @@ cpp_grammar = Grammar.new(
                     tag_as: "keyword.operator.memory.new"
                 )
             ).lookAheadToAvoid(@standard_character)
-    )
+        )
     control_flow_keywords = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
         tag_as: "keyword.control.$1"
-    )
+        )
 #
 # Operators
 #
     normal_word_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow)) ],
         tag_as: "keyword.operator.$1",
-    )
+        )
 
 #
 # Templates
@@ -321,7 +321,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.comma.template.argument"
             )
         ]
-    )
+        )
     template_definition = Range.new(
         repository_name: 'template_definition',
         tag_as: 'meta.template.definition',
@@ -341,7 +341,7 @@ cpp_grammar = Grammar.new(
             :template_definition_argument,
             :template_call_innards,
         ]
-    )
+        )
     template_definition_argument = newPattern(
         repository_name: 'template_definition_argument',
         match: maybe(
@@ -396,7 +396,7 @@ cpp_grammar = Grammar.new(
                     lookAheadFor(/>/)
                 )
             )
-    )
+        )
 
 #
 # Scope resolution
@@ -405,7 +405,7 @@ cpp_grammar = Grammar.new(
     preceding_scopes = newPattern(
         match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution ]
-    )
+        )
     scope_resolution = newPattern(
         repository_name: 'scope_resolution',
         tag_as: "meta.scope-resolution",
@@ -430,13 +430,13 @@ cpp_grammar = Grammar.new(
     probably_a_parameter = newPattern(
         repository_name: 'probably_a_parameter',
         match: newPattern(
-            match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-            tag_as: "variable.parameter.probably.defaulted"
-        ).or(
-            match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
-            tag_as: "variable.parameter.probably"
+                match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
+                tag_as: "variable.parameter.probably.defaulted"
+            ).or(
+                match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
+                tag_as: "variable.parameter.probably"
+            )
         )
-    )
 
 #
 # Operator overload
@@ -465,7 +465,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.parameters.end.bracket.round"
             ),
         includes: [:probably_a_parameter, :'function-innards-c' ]
-    )
+        )
 
 #
 # Access . .* -> ->*
@@ -486,18 +486,18 @@ cpp_grammar = Grammar.new(
         repository_name: 'member_access',
         tag_as: "variable.other.object.access",
         match: newPattern(
-            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-            tag_as: "variable.other.object",
-        ).then(
-            member_operator
-        ).then(
-            match: zeroOrMoreOf(subsequent_object_with_operator),
-            includes: [ :member_access, :method_access ]
-        ).then(
-            match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
-            tag_as: "variable.other.member"
+                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+                tag_as: "variable.other.object",
+            ).then(
+                member_operator
+            ).then(
+                match: zeroOrMoreOf(subsequent_object_with_operator),
+                includes: [ :member_access, :method_access ]
+            ).then(
+                match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+                tag_as: "variable.other.member"
+            )
         )
-    )
     method_access = Range.new(
         repository_name: 'method_access',
         tag_as: "meta.function-call.member",
@@ -521,7 +521,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
         includes: ["#function-call-innards-c"],
-    )
+        )
 
 #
 # Functions
@@ -534,7 +534,7 @@ cpp_grammar = Grammar.new(
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
         includes: [ "#function-innards-c" ]
-    )
+        )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     function_call = Range.new(
         start_pattern: avoid_invalid_function_names.then(
@@ -556,7 +556,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.arguments.end.bracket.round"
             ),
         includes: [ "#function-call-innards-c" ]
-    )
+        )
 
 #
 # Namespace
@@ -617,7 +617,7 @@ cpp_grammar = Grammar.new(
             ),
             "$base"
         ]
-    )
+        )
 
 #
 # preprocessor
@@ -628,7 +628,7 @@ cpp_grammar = Grammar.new(
     macro_argument = newPattern(
         match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
         name: "variable.other.macro.argument"
-    )
+        )
 
 #
 # Support
