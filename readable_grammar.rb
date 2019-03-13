@@ -609,6 +609,9 @@ class Range
         if @as_tag[:endCaptures] == {}
             @as_tag.delete(:endCaptures)
         end
+        if not( (@as_tag[:name].is_a? String) and (@as_tag[:name] != "") )
+            @as_tag.delete(:name)
+        end
         
         #
         # handle adding to the repository
