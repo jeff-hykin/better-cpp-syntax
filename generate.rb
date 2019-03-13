@@ -417,6 +417,7 @@ cpp_grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    preceding_scopes = zeroOrMoreOf(one_scope_resolution).maybe(@spaces)
     preceding_scopes_1_group = newGroup(zeroOrMoreOf(one_scope_resolution)).maybe(@spaces)
     scope_resolution = newPattern(
         repository_name: 'scope_resolution',
@@ -541,48 +542,73 @@ cpp_grammar = Grammar.new(
 #
 # Functions
 #
-        cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
-    avoid_keywords = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
+    cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
+    avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
-function_definition_pattern = avoid_keywords.then(look_ahead_for_function_name)
-function_call_pattern_4_groups = avoid_keywords.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups)).then(newGroup(/\(/))
-# a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-function_call_tagger = {
-    begin: -function_call_pattern_4_groups,
-    beginCaptures: {
-        "1" => {
-            patterns: [
-                {
-                    include: "#scope_resolution"
-                }
-            ]
+    function_definition = Range.new(
+        tag_as: "meta.function.definition",
+        start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
+        end_pattern: lookBehindFor(/\)/),
+        includes: [ "#function-innards-c" ]
+    )
+    # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
+    function_call = Range.new(
+        start_pattern: newPattern(
+                match: avoid_invalid_function_names.then(preceding_scopes),
+                includes: [ scope_resolution ],
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.function.call"
+            ).maybe(@spaces).maybe(
+                match: template_call.without_numbered_capture_groups,
+                includes: [ :template_call_innards ]
+            ).then(
+                match: /\(/,
+                tag_as: "punctuation.section.arguments.begin.bracket.round"
+            ),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.arguments.end.bracket.round"
+            ),
+        includes: [ "#function-call-innards-c" ]
+    )
+    function_call_pattern_4_groups = avoid_invalid_function_names.then(preceding_scopes_1_group).then(newGroup(variable_name_without_bounds)).maybe(@spaces).maybe(newGroup(template_call.without_numbered_capture_groups)).then(newGroup(/\(/))
+    function_call_tagger = {
+        begin: -function_call_pattern_4_groups,
+        beginCaptures: {
+            "1" => {
+                patterns: [
+                    {
+                        include: "#scope_resolution"
+                    }
+                ]
+            },
+            "2" => {
+                name: "entity.name.function.call"
+            },
+            "3" => {
+                patterns: [
+                    {
+                        include: "#template_call_innards"
+                    }
+                ]
+            },
+            "4" => {
+                name: "punctuation.section.arguments.begin.bracket.round"
+            },
         },
-        "2" => {
-            name: "entity.name.function.call"
+        end: "\\)",
+        endCaptures: {
+            "0" => {
+                name: "punctuation.section.arguments.end.bracket.round"
+            }
         },
-        "3" => {
-            patterns: [
-                {
-                    include: "#template_call_innards"
-                }
-            ]
-        },
-        "4" => {
-            name: "punctuation.section.arguments.begin.bracket.round"
-        },
-    },
-    end: "\\)",
-    endCaptures: {
-        "0" => {
-            name: "punctuation.section.arguments.end.bracket.round"
-        }
-    },
-    patterns: [
-        {
-            include: "#function-call-innards-c"
-        }
-    ]
-}
+        patterns: [
+            {
+                include: "#function-call-innards-c"
+            }
+        ]
+    }
 
 #
 # Namespace
@@ -690,11 +716,13 @@ namespace_definition_tagger = {
 #
 # Support
 #
-support_type_pattern = @cpp_support.that(:belongsToIostream)
-support_type_function_tokenizer = {
-    match: variableBounds[newGroup(support_type_pattern)],
-    name: "support.variable.iostream.$1",
-}
+    # TODO: currently this is used, ideally it will be built up over time and then be included
+    # it will be for things such as cout, cin, vector, string, map, etc
+    support_type_pattern = @cpp_support.that(:belongsToIostream)
+    support_type_function_tokenizer = {
+        match: variableBounds[newGroup(support_type_pattern)],
+        name: "support.variable.iostream.$1",
+    }
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -1022,16 +1050,7 @@ cpp_grammar.initalContextIncludes(
     posix_reserved_types,
     "#block-c",
     "#parens-c",
-    {
-        begin: -function_definition_pattern,
-        end: -lookBehindFor(/\)/), # old pattern: "(?<=\\))(?!\\w)",
-        name: "meta.function.definition",
-        patterns: [
-            {
-                include: "#function-innards-c"
-            }
-        ]
-    },
+    function_definition,
     "#line_continuation_character",
     {
         name: "meta.bracket.square.access",

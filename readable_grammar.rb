@@ -150,7 +150,9 @@ class Grammar
                 key = each[0]
                 value = each[1]
                 
-                if value.is_a? Array
+                if value == nil
+                    next
+                elsif value.is_a? Array
                     for each_sub_hash in value
                         addLanguageEndings(each_sub_hash)
                     end
@@ -599,6 +601,14 @@ class Range
             endCaptures: key_arguments[:end_pattern].captures,
             patterns: Grammar.convertIncludesToPatternList(key_arguments[:includes])
         }
+        
+        # remove blanks
+        if @as_tag[:beginCaptures] == {}
+            @as_tag.delete(:beginCaptures)
+        end
+        if @as_tag[:endCaptures] == {}
+            @as_tag.delete(:endCaptures)
+        end
         
         #
         # handle adding to the repository

@@ -260,7 +260,7 @@ tokens = [
     { representation: "operator"        , name: "operator"      },
     # 
     { representation: "typedef"         , name: "typedef"       },
-    { representation: "decltype"        , name: "decltype"      , isSpecifier: true},
+    { representation: "decltype"        , name: "decltype"      , isSpecifier: true, isValidFunctionName: true}, #FIXME, decltype is not a valid function name, this is just a temp fix for decltype messing up highlighting
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
