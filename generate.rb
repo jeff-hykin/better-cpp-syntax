@@ -240,7 +240,10 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.$1"
         )
     access_control_keywords = newPattern(
-        match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
+        match: lookBehindToAvoid(@standard_character).then(
+            match: @cpp_tokens.that(:isAccessSpecifier),
+            capture: true
+            ).maybe(@spaces).then(/:/),
         tag_as: "storage.type.modifier.access.control.$1"
         )
     exception_keywords = newPattern(
