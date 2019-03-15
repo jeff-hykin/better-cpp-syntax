@@ -161,7 +161,7 @@ cpp_grammar = Grammar.new(
                     # integer suffix
                     ).maybe(
                         literal_integer_suffix = newPattern(
-                            match: /LL[uU]/.or(/ll[uU]/).or(/[uU]LL/).or(/[uU]ll/).or(/ll/).or(/LL/).or(/[uUlL]/).lookAheadToAvoid(/\w/),
+                            match: /[uU]/.or(/[uU]ll?/).or(/[uU]LL?/).or(/ll?[uU]?/).or(/LL?[uU]?/).lookAheadToAvoid(/\w/),
                             tag_as: "keyword.other.unit.suffix.integer"
                         )
                     )
