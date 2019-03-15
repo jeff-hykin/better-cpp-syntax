@@ -632,7 +632,7 @@ cpp_grammar = Grammar.new(
 #
 # Support
 #
-    # TODO: currently this is used, ideally it will be built up over time and then be included
+    # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
 
 cpp_grammar.initalContextIncludes(
