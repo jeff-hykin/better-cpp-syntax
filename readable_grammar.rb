@@ -2,6 +2,16 @@ require 'json'
 require 'yaml'
 
 # TODO
+    # add support for all builtin things
+        # see https://macromates.com/manual/en/language_grammars#language_rules
+
+        # newPattern
+        #     repository
+        #     comment
+
+        # group
+        #     repository
+        #     comment
     # add testing support
         # have a should_match: list, and a should_not_match: list
     # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
@@ -11,7 +21,6 @@ require 'yaml'
     # add optimizations
         # add check for seeing if the last pattern was an OR with no attributes. if it was then change (a|(b|c)) to (a|b|c)
         # add a "is alreadly a group" flag to prevent double wrapping
-    # TODO: add something (like 'tag_content_as') to support 'contentName' https://macromates.com/manual/en/language_grammars#language_rules
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # TODO: auto generate a tag-name when a pattern/range is used in more than one place
     # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
@@ -33,6 +42,22 @@ class Grammar
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
             raise "\n\nHey, I think youre trying to use some of the Grammar tools (like Patterns) before you've defined a grammar\nAt the top of the program just do something like:\ngrammar = Grammar.new( name:'blah', scope_name: 'source.blah' )\nAfter that the other stuff should work\n\n"
+        end
+    end
+    
+    def self.toTag(data)
+        # if its a string then include it directly
+        if (data.instance_of? String)
+            return { include: data }
+        # if its a symbol then include a # to make it a repository_name reference
+        elsif (data.instance_of? Symbol)
+            return { include: "##{data}" }
+        # if its a pattern, then convert it to a tag
+        elsif (data.instance_of? Regexp) or (data.instance_of? Range)
+            return data.to_tag
+        # if its a hash, then just add it as-is
+        elsif (data.instance_of? Hash)
+            return data
         end
     end
     
@@ -106,19 +131,7 @@ class Grammar
         # create the pattern list
         patterns = []
         for each_include in includes
-            # if its a string then include it directly
-            if (each_include.instance_of? String)
-                patterns.push({ include: each_include })
-            # if its a symbol then include a # to make it a repository_name reference
-            elsif (each_include.instance_of? Symbol)
-                patterns.push({ include: "##{each_include}" })
-            # if its a pattern, then convert it to a tag
-            elsif (each_include.instance_of? Regexp) or (each_include.instance_of? Range)
-                patterns.push(each_include.to_tag)
-            # if its a hash, then just add it as-is
-            elsif (each_include.instance_of? Hash)
-                patterns.push(each_include)
-            end
+            patterns.push(Grammar.toTag(each_include))
         end
         return patterns
     end
@@ -600,36 +613,129 @@ class Range
     attr_accessor :as_tag, :repository_name
     
     def initialize(key_arguments)
-        # TODO:
-            # tag_content_as
-        @as_tag = {
-            name: key_arguments[:tag_as],
-            begin: key_arguments[:start_pattern].without_default_mode_modifiers,
-            beginCaptures: key_arguments[:start_pattern].captures,
-            end: key_arguments[:end_pattern].without_default_mode_modifiers,
-            endCaptures: key_arguments[:end_pattern].captures,
-            patterns: Grammar.convertIncludesToPatternList(key_arguments[:includes])
-        }
+        # parameters:
+            # comment: (idk why youd ever use this, but it exists for backwards compatibility)
+            # tag_as:
+            # tag_content_as:
+            # apply_end_pattern_last:
+            # while:
+            # start_pattern:
+            # end_pattern:
+            # includes:
+            # repository:
+            # repository_name:
+
+        @as_tag = {}
         
-        # remove blanks
-        if @as_tag[:beginCaptures] == {}
-            @as_tag.delete(:beginCaptures)
-        end
-        if @as_tag[:endCaptures] == {}
-            @as_tag.delete(:endCaptures)
-        end
-        if not( (@as_tag[:name].is_a? String) and (@as_tag[:name] != "") )
-            @as_tag.delete(:name)
+        #
+        # comment
+        #
+        comment = key_arguments[:comment]
+        key_arguments.delete(:comment)
+        if comment != nil && comment != ""
+            @as_tag[:name] = comment
         end
         
         #
-        # handle adding to the repository
+        # tag_as
         #
-        if key_arguments[:repository_name] != nil
+        tag_name = key_arguments[:tag_as]
+        key_arguments.delete(:tag_as)
+        if tag_name != nil && tag_name != ""
+            @as_tag[:name] = tag_name
+        end
+        
+        #
+        # tag_content_as
+        #
+        tag_content_name = key_arguments[:tag_content_as]
+        key_arguments.delete(:tag_content_as)
+        if tag_content_name != nil && tag_content_name != ""
+            @as_tag[:contentName] = tag_content_name
+        end
+        
+        #
+        # apply_end_pattern_last
+        #
+        apply_end_pattern_last = key_arguments[:apply_end_pattern_last]
+        key_arguments.delete(:apply_end_pattern_last)
+        if apply_end_pattern_last == 1 || apply_end_pattern_last == true
+            @as_tag[:applyEndPatternLast] = apply_end_pattern_last
+        end
+        
+        #
+        # while
+        #
+        while_statement = key_arguments[:while]
+        key_arguments.delete(:while)
+        if while_statement != nil && while_statement != //
+            @as_tag[:while] = while_statement
+        end
+        
+        #
+        # start_pattern
+        #
+        start_pattern = key_arguments[:start_pattern]
+        if not ( (start_pattern.is_a? Regexp) and start_pattern != // )
+            raise "The start pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+        end
+        @as_tag[:begin] = start_pattern.without_default_mode_modifiers
+        key_arguments.delete(:start_pattern)
+        begin_captures = start_pattern.captures
+        if begin_captures != {}
+            @as_tag[:beginCaptures] = begin_captures
+        end
+        
+        #
+        # end_pattern
+        #
+        end_pattern = key_arguments[:end_pattern]
+        if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
+            raise "The end pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+        end
+        @as_tag[:end] = end_pattern.without_default_mode_modifiers
+        key_arguments.delete(:end_pattern)
+        end_captures = end_pattern.captures
+        if end_captures != {}
+            @as_tag[:endCaptures] = end_captures
+        end
+        
+        #
+        # includes
+        #
+        patterns = Grammar.convertIncludesToPatternList(key_arguments[:includes])
+        key_arguments.delete(:includes)
+        if patterns != []
+            @as_tag[:patterns] = patterns
+        end
+        
+        #
+        # repository
+        #
+        repository = key_arguments[:repository]
+        key_arguments.delete(:repository)
+        if (repository.is_a? Hash) && (repository != {})
+            textmate_repository = {}
+            for each_key, each_value in repository.each_pair
+                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)
+            end
+            @as_tag[:repository] = textmate_repository
+        end
+        
+        #
+        # repository_name
+        #
+        # extract the repository_name
+        repository_name = key_arguments[:repository_name]
+        key_arguments.delete(:repository_name)
+        if repository_name.to_s != ""
             Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][key_arguments[:repository_name]] = @as_tag
-            @repository_name = key_arguments[:repository_name]
+            Grammar.current_grammar.data[:repository][repository_name] = self.to_tag
+            # set the repository_name only after the repository entry is made
+            @repository_name = repository_name
         end
+        
+        # TODO, add more error checking. key_arguments should be empty at this point
     end
     
     def to_tag
