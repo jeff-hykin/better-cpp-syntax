@@ -21,3 +21,26 @@ cpp_grammar = Grammar.new(
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 #variable end
+
+template_call = newPattern(
+    repository_name: 'template_call_innards',
+    tag_as: 'meta.template.call',
+    match: /</.zeroOrMoreOf(/[\w<]/).then(/>/).maybe(@spaces),
+    includes: [
+        :storage_types,
+        :constants,
+        :scope_resolution,
+        newPattern(
+            match: variable_name,
+            tag_as: 'storage.type.user-defined'
+        ),
+        :operators,
+        :number_literal,
+        :strings,
+        newPattern(
+            match: /,/,
+            tag_as: "punctuation.separator.comma.template.argument"
+        )
+    ]
+    )
+p template_call.without_numbered_capture_groups

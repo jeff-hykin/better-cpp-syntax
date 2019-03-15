@@ -647,11 +647,11 @@ cpp_grammar.initalContextIncludes(
     template_definition,
     scope_resolution,
     {
-        match: -/\b(decltype|wchar_t|char16_t|char32_t)\b/,
+        match: /\b(decltype|wchar_t|char16_t|char32_t)\b/,
         name: "storage.type"
     },
     {
-        match: -/\b(constexpr|export|mutable|typename|thread_local)\b/,
+        match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
         name: "storage.modifier"
     },
     {
@@ -665,7 +665,7 @@ cpp_grammar.initalContextIncludes(
                 name: "punctuation.definition.parameters.begin.destructor"
             }
         },
-        end: -/\)/,
+        end: /\)/,
         endCaptures: {
             "0" => {
                 name: "punctuation.definition.parameters.end.destructor"
@@ -688,7 +688,7 @@ cpp_grammar.initalContextIncludes(
                 name: "punctuation.definition.parameters.begin"
             }
         },
-        end: -/\)/,
+        end: /\)/,
         endCaptures: {
             "0" => {
                 name: "punctuation.definition.parameters.end"
@@ -718,7 +718,7 @@ cpp_grammar.initalContextIncludes(
     :strings_c,
     {
         name: "meta.preprocessor.macro",
-        begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{-preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
+        begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.define"
@@ -904,7 +904,7 @@ cpp_grammar.initalContextIncludes(
         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
         patterns: [
             {
-                match: -preprocessor_name_no_bounds,
+                match: preprocessor_name_no_bounds,
                 name: "entity.name.function.preprocessor"
             },
             {
@@ -983,7 +983,7 @@ cpp_grammar.initalContextIncludes(
     },
     {
         name: "storage.modifier.array.bracket.square",
-        match: -/#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
+        match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
     },
     {
         match: ";",
@@ -1366,7 +1366,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "c_function_call" => {
-        begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{-maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+        begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
         patterns: [
@@ -1501,7 +1501,7 @@ cpp_grammar.addToRepository({
                 include: "#block_innards-c"
             },
             {
-                match: -lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
+                match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
                 name: "punctuation.range-based"
             }
         ]
@@ -1897,7 +1897,7 @@ cpp_grammar.addToRepository({
                 include: "#constants"
             },
             {
-                match: -preprocessor_name_no_bounds,
+                match: preprocessor_name_no_bounds,
                 name: "entity.name.function.preprocessor"
             },
             {
@@ -2809,7 +2809,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.section.parameters.begin.bracket.round"
                     },
                 },
-                end: -/\)|:/,
+                end: /\)|:/,
                 endCaptures: {
                     "0" => {
                         name: "punctuation.section.parameters.end.bracket.round"
@@ -2866,7 +2866,7 @@ cpp_grammar.addToRepository({
                 include: "#operators"
             },
             {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{-maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                 beginCaptures: {
                     "1" => {
                         name: "keyword.operator.memory.new"

@@ -387,7 +387,7 @@ class Regexp
         as_string = self.to_s
         # if it is the default settings (AKA -mix) then remove it
         if (as_string.size > 6) and (as_string[0..5] == '(?-mix')
-            return as_string.sub(/\A\(\?\-mix\:/, "").sub(/\)\z/,"")
+            return self.inspect[1..-2]
         else 
             return as_string
         end
@@ -420,11 +420,6 @@ class Regexp
         return Regexp.new(reversed_but_fixed.reverse)
     end
     
-    # an alias operator for "without_default_mode_modifiers"
-    def -@()
-        return self.without_default_mode_modifiers
-    end
-    
     def processRegexOperator(arguments, operator)
         # first parse the arguments
         other_regex, attributes = Regexp.processGrammarArguments(arguments, operator)
@@ -446,11 +441,11 @@ class Regexp
                     new_regex = /#{self_as_string}#{other_regex_as_string}/
                 end
             when 'or'
-                new_regex = /(?:(?:#{self_as_string}|(#{other_regex_as_string})))/
+                new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
                 if no_attributes
                     # the extra (?:(?:)) groups are because ruby will auto-optimize away the outer most one, even if only one is given
                     # TODO eventually there should be a better optimization for this
-                    new_regex = /(?:(?:(?:#{self_as_string}|#{other_regex_as_string})))/
+                    new_regex = /(?:#{self_as_string}|#{other_regex_as_string})/
                 end
             when 'maybe'
                 # this one is more complicated because it contains an optimization
@@ -572,10 +567,6 @@ class String
     # make the without_default_mode_modifiers do nothing for strings
     def without_default_mode_modifiers()
         return self
-    end
-    # an alias operator for "without_default_mode_modifiers"
-    def -@()
-        return self.without_default_mode_modifiers
     end
 end
 
@@ -807,6 +798,6 @@ class TokenHelper
             end
             output
         end
-        return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
+        return /(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")})/
     end
 end
