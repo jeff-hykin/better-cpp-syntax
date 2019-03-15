@@ -3,7 +3,7 @@ require_relative './cpp_tokens.rb'
 
 # todo
     # fix sizeof, alignas, decltype, and similar
-    # fix initializer list "functions" e.g. `int a{5};`
+    # fix initializer list "functions" e.g. `int a{5};` 
     # fix the ... inside of macros
     # have all patterns with keywords be dynamically generated
 
@@ -87,7 +87,7 @@ cpp_grammar = Grammar.new(
                             ).maybe(
                                 hex_digits
                             ).then(
-                                # lookBehind/Ahead because there needs to be a hex digit on at least one side
+                                # lookBehind/Ahead because there needs to be a hex digit on at least one side 
                                 match: lookBehindFor(/[0-9a-fA-F]/).then(/\./).or(/\./.lookAheadFor(/[0-9a-fA-F]/)),
                                 tag_as: "constant.numeric.hexadecimal",
                             ).maybe(
@@ -100,7 +100,7 @@ cpp_grammar = Grammar.new(
                             decimal_literal_float = maybe(
                                 decimal_digits
                             ).then(
-                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side
+                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side 
                                 match: lookBehindFor(/[0-9]/).then(/\./).or(/\./.lookAheadFor(/[0-9]/)),
                                 tag_as: "constant.numeric.decimal.point",
                             ).maybe(
@@ -172,7 +172,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.unit.user-defined"
             )
         )
-
+    
 #
 # Variable
 #
@@ -205,17 +205,17 @@ cpp_grammar = Grammar.new(
     storage_types = newPattern(
         repository_name: 'storage_types',
         includes: [
-
+            
             primitive_types = newPattern(
                 match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
                 tag_as: "storage.type.primitive"
             ),
-
+            
             non_primitive_types = newPattern(
                 match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
                 tag_as: "storage.type"
             ),
-
+            
             # FIXME, these should be changed to each have their own matcher, and struct should be handled the similar to 'class'
             other_types = newPattern(
                 match: variableBounds[ /(asm|__asm__|enum|union|struct)/ ],
@@ -353,7 +353,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "storage.type.template.argument.$1",
             # case 2: normal situation (ex: "typename T")
             ).or(
-                newPattern(
+                newPattern( 
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
                     tag_as: "storage.type.template.argument.$2",
                 ).then(
@@ -614,7 +614,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "punctuation.definition.scope"
                     ),
                 includes: [:special_block, :constructor, "$base" ]
-
+                
             ),
             "$base"
         ]
