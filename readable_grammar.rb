@@ -2,18 +2,17 @@ require 'json'
 require 'yaml'
 
 # TODO
+    # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
     # add testing support
         # have a should_match: list, and a should_not_match: list
-    # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
-    # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
-    # create a way to easily mutate anything on an existing pattern
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
+    # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
+    # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
+    # TODO: auto generate a tag-name when a pattern/range is used in more than one place
+    # create a way to easily mutate anything on an existing pattern
     # add optimizations
         # add check for seeing if the last pattern was an OR with no attributes. if it was then change (a|(b|c)) to (a|b|c)
         # add a "is alreadly a group" flag to prevent double wrapping
-    # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
-    # TODO: auto generate a tag-name when a pattern/range is used in more than one place
-    # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
 
 class Grammar
     attr_accessor :data
@@ -29,6 +28,10 @@ class Grammar
     #
     # Class Methods
     #
+    def self.tagAsConversion(name, group_number)
+        return name.gsub(/\$match/, "$#{group_number}")
+    end
+    
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
             raise "\n\nHey, I think youre trying to use some of the Grammar tools (like Patterns) before you've defined a grammar\nAt the top of the program just do something like:\ngrammar = Grammar.new( name:'blah', scope_name: 'source.blah' )\nAfter that the other stuff should work\n\n"
@@ -307,9 +310,18 @@ class Regexp
                 # remove the 0th capture group
                 top_level_group = new_captures.delete('0')
                 # add the name to the output
-                output[:name] = zero_group[:name]
+                output[:name] = Grammar.tagAsConversion(zero_group[:name], 0)
             end
             output[:captures] = new_captures
+        end
+        
+        # convert all of the "$match" into their group numbers
+        if output[:captures].is_a?(Hash)
+            for each_group_number, each_group in output[:captures].each_pair
+                if each_group[:name].is_a?(String)
+                    output[:captures][each_group_number][:name] = Grammar.tagAsConversion(each_group[:name], each_group_number)
+                end
+            end
         end
         
         # if captures dont exist then dont show them in the output

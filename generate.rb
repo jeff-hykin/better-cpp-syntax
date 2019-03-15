@@ -220,7 +220,7 @@ cpp_grammar = Grammar.new(
             # FIXME, these should be changed to each have their own matcher, and struct should be handled the similar to 'class'
             other_types = newPattern(
                 match: variableBounds[ /(asm|__asm__|enum|union|struct)/ ],
-                tag_as: "storage.type.$1"
+                tag_as: "storage.type.$match"
             )
         ]
         )
@@ -230,36 +230,36 @@ cpp_grammar = Grammar.new(
 #
     functional_specifiers_pre_parameters = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
-        tag_as: "storage.modifier.specificer.functional.pre-parameters.$1"
+        tag_as: "storage.modifier.specificer.functional.pre-parameters.$match"
         )
     qualifiers_and_specifiers_post_parameters = newPattern(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
-        tag_as: "storage.modifier.specifier.functional.post-parameters.$1"
+        tag_as: "storage.modifier.specifier.functional.post-parameters.$match"
         )
     storage_specifiers = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
-        tag_as: "storage.modifier.specifier.$1"
+        tag_as: "storage.modifier.specifier.$match"
         )
     access_control_keywords = newPattern(
         match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).then(/ *:/),
-        tag_as: "storage.type.modifier.access.control.$1"
+        tag_as: "storage.type.modifier.access.control.$match"
         )
     exception_keywords = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
-        tag_as: "keyword.control.exception.$1"
+        tag_as: "keyword.control.exception.$match"
         )
     other_keywords = newPattern(
         match: variableBounds[ /(using|typedef)/ ],
-        tag_as: "keyword.other.$1"
+        tag_as: "keyword.other.$match"
         )
     the_this_keyword = newPattern(
         match: variableBounds[ /this/ ],
         tag_as: "variable.language.this"
         )
-    # TODO: enhance this to include <>'s
+    # TODO: enhance casting operators to include <>'s
     type_casting_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
-        tag_as: "keyword.operator.cast.$1"
+        tag_as: "keyword.operator.cast.$match"
         )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
@@ -286,14 +286,14 @@ cpp_grammar = Grammar.new(
         )
     control_flow_keywords = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
-        tag_as: "keyword.control.$1"
+        tag_as: "keyword.control.$match"
         )
 #
 # Operators
 #
     normal_word_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow)) ],
-        tag_as: "keyword.operator.$1",
+        tag_as: "keyword.operator.$match",
         )
 
 #
@@ -348,12 +348,12 @@ cpp_grammar = Grammar.new(
             # case 1: only one word
             ).then(
                 match: variable_name_without_bounds,
-                tag_as: "storage.type.template.argument.$1",
+                tag_as: "storage.type.template.argument.$match",
             # case 2: normal situation (ex: "typename T")
             ).or(
                 newPattern( 
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                    tag_as: "storage.type.template.argument.$2",
+                    tag_as: "storage.type.template.argument.$match",
                 ).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template",
