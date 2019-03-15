@@ -201,7 +201,7 @@ cpp_grammar = Grammar.new(
     # why is posix reserved types not in "storage_types"? I don't know, if you can get it in there and everything still works it would be appreciated
     posix_reserved_types = newPattern(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        name: "support.type.posix-reserved"
+        tag_as: "support.type.posix-reserved"
         )
     storage_types = newPattern(
         repository_name: 'storage_types',
@@ -412,8 +412,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.namespace.scope-resolution"
             ).maybe(@spaces).maybe(
-                match: template_call.without_numbered_capture_groups,
-                includes: [ :template_call_innards ]
+                template_call
             ).then(
                 match: /::/,
                 tag_as: "punctuation.separator.namespace.access"
@@ -542,10 +541,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
             ).maybe(@spaces).maybe(
-                # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
-                # once that^ is done, this can be replaced with just 'template_call'
-                match: template_call.without_numbered_capture_groups,
-                includes: [ :template_call_innards ]
+                template_call
             ).then(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round"
@@ -626,7 +622,7 @@ cpp_grammar = Grammar.new(
     preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
     macro_argument = newPattern(
         match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        name: "variable.other.macro.argument"
+        tag_as: "variable.other.macro.argument"
         )
 
 #

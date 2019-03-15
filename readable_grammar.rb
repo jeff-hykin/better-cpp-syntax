@@ -2,16 +2,6 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # add support for all builtin things
-        # see https://macromates.com/manual/en/language_grammars#language_rules
-
-        # newPattern
-        #     repository
-        #     comment
-
-        # group
-        #     repository
-        #     comment
     # add testing support
         # have a should_match: list, and a should_not_match: list
     # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
@@ -58,6 +48,16 @@ class Grammar
         # if its a hash, then just add it as-is
         elsif (data.instance_of? Hash)
             return data
+        end
+    end
+    
+    def self.convertRepository(repository)
+        if (repository.is_a? Hash) && (repository != {})
+            textmate_repository = {}
+            for each_key, each_value in repository.each_pair
+                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)
+            end
+            return textmate_repository
         end
     end
     
@@ -241,12 +241,13 @@ class Regexp
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf' ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf') end
     
-    def to_tag
-        # if this pattern is in the repository, then just return a reference to the repository
-        if self.repository_name != nil
-            return { include: "##{self.repository_name}" }
+    def to_tag(ignore_repository_entry: false)
+        if not ignore_repository_entry
+            # if this pattern is in the repository, then just return a reference to the repository
+            if self.repository_name != nil
+                return { include: "##{self.repository_name}" }
+            end
         end
-        
         
         regex_as_string = self.without_default_mode_modifiers
         captures = self.captures
@@ -258,7 +259,7 @@ class Regexp
         # if only a pattern list (no :match argument)
         if regex_as_string == '()'
             return {
-                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:patterns])
+                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:includes])
             }
         end
         
@@ -302,18 +303,18 @@ class Regexp
             end
             zero_group = new_captures['0']
             # if name is the only value
-            if (zero_group[:name] != nil) and zero_group.keys.size == 1
+            if zero_group.is_a?(Hash) && (zero_group[:name] != nil) && zero_group.keys.size == 1
                 # remove the 0th capture group
                 top_level_group = new_captures.delete('0')
                 # add the name to the output
                 output[:name] = zero_group[:name]
             end
-            # if all captures have been removed, then remove it from the output
-            if new_captures == {}
-                output.delete(:captures)
-            else
-                output[:captures] = new_captures
-            end
+            output[:captures] = new_captures
+        end
+        
+        # if captures dont exist then dont show them in the output
+        if output[:captures] == {}
+            output.delete(:captures)
         end
         
         return output
@@ -321,44 +322,62 @@ class Regexp
     
     def captures
         captures = {}
-        for group_number in 1..@group_attributes.size
+        for group_number in 1..self.group_attributes.size
             raw_attributes = @group_attributes[group_number - 1]
-            
-            # if it has a repository_name, then just use that
-            if ((raw_attributes[:repository_name].is_a? String) and (raw_attributes[:repository_name] != ""))
-                captures[group_number.to_s] = {
-                    patterns: [ { include: "##{raw_attributes[:repository_name]}" } ]
-                }
-                next
-            end
+            capture_group = {}
             
             # if no attributes then just skip
             if raw_attributes == {}
                 next
             end
             
-            # by default carry everything over
-            captures[group_number.to_s] = raw_attributes
-            # convert "tag_as" into the TextMate "name"
-            if raw_attributes[:tag_as] != nil
-                captures[group_number.to_s][:name] = raw_attributes[:tag_as]
-                # remove it from the hash
-                raw_attributes.delete(:tag_as)
+            # comments
+            if raw_attributes[:comment] != nil
+                capture_group[:comment] = raw_attributes[:comment]
             end
             
-            # check for "includes"
+            # convert "tag_as" into the TextMate "name"
+            if raw_attributes[:tag_as] != nil
+                capture_group[:name] = raw_attributes[:tag_as]
+            end
+            
+            # check for "includes" convert it to "patterns"
             if raw_attributes[:includes] != nil
                 if not (raw_attributes[:includes].instance_of? Array)
                     raise "\n\nWhen converting a pattern into a tag (to_tag) there was a group that had an 'includes', but the includes wasn't an array\nThe pattern is:#{self}\nThe group attributes are: #{raw_attributes}"
                 end
                 # create the pattern list
-                captures[group_number.to_s][:patterns] = Grammar.convertIncludesToPatternList(raw_attributes[:includes])
-                # remove includes from the hash
-                raw_attributes.delete(:includes)
+                capture_group[:patterns] = Grammar.convertIncludesToPatternList(raw_attributes[:includes])
             end
-            # TODO add a check for :name, and :patterns and tell them to use tag_as and includes instead
-            # add any other attributes
-            captures[group_number.to_s].merge(raw_attributes)
+            
+            # check for "repository", run conversion on it
+            if raw_attributes[:repository] != nil
+                capture_group[:repository] = Grammar.convertRepository(raw_attributes[:repository])
+            end
+            
+            # a check for :name, and :patterns and tell them to use tag_as and includes instead
+            if raw_attributes[:name] or raw_attributes[:patterns]
+                raise "\n\nSomewhere there is a name: or patterns: attribute being set (inside of a newPattern() or helper)\ninstead of name: please use tag_as:\ninstead of patterns: please use includes:\n\nThe arguments for the pattern are:\n#{raw_attributes}"
+            end
+            
+            # check for unknown names
+            attributes_copy = Marshal.load(Marshal.dump(raw_attributes))
+            attributes_copy.delete(:name)
+            attributes_copy.delete(:match)
+            attributes_copy.delete(:patterns)
+            attributes_copy.delete(:comment)
+            attributes_copy.delete(:tag_as)
+            attributes_copy.delete(:includes)
+            attributes_copy.delete(:repository_name)
+            attributes_copy.delete(:repository)
+            if attributes_copy.size != 0
+                raise "\n\nThere are arugments being given to a newPattern or a helper that are not understood\nThe unknown arguments are:\n#{attributes_copy}\n\nThe normal arguments are#{raw_attributes}"
+            end
+            
+            # set the capture_group
+            if capture_group != {}
+                captures[group_number.to_s] = capture_group
+            end
         end
         return captures
     end
@@ -469,11 +488,6 @@ class Regexp
         #
         # Make changes to capture groups/attributes
         #
-        # extract out the repository_name first if there is one
-        if attributes[:repository_name] != nil
-            repository_name = attributes[:repository_name]
-            attributes.delete(:repository_name)
-        end
         # update the attributes of the new regex
         if no_attributes
             new_regex.group_attributes = self.group_attributes + other_regex.group_attributes
@@ -486,10 +500,10 @@ class Regexp
         end
         
         # if the pattern has a :repository_name
-        if repository_name != nil
+        if attributes[:repository_name] != nil
+            new_regex.repository_name = attributes[:repository_name]
             Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][repository_name] = new_regex.to_tag
-            new_regex.repository_name = repository_name
+            Grammar.current_grammar.data[:repository][attributes[:repository_name]] = new_regex.to_tag(ignore_repository_entry:true)
         end
         
         return new_regex
@@ -528,8 +542,7 @@ class Regexp
         # if its a Hash then extract the regex, and use the rest of the hash as the attributes
         elsif arg1.instance_of? Hash
             other_regex = arg1[:match]
-            # make shallow copy
-            attributes = arg1.to_hash
+            attributes = arg1.clone
             attributes.delete(:match)
         else
             raise "\n\nWhen creating a pattern, there is a #{error_location}() that was called, but the argument was not a Regex pattern or a Hash.\nThe function doesn't know what to do with the arguments:\n#{arguments}"
@@ -624,8 +637,9 @@ class Range
             # includes:
             # repository:
             # repository_name:
-
+        
         @as_tag = {}
+        key_arguments = key_arguments.clone
         
         #
         # comment
@@ -715,11 +729,7 @@ class Range
         repository = key_arguments[:repository]
         key_arguments.delete(:repository)
         if (repository.is_a? Hash) && (repository != {})
-            textmate_repository = {}
-            for each_key, each_value in repository.each_pair
-                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)
-            end
-            @as_tag[:repository] = textmate_repository
+            @as_tag[:repository] = Grammar.convertRepository(repository)
         end
         
         #
