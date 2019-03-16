@@ -310,34 +310,20 @@
 //
 // lambdas
 //
-    auto a = [ a, b, c ] (Args... args, int thing1) -> Ret {
+    auto a = [ a, b, c ] 
+    (Args... args, int thing1) -> Ret 
+        {
+        }
         
-    }
+    [ a,                     b, c ] (Args... args, int thing1) mutable -> Ret {         }
+    [ a,                     b, c ] (Args... args, int thing1)                {         }
+    [ a = stuff::blah[1324], b, c ] (Args... args, int thing1)                {         }
+    [ a,                     b, c ]                                           {         }
+    [=]                                                                -> int {         }
+    [=]                             ()                         mutable        { return; }
     
-    return [ a, b, c ] (Args... args, int thing1) -> Ret {
-        
-    }
-    
-    [ a, b, c ] (Args... args, int thing1) { }
-    
-    [ a = stuff::blah[1324], b, c ] (Args... args, int thing1) 
-        { }
-    
-    [ a, b, c ]
-        { }
-    
-    
-    [=] -> int
-        { }
-    
-    return [ a, b, c ] -> int
-        { }
-        
-    return function<void(void)>([=]() mutable {
-            input_task.Start();
-            Event<ANYTYPE>::NeedToWaitFor[input_event.name].push_back(input_task.thread);
-            return;
-        });
+    return [ a, b, c ] (Args... args, int thing1) -> Ret { }
+    return [ a, b, c ] -> int { }
     
 
 
