@@ -69,7 +69,7 @@ cpp_grammar = Grammar.new(
                 ),
             )
         decimal_exponent = newPattern(
-            should_fully_match: [  "e-100", "e+100", "E100", ],
+            should_fully_match: [ "e100", "e-100", "e+100", "E100", ],
             should_not_fully_match: [ "e0x0", "e-+100" ],
             match: newPattern(
                     match: /[eE]/,
@@ -191,6 +191,14 @@ cpp_grammar = Grammar.new(
         )
     
 #
+# Contexts
+#
+    # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
+    # but for now it just includes everything
+    evaluation_context = [ 
+        '$base'
+    ]
+#
 # Variable
 #
     # todo: make a better name for this function
@@ -200,7 +208,7 @@ cpp_grammar = Grammar.new(
     variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
-
+    
 #
 # Constants
 #
@@ -305,14 +313,6 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.$match"
         )
 #
-# Operators
-#
-    normal_word_operators = newPattern(
-        match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow)) ],
-        tag_as: "keyword.operator.$match",
-        )
-
-#
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
@@ -412,7 +412,6 @@ cpp_grammar = Grammar.new(
                 )
             )
         )
-
 #
 # Scope resolution
 #
@@ -434,7 +433,160 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.namespace.access"
             )
         )
-
+#
+# Functions
+#
+    functionTemplate = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
+        return Range.new(
+            repository_name: repository_name,
+            tag_content_as: "meta.#{tag_content_as}",
+            start_pattern: newPattern(
+                    match: match_name,
+                    tag_as: tag_name_as,
+                ).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.arguments.begin.bracket.round.#{tag_parenthese_as}"
+                ),
+            end_pattern: newPattern(
+                    match: /\)/,
+                    tag_as: "punctuation.section.arguments.end.bracket.round.#{tag_parenthese_as}"
+                ),
+            includes: evaluation_context
+            )
+    end
+    cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
+    avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
+    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
+    function_definition = Range.new(
+        tag_as: "meta.function.definition",
+        start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
+        end_pattern: lookBehindFor(/\)/),
+        includes: [ "#function-innards-c" ]
+        )
+    # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
+    function_call = Range.new(
+        start_pattern: avoid_invalid_function_names.then(
+                preceding_scopes
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.function.call"
+            ).maybe(@spaces).maybe(
+                template_call
+            ).then(
+                match: /\(/,
+                tag_as: "punctuation.section.arguments.begin.bracket.round"
+            ),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.arguments.end.bracket.round"
+            ),
+        includes: [ "#function-call-innards-c" ]
+        )
+#
+# Operators
+#
+    operator_context = []
+    normal_word_operators = newPattern(
+        match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
+        tag_as: "keyword.operator.$match",
+        )
+    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
+    for each in array_of_function_like_operators
+        name = each[:name]
+        operator_context.push(functionTemplate[
+            repository_name: "#{name}_operator",
+            match_name: variableBounds[/#{name}/],
+            tag_name_as: "keyword.operator.#{name}",
+            tag_content_as: "arguments.operator.#{name}",
+            tag_parenthese_as: "operator.#{name} keyword.operator.#{name}"
+        ])
+    end
+    operator_context += [
+            functionTemplate[
+                repository_name: "decltype_specifier", 
+                match_name: variableBounds[/decltype/], 
+                tag_name_as: "keyword.other.decltype storage.type.decltype",
+                tag_content_as: "arguments.decltype", 
+                tag_parenthese_as: "decltype storage.type.decltype" 
+            ],
+            type_casting_operators,
+            :method_access,
+            :member_access,
+            normal_word_operators,
+            {
+                match: "--",
+                name: "keyword.operator.decrement"
+            },
+            {
+                match: "\\+\\+",
+                name: "keyword.operator.increment"
+            },
+            {
+                match: "%=|\\+=|-=|\\*=|(?<!\\()/=",
+                name: "keyword.operator.assignment.compound"
+            },
+            {
+                match: "&=|\\^=|<<=|>>=|\\|=",
+                name: "keyword.operator.assignment.compound.bitwise"
+            },
+            {
+                match: "<<|>>",
+                name: "keyword.operator.bitwise.shift"
+            },
+            {
+                match: "!=|<=|>=|==|<|>",
+                name: "keyword.operator.comparison"
+            },
+            {
+                match: "&&|!|\\|\\|",
+                name: "keyword.operator.logical"
+            },
+            {
+                match: "&|\\||\\^|~",
+                name: "keyword.operator"
+            },
+            {
+                match: "=",
+                name: "keyword.operator.assignment"
+            },
+            {
+                match: "%|\\*|/|-|\\+",
+                name: "keyword.operator"
+            },
+            {
+                begin: "\\?",
+                beginCaptures: {
+                    "0" => {
+                        name: "keyword.operator.ternary"
+                    }
+                },
+                end: ":",
+                applyEndPatternLast: true,
+                endCaptures: {
+                    "0" => {
+                        name: "keyword.operator.ternary"
+                    }
+                },
+                patterns: [
+                    {
+                        include: "#method_access"
+                    },
+                    {
+                        include: "#member_access"
+                    },
+                    {
+                        include: "#c_function_call"
+                    },
+                    {
+                        include: "$base"
+                    }
+                ]
+            }
+        ]
+    operators = newPattern(
+        repository_name: 'operators',
+        includes: operator_context,
+        )
 #
 # Probably a parameter
 #
@@ -536,39 +688,6 @@ cpp_grammar = Grammar.new(
             ),
         includes: ["#function-call-innards-c"],
         )
-
-#
-# Functions
-#
-    cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
-    avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
-    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
-    function_definition = Range.new(
-        tag_as: "meta.function.definition",
-        start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
-        end_pattern: lookBehindFor(/\)/),
-        includes: [ "#function-innards-c" ]
-        )
-    # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-    function_call = Range.new(
-        start_pattern: avoid_invalid_function_names.then(
-                preceding_scopes
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.function.call"
-            ).maybe(@spaces).maybe(
-                template_call
-            ).then(
-                match: /\(/,
-                tag_as: "punctuation.section.arguments.begin.bracket.round"
-            ),
-        end_pattern: newPattern(
-                match: /\)/,
-                tag_as: "punctuation.section.arguments.end.bracket.round"
-            ),
-        includes: [ "#function-call-innards-c" ]
-        )
-
 #
 # Namespace
 #
@@ -662,10 +781,6 @@ cpp_grammar.initalContextIncludes(
     language_constants,
     template_definition,
     scope_resolution,
-    {
-        match: /\b(decltype|wchar_t|char16_t|char32_t)\b/,
-        name: "storage.type"
-    },
     {
         match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
         name: "storage.modifier"
@@ -1539,87 +1654,6 @@ cpp_grammar.addToRepository({
         },
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
-    },
-    "operators" => {
-        patterns: [
-            type_casting_operators.to_tag,
-            {
-                include: "#method_access",
-            },
-            {
-                include: "#member_access",
-            },
-            normal_word_operators.to_tag,
-            {
-                match: "--",
-                name: "keyword.operator.decrement"
-            },
-            {
-                match: "\\+\\+",
-                name: "keyword.operator.increment"
-            },
-            {
-                match: "%=|\\+=|-=|\\*=|(?<!\\()/=",
-                name: "keyword.operator.assignment.compound"
-            },
-            {
-                match: "&=|\\^=|<<=|>>=|\\|=",
-                name: "keyword.operator.assignment.compound.bitwise"
-            },
-            {
-                match: "<<|>>",
-                name: "keyword.operator.bitwise.shift"
-            },
-            {
-                match: "!=|<=|>=|==|<|>",
-                name: "keyword.operator.comparison"
-            },
-            {
-                match: "&&|!|\\|\\|",
-                name: "keyword.operator.logical"
-            },
-            {
-                match: "&|\\||\\^|~",
-                name: "keyword.operator"
-            },
-            {
-                match: "=",
-                name: "keyword.operator.assignment"
-            },
-            {
-                match: "%|\\*|/|-|\\+",
-                name: "keyword.operator"
-            },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                end: ":",
-                applyEndPatternLast: true,
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#method_access"
-                    },
-                    {
-                        include: "#member_access"
-                    },
-                    {
-                        include: "#c_function_call"
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            }
-        ]
     },
     "strings_c" => {
         patterns: [

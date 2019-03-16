@@ -27,7 +27,7 @@ tokens = [
     { representation: "compl"                , name: "bitwise-not-word"               , isOperator: true,                                      isUrnaryOperator:  true, presedence:  3.3 , evaledRightToLeft: true, isPreFixOperator:  true , isOperatorAlias: true},
     { representation: "*"                    , name: "dereference"                    , isOperator: true, canAppearAfterOperatorKeyword: true, isUrnaryOperator:  true, presedence:  3.5 , evaledRightToLeft: true, isPreFixOperator:  true },
     { representation: "&"                    , name: "address-of"                     , isOperator: true, canAppearAfterOperatorKeyword: true, isUrnaryOperator:  true, presedence:  3.6 , evaledRightToLeft: true, isPreFixOperator:  true },
-    { representation: "sizeof"               , name: "sizeof"                         , isOperator: true,                                      isUrnaryOperator:  true, presedence:  3.7 , evaledRightToLeft: true, isPreFixOperator:  true },
+    { representation: "sizeof"               , name: "sizeof"                         , isOperator: true,                                      isUrnaryOperator:  true, presedence:  3.7 , evaledRightToLeft: true, isPreFixOperator:  true, isFunctionLike: true  },
     { representation: "sizeof..."            , name: "variadic-sizeof"                , isOperator: true,                                      isUrnaryOperator:  true, presedence:  3.7 , evaledRightToLeft: true, isPreFixOperator:  true },
     { representation: "new"                  , name: "new"                            , isOperator: true, canAppearAfterOperatorKeyword: true, isUrnaryOperator:  true, presedence:  3.8 , evaledRightToLeft: true, isPreFixOperator:  true },
     { representation: "new[]"                , name: "new-array"                      , isOperator: true, canAppearAfterOperatorKeyword: true, isUrnaryOperator:  true, presedence:  3.8 , evaledRightToLeft: true, isPreFixOperator:  true },
@@ -78,9 +78,9 @@ tokens = [
     { representation: "or_eq"                , name: "bitwise-or-assignment-word"     , isOperator: true,                                      isBinaryOperator:  true, presedence: 16.7 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true , isOperatorAlias: true},
     { representation: ","                    , name: "comma"                          , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.7 , evaledRightToLeft: true, isInFixOperator:   true },
     # no presedence
-    { representation: "alignof"              , name: "alignof"                        , isOperator: true,                                                                                                           isPreFixOperator:  true },
-    { representation: "alignas"              , name: "alignas"                        , isOperator: true,                                                                                                           isPreFixOperator:  true },
-    { representation: "typeid"               , name: "typeid"                         , isOperator: true,                                                                                                           isPreFixOperator:  true },
+    { representation: "alignof"              , name: "alignof"                        , isOperator: true,                                                                                                           isFunctionLike:  true },
+    { representation: "alignas"              , name: "alignas"                        , isOperator: true,                                                                                                           isFunctionLike:  true },
+    { representation: "typeid"               , name: "typeid"                         , isOperator: true,                                                                                                           isFunctionLike:  true },
     { representation: "noexcept"             , name: "noexcept"                       , isOperator: true },
     { representation: "static_cast"          , name: "static_cast"                    , isOperator: true , isTypeCastingOperator: true},
     { representation: "dynamic_cast"         , name: "dynamic_cast"                   , isOperator: true , isTypeCastingOperator: true},
@@ -260,7 +260,7 @@ tokens = [
     { representation: "operator"        , name: "operator"      },
     # 
     { representation: "typedef"         , name: "typedef"       },
-    { representation: "decltype"        , name: "decltype"      , isSpecifier: true, isValidFunctionName: true}, #FIXME, decltype is not a valid function name, this is just a temp fix for decltype messing up highlighting
+    { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
