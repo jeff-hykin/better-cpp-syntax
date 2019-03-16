@@ -27,13 +27,13 @@ It fixes:
 
 It adds:
 - Parameter highlighting
+- Lambda highlighting
 - C++14 literal support (`100'000ms`)
+- Template definition syntax highlighting (including C++ 2020 syntax)
 - Better object identification
 - Improved scope resultion `::` syntax
 - Highlighting of templated function calls `aFunction<int>(arguments)`
-- Template definition syntax highlighting (including C++ 2020 syntax)
 - Additional specificity for many existing tags
-- Tags for the colon in ranged-based for loops
 - Many other features
 
 ## Contributing
@@ -47,7 +47,6 @@ Planned future fixes/featues:
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
 - Better support for dereferenced/pointer tagging
-- Add support for lambda highlighting (this is going to be tough)
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar

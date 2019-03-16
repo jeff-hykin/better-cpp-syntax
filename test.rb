@@ -10,28 +10,22 @@ cpp_grammar = Grammar.new(
         "This file essentially an updated/improved fork of the atom syntax https://github.com/atom/language-c/blob/master/grammars/c%2B%2B.cson",
     ],
 )
+#
+# Variable
+#
+    # todo: make a better name for this function
+    variableBounds = ->(regex_pattern) do
+        lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
+    end
+    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+    # word bounds are inefficient, but they are accurate
+    variable_name = variableBounds[variable_name_without_bounds]
+#variable end
 
-characters_in_template_call = /[\s<>,\w]/
-    template_call = newPattern(
-        repository_name: 'template_call_innards',
-        tag_as: 'meta.template.call',
-        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
-        includes: [
-            :storage_types,
-            :constants,
-            :scope_resolution,
-            newPattern(
-                match: /\w+/,
-                tag_as: 'storage.type.user-defined'
-            ),
-            :operators,
-            :number_literal,
-            :strings,
-            newPattern(
-                match: /,/,
-                tag_as: "punctuation.separator.comma.template.argument"
-            )
-        ]
+number_seperator_pattern = newPattern(
+    repository_name: 'literal_numeric_seperator',
+    match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
+    tag_as:"punctuation.separator.constant.numeric"
     )
-thing = /thing1/.then( template_call )
-puts thing.to_tag.to_yaml 
+
+p "''" =~ number_seperator_pattern

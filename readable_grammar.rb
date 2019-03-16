@@ -2,19 +2,14 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # add testing support
-        # have a should_match: list, and a should_not_match: list
-    # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
-    # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
-    # create a way to easily mutate anything on an existing pattern
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
+    # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
+    # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
+    # auto generate a repository entry when a pattern/range is used in more than one place
+    # create a way to easily mutate anything on an existing pattern
     # add optimizations
         # add check for seeing if the last pattern was an OR with no attributes. if it was then change (a|(b|c)) to (a|b|c)
         # add a "is alreadly a group" flag to prevent double wrapping
-    # TODO: add something (like 'tag_content_as') to support 'contentName' https://macromates.com/manual/en/language_grammars#language_rules
-    # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
-    # TODO: auto generate a tag-name when a pattern/range is used in more than one place
-    # TODO: repository_name's need to say as a pseudo element in 'group_attributes' so that when they're converted they don't copy and paste everything
 
 class Grammar
     attr_accessor :data
@@ -30,9 +25,59 @@ class Grammar
     #
     # Class Methods
     #
+    def self.convertTagName(name, group_number, group_attributes, was_first_group_removed: nil)
+        new_name = name
+        # replace $match with its group number
+        new_name.gsub!(/(?<=\$)match/,"#{group_number}" )
+        # replace reference() with the group number it was referencing
+        new_name.gsub! /(?<=\$)reference\((\w+)\)/ do |match|
+            reference = match.match(/(?<=\()\w+/).to_s
+            matching_index = group_attributes.find_index { |each| each[:reference] == reference }
+            
+            if matching_index == nil
+                raise "\n\nWhen looking for #{match} I couldnt find any groups with that reference\nThe groups are:\n#{group_attributes.to_yaml}\n\n"
+            elsif matching_index !=  group_attributes.size - 1 - group_attributes.reverse.find_index { |each| each[:reference] == reference }
+                raise "\n\nWhen looking for #{match} I found multiple groups with that reference\nThe groups are:\n#{group_attributes.to_yaml}\n\n"
+            end
+            
+            if was_first_group_removed
+                matching_index -= 1
+            end
+            matching_index
+        end
+        
+        return new_name
+    end
+    
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
             raise "\n\nHey, I think youre trying to use some of the Grammar tools (like Patterns) before you've defined a grammar\nAt the top of the program just do something like:\ngrammar = Grammar.new( name:'blah', scope_name: 'source.blah' )\nAfter that the other stuff should work\n\n"
+        end
+    end
+    
+    def self.toTag(data)
+        # if its a string then include it directly
+        if (data.instance_of? String)
+            return { include: data }
+        # if its a symbol then include a # to make it a repository_name reference
+        elsif (data.instance_of? Symbol)
+            return { include: "##{data}" }
+        # if its a pattern, then convert it to a tag
+        elsif (data.instance_of? Regexp) or (data.instance_of? Range)
+            return data.to_tag
+        # if its a hash, then just add it as-is
+        elsif (data.instance_of? Hash)
+            return data
+        end
+    end
+    
+    def self.convertRepository(repository)
+        if (repository.is_a? Hash) && (repository != {})
+            textmate_repository = {}
+            for each_key, each_value in repository.each_pair
+                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)
+            end
+            return textmate_repository
         end
     end
     
@@ -106,19 +151,7 @@ class Grammar
         # create the pattern list
         patterns = []
         for each_include in includes
-            # if its a string then include it directly
-            if (each_include.instance_of? String)
-                patterns.push({ include: each_include })
-            # if its a symbol then include a # to make it a repository_name reference
-            elsif (each_include.instance_of? Symbol)
-                patterns.push({ include: "##{each_include}" })
-            # if its a pattern, then convert it to a tag
-            elsif (each_include.instance_of? Regexp) or (each_include.instance_of? Range)
-                patterns.push(each_include.to_tag)
-            # if its a hash, then just add it as-is
-            elsif (each_include.instance_of? Hash)
-                patterns.push(each_include)
-            end
+            patterns.push(Grammar.toTag(each_include))
         end
         return patterns
     end
@@ -146,7 +179,7 @@ class Grammar
             for each in data
                 addLanguageEndings(each)
             end
-        else
+        elsif data.is_a? Hash
             for each in data
                 key = each[0]
                 value = each[1]
@@ -215,6 +248,23 @@ class Regexp
     attr_accessor :repository_name
     attr_accessor :has_top_level_group
     
+    def self.runTest(test_name, arguments, lambda, new_regex)
+        if arguments[test_name] != nil
+            if not( arguments[test_name].is_a?(Array) )
+                raise "\n\nI think there's a #{test_name}: argument, for a newPattern or helper, but the argument isn't an array (and it needs to be to work)\nThe other arguments are #{arguments.to_yaml}"
+            end
+            failures = []
+            for each in arguments[test_name]
+                if lambda[each]
+                    failures.push(each)
+                end
+            end
+            if failures.size > 0
+                puts "\n\nWhen testing the pattern:\nregex: #{new_regex.inspect}\n with these arguments:\n#{arguments.to_yaml}\n\nThe #{test_name} test failed for:\n#{failures.to_yaml}"
+            end
+        end
+    end
+    
     #
     # English Helpers
     #
@@ -228,12 +278,13 @@ class Regexp
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf' ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf') end
     
-    def to_tag
-        # if this pattern is in the repository, then just return a reference to the repository
-        if self.repository_name != nil
-            return { include: "##{self.repository_name}" }
+    def to_tag(ignore_repository_entry: false, without_optimizations: false)
+        if not ignore_repository_entry
+            # if this pattern is in the repository, then just return a reference to the repository
+            if self.repository_name != nil
+                return { include: "##{self.repository_name}" }
+            end
         end
-        
         
         regex_as_string = self.without_default_mode_modifiers
         captures = self.captures
@@ -245,7 +296,7 @@ class Regexp
         # if only a pattern list (no :match argument)
         if regex_as_string == '()'
             return {
-                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:patterns])
+                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:includes])
             }
         end
         
@@ -267,7 +318,7 @@ class Regexp
             #     match: 'oneThing'
             #     name: "thing.one"
             # }
-        if self.has_top_level_group
+        if self.has_top_level_group && !without_optimizations
             #
             # remove the group from the regex
             #
@@ -277,7 +328,7 @@ class Regexp
             end
             # remove the first and last ()'s
             output[:match] = regex_as_string[1...-1]
-            
+            was_first_group_removed = true
             #
             # update the capture groups
             #
@@ -289,18 +340,27 @@ class Regexp
             end
             zero_group = new_captures['0']
             # if name is the only value
-            if (zero_group[:name] != nil) and zero_group.keys.size == 1
+            if zero_group.is_a?(Hash) && (zero_group[:name] != nil) && zero_group.keys.size == 1
                 # remove the 0th capture group
                 top_level_group = new_captures.delete('0')
                 # add the name to the output
-                output[:name] = zero_group[:name]
+                output[:name] = Grammar.convertTagName(zero_group[:name], 0, @group_attributes, was_first_group_removed: was_first_group_removed)
             end
-            # if all captures have been removed, then remove it from the output
-            if new_captures == {}
-                output.delete(:captures)
-            else
-                output[:captures] = new_captures
+            output[:captures] = new_captures
+        end
+        
+        # convert all of the "$match" into their group numbers
+        if output[:captures].is_a?(Hash)
+            for each_group_number, each_group in output[:captures].each_pair
+                if each_group[:name].is_a?(String)
+                    output[:captures][each_group_number][:name] = Grammar.convertTagName(each_group[:name], each_group_number, @group_attributes, was_first_group_removed: was_first_group_removed)
+                end
             end
+        end
+        
+        # if captures dont exist then dont show them in the output
+        if output[:captures] == {}
+            output.delete(:captures)
         end
         
         return output
@@ -308,44 +368,67 @@ class Regexp
     
     def captures
         captures = {}
-        for group_number in 1..@group_attributes.size
+        for group_number in 1..self.group_attributes.size
             raw_attributes = @group_attributes[group_number - 1]
-            
-            # if it has a repository_name, then just use that
-            if ((raw_attributes[:repository_name].is_a? String) and (raw_attributes[:repository_name] != ""))
-                captures[group_number.to_s] = {
-                    patterns: [ { include: "##{raw_attributes[:repository_name]}" } ]
-                }
-                next
-            end
+            capture_group = {}
             
             # if no attributes then just skip
             if raw_attributes == {}
                 next
             end
             
-            # by default carry everything over
-            captures[group_number.to_s] = raw_attributes
-            # convert "tag_as" into the TextMate "name"
-            if raw_attributes[:tag_as] != nil
-                captures[group_number.to_s][:name] = raw_attributes[:tag_as]
-                # remove it from the hash
-                raw_attributes.delete(:tag_as)
+            # comments
+            if raw_attributes[:comment] != nil
+                capture_group[:comment] = raw_attributes[:comment]
             end
             
-            # check for "includes"
+            # convert "tag_as" into the TextMate "name"
+            if raw_attributes[:tag_as] != nil
+                capture_group[:name] = raw_attributes[:tag_as]
+            end
+            
+            # check for "includes" convert it to "patterns"
             if raw_attributes[:includes] != nil
                 if not (raw_attributes[:includes].instance_of? Array)
                     raise "\n\nWhen converting a pattern into a tag (to_tag) there was a group that had an 'includes', but the includes wasn't an array\nThe pattern is:#{self}\nThe group attributes are: #{raw_attributes}"
                 end
                 # create the pattern list
-                captures[group_number.to_s][:patterns] = Grammar.convertIncludesToPatternList(raw_attributes[:includes])
-                # remove includes from the hash
-                raw_attributes.delete(:includes)
+                capture_group[:patterns] = Grammar.convertIncludesToPatternList(raw_attributes[:includes])
             end
-            # TODO add a check for :name, and :patterns and tell them to use tag_as and includes instead
-            # add any other attributes
-            captures[group_number.to_s].merge(raw_attributes)
+            
+            # check for "repository", run conversion on it
+            if raw_attributes[:repository] != nil
+                capture_group[:repository] = Grammar.convertRepository(raw_attributes[:repository])
+            end
+            
+            # a check for :name, and :patterns and tell them to use tag_as and includes instead
+            if raw_attributes[:name] or raw_attributes[:patterns]
+                raise "\n\nSomewhere there is a name: or patterns: attribute being set (inside of a newPattern() or helper)\ninstead of name: please use tag_as:\ninstead of patterns: please use includes:\n\nThe arguments for the pattern are:\n#{raw_attributes.to_yaml}"
+            end
+            
+            # check for unknown names
+            attributes_copy = Marshal.load(Marshal.dump(raw_attributes))
+            attributes_copy.delete(:name)
+            attributes_copy.delete(:match)
+            attributes_copy.delete(:patterns)
+            attributes_copy.delete(:comment)
+            attributes_copy.delete(:tag_as)
+            attributes_copy.delete(:includes)
+            attributes_copy.delete(:reference)
+            attributes_copy.delete(:should_fully_match)
+            attributes_copy.delete(:should_not_fully_match)
+            attributes_copy.delete(:should_partial_match)
+            attributes_copy.delete(:should_not_partial_match)
+            attributes_copy.delete(:repository_name)
+            attributes_copy.delete(:repository)
+            if attributes_copy.size != 0
+                raise "\n\nThere are arugments being given to a newPattern or a helper that are not understood\nThe unknown arguments are:\n#{attributes_copy}\n\nThe normal arguments are#{raw_attributes}"
+            end
+            
+            # set the capture_group
+            if capture_group != {}
+                captures[group_number.to_s] = capture_group
+            end
         end
         return captures
     end
@@ -355,7 +438,7 @@ class Regexp
         as_string = self.to_s
         # if it is the default settings (AKA -mix) then remove it
         if (as_string.size > 6) and (as_string[0..5] == '(?-mix')
-            return as_string.sub(/\A\(\?\-mix\:/, "").sub(/\)\z/,"")
+            return self.inspect[1..-2]
         else 
             return as_string
         end
@@ -388,11 +471,6 @@ class Regexp
         return Regexp.new(reversed_but_fixed.reverse)
     end
     
-    # an alias operator for "without_default_mode_modifiers"
-    def -@()
-        return self.without_default_mode_modifiers
-    end
-    
     def processRegexOperator(arguments, operator)
         # first parse the arguments
         other_regex, attributes = Regexp.processGrammarArguments(arguments, operator)
@@ -414,11 +492,11 @@ class Regexp
                     new_regex = /#{self_as_string}#{other_regex_as_string}/
                 end
             when 'or'
-                new_regex = /(?:(?:#{self_as_string}|(#{other_regex_as_string})))/
+                new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
                 if no_attributes
                     # the extra (?:(?:)) groups are because ruby will auto-optimize away the outer most one, even if only one is given
                     # TODO eventually there should be a better optimization for this
-                    new_regex = /(?:(?:(?:#{self_as_string}|#{other_regex_as_string})))/
+                    new_regex = /(?:#{self_as_string}|#{other_regex_as_string})/
                 end
             when 'maybe'
                 # this one is more complicated because it contains an optimization
@@ -456,11 +534,6 @@ class Regexp
         #
         # Make changes to capture groups/attributes
         #
-        # extract out the repository_name first if there is one
-        if attributes[:repository_name] != nil
-            repository_name = attributes[:repository_name]
-            attributes.delete(:repository_name)
-        end
         # update the attributes of the new regex
         if no_attributes
             new_regex.group_attributes = self.group_attributes + other_regex.group_attributes
@@ -473,11 +546,19 @@ class Regexp
         end
         
         # if the pattern has a :repository_name
-        if repository_name != nil
+        if attributes[:repository_name] != nil
+            new_regex.repository_name = attributes[:repository_name]
             Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][repository_name] = new_regex.to_tag
-            new_regex.repository_name = repository_name
+            Grammar.current_grammar.data[:repository][attributes[:repository_name]] = new_regex.to_tag(ignore_repository_entry:true)
         end
+        
+        #
+        # run tests
+        #
+        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ new_regex)       } , new_regex)
+        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ new_regex) != nil     } , new_regex)
+        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{new_regex}\z/)  } , new_regex)
+        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{new_regex}\z/) != nil } , new_regex)
         
         return new_regex
     end
@@ -515,8 +596,7 @@ class Regexp
         # if its a Hash then extract the regex, and use the rest of the hash as the attributes
         elsif arg1.instance_of? Hash
             other_regex = arg1[:match]
-            # make shallow copy
-            attributes = arg1.to_hash
+            attributes = arg1.clone
             attributes.delete(:match)
         else
             raise "\n\nWhen creating a pattern, there is a #{error_location}() that was called, but the argument was not a Regex pattern or a Hash.\nThe function doesn't know what to do with the arguments:\n#{arguments}"
@@ -546,10 +626,6 @@ class String
     # make the without_default_mode_modifiers do nothing for strings
     def without_default_mode_modifiers()
         return self
-    end
-    # an alias operator for "without_default_mode_modifiers"
-    def -@()
-        return self.without_default_mode_modifiers
     end
 end
 
@@ -600,36 +676,126 @@ class Range
     attr_accessor :as_tag, :repository_name
     
     def initialize(key_arguments)
-        # TODO:
-            # tag_content_as
-        @as_tag = {
-            name: key_arguments[:tag_as],
-            begin: key_arguments[:start_pattern].without_default_mode_modifiers,
-            beginCaptures: key_arguments[:start_pattern].captures,
-            end: key_arguments[:end_pattern].without_default_mode_modifiers,
-            endCaptures: key_arguments[:end_pattern].captures,
-            patterns: Grammar.convertIncludesToPatternList(key_arguments[:includes])
-        }
+        # parameters:
+            # comment: (idk why youd ever use this, but it exists for backwards compatibility)
+            # tag_as:
+            # tag_content_as:
+            # apply_end_pattern_last:
+            # while:
+            # start_pattern:
+            # end_pattern:
+            # includes:
+            # repository:
+            # repository_name:
         
-        # remove blanks
-        if @as_tag[:beginCaptures] == {}
-            @as_tag.delete(:beginCaptures)
-        end
-        if @as_tag[:endCaptures] == {}
-            @as_tag.delete(:endCaptures)
-        end
-        if not( (@as_tag[:name].is_a? String) and (@as_tag[:name] != "") )
-            @as_tag.delete(:name)
+        @as_tag = {}
+        key_arguments = key_arguments.clone
+        
+        #
+        # comment
+        #
+        comment = key_arguments[:comment]
+        key_arguments.delete(:comment)
+        if comment != nil && comment != ""
+            @as_tag[:name] = comment
         end
         
         #
-        # handle adding to the repository
+        # tag_as
         #
-        if key_arguments[:repository_name] != nil
+        tag_name = key_arguments[:tag_as]
+        key_arguments.delete(:tag_as)
+        if tag_name != nil && tag_name != ""
+            @as_tag[:name] = tag_name
+        end
+        
+        #
+        # tag_content_as
+        #
+        tag_content_name = key_arguments[:tag_content_as]
+        key_arguments.delete(:tag_content_as)
+        if tag_content_name != nil && tag_content_name != ""
+            @as_tag[:contentName] = tag_content_name
+        end
+        
+        #
+        # apply_end_pattern_last
+        #
+        apply_end_pattern_last = key_arguments[:apply_end_pattern_last]
+        key_arguments.delete(:apply_end_pattern_last)
+        if apply_end_pattern_last == 1 || apply_end_pattern_last == true
+            @as_tag[:applyEndPatternLast] = apply_end_pattern_last
+        end
+        
+        #
+        # while
+        #
+        while_statement = key_arguments[:while]
+        key_arguments.delete(:while)
+        if while_statement != nil && while_statement != //
+            @as_tag[:while] = while_statement
+        end
+        
+        #
+        # start_pattern
+        #
+        start_pattern = key_arguments[:start_pattern]
+        if not ( (start_pattern.is_a? Regexp) and start_pattern != // )
+            raise "The start pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+        end
+        @as_tag[:begin] = start_pattern.without_default_mode_modifiers
+        key_arguments.delete(:start_pattern)
+        begin_captures = start_pattern.to_tag(without_optimizations: true)[:captures]
+        if begin_captures != {} && begin_captures.to_s != "" 
+            @as_tag[:beginCaptures] = begin_captures
+        end
+        
+        #
+        # end_pattern
+        #
+        end_pattern = key_arguments[:end_pattern]
+        if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
+            raise "The end pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+        end
+        @as_tag[:end] = end_pattern.without_default_mode_modifiers
+        key_arguments.delete(:end_pattern)
+        end_captures = end_pattern.to_tag(without_optimizations: true)[:captures]
+        if end_captures != {} && end_captures.to_s != ""
+            @as_tag[:endCaptures] = end_captures
+        end
+        
+        #
+        # includes
+        #
+        patterns = Grammar.convertIncludesToPatternList(key_arguments[:includes])
+        key_arguments.delete(:includes)
+        if patterns != []
+            @as_tag[:patterns] = patterns
+        end
+        
+        #
+        # repository
+        #
+        repository = key_arguments[:repository]
+        key_arguments.delete(:repository)
+        if (repository.is_a? Hash) && (repository != {})
+            @as_tag[:repository] = Grammar.convertRepository(repository)
+        end
+        
+        #
+        # repository_name
+        #
+        # extract the repository_name
+        repository_name = key_arguments[:repository_name]
+        key_arguments.delete(:repository_name)
+        if repository_name.to_s != ""
             Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][key_arguments[:repository_name]] = @as_tag
-            @repository_name = key_arguments[:repository_name]
+            Grammar.current_grammar.data[:repository][repository_name] = self.to_tag
+            # set the repository_name only after the repository entry is made
+            @repository_name = repository_name
         end
+        
+        # TODO, add more error checking. key_arguments should be empty at this point
     end
     
     def to_tag
@@ -691,6 +857,6 @@ class TokenHelper
             end
             output
         end
-        return /(?:(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")}))/
+        return /(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")})/
     end
 end
