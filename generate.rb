@@ -1664,7 +1664,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "parens-c" => {
-        name: "punctuation.section.parens-c\b",
+        name: "punctuation.section.parens-c",
         begin: "\\(",
         beginCaptures: {
             "0" => {
