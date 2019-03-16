@@ -32,17 +32,18 @@ class Grammar
         # replace reference() with the group number it was referencing
         new_name.gsub! /(?<=\$)reference\((\w+)\)/ do |match|
             reference = match.match(/(?<=\()\w+/).to_s
-            matching_groups = group_attributes.select { |key, value| value[:reference] == reference }
-            if matching_groups.size == 0
-                raise "\n\nWhen looking for #{match} I couldnt find any groups with that reference\nThe groups are:\n#{group_attributes}"
-            elsif matching_groups.size > 1
-                raise "\n\nWhen looking for #{match} I found multiple groups with that reference\nThe groups are:\n#{group_attributes}"
+            matching_index = group_attributes.find_index { |each| each[:reference] == reference }
+            
+            if matching_index == nil
+                raise "\n\nWhen looking for #{match} I couldnt find any groups with that reference\nThe groups are:\n#{group_attributes.to_yaml}\n\n"
+            elsif matching_index !=  group_attributes.size - 1 - group_attributes.reverse.find_index { |each| each[:reference] == reference }
+                raise "\n\nWhen looking for #{match} I found multiple groups with that reference\nThe groups are:\n#{group_attributes.to_yaml}\n\n"
             end
-            number = matching_groups.keys[0].to_i 
+            
             if was_first_group_removed
-                number -= 1
+                matching_index -= 1
             end
-            number
+            matching_index
         end
         
         return new_name
@@ -178,7 +179,7 @@ class Grammar
             for each in data
                 addLanguageEndings(each)
             end
-        else
+        elsif data.is_a? Hash
             for each in data
                 key = each[0]
                 value = each[1]
@@ -277,7 +278,7 @@ class Regexp
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf' ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf') end
     
-    def to_tag(ignore_repository_entry: false)
+    def to_tag(ignore_repository_entry: false, without_optimizations: false)
         if not ignore_repository_entry
             # if this pattern is in the repository, then just return a reference to the repository
             if self.repository_name != nil
@@ -317,7 +318,7 @@ class Regexp
             #     match: 'oneThing'
             #     name: "thing.one"
             # }
-        if self.has_top_level_group
+        if self.has_top_level_group && !without_optimizations
             #
             # remove the group from the regex
             #
@@ -343,7 +344,7 @@ class Regexp
                 # remove the 0th capture group
                 top_level_group = new_captures.delete('0')
                 # add the name to the output
-                output[:name] = Grammar.convertTagName(zero_group[:name], 0, group_attributes, was_first_group_removed: was_first_group_removed)
+                output[:name] = Grammar.convertTagName(zero_group[:name], 0, @group_attributes, was_first_group_removed: was_first_group_removed)
             end
             output[:captures] = new_captures
         end
@@ -352,7 +353,7 @@ class Regexp
         if output[:captures].is_a?(Hash)
             for each_group_number, each_group in output[:captures].each_pair
                 if each_group[:name].is_a?(String)
-                    output[:captures][each_group_number][:name] = Grammar.convertTagName(each_group[:name], each_group_number, group_attributes, was_first_group_removed: was_first_group_removed)
+                    output[:captures][each_group_number][:name] = Grammar.convertTagName(each_group[:name], each_group_number, @group_attributes, was_first_group_removed: was_first_group_removed)
                 end
             end
         end
@@ -402,7 +403,7 @@ class Regexp
             
             # a check for :name, and :patterns and tell them to use tag_as and includes instead
             if raw_attributes[:name] or raw_attributes[:patterns]
-                raise "\n\nSomewhere there is a name: or patterns: attribute being set (inside of a newPattern() or helper)\ninstead of name: please use tag_as:\ninstead of patterns: please use includes:\n\nThe arguments for the pattern are:\n#{raw_attributes}"
+                raise "\n\nSomewhere there is a name: or patterns: attribute being set (inside of a newPattern() or helper)\ninstead of name: please use tag_as:\ninstead of patterns: please use includes:\n\nThe arguments for the pattern are:\n#{raw_attributes.to_yaml}"
             end
             
             # check for unknown names
@@ -744,8 +745,8 @@ class Range
         end
         @as_tag[:begin] = start_pattern.without_default_mode_modifiers
         key_arguments.delete(:start_pattern)
-        begin_captures = start_pattern.captures
-        if begin_captures != {}
+        begin_captures = start_pattern.to_tag(without_optimizations: true)[:captures]
+        if begin_captures != {} && begin_captures.to_s != "" 
             @as_tag[:beginCaptures] = begin_captures
         end
         
@@ -758,8 +759,8 @@ class Range
         end
         @as_tag[:end] = end_pattern.without_default_mode_modifiers
         key_arguments.delete(:end_pattern)
-        end_captures = end_pattern.captures
-        if end_captures != {}
+        end_captures = end_pattern.to_tag(without_optimizations: true)[:captures]
+        if end_captures != {} && end_captures.to_s != ""
             @as_tag[:endCaptures] = end_captures
         end
         
