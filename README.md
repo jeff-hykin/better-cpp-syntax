@@ -4,7 +4,7 @@ This used to be a fix, but then VS Code starting using it as the official source
 
 ## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all C++/C files.
-Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
+<br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
 ### Before Better C++
 ![without-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240797-8d75ef80-2897-11e9-97b6-f94af43d9fb7.png)
