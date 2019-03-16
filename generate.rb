@@ -754,7 +754,7 @@ cpp_grammar = Grammar.new(
         )
 
 #
-# preprocessor
+# Preprocessor
 #
     # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
     preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
@@ -765,7 +765,7 @@ cpp_grammar = Grammar.new(
         )
 
 #
-# lambda
+# Lambdas
 #
     array_of_invalid_function_names = @cpp_tokens.tokens.select { |each| each[:canAppearBeforeLambdaCapture] }
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each[:representation]+'|^'+each[:representation] } .join('|')}/
