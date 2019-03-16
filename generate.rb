@@ -178,7 +178,7 @@ cpp_grammar = Grammar.new(
                     # integer suffix
                     ).maybe(
                         literal_integer_suffix = newPattern(
-                            match: /LL[uU]/.or(/ll[uU]/).or(/[uU]LL/).or(/[uU]ll/).or(/ll/).or(/LL/).or(/[uUlL]/).lookAheadToAvoid(/\w/),
+                            match: /[uU]/.or(/[uU]ll?/).or(/[uU]LL?/).or(/ll?[uU]?/).or(/LL?[uU]?/).lookAheadToAvoid(/\w/),
                             tag_as: "keyword.other.unit.suffix.integer"
                         )
                     )
@@ -268,7 +268,7 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.$match"
         )
     access_control_keywords = newPattern(
-        match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).then(/ *:/),
+        match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
         tag_as: "storage.type.modifier.access.control.$match"
         )
     exception_keywords = newPattern(
