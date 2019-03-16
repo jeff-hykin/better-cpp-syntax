@@ -27,48 +27,64 @@ cpp_grammar = Grammar.new(
     # misc
     #
         number_seperator_pattern = newPattern(
+            should_fully_match: [ "'" ],
+            should_partial_match: [ "1'1", "1'", "'1" ],
+            should_not_partial_match: [ "1''1", "1''" ],
             repository_name: 'literal_numeric_seperator',
             match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
-            tag_as:"punctuation.separator.constant.numeric"
+            tag_as:"punctuation.separator.constant.numeric",
             )
         hex_digits = newPattern(
+            should_fully_match: [ "1", "123456", "DeAdBeeF", "49'30'94", "DeA'dBe'eF", "dea234f4930" ],
+            should_not_fully_match: [ "'3902" , "de2300p1000", "0x000" ],
+            should_not_partial_match: [ "p", "x", "." ],
             match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
             tag_as: "constant.numeric.hexadecimal",
-            includes: [ number_seperator_pattern ]
+            includes: [ number_seperator_pattern ],
             )
         decimal_digits = newPattern(
+            should_fully_match: [ "1", "123456", "49'30'94" , "1'2" ],
+            should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
             match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
             tag_as: "constant.numeric.decimal",
-            includes: [ number_seperator_pattern ]
+            includes: [ number_seperator_pattern ],
             )
         # see https://en.cppreference.com/w/cpp/language/floating_literal
         hex_exponent = newPattern(
-                match: /[pP]/,
-                tag_as: "keyword.other.unit.exponent.hexadecimal",
-            ).maybe(
-                match: /\+/,
-                tag_as: "keyword.operator.plus.exponent.hexadecimal",
-            ).maybe(
-                match: /\-/,
-                tag_as: "keyword.operator.minus.exponent.hexadecimal",
-            ).then(
-                match: decimal_digits.without_numbered_capture_groups,
-                tag_as: "constant.numeric.exponent.hexadecimal",
-                includes: [ number_seperator_pattern ]
+            should_fully_match: [ "p100", "p-100", "p+100", "P100" ],
+            should_not_fully_match: [ "p0x0", "p-+100" ],
+            match: newPattern(
+                    match: /[pP]/,
+                    tag_as: "keyword.other.unit.exponent.hexadecimal",
+                ).maybe(
+                    match: /\+/,
+                    tag_as: "keyword.operator.plus.exponent.hexadecimal",
+                ).maybe(
+                    match: /\-/,
+                    tag_as: "keyword.operator.minus.exponent.hexadecimal",
+                ).then(
+                    match: decimal_digits.without_numbered_capture_groups,
+                    tag_as: "constant.numeric.exponent.hexadecimal",
+                    includes: [ number_seperator_pattern ]
+                ),
             )
         decimal_exponent = newPattern(
-                match: /[eE]/,
-                tag_as: "keyword.other.unit.exponent.decimal",
-            ).maybe(
-                match: /\+/,
-                tag_as: "keyword.operator.plus.exponent.decimal",
-            ).maybe(
-                match: /\-/,
-                tag_as: "keyword.operator.minus.exponent.decimal",
-            ).then(
-                match: decimal_digits.without_numbered_capture_groups,
-                tag_as: "constant.numeric.exponent.decimal",
-                includes: [ number_seperator_pattern ]
+            should_fully_match: [  "e-100", "e+100", "E100", ],
+            should_not_fully_match: [ "e0x0", "e-+100" ],
+            match: newPattern(
+                    match: /[eE]/,
+                    tag_as: "keyword.other.unit.exponent.decimal",
+                ).maybe(
+                    match: /\+/,
+                    tag_as: "keyword.operator.plus.exponent.decimal",
+                ).maybe(
+                    match: /\-/,
+                    tag_as: "keyword.operator.minus.exponent.decimal",
+                ).then(
+                    match: decimal_digits.without_numbered_capture_groups,
+                    tag_as: "constant.numeric.exponent.decimal",
+                    includes: [ number_seperator_pattern ]
+                ),
             )
     #
     # Number Literal

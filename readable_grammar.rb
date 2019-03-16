@@ -2,13 +2,10 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # add support for tag_as to use $match, and then replace $match with the group number (e.g. $11)
-    # add testing support
-        # have a should_match: list, and a should_not_match: list
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
-    # TODO: auto generate a tag-name when a pattern/range is used in more than one place
+    # auto generate a repository entry when a pattern/range is used in more than one place
     # create a way to easily mutate anything on an existing pattern
     # add optimizations
         # add check for seeing if the last pattern was an OR with no attributes. if it was then change (a|(b|c)) to (a|b|c)
@@ -28,8 +25,27 @@ class Grammar
     #
     # Class Methods
     #
-    def self.tagAsConversion(name, group_number)
-        return name.gsub(/\$match/, "$#{group_number}")
+    def self.convertTagName(name, group_number, group_attributes, was_first_group_removed: nil)
+        new_name = name
+        # replace $match with its group number
+        new_name.gsub!(/(?<=\$)match/,"#{group_number}" )
+        # replace reference() with the group number it was referencing
+        new_name.gsub! /(?<=\$)reference\((\w+)\)/ do |match|
+            reference = match.match(/(?<=\()\w+/).to_s
+            matching_groups = group_attributes.select { |key, value| value[:reference] == reference }
+            if matching_groups.size == 0
+                raise "\n\nWhen looking for #{match} I couldnt find any groups with that reference\nThe groups are:\n#{group_attributes}"
+            elsif matching_groups.size > 1
+                raise "\n\nWhen looking for #{match} I found multiple groups with that reference\nThe groups are:\n#{group_attributes}"
+            end
+            number = matching_groups.keys[0].to_i 
+            if was_first_group_removed
+                number -= 1
+            end
+            number
+        end
+        
+        return new_name
     end
     
     def self.makeSureAGrammarExists
@@ -231,6 +247,23 @@ class Regexp
     attr_accessor :repository_name
     attr_accessor :has_top_level_group
     
+    def self.runTest(test_name, arguments, lambda)
+        if arguments[test_name] != nil
+            if not( arguments[test_name].is_a?(Array) )
+                raise "\n\nI think there's a should_not_fully_match: argument, for a newPattern or helper, but the argument isn't an array (and it needs to be to work)\nThe other arguments are #{arguments.to_yaml}"
+            end
+            failures = []
+            for each in arguments[test_name]
+                if lambda[each]
+                    failures.push(each)
+                end
+            end
+            if failures.size > 0
+                puts "\n\nWhen testing the pattern with these arguments:\n#{arguments.to_yaml}\n\nThe #{test_name} test failed for:\n#{failures.to_yaml}"
+            end
+        end
+    end
+    
     #
     # English Helpers
     #
@@ -294,7 +327,7 @@ class Regexp
             end
             # remove the first and last ()'s
             output[:match] = regex_as_string[1...-1]
-            
+            was_first_group_removed = true
             #
             # update the capture groups
             #
@@ -310,7 +343,7 @@ class Regexp
                 # remove the 0th capture group
                 top_level_group = new_captures.delete('0')
                 # add the name to the output
-                output[:name] = Grammar.tagAsConversion(zero_group[:name], 0)
+                output[:name] = Grammar.convertTagName(zero_group[:name], 0, group_attributes, was_first_group_removed: was_first_group_removed)
             end
             output[:captures] = new_captures
         end
@@ -319,7 +352,7 @@ class Regexp
         if output[:captures].is_a?(Hash)
             for each_group_number, each_group in output[:captures].each_pair
                 if each_group[:name].is_a?(String)
-                    output[:captures][each_group_number][:name] = Grammar.tagAsConversion(each_group[:name], each_group_number)
+                    output[:captures][each_group_number][:name] = Grammar.convertTagName(each_group[:name], each_group_number, group_attributes, was_first_group_removed: was_first_group_removed)
                 end
             end
         end
@@ -380,6 +413,11 @@ class Regexp
             attributes_copy.delete(:comment)
             attributes_copy.delete(:tag_as)
             attributes_copy.delete(:includes)
+            attributes_copy.delete(:reference)
+            attributes_copy.delete(:should_fully_match)
+            attributes_copy.delete(:should_not_fully_match)
+            attributes_copy.delete(:should_partial_match)
+            attributes_copy.delete(:should_not_partial_match)
             attributes_copy.delete(:repository_name)
             attributes_copy.delete(:repository)
             if attributes_copy.size != 0
@@ -512,6 +550,14 @@ class Regexp
             Grammar.makeSureAGrammarExists
             Grammar.current_grammar.data[:repository][attributes[:repository_name]] = new_regex.to_tag(ignore_repository_entry:true)
         end
+        
+        #
+        # run tests
+        #
+        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ new_regex)       } )
+        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ new_regex) != nil     } )
+        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{new_regex}\z/)  } )
+        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{new_regex}\z/) != nil } )
         
         return new_regex
     end

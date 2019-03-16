@@ -22,25 +22,10 @@ cpp_grammar = Grammar.new(
     variable_name = variableBounds[variable_name_without_bounds]
 #variable end
 
-template_call = newPattern(
-    repository_name: 'template_call_innards',
-    tag_as: 'meta.template.call',
-    match: /</.zeroOrMoreOf(/[\w<]/).then(/>/).maybe(@spaces),
-    includes: [
-        :storage_types,
-        :constants,
-        :scope_resolution,
-        newPattern(
-            match: variable_name,
-            tag_as: 'storage.type.user-defined'
-        ),
-        :operators,
-        :number_literal,
-        :strings,
-        newPattern(
-            match: /,/,
-            tag_as: "punctuation.separator.comma.template.argument"
-        )
-    ]
+number_seperator_pattern = newPattern(
+    repository_name: 'literal_numeric_seperator',
+    match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
+    tag_as:"punctuation.separator.constant.numeric"
     )
-p template_call.without_numbered_capture_groups
+
+p "''" =~ number_seperator_pattern
