@@ -683,13 +683,15 @@
       :patterns:
       - :include: "#probably_a_parameter"
       - :include: "#function-innards-c"
+    - :match: "(?<!\\w)(?:mutable|constexpr|consteval)(?!\\w)"
+      :name: storage.modifier.lambda.$0.cpp
     - :match: "(->)(.+?(?=\\{|$))?"
       :captures:
         '1':
           :name: punctuation.definition.lambda.return-type.cpp
         '2':
           :name: storage.type.return-type.lambda.cpp
-    - :name: meta.function-body.lambda.cpp
+    - :name: meta.function.definition.body.lambda.cpp
       :begin: "(\\{)"
       :beginCaptures:
         '1':

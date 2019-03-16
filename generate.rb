@@ -805,6 +805,11 @@ cpp_grammar = Grammar.new(
                     ),
                 includes: [ probably_a_parameter, "#function-innards-c" ]
             ),
+            # specificers
+            newPattern(
+                match: variableBounds[ @cpp_tokens.that(:isLambdaSpecifier) ],
+                tag_as: "storage.modifier.lambda.$match"
+            ),
             # check for the -> syntax
             newPattern(
                 match: /->/,
@@ -815,7 +820,7 @@ cpp_grammar = Grammar.new(
             ),
             # then find the body
             Range.new(
-                tag_as: "meta.function-body.lambda",
+                tag_as: "meta.function.definition.body.lambda",
                 start_pattern: newPattern(
                         match: /\{/,
                         tag_as:  "punctuation.section.block.begin.bracket.curly.lambda",
