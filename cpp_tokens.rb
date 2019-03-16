@@ -96,7 +96,7 @@ tokens = [
     { representation: "switch"               , name: "switch"                         , isControlFlow: true, requiresParentheseBlockImmediately: true, },
     { representation: "try"                  , name: "try"                            , isControlFlow: true,                                           isExceptionRelated: true},
     { representation: "catch"                , name: "catch"                          , isControlFlow: true, requiresParentheseBlockImmediately: true, isExceptionRelated: true},
-    { representation: "return"               , name: "return"                         , isControlFlow: true,                                           },
+    { representation: "return"               , name: "return"                         , isControlFlow: true,                                           canAppearBeforeLambdaCapture: true },
     { representation: "break"                , name: "break"                          , isControlFlow: true,                                           },
     { representation: "case"                 , name: "case"                           , isControlFlow: true,                                           },
     { representation: "continue"             , name: "continue"                       , isControlFlow: true,                                           },

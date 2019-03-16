@@ -71,6 +71,7 @@
       :name: punctuation.definition.parameters.end.cpp
   :patterns:
   - :include: "$base"
+- :include: "#lambdas"
 - :include: "#preprocessor-rule-enabled"
 - :include: "#preprocessor-rule-disabled"
 - :include: "#preprocessor-rule-conditional"
@@ -228,7 +229,7 @@
   :name: support.type.posix-reserved.cpp
 - :include: "#block-c"
 - :include: "#parens-c"
-- :name: meta.function.definition.cpp
+- :name: meta.function.definition.parameters.cpp
   :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()"
   :end: "(?<=\\))"
   :patterns:
@@ -433,7 +434,7 @@
       '4':
         :name: storage.type.template.cpp
       '5':
-        :name: keyword.operator.ellipsis.template.definition.cpp
+        :name: punctuation.vararg-ellipses.template.definition.cpp
       '6':
         :name: entity.name.type.template.cpp
       '7':
@@ -555,6 +556,7 @@
     - :include: "#member_access"
     - :match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
       :name: keyword.operator.$0.cpp
+    - :include: "#vararg_ellipses"
     - :match: "--"
       :name: keyword.operator.decrement.cpp
     - :match: "\\+\\+"
@@ -590,12 +592,12 @@
       - :include: "#c_function_call"
       - :include: "$base"
   probably_a_parameter:
-    :match: "(?:([a-zA-Z_]\\w*\\s*(?==))|((?<=\\w |\\*\\/|[&*>\\]\\)])\\s*[a-zA-Z_]\\w*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
+    :match: "(?:([a-zA-Z_]\\w*\\s*(?==))|((?<=\\w |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*[a-zA-Z_]\\w*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
     :captures:
       '1':
-        :name: variable.parameter.probably.defaulted.cpp
+        :name: variable.parameter.defaulted.cpp
       '2':
-        :name: variable.parameter.probably.cpp
+        :name: variable.parameter.cpp
   operator_overload:
     :name: meta.function.definition.parameters.operator-overload.cpp
     :begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))\\s*(\\()"
@@ -655,6 +657,49 @@
         :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     :patterns:
     - :include: "#function-call-innards-c"
+  lambdas:
+    :begin: "((?:(?<=[^\\s]|^)(?<!\\w)|(?<=\\Wreturn|^return))\\s*(\\[)((?:.*\\[.*?\\].*?)*.*?)(\\]))"
+    :beginCaptures:
+      '2':
+        :name: punctuation.definition.capture.begin.lambda.cpp
+      '3':
+        :name: meta.lambda.capture.cpp
+        :patterns:
+        - :include: "#probably_a_parameter"
+        - :include: "#function-innards-c"
+      '4':
+        :name: punctuation.definition.capture.end.lambda.cpp
+    :end: "(?<=})"
+    :patterns:
+    - :name: meta.function.definition.parameters.lambda.cpp
+      :begin: "(\\()"
+      :beginCaptures:
+        '1':
+          :name: punctuation.definition.parameters.begin.lambda.cpp
+      :end: "(\\))"
+      :endCaptures:
+        '1':
+          :name: punctuation.definition.parameters.end.lambda.cpp
+      :patterns:
+      - :include: "#probably_a_parameter"
+      - :include: "#function-innards-c"
+    - :match: "(->)(.+?(?=\\{|$))?"
+      :captures:
+        '1':
+          :name: punctuation.definition.lambda.return-type.cpp
+        '2':
+          :name: storage.type.return-type.lambda.cpp
+    - :name: meta.function-body.lambda.cpp
+      :begin: "(\\{)"
+      :beginCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.lambda.cpp
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.lambda.cpp
+      :patterns:
+      - :include: "$base"
   angle_brackets:
     :begin: "<"
     :end: ">"
@@ -1051,7 +1096,7 @@
         \ # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)?
         # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type"
       :name: constant.other.placeholder.cpp
-  vararg_ellipses-c:
+  vararg_ellipses:
     :match: "(?<!\\.)\\.\\.\\.(?!\\.)"
     :name: punctuation.vararg-ellipses.cpp
   preprocessor-rule-conditional:
@@ -1527,7 +1572,7 @@
     - :include: "#block_innards-c"
   preprocessor-rule-define-line-contents:
     :patterns:
-    - :include: "#vararg_ellipses-c"
+    - :include: "#vararg_ellipses"
     - :match: !ruby/regexp /##?[a-zA-Z_]\w*(?!\w)/
       :name: variable.other.macro.argument.cpp
     - :begin: "{"
@@ -1603,7 +1648,7 @@
     :patterns:
     - :include: "#comments-c"
     - :include: "#storage_types"
-    - :include: "#vararg_ellipses-c"
+    - :include: "#vararg_ellipses"
     - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#operators"
@@ -1643,7 +1688,7 @@
     - :include: "#comments-c"
     - :include: "#storage_types"
     - :include: "#operators"
-    - :include: "#vararg_ellipses-c"
+    - :include: "#vararg_ellipses"
     - :name: meta.function.definition.parameters.cpp
       :begin: |-
         (?x)

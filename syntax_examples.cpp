@@ -118,7 +118,13 @@
 //
     pthread_rwlockattr_t thing;
     padfthread_rwlockattr_t thing;
-    
+    decltype(int);
+
+// 
+// operators 
+// 
+    typeid()
+
 //
 // Memory
 //
@@ -300,7 +306,25 @@
             // depends on #include <bitset>
             return bitset<8>(input).to_string();
         }
+
+//
+// lambdas
+//
+    [ a, b, c ] (Args... args, int thing1) -> Ret {
         
+    }
+    return [ a, b, c ] (Args... args, int thing1) -> Ret {
+        
+    }
+    [ a, b, c ] (Args... args, int thing1) { }
+    [ a = stuff::blah[1324], b, c ] (Args... args, int thing1) 
+        { }
+    [ a, b, c ]
+        { }
+    [=] -> int
+        { }
+    return [ a, b, c ] -> int
+        { }
 
 
 

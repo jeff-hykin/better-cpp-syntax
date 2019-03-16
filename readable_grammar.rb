@@ -248,10 +248,10 @@ class Regexp
     attr_accessor :repository_name
     attr_accessor :has_top_level_group
     
-    def self.runTest(test_name, arguments, lambda)
+    def self.runTest(test_name, arguments, lambda, new_regex)
         if arguments[test_name] != nil
             if not( arguments[test_name].is_a?(Array) )
-                raise "\n\nI think there's a should_not_fully_match: argument, for a newPattern or helper, but the argument isn't an array (and it needs to be to work)\nThe other arguments are #{arguments.to_yaml}"
+                raise "\n\nI think there's a #{test_name}: argument, for a newPattern or helper, but the argument isn't an array (and it needs to be to work)\nThe other arguments are #{arguments.to_yaml}"
             end
             failures = []
             for each in arguments[test_name]
@@ -260,7 +260,7 @@ class Regexp
                 end
             end
             if failures.size > 0
-                puts "\n\nWhen testing the pattern with these arguments:\n#{arguments.to_yaml}\n\nThe #{test_name} test failed for:\n#{failures.to_yaml}"
+                puts "\n\nWhen testing the pattern:\nregex: #{new_regex.inspect}\n with these arguments:\n#{arguments.to_yaml}\n\nThe #{test_name} test failed for:\n#{failures.to_yaml}"
             end
         end
     end
@@ -555,10 +555,10 @@ class Regexp
         #
         # run tests
         #
-        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ new_regex)       } )
-        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ new_regex) != nil     } )
-        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{new_regex}\z/)  } )
-        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{new_regex}\z/) != nil } )
+        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ new_regex)       } , new_regex)
+        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ new_regex) != nil     } , new_regex)
+        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{new_regex}\z/)  } , new_regex)
+        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{new_regex}\z/) != nil } , new_regex)
         
         return new_regex
     end

@@ -197,6 +197,9 @@ cpp_grammar = Grammar.new(
     # but for now it just includes everything
     evaluation_context = [ 
         '$base'
+        # function call
+        # number literal
+        # lambdas
     ]
 #
 # Variable
@@ -221,7 +224,7 @@ cpp_grammar = Grammar.new(
 #
 # Types
 #
-    look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]/).maybe(@spaces)
+    look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]|\.\.\./).maybe(@spaces)
     # why is posix reserved types not in "storage_types"? I don't know, if you can get it in there and everything still works it would be appreciated
     posix_reserved_types = newPattern(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
@@ -381,7 +384,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
-                    tag_as: "keyword.operator.ellipsis.template.definition",
+                    tag_as: "punctuation.vararg-ellipses.template.definition",
                 ).maybe(@spaces).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
@@ -458,7 +461,7 @@ cpp_grammar = Grammar.new(
     avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
     function_definition = Range.new(
-        tag_as: "meta.function.definition",
+        tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
         includes: [ "#function-innards-c" ]
@@ -513,6 +516,7 @@ cpp_grammar = Grammar.new(
             :method_access,
             :member_access,
             normal_word_operators,
+            :vararg_ellipses,
             {
                 match: "--",
                 name: "keyword.operator.decrement"
@@ -597,10 +601,10 @@ cpp_grammar = Grammar.new(
         repository_name: 'probably_a_parameter',
         match: newPattern(
                 match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-                tag_as: "variable.parameter.probably.defaulted"
+                tag_as: "variable.parameter.defaulted"
             ).or(
                 match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
-                tag_as: "variable.parameter.probably"
+                tag_as: "variable.parameter"
             )
         )
 
@@ -761,6 +765,71 @@ cpp_grammar = Grammar.new(
         )
 
 #
+# lambda
+#
+    array_of_invalid_function_names = @cpp_tokens.tokens.select { |each| each[:canAppearBeforeLambdaCapture] }
+    non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each[:representation]+'|^'+each[:representation] } .join('|')}/
+    lambdas = Range.new(
+        repository_name: 'lambdas',
+        start_pattern: newPattern(
+                should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
+                should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []" ],
+                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(@standard_character).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                        match: /\[/,
+                        tag_as: "punctuation.definition.capture.begin.lambda",
+                    ).then(
+                        match: /(?:.*\[.*?\].*?)*.*?/,
+                        tag_as: "meta.lambda.capture",
+                        # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
+                        # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
+                        includes: [ probably_a_parameter, "#function-innards-c" ],
+                    ).then(
+                        match: /\]/,
+                        tag_as: "punctuation.definition.capture.end.lambda",
+                    )
+            ),
+        end_pattern: newPattern(
+                match: lookBehindFor(/}/),
+            ),
+        includes: [
+            # check for parameters first 
+            Range.new(
+                tag_as: 'meta.function.definition.parameters.lambda',
+                start_pattern: newPattern(
+                        match: /\(/,
+                        tag_as:  "punctuation.definition.parameters.begin.lambda",
+                    ),
+                end_pattern: newPattern(
+                        match: /\)/,
+                        tag_as:  "punctuation.definition.parameters.end.lambda",
+                    ),
+                includes: [ probably_a_parameter, "#function-innards-c" ]
+            ),
+            # check for the -> syntax
+            newPattern(
+                match: /->/,
+                tag_as: "punctuation.definition.lambda.return-type"
+            ).maybe(
+                match: /.+?/.lookAheadFor(/\{|$/),
+                tag_as: "storage.type.return-type.lambda"
+            ),
+            # then find the body
+            Range.new(
+                tag_as: "meta.function-body.lambda",
+                start_pattern: newPattern(
+                        match: /\{/,
+                        tag_as:  "punctuation.section.block.begin.bracket.curly.lambda",
+                    ),
+                end_pattern: newPattern(
+                        match: /\}/,
+                        tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
+                    ),
+                includes: [ "$base" ]
+            ),
+        ]
+        )
+
+#
 # Support
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
@@ -831,6 +900,7 @@ cpp_grammar.initalContextIncludes(
             }
         ]
     },
+    lambdas,
     #
     # C patterns
     #
@@ -1738,7 +1808,7 @@ cpp_grammar.addToRepository({
             # }
         ]
     },
-    "vararg_ellipses-c" => {
+    "vararg_ellipses" => {
         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
         name: "punctuation.vararg-ellipses"
     },
@@ -2635,7 +2705,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-define-line-contents" => {
         patterns: [
             {
-                include: "#vararg_ellipses-c"
+                include: "#vararg_ellipses"
             },
             {
                 match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
@@ -2777,7 +2847,7 @@ cpp_grammar.addToRepository({
                 include: "#storage_types"
             },
             {
-                include: "#vararg_ellipses-c"
+                include: "#vararg_ellipses"
             },
             {
                 include: "#method_access"
@@ -2846,7 +2916,7 @@ cpp_grammar.addToRepository({
                 include: "#operators"
             },
             {
-                include: "#vararg_ellipses-c"
+                include: "#vararg_ellipses"
             },
             {
                 name: "meta.function.definition.parameters",
