@@ -1337,6 +1337,13 @@ cpp_grammar.addToRepository({
                     {
                         include: "#angle_brackets"
                     },
+                    newPattern(
+                        match: /(?:public|protected|private)/.then(@spaces),
+                        tag_as: "storage.type.modifier.access.$match"
+                    ).then(
+                        match: variable_name,
+                        tag_as: "entity.name.type.inherited"
+                    ).to_tag,
                     {
                         begin: "\\{",
                         beginCaptures: {

@@ -838,6 +838,12 @@
       :name: meta.class-struct-block.cpp
       :patterns:
       - :include: "#angle_brackets"
+      - :match: "((?:public|protected|private)\\s+)((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+        :captures:
+          '1':
+            :name: storage.type.modifier.access.$1.cpp
+          '2':
+            :name: entity.name.type.inherited.cpp
       - :begin: "\\{"
         :beginCaptures:
           '0':
