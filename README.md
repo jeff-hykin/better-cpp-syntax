@@ -32,7 +32,7 @@ It adds:
 - C++14 literal support (`100'000ms`)
 - Template definition syntax highlighting (including C++ 2020 syntax)
 - Better object identification
-- Improved scope resultion `::` syntax
+- Improved scope resolution `::` syntax
 - Highlighting of templated function calls `aFunction<int>(arguments)`
 - Additional specificity for many existing tags
 - Many other features
