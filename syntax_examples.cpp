@@ -248,6 +248,23 @@
 //
 // templates
 //
+    namespace test {
+        template <class T>
+        struct test {
+            template <class U = std::vector<int>> 
+            bool operator()(U k) {}
+        };
+        struct test {
+            template <class U = std::vector<int>>  bool operator()(U k) {}
+        };
+        struct test2 {
+            bool operator()() = delete;
+        };
+    } // namespace test
+
+    // no syntax highlighting
+    class test2 {};
+    
     template<int, typename Callable, typename Ret, typename... Args>
     auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...))
         {

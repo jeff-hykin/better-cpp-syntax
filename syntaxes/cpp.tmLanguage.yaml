@@ -27,6 +27,7 @@
 - :match: "(?<!\\w)this(?!\\w)"
   :name: variable.language.this.cpp
 - :include: "#constants"
+- :include: "#template_isolated_definition"
 - :include: "#template_definition"
 - :include: "#scope_resolution"
 - :match: !ruby/regexp /\b(constexpr|export|mutable|typename|thread_local)\b/
@@ -406,6 +407,23 @@
         - :include: "#strings"
         - :match: ","
           :name: punctuation.separator.comma.template.argument.cpp
+  template_isolated_definition:
+    :match: "(?<!\\w)(template)\\s*(<)((?:.)*)(>\\s*$)"
+    :captures:
+      '1':
+        :name: storage.type.template.cpp
+      '2':
+        :name: punctuation.section.angle-brackets.start.template.definition.cpp
+      '3':
+        :name: meta.template.definition.cpp
+        :patterns:
+        - :include: "#scope_resolution"
+        - :include: "#template_definition_argument"
+        - :include: "#template_argument_defaulted"
+        - :include: "#template_call_innards"
+        - :include: "$base"
+      '4':
+        :name: punctuation.section.angle-brackets.end.template.definition.cpp
   template_definition:
     :name: meta.template.definition.cpp
     :begin: "(?<!\\w)(template)\\s*(<)"
@@ -419,11 +437,30 @@
       '1':
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
     :patterns:
+    - :begin: "((?<=\\w)\\s*<)"
+      :beginCaptures:
+        '1':
+          :name: punctuation.section.angle-brackets.begin.template.call.cpp
+      :end: "(>)"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.angle-brackets.begin.template.call.cpp
     - :include: "#scope_resolution"
     - :include: "#template_definition_argument"
+    - :include: "#template_argument_defaulted"
     - :include: "#template_call_innards"
+    - :include: "$base"
+  template_argument_defaulted:
+    :match: "(?<=<|,)\\s*((?:[a-zA-Z_]\\w*\\s+)*)([a-zA-Z_]\\w*)\\s*([=])"
+    :captures:
+      '1':
+        :name: storage.type.template.cpp
+      '2':
+        :name: entity.name.type.template.cpp
+      '3':
+        :name: keyword.operator.assignment.cpp
   template_definition_argument:
-    :match: "(?:(?:(?:\\s*([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*))|((?:[a-zA-Z_]\\w*\\s+)*)([a-zA-Z_]\\w*)\\s*([=])\\s*(\\w+))\\s*(?:(,)|(?=>))"
+    :match: "(?:(?:\\s*([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*))\\s*(?:(,)|(?=>|$))"
     :captures:
       '1':
         :name: storage.type.template.argument.$1.cpp
@@ -438,14 +475,6 @@
       '6':
         :name: entity.name.type.template.cpp
       '7':
-        :name: storage.type.template.cpp
-      '8':
-        :name: entity.name.type.template.cpp
-      '9':
-        :name: keyword.operator.assignment.cpp
-      '10':
-        :name: constant.other.cpp
-      '11':
         :name: punctuation.separator.comma.template.argument.cpp
   scope_resolution:
     :match: "((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"

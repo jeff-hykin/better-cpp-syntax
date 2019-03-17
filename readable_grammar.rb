@@ -2,6 +2,7 @@ require 'json'
 require 'yaml'
 
 # TODO
+    # add a way to use backreferences \1 within the regex
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")

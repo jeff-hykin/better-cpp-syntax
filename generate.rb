@@ -319,6 +319,8 @@ cpp_grammar = Grammar.new(
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
+    # note: template_call should indeally be a Range(), the reason its not is 
+    # because it's embedded inside of other patterns
     template_call = newPattern(
         repository_name: 'template_call_innards',
         tag_as: 'meta.template.call',
@@ -340,25 +342,69 @@ cpp_grammar = Grammar.new(
             )
         ]
         )
+    template_context = [
+            :scope_resolution,
+            :template_definition_argument,
+            :template_argument_defaulted,
+            :template_call_innards,
+            *evaluation_context
+        ]
+    template_start = lookBehindToAvoid(@standard_character).then(
+            match: /template/,
+            tag_as: "storage.type.template"
+        ).maybe(@spaces).then(
+            match: /</,
+            tag_as: "punctuation.section.angle-brackets.start.template.definition"
+        )
+    # a template definition that is by itself on a line (this is ideal)
+    template_isolated_definition = newPattern(
+        repository_name: 'template_isolated_definition',
+        match: template_start.then(
+                match:  zeroOrMoreOf(/./),
+                tag_as: "meta.template.definition",
+                includes: template_context,
+            ).then(
+                match: />/.maybe(@spaces).then(/$/),
+                tag_as: "punctuation.section.angle-brackets.end.template.definition"
+            ),
+        )
     template_definition = Range.new(
         repository_name: 'template_definition',
         tag_as: 'meta.template.definition',
-        start_pattern: lookBehindToAvoid(@standard_character).then(
-                match: /template/,
-                tag_as: "storage.type.template"
-            ).maybe(@spaces).then(
-                match: /</,
-                tag_as: "punctuation.section.angle-brackets.start.template.definition"
-            ),
+        start_pattern: template_start,
         end_pattern: newPattern(
                 match: />/,
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
             ),
         includes: [
-            :scope_resolution,
-            :template_definition_argument,
-            :template_call_innards,
+            # a template call inside of a non-isolated template definition
+            # however this is rolling the dice: because if there is a less-than operator in a defaulted argument, then this pattern will screw everything up
+            # a better solution would be nice, but its going to be difficult/impossible
+            Range.new(
+                start_pattern: newPattern(
+                        match: lookBehindFor(/\w/).maybe(@spaces).then(/</),
+                        tag_as: "punctuation.section.angle-brackets.begin.template.call"
+                    ),
+                end_pattern: newPattern(
+                        match: />/,
+                        tag_as: "punctuation.section.angle-brackets.begin.template.call"
+                    ),
+            ),
+            *template_context,
         ]
+        )
+    template_argument_defaulted = newPattern(
+        repository_name: 'template_argument_defaulted',
+        match: lookBehindFor(/<|,/).maybe(@spaces).then(
+                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                tag_as: "storage.type.template",
+            ).then(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+            ).maybe(@spaces).then(
+                match: /[=]/,
+                tag_as: "keyword.operator.assignment"
+            )
         )
     template_definition_argument = newPattern(
         repository_name: 'template_definition_argument',
@@ -389,29 +435,12 @@ cpp_grammar = Grammar.new(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
                 )
-            # case 4: defaulted assignment (ex: "int N = 0")
-            ).or(
-                newPattern(
-                    match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                    tag_as: "storage.type.template",
-                ).then(
-                    match: variable_name_without_bounds,
-                    tag_as: "entity.name.type.template"
-                ).maybe(@spaces).then(
-                    match: /[=]/,
-                    tag_as: "keyword.operator.assignment"
-                # FIXME, this last group needs to be updated
-                ).maybe(@spaces).then(
-                    match: /\w+/,
-                    tag_as: "constant.other"
-                )
-            # ending
             ).maybe(@spaces).then(
                 newPattern(
                     match: /,/,
                     tag_as: "punctuation.separator.comma.template.argument",
                 ).or(
-                    lookAheadFor(/>/)
+                    lookAheadFor(/>|$/)
                 )
             )
         )
@@ -854,6 +883,7 @@ cpp_grammar.initalContextIncludes(
     :memory_operators,
     the_this_keyword,
     language_constants,
+    template_isolated_definition,
     template_definition,
     scope_resolution,
     {
