@@ -445,6 +445,17 @@
       :endCaptures:
         '1':
           :name: punctuation.section.angle-brackets.begin.template.call.cpp
+      :patterns:
+      - :include: "#storage_types"
+      - :include: "#constants"
+      - :include: "#scope_resolution"
+      - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+        :name: storage.type.user-defined.cpp
+      - :include: "#operators"
+      - :include: "#number_literal"
+      - :include: "#strings"
+      - :match: ","
+        :name: punctuation.separator.comma.template.argument.cpp
     - :include: "#scope_resolution"
     - :include: "#template_definition_argument"
     - :include: "#template_argument_defaulted"

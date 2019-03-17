@@ -319,13 +319,7 @@ cpp_grammar = Grammar.new(
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
-    # note: template_call should indeally be a Range(), the reason its not is 
-    # because it's embedded inside of other patterns
-    template_call = newPattern(
-        repository_name: 'template_call_innards',
-        tag_as: 'meta.template.call',
-        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
-        includes: [
+    template_call_context = [
             :storage_types,
             :constants,
             :scope_resolution,
@@ -341,8 +335,15 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.comma.template.argument"
             )
         ]
+    # note: template_call should indeally be a Range(), the reason its not is 
+    # because it's embedded inside of other patterns
+    template_call = newPattern(
+        repository_name: 'template_call_innards',
+        tag_as: 'meta.template.call',
+        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+        includes: template_call_context
         )
-    template_context = [
+    template_definition_context = [
             :scope_resolution,
             :template_definition_argument,
             :template_argument_defaulted,
@@ -362,7 +363,7 @@ cpp_grammar = Grammar.new(
         match: template_start.then(
                 match:  zeroOrMoreOf(/./),
                 tag_as: "meta.template.definition",
-                includes: template_context,
+                includes: template_definition_context,
             ).then(
                 match: />/.maybe(@spaces).then(/$/),
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
@@ -389,8 +390,9 @@ cpp_grammar = Grammar.new(
                         match: />/,
                         tag_as: "punctuation.section.angle-brackets.begin.template.call"
                     ),
+                includes: template_call_context
             ),
-            *template_context,
+            *template_definition_context,
         ]
         )
     template_argument_defaulted = newPattern(
