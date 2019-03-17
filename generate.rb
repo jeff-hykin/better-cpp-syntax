@@ -670,15 +670,16 @@ cpp_grammar = Grammar.new(
         )
     method_access = Range.new(
         repository_name: 'method_access',
-        tag_as: "meta.function-call.member",
+        tag_content_as: "meta.function-call.member",
         start_pattern: newPattern(
                 match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: "variable.other.object",
+                tag_as: "variable.other.object.access",
             ).then(
                 member_operator
             ).then(
                 match: zeroOrMoreOf(subsequent_object_with_operator),
-                includes: [ :member_access, :method_access ]
+                includes: [ :member_access, :method_access ],
+                tag_as: "variable.other.object.access"
             ).maybe(@spaces).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.member"

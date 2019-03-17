@@ -634,16 +634,17 @@
         :name: variable.other.member.cpp
     :name: variable.other.object.access.cpp
   method_access:
-    :name: meta.function-call.member.cpp
+    :contentName: meta.function-call.member
     :begin: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.|\\.\\*))|((?:->|->\\*)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.|\\.\\*))|(?:(?:->|->\\*)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()"
     :beginCaptures:
       '1':
-        :name: variable.other.object.cpp
+        :name: variable.other.object.access.cpp
       '2':
         :name: punctuation.separator.dot-access.cpp
       '3':
         :name: punctuation.separator.pointer-access.cpp
       '4':
+        :name: variable.other.object.access.cpp
         :patterns:
         - :include: "#member_access"
         - :include: "#method_access"

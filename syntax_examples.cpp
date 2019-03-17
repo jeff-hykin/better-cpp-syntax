@@ -171,6 +171,8 @@
 //
 // member access
 //
+    window.as.translate(0,0.5,0);
+    window.MV.translate(0,0.5,0);
     a_pointer.thread;
     a_pointer.*thread;
     a_pointer->thread;
