@@ -671,8 +671,8 @@ cpp_grammar = Grammar.new(
 #
 # Access . .* -> ->*
 #
-    dot_operator = /\./.or(/\.\*/)
-    arrow_operator = /->/.or(/->\*/)
+    dot_operator = /\.\*/.or(/\./)
+    arrow_operator = /->\*/.or(/->/)
     member_operator = newPattern(
             match: dot_operator,
             tag_as: "punctuation.separator.dot-access"
@@ -683,35 +683,34 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
+    partial_member = newPattern(
+            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+            tag_as: "variable.other.object.access",
+        ).then(
+            member_operator
+        )
+    member_context = [
+            :member_access, 
+            :method_access,
+            partial_member
+        ]
+    member_start = partial_member.then(
+            match: zeroOrMoreOf(subsequent_object_with_operator),
+            includes: member_context
+        ).maybe(@spaces)
+    # access to attribute
     member_access = newPattern(
         repository_name: 'member_access',
-        tag_as: "variable.other.object.access",
-        match: newPattern(
-                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: "variable.other.object",
-            ).then(
-                member_operator
-            ).then(
-                match: zeroOrMoreOf(subsequent_object_with_operator),
-                includes: [ :member_access, :method_access ]
-            ).then(
+        match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.member"
             )
         )
+    # access to method
     method_access = Range.new(
         repository_name: 'method_access',
         tag_content_as: "meta.function-call.member",
-        start_pattern: newPattern(
-                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: "variable.other.object.access",
-            ).then(
-                member_operator
-            ).then(
-                match: zeroOrMoreOf(subsequent_object_with_operator),
-                includes: [ :member_access, :method_access ],
-                tag_as: "variable.other.object.access"
-            ).maybe(@spaces).then(
+        start_pattern: member_start.then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.member"
             ).then(

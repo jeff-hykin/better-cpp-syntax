@@ -124,6 +124,8 @@
 // operators 
 // 
     typeid()
+    sizeof()
+    alignas()
 
 //
 // Memory
@@ -248,15 +250,42 @@
 //
 // templates
 //
+    // 
+    // seperate line template (works perfect)
+    // 
+    template <class U = std::vector<int>>
+    template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> 
+    //
+    // same-line template
+    // 
+    // takes risk (makes assumption) but works
+    template <class U = std::vector<int>>                            bool operator()(U k) {}
+    // takes risk (makes assumption) but fails early (okay)
+    template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> bool operator()(U k) {}
+    // takes risk (makes assumption) and never closes (bad)
+    template<typename RETURN_TYPE, int N = 0 < 1, typename Callable> bool operator()(U k) {}
+    
+    
     namespace test {
         template <class T>
         struct test {
-            template <class U = std::vector<int>> 
+            // seperate line template
+            template <class U = std::vector<int>>
+            template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> 
             bool operator()(U k) {}
         };
-        struct test {
+        
+        struct test2 {
+            // same-line template
             template <class U = std::vector<int>>  bool operator()(U k) {}
         };
+        
+        struct test3 {
+            // same-line template
+            template <class U = std::vector<int>>  bool operator()(U k) {}
+        };
+        
+        
         struct test2 {
             bool operator()() = delete;
         };
