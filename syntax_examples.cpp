@@ -372,8 +372,12 @@
     
     return [ a, b, c ] (Args... args, int thing1) -> Ret { }
     return [ a, b, c ] -> int { }
-    
 
+    //
+    // not lambdas
+    //
+    test()[0] = 5; // no syntax highlighting;
+    test[5][5] = 5;
 
 
 int main() {

@@ -804,7 +804,8 @@ cpp_grammar = Grammar.new(
         repository_name: 'lambdas',
         start_pattern: newPattern(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
-                should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []" ],
+                should_partial_match: [ "[]<", "[=](", "[&]{", "[x,y,x] <", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
+                should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: lookBehindFor(/[^\s\]]|^/).lookBehindToAvoid(@standard_character).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
                         match: /\[/,
                         tag_as: "punctuation.definition.capture.begin.lambda",
@@ -817,7 +818,7 @@ cpp_grammar = Grammar.new(
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
-                    )
+                    ).maybe(@spaces).then(/\z/).or(lookAheadFor(/[(<{]/))
             ),
         end_pattern: newPattern(
                 match: lookBehindFor(/}/),
