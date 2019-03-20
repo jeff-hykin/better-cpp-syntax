@@ -250,20 +250,6 @@
 //
 // templates
 //
-    // 
-    // seperate line template (works perfect)
-    // 
-    template <class U = std::vector<int>>
-    template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> 
-    //
-    // same-line template
-    // 
-    // takes risk (makes assumption) but works
-    template <class U = std::vector<int>>                            bool operator()(U k) {}
-    // takes risk (makes assumption) but fails early (okay)
-    template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> bool operator()(U k) {}
-    // takes risk (makes assumption) and never closes (bad)
-    template<typename RETURN_TYPE, int N = 0 < 1, typename Callable> bool operator()(U k) {}
     
     
     namespace test {
@@ -369,7 +355,13 @@
     [ a,                     b, c ]                                           {         }
     [=]                                                                -> int {         }
     [=]                             ()                         mutable        { return; }
-    
+    auto a = thing[1][2];
+    auto a = thing()[2];
+    [](Args... args) -> Ret {
+                return Ret(a_storage_of_callable.callable(forward<Args>(args)...));
+            };
+            
+            
     return [ a, b, c ] (Args... args, int thing1) -> Ret { }
     return [ a, b, c ] -> int { }
 
