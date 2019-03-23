@@ -1022,7 +1022,7 @@
   c_function_call:
     :begin: |-
       (?x)
-      (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
+      (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator)\s*\()
       (?=
       (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\s*(?-mix:(?:(?-mix:(?:<(?:[\s<>,\w])*>\s*)))?)\(  # actual name
       |
