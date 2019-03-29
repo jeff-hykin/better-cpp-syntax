@@ -3,7 +3,7 @@ require_relative './cpp_tokens.rb'
 
 # todo
     # fix sizeof, alignas, decltype, and similar
-    # fix initializer list "functions" e.g. `int a{5};` 
+    # fix initializer list "functions" e.g. `int a{5};`
     # fix the ... inside of macros
     # have all patterns with keywords be dynamically generated
 
@@ -103,7 +103,7 @@ cpp_grammar = Grammar.new(
                             ).maybe(
                                 hex_digits
                             ).then(
-                                # lookBehind/Ahead because there needs to be a hex digit on at least one side 
+                                # lookBehind/Ahead because there needs to be a hex digit on at least one side
                                 match: lookBehindFor(/[0-9a-fA-F]/).then(/\./).or(/\./.lookAheadFor(/[0-9a-fA-F]/)),
                                 tag_as: "constant.numeric.hexadecimal",
                             ).maybe(
@@ -116,7 +116,7 @@ cpp_grammar = Grammar.new(
                             decimal_literal_float = maybe(
                                 decimal_digits
                             ).then(
-                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side 
+                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side
                                 match: lookBehindFor(/[0-9]/).then(/\./).or(/\./.lookAheadFor(/[0-9]/)),
                                 tag_as: "constant.numeric.decimal.point",
                             ).maybe(
@@ -188,13 +188,13 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.unit.user-defined"
             )
         )
-    
+
 #
 # Contexts
 #
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
-    evaluation_context = [ 
+    evaluation_context = [
         '$base'
         # function call
         # number literal
@@ -210,7 +210,7 @@ cpp_grammar = Grammar.new(
     variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
-    
+
 #
 # Constants
 #
@@ -232,17 +232,17 @@ cpp_grammar = Grammar.new(
     storage_types = newPattern(
         repository_name: 'storage_types',
         includes: [
-            
+
             primitive_types = newPattern(
                 match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
                 tag_as: "storage.type.primitive"
             ),
-            
+
             non_primitive_types = newPattern(
                 match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
                 tag_as: "storage.type"
             ),
-            
+
             # FIXME, these should be changed to each have their own matcher, and struct should be handled the similar to 'class'
             other_types = newPattern(
                 match: variableBounds[ /(asm|__asm__|enum|union|struct)/ ],
@@ -334,7 +334,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.comma.template.argument"
             )
         ]
-    # note: template_call should indeally be a Range(), the reason its not is 
+    # note: template_call should indeally be a Range(), the reason its not is
     # because it's embedded inside of other patterns
     template_call = newPattern(
         repository_name: 'template_call_innards',
@@ -417,7 +417,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "storage.type.template.argument.$match",
             # case 2: normal situation (ex: "typename T")
             ).or(
-                newPattern( 
+                newPattern(
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
                     tag_as: "storage.type.template.argument.$match",
                 ).then(
@@ -536,11 +536,11 @@ cpp_grammar = Grammar.new(
     end
     operator_context += [
             functionTemplate[
-                repository_name: "decltype_specifier", 
-                match_name: variableBounds[/decltype/], 
+                repository_name: "decltype_specifier",
+                match_name: variableBounds[/decltype/],
                 tag_name_as: "keyword.other.decltype storage.type.decltype",
-                tag_content_as: "arguments.decltype", 
-                tag_parenthese_as: "decltype storage.type.decltype" 
+                tag_content_as: "arguments.decltype",
+                tag_parenthese_as: "decltype storage.type.decltype"
             ],
             type_casting_operators,
             :method_access,
@@ -689,7 +689,7 @@ cpp_grammar = Grammar.new(
             member_operator
         )
     member_context = [
-            :member_access, 
+            :member_access,
             :method_access,
             partial_member
         ]
@@ -777,7 +777,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "punctuation.definition.scope"
                     ),
                 includes: [:special_block, :constructor, "$base" ]
-                
+
             ),
             "$base"
         ]
@@ -823,7 +823,7 @@ cpp_grammar = Grammar.new(
                 match: lookBehindFor(/}/),
             ),
         includes: [
-            # check for parameters first 
+            # check for parameters first
             Range.new(
                 tag_as: 'meta.function.definition.parameters.lambda',
                 start_pattern: newPattern(
@@ -1327,55 +1327,49 @@ cpp_grammar.addToRepository({
         patterns: [
             using_namespace.to_tag,
             namespace_definition.to_tag,
-            {
-                begin: "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
-                beginCaptures: {
-                    "1" => {
-                        name: "storage.type.class"
-                    },
-                    "2" => {
-                        name: "storage.type.struct"
-                    },
-                    "3" => {
-                        name: "entity.name.type"
-                    },
-                    "5" => {
-                        name: "storage.type.modifier.access"
-                    },
-                    "6" => {
-                        name: "entity.name.type.inherited"
-                    },
-                    "7" => {
-                        patterns: [
-                            {
-                                match: "(public|protected|private)",
-                                name: "storage.type.modifier.access"
-                            },
-                            {
-                                match: "[_A-Za-z][_A-Za-z0-9]*",
-                                name: "entity.name.type.inherited"
-                            }
-                        ]
-                    }
-                },
-                end: "(?<=\\})|(;)|(?=(\\(|\\)|>|\\[|\\]|=))",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.terminator.statement",
-                    },
-                },
-                name: "meta.class-struct-block",
-                patterns: [
-                    {
-                        include: "#angle_brackets"
-                    },
+            Range.new(
+                start_pattern: newPattern(
+                    reference: "storage_type",
+                    match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
+                    tag_as: "storage.type.$match",
+                  ).then(@spaces).then(
+                    match: variable_name,
+                    tag_as: "entity.name.type.$reference(storage_type)",
+                  ).maybe(maybe(@spaces).then(/:/).maybe(@spaces)
+                  .zeroOrMoreOf(
+                    maybe(
+                      match: @cpp_tokens.that(:isAccessSpecifier),
+                      tag_as: "storage.type.modifier.access.$match",
+                    ).maybe(@spaces).oneOrMoreOf(
+                        tag_as: "entity.name.type.inherited",
+                        match: maybe(@spaces).maybe(/,/).maybe(@spaces)
+                        .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
+                        .then(variable_name)
+                    )
+                  )
+                ),
+                end_pattern: newPattern(
+                  lookBehindFor(/\}/)
+                  .or(
+                    match: /;/,
+                    tag_as: "punctuation.terminator.statement",
+                  ).or(
+                    lookAheadFor(newPattern(
+                      match: /[()>\[\]=]/,
+                      tag_as: "punctuation.terminator.statement",
+                    ))
+                  )
+                ),
+                tag_as: "meta.class-struct-block",
+                includes: [
+                    "#angle_brackets",
                     newPattern(
                         match: /(?:public|protected|private)/.then(@spaces),
                         tag_as: "storage.type.modifier.access.$match"
                     ).then(
                         match: variable_name,
-                        tag_as: "entity.name.type.inherited"
-                    ).to_tag,
+                        tag_as: "entity.name.type.inherited",
+                    ),
                     {
                         begin: "\\{",
                         beginCaptures: {
@@ -1404,11 +1398,9 @@ cpp_grammar.addToRepository({
                             }
                         ]
                     },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
+                    "$base",
+                ],
+            ).to_tag,
             {
                 begin: "\\b(extern)(?=\\s*\")",
                 beginCaptures: {
