@@ -2,7 +2,6 @@ require_relative './readable_grammar.rb'
 require_relative './cpp_tokens.rb'
 
 # todo
-    # fix sizeof, alignas, decltype, and similar
     # fix initializer list "functions" e.g. `int a{5};`
     # fix the ... inside of macros
     # have all patterns with keywords be dynamically generated
