@@ -894,7 +894,7 @@ cpp_grammar = Grammar.new(
     ]
     class_struct_block = Range.new(
         start_pattern: newPattern(
-            should_fully_match: ["class foo:", "struct foo", "enum b"],
+            should_fully_match: ["class foo: bar", "class foo: public baz", "enum b"],
             should_not_fully_match: ["class foo {"],
             should_partial_match: ["class foo f;", "enum en e;", "struct st s;"],
             match: newPattern(
