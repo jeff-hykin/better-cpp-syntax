@@ -330,6 +330,20 @@
             }
     };
 
+// 
+// inheritance
+// 
+
+    class foo : private bar,quix,foo, public bar, quix, foo, protected bar, quix{};
+    class foo f;
+    struct thing : 
+        public A, public B {};
+        
+    class thing :
+        public A,
+        public B,
+        {};
+
 
 // 
 // Functions
@@ -376,8 +390,3 @@ int main() {
     int a = ( thing + 10)
     return 0;
 }
-
-class foo : private bar,quix,foo, public bar, quix, foo, protected bar, quix{};
-class foo f;
-struct thing : 
-    public A, public B {};
