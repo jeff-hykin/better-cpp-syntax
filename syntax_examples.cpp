@@ -376,3 +376,6 @@ int main() {
     int a = ( thing + 10)
     return 0;
 }
+
+class foo: private bar,quix,foo, public bar, quix, foo, protected bar, quix{};
+class foo f;

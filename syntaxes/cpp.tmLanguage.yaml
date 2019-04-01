@@ -868,16 +868,18 @@
         - :include: "$base"
       - :include: "$base"
     - :name: meta.class-struct-block.cpp
-      :begin: "((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*:\\s*(?:((?:private|protected|public))?\\s*((?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+))*)?"
+      :begin: "((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*:\\s*((?:(?:,)?\\s*(?:private|protected|public)\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?"
       :beginCaptures:
         '1':
           :name: storage.type.$1.cpp
         '2':
           :name: entity.name.type.$0.cpp
         '3':
-          :name: storage.type.modifier.access.$3.cpp
-        '4':
-          :name: entity.name.type.inherited.cpp
+          :patterns:
+          - :match: "(?:private|protected|public)"
+            :name: storage.type.modifier.access.$0.cpp
+          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+            :name: entity.name.type.inherited.cpp
       :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
       :endCaptures:
         '1':

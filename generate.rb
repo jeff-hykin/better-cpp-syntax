@@ -1337,15 +1337,22 @@ cpp_grammar.addToRepository({
                     tag_as: "entity.name.type.$reference(storage_type)",
                   ).maybe(maybe(@spaces).then(/:/).maybe(@spaces)
                   .zeroOrMoreOf(
-                    maybe(
-                      match: @cpp_tokens.that(:isAccessSpecifier),
-                      tag_as: "storage.type.modifier.access.$match",
+                    match: maybe(/,/).maybe(@spaces).then(@cpp_tokens.that(:isAccessSpecifier)
                     ).maybe(@spaces).oneOrMoreOf(
-                        tag_as: "entity.name.type.inherited",
                         match: maybe(@spaces).maybe(/,/).maybe(@spaces)
                         .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
                         .then(variable_name)
-                    )
+                    ),
+                    includes: [
+                        newPattern(
+                            match: @cpp_tokens.that(:isAccessSpecifier),
+                            tag_as: "storage.type.modifier.access.$match",
+                        ),
+                        newPattern(
+                            match: variable_name,
+                            tag_as: "entity.name.type.inherited"
+                        )
+                    ]
                   )
                 ),
                 end_pattern: newPattern(
