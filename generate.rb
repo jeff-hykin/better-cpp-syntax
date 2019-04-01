@@ -797,8 +797,8 @@ cpp_grammar = Grammar.new(
 #
 # Lambdas
 #
-    array_of_invalid_function_names = @cpp_tokens.tokens.select { |each| each[:canAppearBeforeLambdaCapture] }
-    non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each[:representation]+'|^'+each[:representation] } .join('|')}/
+    array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
+    non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
     lambdas = Range.new(
         repository_name: 'lambdas',
         start_pattern: newPattern(
@@ -870,6 +870,115 @@ cpp_grammar = Grammar.new(
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
+# 
+# Classes and structs
+# 
+    # the following are basically the equivlent of:
+    #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
+    # that ^ causes an error in the lookBehindFor() so it has to be manually spread
+    can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isAccessSpecifier) + [ ',', ':' ]
+    can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
+    inhertance_context = [
+        newPattern(
+            match: /,/,
+            tag_as: "punctuation.separator.delimiter.inhertance"
+        ),
+        newPattern(
+            match: @cpp_tokens.that(:isAccessSpecifier),
+            tag_as: "storage.type.modifier.access.$match",
+        ),
+        newPattern(
+            match: lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(variable_name),
+            tag_as: "entity.name.type.inherited"
+        )
+    ]
+    class_struct_block = Range.new(
+        start_pattern: newPattern(
+            should_fully_match: ["class foo: bar", "class foo: public baz", "enum b"],
+            should_not_fully_match: ["class foo {"],
+            should_partial_match: ["class foo f;", "enum en e;", "struct st s;"],
+            match: newPattern(
+                reference: "storage_type",
+                match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
+                tag_as: "storage.type.$match",
+            ).then(@spaces).then(
+                match: variable_name,
+                tag_as: "entity.name.type.$reference(storage_type)",
+            ).maybe(maybe(@spaces).then(
+                    match: /:/,
+                    tag_as: "punctuation.inhertance.colon"
+                # the following may seem redundant (removing it shouldn't change anything)
+                # this is because the follow are matched by what is inside of this Range
+                # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
+                # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
+                ).maybe(@spaces)
+                .zeroOrMoreOf(
+                    match: maybe(/,/)
+                    .maybe(@spaces)
+                    .maybe(@cpp_tokens.that(:isAccessSpecifier))
+                    .maybe(@spaces).oneOrMoreOf(
+                        maybe(@spaces).maybe(/,/).maybe(@spaces)
+                        .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
+                        .then(variable_name)
+                    ),
+                    includes: inhertance_context
+                )
+            ),
+        ),
+        end_pattern: newPattern(
+            lookBehindFor(/\}/)
+            .or(
+                match: /;/,
+                tag_as: "punctuation.terminator.statement",
+            ).or(
+            lookAheadFor(newPattern(
+                match: /[()>\[\]=]/,
+                tag_as: "punctuation.terminator.statement",
+            ))
+            )
+        ),
+        tag_as: "meta.class-struct-block",
+        includes: [
+            # 
+            # This part is only for what is before the {}'s (aka inhertance)
+            # 
+            "#angle_brackets",
+            *inhertance_context,
+            
+            # 
+            # This Range is for everything in the {}'s
+            # 
+            {
+                begin: "\\{",
+                beginCaptures: {
+                    "0" => {
+                        name: "punctuation.section.block.begin.bracket.curly"
+                    }
+                },
+                end: "(\\})(\\s*\\n)?",
+                endCaptures: {
+                    "1" => {
+                        name: "punctuation.section.block.end.bracket.curly"
+                    },
+                    "2" => {
+                        name: "invalid.illegal.you-forgot-semicolon"
+                    }
+                },
+                patterns: [
+                    {
+                        include: "#special_block"
+                    },
+                    {
+                        include: "#constructor"
+                    },
+                    {
+                        include: "$base"
+                    }
+                ]
+            },
+            "$base",
+        ],
+    )
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -1327,88 +1436,7 @@ cpp_grammar.addToRepository({
         patterns: [
             using_namespace.to_tag,
             namespace_definition.to_tag,
-            {
-                begin: "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
-                beginCaptures: {
-                    "1" => {
-                        name: "storage.type.class"
-                    },
-                    "2" => {
-                        name: "storage.type.struct"
-                    },
-                    "3" => {
-                        name: "entity.name.type"
-                    },
-                    "5" => {
-                        name: "storage.type.modifier.access"
-                    },
-                    "6" => {
-                        name: "entity.name.type.inherited"
-                    },
-                    "7" => {
-                        patterns: [
-                            {
-                                match: "(public|protected|private)",
-                                name: "storage.type.modifier.access"
-                            },
-                            {
-                                match: "[_A-Za-z][_A-Za-z0-9]*",
-                                name: "entity.name.type.inherited"
-                            }
-                        ]
-                    }
-                },
-                end: "(?<=\\})|(;)|(?=(\\(|\\)|>|\\[|\\]|=))",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.terminator.statement",
-                    },
-                },
-                name: "meta.class-struct-block",
-                patterns: [
-                    {
-                        include: "#angle_brackets"
-                    },
-                    newPattern(
-                        match: /(?:public|protected|private)/.then(@spaces),
-                        tag_as: "storage.type.modifier.access.$match"
-                    ).then(
-                        match: variable_name,
-                        tag_as: "entity.name.type.inherited"
-                    ).to_tag,
-                    {
-                        begin: "\\{",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.section.block.begin.bracket.curly"
-                            }
-                        },
-                        end: "(\\})(\\s*\\n)?",
-                        endCaptures: {
-                            "1" => {
-                                name: "punctuation.section.block.end.bracket.curly"
-                            },
-                            "2" => {
-                                name: "invalid.illegal.you-forgot-semicolon"
-                            }
-                        },
-                        patterns: [
-                            {
-                                include: "#special_block"
-                            },
-                            {
-                                include: "#constructor"
-                            },
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
+            class_struct_block.to_tag,
             {
                 begin: "\\b(extern)(?=\\s*\")",
                 beginCaptures: {
