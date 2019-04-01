@@ -868,17 +868,21 @@
         - :include: "$base"
       - :include: "$base"
     - :name: meta.class-struct-block.cpp
-      :begin: "(((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*:\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
+      :begin: "(((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
       :beginCaptures:
         '2':
           :name: storage.type.$2.cpp
         '3':
           :name: entity.name.type.$1.cpp
         '4':
+          :name: punctuation.inhertance.colon.cpp
+        '5':
           :patterns:
+          - :match: ","
+            :name: punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
             :name: entity.name.type.inherited.cpp
       :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
       :endCaptures:
@@ -886,12 +890,12 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :include: "#angle_brackets"
-      - :match: "((?:public|protected|private)\\s+)((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
-        :captures:
-          '1':
-            :name: storage.type.modifier.access.$1.cpp
-          '2':
-            :name: entity.name.type.inherited.cpp
+      - :match: ","
+        :name: punctuation.separator.delimiter.inhertance.cpp
+      - :match: "(?:private|protected|public)"
+        :name: storage.type.modifier.access.$0.cpp
+      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+        :name: entity.name.type.inherited.cpp
       - :begin: "\\{"
         :beginCaptures:
           '0':
