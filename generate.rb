@@ -894,7 +894,7 @@ cpp_grammar = Grammar.new(
     ]
     class_struct_block = Range.new(
         start_pattern: newPattern(
-            should_fully_match: ["class foo: bar", "class foo: public baz", "enum b"],
+            should_fully_match: ["class foo:", "struct foo", "enum b"],
             should_not_fully_match: ["class foo {"],
             should_partial_match: ["class foo f;", "enum en e;", "struct st s;"],
             match: newPattern(
@@ -907,6 +907,10 @@ cpp_grammar = Grammar.new(
             ).maybe(maybe(@spaces).then(
                     match: /:/,
                     tag_as: "punctuation.inhertance.colon"
+                # the following may seem redundant (removing it shouldn't change anything)
+                # this is because the follow are matched by what is inside of this Range
+                # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
+                # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
                 ).maybe(@spaces)
                 .zeroOrMoreOf(
                     match: maybe(/,/)
