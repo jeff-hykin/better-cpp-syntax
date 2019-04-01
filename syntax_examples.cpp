@@ -169,6 +169,8 @@
     Task<ANY_OUTPUT_TYPE, ANY_INPUT_TYPE>::links_to;
     &TEST_CLASS::name;
     Event<ANYTYPE>::   ListenersFor[input_event.name]
+    std::allocator_traits<decltype(acopy)>::destroy(acopy, this);
+    std::allocator_traits<decltype(acopy)>::deallocate(acopy, this);
 
 //
 // member access
@@ -384,7 +386,9 @@
     //
     test()[0] = 5; // no syntax highlighting;
     test[5][5] = 5;
-
+    
+    
+    
 
 int main() {
     int a = ( thing + 10)
