@@ -886,8 +886,8 @@ cpp_grammar = Grammar.new(
             match: @cpp_tokens.that(:isAccessSpecifier),
             tag_as: "storage.type.modifier.access.$match",
         ),
-        newPattern(
-            match: lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(variable_name),
+        lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(
+            match: variable_name,
             tag_as: "entity.name.type.inherited"
         )
     ]

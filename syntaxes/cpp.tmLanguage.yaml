@@ -882,8 +882,10 @@
             :name: punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
-            :name: entity.name.type.inherited.cpp
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+            :captures:
+              '1':
+                :name: entity.name.type.inherited.cpp
       :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
       :endCaptures:
         '1':
@@ -894,8 +896,10 @@
         :name: punctuation.separator.delimiter.inhertance.cpp
       - :match: "(?:private|protected|public)"
         :name: storage.type.modifier.access.$0.cpp
-      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
-        :name: entity.name.type.inherited.cpp
+      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+        :captures:
+          '1':
+            :name: entity.name.type.inherited.cpp
       - :begin: "\\{"
         :beginCaptures:
           '0':
