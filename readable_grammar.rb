@@ -841,7 +841,8 @@ class TokenHelper
         end
     end
     
-    def that(*adjectives)
+    
+    def tokensThat(*adjectives)
         matches = @tokens.select do |each_token|
             output = true
             for each_adjective in adjectives
@@ -858,6 +859,16 @@ class TokenHelper
             end
             output
         end
+        return matches
+    end
+    
+    def representationsThat(*adjectives)
+        matches = self.tokensThat(*adjectives)
+        return matches.map do |each| each[:representation] end
+    end
+    
+    def that(*adjectives)
+        matches = tokensThat(*adjectives)
         return /(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")})/
     end
 end
