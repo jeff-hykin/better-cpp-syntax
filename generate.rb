@@ -1329,31 +1329,38 @@ cpp_grammar.addToRepository({
             namespace_definition.to_tag,
             Range.new(
                 start_pattern: newPattern(
-                    reference: "storage_type",
-                    match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
-                    tag_as: "storage.type.$match",
-                  ).then(@spaces).then(
-                    match: variable_name,
-                    tag_as: "entity.name.type.$reference(storage_type)",
-                  ).maybe(maybe(@spaces).then(/:/).maybe(@spaces)
-                  .zeroOrMoreOf(
-                    match: maybe(/,/).maybe(@spaces).then(@cpp_tokens.that(:isAccessSpecifier)
-                    ).maybe(@spaces).oneOrMoreOf(
-                        match: maybe(@spaces).maybe(/,/).maybe(@spaces)
-                        .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
-                        .then(variable_name)
-                    ),
-                    includes: [
-                        newPattern(
-                            match: @cpp_tokens.that(:isAccessSpecifier),
-                            tag_as: "storage.type.modifier.access.$match",
-                        ),
-                        newPattern(
-                            match: variable_name,
-                            tag_as: "entity.name.type.inherited"
+                    should_fully_match: ["class foo: bar", "class foo: public baz", "enum b"],
+                    should_not_fully_match: ["class foo {"],
+                    should_partial_match: ["class foo f;", "enum en e;", "struct st s;"],
+                    match: newPattern(
+                        reference: "storage_type",
+                        match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
+                        tag_as: "storage.type.$match",
+                    ).then(@spaces).then(
+                        match: variable_name,
+                        tag_as: "entity.name.type.$reference(storage_type)",
+                    ).maybe(maybe(@spaces).then(/:/).maybe(@spaces)
+                        .zeroOrMoreOf(
+                            match: maybe(/,/)
+                            .maybe(@spaces)
+                            .maybe(@cpp_tokens.that(:isAccessSpecifier))
+                            .maybe(@spaces).oneOrMoreOf(
+                                maybe(@spaces).maybe(/,/).maybe(@spaces)
+                                .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
+                                .then(variable_name)
+                            ),
+                            includes: [
+                                newPattern(
+                                    match: @cpp_tokens.that(:isAccessSpecifier),
+                                    tag_as: "storage.type.modifier.access.$match",
+                                ),
+                                newPattern(
+                                    match: variable_name,
+                                    tag_as: "entity.name.type.inherited"
+                                )
+                            ]
                         )
-                    ]
-                  )
+                    ),
                 ),
                 end_pattern: newPattern(
                   lookBehindFor(/\}/)
