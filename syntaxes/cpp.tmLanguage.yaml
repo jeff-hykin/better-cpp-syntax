@@ -863,8 +863,6 @@
           '1':
             :name: punctuation.definition.scope.cpp
         :patterns:
-        - :include: "#special_block"
-        - :include: "#constructor"
         - :include: "$base"
       - :include: "$base"
     - :name: meta.class-struct-block.cpp

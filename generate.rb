@@ -775,7 +775,7 @@ cpp_grammar = Grammar.new(
                         match: /\}/,
                         tag_as: "punctuation.definition.scope"
                     ),
-                includes: [:special_block, :constructor, "$base" ]
+                includes: ["$base" ]
 
             ),
             "$base"
