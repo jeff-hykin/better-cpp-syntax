@@ -1,10 +1,10 @@
 require_relative './readable_grammar.rb'
 
-# 
+#
 # C++ specific tokens
-# 
-    # TODO: 
-        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations 
+#
+    # TODO:
+        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations
         # https://en.cppreference.com/w/cpp/language/declarations
         # look at https://en.cppreference.com/w/cpp/language/function to implement better member function syntax
 
@@ -202,7 +202,7 @@ tokens = [
     { representation: "struct"               , name: "struct"          , isTypeCreator: true},
     { representation: "union"                , name: "union"           , isTypeCreator: true},
     { representation: "enum"                 , name: "enum"            , isTypeCreator: true},
-    # storage specifiers https://en.cppreference.com/w/cpp/language/declarations 
+    # storage specifiers https://en.cppreference.com/w/cpp/language/declarations
     { representation: "const"                , name: "const"            , isSpecifier: true, isStorageSpecifier: true },
     { representation: "static"               , name: "static"           , isSpecifier: true, isStorageSpecifier: true },
     { representation: "volatile"             , name: "volatile"         , isSpecifier: true, isStorageSpecifier: true },
@@ -249,23 +249,30 @@ tokens = [
     { representation: "defined"               , name: "defined"                , isPreprocessorDirective: true },
     { representation: "__has_include"         , name: "__has_include"          , isPreprocessorDirective: true },
     { representation: "__has_cpp_attribute"   , name: "__has_cpp_attribute"    , isPreprocessorDirective: true },
-    # 
+    { representation: "[["                    , name: "C++11 attribute start"  , isAttributeStart: true},
+    { representation: "]]"                    , name: "C++11 attribute end"    , isAttributeEnd: true},
+    { representation: "__attribute(("         , name: "gcc attribute start alt", isAttributeStart: true},
+    { representation: "__attribute__(("       , name: "gcc attribute start"    , isAttributeStart: true},
+    { representation: "))"                    , name: "gcc attribute end"      , isAttributeEnd: true},
+    { representation: "__declspec("           , name: "ms attribute start"     , isAttributeStart: true},
+    { representation: ")"                     , name: "ms attribute end"       , isAttributeEnd: true},
+    #
     # misc
-    # 
+    #
     # https://en.cppreference.com/w/cpp/keyword
     { representation: "this"            , name: "this"          },
     { representation: "template"        , name: "template"      },
     { representation: "namespace"       , name: "namespace"     },
     { representation: "using"           , name: "using"         },
     { representation: "operator"        , name: "operator"      },
-    # 
+    #
     { representation: "typedef"         , name: "typedef"       },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
     { representation: "typename"        , name: "typename"      },
-    # 
+    #
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
-    # 
+    #
     { representation: "concept"                    , name: "concept"                    },
     { representation: "requires"                   , name: "requires"                   },
     { representation: "export"                     , name: "export"                     },
@@ -280,7 +287,7 @@ tokens = [
     { representation: "module"                     , name: "module"                     },
     { representation: "reflexpr"                   , name: "reflexpr"                   },
     { representation: "synchronized"               , name: "synchronized"               },
-    # 
+    #
     { representation: "audit"                      , name: "audit"                      , isSpecialIdentifier: true , isValidFunctionName: true},
     { representation: "axiom"                      , name: "axiom"                      , isSpecialIdentifier: true , isValidFunctionName: true},
     { representation: "transaction_safe"           , name: "transaction_safe"           , isSpecialIdentifier: true , isValidFunctionName: true},
@@ -289,7 +296,7 @@ tokens = [
 
 
 
-@cpp_tokens = TokenHelper.new tokens, for_each_token: ->(each) do 
+@cpp_tokens = TokenHelper.new tokens, for_each_token: ->(each) do
     # isSymbol, isWordish
     if each[:representation] =~ /[a-zA-Z0-9_]/
         each[:isWordish] = true

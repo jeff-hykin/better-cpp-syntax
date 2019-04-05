@@ -865,13 +865,51 @@ cpp_grammar = Grammar.new(
         )
 
 #
+# C++ Attributes
+#
+    attributes = Range.new(
+        repository_name: "attribute_cpp",
+        tag_as: "support.other.attribute",
+        start_pattern: newPattern(
+            match: @cpp_tokens.that(:isAttributeStart),
+            tag_as: "punctuation.start.attribute",
+        ),
+        end_pattern: newPattern(
+            match:  @cpp_tokens.that(:isAttributeEnd),
+            tag_as: "punctuation.end.attribute",
+        ),
+        includes: [
+            # allow nested attributes
+            "#attribute_cpp",
+            Range.new(
+                start_pattern: newPattern(/\(/),
+                end_pattern: newPattern(/\)/),
+                includes: [
+                    "#attribute_cpp",
+                    "#strings_c",
+                ],
+            ),
+            newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
+            newPattern(match: /::/, tag_as: "punctuation.accessor.attribute"),
+        ],
+    )
+    inline_attribute = newPattern(
+        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
+        should_partial_match: ["struct [[deprecated]] st"],
+        match: @cpp_tokens.that(:isAttributeStart).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd)).lookAheadToAvoid(/\)/),
+        includes: [
+            "#attribute_cpp",
+        ],
+    )
+
+#
 # Support
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
-# 
+#
 # Classes and structs
-# 
+#
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
@@ -900,7 +938,7 @@ cpp_grammar = Grammar.new(
                 reference: "storage_type",
                 match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
                 tag_as: "storage.type.$match",
-            ).then(@spaces).then(
+            ).then(@spaces).maybe(inline_attribute).maybe(@spaces).then(
                 match: variable_name,
                 tag_as: "entity.name.type.$reference(storage_type)",
             ).maybe(maybe(@spaces).then(
@@ -938,15 +976,15 @@ cpp_grammar = Grammar.new(
         ),
         tag_as: "meta.class-struct-block",
         includes: [
-            # 
+            #
             # This part is only for what is before the {}'s (aka inhertance)
-            # 
+            #
             "#angle_brackets",
             *inhertance_context,
-            
-            # 
+
+            #
             # This Range is for everything in the {}'s
-            # 
+            #
             {
                 begin: "\\{",
                 beginCaptures: {
@@ -1433,6 +1471,7 @@ cpp_grammar.addToRepository({
     },
     "special_block" => {
         patterns: [
+            attributes.to_tag,
             using_namespace.to_tag,
             namespace_definition.to_tag,
             class_struct_block.to_tag,

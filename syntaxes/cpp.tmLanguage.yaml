@@ -756,6 +756,27 @@
           :name: punctuation.section.block.end.bracket.curly.lambda.cpp
       :patterns:
       - :include: "$base"
+  attribute_cpp:
+    :name: support.other.attribute.cpp
+    :begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"
+    :beginCaptures:
+      '1':
+        :name: punctuation.start.attribute.cpp
+    :end: "((?:\\]\\]|\\)\\)|\\)))"
+    :endCaptures:
+      '1':
+        :name: punctuation.end.attribute.cpp
+    :patterns:
+    - :include: "#attribute_cpp"
+    - :begin: "\\("
+      :end: "\\)"
+      :patterns:
+      - :include: "#attribute_cpp"
+      - :include: "#strings_c"
+    - :match: ","
+      :name: punctuation.separator.attribute.cpp
+    - :match: "::"
+      :name: punctuation.accessor.attribute.cpp
   angle_brackets:
     :begin: "<"
     :end: ">"
@@ -826,6 +847,7 @@
       - :include: "$base"
   special_block:
     :patterns:
+    - :include: "#attribute_cpp"
     - :name: meta.using-namespace-declaration.cpp
       :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?=;|\\n)"
       :beginCaptures:
@@ -868,15 +890,18 @@
         - :include: "$base"
       - :include: "$base"
     - :name: meta.class-struct-block.cpp
-      :begin: "(((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
+      :begin: "(((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+(?:((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\().*?(?:\\]\\]|\\)\\)|\\))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
       :beginCaptures:
         '2':
           :name: storage.type.$2.cpp
         '3':
-          :name: entity.name.type.$1.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '4':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$1.cpp
         '5':
+          :name: punctuation.inhertance.colon.cpp
+        '6':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
