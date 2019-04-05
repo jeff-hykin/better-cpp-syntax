@@ -712,7 +712,7 @@
     :patterns:
     - :include: "#function-call-innards-c"
   lambdas:
-    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)])|(?<=\\Wreturn|^return))\\s*(\\[)((?:.*\\[.*?\\].*?)*.*?)(\\]))"
+    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\]])|(?<=\\Wreturn|^return))\\s*(\\[)((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     :beginCaptures:
       '2':
         :name: punctuation.definition.capture.begin.lambda.cpp
