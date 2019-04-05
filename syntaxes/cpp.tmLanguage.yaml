@@ -773,10 +773,18 @@
       :patterns:
       - :include: "#attribute_cpp"
       - :include: "#strings_c"
+    - :match: "(using)\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+      :captures:
+        '1':
+          :name: keyword.other.using.directive.cpp
+        '2':
+          :name: entity.name.namespace.cpp
     - :match: ","
       :name: punctuation.separator.attribute.cpp
-    - :match: "::"
+    - :match: "::?"
       :name: punctuation.accessor.attribute.cpp
+    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+      :name: entity.other.attribute.$0.cpp
   angle_brackets:
     :begin: "<"
     :end: ">"
