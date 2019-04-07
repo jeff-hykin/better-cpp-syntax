@@ -869,9 +869,73 @@ cpp_grammar = Grammar.new(
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
-# 
+#
+# Enums
+#
+    enum_block = Range.new(
+        start_pattern: newPattern(
+                match: /enum/,
+                tag_as: "storage.type.enum"
+            ).then(@spaces).maybe(newPattern(
+                match: /class|struct/,
+                tag_as: "storage.type.enum",
+            ).then(@spaces)).then(
+                match: variable_name,
+                tag_as: "entity.name.type.enum",
+            ).maybe(maybe(@spaces).then(
+                match: /:/,
+                tag_as: "punctuation.type-specifier.colon",
+            ).maybe(@spaces).then(
+                match: variable_name,
+                tag_as: "entity.name.type.underlying.enum",
+            )),
+        end_pattern: newPattern(
+            lookBehindFor(/\}/)
+            .or(
+                match: /;/,
+                tag_as: "punctuation.terminator.statement",
+            ).or(
+                lookAheadFor(newPattern(
+                    match: /[()>\[\]=]/,
+                    tag_as: "punctuation.terminator.statement",
+                ))
+            )),
+        tag_as: "meta.enum-block",
+        includes: [
+            {
+                begin: "\\{",
+                beginCaptures: {
+                    "0" => {
+                        name: "punctuation.section.block.begin.bracket.curly"
+                    }
+                },
+                end: "(\\})(\\s*\\n)?",
+                endCaptures: {
+                    "1" => {
+                        name: "punctuation.section.block.end.bracket.curly"
+                    },
+                    "2" => {
+                        name: "invalid.illegal.you-forgot-semicolon"
+                    }
+                },
+                patterns: [
+                    {
+                        include: "#special_block"
+                    },
+                    {
+                        include: "#constructor"
+                    },
+                    {
+                        include: "$base"
+                    }
+                ]
+            },
+            "$base",
+        ],
+    )
+#
 # Classes and structs
-# 
+#
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
@@ -893,12 +957,12 @@ cpp_grammar = Grammar.new(
     ]
     class_struct_block = Range.new(
         start_pattern: newPattern(
-            should_fully_match: ["class foo: bar", "class foo: public baz", "enum b"],
+            should_fully_match: ["class foo: bar", "class foo: public baz"],
             should_not_fully_match: ["class foo {"],
-            should_partial_match: ["class foo f;", "enum en e;", "struct st s;"],
+            should_partial_match: ["class foo f;", "struct st s;"],
             match: newPattern(
                 reference: "storage_type",
-                match: variableBounds[ @cpp_tokens.that(:isTypeCreator) ],
+                match: variableBounds[ /struct|class|union/ ],
                 tag_as: "storage.type.$match",
             ).then(@spaces).then(
                 match: variable_name,
@@ -938,15 +1002,15 @@ cpp_grammar = Grammar.new(
         ),
         tag_as: "meta.class-struct-block",
         includes: [
-            # 
+            #
             # This part is only for what is before the {}'s (aka inhertance)
-            # 
+            #
             "#angle_brackets",
             *inhertance_context,
-            
-            # 
+
+            #
             # This Range is for everything in the {}'s
-            # 
+            #
             {
                 begin: "\\{",
                 beginCaptures: {
@@ -1435,6 +1499,7 @@ cpp_grammar.addToRepository({
         patterns: [
             using_namespace.to_tag,
             namespace_definition.to_tag,
+            enum_block.to_tag,
             class_struct_block.to_tag,
             {
                 begin: "\\b(extern)(?=\\s*\")",

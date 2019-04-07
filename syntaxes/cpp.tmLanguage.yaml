@@ -867,8 +867,41 @@
         - :include: "#constructor"
         - :include: "$base"
       - :include: "$base"
+    - :name: meta.enum-block.cpp
+      :begin: "(enum)\\s+(?:(class|struct)\\s+)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?"
+      :beginCaptures:
+        '1':
+          :name: storage.type.enum.cpp
+        '2':
+          :name: storage.type.enum.cpp
+        '3':
+          :name: entity.name.type.enum.cpp
+        '4':
+          :name: punctuation.type-specifier.colon.cpp
+        '5':
+          :name: entity.name.type.underlying.enum.cpp
+      :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
+      :patterns:
+      - :begin: "\\{"
+        :beginCaptures:
+          '0':
+            :name: punctuation.section.block.begin.bracket.curly.cpp
+        :end: "(\\})(\\s*\\n)?"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.end.bracket.curly.cpp
+          '2':
+            :name: invalid.illegal.you-forgot-semicolon.cpp
+        :patterns:
+        - :include: "#special_block"
+        - :include: "#constructor"
+        - :include: "$base"
+      - :include: "$base"
     - :name: meta.class-struct-block.cpp
-      :begin: "(((?<!\\w)(?:class|struct|union|enum)(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
+      :begin: "(((?<!\\w)struct|class|union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
       :beginCaptures:
         '2':
           :name: storage.type.$2.cpp
