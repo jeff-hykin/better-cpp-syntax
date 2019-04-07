@@ -741,7 +741,7 @@
     :patterns:
     - :include: "#function-call-innards-c"
   lambdas:
-    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\]])|(?<=\\Wreturn|^return))\\s*(\\[)((?:.*\\[.*?\\].*?)*.*?)(\\]))"
+    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\]\\[])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     :beginCaptures:
       '2':
         :name: punctuation.definition.capture.begin.lambda.cpp
@@ -1825,6 +1825,7 @@
     - :include: "$base"
   function-call-innards-c:
     :patterns:
+    - :include: "#attribute_cpp"
     - :include: "#comments-c"
     - :include: "#storage_types"
     - :include: "#method_access"
