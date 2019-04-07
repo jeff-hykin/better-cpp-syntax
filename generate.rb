@@ -250,7 +250,11 @@ cpp_grammar = Grammar.new(
                 tag_as: "entity.name.namespace",
             ),
             newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
-            newPattern(match: /::?/, tag_as: "punctuation.accessor.attribute"),
+            newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
+            newPattern(
+                match: variable_name.lookAheadFor(/::/),
+                tag_as: "entity.name.namespace"
+            ),
             newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
         ],
     )

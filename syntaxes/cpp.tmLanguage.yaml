@@ -395,8 +395,10 @@
           :name: entity.name.namespace.cpp
     - :match: ","
       :name: punctuation.separator.attribute.cpp
-    - :match: "::?"
+    - :match: ":"
       :name: punctuation.accessor.attribute.cpp
+    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)(?=::)"
+      :name: entity.name.namespace.cpp
     - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
       :name: entity.other.attribute.$0.cpp
   storage_types:
