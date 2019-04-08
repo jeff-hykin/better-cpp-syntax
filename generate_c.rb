@@ -121,6 +121,10 @@ c_grammar.initalContextIncludes(
         name: "keyword.control.c"
     },
     "#storage_types",
+    newPattern(
+        match: /typedef/,
+        tag_as: "keyword.other.typedef",
+    ),
     {
         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
         name: "storage.modifier.c"
