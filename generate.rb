@@ -261,7 +261,14 @@ cpp_grammar = Grammar.new(
     inline_attribute = newPattern(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
         should_partial_match: ["struct [[deprecated]] st"],
-        match: @cpp_tokens.that(:isAttributeStart).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd)).lookAheadToAvoid(/\)/),
+        # match one of the three attribute styles
+        match: newPattern(
+            @cpp_tokens.that(:isAttributeStart, :isCppAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isCppAttribute))
+        ).or(
+            @cpp_tokens.that(:isAttributeStart, :isGccAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isGccAttribute))
+        ).or(
+            @cpp_tokens.that(:isAttributeStart, :isMsAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isMsAttribute))
+        ).lookAheadToAvoid(/\)/),
         includes: [
             "#attribute_cpp",
         ],
