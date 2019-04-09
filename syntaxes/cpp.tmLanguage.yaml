@@ -379,17 +379,21 @@
     - :match: "(?<!\\w)(asm|__asm__|enum|union|struct)(?!\\w)"
       :name: storage.type.$0.cpp
   memory_operators:
-    :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
+    :match: "(?<!\\w)(?:(?:(?:(delete)\\s*(\\[\\])|(new)\\s*(\\[\\]))|(delete))|(new))(?!\\w)"
     :captures:
       '1':
-        :name: keyword.other.memory.delete.array.cpp
+        :name: keyword.operator.delete.array.cpp
       '2':
-        :name: keyword.other.memory.delete.array.bracket.cpp
+        :name: keyword.operator.delete.array.bracket.cpp
       '3':
-        :name: keyword.other.memory.delete.cpp
+        :name: keyword.operator.new.array.cpp
       '4':
-        :name: keyword.other.memory.new.cpp
-    :name: keyword.other.memory.cpp
+        :name: keyword.operator.new.array.bracket.cpp
+      '5':
+        :name: keyword.operator.delete.cpp
+      '6':
+        :name: keyword.operator.new.cpp
+    :name: keyword.operator.memory.cpp
   template_call_innards:
     :match: "<(?:[\\s<>,\\w])*>\\s*"
     :captures:

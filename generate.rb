@@ -288,24 +288,32 @@ cpp_grammar = Grammar.new(
         )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
-        tag_as: "keyword.other.memory",
+        tag_as: "keyword.operator.memory",
         match: lookBehindToAvoid(
                 @standard_character
             ).then(
                 newPattern(
                     newPattern(
                         match: /delete/,
-                        tag_as: "keyword.other.memory.delete.array"
+                        tag_as: "keyword.operator.delete.array"
                     ).maybe(@spaces).then(
                         match: /\[\]/,
-                        tag_as: "keyword.other.memory.delete.array.bracket"
+                        tag_as: "keyword.operator.delete.array.bracket"
+                    )
+                ).or(
+                    newPattern(
+                        match: /new/,
+                        tag_as: "keyword.operator.new.array"
+                    ).maybe(@spaces).then(
+                        match: /\[\]/,
+                        tag_as: "keyword.operator.new.array.bracket"
                     )
                 ).or(
                     match: /delete/,
-                    tag_as: "keyword.other.memory.delete"
+                    tag_as: "keyword.operator.delete"
                 ).or(
                     match: /new/,
-                    tag_as: "keyword.other.memory.new"
+                    tag_as: "keyword.operator.new"
                 )
             ).lookAheadToAvoid(@standard_character)
         )
