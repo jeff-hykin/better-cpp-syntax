@@ -1,4 +1,4 @@
-require_relative './readable_grammar.rb'
+require_relative '../readable_grammar.rb'
 require_relative './c_tokens.rb'
 
 # misc
@@ -2154,5 +2154,5 @@ c_grammar.addToRepository({
 Dir.chdir __dir__
 
 # Save
-c_grammar.saveAsYamlTo("./syntaxes/c.tmLanguage")
-c_grammar.saveAsJsonTo("./syntaxes/c.tmLanguage")
+c_grammar.saveAsYamlTo("../syntaxes/c.tmLanguage")
+c_grammar.saveAsJsonTo("../syntaxes/c.tmLanguage")

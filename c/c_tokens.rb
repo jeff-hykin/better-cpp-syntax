@@ -1,4 +1,4 @@
-require_relative './readable_grammar.rb'
+require_relative '../readable_grammar.rb'
 
 tokens = [
     { representation: "++"                   , name: "post-increment"                 , isOperator: true, isUrnaryOperator:  true, presedence:  2.1 , evaledLeftToRight: true, isPostFixOperator: true },

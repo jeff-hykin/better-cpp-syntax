@@ -1,4 +1,4 @@
-require_relative './readable_grammar.rb'
+require_relative '../readable_grammar.rb'
 
 # 
 # C++ specific tokens
