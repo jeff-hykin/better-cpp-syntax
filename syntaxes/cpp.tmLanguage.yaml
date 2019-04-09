@@ -382,14 +382,14 @@
     :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
     :captures:
       '1':
-        :name: keyword.operator.memory.delete.array.cpp
+        :name: keyword.other.memory.delete.array.cpp
       '2':
-        :name: keyword.operator.memory.delete.array.bracket.cpp
+        :name: keyword.other.memory.delete.array.bracket.cpp
       '3':
-        :name: keyword.operator.memory.delete.cpp
+        :name: keyword.other.memory.delete.cpp
       '4':
-        :name: keyword.operator.memory.new.cpp
-    :name: keyword.operator.memory.cpp
+        :name: keyword.other.memory.new.cpp
+    :name: keyword.other.memory.cpp
   template_call_innards:
     :match: "<(?:[\\s<>,\\w])*>\\s*"
     :captures:

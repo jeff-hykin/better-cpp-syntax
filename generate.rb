@@ -288,24 +288,24 @@ cpp_grammar = Grammar.new(
         )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
-        tag_as: "keyword.operator.memory",
+        tag_as: "keyword.other.memory",
         match: lookBehindToAvoid(
                 @standard_character
             ).then(
                 newPattern(
                     newPattern(
                         match: /delete/,
-                        tag_as: "keyword.operator.memory.delete.array"
+                        tag_as: "keyword.other.memory.delete.array"
                     ).maybe(@spaces).then(
                         match: /\[\]/,
-                        tag_as: "keyword.operator.memory.delete.array.bracket"
+                        tag_as: "keyword.other.memory.delete.array.bracket"
                     )
                 ).or(
                     match: /delete/,
-                    tag_as: "keyword.operator.memory.delete"
+                    tag_as: "keyword.other.memory.delete"
                 ).or(
                     match: /new/,
-                    tag_as: "keyword.operator.memory.new"
+                    tag_as: "keyword.other.memory.new"
                 )
             ).lookAheadToAvoid(@standard_character)
         )
@@ -869,9 +869,9 @@ cpp_grammar = Grammar.new(
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
-# 
+#
 # Classes and structs
-# 
+#
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
@@ -938,15 +938,15 @@ cpp_grammar = Grammar.new(
         ),
         tag_as: "meta.class-struct-block",
         includes: [
-            # 
+            #
             # This part is only for what is before the {}'s (aka inhertance)
-            # 
+            #
             "#angle_brackets",
             *inhertance_context,
-            
-            # 
+
+            #
             # This Range is for everything in the {}'s
-            # 
+            #
             {
                 begin: "\\{",
                 beginCaptures: {
