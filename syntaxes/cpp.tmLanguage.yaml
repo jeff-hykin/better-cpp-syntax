@@ -230,7 +230,7 @@
 - :include: "#block-c"
 - :include: "#parens-c"
 - :name: meta.function.definition.parameters.cpp
-  :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()"
+  :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=[a-zA-Z_]\\w*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
   :end: "(?<=\\))"
   :patterns:
   - :include: "#function-innards-c"
@@ -390,6 +390,37 @@
       '4':
         :name: keyword.operator.memory.new.cpp
     :name: keyword.operator.memory.cpp
+  attribute_cpp:
+    :name: support.other.attribute.cpp
+    :begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"
+    :beginCaptures:
+      '1':
+        :name: punctuation.start.attribute.cpp
+    :end: "((?:\\]\\]|\\)\\)|\\)))"
+    :endCaptures:
+      '1':
+        :name: punctuation.end.attribute.cpp
+    :patterns:
+    - :include: "#attribute_cpp"
+    - :begin: "\\("
+      :end: "\\)"
+      :patterns:
+      - :include: "#attribute_cpp"
+      - :include: "#strings_c"
+    - :match: "(using)\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+      :captures:
+        '1':
+          :name: keyword.other.using.directive.cpp
+        '2':
+          :name: entity.name.namespace.cpp
+    - :match: ","
+      :name: punctuation.separator.attribute.cpp
+    - :match: ":"
+      :name: punctuation.accessor.attribute.cpp
+    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)(?=::)"
+      :name: entity.name.namespace.cpp
+    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+      :name: entity.other.attribute.$0.cpp
   template_call_innards:
     :match: "<(?:[\\s<>,\\w])*>\\s*"
     :captures:
@@ -712,7 +743,7 @@
     :patterns:
     - :include: "#function-call-innards-c"
   lambdas:
-    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)])|(?<=\\Wreturn|^return))\\s*(\\[)((?:.*\\[.*?\\].*?)*.*?)(\\]))"
+    :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     :beginCaptures:
       '2':
         :name: punctuation.definition.capture.begin.lambda.cpp
@@ -826,6 +857,7 @@
       - :include: "$base"
   special_block:
     :patterns:
+    - :include: "#attribute_cpp"
     - :name: meta.using-namespace-declaration.cpp
       :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?=;|\\n)"
       :beginCaptures:
@@ -843,7 +875,7 @@
         '1':
           :name: punctuation.terminator.statement.cpp
     - :name: meta.namespace-block.cpp
-      :begin: "((?<!\\w)(namespace)\\s+((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
+      :begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
       :beginCaptures:
         '1':
           :name: meta.head.namespace.cpp
@@ -851,8 +883,11 @@
           :name: keyword.other.namespace.definition storage.type.namespace.definition.cpp
         '3':
           :patterns:
-          - :include: "#scope_resolution"
+          - :include: "#attribute_cpp"
         '4':
+          :patterns:
+          - :include: "#scope_resolution"
+        '5':
           :name: entity.name.namespace.cpp
       :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
       :patterns:
@@ -873,17 +908,20 @@
       - :name: meta.tail.namespace.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)class(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :begin: "((((?<!\\w)class(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.class.cpp
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '5':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '6':
+          :name: punctuation.inhertance.colon.cpp
+        '7':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -929,17 +967,20 @@
       - :name: meta.tail.class.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)struct(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :begin: "((((?<!\\w)struct(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.struct.cpp
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '5':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '6':
+          :name: punctuation.inhertance.colon.cpp
+        '7':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -985,17 +1026,20 @@
       - :name: meta.tail.struct.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :begin: "((((?<!\\w)union(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.union.cpp
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '5':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '6':
+          :name: punctuation.inhertance.colon.cpp
+        '7':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -1042,7 +1086,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.enum-block.cpp
-      :begin: "((enum)\\s+(?:(class|struct)\\s+)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
+      :begin: "((enum)\\s+(?:(class|struct)\\s+)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
       :beginCaptures:
         '1':
           :name: meta.head.enum.cpp
@@ -1051,17 +1095,20 @@
         '3':
           :name: storage.type.enum.enum-key.$3.cpp
         '4':
-          :name: entity.name.type.enum.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '5':
-          :name: punctuation.type-specifier.colon.cpp
+          :name: entity.name.type.enum.cpp
         '6':
-          :name: meta.scope-resolution.cpp
+          :name: punctuation.type-specifier.colon.cpp
         '7':
+          :name: meta.scope-resolution.cpp
+        '8':
           :patterns:
           - :include: "#scope_resolution"
-        '8':
-          :name: entity.name.namespace.scope-resolution.cpp
         '9':
+          :name: entity.name.namespace.scope-resolution.cpp
+        '10':
           :name: meta.template.call.cpp
           :patterns:
           - :include: "#storage_types"
@@ -1074,10 +1121,10 @@
           - :include: "#strings"
           - :match: ","
             :name: punctuation.separator.comma.template.argument.cpp
-        '10':
-          :name: punctuation.separator.namespace.access.cpp
         '11':
-          :name: storage.type.integral.$11.cpp
+          :name: punctuation.separator.namespace.access.cpp
+        '12':
+          :name: storage.type.integral.$12.cpp
       :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
       :endCaptures:
         '1':
@@ -1949,6 +1996,7 @@
     - :include: "#preprocessor-rule-define-line-contents"
   function-innards-c:
     :patterns:
+    - :include: "#attribute_cpp"
     - :include: "#comments-c"
     - :include: "#storage_types"
     - :include: "#operators"
@@ -1988,6 +2036,7 @@
     - :include: "$base"
   function-call-innards-c:
     :patterns:
+    - :include: "#attribute_cpp"
     - :include: "#comments-c"
     - :include: "#storage_types"
     - :include: "#method_access"

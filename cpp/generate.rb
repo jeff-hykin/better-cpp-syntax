@@ -375,6 +375,60 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.$match"
         )
 #
+# C++ Attributes
+#
+    attributes = Range.new(
+        repository_name: "attribute_cpp",
+        tag_as: "support.other.attribute",
+        start_pattern: newPattern(
+            match: @cpp_tokens.that(:isAttributeStart),
+            tag_as: "punctuation.start.attribute",
+        ),
+        end_pattern: newPattern(
+            match:  @cpp_tokens.that(:isAttributeEnd),
+            tag_as: "punctuation.end.attribute",
+        ),
+        includes: [
+            # allow nested attributes
+            "#attribute_cpp",
+            Range.new(
+                start_pattern: newPattern(/\(/),
+                end_pattern: newPattern(/\)/),
+                includes: [
+                    "#attribute_cpp",
+                    "#strings_c",
+                ],
+            ),
+            newPattern(match: /using/, tag_as: "keyword.other.using.directive")
+            .then(@spaces).then(
+                match: variable_name,
+                tag_as: "entity.name.namespace",
+            ),
+            newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
+            newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
+            newPattern(
+                match: variable_name.lookAheadFor(/::/),
+                tag_as: "entity.name.namespace"
+            ),
+            newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
+        ],
+    )
+    inline_attribute = newPattern(
+        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
+        should_partial_match: ["struct [[deprecated]] st"],
+        # match one of the three attribute styles
+        match: newPattern(
+            @cpp_tokens.that(:isAttributeStart, :isCppAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isCppAttribute))
+        ).or(
+            @cpp_tokens.that(:isAttributeStart, :isGccAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isGccAttribute))
+        ).or(
+            @cpp_tokens.that(:isAttributeStart, :isMsAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isMsAttribute))
+        ).lookAheadToAvoid(/\)/),
+        includes: [
+            "#attribute_cpp",
+        ],
+    )
+#
 # Templates
 #
     characters_in_template_call = /[\s<>,\w]/
@@ -549,7 +603,7 @@ cpp_grammar = Grammar.new(
     end
     cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
-    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
+    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
     function_definition = Range.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
@@ -812,7 +866,7 @@ cpp_grammar = Grammar.new(
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /namespace/,
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
-            ).then(@spaces).then(
+            ).then(@spaces).maybe(inline_attribute).maybe(@spaces).then(
                 # Named namespace (with possible scope )
                 preceding_scopes
             ).maybe(@spaces).then(
@@ -848,8 +902,8 @@ cpp_grammar = Grammar.new(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
-                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: /\[/,
+                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                        match: /\[/.lookAheadToAvoid(/\[/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
                         match: /(?:.*\[.*?\].*?)*.*?/,
@@ -931,7 +985,7 @@ cpp_grammar = Grammar.new(
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
                     ).then(@spaces)
-                ).then(
+                ).maybe(inline_attribute).maybe(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
@@ -977,7 +1031,7 @@ cpp_grammar = Grammar.new(
                         reference: "storage_type",
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
-                    ).then(@spaces).then(
+                    ).then(@spaces).maybe(inline_attribute).maybe(@spaces).then(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(maybe(@spaces).then(
@@ -1478,6 +1532,7 @@ cpp_grammar.addToRepository({
     },
     "special_block" => {
         patterns: [
+            attributes.to_tag,
             using_namespace.to_tag,
             namespace_block.to_tag,
             class_block.to_tag,
@@ -2989,6 +3044,7 @@ cpp_grammar.addToRepository({
     },
     "function-innards-c" => {
         patterns: [
+            attributes.to_tag,
             {
                 include: "#comments-c"
             },
@@ -3053,6 +3109,7 @@ cpp_grammar.addToRepository({
     },
     "function-call-innards-c" => {
         patterns: [
+            attributes.to_tag,
             {
                 include: "#comments-c"
             },

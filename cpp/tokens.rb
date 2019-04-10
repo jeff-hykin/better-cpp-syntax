@@ -249,6 +249,15 @@ tokens = [
     { representation: "defined"               , name: "defined"                , isPreprocessorDirective: true },
     { representation: "__has_include"         , name: "__has_include"          , isPreprocessorDirective: true },
     { representation: "__has_cpp_attribute"   , name: "__has_cpp_attribute"    , isPreprocessorDirective: true },
+    # attributes
+    { representation: "[["                    , name: "C++11 attribute start"  , isAttributeStart: true, isCppAttribute: true},
+    { representation: "]]"                    , name: "C++11 attribute end"    , isAttributeEnd: true  , isCppAttribute: true},
+    { representation: "__attribute(("         , name: "gcc attribute start alt", isAttributeStart: true, isGccAttribute: true},
+    { representation: "__attribute__(("       , name: "gcc attribute start"    , isAttributeStart: true, isGccAttribute: true},
+    { representation: "))"                    , name: "gcc attribute end"      , isAttributeEnd: true  , isGccAttribute: true},
+    { representation: "__declspec("           , name: "ms attribute start"     , isAttributeStart: true, isMsAttribute: true},
+    { representation: ")"                     , name: "ms attribute end"       , isAttributeEnd: true  , isMsAttribute: true},
+
     # 
     # misc
     # 
