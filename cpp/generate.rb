@@ -802,10 +802,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(
                 /;|\n/
             ),
-        end_pattern: newPattern(
-                match: /;/,
-                tag_as: "punctuation.terminator.statement"
-            ),
+        end_pattern: semicolon,
         )
     # TODO: add support for namespace name = qualified-namespace ;
     namespace_block = blockFinderFor(
@@ -1382,10 +1379,7 @@ cpp_grammar.initalContextIncludes(
         name: "storage.modifier.array.bracket.square",
         match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
     },
-    {
-        match: ";",
-        name: "punctuation.terminator.statement"
-    },
+    semicolon.to_tag,
     {
         match: ",",
         name: "punctuation.separator.delimiter"
@@ -3134,5 +3128,6 @@ cpp_grammar.addToRepository({
 Dir.chdir __dir__
 
 # Save
-cpp_grammar.saveAsYamlTo("../syntaxes/cpp.tmLanguage")
-cpp_grammar.saveAsJsonTo("../syntaxes/cpp.tmLanguage")
+syntax_location = "../syntaxes/cpp.tmLanguage"
+cpp_grammar.saveAsYamlTo(syntax_location)
+cpp_grammar.saveAsJsonTo(syntax_location)
