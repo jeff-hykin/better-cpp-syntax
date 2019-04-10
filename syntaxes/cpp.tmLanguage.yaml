@@ -376,7 +376,7 @@
       :name: storage.type.primitive.cpp
     - :match: "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)"
       :name: storage.type.cpp
-    - :match: "(?<!\\w)(asm|__asm__|enum|union|struct)(?!\\w)"
+    - :match: "(?<!\\w)(asm|__asm__)(?!\\w)"
       :name: storage.type.$0.cpp
   memory_operators:
     :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
@@ -843,73 +843,47 @@
         '1':
           :name: punctuation.terminator.statement.cpp
     - :name: meta.namespace-block.cpp
-      :begin: "(?<!\\w)(namespace)\\s+((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{))"
+      :begin: "((?<!\\w)(namespace)\\s+((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
       :beginCaptures:
         '1':
-          :name: keyword.other.namespace.definition storage.type.namespace.definition.cpp
+          :name: meta.head.namespace.cpp
         '2':
+          :name: keyword.other.namespace.definition storage.type.namespace.definition.cpp
+        '3':
           :patterns:
           - :include: "#scope_resolution"
-        '3':
+        '4':
           :name: entity.name.namespace.cpp
-      :end: "(?:(?<=\\})|(?=;|,|\\(|\\)|>|\\[|\\]|=))"
+      :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
       :patterns:
-      - :begin: "(\\{)"
+      - :name: meta.head.namespace.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+      - :name: meta.body.namespace.cpp
+        :begin: "(\\{)"
         :beginCaptures:
           '1':
-            :name: punctuation.definition.scope.cpp
+            :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
         :end: "(\\})"
         :endCaptures:
           '1':
-            :name: punctuation.definition.scope.cpp
+            :name: punctuation.section.block.end.bracket.curly.namespace.cpp
         :patterns:
-        - :include: "#special_block"
-        - :include: "#constructor"
         - :include: "$base"
-      - :include: "$base"
-    - :name: meta.enum-block.cpp
-      :begin: "(enum)\\s+(?:(class|struct)\\s+)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?"
+      - :name: meta.tail.namespace.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
+    - :begin: "((((?<!\\w)class(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
-          :name: storage.type.enum.cpp
-        '2':
-          :name: storage.type.enum.cpp
+          :name: meta.head.class.cpp
         '3':
-          :name: entity.name.type.enum.cpp
+          :name: storage.type.$3.cpp
         '4':
-          :name: punctuation.type-specifier.colon.cpp
+          :name: entity.name.type.$2.cpp
         '5':
-          :name: entity.name.type.underlying.enum.cpp
-      :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :begin: "\\{"
-        :beginCaptures:
-          '0':
-            :name: punctuation.section.block.begin.bracket.curly.cpp
-        :end: "(\\})(\\s*\\n)?"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.cpp
-          '2':
-            :name: invalid.illegal.you-forgot-semicolon.cpp
-        :patterns:
-        - :include: "#special_block"
-        - :include: "#constructor"
-        - :include: "$base"
-      - :include: "$base"
-    - :name: meta.class-struct-block.cpp
-      :begin: "(((?<!\\w)struct|class|union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?)"
-      :beginCaptures:
-        '2':
-          :name: storage.type.$2.cpp
-        '3':
-          :name: entity.name.type.$1.cpp
-        '4':
           :name: punctuation.inhertance.colon.cpp
-        '5':
+        '6':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -919,53 +893,246 @@
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
-      :end: "(?:(?:(?<=\\})|(;))|(?=([()>\\[\\]=])))"
+      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
       :endCaptures:
         '1':
           :name: punctuation.terminator.statement.cpp
+        '2':
+          :name: punctuation.terminator.statement.cpp
       :patterns:
-      - :include: "#angle_brackets"
-      - :match: ","
-        :name: punctuation.separator.delimiter.inhertance.cpp
-      - :match: "(?:private|protected|public)"
-        :name: storage.type.modifier.access.$0.cpp
-      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
-        :captures:
-          '1':
-            :name: entity.name.type.inherited.cpp
-      - :begin: "\\{"
+      - :name: meta.head.class.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+        :patterns:
+        - :include: "#angle_brackets"
+        - :match: ","
+          :name: punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?:private|protected|public)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+      - :name: meta.body.class.cpp
+        :begin: "(\\{)"
         :beginCaptures:
-          '0':
-            :name: punctuation.section.block.begin.bracket.curly.cpp
-        :end: "(\\})(\\s*\\n)?"
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.class.cpp
+        :end: "(\\})"
         :endCaptures:
           '1':
-            :name: punctuation.section.block.end.bracket.curly.cpp
-          '2':
-            :name: invalid.illegal.you-forgot-semicolon.cpp
+            :name: punctuation.section.block.end.bracket.curly.class.cpp
         :patterns:
         - :include: "#special_block"
         - :include: "#constructor"
         - :include: "$base"
-      - :include: "$base"
-    - :begin: \b(extern)(?=\s*")
+      - :name: meta.tail.class.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
+    - :begin: "((((?<!\\w)struct(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
-          :name: storage.modifier.cpp
-      :end: "(?<=\\})|(?=\\w)|(?=\\s*#\\s*endif\\b)"
-      :name: meta.extern-block.cpp
+          :name: meta.head.struct.cpp
+        '3':
+          :name: storage.type.$3.cpp
+        '4':
+          :name: entity.name.type.$2.cpp
+        '5':
+          :name: punctuation.inhertance.colon.cpp
+        '6':
+          :patterns:
+          - :match: ","
+            :name: punctuation.separator.delimiter.inhertance.cpp
+          - :match: "(?:private|protected|public)"
+            :name: storage.type.modifier.access.$0.cpp
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+            :captures:
+              '1':
+                :name: entity.name.type.inherited.cpp
+      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
+        '2':
+          :name: punctuation.terminator.statement.cpp
       :patterns:
-      - :begin: "\\{"
+      - :name: meta.head.struct.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+        :patterns:
+        - :include: "#angle_brackets"
+        - :match: ","
+          :name: punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?:private|protected|public)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+      - :name: meta.body.struct.cpp
+        :begin: "(\\{)"
         :beginCaptures:
-          '0':
-            :name: punctuation.section.block.begin.bracket.curly.cpp
-        :end: "\\}|(?=\\s*#\\s*endif\\b)"
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.struct.cpp
+        :end: "(\\})"
         :endCaptures:
-          '0':
-            :name: punctuation.section.block.end.bracket.curly.cpp
+          '1':
+            :name: punctuation.section.block.end.bracket.curly.struct.cpp
         :patterns:
         - :include: "#special_block"
+        - :include: "#constructor"
         - :include: "$base"
+      - :name: meta.tail.struct.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
+    - :begin: "((((?<!\\w)union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :beginCaptures:
+        '1':
+          :name: meta.head.union.cpp
+        '3':
+          :name: storage.type.$3.cpp
+        '4':
+          :name: entity.name.type.$2.cpp
+        '5':
+          :name: punctuation.inhertance.colon.cpp
+        '6':
+          :patterns:
+          - :match: ","
+            :name: punctuation.separator.delimiter.inhertance.cpp
+          - :match: "(?:private|protected|public)"
+            :name: storage.type.modifier.access.$0.cpp
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+            :captures:
+              '1':
+                :name: entity.name.type.inherited.cpp
+      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
+        '2':
+          :name: punctuation.terminator.statement.cpp
+      :patterns:
+      - :name: meta.head.union.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+        :patterns:
+        - :include: "#angle_brackets"
+        - :match: ","
+          :name: punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?:private|protected|public)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+      - :name: meta.body.union.cpp
+        :begin: "(\\{)"
+        :beginCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.union.cpp
+        :end: "(\\})"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.end.bracket.curly.union.cpp
+        :patterns:
+        - :include: "#special_block"
+        - :include: "#constructor"
+        - :include: "$base"
+      - :name: meta.tail.union.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
+    - :name: meta.enum-block.cpp
+      :begin: "((enum)\\s+(?:(class|struct)\\s+)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
+      :beginCaptures:
+        '1':
+          :name: meta.head.enum.cpp
+        '2':
+          :name: storage.type.enum.cpp
+        '3':
+          :name: storage.type.enum.enum-key.$3.cpp
+        '4':
+          :name: entity.name.type.enum.cpp
+        '5':
+          :name: punctuation.type-specifier.colon.cpp
+        '6':
+          :name: meta.scope-resolution.cpp
+        '7':
+          :patterns:
+          - :include: "#scope_resolution"
+        '8':
+          :name: entity.name.namespace.scope-resolution.cpp
+        '9':
+          :name: meta.template.call.cpp
+          :patterns:
+          - :include: "#storage_types"
+          - :include: "#constants"
+          - :include: "#scope_resolution"
+          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+            :name: storage.type.user-defined.cpp
+          - :include: "#operators"
+          - :include: "#number_literal"
+          - :include: "#strings"
+          - :match: ","
+            :name: punctuation.separator.comma.template.argument.cpp
+        '10':
+          :name: punctuation.separator.namespace.access.cpp
+        '11':
+          :name: storage.type.integral.$11.cpp
+      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
+        '2':
+          :name: punctuation.terminator.statement.cpp
+      :patterns:
+      - :name: meta.head.enum.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+      - :name: meta.body.enum.cpp
+        :begin: "(\\{)"
+        :beginCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.enum.cpp
+        :end: "(\\})"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.end.bracket.curly.enum.cpp
+        :patterns:
+        - :include: "$base"
+      - :name: meta.tail.enum.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
+    - :name: meta.extern-block.cpp
+      :begin: ((\bextern)(?=\s*\"))
+      :beginCaptures:
+        '1':
+          :name: meta.head.extern.cpp
+        '2':
+          :name: storage.type.extern.cpp
+      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+      :endCaptures:
+        '1':
+          :name: punctuation.terminator.statement.cpp
+        '2':
+          :name: punctuation.terminator.statement.cpp
+      :patterns:
+      - :name: meta.head.extern.cpp
+        :begin: "(?<=^)[\\s\\n]?"
+        :end: "[\\s\\n]?(?={)"
+      - :name: meta.body.extern.cpp
+        :begin: "(\\{)"
+        :beginCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.extern.cpp
+        :end: "(\\})"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.end.bracket.curly.extern.cpp
+        :patterns:
+        - :include: "$base"
+      - :name: meta.tail.extern.cpp
+        :begin: "(?<=})[\\s\\n]*"
+        :end: "[\\s\\n]*(?=;)"
       - :include: "$base"
   strings:
     :patterns:
