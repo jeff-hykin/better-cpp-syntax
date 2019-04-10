@@ -1,4 +1,4 @@
-require_relative '../readable_grammar.rb'
+require_relative '../textmate_tools.rb'
 require_relative './cpp_tokens.rb'
 
 # todo

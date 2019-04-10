@@ -1,4 +1,4 @@
-require_relative './readable_grammar.rb'
+require_relative './textmate_tools.rb'
 cpp_grammar = Grammar.new(
     name:"C++",
     scope_name: "source.cpp",

@@ -1,4 +1,4 @@
-require_relative '../readable_grammar.rb'
+require_relative '../textmate_tools.rb'
 require_relative './c_tokens.rb'
 
 # misc
