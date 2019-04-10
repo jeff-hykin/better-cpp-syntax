@@ -906,13 +906,13 @@
       :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
       :patterns:
       - :name: meta.head.namespace.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
-      - :name: meta.body.namespace.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
+      - :name: meta.body.namespace.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
@@ -923,7 +923,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.class.cpp
-      :begin: "((((?<!\\w)class(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.class.cpp
@@ -933,10 +933,13 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
-          :name: entity.name.type.$3.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '6':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '7':
+          :name: punctuation.inhertance.colon.cpp
+        '8':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -954,8 +957,11 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.class.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.class.cpp
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -967,10 +973,7 @@
             '1':
               :name: entity.name.type.inherited.cpp
       - :name: meta.body.class.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.class.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
@@ -983,7 +986,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.struct.cpp
-      :begin: "((((?<!\\w)struct(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.struct.cpp
@@ -993,10 +996,13 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
-          :name: entity.name.type.$3.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '6':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '7':
+          :name: punctuation.inhertance.colon.cpp
+        '8':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -1014,8 +1020,11 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.struct.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.struct.cpp
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -1027,10 +1036,7 @@
             '1':
               :name: entity.name.type.inherited.cpp
       - :name: meta.body.struct.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.struct.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
@@ -1043,7 +1049,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.union.cpp
-      :begin: "((((?<!\\w)union(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.union.cpp
@@ -1053,10 +1059,13 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
-          :name: entity.name.type.$3.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '6':
-          :name: punctuation.inhertance.colon.cpp
+          :name: entity.name.type.$3.cpp
         '7':
+          :name: punctuation.inhertance.colon.cpp
+        '8':
           :patterns:
           - :match: ","
             :name: punctuation.separator.delimiter.inhertance.cpp
@@ -1074,8 +1083,11 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.union.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.block.begin.bracket.curly.union.cpp
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -1087,10 +1099,7 @@
             '1':
               :name: entity.name.type.inherited.cpp
       - :name: meta.body.union.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.union.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
@@ -1103,7 +1112,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.enum.cpp
-      :begin: "((enum)\\s+(?:(class|struct)\\s+)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
+      :begin: "((enum)\\s+(?:(class|struct)(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={)))?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
       :beginCaptures:
         '1':
           :name: meta.head.enum.cpp
@@ -1115,17 +1124,20 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
-          :name: entity.name.type.enum.cpp
+          :patterns:
+          - :include: "#attribute_cpp"
         '6':
-          :name: punctuation.type-specifier.colon.cpp
+          :name: entity.name.type.enum.cpp
         '7':
-          :name: meta.scope-resolution.cpp
+          :name: punctuation.type-specifier.colon.cpp
         '8':
+          :name: meta.scope-resolution.cpp
+        '9':
           :patterns:
           - :include: "#scope_resolution"
-        '9':
-          :name: entity.name.namespace.scope-resolution.cpp
         '10':
+          :name: entity.name.namespace.scope-resolution.cpp
+        '11':
           :name: meta.template.call.cpp
           :patterns:
           - :include: "#storage_types"
@@ -1138,10 +1150,10 @@
           - :include: "#strings"
           - :match: ","
             :name: punctuation.separator.comma.template.argument.cpp
-        '11':
-          :name: punctuation.separator.namespace.access.cpp
         '12':
-          :name: storage.type.integral.$12.cpp
+          :name: punctuation.separator.namespace.access.cpp
+        '13':
+          :name: storage.type.integral.$13.cpp
       :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
       :endCaptures:
         '1':
@@ -1150,13 +1162,13 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.enum.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
-      - :name: meta.body.enum.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.enum.cpp
+      - :name: meta.body.enum.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
@@ -1181,13 +1193,13 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.extern.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
-      - :name: meta.body.extern.cpp
-        :begin: "(\\{)"
-        :beginCaptures:
+        :begin: "\\G"
+        :end: "(\\{)"
+        :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.extern.cpp
+      - :name: meta.body.extern.cpp
+        :begin: "(?<=\\{)"
         :end: "(\\})"
         :endCaptures:
           '1':
