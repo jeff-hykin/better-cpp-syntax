@@ -124,7 +124,7 @@
 // Storage types
 //
     pthread_rwlockattr_t thing;
-    padfthread_rwlockattr_t thing;
+    pthread_rwlockattr_t thing;
     decltype(int);
 
 // 

@@ -345,28 +345,28 @@ cpp_grammar = Grammar.new(
     # TODO: enhance casting operators to include <>'s
     type_casting_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
-        tag_as: "keyword.operator.cast.$match"
+        tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
     memory_operators = newPattern(
         repository_name: 'memory_operators',
-        tag_as: "keyword.operator.memory",
+        tag_as: "keyword.operator.wordlike memory",
         match: lookBehindToAvoid(
                 @standard_character
             ).then(
                 newPattern(
                     newPattern(
                         match: /delete/,
-                        tag_as: "keyword.operator.memory.delete.array"
+                        tag_as: "keyword.operator.delete.array"
                     ).maybe(@spaces).then(
                         match: /\[\]/,
-                        tag_as: "keyword.operator.memory.delete.array.bracket"
+                        tag_as: "keyword.operator.delete.array.bracket"
                     )
                 ).or(
                     match: /delete/,
-                    tag_as: "keyword.operator.memory.delete"
+                    tag_as: "keyword.operator.delete"
                 ).or(
                     match: /new/,
-                    tag_as: "keyword.operator.memory.new"
+                    tag_as: "keyword.operator.new"
                 )
             ).lookAheadToAvoid(@standard_character)
         )
@@ -581,7 +581,7 @@ cpp_grammar = Grammar.new(
     operator_context = []
     normal_word_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "alias keyword.operator.$match",
+        tag_as: "keyword.operator.wordlike alias keyword.operator.$match",
         )
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
@@ -589,18 +589,18 @@ cpp_grammar = Grammar.new(
         operator_context.push(functionTemplate[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
-            tag_name_as: "keyword.operator.#{name}",
+            tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
             tag_content_as: "arguments.operator.#{name}",
-            tag_parenthese_as: "operator.#{name} keyword.operator.#{name}"
+            tag_parenthese_as: "operator.#{name} keyword.operator.functionlike keyword.operator.#{name}"
         ])
     end
     operator_context += [
             functionTemplate[
                 repository_name: "decltype_specifier",
                 match_name: variableBounds[/decltype/],
-                tag_name_as: "keyword.other.decltype storage.type.decltype",
+                tag_name_as: "keyword.operator.functionlike keyword.other.decltype storage.type.decltype",
                 tag_content_as: "arguments.decltype",
-                tag_parenthese_as: "decltype storage.type.decltype"
+                tag_parenthese_as: "decltype keyword.operator.functionlike storage.type.decltype"
             ],
             type_casting_operators,
             :method_access,
@@ -718,11 +718,11 @@ cpp_grammar = Grammar.new(
                 includes: [:scope_resolution]
             ).maybe(@spaces).then(
                 match: /\(/,
-                tag_as: "punctuation.section.parameters.begin.bracket.round"
+                tag_as: "punctuation.section.parameters.begin.bracket.round.operator-overload"
             ),
         end_pattern: newPattern(
                 match: /\)/,
-                tag_as: "punctuation.section.parameters.end.bracket.round"
+                tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
         includes: [:probably_a_parameter, :'function-innards-c' ]
         )
@@ -732,6 +732,7 @@ cpp_grammar = Grammar.new(
 #
     dot_operator = /\.\*/.or(/\./)
     arrow_operator = /->\*/.or(/->/)
+    dot_or_arrow_operator = /(?:\.\*|\.|->|->\*)/
     member_operator = newPattern(
             match: dot_operator,
             tag_as: "punctuation.separator.dot-access"
@@ -749,9 +750,17 @@ cpp_grammar = Grammar.new(
             member_operator
         )
     member_context = [
+            mid_member = newPattern(
+                tag_as: "variable.other.member",
+                match: lookBehindFor(dot_or_arrow_operator).maybe(
+                    @spaces
+                ).then(
+                    partial_member
+                )
+            ),
+            partial_member,
             :member_access,
             :method_access,
-            partial_member
         ]
     member_start = partial_member.then(
             match: zeroOrMoreOf(subsequent_object_with_operator),
@@ -1965,14 +1974,6 @@ cpp_grammar.addToRepository({
                     }
                 ]
             },
-            {
-                match: "^\\s*#\\s*(else|elif|endif)\\b",
-                captures: {
-                    "0" => {
-                        name: "invalid.illegal.stray-$1"
-                    }
-                }
-            }
         ]
     },
     "preprocessor-rule-conditional-block" => {
@@ -2045,14 +2046,6 @@ cpp_grammar.addToRepository({
                     }
                 ]
             },
-            {
-                match: "^\\s*#\\s*(else|elif|endif)\\b",
-                captures: {
-                    "0" => {
-                        name: "invalid.illegal.stray-$1"
-                    }
-                }
-            }
         ]
     },
     "preprocessor-rule-conditional-line" => {
@@ -3072,7 +3065,7 @@ cpp_grammar.addToRepository({
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                 beginCaptures: {
                     "1" => {
-                        name: "keyword.operator.memory.new"
+                        name: "keyword.operator.wordlike memory keyword.operator.new"
                     },
                     "2" => {
                         patterns: [
@@ -3135,7 +3128,7 @@ cpp_grammar.saveAsJsonTo(syntax_location)
 
 # uncomment the following if you want it to auto-update your system syntax when this file is run
 # only works on mac at the moment
-# if (/darwin/ =~ RUBY_PLATFORM) != nil
-#     # overwrite the system syntax with the generated syntax
-#     `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
-# end
+if (/darwin/ =~ RUBY_PLATFORM) != nil
+    # overwrite the system syntax with the generated syntax
+    `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
+end

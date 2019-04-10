@@ -75,6 +75,8 @@
 - :include: "#preprocessor-rule-enabled"
 - :include: "#preprocessor-rule-disabled"
 - :include: "#preprocessor-rule-conditional"
+- :match: "(?<!\\w)#(?-mix:if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute)(?!\\w)"
+  :name: keyword.control.directive.$0.cpp
 - :include: "#comments-c"
 - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
   :name: keyword.control.$0.cpp
@@ -382,14 +384,14 @@
     :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
     :captures:
       '1':
-        :name: keyword.operator.memory.delete.array.cpp
+        :name: keyword.operator.delete.array.cpp
       '2':
-        :name: keyword.operator.memory.delete.array.bracket.cpp
+        :name: keyword.operator.delete.array.bracket.cpp
       '3':
-        :name: keyword.operator.memory.delete.cpp
+        :name: keyword.operator.delete.cpp
       '4':
-        :name: keyword.operator.memory.new.cpp
-    :name: keyword.operator.memory.cpp
+        :name: keyword.operator.new.cpp
+    :name: keyword.operator.wordlike.cpp memory.cpp
   template_call_innards:
     :match: "<(?:[\\s<>,\\w])*>\\s*"
     :captures:
@@ -515,13 +517,15 @@
     :begin: "((?<!\\w)sizeof(?!\\w))(\\()"
     :beginCaptures:
       '1':
-        :name: keyword.operator.sizeof.cpp
+        :name: keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.operator.sizeof keyword.operator.sizeof.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
+          keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.operator.sizeof keyword.operator.sizeof.cpp
+        :name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
+          keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
     :patterns:
     - :include: "$base"
   alignof_operator:
@@ -529,14 +533,15 @@
     :begin: "((?<!\\w)alignof(?!\\w))(\\()"
     :beginCaptures:
       '1':
-        :name: keyword.operator.alignof.cpp
+        :name: keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.operator.alignof
-          keyword.operator.alignof.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.operator.alignof.cpp
+          keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.operator.alignof keyword.operator.alignof.cpp
+        :name: punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
+          keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
     :patterns:
     - :include: "$base"
   alignas_operator:
@@ -544,14 +549,15 @@
     :begin: "((?<!\\w)alignas(?!\\w))(\\()"
     :beginCaptures:
       '1':
-        :name: keyword.operator.alignas.cpp
+        :name: keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.operator.alignas
-          keyword.operator.alignas.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.operator.alignas.cpp
+          keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.operator.alignas keyword.operator.alignas.cpp
+        :name: punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
+          keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
     :patterns:
     - :include: "$base"
   typeid_operator:
@@ -559,13 +565,15 @@
     :begin: "((?<!\\w)typeid(?!\\w))(\\()"
     :beginCaptures:
       '1':
-        :name: keyword.operator.typeid.cpp
+        :name: keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.operator.typeid keyword.operator.typeid.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+          keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.operator.typeid keyword.operator.typeid.cpp
+        :name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+          keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
     :patterns:
     - :include: "$base"
   decltype_specifier:
@@ -573,13 +581,15 @@
     :begin: "((?<!\\w)decltype(?!\\w))(\\()"
     :beginCaptures:
       '1':
-        :name: keyword.other.decltype storage.type.decltype.cpp
+        :name: keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.decltype storage.type.decltype.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.decltype.cpp keyword.operator.functionlike.cpp
+          storage.type.decltype.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.decltype storage.type.decltype.cpp
+        :name: punctuation.section.arguments.end.bracket.round.decltype.cpp keyword.operator.functionlike.cpp
+          storage.type.decltype.cpp
     :patterns:
     - :include: "$base"
   operators:
@@ -590,11 +600,11 @@
     - :include: "#typeid_operator"
     - :include: "#decltype_specifier"
     - :match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
-      :name: keyword.operator.cast.$0.cpp
+      :name: keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp
     - :include: "#method_access"
     - :include: "#member_access"
     - :match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
-      :name: alias keyword.operator.$0.cpp
+      :name: keyword.operator.wordlike.cpp alias.cpp keyword.operator.$0.cpp
     - :include: "#vararg_ellipses"
     - :match: "--"
       :name: keyword.operator.decrement.cpp
@@ -648,11 +658,11 @@
         :patterns:
         - :include: "#scope_resolution"
       '3':
-        :name: punctuation.section.parameters.begin.bracket.round.cpp
+        :name: punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.parameters.end.bracket.round.cpp
+        :name: punctuation.section.parameters.end.bracket.round.operator-overload.cpp
     :patterns:
     - :include: "#probably_a_parameter"
     - :include: "#function-innards-c"
@@ -667,8 +677,15 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :include: "#member_access"
-        - :include: "#method_access"
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          :captures:
+            '1':
+              :name: variable.other.object.access.cpp
+            '2':
+              :name: punctuation.separator.dot-access.cpp
+            '3':
+              :name: punctuation.separator.pointer-access.cpp
+          :name: variable.other.member.cpp
         - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
@@ -677,6 +694,8 @@
               :name: punctuation.separator.dot-access.cpp
             '3':
               :name: punctuation.separator.pointer-access.cpp
+        - :include: "#member_access"
+        - :include: "#method_access"
       '5':
         :name: variable.other.member.cpp
   method_access:
@@ -691,8 +710,15 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :include: "#member_access"
-        - :include: "#method_access"
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          :captures:
+            '1':
+              :name: variable.other.object.access.cpp
+            '2':
+              :name: punctuation.separator.dot-access.cpp
+            '3':
+              :name: punctuation.separator.pointer-access.cpp
+          :name: variable.other.member.cpp
         - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
@@ -701,6 +727,8 @@
               :name: punctuation.separator.dot-access.cpp
             '3':
               :name: punctuation.separator.pointer-access.cpp
+        - :include: "#member_access"
+        - :include: "#method_access"
       '5':
         :name: entity.name.function.member.cpp
       '6':
@@ -832,7 +860,7 @@
         '1':
           :name: keyword.other.using.directive.cpp
         '2':
-          :name: keyword.other.namespace.directive storage.type.namespace.directive.cpp
+          :name: keyword.other.namespace.directive.cpp storage.type.namespace.directive.cpp
         '3':
           :patterns:
           - :include: "#scope_resolution"
@@ -848,7 +876,7 @@
         '1':
           :name: meta.head.namespace.cpp
         '2':
-          :name: keyword.other.namespace.definition storage.type.namespace.definition.cpp
+          :name: keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp
         '3':
           :patterns:
           - :include: "#scope_resolution"
@@ -1401,10 +1429,6 @@
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
       - :include: "$base"
-    - :match: "^\\s*#\\s*(else|elif|endif)\\b"
-      :captures:
-        '0':
-          :name: invalid.illegal.stray-$1.cpp
   preprocessor-rule-conditional-block:
     :patterns:
     - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
@@ -1443,10 +1467,6 @@
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
       - :include: "#block_innards-c"
-    - :match: "^\\s*#\\s*(else|elif|endif)\\b"
-      :captures:
-        '0':
-          :name: invalid.illegal.stray-$1.cpp
   preprocessor-rule-conditional-line:
     :patterns:
     - :match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))"
@@ -2004,7 +2024,7 @@
         \s*(\()
       :beginCaptures:
         '1':
-          :name: keyword.operator.memory.new.cpp
+          :name: keyword.operator.wordlike.cpp memory.cpp keyword.operator.new.cpp
         '2':
           :patterns:
           - :include: "#template_call_innards"

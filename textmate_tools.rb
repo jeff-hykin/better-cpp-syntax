@@ -194,11 +194,16 @@ class Grammar
                 elsif value.is_a? Hash
                     addLanguageEndings(value)
                 elsif key.to_s == "name"
-                    # if it doesnt already have the ending then add it
-                    if not (value =~ /#{@language_ending}\z/)
-                        value += ".#{@language_ending}"
-                        data[key] = value
+                    new_names = []
+                    for each in value.split(/\s/)
+                        each_with_ending = each
+                        # if it doesnt already have the ending then add it
+                        if not (each_with_ending =~ /#{@language_ending}\z/)
+                            each_with_ending += ".#{@language_ending}"
+                        end
+                        new_names << each_with_ending
                     end
+                    data[key] = new_names.join(' ')
                 end
             end
         end
