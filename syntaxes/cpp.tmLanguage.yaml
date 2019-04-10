@@ -397,11 +397,11 @@
     :begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"
     :beginCaptures:
       '1':
-        :name: punctuation.start.attribute.cpp
+        :name: punctuation.section.attribute.begin.cpp
     :end: "((?:\\]\\]|\\)\\)|\\)))"
     :endCaptures:
       '1':
-        :name: punctuation.end.attribute.cpp
+        :name: punctuation.section.attribute.end.cpp
     :patterns:
     - :include: "#attribute_cpp"
     - :begin: "\\("

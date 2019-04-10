@@ -382,11 +382,11 @@ cpp_grammar = Grammar.new(
         tag_as: "support.other.attribute",
         start_pattern: newPattern(
             match: @cpp_tokens.that(:isAttributeStart),
-            tag_as: "punctuation.start.attribute",
+            tag_as: "punctuation.section.attribute.begin",
         ),
         end_pattern: newPattern(
             match:  @cpp_tokens.that(:isAttributeEnd),
-            tag_as: "punctuation.end.attribute",
+            tag_as: "punctuation.section.attribute.end",
         ),
         includes: [
             # allow nested attributes
