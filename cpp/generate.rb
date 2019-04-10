@@ -16,9 +16,9 @@ cpp_grammar = Grammar.new(
     ],
 )
 
-# 
+#
 # Utils
-# 
+#
     @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -50,8 +50,8 @@ cpp_grammar = Grammar.new(
                 # Head
                 Range.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: lookBehindFor(/^/).then(/[\s\n]?/),
-                    end_pattern: newPattern(/[\s\n]?/).lookAheadFor(/{/),
+                    start_pattern: lookBehindFor(/\G/),
+                    end_pattern: lookAheadFor(/{/),
                     includes: head_includes
                 ),
                 # Body
@@ -1081,7 +1081,7 @@ cpp_grammar = Grammar.new(
     extern_block = blockFinderFor(
         name: 'extern',
         tag_as: "meta.block.extern",
-        
+
         start_pattern: newPattern(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
@@ -1089,15 +1089,15 @@ cpp_grammar = Grammar.new(
         secondary_includes: [ "$base" ]
         )
 
-# 
+#
 # preprocessor directives
-# 
+#
     # TODO, change all blocks/paraentheses so that they end and the end of a macro
     # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
     hacky_fix_for_stray_directive = newPattern(
         match: variableBounds[/#(?:endif|else|elif)/],
         tag_as: "keyword.control.directive.$match"
-    )    
+    )
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -3185,7 +3185,7 @@ cpp_grammar.addToRepository({
 })
 
 
-    
+
 
 Dir.chdir __dir__
 
@@ -3197,7 +3197,7 @@ cpp_grammar.saveAsJsonTo(syntax_location)
 
 # uncomment the following if you want it to auto-update your system syntax when this file is run
 # only works on mac at the moment
-if (/darwin/ =~ RUBY_PLATFORM) != nil
-    # overwrite the system syntax with the generated syntax
-    `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
-end
+# if (/darwin/ =~ RUBY_PLATFORM) != nil
+#     # overwrite the system syntax with the generated syntax
+#     `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
+# end

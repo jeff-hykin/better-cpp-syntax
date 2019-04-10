@@ -906,8 +906,8 @@
       :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
       :patterns:
       - :name: meta.head.namespace.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
       - :name: meta.body.namespace.cpp
         :begin: "(\\{)"
         :beginCaptures:
@@ -954,8 +954,8 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.class.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -1014,8 +1014,8 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.struct.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -1074,8 +1074,8 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.union.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
         :patterns:
         - :include: "#angle_brackets"
         - :match: ","
@@ -1150,8 +1150,8 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.enum.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
       - :name: meta.body.enum.cpp
         :begin: "(\\{)"
         :beginCaptures:
@@ -1181,8 +1181,8 @@
           :name: punctuation.terminator.statement.cpp
       :patterns:
       - :name: meta.head.extern.cpp
-        :begin: "(?<=^)[\\s\\n]?"
-        :end: "[\\s\\n]?(?={)"
+        :begin: "(?<=\\G)"
+        :end: "(?={)"
       - :name: meta.body.extern.cpp
         :begin: "(\\{)"
         :beginCaptures:
