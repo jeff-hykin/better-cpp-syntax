@@ -50,17 +50,17 @@ cpp_grammar = Grammar.new(
                 # Head
                 Range.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: lookBehindFor(/\G/),
-                    end_pattern: lookAheadFor(/{/),
+                    start_pattern: /\G/,
+                    end_pattern: newPattern(
+                        match: /\{/,
+                        tag_as: "punctuation.section.block.begin.bracket.curly."+name
+                    ),
                     includes: head_includes
                 ),
                 # Body
                 Range.new(
                     tag_as: "meta.body."+name, # body is everything in the {}'s
-                    start_pattern: newPattern(
-                            match: /\{/,
-                            tag_as: "punctuation.section.block.begin.bracket.curly."+name
-                        ),
+                    start_pattern: lookBehindFor(/\{/),
                     end_pattern: newPattern(
                             match: /\}/,
                             tag_as: "punctuation.section.block.end.bracket.curly."+name
@@ -1034,7 +1034,7 @@ cpp_grammar = Grammar.new(
             name: name,
             start_pattern: newPattern(
                     should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
-                    should_not_fully_match: ["#{name} foo {"],
+                    should_not_fully_match: ["#{name} foo {","#{name} foo{"],
                     should_partial_match: ["#{name} foo f;", "#{name} st s;"],
                     match: newPattern(
                         reference: "storage_type",
