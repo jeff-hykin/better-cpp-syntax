@@ -16,6 +16,68 @@ cpp_grammar = Grammar.new(
     ],
 )
 
+# 
+# Utils
+# 
+    @semicolon = newPattern(
+            match: /;/,
+            tag_as: "punctuation.terminator.statement",
+        )
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [], secondary_includes:[])
+        lookahead_endings = /[;()>\[\]=]/
+        if needs_semicolon
+            end_pattern = newPattern(
+                match: newPattern(
+                        lookBehindFor(/}/).maybe(@spaces).then(@semicolon)
+                    ).or(
+                        @semicolon
+                    ).or(
+                        lookAheadFor(lookahead_endings)
+                    )
+                )
+        else
+            end_pattern = lookBehindFor(/\}/).or(lookAheadFor(lookahead_endings))
+        end
+        return Range.new(
+            tag_as: tag_as,
+            start_pattern: newPattern(
+                    match: start_pattern,
+                    tag_as: "meta.head."+name,
+                ),
+            end_pattern: end_pattern,
+            includes: [
+                *primary_includes,
+                # Head
+                Range.new(
+                    tag_as: "meta.head."+name,
+                    start_pattern: lookBehindFor(/^/).then(/[\s\n]?/),
+                    end_pattern: newPattern(/[\s\n]?/).lookAheadFor(/{/),
+                    includes: head_includes
+                ),
+                # Body
+                Range.new(
+                    tag_as: "meta.body."+name, # body is everything in the {}'s
+                    start_pattern: newPattern(
+                            match: /\{/,
+                            tag_as: "punctuation.section.block.begin.bracket.curly."+name
+                        ),
+                    end_pattern: newPattern(
+                            match: /\}/,
+                            tag_as: "punctuation.section.block.end.bracket.curly."+name
+                        ),
+                    includes: body_includes
+                ),
+                # Tail
+                Range.new(
+                    tag_as: "meta.tail."+name,
+                    start_pattern: lookBehindFor(/}/).then(/[\s\n]*/),
+                    end_pattern: newPattern(/[\s\n]*/).lookAheadFor(/;/),
+                    includes: tail_includes
+                ),
+                *secondary_includes
+            ]
+        )
+    end
 #
 #
 # Numbers
@@ -242,9 +304,8 @@ cpp_grammar = Grammar.new(
                 tag_as: "storage.type"
             ),
 
-            # FIXME, these should be changed to each have their own matcher, and struct should be handled the similar to 'class'
             other_types = newPattern(
-                match: variableBounds[ /(asm|__asm__|enum|union|struct)/ ],
+                match: variableBounds[ /(asm|__asm__)/ ],
                 tag_as: "storage.type.$match"
             )
         ]
@@ -747,8 +808,10 @@ cpp_grammar = Grammar.new(
             ),
         )
     # TODO: add support for namespace name = qualified-namespace ;
-    namespace_definition = Range.new(
+    namespace_block = blockFinderFor(
+        name: "namespace",
         tag_as: "meta.namespace-block",
+        needs_semicolon: false,
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /namespace/,
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
@@ -764,22 +827,6 @@ cpp_grammar = Grammar.new(
                     lookAheadFor(/\{/)
                 )
             ),
-        end_pattern: lookBehindFor(/\}/).or(lookAheadFor(/;|,|\(|\)|>|\[|\]|=/)),
-        includes: [
-            Range.new(
-                start_pattern: newPattern(
-                        match: /\{/,
-                        tag_as: "punctuation.definition.scope"
-                    ),
-                end_pattern: newPattern(
-                        match: /\}/,
-                        tag_as: "punctuation.definition.scope"
-                    ),
-                includes: [:special_block, :constructor, "$base" ]
-
-            ),
-            "$base"
-        ]
         )
 
 #
@@ -869,73 +916,39 @@ cpp_grammar = Grammar.new(
 #
     # TODO: currently this is not used, ideally it will be built up over time and then be included
     # it will be for things such as cout, cin, vector, string, map, etc
+
 #
-# Enums
+# Classes, structs, unions, enums
 #
-    enum_block = Range.new(
-        start_pattern: newPattern(
-                match: /enum/,
-                tag_as: "storage.type.enum"
-            ).then(@spaces).maybe(newPattern(
-                match: /class|struct/,
-                tag_as: "storage.type.enum",
-            ).then(@spaces)).then(
-                match: variable_name,
-                tag_as: "entity.name.type.enum",
-            ).maybe(maybe(@spaces).then(
-                match: /:/,
-                tag_as: "punctuation.type-specifier.colon",
-            ).maybe(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.underlying.enum",
-            )),
-        end_pattern: newPattern(
-            lookBehindFor(/\}/)
-            .or(
-                match: /;/,
-                tag_as: "punctuation.terminator.statement",
-            ).or(
-                lookAheadFor(newPattern(
-                    match: /[()>\[\]=]/,
-                    tag_as: "punctuation.terminator.statement",
-                ))
-            )),
-        tag_as: "meta.enum-block",
-        includes: [
-            {
-                begin: "\\{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly"
-                    }
-                },
-                end: "(\\})(\\s*\\n)?",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.block.end.bracket.curly"
-                    },
-                    "2" => {
-                        name: "invalid.illegal.you-forgot-semicolon"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#special_block"
-                    },
-                    {
-                        include: "#constructor"
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
-            "$base",
-        ],
-    )
-#
-# Classes and structs
-#
+    # see https://en.cppreference.com/w/cpp/language/enum
+    # this range matches both the case with brackets and the case without brackets
+    enum_block = blockFinderFor(
+            name: "enum",
+            tag_as: "meta.enum-block",
+            start_pattern: newPattern(
+                    match: /enum/,
+                    tag_as: "storage.type.enum"
+                ).then(@spaces).maybe(
+                    # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
+                    newPattern(
+                        match: /class|struct/,
+                        tag_as: "storage.type.enum.enum-key.$match",
+                    ).then(@spaces)
+                ).then(
+                    match: variable_name,
+                    tag_as: "entity.name.type.enum",
+                ).maybe(
+                    maybe(@spaces).then(
+                        match: /:/,
+                        tag_as: "punctuation.type-specifier.colon",
+                    ).maybe(@spaces).maybe(
+                        scope_resolution
+                    ).maybe(@spaces).then(
+                        match: variable_name,
+                        tag_as: "storage.type.integral.$match",
+                    )
+            ),
+        )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
@@ -955,93 +968,67 @@ cpp_grammar = Grammar.new(
             tag_as: "entity.name.type.inherited"
         )
     ]
-    class_struct_block = Range.new(
-        start_pattern: newPattern(
-            should_fully_match: ["class foo: bar", "class foo: public baz"],
-            should_not_fully_match: ["class foo {"],
-            should_partial_match: ["class foo f;", "struct st s;"],
-            match: newPattern(
-                reference: "storage_type",
-                match: variableBounds[ /struct|class|union/ ],
-                tag_as: "storage.type.$match",
-            ).then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.$reference(storage_type)",
-            ).maybe(maybe(@spaces).then(
-                    match: /:/,
-                    tag_as: "punctuation.inhertance.colon"
-                # the following may seem redundant (removing it shouldn't change anything)
-                # this is because the follow are matched by what is inside of this Range
-                # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
-                # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
-                ).maybe(@spaces)
-                .zeroOrMoreOf(
-                    match: maybe(/,/)
-                    .maybe(@spaces)
-                    .maybe(@cpp_tokens.that(:isAccessSpecifier))
-                    .maybe(@spaces).oneOrMoreOf(
-                        maybe(@spaces).maybe(/,/).maybe(@spaces)
-                        .lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier))
-                        .then(variable_name)
+    generateClassOrStructBlockFinder = ->(name) do
+        return blockFinderFor(
+            tag_as: "",
+            name: name,
+            start_pattern: newPattern(
+                    should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
+                    should_not_fully_match: ["#{name} foo {"],
+                    should_partial_match: ["#{name} foo f;", "#{name} st s;"],
+                    match: newPattern(
+                        reference: "storage_type",
+                        match: variableBounds[ /#{name}/ ],
+                        tag_as: "storage.type.$match",
+                    ).then(@spaces).then(
+                        match: variable_name,
+                        tag_as: "entity.name.type.$reference(storage_type)",
+                    ).maybe(maybe(@spaces).then(
+                            match: /:/,
+                            tag_as: "punctuation.inhertance.colon"
+                        # the following may seem redundant (removing it shouldn't change anything)
+                        # this is because the follow are matched by what is inside of this Range
+                        # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
+                        # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
+                        ).maybe(@spaces).zeroOrMoreOf(
+                            match: maybe(/,/).maybe(
+                                @spaces
+                            ).maybe(
+                                @cpp_tokens.that(:isAccessSpecifier)
+                            ).maybe(@spaces).oneOrMoreOf(
+                                maybe(@spaces).maybe(/,/).maybe(
+                                    @spaces
+                                ).lookAheadToAvoid(
+                                    @cpp_tokens.that(:isAccessSpecifier)
+                                ).then(variable_name)
+                            ),
+                            includes: inhertance_context
+                        )
                     ),
-                    includes: inhertance_context
-                )
-            ),
-        ),
-        end_pattern: newPattern(
-            lookBehindFor(/\}/)
-            .or(
-                match: /;/,
-                tag_as: "punctuation.terminator.statement",
-            ).or(
-            lookAheadFor(newPattern(
-                match: /[()>\[\]=]/,
-                tag_as: "punctuation.terminator.statement",
-            ))
-            )
-        ),
-        tag_as: "meta.class-struct-block",
-        includes: [
-            #
-            # This part is only for what is before the {}'s (aka inhertance)
-            #
-            "#angle_brackets",
-            *inhertance_context,
-
-            #
-            # This Range is for everything in the {}'s
-            #
-            {
-                begin: "\\{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly"
-                    }
-                },
-                end: "(\\})(\\s*\\n)?",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.block.end.bracket.curly"
-                    },
-                    "2" => {
-                        name: "invalid.illegal.you-forgot-semicolon"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#special_block"
-                    },
-                    {
-                        include: "#constructor"
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
-            "$base",
-        ],
-    )
+                ),
+            head_includes: [
+                "#angle_brackets",
+                *inhertance_context,
+            ],
+            body_includes: [ "#special_block", "#constructor", "$base"  ],
+        )
+    end
+    class_block = generateClassOrStructBlockFinder["class"]
+    struct_block = generateClassOrStructBlockFinder["struct"]
+    union_block = generateClassOrStructBlockFinder["union"]
+    # the following is a legacy pattern, I'm not sure if it is still accurate
+    # I have no idea why it matches a double quote
+    extern_block = blockFinderFor(
+        name: 'extern',
+        tag_as: "meta.extern-block",
+        
+        start_pattern: newPattern(
+                match: /\bextern/,
+                tag_as: "storage.type.extern"
+            ).lookAheadFor(/\s*\"/),
+        secondary_includes: [ "$base" ]
+        )
+    
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -1498,46 +1485,12 @@ cpp_grammar.addToRepository({
     "special_block" => {
         patterns: [
             using_namespace.to_tag,
-            namespace_definition.to_tag,
+            namespace_block.to_tag,
+            class_block.to_tag,
+            struct_block.to_tag,
+            union_block.to_tag,
             enum_block.to_tag,
-            class_struct_block.to_tag,
-            {
-                begin: "\\b(extern)(?=\\s*\")",
-                beginCaptures: {
-                    "1" => {
-                        name: "storage.modifier"
-                    }
-                },
-                end: "(?<=\\})|(?=\\w)|(?=\\s*#\\s*endif\\b)",
-                name: "meta.extern-block",
-                patterns: [
-                    {
-                        begin: "\\{",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.section.block.begin.bracket.curly"
-                            }
-                        },
-                        end: "\\}|(?=\\s*#\\s*endif\\b)",
-                        endCaptures: {
-                            "0" => {
-                                name: "punctuation.section.block.end.bracket.curly"
-                            }
-                        },
-                        patterns: [
-                            {
-                                include: "#special_block"
-                            },
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            }
+            extern_block.to_tag,
         ]
     },
     # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
