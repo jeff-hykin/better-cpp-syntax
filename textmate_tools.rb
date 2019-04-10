@@ -44,7 +44,8 @@ class Grammar
             if was_first_group_removed
                 matching_index -= 1
             end
-            matching_index
+            # the Nth matching_index is the (N+1)th capture group
+            matching_index + 1
         end
         
         return new_name
