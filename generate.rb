@@ -3131,8 +3131,9 @@ Dir.chdir __dir__
 syntax_location = "./syntaxes/cpp.tmLanguage"
 cpp_grammar.saveAsYamlTo(syntax_location)
 cpp_grammar.saveAsJsonTo(syntax_location)
-# if on mac OS
-if (/darwin/ =~ RUBY_PLATFORM) != nil
-    # overwrite the system syntax with the generated syntax
-    `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
-end
+# uncomment this if you want it to auto-update your system syntax when this file is run
+# only works on mac at the moment
+# if (/darwin/ =~ RUBY_PLATFORM) != nil
+#     # overwrite the system syntax with the generated syntax
+#     `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
+# end
