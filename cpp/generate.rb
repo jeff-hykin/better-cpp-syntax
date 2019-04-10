@@ -1034,7 +1034,16 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(/\s*\"/),
         secondary_includes: [ "$base" ]
         )
-    
+
+# 
+# preprocessor directives
+# 
+    # TODO, change all blocks/paraentheses so that they end and the end of a macro
+    # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
+    hacky_fix_for_stray_directive = newPattern(
+        match: variableBounds[/##{@cpp_tokens.that(:isPreprocessorDirective)}/],
+        tag_as: "keyword.control.directive.$match"
+    )    
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -1109,6 +1118,7 @@ cpp_grammar.initalContextIncludes(
     "#preprocessor-rule-enabled",
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",
+    hacky_fix_for_stray_directive,
     "#comments-c",
     control_flow_keywords,
     storage_types,
@@ -3117,6 +3127,8 @@ cpp_grammar.addToRepository({
     }
 })
 
+
+    
 
 Dir.chdir __dir__
 
