@@ -816,7 +816,7 @@ cpp_grammar = Grammar.new(
     # TODO: add support for namespace name = qualified-namespace ;
     namespace_block = blockFinderFor(
         name: "namespace",
-        tag_as: "meta.namespace-block",
+        tag_as: "meta.block.namespace",
         needs_semicolon: false,
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /namespace/,
@@ -930,7 +930,7 @@ cpp_grammar = Grammar.new(
     # this range matches both the case with brackets and the case without brackets
     enum_block = blockFinderFor(
             name: "enum",
-            tag_as: "meta.enum-block",
+            tag_as: "meta.block.enum",
             start_pattern: newPattern(
                     match: /enum/,
                     tag_as: "storage.type.enum"
@@ -976,7 +976,7 @@ cpp_grammar = Grammar.new(
     ]
     generateClassOrStructBlockFinder = ->(name) do
         return blockFinderFor(
-            tag_as: "meta.#{name}-block",
+            tag_as: "meta.block.#{name}",
             name: name,
             start_pattern: newPattern(
                     should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
@@ -1026,7 +1026,7 @@ cpp_grammar = Grammar.new(
     # I have no idea why it matches a double quote
     extern_block = blockFinderFor(
         name: 'extern',
-        tag_as: "meta.extern-block",
+        tag_as: "meta.block.extern",
         
         start_pattern: newPattern(
                 match: /\bextern/,

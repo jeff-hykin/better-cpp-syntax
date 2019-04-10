@@ -75,7 +75,7 @@
 - :include: "#preprocessor-rule-enabled"
 - :include: "#preprocessor-rule-disabled"
 - :include: "#preprocessor-rule-conditional"
-- :match: "(?<!\\w)#(?-mix:if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute)(?!\\w)"
+- :match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
   :name: keyword.control.directive.$0.cpp
 - :include: "#comments-c"
 - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
@@ -856,7 +856,7 @@
       :endCaptures:
         '1':
           :name: punctuation.terminator.statement.cpp
-    - :name: meta.namespace-block.cpp
+    - :name: meta.block.namespace.cpp
       :begin: "((?<!\\w)(namespace)\\s+((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
       :beginCaptures:
         '1':
@@ -887,7 +887,7 @@
       - :name: meta.tail.namespace.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :name: meta.class-block.cpp
+    - :name: meta.block.class.cpp
       :begin: "((((?<!\\w)class(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
@@ -895,7 +895,7 @@
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :name: entity.name.type.$3.cpp
         '5':
           :name: punctuation.inhertance.colon.cpp
         '6':
@@ -944,7 +944,7 @@
       - :name: meta.tail.class.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :name: meta.struct-block.cpp
+    - :name: meta.block.struct.cpp
       :begin: "((((?<!\\w)struct(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
@@ -952,7 +952,7 @@
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :name: entity.name.type.$3.cpp
         '5':
           :name: punctuation.inhertance.colon.cpp
         '6':
@@ -1001,7 +1001,7 @@
       - :name: meta.tail.struct.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :name: meta.union-block.cpp
+    - :name: meta.block.union.cpp
       :begin: "((((?<!\\w)union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
@@ -1009,7 +1009,7 @@
         '3':
           :name: storage.type.$3.cpp
         '4':
-          :name: entity.name.type.$2.cpp
+          :name: entity.name.type.$3.cpp
         '5':
           :name: punctuation.inhertance.colon.cpp
         '6':
@@ -1058,7 +1058,7 @@
       - :name: meta.tail.union.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :name: meta.enum-block.cpp
+    - :name: meta.block.enum.cpp
       :begin: "((enum)\\s+(?:(class|struct)\\s+)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
       :beginCaptures:
         '1':
@@ -1119,7 +1119,7 @@
       - :name: meta.tail.enum.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :name: meta.extern-block.cpp
+    - :name: meta.block.extern.cpp
       :begin: ((\bextern)(?=\s*\"))
       :beginCaptures:
         '1':
