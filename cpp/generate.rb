@@ -16,9 +16,9 @@ cpp_grammar = Grammar.new(
     ],
 )
 
-# 
+#
 # Utils
-# 
+#
     @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -264,11 +264,15 @@ cpp_grammar = Grammar.new(
 #
 # Variable
 #
+    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U000[0-9a-fA-F]/)
+    first_character = /[a-zA-Z_]/.or(universal_character)
+    subsequent_character = /[a-zA-Z0-9]/.or(universal_character)
+    identifier = first_character.then(zeroOrMoreOf(subsequent_character))
     # todo: make a better name for this function
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+    variable_name_without_bounds = identifier
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
@@ -1081,7 +1085,7 @@ cpp_grammar = Grammar.new(
     extern_block = blockFinderFor(
         name: 'extern',
         tag_as: "meta.block.extern",
-        
+
         start_pattern: newPattern(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
@@ -1089,15 +1093,15 @@ cpp_grammar = Grammar.new(
         secondary_includes: [ "$base" ]
         )
 
-# 
+#
 # preprocessor directives
-# 
+#
     # TODO, change all blocks/paraentheses so that they end and the end of a macro
     # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
     hacky_fix_for_stray_directive = newPattern(
         match: variableBounds[/#(?:endif|else|elif)/],
         tag_as: "keyword.control.directive.$match"
-    )    
+    )
 
 cpp_grammar.initalContextIncludes(
     :special_block,
@@ -3185,7 +3189,7 @@ cpp_grammar.addToRepository({
 })
 
 
-    
+
 
 Dir.chdir __dir__
 

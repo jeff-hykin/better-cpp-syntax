@@ -7,7 +7,7 @@
 - This file essentially an updated/improved fork of the atom syntax https://github.com/atom/language-c/blob/master/grammars/c%2B%2B.cson
 :patterns:
 - :include: "#special_block"
-- :match: "##[a-zA-Z_]\\w*(?!\\w)"
+- :match: "##(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
   :name: variable.other.macro.argument.cpp
 - :include: "#strings"
 - :match: "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)"
@@ -232,7 +232,7 @@
 - :include: "#block-c"
 - :include: "#parens-c"
 - :name: meta.function.definition.parameters.cpp
-  :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=[a-zA-Z_]\\w*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
+  :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
   :end: "(?<=\\))"
   :patterns:
   - :include: "#function-innards-c"
@@ -409,7 +409,7 @@
       :patterns:
       - :include: "#attribute_cpp"
       - :include: "#strings_c"
-    - :match: "(using)\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+    - :match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
       :captures:
         '1':
           :name: keyword.other.using.directive.cpp
@@ -419,9 +419,9 @@
       :name: punctuation.separator.attribute.cpp
     - :match: ":"
       :name: punctuation.accessor.attribute.cpp
-    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)(?=::)"
+    - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
       :name: entity.name.namespace.cpp
-    - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+    - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       :name: entity.other.attribute.$0.cpp
   template_call_innards:
     :match: "<(?:[\\s<>,\\w])*>\\s*"
@@ -432,7 +432,7 @@
         - :include: "#storage_types"
         - :include: "#constants"
         - :include: "#scope_resolution"
-        - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+        - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
           :name: storage.type.user-defined.cpp
         - :include: "#operators"
         - :include: "#number_literal"
@@ -481,7 +481,7 @@
       - :include: "#storage_types"
       - :include: "#constants"
       - :include: "#scope_resolution"
-      - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+      - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
         :name: storage.type.user-defined.cpp
       - :include: "#operators"
       - :include: "#number_literal"
@@ -494,7 +494,7 @@
     - :include: "#template_call_innards"
     - :include: "$base"
   template_argument_defaulted:
-    :match: "(?<=<|,)\\s*((?:[a-zA-Z_]\\w*\\s+)*)([a-zA-Z_]\\w*)\\s*([=])"
+    :match: "(?<=<|,)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*([=])"
     :captures:
       '1':
         :name: storage.type.template.cpp
@@ -503,7 +503,7 @@
       '3':
         :name: keyword.operator.assignment.cpp
   template_definition_argument:
-    :match: "(?:(?:\\s*([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*))\\s*(?:(,)|(?=>|$))"
+    :match: "(?:(?:\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(\\.\\.\\.)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))\\s*(?:(,)|(?=>|$))"
     :captures:
       '1':
         :name: storage.type.template.argument.$1.cpp
@@ -520,7 +520,7 @@
       '7':
         :name: punctuation.separator.comma.template.argument.cpp
   scope_resolution:
-    :match: "((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"
+    :match: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"
     :captures:
       '1':
         :patterns:
@@ -533,7 +533,7 @@
         - :include: "#storage_types"
         - :include: "#constants"
         - :include: "#scope_resolution"
-        - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+        - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
           :name: storage.type.user-defined.cpp
         - :include: "#operators"
         - :include: "#number_literal"
@@ -672,7 +672,8 @@
       - :include: "#c_function_call"
       - :include: "$base"
   probably_a_parameter:
-    :match: "(?:([a-zA-Z_]\\w*\\s*(?==))|((?<=\\w |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*[a-zA-Z_]\\w*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
+    :match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
+      |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
     :captures:
       '1':
         :name: variable.parameter.defaulted.cpp
@@ -680,7 +681,7 @@
         :name: variable.parameter.cpp
   operator_overload:
     :name: meta.function.definition.parameters.operator-overload.cpp
-    :begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))\\s*(\\()"
+    :begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:&)?)))\\s*(\\()"
     :beginCaptures:
       '1':
         :name: keyword.other.operator.overload.cpp
@@ -698,7 +699,7 @@
     - :include: "#probably_a_parameter"
     - :include: "#function-innards-c"
   member_access:
-    :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))[a-zA-Z_]\\w*\\b(?!\\())"
+    :match: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
     :captures:
       '1':
         :name: variable.other.object.access.cpp
@@ -708,9 +709,9 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
           :name: variable.other.object.property.cpp
-        - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+        - :match: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
               :name: variable.other.object.access.cpp
@@ -724,7 +725,7 @@
         :name: variable.other.property.cpp
   method_access:
     :contentName: meta.function-call.member
-    :begin: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()"
+    :begin: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(\\()"
     :beginCaptures:
       '1':
         :name: variable.other.object.access.cpp
@@ -734,9 +735,9 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
           :name: variable.other.object.property.cpp
-        - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+        - :match: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
               :name: variable.other.object.access.cpp
@@ -873,7 +874,7 @@
     :patterns:
     - :include: "#attribute_cpp"
     - :name: meta.using-namespace-declaration.cpp
-      :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?=;|\\n)"
+      :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
       :beginCaptures:
         '1':
           :name: keyword.other.using.directive.cpp
@@ -889,7 +890,7 @@
         '1':
           :name: punctuation.terminator.statement.cpp
     - :name: meta.block.namespace.cpp
-      :begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)[a-zA-Z_]\\w*(?!\\w))|(?=\\{)))"
+      :begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))|(?=\\{)))"
       :beginCaptures:
         '1':
           :name: meta.head.namespace.cpp
@@ -923,7 +924,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.class.cpp
-      :begin: "((((?<!\\w)class(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)class(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.class.cpp
@@ -942,7 +943,7 @@
             :name: punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -962,7 +963,7 @@
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
@@ -983,7 +984,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.struct.cpp
-      :begin: "((((?<!\\w)struct(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)struct(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.struct.cpp
@@ -1002,7 +1003,7 @@
             :name: punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -1022,7 +1023,7 @@
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
@@ -1043,7 +1044,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.union.cpp
-      :begin: "((((?<!\\w)union(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)union(?!\\w))\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.union.cpp
@@ -1062,7 +1063,7 @@
             :name: punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -1082,7 +1083,7 @@
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
@@ -1103,7 +1104,7 @@
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
     - :name: meta.block.enum.cpp
-      :begin: "((enum)\\s+(?:(class|struct)\\s+)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*(?:(((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w)))?)"
+      :begin: "((enum)\\s+(?:(class|struct)\\s+)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
       :beginCaptures:
         '1':
           :name: meta.head.enum.cpp
@@ -1131,7 +1132,7 @@
           - :include: "#storage_types"
           - :include: "#constants"
           - :include: "#scope_resolution"
-          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+          - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
             :name: storage.type.user-defined.cpp
           - :include: "#operators"
           - :include: "#number_literal"
@@ -1893,7 +1894,7 @@
   preprocessor-rule-define-line-contents:
     :patterns:
     - :include: "#vararg_ellipses"
-    - :match: !ruby/regexp /##?[a-zA-Z_]\w*(?!\w)/
+    - :match: !ruby/regexp /##?(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F])))*(?!\w)/
       :name: variable.other.macro.argument.cpp
     - :begin: "{"
       :beginCaptures:
@@ -2074,7 +2075,7 @@
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
       - :include: "#function-call-innards-c"
-    - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(\\()"
+    - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(\\()"
       :beginCaptures:
         '1':
           :patterns:
@@ -2087,7 +2088,7 @@
           - :include: "#storage_types"
           - :include: "#constants"
           - :include: "#scope_resolution"
-          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+          - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
             :name: storage.type.user-defined.cpp
           - :include: "#operators"
           - :include: "#number_literal"
