@@ -677,15 +677,8 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          :captures:
-            '1':
-              :name: variable.other.object.access.cpp
-            '2':
-              :name: punctuation.separator.dot-access.cpp
-            '3':
-              :name: punctuation.separator.pointer-access.cpp
-          :name: variable.other.member.cpp
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
+          :name: variable.other.object.property.cpp
         - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
@@ -697,7 +690,7 @@
         - :include: "#member_access"
         - :include: "#method_access"
       '5':
-        :name: variable.other.member.cpp
+        :name: variable.other.property.cpp
   method_access:
     :contentName: meta.function-call.member
     :begin: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()"
@@ -710,15 +703,8 @@
         :name: punctuation.separator.pointer-access.cpp
       '4':
         :patterns:
-        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          :captures:
-            '1':
-              :name: variable.other.object.access.cpp
-            '2':
-              :name: punctuation.separator.dot-access.cpp
-            '3':
-              :name: punctuation.separator.pointer-access.cpp
-          :name: variable.other.member.cpp
+        - :match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
+          :name: variable.other.object.property.cpp
         - :match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           :captures:
             '1':
@@ -901,7 +887,8 @@
       - :name: meta.tail.namespace.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)class(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :name: meta.class-block.cpp
+      :begin: "((((?<!\\w)class(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.class.cpp
@@ -957,7 +944,8 @@
       - :name: meta.tail.class.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)struct(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :name: meta.struct-block.cpp
+      :begin: "((((?<!\\w)struct(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.struct.cpp
@@ -1013,7 +1001,8 @@
       - :name: meta.tail.struct.cpp
         :begin: "(?<=})[\\s\\n]*"
         :end: "[\\s\\n]*(?=;)"
-    - :begin: "((((?<!\\w)union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+    - :name: meta.union-block.cpp
+      :begin: "((((?<!\\w)union(?!\\w))\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.union.cpp

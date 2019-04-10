@@ -751,11 +751,11 @@ cpp_grammar = Grammar.new(
         )
     member_context = [
             mid_member = newPattern(
-                tag_as: "variable.other.member",
+                tag_as: "variable.other.object.property",
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
-                    partial_member
+                    partial_member.without_numbered_capture_groups
                 )
             ),
             partial_member,
@@ -771,7 +771,7 @@ cpp_grammar = Grammar.new(
         repository_name: 'member_access',
         match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
-                tag_as: "variable.other.member"
+                tag_as: "variable.other.property"
             )
         )
     # access to method
@@ -976,7 +976,7 @@ cpp_grammar = Grammar.new(
     ]
     generateClassOrStructBlockFinder = ->(name) do
         return blockFinderFor(
-            tag_as: "",
+            tag_as: "meta.#{name}-block",
             name: name,
             start_pattern: newPattern(
                     should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
