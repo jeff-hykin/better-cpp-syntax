@@ -1,5 +1,5 @@
 require_relative '../textmate_tools.rb'
-require_relative './cpp_tokens.rb'
+require_relative './tokens.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -581,7 +581,7 @@ cpp_grammar = Grammar.new(
     operator_context = []
     normal_word_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "keyword.operator.$match",
+        tag_as: "alias keyword.operator.$match",
         )
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
@@ -802,7 +802,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(
                 /;|\n/
             ),
-        end_pattern: semicolon,
+        end_pattern: @semicolon,
         )
     # TODO: add support for namespace name = qualified-namespace ;
     namespace_block = blockFinderFor(
@@ -1379,7 +1379,7 @@ cpp_grammar.initalContextIncludes(
         name: "storage.modifier.array.bracket.square",
         match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
     },
-    semicolon.to_tag,
+    @semicolon.to_tag,
     {
         match: ",",
         name: "punctuation.separator.delimiter"

@@ -99,6 +99,13 @@
     //
         auto a = "things\n\b\v\t";
 
+// 
+// operator words
+// 
+    auto a = 1 and 1;
+    auto a = 1 or 1;
+    auto a = 1 xor 1;
+
 //
 // type castings
 //
