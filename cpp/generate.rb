@@ -1041,7 +1041,7 @@ cpp_grammar = Grammar.new(
     # TODO, change all blocks/paraentheses so that they end and the end of a macro
     # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
     hacky_fix_for_stray_directive = newPattern(
-        match: variableBounds[/##{@cpp_tokens.that(:isPreprocessorDirective)}/],
+        match: variableBounds[/#(?:endif|else|elif)/],
         tag_as: "keyword.control.directive.$match"
     )    
 
