@@ -993,7 +993,7 @@ cpp_grammar = Grammar.new(
                     newPattern(
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
-                    ).then(@spaces)
+                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)))
                 ).maybe(inline_attribute).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
@@ -1040,7 +1040,7 @@ cpp_grammar = Grammar.new(
                         reference: "storage_type",
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
-                    ).then(@spaces).maybe(inline_attribute).maybe(@spaces).maybe(
+                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(maybe(@spaces).then(
