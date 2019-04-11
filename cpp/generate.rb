@@ -264,11 +264,15 @@ cpp_grammar = Grammar.new(
 #
 # Variable
 #
+    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U000[0-9a-fA-F]/)
+    first_character = /[a-zA-Z_]/.or(universal_character)
+    subsequent_character = /[a-zA-Z0-9]/.or(universal_character)
+    identifier = first_character.then(zeroOrMoreOf(subsequent_character))
     # todo: make a better name for this function
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+    variable_name_without_bounds = identifier
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
