@@ -78,6 +78,17 @@
 - :match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
   :name: keyword.control.directive.$0.cpp
 - :include: "#comments-c"
+- :name: meta.conditional.case.cpp
+  :begin: "(case)"
+  :beginCaptures:
+    '1':
+      :name: keyword.control.case.cpp
+  :end: "(:)"
+  :endCaptures:
+    '1':
+      :name: colon.cpp punctuation.seperator.case.cpp
+  :patterns:
+  - :include: "$base"
 - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
   :name: keyword.control.$0.cpp
 - :include: "#storage_types"
@@ -872,7 +883,7 @@
   special_block:
     :patterns:
     - :include: "#attribute_cpp"
-    - :name: meta.using-namespace-declaration.cpp
+    - :name: meta.using-namespace.cpp
       :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?=;|\\n)"
       :beginCaptures:
         '1':

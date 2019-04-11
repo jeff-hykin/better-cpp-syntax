@@ -378,6 +378,37 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
         tag_as: "keyword.control.$match"
         )
+# 
+# Control flow
+# 
+    # TODO: update this context in the future to be more restrictive
+    contional_context = [
+        "$base"
+    ]
+    default_statement = Range.new(
+            tag_as: "meta.conditional.case",
+            start_pattern: newPattern(
+                match: /default/,
+                tag_as: "keyword.control.default"
+            ),
+            end_pattern: newPattern(
+                match: /:/,
+                tag_as: "colon punctuation.seperator.case.default"
+            ),
+            includes: contional_context
+        )
+    case_statement = Range.new(
+            tag_as: "meta.conditional.case",
+            start_pattern: newPattern(
+                match: /case/,
+                tag_as: "keyword.control.case"
+            ),
+            end_pattern: newPattern(
+                match: /:/,
+                tag_as: "colon punctuation.seperator.case"
+            ),
+            includes: contional_context
+        )
 #
 # C++ Attributes
 #
@@ -856,7 +887,7 @@ cpp_grammar = Grammar.new(
 #
     # see https://en.cppreference.com/w/cpp/language/namespace
     using_namespace = Range.new(
-        tag_as: "meta.using-namespace-declaration",
+        tag_as: "meta.using-namespace",
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /using/,
                 tag_as: "keyword.other.using.directive",
@@ -1180,6 +1211,7 @@ cpp_grammar.initalContextIncludes(
     "#preprocessor-rule-conditional",
     hacky_fix_for_stray_directive,
     "#comments-c",
+    case_statement,
     control_flow_keywords,
     storage_types,
     {
