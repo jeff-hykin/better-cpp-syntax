@@ -38,7 +38,7 @@ It adds:
 - Many other features
 
 ## Contributing
-This is a project that is converting legacy JSON file into ruby files generate a JSON file. The main ruby file "generate.rb" uses tools (that are in beta) that help generate the JSON file. If you want to contribute, take a look at `number_literal = newPattern(` inside of "generate.rb" to see how the new syntax looks. Take a look at `"comments-c" => {` to see how the old syntax looks. The code is ready for contributions, and in the future there will be much more documentation for contributors.
+This is a project that is converting legacy JSON file into ruby files that generate a JSON file. The main ruby file "generate.rb" uses tools (that are in beta) that help generate the JSON file. If you want to contribute, take a look at `number_literal = newPattern(` inside of "generate.rb" to see how the new syntax looks. Take a look at `"comments-c" => {` to see how the old syntax looks. The code is ready for contributions, and in the future there will be much more documentation for contributors.
 
 Planned future fixes/featues:
 - Fix multiple inheritance https://github.com/atom/language-c/issues/245
