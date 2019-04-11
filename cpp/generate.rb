@@ -844,10 +844,12 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = the_this_keyword.or(newPattern(
-            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-            tag_as: "variable.other.object.access",
-        )).then(
+    partial_member = the_this_keyword.or(
+            newPattern(
+                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+                tag_as: "variable.other.object.access",
+            )
+        ).then(
             member_operator
         )
     member_context = [
@@ -1141,11 +1143,11 @@ cpp_grammar = Grammar.new(
     extern_block = blockFinderFor(
         name: 'extern',
         tag_as: "meta.block.extern",
-
         start_pattern: newPattern(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
             ).lookAheadFor(/\s*\"/),
+        head_includes: [ "$base" ],
         secondary_includes: [ "$base" ]
         )
 

@@ -1243,6 +1243,8 @@
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.extern.cpp
+        :patterns:
+        - :include: "$base"
       - :name: meta.body.extern.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
