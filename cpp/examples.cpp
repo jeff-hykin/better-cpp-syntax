@@ -444,3 +444,9 @@ int main() {
     struct st { // syntax highlighting works now
     };
     void func3();
+
+// Universal character name
+class LineReader{};
+class Line_Reader{};
+class Line\u00b7Reader{};
+class Line\U0002070EReader{};
