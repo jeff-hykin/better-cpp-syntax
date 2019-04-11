@@ -78,11 +78,11 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-# 
-# 
+#
+#
 # Contexts
-# 
-# 
+#
+#
     preprocessor_context = [
         "#preprocessor-rule-enabled",
         "#preprocessor-rule-disabled",
@@ -1110,6 +1110,10 @@ cpp_grammar = Grammar.new(
                         ).or(
                             lookAheadFor(/{/)
                         )
+                    ).maybe(newPattern(
+                            match: /final/,
+                            tag_as: "storage.type.modifier.final",
+                        ).maybe(@spaces)
                     ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
@@ -1145,6 +1149,10 @@ cpp_grammar = Grammar.new(
                 *inhertance_context,
                 template_call_range,
                 :comments,
+                newPattern(
+                    match: /final/,
+                    tag_as: "storage.type.modifier.final",
+                )
             ],
             body_includes: [ "#special_block", "#constructor", "$base"  ],
         )

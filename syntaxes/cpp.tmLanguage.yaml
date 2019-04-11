@@ -939,7 +939,7 @@
         :patterns:
         - :include: "$base"
     - :name: meta.block.class.cpp
-      :begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:(final)\\s*)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.class.cpp
@@ -949,13 +949,15 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
+          :name: storage.type.modifier.final.cpp
+        '6':
           :patterns:
           - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
         '7':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
+          :name: entity.name.type.$3.cpp
         '8':
+          :name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
           :patterns:
           - :match: ","
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1013,6 +1015,8 @@
           - :match: ","
             :name: comma.cpp punctuation.separator.template.argument.cpp
         - :include: "#comments"
+        - :match: final
+          :name: storage.type.modifier.final.cpp
       - :name: meta.body.class.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
@@ -1029,7 +1033,7 @@
         :patterns:
         - :include: "$base"
     - :name: meta.block.struct.cpp
-      :begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:(final)\\s*)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.struct.cpp
@@ -1039,13 +1043,15 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
+          :name: storage.type.modifier.final.cpp
+        '6':
           :patterns:
           - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
         '7':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
+          :name: entity.name.type.$3.cpp
         '8':
+          :name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
           :patterns:
           - :match: ","
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1083,6 +1089,8 @@
               :name: entity.name.type.inherited.cpp
         - *1
         - :include: "#comments"
+        - :match: final
+          :name: storage.type.modifier.final.cpp
       - :name: meta.body.struct.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
@@ -1099,7 +1107,7 @@
         :patterns:
         - :include: "$base"
     - :name: meta.block.union.cpp
-      :begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
+      :begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:(final)\\s*)?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))?(?:\\s*(:)\\s*((?:(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)[a-zA-Z_]\\w*(?!\\w))+)*))?))"
       :beginCaptures:
         '1':
           :name: meta.head.union.cpp
@@ -1109,13 +1117,15 @@
           :patterns:
           - :include: "#attribute_cpp"
         '5':
+          :name: storage.type.modifier.final.cpp
+        '6':
           :patterns:
           - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
         '7':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
+          :name: entity.name.type.$3.cpp
         '8':
+          :name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
           :patterns:
           - :match: ","
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1153,6 +1163,8 @@
               :name: entity.name.type.inherited.cpp
         - *1
         - :include: "#comments"
+        - :match: final
+          :name: storage.type.modifier.final.cpp
       - :name: meta.body.union.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
