@@ -272,7 +272,7 @@ cpp_grammar = Grammar.new(
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = identifier
+    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
