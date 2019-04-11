@@ -77,7 +77,7 @@
 - :include: "#preprocessor-rule-conditional"
 - :match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
   :name: keyword.control.directive.$0.cpp
-- :include: "#comments-c"
+- :include: "#comments"
 - :name: meta.conditional.case.cpp
   :begin: "(case)"
   :beginCaptures:
@@ -156,7 +156,7 @@
     :name: string.unquoted.single.cpp
     :patterns:
     - :include: "#line_continuation_character"
-    - :include: "#comments-c"
+    - :include: "#comments"
 - :name: meta.preprocessor.include.cpp
   :begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
   :beginCaptures:
@@ -207,7 +207,7 @@
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
   :patterns:
-  - :match: &1 !ruby/regexp /[a-zA-Z_$][\w$]*/
+  - :match: &2 !ruby/regexp /[a-zA-Z_$][\w$]*/
     :name: entity.name.function.preprocessor.cpp
   - :include: "#line_continuation_character"
 - :name: meta.preprocessor.pragma.cpp
@@ -918,7 +918,7 @@
       :patterns:
       - :name: meta.head.namespace.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
@@ -971,12 +971,11 @@
       :patterns:
       - :name: meta.head.class.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.class.cpp
         :patterns:
-        - :include: "#angle_brackets"
         - :match: ","
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
@@ -985,6 +984,28 @@
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
+        - &1
+          :name: meta.template.call.cpp
+          :begin: "(<)"
+          :beginCaptures:
+            '1':
+              :name: punctuation.section.angle-brackets.begin.template.call.cpp
+          :end: "(>)"
+          :endCaptures:
+            '1':
+              :name: punctuation.section.angle-brackets.end.template.call.cpp
+          :patterns:
+          - :include: "#storage_types"
+          - :include: "#constants"
+          - :include: "#scope_resolution"
+          - :match: "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)"
+            :name: storage.type.user-defined.cpp
+          - :include: "#operators"
+          - :include: "#number_literal"
+          - :include: "#strings"
+          - :match: ","
+            :name: punctuation.separator.comma.template.argument.cpp
+        - :include: "#comments"
       - :name: meta.body.class.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
@@ -1036,12 +1057,11 @@
       :patterns:
       - :name: meta.head.struct.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.struct.cpp
         :patterns:
-        - :include: "#angle_brackets"
         - :match: ","
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
@@ -1050,6 +1070,8 @@
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
+        - *1
+        - :include: "#comments"
       - :name: meta.body.struct.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
@@ -1101,12 +1123,11 @@
       :patterns:
       - :name: meta.head.union.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.union.cpp
         :patterns:
-        - :include: "#angle_brackets"
         - :match: ","
           :name: punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
@@ -1115,6 +1136,8 @@
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
+        - *1
+        - :include: "#comments"
       - :name: meta.body.union.cpp
         :begin: "(?<=\\{)"
         :end: "(\\})"
@@ -1182,7 +1205,7 @@
       :patterns:
       - :name: meta.head.enum.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.enum.cpp
@@ -1215,7 +1238,7 @@
       :patterns:
       - :name: meta.head.extern.cpp
         :begin: "\\G"
-        :end: "(\\{)"
+        :end: "(\\{|;)"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.extern.cpp
@@ -1333,7 +1356,7 @@
     :name: meta.function-call.cpp
     :patterns:
     - :include: "#function-call-innards-c"
-  comments-c:
+  comments:
     :patterns:
     - :captures:
         '1':
@@ -1544,7 +1567,7 @@
       :name: keyword.control.directive.conditional.cpp
     - :match: "\\bdefined\\b"
       :name: invalid.illegal.macro-name.cpp
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :include: "#strings_c"
     - :include: "#number_literal"
     - :begin: "\\?"
@@ -1559,7 +1582,7 @@
       - :include: "#preprocessor-rule-conditional-line"
     - :include: "#operators"
     - :include: "#constants"
-    - :match: *1
+    - :match: *2
       :name: entity.name.function.preprocessor.cpp
     - :include: "#line_continuation_character"
     - :begin: "\\("
@@ -1596,7 +1619,7 @@
         :name: meta.preprocessor.cpp
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#comments-c"
+      - :include: "#comments"
       - :include: "#preprocessor-rule-enabled-elif"
       - :include: "#preprocessor-rule-enabled-else"
       - :include: "#preprocessor-rule-disabled-elif"
@@ -1646,7 +1669,7 @@
         :name: meta.preprocessor.cpp
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#comments-c"
+      - :include: "#comments"
       - :include: "#preprocessor-rule-enabled-elif-block"
       - :include: "#preprocessor-rule-enabled-else-block"
       - :include: "#preprocessor-rule-disabled-elif"
@@ -1688,7 +1711,7 @@
       :name: meta.preprocessor.cpp
       :patterns:
       - :include: "#preprocessor-rule-conditional-line"
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       contentName: comment.block.preprocessor.elif-branch
@@ -1721,7 +1744,7 @@
         :name: meta.preprocessor.cpp
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#comments-c"
+      - :include: "#comments"
       - :begin: "^\\s*((#)\\s*else\\b)"
         :beginCaptures:
           '0':
@@ -1776,7 +1799,7 @@
         :name: meta.preprocessor.cpp
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#comments-c"
+      - :include: "#comments"
       - :begin: "^\\s*((#)\\s*else\\b)"
         :beginCaptures:
           '0':
@@ -1823,7 +1846,7 @@
       :name: meta.preprocessor.cpp
       :patterns:
       - :include: "#preprocessor-rule-conditional-line"
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
@@ -1870,7 +1893,7 @@
       :name: meta.preprocessor.cpp
       :patterns:
       - :include: "#preprocessor-rule-conditional-line"
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
@@ -2001,7 +2024,7 @@
     - :include: "#preprocessor-rule-define-line-contents"
   preprocessor-rule-define-line-functions:
     :patterns:
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :include: "#storage_types"
     - :include: "#vararg_ellipses"
     - :include: "#method_access"
@@ -2041,7 +2064,7 @@
   function-innards-c:
     :patterns:
     - :include: "#attribute_cpp"
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :include: "#storage_types"
     - :include: "#operators"
     - :include: "#vararg_ellipses"
@@ -2081,7 +2104,7 @@
   function-call-innards-c:
     :patterns:
     - :include: "#attribute_cpp"
-    - :include: "#comments-c"
+    - :include: "#comments"
     - :include: "#storage_types"
     - :include: "#method_access"
     - :include: "#member_access"

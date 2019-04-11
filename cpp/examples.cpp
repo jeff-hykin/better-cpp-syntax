@@ -355,6 +355,17 @@
       void A();
 };
 
+    struct copy_storage_helper<pointerT, hashT, allocatorT, false>     // copyableT
+      {
+        [[noreturn]] void operator()(pointerT /*ptr*/, const hashT& /*hf*/, pointerT /*ptr_old*/, size_t /*off*/, size_t /*cnt*/) const
+          {
+            // `allocatorT::value_type` is not copy-constructible.
+            // Throw an exception unconditionally, even when there is nothing to copy.
+            noadl::sprintf_and_throw<domain_error>("cow_hashmap: `%s` is not copy-constructible.",
+                                                   typeid(typename allocatorT::value_type).name());
+          }
+      };
+
 // 
 // inheritance
 // 
@@ -421,14 +432,14 @@ int main() {
 //
 // Attributes
 //
-switch(test) {
-	case 1:
-	break;
-	case 2: [[fallthrough]];
-	case 3: break; // no syntax highlighting
-}
-void func1();
-[[noreturn]] void func2(/*syntax highlighting*/); // no syntax highlighting
-struct st { // syntax highlighting works now
-};
-void func3();
+    switch(test) {
+        case 1:
+        break;
+        case 2: [[fallthrough]];
+        case 3: break; // no syntax highlighting
+    }
+    void func1();
+    [[noreturn]] void func2(/*syntax highlighting*/); // no syntax highlighting
+    struct st { // syntax highlighting works now
+    };
+    void func3();

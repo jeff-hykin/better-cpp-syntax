@@ -491,6 +491,18 @@ cpp_grammar = Grammar.new(
         match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
         includes: template_call_context
         )
+    template_call_range = Range.new(
+            tag_as: 'meta.template.call',
+            start_pattern: newPattern(
+                match: /</,
+                tag_as: "punctuation.section.angle-brackets.begin.template.call"
+            ),
+            end_pattern: newPattern(
+                match: />/,
+                tag_as: "punctuation.section.angle-brackets.end.template.call"
+            ),
+            includes: template_call_context
+        )
     template_definition_context = [
             :scope_resolution,
             :template_definition_argument,
@@ -1077,10 +1089,20 @@ cpp_grammar = Grammar.new(
                         reference: "storage_type",
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
-                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(inline_attribute).maybe(@spaces).maybe(
+                    ).then(
+                        @spaces.or(
+                            inline_attribute
+                        ).or(
+                            lookAheadFor(/{/)
+                        )
+                    ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
-                    ).maybe(maybe(@spaces).then(
+                    ).maybe(
+                        # 
+                        # inheritance
+                        # 
+                        maybe(@spaces).then(
                             match: /:/,
                             tag_as: "punctuation.inhertance.colon"
                         # the following may seem redundant (removing it shouldn't change anything)
@@ -1104,8 +1126,9 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
             head_includes: [
-                "#angle_brackets",
                 *inhertance_context,
+                template_call_range,
+                :comments,
             ],
             body_includes: [ "#special_block", "#constructor", "$base"  ],
         )
@@ -1210,7 +1233,7 @@ cpp_grammar.initalContextIncludes(
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",
     hacky_fix_for_stray_directive,
-    "#comments-c",
+    "#comments",
     case_statement,
     control_flow_keywords,
     storage_types,
@@ -1316,7 +1339,7 @@ cpp_grammar.initalContextIncludes(
                         include: "#line_continuation_character"
                     },
                     {
-                        include: "#comments-c"
+                        include: "#comments"
                     }
                 ]
             }
@@ -1771,7 +1794,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "comments-c" => {
+    "comments" => {
         patterns: [
             {
                 captures: {
@@ -2162,7 +2185,7 @@ cpp_grammar.addToRepository({
                 name: "invalid.illegal.macro-name"
             },
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 include: "#strings_c"
@@ -2262,7 +2285,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#comments-c"
+                        include: "#comments"
                     },
                     {
                         include: "#preprocessor-rule-enabled-elif"
@@ -2359,7 +2382,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#comments-c"
+                        include: "#comments"
                     },
                     {
                         include: "#preprocessor-rule-enabled-elif-block"
@@ -2443,7 +2466,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -2502,7 +2525,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#comments-c"
+                        include: "#comments"
                     },
                     {
                         begin: "^\\s*((#)\\s*else\\b)",
@@ -2604,7 +2627,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#comments-c"
+                        include: "#comments"
                     },
                     {
                         begin: "^\\s*((#)\\s*else\\b)",
@@ -2693,7 +2716,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -2780,7 +2803,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3020,7 +3043,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-define-line-functions" => {
         patterns: [
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 include: "#storage_types"
@@ -3087,7 +3110,7 @@ cpp_grammar.addToRepository({
         patterns: [
             attributes.to_tag,
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 include: "#storage_types"
@@ -3152,7 +3175,7 @@ cpp_grammar.addToRepository({
         patterns: [
             attributes.to_tag,
             {
-                include: "#comments-c"
+                include: "#comments"
             },
             {
                 include: "#storage_types"
@@ -3228,14 +3251,6 @@ cpp_grammar.addToRepository({
 Dir.chdir __dir__
 
 # Save
-syntax_location = "../syntaxes/cpp.tmLanguage"
-cpp_grammar.saveAsYamlTo(syntax_location)
-cpp_grammar.saveAsJsonTo(syntax_location)
-
-
-# uncomment the following if you want it to auto-update your system syntax when this file is run
-# only works on mac at the moment
-# if (/darwin/ =~ RUBY_PLATFORM) != nil
-#     # overwrite the system syntax with the generated syntax
-#     `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
-# end
+@syntax_location = "../syntaxes/cpp.tmLanguage"
+cpp_grammar.saveAsYamlTo(@syntax_location)
+cpp_grammar.saveAsJsonTo(@syntax_location)
