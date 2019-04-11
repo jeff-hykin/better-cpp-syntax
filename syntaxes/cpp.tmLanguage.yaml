@@ -918,7 +918,7 @@
       :patterns:
       - :name: meta.head.namespace.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
@@ -971,7 +971,7 @@
       :patterns:
       - :name: meta.head.class.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.class.cpp
@@ -1057,7 +1057,7 @@
       :patterns:
       - :name: meta.head.struct.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.struct.cpp
@@ -1123,7 +1123,7 @@
       :patterns:
       - :name: meta.head.union.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.union.cpp
@@ -1205,7 +1205,7 @@
       :patterns:
       - :name: meta.head.enum.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.enum.cpp
@@ -1238,7 +1238,7 @@
       :patterns:
       - :name: meta.head.extern.cpp
         :begin: "\\G"
-        :end: "(\\{|;)"
+        :end: "((?:\\{|(?=;)))"
         :endCaptures:
           '1':
             :name: punctuation.section.block.begin.bracket.curly.extern.cpp
