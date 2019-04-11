@@ -1092,6 +1092,10 @@ cpp_grammar = Grammar.new(
             tag_as: "entity.name.type.inherited"
         )
     ]
+    final_modifier = newPattern(
+        match: /final/,
+        tag_as: "storage.type.modifier.final",
+    )
     generateClassOrStructBlockFinder = ->(name) do
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
@@ -1110,10 +1114,7 @@ cpp_grammar = Grammar.new(
                         ).or(
                             lookAheadFor(/{/)
                         )
-                    ).maybe(newPattern(
-                            match: /final/,
-                            tag_as: "storage.type.modifier.final",
-                        ).maybe(@spaces)
+                    ).maybe(final_modifier.maybe(@spaces)
                     ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
@@ -1149,10 +1150,7 @@ cpp_grammar = Grammar.new(
                 *inhertance_context,
                 template_call_range,
                 :comments,
-                newPattern(
-                    match: /final/,
-                    tag_as: "storage.type.modifier.final",
-                )
+                final_modifier,
             ],
             body_includes: [ "#special_block", "#constructor", "$base"  ],
         )
