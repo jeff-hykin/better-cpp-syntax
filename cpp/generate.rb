@@ -1520,19 +1520,6 @@ cpp_grammar.initalContextIncludes(
     }
 )
 cpp_grammar.addToRepository({
-    "angle_brackets" => {
-        begin: "<",
-        end: ">",
-        name: "meta.angle-brackets",
-        patterns: [
-            {
-                include: "#angle_brackets"
-            },
-            {
-                include: "$base"
-            }
-        ]
-    },
     "block" => {
         begin: "\\{",
         beginCaptures: {
