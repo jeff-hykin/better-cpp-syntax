@@ -56,6 +56,6 @@ I love regular expressions, and I plan on actively maintaining this.
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
-<br>There was a pull request on this repo from matter123 that fixed number literals.
-<br>Thanks fnadeau, and matter123!
-<br>The rest of the ruby code is authored by me.
+<br>@matter123 has written almost every pull request, containing entirely new patterns and fixes for numerous things 
+<br>Thanks fnadeau and @matter123!
+<br>The rest of the ruby is authored by @jeff-hykin
