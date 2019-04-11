@@ -23,7 +23,7 @@ cpp_grammar = Grammar.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
         )
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [], secondary_includes:[])
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [ "$base" ], secondary_includes:[])
         lookahead_endings = /[;()>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -825,10 +825,12 @@ cpp_grammar = Grammar.new(
             includes: member_context
         ).maybe(@spaces)
     # access to attribute
+    type_represenetations = @cpp_tokens.representationsThat(:isType)
+    lookahead_friedly_types_pattern = /#{type_represenetations.map { |each| each+"[^#{@standard_character}]" } .join('|')}/
     member_access = newPattern(
         repository_name: 'member_access',
         match: member_start.then(
-                match: @word_boundary.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+                match: @word_boundary.lookAheadToAvoid(lookahead_friedly_types_pattern).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.property"
             )
         )
@@ -3201,7 +3203,7 @@ cpp_grammar.saveAsJsonTo(syntax_location)
 
 # uncomment the following if you want it to auto-update your system syntax when this file is run
 # only works on mac at the moment
-# if (/darwin/ =~ RUBY_PLATFORM) != nil
-#     # overwrite the system syntax with the generated syntax
-#     `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
-# end
+if (/darwin/ =~ RUBY_PLATFORM) != nil
+    # overwrite the system syntax with the generated syntax
+    `cp '#{syntax_location}.json' '/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/cpp/syntaxes'`
+end
