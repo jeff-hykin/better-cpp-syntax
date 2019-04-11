@@ -86,7 +86,7 @@
   :end: "(:)"
   :endCaptures:
     '1':
-      :name: colon.cpp punctuation.seperator.case.cpp
+      :name: colon.cpp punctuation.separator.case.cpp
   :patterns:
   - :include: "$base"
 - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
@@ -266,7 +266,7 @@
 - :match: ";"
   :name: punctuation.terminator.statement.cpp
 - :match: ","
-  :name: punctuation.separator.delimiter.cpp
+  :name: comma.cpp punctuation.separator.delimiter.cpp
 :repository:
   literal_numeric_seperator:
     :match: "(?<!')'(?!')"
@@ -449,7 +449,7 @@
         - :include: "#number_literal"
         - :include: "#strings"
         - :match: ","
-          :name: punctuation.separator.comma.template.argument.cpp
+          :name: comma.cpp punctuation.separator.template.argument.cpp
   template_isolated_definition:
     :match: "(?<!\\w)(template)\\s*(<)((?:.)*)(>\\s*$)"
     :captures:
@@ -498,7 +498,7 @@
       - :include: "#number_literal"
       - :include: "#strings"
       - :match: ","
-        :name: punctuation.separator.comma.template.argument.cpp
+        :name: comma.cpp punctuation.separator.template.argument.cpp
     - :include: "#scope_resolution"
     - :include: "#template_definition_argument"
     - :include: "#template_argument_defaulted"
@@ -525,11 +525,11 @@
       '4':
         :name: storage.type.template.cpp
       '5':
-        :name: punctuation.vararg-ellipses.template.definition.cpp
+        :name: ellipses.cpp punctuation.vararg-ellipses.template.definition.cpp
       '6':
         :name: entity.name.type.template.cpp
       '7':
-        :name: punctuation.separator.comma.template.argument.cpp
+        :name: comma.cpp punctuation.separator.template.argument.cpp
   scope_resolution:
     :match: "((?:[a-zA-Z_]\\w*\\s*(?:(?-mix:(?:<(?:[\\s<>,\\w])*>\\s*)))?::)*\\s*)([a-zA-Z_]\\w*)\\s*(?:(<(?:[\\s<>,\\w])*>\\s*))?(::)"
     :captures:
@@ -550,7 +550,7 @@
         - :include: "#number_literal"
         - :include: "#strings"
         - :match: ","
-          :name: punctuation.separator.comma.template.argument.cpp
+          :name: comma.cpp punctuation.separator.template.argument.cpp
       '4':
         :name: punctuation.separator.namespace.access.cpp
     :name: meta.scope-resolution.cpp
@@ -951,11 +951,11 @@
         '6':
           :name: entity.name.type.$3.cpp
         '7':
-          :name: punctuation.inhertance.colon.cpp
+          :name: colon.cpp punctuation.separator.inhertance.cpp
         '8':
           :patterns:
           - :match: ","
-            :name: punctuation.separator.delimiter.inhertance.cpp
+            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
           - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -977,7 +977,7 @@
             :name: punctuation.section.block.begin.bracket.curly.class.cpp
         :patterns:
         - :match: ","
-          :name: punctuation.separator.delimiter.inhertance.cpp
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
         - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -1004,7 +1004,7 @@
           - :include: "#number_literal"
           - :include: "#strings"
           - :match: ","
-            :name: punctuation.separator.comma.template.argument.cpp
+            :name: comma.cpp punctuation.separator.template.argument.cpp
         - :include: "#comments"
       - :name: meta.body.class.cpp
         :begin: "(?<=\\{)"
@@ -1037,11 +1037,11 @@
         '6':
           :name: entity.name.type.$3.cpp
         '7':
-          :name: punctuation.inhertance.colon.cpp
+          :name: colon.cpp punctuation.separator.inhertance.cpp
         '8':
           :patterns:
           - :match: ","
-            :name: punctuation.separator.delimiter.inhertance.cpp
+            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
           - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -1063,7 +1063,7 @@
             :name: punctuation.section.block.begin.bracket.curly.struct.cpp
         :patterns:
         - :match: ","
-          :name: punctuation.separator.delimiter.inhertance.cpp
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
         - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -1103,11 +1103,11 @@
         '6':
           :name: entity.name.type.$3.cpp
         '7':
-          :name: punctuation.inhertance.colon.cpp
+          :name: colon.cpp punctuation.separator.inhertance.cpp
         '8':
           :patterns:
           - :match: ","
-            :name: punctuation.separator.delimiter.inhertance.cpp
+            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?:private|protected|public)"
             :name: storage.type.modifier.access.$0.cpp
           - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -1129,7 +1129,7 @@
             :name: punctuation.section.block.begin.bracket.curly.union.cpp
         :patterns:
         - :match: ","
-          :name: punctuation.separator.delimiter.inhertance.cpp
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?:private|protected|public)"
           :name: storage.type.modifier.access.$0.cpp
         - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)[a-zA-Z_]\\w*(?!\\w))"
@@ -1171,7 +1171,7 @@
         '6':
           :name: entity.name.type.enum.cpp
         '7':
-          :name: punctuation.type-specifier.colon.cpp
+          :name: colon.cpp punctuation.separator.type-specifier.cpp
         '8':
           :name: meta.scope-resolution.cpp
         '9':
@@ -1191,7 +1191,7 @@
           - :include: "#number_literal"
           - :include: "#strings"
           - :match: ","
-            :name: punctuation.separator.comma.template.argument.cpp
+            :name: comma.cpp punctuation.separator.template.argument.cpp
         '12':
           :name: punctuation.separator.namespace.access.cpp
         '13':
@@ -1428,7 +1428,7 @@
     :patterns:
     - :include: "#block_innards-c"
     - :match: !ruby/regexp /(?<!:):(?!:)/
-      :name: punctuation.range-based.cpp
+      :name: colon.cpp punctuation.separator.range-based.cpp
   pragma-mark:
     :captures:
       '1':
@@ -2151,7 +2151,7 @@
           - :include: "#number_literal"
           - :include: "#strings"
           - :match: ","
-            :name: punctuation.separator.comma.template.argument.cpp
+            :name: comma.cpp punctuation.separator.template.argument.cpp
         '4':
           :name: punctuation.section.arguments.begin.bracket.round.cpp
       :end: "(\\))"

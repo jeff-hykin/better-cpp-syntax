@@ -371,6 +371,7 @@
 // 
 
     class foo : private bar,quix,foo, public bar, quix, foo, protected bar, quix{};
+    struct foo f;
     class foo f;
     struct thing : 
         public A, public B {};

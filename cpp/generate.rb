@@ -393,7 +393,7 @@ cpp_grammar = Grammar.new(
             ),
             end_pattern: newPattern(
                 match: /:/,
-                tag_as: "colon punctuation.seperator.case.default"
+                tag_as: "colon punctuation.separator.case.default"
             ),
             includes: contional_context
         )
@@ -405,7 +405,7 @@ cpp_grammar = Grammar.new(
             ),
             end_pattern: newPattern(
                 match: /:/,
-                tag_as: "colon punctuation.seperator.case"
+                tag_as: "colon punctuation.separator.case"
             ),
             includes: contional_context
         )
@@ -480,7 +480,7 @@ cpp_grammar = Grammar.new(
             :strings,
             newPattern(
                 match: /,/,
-                tag_as: "punctuation.separator.comma.template.argument"
+                tag_as: "comma punctuation.separator.template.argument"
             )
         ]
     # note: template_call should indeally be a Range(), the reason its not is
@@ -592,7 +592,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
-                    tag_as: "punctuation.vararg-ellipses.template.definition",
+                    tag_as: "ellipses punctuation.vararg-ellipses.template.definition",
                 ).maybe(@spaces).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
@@ -600,7 +600,7 @@ cpp_grammar = Grammar.new(
             ).maybe(@spaces).then(
                 newPattern(
                     match: /,/,
-                    tag_as: "punctuation.separator.comma.template.argument",
+                    tag_as: "comma punctuation.separator.template.argument",
                 ).or(
                     lookAheadFor(/>|$/)
                 )
@@ -1049,7 +1049,7 @@ cpp_grammar = Grammar.new(
                 ).maybe(
                     maybe(@spaces).then(
                         match: /:/,
-                        tag_as: "punctuation.type-specifier.colon",
+                        tag_as: "colon punctuation.separator.type-specifier",
                     ).maybe(@spaces).maybe(
                         scope_resolution
                     ).maybe(@spaces).then(
@@ -1066,7 +1066,7 @@ cpp_grammar = Grammar.new(
     inhertance_context = [
         newPattern(
             match: /,/,
-            tag_as: "punctuation.separator.delimiter.inhertance"
+            tag_as: "comma punctuation.separator.delimiter.inhertance"
         ),
         newPattern(
             match: @cpp_tokens.that(:isAccessSpecifier),
@@ -1104,7 +1104,7 @@ cpp_grammar = Grammar.new(
                         # 
                         maybe(@spaces).then(
                             match: /:/,
-                            tag_as: "punctuation.inhertance.colon"
+                            tag_as: "colon punctuation.separator.inhertance"
                         # the following may seem redundant (removing it shouldn't change anything)
                         # this is because the follow are matched by what is inside of this Range
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
@@ -1516,7 +1516,7 @@ cpp_grammar.initalContextIncludes(
     @semicolon.to_tag,
     {
         match: ",",
-        name: "punctuation.separator.delimiter"
+        name: "comma punctuation.separator.delimiter"
     }
 )
 cpp_grammar.addToRepository({
@@ -1921,7 +1921,7 @@ cpp_grammar.addToRepository({
             },
             {
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
-                name: "punctuation.range-based"
+                name: "colon punctuation.separator.range-based"
             }
         ]
     },
