@@ -378,9 +378,9 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
         tag_as: "keyword.control.$match"
         )
-# 
+#
 # Control flow
-# 
+#
     # TODO: update this context in the future to be more restrictive
     contional_context = [
         "$base"
@@ -844,10 +844,10 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = newPattern(
+    partial_member = the_this_keyword.or(newPattern(
             match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
             tag_as: "variable.other.object.access",
-        ).then(
+        )).then(
             member_operator
         )
     member_context = [
@@ -1099,9 +1099,9 @@ cpp_grammar = Grammar.new(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(
-                        # 
+                        #
                         # inheritance
-                        # 
+                        #
                         maybe(@spaces).then(
                             match: /:/,
                             tag_as: "colon punctuation.separator.inhertance"
