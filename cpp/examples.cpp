@@ -338,6 +338,22 @@
                 
             }
     };
+    class A{
+        void A();
+    };
+    class A
+{
+        void A();
+};
+    class A {
+        void A();
+    };
+    class A
+
+
+{
+      void A();
+};
 
 // 
 // inheritance
