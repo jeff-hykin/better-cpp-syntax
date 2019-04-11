@@ -388,7 +388,7 @@ cpp_grammar = Grammar.new(
     default_statement = Range.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
-                match: /default/,
+                match: variableBounds[ /default/ ],
                 tag_as: "keyword.control.default"
             ),
             end_pattern: newPattern(
@@ -400,7 +400,7 @@ cpp_grammar = Grammar.new(
     case_statement = Range.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
-                match: /case/,
+                match: variableBounds[ /case/ ],
                 tag_as: "keyword.control.case"
             ),
             end_pattern: newPattern(

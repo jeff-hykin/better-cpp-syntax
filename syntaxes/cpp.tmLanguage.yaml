@@ -79,7 +79,7 @@
   :name: keyword.control.directive.$0.cpp
 - :include: "#comments"
 - :name: meta.conditional.case.cpp
-  :begin: "(case)"
+  :begin: "((?<!\\w)case(?!\\w))"
   :beginCaptures:
     '1':
       :name: keyword.control.case.cpp
@@ -812,13 +812,6 @@
           :name: punctuation.section.block.end.bracket.curly.lambda.cpp
       :patterns:
       - :include: "$base"
-  angle_brackets:
-    :begin: "<"
-    :end: ">"
-    :name: meta.angle-brackets.cpp
-    :patterns:
-    - :include: "#angle_brackets"
-    - :include: "$base"
   block:
     :begin: "\\{"
     :beginCaptures:
