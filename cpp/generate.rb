@@ -478,7 +478,7 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\s<>,\w]/
+    characters_in_template_call = /[\s<>:,\w]/
     template_call_context = [
             :storage_types,
             :constants,
