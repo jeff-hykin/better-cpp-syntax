@@ -78,6 +78,18 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
+# 
+# 
+# Contexts
+# 
+# 
+    preprocessor_context = [
+        "#preprocessor-rule-enabled",
+        "#preprocessor-rule-disabled",
+        "#preprocessor-rule-conditional",
+        "#hacky_fix_for_stray_directive",
+    ]
+
 #
 #
 # Numbers
@@ -1059,6 +1071,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
+            head_includes: [ "$base" ]
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1128,6 +1141,7 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
             head_includes: [
+                *preprocessor_context,
                 *inhertance_context,
                 template_call_range,
                 :comments,
@@ -1157,6 +1171,7 @@ cpp_grammar = Grammar.new(
     # TODO, change all blocks/paraentheses so that they end and the end of a macro
     # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
     hacky_fix_for_stray_directive = newPattern(
+        repository_name: :hacky_fix_for_stray_directive,
         match: variableBounds[/#(?:endif|else|elif)/],
         tag_as: "keyword.control.directive.$match"
     )
@@ -1231,10 +1246,7 @@ cpp_grammar.initalContextIncludes(
     #
     # C patterns
     #
-    "#preprocessor-rule-enabled",
-    "#preprocessor-rule-disabled",
-    "#preprocessor-rule-conditional",
-    hacky_fix_for_stray_directive,
+    *preprocessor_context,
     "#comments",
     case_statement,
     control_flow_keywords,
