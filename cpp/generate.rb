@@ -78,11 +78,11 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-# 
-# 
+#
+#
 # Contexts
-# 
-# 
+#
+#
     preprocessor_context = [
         "#preprocessor-rule-enabled",
         "#preprocessor-rule-disabled",
@@ -1260,7 +1260,7 @@ cpp_grammar.initalContextIncludes(
     :strings_c,
     {
         name: "meta.preprocessor.macro",
-        begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
+        begin: "(?x)\n(?:^|(?<!\\*/))\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.define"
@@ -1293,7 +1293,7 @@ cpp_grammar.initalContextIncludes(
     },
     {
         name: "meta.preprocessor.diagnostic",
-        begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(error|warning))\\b\\s*",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.diagnostic.$3"
@@ -1361,7 +1361,7 @@ cpp_grammar.initalContextIncludes(
     },
     {
         name: "meta.preprocessor.include",
-        begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.$3"
@@ -1410,7 +1410,7 @@ cpp_grammar.initalContextIncludes(
     "#pragma-mark",
     {
         name: "meta.preprocessor",
-        begin: "^\\s*((#)\\s*line)\\b",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*line)\\b",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.line"
@@ -1434,7 +1434,7 @@ cpp_grammar.initalContextIncludes(
     },
     {
         name: "meta.preprocessor",
-        begin: "^\\s*(?:((#)\\s*undef))\\b",
+        begin: "(?:^|(?<!\\*/))\\s*(?:((#)\\s*undef))\\b",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.undef"
@@ -1456,7 +1456,7 @@ cpp_grammar.initalContextIncludes(
     },
     {
         name: "meta.preprocessor.pragma",
-        begin: "^\\s*(?:((#)\\s*pragma))\\b",
+        begin: "(?:^|(?<!\\*/))\\s*(?:((#)\\s*pragma))\\b",
         beginCaptures: {
             "1" => {
                 name: "keyword.control.directive.pragma"
@@ -1859,8 +1859,8 @@ cpp_grammar.addToRepository({
         ]
     },
     "disabled" => {
-        begin: "^\\s*#\\s*if(n?def)?\\b.*$",
-        end: "^\\s*#\\s*endif\\b",
+        begin: "(?:^|(?<!\\*/))\\s*#\\s*if(n?def)?\\b.*$",
+        end: "(?:^|(?<!\\*/))\\s*#\\s*endif\\b",
         patterns: [
             {
                 include: "#disabled"
@@ -1941,7 +1941,7 @@ cpp_grammar.addToRepository({
                 name: "entity.name.tag.pragma-mark"
             }
         },
-        match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
+        match: "(?:^|(?<!\\*/))\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
     },
     "strings_c" => {
@@ -2034,7 +2034,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-conditional" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if(?:n?def)?\\b)",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2046,7 +2046,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.definition.directive"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2079,7 +2079,7 @@ cpp_grammar.addToRepository({
                         include: "#preprocessor-rule-disabled-elif"
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "1" => {
                                 name: "keyword.control.directive.conditional"
@@ -2106,7 +2106,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-conditional-block" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if(?:n?def)?\\b)",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2118,7 +2118,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.definition.directive"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2151,7 +2151,7 @@ cpp_grammar.addToRepository({
                         include: "#preprocessor-rule-disabled-elif"
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "1" => {
                                 name: "keyword.control.directive.conditional"
@@ -2250,7 +2250,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-disabled" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2262,7 +2262,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.definition.directive"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2298,7 +2298,7 @@ cpp_grammar.addToRepository({
                         include: "#preprocessor-rule-disabled-elif"
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2310,7 +2310,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))",
                         patterns: [
                             {
                                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
@@ -2329,7 +2329,7 @@ cpp_grammar.addToRepository({
                     },
                     {
                         begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.if-branch",
                         patterns: [
                             {
@@ -2347,7 +2347,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-disabled-block" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2359,7 +2359,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.definition.directive"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2395,7 +2395,7 @@ cpp_grammar.addToRepository({
                         include: "#preprocessor-rule-disabled-elif"
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2407,7 +2407,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))",
                         patterns: [
                             {
                                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
@@ -2426,7 +2426,7 @@ cpp_grammar.addToRepository({
                     },
                     {
                         begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.if-branch.in-block",
                         patterns: [
                             {
@@ -2442,7 +2442,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "preprocessor-rule-disabled-elif" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
                 name: "meta.preprocessor"
@@ -2454,7 +2454,7 @@ cpp_grammar.addToRepository({
                 name: "punctuation.definition.directive"
             }
         },
-        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))",
         patterns: [
             {
                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
@@ -2471,7 +2471,7 @@ cpp_grammar.addToRepository({
             },
             {
                 begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                 "contentName" => "comment.block.preprocessor.elif-branch",
                 patterns: [
                     {
@@ -2487,7 +2487,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-enabled" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2502,7 +2502,7 @@ cpp_grammar.addToRepository({
                         name: "constant.numeric.preprocessor"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2529,7 +2529,7 @@ cpp_grammar.addToRepository({
                         include: "#comments"
                     },
                     {
-                        begin: "^\\s*((#)\\s*else\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2541,7 +2541,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
                         "contentName" => "comment.block.preprocessor.else-branch",
                         patterns: [
                             {
@@ -2553,7 +2553,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2565,7 +2565,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.if-branch",
                         patterns: [
                             {
@@ -2578,7 +2578,7 @@ cpp_grammar.addToRepository({
                     },
                     {
                         begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
                                 include: "$base"
@@ -2592,7 +2592,7 @@ cpp_grammar.addToRepository({
     "preprocessor-rule-enabled-block" => {
         patterns: [
             {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+                begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
                 beginCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2604,7 +2604,7 @@ cpp_grammar.addToRepository({
                         name: "punctuation.definition.directive"
                     }
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
+                end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)",
                 endCaptures: {
                     "0" => {
                         name: "meta.preprocessor"
@@ -2631,7 +2631,7 @@ cpp_grammar.addToRepository({
                         include: "#comments"
                     },
                     {
-                        begin: "^\\s*((#)\\s*else\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2643,7 +2643,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
                         "contentName" => "comment.block.preprocessor.else-branch.in-block",
                         patterns: [
                             {
@@ -2655,7 +2655,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        begin: "^\\s*((#)\\s*elif\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2667,7 +2667,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.if-branch.in-block",
                         patterns: [
                             {
@@ -2680,7 +2680,7 @@ cpp_grammar.addToRepository({
                     },
                     {
                         begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
                                 include: "#block_innards-c"
@@ -2692,7 +2692,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "preprocessor-rule-enabled-elif" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
                 name: "meta.preprocessor"
@@ -2704,7 +2704,7 @@ cpp_grammar.addToRepository({
                 name: "punctuation.definition.directive"
             }
         },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
+        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
         patterns: [
             {
                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
@@ -2721,10 +2721,10 @@ cpp_grammar.addToRepository({
             },
             {
                 begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
+                end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:endif)\\b))",
                 patterns: [
                     {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(else)\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2736,7 +2736,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
                         "contentName" => "comment.block.preprocessor.elif-branch",
                         patterns: [
                             {
@@ -2748,7 +2748,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(elif)\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2760,7 +2760,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.elif-branch",
                         patterns: [
                             {
@@ -2779,7 +2779,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "preprocessor-rule-enabled-elif-block" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
                 name: "meta.preprocessor"
@@ -2791,7 +2791,7 @@ cpp_grammar.addToRepository({
                 name: "punctuation.definition.directive"
             }
         },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
+        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
         patterns: [
             {
                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
@@ -2808,10 +2808,10 @@ cpp_grammar.addToRepository({
             },
             {
                 begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
+                end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:endif)\\b))",
                 patterns: [
                     {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(else)\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2823,7 +2823,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
                         "contentName" => "comment.block.preprocessor.elif-branch.in-block",
                         patterns: [
                             {
@@ -2835,7 +2835,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
+                        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(elif)\\b)",
                         beginCaptures: {
                             "0" => {
                                 name: "meta.preprocessor"
@@ -2847,7 +2847,7 @@ cpp_grammar.addToRepository({
                                 name: "punctuation.definition.directive"
                             }
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         "contentName" => "comment.block.preprocessor.elif-branch",
                         patterns: [
                             {
@@ -2866,7 +2866,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "preprocessor-rule-enabled-else" => {
-        begin: "^\\s*((#)\\s*else\\b)",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
                 name: "meta.preprocessor"
@@ -2878,7 +2878,7 @@ cpp_grammar.addToRepository({
                 name: "punctuation.definition.directive"
             }
         },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
+        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
         patterns: [
             {
                 include: "$base"
@@ -2886,7 +2886,7 @@ cpp_grammar.addToRepository({
         ]
     },
     "preprocessor-rule-enabled-else-block" => {
-        begin: "^\\s*((#)\\s*else\\b)",
+        begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
                 name: "meta.preprocessor"
@@ -2898,7 +2898,7 @@ cpp_grammar.addToRepository({
                 name: "punctuation.definition.directive"
             }
         },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
+        end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))",
         patterns: [
             {
                 include: "#block_innards-c"

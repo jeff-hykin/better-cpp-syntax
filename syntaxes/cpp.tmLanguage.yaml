@@ -97,7 +97,7 @@
 - :include: "#number_literal"
 - :include: "#strings_c"
 - :name: meta.preprocessor.macro.cpp
-  :begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t
+  :begin: "(?x)\n(?:^|(?<!\\*/))\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t
     \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
     \ ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t#
     varargs ellipsis?\n\t)\n  (\\))\n)?"
@@ -120,7 +120,7 @@
   :patterns:
   - :include: "#preprocessor-rule-define-line-contents"
 - :name: meta.preprocessor.diagnostic.cpp
-  :begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
+  :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(error|warning))\\b\\s*"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.diagnostic.$3.cpp
@@ -157,7 +157,7 @@
     - :include: "#line_continuation_character"
     - :include: "#comments"
 - :name: meta.preprocessor.include.cpp
-  :begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
+  :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.$3.cpp
@@ -186,7 +186,7 @@
     :name: string.quoted.other.lt-gt.include.cpp
 - :include: "#pragma-mark"
 - :name: meta.preprocessor.cpp
-  :begin: "^\\s*((#)\\s*line)\\b"
+  :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*line)\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.line.cpp
@@ -198,7 +198,7 @@
   - :include: "#number_literal"
   - :include: "#line_continuation_character"
 - :name: meta.preprocessor.cpp
-  :begin: "^\\s*(?:((#)\\s*undef))\\b"
+  :begin: "(?:^|(?<!\\*/))\\s*(?:((#)\\s*undef))\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.undef.cpp
@@ -210,7 +210,7 @@
     :name: entity.name.function.preprocessor.cpp
   - :include: "#line_continuation_character"
 - :name: meta.preprocessor.pragma.cpp
-  :begin: "^\\s*(?:((#)\\s*pragma))\\b"
+  :begin: "(?:^|(?<!\\*/))\\s*(?:((#)\\s*pragma))\\b"
   :beginCaptures:
     '1':
       :name: keyword.control.directive.pragma.cpp
@@ -1411,8 +1411,8 @@
         :patterns:
         - :include: "#line_continuation_character"
   disabled:
-    :begin: "^\\s*#\\s*if(n?def)?\\b.*$"
-    :end: "^\\s*#\\s*endif\\b"
+    :begin: "(?:^|(?<!\\*/))\\s*#\\s*if(n?def)?\\b.*$"
+    :end: "(?:^|(?<!\\*/))\\s*#\\s*endif\\b"
     :patterns:
     - :include: "#disabled"
     - :include: "#pragma-mark"
@@ -1458,7 +1458,7 @@
         :name: punctuation.definition.directive.cpp
       '4':
         :name: entity.name.tag.pragma-mark.cpp
-    :match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))"
+    :match: "(?:^|(?<!\\*/))\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))"
     :name: meta.section.cpp
   strings_c:
     :patterns:
@@ -1506,7 +1506,7 @@
     :name: punctuation.vararg-ellipses.cpp
   preprocessor-rule-conditional:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if(?:n?def)?\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1514,7 +1514,7 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1531,7 +1531,7 @@
       - :include: "#preprocessor-rule-enabled-elif"
       - :include: "#preprocessor-rule-enabled-else"
       - :include: "#preprocessor-rule-disabled-elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '1':
             :name: keyword.control.directive.conditional.cpp
@@ -1544,7 +1544,7 @@
       - :include: "$base"
   preprocessor-rule-conditional-block:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if(?:n?def)?\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1552,7 +1552,7 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1569,7 +1569,7 @@
       - :include: "#preprocessor-rule-enabled-elif-block"
       - :include: "#preprocessor-rule-enabled-else-block"
       - :include: "#preprocessor-rule-disabled-elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '1':
             :name: keyword.control.directive.conditional.cpp
@@ -1616,7 +1616,7 @@
       - :include: "#preprocessor-rule-conditional-line"
   preprocessor-rule-disabled:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1624,7 +1624,7 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1642,7 +1642,7 @@
       - :include: "#preprocessor-rule-enabled-elif"
       - :include: "#preprocessor-rule-enabled-else"
       - :include: "#preprocessor-rule-disabled-elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1650,7 +1650,7 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))"
         :patterns:
         - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
           :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
@@ -1659,14 +1659,14 @@
           - :include: "#preprocessor-rule-conditional-line"
         - :include: "$base"
       - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
   preprocessor-rule-disabled-block:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1674,7 +1674,7 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1692,7 +1692,7 @@
       - :include: "#preprocessor-rule-enabled-elif-block"
       - :include: "#preprocessor-rule-enabled-else-block"
       - :include: "#preprocessor-rule-disabled-elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1700,7 +1700,7 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))"
         :patterns:
         - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
           :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
@@ -1709,13 +1709,13 @@
           - :include: "#preprocessor-rule-conditional-line"
         - :include: "#block_innards-c"
       - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch.in-block
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
   preprocessor-rule-disabled-elif:
-    :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
         :name: meta.preprocessor.cpp
@@ -1723,7 +1723,7 @@
         :name: keyword.control.directive.conditional.cpp
       '2':
         :name: punctuation.definition.directive.cpp
-    :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
+    :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:elif|else|endif)\\b))"
     :patterns:
     - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
@@ -1732,14 +1732,14 @@
       - :include: "#preprocessor-rule-conditional-line"
     - :include: "#comments"
     - :begin: "\\n"
-      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
       contentName: comment.block.preprocessor.elif-branch
       :patterns:
       - :include: "#disabled"
       - :include: "#pragma-mark"
   preprocessor-rule-enabled:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1749,7 +1749,7 @@
           :name: punctuation.definition.directive.cpp
         '3':
           :name: constant.numeric.preprocessor.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1764,7 +1764,7 @@
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
       - :include: "#comments"
-      - :begin: "^\\s*((#)\\s*else\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1772,12 +1772,12 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
         contentName: comment.block.preprocessor.else-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1785,18 +1785,18 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
       - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         :patterns:
         - :include: "$base"
   preprocessor-rule-enabled-block:
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1804,7 +1804,7 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
+      :end: "(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b)"
       :endCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1819,7 +1819,7 @@
         :patterns:
         - :include: "#preprocessor-rule-conditional-line"
       - :include: "#comments"
-      - :begin: "^\\s*((#)\\s*else\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1827,12 +1827,12 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
         contentName: comment.block.preprocessor.else-branch.in-block
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1840,17 +1840,17 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch.in-block
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
       - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         :patterns:
         - :include: "#block_innards-c"
   preprocessor-rule-enabled-elif:
-    :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
         :name: meta.preprocessor.cpp
@@ -1858,7 +1858,7 @@
         :name: keyword.control.directive.conditional.cpp
       '2':
         :name: punctuation.definition.directive.cpp
-    :end: "(?=^\\s*((#)\\s*endif\\b))"
+    :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
     :patterns:
     - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
@@ -1867,9 +1867,9 @@
       - :include: "#preprocessor-rule-conditional-line"
     - :include: "#comments"
     - :begin: "\\n"
-      :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
+      :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
-      - :begin: "^\\s*((#)\\s*(else)\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(else)\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1877,12 +1877,12 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
-      - :begin: "^\\s*((#)\\s*(elif)\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(elif)\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1890,14 +1890,14 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
       - :include: "$base"
   preprocessor-rule-enabled-elif-block:
-    :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
         :name: meta.preprocessor.cpp
@@ -1905,7 +1905,7 @@
         :name: keyword.control.directive.conditional.cpp
       '2':
         :name: punctuation.definition.directive.cpp
-    :end: "(?=^\\s*((#)\\s*endif\\b))"
+    :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
     :patterns:
     - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
@@ -1914,9 +1914,9 @@
       - :include: "#preprocessor-rule-conditional-line"
     - :include: "#comments"
     - :begin: "\\n"
-      :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
+      :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
-      - :begin: "^\\s*((#)\\s*(else)\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(else)\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1924,12 +1924,12 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
         contentName: comment.block.preprocessor.elif-branch.in-block
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
-      - :begin: "^\\s*((#)\\s*(elif)\\b)"
+      - :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*(elif)\\b)"
         :beginCaptures:
           '0':
             :name: meta.preprocessor.cpp
@@ -1937,14 +1937,14 @@
             :name: keyword.control.directive.conditional.cpp
           '2':
             :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+        :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
         - :include: "#pragma-mark"
       - :include: "#block_innards-c"
   preprocessor-rule-enabled-else:
-    :begin: "^\\s*((#)\\s*else\\b)"
+    :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)"
     :beginCaptures:
       '0':
         :name: meta.preprocessor.cpp
@@ -1952,11 +1952,11 @@
         :name: keyword.control.directive.conditional.cpp
       '2':
         :name: punctuation.definition.directive.cpp
-    :end: "(?=^\\s*((#)\\s*endif\\b))"
+    :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
     :patterns:
     - :include: "$base"
   preprocessor-rule-enabled-else-block:
-    :begin: "^\\s*((#)\\s*else\\b)"
+    :begin: "(?:^|(?<!\\*/))\\s*((#)\\s*else\\b)"
     :beginCaptures:
       '0':
         :name: meta.preprocessor.cpp
@@ -1964,7 +1964,7 @@
         :name: keyword.control.directive.conditional.cpp
       '2':
         :name: punctuation.definition.directive.cpp
-    :end: "(?=^\\s*((#)\\s*endif\\b))"
+    :end: "(?=(?:^|(?<!\\*/))\\s*((#)\\s*endif\\b))"
     :patterns:
     - :include: "#block_innards-c"
   preprocessor-rule-define-line-contents:
