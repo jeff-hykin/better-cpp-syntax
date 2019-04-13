@@ -2,7 +2,6 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # add a way to use backreferences \1 within the regex
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
@@ -50,6 +49,22 @@ class Grammar
         
         return new_name
     end
+    # replaces [:backref:reference] with the groups number it was referencing
+    def self.fixupBackRefs(regex_as_string, group_attribute, was_first_group_removed: nil)
+        references = Hash.new
+        #convert all references to group numbers
+        group_attribute.each.with_index { |each, index|
+            if each[:reference]
+                references[each[:reference]] = index - (was_first_group_removed ? 1 : 0) + 1
+            end
+        }
+        # check for a backref to the Nth group, replace it with `\N` and try again
+        while /\[:backref:([^\\]+?):\]/ =~ regex_as_string
+            regex_as_string = "#{$`}\\#{references[$1]}#{$'}"
+        end
+        return regex_as_string
+    end
+    
     
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
@@ -284,6 +299,7 @@ class Regexp
     def maybe        (*arguments) processRegexOperator(arguments, 'maybe'       ) end
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf' ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf') end
+    def backReference (reference) processbackReference(reference) end
     
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
         if not ignore_repository_entry
@@ -355,6 +371,9 @@ class Regexp
             end
             output[:captures] = new_captures
         end
+
+        # create real backreferences
+        output[:match] = Grammar.fixupBackRefs(output[:match], @group_attributes, was_first_group_removed: was_first_group_removed)
         
         # convert all of the "$match" into their group numbers
         if output[:captures].is_a?(Hash)
@@ -590,6 +609,21 @@ class Regexp
         return new_regex
     end
     
+    def processbackReference(reference)
+        #
+        # generate the new regex
+        #
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = "[:backref:#{reference}:]"
+        new_regex = /#{self_as_string}#{other_regex_as_string}/
+        
+        #
+        # carry over attributes
+        #
+        new_regex.group_attributes = self.group_attributes
+        return new_regex
+    end
+    
     # summary
     #     the 'under the hood' of this feels complicated, but the resulting behavior is simple
     #     (this is abstracted into a class-method because its used in many instance functions)
@@ -675,6 +709,9 @@ end
     end
     def zeroOrMoreOf(*arguments)
         //.zeroOrMoreOf(*arguments)
+    end
+    def backReference(reference)
+        //.backReference(reference)
     end
 #
 # Range

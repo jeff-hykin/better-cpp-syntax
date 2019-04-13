@@ -29,3 +29,16 @@ number_seperator_pattern = newPattern(
     )
 
 p "''" =~ number_seperator_pattern
+
+cpp_grammar.initalContextIncludes(
+    newPattern(
+        match: /foo/.or(/bar/),
+        reference: "foo_bar",
+    ).then(@spaces).then(
+        match: /baz/.or(/quix/),
+        reference: "baz_quix",
+    ).then(@spaces)
+    .backReference("baz_quix").then(@spaces)
+    .then(match: backReference("foo_bar"), tag_as: "foo_bar.2")
+)
+cpp_grammar.saveAsYamlTo("./debug")
