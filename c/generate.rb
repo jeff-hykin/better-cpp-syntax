@@ -586,7 +586,7 @@ c_grammar.addToRepository({
                 include: "#parens-block"
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -715,7 +715,7 @@ c_grammar.addToRepository({
         },
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -832,7 +832,7 @@ c_grammar.addToRepository({
                         include: "#c_function_call"
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             }
@@ -1005,7 +1005,7 @@ c_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             },
@@ -1248,7 +1248,7 @@ c_grammar.addToRepository({
                                 ]
                             },
                             {
-                                include: "$base"
+                                include: "$self"
                             }
                         ]
                     },
@@ -1506,7 +1506,7 @@ c_grammar.addToRepository({
                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
-                                include: "$base"
+                                include: "$self"
                             }
                         ]
                     }
@@ -1697,7 +1697,7 @@ c_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             }
@@ -1806,7 +1806,7 @@ c_grammar.addToRepository({
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -1929,7 +1929,7 @@ c_grammar.addToRepository({
                 include: "#member_access"
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -2088,7 +2088,7 @@ c_grammar.addToRepository({
                 ]
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },

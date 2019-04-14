@@ -23,7 +23,7 @@ cpp_grammar = Grammar.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
         )
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [ "$base" ], secondary_includes:[])
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$self" ], tail_includes: [ "$self" ], secondary_includes:[])
         lookahead_endings = /[;()>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -268,7 +268,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     evaluation_context = [
-        '$base'
+        '$self'
         # function call
         # number literal
         # lambdas
@@ -395,7 +395,7 @@ cpp_grammar = Grammar.new(
 #
     # TODO: update this context in the future to be more restrictive
     contional_context = [
-        "$base"
+        "$self"
     ]
     default_statement = Range.new(
             tag_as: "meta.conditional.case",
@@ -840,7 +840,7 @@ cpp_grammar = Grammar.new(
                         include: "#c_function_call"
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             }
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
-                includes: [ "$base" ]
+                includes: [ "$self" ]
             ),
         ]
         )
@@ -1126,7 +1126,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ "$base" ]
+            head_includes: [ "$self" ]
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1139,7 +1139,7 @@ cpp_grammar = Grammar.new(
             tag_as: "comma punctuation.separator.delimiter.inhertance"
         ),
         newPattern(
-            match: @cpp_tokens.that(:isAccessSpecifier),
+            match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
             tag_as: "storage.type.modifier.access.$match",
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(
@@ -1185,8 +1185,8 @@ cpp_grammar = Grammar.new(
                         # this is because the follow are matched by what is inside of this Range
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
-                        ).maybe(@spaces).zeroOrMoreOf(
-                            match: maybe(/,/).maybe(
+                        ).zeroOrMoreOf(
+                            match: maybe(@spaces).maybe(/,/).maybe(
                                 @spaces
                             ).maybe(
                                 @cpp_tokens.that(:isAccessSpecifier)
@@ -1207,7 +1207,7 @@ cpp_grammar = Grammar.new(
                 template_call_range,
                 :comments,
             ],
-            body_includes: [ "#constructor", "$base"  ],
+            body_includes: [ "#constructor", "$self"  ],
         )
     end
     class_block = generateClassOrStructBlockFinder["class"]
@@ -1222,8 +1222,8 @@ cpp_grammar = Grammar.new(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
             ).lookAheadFor(/\s*\"/),
-        head_includes: [ "$base" ],
-        secondary_includes: [ "$base" ]
+        head_includes: [ "$self" ],
+        secondary_includes: [ "$self" ]
         )
 
 #
@@ -1278,7 +1278,7 @@ cpp_grammar.initalContextIncludes(
         },
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -1301,7 +1301,7 @@ cpp_grammar.initalContextIncludes(
         },
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -1625,7 +1625,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function-call"
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -1668,7 +1668,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function.constructor.initializer-list",
                 patterns: [
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             }
@@ -1844,7 +1844,7 @@ cpp_grammar.addToRepository({
                 include: "#parens-block-c"
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -1961,7 +1961,7 @@ cpp_grammar.addToRepository({
         },
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -2160,7 +2160,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             },
@@ -2386,7 +2386,7 @@ cpp_grammar.addToRepository({
                                 ]
                             },
                             {
-                                include: "$base"
+                                include: "$self"
                             }
                         ]
                     },
@@ -2644,7 +2644,7 @@ cpp_grammar.addToRepository({
                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
-                                include: "$base"
+                                include: "$self"
                             }
                         ]
                     }
@@ -2835,7 +2835,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "$self"
                     }
                 ]
             }
@@ -2944,7 +2944,7 @@ cpp_grammar.addToRepository({
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -3071,7 +3071,7 @@ cpp_grammar.addToRepository({
                 include: "#member_access"
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
@@ -3231,7 +3231,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "$base"
+                include: "$self"
             }
         ]
     },
