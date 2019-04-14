@@ -23,7 +23,7 @@ cpp_grammar = Grammar.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
         )
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [ "$base" ], secondary_includes:[])
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "#cpp_base" ], tail_includes: [ "#cpp_base" ], secondary_includes:[])
         lookahead_endings = /[;()>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -268,7 +268,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     evaluation_context = [
-        '$base'
+        '#cpp_base'
         # function call
         # number literal
         # lambdas
@@ -395,7 +395,7 @@ cpp_grammar = Grammar.new(
 #
     # TODO: update this context in the future to be more restrictive
     contional_context = [
-        "$base"
+        "#cpp_base"
     ]
     default_statement = Range.new(
             tag_as: "meta.conditional.case",
@@ -840,7 +840,7 @@ cpp_grammar = Grammar.new(
                         include: "#c_function_call"
                     },
                     {
-                        include: "$base"
+                        include: "#cpp_base"
                     }
                 ]
             }
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
-                includes: [ "$base" ]
+                includes: [ "#cpp_base" ]
             ),
         ]
         )
@@ -1126,7 +1126,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ "$base" ]
+            head_includes: [ "#cpp_base" ]
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1207,7 +1207,7 @@ cpp_grammar = Grammar.new(
                 template_call_range,
                 :comments,
             ],
-            body_includes: [ "#constructor", "$base"  ],
+            body_includes: [ "#constructor", "#cpp_base"  ],
         )
     end
     class_block = generateClassOrStructBlockFinder["class"]
@@ -1222,8 +1222,8 @@ cpp_grammar = Grammar.new(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
             ).lookAheadFor(/\s*\"/),
-        head_includes: [ "$base" ],
-        secondary_includes: [ "$base" ]
+        head_includes: [ "#cpp_base" ],
+        secondary_includes: [ "#cpp_base" ]
         )
 
 #
@@ -1237,365 +1237,372 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.directive.$match"
     )
 
-cpp_grammar.initalContextIncludes(
-    :parameter_struct, # this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
-    :struct_declare,
-    :special_block,
-    macro_argument,
-    :strings,
-    functional_specifiers_pre_parameters,
-    qualifiers_and_specifiers_post_parameters,
-    storage_specifiers,
-    access_control_keywords,
-    exception_keywords,
-    other_keywords,
-    :memory_operators,
-    the_this_keyword,
-    language_constants,
-    template_isolated_definition,
-    template_definition,
-    scope_resolution,
-    {
-        match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
-        name: "storage.modifier"
-    },
-    {
-        name: "meta.function.destructor",
-        begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-        beginCaptures: {
-            "1" => {
-                name: "entity.name.function.destructor"
-            },
-            "2" => {
-                name: "punctuation.definition.parameters.begin.destructor"
-            }
+# 
+# language context
+# 
+newPattern(
+    repository_name: :cpp_base,
+    includes: [
+        :parameter_struct, # this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
+        :struct_declare,
+        :special_block,
+        macro_argument,
+        :strings,
+        functional_specifiers_pre_parameters,
+        qualifiers_and_specifiers_post_parameters,
+        storage_specifiers,
+        access_control_keywords,
+        exception_keywords,
+        other_keywords,
+        :memory_operators,
+        the_this_keyword,
+        language_constants,
+        template_isolated_definition,
+        template_definition,
+        scope_resolution,
+        {
+            match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
+            name: "storage.modifier"
         },
-        end: /\)/,
-        endCaptures: {
-            "0" => {
-                name: "punctuation.definition.parameters.end.destructor"
-            }
-        },
-        patterns: [
-            {
-                include: "$base"
-            }
-        ]
-    },
-    {
-        name: "meta.function.destructor.prototype",
-        begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-        beginCaptures: {
-            "1" => {
-                name: "entity.name.function"
-            },
-            "2" => {
-                name: "punctuation.definition.parameters.begin"
-            }
-        },
-        end: /\)/,
-        endCaptures: {
-            "0" => {
-                name: "punctuation.definition.parameters.end"
-            }
-        },
-        patterns: [
-            {
-                include: "$base"
-            }
-        ]
-    },
-    lambdas,
-    #
-    # C patterns
-    #
-    *preprocessor_context,
-    "#comments",
-    case_statement,
-    control_flow_keywords,
-    storage_types,
-    {
-        match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
-        name: "storage.modifier"
-    },
-    operator_overload,
-    number_literal,
-    :strings_c,
-    {
-        name: "meta.preprocessor.macro",
-        begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.define"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            },
-            "3" => {
-                name: "entity.name.function.preprocessor"
-            },
-            "5" => {
-                name: "punctuation.definition.parameters.begin"
-            },
-            "6" => {
-                name: "variable.parameter.preprocessor"
-            },
-            "8" => {
-                name: "punctuation.separator.parameters"
-            },
-            "9" => {
-                name: "punctuation.definition.parameters.end"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                include: "#preprocessor-rule-define-line-contents"
-            }
-        ]
-    },
-    {
-        name: "meta.preprocessor.diagnostic",
-        begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.diagnostic.$3"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
+        {
+            name: "meta.function.destructor",
+            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+            beginCaptures: {
+                "1" => {
+                    name: "entity.name.function.destructor"
                 },
-                end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
+                "2" => {
+                    name: "punctuation.definition.parameters.begin.destructor"
+                }
             },
-            {
-                begin: "'",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "'|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.single",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
+            end: /\)/,
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.definition.parameters.end.destructor"
+                }
             },
-            {
-                begin: "[^'\"]",
-                end: "(?<!\\\\)(?=\\s*\\n)",
-                name: "string.unquoted.single",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
+            patterns: [
+                {
+                    include: "#cpp_base"
+                }
+            ]
+        },
+        {
+            name: "meta.function.destructor.prototype",
+            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+            beginCaptures: {
+                "1" => {
+                    name: "entity.name.function"
+                },
+                "2" => {
+                    name: "punctuation.definition.parameters.begin"
+                }
+            },
+            end: /\)/,
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.definition.parameters.end"
+                }
+            },
+            patterns: [
+                {
+                    include: "#cpp_base"
+                }
+            ]
+        },
+        lambdas,
+        #
+        # C patterns
+        #
+        *preprocessor_context,
+        "#comments",
+        case_statement,
+        control_flow_keywords,
+        storage_types,
+        {
+            match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
+            name: "storage.modifier"
+        },
+        operator_overload,
+        number_literal,
+        :strings_c,
+        {
+            name: "meta.preprocessor.macro",
+            begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.define"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                },
+                "3" => {
+                    name: "entity.name.function.preprocessor"
+                },
+                "5" => {
+                    name: "punctuation.definition.parameters.begin"
+                },
+                "6" => {
+                    name: "variable.parameter.preprocessor"
+                },
+                "8" => {
+                    name: "punctuation.separator.parameters"
+                },
+                "9" => {
+                    name: "punctuation.definition.parameters.end"
+                }
+            },
+            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    include: "#preprocessor-rule-define-line-contents"
+                }
+            ]
+        },
+        {
+            name: "meta.preprocessor.diagnostic",
+            begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.diagnostic.$3"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            end: "(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    begin: "\"",
+                    beginCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.begin"
+                        }
                     },
-                    {
-                        include: "#comments"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        name: "meta.preprocessor.include",
-        begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.$3"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                include: "#line_continuation_character"
-            },
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
+                    end: "\"|(?<!\\\\)(?=\\s*\\n)",
+                    endCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.end"
+                        }
+                    },
+                    name: "string.quoted.double",
+                    patterns: [
+                        {
+                            include: "#line_continuation_character"
+                        }
+                    ]
                 },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
+                {
+                    begin: "'",
+                    beginCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.begin"
+                        }
+                    },
+                    end: "'|(?<!\\\\)(?=\\s*\\n)",
+                    endCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.end"
+                        }
+                    },
+                    name: "string.quoted.single",
+                    patterns: [
+                        {
+                            include: "#line_continuation_character"
+                        }
+                    ]
                 },
-                name: "string.quoted.double.include"
-            },
-            {
-                begin: "<",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
+                {
+                    begin: "[^'\"]",
+                    end: "(?<!\\\\)(?=\\s*\\n)",
+                    name: "string.unquoted.single",
+                    patterns: [
+                        {
+                            include: "#line_continuation_character"
+                        },
+                        {
+                            include: "#comments"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            name: "meta.preprocessor.include",
+            begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.$3"
                 },
-                end: ">",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    include: "#line_continuation_character"
                 },
-                name: "string.quoted.other.lt-gt.include"
-            }
-        ]
-    },
-    "#pragma-mark",
-    {
-        name: "meta.preprocessor",
-        begin: "^\\s*((#)\\s*line)\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.line"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
+                {
+                    begin: "\"",
+                    beginCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.begin"
+                        }
+                    },
+                    end: "\"",
+                    endCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.end"
+                        }
+                    },
+                    name: "string.quoted.double.include"
+                },
+                {
+                    begin: "<",
+                    beginCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.begin"
+                        }
+                    },
+                    end: ">",
+                    endCaptures: {
+                        "0" => {
+                            name: "punctuation.definition.string.end"
+                        }
+                    },
+                    name: "string.quoted.other.lt-gt.include"
+                }
+            ]
         },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                include: "#strings_c"
+        "#pragma-mark",
+        {
+            name: "meta.preprocessor",
+            begin: "^\\s*((#)\\s*line)\\b",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.line"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
             },
-            {
-                include: "#number_literal"
-            },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    {
-        name: "meta.preprocessor",
-        begin: "^\\s*(?:((#)\\s*undef))\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.undef"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
+            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    include: "#strings_c"
+                },
+                {
+                    include: "#number_literal"
+                },
+                {
+                    include: "#line_continuation_character"
+                }
+            ]
         },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                match: preprocessor_name_no_bounds,
-                name: "entity.name.function.preprocessor"
+        {
+            name: "meta.preprocessor",
+            begin: "^\\s*(?:((#)\\s*undef))\\b",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.undef"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
             },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    {
-        name: "meta.preprocessor.pragma",
-        begin: "^\\s*(?:((#)\\s*pragma))\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.pragma"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
+            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    match: preprocessor_name_no_bounds,
+                    name: "entity.name.function.preprocessor"
+                },
+                {
+                    include: "#line_continuation_character"
+                }
+            ]
         },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        patterns: [
-            {
-                include: "#strings_c"
+        {
+            name: "meta.preprocessor.pragma",
+            begin: "^\\s*(?:((#)\\s*pragma))\\b",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.control.directive.pragma"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
             },
-            {
-                match: "[a-zA-Z_$][\\w\\-$]*",
-                name: "entity.other.attribute-name.pragma.preprocessor"
-            },
-            {
-                include: "#number_literal"
-            },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    :operators,
-    {
-        match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
-        name: "support.type.sys-types"
-    },
-    {
-        match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
-        name: "support.type.pthread"
-    },
-    {
-        match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
-        name: "support.type.stdint"
-    },
-    posix_reserved_types,
-    "#block-c",
-    "#parens-c",
-    function_definition,
-    "#line_continuation_character",
-    {
-        name: "meta.bracket.square.access",
-        begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
-        beginCaptures: {
-            "1" => {
-                name: "variable.other.object"
-            },
-            "2" => {
-                name: "punctuation.definition.begin.bracket.square"
-            }
+            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            patterns: [
+                {
+                    include: "#strings_c"
+                },
+                {
+                    match: "[a-zA-Z_$][\\w\\-$]*",
+                    name: "entity.other.attribute-name.pragma.preprocessor"
+                },
+                {
+                    include: "#number_literal"
+                },
+                {
+                    include: "#line_continuation_character"
+                }
+            ]
         },
-        end: "\\]",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.definition.end.bracket.square"
-            }
+        :operators,
+        {
+            match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
+            name: "support.type.sys-types"
         },
-        patterns: [
-            {
-                include: "#function-call-innards-c"
-            }
-        ]
-    },
-    {
-        name: "storage.modifier.array.bracket.square",
-        match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
-    },
-    @semicolon.to_tag,
-    {
-        match: ",",
-        name: "comma punctuation.separator.delimiter"
-    }
+        {
+            match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
+            name: "support.type.pthread"
+        },
+        {
+            match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
+            name: "support.type.stdint"
+        },
+        posix_reserved_types,
+        "#block-c",
+        "#parens-c",
+        function_definition,
+        "#line_continuation_character",
+        {
+            name: "meta.bracket.square.access",
+            begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
+            beginCaptures: {
+                "1" => {
+                    name: "variable.other.object"
+                },
+                "2" => {
+                    name: "punctuation.definition.begin.bracket.square"
+                }
+            },
+            end: "\\]",
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.definition.end.bracket.square"
+                }
+            },
+            patterns: [
+                {
+                    include: "#function-call-innards-c"
+                }
+            ]
+        },
+        {
+            name: "storage.modifier.array.bracket.square",
+            match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
+        },
+        @semicolon.to_tag,
+        {
+            match: ",",
+            name: "comma punctuation.separator.delimiter"
+        }
+    ]
 )
+cpp_grammar.initalContextIncludes(:cpp_base)
 cpp_grammar.addToRepository({
     "block" => {
         begin: "\\{",
@@ -1625,7 +1632,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function-call"
             },
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
@@ -1668,7 +1675,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function.constructor.initializer-list",
                 patterns: [
                     {
-                        include: "$base"
+                        include: "#cpp_base"
                     }
                 ]
             }
@@ -1844,7 +1851,7 @@ cpp_grammar.addToRepository({
                 include: "#parens-block-c"
             },
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
@@ -1961,7 +1968,7 @@ cpp_grammar.addToRepository({
         },
         patterns: [
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
@@ -2160,7 +2167,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "#cpp_base"
                     }
                 ]
             },
@@ -2386,7 +2393,7 @@ cpp_grammar.addToRepository({
                                 ]
                             },
                             {
-                                include: "$base"
+                                include: "#cpp_base"
                             }
                         ]
                     },
@@ -2644,7 +2651,7 @@ cpp_grammar.addToRepository({
                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
-                                include: "$base"
+                                include: "#cpp_base"
                             }
                         ]
                     }
@@ -2835,7 +2842,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "$base"
+                        include: "#cpp_base"
                     }
                 ]
             }
@@ -2944,7 +2951,7 @@ cpp_grammar.addToRepository({
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
@@ -3071,7 +3078,7 @@ cpp_grammar.addToRepository({
                 include: "#member_access"
             },
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
@@ -3231,7 +3238,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "$base"
+                include: "#cpp_base"
             }
         ]
     },
