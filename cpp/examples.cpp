@@ -263,7 +263,10 @@
     
     namespace test {
         template <class T>
-        struct test {
+        #ifdef blah
+        struct test 
+        #endif
+        {
             // seperate line template
             template <class U = std::vector<int>>
             template<typename RETURN_TYPE, int N = 0 > 1, typename Callable> 
@@ -460,3 +463,9 @@ int main() {
     struct st { // syntax highlighting works now
     };
     void func3();
+
+// Universal character name
+class LineReader{};
+class Line_Reader{};
+class Line\u00b7Reader{};
+class Line\U0002070EReader{};
