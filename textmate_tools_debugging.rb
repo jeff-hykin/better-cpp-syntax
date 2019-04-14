@@ -28,19 +28,14 @@ number_seperator_pattern = newPattern(
     tag_as:"punctuation.separator.constant.numeric"
     )
 
-p "''" =~ number_seperator_pattern
-
 cpp_grammar.initalContextIncludes(
     newPattern(
-        match: /foo/.or(/bar/),
-        reference: "foo_bar",
-    ).then(@spaces)
-    # .backReference("baz")
-    .then(
-        match: /baz/.or(/quix/),
-        reference: "baz_quix",
-    ).then(@spaces)
-    .backReference("baz_quix").then(@spaces)
-    .then(match: backReference("foo_bar"), tag_as: "foo_bar.2")
+        should_fully_match: [ "baz baz", "quix quix" ],
+        should_not_fully_match: [ "baz quix", "quix baz" ],
+        match: newPattern(
+            match: /baz/.or(/quix/),
+            reference: "baz_quix",
+        ).then(@spaces).backReference("baz_quix")
+    )
 )
 cpp_grammar.saveAsYamlTo("./debug")
