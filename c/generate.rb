@@ -916,11 +916,11 @@ c_grammar.addToRepository({
     "storage_types" => {
         patterns: [
             {
-                match: @c_tokens.that(:isType, :isPrimitive),
+                match: variableBounds[@c_tokens.that(:isType, :isPrimitive)],
                 name: "storage.type.built-in.primitive.c",
             },
             {
-                match: @c_tokens.that(:isType, not(:isPrimitive)),
+                match: variableBounds[@c_tokens.that(:isType, not(:isPrimitive))],
                 name: "storage.type.built-in.c",
             },
             {
