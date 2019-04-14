@@ -2,7 +2,6 @@ require 'json'
 require 'yaml'
 
 # TODO
-    # add a way to use backreferences \1 within the regex
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
@@ -50,6 +49,26 @@ class Grammar
         
         return new_name
     end
+    # replaces [:backreference:reference] with the groups number it was referencing
+    def self.fixupBackRefs(regex_as_string, group_attribute, was_first_group_removed: nil)
+        references = Hash.new
+        #convert all references to group numbers
+        group_attribute.each.with_index { |each, index|
+            if each[:reference]
+                references[each[:reference]] = index - (was_first_group_removed ? 1 : 0) + 1
+            end
+        }
+        # check for a backref to the Nth group, replace it with `\N` and try again
+        regex_as_string.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
+            if references[$1] == nil
+                raise "When processing the backReference:#{$1}, I couldn't find the group it was referencing"
+            end
+            # if the reference does exist, then replace it with it's number
+            "\\#{references[$1]}"
+        end
+        return regex_as_string
+    end
+    
     
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
@@ -279,11 +298,25 @@ class Regexp
     def lookAheadToAvoid  (other_regex) processRegexLookarounds(other_regex, 'lookAheadToAvoid' ) end
     def lookBehindFor     (other_regex) processRegexLookarounds(other_regex, 'lookBehindFor'    ) end
     def lookBehindToAvoid (other_regex) processRegexLookarounds(other_regex, 'lookBehindToAvoid') end
-    def then         (*arguments) processRegexOperator(arguments, 'then'        ) end
-    def or           (*arguments) processRegexOperator(arguments, 'or'          ) end
-    def maybe        (*arguments) processRegexOperator(arguments, 'maybe'       ) end
-    def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf' ) end
-    def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf') end
+    def then         (*arguments) processRegexOperator(arguments, 'then'         ) end
+    def or           (*arguments) processRegexOperator(arguments, 'or'           ) end
+    def maybe        (*arguments) processRegexOperator(arguments, 'maybe'        ) end
+    def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
+    def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
+    def backReference(reference)
+        #
+        # generate the new regex
+        #
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = "[:backreference:#{reference}:]"
+        new_regex = /#{self_as_string}#{other_regex_as_string}/
+        
+        #
+        # carry over attributes
+        #
+        new_regex.group_attributes = self.group_attributes
+        return new_regex
+    end
     
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
         if not ignore_repository_entry
@@ -355,6 +388,9 @@ class Regexp
             end
             output[:captures] = new_captures
         end
+
+        # create real backreferences
+        output[:match] = Grammar.fixupBackRefs(output[:match], @group_attributes, was_first_group_removed: was_first_group_removed)
         
         # convert all of the "$match" into their group numbers
         if output[:captures].is_a?(Hash)
@@ -562,11 +598,16 @@ class Regexp
         #
         # run tests
         #
-        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ new_regex)       } , new_regex)
-        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ new_regex) != nil     } , new_regex)
-        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{new_regex}\z/)  } , new_regex)
-        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{new_regex}\z/) != nil } , new_regex)
-        
+        # if there are backreferences, then implement them before testing
+        if "#{new_regex}" =~ /\[:backreference:([^\\]+?):\]/
+            test_regex = /#{new_regex.to_tag[:match]}/
+        else
+            test_regex = new_regex
+        end
+        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
+        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
+        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
+        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
         return new_regex
     end
     
@@ -675,6 +716,9 @@ end
     end
     def zeroOrMoreOf(*arguments)
         //.zeroOrMoreOf(*arguments)
+    end
+    def backReference(reference)
+        //.backReference(reference)
     end
 #
 # Range
