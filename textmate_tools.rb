@@ -598,11 +598,16 @@ class Regexp
         #
         # run tests
         #
-        replaced_backreferences = /#{new_regex.to_tag[:match]}/
-        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ replaced_backreferences)       } , replaced_backreferences)
-        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ replaced_backreferences) != nil     } , replaced_backreferences)
-        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{replaced_backreferences}\z/)  } , replaced_backreferences)
-        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{replaced_backreferences}\z/) != nil } , replaced_backreferences)
+        # if there are backreferences, then implement them before testing
+        if "#{new_regex}" =~ /\[:backreference:([^\\]+?):\]/
+            test_regex = /#{new_regex.to_tag[:match]}/
+        else
+            test_regex = new_regex
+        end
+        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
+        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
+        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
+        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
         return new_regex
     end
     
