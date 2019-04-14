@@ -1243,7 +1243,7 @@ cpp_grammar = Grammar.new(
 newPattern(
     repository_name: :cpp_base,
     includes: [
-        :parameter_struct, # this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
+        :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
         :struct_declare,
         :special_block,
         macro_argument,
