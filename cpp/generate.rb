@@ -663,11 +663,66 @@ cpp_grammar = Grammar.new(
     cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
+    struct_declare = newPattern(
+            should_partial_match: [ "struct crypto_aead *tfm = crypto_aead_reqtfm(req);", "struct aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
+            repository_name: "struct_declare",
+            match: newPattern(
+                match: /struct/,
+                tag_as: "storage.type.struct.declare",
+            ).then(@spaces).then(
+                match: variable_name,
+                tag_as: "entity.name.type.struct",
+            ).then(@spaces).zeroOrMoreOf(
+                match: /\*|&/.maybe(@spaces),
+                includes: [
+                    newPattern(
+                        match: /\*/,
+                        tag_as: "keyword.operator.dereference"
+                    ),
+                    newPattern(
+                        match: /&/,
+                        tag_as: "keyword.operator.reference"
+                    ),
+                ]
+            ).then(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            )
+        )
+    parameter_struct = newPattern(
+            should_partial_match: [ "struct skcipher_walk *walk," ],
+            repository_name: "parameter_struct",
+            match: newPattern(
+                match: /struct/,
+                tag_as: "storage.type.struct.parameter",
+            ).then(@spaces).then(
+                match: variable_name,
+                tag_as: "entity.name.type.struct.parameter",
+            ).then(@spaces).zeroOrMoreOf(
+                match: /\*|&/.maybe(@spaces),
+                includes: [
+                    newPattern(
+                        match: /\*/,
+                        tag_as: "keyword.operator.dereference"
+                    ),
+                    newPattern(
+                        match: /&/,
+                        tag_as: "keyword.operator.reference"
+                    ),
+                ]
+            # this is a maybe because its possible to have a type declare without an actual parameter
+            ).maybe(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            ).maybe(@spaces).maybe(
+                /\[/.maybe(@spaces).then(/\]/).maybe(@spaces),
+            ).lookAheadFor(/,|\)|\n/)
+        )
     function_definition = Range.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
-        includes: [ "#function-innards-c" ]
+        includes: [ parameter_struct, "#function-innards-c" ]
         )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     function_call = Range.new(
@@ -1146,7 +1201,7 @@ cpp_grammar = Grammar.new(
                 template_call_range,
                 :comments,
             ],
-            body_includes: [ "#special_block", "#constructor", "$base"  ],
+            body_includes: [ "#constructor", "$base"  ],
         )
     end
     class_block = generateClassOrStructBlockFinder["class"]
@@ -1177,6 +1232,8 @@ cpp_grammar = Grammar.new(
     )
 
 cpp_grammar.initalContextIncludes(
+    :parameter_struct, # this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
+    :struct_declare,
     :special_block,
     macro_argument,
     :strings,
@@ -3253,8 +3310,7 @@ Dir.chdir __dir__
 @syntax_location = "../syntaxes/cpp.tmLanguage"
 cpp_grammar.saveAsYamlTo(@syntax_location)
 cpp_grammar.saveAsJsonTo(@syntax_location)
-# copy to C (temporary fix for C)
-cpp_grammar.data[:name] = "C"
-cpp_grammar.data[:scopeName] = "source.c"
-cpp_grammar.data[:version] = "https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/syntaxes/c.tmLanguage.json"
-cpp_grammar.saveAsJsonTo("../syntaxes/c.tmLanguage")
+
+# TODO, upgrade the code so this is not necessary
+# for exporting to C
+@cpp_grammar = cpp_grammar
