@@ -34,7 +34,9 @@ cpp_grammar.initalContextIncludes(
     newPattern(
         match: /foo/.or(/bar/),
         reference: "foo_bar",
-    ).then(@spaces).then(
+    ).then(@spaces)
+    # .backReference("baz")
+    .then(
         match: /baz/.or(/quix/),
         reference: "baz_quix",
     ).then(@spaces)

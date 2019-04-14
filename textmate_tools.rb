@@ -611,6 +611,13 @@ class Regexp
     
     def processbackReference(reference)
         #
+        # ensure reference exists
+        #
+        if not self.group_attributes.index { |each| each[:reference] == reference }
+            raise "\n\nAttempted to create a backreference to `#{reference}', but that reference doesn't exist."
+        end
+
+        #
         # generate the new regex
         #
         self_as_string = self.without_default_mode_modifiers
