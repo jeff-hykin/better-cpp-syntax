@@ -7,9 +7,6 @@
 //
 
 
-
-
-int a = 10;
     //
     // Digits
     //
@@ -374,6 +371,9 @@ int a = 10;
 class ClassH : public foo::ClassF, public foo::ClassG {
 };
 
+    class foo : bar {};
+    class foo : public bar {};
+    
     struct copy_storage_helper<pointerT, hashT, allocatorT, false>     // copyableT
       {
         [[noreturn]] void operator()(pointerT /*ptr*/, const hashT& /*hf*/, pointerT /*ptr_old*/, size_t /*off*/, size_t /*cnt*/) const

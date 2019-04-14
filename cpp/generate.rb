@@ -1139,7 +1139,7 @@ cpp_grammar = Grammar.new(
             tag_as: "comma punctuation.separator.delimiter.inhertance"
         ),
         newPattern(
-            match: @cpp_tokens.that(:isAccessSpecifier),
+            match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
             tag_as: "storage.type.modifier.access.$match",
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(
@@ -1185,8 +1185,8 @@ cpp_grammar = Grammar.new(
                         # this is because the follow are matched by what is inside of this Range
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
-                        ).maybe(@spaces).zeroOrMoreOf(
-                            match: maybe(/,/).maybe(
+                        ).zeroOrMoreOf(
+                            match: maybe(@spaces).maybe(/,/).maybe(
                                 @spaces
                             ).maybe(
                                 @cpp_tokens.that(:isAccessSpecifier)
