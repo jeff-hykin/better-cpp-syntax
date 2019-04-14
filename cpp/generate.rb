@@ -1169,10 +1169,11 @@ cpp_grammar = Grammar.new(
                         ).or(
                             lookAheadFor(/{/)
                         )
-                    ).maybe(final_modifier.maybe(@spaces)
                     ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
+                    ).maybe(
+                        @spaces.then(final_modifier).maybe(@spaces)
                     ).maybe(
                         #
                         # inheritance
@@ -1205,7 +1206,6 @@ cpp_grammar = Grammar.new(
                 *inhertance_context,
                 template_call_range,
                 :comments,
-                final_modifier,
             ],
             body_includes: [ "#constructor", "$base"  ],
         )
