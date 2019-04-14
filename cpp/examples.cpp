@@ -357,6 +357,22 @@
 {
       void A();
 };
+	class ClassA {
+};
+
+	class ClassE final : public ClassA {
+	};
+
+	namespace foo {
+		class ClassF {
+	};
+
+	class ClassG {
+	};
+}
+
+class ClassH : public foo::ClassF, public foo::ClassG {
+};
 
     struct copy_storage_helper<pointerT, hashT, allocatorT, false>     // copyableT
       {
