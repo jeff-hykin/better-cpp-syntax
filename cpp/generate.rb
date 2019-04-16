@@ -449,13 +449,13 @@ cpp_grammar = Grammar.new(
             newPattern(match: /using/, tag_as: "keyword.other.using.directive")
             .then(@spaces).then(
                 match: variable_name,
-                tag_as: "entity.name.namespace",
+                tag_as: "entity.name.type.namespace",
             ),
             newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
             newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
             newPattern(
                 match: variable_name.lookAheadFor(/::/),
-                tag_as: "entity.name.namespace"
+                tag_as: "entity.name.type.namespace"
             ),
             newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
         ],
@@ -979,7 +979,7 @@ cpp_grammar = Grammar.new(
                 preceding_scopes
             ).then(
                 match: variable_name,
-                tag_as: "entity.name.namespace"
+                tag_as: "entity.name.type.namespace"
             ).lookAheadFor(
                 /;|\n/
             ),
@@ -999,7 +999,7 @@ cpp_grammar = Grammar.new(
             ).maybe(@spaces).then(
                 newPattern(
                     match: variable_name,
-                    tag_as: "entity.name.namespace",
+                    tag_as: "entity.name.type.namespace",
                 # anonymous namespaces
                 ).or(
                     lookAheadFor(/\{/)
