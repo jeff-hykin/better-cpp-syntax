@@ -165,13 +165,13 @@
         '1':
           :name: keyword.other.using.directive.cpp
         '2':
-          :name: entity.name.namespace.cpp
+          :name: entity.name.type.namespace.cpp
     - :match: ","
       :name: punctuation.separator.attribute.cpp
     - :match: ":"
       :name: punctuation.accessor.attribute.cpp
     - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      :name: entity.name.namespace.cpp
+      :name: entity.name.type.namespace.cpp
     - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       :name: entity.other.attribute.$0.cpp
   template_call_innards:
@@ -332,12 +332,10 @@
         :name: keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
       '2':
         :name: punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
-          keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
-          keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp
     :patterns:
     - :include: "#cpp_base"
   alignof_operator:
@@ -348,12 +346,10 @@
         :name: keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
       '2':
         :name: punctuation.section.arguments.begin.bracket.round.operator.alignof.cpp
-          keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
-          keyword.operator.functionlike.cpp keyword.operator.alignof.cpp
     :patterns:
     - :include: "#cpp_base"
   alignas_operator:
@@ -364,12 +360,10 @@
         :name: keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
       '2':
         :name: punctuation.section.arguments.begin.bracket.round.operator.alignas.cpp
-          keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
-          keyword.operator.functionlike.cpp keyword.operator.alignas.cpp
     :patterns:
     - :include: "#cpp_base"
   typeid_operator:
@@ -380,12 +374,10 @@
         :name: keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
       '2':
         :name: punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
-          keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
-          keyword.operator.functionlike.cpp keyword.operator.typeid.cpp
     :patterns:
     - :include: "#cpp_base"
   decltype_specifier:
@@ -395,13 +387,11 @@
       '1':
         :name: keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp
       '2':
-        :name: punctuation.section.arguments.begin.bracket.round.decltype.cpp keyword.operator.functionlike.cpp
-          storage.type.decltype.cpp
+        :name: punctuation.section.arguments.begin.bracket.round.decltype.cpp
     :end: "(\\))"
     :endCaptures:
       '1':
-        :name: punctuation.section.arguments.end.bracket.round.decltype.cpp keyword.operator.functionlike.cpp
-          storage.type.decltype.cpp
+        :name: punctuation.section.arguments.end.bracket.round.decltype.cpp
     :patterns:
     - :include: "#cpp_base"
   operators:
@@ -934,7 +924,7 @@
           :patterns:
           - :include: "#scope_resolution"
         '4':
-          :name: entity.name.namespace.cpp
+          :name: entity.name.type.namespace.cpp
       :end: "(;)"
       :endCaptures:
         '1':
@@ -953,7 +943,7 @@
           :patterns:
           - :include: "#scope_resolution"
         '5':
-          :name: entity.name.namespace.cpp
+          :name: entity.name.type.namespace.cpp
       :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
       :patterns:
       - :name: meta.head.namespace.cpp
@@ -1000,7 +990,7 @@
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -1026,7 +1016,7 @@
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
@@ -1091,7 +1081,7 @@
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -1117,7 +1107,7 @@
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
@@ -1162,7 +1152,7 @@
             :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
           - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
             :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
             :captures:
               '1':
                 :name: entity.name.type.inherited.cpp
@@ -1188,7 +1178,7 @@
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
         - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
           :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))(\\w+)"
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
           :captures:
             '1':
               :name: entity.name.type.inherited.cpp
