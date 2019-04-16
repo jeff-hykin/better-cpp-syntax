@@ -759,7 +759,7 @@ cpp_grammar = Grammar.new(
             match_name: variableBounds[/#{name}/],
             tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
             tag_content_as: "arguments.operator.#{name}",
-            tag_parenthese_as: "operator.#{name} keyword.operator.functionlike keyword.operator.#{name}"
+            tag_parenthese_as: "operator.#{name}"
         ])
     end
     operator_context += [
@@ -768,7 +768,7 @@ cpp_grammar = Grammar.new(
                 match_name: variableBounds[/decltype/],
                 tag_name_as: "keyword.operator.functionlike keyword.other.decltype storage.type.decltype",
                 tag_content_as: "arguments.decltype",
-                tag_parenthese_as: "decltype keyword.operator.functionlike storage.type.decltype"
+                tag_parenthese_as: "decltype"
             ],
             type_casting_operators,
             :method_access,
