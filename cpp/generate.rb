@@ -631,7 +631,7 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.scope-resolution",
         match: preceding_scopes.then(
                 match: variable_name_without_bounds,
-                tag_as: "entity.name.namespace.scope-resolution"
+                tag_as: "entity.name.type.namespace.scope-resolution"
             ).maybe(@spaces).maybe(
                 template_call
             ).then(
