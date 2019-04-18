@@ -89,6 +89,23 @@ cpp_grammar = Grammar.new(
         "#preprocessor-rule-conditional",
         "#hacky_fix_for_stray_directive",
     ]
+    type_context = newPattern(
+        repository_name: :storage_types,
+        includes:  [
+            :primitive_types,
+            :non_primitive_types,
+            :pthread_types,
+            :posix_reserved_types,
+        ]
+        )
+    # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
+    # but for now it just includes everything
+    evaluation_context = [
+        '#cpp_base'
+        # function call
+        # number literal
+        # lambdas
+    ]
 
 #
 #
@@ -261,18 +278,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.unit.user-defined"
             )
         )
-
-#
-# Contexts
-#
-    # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
-    # but for now it just includes everything
-    evaluation_context = [
-        '#cpp_base'
-        # function call
-        # number literal
-        # lambdas
-    ]
+   
 #
 # Variable
 #
@@ -298,33 +304,18 @@ cpp_grammar = Grammar.new(
         )
 
 #
-# Types
+# Built-In Types
 #
     look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]|\.\.\./).maybe(@spaces)
-    # why is posix reserved types not in "storage_types"? I don't know, if you can get it in there and everything still works it would be appreciated
-    posix_reserved_types = newPattern(
-        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        tag_as: "support.type.posix-reserved"
+    primitive_types = newPattern(
+        repository_name: :primitive_types,
+        match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
+        tag_as: "storage.type.primitive"
         )
-    storage_types = newPattern(
-        repository_name: 'storage_types',
-        includes: [
-
-            primitive_types = newPattern(
-                match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
-                tag_as: "storage.type.primitive"
-            ),
-
-            non_primitive_types = newPattern(
-                match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
-                tag_as: "storage.type"
-            ),
-
-            other_types = newPattern(
-                match: variableBounds[ /(asm|__asm__)/ ],
-                tag_as: "storage.type.$match"
-            )
-        ]
+    non_primitive_types = newPattern(
+        repository_name: :non_primitive_types,
+        match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
+        tag_as: "storage.type"
         )
 
 #
@@ -1092,8 +1083,19 @@ cpp_grammar = Grammar.new(
 #
 # Support
 #
-    # TODO: currently this is not used, ideally it will be built up over time and then be included
+    # generally this section is for things that need a #include, (the support category)
     # it will be for things such as cout, cin, vector, string, map, etc
+    pthread_types = newPattern(
+        repository_name: :pthread_types,
+        tag_as: "support.type.posix-reserved.pthread",
+        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
+        )
+    posix_reserved_types = newPattern(
+        repository_name: :posix_reserved_types,
+        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
+        tag_as: "support.type.posix-reserved"
+        )
+    
 
 #
 # Classes, structs, unions, enums
@@ -1238,7 +1240,16 @@ cpp_grammar = Grammar.new(
     )
 
 # 
-# language context
+# Misc Legacy
+# 
+    assembly = newPattern(
+        repository_name: :assembly,
+        match: variableBounds[ /(asm|__asm__)/ ],
+        tag_as: "storage.type.$match"
+        )
+
+# 
+# Language Context
 # 
 newPattern(
     repository_name: :cpp_base,
@@ -1318,7 +1329,8 @@ newPattern(
         "#comments",
         case_statement,
         control_flow_keywords,
-        storage_types,
+        :storage_types,
+        :assembly,
         {
             match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
             name: "storage.modifier"
@@ -1551,19 +1563,6 @@ newPattern(
             ]
         },
         :operators,
-        {
-            match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
-            name: "support.type.sys-types"
-        },
-        {
-            match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
-            name: "support.type.pthread"
-        },
-        {
-            match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
-            name: "support.type.stdint"
-        },
-        posix_reserved_types,
         "#block-c",
         "#parens-c",
         function_definition,
