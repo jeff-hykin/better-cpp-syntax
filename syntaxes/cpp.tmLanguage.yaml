@@ -208,7 +208,7 @@
         - :include: "#template_definition_argument"
         - :include: "#template_argument_defaulted"
         - :include: "#template_call_innards"
-        - :include: "#cpp_base"
+        - :include: "$base"
       '4':
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
   template_definition:
@@ -247,7 +247,7 @@
     - :include: "#template_definition_argument"
     - :include: "#template_argument_defaulted"
     - :include: "#template_call_innards"
-    - :include: "#cpp_base"
+    - :include: "$base"
   template_argument_defaulted:
     :match: "(?<=<|,)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*([=])"
     :captures:
@@ -341,7 +341,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
     :patterns:
-    - :include: "#cpp_base"
+    - :include: "$base"
   alignof_operator:
     :contentName: meta.arguments.operator.alignof
     :begin: "((?<!\\w)alignof(?!\\w))(\\()"
@@ -355,7 +355,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
     :patterns:
-    - :include: "#cpp_base"
+    - :include: "$base"
   alignas_operator:
     :contentName: meta.arguments.operator.alignas
     :begin: "((?<!\\w)alignas(?!\\w))(\\()"
@@ -369,7 +369,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
     :patterns:
-    - :include: "#cpp_base"
+    - :include: "$base"
   typeid_operator:
     :contentName: meta.arguments.operator.typeid
     :begin: "((?<!\\w)typeid(?!\\w))(\\()"
@@ -383,7 +383,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
     :patterns:
-    - :include: "#cpp_base"
+    - :include: "$base"
   decltype_specifier:
     :contentName: meta.arguments.decltype
     :begin: "((?<!\\w)decltype(?!\\w))(\\()"
@@ -397,7 +397,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.decltype.cpp
     :patterns:
-    - :include: "#cpp_base"
+    - :include: "$base"
   operators:
     :patterns:
     - :include: "#sizeof_operator"

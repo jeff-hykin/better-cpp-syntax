@@ -101,7 +101,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     evaluation_context = [
-        '#cpp_base'
+        '$base'
         # function call
         # number literal
         # lambdas
