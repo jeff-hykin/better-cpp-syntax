@@ -807,35 +807,19 @@ c_grammar.addToRepository({
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator.c"
             },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                end: ":",
+            Range.new(
+                start_pattern: newPattern(
+                    match: /\?/,
+                    tag_as: "keyword.operator.ternary",
+                ),
+                end_pattern: newPattern(
+                    match: /:/,
+                    tag_as: "keyword.operator.ternary",
+                ),
                 applyEndPatternLast: true,
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#method_access"
-                    },
-                    {
-                        include: "#member_access"
-                    },
-                    {
-                        include: "#c_function_call"
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            }
+                includes: [ "#function-call-innards" ]
+
+            ).to_tag,
         ]
     },
     "strings" => {

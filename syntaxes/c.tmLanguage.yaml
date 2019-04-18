@@ -475,20 +475,16 @@
       :name: keyword.operator.assignment.c
     - :match: "%|\\*|/|-|\\+"
       :name: keyword.operator.c
-    - :begin: "\\?"
+    - :begin: "(\\?)"
       :beginCaptures:
-        '0':
+        '1':
           :name: keyword.operator.ternary.c
-      :end: ":"
-      :applyEndPatternLast: true
+      :end: "(:)"
       :endCaptures:
-        '0':
+        '1':
           :name: keyword.operator.ternary.c
       :patterns:
-      - :include: "#method_access"
-      - :include: "#member_access"
-      - :include: "#c_function_call"
-      - :include: "$base"
+      - :include: "#function-call-innards"
   strings:
     :patterns:
     - :begin: "\""
