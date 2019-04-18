@@ -23,7 +23,7 @@ cpp_grammar = Grammar.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
         )
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "#cpp_base" ], tail_includes: [ "#cpp_base" ], secondary_includes:[])
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ "$base" ], tail_includes: [ "$base" ], secondary_includes:[])
         lookahead_endings = /[;()>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -268,7 +268,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     evaluation_context = [
-        '#cpp_base'
+        '$base'
         # function call
         # number literal
         # lambdas
@@ -395,7 +395,7 @@ cpp_grammar = Grammar.new(
 #
     # TODO: update this context in the future to be more restrictive
     contional_context = [
-        "#cpp_base"
+        "$base"
     ]
     default_statement = Range.new(
             tag_as: "meta.conditional.case",
@@ -840,7 +840,7 @@ cpp_grammar = Grammar.new(
                         include: "#c_function_call"
                     },
                     {
-                        include: "#cpp_base"
+                        include: "$base"
                     }
                 ]
             }
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
-                includes: [ "#cpp_base" ]
+                includes: [ "$base" ]
             ),
         ]
         )
@@ -1126,7 +1126,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ "#cpp_base" ]
+            head_includes: [ "$base" ]
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1207,7 +1207,7 @@ cpp_grammar = Grammar.new(
                 template_call_range,
                 :comments,
             ],
-            body_includes: [ "#constructor", "#cpp_base"  ],
+            body_includes: [ "#constructor", "$base"  ],
         )
     end
     class_block = generateClassOrStructBlockFinder["class"]
@@ -1222,8 +1222,8 @@ cpp_grammar = Grammar.new(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
             ).lookAheadFor(/\s*\"/),
-        head_includes: [ "#cpp_base" ],
-        secondary_includes: [ "#cpp_base" ]
+        head_includes: [ "$base" ],
+        secondary_includes: [ "$base" ]
         )
 
 #
@@ -1283,7 +1283,7 @@ newPattern(
             },
             patterns: [
                 {
-                    include: "#cpp_base"
+                    include: "$base"
                 }
             ]
         },
@@ -1306,7 +1306,7 @@ newPattern(
             },
             patterns: [
                 {
-                    include: "#cpp_base"
+                    include: "$base"
                 }
             ]
         },
@@ -1632,7 +1632,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function-call"
             },
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
@@ -1675,7 +1675,7 @@ cpp_grammar.addToRepository({
                 name: "meta.function.constructor.initializer-list",
                 patterns: [
                     {
-                        include: "#cpp_base"
+                        include: "$base"
                     }
                 ]
             }
@@ -1851,7 +1851,7 @@ cpp_grammar.addToRepository({
                 include: "#parens-block-c"
             },
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
@@ -1968,7 +1968,7 @@ cpp_grammar.addToRepository({
         },
         patterns: [
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
@@ -2167,7 +2167,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#cpp_base"
+                        include: "$base"
                     }
                 ]
             },
@@ -2393,7 +2393,7 @@ cpp_grammar.addToRepository({
                                 ]
                             },
                             {
-                                include: "#cpp_base"
+                                include: "$base"
                             }
                         ]
                     },
@@ -2651,7 +2651,7 @@ cpp_grammar.addToRepository({
                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                         patterns: [
                             {
-                                include: "#cpp_base"
+                                include: "$base"
                             }
                         ]
                     }
@@ -2842,7 +2842,7 @@ cpp_grammar.addToRepository({
                         ]
                     },
                     {
-                        include: "#cpp_base"
+                        include: "$base"
                     }
                 ]
             }
@@ -2951,7 +2951,7 @@ cpp_grammar.addToRepository({
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
@@ -3078,7 +3078,7 @@ cpp_grammar.addToRepository({
                 include: "#member_access"
             },
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
@@ -3238,7 +3238,7 @@ cpp_grammar.addToRepository({
                 ]
             },
             {
-                include: "#cpp_base"
+                include: "$base"
             }
         ]
     },
