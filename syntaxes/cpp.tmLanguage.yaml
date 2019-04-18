@@ -8,6 +8,12 @@
 :patterns:
 - :include: "#cpp_base"
 :repository:
+  :storage_types:
+    :patterns:
+    - :include: "#primitive_types"
+    - :include: "#non_primitive_types"
+    - :include: "#pthread_types"
+    - :include: "#posix_reserved_types"
   literal_numeric_seperator:
     :match: "(?<!')'(?!')"
     :name: punctuation.separator.constant.numeric.cpp
@@ -123,14 +129,12 @@
   constants:
     :match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     :name: constant.language.cpp
-  storage_types:
-    :patterns:
-    - :match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
-      :name: storage.type.primitive.cpp
-    - :match: "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)"
-      :name: storage.type.cpp
-    - :match: "(?<!\\w)(asm|__asm__)(?!\\w)"
-      :name: storage.type.$0.cpp
+  :primitive_types:
+    :match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
+    :name: storage.type.primitive.cpp
+  :non_primitive_types:
+    :match: "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)"
+    :name: storage.type.cpp
   memory_operators:
     :match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
     :captures:
@@ -204,7 +208,7 @@
         - :include: "#template_definition_argument"
         - :include: "#template_argument_defaulted"
         - :include: "#template_call_innards"
-        - :include: "$base"
+        - :include: "#cpp_base"
       '4':
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
   template_definition:
@@ -243,7 +247,7 @@
     - :include: "#template_definition_argument"
     - :include: "#template_argument_defaulted"
     - :include: "#template_call_innards"
-    - :include: "$base"
+    - :include: "#cpp_base"
   template_argument_defaulted:
     :match: "(?<=<|,)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*([=])"
     :captures:
@@ -337,7 +341,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#cpp_base"
   alignof_operator:
     :contentName: meta.arguments.operator.alignof
     :begin: "((?<!\\w)alignof(?!\\w))(\\()"
@@ -351,7 +355,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#cpp_base"
   alignas_operator:
     :contentName: meta.arguments.operator.alignas
     :begin: "((?<!\\w)alignas(?!\\w))(\\()"
@@ -365,7 +369,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#cpp_base"
   typeid_operator:
     :contentName: meta.arguments.operator.typeid
     :begin: "((?<!\\w)typeid(?!\\w))(\\()"
@@ -379,7 +383,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#cpp_base"
   decltype_specifier:
     :contentName: meta.arguments.decltype
     :begin: "((?<!\\w)decltype(?!\\w))(\\()"
@@ -393,7 +397,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.decltype.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#cpp_base"
   operators:
     :patterns:
     - :include: "#sizeof_operator"
@@ -470,7 +474,7 @@
     - :include: "#probably_a_parameter"
     - :include: "#function-innards-c"
   member_access:
-    :match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|pthread_attr_t[^(?-mix:\\w)]|pthread_cond_t[^(?-mix:\\w)]|pthread_condattr_t[^(?-mix:\\w)]|pthread_mutex_t[^(?-mix:\\w)]|pthread_mutexattr_t[^(?-mix:\\w)]|pthread_once_t[^(?-mix:\\w)]|pthread_rwlock_t[^(?-mix:\\w)]|pthread_rwlockattr_t[^(?-mix:\\w)]|pthread_t[^(?-mix:\\w)]|pthread_key_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
+    :match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
     :captures:
       '1':
         :name: variable.language.this.cpp
@@ -581,9 +585,18 @@
           :name: punctuation.section.block.end.bracket.curly.lambda.cpp
       :patterns:
       - :include: "$base"
+  :pthread_types:
+    :match: "(?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)"
+    :name: support.type.posix-reserved.pthread.cpp
+  :posix_reserved_types:
+    :match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
+    :name: support.type.posix-reserved.cpp
   :hacky_fix_for_stray_directive:
     :match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     :name: keyword.control.directive.$0.cpp
+  :assembly:
+    :match: "(?<!\\w)(asm|__asm__)(?!\\w)"
+    :name: storage.type.$0.cpp
   :cpp_base:
     :patterns:
     - :include: "#parameter_struct"
@@ -673,6 +686,7 @@
     - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
       :name: keyword.control.$0.cpp
     - :include: "#storage_types"
+    - :include: "#assembly"
     - :match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b"
       :name: storage.modifier.cpp
     - :include: "#operator_overload"
@@ -806,25 +820,10 @@
       - :include: "#number_literal"
       - :include: "#line_continuation_character"
     - :include: "#operators"
-    - :match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b"
-      :name: support.type.sys-types.cpp
-    - :match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b"
-      :name: support.type.pthread.cpp
-    - :match: |-
-        (?x) \b
-        (int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t
-        |int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t
-        |uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t
-        |uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t
-        |uintmax_t|uintmax_t)
-        \b
-      :name: support.type.stdint.cpp
-    - :match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
-      :name: support.type.posix-reserved.cpp
     - :include: "#block-c"
     - :include: "#parens-c"
     - :name: meta.function.definition.parameters.cpp
-      :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
+      :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
       :end: "(?<=\\))"
       :patterns:
       - :include: "#parameter_struct"
@@ -2181,7 +2180,7 @@
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
       - :include: "#function-call-innards-c"
-    - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(\\()"
+    - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(\\()"
       :beginCaptures:
         '1':
           :patterns:
