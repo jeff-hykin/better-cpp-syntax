@@ -385,7 +385,7 @@ cpp_grammar = Grammar.new(
 # Control flow
 #
     # TODO: update this context in the future to be more restrictive
-    contional_context = [
+    conditional_context = [
         "$base"
     ]
     default_statement = Range.new(
@@ -398,7 +398,7 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case.default"
             ),
-            includes: contional_context
+            includes: conditional_context
         )
     case_statement = Range.new(
             tag_as: "meta.conditional.case",
@@ -410,7 +410,25 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case"
             ),
-            includes: contional_context
+            includes: conditional_context
+        )
+    switch_statement = blockFinderFor(
+            name: "switch",
+            tag_as: "meta.block.switch",
+            start_pattern: newPattern(
+                match: newPattern(
+                    match: /switch/,
+                    tag_as: "keyword.control.switch"
+                ).maybe(@spaces).then(/\(/).then(/.*/).then(/\)/),
+                tag_as: "meta.conditional.switch"
+            ),
+            head_includes: ["$base"],
+            body_includes: [
+                default_statement,
+                case_statement,
+                "$base",
+            ],
+            needs_semicolon: false,
         )
 #
 # C++ Attributes
@@ -1095,7 +1113,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
         tag_as: "support.type.posix-reserved"
         )
-    
+
 
 #
 # Classes, structs, unions, enums
@@ -1239,18 +1257,18 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.directive.$match"
     )
 
-# 
+#
 # Misc Legacy
-# 
+#
     assembly = newPattern(
         repository_name: :assembly,
         match: variableBounds[ /(asm|__asm__)/ ],
         tag_as: "storage.type.$match"
         )
 
-# 
+#
 # Language Context
-# 
+#
 newPattern(
     repository_name: :cpp_base,
     includes: [
@@ -1327,7 +1345,7 @@ newPattern(
         #
         *preprocessor_context,
         "#comments",
-        case_statement,
+        switch_statement,
         control_flow_keywords,
         :storage_types,
         :assembly,
