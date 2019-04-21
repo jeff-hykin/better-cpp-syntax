@@ -700,7 +700,7 @@ c_grammar.addToRepository({
         ]
     },
     "parens" => {
-        name: "punctuation.section.parens",
+        name: "meta.section.parens",
         begin: "\\(",
         beginCaptures: {
             "0" => {
@@ -720,7 +720,7 @@ c_grammar.addToRepository({
         ]
     },
     "parens-block" => {
-        name: "punctuation.section.parens.block",
+        name: "meta.section.parens.block",
         begin: "\\(",
         beginCaptures: {
             "0" => {
