@@ -1244,7 +1244,7 @@ cpp_grammar = Grammar.new(
 # 
 # Language Context
 # 
-cpp_grammar[:$initial_context] = [
+    cpp_grammar[:$initial_context] = [
         :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
         :struct_declare,
         :special_block,
@@ -1591,40 +1591,42 @@ cpp_grammar[:$initial_context] = [
             name: "comma punctuation.separator.delimiter"
         }
     ]
-cpp_grammar.addToRepository({
-    "block" => {
-        begin: "\\{",
-        beginCaptures: {
-            "0" => {
-                name: "punctuation.section.block.begin.bracket.curly"
-            }
-        },
-        end: "\\}",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.block.end.bracket.curly"
-            }
-        },
-        name: "meta.block",
-        patterns: [
-            {
-                captures: {
-                    "1" => {
-                        name: "support.function.any-method"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.parameters"
-                    }
-                },
-                match: "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
-                name: "meta.function-call"
+# 
+# Legacy Entries
+# 
+    cpp_grammar[:block] = {
+            begin: "\\{",
+            beginCaptures: {
+                "0" => {
+                    name: "punctuation.section.block.begin.bracket.curly"
+                }
             },
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "constructor" => {
+            end: "\\}",
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.section.block.end.bracket.curly"
+                }
+            },
+            name: "meta.block",
+            patterns: [
+                {
+                    captures: {
+                        "1" => {
+                            name: "support.function.any-method"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.parameters"
+                        }
+                    },
+                    match: "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
+                    name: "meta.function-call"
+                },
+                {
+                    include: "$base"
+                }
+            ]
+        }
+    cpp_grammar[:'constructor'] = {
         patterns: [
             {
                 begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
@@ -1669,7 +1671,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "special_block" => {
+    cpp_grammar[:'special_block'] = {
         patterns: [
             attributes.to_tag,
             using_namespace.to_tag,
@@ -1682,7 +1684,7 @@ cpp_grammar.addToRepository({
         ]
     },
     # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
-    "strings" => {
+    cpp_grammar[:'strings'] = {
         patterns: [
             {
                 begin: "(u|u8|U|L)?\"",
@@ -1749,7 +1751,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "block-c" => {
+    cpp_grammar[:'block-c'] = {
         patterns: [
             {
                 begin: "{",
@@ -1773,7 +1775,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "block_innards-c" => {
+    cpp_grammar[:'block_innards-c'] = {
         patterns: [
             {
                 include: "#preprocessor-rule-enabled-block"
@@ -1843,7 +1845,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "c_function_call" => {
+    cpp_grammar[:'c_function_call'] = {
         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
@@ -1853,7 +1855,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "comments" => {
+    cpp_grammar[:'comments'] = {
         patterns: [
             {
                 captures: {
@@ -1916,7 +1918,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "disabled" => {
+    cpp_grammar[:'disabled'] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
         patterns: [
@@ -1928,7 +1930,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "line_continuation_character" => {
+    cpp_grammar[:'line_continuation_character'] = {
         patterns: [
             {
                 match: "(\\\\)\\n",
@@ -1940,7 +1942,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "parens-c" => {
+    cpp_grammar[:'parens-c'] = {
         name: "punctuation.section.parens-c",
         begin: "\\(",
         beginCaptures: {
@@ -1960,7 +1962,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "parens-block-c" => {
+    cpp_grammar[:'parens-block-c'] = {
         name: "meta.block.parens",
         begin: "\\(",
         beginCaptures: {
@@ -1984,7 +1986,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "pragma-mark" => {
+    cpp_grammar[:'pragma-mark'] = {
         captures: {
             "1" => {
                 name: "meta.preprocessor.pragma"
@@ -2002,7 +2004,7 @@ cpp_grammar.addToRepository({
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
     },
-    "strings_c" => {
+    cpp_grammar[:'strings_c'] = {
         patterns: [
             {
                 begin: "\"",
@@ -2055,7 +2057,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "string_escaped_char-c" => {
+    cpp_grammar[:'string_escaped_char-c'] = {
         patterns: [
             {
                 match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
@@ -2067,7 +2069,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "string_placeholder-c" => {
+    cpp_grammar[:'string_placeholder-c'] = {
         patterns: [
             {
                 match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
@@ -2085,11 +2087,11 @@ cpp_grammar.addToRepository({
             # }
         ]
     },
-    "vararg_ellipses" => {
+    cpp_grammar[:'vararg_ellipses'] = {
         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
         name: "punctuation.vararg-ellipses"
     },
-    "preprocessor-rule-conditional" => {
+    cpp_grammar[:'preprocessor-rule-conditional'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
@@ -2161,7 +2163,7 @@ cpp_grammar.addToRepository({
             },
         ]
     },
-    "preprocessor-rule-conditional-block" => {
+    cpp_grammar[:'preprocessor-rule-conditional-block'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
@@ -2233,7 +2235,7 @@ cpp_grammar.addToRepository({
             },
         ]
     },
-    "preprocessor-rule-conditional-line" => {
+    cpp_grammar[:'preprocessor-rule-conditional-line'] = {
         patterns: [
             {
                 match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
@@ -2305,7 +2307,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-disabled" => {
+    cpp_grammar[:'preprocessor-rule-disabled'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2402,7 +2404,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-disabled-block" => {
+    cpp_grammar[:'preprocessor-rule-disabled-block'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2499,7 +2501,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-disabled-elif" => {
+    cpp_grammar[:'preprocessor-rule-disabled-elif'] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2542,7 +2544,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled" => {
+    cpp_grammar[:'preprocessor-rule-enabled'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2647,7 +2649,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled-block" => {
+    cpp_grammar[:'preprocessor-rule-enabled-block'] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2749,7 +2751,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled-elif" => {
+    cpp_grammar[:'preprocessor-rule-enabled-elif'] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2836,7 +2838,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled-elif-block" => {
+    cpp_grammar[:'preprocessor-rule-enabled-elif-block'] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2923,7 +2925,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled-else" => {
+    cpp_grammar[:'preprocessor-rule-enabled-else'] = {
         begin: "^\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
@@ -2943,7 +2945,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-enabled-else-block" => {
+    cpp_grammar[:'preprocessor-rule-enabled-else-block'] = {
         begin: "^\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
@@ -2963,7 +2965,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-define-line-contents" => {
+    cpp_grammar[:'preprocessor-rule-define-line-contents'] = {
         patterns: [
             {
                 include: "#vararg_ellipses"
@@ -3070,7 +3072,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-define-line-blocks" => {
+    cpp_grammar[:'preprocessor-rule-define-line-blocks'] = {
         patterns: [
             {
                 begin: "{",
@@ -3099,7 +3101,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "preprocessor-rule-define-line-functions" => {
+    cpp_grammar[:'preprocessor-rule-define-line-functions'] = {
         patterns: [
             {
                 include: "#comments"
@@ -3165,7 +3167,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "function-innards-c" => {
+    cpp_grammar[:'function-innards-c'] = {
         patterns: [
             attributes.to_tag,
             {
@@ -3230,7 +3232,7 @@ cpp_grammar.addToRepository({
             }
         ]
     },
-    "function-call-innards-c" => {
+    cpp_grammar[:'function-call-innards-c'] = {
         patterns: [
             attributes.to_tag,
             {
@@ -3302,7 +3304,6 @@ cpp_grammar.addToRepository({
             }
         ]
     }
-})
 
 
 Dir.chdir __dir__
