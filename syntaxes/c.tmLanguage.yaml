@@ -11,7 +11,7 @@
 - include: "#preprocessor-rule-conditional"
 - include: "#comments"
 - include: "#switch_statement"
-- match: "\\b(break|continue|default|do|else|for|goto|if|_Pragma|return|while)\\b"
+- match: "\\b(break|continue|do|else|for|goto|if|_Pragma|return|while)\\b"
   name: keyword.control.c
 - include: "#storage_types"
 - match: typedef
@@ -1152,7 +1152,7 @@
       - include: "#function-call-innards"
     - include: "#block_innards"
   default_statement:
-    name: meta.conditional.case.cpp.c
+    name: meta.conditional.case.c
     begin: "((?<!\\w)default(?!\\w))"
     beginCaptures:
       '1':
@@ -1164,7 +1164,7 @@
     patterns:
     - include: "#conditional_context"
   case_statement:
-    name: meta.conditional.case.cpp.c
+    name: meta.conditional.case.c
     begin: "((?<!\\w)case(?!\\w))"
     beginCaptures:
       '1':
@@ -1176,7 +1176,7 @@
     patterns:
     - include: "#conditional_context"
   switch_statement:
-    name: meta.block.switch.cpp.c
+    name: meta.block.switch.c
     begin: "(((?<!\\w)switch(?!\\w)))"
     beginCaptures:
       '1':
@@ -1211,7 +1211,7 @@
       patterns:
       - include: "$base"
   switch_conditional_parentheses:
-    name: meta.conditional.switch.cpp.c
+    name: meta.conditional.switch.c
     begin: "(\\()"
     beginCaptures:
       '1':

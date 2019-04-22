@@ -233,40 +233,6 @@ class Grammar
         end
     end
     
-    def addLanguageEndings(data)
-        if data.is_a? Array 
-            for each in data
-                addLanguageEndings(each)
-            end
-        elsif data.is_a? Hash
-            for each in data
-                key = each[0]
-                value = each[1]
-                
-                if value == nil
-                    next
-                elsif value.is_a? Array
-                    for each_sub_hash in value
-                        addLanguageEndings(each_sub_hash)
-                    end
-                elsif value.is_a? Hash
-                    addLanguageEndings(value)
-                elsif key.to_s == "name"
-                    new_names = []
-                    for each in value.split(/\s/)
-                        each_with_ending = each
-                        # if it doesnt already have the ending then add it
-                        if not (each_with_ending =~ /#{@language_ending}\z/)
-                            each_with_ending += ".#{@language_ending}"
-                        end
-                        new_names << each_with_ending
-                    end
-                    data[key] = new_names.join(' ')
-                end
-            end
-        end
-    end
-    
     #
     # External Helpers
     #
@@ -309,13 +275,14 @@ class Grammar
         # Convert all the repository entries
         #
         for each_name in repository_copy.keys
-            repository_copy[each_name] = Grammar.toTag(repository_copy[each_name], ignore_repository_entry: true)
+            repository_copy[each_name] = Grammar.toTag(repository_copy[each_name], ignore_repository_entry: true).dup
         end
         textmate_output[:repository] = repository_copy
         
         # 
         # Add the language endings
         # 
+        
         post_processing = ->(each_pattern) do
             for each_key in each_pattern.dup.keys
                 #
