@@ -84,9 +84,9 @@ cpp_grammar = Grammar.new(
 #
 #
     preprocessor_context = [
-        "#preprocessor-rule-enabled",
-        "#preprocessor-rule-disabled",
-        "#preprocessor-rule-conditional",
+        "#preprocessor_rule_enabled",
+        "#preprocessor_rule_disabled",
+        "#preprocessor_rule_conditional",
         "#hacky_fix_for_stray_directive",
     ]
     cpp_grammar[:storage_types] = [
@@ -710,7 +710,7 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
-        includes: [ parameter_struct, "#function-innards-c" ]
+        includes: [ parameter_struct, "#function_innards_c" ]
         )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     function_call = Range.new(
@@ -729,7 +729,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round"
             ),
-        includes: [ "#function-call-innards-c" ]
+        includes: [ "#functioncall_innards_c" ]
         )
 #
 # Operators
@@ -876,7 +876,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
-        includes: [:probably_a_parameter, :'function-innards-c' ]
+        includes: [:probably_a_parameter, :'function_innards_c' ]
         )
 
 #
@@ -945,7 +945,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
-        includes: ["#function-call-innards-c"],
+        includes: ["#functioncall_innards_c"],
         )
 #
 # Namespace
@@ -1021,7 +1021,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ probably_a_parameter, "#function-innards-c" ],
+                        includes: [ probably_a_parameter, "#function_innards_c" ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1042,7 +1042,7 @@ cpp_grammar = Grammar.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
-                includes: [ probably_a_parameter, "#function-innards-c" ]
+                includes: [ probably_a_parameter, "#function_innards_c" ]
             ),
             # specificers
             newPattern(
@@ -1358,7 +1358,7 @@ cpp_grammar = Grammar.new(
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
             patterns: [
                 {
-                    include: "#preprocessor-rule-define-line-contents"
+                    include: "#preprocessor_rule_define_line_contents"
                 }
             ]
         },
@@ -1478,7 +1478,7 @@ cpp_grammar = Grammar.new(
                 }
             ]
         },
-        "#pragma-mark",
+        "#pragma_mark",
         {
             name: "meta.preprocessor",
             begin: "^\\s*((#)\\s*line)\\b",
@@ -1577,7 +1577,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function-call-innards-c"
+                    include: "#functioncall_innards_c"
                 }
             ]
         },
@@ -1618,7 +1618,7 @@ cpp_grammar = Grammar.new(
                         include: "#probably_a_parameter"
                     },
                     {
-                        include: "#function-innards-c"
+                        include: "#function_innards_c"
                     }
                 ]
             },
@@ -1638,7 +1638,7 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
+        }
     cpp_grammar[:special_block] = {
         patterns: [
             attributes.to_tag,
@@ -1650,7 +1650,7 @@ cpp_grammar = Grammar.new(
             enum_block.to_tag,
             extern_block.to_tag,
         ]
-    }
+        }
     # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
     cpp_grammar[:strings] = {
         patterns: [
@@ -1689,7 +1689,7 @@ cpp_grammar = Grammar.new(
                         name: "constant.character.escape"
                     },
                     {
-                        include: "#string_placeholder-c"
+                        include: "#string_placeholder_c"
                     }
                 ]
             },
@@ -1718,7 +1718,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double.raw"
             }
         ]
-    }
+        }
     cpp_grammar[:block] = {
         patterns: [
             {
@@ -1742,11 +1742,11 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
+        }
     cpp_grammar[:block_context] = [
-        "#preprocessor-rule-enabled-block",
-        "#preprocessor-rule-disabled-block",
-        "#preprocessor-rule-conditional-block",
+        "#preprocessor_rule_enabled_block",
+        "#preprocessor_rule_disabled_block",
+        "#preprocessor_rule_conditional_block",
         "#method_access",
         "#member_access",
         "#c_function_call",
@@ -1769,7 +1769,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function-call-innards-c"
+                    include: "#functioncall_innards_c"
                 }
             ]
         },
@@ -1792,19 +1792,19 @@ cpp_grammar = Grammar.new(
                 }
             ]
         },
-        "#parens-block-c",
+        "#parentheses_block",
         "$base"
-    ]
+        ]
     cpp_grammar[:c_function_call] = {
         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
         patterns: [
             {
-                include: "#function-call-innards-c"
+                include: "#functioncall_innards_c"
             }
         ]
-    }
+        }
     cpp_grammar[:comments] = {
         patterns: [
             {
@@ -1867,7 +1867,7 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
+        }
     cpp_grammar[:disabled] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
@@ -1876,10 +1876,10 @@ cpp_grammar = Grammar.new(
                 include: "#disabled"
             },
             {
-                include: "#pragma-mark"
+                include: "#pragma_mark"
             }
         ]
-    }
+        }
     cpp_grammar[:line_continuation_character] = {
         patterns: [
             {
@@ -1891,8 +1891,8 @@ cpp_grammar = Grammar.new(
                 }
             }
         ]
-    }
-    cpp_grammar[:'parentheses'] = {
+        }
+    cpp_grammar[:parentheses] = {
         name: "punctuation.section.parens-c",
         begin: "\\(",
         beginCaptures: {
@@ -1911,8 +1911,8 @@ cpp_grammar = Grammar.new(
                 include: "$base"
             }
         ]
-    }
-    cpp_grammar[:'parens-block-c'] = {
+        }
+    cpp_grammar[:parentheses_block] = {
         name: "meta.block.parens",
         begin: "\\(",
         beginCaptures: {
@@ -1935,8 +1935,8 @@ cpp_grammar = Grammar.new(
                 name: "colon punctuation.separator.range-based"
             }
         ]
-    }
-    cpp_grammar[:'pragma-mark'] = {
+        }
+    cpp_grammar[:pragma_mark] = {
         captures: {
             "1" => {
                 name: "meta.preprocessor.pragma"
@@ -1953,7 +1953,7 @@ cpp_grammar = Grammar.new(
         },
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
-    }
+        }
     cpp_grammar[:strings_c] = {
         patterns: [
             {
@@ -1972,10 +1972,10 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double",
                 patterns: [
                     {
-                        include: "#string_escaped_char-c"
+                        include: "#string_escaped_char_c"
                     },
                     {
-                        include: "#string_placeholder-c"
+                        include: "#string_placeholder_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -1998,7 +1998,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.single",
                 patterns: [
                     {
-                        include: "#string_escaped_char-c"
+                        include: "#string_escaped_char_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -2006,8 +2006,8 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
-    cpp_grammar[:'string_escaped_char-c'] = {
+        }
+    cpp_grammar[:string_escaped_char_c] = {
         patterns: [
             {
                 match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
@@ -2018,8 +2018,8 @@ cpp_grammar = Grammar.new(
                 name: "invalid.illegal.unknown-escape"
             }
         ]
-    }
-    cpp_grammar[:'string_placeholder-c'] = {
+        }
+    cpp_grammar[:string_placeholder_c] = {
         patterns: [
             {
                 match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
@@ -2036,12 +2036,12 @@ cpp_grammar = Grammar.new(
             #     }
             # }
         ]
-    }
+        }
     cpp_grammar[:vararg_ellipses] = {
         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
         name: "punctuation.vararg-ellipses"
-    }
-    cpp_grammar[:'preprocessor-rule-conditional'] = {
+        }
+    cpp_grammar[:preprocessor_rule_conditional] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
@@ -2075,18 +2075,18 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
                     {
-                        include: "#preprocessor-rule-enabled-elif"
+                        include: "#preprocessor_rule_enabled_elif"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-else"
+                        include: "#preprocessor_rule_enabled_else"
                     },
                     {
-                        include: "#preprocessor-rule-disabled-elif"
+                        include: "#preprocessor_rule_disabled_elif"
                     },
                     {
                         begin: "^\\s*((#)\\s*elif\\b)",
@@ -2102,7 +2102,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2112,8 +2112,8 @@ cpp_grammar = Grammar.new(
                 ]
             },
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-conditional-block'] = {
+        }
+    cpp_grammar[:preprocessor_rule_conditional_block] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
@@ -2147,18 +2147,18 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
                     {
-                        include: "#preprocessor-rule-enabled-elif-block"
+                        include: "#preprocessor_rule_enabled_elif_block"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-else-block"
+                        include: "#preprocessor_rule_enabled_else_block"
                     },
                     {
-                        include: "#preprocessor-rule-disabled-elif"
+                        include: "#preprocessor_rule_disabled_elif"
                     },
                     {
                         begin: "^\\s*((#)\\s*elif\\b)",
@@ -2174,7 +2174,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2184,8 +2184,8 @@ cpp_grammar = Grammar.new(
                 ]
             },
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-conditional-line'] = {
+        }
+    cpp_grammar[:preprocessor_rule_conditional_line] = {
         patterns: [
             {
                 match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
@@ -2219,7 +2219,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor-rule-conditional-line"
+                        include: "#preprocessor_rule_conditional_line"
                     }
                 ]
             },
@@ -2251,13 +2251,13 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor-rule-conditional-line"
+                        include: "#preprocessor_rule_conditional_line"
                     }
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-disabled'] = {
+        }
+    cpp_grammar[:preprocessor_rule_disabled] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2291,7 +2291,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2299,13 +2299,13 @@ cpp_grammar = Grammar.new(
                         include: "#comments"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-elif"
+                        include: "#preprocessor_rule_enabled_elif"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-else"
+                        include: "#preprocessor_rule_enabled_else"
                     },
                     {
-                        include: "#preprocessor-rule-disabled-elif"
+                        include: "#preprocessor_rule_disabled_elif"
                     },
                     {
                         begin: "^\\s*((#)\\s*elif\\b)",
@@ -2328,7 +2328,7 @@ cpp_grammar = Grammar.new(
                                 name: "meta.preprocessor",
                                 patterns: [
                                     {
-                                        include: "#preprocessor-rule-conditional-line"
+                                        include: "#preprocessor_rule_conditional_line"
                                     }
                                 ]
                             },
@@ -2346,15 +2346,15 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     }
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-disabled-block'] = {
+        }
+    cpp_grammar[:preprocessor_rule_disabled_block] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2388,7 +2388,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2396,13 +2396,13 @@ cpp_grammar = Grammar.new(
                         include: "#comments"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-elif-block"
+                        include: "#preprocessor_rule_enabled_elif_block"
                     },
                     {
-                        include: "#preprocessor-rule-enabled-else-block"
+                        include: "#preprocessor_rule_enabled_else_block"
                     },
                     {
-                        include: "#preprocessor-rule-disabled-elif"
+                        include: "#preprocessor_rule_disabled_elif"
                     },
                     {
                         begin: "^\\s*((#)\\s*elif\\b)",
@@ -2425,7 +2425,7 @@ cpp_grammar = Grammar.new(
                                 name: "meta.preprocessor",
                                 patterns: [
                                     {
-                                        include: "#preprocessor-rule-conditional-line"
+                                        include: "#preprocessor_rule_conditional_line"
                                     }
                                 ]
                             },
@@ -2443,15 +2443,15 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     }
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-disabled-elif'] = {
+        }
+    cpp_grammar[:preprocessor_rule_disabled_elif] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2472,7 +2472,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor-rule-conditional-line"
+                        include: "#preprocessor_rule_conditional_line"
                     }
                 ]
             },
@@ -2488,13 +2488,13 @@ cpp_grammar = Grammar.new(
                         include: "#disabled"
                     },
                     {
-                        include: "#pragma-mark"
+                        include: "#pragma_mark"
                     }
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2531,7 +2531,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2558,7 +2558,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2582,7 +2582,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2598,8 +2598,8 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled-block'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled_block] = {
         patterns: [
             {
                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2633,7 +2633,7 @@ cpp_grammar = Grammar.new(
                         name: "meta.preprocessor",
                         patterns: [
                             {
-                                include: "#preprocessor-rule-conditional-line"
+                                include: "#preprocessor_rule_conditional_line"
                             }
                         ]
                     },
@@ -2660,7 +2660,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2684,7 +2684,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2700,8 +2700,8 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled-elif'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled_elif] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2722,7 +2722,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor-rule-conditional-line"
+                        include: "#preprocessor_rule_conditional_line"
                     }
                 ]
             },
@@ -2753,7 +2753,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2777,7 +2777,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2787,8 +2787,8 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled-elif-block'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled_elif_block] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
         beginCaptures: {
             "0" => {
@@ -2809,7 +2809,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor-rule-conditional-line"
+                        include: "#preprocessor_rule_conditional_line"
                     }
                 ]
             },
@@ -2840,7 +2840,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2864,7 +2864,7 @@ cpp_grammar = Grammar.new(
                                 include: "#disabled"
                             },
                             {
-                                include: "#pragma-mark"
+                                include: "#pragma_mark"
                             }
                         ]
                     },
@@ -2874,8 +2874,8 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled-else'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled_else] = {
         begin: "^\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
@@ -2894,8 +2894,8 @@ cpp_grammar = Grammar.new(
                 include: "$base"
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-enabled-else-block'] = {
+        }
+    cpp_grammar[:preprocessor_rule_enabled_else_block] = {
         begin: "^\\s*((#)\\s*else\\b)",
         beginCaptures: {
             "0" => {
@@ -2914,8 +2914,8 @@ cpp_grammar = Grammar.new(
                 include: "#block_context"
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-define-line-contents'] = {
+        }
+    cpp_grammar[:preprocessor_rule_define_line_contents] = {
         patterns: [
             {
                 include: "#vararg_ellipses"
@@ -2940,7 +2940,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.block",
                 patterns: [
                     {
-                        include: "#preprocessor-rule-define-line-blocks"
+                        include: "#preprocessor_rule_define_line_blocks"
                     }
                 ]
             },
@@ -2958,7 +2958,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function",
                 patterns: [
                     {
-                        include: "#preprocessor-rule-define-line-functions"
+                        include: "#preprocessor_rule_define_line_functions"
                     }
                 ]
             },
@@ -2978,10 +2978,10 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double",
                 patterns: [
                     {
-                        include: "#string_escaped_char-c"
+                        include: "#string_escaped_char_c"
                     },
                     {
-                        include: "#string_placeholder-c"
+                        include: "#string_placeholder_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -3004,7 +3004,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.single",
                 patterns: [
                     {
-                        include: "#string_escaped_char-c"
+                        include: "#string_escaped_char_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -3021,8 +3021,8 @@ cpp_grammar = Grammar.new(
                 include: "$base"
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-define-line-blocks'] = {
+        }
+    cpp_grammar[:preprocessor_rule_define_line_blocks] = {
         patterns: [
             {
                 begin: "{",
@@ -3039,19 +3039,19 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor-rule-define-line-blocks"
+                        include: "#preprocessor_rule_define_line_blocks"
                     },
                     {
-                        include: "#preprocessor-rule-define-line-contents"
+                        include: "#preprocessor_rule_define_line_contents"
                     }
                 ]
             },
             {
-                include: "#preprocessor-rule-define-line-contents"
+                include: "#preprocessor_rule_define_line_contents"
             }
         ]
-    }
-    cpp_grammar[:'preprocessor-rule-define-line-functions'] = {
+        }
+    cpp_grammar[:preprocessor_rule_define_line_functions] = {
         patterns: [
             {
                 include: "#comments"
@@ -3089,7 +3089,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor-rule-define-line-functions"
+                        include: "#preprocessor_rule_define_line_functions"
                     }
                 ]
             },
@@ -3108,16 +3108,16 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor-rule-define-line-functions"
+                        include: "#preprocessor_rule_define_line_functions"
                     }
                 ]
             },
             {
-                include: "#preprocessor-rule-define-line-contents"
+                include: "#preprocessor_rule_define_line_contents"
             }
         ]
-    }
-    cpp_grammar[:'function-innards-c'] = {
+        }
+    cpp_grammar[:function_innards_c] = {
         patterns: [
             attributes.to_tag,
             {
@@ -3154,7 +3154,7 @@ cpp_grammar = Grammar.new(
                         include: "#probably_a_parameter"
                     },
                     {
-                        include: "#function-innards-c"
+                        include: "#function_innards_c"
                     }
                 ]
             },
@@ -3173,7 +3173,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#function-innards-c"
+                        include: "#function_innards_c"
                     }
                 ]
             },
@@ -3181,8 +3181,8 @@ cpp_grammar = Grammar.new(
                 include: "$base"
             }
         ]
-    }
-    cpp_grammar[:'function-call-innards-c'] = {
+        }
+    cpp_grammar[:functioncall_innards_c] = {
         patterns: [
             attributes.to_tag,
             {
@@ -3225,7 +3225,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#function-call-innards-c"
+                        include: "#functioncall_innards_c"
                     }
                 ]
             },
@@ -3245,7 +3245,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#function-call-innards-c"
+                        include: "#functioncall_innards_c"
                     }
                 ]
             },
@@ -3253,7 +3253,7 @@ cpp_grammar = Grammar.new(
                 include: "#block_context"
             }
         ]
-    }
+        }
 
 
 Dir.chdir __dir__
