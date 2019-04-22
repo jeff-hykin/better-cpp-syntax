@@ -3,9 +3,14 @@ require 'yaml'
 
 # design upgrades
     # create Context class
+    # add a way for sharing data
+        # save the objects, dont immediatly convert
+            # change the way things add themselves to the repository
+        # make a method for setting the initial context :$initial_context
+            # add a replacement in the convert includes method
+        # TODO: convert all repository_name's into symbols (and only allow symbols)
     # make Range, Pattern, and Context a sub-class of Grammar
     # make patterns be able to take symbols as input and retrieve the pattern with that repository_name
-    # make a method for setting the initial context :$initial_context
     # make includes be able to handle :$base and :$self
     # have the export method replace the "$base" or "$self"
     # create greedy modifiers like Fewest()
@@ -33,6 +38,7 @@ require 'yaml'
             # that( not() )
 
 # TODO
+    # add a check that doesnt allow $ in non-special repository names
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
     # add method to append something to all tag names (add an extension: "blah" argument to "to_tag")
@@ -99,7 +105,6 @@ class Grammar
         end
         return regex_as_string
     end
-    
     
     def self.makeSureAGrammarExists
         if @@current_grammar == nil
@@ -263,8 +268,12 @@ class Grammar
     #
     # External Helpers
     #
-    def initalContextIncludes(*arguments)
-        @data[:patterns] += Grammar.convertIncludesToPatternList(arguments)
+    def [](key)
+        return @data[:repository][key]
+    end
+    
+    def []=(key, value)
+        return @data[:repository][key] = value
     end
     
     def addToRepository(hash_of_repos)
@@ -272,17 +281,37 @@ class Grammar
     end
     
     def to_h
-        patterns = []
-        for each in @data[:patterns]
-            patterns.push(each.to_h)
-        end
-        output = {
+        # 
+        # initialize output
+        # 
+        textmate_output = {
             **@data,
-            patterns: patterns,
+            patterns: [],
+            repository: [],
         }
-        addLanguageEndings(output[:repository])
-        addLanguageEndings(output[:patterns])
-        return output
+        repository_copy = @data[:repository].dup
+        
+        # 
+        # Convert the :$initial_context into the patterns section
+        # 
+        initial_context = repository_copy[:$initial_context]
+        repository_copy.delete(:$initial_context)
+        textmate_output[:patterns] = Grammar.convertIncludesToPatternList(initial_context)
+        
+        #
+        # Convert all the repository entries
+        #
+        for each_name in repository_copy.keys
+            repository_copy[each_name] = Grammar.toTag(repository_copy[each_name])
+        end
+        textmate_output[:repository] = repository_copy
+        
+        # 
+        # Add the language endings
+        # 
+        addLanguageEndings(textmate_output[:repository])
+        addLanguageEndings(textmate_output[:patterns])
+        return textmate_output
     end
     
     def saveAsJsonTo(file_location)
@@ -886,10 +915,45 @@ class Range
                 include: "##{@repository_name}"
             }
         end
-        return as_tag
+        return @as_tag
     end
 end
 
+#
+# Context
+#
+class Context
+    def initialize(repository_name: nil, includes: [])
+        #
+        # save arguments
+        #
+        @repository_name = repository_name
+        @includes = includes
+        
+        #
+        # save to repository
+        # 
+        if repository_name.to_s != ""
+            Grammar.makeSureAGrammarExists
+            Grammar.current_grammar.data[:repository][repository_name] = self.to_tag
+            # set the repository_name only after the repository entry is made
+            @repository_name = repository_name
+        end
+        
+        @as_tag = {
+            patterns: Grammar.convertIncludesToPatternList(@includes),
+        }
+    end
+    
+    def to_tag
+        if @repository_name != nil
+            return {
+                include: "##{@repository_name}"
+            }
+        end
+        return @as_tag
+    end
+end
 #
 # Helpers for Tokens
 #

@@ -117,7 +117,7 @@ else
         includes: ["#function-call-innards"],
         )
 
-c_grammar.initalContextIncludes(
+c_grammar[:$initial_context] = [
     "#preprocessor-rule-enabled",
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",
@@ -441,7 +441,7 @@ c_grammar.initalContextIncludes(
         match: ",",
         name: "punctuation.separator.delimiter.c"
     }
-)
+]
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {

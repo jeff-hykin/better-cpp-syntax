@@ -1251,9 +1251,7 @@ cpp_grammar = Grammar.new(
 # 
 # Language Context
 # 
-newPattern(
-    repository_name: :cpp_base,
-    includes: [
+cpp_grammar[:$initial_context] = [
         :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
         :struct_declare,
         :special_block,
@@ -1600,8 +1598,6 @@ newPattern(
             name: "comma punctuation.separator.delimiter"
         }
     ]
-)
-cpp_grammar.initalContextIncludes(:cpp_base)
 cpp_grammar.addToRepository({
     "block" => {
         begin: "\\{",
