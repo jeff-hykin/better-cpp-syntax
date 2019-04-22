@@ -1554,7 +1554,7 @@ cpp_grammar = Grammar.new(
             ]
         },
         :operators,
-        "#block-c",
+        :block,
         "#parens-c",
         function_definition,
         "#line_continuation_character",
@@ -1594,38 +1594,6 @@ cpp_grammar = Grammar.new(
 # 
 # Legacy Entries
 # 
-    cpp_grammar[:block] = {
-            begin: "\\{",
-            beginCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.begin.bracket.curly"
-                }
-            },
-            end: "\\}",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.end.bracket.curly"
-                }
-            },
-            name: "meta.block",
-            patterns: [
-                {
-                    captures: {
-                        "1" => {
-                            name: "support.function.any-method"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.parameters"
-                        }
-                    },
-                    match: "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
-                    name: "meta.function-call"
-                },
-                {
-                    include: "$base"
-                }
-            ]
-        }
     cpp_grammar[:'constructor'] = {
         patterns: [
             {
@@ -1751,7 +1719,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'block-c'] = {
+    cpp_grammar[:block] = {
         patterns: [
             {
                 begin: "{",
