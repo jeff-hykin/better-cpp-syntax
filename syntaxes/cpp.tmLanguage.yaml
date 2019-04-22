@@ -1504,7 +1504,7 @@
       '1':
         name: constant.character.escape.line-continuation.cpp
   parentheses:
-    name: punctuation.section.parens-c.cpp
+    name: meta.parens.cpp
     begin: "\\("
     beginCaptures:
       '0':
@@ -1516,7 +1516,7 @@
     patterns:
     - include: "$base"
   parentheses_block:
-    name: meta.block.parens.cpp
+    name: meta.parens.block.cpp
     begin: "\\("
     beginCaptures:
       '0':

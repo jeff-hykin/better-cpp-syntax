@@ -1898,7 +1898,7 @@ cpp_grammar = Grammar.new(
             }
         }
     cpp_grammar[:parentheses] = {
-        name: "punctuation.section.parens-c",
+        name: "meta.parens",
         begin: "\\(",
         beginCaptures: {
             "0" => {
@@ -1918,7 +1918,7 @@ cpp_grammar = Grammar.new(
         ]
         }
     cpp_grammar[:parentheses_block] = {
-        name: "meta.block.parens",
+        name: "meta.parens.block",
         begin: "\\(",
         beginCaptures: {
             "0" => {
