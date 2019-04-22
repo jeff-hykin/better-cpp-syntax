@@ -74,9 +74,9 @@
   :patterns:
   - :include: "$base"
 - :include: "#lambdas"
-- :include: "#preprocessor-rule-enabled"
-- :include: "#preprocessor-rule-disabled"
-- :include: "#preprocessor-rule-conditional"
+- :include: "#preprocessor_rule_enabled"
+- :include: "#preprocessor_rule_disabled"
+- :include: "#preprocessor_rule_conditional"
 - :include: "#hacky_fix_for_stray_directive"
 - :include: "#comments"
 - :name: meta.conditional.case.cpp
@@ -121,7 +121,7 @@
       :name: punctuation.definition.parameters.end.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
   :patterns:
-  - :include: "#preprocessor-rule-define-line-contents"
+  - :include: "#preprocessor_rule_define_line_contents"
 - :name: meta.preprocessor.diagnostic.cpp
   :begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
   :beginCaptures:
@@ -187,7 +187,7 @@
       '0':
         :name: punctuation.definition.string.end.cpp
     :name: string.quoted.other.lt-gt.include.cpp
-- :include: "#pragma-mark"
+- :include: "#pragma_mark"
 - :name: meta.preprocessor.cpp
   :begin: "^\\s*((#)\\s*line)\\b"
   :beginCaptures:
@@ -227,14 +227,14 @@
   - :include: "#number_literal"
   - :include: "#line_continuation_character"
 - :include: "#operators"
-- :include: "#block-c"
-- :include: "#parens-c"
+- :include: "#block"
+- :include: "#parentheses"
 - :name: meta.function.definition.parameters.cpp
   :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
   :end: "(?<=\\))"
   :patterns:
   - :include: "#parameter_struct"
-  - :include: "#function-innards-c"
+  - :include: "#function_innards_c"
 - :include: "#line_continuation_character"
 - :name: meta.bracket.square.access.cpp
   :begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])"
@@ -248,7 +248,7 @@
     '0':
       :name: punctuation.definition.end.bracket.square.cpp
   :patterns:
-  - :include: "#function-call-innards-c"
+  - :include: "#functioncall_innards_c"
 - :name: storage.modifier.array.bracket.square.cpp
   :match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
 - :match: ";"
@@ -720,7 +720,7 @@
         :name: punctuation.section.parameters.end.bracket.round.operator-overload.cpp
     :patterns:
     - :include: "#probably_a_parameter"
-    - :include: "#function-innards-c"
+    - :include: "#function_innards_c"
   member_access:
     :match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
     :captures:
@@ -787,7 +787,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     :patterns:
-    - :include: "#function-call-innards-c"
+    - :include: "#functioncall_innards_c"
   lambdas:
     :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     :beginCaptures:
@@ -797,7 +797,7 @@
         :name: meta.lambda.capture.cpp
         :patterns:
         - :include: "#probably_a_parameter"
-        - :include: "#function-innards-c"
+        - :include: "#function_innards_c"
       '4':
         :name: punctuation.definition.capture.end.lambda.cpp
     :end: "(?<=})"
@@ -813,7 +813,7 @@
           :name: punctuation.definition.parameters.end.lambda.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function-innards-c"
+      - :include: "#function_innards_c"
     - :match: "(?<!\\w)(?:mutable|constexpr|consteval)(?!\\w)"
       :name: storage.modifier.lambda.$0.cpp
     - :match: "(->)(.+?(?=\\{|$))?"
@@ -845,32 +845,7 @@
   :assembly:
     :match: "(?<!\\w)(asm|__asm__)(?!\\w)"
     :name: storage.type.$0.cpp
-  block:
-    :begin: "\\{"
-    :beginCaptures:
-      '0':
-        :name: punctuation.section.block.begin.bracket.curly.cpp
-    :end: "\\}"
-    :endCaptures:
-      '0':
-        :name: punctuation.section.block.end.bracket.curly.cpp
-    :name: meta.block.cpp
-    :patterns:
-    - :captures:
-        '1':
-          :name: support.function.any-method.cpp
-        '2':
-          :name: punctuation.definition.parameters.cpp
-      :match: |-
-        (?x)
-        (
-          (?!while|for|do|if|else|switch|catch|return)
-          (?:\b[A-Za-z_][A-Za-z0-9_]*+\b|::)*+ # actual name
-        )
-        \s*(\() # opening bracket
-      :name: meta.function-call.cpp
-    - :include: "$base"
-  constructor:
+  :constructor:
     :patterns:
     - :begin: |-
         (?x)
@@ -889,7 +864,7 @@
       :name: meta.function.constructor.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function-innards-c"
+      - :include: "#function_innards_c"
     - :begin: |-
         (?x)
         (:)
@@ -906,7 +881,7 @@
       :name: meta.function.constructor.initializer-list.cpp
       :patterns:
       - :include: "$base"
-  special_block:
+  :special_block:
     :patterns:
     - :include: "#attribute_cpp"
     - :name: meta.using-namespace.cpp
@@ -1004,9 +979,9 @@
           '1':
             :name: punctuation.section.block.begin.bracket.curly.class.cpp
         :patterns:
-        - :include: "#preprocessor-rule-enabled"
-        - :include: "#preprocessor-rule-disabled"
-        - :include: "#preprocessor-rule-conditional"
+        - :include: "#preprocessor_rule_enabled"
+        - :include: "#preprocessor_rule_disabled"
+        - :include: "#preprocessor_rule_conditional"
         - :include: "#hacky_fix_for_stray_directive"
         - :match: ","
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1095,9 +1070,9 @@
           '1':
             :name: punctuation.section.block.begin.bracket.curly.struct.cpp
         :patterns:
-        - :include: "#preprocessor-rule-enabled"
-        - :include: "#preprocessor-rule-disabled"
-        - :include: "#preprocessor-rule-conditional"
+        - :include: "#preprocessor_rule_enabled"
+        - :include: "#preprocessor_rule_disabled"
+        - :include: "#preprocessor_rule_conditional"
         - :include: "#hacky_fix_for_stray_directive"
         - :match: ","
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1166,9 +1141,9 @@
           '1':
             :name: punctuation.section.block.begin.bracket.curly.union.cpp
         :patterns:
-        - :include: "#preprocessor-rule-enabled"
-        - :include: "#preprocessor-rule-disabled"
-        - :include: "#preprocessor-rule-conditional"
+        - :include: "#preprocessor_rule_enabled"
+        - :include: "#preprocessor_rule_disabled"
+        - :include: "#preprocessor_rule_conditional"
         - :include: "#hacky_fix_for_stray_directive"
         - :match: ","
           :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
@@ -1301,7 +1276,7 @@
         :patterns:
         - :include: "$base"
       - :include: "$base"
-  strings:
+  :strings:
     :patterns:
     - :begin: (u|u8|U|L)?"
       :beginCaptures:
@@ -1323,7 +1298,7 @@
         :name: constant.character.escape.cpp
       - :match: "\\\\x\\h+"
         :name: constant.character.escape.cpp
-      - :include: "#string_placeholder-c"
+      - :include: "#string_placeholder_c"
     - :begin: (u|u8|U|L)?R"(?:([^ ()\\\t]{0,16})|([^ ()\\\t]*))\(
       :beginCaptures:
         '0':
@@ -1339,7 +1314,7 @@
         '1':
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
-  block-c:
+  :block:
     :patterns:
     - :begin: "{"
       :beginCaptures:
@@ -1351,12 +1326,12 @@
           :name: punctuation.section.block.end.bracket.curly.cpp
       :name: meta.block.cpp
       :patterns:
-      - :include: "#block_innards-c"
-  block_innards-c:
+      - :include: "#block_context"
+  :block_context:
     :patterns:
-    - :include: "#preprocessor-rule-enabled-block"
-    - :include: "#preprocessor-rule-disabled-block"
-    - :include: "#preprocessor-rule-conditional-block"
+    - :include: "#preprocessor_rule_enabled_block"
+    - :include: "#preprocessor_rule_disabled_block"
+    - :include: "#preprocessor_rule_conditional_block"
     - :include: "#method_access"
     - :include: "#member_access"
     - :include: "#c_function_call"
@@ -1375,7 +1350,7 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.initialization.cpp
       :patterns:
-      - :include: "#function-call-innards-c"
+      - :include: "#functioncall_innards_c"
     - :begin: "{"
       :beginCaptures:
         '0':
@@ -1385,10 +1360,10 @@
         '0':
           :name: punctuation.section.block.end.bracket.curly.cpp
       :patterns:
-      - :include: "#block_innards-c"
-    - :include: "#parens-block-c"
+      - :include: "#block_context"
+    - :include: "#parentheses_block"
     - :include: "$base"
-  c_function_call:
+  :c_function_call:
     :begin: |-
       (?x)
       (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\s*\()
@@ -1400,8 +1375,8 @@
     :end: "(?<=\\))(?!\\w)"
     :name: meta.function-call.cpp
     :patterns:
-    - :include: "#function-call-innards-c"
-  comments:
+    - :include: "#functioncall_innards_c"
+  :comments:
     :patterns:
     - :captures:
         '1':
@@ -1436,19 +1411,19 @@
         :name: comment.line.double-slash.cpp
         :patterns:
         - :include: "#line_continuation_character"
-  disabled:
+  :disabled:
     :begin: "^\\s*#\\s*if(n?def)?\\b.*$"
     :end: "^\\s*#\\s*endif\\b"
     :patterns:
     - :include: "#disabled"
-    - :include: "#pragma-mark"
-  line_continuation_character:
+    - :include: "#pragma_mark"
+  :line_continuation_character:
     :patterns:
     - :match: "(\\\\)\\n"
       :captures:
         '1':
           :name: constant.character.escape.line-continuation.cpp
-  parens-c:
+  :parentheses:
     :name: punctuation.section.parens-c.cpp
     :begin: "\\("
     :beginCaptures:
@@ -1460,7 +1435,7 @@
         :name: punctuation.section.parens.end.bracket.round.cpp
     :patterns:
     - :include: "$base"
-  parens-block-c:
+  :parentheses_block:
     :name: meta.block.parens.cpp
     :begin: "\\("
     :beginCaptures:
@@ -1471,10 +1446,10 @@
       '0':
         :name: punctuation.section.parens.end.bracket.round.cpp
     :patterns:
-    - :include: "#block_innards-c"
+    - :include: "#block_context"
     - :match: !ruby/regexp /(?<!:):(?!:)/
       :name: colon.cpp punctuation.separator.range-based.cpp
-  pragma-mark:
+  :pragma_mark:
     :captures:
       '1':
         :name: meta.preprocessor.pragma.cpp
@@ -1486,7 +1461,7 @@
         :name: entity.name.tag.pragma-mark.cpp
     :match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))"
     :name: meta.section.cpp
-  strings_c:
+  :strings_c:
     :patterns:
     - :begin: "\""
       :beginCaptures:
@@ -1498,8 +1473,8 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.double.cpp
       :patterns:
-      - :include: "#string_escaped_char-c"
-      - :include: "#string_placeholder-c"
+      - :include: "#string_escaped_char_c"
+      - :include: "#string_placeholder_c"
       - :include: "#line_continuation_character"
     - :begin: !ruby/regexp /(?<![\da-fA-F])'/
       :beginCaptures:
@@ -1511,26 +1486,26 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.single.cpp
       :patterns:
-      - :include: "#string_escaped_char-c"
+      - :include: "#string_escaped_char_c"
       - :include: "#line_continuation_character"
-  string_escaped_char-c:
+  :string_escaped_char_c:
     :patterns:
     - :match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
         |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )"
       :name: constant.character.escape.cpp
     - :match: "\\\\."
       :name: invalid.illegal.unknown-escape.cpp
-  string_placeholder-c:
+  :string_placeholder_c:
     :patterns:
     - :match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t
         \ # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t
         \ # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)?
         # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type"
       :name: constant.other.placeholder.cpp
-  vararg_ellipses:
+  :vararg_ellipses:
     :match: "(?<!\\.)\\.\\.\\.(?!\\.)"
     :name: punctuation.vararg-ellipses.cpp
-  preprocessor-rule-conditional:
+  :preprocessor_rule_conditional:
     :patterns:
     - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
       :beginCaptures:
@@ -1553,10 +1528,10 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#preprocessor-rule-enabled-elif"
-      - :include: "#preprocessor-rule-enabled-else"
-      - :include: "#preprocessor-rule-disabled-elif"
+        - :include: "#preprocessor_rule_conditional_line"
+      - :include: "#preprocessor_rule_enabled_elif"
+      - :include: "#preprocessor_rule_enabled_else"
+      - :include: "#preprocessor_rule_disabled_elif"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '1':
@@ -1566,9 +1541,9 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
+        - :include: "#preprocessor_rule_conditional_line"
       - :include: "$base"
-  preprocessor-rule-conditional-block:
+  :preprocessor_rule_conditional_block:
     :patterns:
     - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
       :beginCaptures:
@@ -1591,10 +1566,10 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#preprocessor-rule-enabled-elif-block"
-      - :include: "#preprocessor-rule-enabled-else-block"
-      - :include: "#preprocessor-rule-disabled-elif"
+        - :include: "#preprocessor_rule_conditional_line"
+      - :include: "#preprocessor_rule_enabled_elif_block"
+      - :include: "#preprocessor_rule_enabled_else_block"
+      - :include: "#preprocessor_rule_disabled_elif"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '1':
@@ -1604,9 +1579,9 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
-      - :include: "#block_innards-c"
-  preprocessor-rule-conditional-line:
+        - :include: "#preprocessor_rule_conditional_line"
+      - :include: "#block_context"
+  :preprocessor_rule_conditional_line:
     :patterns:
     - :match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))"
       :name: keyword.control.directive.conditional.cpp
@@ -1624,7 +1599,7 @@
         '0':
           :name: keyword.operator.ternary.cpp
       :patterns:
-      - :include: "#preprocessor-rule-conditional-line"
+      - :include: "#preprocessor_rule_conditional_line"
     - :include: "#operators"
     - :include: "#constants"
     - :match: *2
@@ -1639,8 +1614,8 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor-rule-conditional-line"
-  preprocessor-rule-disabled:
+      - :include: "#preprocessor_rule_conditional_line"
+  :preprocessor_rule_disabled:
     :patterns:
     - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
@@ -1663,11 +1638,11 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
+        - :include: "#preprocessor_rule_conditional_line"
       - :include: "#comments"
-      - :include: "#preprocessor-rule-enabled-elif"
-      - :include: "#preprocessor-rule-enabled-else"
-      - :include: "#preprocessor-rule-disabled-elif"
+      - :include: "#preprocessor_rule_enabled_elif"
+      - :include: "#preprocessor_rule_enabled_else"
+      - :include: "#preprocessor_rule_disabled_elif"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
@@ -1682,15 +1657,15 @@
           :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
           :name: meta.preprocessor.cpp
           :patterns:
-          - :include: "#preprocessor-rule-conditional-line"
+          - :include: "#preprocessor_rule_conditional_line"
         - :include: "$base"
       - :begin: "\\n"
         :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
-  preprocessor-rule-disabled-block:
+        - :include: "#pragma_mark"
+  :preprocessor_rule_disabled_block:
     :patterns:
     - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
@@ -1713,11 +1688,11 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
+        - :include: "#preprocessor_rule_conditional_line"
       - :include: "#comments"
-      - :include: "#preprocessor-rule-enabled-elif-block"
-      - :include: "#preprocessor-rule-enabled-else-block"
-      - :include: "#preprocessor-rule-disabled-elif"
+      - :include: "#preprocessor_rule_enabled_elif_block"
+      - :include: "#preprocessor_rule_enabled_else_block"
+      - :include: "#preprocessor_rule_disabled_elif"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
@@ -1732,15 +1707,15 @@
           :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
           :name: meta.preprocessor.cpp
           :patterns:
-          - :include: "#preprocessor-rule-conditional-line"
-        - :include: "#block_innards-c"
+          - :include: "#preprocessor_rule_conditional_line"
+        - :include: "#block_context"
       - :begin: "\\n"
         :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
         contentName: comment.block.preprocessor.if-branch.in-block
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
-  preprocessor-rule-disabled-elif:
+        - :include: "#pragma_mark"
+  :preprocessor_rule_disabled_elif:
     :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
@@ -1755,15 +1730,15 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor-rule-conditional-line"
+      - :include: "#preprocessor_rule_conditional_line"
     - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       contentName: comment.block.preprocessor.elif-branch
       :patterns:
       - :include: "#disabled"
-      - :include: "#pragma-mark"
-  preprocessor-rule-enabled:
+      - :include: "#pragma_mark"
+  :preprocessor_rule_enabled:
     :patterns:
     - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
@@ -1788,7 +1763,7 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
+        - :include: "#preprocessor_rule_conditional_line"
       - :include: "#comments"
       - :begin: "^\\s*((#)\\s*else\\b)"
         :beginCaptures:
@@ -1802,7 +1777,7 @@
         contentName: comment.block.preprocessor.else-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
@@ -1815,12 +1790,12 @@
         contentName: comment.block.preprocessor.if-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "\\n"
         :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
         :patterns:
         - :include: "$base"
-  preprocessor-rule-enabled-block:
+  :preprocessor_rule_enabled_block:
     :patterns:
     - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
       :beginCaptures:
@@ -1843,7 +1818,7 @@
         :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor-rule-conditional-line"
+        - :include: "#preprocessor_rule_conditional_line"
       - :include: "#comments"
       - :begin: "^\\s*((#)\\s*else\\b)"
         :beginCaptures:
@@ -1857,7 +1832,7 @@
         contentName: comment.block.preprocessor.else-branch.in-block
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "^\\s*((#)\\s*elif\\b)"
         :beginCaptures:
           '0':
@@ -1870,12 +1845,12 @@
         contentName: comment.block.preprocessor.if-branch.in-block
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "\\n"
         :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
         :patterns:
-        - :include: "#block_innards-c"
-  preprocessor-rule-enabled-elif:
+        - :include: "#block_context"
+  :preprocessor_rule_enabled_elif:
     :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
@@ -1890,7 +1865,7 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor-rule-conditional-line"
+      - :include: "#preprocessor_rule_conditional_line"
     - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
@@ -1907,7 +1882,7 @@
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "^\\s*((#)\\s*(elif)\\b)"
         :beginCaptures:
           '0':
@@ -1920,9 +1895,9 @@
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :include: "$base"
-  preprocessor-rule-enabled-elif-block:
+  :preprocessor_rule_enabled_elif_block:
     :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
       '0':
@@ -1937,7 +1912,7 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor-rule-conditional-line"
+      - :include: "#preprocessor_rule_conditional_line"
     - :include: "#comments"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
@@ -1954,7 +1929,7 @@
         contentName: comment.block.preprocessor.elif-branch.in-block
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
+        - :include: "#pragma_mark"
       - :begin: "^\\s*((#)\\s*(elif)\\b)"
         :beginCaptures:
           '0':
@@ -1967,9 +1942,9 @@
         contentName: comment.block.preprocessor.elif-branch
         :patterns:
         - :include: "#disabled"
-        - :include: "#pragma-mark"
-      - :include: "#block_innards-c"
-  preprocessor-rule-enabled-else:
+        - :include: "#pragma_mark"
+      - :include: "#block_context"
+  :preprocessor_rule_enabled_else:
     :begin: "^\\s*((#)\\s*else\\b)"
     :beginCaptures:
       '0':
@@ -1981,7 +1956,7 @@
     :end: "(?=^\\s*((#)\\s*endif\\b))"
     :patterns:
     - :include: "$base"
-  preprocessor-rule-enabled-else-block:
+  :preprocessor_rule_enabled_else_block:
     :begin: "^\\s*((#)\\s*else\\b)"
     :beginCaptures:
       '0':
@@ -1992,8 +1967,8 @@
         :name: punctuation.definition.directive.cpp
     :end: "(?=^\\s*((#)\\s*endif\\b))"
     :patterns:
-    - :include: "#block_innards-c"
-  preprocessor-rule-define-line-contents:
+    - :include: "#block_context"
+  :preprocessor_rule_define_line_contents:
     :patterns:
     - :include: "#vararg_ellipses"
     - :match: !ruby/regexp /##?(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F])))*(?!\w)/
@@ -2008,7 +1983,7 @@
           :name: punctuation.section.block.end.bracket.curly.cpp
       :name: meta.block.cpp
       :patterns:
-      - :include: "#preprocessor-rule-define-line-blocks"
+      - :include: "#preprocessor_rule_define_line_blocks"
     - :match: "\\("
       :name: punctuation.section.parens.begin.bracket.round.cpp
     - :match: "\\)"
@@ -2024,7 +1999,7 @@
       :end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)"
       :name: meta.function.cpp
       :patterns:
-      - :include: "#preprocessor-rule-define-line-functions"
+      - :include: "#preprocessor_rule_define_line_functions"
     - :begin: "\""
       :beginCaptures:
         '0':
@@ -2035,8 +2010,8 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.double.cpp
       :patterns:
-      - :include: "#string_escaped_char-c"
-      - :include: "#string_placeholder-c"
+      - :include: "#string_escaped_char_c"
+      - :include: "#string_placeholder_c"
       - :include: "#line_continuation_character"
     - :begin: "'"
       :beginCaptures:
@@ -2048,12 +2023,12 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.single.cpp
       :patterns:
-      - :include: "#string_escaped_char-c"
+      - :include: "#string_escaped_char_c"
       - :include: "#line_continuation_character"
     - :include: "#method_access"
     - :include: "#member_access"
     - :include: "$base"
-  preprocessor-rule-define-line-blocks:
+  :preprocessor_rule_define_line_blocks:
     :patterns:
     - :begin: "{"
       :beginCaptures:
@@ -2064,10 +2039,10 @@
         '0':
           :name: punctuation.section.block.end.bracket.curly.cpp
       :patterns:
-      - :include: "#preprocessor-rule-define-line-blocks"
-      - :include: "#preprocessor-rule-define-line-contents"
-    - :include: "#preprocessor-rule-define-line-contents"
-  preprocessor-rule-define-line-functions:
+      - :include: "#preprocessor_rule_define_line_blocks"
+      - :include: "#preprocessor_rule_define_line_contents"
+    - :include: "#preprocessor_rule_define_line_contents"
+  :preprocessor_rule_define_line_functions:
     :patterns:
     - :include: "#comments"
     - :include: "#storage_types"
@@ -2094,7 +2069,7 @@
         '1':
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor-rule-define-line-functions"
+      - :include: "#preprocessor_rule_define_line_functions"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2104,9 +2079,9 @@
         '1':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor-rule-define-line-functions"
-    - :include: "#preprocessor-rule-define-line-contents"
-  function-innards-c:
+      - :include: "#preprocessor_rule_define_line_functions"
+    - :include: "#preprocessor_rule_define_line_contents"
+  :function_innards_c:
     :patterns:
     - :include: "#attribute_cpp"
     - :include: "#comments"
@@ -2134,7 +2109,7 @@
           :name: punctuation.section.parameters.end.bracket.round.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function-innards-c"
+      - :include: "#function_innards_c"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2144,9 +2119,9 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#function-innards-c"
+      - :include: "#function_innards_c"
     - :include: "$base"
-  function-call-innards-c:
+  :functioncall_innards_c:
     :patterns:
     - :include: "#attribute_cpp"
     - :include: "#comments"
@@ -2176,7 +2151,7 @@
         '0':
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
-      - :include: "#function-call-innards-c"
+      - :include: "#functioncall_innards_c"
     - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(\\()"
       :beginCaptures:
         '1':
@@ -2204,7 +2179,7 @@
         '1':
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
-      - :include: "#function-call-innards-c"
+      - :include: "#functioncall_innards_c"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2214,5 +2189,5 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#function-call-innards-c"
-    - :include: "#block_innards-c"
+      - :include: "#functioncall_innards_c"
+    - :include: "#block_context"
