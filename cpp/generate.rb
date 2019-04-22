@@ -1555,7 +1555,7 @@ cpp_grammar = Grammar.new(
         },
         :operators,
         :block,
-        "#parens-c",
+        :parentheses,
         function_definition,
         "#line_continuation_character",
         {
@@ -1892,7 +1892,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     }
-    cpp_grammar[:'parens-c'] = {
+    cpp_grammar[:'parentheses'] = {
         name: "punctuation.section.parens-c",
         begin: "\\(",
         beginCaptures: {
