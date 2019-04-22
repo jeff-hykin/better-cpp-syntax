@@ -1,42 +1,6 @@
 require 'json'
 require 'yaml'
 
-# design upgrades
-    # create Context class
-    # add a way for sharing data
-        # save the objects, dont immediatly convert
-            # change the way things add themselves to the repository
-        # make a method for setting the initial context :$inital_context
-            # add a replacement in the convert includes method
-        # TODO: convert all repository_name's into symbols (and only allow symbols)
-    # make Range, Pattern, and Context a sub-class of Grammar
-    # make patterns be able to take symbols as input and retrieve the pattern with that repository_name
-    # make includes be able to handle :$base and :$self
-    # have the export method replace the "$base" or "$self"
-    # create greedy modifiers like Fewest()
-    # create a small guide for each thing:
-        # Grammar
-            # basic info
-            # inital_context
-            # Patterns
-                # external peices
-                    # @'s variables
-                    # functions
-                # internal peices
-                    # *all arguments*
-                    # includes
-                    # tag_as
-                        # .'s
-                        # $match
-                        # $reference()
-            # Contexts
-            # Range
-        # Tokens
-            # standard key names
-            # that()
-            # representationsThat()
-            # that( not() )
-
 # TODO
     # add a check that doesnt allow $ in non-special repository names
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)

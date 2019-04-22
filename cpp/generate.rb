@@ -111,7 +111,7 @@ cpp_grammar = Grammar.new(
             :lambdas,
             :preprocessor_context,
             :comments_context,
-            :case_statement,
+            :switch_statement,
             :control_flow_keywords,
             :storage_types,
             :assembly,
@@ -158,7 +158,7 @@ cpp_grammar = Grammar.new(
         ]
     # eventually this context will be more exclusive (can't have class definitons inside of an if statement)
     # but for now it just includes everything
-    cpp_grammar[:contional_context] = [
+    cpp_grammar[:conditional_context] = [
             :$inital_context
         ]
     cpp_grammar[:template_definition_context] = [
@@ -450,7 +450,7 @@ cpp_grammar = Grammar.new(
 #
 # Control flow
 #
-    default_statement = Range.new(
+    cpp_grammar[:default_statement] = Range.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
                 match: variableBounds[ /default/ ],
@@ -460,9 +460,9 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case.default"
             ),
-            includes: [:contional_context]
+            includes: [:conditional_context]
         )
-    cpp_grammar[:case_statement] = case_statement = Range.new(
+    cpp_grammar[:case_statement] = Range.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
                 match: variableBounds[ /case/ ],
@@ -472,7 +472,38 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case"
             ),
-            includes: [:contional_context]
+            includes: [:conditional_context]
+        )
+    cpp_grammar[:switch_statement] = blockFinderFor(
+            name: "switch",
+            tag_as: "meta.block.switch",
+            start_pattern: newPattern(
+                tag_as: "meta.conditional.switch",
+                match: newPattern(
+                    match: /switch/,
+                    tag_as: "keyword.control.switch"
+                )
+            ),
+            head_includes: [
+                Range.new(
+                    start_pattern: newPattern(
+                        match: /\(/,
+                        tag_as: 'punctuation.section.parens.begin.bracket.round.conditional.switch'
+                    ),
+                    end_pattern: newPattern(
+                        match: /\)/,
+                        tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
+                    ),
+                    includes: [ :conditional_context ]
+                ),
+                :$inital_context
+            ],
+            body_includes: [
+                :default_statement,
+                :case_statement,
+                :$inital_context,
+            ],
+            needs_semicolon: false,
         )
 #
 # C++ Attributes

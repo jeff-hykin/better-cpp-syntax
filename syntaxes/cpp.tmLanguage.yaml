@@ -29,7 +29,7 @@
 - include: "#lambdas"
 - include: "#preprocessor_context"
 - include: "#comments_context"
-- include: "#case_statement"
+- include: "#switch_statement"
 - include: "#control_flow_keywords"
 - include: "#storage_types"
 - include: "#assembly"
@@ -145,7 +145,7 @@
   evaluation_context:
     patterns:
     - include: "$base"
-  contional_context:
+  conditional_context:
     patterns:
     - include: "$base"
   template_definition_context:
@@ -322,6 +322,18 @@
   control_flow_keywords:
     match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
     name: keyword.control.$0.cpp
+  default_statement:
+    name: meta.conditional.case.cpp
+    begin: "((?<!\\w)default(?!\\w))"
+    beginCaptures:
+      '1':
+        name: keyword.control.default.cpp
+    end: "(:)"
+    endCaptures:
+      '1':
+        name: colon.cpp punctuation.separator.case.default.cpp
+    patterns:
+    - include: "#conditional_context"
   case_statement:
     name: meta.conditional.case.cpp
     begin: "((?<!\\w)case(?!\\w))"
@@ -333,7 +345,52 @@
       '1':
         name: colon.cpp punctuation.separator.case.cpp
     patterns:
-    - include: "#contional_context"
+    - include: "#conditional_context"
+  switch_statement:
+    name: meta.block.switch.cpp
+    begin: "(((switch)))"
+    beginCaptures:
+      '1':
+        name: meta.head.switch.cpp
+      '2':
+        name: meta.conditional.switch.cpp
+      '3':
+        name: keyword.control.switch.cpp
+    end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
+    patterns:
+    - name: meta.head.switch.cpp
+      begin: "\\G"
+      end: "((?:\\{|(?=;)))"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.begin.bracket.curly.switch.cpp
+      patterns:
+      - begin: "(\\()"
+        beginCaptures:
+          '1':
+            name: punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
+        end: "(\\))"
+        endCaptures:
+          '1':
+            name: punctuation.section.parens.end.bracket.round.conditional.switch.cpp
+        patterns:
+        - include: "#conditional_context"
+      - include: "$base"
+    - name: meta.body.switch.cpp
+      begin: "(?<=\\{)"
+      end: "(\\})"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.end.bracket.curly.switch.cpp
+      patterns:
+      - include: "#default_statement"
+      - include: "#case_statement"
+      - include: "$base"
+    - name: meta.tail.switch.cpp
+      begin: "(?<=})[\\s\\n]*"
+      end: "[\\s\\n]*(?=;)"
+      patterns:
+      - include: "$base"
   attributes:
     name: support.other.attribute.cpp
     begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"

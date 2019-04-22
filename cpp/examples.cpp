@@ -452,7 +452,7 @@ int main() {
 //
 // Attributes
 //
-    switch(test) {
+    switch (test) {
         case 1:
         break;
         case 2: [[fallthrough]];
