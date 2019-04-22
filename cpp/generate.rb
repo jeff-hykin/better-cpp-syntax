@@ -27,7 +27,7 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "comma punctuation.separator.delimiter"
         )
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$inital_context ], tail_includes: [ :$inital_context ], secondary_includes:[])
+    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;()>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -87,7 +87,7 @@ cpp_grammar = Grammar.new(
 # Contexts
 #
 #
-    cpp_grammar[:$inital_context] = [
+    cpp_grammar[:$initial_context] = [
             :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
             :struct_declare,
             :special_block_context,
@@ -151,7 +151,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     cpp_grammar[:evaluation_context] = [
-            :$inital_context
+            :$initial_context
             # function call
             # number literal
             # lambdas
@@ -159,7 +159,7 @@ cpp_grammar = Grammar.new(
     # eventually this context will be more exclusive (can't have class definitons inside of an if statement)
     # but for now it just includes everything
     cpp_grammar[:conditional_context] = [
-            :$inital_context
+            :$initial_context
         ]
     cpp_grammar[:template_definition_context] = [
             :scope_resolution,
@@ -496,12 +496,12 @@ cpp_grammar = Grammar.new(
                     ),
                     includes: [ :conditional_context ]
                 ),
-                :$inital_context
+                :$initial_context
             ],
             body_includes: [
                 :default_statement,
                 :case_statement,
-                :$inital_context,
+                :$initial_context,
             ],
             needs_semicolon: false,
         )
@@ -905,7 +905,7 @@ cpp_grammar = Grammar.new(
                         include: "#function_call_c"
                     },
                     {
-                        include: "$inital_context"
+                        include: "$initial_context"
                     }
                 ]
             }
@@ -1140,7 +1140,7 @@ cpp_grammar = Grammar.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
-                includes: [ :$inital_context ]
+                includes: [ :$initial_context ]
             ),
         ]
         )
@@ -1191,7 +1191,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ :$inital_context ]
+            head_includes: [ :$initial_context ]
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1272,7 +1272,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$inital_context  ],
+            body_includes: [ :constructor_context, :$initial_context  ],
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1287,8 +1287,8 @@ cpp_grammar = Grammar.new(
                 match: /\bextern/,
                 tag_as: "storage.type.extern"
             ).lookAheadFor(/\s*\"/),
-        head_includes: [ :$inital_context ],
-        secondary_includes: [ :$inital_context ]
+        head_includes: [ :$initial_context ],
+        secondary_includes: [ :$initial_context ]
         )
 
 #
@@ -1362,7 +1362,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "$inital_context"
+                    include: "$initial_context"
                 }
             ]
         }
@@ -1385,7 +1385,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "$inital_context"
+                    include: "$initial_context"
                 }
             ]
         }
@@ -1650,7 +1650,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function.constructor.initializer-list",
                 patterns: [
                     {
-                        include: "$inital_context"
+                        include: "$initial_context"
                     }
                 ]
             }
@@ -1800,7 +1800,7 @@ cpp_grammar = Grammar.new(
             ]
         },
         :parentheses_block,
-        :$inital_context
+        :$initial_context
         ]
     cpp_grammar[:function_call_c] = {
         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
@@ -1911,7 +1911,7 @@ cpp_grammar = Grammar.new(
         },
         patterns: [
             {
-                include: "$inital_context"
+                include: "$initial_context"
             }
         ]
         }
@@ -2097,7 +2097,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "$inital_context"
+                    include: "$initial_context"
                 }
             ]
         }
@@ -2301,7 +2301,7 @@ cpp_grammar = Grammar.new(
                             ]
                         },
                         {
-                            include: "$inital_context"
+                            include: "$initial_context"
                         }
                     ]
                 },
@@ -2551,7 +2551,7 @@ cpp_grammar = Grammar.new(
                     end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                     patterns: [
                         {
-                            include: "$inital_context"
+                            include: "$initial_context"
                         }
                     ]
                 }
@@ -2737,7 +2737,7 @@ cpp_grammar = Grammar.new(
                         ]
                     },
                     {
-                        include: "$inital_context"
+                        include: "$initial_context"
                     }
                 ]
             }
@@ -2846,7 +2846,7 @@ cpp_grammar = Grammar.new(
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "$inital_context"
+                include: "$initial_context"
             }
         ]
         }
@@ -2962,7 +2962,7 @@ cpp_grammar = Grammar.new(
             },
             :method_access,
             :member_access,
-            :$inital_context
+            :$initial_context
         ]
     cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
@@ -3092,7 +3092,7 @@ cpp_grammar = Grammar.new(
                     }
                 ]
             },
-            :$inital_context
+            :$initial_context
         ]
     cpp_grammar[:function_call_context_c] = [
             :attributes,

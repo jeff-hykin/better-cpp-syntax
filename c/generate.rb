@@ -13,12 +13,11 @@ c_grammar = Grammar.new(
     name: 'C',
     scope_name: "source.c",
 )
-# Set this to true in order to generate the C grammar using the C++ syntax
-if false
-    require_relative '../cpp/generate'
-    c_grammar.data[:patterns] = @cpp_grammar.data[:patterns]
-    c_grammar.data[:repository] = @cpp_grammar.data[:repository]
-else
+
+# 
+# import from C++
+# 
+    c_grammar[:switch_statement] = @cpp_grammar[:switch_statement]
 
 # 
 # Contexts
@@ -125,7 +124,7 @@ else
         includes: ["#function-call-innards"],
         )
 
-c_grammar[:$inital_context] = [
+c_grammar[:$initial_context] = [
     "#preprocessor-rule-enabled",
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",
@@ -2146,7 +2145,7 @@ c_grammar.addToRepository({
         ]
     }
 })
-end
+
 
 Dir.chdir __dir__
 
