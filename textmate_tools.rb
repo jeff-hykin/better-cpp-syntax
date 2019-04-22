@@ -6,7 +6,7 @@ require 'yaml'
     # add a way for sharing data
         # save the objects, dont immediatly convert
             # change the way things add themselves to the repository
-        # make a method for setting the initial context :$initial_context
+        # make a method for setting the initial context :$inital_context
             # add a replacement in the convert includes method
         # TODO: convert all repository_name's into symbols (and only allow symbols)
     # make Range, Pattern, and Context a sub-class of Grammar
@@ -17,7 +17,7 @@ require 'yaml'
     # create a small guide for each thing:
         # Grammar
             # basic info
-            # initial_context
+            # inital_context
             # Patterns
                 # external peices
                     # @'s variables
@@ -118,8 +118,8 @@ class Grammar
             return { include: data }
         # if its a symbol then include a # to make it a repository_name reference
         elsif (data.instance_of? Symbol)
-            if data == :$initial_context
-                new_value = '$initial_context'
+            if data == :$inital_context
+                new_value = '$inital_context'
             elsif data == :$base
                 new_value = '$base'
             elsif data == :$self
@@ -335,11 +335,11 @@ class Grammar
         repository_copy = @data[:repository].dup
         
         # 
-        # Convert the :$initial_context into the patterns section
+        # Convert the :$inital_context into the patterns section
         # 
-        initial_context = repository_copy[:$initial_context]
-        repository_copy.delete(:$initial_context)
-        textmate_output[:patterns] = Grammar.convertIncludesToPatternList(initial_context)
+        inital_context = repository_copy[:$inital_context]
+        repository_copy.delete(:$inital_context)
+        textmate_output[:patterns] = Grammar.convertIncludesToPatternList(inital_context)
         
         #
         # Convert all the repository entries
@@ -361,10 +361,10 @@ class Grammar
                 each_pattern.delete(each_key.to_sym)
                 each_key = each_key.to_s
                 # 
-                # convert the $initial_context
+                # convert the $inital_context
                 #
                 if each_key == "include"
-                    if each_pattern[each_key] == "$initial_context"
+                    if each_pattern[each_key] == "$inital_context"
                         if inherit_or_embedded == :inherit
                             each_pattern[each_key] = "$base"
                         elsif inherit_or_embedded == :embedded
