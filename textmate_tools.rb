@@ -1,6 +1,37 @@
 require 'json'
 require 'yaml'
 
+# design upgrades
+    # create Context class
+    # make Range, Pattern, and Context a sub-class of Grammar
+    # make patterns be able to take symbols as input and retrieve the pattern with that repository_name
+    # make a method for setting the initial context :$initial_context
+    # make includes be able to handle :$base and :$self
+    # have the export method replace the "$base" or "$self"
+    # create greedy modifiers like Fewest()
+    # create a small guide for each thing:
+        # Grammar
+            # basic info
+            # initial_context
+            # Patterns
+                # external peices
+                    # @'s variables
+                    # functions
+                # internal peices
+                    # *all arguments*
+                    # includes
+                    # tag_as
+                        # .'s
+                        # $match
+                        # $reference()
+            # Contexts
+            # Range
+        # Tokens
+            # standard key names
+            # that()
+            # representationsThat()
+            # that( not() )
+
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
     # have grammar check at the end to make sure that all of the included repository_names are actually valid repo names
