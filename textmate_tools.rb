@@ -177,10 +177,7 @@ class Grammar
             raise "\n\nWhen calling convertIncludesToPatternList() the argument wasn't an array\nThe argument is:#{includes}"
         end
         # create the pattern list
-        patterns = []
-        for each_include in includes
-            patterns.concat(Grammar.toTag(each_include))
-        end
+        patterns = Grammar.toTag(includes)
         return patterns
     end
     
