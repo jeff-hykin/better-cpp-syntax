@@ -118,7 +118,16 @@ class Grammar
             return { include: data }
         # if its a symbol then include a # to make it a repository_name reference
         elsif (data.instance_of? Symbol)
-            return { include: "##{data}" }
+            if data == :$initial_context
+                new_value = '$initial_context'
+            elsif data == :$base
+                new_value = '$base'
+            elsif data == :$self
+                new_value = '$self'
+            else
+                new_value = "##{data}"
+            end
+            return { include: new_value }
         # if its a pattern, then convert it to a tag
         elsif (data.instance_of? Regexp) or (data.instance_of? Range)
             return data.to_tag(ignore_repository_entry: ignore_repository_entry)
@@ -235,6 +244,31 @@ class Grammar
     #
     # Interal Helpers
     #
+    def forEachPatternDo(data, a_lambda)
+        if data.is_a? Array 
+            for each in data
+                forEachPatternDo(each, a_lambda)
+            end
+        elsif data.is_a? Hash
+            for each in data.dup
+                key = each[0]
+                value = each[1]
+                
+                if value == nil
+                    next
+                elsif value.is_a? Array
+                    for each_sub_hash in value
+                        forEachPatternDo(each_sub_hash, a_lambda)
+                    end
+                elsif value.is_a? Hash
+                    forEachPatternDo(value, a_lambda)
+                end
+                
+                a_lambda[data]
+            end
+        end
+    end
+    
     def addLanguageEndings(data)
         if data.is_a? Array 
             for each in data
@@ -289,7 +323,7 @@ class Grammar
         @data[:repository].merge!(hash_of_repos)
     end
     
-    def to_h
+    def to_h(inherit_or_embedded: :inherit)
         # 
         # initialize output
         # 
@@ -318,20 +352,59 @@ class Grammar
         # 
         # Add the language endings
         # 
-        addLanguageEndings(textmate_output[:repository])
-        addLanguageEndings(textmate_output[:patterns])
+        post_processing = ->(each_pattern) do
+            for each_key in each_pattern.dup.keys
+                #
+                # convert all keys to strings
+                #
+                each_pattern[each_key.to_s] = each_pattern[each_key]
+                each_pattern.delete(each_key.to_sym)
+                each_key = each_key.to_s
+                # 
+                # convert the $initial_context
+                #
+                if each_key == "include"
+                    if each_pattern[each_key] == "$initial_context"
+                        if inherit_or_embedded == :inherit
+                            each_pattern[each_key] = "$base"
+                        elsif inherit_or_embedded == :embedded
+                            each_pattern[each_key] = "$self"
+                        else
+                            raise "\n\nError: the inherit_or_embedded needs to be either :inherit or embedded, but it was #{inherit_or_embedded} instead"
+                        end
+                    end
+                end
+                #
+                # add the language endings
+                # 
+                if each_key == "name"
+                    new_names = []
+                    for each_tag in each_pattern[each_key].split(/\s/)
+                        each_with_ending = each_tag
+                        # if it doesnt already have the ending then add it
+                        if not (each_with_ending =~ /#{@language_ending}\z/)
+                            each_with_ending += ".#{@language_ending}"
+                        end
+                        new_names << each_with_ending
+                    end
+                    each_pattern[each_key] = new_names.join(' ')
+                end
+            end
+        end
+        forEachPatternDo(textmate_output[:repository], post_processing)
+        forEachPatternDo(textmate_output[:patterns], post_processing)
         return textmate_output
     end
     
-    def saveAsJsonTo(file_location)
+    def saveAsJsonTo(file_location, inherit_or_embedded: :inherit)
         new_file = File.open(file_location+".json", "w")
-        new_file.write(self.to_h.to_json)
+        new_file.write(self.to_h(inherit_or_embedded: inherit_or_embedded).to_json)
         new_file.close
     end
     
-    def saveAsYamlTo(file_location)
+    def saveAsYamlTo(file_location, inherit_or_embedded: :inherit)
         new_file = File.open(file_location+".yaml", "w")
-        new_file.write(self.to_h.to_yaml)
+        new_file.write(self.to_h(inherit_or_embedded: inherit_or_embedded).to_yaml)
         new_file.close
     end
 end
@@ -880,7 +953,7 @@ class Range
         end
         @as_tag[:end] = end_pattern.without_default_mode_modifiers
         key_arguments.delete(:end_pattern)
-        end_captures = end_pattern.to_tag(without_optimizations: true)[:captures]
+        end_captures = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)[:captures]
         if end_captures != {} && end_captures.to_s != ""
             @as_tag[:endCaptures] = end_captures
         end
