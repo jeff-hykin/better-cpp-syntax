@@ -28,6 +28,26 @@ number_seperator_pattern = newPattern(
     tag_as:"punctuation.separator.constant.numeric"
     )
 
+test_deeply_nested = [
+    "#3",
+    "#4",
+]
+test_include_array = [
+    "#1",
+    "#2",
+    test_deeply_nested,
+]
+
+Range.new(
+    repository_name: 'test_include_array',
+    start_pattern: /foo/,
+    end_pattern: /bar/,
+    includes: [
+        test_include_array,
+        "$base"
+    ]
+)
+
 cpp_grammar.initalContextIncludes(
     newPattern(
         should_fully_match: [ "baz baz", "quix quix" ],

@@ -15,3 +15,12 @@
   literal_numeric_seperator:
     :match: "(?<!')'(?!')"
     :name: punctuation.separator.constant.numeric.cpp
+  test_include_array:
+    :begin: foo
+    :end: bar
+    :patterns:
+    - :include: "#1"
+    - :include: "#2"
+    - :include: "#3"
+    - :include: "#4"
+    - :include: "$base"

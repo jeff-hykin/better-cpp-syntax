@@ -77,18 +77,25 @@ class Grammar
     end
     
     def self.toTag(data)
+        # if its an array then convert each element to its tag
+        if (data.instance_of? Array)
+            tags = []
+            for each_data in data
+                tags.concat(Grammar.toTag(each_data))
+            end
+            return tags
         # if its a string then include it directly
-        if (data.instance_of? String)
-            return { include: data }
+        elsif (data.instance_of? String)
+            return [{ include: data }]
         # if its a symbol then include a # to make it a repository_name reference
         elsif (data.instance_of? Symbol)
-            return { include: "##{data}" }
+            return [{ include: "##{data}" }]
         # if its a pattern, then convert it to a tag
         elsif (data.instance_of? Regexp) or (data.instance_of? Range)
-            return data.to_tag
+            return [data.to_tag]
         # if its a hash, then just add it as-is
         elsif (data.instance_of? Hash)
-            return data
+            return [data]
         end
     end
     
@@ -172,7 +179,7 @@ class Grammar
         # create the pattern list
         patterns = []
         for each_include in includes
-            patterns.push(Grammar.toTag(each_include))
+            patterns.concat(Grammar.toTag(each_include))
         end
         return patterns
     end
