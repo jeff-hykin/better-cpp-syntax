@@ -8,10 +8,10 @@
 :patterns:
 - :include: "#parameter_struct"
 - :include: "#struct_declare"
-- :include: "#special_block"
+- :include: "#special_block_context"
 - :match: "##(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
   :name: variable.other.macro.argument.cpp
-- :include: "#strings"
+- :include: "#string_context"
 - :match: "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)"
   :name: storage.modifier.specificer.functional.pre-parameters.$0.cpp
 - :match: "(?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r]))"
@@ -78,7 +78,7 @@
 - :include: "#preprocessor_rule_disabled"
 - :include: "#preprocessor_rule_conditional"
 - :include: "#hacky_fix_for_stray_directive"
-- :include: "#comments"
+- :include: "#comments_context"
 - :name: meta.conditional.case.cpp
   :begin: "((?<!\\w)case(?!\\w))"
   :beginCaptures:
@@ -98,7 +98,7 @@
   :name: storage.modifier.cpp
 - :include: "#operator_overload"
 - :include: "#number_literal"
-- :include: "#strings_c"
+- :include: "#string_context_c"
 - :name: meta.preprocessor.macro.cpp
   :begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t
     \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
@@ -121,7 +121,7 @@
       :name: punctuation.definition.parameters.end.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
   :patterns:
-  - :include: "#preprocessor_rule_define_line_contents"
+  - :include: "#preprocessor_rule_define_line_context"
 - :name: meta.preprocessor.diagnostic.cpp
   :begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
   :beginCaptures:
@@ -158,7 +158,7 @@
     :name: string.unquoted.single.cpp
     :patterns:
     - :include: "#line_continuation_character"
-    - :include: "#comments"
+    - :include: "#comments_context"
 - :name: meta.preprocessor.include.cpp
   :begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*"
   :beginCaptures:
@@ -197,7 +197,7 @@
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
   :patterns:
-  - :include: "#strings_c"
+  - :include: "#string_context_c"
   - :include: "#number_literal"
   - :include: "#line_continuation_character"
 - :name: meta.preprocessor.cpp
@@ -221,7 +221,7 @@
       :name: punctuation.definition.directive.cpp
   :end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
   :patterns:
-  - :include: "#strings_c"
+  - :include: "#string_context_c"
   - :match: "[a-zA-Z_$][\\w\\-$]*"
     :name: entity.other.attribute-name.pragma.preprocessor.cpp
   - :include: "#number_literal"
@@ -234,7 +234,7 @@
   :end: "(?<=\\))"
   :patterns:
   - :include: "#parameter_struct"
-  - :include: "#function_innards_c"
+  - :include: "#function_context_c"
 - :include: "#line_continuation_character"
 - :name: meta.bracket.square.access.cpp
   :begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])"
@@ -248,7 +248,7 @@
     '0':
       :name: punctuation.definition.end.bracket.square.cpp
   :patterns:
-  - :include: "#functioncall_innards_c"
+  - :include: "#function_call_context_c"
 - :name: storage.modifier.array.bracket.square.cpp
   :match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
 - :match: ";"
@@ -395,7 +395,7 @@
       '4':
         :name: keyword.operator.new.cpp
     :name: keyword.operator.wordlike.cpp memory.cpp
-  attribute_cpp:
+  :attributes:
     :name: support.other.attribute.cpp
     :begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"
     :beginCaptures:
@@ -406,12 +406,12 @@
       '1':
         :name: punctuation.section.attribute.end.cpp
     :patterns:
-    - :include: "#attribute_cpp"
+    - :include: "#attributes"
     - :begin: "\\("
       :end: "\\)"
       :patterns:
-      - :include: "#attribute_cpp"
-      - :include: "#strings_c"
+      - :include: "#attributes"
+      - :include: "#string_context_c"
     - :match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
       :captures:
         '1':
@@ -439,7 +439,7 @@
           :name: storage.type.user-defined.cpp
         - :include: "#operators"
         - :include: "#number_literal"
-        - :include: "#strings"
+        - :include: "#string_context"
         - :match: ","
           :name: comma.cpp punctuation.separator.template.argument.cpp
   template_isolated_definition:
@@ -488,7 +488,7 @@
         :name: storage.type.user-defined.cpp
       - :include: "#operators"
       - :include: "#number_literal"
-      - :include: "#strings"
+      - :include: "#string_context"
       - :match: ","
         :name: comma.cpp punctuation.separator.template.argument.cpp
     - :include: "#scope_resolution"
@@ -540,7 +540,7 @@
           :name: storage.type.user-defined.cpp
         - :include: "#operators"
         - :include: "#number_literal"
-        - :include: "#strings"
+        - :include: "#string_context"
         - :match: ","
           :name: comma.cpp punctuation.separator.template.argument.cpp
       '4':
@@ -576,6 +576,35 @@
           :name: keyword.operator.reference.cpp
       '4':
         :name: variable.other.object.declare.cpp
+  :function_call:
+    :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(\\()"
+    :beginCaptures:
+      '1':
+        :patterns:
+        - :include: "#scope_resolution"
+      '2':
+        :name: entity.name.function.call.cpp
+      '3':
+        :name: meta.template.call.cpp
+        :patterns:
+        - :include: "#storage_types"
+        - :include: "#constants"
+        - :include: "#scope_resolution"
+        - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+          :name: storage.type.user-defined.cpp
+        - :include: "#operators"
+        - :include: "#number_literal"
+        - :include: "#string_context"
+        - :match: ","
+          :name: comma.cpp punctuation.separator.template.argument.cpp
+      '4':
+        :name: punctuation.section.arguments.begin.bracket.round.cpp
+    :end: "(\\))"
+    :endCaptures:
+      '1':
+        :name: punctuation.section.arguments.end.bracket.round.cpp
+    :patterns:
+    - :include: "#function_call_context_c"
   :operators:
     :patterns:
     - :include: "#sizeof_operator"
@@ -622,7 +651,7 @@
       :patterns:
       - :include: "#method_access"
       - :include: "#member_access"
-      - :include: "#c_function_call"
+      - :include: "#function_call_c"
       - :include: "$base"
   sizeof_operator:
     :contentName: meta.arguments.operator.sizeof
@@ -720,7 +749,7 @@
         :name: punctuation.section.parameters.end.bracket.round.operator-overload.cpp
     :patterns:
     - :include: "#probably_a_parameter"
-    - :include: "#function_innards_c"
+    - :include: "#function_context_c"
   member_access:
     :match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
     :captures:
@@ -787,7 +816,61 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     :patterns:
-    - :include: "#functioncall_innards_c"
+    - :include: "#function_call_context_c"
+  :using_namespace:
+    :name: meta.using-namespace.cpp
+    :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
+    :beginCaptures:
+      '1':
+        :name: keyword.other.using.directive.cpp
+      '2':
+        :name: keyword.other.namespace.directive.cpp storage.type.namespace.directive.cpp
+      '3':
+        :patterns:
+        - :include: "#scope_resolution"
+      '4':
+        :name: entity.name.type.namespace.cpp
+    :end: "(;)"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+  :namespace_block:
+    :name: meta.block.namespace.cpp
+    :begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))|(?=\\{)))"
+    :beginCaptures:
+      '1':
+        :name: meta.head.namespace.cpp
+      '2':
+        :name: keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp
+      '3':
+        :patterns:
+        - :include: "#attributes"
+      '4':
+        :patterns:
+        - :include: "#scope_resolution"
+      '5':
+        :name: entity.name.type.namespace.cpp
+    :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
+    :patterns:
+    - :name: meta.head.namespace.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - :name: meta.body.namespace.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.namespace.cpp
+      :patterns:
+      - :include: "$base"
+    - :name: meta.tail.namespace.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
   lambdas:
     :begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     :beginCaptures:
@@ -797,7 +880,7 @@
         :name: meta.lambda.capture.cpp
         :patterns:
         - :include: "#probably_a_parameter"
-        - :include: "#function_innards_c"
+        - :include: "#function_context_c"
       '4':
         :name: punctuation.definition.capture.end.lambda.cpp
     :end: "(?<=})"
@@ -813,7 +896,7 @@
           :name: punctuation.definition.parameters.end.lambda.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function_innards_c"
+      - :include: "#function_context_c"
     - :match: "(?<!\\w)(?:mutable|constexpr|consteval)(?!\\w)"
       :name: storage.modifier.lambda.$0.cpp
     - :match: "(->)(.+?(?=\\{|$))?"
@@ -839,13 +922,358 @@
   :posix_reserved_types:
     :match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     :name: support.type.posix-reserved.cpp
+  :enum_block:
+    :name: meta.block.enum.cpp
+    :begin: "((enum)\\s+(?:(class|struct)(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={)))?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
+    :beginCaptures:
+      '1':
+        :name: meta.head.enum.cpp
+      '2':
+        :name: storage.type.enum.cpp
+      '3':
+        :name: storage.type.enum.enum-key.$3.cpp
+      '4':
+        :patterns:
+        - :include: "#attributes"
+      '5':
+        :patterns:
+        - :include: "#attributes"
+      '6':
+        :name: entity.name.type.enum.cpp
+      '7':
+        :name: colon.cpp punctuation.separator.type-specifier.cpp
+      '8':
+        :name: meta.scope-resolution.cpp
+      '9':
+        :patterns:
+        - :include: "#scope_resolution"
+      '10':
+        :name: entity.name.type.namespace.scope-resolution.cpp
+      '11':
+        :name: meta.template.call.cpp
+        :patterns:
+        - :include: "#storage_types"
+        - :include: "#constants"
+        - :include: "#scope_resolution"
+        - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+          :name: storage.type.user-defined.cpp
+        - :include: "#operators"
+        - :include: "#number_literal"
+        - :include: "#string_context"
+        - :match: ","
+          :name: comma.cpp punctuation.separator.template.argument.cpp
+      '12':
+        :name: punctuation.separator.namespace.access.cpp
+      '13':
+        :name: storage.type.integral.$13.cpp
+    :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+      '2':
+        :name: punctuation.terminator.statement.cpp
+    :patterns:
+    - :name: meta.head.enum.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.enum.cpp
+      :patterns:
+      - :include: "$base"
+    - :name: meta.body.enum.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.enum.cpp
+      :patterns:
+      - :include: "$base"
+    - :name: meta.tail.enum.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
+  :class_block:
+    :name: meta.block.class.cpp
+    :begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    :beginCaptures:
+      '1':
+        :name: meta.head.class.cpp
+      '3':
+        :name: storage.type.$3.cpp
+      '4':
+        :patterns:
+        - :include: "#attributes"
+      '5':
+        :patterns:
+        - :include: "#attributes"
+      '6':
+        :name: entity.name.type.$3.cpp
+      '7':
+        :name: storage.type.modifier.final.cpp
+      '8':
+        :name: colon.cpp punctuation.separator.inhertance.cpp
+      '9':
+        :patterns:
+        - :match: ","
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+    :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+      '2':
+        :name: punctuation.terminator.statement.cpp
+    :patterns:
+    - :name: meta.head.class.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.class.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_enabled"
+      - :include: "#preprocessor_rule_disabled"
+      - :include: "#preprocessor_rule_conditional"
+      - :include: "#hacky_fix_for_stray_directive"
+      - :match: ","
+        :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+      - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+        :name: storage.type.modifier.access.$0.cpp
+      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+        :captures:
+          '1':
+            :name: entity.name.type.inherited.cpp
+      - &1
+        :name: meta.template.call.cpp
+        :begin: "(<)"
+        :beginCaptures:
+          '1':
+            :name: punctuation.section.angle-brackets.begin.template.call.cpp
+        :end: "(>)"
+        :endCaptures:
+          '1':
+            :name: punctuation.section.angle-brackets.end.template.call.cpp
+        :patterns:
+        - :include: "#storage_types"
+        - :include: "#constants"
+        - :include: "#scope_resolution"
+        - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+          :name: storage.type.user-defined.cpp
+        - :include: "#operators"
+        - :include: "#number_literal"
+        - :include: "#string_context"
+        - :match: ","
+          :name: comma.cpp punctuation.separator.template.argument.cpp
+      - :include: "#comments_context"
+    - :name: meta.body.class.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.class.cpp
+      :patterns:
+      - :include: "#constructor_context"
+      - :include: "$base"
+    - :name: meta.tail.class.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
+  :struct_block:
+    :name: meta.block.struct.cpp
+    :begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    :beginCaptures:
+      '1':
+        :name: meta.head.struct.cpp
+      '3':
+        :name: storage.type.$3.cpp
+      '4':
+        :patterns:
+        - :include: "#attributes"
+      '5':
+        :patterns:
+        - :include: "#attributes"
+      '6':
+        :name: entity.name.type.$3.cpp
+      '7':
+        :name: storage.type.modifier.final.cpp
+      '8':
+        :name: colon.cpp punctuation.separator.inhertance.cpp
+      '9':
+        :patterns:
+        - :match: ","
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+    :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+      '2':
+        :name: punctuation.terminator.statement.cpp
+    :patterns:
+    - :name: meta.head.struct.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.struct.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_enabled"
+      - :include: "#preprocessor_rule_disabled"
+      - :include: "#preprocessor_rule_conditional"
+      - :include: "#hacky_fix_for_stray_directive"
+      - :match: ","
+        :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+      - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+        :name: storage.type.modifier.access.$0.cpp
+      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+        :captures:
+          '1':
+            :name: entity.name.type.inherited.cpp
+      - *1
+      - :include: "#comments_context"
+    - :name: meta.body.struct.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.struct.cpp
+      :patterns:
+      - :include: "#constructor_context"
+      - :include: "$base"
+    - :name: meta.tail.struct.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
+  :union_block:
+    :name: meta.block.union.cpp
+    :begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    :beginCaptures:
+      '1':
+        :name: meta.head.union.cpp
+      '3':
+        :name: storage.type.$3.cpp
+      '4':
+        :patterns:
+        - :include: "#attributes"
+      '5':
+        :patterns:
+        - :include: "#attributes"
+      '6':
+        :name: entity.name.type.$3.cpp
+      '7':
+        :name: storage.type.modifier.final.cpp
+      '8':
+        :name: colon.cpp punctuation.separator.inhertance.cpp
+      '9':
+        :patterns:
+        - :match: ","
+          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+          :name: storage.type.modifier.access.$0.cpp
+        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          :captures:
+            '1':
+              :name: entity.name.type.inherited.cpp
+    :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+      '2':
+        :name: punctuation.terminator.statement.cpp
+    :patterns:
+    - :name: meta.head.union.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.union.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_enabled"
+      - :include: "#preprocessor_rule_disabled"
+      - :include: "#preprocessor_rule_conditional"
+      - :include: "#hacky_fix_for_stray_directive"
+      - :match: ","
+        :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
+      - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
+        :name: storage.type.modifier.access.$0.cpp
+      - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+        :captures:
+          '1':
+            :name: entity.name.type.inherited.cpp
+      - *1
+      - :include: "#comments_context"
+    - :name: meta.body.union.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.union.cpp
+      :patterns:
+      - :include: "#constructor_context"
+      - :include: "$base"
+    - :name: meta.tail.union.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
+  :extern_block:
+    :name: meta.block.extern.cpp
+    :begin: ((\bextern)(?=\s*\"))
+    :beginCaptures:
+      '1':
+        :name: meta.head.extern.cpp
+      '2':
+        :name: storage.type.extern.cpp
+    :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    :endCaptures:
+      '1':
+        :name: punctuation.terminator.statement.cpp
+      '2':
+        :name: punctuation.terminator.statement.cpp
+    :patterns:
+    - :name: meta.head.extern.cpp
+      :begin: "\\G"
+      :end: "((?:\\{|(?=;)))"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.begin.bracket.curly.extern.cpp
+      :patterns:
+      - :include: "$base"
+    - :name: meta.body.extern.cpp
+      :begin: "(?<=\\{)"
+      :end: "(\\})"
+      :endCaptures:
+        '1':
+          :name: punctuation.section.block.end.bracket.curly.extern.cpp
+      :patterns:
+      - :include: "$base"
+    - :name: meta.tail.extern.cpp
+      :begin: "(?<=})[\\s\\n]*"
+      :end: "[\\s\\n]*(?=;)"
+      :patterns:
+      - :include: "$base"
+    - :include: "$base"
   :hacky_fix_for_stray_directive:
     :match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     :name: keyword.control.directive.$0.cpp
   :assembly:
     :match: "(?<!\\w)(asm|__asm__)(?!\\w)"
     :name: storage.type.$0.cpp
-  :constructor:
+  :constructor_context:
     :patterns:
     - :begin: |-
         (?x)
@@ -864,7 +1292,7 @@
       :name: meta.function.constructor.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function_innards_c"
+      - :include: "#function_context_c"
     - :begin: |-
         (?x)
         (:)
@@ -881,402 +1309,17 @@
       :name: meta.function.constructor.initializer-list.cpp
       :patterns:
       - :include: "$base"
-  :special_block:
+  :special_block_context:
     :patterns:
-    - :include: "#attribute_cpp"
-    - :name: meta.using-namespace.cpp
-      :begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
-      :beginCaptures:
-        '1':
-          :name: keyword.other.using.directive.cpp
-        '2':
-          :name: keyword.other.namespace.directive.cpp storage.type.namespace.directive.cpp
-        '3':
-          :patterns:
-          - :include: "#scope_resolution"
-        '4':
-          :name: entity.name.type.namespace.cpp
-      :end: "(;)"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-    - :name: meta.block.namespace.cpp
-      :begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))|(?=\\{)))"
-      :beginCaptures:
-        '1':
-          :name: meta.head.namespace.cpp
-        '2':
-          :name: keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp
-        '3':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '4':
-          :patterns:
-          - :include: "#scope_resolution"
-        '5':
-          :name: entity.name.type.namespace.cpp
-      :end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
-      :patterns:
-      - :name: meta.head.namespace.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.namespace.cpp
-      - :name: meta.body.namespace.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.namespace.cpp
-        :patterns:
-        - :include: "$base"
-      - :name: meta.tail.namespace.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-    - :name: meta.block.class.cpp
-      :begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
-      :beginCaptures:
-        '1':
-          :name: meta.head.class.cpp
-        '3':
-          :name: storage.type.$3.cpp
-        '4':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '5':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
-        '7':
-          :name: storage.type.modifier.final.cpp
-        '8':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
-        '9':
-          :patterns:
-          - :match: ","
-            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-          - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-            :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-            :captures:
-              '1':
-                :name: entity.name.type.inherited.cpp
-      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-        '2':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :name: meta.head.class.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.class.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_enabled"
-        - :include: "#preprocessor_rule_disabled"
-        - :include: "#preprocessor_rule_conditional"
-        - :include: "#hacky_fix_for_stray_directive"
-        - :match: ","
-          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-          :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-          :captures:
-            '1':
-              :name: entity.name.type.inherited.cpp
-        - &1
-          :name: meta.template.call.cpp
-          :begin: "(<)"
-          :beginCaptures:
-            '1':
-              :name: punctuation.section.angle-brackets.begin.template.call.cpp
-          :end: "(>)"
-          :endCaptures:
-            '1':
-              :name: punctuation.section.angle-brackets.end.template.call.cpp
-          :patterns:
-          - :include: "#storage_types"
-          - :include: "#constants"
-          - :include: "#scope_resolution"
-          - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-            :name: storage.type.user-defined.cpp
-          - :include: "#operators"
-          - :include: "#number_literal"
-          - :include: "#strings"
-          - :match: ","
-            :name: comma.cpp punctuation.separator.template.argument.cpp
-        - :include: "#comments"
-      - :name: meta.body.class.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.class.cpp
-        :patterns:
-        - :include: "#constructor"
-        - :include: "$base"
-      - :name: meta.tail.class.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-    - :name: meta.block.struct.cpp
-      :begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
-      :beginCaptures:
-        '1':
-          :name: meta.head.struct.cpp
-        '3':
-          :name: storage.type.$3.cpp
-        '4':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '5':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
-        '7':
-          :name: storage.type.modifier.final.cpp
-        '8':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
-        '9':
-          :patterns:
-          - :match: ","
-            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-          - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-            :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-            :captures:
-              '1':
-                :name: entity.name.type.inherited.cpp
-      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-        '2':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :name: meta.head.struct.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.struct.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_enabled"
-        - :include: "#preprocessor_rule_disabled"
-        - :include: "#preprocessor_rule_conditional"
-        - :include: "#hacky_fix_for_stray_directive"
-        - :match: ","
-          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-          :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-          :captures:
-            '1':
-              :name: entity.name.type.inherited.cpp
-        - *1
-        - :include: "#comments"
-      - :name: meta.body.struct.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.struct.cpp
-        :patterns:
-        - :include: "#constructor"
-        - :include: "$base"
-      - :name: meta.tail.struct.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-    - :name: meta.block.union.cpp
-      :begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
-      :beginCaptures:
-        '1':
-          :name: meta.head.union.cpp
-        '3':
-          :name: storage.type.$3.cpp
-        '4':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '5':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.$3.cpp
-        '7':
-          :name: storage.type.modifier.final.cpp
-        '8':
-          :name: colon.cpp punctuation.separator.inhertance.cpp
-        '9':
-          :patterns:
-          - :match: ","
-            :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-          - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-            :name: storage.type.modifier.access.$0.cpp
-          - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-            :captures:
-              '1':
-                :name: entity.name.type.inherited.cpp
-      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-        '2':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :name: meta.head.union.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.union.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_enabled"
-        - :include: "#preprocessor_rule_disabled"
-        - :include: "#preprocessor_rule_conditional"
-        - :include: "#hacky_fix_for_stray_directive"
-        - :match: ","
-          :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
-        - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
-          :name: storage.type.modifier.access.$0.cpp
-        - :match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-          :captures:
-            '1':
-              :name: entity.name.type.inherited.cpp
-        - *1
-        - :include: "#comments"
-      - :name: meta.body.union.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.union.cpp
-        :patterns:
-        - :include: "#constructor"
-        - :include: "$base"
-      - :name: meta.tail.union.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-    - :name: meta.block.enum.cpp
-      :begin: "((enum)\\s+(?:(class|struct)(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={)))?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
-      :beginCaptures:
-        '1':
-          :name: meta.head.enum.cpp
-        '2':
-          :name: storage.type.enum.cpp
-        '3':
-          :name: storage.type.enum.enum-key.$3.cpp
-        '4':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '5':
-          :patterns:
-          - :include: "#attribute_cpp"
-        '6':
-          :name: entity.name.type.enum.cpp
-        '7':
-          :name: colon.cpp punctuation.separator.type-specifier.cpp
-        '8':
-          :name: meta.scope-resolution.cpp
-        '9':
-          :patterns:
-          - :include: "#scope_resolution"
-        '10':
-          :name: entity.name.type.namespace.scope-resolution.cpp
-        '11':
-          :name: meta.template.call.cpp
-          :patterns:
-          - :include: "#storage_types"
-          - :include: "#constants"
-          - :include: "#scope_resolution"
-          - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-            :name: storage.type.user-defined.cpp
-          - :include: "#operators"
-          - :include: "#number_literal"
-          - :include: "#strings"
-          - :match: ","
-            :name: comma.cpp punctuation.separator.template.argument.cpp
-        '12':
-          :name: punctuation.separator.namespace.access.cpp
-        '13':
-          :name: storage.type.integral.$13.cpp
-      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-        '2':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :name: meta.head.enum.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.enum.cpp
-        :patterns:
-        - :include: "$base"
-      - :name: meta.body.enum.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.enum.cpp
-        :patterns:
-        - :include: "$base"
-      - :name: meta.tail.enum.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-    - :name: meta.block.extern.cpp
-      :begin: ((\bextern)(?=\s*\"))
-      :beginCaptures:
-        '1':
-          :name: meta.head.extern.cpp
-        '2':
-          :name: storage.type.extern.cpp
-      :end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
-      :endCaptures:
-        '1':
-          :name: punctuation.terminator.statement.cpp
-        '2':
-          :name: punctuation.terminator.statement.cpp
-      :patterns:
-      - :name: meta.head.extern.cpp
-        :begin: "\\G"
-        :end: "((?:\\{|(?=;)))"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.begin.bracket.curly.extern.cpp
-        :patterns:
-        - :include: "$base"
-      - :name: meta.body.extern.cpp
-        :begin: "(?<=\\{)"
-        :end: "(\\})"
-        :endCaptures:
-          '1':
-            :name: punctuation.section.block.end.bracket.curly.extern.cpp
-        :patterns:
-        - :include: "$base"
-      - :name: meta.tail.extern.cpp
-        :begin: "(?<=})[\\s\\n]*"
-        :end: "[\\s\\n]*(?=;)"
-        :patterns:
-        - :include: "$base"
-      - :include: "$base"
-  :strings:
+    - :include: "#attributes"
+    - :include: "#using_namespace"
+    - :include: "#namespace_block"
+    - :include: "#class_block"
+    - :include: "#struct_block"
+    - :include: "#union_block"
+    - :include: "#enum_block"
+    - :include: "#extern_block"
+  :string_context:
     :patterns:
     - :begin: (u|u8|U|L)?"
       :beginCaptures:
@@ -1298,7 +1341,7 @@
         :name: constant.character.escape.cpp
       - :match: "\\\\x\\h+"
         :name: constant.character.escape.cpp
-      - :include: "#string_placeholder_c"
+      - :include: "#string_escapes_context_c"
     - :begin: (u|u8|U|L)?R"(?:([^ ()\\\t]{0,16})|([^ ()\\\t]*))\(
       :beginCaptures:
         '0':
@@ -1315,18 +1358,17 @@
           :name: invalid.illegal.delimiter-too-long.cpp
       :name: string.quoted.double.raw.cpp
   :block:
+    :begin: "{"
+    :beginCaptures:
+      '0':
+        :name: punctuation.section.block.begin.bracket.curly.cpp
+    :end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)"
+    :endCaptures:
+      '0':
+        :name: punctuation.section.block.end.bracket.curly.cpp
+    :name: meta.block.cpp
     :patterns:
-    - :begin: "{"
-      :beginCaptures:
-        '0':
-          :name: punctuation.section.block.begin.bracket.curly.cpp
-      :end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)"
-      :endCaptures:
-        '0':
-          :name: punctuation.section.block.end.bracket.curly.cpp
-      :name: meta.block.cpp
-      :patterns:
-      - :include: "#block_context"
+    - :include: "#block_context"
   :block_context:
     :patterns:
     - :include: "#preprocessor_rule_enabled_block"
@@ -1334,7 +1376,7 @@
     - :include: "#preprocessor_rule_conditional_block"
     - :include: "#method_access"
     - :include: "#member_access"
-    - :include: "#c_function_call"
+    - :include: "#function_call_c"
     - :name: meta.initialization.cpp
       :begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)
         \ # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ |
@@ -1350,7 +1392,7 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.initialization.cpp
       :patterns:
-      - :include: "#functioncall_innards_c"
+      - :include: "#function_call_context_c"
     - :begin: "{"
       :beginCaptures:
         '0':
@@ -1363,7 +1405,7 @@
       - :include: "#block_context"
     - :include: "#parentheses_block"
     - :include: "$base"
-  :c_function_call:
+  :function_call_c:
     :begin: |-
       (?x)
       (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\s*\()
@@ -1375,8 +1417,8 @@
     :end: "(?<=\\))(?!\\w)"
     :name: meta.function-call.cpp
     :patterns:
-    - :include: "#functioncall_innards_c"
-  :comments:
+    - :include: "#function_call_context_c"
+  :comments_context:
     :patterns:
     - :captures:
         '1':
@@ -1418,11 +1460,10 @@
     - :include: "#disabled"
     - :include: "#pragma_mark"
   :line_continuation_character:
-    :patterns:
-    - :match: "(\\\\)\\n"
-      :captures:
-        '1':
-          :name: constant.character.escape.line-continuation.cpp
+    :match: "(\\\\)\\n"
+    :captures:
+      '1':
+        :name: constant.character.escape.line-continuation.cpp
   :parentheses:
     :name: punctuation.section.parens-c.cpp
     :begin: "\\("
@@ -1461,7 +1502,7 @@
         :name: entity.name.tag.pragma-mark.cpp
     :match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))"
     :name: meta.section.cpp
-  :strings_c:
+  :string_context_c:
     :patterns:
     - :begin: "\""
       :beginCaptures:
@@ -1473,8 +1514,7 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.double.cpp
       :patterns:
-      - :include: "#string_escaped_char_c"
-      - :include: "#string_placeholder_c"
+      - :include: "#string_escapes_context_c"
       - :include: "#line_continuation_character"
     - :begin: !ruby/regexp /(?<![\da-fA-F])'/
       :beginCaptures:
@@ -1486,17 +1526,15 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.single.cpp
       :patterns:
-      - :include: "#string_escaped_char_c"
+      - :include: "#string_escapes_context_c"
       - :include: "#line_continuation_character"
-  :string_escaped_char_c:
+  :string_escapes_context_c:
     :patterns:
     - :match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
         |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )"
       :name: constant.character.escape.cpp
     - :match: "\\\\."
       :name: invalid.illegal.unknown-escape.cpp
-  :string_placeholder_c:
-    :patterns:
     - :match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t
         \ # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t
         \ # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)?
@@ -1506,89 +1544,87 @@
     :match: "(?<!\\.)\\.\\.\\.(?!\\.)"
     :name: punctuation.vararg-ellipses.cpp
   :preprocessor_rule_conditional:
+    :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
-      :beginCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
+      :name: meta.preprocessor.cpp
       :patterns:
-      - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#preprocessor_rule_enabled_elif"
-      - :include: "#preprocessor_rule_enabled_else"
-      - :include: "#preprocessor_rule_disabled_elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "$base"
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#preprocessor_rule_enabled_elif"
+    - :include: "#preprocessor_rule_enabled_else"
+    - :include: "#preprocessor_rule_disabled_elif"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
+      :beginCaptures:
+        '1':
+          :name: keyword.control.directive.conditional.cpp
+        '2':
+          :name: punctuation.definition.directive.cpp
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "$base"
   :preprocessor_rule_conditional_block:
+    :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
-      :beginCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
+      :name: meta.preprocessor.cpp
       :patterns:
-      - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#preprocessor_rule_enabled_elif_block"
-      - :include: "#preprocessor_rule_enabled_else_block"
-      - :include: "#preprocessor_rule_disabled_elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#block_context"
-  :preprocessor_rule_conditional_line:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#preprocessor_rule_enabled_elif_block"
+    - :include: "#preprocessor_rule_enabled_else_block"
+    - :include: "#preprocessor_rule_disabled_elif"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
+      :beginCaptures:
+        '1':
+          :name: keyword.control.directive.conditional.cpp
+        '2':
+          :name: punctuation.definition.directive.cpp
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#block_context"
+  :preprocessor_rule_conditional_line_context:
     :patterns:
     - :match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))"
       :name: keyword.control.directive.conditional.cpp
     - :match: "\\bdefined\\b"
       :name: invalid.illegal.macro-name.cpp
-    - :include: "#comments"
-    - :include: "#strings_c"
+    - :include: "#comments_context"
+    - :include: "#string_context_c"
     - :include: "#number_literal"
     - :begin: "\\?"
       :beginCaptures:
@@ -1599,7 +1635,7 @@
         '0':
           :name: keyword.operator.ternary.cpp
       :patterns:
-      - :include: "#preprocessor_rule_conditional_line"
+      - :include: "#preprocessor_rule_conditional_line_context"
     - :include: "#operators"
     - :include: "#constants"
     - :match: *2
@@ -1614,10 +1650,35 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor_rule_conditional_line"
+      - :include: "#preprocessor_rule_conditional_line_context"
   :preprocessor_rule_disabled:
+    :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
+    - :include: "#preprocessor_rule_enabled_elif"
+    - :include: "#preprocessor_rule_enabled_else"
+    - :include: "#preprocessor_rule_disabled_elif"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1625,49 +1686,48 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
+      :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
       :patterns:
       - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#comments"
-      - :include: "#preprocessor_rule_enabled_elif"
-      - :include: "#preprocessor_rule_enabled_else"
-      - :include: "#preprocessor_rule_disabled_elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
-        :patterns:
-        - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-          :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-          :name: meta.preprocessor.cpp
-          :patterns:
-          - :include: "#preprocessor_rule_conditional_line"
-        - :include: "$base"
-      - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        contentName: comment.block.preprocessor.if-branch
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
+        - :include: "#preprocessor_rule_conditional_line_context"
+      - :include: "$base"
+    - :begin: "\\n"
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      contentName: comment.block.preprocessor.if-branch
+      :patterns:
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
   :preprocessor_rule_disabled_block:
+    :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
+    - :include: "#preprocessor_rule_enabled_elif_block"
+    - :include: "#preprocessor_rule_enabled_else_block"
+    - :include: "#preprocessor_rule_disabled_elif"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1675,46 +1735,20 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
-        '0':
-          :name: meta.preprocessor.cpp
-        '1':
-          :name: keyword.control.directive.conditional.cpp
-        '2':
-          :name: punctuation.definition.directive.cpp
+      :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
       :patterns:
       - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
         :name: meta.preprocessor.cpp
         :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#comments"
-      - :include: "#preprocessor_rule_enabled_elif_block"
-      - :include: "#preprocessor_rule_enabled_else_block"
-      - :include: "#preprocessor_rule_disabled_elif"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))"
-        :patterns:
-        - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-          :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
-          :name: meta.preprocessor.cpp
-          :patterns:
-          - :include: "#preprocessor_rule_conditional_line"
-        - :include: "#block_context"
-      - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        contentName: comment.block.preprocessor.if-branch.in-block
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
+        - :include: "#preprocessor_rule_conditional_line_context"
+      - :include: "#block_context"
+    - :begin: "\\n"
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      contentName: comment.block.preprocessor.if-branch.in-block
+      :patterns:
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
   :preprocessor_rule_disabled_elif:
     :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
@@ -1730,8 +1764,8 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor_rule_conditional_line"
-    - :include: "#comments"
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       contentName: comment.block.preprocessor.elif-branch
@@ -1739,8 +1773,32 @@
       - :include: "#disabled"
       - :include: "#pragma_mark"
   :preprocessor_rule_enabled:
+    :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+      '3':
+        :name: constant.numeric.preprocessor.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
+    - :begin: "^\\s*((#)\\s*else\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1748,56 +1806,53 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-        '3':
-          :name: constant.numeric.preprocessor.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
+      :end: "(?=^\\s*((#)\\s*endif\\b))"
+      contentName: comment.block.preprocessor.else-branch
+      :patterns:
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
+      :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
         '1':
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      contentName: comment.block.preprocessor.if-branch
       :patterns:
-      - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#comments"
-      - :begin: "^\\s*((#)\\s*else\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
-        contentName: comment.block.preprocessor.else-branch
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        contentName: comment.block.preprocessor.if-branch
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
-      - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        :patterns:
-        - :include: "$base"
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
+    - :begin: "\\n"
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      :patterns:
+      - :include: "$base"
   :preprocessor_rule_enabled_block:
+    :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    :beginCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
+    :end: "^\\s*((#)\\s*endif\\b)"
+    :endCaptures:
+      '0':
+        :name: meta.preprocessor.cpp
+      '1':
+        :name: keyword.control.directive.conditional.cpp
+      '2':
+        :name: punctuation.definition.directive.cpp
     :patterns:
-    - :begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
+    - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
+      :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
+      :name: meta.preprocessor.cpp
+      :patterns:
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
+    - :begin: "^\\s*((#)\\s*else\\b)"
       :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
@@ -1805,51 +1860,28 @@
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
-      :end: "^\\s*((#)\\s*endif\\b)"
-      :endCaptures:
+      :end: "(?=^\\s*((#)\\s*endif\\b))"
+      contentName: comment.block.preprocessor.else-branch.in-block
+      :patterns:
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
+    - :begin: "^\\s*((#)\\s*elif\\b)"
+      :beginCaptures:
         '0':
           :name: meta.preprocessor.cpp
         '1':
           :name: keyword.control.directive.conditional.cpp
         '2':
           :name: punctuation.definition.directive.cpp
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      contentName: comment.block.preprocessor.if-branch.in-block
       :patterns:
-      - :begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))"
-        :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)"
-        :name: meta.preprocessor.cpp
-        :patterns:
-        - :include: "#preprocessor_rule_conditional_line"
-      - :include: "#comments"
-      - :begin: "^\\s*((#)\\s*else\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*endif\\b))"
-        contentName: comment.block.preprocessor.else-branch.in-block
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
-      - :begin: "^\\s*((#)\\s*elif\\b)"
-        :beginCaptures:
-          '0':
-            :name: meta.preprocessor.cpp
-          '1':
-            :name: keyword.control.directive.conditional.cpp
-          '2':
-            :name: punctuation.definition.directive.cpp
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        contentName: comment.block.preprocessor.if-branch.in-block
-        :patterns:
-        - :include: "#disabled"
-        - :include: "#pragma_mark"
-      - :begin: "\\n"
-        :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
-        :patterns:
-        - :include: "#block_context"
+      - :include: "#disabled"
+      - :include: "#pragma_mark"
+    - :begin: "\\n"
+      :end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
+      :patterns:
+      - :include: "#block_context"
   :preprocessor_rule_enabled_elif:
     :begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     :beginCaptures:
@@ -1865,8 +1897,8 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor_rule_conditional_line"
-    - :include: "#comments"
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
@@ -1912,8 +1944,8 @@
       :end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)"
       :name: meta.preprocessor.cpp
       :patterns:
-      - :include: "#preprocessor_rule_conditional_line"
-    - :include: "#comments"
+      - :include: "#preprocessor_rule_conditional_line_context"
+    - :include: "#comments_context"
     - :begin: "\\n"
       :end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       :patterns:
@@ -1968,7 +2000,7 @@
     :end: "(?=^\\s*((#)\\s*endif\\b))"
     :patterns:
     - :include: "#block_context"
-  :preprocessor_rule_define_line_contents:
+  :preprocessor_rule_define_line_context:
     :patterns:
     - :include: "#vararg_ellipses"
     - :match: !ruby/regexp /##?(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U000[0-9a-fA-F])))*(?!\w)/
@@ -1983,7 +2015,7 @@
           :name: punctuation.section.block.end.bracket.curly.cpp
       :name: meta.block.cpp
       :patterns:
-      - :include: "#preprocessor_rule_define_line_blocks"
+      - :include: "#preprocessor_rule_define_line_blocks_context"
     - :match: "\\("
       :name: punctuation.section.parens.begin.bracket.round.cpp
     - :match: "\\)"
@@ -1999,7 +2031,7 @@
       :end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)"
       :name: meta.function.cpp
       :patterns:
-      - :include: "#preprocessor_rule_define_line_functions"
+      - :include: "#preprocessor_rule_define_line_functions_context"
     - :begin: "\""
       :beginCaptures:
         '0':
@@ -2010,8 +2042,7 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.double.cpp
       :patterns:
-      - :include: "#string_escaped_char_c"
-      - :include: "#string_placeholder_c"
+      - :include: "#string_escapes_context_c"
       - :include: "#line_continuation_character"
     - :begin: "'"
       :beginCaptures:
@@ -2023,12 +2054,12 @@
           :name: punctuation.definition.string.end.cpp
       :name: string.quoted.single.cpp
       :patterns:
-      - :include: "#string_escaped_char_c"
+      - :include: "#string_escapes_context_c"
       - :include: "#line_continuation_character"
     - :include: "#method_access"
     - :include: "#member_access"
     - :include: "$base"
-  :preprocessor_rule_define_line_blocks:
+  :preprocessor_rule_define_line_blocks_context:
     :patterns:
     - :begin: "{"
       :beginCaptures:
@@ -2039,12 +2070,12 @@
         '0':
           :name: punctuation.section.block.end.bracket.curly.cpp
       :patterns:
-      - :include: "#preprocessor_rule_define_line_blocks"
-      - :include: "#preprocessor_rule_define_line_contents"
-    - :include: "#preprocessor_rule_define_line_contents"
-  :preprocessor_rule_define_line_functions:
+      - :include: "#preprocessor_rule_define_line_blocks_context"
+      - :include: "#preprocessor_rule_define_line_context"
+    - :include: "#preprocessor_rule_define_line_context"
+  :preprocessor_rule_define_line_functions_context:
     :patterns:
-    - :include: "#comments"
+    - :include: "#comments_context"
     - :include: "#storage_types"
     - :include: "#vararg_ellipses"
     - :include: "#method_access"
@@ -2069,7 +2100,7 @@
         '1':
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor_rule_define_line_functions"
+      - :include: "#preprocessor_rule_define_line_functions_context"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2079,12 +2110,12 @@
         '1':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#preprocessor_rule_define_line_functions"
-    - :include: "#preprocessor_rule_define_line_contents"
-  :function_innards_c:
+      - :include: "#preprocessor_rule_define_line_functions_context"
+    - :include: "#preprocessor_rule_define_line_context"
+  :function_context_c:
     :patterns:
-    - :include: "#attribute_cpp"
-    - :include: "#comments"
+    - :include: "#attributes"
+    - :include: "#comments_context"
     - :include: "#storage_types"
     - :include: "#operators"
     - :include: "#vararg_ellipses"
@@ -2109,7 +2140,7 @@
           :name: punctuation.section.parameters.end.bracket.round.cpp
       :patterns:
       - :include: "#probably_a_parameter"
-      - :include: "#function_innards_c"
+      - :include: "#function_context_c"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2119,12 +2150,12 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#function_innards_c"
+      - :include: "#function_context_c"
     - :include: "$base"
-  :functioncall_innards_c:
+  :function_call_context_c:
     :patterns:
-    - :include: "#attribute_cpp"
-    - :include: "#comments"
+    - :include: "#attributes"
+    - :include: "#comments_context"
     - :include: "#storage_types"
     - :include: "#method_access"
     - :include: "#member_access"
@@ -2151,35 +2182,8 @@
         '0':
           :name: punctuation.section.arguments.end.bracket.round.cpp
       :patterns:
-      - :include: "#functioncall_innards_c"
-    - :begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(\\()"
-      :beginCaptures:
-        '1':
-          :patterns:
-          - :include: "#scope_resolution"
-        '2':
-          :name: entity.name.function.call.cpp
-        '3':
-          :name: meta.template.call.cpp
-          :patterns:
-          - :include: "#storage_types"
-          - :include: "#constants"
-          - :include: "#scope_resolution"
-          - :match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-            :name: storage.type.user-defined.cpp
-          - :include: "#operators"
-          - :include: "#number_literal"
-          - :include: "#strings"
-          - :match: ","
-            :name: comma.cpp punctuation.separator.template.argument.cpp
-        '4':
-          :name: punctuation.section.arguments.begin.bracket.round.cpp
-      :end: "(\\))"
-      :endCaptures:
-        '1':
-          :name: punctuation.section.arguments.end.bracket.round.cpp
-      :patterns:
-      - :include: "#functioncall_innards_c"
+      - :include: "#function_call_context_c"
+    - :include: "#function_call"
     - :begin: "\\("
       :beginCaptures:
         '0':
@@ -2189,5 +2193,5 @@
         '0':
           :name: punctuation.section.parens.end.bracket.round.cpp
       :patterns:
-      - :include: "#functioncall_innards_c"
+      - :include: "#function_call_context_c"
     - :include: "#block_context"

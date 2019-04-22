@@ -412,8 +412,7 @@ cpp_grammar = Grammar.new(
 #
 # C++ Attributes
 #
-    attributes = Range.new(
-        repository_name: "attribute_cpp",
+    cpp_grammar[:attributes] = attributes = Range.new(
         tag_as: "support.other.attribute",
         start_pattern: newPattern(
             match: @cpp_tokens.that(:isAttributeStart),
@@ -425,13 +424,13 @@ cpp_grammar = Grammar.new(
         ),
         includes: [
             # allow nested attributes
-            "#attribute_cpp",
+            :attributes,
             Range.new(
                 start_pattern: newPattern(/\(/),
                 end_pattern: newPattern(/\)/),
                 includes: [
-                    "#attribute_cpp",
-                    "#strings_c",
+                    :attributes,
+                    "#string_context_c",
                 ],
             ),
             newPattern(match: /using/, tag_as: "keyword.other.using.directive")
@@ -460,7 +459,7 @@ cpp_grammar = Grammar.new(
             @cpp_tokens.that(:isAttributeStart, :isMsAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isMsAttribute))
         ).lookAheadToAvoid(/\)/),
         includes: [
-            "#attribute_cpp",
+            :attributes,
         ],
     )
 #
@@ -477,7 +476,7 @@ cpp_grammar = Grammar.new(
             ),
             :operators,
             :number_literal,
-            :strings,
+            :string_context,
             newPattern(
                 match: /,/,
                 tag_as: "comma punctuation.separator.template.argument"
@@ -710,10 +709,10 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
-        includes: [ parameter_struct, "#function_innards_c" ]
+        includes: [ parameter_struct, "#function_context_c" ]
         )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-    function_call = Range.new(
+    cpp_grammar[:function_call] = Range.new(
         start_pattern: avoid_invalid_function_names.then(
                 preceding_scopes
             ).then(
@@ -729,7 +728,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round"
             ),
-        includes: [ "#functioncall_innards_c" ]
+        includes: [ "#function_call_context_c" ]
         )
 #
 # Operators
@@ -825,7 +824,7 @@ cpp_grammar = Grammar.new(
                         include: "#member_access"
                     },
                     {
-                        include: "#c_function_call"
+                        include: "#function_call_c"
                     },
                     {
                         include: "$base"
@@ -876,7 +875,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
-        includes: [:probably_a_parameter, :'function_innards_c' ]
+        includes: [:probably_a_parameter, :'function_context_c' ]
         )
 
 #
@@ -945,13 +944,13 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
-        includes: ["#functioncall_innards_c"],
+        includes: ["#function_call_context_c"],
         )
 #
 # Namespace
 #
     # see https://en.cppreference.com/w/cpp/language/namespace
-    using_namespace = Range.new(
+    cpp_grammar[:using_namespace] = Range.new(
         tag_as: "meta.using-namespace",
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /using/,
@@ -970,7 +969,7 @@ cpp_grammar = Grammar.new(
         end_pattern: @semicolon,
         )
     # TODO: add support for namespace name = qualified-namespace ;
-    namespace_block = blockFinderFor(
+    cpp_grammar[:namespace_block] = blockFinderFor(
         name: "namespace",
         tag_as: "meta.block.namespace",
         needs_semicolon: false,
@@ -1021,7 +1020,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ probably_a_parameter, "#function_innards_c" ],
+                        includes: [ probably_a_parameter, "#function_context_c" ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1042,7 +1041,7 @@ cpp_grammar = Grammar.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
-                includes: [ probably_a_parameter, "#function_innards_c" ]
+                includes: [ probably_a_parameter, "#function_context_c" ]
             ),
             # specificers
             newPattern(
@@ -1095,7 +1094,7 @@ cpp_grammar = Grammar.new(
 #
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
-    enum_block = blockFinderFor(
+    cpp_grammar[:enum_block] = blockFinderFor(
             name: "enum",
             tag_as: "meta.block.enum",
             start_pattern: newPattern(
@@ -1200,17 +1199,17 @@ cpp_grammar = Grammar.new(
                 *preprocessor_context,
                 *inhertance_context,
                 template_call_range,
-                :comments,
+                :comments_context,
             ],
-            body_includes: [ "#constructor", "$base"  ],
+            body_includes: [ :constructor_context, "$base"  ],
         )
     end
-    class_block = generateClassOrStructBlockFinder["class"]
-    struct_block = generateClassOrStructBlockFinder["struct"]
-    union_block = generateClassOrStructBlockFinder["union"]
+    cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
+    cpp_grammar[:struct_block] = generateClassOrStructBlockFinder["struct"]
+    cpp_grammar[:union_block] = generateClassOrStructBlockFinder["union"]
     # the following is a legacy pattern, I'm not sure if it is still accurate
     # I have no idea why it matches a double quote
-    extern_block = blockFinderFor(
+    cpp_grammar[:extern_block] = blockFinderFor(
         name: 'extern',
         tag_as: "meta.block.extern",
         start_pattern: newPattern(
@@ -1247,9 +1246,9 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:$initial_context] = [
         :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
         :struct_declare,
-        :special_block,
+        :special_block_context,
         macro_argument,
-        :strings,
+        :string_context,
         functional_specifiers_pre_parameters,
         qualifiers_and_specifiers_post_parameters,
         storage_specifiers,
@@ -1317,7 +1316,7 @@ cpp_grammar = Grammar.new(
         # C patterns
         #
         *preprocessor_context,
-        "#comments",
+        :comments_context,
         case_statement,
         control_flow_keywords,
         :storage_types,
@@ -1328,7 +1327,7 @@ cpp_grammar = Grammar.new(
         },
         operator_overload,
         number_literal,
-        :strings_c,
+        :string_context_c,
         {
             name: "meta.preprocessor.macro",
             begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
@@ -1358,7 +1357,7 @@ cpp_grammar = Grammar.new(
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
             patterns: [
                 {
-                    include: "#preprocessor_rule_define_line_contents"
+                    include: "#preprocessor_rule_define_line_context"
                 }
             ]
         },
@@ -1424,7 +1423,7 @@ cpp_grammar = Grammar.new(
                             include: "#line_continuation_character"
                         },
                         {
-                            include: "#comments"
+                            include: "#comments_context"
                         }
                     ]
                 }
@@ -1493,7 +1492,7 @@ cpp_grammar = Grammar.new(
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
             patterns: [
                 {
-                    include: "#strings_c"
+                    include: "#string_context_c"
                 },
                 {
                     include: "#number_literal"
@@ -1539,7 +1538,7 @@ cpp_grammar = Grammar.new(
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
             patterns: [
                 {
-                    include: "#strings_c"
+                    include: "#string_context_c"
                 },
                 {
                     match: "[a-zA-Z_$][\\w\\-$]*",
@@ -1577,7 +1576,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#functioncall_innards_c"
+                    include: "#function_call_context_c"
                 }
             ]
         },
@@ -1594,8 +1593,7 @@ cpp_grammar = Grammar.new(
 # 
 # Legacy Entries
 # 
-    cpp_grammar[:constructor] = {
-        patterns: [
+    cpp_grammar[:constructor_context] = [
             {
                 begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
                 beginCaptures: {
@@ -1618,7 +1616,7 @@ cpp_grammar = Grammar.new(
                         include: "#probably_a_parameter"
                     },
                     {
-                        include: "#function_innards_c"
+                        include: "#function_context_c"
                     }
                 ]
             },
@@ -1638,22 +1636,17 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-        }
-    cpp_grammar[:special_block] = {
-        patterns: [
-            attributes.to_tag,
-            using_namespace.to_tag,
-            namespace_block.to_tag,
-            class_block.to_tag,
-            struct_block.to_tag,
-            union_block.to_tag,
-            enum_block.to_tag,
-            extern_block.to_tag,
+    cpp_grammar[:special_block_context] = [
+            :attributes,
+            :using_namespace,
+            :namespace_block,
+            :class_block,
+            :struct_block,
+            :union_block,
+            :enum_block,
+            :extern_block,
         ]
-        }
-    # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
-    cpp_grammar[:strings] = {
-        patterns: [
+    cpp_grammar[:string_context] = [
             {
                 begin: "(u|u8|U|L)?\"",
                 beginCaptures: {
@@ -1689,7 +1682,7 @@ cpp_grammar = Grammar.new(
                         name: "constant.character.escape"
                     },
                     {
-                        include: "#string_placeholder_c"
+                        include: "#string_escapes_context_c"
                     }
                 ]
             },
@@ -1718,30 +1711,25 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double.raw"
             }
         ]
-        }
     cpp_grammar[:block] = {
-        patterns: [
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly"
-                    }
-                },
-                name: "meta.block",
-                patterns: [
-                    {
-                        include: "#block_context"
-                    }
-                ]
-            }
-        ]
+            begin: "{",
+            beginCaptures: {
+                "0" => {
+                    name: "punctuation.section.block.begin.bracket.curly"
+                }
+            },
+            end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.section.block.end.bracket.curly"
+                }
+            },
+            name: "meta.block",
+            patterns: [
+                {
+                    include: "#block_context"
+                }
+            ]
         }
     cpp_grammar[:block_context] = [
         "#preprocessor_rule_enabled_block",
@@ -1749,7 +1737,7 @@ cpp_grammar = Grammar.new(
         "#preprocessor_rule_conditional_block",
         "#method_access",
         "#member_access",
-        "#c_function_call",
+        "#function_call_c",
         {
             name: "meta.initialization",
             begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
@@ -1769,7 +1757,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#functioncall_innards_c"
+                    include: "#function_call_context_c"
                 }
             ]
         },
@@ -1795,17 +1783,17 @@ cpp_grammar = Grammar.new(
         "#parentheses_block",
         "$base"
         ]
-    cpp_grammar[:c_function_call] = {
+    cpp_grammar[:function_call_c] = {
         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
         patterns: [
             {
-                include: "#functioncall_innards_c"
+                include: "#function_call_context_c"
             }
         ]
         }
-    cpp_grammar[:comments] = {
+    cpp_grammar[:comments_context] = {
         patterns: [
             {
                 captures: {
@@ -1881,16 +1869,12 @@ cpp_grammar = Grammar.new(
         ]
         }
     cpp_grammar[:line_continuation_character] = {
-        patterns: [
-            {
-                match: "(\\\\)\\n",
-                captures: {
-                    "1" => {
-                        name: "constant.character.escape.line-continuation"
-                    }
+            match: "(\\\\)\\n",
+            captures: {
+                "1" => {
+                    name: "constant.character.escape.line-continuation"
                 }
             }
-        ]
         }
     cpp_grammar[:parentheses] = {
         name: "punctuation.section.parens-c",
@@ -1954,8 +1938,7 @@ cpp_grammar = Grammar.new(
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
         }
-    cpp_grammar[:strings_c] = {
-        patterns: [
+    cpp_grammar[:string_context_c] = [
             {
                 begin: "\"",
                 beginCaptures: {
@@ -1972,10 +1955,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double",
                 patterns: [
                     {
-                        include: "#string_escaped_char_c"
-                    },
-                    {
-                        include: "#string_placeholder_c"
+                        include: "#string_escapes_context_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -1998,7 +1978,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.single",
                 patterns: [
                     {
-                        include: "#string_escaped_char_c"
+                        include: "#string_escapes_context_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -2006,9 +1986,7 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-        }
-    cpp_grammar[:string_escaped_char_c] = {
-        patterns: [
+    cpp_grammar[:string_escapes_context_c] = [
             {
                 match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
                 name: "constant.character.escape"
@@ -2016,11 +1994,7 @@ cpp_grammar = Grammar.new(
             {
                 match: "\\\\.",
                 name: "invalid.illegal.unknown-escape"
-            }
-        ]
-        }
-    cpp_grammar[:string_placeholder_c] = {
-        patterns: [
+            },
             {
                 match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
                 name: "constant.other.placeholder"
@@ -2036,157 +2010,147 @@ cpp_grammar = Grammar.new(
             #     }
             # }
         ]
-        }
     cpp_grammar[:vararg_ellipses] = {
         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
         name: "punctuation.vararg-ellipses"
         }
     cpp_grammar[:preprocessor_rule_conditional] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+            begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_elif"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_else"
-                    },
-                    {
-                        include: "#preprocessor_rule_disabled_elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
             },
-        ]
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#preprocessor_rule_enabled_elif"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_else"
+                },
+                {
+                    include: "#preprocessor_rule_disabled_elif"
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
+                    },
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "$base"
+                }
+            ]
         }
     cpp_grammar[:preprocessor_rule_conditional_block] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+            begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_elif_block"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_else_block"
-                    },
-                    {
-                        include: "#preprocessor_rule_disabled_elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#block_context"
-                    }
-                ]
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
             },
-        ]
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#preprocessor_rule_enabled_elif_block"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_else_block"
+                },
+                {
+                    include: "#preprocessor_rule_disabled_elif"
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
+                    },
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#block_context"
+                }
+            ]
         }
-    cpp_grammar[:preprocessor_rule_conditional_line] = {
-        patterns: [
+    cpp_grammar[:preprocessor_rule_conditional_line_context] = [
             {
                 match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
                 name: "keyword.control.directive.conditional"
@@ -2195,15 +2159,9 @@ cpp_grammar = Grammar.new(
                 match: "\\bdefined\\b",
                 name: "invalid.illegal.macro-name"
             },
-            {
-                include: "#comments"
-            },
-            {
-                include: "#strings_c"
-            },
-            {
-                include: "#number_literal"
-            },
+            :comments_context,
+            :string_context_c,
+            :number_literal,
             {
                 begin: "\\?",
                 beginCaptures: {
@@ -2219,23 +2177,17 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor_rule_conditional_line"
+                        include: "#preprocessor_rule_conditional_line_context"
                     }
                 ]
             },
-            {
-                include: "#operators"
-            },
-            {
-                include: "#constants"
-            },
+            :operators,
+            :constants,
             {
                 match: preprocessor_name_no_bounds,
                 name: "entity.name.function.preprocessor"
             },
-            {
-                include: "#line_continuation_character"
-            },
+            :line_continuation_character,
             {
                 begin: "\\(",
                 beginCaptures: {
@@ -2251,205 +2203,196 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor_rule_conditional_line"
+                        include: "#preprocessor_rule_conditional_line_context"
                     }
                 ]
             }
         ]
-        }
     cpp_grammar[:preprocessor_rule_disabled] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_elif"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_else"
-                    },
-                    {
-                        include: "#preprocessor_rule_disabled_elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#comments_context"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_elif"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_else"
+                },
+                {
+                    include: "#preprocessor_rule_disabled_elif"
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
                         },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                        patterns: [
-                            {
-                                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                                name: "meta.preprocessor",
-                                patterns: [
-                                    {
-                                        include: "#preprocessor_rule_conditional_line"
-                                    }
-                                ]
-                            },
-                            {
-                                include: "$base"
-                            }
-                        ]
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
                     },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+                    end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+                    patterns: [
+                        {
+                            begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                            end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                            name: "meta.preprocessor",
+                            patterns: [
+                                {
+                                    include: "#preprocessor_rule_conditional_line_context"
+                                }
+                            ]
+                        },
+                        {
+                            include: "$base"
+                        }
+                    ]
+                },
+                {
+                    begin: "\\n",
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    "contentName" => "comment.block.preprocessor.if-branch",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                }
+            ]
         }
     cpp_grammar[:preprocessor_rule_disabled_block] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_elif_block"
-                    },
-                    {
-                        include: "#preprocessor_rule_enabled_else_block"
-                    },
-                    {
-                        include: "#preprocessor_rule_disabled_elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#comments_context"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_elif_block"
+                },
+                {
+                    include: "#preprocessor_rule_enabled_else_block"
+                },
+                {
+                    include: "#preprocessor_rule_disabled_elif"
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
                         },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                        patterns: [
-                            {
-                                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                                name: "meta.preprocessor",
-                                patterns: [
-                                    {
-                                        include: "#preprocessor_rule_conditional_line"
-                                    }
-                                ]
-                            },
-                            {
-                                include: "#block_context"
-                            }
-                        ]
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
                     },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.in-block",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+                    end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+                    patterns: [
+                        {
+                            begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                            end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                            name: "meta.preprocessor",
+                            patterns: [
+                                {
+                                    include: "#preprocessor_rule_conditional_line_context"
+                                }
+                            ]
+                        },
+                        {
+                            include: "#block_context"
+                        }
+                    ]
+                },
+                {
+                    begin: "\\n",
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    "contentName" => "comment.block.preprocessor.if-branch.in-block",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                }
+            ]
         }
     cpp_grammar[:preprocessor_rule_disabled_elif] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2472,12 +2415,12 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor_rule_conditional_line"
+                        include: "#preprocessor_rule_conditional_line_context"
                     }
                 ]
             },
             {
-                include: "#comments"
+                include: "#comments_context"
             },
             {
                 begin: "\\n",
@@ -2495,211 +2438,204 @@ cpp_grammar = Grammar.new(
         ]
         }
     cpp_grammar[:preprocessor_rule_enabled] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    },
-                    "3" => {
-                        name: "constant.numeric.preprocessor"
-                    }
+            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*else\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                "2" => {
+                    name: "punctuation.definition.directive"
+                },
+                "3" => {
+                    name: "constant.numeric.preprocessor"
+                }
+            },
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#comments_context"
+                },
+                {
+                    begin: "^\\s*((#)\\s*else\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.else-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
                     },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        patterns: [
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+                    end: "(?=^\\s*((#)\\s*endif\\b))",
+                    "contentName" => "comment.block.preprocessor.else-branch",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
+                        },
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
+                    },
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    "contentName" => "comment.block.preprocessor.if-branch",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                },
+                {
+                    begin: "\\n",
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    patterns: [
+                        {
+                            include: "$base"
+                        }
+                    ]
+                }
+            ]
         }
     cpp_grammar[:preprocessor_rule_enabled_block] = {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+            beginCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
                 },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive"
-                    }
+                "1" => {
+                    name: "keyword.control.directive.conditional"
                 },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor",
-                        patterns: [
-                            {
-                                include: "#preprocessor_rule_conditional_line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*else\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            end: "^\\s*((#)\\s*endif\\b)",
+            endCaptures: {
+                "0" => {
+                    name: "meta.preprocessor"
+                },
+                "1" => {
+                    name: "keyword.control.directive.conditional"
+                },
+                "2" => {
+                    name: "punctuation.definition.directive"
+                }
+            },
+            patterns: [
+                {
+                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+                    name: "meta.preprocessor",
+                    patterns: [
+                        {
+                            include: "#preprocessor_rule_conditional_line_context"
+                        }
+                    ]
+                },
+                {
+                    include: "#comments_context"
+                },
+                {
+                    begin: "^\\s*((#)\\s*else\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
                         },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.else-branch.in-block",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
                         },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.in-block",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
                     },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        patterns: [
-                            {
-                                include: "#block_context"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+                    end: "(?=^\\s*((#)\\s*endif\\b))",
+                    "contentName" => "comment.block.preprocessor.else-branch.in-block",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                },
+                {
+                    begin: "^\\s*((#)\\s*elif\\b)",
+                    beginCaptures: {
+                        "0" => {
+                            name: "meta.preprocessor"
+                        },
+                        "1" => {
+                            name: "keyword.control.directive.conditional"
+                        },
+                        "2" => {
+                            name: "punctuation.definition.directive"
+                        }
+                    },
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    "contentName" => "comment.block.preprocessor.if-branch.in-block",
+                    patterns: [
+                        {
+                            include: "#disabled"
+                        },
+                        {
+                            include: "#pragma_mark"
+                        }
+                    ]
+                },
+                {
+                    begin: "\\n",
+                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+                    patterns: [
+                        {
+                            include: "#block_context"
+                        }
+                    ]
+                }
+            ]
+
         }
     cpp_grammar[:preprocessor_rule_enabled_elif] = {
         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
@@ -2722,12 +2658,12 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor_rule_conditional_line"
+                        include: "#preprocessor_rule_conditional_line_context"
                     }
                 ]
             },
             {
-                include: "#comments"
+                include: "#comments_context"
             },
             {
                 begin: "\\n",
@@ -2809,12 +2745,12 @@ cpp_grammar = Grammar.new(
                 name: "meta.preprocessor",
                 patterns: [
                     {
-                        include: "#preprocessor_rule_conditional_line"
+                        include: "#preprocessor_rule_conditional_line_context"
                     }
                 ]
             },
             {
-                include: "#comments"
+                include: "#comments_context"
             },
             {
                 begin: "\\n",
@@ -2915,11 +2851,8 @@ cpp_grammar = Grammar.new(
             }
         ]
         }
-    cpp_grammar[:preprocessor_rule_define_line_contents] = {
-        patterns: [
-            {
-                include: "#vararg_ellipses"
-            },
+    cpp_grammar[:preprocessor_rule_define_line_context] = [
+            :vararg_ellipses,
             {
                 match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
                 name: "variable.other.macro.argument"
@@ -2940,7 +2873,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.block",
                 patterns: [
                     {
-                        include: "#preprocessor_rule_define_line_blocks"
+                        include: "#preprocessor_rule_define_line_blocks_context"
                     }
                 ]
             },
@@ -2958,7 +2891,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function",
                 patterns: [
                     {
-                        include: "#preprocessor_rule_define_line_functions"
+                        include: "#preprocessor_rule_define_line_functions_context"
                     }
                 ]
             },
@@ -2978,10 +2911,7 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double",
                 patterns: [
                     {
-                        include: "#string_escaped_char_c"
-                    },
-                    {
-                        include: "#string_placeholder_c"
+                        include: "#string_escapes_context_c"
                     },
                     {
                         include: "#line_continuation_character"
@@ -3004,26 +2934,18 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.single",
                 patterns: [
                     {
-                        include: "#string_escaped_char_c"
+                        include: "#string_escapes_context_c"
                     },
                     {
                         include: "#line_continuation_character"
                     }
                 ]
             },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "$base"
-            }
+            :method_access,
+            :member_access,
+            "$base"
         ]
-        }
-    cpp_grammar[:preprocessor_rule_define_line_blocks] = {
-        patterns: [
+    cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
                 begin: "{",
                 beginCaptures: {
@@ -3039,38 +2961,24 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor_rule_define_line_blocks"
+                        include: "#preprocessor_rule_define_line_blocks_context"
                     },
                     {
-                        include: "#preprocessor_rule_define_line_contents"
+                        include: "#preprocessor_rule_define_line_context"
                     }
                 ]
             },
             {
-                include: "#preprocessor_rule_define_line_contents"
+                include: "#preprocessor_rule_define_line_context"
             }
         ]
-        }
-    cpp_grammar[:preprocessor_rule_define_line_functions] = {
-        patterns: [
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#vararg_ellipses"
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "#operators"
-            },
+    cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
+            :comments_context,
+            :storage_types,
+            :vararg_ellipses,
+            :method_access,
+            :member_access,
+            :operators,
             {
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                 beginCaptures: {
@@ -3089,7 +2997,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor_rule_define_line_functions"
+                        include: "#preprocessor_rule_define_line_functions_context"
                     }
                 ]
             },
@@ -3108,30 +3016,18 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#preprocessor_rule_define_line_functions"
+                        include: "#preprocessor_rule_define_line_functions_context"
                     }
                 ]
             },
-            {
-                include: "#preprocessor_rule_define_line_contents"
-            }
+            :preprocessor_rule_define_line_context
         ]
-        }
-    cpp_grammar[:function_innards_c] = {
-        patterns: [
-            attributes.to_tag,
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#operators"
-            },
-            {
-                include: "#vararg_ellipses"
-            },
+    cpp_grammar[:function_context_c] = [
+            :attributes,
+            :comments_context,
+            :storage_types,
+            :operators,
+            :vararg_ellipses,
             {
                 name: "meta.function.definition.parameters",
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
@@ -3154,7 +3050,7 @@ cpp_grammar = Grammar.new(
                         include: "#probably_a_parameter"
                     },
                     {
-                        include: "#function_innards_c"
+                        include: "#function_context_c"
                     }
                 ]
             },
@@ -3173,33 +3069,19 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#function_innards_c"
+                        include: "#function_context_c"
                     }
                 ]
             },
-            {
-                include: "$base"
-            }
+            "$base"
         ]
-        }
-    cpp_grammar[:functioncall_innards_c] = {
-        patterns: [
-            attributes.to_tag,
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "#operators"
-            },
+    cpp_grammar[:function_call_context_c] = [
+            :attributes,
+            :comments_context,
+            :storage_types,
+            :method_access,
+            :member_access,
+            :operators,
             {
                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
                 beginCaptures: {
@@ -3225,11 +3107,11 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#functioncall_innards_c"
+                        include: "#function_call_context_c"
                     }
                 ]
             },
-            function_call.to_tag,
+            :function_call,
             {
                 begin: "\\(",
                 beginCaptures: {
@@ -3245,15 +3127,12 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#functioncall_innards_c"
+                        include: "#function_call_context_c"
                     }
                 ]
             },
-            {
-                include: "#block_context"
-            }
+            :block_context
         ]
-        }
 
 
 Dir.chdir __dir__
