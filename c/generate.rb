@@ -117,7 +117,7 @@ else
         includes: ["#function-call-innards"],
         )
 
-c_grammar[:$initial_context] = [
+c_grammar[:$inital_context] = [
     "#preprocessor-rule-enabled",
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",

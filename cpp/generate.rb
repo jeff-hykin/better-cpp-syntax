@@ -2931,7 +2931,7 @@ cpp_grammar = Grammar.new(
             },
             :method_access,
             :member_access,
-            "$inital_context"
+            :$inital_context
         ]
     cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
