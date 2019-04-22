@@ -2145,5 +2145,6 @@ end
 Dir.chdir __dir__
 
 # Save
-c_grammar.saveAsYamlTo("../syntaxes/c.tmLanguage")
-c_grammar.saveAsJsonTo("../syntaxes/c.tmLanguage")
+@syntax_location = "../syntaxes/c.tmLanguage"
+c_grammar.saveAsYamlTo(@syntax_location)
+c_grammar.saveAsJsonTo(@syntax_location)
