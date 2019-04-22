@@ -103,7 +103,7 @@ class Grammar
         if (repository.is_a? Hash) && (repository != {})
             textmate_repository = {}
             for each_key, each_value in repository.each_pair
-                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)
+                textmate_repository[each_key.to_s] = Grammar.toTag(each_value)[0]
             end
             return textmate_repository
         end
