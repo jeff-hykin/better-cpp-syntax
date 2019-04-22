@@ -925,41 +925,6 @@ class Range
 end
 
 #
-# Context
-#
-class Context
-    def initialize(repository_name: nil, includes: [])
-        #
-        # save arguments
-        #
-        @repository_name = repository_name
-        @includes = includes
-        
-        #
-        # save to repository
-        # 
-        if repository_name.to_s != ""
-            Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][repository_name] = self.to_tag
-            # set the repository_name only after the repository entry is made
-            @repository_name = repository_name
-        end
-        
-        @as_tag = {
-            patterns: Grammar.convertIncludesToPatternList(@includes),
-        }
-    end
-    
-    def to_tag
-        if @repository_name != nil
-            return {
-                include: "##{@repository_name}"
-            }
-        end
-        return @as_tag
-    end
-end
-#
 # Helpers for Tokens
 #
 class NegatedSymbol
