@@ -485,6 +485,7 @@
           :name: keyword.operator.ternary.c
       :patterns:
       - :include: "#function-call-innards"
+      - :include: "$base"
   strings:
     :patterns:
     - :begin: "\""

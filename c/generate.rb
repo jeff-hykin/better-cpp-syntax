@@ -20,6 +20,14 @@ if false
     c_grammar.data[:repository] = @cpp_grammar.data[:repository]
 else
 
+# 
+# Contexts
+# 
+    evalutation_context = [
+        "#function-call-innards",
+        "$base"
+    ]
+    
 #
 # Variable
 #
@@ -816,9 +824,7 @@ c_grammar.addToRepository({
                     match: /:/,
                     tag_as: "keyword.operator.ternary",
                 ),
-                applyEndPatternLast: true,
-                includes: [ "#function-call-innards" ]
-
+                includes: [ *evalutation_context ]
             ).to_tag,
         ]
     },
