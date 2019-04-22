@@ -1594,7 +1594,7 @@ cpp_grammar = Grammar.new(
 # 
 # Legacy Entries
 # 
-    cpp_grammar[:'constructor'] = {
+    cpp_grammar[:constructor] = {
         patterns: [
             {
                 begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
@@ -1639,7 +1639,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'special_block'] = {
+    cpp_grammar[:special_block] = {
         patterns: [
             attributes.to_tag,
             using_namespace.to_tag,
@@ -1652,7 +1652,7 @@ cpp_grammar = Grammar.new(
         ]
     },
     # TODO: "strings" is included and it is different from "strings_c", but its not used anywhere. Figure out whats going on here
-    cpp_grammar[:'strings'] = {
+    cpp_grammar[:strings] = {
         patterns: [
             {
                 begin: "(u|u8|U|L)?\"",
@@ -1813,7 +1813,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'c_function_call'] = {
+    cpp_grammar[:c_function_call] = {
         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*#{maybe(template_call.without_numbered_capture_groups)}\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
         end: "(?<=\\))(?!\\w)",
         name: "meta.function-call",
@@ -1823,7 +1823,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'comments'] = {
+    cpp_grammar[:comments] = {
         patterns: [
             {
                 captures: {
@@ -1886,7 +1886,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'disabled'] = {
+    cpp_grammar[:disabled] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
         patterns: [
@@ -1898,7 +1898,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     },
-    cpp_grammar[:'line_continuation_character'] = {
+    cpp_grammar[:line_continuation_character] = {
         patterns: [
             {
                 match: "(\\\\)\\n",
@@ -1972,7 +1972,7 @@ cpp_grammar = Grammar.new(
         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
         name: "meta.section"
     },
-    cpp_grammar[:'strings_c'] = {
+    cpp_grammar[:strings_c] = {
         patterns: [
             {
                 begin: "\"",
@@ -2055,7 +2055,7 @@ cpp_grammar = Grammar.new(
             # }
         ]
     },
-    cpp_grammar[:'vararg_ellipses'] = {
+    cpp_grammar[:vararg_ellipses] = {
         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
         name: "punctuation.vararg-ellipses"
     },
