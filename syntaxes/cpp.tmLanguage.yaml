@@ -346,35 +346,37 @@
         name: colon.cpp punctuation.separator.case.cpp
     patterns:
     - include: "#conditional_context"
+  switch_conditional_parentheses:
+    name: meta.conditional.switch.cpp
+    begin: "(\\()"
+    beginCaptures:
+      '1':
+        name: punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.parens.end.bracket.round.conditional.switch.cpp
+    patterns:
+    - include: "#conditional_context"
   switch_statement:
     name: meta.block.switch.cpp
-    begin: "(((switch)))"
+    begin: "(((?<!\\w)switch(?!\\w)))"
     beginCaptures:
       '1':
         name: meta.head.switch.cpp
       '2':
-        name: meta.conditional.switch.cpp
-      '3':
         name: keyword.control.switch.cpp
-    end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
+    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
     patterns:
+    - include: "#switch_conditional_parentheses"
     - name: meta.head.switch.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.switch.cpp
       patterns:
-      - begin: "(\\()"
-        beginCaptures:
-          '1':
-            name: punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
-        end: "(\\))"
-        endCaptures:
-          '1':
-            name: punctuation.section.parens.end.bracket.round.conditional.switch.cpp
-        patterns:
-        - include: "#conditional_context"
+      - include: "#switch_conditional_parentheses"
       - include: "$base"
     - name: meta.body.switch.cpp
       begin: "(?<=\\{)"
@@ -757,10 +759,10 @@
         - include: "#scope_resolution"
       '5':
         name: entity.name.type.namespace.cpp
-    end: "(?:(?<=\\})|(?=[;()>\\[\\]=]))"
+    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.namespace.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
@@ -867,7 +869,7 @@
         name: punctuation.separator.namespace.access.cpp
       '13':
         name: storage.type.integral.$13.cpp
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -875,7 +877,7 @@
         name: punctuation.terminator.statement.cpp
     patterns:
     - name: meta.head.enum.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
@@ -928,7 +930,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -936,7 +938,7 @@
         name: punctuation.terminator.statement.cpp
     patterns:
     - name: meta.head.class.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
@@ -983,7 +985,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -991,7 +993,7 @@
         name: punctuation.terminator.statement.cpp
     patterns:
     - name: meta.head.struct.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
@@ -1038,7 +1040,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1046,7 +1048,7 @@
         name: punctuation.terminator.statement.cpp
     patterns:
     - name: meta.head.union.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':
@@ -1078,7 +1080,7 @@
         name: meta.head.extern.cpp
       '2':
         name: storage.type.extern.cpp
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;()>\\[\\]=]))"
+    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1086,7 +1088,7 @@
         name: punctuation.terminator.statement.cpp
     patterns:
     - name: meta.head.extern.cpp
-      begin: "\\G"
+      begin: "\\G| "
       end: "((?:\\{|(?=;)))"
       endCaptures:
         '1':

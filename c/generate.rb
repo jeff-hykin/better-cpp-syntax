@@ -17,11 +17,23 @@ c_grammar = Grammar.new(
 # 
 # import from C++
 # 
-    c_grammar[:switch_statement] = @cpp_grammar[:switch_statement]
+    require_relative '../cpp/generate.rb'
+    import_names = [
+        :default_statement,
+        :case_statement,
+        :switch_statement,
+        :switch_conditional_parentheses
+    ]
+    for each in import_names
+        c_grammar[each] = @cpp_grammar[each]
+    end
 
 # 
 # Contexts
 # 
+    c_grammar[:conditional_context] = [
+            :$initial_context
+        ]
     evalutation_context = [
         "#function-call-innards",
         "$base"
@@ -65,7 +77,6 @@ c_grammar = Grammar.new(
                 match: variable_name_without_bounds,
                 tag_as: "variable.parameter.probably"
             )).then(stuff_after_a_parameter),
-        repository_name: "probably_a_parameter",
     )
 
 #
@@ -99,16 +110,14 @@ c_grammar = Grammar.new(
             includes: member_context
         ).maybe(@spaces)
     # access to attribute
-    member_access = newPattern(
-        repository_name: 'member_access',
+    c_grammar[:member_access] =  member_access = newPattern(
         match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.member"
             )
         )
     # access to method
-    method_access = Range.new(
-        repository_name: 'method_access',
+    c_grammar[:method_access] =  method_access = Range.new(
         tag_content_as: "meta.function-call.member",
         start_pattern: member_start.then(
                 match: variable_name_without_bounds,
@@ -129,8 +138,9 @@ c_grammar[:$initial_context] = [
     "#preprocessor-rule-disabled",
     "#preprocessor-rule-conditional",
     "#comments",
+    :switch_statement,
     {
-        match: "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
+        match: "\\b(break|continue|do|else|for|goto|if|_Pragma|return|while)\\b",
         name: "keyword.control.c"
     },
     "#storage_types",

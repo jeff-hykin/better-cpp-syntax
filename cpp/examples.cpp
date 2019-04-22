@@ -458,6 +458,131 @@ int main() {
         case 2: [[fallthrough]];
         case 3: break; // no syntax highlighting
     }
+    switch(next) {
+        case '\'':
+        case '\"':
+        case '\\':
+        case '?':
+            {
+            value.push_back(next);
+            break;
+            }
+        case 'a':
+            {
+            value.push_back('\a');
+            break;
+            }
+        case 'b':
+            {
+            value.push_back('\b');
+            break;
+            }
+        case 'f':
+            {
+            value.push_back('\f');
+            break;
+            }
+        case 'n':
+            {
+            value.push_back('\n');
+            break;
+            }
+        case 'r':
+            {
+            value.push_back('\r');
+            break;
+            }
+        case 't':
+            {
+            value.push_back('\t');
+            break;
+            }
+        case 'v':
+            {
+            value.push_back('\v');
+            break;
+            }
+        case '0':
+            {
+            value.push_back('\0');
+            break;
+            }
+        case 'Z':
+            {
+            value.push_back('\x1A');
+            break;
+            }
+        case 'e':
+            {
+            value.push_back('\x1B');
+            break;
+            }
+        case 'U':
+            {
+            xcnt += 2;  // 6: "\U123456"
+            }
+            // Fallthrough.
+        case 'u':
+            {
+            xcnt += 2;  // 4: "\u1234"
+            }
+            // Fallthrough.
+        case 'x':
+            {
+            xcnt += 2;  // 2: "\x12"
+            // Read hex digits.
+            if(qavail < xcnt + 2) {
+                throw do_make_parser_error(reader, reader.size_avail(), Parser_Error::code_escape_sequence_incomplete);
+            }
+            char32_t cpnt = 0;
+            for(auto i = tlen; i < tlen + xcnt; ++i) {
+                static constexpr char s_digits[] = "00112233445566778899AaBbCcDdEeFf";
+                auto dptr = std::char_traits<char>::find(s_digits, 32, bptr[i]);
+                if(!dptr) {
+                throw do_make_parser_error(reader, i + 1, Parser_Error::code_escape_sequence_invalid_hex);
+                }
+                auto dvalue = static_cast<char32_t>((dptr - s_digits) / 2);
+                cpnt = cpnt * 16 + dvalue;
+            }
+            if(next == 'x') {
+                // Write the character verbatim.
+                value.push_back(static_cast<char>(cpnt));
+                break;
+            }
+            // Write a Unicode code point.
+            if(((0xD800 <= cpnt) && (cpnt < 0xE000)) || (0x110000 <= cpnt)) {
+                // Code point value is reserved or too large.
+                throw do_make_parser_error(reader, tlen + xcnt, Parser_Error::code_escape_utf_code_point_invalid);
+            }
+            // Encode it.
+            auto encode_one = [&](unsigned shift, unsigned mask)
+                {
+                value.push_back(static_cast<char>((~mask << 1) | ((cpnt >> shift) & mask)));
+                };
+            if(cpnt < 0x80) {
+                encode_one( 0, 0xFF);
+                break;
+            }
+            if(cpnt < 0x800) {
+                encode_one( 6, 0x1F);
+                encode_one( 0, 0x3F);
+                break;
+            }
+            if(cpnt < 0x10000) {
+                encode_one(12, 0x0F);
+                encode_one( 6, 0x3F);
+                encode_one( 0, 0x3F);
+                break;
+            }
+            encode_one(18, 0x07);
+            encode_one(12, 0x3F);
+            encode_one( 6, 0x3F);
+            encode_one( 0, 0x3F);
+            break;
+            }
+        default:
+            thing;
+        }
     void func1();
     [[noreturn]] void func2(/*syntax highlighting*/); // no syntax highlighting
     struct st { // syntax highlighting works now

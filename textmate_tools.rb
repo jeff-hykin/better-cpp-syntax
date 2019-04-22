@@ -569,7 +569,6 @@ class Regexp
             attributes_copy.delete(:should_not_fully_match)
             attributes_copy.delete(:should_partial_match)
             attributes_copy.delete(:should_not_partial_match)
-            attributes_copy.delete(:repository_name)
             attributes_copy.delete(:repository)
             if attributes_copy.size != 0
                 raise "\n\nThere are arugments being given to a newPattern or a helper that are not understood\nThe unknown arguments are:\n#{attributes_copy}\n\nThe normal arguments are#{raw_attributes}"
@@ -693,13 +692,6 @@ class Regexp
         # if there are arributes, then those attributes are top-level
         if (self == //) and (attributes != {})
             new_regex.has_top_level_group = true
-        end
-        
-        # if the pattern has a :repository_name
-        if attributes[:repository_name] != nil
-            new_regex.repository_name = attributes[:repository_name]
-            Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][attributes[:repository_name]] = new_regex.to_tag(ignore_repository_entry:true)
         end
         
         #
@@ -938,19 +930,6 @@ class Range
         key_arguments.delete(:repository)
         if (repository.is_a? Hash) && (repository != {})
             @as_tag[:repository] = Grammar.convertRepository(repository)
-        end
-        
-        #
-        # repository_name
-        #
-        # extract the repository_name
-        repository_name = key_arguments[:repository_name]
-        key_arguments.delete(:repository_name)
-        if repository_name.to_s != ""
-            Grammar.makeSureAGrammarExists
-            Grammar.current_grammar.data[:repository][repository_name] = self.to_tag
-            # set the repository_name only after the repository entry is made
-            @repository_name = repository_name
         end
         
         # TODO, add more error checking. key_arguments should be empty at this point

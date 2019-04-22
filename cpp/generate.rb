@@ -28,7 +28,7 @@ cpp_grammar = Grammar.new(
             tag_as: "comma punctuation.separator.delimiter"
         )
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
-        lookahead_endings = /[;()>\[\]=]/
+        lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
                 match: newPattern(
@@ -54,7 +54,7 @@ cpp_grammar = Grammar.new(
                 # Head
                 Range.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: /\G/,
+                    start_pattern: /\G| /,
                     end_pattern: newPattern(
                         match: /\{/.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
@@ -474,28 +474,30 @@ cpp_grammar = Grammar.new(
             ),
             includes: [:conditional_context]
         )
+    cpp_grammar[:switch_conditional_parentheses] = Range.new(
+            tag_as: "meta.conditional.switch",
+            start_pattern: newPattern(
+                match: /\(/,
+                tag_as: 'punctuation.section.parens.begin.bracket.round.conditional.switch'
+            ),
+            end_pattern: newPattern(
+                match: /\)/,
+                tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
+            ),
+            includes: [ :conditional_context ]
+        )
     cpp_grammar[:switch_statement] = blockFinderFor(
             name: "switch",
             tag_as: "meta.block.switch",
             start_pattern: newPattern(
-                tag_as: "meta.conditional.switch",
-                match: newPattern(
-                    match: /switch/,
-                    tag_as: "keyword.control.switch"
-                )
+                match: variableBounds[/switch/],
+                tag_as: "keyword.control.switch"
             ),
+            primary_includes: [
+                :switch_conditional_parentheses
+            ],
             head_includes: [
-                Range.new(
-                    start_pattern: newPattern(
-                        match: /\(/,
-                        tag_as: 'punctuation.section.parens.begin.bracket.round.conditional.switch'
-                    ),
-                    end_pattern: newPattern(
-                        match: /\)/,
-                        tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
-                    ),
-                    includes: [ :conditional_context ]
-                ),
+                :switch_conditional_parentheses,
                 :$initial_context
             ],
             body_includes: [
