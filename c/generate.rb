@@ -20,6 +20,14 @@ if false
     c_grammar.data[:repository] = @cpp_grammar.data[:repository]
 else
 
+# 
+# Contexts
+# 
+    evalutation_context = [
+        "#function-call-innards",
+        "$base"
+    ]
+    
 #
 # Variable
 #
@@ -807,35 +815,17 @@ c_grammar.addToRepository({
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator.c"
             },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                end: ":",
-                applyEndPatternLast: true,
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#method_access"
-                    },
-                    {
-                        include: "#member_access"
-                    },
-                    {
-                        include: "#c_function_call"
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            }
+            Range.new(
+                start_pattern: newPattern(
+                    match: /\?/,
+                    tag_as: "keyword.operator.ternary",
+                ),
+                end_pattern: newPattern(
+                    match: /:/,
+                    tag_as: "keyword.operator.ternary",
+                ),
+                includes: [ *evalutation_context ]
+            ).to_tag,
         ]
     },
     "strings" => {
@@ -2161,5 +2151,6 @@ end
 Dir.chdir __dir__
 
 # Save
-c_grammar.saveAsYamlTo("../syntaxes/c.tmLanguage")
-c_grammar.saveAsJsonTo("../syntaxes/c.tmLanguage")
+@syntax_location = "../syntaxes/c.tmLanguage"
+c_grammar.saveAsYamlTo(@syntax_location)
+c_grammar.saveAsJsonTo(@syntax_location)
