@@ -83,11 +83,11 @@ cpp_grammar = Grammar.new(
 # Contexts
 #
 #
-    preprocessor_context = [
-        "#preprocessor_rule_enabled",
-        "#preprocessor_rule_disabled",
-        "#preprocessor_rule_conditional",
-        "#hacky_fix_for_stray_directive",
+    cpp_grammar[:preprocessor_context] = [
+        :preprocessor_rule_enabled,
+        :preprocessor_rule_disabled,
+        :preprocessor_rule_conditional,
+        :hacky_fix_for_stray_directive,
     ]
     cpp_grammar[:storage_types] = [
         :primitive_types,
@@ -97,11 +97,16 @@ cpp_grammar = Grammar.new(
     ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
-    evaluation_context = [
+    cpp_grammar[:evaluation_context] = [
         '$base'
         # function call
         # number literal
         # lambdas
+    ]
+    # eventually this context will be more exclusive (can't have class definitons inside of an if statement)
+    # but for now it just includes everything
+    cpp_grammar[:contional_context] = [
+        "$base"
     ]
 
 #
@@ -381,10 +386,6 @@ cpp_grammar = Grammar.new(
 #
 # Control flow
 #
-    # TODO: update this context in the future to be more restrictive
-    contional_context = [
-        "$base"
-    ]
     default_statement = Range.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
@@ -395,7 +396,7 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case.default"
             ),
-            includes: contional_context
+            includes: [:contional_context]
         )
     case_statement = Range.new(
             tag_as: "meta.conditional.case",
@@ -407,7 +408,7 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case"
             ),
-            includes: contional_context
+            includes: [:contional_context]
         )
 #
 # C++ Attributes
@@ -507,7 +508,7 @@ cpp_grammar = Grammar.new(
             :template_definition_argument,
             :template_argument_defaulted,
             :template_call_innards,
-            *evaluation_context
+            :evaluation_context
         ]
     template_start = lookBehindToAvoid(@standard_character).then(
             match: /template/,
@@ -644,7 +645,9 @@ cpp_grammar = Grammar.new(
                     match: /\)/,
                     tag_as: "punctuation.section.arguments.end.bracket.round.#{tag_parenthese_as}"
                 ),
-            includes: evaluation_context
+            includes: [
+                :evaluation_context
+            ]
             )
     end
     cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
@@ -1196,7 +1199,7 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
             head_includes: [
-                *preprocessor_context,
+                :preprocessor_context,
                 *inhertance_context,
                 template_call_range,
                 :comments_context,
@@ -1315,7 +1318,7 @@ cpp_grammar = Grammar.new(
         #
         # C patterns
         #
-        *preprocessor_context,
+        :preprocessor_context,
         :comments_context,
         case_statement,
         control_flow_keywords,

@@ -74,10 +74,7 @@
   :patterns:
   - :include: "$base"
 - :include: "#lambdas"
-- :include: "#preprocessor_rule_enabled"
-- :include: "#preprocessor_rule_disabled"
-- :include: "#preprocessor_rule_conditional"
-- :include: "#hacky_fix_for_stray_directive"
+- :include: "#preprocessor_context"
 - :include: "#comments_context"
 - :name: meta.conditional.case.cpp
   :begin: "((?<!\\w)case(?!\\w))"
@@ -89,7 +86,7 @@
     '1':
       :name: colon.cpp punctuation.separator.case.cpp
   :patterns:
-  - :include: "$base"
+  - :include: "#contional_context"
 - :match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
   :name: keyword.control.$0.cpp
 - :include: "#storage_types"
@@ -256,12 +253,24 @@
 - :match: ","
   :name: comma.cpp punctuation.separator.delimiter.cpp
 :repository:
+  :preprocessor_context:
+    :patterns:
+    - :include: "#preprocessor_rule_enabled"
+    - :include: "#preprocessor_rule_disabled"
+    - :include: "#preprocessor_rule_conditional"
+    - :include: "#hacky_fix_for_stray_directive"
   :storage_types:
     :patterns:
     - :include: "#primitive_types"
     - :include: "#non_primitive_types"
     - :include: "#pthread_types"
     - :include: "#posix_reserved_types"
+  :evaluation_context:
+    :patterns:
+    - :include: "$base"
+  :contional_context:
+    :patterns:
+    - :include: "$base"
   literal_numeric_seperator:
     :match: "(?<!')'(?!')"
     :name: punctuation.separator.constant.numeric.cpp
@@ -456,7 +465,7 @@
         - :include: "#template_definition_argument"
         - :include: "#template_argument_defaulted"
         - :include: "#template_call_innards"
-        - :include: "$base"
+        - :include: "#evaluation_context"
       '4':
         :name: punctuation.section.angle-brackets.end.template.definition.cpp
   template_definition:
@@ -495,7 +504,7 @@
     - :include: "#template_definition_argument"
     - :include: "#template_argument_defaulted"
     - :include: "#template_call_innards"
-    - :include: "$base"
+    - :include: "#evaluation_context"
   template_argument_defaulted:
     :match: "(?<=<|,)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*([=])"
     :captures:
@@ -666,7 +675,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#evaluation_context"
   alignof_operator:
     :contentName: meta.arguments.operator.alignof
     :begin: "((?<!\\w)alignof(?!\\w))(\\()"
@@ -680,7 +689,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#evaluation_context"
   alignas_operator:
     :contentName: meta.arguments.operator.alignas
     :begin: "((?<!\\w)alignas(?!\\w))(\\()"
@@ -694,7 +703,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#evaluation_context"
   typeid_operator:
     :contentName: meta.arguments.operator.typeid
     :begin: "((?<!\\w)typeid(?!\\w))(\\()"
@@ -708,7 +717,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#evaluation_context"
   decltype_specifier:
     :contentName: meta.arguments.decltype
     :begin: "((?<!\\w)decltype(?!\\w))(\\()"
@@ -722,7 +731,7 @@
       '1':
         :name: punctuation.section.arguments.end.bracket.round.decltype.cpp
     :patterns:
-    - :include: "$base"
+    - :include: "#evaluation_context"
   probably_a_parameter:
     :match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
@@ -1038,10 +1047,7 @@
         '1':
           :name: punctuation.section.block.begin.bracket.curly.class.cpp
       :patterns:
-      - :include: "#preprocessor_rule_enabled"
-      - :include: "#preprocessor_rule_disabled"
-      - :include: "#preprocessor_rule_conditional"
-      - :include: "#hacky_fix_for_stray_directive"
+      - :include: "#preprocessor_context"
       - :match: ","
         :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
       - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
@@ -1130,10 +1136,7 @@
         '1':
           :name: punctuation.section.block.begin.bracket.curly.struct.cpp
       :patterns:
-      - :include: "#preprocessor_rule_enabled"
-      - :include: "#preprocessor_rule_disabled"
-      - :include: "#preprocessor_rule_conditional"
-      - :include: "#hacky_fix_for_stray_directive"
+      - :include: "#preprocessor_context"
       - :match: ","
         :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
       - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
@@ -1202,10 +1205,7 @@
         '1':
           :name: punctuation.section.block.begin.bracket.curly.union.cpp
       :patterns:
-      - :include: "#preprocessor_rule_enabled"
-      - :include: "#preprocessor_rule_disabled"
-      - :include: "#preprocessor_rule_conditional"
-      - :include: "#hacky_fix_for_stray_directive"
+      - :include: "#preprocessor_context"
       - :match: ","
         :name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
       - :match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
