@@ -112,7 +112,7 @@ class Grammar
         end
     end
     
-    def self.toTag(data)
+    def self.toTag(data, ignore_repository_entry: false)
         # if its a string then include it directly
         if (data.instance_of? String)
             return { include: data }
@@ -121,7 +121,7 @@ class Grammar
             return { include: "##{data}" }
         # if its a pattern, then convert it to a tag
         elsif (data.instance_of? Regexp) or (data.instance_of? Range)
-            return data.to_tag
+            return data.to_tag(ignore_repository_entry: ignore_repository_entry)
         # if its a hash, then just add it as-is
         elsif (data.instance_of? Hash)
             return data
@@ -142,7 +142,7 @@ class Grammar
         end
     end
     
-    def self.convertIncludesToPatternList(includes)
+    def self.convertIncludesToPatternList(includes, ignore_repository_entry: false)
         # Summary:
             # this takes a list, like:
             #     [
@@ -212,7 +212,7 @@ class Grammar
         # create the pattern list
         patterns = []
         for each_include in includes
-            patterns.push(Grammar.toTag(each_include))
+            patterns.push(Grammar.toTag(each_include, ignore_repository_entry: ignore_repository_entry))
         end
         return patterns
     end
@@ -277,7 +277,12 @@ class Grammar
     end
     
     def []=(key, value)
-        return @data[:repository][key] = value
+        # add it to the repository
+        @data[:repository][key] = value
+        # tell the object it was added to a repository
+        if (value.instance_of? Regexp) || (value.instance_of? Range)
+            value.repository_name = key
+        end
     end
     
     def addToRepository(hash_of_repos)
@@ -306,7 +311,7 @@ class Grammar
         # Convert all the repository entries
         #
         for each_name in repository_copy.keys
-            repository_copy[each_name] = Grammar.toTag(repository_copy[each_name])
+            repository_copy[each_name] = Grammar.toTag(repository_copy[each_name], ignore_repository_entry: true)
         end
         textmate_output[:repository] = repository_copy
         
@@ -914,7 +919,10 @@ class Range
         # TODO, add more error checking. key_arguments should be empty at this point
     end
     
-    def to_tag
+    def to_tag(ignore_repository_entry: false)
+        if ignore_repository_entry
+            return @as_tag
+        end
         if @repository_name != nil
             return {
                 include: "##{@repository_name}"
