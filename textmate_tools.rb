@@ -125,6 +125,10 @@ class Grammar
         # if its a hash, then just add it as-is
         elsif (data.instance_of? Hash)
             return data
+        elsif (data.instance_of? Array)
+            return {
+                patterns: Grammar.convertIncludesToPatternList(data)
+            }
         end
     end
     
@@ -393,11 +397,12 @@ class Regexp
             captures: captures,
         }
         
-        # if only a pattern list (no :match argument)
+        # if no regex in the pattern
         if regex_as_string == '()'
-            return {
-                patterns: Grammar.convertIncludesToPatternList(@group_attributes[0][:includes])
-            }
+            puts "\n\nThere is a newPattern(), or one of its helpers, where no 'match' argument was given"
+            puts "Here is the data for the pattern:"
+            puts @group_attributes.to_yaml
+            raise "Error: see printout above"
         end
         
         #

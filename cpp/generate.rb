@@ -89,15 +89,12 @@ cpp_grammar = Grammar.new(
         "#preprocessor-rule-conditional",
         "#hacky_fix_for_stray_directive",
     ]
-    type_context = newPattern(
-        repository_name: :storage_types,
-        includes:  [
-            :primitive_types,
-            :non_primitive_types,
-            :pthread_types,
-            :posix_reserved_types,
-        ]
-        )
+    cpp_grammar[:storage_types] = [
+        :primitive_types,
+        :non_primitive_types,
+        :pthread_types,
+        :posix_reserved_types,
+    ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
     evaluation_context = [
@@ -737,7 +734,7 @@ cpp_grammar = Grammar.new(
 #
 # Operators
 #
-    operator_context = []
+    cpp_grammar[:operators] = []
     normal_word_operators = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
         tag_as: "keyword.operator.wordlike alias keyword.operator.$match",
@@ -745,7 +742,7 @@ cpp_grammar = Grammar.new(
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
-        operator_context.push(functionTemplate[
+        cpp_grammar[:operators].push(functionTemplate[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
             tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
@@ -753,7 +750,7 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
-    operator_context += [
+    cpp_grammar[:operators] += [
             functionTemplate[
                 repository_name: "decltype_specifier",
                 match_name: variableBounds[/decltype/],
@@ -836,10 +833,6 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    operators = newPattern(
-        repository_name: 'operators',
-        includes: operator_context,
-        )
 #
 # Probably a parameter
 #

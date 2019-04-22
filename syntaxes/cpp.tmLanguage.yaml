@@ -576,6 +576,54 @@
           :name: keyword.operator.reference.cpp
       '4':
         :name: variable.other.object.declare.cpp
+  :operators:
+    :patterns:
+    - :include: "#sizeof_operator"
+    - :include: "#alignof_operator"
+    - :include: "#alignas_operator"
+    - :include: "#typeid_operator"
+    - :include: "#decltype_specifier"
+    - :match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
+      :name: keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp
+    - :include: "#method_access"
+    - :include: "#member_access"
+    - :match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
+      :name: keyword.operator.wordlike.cpp alias.cpp keyword.operator.$0.cpp
+    - :include: "#vararg_ellipses"
+    - :match: "--"
+      :name: keyword.operator.decrement.cpp
+    - :match: "\\+\\+"
+      :name: keyword.operator.increment.cpp
+    - :match: "%=|\\+=|-=|\\*=|(?<!\\()/="
+      :name: keyword.operator.assignment.compound.cpp
+    - :match: "&=|\\^=|<<=|>>=|\\|="
+      :name: keyword.operator.assignment.compound.bitwise.cpp
+    - :match: "<<|>>"
+      :name: keyword.operator.bitwise.shift.cpp
+    - :match: "!=|<=|>=|==|<|>"
+      :name: keyword.operator.comparison.cpp
+    - :match: "&&|!|\\|\\|"
+      :name: keyword.operator.logical.cpp
+    - :match: "&|\\||\\^|~"
+      :name: keyword.operator.cpp
+    - :match: "="
+      :name: keyword.operator.assignment.cpp
+    - :match: "%|\\*|/|-|\\+"
+      :name: keyword.operator.cpp
+    - :begin: "\\?"
+      :beginCaptures:
+        '0':
+          :name: keyword.operator.ternary.cpp
+      :end: ":"
+      :applyEndPatternLast: true
+      :endCaptures:
+        '0':
+          :name: keyword.operator.ternary.cpp
+      :patterns:
+      - :include: "#method_access"
+      - :include: "#member_access"
+      - :include: "#c_function_call"
+      - :include: "$base"
   sizeof_operator:
     :contentName: meta.arguments.operator.sizeof
     :begin: "((?<!\\w)sizeof(?!\\w))(\\()"
@@ -646,54 +694,6 @@
         :name: punctuation.section.arguments.end.bracket.round.decltype.cpp
     :patterns:
     - :include: "$base"
-  operators:
-    :patterns:
-    - :include: "#sizeof_operator"
-    - :include: "#alignof_operator"
-    - :include: "#alignas_operator"
-    - :include: "#typeid_operator"
-    - :include: "#decltype_specifier"
-    - :match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
-      :name: keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp
-    - :include: "#method_access"
-    - :include: "#member_access"
-    - :match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
-      :name: keyword.operator.wordlike.cpp alias.cpp keyword.operator.$0.cpp
-    - :include: "#vararg_ellipses"
-    - :match: "--"
-      :name: keyword.operator.decrement.cpp
-    - :match: "\\+\\+"
-      :name: keyword.operator.increment.cpp
-    - :match: "%=|\\+=|-=|\\*=|(?<!\\()/="
-      :name: keyword.operator.assignment.compound.cpp
-    - :match: "&=|\\^=|<<=|>>=|\\|="
-      :name: keyword.operator.assignment.compound.bitwise.cpp
-    - :match: "<<|>>"
-      :name: keyword.operator.bitwise.shift.cpp
-    - :match: "!=|<=|>=|==|<|>"
-      :name: keyword.operator.comparison.cpp
-    - :match: "&&|!|\\|\\|"
-      :name: keyword.operator.logical.cpp
-    - :match: "&|\\||\\^|~"
-      :name: keyword.operator.cpp
-    - :match: "="
-      :name: keyword.operator.assignment.cpp
-    - :match: "%|\\*|/|-|\\+"
-      :name: keyword.operator.cpp
-    - :begin: "\\?"
-      :beginCaptures:
-        '0':
-          :name: keyword.operator.ternary.cpp
-      :end: ":"
-      :applyEndPatternLast: true
-      :endCaptures:
-        '0':
-          :name: keyword.operator.ternary.cpp
-      :patterns:
-      - :include: "#method_access"
-      - :include: "#member_access"
-      - :include: "#c_function_call"
-      - :include: "$base"
   probably_a_parameter:
     :match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
