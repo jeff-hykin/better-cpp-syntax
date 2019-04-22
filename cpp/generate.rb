@@ -3162,7 +3162,7 @@ Dir.chdir __dir__
 @syntax_location = "../syntaxes/cpp.tmLanguage"
 cpp_grammar.saveAsYamlTo(@syntax_location)
 cpp_grammar.saveAsJsonTo(@syntax_location)
-
+cpp_grammar.saveTagsTo("tags.txt")
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = cpp_grammar

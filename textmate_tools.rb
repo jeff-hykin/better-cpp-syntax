@@ -1,5 +1,6 @@
 require 'json'
 require 'yaml'
+require 'set'
 
 # TODO
     # add a check that doesnt allow $ in non-special repository names
@@ -13,7 +14,7 @@ require 'yaml'
         # add a "is alreadly a group" flag to prevent double wrapping
 
 class Grammar
-    attr_accessor :data
+    attr_accessor :data, :all_tags
     
     #
     # Globally accessible current grammar object
@@ -282,7 +283,7 @@ class Grammar
         # 
         # Add the language endings
         # 
-        
+        @all_tags = Set.new()
         post_processing = ->(each_pattern) do
             for each_key in each_pattern.dup.keys
                 #
@@ -317,6 +318,7 @@ class Grammar
                             each_with_ending += ".#{@language_ending}"
                         end
                         new_names << each_with_ending
+                        @all_tags.add(each_with_ending)
                     end
                     each_pattern[each_key] = new_names.join(' ')
                 end
@@ -336,6 +338,13 @@ class Grammar
     def saveAsYamlTo(file_location, inherit_or_embedded: :inherit)
         new_file = File.open(file_location+".yaml", "w")
         new_file.write(self.to_h(inherit_or_embedded: inherit_or_embedded).to_yaml)
+        new_file.close
+    end
+    
+    def saveTagsTo(file_location)
+        self.to_h(inherit_or_embedded: :inherit)
+        new_file = File.open(file_location, "w")
+        new_file.write(@all_tags.to_a.sort.join("\n"))
         new_file.close
     end
 end

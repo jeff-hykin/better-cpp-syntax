@@ -2163,3 +2163,4 @@ Dir.chdir __dir__
 @syntax_location = "../syntaxes/c.tmLanguage"
 c_grammar.saveAsYamlTo(@syntax_location)
 c_grammar.saveAsJsonTo(@syntax_location)
+c_grammar.saveTagsTo("tags.txt")
