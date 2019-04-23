@@ -459,6 +459,7 @@ c_grammar[:$initial_context] = [
         name: "punctuation.separator.delimiter.c"
     }
 ]
+c_grammar[:numbers] = numeric_constant(c_grammar)
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {
@@ -705,14 +706,6 @@ c_grammar.addToRepository({
                         name: "constant.character.escape.line-continuation.c"
                     }
                 }
-            }
-        ]
-    },
-    "numbers" => {
-        patterns: [
-            {
-                match: "\\b((0(x|X)[0-9a-fA-F]([0-9a-fA-F']*[0-9a-fA-F])?)|(0(b|B)[01]([01']*[01])?)|(([0-9]([0-9']*[0-9])?\\.?[0-9]*([0-9']*[0-9])?)|(\\.[0-9]([0-9']*[0-9])?))((e|E)(\\+|-)?[0-9]([0-9']*[0-9])?)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-                name: "constant.numeric.c"
             }
         ]
     },
