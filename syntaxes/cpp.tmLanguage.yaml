@@ -169,114 +169,135 @@
     match: "(?<!')'(?!')"
     name: punctuation.separator.constant.numeric.cpp
   number_literal:
-    match: "(?<!\\w)(?:(?:(0[xX])(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(?:(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?|(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?(?:(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?)(?:([lLfF](?!\\w)))?|(?:(?:(?:(0[bB])((?:(?:[01]|((?<!')'(?!'))))+)|(0)((?:(?:[0-7]|((?<!')'(?!'))))+))|(0[xX])([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?)|([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?)(\\w*)"
-    captures:
-      '1':
-        name: keyword.other.unit.hexadecimal.cpp
-      '2':
-        name: constant.numeric.hexadecimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '3':
-        name: punctuation.separator.constant.numeric.cpp
-      '4':
-        name: constant.numeric.hexadecimal.cpp
-      '5':
-        name: constant.numeric.hexadecimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '6':
-        name: punctuation.separator.constant.numeric.cpp
-      '8':
-        name: keyword.other.unit.exponent.hexadecimal.cpp
-      '9':
-        name: keyword.operator.plus.exponent.hexadecimal.cpp
-      '10':
-        name: keyword.operator.minus.exponent.hexadecimal.cpp
-      '11':
-        name: constant.numeric.exponent.hexadecimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '12':
-        name: constant.numeric.decimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '13':
-        name: punctuation.separator.constant.numeric.cpp
-      '14':
-        name: constant.numeric.decimal.point.cpp
-      '15':
-        name: constant.numeric.decimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '16':
-        name: punctuation.separator.constant.numeric.cpp
-      '18':
-        name: keyword.other.unit.exponent.decimal.cpp
-      '19':
-        name: keyword.operator.plus.exponent.decimal.cpp
-      '20':
-        name: keyword.operator.minus.exponent.decimal.cpp
-      '21':
-        name: constant.numeric.exponent.decimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '22':
-        name: keyword.other.unit.suffix.floating-point.cpp
-      '23':
-        name: keyword.other.unit.binary.cpp
-      '24':
-        name: constant.numeric.binary.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '25':
-        name: punctuation.separator.constant.numeric.cpp
-      '26':
-        name: keyword.other.unit.octal.cpp
-      '27':
-        name: constant.numeric.octal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '28':
-        name: punctuation.separator.constant.numeric.cpp
-      '29':
-        name: keyword.other.unit.hexadecimal.cpp
-      '30':
-        name: constant.numeric.hexadecimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '31':
-        name: punctuation.separator.constant.numeric.cpp
-      '33':
-        name: keyword.other.unit.exponent.hexadecimal.cpp
-      '34':
-        name: keyword.operator.plus.exponent.hexadecimal.cpp
-      '35':
-        name: keyword.operator.minus.exponent.hexadecimal.cpp
-      '36':
-        name: constant.numeric.exponent.hexadecimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '37':
-        name: constant.numeric.decimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '38':
-        name: punctuation.separator.constant.numeric.cpp
-      '40':
-        name: keyword.other.unit.exponent.decimal.cpp
-      '41':
-        name: keyword.operator.plus.exponent.decimal.cpp
-      '42':
-        name: keyword.operator.minus.exponent.decimal.cpp
-      '43':
-        name: constant.numeric.exponent.decimal.cpp
-        patterns:
-        - include: "#literal_numeric_seperator"
-      '44':
-        name: keyword.other.unit.suffix.integer.cpp
-      '45':
-        name: keyword.other.unit.user-defined.cpp
+    begin: "(?<!\\w)(?=\\d)"
+    end: "(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-]))"
+    patterns:
+    - match: "(\\G0[xX](?:((?<!')'(?!')))?)(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*))))(?:([lLfF](?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: keyword.other.unit.hexadecimal.cpp
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: constant.numeric.hexadecimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '4':
+          name: punctuation.separator.constant.numeric.cpp
+        '5':
+          name: constant.numeric.hexadecimal.cpp
+        '6':
+          name: constant.numeric.hexadecimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '7':
+          name: punctuation.separator.constant.numeric.cpp
+        '9':
+          name: keyword.other.unit.exponent.hexadecimal.cpp
+        '10':
+          name: keyword.operator.plus.exponent.hexadecimal.cpp
+        '11':
+          name: keyword.operator.minus.exponent.hexadecimal.cpp
+        '12':
+          name: constant.numeric.exponent.hexadecimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '13':
+          name: keyword.other.unit.suffix.floating-point.cpp
+        '14':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "\\G(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*))))(?:([lLfF](?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: constant.numeric.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: constant.numeric.decimal.point.cpp
+        '4':
+          name: constant.numeric.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '5':
+          name: punctuation.separator.constant.numeric.cpp
+        '7':
+          name: keyword.other.unit.exponent.decimal.cpp
+        '8':
+          name: keyword.operator.plus.exponent.decimal.cpp
+        '9':
+          name: keyword.operator.minus.exponent.decimal.cpp
+        '10':
+          name: constant.numeric.exponent.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '11':
+          name: keyword.other.unit.suffix.floating-point.cpp
+        '12':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "(\\G0[bB](?:((?<!')'(?!')))?)([01](?:(?:[01]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: keyword.other.unit.binary.cpp
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: constant.numeric.binary.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '4':
+          name: punctuation.separator.constant.numeric.cpp
+        '5':
+          name: keyword.other.unit.suffix.integer.cpp
+        '6':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "(\\G0(?:((?<!')'(?!')))?)([0-7](?:(?:[0-7]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: keyword.other.unit.octal.cpp
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: constant.numeric.octal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '4':
+          name: punctuation.separator.constant.numeric.cpp
+        '5':
+          name: keyword.other.unit.suffix.integer.cpp
+        '6':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "(\\G0[xX](?:((?<!')'(?!')))?)([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: keyword.other.unit.hexadecimal.cpp
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: constant.numeric.hexadecimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '4':
+          name: punctuation.separator.constant.numeric.cpp
+        '5':
+          name: keyword.other.unit.suffix.integer.cpp
+        '6':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "\\G([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+      captures:
+        '1':
+          name: constant.numeric.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '2':
+          name: punctuation.separator.constant.numeric.cpp
+        '3':
+          name: keyword.other.unit.suffix.integer.cpp
+        '4':
+          name: keyword.other.unit.user-defined.cpp
+    - match: "(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])"
+      name: invalid.illegal.constant.numeric.cpp
   constants:
     match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
     name: constant.language.cpp

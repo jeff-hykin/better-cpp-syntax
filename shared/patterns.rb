@@ -9,6 +9,16 @@ def numeric_constant(grammar, allow_udl: false)
     start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d/)
     end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
 
+    decimal_udl_pattern = allow_udl ?
+        newPattern(
+            match: maybe(/\w/.lookBehindToAvoid(/[eE]/).then(/\w*/)).then(end_pattern),
+            tag_as: "keyword.other.unit.user-defined"
+        ) : end_pattern
+    hex_udl_pattern = allow_udl ?
+        newPattern(
+            match: maybe(/\w/.lookBehindToAvoid(/[pP]/).then(/\w*/)).then(end_pattern),
+            tag_as: "keyword.other.unit.user-defined"
+        ) : end_pattern
     udl_pattern = allow_udl ?
         newPattern(
             match: /\w*/.then(end_pattern),
@@ -57,23 +67,23 @@ def numeric_constant(grammar, allow_udl: false)
         should_fully_match: ["0x'", "0X'", "0x", "0X"],
         should_partial_match: ["0x1234"],
         should_not_partial_match: ["0b010x"],
-        match: /\A/.then(/0[xX]/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0[xX]/).maybe(number_seperator_pattern),
         tag_as: "keyword.other.unit.hexadecimal",
     )
     octal_prefix = newPattern(
         should_fully_match: ["0'", "0"],
         should_partial_match: ["01234"],
-        match: /\A/.then(/0/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0/).maybe(number_seperator_pattern),
         tag_as: "keyword.other.unit.octal",
     )
     binary_prefix = newPattern(
         should_fully_match: ["0b'", "0B'", "0b", "0B"],
         should_partial_match: ["0b1001"],
         should_not_partial_match: ["0x010b"],
-        match: /\A/.then(/0[bB]/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0[bB]/).maybe(number_seperator_pattern),
         tag_as: "keyword.other.unit.binary",
     )
-    decimal_prefix = /\A/,
+    decimal_prefix = /\G/,
     numeric_suffix = newPattern(
         should_fully_match: ["u","l","UL","llU"],
         should_not_fully_match: ["lLu","uU","lug"],
@@ -143,15 +153,15 @@ def numeric_constant(grammar, allow_udl: false)
             # floating point
             hex_prefix.maybe(hex_digits).then(hex_point)
                 .maybe(hex_digits).then(hex_exponent)
-                .maybe(floating_suffix).then(udl_pattern),
-            /\A/.maybe(decimal_digits).then(decimal_point)
+                .maybe(floating_suffix).then(hex_udl_pattern),
+            /\G/.maybe(decimal_digits).then(decimal_point)
                 .maybe(decimal_digits).then(decimal_exponent)
-                .maybe(floating_suffix).then(udl_pattern),
+                .maybe(floating_suffix).then(decimal_udl_pattern),
             # numeric
             binary_prefix.then(binary_digits).maybe(numeric_suffix).then(udl_pattern),
             octal_prefix.then(octal_digits).maybe(numeric_suffix).then(udl_pattern),
-            hex_prefix.then(hex_digits).maybe(numeric_suffix).then(udl_pattern),
-            /\A/.then(decimal_digits).maybe(numeric_suffix).then(udl_pattern),
+            hex_prefix.then(hex_digits).maybe(numeric_suffix).then(hex_udl_pattern),
+            /\G/.then(decimal_digits).maybe(numeric_suffix).then(decimal_udl_pattern),
             # invalid
             newPattern(
                 match: valid_single_character.or(valid_after_exponent),
