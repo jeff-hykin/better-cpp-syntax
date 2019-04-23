@@ -213,7 +213,7 @@
   name: punctuation.separator.delimiter.c
 :repository:
   probably_a_parameter:
-    match: "(?<=(?:[a-zA-Z_0-9 ]|[&*>\\]\\)]))\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))"
+    match: "(?<=(?:[a-zA-Z_0-9] |[&*>\\]\\)]))\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))"
     captures:
       '1':
         name: variable.parameter.probably.c

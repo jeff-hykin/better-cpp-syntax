@@ -14,9 +14,9 @@ c_grammar = Grammar.new(
     scope_name: "source.c",
 )
 
-# 
+#
 # import from C++
-# 
+#
     require_relative '../cpp/generate.rb'
     import_names = [
         :default_statement,
@@ -28,9 +28,9 @@ c_grammar = Grammar.new(
         c_grammar[each] = @cpp_grammar[each]
     end
 
-# 
+#
 # Contexts
-# 
+#
     c_grammar[:conditional_context] = [
             :$initial_context
         ]
@@ -38,7 +38,7 @@ c_grammar = Grammar.new(
         "#function-call-innards",
         "$base"
     ]
-    
+
 #
 # Variable
 #
@@ -67,7 +67,7 @@ c_grammar = Grammar.new(
 # Probably a parameter
 #
     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-    look_behind_for_type = lookBehindFor(/[a-zA-Z_0-9 ]/.or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
+    look_behind_for_type = lookBehindFor(/[a-zA-Z_0-9] /.or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
     array_brackets = /\[\]/.maybe(@spaces)
     comma_or_closing_paraenthese = /,/.or(/\)/)
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
