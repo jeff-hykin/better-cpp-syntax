@@ -4,9 +4,9 @@ def numeric_constant(grammar, allow_udl: false)
     # constant/literal
     # additionally +- are part of the sequence when immediately succeeding e,E,p, or P.
     # the outer range pattern does not attempt to actually process the numbers
-    valid_single_character = /['0-9a-zA-Z_.']/
+    valid_single_character = /['0-9a-zA-Z_\.']/
     valid_after_exponent = lookBehindFor(/[eEpP]/).then(/[+-]/)
-    start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d/)
+    start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\./)
     end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
 
     decimal_udl_pattern = allow_udl ?
@@ -85,7 +85,7 @@ def numeric_constant(grammar, allow_udl: false)
     ).maybe(number_seperator_pattern)
     decimal_prefix = newPattern(
         should_partial_match: ["1234"],
-        match: /\G/.lookAheadFor(/[0-9]/).lookAheadToAvoid(/0[xXbB]/),
+        match: /\G/.lookAheadFor(/[0-9.]/).lookAheadToAvoid(/0[xXbB]/),
     )
     numeric_suffix = newPattern(
         should_fully_match: ["u","l","UL","llU"],
