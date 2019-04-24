@@ -101,7 +101,7 @@ cpp_grammar = Grammar.new(
             :other_keywords,
             :memory_operators,
             :the_this_keyword,
-            :language_constants,
+            :constants,
             :template_isolated_definition,
             :template_definition,
             :scope_resolution,
@@ -369,7 +369,7 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:language_constants] = newPattern(
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
-        tag_as: "constant.language"
+        tag_as: "constant.language.$match"
         )
 
 #

@@ -19,7 +19,7 @@
 - include: "#other_keywords"
 - include: "#memory_operators"
 - include: "#the_this_keyword"
-- include: "#language_constants"
+- include: "#constants"
 - include: "#template_isolated_definition"
 - include: "#template_definition"
 - include: "#scope_resolution"
@@ -279,7 +279,7 @@
         name: keyword.other.unit.user-defined.cpp
   language_constants:
     match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
-    name: constant.language.cpp
+    name: constant.language.$0.cpp
   primitive_types:
     match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
     name: storage.type.primitive.cpp
