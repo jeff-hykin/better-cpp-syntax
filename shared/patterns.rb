@@ -1,5 +1,5 @@
 def numeric_constant(grammar, allow_udl: false)
-    # both C and C++ treat any sequence of digits, letter, periods, and valid seperators
+    # both C and C++ treat any sequence of digits, letter, periods, and valid separators
     # as a single numeric constant even if such a sequence forms no valid
     # constant/literal
     # additionally +- are part of the sequence when immediately succeeding e,E,p, or P.
@@ -25,7 +25,7 @@ def numeric_constant(grammar, allow_udl: false)
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
 
-    grammar[:literal_numeric_seperator] = number_seperator_pattern = newPattern(
+    grammar[:literal_numeric_separator] = number_separator_pattern = newPattern(
         should_fully_match: [ "'" ],
         should_partial_match: [ "1'1", "1'", "'1" ],
         should_not_partial_match: [ "1''1", "1''" ],
@@ -37,30 +37,31 @@ def numeric_constant(grammar, allow_udl: false)
         should_fully_match: [ "1", "123456", "DeAdBeeF", "49'30'94", "DeA'dBe'eF", "dea234f4930" ],
         should_not_fully_match: [ "'3902" , "de2300p1000", "0x000" ],
         should_not_partial_match: [ "p", "x", "." ],
-        match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
+        match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.hexadecimal",
-        includes: [ number_seperator_pattern ],
+        includes: [ number_separator_pattern ],
         )
     decimal_digits = newPattern(
         should_fully_match: [ "1", "123456", "49'30'94" , "1'2" ],
         should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
-        match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
+        match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.decimal",
-        includes: [ number_seperator_pattern ],
+        includes: [ number_separator_pattern ],
         )
+    # 0'004'000'000 is valid (i.e. a number separator directly after the prefix)
     octal_digits = newPattern(
         should_fully_match: [ "1", "123456", "47'30'74" , "1'2" ],
         should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
-        match: /[0-7]/.zeroOrMoreOf(/[0-7]/.or(number_seperator_pattern)),
+        match: oneOrMoreOf(/[0-7]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.octal",
-        includes: [ number_seperator_pattern ],
+        includes: [ number_separator_pattern ],
         )
     binary_digits = newPattern(
         should_fully_match: [ "1", "100100", "10'00'11" , "1'0" ],
         should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
-        match: /[01]/.zeroOrMoreOf(/[01]/.or(number_seperator_pattern)),
+        match: /[01]/.zeroOrMoreOf(/[01]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.binary",
-        includes: [ number_seperator_pattern ],
+        includes: [ number_separator_pattern ],
         )
 
     hex_prefix = newPattern(
@@ -69,20 +70,20 @@ def numeric_constant(grammar, allow_udl: false)
         should_not_partial_match: ["0b010x"],
         match: /\G/.then(/0[xX]/),
         tag_as: "keyword.other.unit.hexadecimal",
-    ).maybe(number_seperator_pattern)
+    )
     octal_prefix = newPattern(
         should_fully_match: ["0"],
         should_partial_match: ["01234"],
         match: /\G/.then(/0/),
         tag_as: "keyword.other.unit.octal",
-    ).maybe(number_seperator_pattern)
+    )
     binary_prefix = newPattern(
         should_fully_match: ["0b", "0B"],
         should_partial_match: ["0b1001"],
         should_not_partial_match: ["0x010b"],
         match: /\G/.then(/0[bB]/),
         tag_as: "keyword.other.unit.binary",
-    ).maybe(number_seperator_pattern)
+    )
     decimal_prefix = newPattern(
         should_partial_match: ["1234"],
         match: /\G/.lookAheadFor(/[0-9.]/).lookAheadToAvoid(/0[xXbB]/),
@@ -110,7 +111,7 @@ def numeric_constant(grammar, allow_udl: false)
             ).then(
                 match: decimal_digits.without_numbered_capture_groups,
                 tag_as: "constant.numeric.exponent.hexadecimal",
-                includes: [ number_seperator_pattern ]
+                includes: [ number_separator_pattern ]
             ),
         )
     decimal_exponent = newPattern(
@@ -128,7 +129,7 @@ def numeric_constant(grammar, allow_udl: false)
             ).then(
                 match: decimal_digits.without_numbered_capture_groups,
                 tag_as: "constant.numeric.exponent.decimal",
-                includes: [ number_seperator_pattern ]
+                includes: [ number_separator_pattern ]
             ),
         )
     hex_point = newPattern(
