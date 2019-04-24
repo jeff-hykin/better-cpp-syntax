@@ -247,6 +247,8 @@ tokens = [
     { representation: "))"                    , name: "gcc attribute end"      , isAttributeEnd: true  , isGccAttribute: true},
     { representation: "__declspec("           , name: "ms attribute start"     , isAttributeStart: true, isMsAttribute: true},
     { representation: ")"                     , name: "ms attribute end"       , isAttributeEnd: true  , isMsAttribute: true},
+    { representation: "alignas("              , name: "alignas start"          , isAttributeStart: true, isAlignas: true},
+    { representation: ")"                     , name: "alignas end"            , isAttributeEnd: true  , isAlignas: true},
 
     # 
     # misc

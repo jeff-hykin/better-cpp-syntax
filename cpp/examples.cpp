@@ -384,6 +384,7 @@ class ClassH : public foo::ClassF, public foo::ClassG {
                                                    typeid(typename allocatorT::value_type).name());
           }
       };
+      struct alignas(16) sse_t {};
 
 // 
 // inheritance

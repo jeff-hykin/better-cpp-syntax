@@ -555,6 +555,8 @@ cpp_grammar = Grammar.new(
             @cpp_tokens.that(:isAttributeStart, :isGccAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isGccAttribute))
         ).or(
             @cpp_tokens.that(:isAttributeStart, :isMsAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isMsAttribute))
+        ).or(
+            @cpp_tokens.that(:isAttributeStart, :isAlignas).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isAlignas))
         ).lookAheadToAvoid(/\)/),
         includes: [
             :attributes,
