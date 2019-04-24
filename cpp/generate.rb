@@ -101,7 +101,7 @@ cpp_grammar = Grammar.new(
             :other_keywords,
             :memory_operators,
             :the_this_keyword,
-            :language_constants,
+            :constants,
             :template_isolated_definition,
             :template_definition,
             :scope_resolution,
