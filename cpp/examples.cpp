@@ -83,7 +83,15 @@
             20ounces
             2000miles
             L"akdjfhald"
-            
+        // invalid literals
+            1Ex
+            0xe+foo
+            0x1Px
+        // odd valid literals
+            0x'12345
+            0'12345
+		0x1Ex
+		1Px
     //
     // chars
     //

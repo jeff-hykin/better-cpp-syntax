@@ -172,7 +172,7 @@
     begin: "(?<!\\w)(?=\\d)"
     end: "(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-]))"
     patterns:
-    - match: "(\\G0[xX](?:((?<!')'(?!')))?)(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*))))(?:([lLfF](?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[xX])(?:((?<!')'(?!')))?(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*))?(?:(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?(?:([lLfF](?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.cpp
@@ -206,37 +206,37 @@
           name: keyword.other.unit.suffix.floating-point.cpp
         '14':
           name: keyword.other.unit.user-defined.cpp
-    - match: "\\G(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*))))(?:([lLfF](?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G(?=[0-9])(?!0[xXbB]))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<!')'(?!'))))*))?(?:(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?(?:([lLfF](?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
-        '1':
-          name: constant.numeric.decimal.cpp
-          patterns:
-          - include: "#literal_numeric_seperator"
         '2':
-          name: punctuation.separator.constant.numeric.cpp
-        '3':
-          name: constant.numeric.decimal.point.cpp
-        '4':
           name: constant.numeric.decimal.cpp
           patterns:
           - include: "#literal_numeric_seperator"
-        '5':
+        '3':
           name: punctuation.separator.constant.numeric.cpp
-        '7':
-          name: keyword.other.unit.exponent.decimal.cpp
+        '4':
+          name: constant.numeric.decimal.point.cpp
+        '5':
+          name: constant.numeric.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '6':
+          name: punctuation.separator.constant.numeric.cpp
         '8':
-          name: keyword.operator.plus.exponent.decimal.cpp
+          name: keyword.other.unit.exponent.decimal.cpp
         '9':
-          name: keyword.operator.minus.exponent.decimal.cpp
+          name: keyword.operator.plus.exponent.decimal.cpp
         '10':
+          name: keyword.operator.minus.exponent.decimal.cpp
+        '11':
           name: constant.numeric.exponent.decimal.cpp
           patterns:
           - include: "#literal_numeric_seperator"
-        '11':
-          name: keyword.other.unit.suffix.floating-point.cpp
         '12':
+          name: keyword.other.unit.suffix.floating-point.cpp
+        '13':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0[bB](?:((?<!')'(?!')))?)([01](?:(?:[01]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[bB])(?:((?<!')'(?!')))?([01](?:(?:[01]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.binary.cpp
@@ -252,7 +252,7 @@
           name: keyword.other.unit.suffix.integer.cpp
         '6':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0(?:((?<!')'(?!')))?)([0-7](?:(?:[0-7]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0)(?:((?<!')'(?!')))?([0-7](?:(?:[0-7]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?(\\w*(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.octal.cpp
@@ -268,7 +268,7 @@
           name: keyword.other.unit.suffix.integer.cpp
         '6':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0[xX](?:((?<!')'(?!')))?)([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[xX])(?:((?<!')'(?!')))?([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<!')'(?!'))))*)(?:(([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![pP])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.cpp
@@ -280,23 +280,43 @@
           - include: "#literal_numeric_seperator"
         '4':
           name: punctuation.separator.constant.numeric.cpp
-        '5':
-          name: keyword.other.unit.suffix.integer.cpp
         '6':
+          name: keyword.other.unit.exponent.hexadecimal.cpp
+        '7':
+          name: keyword.operator.plus.exponent.hexadecimal.cpp
+        '8':
+          name: keyword.operator.minus.exponent.hexadecimal.cpp
+        '9':
+          name: constant.numeric.exponent.hexadecimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '10':
+          name: keyword.other.unit.suffix.integer.cpp
+        '11':
           name: keyword.other.unit.user-defined.cpp
-    - match: "\\G([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G(?=[0-9])(?!0[xXbB]))([0-9](?:(?:[0-9]|((?<!')'(?!'))))*)(?:(([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<!')'(?!'))))*)))))?(?:((?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)(?!\\w)))?((?:\\w(?<![eE])\\w*)?(?!(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])))"
       captures:
-        '1':
+        '2':
           name: constant.numeric.decimal.cpp
           patterns:
           - include: "#literal_numeric_seperator"
-        '2':
-          name: punctuation.separator.constant.numeric.cpp
         '3':
+          name: punctuation.separator.constant.numeric.cpp
+        '5':
+          name: keyword.other.unit.exponent.decimal.cpp
+        '6':
+          name: keyword.operator.plus.exponent.decimal.cpp
+        '7':
+          name: keyword.operator.minus.exponent.decimal.cpp
+        '8':
+          name: constant.numeric.exponent.decimal.cpp
+          patterns:
+          - include: "#literal_numeric_seperator"
+        '9':
           name: keyword.other.unit.suffix.integer.cpp
-        '4':
+        '10':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-])"
+    - match: "(?:(?:['0-9a-zA-Z_.']|(?<=[eEpP])[+-]))+"
       name: invalid.illegal.constant.numeric.cpp
   constants:
     match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"

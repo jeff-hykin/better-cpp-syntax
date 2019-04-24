@@ -64,26 +64,29 @@ def numeric_constant(grammar, allow_udl: false)
         )
 
     hex_prefix = newPattern(
-        should_fully_match: ["0x'", "0X'", "0x", "0X"],
+        should_fully_match: ["0x", "0X"],
         should_partial_match: ["0x1234"],
         should_not_partial_match: ["0b010x"],
-        match: /\G/.then(/0[xX]/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0[xX]/),
         tag_as: "keyword.other.unit.hexadecimal",
-    )
+    ).maybe(number_seperator_pattern)
     octal_prefix = newPattern(
-        should_fully_match: ["0'", "0"],
+        should_fully_match: ["0"],
         should_partial_match: ["01234"],
-        match: /\G/.then(/0/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0/),
         tag_as: "keyword.other.unit.octal",
-    )
+    ).maybe(number_seperator_pattern)
     binary_prefix = newPattern(
-        should_fully_match: ["0b'", "0B'", "0b", "0B"],
+        should_fully_match: ["0b", "0B"],
         should_partial_match: ["0b1001"],
         should_not_partial_match: ["0x010b"],
-        match: /\G/.then(/0[bB]/).maybe(number_seperator_pattern),
+        match: /\G/.then(/0[bB]/),
         tag_as: "keyword.other.unit.binary",
+    ).maybe(number_seperator_pattern)
+    decimal_prefix = newPattern(
+        should_partial_match: ["1234"],
+        match: /\G/.lookAheadFor(/[0-9]/).lookAheadToAvoid(/0[xXbB]/),
     )
-    decimal_prefix = /\G/,
     numeric_suffix = newPattern(
         should_fully_match: ["u","l","UL","llU"],
         should_not_fully_match: ["lLu","uU","lug"],
@@ -152,19 +155,19 @@ def numeric_constant(grammar, allow_udl: false)
         includes: [
             # floating point
             hex_prefix.maybe(hex_digits).then(hex_point)
-                .maybe(hex_digits).then(hex_exponent)
+                .maybe(hex_digits).maybe(hex_exponent)
                 .maybe(floating_suffix).then(hex_udl_pattern),
-            /\G/.maybe(decimal_digits).then(decimal_point)
-                .maybe(decimal_digits).then(decimal_exponent)
+            decimal_prefix.maybe(decimal_digits).then(decimal_point)
+                .maybe(decimal_digits).maybe(decimal_exponent)
                 .maybe(floating_suffix).then(decimal_udl_pattern),
             # numeric
             binary_prefix.then(binary_digits).maybe(numeric_suffix).then(udl_pattern),
             octal_prefix.then(octal_digits).maybe(numeric_suffix).then(udl_pattern),
-            hex_prefix.then(hex_digits).maybe(numeric_suffix).then(hex_udl_pattern),
-            /\G/.then(decimal_digits).maybe(numeric_suffix).then(decimal_udl_pattern),
+            hex_prefix.then(hex_digits).maybe(hex_exponent).maybe(numeric_suffix).then(hex_udl_pattern),
+            decimal_prefix.then(decimal_digits).maybe(decimal_exponent).maybe(numeric_suffix).then(decimal_udl_pattern),
             # invalid
             newPattern(
-                match: valid_single_character.or(valid_after_exponent),
+                match: oneOrMoreOf(valid_single_character.or(valid_after_exponent)),
                 tag_as: "invalid.illegal.constant.numeric"
             )
         ]
