@@ -279,7 +279,7 @@
         name: keyword.other.unit.user-defined.cpp
   constants:
     match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
-    name: constant.language.cpp
+    name: constant.language.$0.cpp
   primitive_types:
     match: "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)"
     name: storage.type.primitive.cpp

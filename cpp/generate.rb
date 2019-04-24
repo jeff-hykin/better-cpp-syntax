@@ -369,7 +369,7 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:constants] = newPattern(
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
-        tag_as: "constant.language"
+        tag_as: "constant.language.$match"
         )
 
 #
