@@ -271,6 +271,13 @@ class Grammar
         initial_context = repository_copy[:$initial_context]
         repository_copy.delete(:$initial_context)
         textmate_output[:patterns] = Grammar.convertIncludesToPatternList(initial_context)
+        for each in initial_context
+            if each.is_a? Symbol
+                if self[each] == nil
+                    raise "\n\nIn :$initial_context there's a \"#{each}\" but \"#{each}\" isn't actually a repo."
+                end
+            end
+        end
         
         #
         # Convert all the repository entries
