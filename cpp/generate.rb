@@ -170,7 +170,7 @@ cpp_grammar = Grammar.new(
         ]
     cpp_grammar[:template_call_context] = [
             :storage_types,
-            :constants,
+            :language_constants,
             :scope_resolution,
             :user_defined_template_type,
             :operators,
@@ -367,7 +367,7 @@ cpp_grammar = Grammar.new(
 #
 # Constants
 #
-    cpp_grammar[:constants] = newPattern(
+    cpp_grammar[:language_constants] = newPattern(
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
         tag_as: "constant.language.$match"
         )
@@ -1160,7 +1160,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
         tag_as: "support.type.posix-reserved"
         )
-    
+
 
 #
 # Classes, structs, unions, enums
@@ -1303,7 +1303,7 @@ cpp_grammar = Grammar.new(
             tag_as: "keyword.control.directive.$match"
         )
 
-# 
+#
 # Misc Legacy
 #
     cpp_grammar[:square_brackets] = {
@@ -2203,7 +2203,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             :operators,
-            :constants,
+            :language_constants,
             {
                 match: preprocessor_name_no_bounds,
                 name: "entity.name.function.preprocessor"
