@@ -87,11 +87,13 @@
             1Ex
             0xe+foo
             0x1Px
+            0xAB.cdpfl
+            0x12345'luyards
         // odd valid literals
-            0x'12345
+            0x12345luyards
             0'12345
-		0x1Ex
-		1Px
+            0x1Ex
+            1Px
     //
     // chars
     //

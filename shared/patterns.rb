@@ -11,17 +11,17 @@ def numeric_constant(grammar, allow_udl: false)
 
     decimal_udl_pattern = allow_udl ?
         newPattern(
-            match: maybe(/\w/.lookBehindToAvoid(/[eE]/).then(/\w*/)).then(end_pattern),
+            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
     hex_udl_pattern = allow_udl ?
         newPattern(
-            match: maybe(/\w/.lookBehindToAvoid(/[pP]/).then(/\w*/)).then(end_pattern),
+            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
     udl_pattern = allow_udl ?
         newPattern(
-            match: /\w*/.then(end_pattern),
+            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
 
