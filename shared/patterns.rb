@@ -11,25 +11,24 @@ def numeric_constant(grammar, allow_udl: false)
 
     decimal_udl_pattern = allow_udl ?
         newPattern(
-            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
+            match: maybe(/\w/.lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
     hex_udl_pattern = allow_udl ?
         newPattern(
-            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
+            match: maybe(/\w/.lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
     udl_pattern = allow_udl ?
         newPattern(
-            match: lookBehindToAvoid(/'/).maybe(/\w/.lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
+            match: maybe(/\w/.lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
             tag_as: "keyword.other.unit.user-defined"
         ) : end_pattern
 
     grammar[:literal_numeric_separator] = number_separator_pattern = newPattern(
-        should_fully_match: [ "'" ],
-        should_partial_match: [ "1'1", "1'", "'1" ],
+        should_partial_match: [ "1'1" ],
         should_not_partial_match: [ "1''1", "1''" ],
-        match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
+        match: lookBehindFor(/[0-9a-fA-F]/).then(/'/).lookAheadFor(/[0-9a-fA-F]/),
         tag_as:"punctuation.separator.constant.numeric",
         )
 
@@ -99,7 +98,7 @@ def numeric_constant(grammar, allow_udl: false)
     hex_exponent = newPattern(
         should_fully_match: [ "p100", "p-100", "p+100", "P100" ],
         should_not_fully_match: [ "p0x0", "p-+100" ],
-        match: newPattern(
+        match: lookBehindToAvoid(/'/).then(
                 match: /[pP]/,
                 tag_as: "keyword.other.unit.exponent.hexadecimal",
             ).maybe(
@@ -117,7 +116,7 @@ def numeric_constant(grammar, allow_udl: false)
     decimal_exponent = newPattern(
         should_fully_match: [ "e100", "e-100", "e+100", "E100", ],
         should_not_fully_match: [ "e0x0", "e-+100" ],
-        match: newPattern(
+        match: lookBehindToAvoid(/'/).then(
                 match: /[eE]/,
                 tag_as: "keyword.other.unit.exponent.decimal",
             ).maybe(
