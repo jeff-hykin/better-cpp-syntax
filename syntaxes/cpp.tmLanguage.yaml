@@ -48,6 +48,7 @@
 - include: "#block"
 - include: "#parentheses"
 - include: "#function_definition"
+- include: "#declarations"
 - include: "#line_continuation_character"
 - include: "#square_brackets"
 - include: "#empty_square_brackets"
@@ -527,6 +528,35 @@
       '4':
         name: punctuation.separator.namespace.access.cpp
     name: meta.scope-resolution.cpp
+  declarations:
+    match: "(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*((?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?)(?:\\s*((?:(?:\\*)+|(?:&)+))\\s+|\\s+(?:((?:(?:\\*)+|(?:&)+)))?\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:(;)|(?=[\\[{=,)]))"
+    captures:
+      '1':
+        name: storage.modifier.specifier.$0.cpp
+      '2':
+        name: entity.name.type.cpp
+      '3':
+        name: meta.scope-resolution.cpp
+      '4':
+        patterns:
+        - include: "#scope_resolution"
+      '5':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '6':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_context"
+      '7':
+        name: punctuation.separator.namespace.access.cpp
+      '8':
+        name: variable.other.type_modifier.cpp
+      '9':
+        name: variable.other.type_modifier.cpp
+      '10':
+        name: variable.other.cpp
+      '11':
+        name: punctuation.terminator.statement.cpp
+    name: meta.variable.declaration.cpp
   struct_declare:
     match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s+((?:\\*|&\\s*)*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
     captures:

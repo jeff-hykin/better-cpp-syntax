@@ -130,6 +130,7 @@ cpp_grammar = Grammar.new(
             :block,
             :parentheses,
             :function_definition,
+            :declarations,
             :line_continuation_character,
             :square_brackets,
             :empty_square_brackets,
@@ -396,7 +397,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
         tag_as: "storage.modifier.specifier.functional.post-parameters.$match"
         )
-    cpp_grammar[:storage_specifiers] = newPattern(
+    cpp_grammar[:storage_specifiers] = storage_specifier = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
         tag_as: "storage.modifier.specifier.$match"
         )
@@ -703,6 +704,29 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.namespace.access"
             )
         )
+#
+# Declarations
+#
+    can_appear_before_variable_declaration = newPattern(
+        match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
+        tag_as: "variable.other.type_modifier",
+    )
+    cpp_grammar[:declarations] = newPattern(
+        should_fully_match: ["std::string s;", "A B;", "std::vector<int> vint;"],
+        should_partial_match: ["std::vector<int> vint{{1,2,3,4}}"],
+        should_not_partial_match: ["int min();"],
+        tag_as: "meta.variable.declaration",
+        match: zeroOrMoreOf(storage_specifier.then(@spaces)).then(
+            match: maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
+            tag_as: "entity.name.type",
+        ).then(
+            maybe(@spaces).then(can_appear_before_variable_declaration).then(@spaces).or(
+                @spaces.maybe(can_appear_before_variable_declaration).maybe(@spaces)
+        )).then(
+            match: variable_name,
+            tag_as: "variable.other",
+        ).maybe(@spaces).lookAheadToAvoid(/\(/).then(@semicolon.or(lookAheadFor(/[\[{=,)]/))),
+    )
 #
 # Functions
 #
