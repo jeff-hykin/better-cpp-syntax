@@ -755,11 +755,19 @@ cpp_grammar = Grammar.new(
                 includes: [
                     :evaluation_context,
                 ]
-            ),
+		),
+		Range.new(
+			start_pattern: lookAheadFor(/\{/),
+			end_pattern: lookAheadFor(/\}/),
+			includes: [
+				:evaluation_context,
+			]
+		),
             can_appear_before_variable_declaration_with_spaces.then(
                 match: variable_name,
                 tag_as: "variable.other",
-            ).then(after_declaration),
+		).then(after_declaration),
+		:comments_context,
             :comma,
         ]
     )
@@ -1010,8 +1018,9 @@ cpp_grammar = Grammar.new(
             ),
             :function_pointer,
             :declaration,
-            :qualified_type,
-            :comma
+		:qualified_type,
+		:comments_context,
+            :comma,
         ]
     )
 #
