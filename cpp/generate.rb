@@ -757,8 +757,14 @@ cpp_grammar = Grammar.new(
                 ]
 		),
 		Range.new(
-			start_pattern: lookAheadFor(/\{/),
-			end_pattern: lookAheadFor(/\}/),
+			start_pattern: newPattern(
+				match: /\{/,
+				tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
+			),
+			end_pattern: newPattern(
+				match: /\}/,
+				tag_as: "punctuation.section.block.end.bracket.curly.initializer",
+			),
 			includes: [
 				:evaluation_context,
 			]

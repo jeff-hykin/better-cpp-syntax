@@ -611,8 +611,14 @@
       end: "(?=[;,])"
       patterns:
       - include: "#evaluation_context"
-    - begin: "(?=\\{)"
-      end: "(?=\\})"
+    - begin: "(\\{)"
+      beginCaptures:
+        '1':
+          name: punctuation.section.block.begin.bracket.curly.initalizer.cpp
+      end: "(\\})"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.enbegind.bracket.curly.initalizer.cpp
       patterns:
       - include: "#evaluation_context"
     - match: "\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[\\[{=,);])"
