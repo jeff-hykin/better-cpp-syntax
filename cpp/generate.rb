@@ -747,7 +747,10 @@ cpp_grammar = Grammar.new(
         end_pattern: @semicolon,
         includes: [
             Range.new(
-                start_pattern: /\=/,
+                start_pattern: newPattern(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ),
                 end_pattern: lookAheadFor(/[;,]/),
                 includes: [
                     :evaluation_context,
@@ -996,7 +999,10 @@ cpp_grammar = Grammar.new(
         includes: [
             newPattern(
                 should_fully_match: ["= 5",'= "foo"'],
-                match: /\=/.maybe(@spaces).then(
+                match: newPattern(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ).maybe(@spaces).then(
                     match: /[^,)]+/,
                     includes: [:evaluation_context],
                     tag_as: "variable.parameter.default",
