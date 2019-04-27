@@ -130,7 +130,6 @@ cpp_grammar = Grammar.new(
             :block,
             :parentheses,
             :function_definition,
-            :declarations,
             :line_continuation_character,
             :square_brackets,
             :empty_square_brackets,
@@ -705,27 +704,45 @@ cpp_grammar = Grammar.new(
             )
         )
 #
+# Types
+#
+    cpp_grammar[:qualified_type] = qualified_type = newPattern(
+        should_fully_match: ["A","A::B","A::B<C>::D<E>"],
+        should_not_partial_match: ["return"],
+        match: variableBounds[ lookAheadToAvoid(
+            @cpp_tokens.that(:isWord, not(:isType))
+        ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups) ],
+        tag_as: "entity.name.type",
+        includes: [:storage_types],
+    )
+#
 # Declarations
 #
     can_appear_before_variable_declaration = newPattern(
         match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
         tag_as: "variable.other.type_modifier",
     )
+    can_appear_before_variable_declaration_with_spaces = newPattern(
+        match: maybe(@spaces).then(can_appear_before_variable_declaration).then(@spaces)
+            .or(@spaces.maybe(can_appear_before_variable_declaration).maybe(@spaces)),
+    )
+    array_brackets = /\[/.then(
+        match: /\w+/,
+        includes: [:evaluation_context]
+    ).then(/\]/).maybe(@spaces)
+    after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
+        .then(@semicolon.or(lookAheadFor(/[\[{=,)]/)))
     cpp_grammar[:declarations] = newPattern(
         should_fully_match: ["std::string s;", "A B;", "std::vector<int> vint;"],
         should_partial_match: ["std::vector<int> vint{{1,2,3,4}}"],
         should_not_partial_match: ["int min();"],
-        tag_as: "meta.variable.declaration",
-        match: zeroOrMoreOf(storage_specifier.then(@spaces)).then(
-            match: maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
-            tag_as: "entity.name.type",
+        tag_as: "meta.variable.declaration meta.definition.variable",
+        match: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
+            can_appear_before_variable_declaration_with_spaces
         ).then(
-            maybe(@spaces).then(can_appear_before_variable_declaration).then(@spaces).or(
-                @spaces.maybe(can_appear_before_variable_declaration).maybe(@spaces)
-        )).then(
             match: variable_name,
             tag_as: "variable.other",
-        ).maybe(@spaces).lookAheadToAvoid(/\(/).then(@semicolon.or(lookAheadFor(/[\[{=,)]/))),
+        ).then(after_declaration),
     )
 #
 # Functions
@@ -937,6 +954,44 @@ cpp_grammar = Grammar.new(
             }
         ]
 #
+# Function pointers
+#
+    cpp_grammar[:function_pointer] = Range.new(
+        start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
+                match: /\*/,
+                tag_as: "variable.other.pointer.function",
+            ).maybe(@spaces).maybe(
+                match: identifier,
+                tag_as: "variable.other.pointer.function"
+            ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
+        end_pattern: /\)/.then(after_declaration),
+        includes: [
+            :function_parameters,
+        ]
+    )
+#
+# Function parameters
+#
+    comma_or_closing_paraenthese = /,/.or(/\)/)
+    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(comma_or_closing_paraenthese)
+    cpp_grammar[:function_parameters] = Range.new(
+        start_pattern: /\G/,
+        end_pattern: lookAheadFor(comma_or_closing_paraenthese),
+        includes: [
+            newPattern(
+                should_fully_match: ["= 5",'= "foo"'],
+                match: /\=/.maybe(@spaces).then(
+                    match: /[^,)]+/,
+                    includes: [:evaluation_context],
+                    tag_as: "variable.parameter.default",
+                ),
+            ),
+            :function_pointer,
+            :declarations,
+            :qualified_type
+        ]
+    )
+#
 # Probably a parameter
 #
     array_brackets = /\[\]/.maybe(@spaces)
@@ -977,7 +1032,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
-        includes: [:probably_a_parameter, :function_context_c ]
+        includes: [:function_parameters, :function_context_c ]
         )
 
 #
@@ -1119,7 +1174,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ :probably_a_parameter, :function_context_c ],
+                        includes: [ :function_parameters, :function_context_c ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1140,7 +1195,7 @@ cpp_grammar = Grammar.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
-                includes: [ :probably_a_parameter, :function_context_c ]
+                includes: [ :function_parameters, :function_context_c ]
             ),
             # specificers
             newPattern(
@@ -1217,7 +1272,8 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ :$initial_context ]
+            head_includes: [ :$initial_context ],
+            body_includes: [ :$initial_context, :declarations, :function_pointer ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1298,7 +1354,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context  ],
+            body_includes: [ :constructor_context, :$initial_context, :declarations, :function_pointer],
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1658,7 +1714,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function.constructor",
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"
@@ -3092,7 +3148,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"
