@@ -723,18 +723,16 @@ cpp_grammar = Grammar.new(
         tag_as: "variable.other.type_modifier",
     )
     can_appear_before_variable_declaration_with_spaces = newPattern(
-        match: maybe(@spaces).then(can_appear_before_variable_declaration).then(@spaces)
-            .or(@spaces.maybe(can_appear_before_variable_declaration).maybe(@spaces)),
+        match: maybe(@spaces).maybe(can_appear_before_variable_declaration).maybe(@spaces),
     )
     array_brackets = /\[/.then(
         match: /\w+/,
         includes: [:evaluation_context]
     ).then(/\]/).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
-        .then(@semicolon.or(lookAheadFor(/[\[{=,)]/)))
-    cpp_grammar[:declarations] = newPattern(
-        should_fully_match: ["std::string s;", "A B;", "std::vector<int> vint;"],
-        should_partial_match: ["std::vector<int> vint{{1,2,3,4}}"],
+        .lookAheadFor(/[\[{=,);]/)
+    cpp_grammar[:declaration] = newPattern(
+        should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
         should_not_partial_match: ["int min();"],
         tag_as: "meta.variable.declaration meta.definition.variable",
         match: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
@@ -743,6 +741,17 @@ cpp_grammar = Grammar.new(
             match: variable_name,
             tag_as: "variable.other",
         ).then(after_declaration),
+    )
+    cpp_grammar[:declarations] = Range.new(
+        start_pattern: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type),
+        end_pattern: @semicolon,
+        includes: [
+            can_appear_before_variable_declaration_with_spaces.then(
+                match: variable_name,
+                tag_as: "variable.other",
+            ).then(after_declaration),
+            :comma,
+        ]
     )
 #
 # Functions
@@ -987,8 +996,9 @@ cpp_grammar = Grammar.new(
                 ),
             ),
             :function_pointer,
-            :declarations,
-            :qualified_type
+            :declaration,
+            :qualified_type,
+            :comma
         ]
     )
 #
