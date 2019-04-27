@@ -746,6 +746,13 @@ cpp_grammar = Grammar.new(
         start_pattern: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type),
         end_pattern: @semicolon,
         includes: [
+            Range.new(
+                start_pattern: /\=/,
+                end_pattern: lookAheadFor(/[;,]/),
+                includes: [
+                    :evaluation_context,
+                ]
+            ),
             can_appear_before_variable_declaration_with_spaces.then(
                 match: variable_name,
                 tag_as: "variable.other",

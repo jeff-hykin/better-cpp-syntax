@@ -604,6 +604,10 @@
       '1':
         name: punctuation.terminator.statement.cpp
     patterns:
+    - begin: "\\="
+      end: "(?=[;,])"
+      patterns:
+      - include: "#evaluation_context"
     - match: "\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[\\[{=,);])"
       captures:
         '1':
