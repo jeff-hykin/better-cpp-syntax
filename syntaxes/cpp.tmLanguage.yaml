@@ -994,9 +994,9 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "$base"
       - include: "#declarations"
-      - include: "#function_pointer"
     - name: meta.tail.enum.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
@@ -1060,10 +1060,10 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.class.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
       - include: "#declarations"
-      - include: "#function_pointer"
     - name: meta.tail.class.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
@@ -1117,10 +1117,10 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.struct.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
       - include: "#declarations"
-      - include: "#function_pointer"
     - name: meta.tail.struct.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
@@ -1174,10 +1174,10 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.union.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
       - include: "#declarations"
-      - include: "#function_pointer"
     - name: meta.tail.union.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"

@@ -1273,7 +1273,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :$initial_context, :declarations, :function_pointer ],
+            body_includes: [ :function_pointer, :$initial_context, :declarations ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -1354,7 +1354,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context, :declarations, :function_pointer],
+            body_includes: [ :function_pointer, :constructor_context, :$initial_context, :declarations ],
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
