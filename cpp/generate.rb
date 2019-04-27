@@ -830,7 +830,7 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
-        includes: [ :parameter_struct, :function_context_c ]
+        includes: [ :function_parameters ]
         )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     cpp_grammar[:function_call] = Range.new(
