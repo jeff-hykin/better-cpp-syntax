@@ -709,9 +709,9 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
         should_fully_match: ["A","A::B","A::B<C>::D<E>"],
         should_not_partial_match: ["return"],
-        match: variableBounds[ lookAheadToAvoid(
+        match: maybe(@spaces).then(/\b/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType))
-        ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups) ],
+        ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
         tag_as: "entity.name.type",
         includes: [:storage_types],
     )
@@ -735,7 +735,7 @@ cpp_grammar = Grammar.new(
         should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
         should_not_partial_match: ["int min();"],
         tag_as: "meta.variable.declaration meta.definition.variable",
-        match: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
+        match: maybe(@spaces).zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
             can_appear_before_variable_declaration_with_spaces
         ).then(
             match: variable_name,
@@ -743,8 +743,12 @@ cpp_grammar = Grammar.new(
         ).then(after_declaration),
     )
     cpp_grammar[:declarations] = Range.new(
-        start_pattern: zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type),
+            # this look ahead is to avoid functions
+            # TODO: evaluate if needed after new function patterns
+        start_pattern: maybe(@spaces).zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).maybe(@spaces)
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces)).then(/\(/)),
         end_pattern: @semicolon,
+        tag_as: "declarations",
         includes: [
             Range.new(
                 start_pattern: newPattern(
@@ -755,25 +759,25 @@ cpp_grammar = Grammar.new(
                 includes: [
                     :evaluation_context,
                 ]
-		),
-		Range.new(
-			start_pattern: newPattern(
-				match: /\{/,
-				tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
-			),
-			end_pattern: newPattern(
-				match: /\}/,
-				tag_as: "punctuation.section.block.end.bracket.curly.initializer",
-			),
-			includes: [
-				:evaluation_context,
-			]
-		),
+            ),
+            Range.new(
+                start_pattern: lookAheadFor(/\w/).maybe(@spaces).then(
+                    match: /\{/,
+                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
+                ),
+                end_pattern: newPattern(
+                    match: /\}/,
+                    tag_as: "punctuation.section.block.end.bracket.curly.initializer",
+                ),
+                includes: [
+                    :evaluation_context,
+                ]
+            ),
             can_appear_before_variable_declaration_with_spaces.then(
                 match: variable_name,
                 tag_as: "variable.other",
-		).then(after_declaration),
-		:comments_context,
+            ).then(after_declaration),
+            :comments_context,
             :comma,
         ]
     )
@@ -1008,7 +1012,7 @@ cpp_grammar = Grammar.new(
     comma_or_closing_paraenthese = /,/.or(/\)/)
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(comma_or_closing_paraenthese)
     cpp_grammar[:function_parameters] = Range.new(
-        start_pattern: /\G/,
+        start_pattern: lookBehindFor(/[,(]/),
         end_pattern: lookAheadFor(comma_or_closing_paraenthese),
         includes: [
             newPattern(
@@ -1024,8 +1028,8 @@ cpp_grammar = Grammar.new(
             ),
             :function_pointer,
             :declaration,
-		:qualified_type,
-		:comments_context,
+            :qualified_type,
+            :comments_context,
             :comma,
         ]
     )
@@ -1311,7 +1315,6 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :function_pointer, :$initial_context, :declarations ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
