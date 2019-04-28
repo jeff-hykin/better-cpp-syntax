@@ -711,11 +711,10 @@ cpp_grammar = Grammar.new(
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
-        ).then(
-            match: maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
-            tag_as: "entity.name.type bold"
-        ).lookAheadToAvoid(/\w/),
-        tag_as: "meta.qualified_type",
+        )
+        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
+        tag_as: "entity.name.type meta.qualified_type",
+        includes: [:storage_types],
     )
 #
 # Declarations
@@ -732,38 +731,37 @@ cpp_grammar = Grammar.new(
         includes: [:evaluation_context]
     ).then(/\]/).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
-        .lookAheadFor(/[\[{=,);]/)
+        .lookAheadFor(/[{=,);]/)
 
-    declaration_storage_specifiers = zeroOrMoreOf(newPattern(
-            match: storage_specifier,
-        ).then(@spaces))
+    declaration_storage_specifiers = newPattern(
+        match: zeroOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
+        includes: [
+            :storage_specifiers
+        ]
+    )
 
     cpp_grammar[:declaration] = newPattern(
         should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
         should_not_partial_match: ["int min();"],
-        tag_as: "meta.variable.declaration meta.definition.variable bold",
+        tag_as: "meta.variable.declaration meta.definition.variable",
         match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
         .then(can_appear_before_variable_declaration_with_spaces)
         .then(
             match: variable_name,
-            tag_as: "variable.other bold",
+            tag_as: "variable.other",
         ).then(after_declaration),
     )
     cpp_grammar[:declarations] = Range.new(
-            # this look ahead is to avoid functions
-            # TODO: evaluate if needed after new function patterns
-        start_pattern: /^/.maybe(@spaces).lookAheadFor(newPattern(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
+        start_pattern: /^/.maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(@cpp_tokens.that(:isOperator, not(:isWord)))
-            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/))),
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/)),
         end_pattern: @semicolon,
-        tag_as: "declarations bold",
+        tag_as: "declarations",
         includes: [
-            :storage_specifiers,
-            lookBehindFor(/^|const|static|volatile|register|restrict|extern/).maybe(@spaces).then(qualified_type),
             Range.new(
                 start_pattern: newPattern(
                     match: /\=/,
-                    tag_as: "keyword.operator.assignment bold",
+                    tag_as: "keyword.operator.assignment",
                 ),
                 end_pattern: lookAheadFor(/[;,]/),
                 includes: [
@@ -773,11 +771,11 @@ cpp_grammar = Grammar.new(
             Range.new(
                 start_pattern: lookAheadFor(/\w/).maybe(@spaces).then(
                     match: /\{/,
-                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer bold",
+                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
                 ),
                 end_pattern: newPattern(
                     match: /\}/,
-                    tag_as: "punctuation.section.block.end.bracket.curly.initializer bold",
+                    tag_as: "punctuation.section.block.end.bracket.curly.initializer",
                 ),
                 includes: [
                     :evaluation_context,
@@ -785,11 +783,11 @@ cpp_grammar = Grammar.new(
             ),
             can_appear_before_variable_declaration_with_spaces.then(
                 match: variable_name,
-                tag_as: "variable.other bold",
+                tag_as: "variable.other",
             ).then(after_declaration),
             :comments_context,
             :comma,
-        ]
+        ],
     )
 #
 # Functions
@@ -1006,10 +1004,10 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_pointer] = Range.new(
         start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
                 match: /\*/,
-                tag_as: "variable.other.pointer.function bold",
+                tag_as: "variable.other.pointer.function",
             ).maybe(@spaces).maybe(
                 match: identifier,
-                tag_as: "variable.other.pointer.function bold"
+                tag_as: "variable.other.pointer.function"
             ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
         end_pattern: /\)/.then(after_declaration),
         includes: [
@@ -1024,7 +1022,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_parameters] = Range.new(
         start_pattern: lookBehindFor(/[,(<]/),
         end_pattern: lookAheadFor(ends_parameter),
-        tag_as: "meta.function.parameter bold",
+        tag_as: "meta.function.parameter",
         includes: [
             newPattern(
                 should_fully_match: ["= 5",'= "foo"'],
@@ -1037,7 +1035,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "variable.parameter.default",
                 ),
             ),
-            :function_definition,
+            # :function_definition,
             :function_pointer,
             :declaration,
             zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
