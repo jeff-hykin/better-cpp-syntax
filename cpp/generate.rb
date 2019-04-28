@@ -711,7 +711,7 @@ cpp_grammar = Grammar.new(
         should_not_partial_match: ["return"],
         match: maybe(@spaces).then(/\b/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType))
-        ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
+        ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
         tag_as: "entity.name.type",
         includes: [:storage_types],
     )
@@ -746,7 +746,7 @@ cpp_grammar = Grammar.new(
             # this look ahead is to avoid functions
             # TODO: evaluate if needed after new function patterns
         start_pattern: maybe(@spaces).zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).maybe(@spaces)
-            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces)).then(/\(/)),
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/)),
         end_pattern: @semicolon,
         tag_as: "declarations",
         includes: [
