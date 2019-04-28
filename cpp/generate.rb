@@ -710,7 +710,7 @@ cpp_grammar = Grammar.new(
         should_fully_match: ["A","A::B","A::B<C>::D<E>"],
         should_not_partial_match: ["return"],
         match: maybe(@spaces).then(/\b/).lookAheadToAvoid(
-            @cpp_tokens.that(:isWord, not(:isType))
+            @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/\w/)
         ).maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
         tag_as: "entity.name.type",
         includes: [:storage_types],
@@ -746,6 +746,7 @@ cpp_grammar = Grammar.new(
             # this look ahead is to avoid functions
             # TODO: evaluate if needed after new function patterns
         start_pattern: maybe(@spaces).zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).maybe(@spaces)
+            .lookAheadToAvoid(@cpp_tokens.that(:isOperator, not(:isWord)))
             .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/)),
         end_pattern: @semicolon,
         tag_as: "declarations",
@@ -1009,11 +1010,11 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    comma_or_closing_paraenthese = /,/.or(/\)/)
-    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(comma_or_closing_paraenthese)
+    ends_parameter = /[,)>]/
+    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = Range.new(
-        start_pattern: lookBehindFor(/[,(]/),
-        end_pattern: lookAheadFor(comma_or_closing_paraenthese),
+        start_pattern: lookBehindFor(/[,(<]/),
+        end_pattern: lookAheadFor(ends_parameter),
         includes: [
             newPattern(
                 should_fully_match: ["= 5",'= "foo"'],
@@ -1021,33 +1022,26 @@ cpp_grammar = Grammar.new(
                     match: /\=/,
                     tag_as: "keyword.operator.assignment",
                 ).maybe(@spaces).then(
-                    match: /[^,)]+/,
+                    match: /[^,)>]+/,
                     includes: [:evaluation_context],
                     tag_as: "variable.parameter.default",
                 ),
             ),
             :function_pointer,
             :declaration,
-            :qualified_type,
+            zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
+                match: can_appear_before_variable_declaration_with_spaces
+            ),
             :comments_context,
+            :vararg_ellipses,
+            # the following four are to support incorrectly identified function calls
+            :the_this_keyword,
+            :number_literal,
+            :strings,
+            # :operators,
             :comma,
         ]
     )
-#
-# Probably a parameter
-#
-    array_brackets = /\[\]/.maybe(@spaces)
-    comma_or_closing_paraenthese = /,/.or(/\)/)
-    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    cpp_grammar[:probably_a_parameter] = newPattern(
-        match: newPattern(
-                match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-                tag_as: "variable.parameter.defaulted"
-            ).or(
-                match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
-                tag_as: "variable.parameter"
-            )
-        )
 
 #
 # Operator overload

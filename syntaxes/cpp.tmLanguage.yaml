@@ -528,7 +528,7 @@
         name: punctuation.separator.namespace.access.cpp
     name: meta.scope-resolution.cpp
   qualified_type:
-    match: "\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w)"
+    match: "\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?!\\w))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w)"
     captures:
       '0':
         name: entity.name.type.cpp
@@ -548,7 +548,7 @@
       '5':
         name: punctuation.separator.namespace.access.cpp
   declaration:
-    match: "\\s*(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[\\[{=,);])"
+    match: "\\s*(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?!\\w))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[\\[{=,);])"
     captures:
       '1':
         name: storage.modifier.specifier.$1.cpp
@@ -579,7 +579,7 @@
     name: meta.variable.declaration.cpp meta.definition.variable.cpp
   declarations:
     name: declarations.cpp
-    begin: "\\s*(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?!(?:\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)\\s*(?:(?:::|\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\.|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|sizeof\\.\\.\\.|new\\[\\]|delete\\[\\]|\\.\\*|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||\\?:|=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))?\\s*)?\\()"
+    begin: "\\s*(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?!\\w))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?!(?:::|\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\.|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|sizeof\\.\\.\\.|new\\[\\]|delete\\[\\]|\\.\\*|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||\\?:|=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))(?!(?:\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)\\s*(?:(?:::|\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\.|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|sizeof\\.\\.\\.|new\\[\\]|delete\\[\\]|\\.\\*|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||\\?:|=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))?\\s*)?\\()"
     beginCaptures:
       '1':
         name: storage.modifier.specifier.$1.cpp
@@ -739,7 +739,7 @@
       - include: "#function_call_c"
       - include: "$base"
   function_pointer:
-    begin: "(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*\\(\\s*(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:\\[(\\w+)\\]\\s*)*\\)\\s*\\("
+    begin: "(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?!\\w))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*\\(\\s*(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:\\[(\\w+)\\]\\s*)*\\)\\s*\\("
     beginCaptures:
       '1':
         name: entity.name.type.cpp
@@ -773,10 +773,10 @@
     patterns:
     - include: "#function_parameters"
   function_parameters:
-    begin: "(?<=[,(])"
-    end: "(?=(?:,|\\)))"
+    begin: "(?<=[,(<])"
+    end: "(?=[,)>])"
     patterns:
-    - match: "(\\=)\\s*([^,)]+)"
+    - match: "(\\=)\\s*([^,)>]+)"
       captures:
         '1':
           name: keyword.operator.assignment.cpp
@@ -786,17 +786,35 @@
           - include: "#evaluation_context"
     - include: "#function_pointer"
     - include: "#declaration"
-    - include: "#qualified_type"
+    - match: "(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*\\b(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?!\\w))(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*"
+      captures:
+        '1':
+          name: storage.modifier.specifier.$1.cpp
+        '2':
+          name: entity.name.type.cpp
+          patterns:
+          - include: "#storage_types"
+        '3':
+          name: meta.scope-resolution.cpp
+        '4':
+          patterns:
+          - include: "#scope_resolution"
+        '5':
+          name: entity.name.type.namespace.scope-resolution.cpp
+        '6':
+          name: meta.template.call.cpp
+          patterns:
+          - include: "#template_call_context"
+        '7':
+          name: punctuation.separator.namespace.access.cpp
+        '8':
+          name: variable.other.type_modifier.cpp
     - include: "#comments_context"
+    - include: "#vararg_ellipses"
+    - include: "#the_this_keyword"
+    - include: "#number_literal"
+    - include: "#strings"
     - include: "#comma"
-  probably_a_parameter:
-    match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
-      |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
-    captures:
-      '1':
-        name: variable.parameter.defaulted.cpp
-      '2':
-        name: variable.parameter.cpp
   operator_overload:
     name: meta.function.definition.parameters.operator-overload.cpp
     begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:&)?)))\\s*(\\()"
