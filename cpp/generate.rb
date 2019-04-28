@@ -710,10 +710,10 @@ cpp_grammar = Grammar.new(
         should_fully_match: ["A","A::B","A::B<C>::D<E>"],
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
-            @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w:]/).maybe(@spaces)
+            @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
         ).then(
             match: maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups),
-            tag_as: "entity.name.type"
+            tag_as: "entity.name.type bold"
         ).lookAheadToAvoid(/\w/),
         tag_as: "meta.qualified_type",
     )
@@ -741,12 +741,12 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:declaration] = newPattern(
         should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
         should_not_partial_match: ["int min();"],
-        tag_as: "meta.variable.declaration meta.definition.variable",
+        tag_as: "meta.variable.declaration meta.definition.variable bold",
         match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
         .then(can_appear_before_variable_declaration_with_spaces)
         .then(
             match: variable_name,
-            tag_as: "variable.other",
+            tag_as: "variable.other bold",
         ).then(after_declaration),
     )
     cpp_grammar[:declarations] = Range.new(
@@ -756,14 +756,14 @@ cpp_grammar = Grammar.new(
             .lookAheadToAvoid(@cpp_tokens.that(:isOperator, not(:isWord)))
             .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/))),
         end_pattern: @semicolon,
-        tag_as: "declarations",
+        tag_as: "declarations bold",
         includes: [
             :storage_specifiers,
             lookBehindFor(/^|const|static|volatile|register|restrict|extern/).maybe(@spaces).then(qualified_type),
             Range.new(
                 start_pattern: newPattern(
                     match: /\=/,
-                    tag_as: "keyword.operator.assignment",
+                    tag_as: "keyword.operator.assignment bold",
                 ),
                 end_pattern: lookAheadFor(/[;,]/),
                 includes: [
@@ -773,11 +773,11 @@ cpp_grammar = Grammar.new(
             Range.new(
                 start_pattern: lookAheadFor(/\w/).maybe(@spaces).then(
                     match: /\{/,
-                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
+                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer bold",
                 ),
                 end_pattern: newPattern(
                     match: /\}/,
-                    tag_as: "punctuation.section.block.end.bracket.curly.initializer",
+                    tag_as: "punctuation.section.block.end.bracket.curly.initializer bold",
                 ),
                 includes: [
                     :evaluation_context,
@@ -785,7 +785,7 @@ cpp_grammar = Grammar.new(
             ),
             can_appear_before_variable_declaration_with_spaces.then(
                 match: variable_name,
-                tag_as: "variable.other",
+                tag_as: "variable.other bold",
             ).then(after_declaration),
             :comments_context,
             :comma,
@@ -1006,10 +1006,10 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_pointer] = Range.new(
         start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
                 match: /\*/,
-                tag_as: "variable.other.pointer.function",
+                tag_as: "variable.other.pointer.function bold",
             ).maybe(@spaces).maybe(
                 match: identifier,
-                tag_as: "variable.other.pointer.function"
+                tag_as: "variable.other.pointer.function bold"
             ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
         end_pattern: /\)/.then(after_declaration),
         includes: [
@@ -1024,7 +1024,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_parameters] = Range.new(
         start_pattern: lookBehindFor(/[,(<]/),
         end_pattern: lookAheadFor(ends_parameter),
-        tag_as: "meta.function.parameter",
+        tag_as: "meta.function.parameter bold",
         includes: [
             newPattern(
                 should_fully_match: ["= 5",'= "foo"'],
