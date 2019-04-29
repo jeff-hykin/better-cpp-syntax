@@ -1343,6 +1343,12 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.type.modifier.final",
     )
     generateClassOrStructBlockFinder = ->(name) do
+        body_includes = cpp_grammar[:$initial_context].clone
+        body_includes.delete(:scope_resolution)
+        body_includes.unshift(:constructor_context)
+        body_includes.unshift(:function_pointer)
+        body_includes.push(:declarations)
+        
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
             name: name,
@@ -1398,7 +1404,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :function_pointer, :constructor_context, :$initial_context, :declarations ],
+            body_includes: body_includes,
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
