@@ -753,8 +753,8 @@ cpp_grammar = Grammar.new(
     )
     cpp_grammar[:declarations] = Range.new(
         start_pattern: /^/.maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
-            .lookAheadToAvoid(@cpp_tokens.that(:isOperator, not(:isWord)))
-            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:isOperator, not(:isWord))).maybe(@spaces)).then(/\(/)),
+            .lookAheadToAvoid(@cpp_tokens.that(:canAppearAfterOperatorKeyword))
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/)),
         end_pattern: @semicolon,
         tag_as: "declarations",
         includes: [
