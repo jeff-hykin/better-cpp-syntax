@@ -1348,6 +1348,7 @@ cpp_grammar = Grammar.new(
         body_includes.unshift(:constructor_context)
         body_includes.unshift(:function_pointer)
         body_includes.push(:declarations)
+        body_includes.push(:scope_resolution)
         
         return blockFinderFor(
             tag_as: "meta.block.#{name}",

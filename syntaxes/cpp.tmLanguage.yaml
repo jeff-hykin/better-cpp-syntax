@@ -1182,6 +1182,7 @@
       - include: "#semicolon"
       - include: "#comma"
       - include: "#declarations"
+      - include: "#scope_resolution"
     - name: meta.tail.class.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
@@ -1284,6 +1285,7 @@
       - include: "#semicolon"
       - include: "#comma"
       - include: "#declarations"
+      - include: "#scope_resolution"
     - name: meta.tail.struct.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
@@ -1386,6 +1388,7 @@
       - include: "#semicolon"
       - include: "#comma"
       - include: "#declarations"
+      - include: "#scope_resolution"
     - name: meta.tail.union.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
