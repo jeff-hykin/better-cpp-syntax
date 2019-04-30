@@ -711,7 +711,7 @@ cpp_grammar = Grammar.new(
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
-        )
+        ).maybe(inline_attribute).maybe(@spaces)
         .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
         tag_as: "entity.name.type meta.qualified_type",
         includes: [:storage_types],
@@ -746,6 +746,7 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.variable.declaration meta.definition.variable",
         match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
         .then(can_appear_before_variable_declaration_with_spaces)
+        .maybe(inline_attribute).maybe(@spaces)
         .then(
             match: variable_name,
             tag_as: "variable.other",
@@ -781,7 +782,8 @@ cpp_grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
-            can_appear_before_variable_declaration_with_spaces.then(
+            can_appear_before_variable_declaration_with_spaces.maybe(inline_attribute)
+            .maybe(@spaces).then(
                 match: variable_name,
                 tag_as: "variable.other",
             ).then(after_declaration),
@@ -1017,13 +1019,14 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    ends_parameter = /[,)>]/
+    ends_parameter = /[,)>]|\.\.\./
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = Range.new(
         start_pattern: lookBehindFor(/[,(<]/),
         end_pattern: lookAheadFor(ends_parameter),
         tag_as: "meta.function.parameter",
         includes: [
+            :attributes,
             newPattern(
                 should_fully_match: ["= 5",'= "foo"'],
                 match: newPattern(

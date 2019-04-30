@@ -528,27 +528,30 @@
         name: punctuation.separator.namespace.access.cpp
     name: meta.scope-resolution.cpp
   qualified_type:
-    match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w)"
+    match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w)"
     captures:
       '0':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
       '1':
-        name: meta.scope-resolution.cpp
+        patterns:
+        - include: "#attributes"
       '2':
+        name: meta.scope-resolution.cpp
+      '3':
         patterns:
         - include: "#scope_resolution"
-      '3':
-        name: entity.name.type.namespace.scope-resolution.cpp
       '4':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '5':
         name: meta.template.call.cpp
         patterns:
         - include: "#template_call_context"
-      '5':
+      '6':
         name: punctuation.separator.namespace.access.cpp
   declaration:
-    match: "\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[{=,);])"
+    match: "\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[{=,);])"
     captures:
       '1':
         patterns:
@@ -558,29 +561,35 @@
         patterns:
         - include: "#storage_types"
       '3':
-        name: meta.scope-resolution.cpp
+        patterns:
+        - include: "#attributes"
       '4':
+        name: meta.scope-resolution.cpp
+      '5':
         patterns:
         - include: "#scope_resolution"
-      '5':
-        name: entity.name.type.namespace.scope-resolution.cpp
       '6':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '7':
         name: meta.template.call.cpp
         patterns:
         - include: "#template_call_context"
-      '7':
-        name: punctuation.separator.namespace.access.cpp
       '8':
-        name: variable.other.type_modifier.cpp
+        name: punctuation.separator.namespace.access.cpp
       '9':
-        name: variable.other.cpp
+        name: variable.other.type_modifier.cpp
       '10':
+        patterns:
+        - include: "#attributes"
+      '11':
+        name: variable.other.cpp
+      '12':
         patterns:
         - include: "#evaluation_context"
     name: meta.variable.declaration.cpp meta.definition.variable.cpp
   declarations:
     name: declarations.cpp
-    begin: "^\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?!(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))(?!(?:\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)\\s*(?:(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))?\\s*)?\\()"
+    begin: "^\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?!(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))(?!(?:\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)\\s*(?:(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,))?\\s*)?\\()"
     beginCaptures:
       '1':
         patterns:
@@ -590,17 +599,20 @@
         patterns:
         - include: "#storage_types"
       '3':
-        name: meta.scope-resolution.cpp
+        patterns:
+        - include: "#attributes"
       '4':
+        name: meta.scope-resolution.cpp
+      '5':
         patterns:
         - include: "#scope_resolution"
-      '5':
-        name: entity.name.type.namespace.scope-resolution.cpp
       '6':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '7':
         name: meta.template.call.cpp
         patterns:
         - include: "#template_call_context"
-      '7':
+      '8':
         name: punctuation.separator.namespace.access.cpp
     end: "(;)"
     endCaptures:
@@ -624,13 +636,16 @@
           name: punctuation.section.block.end.bracket.curly.initializer.cpp
       patterns:
       - include: "#evaluation_context"
-    - match: "\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[{=,);])"
+    - match: "\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[{=,);])"
       captures:
         '1':
           name: variable.other.type_modifier.cpp
         '2':
-          name: variable.other.cpp
+          patterns:
+          - include: "#attributes"
         '3':
+          name: variable.other.cpp
+        '4':
           patterns:
           - include: "#evaluation_context"
     - include: "#comments_context"
@@ -741,30 +756,33 @@
       - include: "#function_call_c"
       - include: "$base"
   function_pointer:
-    begin: "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*\\(\\s*(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:\\[(\\w+)\\]\\s*)*\\)\\s*\\("
+    begin: "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*\\(\\s*(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:\\[(\\w+)\\]\\s*)*\\)\\s*\\("
     beginCaptures:
       '1':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
       '2':
-        name: meta.scope-resolution.cpp
+        patterns:
+        - include: "#attributes"
       '3':
+        name: meta.scope-resolution.cpp
+      '4':
         patterns:
         - include: "#scope_resolution"
-      '4':
-        name: entity.name.type.namespace.scope-resolution.cpp
       '5':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '6':
         name: meta.template.call.cpp
         patterns:
         - include: "#template_call_context"
-      '6':
-        name: punctuation.separator.namespace.access.cpp
       '7':
-        name: variable.other.pointer.function.cpp
+        name: punctuation.separator.namespace.access.cpp
       '8':
         name: variable.other.pointer.function.cpp
       '9':
+        name: variable.other.pointer.function.cpp
+      '10':
         patterns:
         - include: "#evaluation_context"
     end: "\\)\\s*(?!\\()(?:\\[(\\w+)\\]\\s*)*(?=[{=,);])"
@@ -777,8 +795,9 @@
   function_parameters:
     name: meta.function.parameter.cpp
     begin: "(?<=[,(<])"
-    end: "(?=[,)>])"
+    end: "(?=[,)>]|\\.\\.\\.)"
     patterns:
+    - include: "#attributes"
     - match: "(\\=)\\s*([^,)>]+)"
       captures:
         '1':
@@ -789,7 +808,7 @@
           - include: "#evaluation_context"
     - include: "#function_pointer"
     - include: "#declaration"
-    - match: "(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*"
+    - match: "(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?(?!\\w))\\s*(?:((?:(?:\\*)+|(?:&)+)))?\\s*"
       captures:
         '1':
           name: storage.modifier.specifier.$1.cpp
@@ -798,19 +817,22 @@
           patterns:
           - include: "#storage_types"
         '3':
-          name: meta.scope-resolution.cpp
+          patterns:
+          - include: "#attributes"
         '4':
+          name: meta.scope-resolution.cpp
+        '5':
           patterns:
           - include: "#scope_resolution"
-        '5':
-          name: entity.name.type.namespace.scope-resolution.cpp
         '6':
+          name: entity.name.type.namespace.scope-resolution.cpp
+        '7':
           name: meta.template.call.cpp
           patterns:
           - include: "#template_call_context"
-        '7':
-          name: punctuation.separator.namespace.access.cpp
         '8':
+          name: punctuation.separator.namespace.access.cpp
+        '9':
           name: variable.other.type_modifier.cpp
     - include: "#comments_context"
     - include: "#vararg_ellipses"
