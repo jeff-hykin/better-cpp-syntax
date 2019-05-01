@@ -714,7 +714,12 @@ cpp_grammar = Grammar.new(
         ).maybe(inline_attribute).maybe(@spaces)
         .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
         tag_as: "entity.name.type meta.qualified_type",
-        includes: [:storage_types,:number_literal,:string_context_c],
+        includes: [
+            :storage_types,
+            :number_literal,
+            :string_context_c,
+            :comma,
+        ],
     )
 #
 # Declarations
@@ -798,6 +803,9 @@ cpp_grammar = Grammar.new(
             ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(qualified_type).maybe(@spaces).then(
                 match: /\=/,
                 tag_as: "keyword.operator.assignment",
+            ).maybe(@spaces).maybe(
+                match: /typename/,
+                tag_as: "keyword.other.typename",
             ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(/[^;]+/))
             .then(can_appear_before_variable_declaration_with_spaces).maybe(array_brackets).maybe(@spaces).then(@semicolon),
         tag_as: "meta.declaration.type.alias"
