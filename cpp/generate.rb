@@ -563,7 +563,7 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\s<>:,\w]/
+    characters_in_template_call = /[\s<>:,*&\w]/
     cpp_grammar[:user_defined_template_type] = newPattern(
             match: variable_name,
             tag_as: 'storage.type.user-defined'
@@ -712,7 +712,7 @@ cpp_grammar = Grammar.new(
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
         ).maybe(inline_attribute).maybe(@spaces)
-        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
+        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:]/),
         tag_as: "entity.name.type meta.qualified_type",
         includes: [
             :storage_types,
@@ -761,7 +761,8 @@ cpp_grammar = Grammar.new(
         start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(/::/)
             .lookAheadToAvoid(@cpp_tokens.that(:canAppearAfterOperatorKeyword))
-            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/)),
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/))
+            .lookAheadFor(/[\w*&]/),
         end_pattern: @semicolon.or(lookAheadFor(/\{/)),
         tag_as: "declarations",
         includes: [
@@ -807,7 +808,13 @@ cpp_grammar = Grammar.new(
             ).maybe(@spaces).maybe(
                 match: /typename/,
                 tag_as: "keyword.other.typename",
-            ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(/[^;]+/))
+            ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(
+                match: /.+/,
+                tag_as: "meta.declaration.type.alias.value.unknown",
+                includes: [
+                    :evaluation_context,
+                ]
+            ))
             .then(can_appear_before_variable_declaration_with_spaces).maybe(array_brackets).maybe(@spaces).then(@semicolon),
         tag_as: "meta.declaration.type.alias"
     )
