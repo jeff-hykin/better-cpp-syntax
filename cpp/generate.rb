@@ -727,7 +727,7 @@ cpp_grammar = Grammar.new(
         match: maybe(@spaces).maybe(can_appear_before_variable_declaration).maybe(@spaces),
     )
     array_brackets = /\[/.then(
-        match: /\w+/,
+        match: /\w*/,
         includes: [:evaluation_context]
     ).then(/\]/).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
@@ -790,6 +790,17 @@ cpp_grammar = Grammar.new(
             :comments_context,
             :comma,
         ],
+    )
+    cpp_grammar[:type_alias] = newPattern(
+        match: newPattern(
+                match:/using/,
+                tag_as: "keyword.other.using.directive",
+            ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(qualified_type).maybe(@spaces).then(
+                match: /\=/,
+                tag_as: "keyword.operator.assignment",
+            ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(/[^;]+/))
+            .then(can_appear_before_variable_declaration_with_spaces).maybe(array_brackets).maybe(@spaces).then(@semicolon),
+        tag_as: "meta.declaration.type.alias"
     )
 #
 # Functions
@@ -1794,6 +1805,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:special_block_context] = [
             :attributes,
             :using_namespace,
+            :type_alias,
             :namespace_block,
             :class_block,
             :struct_block,
