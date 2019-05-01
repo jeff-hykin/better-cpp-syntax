@@ -534,6 +534,8 @@
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
       '1':
         patterns:
         - include: "#attributes"
@@ -560,6 +562,8 @@
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
       '3':
         patterns:
         - include: "#attributes"
@@ -598,6 +602,8 @@
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
       '3':
         patterns:
         - include: "#attributes"
@@ -762,6 +768,8 @@
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
         - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
       '2':
         patterns:
         - include: "#attributes"
@@ -816,6 +824,8 @@
           name: entity.name.type.cpp meta.qualified_type.cpp
           patterns:
           - include: "#storage_types"
+          - include: "#number_literal"
+          - include: "#string_context_c"
         '3':
           patterns:
           - include: "#attributes"
@@ -838,7 +848,7 @@
     - include: "#vararg_ellipses"
     - include: "#the_this_keyword"
     - include: "#number_literal"
-    - include: "#strings"
+    - include: "#string_context_c"
     - include: "#comma"
   operator_overload:
     name: meta.function.definition.parameters.operator-overload.cpp

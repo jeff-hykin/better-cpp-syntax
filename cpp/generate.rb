@@ -714,7 +714,7 @@ cpp_grammar = Grammar.new(
         ).maybe(inline_attribute).maybe(@spaces)
         .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/\w/),
         tag_as: "entity.name.type meta.qualified_type",
-        includes: [:storage_types],
+        includes: [:storage_types,:number_literal,:string_context_c],
     )
 #
 # Declarations
@@ -1049,7 +1049,7 @@ cpp_grammar = Grammar.new(
             # the following four are to support incorrectly identified function calls
             :the_this_keyword,
             :number_literal,
-            :strings,
+            :string_context_c,
             # :operators,
             :comma,
         ]
@@ -1352,7 +1352,7 @@ cpp_grammar = Grammar.new(
         body_includes.unshift(:function_pointer)
         body_includes.push(:declarations)
         body_includes.push(:scope_resolution)
-        
+
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
             name: name,
