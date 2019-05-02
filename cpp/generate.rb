@@ -98,6 +98,7 @@ cpp_grammar = Grammar.new(
             :storage_specifiers,
             :access_control_keywords,
             :exception_keywords,
+            :static_assert,
             :other_keywords,
             :memory_operators,
             :the_this_keyword,
@@ -791,6 +792,36 @@ cpp_grammar = Grammar.new(
         end_pattern: lookBehindFor(/\)/),
         includes: [ :parameter_struct, :function_context_c ]
         )
+    # static assert is special as it can be outside of normal places function calls can be
+    cpp_grammar[:static_assert] = Range.new(
+        start_pattern: newPattern(
+            match: /static_assert|_Static_assert/,
+            tag_as: "keyword.static_assert",
+        ).maybe(@spaces).then(
+            match: /\(/,
+            tag_as: "punctuation.section.arguments.begin.bracket.round",
+        ),
+        end_pattern: newPattern(
+            match: /\)/,
+            tag_as: "punctuation.section.arguments.end.bracket.round",
+        ),
+        includes: [
+            # special handling for the assert message
+            Range.new(
+                start_pattern: newPattern(
+                    match: /,/,
+                    tag_as: "comma punctuation.separator.delimiter",
+                ).maybe(@spaces).lookAheadFor(maybe(/L|u8|u|U/.maybe(@spaces).then(/\"/))),
+                end_pattern: lookAheadFor(/\)/),
+                tag_as: "meta.static_assert.message",
+                includes: [
+                    :string_context,
+                    :string_context_c,
+                ]
+            ),
+            :function_call_context_c,
+        ]
+    )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     cpp_grammar[:function_call] = Range.new(
         start_pattern: avoid_invalid_function_names.then(
