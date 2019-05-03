@@ -1165,6 +1165,28 @@ cpp_grammar = Grammar.new(
 #
 # Classes, structs, unions, enums
 #
+    cpp_grammar[:enumerator_list] = newPattern(
+        match: newPattern(
+            match: variable_name,
+            tag_as: "constant.other.enum",
+        ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
+        .maybe(
+            newPattern(
+                match: /\=/,
+                tag_as: "keyword.operator.assignment",
+            ).maybe(@spaces).then(
+                match: /.+?/,
+                includes: [ :evaluation_context ]
+            ).maybe(@spaces)
+        ).then(newPattern(
+            match: /[,;]|\n/,
+            includes: [
+                :comma,
+                :semicolon,
+            ],
+        ).or(lookAheadFor(/\}/))),
+        tag_as: "meta.enum.definition",
+    )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
     cpp_grammar[:enum_block] = blockFinderFor(
@@ -1193,7 +1215,8 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.type.integral.$match",
                     )
             ),
-            head_includes: [ :$initial_context ]
+            head_includes: [ :$initial_context ],
+            body_includes: [ :enumerator_list, newPattern(@spaces) ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

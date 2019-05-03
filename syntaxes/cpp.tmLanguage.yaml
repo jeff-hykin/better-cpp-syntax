@@ -834,6 +834,24 @@
   posix_reserved_types:
     match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     name: support.type.posix-reserved.cpp
+  enumerator_list:
+    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:([,;]|\\n)|(?=\\}))"
+    captures:
+      '1':
+        name: constant.other.enum.cpp
+      '2':
+        patterns:
+        - include: "#attributes"
+      '3':
+        name: keyword.operator.assignment.cpp
+      '4':
+        patterns:
+        - include: "#evaluation_context"
+      '5':
+        patterns:
+        - include: "#comma"
+        - include: "#semicolon"
+    name: meta.enum.definition.cpp
   enum_block:
     name: meta.block.enum.cpp
     begin: "((enum)\\s+(?:(class|struct)(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={)))?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:<(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(<(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
@@ -891,7 +909,8 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
-      - include: "$base"
+      - include: "#enumerator_list"
+      - match: "\\s+"
     - name: meta.tail.enum.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
