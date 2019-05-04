@@ -164,7 +164,7 @@ def numeric_constant(allow_user_defined_literals: false)
     # first a range (the whole number) is found
     # then, after the range is found, it starts to figure out what kind of number/constant it is
     # it does this by matching one of the includes
-    return Range.new(
+    return PatternRange.new(
         start_pattern: start_pattern,
         end_pattern: end_pattern,
         # only a single include pattern should match

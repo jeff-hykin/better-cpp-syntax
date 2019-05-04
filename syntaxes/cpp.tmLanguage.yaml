@@ -610,7 +610,7 @@
     begin: "(static_assert|_Static_assert)\\s*(\\()"
     beginCaptures:
       '1':
-        name: keyword.static_assert.cpp
+        name: keyword.other.static_assert.cpp
       '2':
         name: punctuation.section.arguments.begin.bracket.round.cpp
     end: "(\\))"

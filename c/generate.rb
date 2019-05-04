@@ -58,7 +58,7 @@ c_grammar = Grammar.new(
     cant_be_a_function_name = @c_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
-    function_definition = Range.new(
+    function_definition = PatternRange.new(
         tag_as: "meta.function",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
@@ -119,7 +119,7 @@ c_grammar = Grammar.new(
             )
         )
     # access to method
-    c_grammar[:method_access] =  method_access = Range.new(
+    c_grammar[:method_access] =  method_access = PatternRange.new(
         tag_content_as: "meta.function-call.member",
         start_pattern: member_start.then(
                 match: variable_name_without_bounds,
@@ -657,13 +657,13 @@ c_grammar.addToRepository({
                     }
                 },
                 match: "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-                name: "comment.line.banner.cpp"
+                name: "comment.line.banner"
             },
             {
                 begin: "(^[ \\t]+)?(?=//)",
                 beginCaptures: {
                     "1" => {
-                        name: "punctuation.whitespace.comment.leading.cpp"
+                        name: "punctuation.whitespace.comment.leading"
                     }
                 },
                 end: "(?!\\G)",
@@ -672,11 +672,11 @@ c_grammar.addToRepository({
                         begin: "//",
                         beginCaptures: {
                             "0" => {
-                                name: "punctuation.definition.comment.cpp"
+                                name: "punctuation.definition.comment"
                             }
                         },
                         end: "(?=\\n)",
-                        name: "comment.line.double-slash.cpp",
+                        name: "comment.line.double-slash",
                         patterns: [
                             {
                                 include: "#line_continuation_character"
@@ -751,7 +751,7 @@ c_grammar.addToRepository({
             },
             {
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
-                name: "punctuation.range-based.cpp"
+                name: "punctuation.range-based"
             }
         ]
     },
@@ -819,7 +819,7 @@ c_grammar.addToRepository({
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator.c"
             },
-            Range.new(
+            PatternRange.new(
                 start_pattern: newPattern(
                     match: /\?/,
                     tag_as: "keyword.operator.ternary",
