@@ -55,7 +55,7 @@ cpp_grammar = Grammar.new(
                 # Head
                 Range.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: / ?\G/,
+                    start_pattern: /\G ?/,
                     end_pattern: newPattern(
                         match: /\{/.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
