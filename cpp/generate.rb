@@ -1,5 +1,6 @@
 require_relative '../textmate_tools.rb'
 require_relative './tokens.rb'
+require_relative '../shared/numeric.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -185,170 +186,9 @@ cpp_grammar = Grammar.new(
 #
 #
     #
-    # misc
-    #
-        cpp_grammar[:literal_numeric_seperator] = number_seperator_pattern = newPattern(
-            should_fully_match: [ "'" ],
-            should_partial_match: [ "1'1", "1'", "'1" ],
-            should_not_partial_match: [ "1''1", "1''" ],
-            match: lookBehindToAvoid(/'/).then(/'/).lookAheadToAvoid(/'/),
-            tag_as:"punctuation.separator.constant.numeric",
-            )
-        hex_digits = newPattern(
-            should_fully_match: [ "1", "123456", "DeAdBeeF", "49'30'94", "DeA'dBe'eF", "dea234f4930" ],
-            should_not_fully_match: [ "'3902" , "de2300p1000", "0x000" ],
-            should_not_partial_match: [ "p", "x", "." ],
-            match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_seperator_pattern)),
-            tag_as: "constant.numeric.hexadecimal",
-            includes: [ number_seperator_pattern ],
-            )
-        decimal_digits = newPattern(
-            should_fully_match: [ "1", "123456", "49'30'94" , "1'2" ],
-            should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
-            match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_seperator_pattern)),
-            tag_as: "constant.numeric.decimal",
-            includes: [ number_seperator_pattern ],
-            )
-        # see https://en.cppreference.com/w/cpp/language/floating_literal
-        hex_exponent = newPattern(
-            should_fully_match: [ "p100", "p-100", "p+100", "P100" ],
-            should_not_fully_match: [ "p0x0", "p-+100" ],
-            match: newPattern(
-                    match: /[pP]/,
-                    tag_as: "keyword.other.unit.exponent.hexadecimal",
-                ).maybe(
-                    match: /\+/,
-                    tag_as: "keyword.operator.plus.exponent.hexadecimal",
-                ).maybe(
-                    match: /\-/,
-                    tag_as: "keyword.operator.minus.exponent.hexadecimal",
-                ).then(
-                    match: decimal_digits.without_numbered_capture_groups,
-                    tag_as: "constant.numeric.exponent.hexadecimal",
-                    includes: [ number_seperator_pattern ]
-                ),
-            )
-        decimal_exponent = newPattern(
-            should_fully_match: [ "e100", "e-100", "e+100", "E100", ],
-            should_not_fully_match: [ "e0x0", "e-+100" ],
-            match: newPattern(
-                    match: /[eE]/,
-                    tag_as: "keyword.other.unit.exponent.decimal",
-                ).maybe(
-                    match: /\+/,
-                    tag_as: "keyword.operator.plus.exponent.decimal",
-                ).maybe(
-                    match: /\-/,
-                    tag_as: "keyword.operator.minus.exponent.decimal",
-                ).then(
-                    match: decimal_digits.without_numbered_capture_groups,
-                    tag_as: "constant.numeric.exponent.decimal",
-                    includes: [ number_seperator_pattern ]
-                ),
-            )
-    #
     # Number Literal
     #
-    cpp_grammar[:number_literal] = newPattern(
-        match: lookBehindToAvoid(/\w/).then(
-                # Floating point
-                # see https://en.cppreference.com/w/cpp/language/floating_literal
-                newPattern(
-                    floating_literal = newPattern(
-                        # Hex
-                        newPattern(
-                            hex_literal_float = newPattern(
-                                match: /0[xX]/,
-                                tag_as: "keyword.other.unit.hexadecimal",
-                            ).maybe(
-                                hex_digits
-                            ).then(
-                                # lookBehind/Ahead because there needs to be a hex digit on at least one side
-                                match: lookBehindFor(/[0-9a-fA-F]/).then(/\./).or(/\./.lookAheadFor(/[0-9a-fA-F]/)),
-                                tag_as: "constant.numeric.hexadecimal",
-                            ).maybe(
-                                hex_digits
-                            ).maybe(
-                                hex_exponent
-                            )
-                        # Decimal
-                        ).or(
-                            decimal_literal_float = maybe(
-                                decimal_digits
-                            ).then(
-                                # lookBehind/Ahead because there needs to be a decimal digit on at least one side
-                                match: lookBehindFor(/[0-9]/).then(/\./).or(/\./.lookAheadFor(/[0-9]/)),
-                                tag_as: "constant.numeric.decimal.point",
-                            ).maybe(
-                                decimal_digits
-                            ).maybe(
-                                decimal_exponent
-                            )
-                        )
-                    # Floating point suffix
-                    ).maybe(
-                        literal_float_suffix = newPattern(
-                            match: /[lLfF]/.lookAheadToAvoid(/\w/),
-                            tag_as: "keyword.other.unit.suffix.floating-point"
-                        )
-                    )
-                # Integer
-                # see https://en.cppreference.com/w/cpp/language/integer_literal
-                ).or(
-                     integer_literal = newPattern(
-                        # Binary
-                        newPattern(
-                            binary_literal_integer = newPattern(
-                                match: /0[bB]/,
-                                tag_as: "keyword.other.unit.binary"
-                            ).then(
-                                match: oneOrMoreOf(/[01]/.or(number_seperator_pattern)),
-                                tag_as: "constant.numeric.binary",
-                                includes: [ number_seperator_pattern ]
-                            )
-                        # Octal
-                        ).or(
-                            octal_literal_integer = newPattern(
-                                match: /0/,
-                                tag_as: "keyword.other.unit.octal"
-                            ).then(
-                                match: oneOrMoreOf(/[0-7]/.or(number_seperator_pattern)),
-                                tag_as: "constant.numeric.octal",
-                                includes: [ number_seperator_pattern ]
-                            )
-                        # Hex
-                        ).or(
-                            hex_literal_integer = newPattern(
-                                match: /0[xX]/,
-                                tag_as: "keyword.other.unit.hexadecimal",
-                            ).then(
-                                hex_digits
-                            ).maybe(
-                                hex_exponent
-                            )
-                        # Decimal
-                        ).or(
-                            decimal_literal_integer = newPattern(
-                                decimal_digits
-                            ).maybe(
-                                decimal_exponent
-                            )
-                        )
-                    # integer suffix
-                    ).maybe(
-                        literal_integer_suffix = newPattern(
-                            match: /[uU]/.or(/[uU]ll?/).or(/[uU]LL?/).or(/ll?[uU]?/).or(/LL?[uU]?/).lookAheadToAvoid(/\w/),
-                            tag_as: "keyword.other.unit.suffix.integer"
-                        )
-                    )
-                )
-            # user defined endings
-            ).then(
-                match: /\w*/,
-                tag_as: "keyword.other.unit.user-defined"
-            )
-        )
-
+    cpp_grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
 #
@@ -1241,7 +1081,7 @@ cpp_grammar = Grammar.new(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
-                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
                         match: /\[/.lookAheadToAvoid(/\[/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
