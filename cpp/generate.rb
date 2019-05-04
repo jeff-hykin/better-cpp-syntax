@@ -1,6 +1,6 @@
 require_relative '../textmate_tools.rb'
 require_relative './tokens.rb'
-require_relative '../shared/patterns.rb'
+require_relative '../shared/numeric.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -188,7 +188,7 @@ cpp_grammar = Grammar.new(
     #
     # Number Literal
     #
-    cpp_grammar[:number_literal] = numeric_constant(cpp_grammar, allow_udl: true)
+    cpp_grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
 #

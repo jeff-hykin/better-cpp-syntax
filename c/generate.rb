@@ -459,7 +459,7 @@ c_grammar[:$initial_context] = [
         name: "punctuation.separator.delimiter.c"
     }
 ]
-c_grammar[:numbers] = numeric_constant(c_grammar)
+c_grammar[:numbers] = numeric_constant
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {
