@@ -55,7 +55,7 @@ cpp_grammar = Grammar.new(
                 # Head
                 Range.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: /\G| /,
+                    start_pattern: / ?\G/,
                     end_pattern: newPattern(
                         match: /\{/.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
@@ -333,9 +333,6 @@ cpp_grammar = Grammar.new(
                 match: variableBounds[/switch/],
                 tag_as: "keyword.control.switch"
             ),
-            primary_includes: [
-                :switch_conditional_parentheses
-            ],
             head_includes: [
                 :switch_conditional_parentheses,
                 :$initial_context
