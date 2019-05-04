@@ -633,7 +633,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:static_assert] = Range.new(
         start_pattern: newPattern(
             match: /static_assert|_Static_assert/,
-            tag_as: "keyword.static_assert",
+            tag_as: "keyword.other.static_assert",
         ).maybe(@spaces).then(
             match: /\(/,
             tag_as: "punctuation.section.arguments.begin.bracket.round",
