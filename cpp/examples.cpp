@@ -271,6 +271,10 @@
 // templates
 //
     
+    void func() {
+        std::cout << max<int>(a, b) << std::endl;
+        std::cout << max(a, b) << std::endl;
+    }
     
     namespace test {
         template <class T>
@@ -463,6 +467,8 @@ int main() {
     return 0;
 }
 
+    
+    
 //
 // Attributes
 //
