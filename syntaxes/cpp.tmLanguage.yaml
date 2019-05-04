@@ -165,9 +165,6 @@
     - include: "#number_literal"
     - include: "#string_context"
     - include: "#comma_in_template_argument"
-  literal_numeric_separator:
-    match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-    name: punctuation.separator.constant.numeric.cpp
   number_literal:
     begin: "(?<!\\w)(?=\\d|\\.)"
     end: "(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
@@ -179,7 +176,8 @@
         '2':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -187,7 +185,8 @@
         '5':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '6':
           name: punctuation.separator.constant.numeric.cpp
         '8':
@@ -199,7 +198,8 @@
         '11':
           name: constant.numeric.exponent.hexadecimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '12':
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
@@ -209,7 +209,8 @@
         '2':
           name: constant.numeric.decimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -217,7 +218,8 @@
         '5':
           name: constant.numeric.decimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '6':
           name: punctuation.separator.constant.numeric.cpp
         '8':
@@ -229,7 +231,8 @@
         '11':
           name: constant.numeric.exponent.decimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '12':
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
@@ -241,7 +244,8 @@
         '2':
           name: constant.numeric.binary.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -255,7 +259,8 @@
         '2':
           name: constant.numeric.octal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -269,7 +274,8 @@
         '2':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '5':
@@ -281,7 +287,8 @@
         '8':
           name: constant.numeric.exponent.hexadecimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '9':
           name: keyword.other.unit.suffix.integer.cpp
         '10':
@@ -291,7 +298,8 @@
         '2':
           name: constant.numeric.decimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '5':
@@ -303,7 +311,8 @@
         '8':
           name: constant.numeric.exponent.decimal.cpp
           patterns:
-          - include: "#literal_numeric_separator"
+          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+            name: punctuation.separator.constant.numeric.cpp
         '9':
           name: keyword.other.unit.suffix.integer.cpp
         '10':

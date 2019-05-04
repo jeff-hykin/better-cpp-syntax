@@ -1,4 +1,4 @@
-def numeric_constant(grammar, allow_udl: false)
+def numeric_constant(allow_user_defined_literals: false)
     # both C and C++ treat any sequence of digits, letter, periods, and valid separators
     # as a single numeric constant even if such a sequence forms no valid
     # constant/literal
@@ -9,23 +9,26 @@ def numeric_constant(grammar, allow_udl: false)
     start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\./)
     end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
 
-    decimal_udl_pattern = allow_udl ?
-        newPattern(
-            match: maybe(/\w/.lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
-        ) : end_pattern
-    hex_udl_pattern = allow_udl ?
-        newPattern(
-            match: maybe(/\w/.lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
-        ) : end_pattern
-    udl_pattern = allow_udl ?
-        newPattern(
-            match: maybe(/\w/.lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
-        ) : end_pattern
+    if allow_user_defined_literals
+        decimal_user_defined_literal_pattern = newPattern(
+                match: maybe(/\w/.lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
+                tag_as: "keyword.other.unit.user-defined"
+            )
+        hex_user_defined_literal_pattern = newPattern(
+                match: maybe(/\w/.lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
+                tag_as: "keyword.other.unit.user-defined"
+            )
+        user_defined_literal_pattern = newPattern(
+                match: maybe(/\w/.lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
+                tag_as: "keyword.other.unit.user-defined"
+            )
+    else
+        decimal_user_defined_literal_pattern = end_pattern
+        hex_user_defined_literal_pattern = end_pattern
+        user_defined_literal_pattern = end_pattern
+    end
 
-    grammar[:literal_numeric_separator] = number_separator_pattern = newPattern(
+    number_separator_pattern = newPattern(
         should_partial_match: [ "1'1" ],
         should_not_partial_match: [ "1''1", "1''" ],
         match: lookBehindFor(/[0-9a-fA-F]/).then(/'/).lookAheadFor(/[0-9a-fA-F]/),
@@ -148,6 +151,12 @@ def numeric_constant(grammar, allow_udl: false)
         tag_as: "keyword.other.unit.suffix.floating-point"
     )
 
+    # 
+    # How this works
+    # 
+    # first a range (the whole number) is found
+    # then, after the range is found, it starts to figure out what kind of number/constant it is
+    # it does this by matching one of the includes
     return Range.new(
         start_pattern: start_pattern,
         end_pattern: end_pattern,
@@ -156,15 +165,15 @@ def numeric_constant(grammar, allow_udl: false)
             # floating point
             hex_prefix.maybe(hex_digits).then(hex_point)
                 .maybe(hex_digits).maybe(hex_exponent)
-                .maybe(floating_suffix).then(hex_udl_pattern),
+                .maybe(floating_suffix).then(hex_user_defined_literal_pattern),
             decimal_prefix.maybe(decimal_digits).then(decimal_point)
                 .maybe(decimal_digits).maybe(decimal_exponent)
-                .maybe(floating_suffix).then(decimal_udl_pattern),
+                .maybe(floating_suffix).then(decimal_user_defined_literal_pattern),
             # numeric
-            binary_prefix.then(binary_digits).maybe(numeric_suffix).then(udl_pattern),
-            octal_prefix.then(octal_digits).maybe(numeric_suffix).then(udl_pattern),
-            hex_prefix.then(hex_digits).maybe(hex_exponent).maybe(numeric_suffix).then(hex_udl_pattern),
-            decimal_prefix.then(decimal_digits).maybe(decimal_exponent).maybe(numeric_suffix).then(decimal_udl_pattern),
+            binary_prefix.then(binary_digits).maybe(numeric_suffix).then(user_defined_literal_pattern),
+            octal_prefix.then(octal_digits).maybe(numeric_suffix).then(user_defined_literal_pattern),
+            hex_prefix.then(hex_digits).maybe(hex_exponent).maybe(numeric_suffix).then(hex_user_defined_literal_pattern),
+            decimal_prefix.then(decimal_digits).maybe(decimal_exponent).maybe(numeric_suffix).then(decimal_user_defined_literal_pattern),
             # invalid
             newPattern(
                 match: oneOrMoreOf(valid_single_character.or(valid_after_exponent)),
