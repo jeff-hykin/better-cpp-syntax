@@ -1,4 +1,5 @@
 colon.cpp.c
+comma.cpp.c
 comment.block.c
 comment.line.banner.cpp.c
 comment.line.double-slash.cpp.c
@@ -54,6 +55,7 @@ keyword.operator.plus.exponent.decimal.c
 keyword.operator.plus.exponent.hexadecimal.c
 keyword.operator.sizeof.c
 keyword.operator.ternary.c
+keyword.other.static_assert.cpp.c
 keyword.other.typedef.c
 keyword.other.unit.binary.c
 keyword.other.unit.exponent.decimal.c
@@ -82,6 +84,7 @@ meta.preprocessor.include.c
 meta.preprocessor.macro.c
 meta.preprocessor.pragma.c
 meta.section.c
+meta.static_assert.message.cpp.c
 meta.tail.switch.cpp.c
 meta.toc-list.banner.block.c
 meta.toc-list.banner.line.c
@@ -97,8 +100,10 @@ punctuation.definition.string.begin.c
 punctuation.definition.string.end.c
 punctuation.range-based.cpp.c
 punctuation.section.arguments.begin.bracket.round.c
+punctuation.section.arguments.begin.bracket.round.cpp.c
 punctuation.section.arguments.begin.bracket.round.function.member.c
 punctuation.section.arguments.end.bracket.round.c
+punctuation.section.arguments.end.bracket.round.cpp.c
 punctuation.section.arguments.end.bracket.round.function.member.c
 punctuation.section.block.begin.bracket.curly.c
 punctuation.section.block.begin.bracket.curly.switch.cpp.c
@@ -116,6 +121,7 @@ punctuation.separator.case.cpp.c
 punctuation.separator.case.default.cpp.c
 punctuation.separator.constant.numeric
 punctuation.separator.delimiter.c
+punctuation.separator.delimiter.cpp.c
 punctuation.separator.dot-access.c
 punctuation.separator.parameters.c
 punctuation.separator.pointer-access.c

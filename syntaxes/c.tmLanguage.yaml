@@ -1218,6 +1218,28 @@
         name: punctuation.section.parens.end.bracket.round.conditional.switch.cpp.c
     patterns:
     - include: "#conditional_context"
+  static_assert:
+    begin: "(static_assert|_Static_assert)\\s*(\\()"
+    beginCaptures:
+      '1':
+        name: keyword.static_assert.cpp.c
+      '2':
+        name: punctuation.section.arguments.begin.bracket.round.cpp.c
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.arguments.end.bracket.round.cpp.c
+    patterns:
+    - name: meta.static_assert.message.cpp.c
+      begin: (,)\s*(?=(?:L|u8|u|U\s*\")?)
+      beginCaptures:
+        '1':
+          name: comma.cpp.c punctuation.separator.delimiter.cpp.c
+      end: "(?=\\))"
+      patterns:
+      - include: "#string_context"
+      - include: "#string_context_c"
+    - include: "#function_call_context_c"
   conditional_context:
     patterns:
     - include: "$base"

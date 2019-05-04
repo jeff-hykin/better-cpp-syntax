@@ -23,7 +23,8 @@ c_grammar = Grammar.new(
         :default_statement,
         :case_statement,
         :switch_statement,
-        :switch_conditional_parentheses
+        :switch_conditional_parentheses,
+        :static_assert,
     ]
     for each in import_names
         c_grammar[each] = @cpp_grammar[each]
