@@ -71,12 +71,6 @@ class Grammar
         return regex_as_string
     end
     
-    def self.makeSureAGrammarExists
-        if @@current_grammar == nil
-            raise "\n\nHey, I think youre trying to use some of the Grammar tools (like Patterns) before you've defined a grammar\nAt the top of the program just do something like:\ngrammar = Grammar.new( name:'blah', scope_name: 'source.blah' )\nAfter that the other stuff should work\n\n"
-        end
-    end
-    
     def self.toTag(data, ignore_repository_entry: false)
         # if its a string then include it directly
         if (data.instance_of? String)
