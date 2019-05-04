@@ -576,7 +576,7 @@ cpp_grammar = Grammar.new(
     # because it's embedded inside of other patterns
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
-        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+        match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
         includes: [:template_call_context]
         )
     cpp_grammar[:template_call_range] = Range.new(
