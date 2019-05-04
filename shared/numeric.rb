@@ -6,7 +6,7 @@ def numeric_constant(allow_user_defined_literals: false)
     # the outer range pattern does not attempt to actually process the numbers
     valid_single_character = /['0-9a-zA-Z_\.']/
     valid_after_exponent = lookBehindFor(/[eEpP]/).then(/[+-]/)
-    start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\./)
+    start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\.\d/)
     end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
     
     number_separator_pattern = newPattern(
