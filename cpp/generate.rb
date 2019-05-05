@@ -1061,7 +1061,7 @@ cpp_grammar = Grammar.new(
             name: "enum",
             tag_as: "meta.block.enum",
             start_pattern: newPattern(
-                    match: /enum/,
+                    match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
                 ).then(@spaces).maybe(
                     # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
