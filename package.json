@@ -40,6 +40,7 @@
     },
     "scripts": {
         "pretest": "ruby c/generate.rb && ruby cpp/generate.rb",
-        "test": "node test/src/index.js"
+        "test": "node test/src/index.js",
+        "generate-specs": "node test/src/generateSpec.js"
     }
 }

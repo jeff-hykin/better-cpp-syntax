@@ -1,15 +1,13 @@
 const path = require("path");
 const fs = require("fs");
-const util = require("util");
 const glob = require("glob");
-const vsctm = require("vscode-textmate");
 const runTest = require("./testRunner");
-
-const readFile = util.promisify(fs.readFile);
 
 const testDir = path.dirname(__dirname);
 const fixtureDir = path.join(testDir, "fixtures");
 const specDir = path.join(testDir, "specs");
+
+const registry = require("./registry");
 
 // grab all fixtures
 const fixtures = glob.sync(
@@ -25,34 +23,6 @@ const tests = fixtures
     })
     // filter for fixtures with a spec
     .filter(test => fs.existsSync(test.spec));
-
-// load the grammars
-const registry = new vsctm.Registry({
-    loadGrammar: scopeName => {
-        let grammarPath = "";
-        switch (scopeName) {
-            case "source.cpp":
-                grammarPath = path.join(
-                    testDir,
-                    "../syntaxes",
-                    "cpp.tmLanguage.json"
-                );
-                break;
-            case "source.c":
-                grammarPath = path.join(
-                    testDir,
-                    "../syntaxes",
-                    "c.tmLanguage.json"
-                );
-                break;
-            default:
-                return Promise.reject("requested non c/c++ grammar");
-        }
-        return Promise.resolve(
-            vsctm.parseRawGrammar(fs.readFileSync(grammarPath), grammarPath)
-        );
-    }
-});
 
 // and run the tests, is in 2 parts to allow async
 runTests();
