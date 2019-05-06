@@ -106,6 +106,13 @@ module.exports["SpecChecker"] = class SpecChecker {
      * @returns {Spec[]}
      */
     convertVSCodeFixtures(fixtures) {
-        return fixtures.map(f => ({ source: f.c, scopes: f.t }));
+        return fixtures
+            .filter(f => f.c.trim() !== "")
+            .map(f => {
+                const scopes = f.t
+                    .split(" ")
+                    .filter(s => s.indexOf("source.c") !== 0);
+                return { source: f.c, scopes };
+            });
     }
 };
