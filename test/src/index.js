@@ -57,6 +57,7 @@ const registry = new vsctm.Registry({
 // and run the tests, is in 2 parts to allow async
 runTests();
 async function runTests() {
+    let totalResult = true;
     for (const test of tests) {
         console.log(
             "running test for",
@@ -67,6 +68,13 @@ async function runTests() {
             .toString()
             .split("\n");
         const spec = fs.readFileSync(test.spec);
-        await runTest(registry, test.fixture, fixture, JSON.parse(spec));
+        const result = await runTest(
+            registry,
+            test.fixture,
+            fixture,
+            JSON.parse(spec)
+        );
+        totalResult = result ? totalResult : result;
     }
+    process.exit(totalResult ? 0 : 1);
 }
