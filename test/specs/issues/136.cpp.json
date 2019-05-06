@@ -2,106 +2,95 @@
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.macro.cpp",
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "TEST",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.begin.cpp"
         ]
     },
     {
         "source": "name",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "variable.parameter.preprocessor.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.end.cpp"
         ]
     },
     {
         "source": "_ts",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "variable.other.object.access.cpp"
         ]
     },
     {
         "source": "->",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.separator.pointer-access.cpp"
         ]
     },
     {
         "source": "test",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.member.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.arguments.begin.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": "name",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "meta.function-call.member"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.arguments.end.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "[",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.capture.begin.lambda.cpp"
         ]
     },
     {
         "source": "&",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "meta.lambda.capture.cpp",
             "keyword.operator.cpp"
         ]
@@ -109,82 +98,70 @@
     {
         "source": "]",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.capture.end.lambda.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp",
             "punctuation.definition.parameters.begin.lambda.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.lambda.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp",
             "punctuation.definition.parameters.end.lambda.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.lambda.cpp"
         ]
     },
     {
         "source": "->",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.lambda.return-type.cpp"
         ]
     },
     {
         "source": " bool",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "storage.type.return-type.lambda.cpp"
         ]
     },
     {
         "source": "#define ASSERT",
-        "scopes": [
-            "meta.preprocessor.macro.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp",
             "punctuation.definition.parameters.begin.lambda.cpp"
-        ]
-    },
-    {
-        "source": "expected",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.lambda.cpp"
         ]
     },
     {
+        "source": "expected",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " actual",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.function.definition.parameters.lambda.cpp",
             "punctuation.definition.parameters.end.lambda.cpp"
         ]
     }

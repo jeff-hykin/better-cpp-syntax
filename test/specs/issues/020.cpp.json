@@ -27,48 +27,45 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "expression ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "expression ",
+        "scopes": []
+    },
+    {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.parens.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.parens.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
@@ -99,48 +96,45 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "expression ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "expression ",
+        "scopes": []
+    },
+    {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.parens.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.parens.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
@@ -171,48 +165,45 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "expression ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "expression ",
+        "scopes": []
+    },
+    {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.parens.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.parens.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
@@ -243,48 +234,45 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "expression ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "expression ",
+        "scopes": []
+    },
+    {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.parens.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.parens.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.parens.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
@@ -296,126 +284,107 @@
     {
         "source": "foo",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "dynamic_cast",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.dynamic_cast.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "expression ",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "reinterpret_cast",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.reinterpret_cast.cpp"
         ]
@@ -423,86 +392,62 @@
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "expression ",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "static_cast",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
         ]
@@ -510,86 +455,62 @@
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "expression ",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "const_cast",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.const_cast.cpp"
         ]
@@ -597,85 +518,65 @@
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "expression ",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "+",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": " thing",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
         ]
     }

@@ -12,53 +12,55 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "void",
         "scopes": [
-            "meta.block.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": "abc",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -80,53 +82,55 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "void",
         "scopes": [
-            "meta.block.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": "abc",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -148,53 +152,55 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "void",
         "scopes": [
-            "meta.block.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": "abc",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -216,53 +222,40 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "void",
         "scopes": [
-            "meta.block.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": "abc",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function-call.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.c",
-            "meta.function-call.c",
             "punctuation.section.arguments.end.bracket.round.c"
-        ]
-    },
-    {
-        "source": ";",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.terminator.statement.c"
-        ]
-    },
-    {
-        "source": "}",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
         ]
     },
     {
@@ -272,75 +265,12 @@
         ]
     },
     {
-        "source": "struct",
-        "scopes": [
-            "storage.type.struct.c"
-        ]
-    },
-    {
-        "source": "{",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.begin.bracket.curly.c"
-        ]
-    },
-    {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
-        ]
-    },
-    {
-        "source": ";",
-        "scopes": [
-            "punctuation.terminator.statement.c"
-        ]
-    },
-    {
-        "source": "enum",
-        "scopes": [
-            "storage.type.enum.c"
-        ]
-    },
-    {
-        "source": "{",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.begin.bracket.curly.c"
-        ]
-    },
-    {
-        "source": "}",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.end.bracket.curly.c"
-        ]
-    },
-    {
-        "source": ";",
-        "scopes": [
-            "punctuation.terminator.statement.c"
-        ]
-    },
-    {
-        "source": "union",
-        "scopes": [
-            "storage.type.union.c"
-        ]
-    },
-    {
-        "source": "{",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.begin.bracket.curly.c"
-        ]
-    },
-    {
-        "source": "}",
-        "scopes": [
-            "meta.block.c",
-            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -358,15 +288,19 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -384,15 +318,19 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -410,15 +348,109 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {

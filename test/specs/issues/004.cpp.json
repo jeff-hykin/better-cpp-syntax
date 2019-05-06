@@ -1,62 +1,62 @@
 [
     {
         "source": "10102",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "0232",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "2323",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "L",
         "scopes": [
-            "string.quoted.double.cpp",
-            "punctuation.definition.string.begin.cpp",
             "meta.encoding.cpp"
-        ]
-    },
-    {
-        "source": "\"",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "abcdef",
-        "scopes": [
-            "string.quoted.double.cpp"
+        "source": "\"",
+        "scopes": [],
+        "scopesEnd": [
+            "punctuation.definition.string.begin.cpp"
         ]
+    },
+    {
+        "source": "abcdef",
+        "scopes": []
     },
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.cpp",
             "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
         ]
     },
     {
@@ -73,20 +73,21 @@
     },
     {
         "source": "100",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "000",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.cpp"
         ]
     },
@@ -98,39 +99,35 @@
     },
     {
         "source": "1",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "234",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "567",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.cpp"
         ]
     },
@@ -142,33 +139,31 @@
     },
     {
         "source": "12",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "34",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "56",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.cpp"
         ]
     },
@@ -186,20 +181,21 @@
     },
     {
         "source": "1001",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.binary.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.binary.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "1101",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.binary.cpp"
         ]
     },
@@ -211,19 +207,19 @@
     },
     {
         "source": "0",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.hexadecimal.cpp"
         ]
     },
     {
         "source": ".",
-        "scopes": [
-            "constant.numeric.hexadecimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "5",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.hexadecimal.cpp"
         ]
     },
@@ -253,79 +249,69 @@
     },
     {
         "source": "AB",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.hexadecimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.hexadecimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "CD",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.hexadecimal.cpp"
         ]
     },
     {
         "source": "1",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "2",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "3",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "4",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.cpp",
             "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "5",
-        "scopes": [
-            "constant.numeric.decimal.cpp"
-        ]
+        "scopes": []
     }
 ]

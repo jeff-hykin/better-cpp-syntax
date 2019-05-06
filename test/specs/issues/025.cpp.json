@@ -8,86 +8,40 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "Stats ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "Stats ",
+        "scopes": []
+    },
+    {
         "source": "aStats",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": ";",
-        "scopes": [
-            "punctuation.terminator.statement.cpp"
-        ]
-    },
-    {
-        "source": "bool",
-        "scopes": [
-            "storage.type.primitive.cpp"
-        ]
-    },
-    {
-        "source": "FillStats",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "entity.name.function.cpp"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesEnd": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
         ]
     },
     {
-        "source": ")",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.end.bracket.round.cpp"
-        ]
-    },
-    {
         "source": ";",
         "scopes": [
             "punctuation.terminator.statement.cpp"
@@ -102,32 +56,31 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
@@ -145,25 +98,69 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
             "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "bool",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "FillStats",
+        "scopes": [
+            "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
@@ -185,21 +182,23 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {

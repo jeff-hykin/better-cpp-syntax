@@ -2,14 +2,15 @@
     {
         "source": "using",
         "scopes": [
-            "meta.using-namespace.cpp",
             "keyword.other.using.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.using-namespace.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.using-namespace.cpp",
             "keyword.other.namespace.directive.cpp",
             "storage.type.namespace.directive.cpp"
         ]
@@ -17,14 +18,12 @@
     {
         "source": "std",
         "scopes": [
-            "meta.using-namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.using-namespace.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

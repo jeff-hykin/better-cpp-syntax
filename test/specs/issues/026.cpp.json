@@ -2,220 +2,205 @@
     {
         "source": "struct",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.function.constructor.cpp",
             "entity.name.function.constructor.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp",
+            "meta.function.constructor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.function.constructor.cpp",
             "punctuation.definition.parameters.begin.constructor.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.function.constructor.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "bar",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.function.constructor.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.function.constructor.cpp",
             "punctuation.definition.parameters.end.constructor.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.constructor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "union",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.head.union.cpp",
             "storage.type.union.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.union.cpp",
+            "meta.head.union.cpp"
         ]
     },
     {
         "source": "baz",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.head.union.cpp",
             "entity.name.type.union.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.head.union.cpp",
             "punctuation.section.block.begin.bracket.curly.union.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.union.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.function.constructor.cpp",
             "entity.name.function.constructor.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.union.cpp",
+            "meta.function.constructor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.function.constructor.cpp",
             "punctuation.definition.parameters.begin.constructor.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.function.constructor.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "quz",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.function.constructor.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.function.constructor.cpp",
             "punctuation.definition.parameters.end.constructor.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.constructor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.union.cpp",
-            "meta.body.union.cpp",
             "punctuation.section.block.end.bracket.curly.union.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.union.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.union.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

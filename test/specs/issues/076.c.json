@@ -12,33 +12,33 @@
     {
         "source": "__debugbreak",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "void",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {

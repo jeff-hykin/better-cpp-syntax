@@ -2,24 +2,22 @@
     {
         "source": "enum",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "storage.type.enum.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.enum.cpp",
+            "meta.head.enum.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "entity.name.type.enum.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "colon.cpp",
             "punctuation.separator.type-specifier.cpp"
         ]
@@ -27,41 +25,39 @@
     {
         "source": "std",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "int8_t",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "storage.type.integral.int8_t.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "punctuation.section.block.begin.bracket.curly.enum.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.enum.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.enum.cpp",
             "meta.body.enum.cpp",
             "punctuation.section.block.end.bracket.curly.enum.cpp"
         ]
@@ -69,8 +65,10 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.enum.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.enum.cpp"
         ]
     },
     {
@@ -82,85 +80,67 @@
     {
         "source": "foo",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "enum",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
             "storage.type.enum.cpp"
-        ]
-    },
-    {
-        "source": "foo",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
-            "entity.name.type.enum.cpp"
-        ]
-    },
-    {
-        "source": "::",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
+        ],
+        "scopesBegin": [
             "meta.block.enum.cpp",
             "meta.head.enum.cpp"
         ]
     },
     {
+        "source": "foo",
+        "scopes": [
+            "entity.name.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "::",
+        "scopes": []
+    },
+    {
         "source": "bar",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
-            "meta.head.enum.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "baz quix)",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "meta.head.enum.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.block.enum.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

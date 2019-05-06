@@ -2,156 +2,159 @@
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp",
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "bar",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "//",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp",
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " foo",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "//",
         "scopes": [
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " namespace foo::bar",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
             "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.namespace.cpp"
         ]
     },
     {
         "source": "scoped",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "console",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
+        ],
+        "scopesBegin": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
             "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
         ]

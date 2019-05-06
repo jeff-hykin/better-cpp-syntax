@@ -2,627 +2,463 @@
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.pragma.cpp",
-            "keyword.control.directive.pragma.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.pragma.cpp",
+            "keyword.control.directive.pragma.cpp"
         ]
     },
     {
         "source": "pragma",
-        "scopes": [
-            "meta.preprocessor.pragma.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.pragma.cpp"
         ]
     },
     {
         "source": "once",
         "scopes": [
-            "meta.preprocessor.pragma.cpp",
             "entity.other.attribute-name.pragma.preprocessor.cpp"
+        ],
+        "scopesEnd": [
+            "meta.preprocessor.pragma.cpp"
         ]
     },
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.include.cpp",
-            "keyword.control.directive.include.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.include.cpp",
+            "keyword.control.directive.include.cpp"
         ]
     },
     {
         "source": "include",
-        "scopes": [
-            "meta.preprocessor.include.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.include.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.include.cpp",
-            "string.quoted.other.lt-gt.include.cpp",
             "punctuation.definition.string.begin.cpp"
+        ],
+        "scopesBegin": [
+            "string.quoted.other.lt-gt.include.cpp"
         ]
     },
     {
         "source": "type_traits",
+        "scopes": []
+    },
+    {
+        "source": ">",
         "scopes": [
+            "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
             "meta.preprocessor.include.cpp",
             "string.quoted.other.lt-gt.include.cpp"
         ]
     },
     {
-        "source": ">",
-        "scopes": [
-            "meta.preprocessor.include.cpp",
-            "string.quoted.other.lt-gt.include.cpp",
-            "punctuation.definition.string.end.cpp"
-        ]
-    },
-    {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.macro.cpp",
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "IsPointDef",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "...",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.vararg-ellipses.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.begin.template.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "__VA_ARGS__",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.end.template.call.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": " \\",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.character.escape.line-continuation.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": "static",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.static.cpp"
         ]
     },
     {
         "source": "const",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.const.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " isPoint ",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "true",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.language.true.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
+            "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
             "meta.tail.struct.cpp",
             "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
-            "punctuation.definition.directive.cpp"
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "ArrayBasedPointDef",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.begin.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "variable.parameter.preprocessor.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.end.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "IsPointDef",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "punctuation.section.arguments.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "T",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "punctuation.section.arguments.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsArrayBasedPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.begin.template.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.end.template.call.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": ":",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "public",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "std",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "::",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "true_type",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": " \\",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
             "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
         ]
@@ -630,343 +466,210 @@
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "XYBasedPointDef",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.begin.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "variable.parameter.preprocessor.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.end.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "IsPointDef",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "punctuation.section.arguments.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "T",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.function.cpp",
             "punctuation.section.arguments.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsXYBasedPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.begin.template.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
-            "meta.template.call.cpp",
             "punctuation.section.angle-brackets.end.template.call.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": ":",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "public",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "std",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "::",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "true_type",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": " \\",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
             "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
         ]
@@ -974,106 +677,71 @@
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "TypeTAndUIsPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "\\",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "storage.type.template.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": "typename ",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.typename",
             ".cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "comma.cpp",
             "punctuation.separator.template.argument.cpp"
         ]
@@ -1081,11 +749,6 @@
     {
         "source": "typename ",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.typename",
             ".cpp"
         ]
@@ -1093,22 +756,12 @@
     {
         "source": "U",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "comma.cpp",
             "punctuation.separator.template.argument.cpp"
         ]
@@ -1116,215 +769,126 @@
     {
         "source": "class",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "typename",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.modifier.cpp"
         ]
     },
     {
         "source": "std",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
         ]
     },
     {
         "source": "enable_if",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "IsPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "isPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "type",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.type.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "comma.cpp",
             "punctuation.separator.template.argument.cpp"
         ]
@@ -1332,1050 +896,573 @@
     {
         "source": "class",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "typename",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.modifier.cpp"
         ]
     },
     {
         "source": "std",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
         ]
     },
     {
         "source": "enable_if",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "IsPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "U",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "isPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "type",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.type.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ],
+        "scopesEnd": [
+            "meta.preprocessor.macro.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "Navigation",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp",
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "Utils",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "storage.type.template.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": "typename ",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.typename",
             ".cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "static",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.static.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": "const",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.const.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " isPoint ",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "false",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.language.false.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "storage.type.template.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": "typename ",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.typename",
             ".cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsArrayBasedPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "static",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.static.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": "const",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.const.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " value ",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "false",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.language.false.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "template",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "storage.type.template.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.start.template.definition.cpp"
         ]
     },
     {
         "source": "typename ",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "storage.type.template.argument.typename",
             ".cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": "T",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.template.definition.cpp",
             "entity.name.type.template.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.definition.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.angle-brackets.end.template.definition.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "IsXYBasedPoint",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "static",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.static.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": "const",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.modifier.specifier.const.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " value ",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "false",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "constant.language.false.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "meta.block.struct.cpp",
-            "meta.tail.struct.cpp",
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
         ]
     }

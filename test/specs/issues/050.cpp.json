@@ -2,219 +2,198 @@
     {
         "source": "switch",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.head.switch.cpp",
             "keyword.control.switch.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.switch.cpp",
+            "meta.head.switch.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.head.switch.cpp",
-            "meta.conditional.switch.cpp",
             "punctuation.section.parens.begin.bracket.round.conditional.switch.cpp"
-        ]
-    },
-    {
-        "source": "test",
-        "scopes": [
-            "meta.block.switch.cpp",
-            "meta.head.switch.cpp",
+        ],
+        "scopesBegin": [
             "meta.conditional.switch.cpp"
         ]
     },
     {
+        "source": "test",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.head.switch.cpp",
-            "meta.conditional.switch.cpp",
             "punctuation.section.parens.end.bracket.round.conditional.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.switch.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.head.switch.cpp",
             "punctuation.section.block.begin.bracket.curly.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.switch.cpp"
         ]
     },
     {
         "source": "case",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "keyword.control.case.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.switch.cpp",
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "colon.cpp",
             "punctuation.separator.case.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "break",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "keyword.control.break.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "case",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "keyword.control.case.cpp"
+        ],
+        "scopesBegin": [
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "colon.cpp",
             "punctuation.separator.case.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "[[",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "support.other.attribute.cpp",
             "punctuation.section.attribute.begin.cpp"
+        ],
+        "scopesBegin": [
+            "support.other.attribute.cpp"
         ]
     },
     {
         "source": "fallthrough",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "support.other.attribute.cpp",
             "entity.other.attribute.fallthrough.cpp"
         ]
     },
     {
         "source": "]]",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "support.other.attribute.cpp",
             "punctuation.section.attribute.end.cpp"
+        ],
+        "scopesEnd": [
+            "support.other.attribute.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "case",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "keyword.control.case.cpp"
+        ],
+        "scopesBegin": [
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "3",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "meta.conditional.case.cpp",
             "colon.cpp",
             "punctuation.separator.case.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.case.cpp"
         ]
     },
     {
         "source": "break",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "keyword.control.break.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "//",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " no syntax highlighting",
-        "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.switch.cpp",
-            "meta.body.switch.cpp",
             "punctuation.section.block.end.bracket.curly.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.switch.cpp",
+            "meta.body.switch.cpp"
         ]
     },
     {
@@ -226,25 +205,27 @@
     {
         "source": "func1",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
@@ -256,22 +237,25 @@
     {
         "source": "[[",
         "scopes": [
-            "support.other.attribute.cpp",
             "punctuation.section.attribute.begin.cpp"
+        ],
+        "scopesBegin": [
+            "support.other.attribute.cpp"
         ]
     },
     {
         "source": "noreturn",
         "scopes": [
-            "support.other.attribute.cpp",
             "entity.other.attribute.noreturn.cpp"
         ]
     },
     {
         "source": "]]",
         "scopes": [
-            "support.other.attribute.cpp",
             "punctuation.section.attribute.end.cpp"
+        ],
+        "scopesEnd": [
+            "support.other.attribute.cpp"
         ]
     },
     {
@@ -283,51 +267,49 @@
     {
         "source": "func2",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "/*",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
-        ]
-    },
-    {
-        "source": "syntax highlighting",
-        "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
+        ],
+        "scopesBegin": [
             "comment.block.cpp"
         ]
     },
     {
+        "source": "syntax highlighting",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
@@ -339,70 +321,77 @@
     {
         "source": "//",
         "scopes": [
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " no syntax highlighting",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "storage.type.struct.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "st",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "entity.name.type.struct.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.head.struct.cpp",
             "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.struct.cpp"
         ]
     },
     {
         "source": "//",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.struct.cpp",
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " syntax highlighting works now",
-        "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.struct.cpp",
-            "meta.body.struct.cpp",
             "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.struct.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.struct.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.struct.cpp"
         ]
     },
     {
@@ -414,25 +403,27 @@
     {
         "source": "func3",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {

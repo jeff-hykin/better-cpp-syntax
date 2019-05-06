@@ -8,110 +8,105 @@
     {
         "source": "function",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "auto",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " postWakeup ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "wpi",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
         ]
     },
     {
         "source": "uv",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "Async",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
+        "scopes": [],
+        "scopesBegin": [
             "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": ">",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
         ]
@@ -119,123 +114,108 @@
     {
         "source": "::",
         "scopes": [
-            "meta.block.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "Create",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "entity.name.function.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "loop",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    m_postMessageWakeup",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " postWakeup",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "postWakeup",
         "scopes": [
-            "meta.block.cpp",
             "variable.other.object.access.cpp"
         ]
     },
     {
         "source": "->",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.separator.pointer-access.cpp"
         ]
     },
     {
         "source": "wakeup.",
         "scopes": [
-            "meta.block.cpp",
             "variable.other.object.property.cpp"
         ]
     },
     {
         "source": "connect",
         "scopes": [
-            "meta.block.cpp",
             "entity.name.function.member.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.arguments.begin.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": "[",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
             "punctuation.definition.capture.begin.lambda.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function-call.member"
         ]
     },
     {
         "source": "this",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
             "meta.lambda.capture.cpp",
             "variable.language.this.cpp"
         ]
@@ -243,120 +223,89 @@
     {
         "source": "]",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
             "punctuation.definition.capture.end.lambda.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.section.block.begin.bracket.curly.lambda.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.body.lambda.cpp"
         ]
     },
     {
         "source": "auto",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": " pipe ",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "m_pipe",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "variable.other.object.access.cpp"
         ]
     },
     {
         "source": ".",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.separator.dot-access.cpp"
         ]
     },
     {
         "source": "lock",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "entity.name.function.member.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.section.arguments.begin.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.section.arguments.end.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.member",
-            "meta.function.definition.body.lambda.cpp",
             "punctuation.section.block.end.bracket.curly.lambda.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function-call.member",
+            "meta.function.definition.body.lambda.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.arguments.end.bracket.round.function.member.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
         ]
     }

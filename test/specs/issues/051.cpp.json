@@ -2,48 +2,45 @@
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "using",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "keyword.other.using.cpp"
-        ]
-    },
-    {
-        "source": " A ",
-        "scopes": [
-            "meta.block.namespace.cpp",
+        ],
+        "scopesBegin": [
             "meta.body.namespace.cpp"
         ]
     },
     {
+        "source": " A ",
+        "scopes": []
+    },
+    {
         "source": "=",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "decltype",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "keyword.operator.functionlike.cpp",
             "keyword.other.decltype.cpp",
             "storage.type.decltype.cpp"
@@ -52,16 +49,12 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.arguments.begin.bracket.round.decltype.cpp"
         ]
     },
     {
         "source": "5",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "meta.arguments.decltype",
             "constant.numeric.decimal.cpp"
         ]
@@ -69,24 +62,18 @@
     {
         "source": ")",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.arguments.end.bracket.round.decltype.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "decltype",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "keyword.operator.functionlike.cpp",
             "keyword.other.decltype.cpp",
             "storage.type.decltype.cpp"
@@ -95,16 +82,12 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.arguments.begin.bracket.round.decltype.cpp"
         ]
     },
     {
         "source": "5",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "meta.arguments.decltype",
             "constant.numeric.decimal.cpp"
         ]
@@ -112,69 +95,54 @@
     {
         "source": ")",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.arguments.end.bracket.round.decltype.cpp"
         ]
     },
     {
         "source": " B ",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "A",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
         ]
     }

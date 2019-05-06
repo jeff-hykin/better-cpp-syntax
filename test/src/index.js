@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
 const runTest = require("./testRunner");
+const argv = require("yargs").argv;
 
 const testDir = path.dirname(__dirname);
 const fixtureDir = path.join(testDir, "fixtures");
@@ -22,7 +23,12 @@ const tests = fixtures
         };
     })
     // filter for fixtures with a spec
-    .filter(test => fs.existsSync(test.spec));
+    .filter(test => fs.existsSync(test.spec))
+    .filter(
+        test =>
+            argv._.length == 0 ||
+            argv._.includes(path.relative(fixtureDir, test.fixture))
+    );
 
 // and run the tests, is in 2 parts to allow async
 runTests();

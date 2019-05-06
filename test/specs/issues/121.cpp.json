@@ -2,66 +2,66 @@
     {
         "source": "/*",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
-        ]
-    },
-    {
-        "source": " Works ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.cpp"
         ]
     },
     {
+        "source": " Works ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "ChildClass",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "colon.cpp",
             "punctuation.separator.inhertance.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "public",
         "scopes": [
-            "meta.block.class.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "ParentClass",
         "scopes": [
-            "meta.block.class.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
         ]
@@ -69,7 +69,6 @@
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -77,81 +76,78 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.class.cpp"
         ]
     },
     {
         "source": "/*",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
-        ]
-    },
-    {
-        "source": " Highlighting lost ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.cpp"
         ]
     },
     {
+        "source": " Highlighting lost ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "DLLEXPORT",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": "ChildClass : ",
-        "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "public",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "ParentClass",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -159,31 +155,27 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "ChildClass",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "colon.cpp",
             "punctuation.separator.inhertance.cpp"
         ]
@@ -191,57 +183,49 @@
     {
         "source": "/*",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
-        ]
-    },
-    {
-        "source": " comment ",
-        "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
+        ],
+        "scopesBegin": [
             "comment.block.cpp"
         ]
     },
     {
+        "source": " comment ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": "public",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "ParentClass",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -249,61 +233,52 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "alignas",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": "(32) ChildClass : ",
-        "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "public",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "ParentClass",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -311,7 +286,6 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

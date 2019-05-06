@@ -2,91 +2,95 @@
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
-            "keyword.control.directive.define.cpp",
             "punctuation.definition.directive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.macro.cpp",
+            "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.cpp",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
     },
     {
         "source": "IS_UPGRADE_ADDR",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "entity.name.function.preprocessor.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.begin.cpp"
         ]
     },
     {
         "source": "addr",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "variable.parameter.preprocessor.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.definition.parameters.end.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.preprocessor.macro.cpp"
         ]
     },
     {
         "source": "/*",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
-        ]
-    },
-    {
-        "source": "((addr) >= UPGRADE_BASE_ADDR) && ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.cpp"
         ]
     },
     {
+        "source": "((addr) >= UPGRADE_BASE_ADDR) && ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "addr",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.cpp"
         ]
     },
     {
+        "source": "addr",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.parens.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
         ]
     },
     {

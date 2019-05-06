@@ -2,138 +2,129 @@
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.include.c",
-            "keyword.control.directive.include.c",
             "punctuation.definition.directive.c"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.include.c",
+            "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "include",
-        "scopes": [
-            "meta.preprocessor.include.c",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.preprocessor.include.c",
-            "string.quoted.other.lt-gt.include.c",
             "punctuation.definition.string.begin.c"
-        ]
-    },
-    {
-        "source": "glib-object.h",
-        "scopes": [
-            "meta.preprocessor.include.c",
+        ],
+        "scopesBegin": [
             "string.quoted.other.lt-gt.include.c"
         ]
     },
     {
+        "source": "glib-object.h",
+        "scopes": []
+    },
+    {
         "source": ">",
         "scopes": [
-            "meta.preprocessor.include.c",
-            "string.quoted.other.lt-gt.include.c",
             "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
+            "string.quoted.other.lt-gt.include.c"
         ]
     },
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.include.c",
-            "keyword.control.directive.include.c",
             "punctuation.definition.directive.c"
+        ],
+        "scopesBegin": [
+            "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "include",
-        "scopes": [
-            "meta.preprocessor.include.c",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "\"",
         "scopes": [
-            "meta.preprocessor.include.c",
-            "string.quoted.double.include.c",
             "punctuation.definition.string.begin.c"
+        ],
+        "scopesBegin": [
+            "string.quoted.double.include.c"
         ]
     },
     {
         "source": "tllt-cp-cooking-details-dto.h",
+        "scopes": []
+    },
+    {
+        "source": "\"",
         "scopes": [
+            "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
             "meta.preprocessor.include.c",
             "string.quoted.double.include.c"
         ]
     },
     {
-        "source": "\"",
-        "scopes": [
-            "meta.preprocessor.include.c",
-            "string.quoted.double.include.c",
-            "punctuation.definition.string.end.c"
-        ]
-    },
-    {
         "source": "G_DEFINE_TYPE",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "TlltCpCookingDetailsDto",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ",",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.separator.delimiter.c"
         ]
     },
     {
         "source": " tllt_cp_cooking_details_dto",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ",",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.separator.delimiter.c"
         ]
     },
     {
         "source": " G_TYPE_OBJECT",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {

@@ -30,32 +30,36 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.c",
             "punctuation.definition.string.begin.c"
+        ],
+        "scopesBegin": [
+            "string.quoted.double.c"
         ]
     },
     {
         "source": "foo ??/",
+        "scopes": []
+    },
+    {
+        "source": "\"",
         "scopes": [
+            "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
             "string.quoted.double.c"
         ]
     },
     {
-        "source": "\"",
-        "scopes": [
-            "string.quoted.double.c",
-            "punctuation.definition.string.end.c"
-        ]
-    },
-    {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "keyword.operator.ternary.c"
         ]
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "keyword.operator.ternary.c"
         ]
     },
@@ -67,13 +71,15 @@
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "keyword.operator.ternary.c"
         ]
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "keyword.operator.ternary.c"
         ]
     },
@@ -86,46 +92,38 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.c",
             "punctuation.definition.string.begin.c"
+        ],
+        "scopesBegin": [
+            "string.quoted.double.c"
         ]
     },
     {
         "source": ";",
-        "scopes": [
-            "string.quoted.double.c"
-        ]
+        "scopes": []
     },
     {
         "source": "class A <",
-        "scopes": [
-            "string.quoted.double.c"
-        ]
+        "scopes": []
     },
     {
         "source": "%",
         "scopes": [
-            "string.quoted.double.c",
             "invalid.illegal.placeholder.c"
         ]
     },
     {
         "source": "    A(); //test",
-        "scopes": [
-            "string.quoted.double.c"
-        ]
+        "scopes": []
     },
     {
         "source": "%",
         "scopes": [
-            "string.quoted.double.c",
             "invalid.illegal.placeholder.c"
         ]
     },
     {
         "source": ">;",
-        "scopes": [
-            "string.quoted.double.c"
-        ]
+        "scopes": []
     }
 ]

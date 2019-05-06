@@ -8,72 +8,69 @@
     {
         "source": "main",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.c",
             "storage.type.built-in.primitive.c"
         ]
     },
     {
         "source": " test_enum ",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.c",
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
         ]
     }

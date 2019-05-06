@@ -8,86 +8,40 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "Stats ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "Stats ",
+        "scopes": []
+    },
+    {
         "source": "aStats",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
-        ]
-    },
-    {
-        "source": ";",
-        "scopes": [
-            "punctuation.terminator.statement.c"
-        ]
-    },
-    {
-        "source": "bool",
-        "scopes": [
-            "storage.type.built-in.primitive.c"
-        ]
-    },
-    {
-        "source": "FillStats",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesEnd": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
-        "source": ")",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.end.bracket.round.c"
-        ]
-    },
-    {
         "source": ";",
         "scopes": [
             "punctuation.terminator.statement.c"
@@ -102,32 +56,31 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -145,25 +98,69 @@
     {
         "source": "FillStats",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
             "meta.function.c",
-            "meta.function.definition.parameters.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "bool",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "FillStats",
+        "scopes": [
+            "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -185,21 +182,23 @@
     {
         "source": "(",
         "scopes": [
-            "meta.parens.c",
             "punctuation.section.parens.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "    Stats aStats",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.c"
         ]
     },
     {
+        "source": "    Stats aStats",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.parens.c",
             "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.parens.c"
         ]
     },
     {

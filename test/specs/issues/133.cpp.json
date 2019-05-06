@@ -2,15 +2,19 @@
     {
         "source": "std",
         "scopes": [
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {

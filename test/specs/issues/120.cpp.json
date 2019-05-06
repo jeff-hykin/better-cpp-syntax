@@ -2,80 +2,74 @@
     {
         "source": "//",
         "scopes": [
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " invalid literals",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "1Ex",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "invalid.illegal.constant.numeric.cpp"
         ]
     },
     {
         "source": "0xe+foo",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0x1Px",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0xAB.cdpfl",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0x12345'luyards",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0.'123",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "0'.123",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "1E'1",
-        "scopes": [
-            "invalid.illegal.constant.numeric.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "1'E1",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "invalid.illegal.constant.numeric.cpp"
         ]
     },
     {
         "source": "//",
         "scopes": [
-            "comment.line.double-slash.cpp",
             "punctuation.definition.comment.cpp"
+        ],
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": " odd valid literals",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
@@ -106,13 +100,16 @@
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.octal.cpp",
             "punctuation.separator.constant.numeric.cpp"
+        ],
+        "scopesBegin": [
+            "constant.numeric.octal.cpp"
         ]
     },
     {
         "source": "12345",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.octal.cpp"
         ]
     },

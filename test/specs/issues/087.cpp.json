@@ -8,122 +8,109 @@
     {
         "source": "function",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "putIfExists",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "entity.name.function.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "string",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "cn",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "variable.other.object.access.cpp"
         ]
     },
     {
         "source": ".",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.separator.dot-access.cpp"
         ]
     },
     {
         "source": "second",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "variable.other.property.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " common",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
@@ -131,152 +118,129 @@
     {
         "source": "\"",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
-        ]
-    },
-    {
-        "source": "type",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
+        ],
+        "scopesBegin": [
             "string.quoted.double.cpp"
         ]
     },
     {
+        "source": "type",
+        "scopes": []
+    },
+    {
         "source": "\"",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "string.quoted.double.cpp",
             "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "putIfExists",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "entity.name.function.call.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": "<",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesBegin": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "std",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "entity.name.type.namespace.scope-resolution.cpp"
+        ],
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "::",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
-            "meta.scope-resolution.cpp",
             "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
         ]
     },
     {
         "source": "string",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "storage.type.user-defined.cpp"
         ]
     },
     {
         "source": ">",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
+        ],
+        "scopesEnd": [
+            "meta.template.call.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "cn",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "variable.other.object.access.cpp"
         ]
     },
     {
         "source": ".",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.separator.dot-access.cpp"
         ]
     },
     {
         "source": "second",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "variable.other.property.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " common",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
@@ -284,48 +248,43 @@
     {
         "source": "\"",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
-        ]
-    },
-    {
-        "source": "type",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
+        ],
+        "scopesBegin": [
             "string.quoted.double.cpp"
         ]
     },
     {
+        "source": "type",
+        "scopes": []
+    },
+    {
         "source": "\"",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
-            "string.quoted.double.cpp",
             "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.function-call.cpp",
             "punctuation.section.arguments.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function-call.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
         ]
     }

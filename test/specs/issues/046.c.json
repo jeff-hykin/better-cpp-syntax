@@ -2,21 +2,23 @@
     {
         "source": "/*",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.begin.c"
-        ]
-    },
-    {
-        "source": " Forward Declaration ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.c"
         ]
     },
     {
+        "source": " Forward Declaration ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.end.c"
+        ],
+        "scopesEnd": [
+            "comment.block.c"
         ]
     },
     {
@@ -70,21 +72,23 @@
     {
         "source": "/*",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.begin.c"
-        ]
-    },
-    {
-        "source": " Function Declaration ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.c"
         ]
     },
     {
+        "source": " Function Declaration ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.end.c"
+        ],
+        "scopesEnd": [
+            "comment.block.c"
         ]
     },
     {
@@ -96,48 +100,43 @@
     {
         "source": "a",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "storage.type.struct.c"
         ]
     },
     {
         "source": " A ",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": "b",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -155,48 +154,43 @@
     {
         "source": "b",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "enum",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "storage.type.enum.c"
         ]
     },
     {
         "source": " B ",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": "c",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -214,48 +208,43 @@
     {
         "source": "c",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "union",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "storage.type.union.c"
         ]
     },
     {
         "source": " C ",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": "d",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -273,40 +262,37 @@
     {
         "source": "d",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "A ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "A ",
+        "scopes": []
+    },
+    {
         "source": "b",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -318,21 +304,23 @@
     {
         "source": "/*",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.begin.c"
-        ]
-    },
-    {
-        "source": " Definition ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.c"
         ]
     },
     {
+        "source": " Definition ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.end.c"
+        ],
+        "scopesEnd": [
+            "comment.block.c"
         ]
     },
     {
@@ -348,55 +336,51 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "enum",
         "scopes": [
-            "meta.block.c",
             "storage.type.enum.c"
         ]
     },
     {
         "source": " B c",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "union",
         "scopes": [
-            "meta.block.c",
             "storage.type.union.c"
         ]
     },
     {
         "source": " C d",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -418,41 +402,39 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
-        ]
-    },
-    {
-        "source": "    a",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.block.c"
         ]
     },
     {
+        "source": "    a",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.block.c",
             "punctuation.separator.delimiter.c"
         ]
     },
     {
         "source": " b",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {
@@ -474,55 +456,51 @@
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "struct",
         "scopes": [
-            "meta.block.c",
             "storage.type.struct.c"
         ]
     },
     {
         "source": " A b",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "enum",
         "scopes": [
-            "meta.block.c",
             "storage.type.enum.c"
         ]
     },
     {
         "source": " B c",
-        "scopes": [
-            "meta.block.c"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
         ]
     },
     {

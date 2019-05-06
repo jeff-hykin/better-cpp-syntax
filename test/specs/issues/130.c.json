@@ -8,150 +8,137 @@
     {
         "source": "function",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.begin.bracket.curly.c"
+        ],
+        "scopesBegin": [
+            "meta.block.c"
         ]
     },
     {
         "source": "a",
         "scopes": [
-            "meta.block.c",
             "variable.other.object.access.c"
         ]
     },
     {
         "source": "->",
         "scopes": [
-            "meta.block.c",
             "punctuation.separator.pointer-access.c"
         ]
     },
     {
         "source": "b",
         "scopes": [
-            "meta.block.c",
             "variable.other.object.access.c"
         ]
     },
     {
         "source": "->",
         "scopes": [
-            "meta.block.c",
             "punctuation.separator.pointer-access.c"
         ]
     },
     {
         "source": "c",
         "scopes": [
-            "meta.block.c",
             "variable.other.member.c"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.c",
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "a",
         "scopes": [
-            "meta.block.c",
             "variable.other.object.access.c"
         ]
     },
     {
         "source": ".",
         "scopes": [
-            "meta.block.c",
             "punctuation.separator.dot-access.c"
         ]
     },
     {
         "source": "b",
         "scopes": [
-            "meta.block.c",
             "variable.other.object.access.c"
         ]
     },
     {
         "source": ".",
         "scopes": [
-            "meta.block.c",
             "punctuation.separator.dot-access.c"
         ]
     },
     {
         "source": "c",
         "scopes": [
-            "meta.block.c",
             "variable.other.member.c"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": "1",
         "scopes": [
-            "meta.block.c",
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.c",
             "punctuation.terminator.statement.c"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.c",
             "punctuation.section.block.end.bracket.curly.c"
         ]
     }

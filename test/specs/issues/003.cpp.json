@@ -2,74 +2,61 @@
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "storage.type.primitive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "bar ",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "bar ",
+        "scopes": []
+    },
+    {
         "source": "a",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
@@ -77,165 +64,133 @@
     {
         "source": "int",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "b",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "return",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "keyword.control.return.cpp"
         ]
     },
     {
         "source": "true",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "constant.language.true.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "namespace",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
+        ],
+        "scopesBegin": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "entity.name.type.namespace.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.head.namespace.cpp",
             "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.namespace.cpp"
         ]
     },
     {
         "source": "bool",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "storage.type.primitive.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.namespace.cpp"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
-            "punctuation.section.parameters.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "bar ",
-        "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
+        ],
+        "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "bar ",
+        "scopes": []
+    },
+    {
         "source": "a",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
@@ -243,83 +198,64 @@
     {
         "source": "int",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "b",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "variable.parameter.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "return",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "keyword.control.return.cpp"
         ]
     },
     {
         "source": "true",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "constant.language.true.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.namespace.cpp",
-            "meta.body.namespace.cpp",
             "punctuation.section.block.end.bracket.curly.namespace.cpp"
         ]
     }

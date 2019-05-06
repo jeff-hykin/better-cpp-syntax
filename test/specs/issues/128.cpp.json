@@ -8,25 +8,27 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
@@ -66,21 +68,23 @@
     {
         "source": "[",
         "scopes": [
-            "meta.bracket.square.access.cpp",
             "punctuation.definition.begin.bracket.square.cpp"
-        ]
-    },
-    {
-        "source": "entriesCount",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.bracket.square.access.cpp"
         ]
     },
     {
+        "source": "entriesCount",
+        "scopes": []
+    },
+    {
         "source": "]",
         "scopes": [
-            "meta.bracket.square.access.cpp",
             "punctuation.definition.end.bracket.square.cpp"
+        ],
+        "scopesEnd": [
+            "meta.bracket.square.access.cpp"
         ]
     },
     {
@@ -98,25 +102,27 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {

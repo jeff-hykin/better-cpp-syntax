@@ -2,15 +2,19 @@
     {
         "source": "/*",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.begin.cpp"
+        ],
+        "scopesBegin": [
+            "comment.block.cpp"
         ]
     },
     {
         "source": "*/",
         "scopes": [
-            "comment.block.cpp",
             "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
         ]
     },
     {
@@ -26,28 +30,29 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
-        ]
-    },
-    {
-        "source": "this works :/",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "string.quoted.double.cpp"
         ]
     },
     {
+        "source": "this works :/",
+        "scopes": []
+    },
+    {
         "source": "\\n",
         "scopes": [
-            "string.quoted.double.cpp",
             "constant.character.escape.cpp"
         ]
     },
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.cpp",
             "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
         ]
     },
     {

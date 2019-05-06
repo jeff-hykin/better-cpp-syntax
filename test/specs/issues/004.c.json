@@ -1,33 +1,31 @@
 [
     {
         "source": "10102",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "0232",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "2323",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.c"
         ]
     },
@@ -38,21 +36,23 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.c",
             "punctuation.definition.string.begin.c"
-        ]
-    },
-    {
-        "source": "abcdef",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "string.quoted.double.c"
         ]
     },
     {
+        "source": "abcdef",
+        "scopes": []
+    },
+    {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.c",
             "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.c"
         ]
     },
     {
@@ -69,39 +69,35 @@
     },
     {
         "source": "1",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "234",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "567",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "0",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.c"
         ]
     },
@@ -113,33 +109,31 @@
     },
     {
         "source": "12",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "34",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "56",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.decimal.c"
         ]
     },
@@ -157,20 +151,21 @@
     },
     {
         "source": "1001",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.binary.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.binary.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "1101",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.binary.c"
         ]
     },
@@ -182,19 +177,19 @@
     },
     {
         "source": "0",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.hexadecimal.c"
         ]
     },
     {
         "source": ".",
-        "scopes": [
-            "constant.numeric.hexadecimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "5",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.hexadecimal.c"
         ]
     },
@@ -224,79 +219,69 @@
     },
     {
         "source": "AB",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.hexadecimal.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.hexadecimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "CD",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "constant.numeric.hexadecimal.c"
         ]
     },
     {
         "source": "1",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "constant.numeric.decimal.c"
         ]
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "2",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "3",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "4",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     },
     {
         "source": "'",
         "scopes": [
-            "constant.numeric.decimal.c",
             "punctuation.separator.constant.numeric"
         ]
     },
     {
         "source": "5",
-        "scopes": [
-            "constant.numeric.decimal.c"
-        ]
+        "scopes": []
     }
 ]

@@ -2,91 +2,95 @@
     {
         "source": "#",
         "scopes": [
-            "meta.preprocessor.macro.c",
-            "keyword.control.directive.define.c",
             "punctuation.definition.directive.c"
+        ],
+        "scopesBegin": [
+            "meta.preprocessor.macro.c",
+            "keyword.control.directive.define.c"
         ]
     },
     {
         "source": "define",
-        "scopes": [
-            "meta.preprocessor.macro.c",
+        "scopes": [],
+        "scopesEnd": [
             "keyword.control.directive.define.c"
         ]
     },
     {
         "source": "IS_UPGRADE_ADDR",
         "scopes": [
-            "meta.preprocessor.macro.c",
             "entity.name.function.preprocessor.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.c",
             "punctuation.definition.parameters.begin.c"
         ]
     },
     {
         "source": "addr",
         "scopes": [
-            "meta.preprocessor.macro.c",
             "variable.parameter.preprocessor.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.preprocessor.macro.c",
             "punctuation.definition.parameters.end.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.preprocessor.macro.c",
             "punctuation.section.parens.begin.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.preprocessor.macro.c"
         ]
     },
     {
         "source": "/*",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.begin.c"
-        ]
-    },
-    {
-        "source": "((addr) >= UPGRADE_BASE_ADDR) && ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "comment.block.c"
         ]
     },
     {
+        "source": "((addr) >= UPGRADE_BASE_ADDR) && ",
+        "scopes": []
+    },
+    {
         "source": "*/",
         "scopes": [
-            "comment.block.c",
             "punctuation.definition.comment.end.c"
+        ],
+        "scopesEnd": [
+            "comment.block.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.parens.c",
             "punctuation.section.parens.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "addr",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.parens.c"
         ]
     },
     {
+        "source": "addr",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.parens.c",
             "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.parens.c"
         ]
     },
     {

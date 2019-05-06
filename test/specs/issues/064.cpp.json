@@ -8,71 +8,67 @@
     {
         "source": "function",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "entity.name.function.cpp"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.begin.bracket.round.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.definition.parameters.cpp",
-            "meta.function.definition.parameters.cpp",
             "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.begin.bracket.curly.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -81,48 +77,40 @@
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -131,54 +119,44 @@
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -186,55 +164,45 @@
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -242,61 +210,49 @@
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -305,65 +261,58 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -372,71 +321,62 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -444,72 +384,63 @@
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -517,78 +448,67 @@
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -597,88 +517,75 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -687,94 +594,79 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -783,94 +675,79 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -879,100 +756,83 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -981,105 +841,87 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -1088,111 +930,91 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": " ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -1201,111 +1023,97 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.cpp"
         ]
     },
     {
         "source": "a ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.assignment.cpp"
         ]
     },
     {
         "source": "new",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.new.cpp"
@@ -1314,90 +1122,79 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "2",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "constant.numeric.decimal.cpp"
         ]
     },
     {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " f",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "[] ",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesBegin": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": "int",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "storage.type.primitive.cpp"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1405,21 +1202,17 @@
     },
     {
         "source": " a",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1427,95 +1220,85 @@
     },
     {
         "source": " a",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": " a",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": " a",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1524,37 +1307,34 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1563,145 +1343,138 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1710,53 +1483,45 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " b",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
             "keyword.operator.wordlike.cpp",
             "memory.cpp",
             "keyword.operator.delete.cpp"
@@ -1765,187 +1530,167 @@
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " b",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "    ::",
-        "scopes": [
-            "meta.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " b",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "delete",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.cpp"
+        ],
+        "scopesBegin": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "[]",
         "scopes": [
-            "meta.block.cpp",
-            "keyword.operator.wordlike.cpp",
-            "memory.cpp",
             "keyword.operator.delete.array.bracket.cpp"
+        ],
+        "scopesEnd": [
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.begin.bracket.round.cpp"
-        ]
-    },
-    {
-        "source": "a",
-        "scopes": [
-            "meta.block.cpp",
+        ],
+        "scopesBegin": [
             "meta.parens.block.cpp"
         ]
     },
     {
+        "source": "a",
+        "scopes": []
+    },
+    {
         "source": ",",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "comma.cpp",
             "punctuation.separator.delimiter.cpp"
         ]
     },
     {
         "source": " b",
-        "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.block.cpp",
-            "meta.parens.block.cpp",
             "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.cpp",
             "punctuation.section.block.end.bracket.curly.cpp"
         ]
     }

@@ -12,40 +12,37 @@
     {
         "source": "tllt_toaster_run",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "gpointer ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "gpointer ",
+        "scopes": []
+    },
+    {
         "source": "user_data",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {

@@ -2,48 +2,50 @@
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "C",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "public :",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.body.class.cpp",
             "storage.type.modifier.access.control.public",
             ":.cpp"
+        ],
+        "scopesBegin": [
+            "meta.body.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.class.cpp"
         ]
     },
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

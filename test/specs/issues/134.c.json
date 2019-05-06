@@ -8,25 +8,27 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -44,32 +46,31 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -87,40 +88,37 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
-        ]
-    },
-    {
-        "source": "(",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "punctuation.section.parameters.begin.bracket.round.c"
-        ]
-    },
-    {
-        "source": "Type ",
-        "scopes": [
+        ],
+        "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
         ]
     },
     {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "Type ",
+        "scopes": []
+    },
+    {
         "source": "foo",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -138,84 +136,73 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.end.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -233,93 +220,79 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.c"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.end.bracket.round.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -337,47 +310,41 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type ",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": " value",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -395,47 +362,41 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type foo ",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": "=",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": " value",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -453,99 +414,83 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.end.bracket.round.c"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": " value",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
@@ -563,108 +508,89 @@
     {
         "source": "bar",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "entity.name.function.c"
+        ],
+        "scopesBegin": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.begin.bracket.round.c"
         ]
     },
     {
         "source": "*",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.c"
         ]
     },
     {
         "source": "foo",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "variable.parameter.probably.c"
         ]
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.c"
         ]
     },
     {
         "source": "(",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.begin.bracket.round.c"
         ]
     },
     {
         "source": "Type",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parens.end.bracket.round.c"
         ]
     },
     {
         "source": "=",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "keyword.operator.assignment.c"
         ]
     },
     {
         "source": " value",
-        "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c"
-        ]
+        "scopes": []
     },
     {
         "source": ")",
         "scopes": [
-            "meta.function.c",
-            "meta.function.definition.parameters.c",
             "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
         ]
     },
     {

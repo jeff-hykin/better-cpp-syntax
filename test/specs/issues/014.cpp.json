@@ -2,31 +2,31 @@
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "B",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -34,31 +34,27 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     },
     {
         "source": "class",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.class.cpp"
+        ],
+        "scopesBegin": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "A",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.class.cpp"
         ]
     },
     {
         "source": ":",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "colon.cpp",
             "punctuation.separator.inhertance.cpp"
         ]
@@ -66,31 +62,27 @@
     {
         "source": "public",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "storage.type.modifier.access.public.cpp"
         ]
     },
     {
         "source": "B",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "entity.name.type.inherited.cpp"
         ]
     },
     {
         "source": "{",
         "scopes": [
-            "meta.block.class.cpp",
-            "meta.head.class.cpp",
             "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "meta.block.class.cpp",
             "meta.body.class.cpp",
             "punctuation.section.block.end.bracket.curly.class.cpp"
         ]
@@ -98,7 +90,6 @@
     {
         "source": ";",
         "scopes": [
-            "meta.block.class.cpp",
             "punctuation.terminator.statement.cpp"
         ]
     }

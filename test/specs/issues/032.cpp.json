@@ -30,32 +30,36 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
+        ],
+        "scopesBegin": [
+            "string.quoted.double.cpp"
         ]
     },
     {
         "source": "foo ??/",
+        "scopes": []
+    },
+    {
+        "source": "\"",
         "scopes": [
+            "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
             "string.quoted.double.cpp"
         ]
     },
     {
-        "source": "\"",
-        "scopes": [
-            "string.quoted.double.cpp",
-            "punctuation.definition.string.end.cpp"
-        ]
-    },
-    {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "keyword.operator.ternary.cpp"
         ]
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "keyword.operator.ternary.cpp"
         ]
     },
@@ -67,13 +71,15 @@
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesBegin": [
             "keyword.operator.ternary.cpp"
         ]
     },
     {
         "source": "?",
-        "scopes": [
+        "scopes": [],
+        "scopesEnd": [
             "keyword.operator.ternary.cpp"
         ]
     },
@@ -86,32 +92,26 @@
     {
         "source": "\"",
         "scopes": [
-            "string.quoted.double.cpp",
             "punctuation.definition.string.begin.cpp"
+        ],
+        "scopesBegin": [
+            "string.quoted.double.cpp"
         ]
     },
     {
         "source": ";",
-        "scopes": [
-            "string.quoted.double.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "class A <%",
-        "scopes": [
-            "string.quoted.double.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "    A(); //test",
-        "scopes": [
-            "string.quoted.double.cpp"
-        ]
+        "scopes": []
     },
     {
         "source": "%>;",
-        "scopes": [
-            "string.quoted.double.cpp"
-        ]
+        "scopes": []
     }
 ]
