@@ -1,0 +1,534 @@
+[
+    {
+        "source": "/*",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.begin.c"
+        ]
+    },
+    {
+        "source": " Forward Declaration ",
+        "scopes": [
+            "comment.block.c"
+        ]
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.end.c"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": " A b",
+        "scopes": []
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": " B c",
+        "scopes": []
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": " C d",
+        "scopes": []
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "/*",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.begin.c"
+        ]
+    },
+    {
+        "source": " Function Declaration ",
+        "scopes": [
+            "comment.block.c"
+        ]
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.end.c"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "a",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": " A ",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "b",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "variable.parameter.probably.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.end.bracket.round.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "b",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": " B ",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "c",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "variable.parameter.probably.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.end.bracket.round.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "c",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": " C ",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "d",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "variable.parameter.probably.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.end.bracket.round.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "d",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "A ",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "b",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "variable.parameter.probably.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.end.bracket.round.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "/*",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.begin.c"
+        ]
+    },
+    {
+        "source": " Definition ",
+        "scopes": [
+            "comment.block.c"
+        ]
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "comment.block.c",
+            "punctuation.definition.comment.end.c"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": " A ",
+        "scopes": []
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "meta.block.c",
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": " B c",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "meta.block.c",
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": " C d",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.end.bracket.curly.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": " B ",
+        "scopes": []
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "    a",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": " b",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.end.bracket.curly.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": " C ",
+        "scopes": []
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "meta.block.c",
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": " A b",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopes": [
+            "meta.block.c",
+            "storage.type.enum.c"
+        ]
+    },
+    {
+        "source": " B c",
+        "scopes": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.c",
+            "punctuation.section.block.end.bracket.curly.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    }
+]

@@ -1,0 +1,557 @@
+[
+    {
+        "source": "namespace",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp",
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
+        ]
+    },
+    {
+        "source": "test",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp",
+            "entity.name.type.namespace.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.head.namespace.cpp",
+            "punctuation.section.block.begin.bracket.curly.namespace.cpp"
+        ]
+    },
+    {
+        "source": "template",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "storage.type.template.cpp"
+        ]
+    },
+    {
+        "source": "<",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "punctuation.section.angle-brackets.start.template.definition.cpp"
+        ]
+    },
+    {
+        "source": "class ",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.template.definition.cpp",
+            "storage.type.template.argument.class",
+            ".cpp"
+        ]
+    },
+    {
+        "source": "T",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.template.definition.cpp",
+            "entity.name.type.template.cpp"
+        ]
+    },
+    {
+        "source": ">",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "storage.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "test",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "entity.name.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": "template",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "storage.type.template.cpp"
+        ]
+    },
+    {
+        "source": "<",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.section.angle-brackets.start.template.definition.cpp"
+        ]
+    },
+    {
+        "source": "class ",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "storage.type.template.cpp"
+        ]
+    },
+    {
+        "source": "U",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "entity.name.type.template.cpp"
+        ]
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "keyword.operator.assignment.cpp"
+        ]
+    },
+    {
+        "source": "std",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "meta.scope-resolution.cpp",
+            "entity.name.type.namespace.scope-resolution.cpp"
+        ]
+    },
+    {
+        "source": "::",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "meta.scope-resolution.cpp",
+            "punctuation.separator.namespace.access.cpp"
+        ]
+    },
+    {
+        "source": "vector",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp"
+        ]
+    },
+    {
+        "source": "<",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "meta.template.call.cpp",
+            "keyword.operator.comparison.cpp"
+        ]
+    },
+    {
+        "source": "int",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "meta.template.call.cpp",
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": ">",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.template.definition.cpp",
+            "meta.template.call.cpp",
+            "keyword.operator.comparison.cpp"
+        ]
+    },
+    {
+        "source": ">",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.section.angle-brackets.end.template.definition.cpp"
+        ]
+    },
+    {
+        "source": "bool",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "operator",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "keyword.other.operator.overload.cpp"
+        ]
+    },
+    {
+        "source": "()",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "entity.name.operator.overloadee.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "punctuation.section.parameters.begin.bracket.round.operator-overload.cpp"
+        ]
+    },
+    {
+        "source": "U ",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp"
+        ]
+    },
+    {
+        "source": "k",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "variable.parameter.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "punctuation.section.parameters.end.bracket.round.operator-overload.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.block.cpp",
+            "punctuation.section.block.begin.bracket.curly.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.block.cpp",
+            "punctuation.section.block.end.bracket.curly.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "storage.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "test2",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "entity.name.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": "bool",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "operator",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "keyword.other.operator.overload.cpp"
+        ]
+    },
+    {
+        "source": "()",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "entity.name.operator.overloadee.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "punctuation.section.parameters.begin.bracket.round.operator-overload.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "meta.function.definition.parameters.operator-overload.cpp",
+            "punctuation.section.parameters.end.bracket.round.operator-overload.cpp"
+        ]
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "keyword.operator.assignment.cpp"
+        ]
+    },
+    {
+        "source": "delete",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "keyword.operator.wordlike.cpp",
+            "memory.cpp",
+            "keyword.operator.delete.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "meta.block.struct.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.namespace.cpp",
+            "meta.body.namespace.cpp",
+            "punctuation.section.block.end.bracket.curly.namespace.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " namespace test",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " no syntax highlighting",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "class",
+        "scopes": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp",
+            "storage.type.class.cpp"
+        ]
+    },
+    {
+        "source": "test2",
+        "scopes": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp",
+            "entity.name.type.class.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp",
+            "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.class.cpp",
+            "meta.body.class.cpp",
+            "punctuation.section.block.end.bracket.curly.class.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.class.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    }
+]

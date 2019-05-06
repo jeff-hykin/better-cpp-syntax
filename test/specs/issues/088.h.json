@@ -1,0 +1,186 @@
+[
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " .h file with C++ syntax highlighting",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "#",
+        "scopes": [
+            "meta.preprocessor.cpp",
+            "keyword.control.directive.conditional.cpp",
+            "punctuation.definition.directive.cpp"
+        ]
+    },
+    {
+        "source": "ifdef",
+        "scopes": [
+            "meta.preprocessor.cpp",
+            "keyword.control.directive.conditional.cpp"
+        ]
+    },
+    {
+        "source": "USE_IN_HLSL",
+        "scopes": [
+            "meta.preprocessor.cpp",
+            "entity.name.function.preprocessor.cpp"
+        ]
+    },
+    {
+        "source": "cbuffer  testCB",
+        "scopes": []
+    },
+    {
+        "source": "#",
+        "scopes": [
+            "meta.preprocessor.cpp",
+            "keyword.control.directive.conditional.cpp",
+            "punctuation.definition.directive.cpp"
+        ]
+    },
+    {
+        "source": "else",
+        "scopes": [
+            "meta.preprocessor.cpp",
+            "keyword.control.directive.conditional.cpp"
+        ]
+    },
+    {
+        "source": "struct",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "storage.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "testCB",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "entity.name.type.struct.cpp"
+        ]
+    },
+    {
+        "source": "#endif",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "keyword.control.directive.#endif.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " <= this #endif is highlighted white although its valid",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.head.struct.cpp",
+            "punctuation.section.block.begin.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": "float",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": " Brightness",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " ...",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "meta.body.struct.cpp",
+            "punctuation.section.block.end.bracket.curly.struct.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.struct.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " the .h file with this struct definition can be used in HLSL and in C++ code ",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " this way",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    }
+]

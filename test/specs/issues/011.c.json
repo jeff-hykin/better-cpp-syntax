@@ -1,0 +1,48 @@
+[
+    {
+        "source": "bool",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "aaaa",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "const",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "storage.modifier.c"
+        ]
+    },
+    {
+        "source": "char",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "*/* comment */ some_var) { return true; }",
+        "scopes": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c",
+            "invalid.illegal.stray-comment-end.c"
+        ]
+    }
+]

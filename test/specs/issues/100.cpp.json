@@ -1,0 +1,88 @@
+[
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "function",
+        "scopes": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp",
+            "entity.name.function.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp",
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp",
+            "punctuation.section.parameters.end.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "meta.block.cpp",
+            "punctuation.section.block.begin.bracket.curly.cpp"
+        ]
+    },
+    {
+        "source": "decltype",
+        "scopes": [
+            "meta.block.cpp",
+            "meta.function-call.cpp",
+            "keyword.operator.functionlike.cpp",
+            "keyword.other.decltype.cpp",
+            "storage.type.decltype.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "meta.block.cpp",
+            "meta.function-call.cpp",
+            "punctuation.section.arguments.begin.bracket.round.decltype.cpp"
+        ]
+    },
+    {
+        "source": "int",
+        "scopes": [
+            "meta.block.cpp",
+            "meta.function-call.cpp",
+            "meta.arguments.decltype",
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "meta.block.cpp",
+            "meta.function-call.cpp",
+            "punctuation.section.arguments.end.bracket.round.decltype.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "meta.block.cpp",
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.block.cpp",
+            "punctuation.section.block.end.bracket.curly.cpp"
+        ]
+    }
+]

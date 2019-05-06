@@ -1,0 +1,149 @@
+[
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " invalid literals",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "1Ex",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0xe+foo",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0x1Px",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0xAB.cdpfl",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0x12345'luyards",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0.'123",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "0'.123",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "1E'1",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "1'E1",
+        "scopes": [
+            "invalid.illegal.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopes": [
+            "comment.line.double-slash.cpp",
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " odd valid literals",
+        "scopes": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "0x",
+        "scopes": [
+            "keyword.other.unit.hexadecimal.cpp"
+        ]
+    },
+    {
+        "source": "12345",
+        "scopes": [
+            "constant.numeric.hexadecimal.cpp"
+        ]
+    },
+    {
+        "source": "luyards",
+        "scopes": [
+            "keyword.other.unit.user-defined.cpp"
+        ]
+    },
+    {
+        "source": "0",
+        "scopes": [
+            "keyword.other.unit.octal.cpp"
+        ]
+    },
+    {
+        "source": "'",
+        "scopes": [
+            "constant.numeric.octal.cpp",
+            "punctuation.separator.constant.numeric.cpp"
+        ]
+    },
+    {
+        "source": "12345",
+        "scopes": [
+            "constant.numeric.octal.cpp"
+        ]
+    },
+    {
+        "source": "0x",
+        "scopes": [
+            "keyword.other.unit.hexadecimal.cpp"
+        ]
+    },
+    {
+        "source": "1E",
+        "scopes": [
+            "constant.numeric.hexadecimal.cpp"
+        ]
+    },
+    {
+        "source": "x",
+        "scopes": [
+            "keyword.other.unit.user-defined.cpp"
+        ]
+    },
+    {
+        "source": "1",
+        "scopes": [
+            "constant.numeric.decimal.cpp"
+        ]
+    },
+    {
+        "source": "Px",
+        "scopes": [
+            "keyword.other.unit.user-defined.cpp"
+        ]
+    }
+]
