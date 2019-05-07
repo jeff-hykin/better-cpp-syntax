@@ -13,11 +13,11 @@
     },
     {
         "source": "bool ",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -65,11 +65,11 @@
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -89,11 +89,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -119,16 +119,15 @@
         ]
     },
     {
-        "source": "result_type ",
-        "scopes": []
+        "source": "result_type "
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -144,8 +143,7 @@
         ]
     },
     {
-        "source": "argument_type ",
-        "scopes": []
+        "source": "argument_type "
     },
     {
         "source": "k",
@@ -164,11 +162,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -194,12 +192,12 @@
     },
     {
         "source": "class ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.class",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {

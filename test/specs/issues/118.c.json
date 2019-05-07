@@ -1,33 +1,31 @@
 [
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.c"
-        ],
         "scopesBegin": [
             "meta.preprocessor.include.c",
             "keyword.control.directive.include.c"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.c"
         ]
     },
     {
         "source": "include",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.definition.string.begin.c"
-        ],
         "scopesBegin": [
             "string.quoted.other.lt-gt.include.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
         ]
     },
     {
-        "source": "glib-object.h",
-        "scopes": []
+        "source": "glib-object.h"
     },
     {
         "source": ">",
@@ -40,32 +38,30 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.c"
-        ],
         "scopesBegin": [
             "keyword.control.directive.include.c"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.c"
         ]
     },
     {
         "source": "include",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.include.c"
         ]
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.c"
-        ],
         "scopesBegin": [
             "string.quoted.double.include.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
         ]
     },
     {
-        "source": "tllt-cp-cooking-details-dto.h",
-        "scopes": []
+        "source": "tllt-cp-cooking-details-dto.h"
     },
     {
         "source": "\"",
@@ -79,12 +75,12 @@
     },
     {
         "source": "G_DEFINE_TYPE",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -94,8 +90,7 @@
         ]
     },
     {
-        "source": "TlltCpCookingDetailsDto",
-        "scopes": []
+        "source": "TlltCpCookingDetailsDto"
     },
     {
         "source": ",",
@@ -104,8 +99,7 @@
         ]
     },
     {
-        "source": " tllt_cp_cooking_details_dto",
-        "scopes": []
+        "source": " tllt_cp_cooking_details_dto"
     },
     {
         "source": ",",
@@ -114,8 +108,7 @@
         ]
     },
     {
-        "source": " G_TYPE_OBJECT",
-        "scopes": []
+        "source": " G_TYPE_OBJECT"
     },
     {
         "source": ")",

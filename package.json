@@ -34,13 +34,14 @@
     },
     "devDependencies": {
         "glob": "^7.1.3",
+        "json-stable-stringify": "^1.0.1",
         "lodash": "^4.17.11",
         "vscode-textmate": "^4.1.1",
         "yargs": "^13.2.2"
     },
     "scripts": {
         "pretest": "ruby c/generate.rb && ruby cpp/generate.rb",
-        "test": "node test/src/index.js",
-        "generate-specs": "node test/src/generateSpec.js"
+        "test": "node test/src/commands/test.js",
+        "generate-specs": "node test/src/commands/generate-specs.js"
     }
 }

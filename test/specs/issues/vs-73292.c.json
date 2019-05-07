@@ -7,12 +7,12 @@
     },
     {
         "source": "main",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -33,11 +33,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.c"
-        ],
         "scopesBegin": [
             "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
         ]
     },
     {
@@ -47,8 +47,7 @@
         ]
     },
     {
-        "source": " test_enum ",
-        "scopes": []
+        "source": " test_enum "
     },
     {
         "source": "=",

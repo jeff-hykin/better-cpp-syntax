@@ -1,12 +1,12 @@
 [
     {
         "source": "test",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -27,11 +27,11 @@
     },
     {
         "source": "[",
-        "scopes": [
-            "punctuation.definition.begin.bracket.square.cpp"
-        ],
         "scopesBegin": [
             "meta.bracket.square.access.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.begin.bracket.square.cpp"
         ]
     },
     {
@@ -69,27 +69,26 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " no syntax highlighting;",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "test",
-        "scopes": [
-            "variable.other.object.cpp"
-        ],
         "scopesBegin": [
             "meta.bracket.square.access.cpp"
+        ],
+        "scopes": [
+            "variable.other.object.cpp"
         ]
     },
     {

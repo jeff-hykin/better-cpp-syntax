@@ -1,12 +1,12 @@
 [
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -26,16 +26,15 @@
     },
     {
         "source": "int",
-        "scopes": [
-            "storage.type.primitive.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.primitive.cpp"
         ]
     },
     {
-        "source": " a",
-        "scopes": []
+        "source": " a"
     },
     {
         "source": ";",
@@ -50,8 +49,7 @@
         ]
     },
     {
-        "source": " b",
-        "scopes": []
+        "source": " b"
     },
     {
         "source": ";",
@@ -60,8 +58,7 @@
         ]
     },
     {
-        "source": "    usertype user_value",
-        "scopes": []
+        "source": "    usertype user_value"
     },
     {
         "source": ";",
@@ -70,30 +67,28 @@
         ]
     },
     {
-        "source": "    usertype user_value",
-        "scopes": []
+        "source": "    usertype user_value"
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "'",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.single.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "A",
-        "scopes": []
+        "source": "A"
     },
     {
         "source": "'",
@@ -126,8 +121,7 @@
         ]
     },
     {
-        "source": " a[] ",
-        "scopes": []
+        "source": " a[] "
     },
     {
         "source": "=",
@@ -137,11 +131,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -193,11 +187,11 @@
     },
     {
         "source": "scoped",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -210,8 +204,7 @@
         ]
     },
     {
-        "source": "templated",
-        "scopes": []
+        "source": "templated"
     },
     {
         "source": "<",
@@ -220,8 +213,7 @@
         ]
     },
     {
-        "source": "type",
-        "scopes": []
+        "source": "type"
     },
     {
         "source": ">",
@@ -230,8 +222,7 @@
         ]
     },
     {
-        "source": " value",
-        "scopes": []
+        "source": " value"
     },
     {
         "source": ";",
@@ -240,8 +231,7 @@
         ]
     },
     {
-        "source": "    compound",
-        "scopes": []
+        "source": "    compound"
     },
     {
         "source": "<",
@@ -257,11 +247,11 @@
     },
     {
         "source": "templated",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -274,8 +264,7 @@
         ]
     },
     {
-        "source": "type ",
-        "scopes": []
+        "source": "type "
     },
     {
         "source": "*",
@@ -290,8 +279,7 @@
         ]
     },
     {
-        "source": "::type value",
-        "scopes": []
+        "source": "::type value"
     },
     {
         "source": ";",
@@ -324,8 +312,7 @@
         ]
     },
     {
-        "source": " a",
-        "scopes": []
+        "source": " a"
     },
     {
         "source": ";",
@@ -340,8 +327,7 @@
         ]
     },
     {
-        "source": " b",
-        "scopes": []
+        "source": " b"
     },
     {
         "source": ";",
@@ -350,8 +336,7 @@
         ]
     },
     {
-        "source": "usertype user_value",
-        "scopes": []
+        "source": "usertype user_value"
     },
     {
         "source": ";",
@@ -360,30 +345,28 @@
         ]
     },
     {
-        "source": "usertype user_value",
-        "scopes": []
+        "source": "usertype user_value"
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "'",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.single.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "A",
-        "scopes": []
+        "source": "A"
     },
     {
         "source": "'",
@@ -411,11 +394,11 @@
     },
     {
         "source": "scoped",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -428,8 +411,7 @@
         ]
     },
     {
-        "source": "templated",
-        "scopes": []
+        "source": "templated"
     },
     {
         "source": "<",
@@ -438,8 +420,7 @@
         ]
     },
     {
-        "source": "type",
-        "scopes": []
+        "source": "type"
     },
     {
         "source": ">",
@@ -448,8 +429,7 @@
         ]
     },
     {
-        "source": " value",
-        "scopes": []
+        "source": " value"
     },
     {
         "source": ";",
@@ -458,8 +438,7 @@
         ]
     },
     {
-        "source": "compound",
-        "scopes": []
+        "source": "compound"
     },
     {
         "source": "<",
@@ -475,11 +454,11 @@
     },
     {
         "source": "templated",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -492,8 +471,7 @@
         ]
     },
     {
-        "source": "type ",
-        "scopes": []
+        "source": "type "
     },
     {
         "source": "*",
@@ -508,8 +486,7 @@
         ]
     },
     {
-        "source": "::type value",
-        "scopes": []
+        "source": "::type value"
     },
     {
         "source": ";",
@@ -524,8 +501,7 @@
         ]
     },
     {
-        "source": " a[] ",
-        "scopes": []
+        "source": " a[] "
     },
     {
         "source": "=",
@@ -535,11 +511,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -597,12 +573,12 @@
     },
     {
         "source": "function_declaration",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -631,8 +607,7 @@
         ]
     },
     {
-        "source": " usertype ",
-        "scopes": []
+        "source": " usertype "
     },
     {
         "source": "user_value",

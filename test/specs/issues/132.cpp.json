@@ -1,13 +1,13 @@
 [
     {
         "source": "namespace",
-        "scopes": [
-            "keyword.other.namespace.definition.cpp",
-            "storage.type.namespace.definition.cpp"
-        ],
         "scopesBegin": [
             "meta.block.namespace.cpp",
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
         ]
     },
     {
@@ -27,14 +27,14 @@
     },
     {
         "source": "namespace",
-        "scopes": [
-            "keyword.other.namespace.definition.cpp",
-            "storage.type.namespace.definition.cpp"
-        ],
         "scopesBegin": [
             "meta.body.namespace.cpp",
             "meta.block.namespace.cpp",
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
         ]
     },
     {
@@ -54,17 +54,16 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "meta.body.namespace.cpp",
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " foo",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -91,38 +90,37 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " namespace foo::bar",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "namespace",
+        "scopesBegin": [
+            "meta.block.namespace.cpp"
+        ],
         "scopes": [
             "meta.head.namespace.cpp",
             "keyword.other.namespace.definition.cpp",
             "storage.type.namespace.definition.cpp"
-        ],
-        "scopesBegin": [
-            "meta.block.namespace.cpp"
         ]
     },
     {
         "source": "scoped",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -136,11 +134,11 @@
     },
     {
         "source": "console",
-        "scopes": [
-            "entity.name.type.namespace.cpp"
-        ],
         "scopesBegin": [
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.cpp"
         ]
     },
     {

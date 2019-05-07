@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,30 +33,30 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "switch",
-        "scopes": [
-            "keyword.control.switch.cpp"
-        ],
         "scopesBegin": [
             "meta.block.switch.cpp",
             "meta.head.switch.cpp"
+        ],
+        "scopes": [
+            "keyword.control.switch.cpp"
         ]
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.section.parens.begin.bracket.round.conditional.switch.cpp"
-        ],
         "scopesBegin": [
             "meta.conditional.switch.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.conditional.switch.cpp"
         ]
     },
     {
@@ -85,12 +85,12 @@
     },
     {
         "source": "case",
-        "scopes": [
-            "keyword.control.case.cpp"
-        ],
         "scopesBegin": [
             "meta.body.switch.cpp",
             "meta.conditional.case.cpp"
+        ],
+        "scopes": [
+            "keyword.control.case.cpp"
         ]
     },
     {
@@ -123,11 +123,11 @@
     },
     {
         "source": "default",
-        "scopes": [
-            "keyword.control.default.cpp"
-        ],
         "scopesBegin": [
             "meta.conditional.case.cpp"
+        ],
+        "scopes": [
+            "keyword.control.default.cpp"
         ]
     },
     {

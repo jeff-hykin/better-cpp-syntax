@@ -1,12 +1,12 @@
 [
     {
         "source": "sscanf",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -16,8 +16,7 @@
         ]
     },
     {
-        "source": "user_input",
-        "scopes": []
+        "source": "user_input"
     },
     {
         "source": ",",
@@ -27,11 +26,11 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.c"
-        ],
         "scopesBegin": [
             "string.quoted.double.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
         ]
     },
     {
@@ -47,8 +46,7 @@
         ]
     },
     {
-        "source": "[^",
-        "scopes": []
+        "source": "[^"
     },
     {
         "source": "\\n",
@@ -57,8 +55,7 @@
         ]
     },
     {
-        "source": "]",
-        "scopes": []
+        "source": "]"
     },
     {
         "source": "\"",
@@ -94,8 +91,7 @@
         ]
     },
     {
-        "source": " arg_str",
-        "scopes": []
+        "source": " arg_str"
     },
     {
         "source": ")",
@@ -115,16 +111,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.c"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.c"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.c"
         ]
     },
     {
         "source": " reads char into arg0, the remainder until \\n to arg_str",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.c"
         ]
@@ -137,12 +132,12 @@
     },
     {
         "source": "test",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -163,16 +158,15 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.c"
-        ],
         "scopesBegin": [
             "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
         ]
     },
     {
-        "source": "    t ",
-        "scopes": []
+        "source": "    t "
     },
     {
         "source": "=",
@@ -182,11 +176,11 @@
     },
     {
         "source": "time",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -217,8 +211,7 @@
         ]
     },
     {
-        "source": "    tmp ",
-        "scopes": []
+        "source": "    tmp "
     },
     {
         "source": "=",
@@ -228,11 +221,11 @@
     },
     {
         "source": "localtime",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -248,8 +241,7 @@
         ]
     },
     {
-        "source": "t",
-        "scopes": []
+        "source": "t"
     },
     {
         "source": ")",
@@ -268,11 +260,11 @@
     },
     {
         "source": "strftime",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -282,8 +274,7 @@
         ]
     },
     {
-        "source": "timestr",
-        "scopes": []
+        "source": "timestr"
     },
     {
         "source": ",",
@@ -304,8 +295,7 @@
         ]
     },
     {
-        "source": "timestr",
-        "scopes": []
+        "source": "timestr"
     },
     {
         "source": ")",
@@ -321,11 +311,11 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.c"
-        ],
         "scopesBegin": [
             "string.quoted.double.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
         ]
     },
     {
@@ -335,8 +325,7 @@
         ]
     },
     {
-        "source": "Y-",
-        "scopes": []
+        "source": "Y-"
     },
     {
         "source": "%",
@@ -345,8 +334,7 @@
         ]
     },
     {
-        "source": "m-",
-        "scopes": []
+        "source": "m-"
     },
     {
         "source": "%d",
@@ -361,8 +349,7 @@
         ]
     },
     {
-        "source": "H:",
-        "scopes": []
+        "source": "H:"
     },
     {
         "source": "%",
@@ -371,8 +358,7 @@
         ]
     },
     {
-        "source": "M:",
-        "scopes": []
+        "source": "M:"
     },
     {
         "source": "%s",
@@ -396,8 +382,7 @@
         ]
     },
     {
-        "source": " tmp",
-        "scopes": []
+        "source": " tmp"
     },
     {
         "source": ")",

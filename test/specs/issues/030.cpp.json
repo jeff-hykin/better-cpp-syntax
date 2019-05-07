@@ -1,17 +1,16 @@
 [
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.pragma.cpp",
             "keyword.control.directive.pragma.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "pragma",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.pragma.cpp"
         ]
@@ -27,33 +26,31 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.include.cpp",
             "keyword.control.directive.include.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "include",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.include.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.other.lt-gt.include.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "type_traits",
-        "scopes": []
+        "source": "type_traits"
     },
     {
         "source": ">",
@@ -67,17 +64,16 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.macro.cpp",
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -114,11 +110,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -144,12 +140,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -160,11 +156,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.section.angle-brackets.begin.template.call.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.angle-brackets.begin.template.call.cpp"
         ]
     },
     {
@@ -183,8 +179,7 @@
         ]
     },
     {
-        "source": " \\",
-        "scopes": []
+        "source": " \\"
     },
     {
         "source": "{",
@@ -197,11 +192,11 @@
     },
     {
         "source": "\\",
-        "scopes": [
-            "constant.character.escape.line-continuation.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "constant.character.escape.line-continuation.cpp"
         ]
     },
     {
@@ -223,8 +218,7 @@
         ]
     },
     {
-        "source": " isPoint ",
-        "scopes": []
+        "source": " isPoint "
     },
     {
         "source": "=",
@@ -261,18 +255,17 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.tail.struct.cpp",
             "meta.preprocessor.macro.cpp",
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -309,11 +302,11 @@
     },
     {
         "source": "IsPointDef",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -323,8 +316,7 @@
         ]
     },
     {
-        "source": "T",
-        "scopes": []
+        "source": "T"
     },
     {
         "source": ")",
@@ -349,11 +341,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -379,12 +371,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -395,11 +387,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.section.angle-brackets.begin.template.call.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.angle-brackets.begin.template.call.cpp"
         ]
     },
     {
@@ -418,8 +410,7 @@
         ]
     },
     {
-        "source": ":",
-        "scopes": []
+        "source": ":"
     },
     {
         "source": "public",
@@ -434,8 +425,7 @@
         ]
     },
     {
-        "source": "::",
-        "scopes": []
+        "source": "::"
     },
     {
         "source": "true_type",
@@ -444,8 +434,7 @@
         ]
     },
     {
-        "source": " \\",
-        "scopes": []
+        "source": " \\"
     },
     {
         "source": "{",
@@ -474,16 +463,15 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -520,11 +508,11 @@
     },
     {
         "source": "IsPointDef",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -534,8 +522,7 @@
         ]
     },
     {
-        "source": "T",
-        "scopes": []
+        "source": "T"
     },
     {
         "source": ")",
@@ -560,11 +547,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -590,12 +577,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -606,11 +593,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.section.angle-brackets.begin.template.call.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.angle-brackets.begin.template.call.cpp"
         ]
     },
     {
@@ -629,8 +616,7 @@
         ]
     },
     {
-        "source": ":",
-        "scopes": []
+        "source": ":"
     },
     {
         "source": "public",
@@ -645,8 +631,7 @@
         ]
     },
     {
-        "source": "::",
-        "scopes": []
+        "source": "::"
     },
     {
         "source": "true_type",
@@ -655,8 +640,7 @@
         ]
     },
     {
-        "source": " \\",
-        "scopes": []
+        "source": " \\"
     },
     {
         "source": "{",
@@ -685,16 +669,15 @@
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -725,12 +708,12 @@
     },
     {
         "source": "typename ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.typename",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {
@@ -786,11 +769,11 @@
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -807,29 +790,29 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "IsPoint",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -913,11 +896,11 @@
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -934,29 +917,29 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "IsPoint",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -1027,13 +1010,13 @@
     },
     {
         "source": "namespace",
-        "scopes": [
-            "keyword.other.namespace.definition.cpp",
-            "storage.type.namespace.definition.cpp"
-        ],
         "scopesBegin": [
             "meta.block.namespace.cpp",
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
         ]
     },
     {
@@ -1053,14 +1036,14 @@
     },
     {
         "source": "namespace",
-        "scopes": [
-            "keyword.other.namespace.definition.cpp",
-            "storage.type.namespace.definition.cpp"
-        ],
         "scopesBegin": [
             "meta.body.namespace.cpp",
             "meta.block.namespace.cpp",
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
         ]
     },
     {
@@ -1080,11 +1063,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.body.namespace.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -1095,12 +1078,12 @@
     },
     {
         "source": "typename ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.typename",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {
@@ -1120,12 +1103,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -1145,11 +1128,11 @@
     },
     {
         "source": "static",
-        "scopes": [
-            "storage.modifier.specifier.static.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.modifier.specifier.static.cpp"
         ]
     },
     {
@@ -1165,8 +1148,7 @@
         ]
     },
     {
-        "source": " isPoint ",
-        "scopes": []
+        "source": " isPoint "
     },
     {
         "source": "=",
@@ -1218,12 +1200,12 @@
     },
     {
         "source": "typename ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.typename",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {
@@ -1243,12 +1225,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -1268,11 +1250,11 @@
     },
     {
         "source": "static",
-        "scopes": [
-            "storage.modifier.specifier.static.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.modifier.specifier.static.cpp"
         ]
     },
     {
@@ -1288,8 +1270,7 @@
         ]
     },
     {
-        "source": " value ",
-        "scopes": []
+        "source": " value "
     },
     {
         "source": "=",
@@ -1341,12 +1322,12 @@
     },
     {
         "source": "typename ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.typename",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {
@@ -1366,12 +1347,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -1391,11 +1372,11 @@
     },
     {
         "source": "static",
-        "scopes": [
-            "storage.modifier.specifier.static.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.modifier.specifier.static.cpp"
         ]
     },
     {
@@ -1411,8 +1392,7 @@
         ]
     },
     {
-        "source": " value ",
-        "scopes": []
+        "source": " value "
     },
     {
         "source": "=",

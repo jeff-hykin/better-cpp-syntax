@@ -1,17 +1,16 @@
 [
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.macro.cpp",
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -51,16 +50,15 @@
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
         ]
     },
     {
-        "source": "((addr) >= UPGRADE_BASE_ADDR) && ",
-        "scopes": []
+        "source": "((addr) >= UPGRADE_BASE_ADDR) && "
     },
     {
         "source": "*/",
@@ -73,16 +71,15 @@
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.section.parens.begin.bracket.round.cpp"
-        ],
         "scopesBegin": [
             "meta.parens.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
-        "source": "addr",
-        "scopes": []
+        "source": "addr"
     },
     {
         "source": ")",
@@ -100,8 +97,7 @@
         ]
     },
     {
-        "source": " UPGRADE_BASE_ADDR ",
-        "scopes": []
+        "source": " UPGRADE_BASE_ADDR "
     },
     {
         "source": "+",
@@ -110,7 +106,6 @@
         ]
     },
     {
-        "source": " UPGRADE_SPACE_SIZE)",
-        "scopes": []
+        "source": " UPGRADE_SPACE_SIZE)"
     }
 ]

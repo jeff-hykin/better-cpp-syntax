@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,29 +33,29 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "putIfExists",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -105,8 +105,7 @@
         ]
     },
     {
-        "source": " common",
-        "scopes": []
+        "source": " common"
     },
     {
         "source": ",",
@@ -117,16 +116,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "type",
-        "scopes": []
+        "source": "type"
     },
     {
         "source": "\"",
@@ -154,29 +152,29 @@
     },
     {
         "source": "putIfExists",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -235,8 +233,7 @@
         ]
     },
     {
-        "source": " common",
-        "scopes": []
+        "source": " common"
     },
     {
         "source": ",",
@@ -247,16 +244,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "type",
-        "scopes": []
+        "source": "type"
     },
     {
         "source": "\"",

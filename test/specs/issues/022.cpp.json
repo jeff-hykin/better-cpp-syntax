@@ -1,12 +1,12 @@
 [
     {
         "source": "sscanf",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -16,8 +16,7 @@
         ]
     },
     {
-        "source": "user_input",
-        "scopes": []
+        "source": "user_input"
     },
     {
         "source": ",",
@@ -28,11 +27,11 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
@@ -42,8 +41,7 @@
         ]
     },
     {
-        "source": " %[^",
-        "scopes": []
+        "source": " %[^"
     },
     {
         "source": "\\n",
@@ -52,8 +50,7 @@
         ]
     },
     {
-        "source": "]",
-        "scopes": []
+        "source": "]"
     },
     {
         "source": "\"",
@@ -91,8 +88,7 @@
         ]
     },
     {
-        "source": " arg_str",
-        "scopes": []
+        "source": " arg_str"
     },
     {
         "source": ")",
@@ -112,16 +108,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " reads char into arg0, the remainder until \\n to arg_str",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -134,12 +129,12 @@
     },
     {
         "source": "test",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -160,16 +155,15 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
-        "source": "    t ",
-        "scopes": []
+        "source": "    t "
     },
     {
         "source": "=",
@@ -179,11 +173,11 @@
     },
     {
         "source": "time",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
@@ -214,8 +208,7 @@
         ]
     },
     {
-        "source": "    tmp ",
-        "scopes": []
+        "source": "    tmp "
     },
     {
         "source": "=",
@@ -225,11 +218,11 @@
     },
     {
         "source": "localtime",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
@@ -245,8 +238,7 @@
         ]
     },
     {
-        "source": "t",
-        "scopes": []
+        "source": "t"
     },
     {
         "source": ")",
@@ -265,11 +257,11 @@
     },
     {
         "source": "strftime",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
@@ -279,8 +271,7 @@
         ]
     },
     {
-        "source": "timestr",
-        "scopes": []
+        "source": "timestr"
     },
     {
         "source": ",",
@@ -323,16 +314,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "%Y-%m-",
-        "scopes": []
+        "source": "%Y-%m-"
     },
     {
         "source": "%d",
@@ -341,8 +331,7 @@
         ]
     },
     {
-        "source": " %H:%M:",
-        "scopes": []
+        "source": " %H:%M:"
     },
     {
         "source": "%s",
@@ -367,8 +356,7 @@
         ]
     },
     {
-        "source": " tmp",
-        "scopes": []
+        "source": " tmp"
     },
     {
         "source": ")",

@@ -1,26 +1,25 @@
 [
     {
         "source": "extern",
-        "scopes": [
-            "storage.type.extern.cpp"
-        ],
         "scopesBegin": [
             "meta.block.extern.cpp",
             "meta.head.extern.cpp"
+        ],
+        "scopes": [
+            "storage.type.extern.cpp"
         ]
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "C",
-        "scopes": []
+        "source": "C"
     },
     {
         "source": "\"",
@@ -42,17 +41,16 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "meta.body.extern.cpp",
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " this one is okay",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -65,12 +63,12 @@
     },
     {
         "source": "inBlock",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -91,11 +89,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -118,27 +116,26 @@
     },
     {
         "source": "extern",
-        "scopes": [
-            "storage.type.extern.cpp"
-        ],
         "scopesBegin": [
             "meta.tail.extern.cpp",
             "meta.block.extern.cpp",
             "meta.head.extern.cpp"
+        ],
+        "scopes": [
+            "storage.type.extern.cpp"
         ]
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "C",
-        "scopes": []
+        "source": "C"
     },
     {
         "source": "\"",
@@ -157,12 +154,12 @@
     },
     {
         "source": "inBlock",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -183,16 +180,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " this one is not",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]

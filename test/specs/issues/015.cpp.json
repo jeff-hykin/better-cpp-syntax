@@ -1,12 +1,12 @@
 [
     {
         "source": "class",
-        "scopes": [
-            "storage.type.class.cpp"
-        ],
         "scopesBegin": [
             "meta.block.class.cpp",
             "meta.head.class.cpp"
+        ],
+        "scopes": [
+            "storage.type.class.cpp"
         ]
     },
     {
@@ -26,12 +26,12 @@
     },
     {
         "source": "public :",
+        "scopesBegin": [
+            "meta.body.class.cpp"
+        ],
         "scopes": [
             "storage.type.modifier.access.control.public",
             ":.cpp"
-        ],
-        "scopesBegin": [
-            "meta.body.class.cpp"
         ]
     },
     {

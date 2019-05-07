@@ -18,8 +18,7 @@
         ]
     },
     {
-        "source": " a ",
-        "scopes": []
+        "source": " a "
     },
     {
         "source": "=",
@@ -29,16 +28,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "foo ??/",
-        "scopes": []
+        "source": "foo ??/"
     },
     {
         "source": "\"",
@@ -51,14 +49,12 @@
     },
     {
         "source": "?",
-        "scopes": [],
         "scopesBegin": [
             "keyword.operator.ternary.cpp"
         ]
     },
     {
         "source": "?",
-        "scopes": [],
         "scopesEnd": [
             "keyword.operator.ternary.cpp"
         ]
@@ -71,14 +67,12 @@
     },
     {
         "source": "?",
-        "scopes": [],
         "scopesBegin": [
             "keyword.operator.ternary.cpp"
         ]
     },
     {
         "source": "?",
-        "scopes": [],
         "scopesEnd": [
             "keyword.operator.ternary.cpp"
         ]
@@ -91,27 +85,23 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": ";",
-        "scopes": []
+        "source": ";"
     },
     {
-        "source": "class A <%",
-        "scopes": []
+        "source": "class A <%"
     },
     {
-        "source": "    A(); //test",
-        "scopes": []
+        "source": "    A(); //test"
     },
     {
-        "source": "%>;",
-        "scopes": []
+        "source": "%>;"
     }
 ]

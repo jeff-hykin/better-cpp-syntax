@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {
@@ -33,30 +33,30 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.c"
-        ],
         "scopesBegin": [
             "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
         ]
     },
     {
         "source": "switch",
-        "scopes": [
-            "keyword.control.switch.c"
-        ],
         "scopesBegin": [
             "meta.block.switch.c",
             "meta.head.switch.c"
+        ],
+        "scopes": [
+            "keyword.control.switch.c"
         ]
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.section.parens.begin.bracket.round.conditional.switch.c"
-        ],
         "scopesBegin": [
             "meta.conditional.switch.c"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.conditional.switch.c"
         ]
     },
     {
@@ -85,12 +85,12 @@
     },
     {
         "source": "default",
-        "scopes": [
-            "keyword.control.default.c"
-        ],
         "scopesBegin": [
             "meta.body.switch.c",
             "meta.conditional.case.c"
+        ],
+        "scopes": [
+            "keyword.control.default.c"
         ]
     },
     {

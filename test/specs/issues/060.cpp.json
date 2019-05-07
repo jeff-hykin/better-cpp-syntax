@@ -7,12 +7,12 @@
     },
     {
         "source": "func",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,16 +33,15 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
-        "source": "stream ",
-        "scopes": []
+        "source": "stream "
     },
     {
         "source": "<<",
@@ -52,12 +51,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -85,8 +84,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -117,12 +115,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -150,8 +148,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -182,12 +179,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -215,8 +212,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -247,12 +243,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -280,8 +276,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -312,12 +307,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -345,8 +340,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -377,12 +371,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -410,8 +404,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -442,12 +435,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -475,8 +468,7 @@
         ]
     },
     {
-        "source": "val ",
-        "scopes": []
+        "source": "val "
     },
     {
         "source": ">>",
@@ -507,12 +499,12 @@
     },
     {
         "source": "static_cast",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.wordlike.cpp",
             "keyword.operator.cast.static_cast.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -540,8 +532,7 @@
         ]
     },
     {
-        "source": "val",
-        "scopes": []
+        "source": "val"
     },
     {
         "source": ")",

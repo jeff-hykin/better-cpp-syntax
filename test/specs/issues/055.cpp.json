@@ -1,12 +1,12 @@
 [
     {
         "source": "enum",
-        "scopes": [
-            "storage.type.enum.cpp"
-        ],
         "scopesBegin": [
             "meta.block.enum.cpp",
             "meta.head.enum.cpp"
+        ],
+        "scopes": [
+            "storage.type.enum.cpp"
         ]
     },
     {
@@ -24,11 +24,11 @@
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -79,12 +79,12 @@
     },
     {
         "source": "foo",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -95,12 +95,12 @@
     },
     {
         "source": "enum",
-        "scopes": [
-            "storage.type.enum.cpp"
-        ],
         "scopesBegin": [
             "meta.block.enum.cpp",
             "meta.head.enum.cpp"
+        ],
+        "scopes": [
+            "storage.type.enum.cpp"
         ]
     },
     {
@@ -110,16 +110,15 @@
         ]
     },
     {
-        "source": "::",
-        "scopes": []
+        "source": "::"
     },
     {
         "source": "bar",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -133,7 +132,6 @@
     },
     {
         "source": "baz quix)",
-        "scopes": [],
         "scopesEnd": [
             "meta.head.enum.cpp"
         ]

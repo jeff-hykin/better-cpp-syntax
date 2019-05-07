@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,11 +33,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -48,11 +48,11 @@
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.section.parens.begin.bracket.round.cpp"
-        ],
         "scopesBegin": [
             "meta.parens.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.cpp"
         ]
     },
     {
@@ -108,29 +108,29 @@
     },
     {
         "source": "throwError",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -165,16 +165,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "Conflicting index files ...",
-        "scopes": []
+        "source": "Conflicting index files ..."
     },
     {
         "source": "\"",

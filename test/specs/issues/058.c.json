@@ -1,16 +1,15 @@
 [
     {
-        "source": "COMM_Bool ",
-        "scopes": []
+        "source": "COMM_Bool "
     },
     {
         "source": "GetThing",
-        "scopes": [
-            "entity.name.function.c"
-        ],
         "scopesBegin": [
             "meta.function.c",
             "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
         ]
     },
     {

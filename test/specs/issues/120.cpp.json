@@ -1,74 +1,63 @@
 [
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " invalid literals",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "1Ex",
-        "scopes": [],
         "scopesBegin": [
             "invalid.illegal.constant.numeric.cpp"
         ]
     },
     {
-        "source": "0xe+foo",
-        "scopes": []
+        "source": "0xe+foo"
     },
     {
-        "source": "0x1Px",
-        "scopes": []
+        "source": "0x1Px"
     },
     {
-        "source": "0xAB.cdpfl",
-        "scopes": []
+        "source": "0xAB.cdpfl"
     },
     {
-        "source": "0x12345'luyards",
-        "scopes": []
+        "source": "0x12345'luyards"
     },
     {
-        "source": "0.'123",
-        "scopes": []
+        "source": "0.'123"
     },
     {
-        "source": "0'.123",
-        "scopes": []
+        "source": "0'.123"
     },
     {
-        "source": "1E'1",
-        "scopes": []
+        "source": "1E'1"
     },
     {
         "source": "1'E1",
-        "scopes": [],
         "scopesEnd": [
             "invalid.illegal.constant.numeric.cpp"
         ]
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " odd valid literals",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -99,16 +88,15 @@
     },
     {
         "source": "'",
-        "scopes": [
-            "punctuation.separator.constant.numeric.cpp"
-        ],
         "scopesBegin": [
             "constant.numeric.octal.cpp"
+        ],
+        "scopes": [
+            "punctuation.separator.constant.numeric.cpp"
         ]
     },
     {
         "source": "12345",
-        "scopes": [],
         "scopesEnd": [
             "constant.numeric.octal.cpp"
         ]

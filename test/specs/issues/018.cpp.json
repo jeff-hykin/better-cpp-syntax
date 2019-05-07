@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,11 +33,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -146,13 +146,13 @@
     },
     {
         "source": "decltype",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.functionlike.cpp",
             "keyword.other.decltype.cpp",
             "storage.type.decltype.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -184,8 +184,7 @@
         ]
     },
     {
-        "source": " type ",
-        "scopes": []
+        "source": " type "
     },
     {
         "source": "=",
@@ -195,13 +194,13 @@
     },
     {
         "source": "decltype",
+        "scopesBegin": [
+            "meta.function-call.cpp"
+        ],
         "scopes": [
             "keyword.operator.functionlike.cpp",
             "keyword.other.decltype.cpp",
             "storage.type.decltype.cpp"
-        ],
-        "scopesBegin": [
-            "meta.function-call.cpp"
         ]
     },
     {
@@ -212,11 +211,11 @@
     },
     {
         "source": "a_storage_of_callable",
-        "scopes": [
-            "variable.other.object.access.cpp"
-        ],
         "scopesBegin": [
             "meta.arguments.decltype"
+        ],
+        "scopes": [
+            "variable.other.object.access.cpp"
         ]
     },
     {

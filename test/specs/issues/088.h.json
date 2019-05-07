@@ -1,33 +1,31 @@
 [
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " .h file with C++ syntax highlighting",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.cpp",
             "keyword.control.directive.conditional.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "ifdef",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.conditional.cpp"
         ]
@@ -42,22 +40,20 @@
         ]
     },
     {
-        "source": "cbuffer  testCB",
-        "scopes": []
+        "source": "cbuffer  testCB"
     },
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.cpp",
             "keyword.control.directive.conditional.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "else",
-        "scopes": [],
         "scopesEnd": [
             "meta.preprocessor.cpp",
             "keyword.control.directive.conditional.cpp"
@@ -65,12 +61,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -87,16 +83,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " <= this #endif is highlighted white although its valid",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -112,16 +107,15 @@
     },
     {
         "source": "float",
-        "scopes": [
-            "storage.type.primitive.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.primitive.cpp"
         ]
     },
     {
-        "source": " Brightness",
-        "scopes": []
+        "source": " Brightness"
     },
     {
         "source": ";",
@@ -131,16 +125,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " ...",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -165,16 +158,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
-        "source": " the .h file with this struct definition can be used in HLSL and in C++ code ",
-        "scopes": []
+        "source": " the .h file with this struct definition can be used in HLSL and in C++ code "
     },
     {
         "source": "//",
@@ -183,7 +175,6 @@
         ]
     },
     {
-        "source": " this way",
-        "scopes": []
+        "source": " this way"
     }
 ]

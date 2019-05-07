@@ -1,17 +1,16 @@
 [
     {
         "source": "#",
-        "scopes": [
-            "punctuation.definition.directive.cpp"
-        ],
         "scopesBegin": [
             "meta.preprocessor.macro.cpp",
             "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
         ]
     },
     {
         "source": "define",
-        "scopes": [],
         "scopesEnd": [
             "keyword.control.directive.define.cpp"
         ]
@@ -103,11 +102,11 @@
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.definition.parameters.begin.lambda.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.lambda.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.parameters.begin.lambda.cpp"
         ]
     },
     {
@@ -132,21 +131,19 @@
         ]
     },
     {
-        "source": "#define ASSERT",
-        "scopes": []
+        "source": "#define ASSERT"
     },
     {
         "source": "(",
-        "scopes": [
-            "punctuation.definition.parameters.begin.lambda.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.lambda.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.parameters.begin.lambda.cpp"
         ]
     },
     {
-        "source": "expected",
-        "scopes": []
+        "source": "expected"
     },
     {
         "source": ",",
@@ -156,8 +153,7 @@
         ]
     },
     {
-        "source": " actual",
-        "scopes": []
+        "source": " actual"
     },
     {
         "source": ")",

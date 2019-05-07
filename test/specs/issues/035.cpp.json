@@ -1,13 +1,13 @@
 [
     {
         "source": "namespace",
-        "scopes": [
-            "keyword.other.namespace.definition.cpp",
-            "storage.type.namespace.definition.cpp"
-        ],
         "scopesBegin": [
             "meta.block.namespace.cpp",
             "meta.head.namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.namespace.definition.cpp",
+            "storage.type.namespace.definition.cpp"
         ]
     },
     {
@@ -27,11 +27,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.body.namespace.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -42,12 +42,12 @@
     },
     {
         "source": "class ",
+        "scopesBegin": [
+            "meta.template.definition.cpp"
+        ],
         "scopes": [
             "storage.type.template.argument.class",
             ".cpp"
-        ],
-        "scopesBegin": [
-            "meta.template.definition.cpp"
         ]
     },
     {
@@ -67,12 +67,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -92,11 +92,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -107,11 +107,11 @@
     },
     {
         "source": "class ",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -128,11 +128,11 @@
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -145,16 +145,15 @@
         ]
     },
     {
-        "source": "vector",
-        "scopes": []
+        "source": "vector"
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -187,11 +186,11 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -207,8 +206,7 @@
         ]
     },
     {
-        "source": "U ",
-        "scopes": []
+        "source": "U "
     },
     {
         "source": "k",
@@ -227,11 +225,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -260,11 +258,11 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -284,20 +282,20 @@
     },
     {
         "source": "bool",
-        "scopes": [
-            "storage.type.primitive.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.primitive.cpp"
         ]
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -371,16 +369,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
-        "source": " namespace test",
-        "scopes": []
+        "source": " namespace test"
     },
     {
         "source": "//",
@@ -390,19 +387,18 @@
     },
     {
         "source": " no syntax highlighting",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "class",
-        "scopes": [
-            "storage.type.class.cpp"
-        ],
         "scopesBegin": [
             "meta.block.class.cpp",
             "meta.head.class.cpp"
+        ],
+        "scopes": [
+            "storage.type.class.cpp"
         ]
     },
     {

@@ -7,12 +7,12 @@
     },
     {
         "source": "function",
-        "scopes": [
-            "entity.name.function.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.cpp",
             "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
         ]
     },
     {
@@ -33,11 +33,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
@@ -47,8 +47,7 @@
         ]
     },
     {
-        "source": " postWakeup ",
-        "scopes": []
+        "source": " postWakeup "
     },
     {
         "source": "=",
@@ -58,11 +57,11 @@
     },
     {
         "source": "wpi",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -73,11 +72,11 @@
     },
     {
         "source": "uv",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -97,7 +96,6 @@
     },
     {
         "source": "<",
-        "scopes": [],
         "scopesBegin": [
             "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
@@ -105,7 +103,6 @@
     },
     {
         "source": ">",
-        "scopes": [],
         "scopesEnd": [
             "meta.template.call.cpp",
             "keyword.operator.comparison.cpp"
@@ -122,11 +119,11 @@
     },
     {
         "source": "Create",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
@@ -136,8 +133,7 @@
         ]
     },
     {
-        "source": "loop",
-        "scopes": []
+        "source": "loop"
     },
     {
         "source": ")",
@@ -155,8 +151,7 @@
         ]
     },
     {
-        "source": "    m_postMessageWakeup",
-        "scopes": []
+        "source": "    m_postMessageWakeup"
     },
     {
         "source": "=",
@@ -165,8 +160,7 @@
         ]
     },
     {
-        "source": " postWakeup",
-        "scopes": []
+        "source": " postWakeup"
     },
     {
         "source": ";",
@@ -206,11 +200,11 @@
     },
     {
         "source": "[",
-        "scopes": [
-            "punctuation.definition.capture.begin.lambda.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.member"
+        ],
+        "scopes": [
+            "punctuation.definition.capture.begin.lambda.cpp"
         ]
     },
     {
@@ -228,11 +222,11 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.lambda.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.body.lambda.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.lambda.cpp"
         ]
     },
     {
@@ -242,8 +236,7 @@
         ]
     },
     {
-        "source": " pipe ",
-        "scopes": []
+        "source": " pipe "
     },
     {
         "source": "=",

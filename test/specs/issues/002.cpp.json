@@ -1,12 +1,12 @@
 [
     {
         "source": "class",
-        "scopes": [
-            "storage.type.class.cpp"
-        ],
         "scopesBegin": [
             "meta.block.class.cpp",
             "meta.head.class.cpp"
+        ],
+        "scopes": [
+            "storage.type.class.cpp"
         ]
     },
     {
@@ -26,7 +26,6 @@
     },
     {
         "source": "    Example ",
-        "scopes": [],
         "scopesBegin": [
             "meta.body.class.cpp"
         ]
@@ -39,11 +38,11 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -75,11 +74,11 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -111,21 +110,21 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
         "source": "std",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "entity.name.operator.overloadee.cpp",
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -139,7 +138,6 @@
     },
     {
         "source": "string &",
-        "scopes": [],
         "scopesEnd": [
             "entity.name.operator.overloadee.cpp"
         ]

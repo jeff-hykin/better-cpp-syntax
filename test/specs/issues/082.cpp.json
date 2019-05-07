@@ -1,12 +1,12 @@
 [
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -17,11 +17,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.section.angle-brackets.begin.template.call.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.angle-brackets.begin.template.call.cpp"
         ]
     },
     {
@@ -80,16 +80,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " copyableT",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -105,12 +104,12 @@
     },
     {
         "source": "[[",
-        "scopes": [
-            "punctuation.section.attribute.begin.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp",
             "support.other.attribute.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.attribute.begin.cpp"
         ]
     },
     {
@@ -136,11 +135,11 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -156,21 +155,19 @@
         ]
     },
     {
-        "source": "pointerT ",
-        "scopes": []
+        "source": "pointerT "
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
         ]
     },
     {
-        "source": "ptr",
-        "scopes": []
+        "source": "ptr"
     },
     {
         "source": "*/",
@@ -195,8 +192,7 @@
         ]
     },
     {
-        "source": " hashT",
-        "scopes": []
+        "source": " hashT"
     },
     {
         "source": "&",
@@ -206,16 +202,15 @@
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
         ]
     },
     {
-        "source": "hf",
-        "scopes": []
+        "source": "hf"
     },
     {
         "source": "*/",
@@ -234,56 +229,19 @@
         ]
     },
     {
-        "source": " pointerT ",
-        "scopes": []
+        "source": " pointerT "
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
-        ]
-    },
-    {
-        "source": "ptr_old",
-        "scopes": []
-    },
-    {
-        "source": "*/",
-        "scopes": [
-            "punctuation.definition.comment.end.cpp"
         ],
-        "scopesEnd": [
-            "comment.block.cpp"
-        ]
-    },
-    {
-        "source": ",",
-        "scopes": [
-            "comma.cpp",
-            "punctuation.separator.delimiter.cpp"
-        ]
-    },
-    {
-        "source": "size_t",
-        "scopes": [
-            "storage.type.cpp"
-        ]
-    },
-    {
-        "source": "/*",
         "scopes": [
             "punctuation.definition.comment.begin.cpp"
-        ],
-        "scopesBegin": [
-            "comment.block.cpp"
         ]
     },
     {
-        "source": "off",
-        "scopes": []
+        "source": "ptr_old"
     },
     {
         "source": "*/",
@@ -309,16 +267,49 @@
     },
     {
         "source": "/*",
+        "scopesBegin": [
+            "comment.block.cpp"
+        ],
         "scopes": [
             "punctuation.definition.comment.begin.cpp"
+        ]
+    },
+    {
+        "source": "off"
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "punctuation.definition.comment.end.cpp"
         ],
-        "scopesBegin": [
+        "scopesEnd": [
             "comment.block.cpp"
         ]
     },
     {
-        "source": "cnt",
-        "scopes": []
+        "source": ",",
+        "scopes": [
+            "comma.cpp",
+            "punctuation.separator.delimiter.cpp"
+        ]
+    },
+    {
+        "source": "size_t",
+        "scopes": [
+            "storage.type.cpp"
+        ]
+    },
+    {
+        "source": "/*",
+        "scopesBegin": [
+            "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
+        ]
+    },
+    {
+        "source": "cnt"
     },
     {
         "source": "*/",
@@ -346,25 +337,24 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
-        "source": " `allocatorT::value_type` is not copy-constructible.",
-        "scopes": []
+        "source": " `allocatorT::value_type` is not copy-constructible."
     },
     {
         "source": "//",
@@ -374,18 +364,17 @@
     },
     {
         "source": " Throw an exception unconditionally, even when there is nothing to copy.",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "noadl",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -399,20 +388,20 @@
     },
     {
         "source": "sprintf_and_throw",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -438,16 +427,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "cow_hashmap: `",
-        "scopes": []
+        "source": "cow_hashmap: `"
     },
     {
         "source": "%s",
@@ -456,8 +444,7 @@
         ]
     },
     {
-        "source": "` is not copy-constructible.",
-        "scopes": []
+        "source": "` is not copy-constructible."
     },
     {
         "source": "\"",
@@ -490,20 +477,20 @@
     },
     {
         "source": "typename",
-        "scopes": [
-            "storage.modifier.cpp"
-        ],
         "scopesBegin": [
             "meta.arguments.operator.typeid"
+        ],
+        "scopes": [
+            "storage.modifier.cpp"
         ]
     },
     {
         "source": "allocatorT",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -517,7 +504,6 @@
     },
     {
         "source": "value_type",
-        "scopes": [],
         "scopesEnd": [
             "meta.arguments.operator.typeid"
         ]
@@ -596,11 +582,11 @@
     },
     {
         "source": "template",
-        "scopes": [
-            "storage.type.template.cpp"
-        ],
         "scopesBegin": [
             "meta.template.definition.cpp"
+        ],
+        "scopes": [
+            "storage.type.template.cpp"
         ]
     },
     {
@@ -673,12 +659,12 @@
     },
     {
         "source": "struct",
-        "scopes": [
-            "storage.type.struct.cpp"
-        ],
         "scopesBegin": [
             "meta.block.struct.cpp",
             "meta.head.struct.cpp"
+        ],
+        "scopes": [
+            "storage.type.struct.cpp"
         ]
     },
     {
@@ -689,11 +675,11 @@
     },
     {
         "source": "<",
-        "scopes": [
-            "punctuation.section.angle-brackets.begin.template.call.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.angle-brackets.begin.template.call.cpp"
         ]
     },
     {
@@ -752,16 +738,15 @@
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
         "source": " copyableT",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
@@ -777,12 +762,12 @@
     },
     {
         "source": "[[",
-        "scopes": [
-            "punctuation.section.attribute.begin.cpp"
-        ],
         "scopesBegin": [
             "meta.body.struct.cpp",
             "support.other.attribute.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.attribute.begin.cpp"
         ]
     },
     {
@@ -808,11 +793,11 @@
     },
     {
         "source": "operator",
-        "scopes": [
-            "keyword.other.operator.overload.cpp"
-        ],
         "scopesBegin": [
             "meta.function.definition.parameters.operator-overload.cpp"
+        ],
+        "scopes": [
+            "keyword.other.operator.overload.cpp"
         ]
     },
     {
@@ -828,21 +813,19 @@
         ]
     },
     {
-        "source": "pointerT ",
-        "scopes": []
+        "source": "pointerT "
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
         ]
     },
     {
-        "source": "ptr",
-        "scopes": []
+        "source": "ptr"
     },
     {
         "source": "*/",
@@ -867,8 +850,7 @@
         ]
     },
     {
-        "source": " hashT",
-        "scopes": []
+        "source": " hashT"
     },
     {
         "source": "&",
@@ -878,16 +860,15 @@
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
         ]
     },
     {
-        "source": "hf",
-        "scopes": []
+        "source": "hf"
     },
     {
         "source": "*/",
@@ -906,56 +887,19 @@
         ]
     },
     {
-        "source": " pointerT ",
-        "scopes": []
+        "source": " pointerT "
     },
     {
         "source": "/*",
-        "scopes": [
-            "punctuation.definition.comment.begin.cpp"
-        ],
         "scopesBegin": [
             "comment.block.cpp"
-        ]
-    },
-    {
-        "source": "ptr_old",
-        "scopes": []
-    },
-    {
-        "source": "*/",
-        "scopes": [
-            "punctuation.definition.comment.end.cpp"
         ],
-        "scopesEnd": [
-            "comment.block.cpp"
-        ]
-    },
-    {
-        "source": ",",
-        "scopes": [
-            "comma.cpp",
-            "punctuation.separator.delimiter.cpp"
-        ]
-    },
-    {
-        "source": "size_t",
-        "scopes": [
-            "storage.type.cpp"
-        ]
-    },
-    {
-        "source": "/*",
         "scopes": [
             "punctuation.definition.comment.begin.cpp"
-        ],
-        "scopesBegin": [
-            "comment.block.cpp"
         ]
     },
     {
-        "source": "off",
-        "scopes": []
+        "source": "ptr_old"
     },
     {
         "source": "*/",
@@ -981,16 +925,49 @@
     },
     {
         "source": "/*",
+        "scopesBegin": [
+            "comment.block.cpp"
+        ],
         "scopes": [
             "punctuation.definition.comment.begin.cpp"
+        ]
+    },
+    {
+        "source": "off"
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "punctuation.definition.comment.end.cpp"
         ],
-        "scopesBegin": [
+        "scopesEnd": [
             "comment.block.cpp"
         ]
     },
     {
-        "source": "cnt",
-        "scopes": []
+        "source": ",",
+        "scopes": [
+            "comma.cpp",
+            "punctuation.separator.delimiter.cpp"
+        ]
+    },
+    {
+        "source": "size_t",
+        "scopes": [
+            "storage.type.cpp"
+        ]
+    },
+    {
+        "source": "/*",
+        "scopesBegin": [
+            "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
+        ]
+    },
+    {
+        "source": "cnt"
     },
     {
         "source": "*/",
@@ -1018,25 +995,24 @@
     },
     {
         "source": "{",
-        "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
-        ],
         "scopesBegin": [
             "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
         ]
     },
     {
         "source": "//",
-        "scopes": [
-            "punctuation.definition.comment.cpp"
-        ],
         "scopesBegin": [
             "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
         ]
     },
     {
-        "source": " `allocatorT::value_type` is not copy-constructible.",
-        "scopes": []
+        "source": " `allocatorT::value_type` is not copy-constructible."
     },
     {
         "source": "//",
@@ -1046,18 +1022,17 @@
     },
     {
         "source": " Throw an exception unconditionally, even when there is nothing to copy.",
-        "scopes": [],
         "scopesEnd": [
             "comment.line.double-slash.cpp"
         ]
     },
     {
         "source": "noadl",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -1071,20 +1046,20 @@
     },
     {
         "source": "sprintf_and_throw",
-        "scopes": [
-            "entity.name.function.call.cpp"
-        ],
         "scopesBegin": [
             "meta.function-call.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.call.cpp"
         ]
     },
     {
         "source": "<",
-        "scopes": [
-            "keyword.operator.comparison.cpp"
-        ],
         "scopesBegin": [
             "meta.template.call.cpp"
+        ],
+        "scopes": [
+            "keyword.operator.comparison.cpp"
         ]
     },
     {
@@ -1110,16 +1085,15 @@
     },
     {
         "source": "\"",
-        "scopes": [
-            "punctuation.definition.string.begin.cpp"
-        ],
         "scopesBegin": [
             "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
         ]
     },
     {
-        "source": "cow_hashmap: `",
-        "scopes": []
+        "source": "cow_hashmap: `"
     },
     {
         "source": "%s",
@@ -1128,8 +1102,7 @@
         ]
     },
     {
-        "source": "` is not copy-constructible.",
-        "scopes": []
+        "source": "` is not copy-constructible."
     },
     {
         "source": "\"",
@@ -1162,20 +1135,20 @@
     },
     {
         "source": "typename",
-        "scopes": [
-            "storage.modifier.cpp"
-        ],
         "scopesBegin": [
             "meta.arguments.operator.typeid"
+        ],
+        "scopes": [
+            "storage.modifier.cpp"
         ]
     },
     {
         "source": "allocatorT",
-        "scopes": [
-            "entity.name.type.namespace.scope-resolution.cpp"
-        ],
         "scopesBegin": [
             "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
         ]
     },
     {
@@ -1189,7 +1162,6 @@
     },
     {
         "source": "value_type",
-        "scopes": [],
         "scopesEnd": [
             "meta.arguments.operator.typeid"
         ]
