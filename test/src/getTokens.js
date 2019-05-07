@@ -22,7 +22,7 @@ module.exports = async function(registry, path, fixture, process) {
         }
         const grammar = await registry.loadGrammar(sourceName);
         let ruleStack = null;
-
+        let lineNumber = 1;
         for (const line of fixture) {
             let r = grammar.tokenizeLine(line, ruleStack);
             ruleStack = r.ruleStack;
@@ -34,8 +34,9 @@ module.exports = async function(registry, path, fixture, process) {
                 }
             }
             if (displayLine) {
-                console.log("line was |%s|", line);
+                console.log("line was:\n  %s:%d: |%s|", path, lineNumber, line);
             }
+            lineNumber += 1;
         }
     } catch (e) {
         console.error(e);

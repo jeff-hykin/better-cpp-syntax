@@ -28,7 +28,7 @@ async function runTests() {
         const spec = fs.readFileSync(test.spec);
         const result = await runTest(
             registry,
-            test.fixture,
+            path.relative(paths.fixtureDir, test.fixture),
             fixture,
             JSON.parse(spec)
         );
