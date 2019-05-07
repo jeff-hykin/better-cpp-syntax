@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const chalk = require("chalk");
 const vsctm = require("vscode-textmate");
 
 /**
@@ -61,15 +62,26 @@ module.exports["SpecChecker"] = class SpecChecker {
         console.error("scope mismatch: token |%s| has wrong scope", source);
         console.group("scopes in spec");
         for (const scope of specScopes) {
-            console.log(scope);
+            this.displayScope(scope, tokenScopes, specScopes);
         }
         console.groupEnd();
         console.group("actual scopes");
         for (const scope of tokenScopes) {
-            console.log(scope);
+            this.displayScope(scope, tokenScopes, specScopes);
         }
         console.groupEnd();
         return false;
+    }
+
+    displayScope(scope, newScopes, oldScopes) {
+        if (_.includes(newScopes, scope) && !_.includes(oldScopes, scope)) {
+            console.log(chalk.greenBright("+ " + scope));
+        } else if (
+            !_.includes(newScopes, scope) &&
+            _.includes(oldScopes, scope)
+        ) {
+            console.log(chalk.redBright("- " + scope));
+        } else console.log(chalk.whiteBright("  " + scope));
     }
 
     /**
@@ -109,10 +121,9 @@ module.exports["SpecChecker"] = class SpecChecker {
         return fixtures
             .filter(f => f.c.trim() !== "")
             .map(f => {
-                const scopes = f.t
-                    .split(" ")
-                    .filter(s => s.indexOf("source.c") !== 0);
-                return { source: f.c, scopes };
+                const scopes = _.tail(f.t.split(" "));
+                // f is spread back in to allow for gradual replacement
+                return { source: f.c, scopes, ...f };
             });
     }
 };
