@@ -59,16 +59,20 @@ module.exports["SpecChecker"] = class SpecChecker {
         if (_.isEqual(specScopes, tokenScopes)) {
             return true;
         }
-        console.error("scope mismatch: token |%s| has wrong scope", source);
+        console.group("scope mismatch: token |%s| has wrong scope", source);
+        console.log();
         console.group("scopes in spec");
         for (const scope of specScopes) {
             this.displayScope(scope, tokenScopes, specScopes);
         }
         console.groupEnd();
+        console.log();
         console.group("actual scopes");
         for (const scope of tokenScopes) {
             this.displayScope(scope, tokenScopes, specScopes);
         }
+        console.log();
+        console.groupEnd();
         console.groupEnd();
         return false;
     }

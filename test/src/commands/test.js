@@ -17,7 +17,7 @@ runTests();
 async function runTests() {
     let totalResult = true;
     for (const test of tests) {
-        console.log(
+        console.group(
             "running test for",
             path.relative(paths.fixtureDir, test.fixture)
         );
@@ -33,6 +33,7 @@ async function runTests() {
             JSON.parse(spec)
         );
         totalResult = result ? totalResult : result;
+        console.groupEnd();
     }
     process.exit(totalResult ? 0 : 1);
 }
