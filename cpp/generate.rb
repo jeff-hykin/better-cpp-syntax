@@ -1063,13 +1063,13 @@ cpp_grammar = Grammar.new(
             start_pattern: newPattern(
                     match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
-                ).then(@spaces).maybe(
-                    # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
-                    newPattern(
+                ).maybe(
+                    @spaces.then(
+                        # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
-                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)))
-                ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    )
+                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
