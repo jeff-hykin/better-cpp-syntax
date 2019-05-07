@@ -41,8 +41,10 @@
         "yargs": "^13.2.2"
     },
     "scripts": {
-        "pretest": "ruby c/generate.rb && ruby cpp/generate.rb",
+        "prepare": "ruby c/generate.rb && ruby cpp/generate.rb",
+        "pretest": "npm prepare",
         "test": "node test/src/commands/test.js",
+        "pregenerate-specs": "npm prepare",
         "generate-specs": "node test/src/commands/generate-specs.js"
     }
 }
