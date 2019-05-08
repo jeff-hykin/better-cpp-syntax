@@ -1,0 +1,97 @@
+[
+    {
+        "source": "enum",
+        "scopesBegin": [
+            "meta.block.enum.cpp",
+            "meta.head.enum.cpp"
+        ],
+        "scopes": [
+            "storage.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "enum1",
+        "scopes": [
+            "entity.name.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.enum.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.enum.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopesBegin": [
+            "meta.body.enum.cpp"
+        ]
+    },
+    {
+        "source": "comment",
+        "scopes": [
+            "meta.enum.definition.cpp",
+            "constant.other.enum.cpp"
+        ]
+    },
+    {
+        "source": "definition"
+    },
+    {
+        "source": "/*"
+    },
+    {
+        "source": "block"
+    },
+    {
+        "source": "comment"
+    },
+    {
+        "source": "*/,"
+    },
+    {
+        "source": "definition3",
+        "scopesBegin": [
+            "meta.enum.definition.cpp",
+            "constant.other.enum.cpp"
+        ]
+    },
+    {
+        "source": "definition",
+        "scopesEnd": [
+            "constant.other.enum.cpp"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "comma.cpp",
+            "punctuation.separator.delimiter.cpp"
+        ],
+        "scopesEnd": [
+            "meta.enum.definition.cpp"
+        ]
+    },
+    {
+        "source": "definition2"
+    },
+    {
+        "source": "//"
+    },
+    {
+        "source": "comment",
+        "scopes": [
+            "meta.enum.definition.cpp",
+            "constant.other.enum.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.enum.cpp"
+        ]
+    }
+]
