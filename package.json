@@ -4,6 +4,9 @@
     "description": "The bleeding edge of the VS Code C++ syntax",
     "icon": "icon.png",
     "version": "1.8.11",
+    "scripts": {
+        "build" : "ruby cpp/generate.rb && ruby c/generate.rb"
+    },
     "engines": {
         "vscode": "^1.0.0"
     },
