@@ -899,10 +899,10 @@
     match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     name: support.type.posix-reserved.cpp
   enumerator_list:
-    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:([,;]|\\n)|(?=\\}))"
+    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:([,;]|\\n|\\/[\\/\\*])|(?=\\}))"
     captures:
       '1':
-        name: constant.other.enum.cpp
+        name: variable.other.enummember.cpp
       '2':
         patterns:
         - include: "#attributes"
@@ -971,7 +971,7 @@
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
       - include: "#enumerator_list"
-      - match: "\\s+"
+      - include: "#comments_context"
     - name: meta.tail.enum.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"

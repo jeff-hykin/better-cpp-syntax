@@ -404,6 +404,15 @@ class ClassH : public foo::ClassF, public foo::ClassG {
       };
 
 // 
+// enums
+// 
+    enum{ thing };
+    enum {};
+    enum A {
+        a, b
+    };
+
+// 
 // inheritance
 // 
 
