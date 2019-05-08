@@ -566,7 +566,7 @@ cpp_grammar = Grammar.new(
 #
     can_appear_before_variable_declaration = newPattern(
         match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
-        tag_as: "variable.other.type_modifier",
+        tag_as: "entity.name.type.modifier",
     )
     can_appear_before_variable_declaration_with_spaces = newPattern(
         match: maybe(@spaces).maybe(can_appear_before_variable_declaration).maybe(@spaces),
@@ -600,9 +600,9 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:declarations] = Range.new(
         start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(/::/)
-            .lookAheadToAvoid(@cpp_tokens.that(:canAppearAfterOperatorKeyword))
+            .lookBehindToAvoid(/operator/)
             .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/))
-            .lookAheadFor(/[\w*&]/),
+            .lookAheadFor(/[a-fA-F0-9\*\&]|\\[uU]/),
         end_pattern: @semicolon.or(lookAheadFor(/\{/)),
         tag_as: "declarations",
         includes: [
@@ -909,7 +909,8 @@ cpp_grammar = Grammar.new(
             :function_pointer,
             :declaration,
             zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
-                match: can_appear_before_variable_declaration_with_spaces
+                match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
+                tag_as: "variable.other.type_modifier"
             ),
             :comments_context,
             :vararg_ellipses,
@@ -1214,11 +1215,16 @@ cpp_grammar = Grammar.new(
     )
     generateClassOrStructBlockFinder = ->(name) do
         body_includes = cpp_grammar[:$initial_context].clone
+        # move patterns covered by declarations to the end
         body_includes.delete(:scope_resolution)
+        body_includes.delete(:primitive_types)
+        body_includes.delete(:non_primitive_types)
         body_includes.unshift(:constructor_context)
         body_includes.unshift(:function_pointer)
         body_includes.push(:declarations)
         body_includes.push(:scope_resolution)
+        body_includes.push(:primitive_types)
+        body_includes.push(:non_primitive_types)
 
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
