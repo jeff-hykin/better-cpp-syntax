@@ -1047,7 +1047,7 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]|\n||\/\//,
+            match: /[,;]|\n|\/[\/\*]/,
             includes: [
                 :comma,
                 :semicolon,
