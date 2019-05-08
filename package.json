@@ -37,14 +37,15 @@
         "glob": "^7.1.3",
         "json-stable-stringify": "^1.0.1",
         "lodash": "^4.17.11",
+        "prettyjson": "^1.2.1",
         "vscode-textmate": "^4.1.1",
         "yargs": "^13.2.2"
     },
     "scripts": {
         "prepare": "ruby c/generate.rb && ruby cpp/generate.rb",
-        "pretest": "npm prepare",
+        "pretest": "npm run prepare",
         "test": "node test/src/commands/test.js",
-        "pregenerate-specs": "npm prepare",
+        "pregenerate-specs": "npm run prepare",
         "generate-specs": "node test/src/commands/generate-specs.js"
     }
 }
