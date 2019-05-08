@@ -1047,7 +1047,7 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]|\n/,
+            match: /[,;]|\n||\/\//,
             includes: [
                 :comma,
                 :semicolon,
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, newPattern(@spaces) ],
+            body_includes: [ :enumerator_list, :comments_context ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
