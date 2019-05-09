@@ -24,6 +24,7 @@
   - comment.line.double-slash
 - source: definition
   scopes:
+  - meta.enum.definition
   - variable.other.enummember
 - source: "/*"
   scopesBegin:
@@ -42,16 +43,20 @@
   - punctuation.separator.delimiter
 - source: definition3
   scopes:
+  - meta.enum.definition
   - variable.other.enummember
 - source: definition
   scopes:
+  - meta.enum.definition
   - variable.other.enummember
 - source: ","
   scopes:
+  - meta.enum.definition
   - comma
   - punctuation.separator.delimiter
 - source: definition2
   scopes:
+  - meta.enum.definition
   - variable.other.enummember
 - source: "//"
   scopes:
