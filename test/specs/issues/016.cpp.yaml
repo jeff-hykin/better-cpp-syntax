@@ -1,38 +1,38 @@
-- source: void
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
+  source: void
 - source: ' operator '
-- source: '"'
-  scopesBegin:
+- scopesBegin:
     - string.quoted.double.cpp
   scopes:
     - punctuation.definition.string.begin.cpp
-- source: '"'
+  source: '"'
+- scopesEnd:
+    - string.quoted.double.cpp
   scopes:
     - punctuation.definition.string.end.cpp
-  scopesEnd:
-    - string.quoted.double.cpp
-- source: _km
-  scopesBegin:
+  source: '"'
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: _km
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: long
-  scopes:
+  source: (
+- scopes:
     - storage.type.primitive.cpp
-- source: double
-  scopes:
+  source: long
+- scopes:
     - variable.parameter.cpp
-- source: )
+  source: double
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

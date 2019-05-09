@@ -1,112 +1,112 @@
-- source: struct
-  scopesBegin:
+- scopesBegin:
     - meta.block.struct.cpp
     - meta.head.struct.cpp
   scopes:
     - storage.type.struct.cpp
-- source: foo
-  scopes:
+  source: struct
+- scopes:
     - entity.name.type.struct.cpp
-- source: '{'
+  source: foo
+- scopesEnd:
+    - meta.head.struct.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct.cpp
-  scopesEnd:
-    - meta.head.struct.cpp
-- source: int
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.body.struct.cpp
     - meta.function.constructor.cpp
   scopes:
     - entity.name.function.constructor.cpp
-- source: (
-  scopes:
+  source: int
+- scopes:
     - punctuation.definition.parameters.begin.constructor.cpp
-- source: '*'
-  scopes:
+  source: (
+- scopes:
     - keyword.operator.cpp
-- source: bar
-  scopes:
+  source: '*'
+- scopes:
     - variable.parameter.cpp
-- source: )
+  source: bar
+- scopesEnd:
+    - meta.function.constructor.cpp
   scopes:
     - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
-- source: (
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: '}'
+  source: ;
+- scopesEnd:
+    - meta.body.struct.cpp
   scopes:
     - punctuation.section.block.end.bracket.curly.struct.cpp
-  scopesEnd:
-    - meta.body.struct.cpp
-- source: ;
+  source: '}'
+- scopesEnd:
+    - meta.block.struct.cpp
   scopes:
     - punctuation.terminator.statement.cpp
-  scopesEnd:
-    - meta.block.struct.cpp
-- source: union
-  scopesBegin:
+  source: ;
+- scopesBegin:
     - meta.block.union.cpp
     - meta.head.union.cpp
   scopes:
     - storage.type.union.cpp
-- source: baz
-  scopes:
+  source: union
+- scopes:
     - entity.name.type.union.cpp
-- source: '{'
+  source: baz
+- scopesEnd:
+    - meta.head.union.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.union.cpp
-  scopesEnd:
-    - meta.head.union.cpp
-- source: int
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.body.union.cpp
     - meta.function.constructor.cpp
   scopes:
     - entity.name.function.constructor.cpp
-- source: (
-  scopes:
+  source: int
+- scopes:
     - punctuation.definition.parameters.begin.constructor.cpp
-- source: '*'
-  scopes:
+  source: (
+- scopes:
     - keyword.operator.cpp
-- source: quz
-  scopes:
+  source: '*'
+- scopes:
     - variable.parameter.cpp
-- source: )
+  source: quz
+- scopesEnd:
+    - meta.function.constructor.cpp
   scopes:
     - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
-- source: (
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: '}'
+  source: ;
+- scopesEnd:
+    - meta.body.union.cpp
   scopes:
     - punctuation.section.block.end.bracket.curly.union.cpp
-  scopesEnd:
-    - meta.body.union.cpp
-- source: ;
-  scopes:
+  source: '}'
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

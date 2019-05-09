@@ -1,58 +1,58 @@
-- source: void
-  scopes:
+- scopes:
     - storage.type.built-in.primitive.c
-- source: function
-  scopesBegin:
+  source: void
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: function
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+  source: (
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: '{'
-  scopesBegin:
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopesBegin:
     - meta.block.c
   scopes:
     - punctuation.section.block.begin.bracket.curly.c
-- source: sizeof
-  scopes:
+  source: '{'
+- scopes:
     - keyword.operator.sizeof.c
-- source: (
-  scopesBegin:
+  source: sizeof
+- scopesBegin:
     - meta.parens.block.c
   scopes:
     - punctuation.section.parens.begin.bracket.round.c
-- source: '1000'
-  scopes:
+  source: (
+- scopes:
     - constant.numeric.decimal.c
-- source: )
+  source: '1000'
+- scopesEnd:
+    - meta.parens.block.c
   scopes:
     - punctuation.section.parens.end.bracket.round.c
-  scopesEnd:
-    - meta.parens.block.c
-- source: sizeof
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.sizeof.c
-- source: (
-  scopesBegin:
+  source: sizeof
+- scopesBegin:
     - meta.parens.block.c
   scopes:
     - punctuation.section.parens.begin.bracket.round.c
-- source: int
-  scopes:
+  source: (
+- scopes:
     - storage.type.built-in.primitive.c
-- source: )
+  source: int
+- scopesEnd:
+    - meta.parens.block.c
   scopes:
     - punctuation.section.parens.end.bracket.round.c
-  scopesEnd:
-    - meta.parens.block.c
-- source: '}'
-  scopes:
+  source: )
+- scopes:
     - punctuation.section.block.end.bracket.curly.c
+  source: '}'

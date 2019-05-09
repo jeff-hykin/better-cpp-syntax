@@ -1,126 +1,126 @@
-- source: '10102'
-  scopesBegin:
+- scopesBegin:
     - constant.numeric.decimal.c
-- source: ''''
-  scopes:
+  source: '10102'
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '0232'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
-- source: '2323'
-  scopesEnd:
+  source: ''''
+- scopesEnd:
     - constant.numeric.decimal.c
+  source: '2323'
 - source: L
-- source: '"'
-  scopesBegin:
+- scopesBegin:
     - string.quoted.double.c
   scopes:
     - punctuation.definition.string.begin.c
+  source: '"'
 - source: abcdef
-- source: '"'
+- scopesEnd:
+    - string.quoted.double.c
   scopes:
     - punctuation.definition.string.end.c
-  scopesEnd:
-    - string.quoted.double.c
-- source: 0b
-  scopes:
+  source: '"'
+- scopes:
     - keyword.other.unit.binary.c
-- source: '10010110'
-  scopes:
+  source: 0b
+- scopes:
     - constant.numeric.binary.c
-- source: '1'
-  scopesBegin:
+  source: '10010110'
+- scopesBegin:
     - constant.numeric.decimal.c
-- source: ''''
-  scopes:
+  source: '1'
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '234'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '567'
-- source: '0'
-  scopesEnd:
+- scopesEnd:
     - constant.numeric.decimal.c
-- source: .
-  scopes:
+  source: '0'
+- scopes:
     - constant.numeric.decimal.point.c
-- source: '12'
-  scopesBegin:
+  source: .
+- scopesBegin:
     - constant.numeric.decimal.c
-- source: ''''
-  scopes:
+  source: '12'
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '34'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
-- source: '56'
-  scopesEnd:
+  source: ''''
+- scopesEnd:
     - constant.numeric.decimal.c
-- source: f
-  scopes:
+  source: '56'
+- scopes:
     - keyword.other.unit.suffix.floating-point.c
-- source: 0b
-  scopes:
+  source: f
+- scopes:
     - keyword.other.unit.binary.c
-- source: '1001'
-  scopesBegin:
+  source: 0b
+- scopesBegin:
     - constant.numeric.binary.c
-- source: ''''
-  scopes:
+  source: '1001'
+- scopes:
     - punctuation.separator.constant.numeric
-- source: '1101'
-  scopesEnd:
+  source: ''''
+- scopesEnd:
     - constant.numeric.binary.c
-- source: 0x
-  scopes:
+  source: '1101'
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: '0'
-  scopesBegin:
+  source: 0x
+- scopesBegin:
     - constant.numeric.hexadecimal.c
+  source: '0'
 - source: .
-- source: '5'
-  scopesEnd:
+- scopesEnd:
     - constant.numeric.hexadecimal.c
-- source: p
-  scopes:
+  source: '5'
+- scopes:
     - keyword.other.unit.exponent.hexadecimal.c
-- source: '10'
-  scopes:
+  source: p
+- scopes:
     - constant.numeric.exponent.hexadecimal.c
-- source: L
-  scopes:
+  source: '10'
+- scopes:
     - keyword.other.unit.suffix.floating-point.c
-- source: 0x
-  scopes:
+  source: L
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: AB
-  scopesBegin:
+  source: 0x
+- scopesBegin:
     - constant.numeric.hexadecimal.c
-- source: ''''
-  scopes:
+  source: AB
+- scopes:
     - punctuation.separator.constant.numeric
-- source: CD
-  scopesEnd:
+  source: ''''
+- scopesEnd:
     - constant.numeric.hexadecimal.c
-- source: '1'
-  scopesBegin:
+  source: CD
+- scopesBegin:
     - constant.numeric.decimal.c
-- source: ''''
-  scopes:
+  source: '1'
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '2'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '3'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '4'
-- source: ''''
-  scopes:
+- scopes:
     - punctuation.separator.constant.numeric
+  source: ''''
 - source: '5'

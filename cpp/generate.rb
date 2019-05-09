@@ -923,7 +923,7 @@ cpp_grammar = Grammar.new(
             }
         ]
 #
-# Probably a parameter
+# Function pointers
 #
     cpp_grammar[:function_pointer] = PatternRange.new(
         start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
@@ -1002,7 +1002,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
-        includes: [:probably_a_parameter, :function_context_c ]
+        includes: [:function_parameters, :function_context_c ]
         )
 
 #
@@ -1144,7 +1144,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ :probably_a_parameter, :function_context_c ],
+                        includes: [ :function_parameters, :function_context_c ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1165,7 +1165,7 @@ cpp_grammar = Grammar.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
-                includes: [ :probably_a_parameter, :function_context_c ]
+                includes: [ :function_parameters, :function_context_c ]
             ),
             # specificers
             newPattern(
@@ -1291,6 +1291,18 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.type.modifier.final",
     )
     generateClassOrStructBlockFinder = ->(name) do
+        body_includes = cpp_grammar[:$initial_context].clone
+        # move patterns covered by declarations to the end
+        body_includes.delete(:scope_resolution)
+        body_includes.delete(:primitive_types)
+        body_includes.delete(:non_primitive_types)
+        body_includes.unshift(:constructor_context)
+        body_includes.unshift(:function_pointer)
+        body_includes.push(:declarations)
+        body_includes.push(:scope_resolution)
+        body_includes.push(:primitive_types)
+        body_includes.push(:non_primitive_types)
+
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
             name: name,
@@ -1346,7 +1358,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context  ],
+            body_includes: body_includes,
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1706,7 +1718,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function.constructor",
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"
@@ -1732,6 +1744,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:special_block_context] = [
             :attributes,
             :using_namespace,
+            :type_alias,
             :namespace_block,
             :class_block,
             :struct_block,
@@ -3140,7 +3153,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"

@@ -1,108 +1,108 @@
-- source: bool
-  scopes:
+- scopes:
     - storage.type.built-in.primitive.c
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
+  source: (
 - source: 'Stats '
-- source: aStats
-  scopes:
+- scopes:
     - variable.parameter.probably.c
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+  source: aStats
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.built-in.primitive.c
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
+  source: (
 - source: '    Stats aStats'
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.built-in.primitive.c
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
+  source: (
 - source: '    Stats aStats'
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.built-in.primitive.c
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+  source: (
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.built-in.primitive.c
+  source: bool
 - source: FillStats
-- source: (
-  scopesBegin:
+- scopesBegin:
     - meta.parens.c
   scopes:
     - punctuation.section.parens.begin.bracket.round.c
+  source: (
 - source: '    Stats aStats'
-- source: )
+- scopesEnd:
+    - meta.parens.c
   scopes:
     - punctuation.section.parens.end.bracket.round.c
-  scopesEnd:
-    - meta.parens.c
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
+  source: ;

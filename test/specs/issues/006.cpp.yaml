@@ -1,66 +1,66 @@
-- source: auto
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
+  source: auto
 - source: ' bar '
-- source: =
-  scopes:
+- scopes:
     - keyword.operator.assignment.cpp
-- source: '{'
-  scopesBegin:
+  source: =
+- scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-- source: 0x
-  scopes:
+  source: '{'
+- scopes:
     - keyword.other.unit.hexadecimal.cpp
-- source: '28'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.cpp
-- source: ','
-  scopes:
+  source: '28'
+- scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.cpp
-- source: d4
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.cpp
-- source: ','
-  scopes:
+  source: d4
+- scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.cpp
-- source: '96'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.cpp
-- source: ','
-  scopes:
+  source: '96'
+- scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.cpp
-- source: '75'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.cpp
-- source: ','
-  scopes:
+  source: '75'
+- scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.cpp
-- source: 4c
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.cpp
-- source: '}'
+  source: 4c
+- scopesEnd:
+    - meta.block.cpp
   scopes:
     - punctuation.section.block.end.bracket.curly.cpp
-  scopesEnd:
-    - meta.block.cpp
-- source: ;
-  scopes:
+  source: '}'
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

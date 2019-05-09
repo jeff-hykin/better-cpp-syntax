@@ -1,78 +1,78 @@
-- source: enum
-  scopesBegin:
+- scopesBegin:
     - meta.block.enum.cpp
     - meta.head.enum.cpp
   scopes:
     - storage.type.enum.cpp
-- source: foo
-  scopes:
+  source: enum
+- scopes:
     - entity.name.type.enum.cpp
-- source: ':'
-  scopes:
+  source: foo
+- scopes:
     - colon.cpp
     - punctuation.separator.type-specifier.cpp
-- source: std
-  scopesBegin:
+  source: ':'
+- scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
-- source: '::'
+  source: std
+- scopesEnd:
+    - meta.scope-resolution.cpp
   scopes:
     - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
-- source: int8_t
-  scopes:
+  source: '::'
+- scopes:
     - storage.type.integral.int8_t.cpp
-- source: '{'
+  source: int8_t
+- scopesEnd:
+    - meta.head.enum.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.enum.cpp
-  scopesEnd:
-    - meta.head.enum.cpp
-- source: '}'
-  scopes:
+  source: '{'
+- scopes:
     - meta.body.enum.cpp
     - punctuation.section.block.end.bracket.curly.enum.cpp
-- source: ;
+  source: '}'
+- scopesEnd:
+    - meta.block.enum.cpp
   scopes:
     - punctuation.terminator.statement.cpp
-  scopesEnd:
-    - meta.block.enum.cpp
-- source: void
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: foo
-  scopesBegin:
+  source: void
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: foo
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: enum
-  scopesBegin:
+  source: (
+- scopesBegin:
     - meta.block.enum.cpp
     - meta.head.enum.cpp
   scopes:
     - storage.type.enum.cpp
-- source: foo
-  scopes:
+  source: enum
+- scopes:
     - entity.name.type.enum.cpp
+  source: foo
 - source: '::'
-- source: bar
-  scopesBegin:
+- scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
-- source: '::'
+  source: bar
+- scopesEnd:
+    - meta.scope-resolution.cpp
   scopes:
     - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
-- source: baz quix)
-  scopesEnd:
+  source: '::'
+- scopesEnd:
     - meta.head.enum.cpp
-- source: ;
-  scopes:
+  source: baz quix)
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

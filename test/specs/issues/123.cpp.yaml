@@ -1,36 +1,36 @@
-- source: bool
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
+  source: bool
 - source: ' a '
-- source: =
-  scopes:
+- scopes:
     - keyword.operator.assignment.cpp
-- source: 'true'
-  scopes:
+  source: =
+- scopes:
     - constant.language.true.cpp
-- source: ','
-  scopes:
+  source: 'true'
+- scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-- source: 'false'
-  scopes:
+  source: ','
+- scopes:
     - constant.language.false.cpp
-- source: ;
-  scopes:
+  source: 'false'
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: void
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: '*'
-  scopes:
+  source: void
+- scopes:
     - keyword.operator.cpp
+  source: '*'
 - source: ' b '
-- source: =
-  scopes:
+- scopes:
     - keyword.operator.assignment.cpp
-- source: nullptr
-  scopes:
+  source: =
+- scopes:
     - constant.language.nullptr.cpp
-- source: ;
-  scopes:
+  source: nullptr
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

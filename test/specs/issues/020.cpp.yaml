@@ -1,286 +1,286 @@
-- source: dynamic_cast
-  scopes:
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.dynamic_cast.cpp
-- source: <
-  scopes:
+  source: dynamic_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: reinterpret_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.reinterpret_cast.cpp
-- source: <
-  scopes:
+  source: reinterpret_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: static_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.static_cast.cpp
-- source: <
-  scopes:
+  source: static_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: const_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.const_cast.cpp
-- source: <
-  scopes:
+  source: const_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: void
-  scopes:
+  source: )
+- scopes:
     - storage.type.primitive.cpp
-- source: foo
-  scopesBegin:
+  source: void
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: foo
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: '{'
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-- source: dynamic_cast
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.function-call.cpp
   scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.dynamic_cast.cpp
-- source: <
-  scopes:
+  source: dynamic_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopes:
+  source: '>'
+- scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
-  scopes:
+- scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-- source: reinterpret_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.reinterpret_cast.cpp
-- source: <
-  scopes:
+  source: reinterpret_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopes:
+  source: '>'
+- scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
-  scopes:
+- scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-- source: static_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.static_cast.cpp
-- source: <
-  scopes:
+  source: static_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopes:
+  source: '>'
+- scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
-  scopes:
+- scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-- source: const_cast
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.wordlike.cpp
     - keyword.operator.cast.const_cast.cpp
-- source: <
-  scopes:
+  source: const_cast
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: (
-  scopes:
+  source: '>'
+- scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: 'expression '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.cpp
-- source: '1'
-  scopes:
+  source: +
+- scopes:
     - constant.numeric.decimal.cpp
-- source: +
-  scopes:
+  source: '1'
+- scopes:
     - keyword.operator.cpp
+  source: +
 - source: ' thing'
-- source: )
+- scopesEnd:
+    - meta.function-call.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
-- source: '}'
-  scopes:
+  source: )
+- scopes:
     - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

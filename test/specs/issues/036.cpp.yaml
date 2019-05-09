@@ -1,31 +1,31 @@
 - source: 'vector '
-- source: <
-  scopes:
+- scopes:
     - keyword.operator.comparison.cpp
-- source: int
-  scopes:
+  source: <
+- scopes:
     - storage.type.primitive.cpp
-- source: '>'
-  scopes:
+  source: int
+- scopes:
     - keyword.operator.comparison.cpp
-- source: v_name
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: v_name
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: '3'
-  scopes:
+  source: (
+- scopes:
     - constant.numeric.decimal.cpp
-- source: )
+  source: '3'
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;
