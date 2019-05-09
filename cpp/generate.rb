@@ -243,7 +243,13 @@ cpp_grammar = Grammar.new(
         )
     cpp_grammar[:access_control_keywords] = newPattern(
         match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
-        tag_as: "storage.type.modifier.access.control.$match"
+        tag_as: "storage.type.modifier.access.control.$match",
+        includes: [
+            newPattern(
+                match: /:/,
+                tag_as: "colon.cpp"
+            )
+        ]
         )
     cpp_grammar[:exception_keywords] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
@@ -697,6 +703,12 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    
+    cpp_grammar[:assignment_operator] = newPattern(
+        match: /\=/,
+        tag_as: "keyword.operator.assignment",
+        )
+        
     cpp_grammar[:operators] += [
             functionTemplate[
                 repository_name: "decltype_specifier",
@@ -742,10 +754,7 @@ cpp_grammar = Grammar.new(
                 match: "&|\\||\\^|~",
                 name: "keyword.operator"
             },
-            {
-                match: "=",
-                name: "keyword.operator.assignment"
-            },
+            :assignment_operator,
             {
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator"
@@ -1036,7 +1045,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:enumerator_list] = newPattern(
         match: newPattern(
             match: variable_name,
-            tag_as: "constant.other.enum",
+            tag_as: "variable.other.enummember",
         ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
         .maybe(
             newPattern(
@@ -1047,12 +1056,12 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]|\n/,
+            match: /[,;]/.or(/\n/),
             includes: [
                 :comma,
                 :semicolon,
             ],
-        ).or(lookAheadFor(/\}/))),
+        ).or(lookAheadFor(/\}/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
         tag_as: "meta.enum.definition",
     )
     # see https://en.cppreference.com/w/cpp/language/enum
@@ -1063,13 +1072,13 @@ cpp_grammar = Grammar.new(
             start_pattern: newPattern(
                     match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
-                ).then(@spaces).maybe(
-                    # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
-                    newPattern(
+                ).maybe(
+                    @spaces.then(
+                        # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
-                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)))
-                ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    )
+                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
@@ -1084,7 +1093,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, newPattern(@spaces) ],
+            body_includes: [ :enumerator_list, :comments_context, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

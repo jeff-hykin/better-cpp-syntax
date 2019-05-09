@@ -1,0 +1,321 @@
+- scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+  source: struct
+- scopes:
+    - entity.name.type.struct.cpp
+  source: A
+- scopesEnd:
+    - meta.head.struct.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.struct.cpp
+  scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' a'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' b'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: '    usertype user_value'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: '    usertype user_value'
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopesBegin:
+    - string.quoted.single.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: ''''
+- source: A
+- scopesEnd:
+    - string.quoted.single.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: ''''
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' a[] '
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '2'
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '3'
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: scoped
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- source: templated
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- source: type
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- source: ' value'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: '    compound'
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopes:
+    - storage.modifier.cpp
+  source: typename
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: templated
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- source: 'type '
+- scopes:
+    - keyword.operator.cpp
+  source: '*'
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- source: '::type value'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesEnd:
+    - meta.body.struct.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+  source: '}'
+- scopesEnd:
+    - meta.block.struct.cpp
+  scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' a'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' b'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: usertype user_value
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: usertype user_value
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopesBegin:
+    - string.quoted.single.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: ''''
+- source: A
+- scopesEnd:
+    - string.quoted.single.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: ''''
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: scoped
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- source: templated
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- source: type
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- source: ' value'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: compound
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopes:
+    - storage.modifier.cpp
+  source: typename
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: templated
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- source: 'type '
+- scopes:
+    - keyword.operator.cpp
+  source: '*'
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- source: '::type value'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' a[] '
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '2'
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '3'
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: function_declaration
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopes:
+    - keyword.operator.cpp
+  source: '*'
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- source: ' usertype '
+- scopes:
+    - variable.parameter.cpp
+  source: user_value
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

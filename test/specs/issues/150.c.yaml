@@ -1,0 +1,49 @@
+- scopes:
+    - storage.type.enum.c
+  source: enum
+- source: ' enum1'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesBegin:
+    - comment.line.double-slash.c
+  scopes:
+    - punctuation.definition.comment.c
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.c
+  source: ' comment'
+- source: "\tdefinition "
+- scopesBegin:
+    - comment.block.c
+  scopes:
+    - punctuation.definition.comment.begin.c
+  source: /*
+- source: ' block comment '
+- scopesEnd:
+    - comment.block.c
+  scopes:
+    - punctuation.definition.comment.end.c
+  source: '*/'
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- source: ' definition3'
+- source: "\tdefinition"
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- source: ' definition2 '
+- scopesBegin:
+    - comment.line.double-slash.c
+  scopes:
+    - punctuation.definition.comment.c
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.c
+  source: ' comment'
+- scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'

@@ -1,0 +1,54 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: ABC
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: Method
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopes:
+    - variable.language.this.cpp
+  source: this
+- scopes:
+    - punctuation.separator.pointer-access.cpp
+  source: '->'
+- scopes:
+    - variable.other.property.cpp
+  source: a
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '5'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

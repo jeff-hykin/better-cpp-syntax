@@ -1,0 +1,25 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- source: ' __cdecl '
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: __debugbreak
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

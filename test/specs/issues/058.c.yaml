@@ -1,0 +1,19 @@
+- source: 'COMM_Bool '
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: GetThing
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;

@@ -1,0 +1,107 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: function
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopes:
+    - keyword.control.if.cpp
+  source: if
+- scopesBegin:
+    - meta.parens.block.cpp
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - variable.other.object.access.cpp
+  source: files
+- scopes:
+    - punctuation.separator.dot-access.cpp
+  source: .
+- scopes:
+    - entity.name.function.member.cpp
+  source: size
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+  source: (
+- scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+  source: )
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopesEnd:
+    - meta.parens.block.cpp
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - meta.function-call.cpp
+  scopes:
+    - entity.name.function.call.cpp
+  source: throwError
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: std
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- scopes:
+    - storage.type.user-defined.cpp
+  source: runtime_error
+- scopesEnd:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.cpp
+  source: (
+- scopesBegin:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: '"'
+- source: Conflicting index files ...
+- scopesEnd:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: '"'
+- scopesEnd:
+    - meta.function-call.cpp
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

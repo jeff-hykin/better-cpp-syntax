@@ -340,7 +340,12 @@
     name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
     match: "(?<!\\w)(?:private|protected|public)\\s*:"
-    name: storage.type.modifier.access.control.$0.cpp
+    captures:
+      '0':
+        name: storage.type.modifier.access.control.$0.cpp
+        patterns:
+        - match: ":"
+          name: colon.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
     name: keyword.control.exception.$0.cpp
@@ -678,8 +683,7 @@
       name: keyword.operator.logical.cpp
     - match: "&|\\||\\^|~"
       name: keyword.operator.cpp
-    - match: "="
-      name: keyword.operator.assignment.cpp
+    - include: "#assignment_operator"
     - match: "%|\\*|/|-|\\+"
       name: keyword.operator.cpp
     - begin: "\\?"
@@ -696,6 +700,9 @@
       - include: "#member_access"
       - include: "#function_call_c"
       - include: "$base"
+  assignment_operator:
+    match: "\\="
+    name: keyword.operator.assignment.cpp
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
@@ -899,10 +906,10 @@
     match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     name: support.type.posix-reserved.cpp
   enumerator_list:
-    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:([,;]|\\n)|(?=\\}))"
+    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:(?:((?:[,;]|\\n))|(?=\\}))|(?=(?:\\/\\/|\\/\\*)))"
     captures:
       '1':
-        name: constant.other.enum.cpp
+        name: variable.other.enummember.cpp
       '2':
         patterns:
         - include: "#attributes"
@@ -918,7 +925,7 @@
     name: meta.enum.definition.cpp
   enum_block:
     name: meta.block.enum.cpp
-    begin: "(((?<!\\w)enum(?!\\w))\\s+(?:(class|struct)(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={)))?(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
+    begin: "(((?<!\\w)enum(?!\\w))(?:\\s+(class|struct))?(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
     beginCaptures:
       '1':
         name: meta.head.enum.cpp
@@ -930,27 +937,24 @@
         patterns:
         - include: "#attributes"
       '5':
-        patterns:
-        - include: "#attributes"
-      '6':
         name: entity.name.type.enum.cpp
-      '7':
+      '6':
         name: colon.cpp punctuation.separator.type-specifier.cpp
-      '8':
+      '7':
         name: meta.scope-resolution.cpp
-      '9':
+      '8':
         patterns:
         - include: "#scope_resolution"
-      '10':
+      '9':
         name: entity.name.type.namespace.scope-resolution.cpp
-      '11':
+      '10':
         name: meta.template.call.cpp
         patterns:
         - include: "#template_call_context"
-      '12':
+      '11':
         name: punctuation.separator.namespace.access.cpp
-      '13':
-        name: storage.type.integral.$13.cpp
+      '12':
+        name: storage.type.integral.$12.cpp
     end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
@@ -974,7 +978,9 @@
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
       - include: "#enumerator_list"
-      - match: "\\s+"
+      - include: "#comments_context"
+      - include: "#comma"
+      - include: "#semicolon"
     - name: meta.tail.enum.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"

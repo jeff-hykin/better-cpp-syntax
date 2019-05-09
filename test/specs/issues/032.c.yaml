@@ -1,0 +1,57 @@
+- scopes:
+    - storage.modifier.c
+  source: const
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: char
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- source: ' a '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- scopesBegin:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.begin.c
+  source: '"'
+- source: foo ??/
+- scopesEnd:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.end.c
+  source: '"'
+- scopesBegin:
+    - keyword.operator.ternary.c
+  source: '?'
+- scopesEnd:
+    - keyword.operator.ternary.c
+  source: '?'
+- scopes:
+    - keyword.operator.c
+  source: /
+- scopesBegin:
+    - keyword.operator.ternary.c
+  source: '?'
+- scopesEnd:
+    - keyword.operator.ternary.c
+  source: '?'
+- scopes:
+    - keyword.operator.c
+  source: /
+- scopesBegin:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.begin.c
+  source: '"'
+- source: ;
+- source: class A <
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: '    A(); //test'
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: '>;'

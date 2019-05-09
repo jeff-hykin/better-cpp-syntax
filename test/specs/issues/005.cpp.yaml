@@ -1,0 +1,25 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- source: ' foo '
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopes:
+    - keyword.operator.cpp
+  source: +
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '11'
+- scopes:
+    - keyword.operator.cpp
+  source: +
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '111'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

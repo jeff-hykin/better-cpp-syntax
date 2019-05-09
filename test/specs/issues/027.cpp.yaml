@@ -1,0 +1,31 @@
+- scopesBegin:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+  source: /*
+- scopesEnd:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  source: '*/'
+- source: ' #define a cout '
+- scopes:
+    - keyword.operator.bitwise.shift.cpp
+  source: '<<'
+- scopesBegin:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: '"'
+- source: 'this works :/'
+- scopes:
+    - constant.character.escape.cpp
+  source: \n
+- scopesEnd:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: '"'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

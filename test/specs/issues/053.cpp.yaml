@@ -1,0 +1,60 @@
+- scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: foo
+- scopesEnd:
+    - meta.head.class.cpp
+  scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+  source: ':'
+- scopes:
+    - entity.name.type.inherited.cpp
+  source: bar
+- scopes:
+    - meta.head.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  source: '{'
+- scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: foo
+- scopesEnd:
+    - meta.head.class.cpp
+  scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+  source: ':'
+- scopes:
+    - storage.type.modifier.access.public.cpp
+  source: public
+- scopes:
+    - entity.name.type.inherited.cpp
+  source: bar
+- scopes:
+    - meta.head.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  source: '{'
+- scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
