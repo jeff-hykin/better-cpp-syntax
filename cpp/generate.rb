@@ -178,7 +178,8 @@ cpp_grammar = Grammar.new(
             :operators,
             :number_literal,
             :string_context,
-            :comma_in_template_argument
+            :comma_in_template_argument,
+            :function_definition
         ]
 
 #
@@ -420,8 +421,14 @@ cpp_grammar = Grammar.new(
     # because it's embedded inside of other patterns
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
-        match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
-        includes: [:template_call_context]
+        match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).zeroOrMoreOf(
+            match: characters_in_template_call,
+            includes: [:template_call_context]
+        ).or(
+            match: /[\s<>:,*&()\w]*?/,
+            includes: [:function_type]
+        ).then(/>/).maybe(@spaces),
+        
         )
     cpp_grammar[:template_call_range] = PatternRange.new(
             tag_as: 'meta.template.call',
@@ -564,6 +571,15 @@ cpp_grammar = Grammar.new(
             :string_context_c,
             :comma,
         ],
+    )
+    # this matches a single function type inside a template, e.g. std::function<void(void)>
+    cpp_grammar[:function_type] = newPattern(
+        match: lookBehindFor(/</).maybe(@spaces).then(qualified_type).maybe(@spaces).then(/\(/).then(
+            match: /\.+/,
+            includes: [
+                :function_parameters,
+            ]
+        ).then(/\)/).maybe(@spaces).lookAheadFor(/>/),
     )
 #
 # Declarations
