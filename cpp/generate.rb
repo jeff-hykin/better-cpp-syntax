@@ -237,7 +237,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
         tag_as: "storage.modifier.specifier.functional.post-parameters.$match"
         )
-    cpp_grammar[:storage_specifiers] = newPattern(
+    cpp_grammar[:storage_specifiers] = storage_specifier = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
         tag_as: "storage.modifier.specifier.$match"
         )
@@ -407,7 +407,7 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\s<>:,\w]/
+    characters_in_template_call = /[\s<>:,*&\w]/
     cpp_grammar[:user_defined_template_type] = newPattern(
             match: variable_name,
             tag_as: 'storage.type.user-defined'
@@ -547,6 +547,121 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.namespace.access"
             )
         )
+#
+# Types
+#
+    cpp_grammar[:qualified_type] = qualified_type = newPattern(
+        should_fully_match: ["A","A::B","A::B<C>::D<E>"],
+        should_not_partial_match: ["return", "static const"],
+        match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
+            @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
+        ).maybe(inline_attribute).maybe(@spaces)
+        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:]/),
+        tag_as: "entity.name.type meta.qualified_type",
+        includes: [
+            :storage_types,
+            :number_literal,
+            :string_context_c,
+            :comma,
+        ],
+    )
+#
+# Declarations
+#
+    can_appear_before_variable_declaration = newPattern(
+        match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
+        tag_as: "entity.name.type.modifier",
+    )
+    can_appear_before_variable_declaration_with_spaces = newPattern(
+        match: maybe(@spaces).maybe(can_appear_before_variable_declaration).maybe(@spaces),
+    )
+    array_brackets = /\[/.then(
+        match: /\w*/,
+        includes: [:evaluation_context]
+    ).then(/\]/).maybe(@spaces)
+    after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
+        .lookAheadFor(/[{=,);]/)
+
+    declaration_storage_specifiers = newPattern(
+        match: zeroOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
+        includes: [
+            :storage_specifiers
+        ]
+    )
+
+    cpp_grammar[:declaration] = newPattern(
+        should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
+        should_not_partial_match: ["int min();"],
+        tag_as: "meta.variable.declaration meta.definition.variable",
+        match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
+        .then(can_appear_before_variable_declaration_with_spaces)
+        .maybe(inline_attribute).maybe(@spaces)
+        .then(
+            match: variable_name,
+            tag_as: "variable.other",
+        ).then(after_declaration),
+    )
+    cpp_grammar[:declarations] = PatternRange.new(
+        start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
+            .lookAheadToAvoid(/::/)
+            .lookBehindToAvoid(/operator/)
+            .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/))
+            .lookAheadFor(/[a-fA-F0-9\*\&]|\\[uU]/),
+        end_pattern: @semicolon.or(lookAheadFor(/\{/)),
+        tag_as: "declarations",
+        includes: [
+            PatternRange.new(
+                start_pattern: newPattern(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ),
+                end_pattern: lookAheadFor(/[;,]/),
+                includes: [
+                    :evaluation_context,
+                ]
+            ),
+            PatternRange.new(
+                start_pattern: lookAheadFor(/\w/).maybe(@spaces).then(
+                    match: /\{/,
+                    tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
+                ),
+                end_pattern: newPattern(
+                    match: /\}/,
+                    tag_as: "punctuation.section.block.end.bracket.curly.initializer",
+                ),
+                includes: [
+                    :evaluation_context,
+                ]
+            ),
+            can_appear_before_variable_declaration_with_spaces.maybe(inline_attribute)
+            .maybe(@spaces).then(
+                match: variable_name,
+                tag_as: "variable.other",
+            ).then(after_declaration),
+            :comments_context,
+            :comma,
+        ],
+    )
+    cpp_grammar[:type_alias] = newPattern(
+        match: newPattern(
+                match:/using/,
+                tag_as: "keyword.other.using.directive",
+            ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(qualified_type).maybe(@spaces).then(
+                match: /\=/,
+                tag_as: "keyword.operator.assignment",
+            ).maybe(@spaces).maybe(
+                match: /typename/,
+                tag_as: "keyword.other.typename",
+            ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(
+                match: /.+/,
+                tag_as: "meta.declaration.type.alias.value.unknown",
+                includes: [
+                    :evaluation_context,
+                ]
+            ))
+            .then(can_appear_before_variable_declaration_with_spaces).maybe(array_brackets).maybe(@spaces).then(@semicolon),
+        tag_as: "meta.declaration.type.alias"
+    )
 #
 # Functions
 #
@@ -790,20 +905,60 @@ cpp_grammar = Grammar.new(
             }
         ]
 #
-# Probably a parameter
+# Function pointers
 #
-    array_brackets = /\[\]/.maybe(@spaces)
-    comma_or_closing_paraenthese = /,/.or(/\)/)
-    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    cpp_grammar[:probably_a_parameter] = newPattern(
-        match: newPattern(
-                match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-                tag_as: "variable.parameter.defaulted"
-            ).or(
-                match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
-                tag_as: "variable.parameter"
-            )
-        )
+    cpp_grammar[:function_pointer] = PatternRange.new(
+        start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
+                match: /\*/,
+                tag_as: "variable.other.pointer.function",
+            ).maybe(@spaces).maybe(
+                match: identifier,
+                tag_as: "variable.other.pointer.function"
+            ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
+        end_pattern: /\)/.then(after_declaration),
+        includes: [
+            :function_parameters,
+        ]
+    )
+#
+# Function parameters
+#
+    ends_parameter = /[,)>]|\.\.\./
+    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
+    cpp_grammar[:function_parameters] = PatternRange.new(
+        start_pattern: lookBehindFor(/[,(<]/),
+        end_pattern: lookAheadFor(ends_parameter),
+        tag_as: "meta.function.parameter",
+        includes: [
+            :attributes,
+            newPattern(
+                should_fully_match: ["= 5",'= "foo"'],
+                match: newPattern(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ).maybe(@spaces).then(
+                    match: /[^,)>]+/,
+                    includes: [:evaluation_context],
+                    tag_as: "variable.parameter.default",
+                ),
+            ),
+            # :function_definition,
+            :function_pointer,
+            :declaration,
+            zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
+                match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
+                tag_as: "variable.other.type_modifier"
+            ),
+            :comments_context,
+            :vararg_ellipses,
+            # the following four are to support incorrectly identified function calls
+            :the_this_keyword,
+            :number_literal,
+            :string_context_c,
+            # :operators,
+            :comma,
+        ]
+    )
 
 #
 # Operator overload
@@ -830,7 +985,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
             ),
-        includes: [:probably_a_parameter, :function_context_c ]
+        includes: [:function_parameters, :function_context_c ]
         )
 
 #
@@ -972,7 +1127,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ :probably_a_parameter, :function_context_c ],
+                        includes: [ :function_parameters, :function_context_c ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -993,7 +1148,7 @@ cpp_grammar = Grammar.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
-                includes: [ :probably_a_parameter, :function_context_c ]
+                includes: [ :function_parameters, :function_context_c ]
             ),
             # specificers
             newPattern(
@@ -1119,6 +1274,18 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.type.modifier.final",
     )
     generateClassOrStructBlockFinder = ->(name) do
+        body_includes = cpp_grammar[:$initial_context].clone
+        # move patterns covered by declarations to the end
+        body_includes.delete(:scope_resolution)
+        body_includes.delete(:primitive_types)
+        body_includes.delete(:non_primitive_types)
+        body_includes.unshift(:constructor_context)
+        body_includes.unshift(:function_pointer)
+        body_includes.push(:declarations)
+        body_includes.push(:scope_resolution)
+        body_includes.push(:primitive_types)
+        body_includes.push(:non_primitive_types)
+
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
             name: name,
@@ -1174,7 +1341,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context  ],
+            body_includes: body_includes,
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1534,7 +1701,7 @@ cpp_grammar = Grammar.new(
                 name: "meta.function.constructor",
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"
@@ -1560,6 +1727,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:special_block_context] = [
             :attributes,
             :using_namespace,
+            :type_alias,
             :namespace_block,
             :class_block,
             :struct_block,
@@ -2968,7 +3136,7 @@ cpp_grammar = Grammar.new(
                 },
                 patterns: [
                     {
-                        include: "#probably_a_parameter"
+                        include: "#function_parameters"
                     },
                     {
                         include: "#function_context_c"

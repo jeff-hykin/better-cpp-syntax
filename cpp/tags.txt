@@ -16,6 +16,7 @@ constant.numeric.hexadecimal.cpp
 constant.numeric.octal.cpp
 constant.numeric.preprocessor.cpp
 constant.other.placeholder.cpp
+declarations.cpp
 ellipses.cpp
 entity.name.function.call.cpp
 entity.name.function.constructor.cpp
@@ -26,8 +27,10 @@ entity.name.function.preprocessor.cpp
 entity.name.operator.overloadee.cpp
 entity.name.tag.pragma-mark.cpp
 entity.name.type.$3.cpp
+entity.name.type.cpp
 entity.name.type.enum.cpp
 entity.name.type.inherited.cpp
+entity.name.type.modifier.cpp
 entity.name.type.namespace.cpp
 entity.name.type.namespace.scope-resolution.cpp
 entity.name.type.struct.cpp
@@ -87,6 +90,7 @@ keyword.other.namespace.definition.cpp
 keyword.other.namespace.directive.cpp
 keyword.other.operator.overload.cpp
 keyword.other.static_assert.cpp
+keyword.other.typename.cpp
 keyword.other.unit.binary.cpp
 keyword.other.unit.exponent.decimal.cpp
 keyword.other.unit.exponent.hexadecimal.cpp
@@ -115,6 +119,9 @@ meta.body.union.cpp
 meta.bracket.square.access.cpp
 meta.conditional.case.cpp
 meta.conditional.switch.cpp
+meta.declaration.type.alias.cpp
+meta.declaration.type.alias.value.unknown.cpp
+meta.definition.variable.cpp
 meta.encoding.cpp
 meta.enum.definition.cpp
 meta.function-call.cpp
@@ -127,6 +134,7 @@ meta.function.definition.parameters.lambda.cpp
 meta.function.definition.parameters.operator-overload.cpp
 meta.function.destructor.cpp
 meta.function.destructor.prototype.cpp
+meta.function.parameter.cpp
 meta.head.class.cpp
 meta.head.enum.cpp
 meta.head.extern.cpp
@@ -143,6 +151,7 @@ meta.preprocessor.diagnostic.cpp
 meta.preprocessor.include.cpp
 meta.preprocessor.macro.cpp
 meta.preprocessor.pragma.cpp
+meta.qualified_type.cpp
 meta.scope-resolution.cpp
 meta.section.cpp
 meta.static_assert.message.cpp
@@ -158,6 +167,7 @@ meta.template.definition.cpp
 meta.toc-list.banner.block.cpp
 meta.toc-list.banner.line.cpp
 meta.using-namespace.cpp
+meta.variable.declaration.cpp
 punctuation.accessor.attribute.cpp
 punctuation.definition.begin.bracket.square.cpp
 punctuation.definition.capture.begin.lambda.cpp
@@ -203,6 +213,7 @@ punctuation.section.block.begin.bracket.curly.class.cpp
 punctuation.section.block.begin.bracket.curly.cpp
 punctuation.section.block.begin.bracket.curly.enum.cpp
 punctuation.section.block.begin.bracket.curly.extern.cpp
+punctuation.section.block.begin.bracket.curly.initializer.cpp
 punctuation.section.block.begin.bracket.curly.lambda.cpp
 punctuation.section.block.begin.bracket.curly.namespace.cpp
 punctuation.section.block.begin.bracket.curly.struct.cpp
@@ -212,6 +223,7 @@ punctuation.section.block.end.bracket.curly.class.cpp
 punctuation.section.block.end.bracket.curly.cpp
 punctuation.section.block.end.bracket.curly.enum.cpp
 punctuation.section.block.end.bracket.curly.extern.cpp
+punctuation.section.block.end.bracket.curly.initializer.cpp
 punctuation.section.block.end.bracket.curly.lambda.cpp
 punctuation.section.block.end.bracket.curly.namespace.cpp
 punctuation.section.block.end.bracket.curly.struct.cpp
@@ -249,7 +261,7 @@ storage.modifier.array.bracket.square.cpp
 storage.modifier.cpp
 storage.modifier.lambda.$0.cpp
 storage.modifier.specificer.functional.pre-parameters.$0.cpp
-storage.modifier.specifier.$0.cpp
+storage.modifier.specifier.$1.cpp
 storage.modifier.specifier.functional.post-parameters.$0.cpp
 storage.type.$0.cpp
 storage.type.$3.cpp
@@ -289,7 +301,8 @@ variable.other.object.access.cpp
 variable.other.object.cpp
 variable.other.object.declare.cpp
 variable.other.object.property.cpp
+variable.other.pointer.function.cpp
 variable.other.property.cpp
-variable.parameter.cpp
-variable.parameter.defaulted.cpp
+variable.other.type_modifier.cpp
+variable.parameter.default.cpp
 variable.parameter.preprocessor.cpp

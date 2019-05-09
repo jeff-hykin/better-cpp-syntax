@@ -1,14 +1,14 @@
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' invalid literals'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' invalid literals'
-- scopesBegin:
+- source: 1Ex
+  scopesBegin:
     - invalid.illegal.constant.numeric.cpp
-  source: 1Ex
 - source: 0xe+foo
 - source: 0x1Px
 - source: 0xAB.cdpfl
@@ -16,49 +16,49 @@
 - source: 0.'123
 - source: 0'.123
 - source: 1E'1
-- scopesEnd:
+- source: 1'E1
+  scopesEnd:
     - invalid.illegal.constant.numeric.cpp
-  source: 1'E1
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' odd valid literals'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' odd valid literals'
-- scopes:
+- source: 0x
+  scopes:
     - keyword.other.unit.hexadecimal.cpp
-  source: 0x
-- scopes:
+- source: '12345'
+  scopes:
     - constant.numeric.hexadecimal.cpp
-  source: '12345'
-- scopes:
+- source: luyards
+  scopes:
     - keyword.other.unit.user-defined.cpp
-  source: luyards
-- scopes:
+- source: '0'
+  scopes:
     - keyword.other.unit.octal.cpp
-  source: '0'
-- scopesBegin:
+- source: ''''
+  scopesBegin:
     - constant.numeric.octal.cpp
   scopes:
     - punctuation.separator.constant.numeric.cpp
-  source: ''''
-- scopesEnd:
+- source: '12345'
+  scopesEnd:
     - constant.numeric.octal.cpp
-  source: '12345'
-- scopes:
+- source: 0x
+  scopes:
     - keyword.other.unit.hexadecimal.cpp
-  source: 0x
-- scopes:
+- source: 1E
+  scopes:
     - constant.numeric.hexadecimal.cpp
-  source: 1E
-- scopes:
+- source: x
+  scopes:
     - keyword.other.unit.user-defined.cpp
-  source: x
-- scopes:
+- source: '1'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '1'
-- scopes:
+- source: Px
+  scopes:
     - keyword.other.unit.user-defined.cpp
-  source: Px

@@ -1,175 +1,175 @@
-- scopesBegin:
+- source: class
+  scopesBegin:
     - meta.block.class.cpp
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: ClassA
+  scopes:
     - entity.name.type.class.cpp
-  source: ClassA
-- scopesEnd:
-    - meta.head.class.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopes:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '}'
+  scopes:
     - meta.body.class.cpp
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: class
+  scopesBegin:
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: ClassE
+  scopes:
     - entity.name.type.class.cpp
-  source: ClassE
-- scopes:
+- source: final
+  scopes:
     - storage.type.modifier.final.cpp
-  source: final
-- scopesEnd:
-    - meta.head.class.cpp
+- source: ':'
   scopes:
     - colon.cpp
     - punctuation.separator.inhertance.cpp
-  source: ':'
-- scopes:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: public
+  scopes:
     - storage.type.modifier.access.public.cpp
-  source: public
-- scopes:
+- source: ClassA
+  scopes:
     - entity.name.type.inherited.cpp
-  source: ClassA
-- scopes:
+- source: '{'
+  scopes:
     - meta.head.class.cpp
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopes:
+- source: '}'
+  scopes:
     - meta.body.class.cpp
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopesEnd:
-    - meta.block.class.cpp
+- source: ;
   scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+  scopesEnd:
+    - meta.block.class.cpp
+- source: namespace
+  scopesBegin:
     - meta.block.namespace.cpp
     - meta.head.namespace.cpp
   scopes:
     - keyword.other.namespace.definition.cpp
     - storage.type.namespace.definition.cpp
-  source: namespace
-- scopes:
+- source: foo
+  scopes:
     - entity.name.type.namespace.cpp
-  source: foo
-- scopesEnd:
-    - meta.head.namespace.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace.cpp
-  source: '{'
-- scopesBegin:
+  scopesEnd:
+    - meta.head.namespace.cpp
+- source: class
+  scopesBegin:
     - meta.body.namespace.cpp
     - meta.block.class.cpp
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: ClassF
+  scopes:
     - entity.name.type.class.cpp
-  source: ClassF
-- scopesEnd:
-    - meta.head.class.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopes:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '}'
+  scopes:
     - meta.body.class.cpp
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: class
+  scopesBegin:
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: ClassG
+  scopes:
     - entity.name.type.class.cpp
-  source: ClassG
-- scopesEnd:
-    - meta.head.class.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopes:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '}'
+  scopes:
     - meta.body.class.cpp
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopesEnd:
-    - meta.block.class.cpp
+- source: ;
   scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesEnd:
-    - meta.block.namespace.cpp
-    - meta.body.namespace.cpp
+  scopesEnd:
+    - meta.block.class.cpp
+- source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.namespace.cpp
-  source: '}'
-- scopesBegin:
+  scopesEnd:
+    - meta.block.namespace.cpp
+    - meta.body.namespace.cpp
+- source: class
+  scopesBegin:
     - meta.block.class.cpp
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: ClassH
+  scopes:
     - entity.name.type.class.cpp
-  source: ClassH
-- scopesEnd:
-    - meta.head.class.cpp
+- source: ':'
   scopes:
     - colon.cpp
     - punctuation.separator.inhertance.cpp
-  source: ':'
-- scopes:
-    - storage.type.modifier.access.public.cpp
-  source: public
-- scopes:
-    - entity.name.type.inherited.cpp
-  source: foo
-- scopesBegin:
+  scopesEnd:
     - meta.head.class.cpp
-  source: '::'
-- scopes:
+- source: public
+  scopes:
+    - storage.type.modifier.access.public.cpp
+- source: foo
+  scopes:
     - entity.name.type.inherited.cpp
-  source: ClassF
-- scopes:
+- source: '::'
+  scopesBegin:
+    - meta.head.class.cpp
+- source: ClassF
+  scopes:
+    - entity.name.type.inherited.cpp
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.inhertance.cpp
-  source: ','
-- scopes:
+- source: public
+  scopes:
     - storage.type.modifier.access.public.cpp
-  source: public
-- scopes:
+- source: foo
+  scopes:
     - entity.name.type.inherited.cpp
-  source: foo
 - source: '::'
-- scopes:
+- source: ClassG
+  scopes:
     - entity.name.type.inherited.cpp
-  source: ClassG
-- scopesEnd:
-    - meta.head.class.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopes:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '}'
+  scopes:
     - meta.body.class.cpp
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;

@@ -1,38 +1,34 @@
-// generates spec files for fixtures that are missing them
+// sort-specs reads the spec files, sorts the keys and remakes them.
+// this is not a fixture guided transformation and this has no bearing on wether or not
+// a test passes, this also
 
 const path = require("path");
 const fs = require("fs");
 const yaml = require("js-yaml");
 
 const argv = require("../arguments");
-const generateSpec = require("../generateSpec");
 const paths = require("../paths");
 
 const tests = require("../getTests")(test => {
     const result =
-        (!fs.existsSync(test.spec.yaml) && !fs.existsSync(test.spec.json)) ||
-        argv["generate-all"] ||
+        fs.existsSync(test.spec.yaml) ||
+        fs.existsSync(test.spec.json) ||
         argv._.length !== 0;
     return result;
 });
 
-// and generate the specs
-generateSpecs();
-async function generateSpecs() {
+sortSpecs();
+async function sortSpecs() {
     for (const test of tests) {
         console.log(
-            "generating spec for",
+            "sorting spec for",
             path.relative(paths.fixtureDir, test.fixture)
         );
-        const fixture = fs
-            .readFileSync(test.fixture)
-            .toString()
-            .split("\n");
 
-        const spec = await generateSpec(test.fixture, fixture);
+        const spec = fs.readFileSync(test.spec.default);
         fs.writeFileSync(
             test.spec.yaml,
-            yaml.dump(JSON.parse(JSON.stringify(spec)), {
+            yaml.dump(yaml.safeLoad(spec), {
                 sortKeys: keyCompare
             })
         );
