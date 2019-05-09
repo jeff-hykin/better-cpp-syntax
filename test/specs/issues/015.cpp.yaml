@@ -17,7 +17,12 @@
   scopes:
     - storage.type.modifier.access.control.public
     - ':.cpp'
-  source: 'public :'
+  source: 'public '
+- source: ':'
+  scopes:
+    - storage.type.modifier.access.control.public
+    - ':.cpp'
+    - colon
 - scopesEnd:
     - meta.body.class.cpp
   scopes:
