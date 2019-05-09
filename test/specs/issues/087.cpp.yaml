@@ -1,152 +1,152 @@
-- scopes:
+- source: void
+  scopes:
     - storage.type.primitive.cpp
-  source: void
-- scopesBegin:
+- source: function
+  scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-  source: function
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  source: )
-- scopesBegin:
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-  source: '{'
-- scopesBegin:
+- source: putIfExists
+  scopesBegin:
     - meta.function-call.cpp
   scopes:
     - entity.name.function.call.cpp
-  source: putIfExists
-- scopesBegin:
+- source: <
+  scopesBegin:
     - meta.template.call.cpp
   scopes:
     - keyword.operator.comparison.cpp
-  source: <
-- scopes:
+- source: string
+  scopes:
     - storage.type.user-defined.cpp
-  source: string
-- scopesEnd:
-    - meta.template.call.cpp
+- source: '>'
   scopes:
     - keyword.operator.comparison.cpp
-  source: '>'
-- scopes:
+  scopesEnd:
+    - meta.template.call.cpp
+- source: (
+  scopes:
     - punctuation.section.arguments.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: cn
+  scopes:
     - variable.other.object.access.cpp
-  source: cn
-- scopes:
+- source: .
+  scopes:
     - punctuation.separator.dot-access.cpp
-  source: .
-- scopes:
+- source: second
+  scopes:
     - variable.other.property.cpp
-  source: second
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' common'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
-- scopesBegin:
+- source: '"'
+  scopesBegin:
     - string.quoted.double.cpp
   scopes:
     - punctuation.definition.string.begin.cpp
-  source: '"'
 - source: type
-- scopesEnd:
-    - string.quoted.double.cpp
+- source: '"'
   scopes:
     - punctuation.definition.string.end.cpp
-  source: '"'
-- scopesEnd:
-    - meta.function-call.cpp
+  scopesEnd:
+    - string.quoted.double.cpp
+- source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function-call.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: putIfExists
+  scopesBegin:
     - meta.function-call.cpp
   scopes:
     - entity.name.function.call.cpp
-  source: putIfExists
-- scopesBegin:
+- source: <
+  scopesBegin:
     - meta.template.call.cpp
   scopes:
     - keyword.operator.comparison.cpp
-  source: <
-- scopesBegin:
+- source: std
+  scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
-  source: std
-- scopesEnd:
-    - meta.scope-resolution.cpp
+- source: '::'
   scopes:
     - punctuation.separator.namespace.access.cpp
-  source: '::'
-- scopes:
+  scopesEnd:
+    - meta.scope-resolution.cpp
+- source: string
+  scopes:
     - storage.type.user-defined.cpp
-  source: string
-- scopesEnd:
-    - meta.template.call.cpp
+- source: '>'
   scopes:
     - keyword.operator.comparison.cpp
-  source: '>'
-- scopes:
+  scopesEnd:
+    - meta.template.call.cpp
+- source: (
+  scopes:
     - punctuation.section.arguments.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: cn
+  scopes:
     - variable.other.object.access.cpp
-  source: cn
-- scopes:
+- source: .
+  scopes:
     - punctuation.separator.dot-access.cpp
-  source: .
-- scopes:
+- source: second
+  scopes:
     - variable.other.property.cpp
-  source: second
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' common'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
-- scopesBegin:
+- source: '"'
+  scopesBegin:
     - string.quoted.double.cpp
   scopes:
     - punctuation.definition.string.begin.cpp
-  source: '"'
 - source: type
-- scopesEnd:
-    - string.quoted.double.cpp
+- source: '"'
   scopes:
     - punctuation.definition.string.end.cpp
-  source: '"'
-- scopesEnd:
-    - meta.function-call.cpp
+  scopesEnd:
+    - string.quoted.double.cpp
+- source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function-call.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.cpp
-  source: '}'
