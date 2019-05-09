@@ -588,19 +588,23 @@ cpp_grammar = Grammar.new(
             :storage_specifiers
         ]
     )
-
-    cpp_grammar[:declaration] = newPattern(
-        should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
-        should_not_partial_match: ["int min();"],
-        tag_as: "meta.variable.declaration meta.definition.variable",
-        match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
-        .then(can_appear_before_variable_declaration_with_spaces)
-        .maybe(inline_attribute).maybe(@spaces)
-        .then(
-            match: variable_name,
-            tag_as: "variable.other",
-        ).then(after_declaration),
-    )
+    
+    variableDeclaration = ->(variable_tag) do
+        return newPattern(
+            should_partial_match: ["std::string s;", "A B,", "std::vector<int> vint,v2","std::vector<int> vint{{1,2,3,4}}"],
+            should_not_partial_match: ["int min();"],
+            tag_as: "meta.variable.declaration meta.definition.variable",
+            match: maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type)
+            .then(can_appear_before_variable_declaration_with_spaces)
+            .maybe(inline_attribute).maybe(@spaces)
+            .then(
+                match: variable_name,
+                tag_as: variable_tag,
+            ).then(after_declaration),
+        )
+    end
+    cpp_grammar[:declaration] = variableDeclaration["variable.other"]
+    cpp_grammar[:parameter_declaration] = variableDeclaration["variable.parameter"]
     cpp_grammar[:declarations] = PatternRange.new(
         start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(/::/)
@@ -942,9 +946,8 @@ cpp_grammar = Grammar.new(
                     tag_as: "variable.parameter.default",
                 ),
             ),
-            # :function_definition,
             :function_pointer,
-            :declaration,
+            :parameter_declaration,
             zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
                 match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
                 tag_as: "variable.other.type_modifier"
