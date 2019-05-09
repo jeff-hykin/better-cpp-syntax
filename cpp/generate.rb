@@ -243,7 +243,13 @@ cpp_grammar = Grammar.new(
         )
     cpp_grammar[:access_control_keywords] = newPattern(
         match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
-        tag_as: "storage.type.modifier.access.control.$match"
+        tag_as: "storage.type.modifier.access.control.$match",
+        includes: [
+            newPattern(
+                match: /:/,
+                tag_as: "colon.cpp"
+            )
+        ]
         )
     cpp_grammar[:exception_keywords] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
@@ -697,6 +703,12 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    
+    cpp_grammar[:assignment_operator] = newPattern(
+        match: /\=/,
+        tag_as: "keyword.operator.assignment",
+        )
+        
     cpp_grammar[:operators] += [
             functionTemplate[
                 repository_name: "decltype_specifier",
@@ -742,10 +754,7 @@ cpp_grammar = Grammar.new(
                 match: "&|\\||\\^|~",
                 name: "keyword.operator"
             },
-            {
-                match: "=",
-                name: "keyword.operator.assignment"
-            },
+            :assignment_operator,
             {
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator"

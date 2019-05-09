@@ -340,7 +340,12 @@
     name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
     match: "(?<!\\w)(?:private|protected|public)\\s*:"
-    name: storage.type.modifier.access.control.$0.cpp
+    captures:
+      '0':
+        name: storage.type.modifier.access.control.$0.cpp
+        patterns:
+        - match: ":"
+          name: colon.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
     name: keyword.control.exception.$0.cpp
@@ -678,8 +683,7 @@
       name: keyword.operator.logical.cpp
     - match: "&|\\||\\^|~"
       name: keyword.operator.cpp
-    - match: "="
-      name: keyword.operator.assignment.cpp
+    - include: "#assignment_operator"
     - match: "%|\\*|/|-|\\+"
       name: keyword.operator.cpp
     - begin: "\\?"
@@ -696,6 +700,9 @@
       - include: "#member_access"
       - include: "#function_call_c"
       - include: "$base"
+  assignment_operator:
+    match: "\\="
+    name: keyword.operator.assignment.cpp
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
