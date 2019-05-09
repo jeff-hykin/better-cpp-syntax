@@ -678,8 +678,7 @@
       name: keyword.operator.logical.cpp
     - match: "&|\\||\\^|~"
       name: keyword.operator.cpp
-    - match: "="
-      name: keyword.operator.assignment.cpp
+    - include: "#assignment_operator"
     - match: "%|\\*|/|-|\\+"
       name: keyword.operator.cpp
     - begin: "\\?"
@@ -696,6 +695,9 @@
       - include: "#member_access"
       - include: "#function_call_c"
       - include: "$base"
+  assignment_operator:
+    match: "\\="
+    name: keyword.operator.assignment.cpp
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
@@ -898,24 +900,9 @@
   posix_reserved_types:
     match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     name: support.type.posix-reserved.cpp
-  enumerator_list:
-    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:([,;]|\\n|\\/[\\/\\*])|(?=\\}))"
-    captures:
-      '1':
-        name: variable.other.enummember.cpp
-      '2':
-        patterns:
-        - include: "#attributes"
-      '3':
-        name: keyword.operator.assignment.cpp
-      '4':
-        patterns:
-        - include: "#evaluation_context"
-      '5':
-        patterns:
-        - include: "#comma"
-        - include: "#semicolon"
-    name: meta.enum.definition.cpp
+  enumerator_name:
+    match: "(?<!\\w)(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?!\\w)"
+    name: variable.other.enummember.cpp
   enum_block:
     name: meta.block.enum.cpp
     begin: "(((?<!\\w)enum(?!\\w))(?:\\s+(class|struct))?(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
@@ -970,8 +957,12 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
-      - include: "#enumerator_list"
       - include: "#comments_context"
+      - include: "#number_literal"
+      - include: "#assignment_operator"
+      - include: "#enumerator_name"
+      - include: "#comma"
+      - include: "#semicolon"
     - name: meta.tail.enum.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"

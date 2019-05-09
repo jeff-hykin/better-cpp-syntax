@@ -536,7 +536,9 @@
     {
         "source": "enum",
         "scopes": [
-            "storage.type.enum",
+            "storage.type.enum"
+        ],
+        "scopesBegin" : [
             "meta.block.enum",
             "meta.head.enum"
         ]
@@ -547,19 +549,25 @@
         ],
         "scopes": [
             "punctuation.section.block.begin.bracket.curly.enum.cpp"
+        ],
+        "scopesEnd":[
+            "meta.head.enum"
         ]
     },
     {
         "source": "}",
         "scopes": [
+            "meta.body.enum",
             "punctuation.section.block.end.bracket.curly.enum.cpp"
         ],
         "scopesEnd": [
+            "meta.block.enum"
         ]
     },
     {
         "source": ";",
         "scopes": [
+            "meta.block.enum",
             "punctuation.terminator.statement.cpp"
         ]
     },

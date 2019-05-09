@@ -697,6 +697,12 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    
+    cpp_grammar[:assignment_operator] = newPattern(
+        match: /\=/,
+        tag_as: "keyword.operator.assignment",
+        )
+        
     cpp_grammar[:operators] += [
             functionTemplate[
                 repository_name: "decltype_specifier",
@@ -742,10 +748,7 @@ cpp_grammar = Grammar.new(
                 match: "&|\\||\\^|~",
                 name: "keyword.operator"
             },
-            {
-                match: "=",
-                name: "keyword.operator.assignment"
-            },
+            :assignment_operator,
             {
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator"
@@ -1033,28 +1036,10 @@ cpp_grammar = Grammar.new(
 #
 # Classes, structs, unions, enums
 #
-    cpp_grammar[:enumerator_list] = newPattern(
-        match: newPattern(
-            match: variable_name,
-            tag_as: "variable.other.enummember",
-        ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
-        .maybe(
-            newPattern(
-                match: /\=/,
-                tag_as: "keyword.operator.assignment",
-            ).maybe(@spaces).then(
-                match: /.+?/,
-                includes: [ :evaluation_context ]
-            ).maybe(@spaces)
-        ).then(newPattern(
-            match: /[,;]|\n|\/[\/\*]/,
-            includes: [
-                :comma,
-                :semicolon,
-            ],
-        ).or(lookAheadFor(/\}/))),
-        tag_as: "meta.enum.definition",
-    )
+    cpp_grammar[:enumerator_name] = newPattern(
+        match: variableBounds[variable_name],
+        tag_as: "variable.other.enummember",
+        )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
     cpp_grammar[:enum_block] = blockFinderFor(
@@ -1084,7 +1069,14 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, :comments_context ],
+            body_includes: [ 
+                :comments_context,
+                :number_literal,
+                :assignment_operator,
+                :enumerator_name,
+                :comma,
+                :semicolon,
+            ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
