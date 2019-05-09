@@ -1,96 +1,96 @@
-- scopesBegin:
+- source: class
+  scopesBegin:
     - meta.block.class.cpp
     - meta.head.class.cpp
   scopes:
     - storage.type.class.cpp
-  source: class
-- scopes:
+- source: Example
+  scopes:
     - entity.name.type.class.cpp
-  source: Example
-- scopesEnd:
-    - meta.head.class.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
-  source: '{'
-- scopesBegin:
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '    Example '
+  scopesBegin:
     - meta.body.class.cpp
-  source: '    Example '
-- scopes:
+- source: '&'
+  scopes:
     - keyword.operator.cpp
-  source: '&'
-- scopesBegin:
+- source: operator
+  scopesBegin:
     - meta.function.definition.parameters.operator-overload.cpp
   scopes:
     - keyword.other.operator.overload.cpp
-  source: operator
-- scopes:
+- source: ++
+  scopes:
     - entity.name.operator.overloadee.cpp
-  source: ++
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.operator-overload.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.operator-overload.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: operator
+  scopesBegin:
     - meta.function.definition.parameters.operator-overload.cpp
   scopes:
     - keyword.other.operator.overload.cpp
-  source: operator
-- scopes:
+- source: ' int'
+  scopes:
     - entity.name.operator.overloadee.cpp
-  source: ' int'
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.operator-overload.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.operator-overload.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: operator
+  scopesBegin:
     - meta.function.definition.parameters.operator-overload.cpp
   scopes:
     - keyword.other.operator.overload.cpp
-  source: operator
-- scopesBegin:
+- source: std
+  scopesBegin:
     - entity.name.operator.overloadee.cpp
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
-  source: std
-- scopesEnd:
-    - meta.scope-resolution.cpp
+- source: '::'
   scopes:
     - punctuation.separator.namespace.access.cpp
-  source: '::'
-- scopesEnd:
+  scopesEnd:
+    - meta.scope-resolution.cpp
+- source: string &
+  scopesEnd:
     - entity.name.operator.overloadee.cpp
-  source: string &
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.operator-overload.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.operator-overload.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesEnd:
-    - meta.body.class.cpp
+- source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.class.cpp
-  source: '}'
-- scopes:
+  scopesEnd:
+    - meta.body.class.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;

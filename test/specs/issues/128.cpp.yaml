@@ -1,69 +1,69 @@
-- scopes:
+- source: void
+  scopes:
     - storage.type.primitive.cpp
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: "\tentries "
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
 - source: ' symbolTableEntry '
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
-- scopesBegin:
+- source: '['
+  scopesBegin:
     - meta.bracket.square.access.cpp
   scopes:
     - punctuation.definition.begin.bracket.square.cpp
-  source: '['
 - source: entriesCount
-- scopesEnd:
-    - meta.bracket.square.access.cpp
+- source: ']'
   scopes:
     - punctuation.definition.end.bracket.square.cpp
-  source: ']'
-- scopes:
+  scopesEnd:
+    - meta.bracket.square.access.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.primitive.cpp
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;

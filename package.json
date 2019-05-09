@@ -9,7 +9,8 @@
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
         "pregenerate-specs": "npm run build",
-        "generate-specs": "node test/src/commands/generate-specs.js"
+        "generate-specs": "node test/src/commands/generate-specs.js",
+        "sort-specs": "node test/src/commands/sort-specs.js"
     },
     "engines": {
         "vscode": "^1.0.0"

@@ -1,57 +1,57 @@
-- scopes:
+- source: const
+  scopes:
     - storage.modifier.c
-  source: const
-- scopes:
+- source: char
+  scopes:
     - storage.type.built-in.primitive.c
-  source: char
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.c
-  source: '*'
 - source: ' a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
-- scopesBegin:
+- source: '"'
+  scopesBegin:
     - string.quoted.double.c
   scopes:
     - punctuation.definition.string.begin.c
-  source: '"'
 - source: foo ??/
-- scopesEnd:
-    - string.quoted.double.c
+- source: '"'
   scopes:
     - punctuation.definition.string.end.c
-  source: '"'
-- scopesBegin:
+  scopesEnd:
+    - string.quoted.double.c
+- source: '?'
+  scopesBegin:
     - keyword.operator.ternary.c
-  source: '?'
-- scopesEnd:
+- source: '?'
+  scopesEnd:
     - keyword.operator.ternary.c
-  source: '?'
-- scopes:
+- source: /
+  scopes:
     - keyword.operator.c
-  source: /
-- scopesBegin:
+- source: '?'
+  scopesBegin:
     - keyword.operator.ternary.c
-  source: '?'
-- scopesEnd:
+- source: '?'
+  scopesEnd:
     - keyword.operator.ternary.c
-  source: '?'
-- scopes:
+- source: /
+  scopes:
     - keyword.operator.c
-  source: /
-- scopesBegin:
+- source: '"'
+  scopesBegin:
     - string.quoted.double.c
   scopes:
     - punctuation.definition.string.begin.c
-  source: '"'
 - source: ;
 - source: class A <
-- scopes:
+- source: '%'
+  scopes:
     - invalid.illegal.placeholder.c
-  source: '%'
 - source: '    A(); //test'
-- scopes:
+- source: '%'
+  scopes:
     - invalid.illegal.placeholder.c
-  source: '%'
 - source: '>;'
