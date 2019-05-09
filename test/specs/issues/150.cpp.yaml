@@ -1,72 +1,73 @@
+---
 - source: enum
-  scopesBegin:
-    - meta.block.enum
-    - meta.head.enum
   scopes:
-    - storage.type.enum
+  - storage.type.enum
+  scopesBegin:
+  - meta.block.enum
+  - meta.head.enum
 - source: enum1
   scopes:
-    - entity.name.type.enum
-- source: '{'
+  - entity.name.type.enum
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.enum
+  - punctuation.section.block.begin.bracket.curly.enum
   scopesEnd:
-    - meta.head.enum
-- source: //
+  - meta.head.enum
+- source: "//"
   scopesBegin:
-    - meta.body.enum
+  - meta.body.enum
   scopes:
-    - comment.line.double-slash
-    - punctuation.definition.comment
+  - comment.line.double-slash
+  - punctuation.definition.comment
 - source: comment
   scopes:
-    - comment.line.double-slash
+  - comment.line.double-slash
 - source: definition
   scopes:
-    - meta.enum.definition
-    - variable.other.enummember
-- source: /*
+  - meta.enum.definition
+  - variable.other.enummember
+- source: "/*"
   scopesBegin:
-    - comment.block
+  - comment.block
   scopes:
-    - punctuation.definition.comment.begin
-- source: ' block comment '
-- source: '*/'
-  scopes:
-    - punctuation.definition.comment.end
+  - punctuation.definition.comment.begin
+- source: " block comment "
+- source: "*/"
   scopesEnd:
-    - comment.block
-- source: ','
+  - comment.block
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+  - punctuation.definition.comment.end
+- source: ","
+  scopes:
+  - comma
+  - punctuation.separator.delimiter
 - source: definition3
   scopes:
-    - meta.enum.definition
-    - variable.other.enummember
+  - meta.enum.definition
+  - variable.other.enummember
 - source: definition
   scopes:
-    - meta.enum.definition
-    - variable.other.enummember
-- source: ','
+  - meta.enum.definition
+  - variable.other.enummember
+- source: ","
   scopes:
-    - meta.enum.definition
-    - comma
-    - punctuation.separator.delimiter
+  - meta.enum.definition
+  - comma
+  - punctuation.separator.delimiter
 - source: definition2
   scopes:
-    - meta.enum.definition
-    - variable.other.enummember
-- source: //
+  - meta.enum.definition
+  - variable.other.enummember
+- source: "//"
   scopes:
-    - comment.line.double-slash
-    - punctuation.definition.comment
+  - comment.line.double-slash
+  - punctuation.definition.comment
 - source: comment
   scopes:
-    - comment.line.double-slash
-- source: '}'
+  - comment.line.double-slash
+- source: "}"
   scopes:
-    - punctuation.section.block.end.bracket.curly.enum
+  - punctuation.section.block.end.bracket.curly.enum
   scopesEnd:
-    - meta.block.enum
-    - meta.body.enum
+  - meta.block.enum
+  - meta.body.enum

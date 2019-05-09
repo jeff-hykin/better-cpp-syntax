@@ -1,60 +1,60 @@
-- source: enum
-  scopesBegin:
+- scopesBegin:
     - meta.block.enum.cpp
     - meta.head.enum.cpp
   scopes:
     - storage.type.enum.cpp
-- source: bar
-  scopes:
+  source: enum
+- scopes:
     - entity.name.type.enum.cpp
-- source: b
-  scopesEnd:
+  source: bar
+- scopesEnd:
     - meta.head.enum.cpp
-- source: ;
+  source: b
+- scopesEnd:
+    - meta.block.enum.cpp
   scopes:
     - punctuation.terminator.statement.cpp
-  scopesEnd:
-    - meta.block.enum.cpp
-- source: int
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: foo
-  scopesBegin:
+  source: int
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: foo
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: '{'
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-- source: enum
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.block.enum.cpp
     - meta.head.enum.cpp
   scopes:
     - storage.type.enum.cpp
-- source: bar
-  scopes:
+  source: enum
+- scopes:
     - entity.name.type.enum.cpp
-- source: b
-  scopesEnd:
+  source: bar
+- scopesEnd:
     - meta.head.enum.cpp
-- source: ;
+  source: b
+- scopesEnd:
+    - meta.block.enum.cpp
   scopes:
     - punctuation.terminator.statement.cpp
-  scopesEnd:
-    - meta.block.enum.cpp
-- source: '}'
-  scopes:
+  source: ;
+- scopes:
     - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

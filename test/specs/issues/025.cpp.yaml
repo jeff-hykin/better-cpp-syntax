@@ -1,108 +1,108 @@
-- source: bool
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
 - source: 'Stats '
-- source: aStats
-  scopes:
+- scopes:
     - variable.parameter.cpp
-- source: )
+  source: aStats
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
 - source: '    Stats aStats'
-- source: )
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
 - source: '    Stats aStats'
-- source: )
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
-- source: FillStats
-  scopesBegin:
+  source: bool
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: FillStats
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: bool
-  scopes:
+  source: ;
+- scopes:
     - storage.type.primitive.cpp
+  source: bool
 - source: FillStats
-- source: (
-  scopesBegin:
+- scopesBegin:
     - meta.parens.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
 - source: '    Stats aStats'
-- source: )
+- scopesEnd:
+    - meta.parens.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
-- source: ;
-  scopes:
+  source: )
+- scopes:
     - punctuation.terminator.statement.cpp
+  source: ;

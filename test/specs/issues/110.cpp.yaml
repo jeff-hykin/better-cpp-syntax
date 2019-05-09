@@ -1,88 +1,88 @@
-- source: void
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
-- source: function
-  scopesBegin:
+  source: void
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: function
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: '{'
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-- source: switch
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.block.switch.cpp
     - meta.head.switch.cpp
   scopes:
     - keyword.control.switch.cpp
-- source: (
-  scopesBegin:
+  source: switch
+- scopesBegin:
     - meta.conditional.switch.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
-- source: '1'
-  scopes:
+  source: (
+- scopes:
     - constant.numeric.decimal.cpp
-- source: )
+  source: '1'
+- scopesEnd:
+    - meta.conditional.switch.cpp
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch.cpp
-  scopesEnd:
-    - meta.conditional.switch.cpp
-- source: '{'
+  source: )
+- scopesEnd:
+    - meta.head.switch.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.switch.cpp
-  scopesEnd:
-    - meta.head.switch.cpp
-- source: case
-  scopesBegin:
+  source: '{'
+- scopesBegin:
     - meta.body.switch.cpp
     - meta.conditional.case.cpp
   scopes:
     - keyword.control.case.cpp
-- source: '1'
-  scopes:
+  source: case
+- scopes:
     - constant.numeric.decimal.cpp
-- source: ':'
+  source: '1'
+- scopesEnd:
+    - meta.conditional.case.cpp
   scopes:
     - colon.cpp
     - punctuation.separator.case.cpp
-  scopesEnd:
-    - meta.conditional.case.cpp
-- source: break
-  scopes:
+  source: ':'
+- scopes:
     - keyword.control.break.cpp
-- source: ;
-  scopes:
+  source: break
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: default
-  scopesBegin:
+  source: ;
+- scopesBegin:
     - meta.conditional.case.cpp
   scopes:
     - keyword.control.default.cpp
-- source: ':'
+  source: default
+- scopesEnd:
+    - meta.conditional.case.cpp
   scopes:
     - colon.cpp
     - punctuation.separator.case.default.cpp
-  scopesEnd:
-    - meta.conditional.case.cpp
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly.switch.cpp
-  scopesEnd:
+  source: ':'
+- scopesEnd:
     - meta.block.switch.cpp
     - meta.body.switch.cpp
-- source: '}'
   scopes:
+    - punctuation.section.block.end.bracket.curly.switch.cpp
+  source: '}'
+- scopes:
     - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

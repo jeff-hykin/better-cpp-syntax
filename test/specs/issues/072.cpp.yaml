@@ -1,339 +1,340 @@
+---
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+  - meta.block.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
+  - storage.type.class.cpp
 - source: A
   scopes:
-    - entity.name.type.class.cpp
-- source: '{'
+  - entity.name.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
 - source: void
   scopesBegin:
-    - meta.body.class.cpp
+  - meta.body.class.cpp
   scopes:
-    - storage.type.primitive.cpp
+  - storage.type.primitive.cpp
 - source: abc
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
-- source: (
+  - entity.name.function.cpp
+- source: "("
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  - punctuation.section.parameters.begin.bracket.round.cpp
+- source: ")"
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+  - punctuation.section.parameters.end.bracket.round.cpp
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
-- source: '}'
+  - punctuation.terminator.statement.cpp
+- source: "}"
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
   scopesEnd:
-    - meta.body.class.cpp
-- source: ;
+  - meta.body.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
+  - storage.type.class.cpp
 - source: A
   scopes:
-    - entity.name.type.class.cpp
-- source: '{'
+  - entity.name.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
 - source: void
   scopesBegin:
-    - meta.body.class.cpp
+  - meta.body.class.cpp
   scopes:
-    - storage.type.primitive.cpp
+  - storage.type.primitive.cpp
 - source: abc
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
-- source: (
+  - entity.name.function.cpp
+- source: "("
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  - punctuation.section.parameters.begin.bracket.round.cpp
+- source: ")"
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+  - punctuation.section.parameters.end.bracket.round.cpp
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
-- source: '}'
+  - punctuation.terminator.statement.cpp
+- source: "}"
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
   scopesEnd:
-    - meta.body.class.cpp
-- source: ;
+  - meta.body.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
+  - storage.type.class.cpp
 - source: A
   scopes:
-    - entity.name.type.class.cpp
-- source: '{'
+  - entity.name.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
 - source: void
   scopesBegin:
-    - meta.body.class.cpp
+  - meta.body.class.cpp
   scopes:
-    - storage.type.primitive.cpp
+  - storage.type.primitive.cpp
 - source: abc
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
-- source: (
+  - entity.name.function.cpp
+- source: "("
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  - punctuation.section.parameters.begin.bracket.round.cpp
+- source: ")"
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+  - punctuation.section.parameters.end.bracket.round.cpp
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
-- source: '}'
+  - punctuation.terminator.statement.cpp
+- source: "}"
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
   scopesEnd:
-    - meta.body.class.cpp
-- source: ;
+  - meta.body.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
+  - storage.type.class.cpp
 - source: A
   scopes:
-    - entity.name.type.class.cpp
-- source: '{'
+  - entity.name.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
+  - meta.head.class.cpp
 - source: void
   scopesBegin:
-    - meta.body.class.cpp
+  - meta.body.class.cpp
   scopes:
-    - storage.type.primitive.cpp
+  - storage.type.primitive.cpp
 - source: abc
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
-- source: (
+  - entity.name.function.cpp
+- source: "("
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  - punctuation.section.parameters.begin.bracket.round.cpp
+- source: ")"
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+  - punctuation.section.parameters.end.bracket.round.cpp
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: ;
+  - meta.function.definition.parameters.cpp
+  - meta.function.definition.parameters.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
-- source: '}'
+  - punctuation.terminator.statement.cpp
+- source: "}"
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
   scopesEnd:
-    - meta.body.class.cpp
-- source: ;
+  - meta.body.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.class.cpp
+  - meta.block.class.cpp
 - source: struct
   scopesBegin:
-    - meta.block.struct.cpp
-    - meta.head.struct.cpp
+  - meta.block.struct.cpp
+  - meta.head.struct.cpp
   scopes:
-    - storage.type.struct.cpp
-- source: '{'
+  - storage.type.struct.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  - punctuation.section.block.begin.bracket.curly.struct.cpp
   scopesEnd:
-    - meta.head.struct.cpp
-- source: '}'
+  - meta.head.struct.cpp
+- source: "}"
   scopes:
-    - meta.body.struct.cpp
-    - punctuation.section.block.end.bracket.curly.struct.cpp
-- source: ;
+  - meta.body.struct.cpp
+  - punctuation.section.block.end.bracket.curly.struct.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.struct.cpp
+  - meta.block.struct.cpp
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+  - meta.block.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
-- source: '{'
+  - storage.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
-- source: '}'
+  - meta.head.class.cpp
+- source: "}"
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
-- source: ;
+  - meta.body.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.class.cpp
+  - meta.block.class.cpp
 - source: enum
   scopesBegin:
-    - meta.block.enum.cpp
-    - meta.head.enum.cpp
+  - meta.block.enum.cpp
+  - meta.head.enum.cpp
   scopes:
-    - storage.type.enum.cpp
-- source: '{'
+  - storage.type.enum.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.enum.cpp
+  - punctuation.section.block.begin.bracket.curly.enum.cpp
   scopesEnd:
-    - meta.head.enum.cpp
-- source: '}'
+  - meta.head.enum.cpp
+- source: "}"
   scopes:
-    - meta.body.enum.cpp
-    - punctuation.section.block.end.bracket.curly.enum.cpp
-- source: ;
+  - meta.body.enum.cpp
+  - punctuation.section.block.end.bracket.curly.enum.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.enum.cpp
+  - meta.block.enum.cpp
 - source: union
   scopesBegin:
-    - meta.block.union.cpp
-    - meta.head.union.cpp
+  - meta.block.union.cpp
+  - meta.head.union.cpp
   scopes:
-    - storage.type.union.cpp
-- source: '{'
+  - storage.type.union.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.union.cpp
+  - punctuation.section.block.begin.bracket.curly.union.cpp
   scopesEnd:
-    - meta.head.union.cpp
-- source: '}'
+  - meta.head.union.cpp
+- source: "}"
   scopes:
-    - meta.body.union.cpp
-    - punctuation.section.block.end.bracket.curly.union.cpp
-- source: ;
+  - meta.body.union.cpp
+  - punctuation.section.block.end.bracket.curly.union.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.union.cpp
+  - meta.block.union.cpp
 - source: struct
   scopesBegin:
-    - meta.block.struct.cpp
-    - meta.head.struct.cpp
+  - meta.block.struct.cpp
+  - meta.head.struct.cpp
   scopes:
-    - storage.type.struct.cpp
-- source: '{'
+  - storage.type.struct.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  - punctuation.section.block.begin.bracket.curly.struct.cpp
   scopesEnd:
-    - meta.head.struct.cpp
-- source: '}'
+  - meta.head.struct.cpp
+- source: "}"
   scopes:
-    - meta.body.struct.cpp
-    - punctuation.section.block.end.bracket.curly.struct.cpp
-- source: ;
+  - meta.body.struct.cpp
+  - punctuation.section.block.end.bracket.curly.struct.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.struct.cpp
+  - meta.block.struct.cpp
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+  - meta.block.class.cpp
+  - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
-- source: '{'
+  - storage.type.class.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+  - punctuation.section.block.begin.bracket.curly.class.cpp
   scopesEnd:
-    - meta.head.class.cpp
-- source: '}'
+  - meta.head.class.cpp
+- source: "}"
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
-- source: ;
+  - meta.body.class.cpp
+  - punctuation.section.block.end.bracket.curly.class.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp
   scopesEnd:
-    - meta.block.class.cpp
+  - meta.block.class.cpp
 - source: enum
-  scopesBegin:
-    - meta.block.enum
-    - meta.head.enum
   scopes:
-    - storage.type.enum
-- source: '{'
+  - storage.type.enum
+  scopesBegin:
+  - meta.block.enum
+  - meta.head.enum
+- source: "{"
   scopesBegin: []
   scopes:
-    - punctuation.section.block.begin.bracket.curly.enum.cpp
+  - punctuation.section.block.begin.bracket.curly.enum.cpp
   scopesEnd:
-    - meta.head.enum
-- source: '}'
+  - meta.head.enum
+- source: "}"
   scopes:
-    - meta.body.enum
-    - punctuation.section.block.end.bracket.curly.enum.cpp
+  - meta.body.enum
+  - punctuation.section.block.end.bracket.curly.enum.cpp
   scopesEnd:
-    - meta.block.enum
-- source: ;
+  - meta.block.enum
+- source: ";"
   scopes:
-    - meta.block.enum
-    - punctuation.terminator.statement.cpp
+  - meta.block.enum
+  - punctuation.terminator.statement.cpp
 - source: union
   scopesBegin:
-    - meta.block.union.cpp
-    - meta.head.union.cpp
+  - meta.block.union.cpp
+  - meta.head.union.cpp
   scopes:
-    - storage.type.union.cpp
-- source: '{'
+  - storage.type.union.cpp
+- source: "{"
   scopes:
-    - punctuation.section.block.begin.bracket.curly.union.cpp
+  - punctuation.section.block.begin.bracket.curly.union.cpp
   scopesEnd:
-    - meta.head.union.cpp
-- source: '}'
+  - meta.head.union.cpp
+- source: "}"
   scopes:
-    - meta.body.union.cpp
-    - punctuation.section.block.end.bracket.curly.union.cpp
-- source: ;
+  - meta.body.union.cpp
+  - punctuation.section.block.end.bracket.curly.union.cpp
+- source: ";"
   scopes:
-    - punctuation.terminator.statement.cpp
+  - punctuation.terminator.statement.cpp

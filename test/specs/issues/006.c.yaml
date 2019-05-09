@@ -1,62 +1,62 @@
-- source: int
-  scopes:
+- scopes:
     - storage.type.built-in.primitive.c
+  source: int
 - source: ' bar '
-- source: =
-  scopes:
+- scopes:
     - keyword.operator.assignment.c
-- source: '{'
-  scopesBegin:
+  source: =
+- scopesBegin:
     - meta.block.c
   scopes:
     - punctuation.section.block.begin.bracket.curly.c
-- source: 0x
-  scopes:
+  source: '{'
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: '28'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.c
-- source: ','
-  scopes:
+  source: '28'
+- scopes:
     - punctuation.separator.delimiter.c
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: d4
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.c
-- source: ','
-  scopes:
+  source: d4
+- scopes:
     - punctuation.separator.delimiter.c
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: '96'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.c
-- source: ','
-  scopes:
+  source: '96'
+- scopes:
     - punctuation.separator.delimiter.c
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: '75'
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.c
-- source: ','
-  scopes:
+  source: '75'
+- scopes:
     - punctuation.separator.delimiter.c
-- source: 0x
-  scopes:
+  source: ','
+- scopes:
     - keyword.other.unit.hexadecimal.c
-- source: 4c
-  scopes:
+  source: 0x
+- scopes:
     - constant.numeric.hexadecimal.c
-- source: '}'
+  source: 4c
+- scopesEnd:
+    - meta.block.c
   scopes:
     - punctuation.section.block.end.bracket.curly.c
-  scopesEnd:
-    - meta.block.c
-- source: ;
-  scopes:
+  source: '}'
+- scopes:
     - punctuation.terminator.statement.c
+  source: ;

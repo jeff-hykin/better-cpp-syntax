@@ -1,10 +1,10 @@
 require_relative '../textmate_tools.rb'
 
-#
+# 
 # C++ specific tokens
-#
-    # TODO:
-        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations
+# 
+    # TODO: 
+        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations 
         # https://en.cppreference.com/w/cpp/language/declarations
         # look at https://en.cppreference.com/w/cpp/language/function to implement better member function syntax
 
@@ -192,7 +192,7 @@ tokens = [
     { representation: "struct"               , name: "struct"          , isTypeCreator: true},
     { representation: "union"                , name: "union"           , isTypeCreator: true},
     { representation: "enum"                 , name: "enum"            , isTypeCreator: true},
-    # storage specifiers https://en.cppreference.com/w/cpp/language/declarations
+    # storage specifiers https://en.cppreference.com/w/cpp/language/declarations 
     { representation: "const"                , name: "const"            , isSpecifier: true, isStorageSpecifier: true },
     { representation: "static"               , name: "static"           , isSpecifier: true, isStorageSpecifier: true },
     { representation: "volatile"             , name: "volatile"         , isSpecifier: true, isStorageSpecifier: true },
@@ -200,12 +200,12 @@ tokens = [
     { representation: "restrict"             , name: "restrict"         , isSpecifier: true, isStorageSpecifier: true },
     { representation: "extern"               , name: "extern"           , isSpecifier: true, isStorageSpecifier: true, isClassSpecifier: true },
     # function specifiers/qualifiers
-    { representation: "inline"               , name: "inline"           , isSpecifier: true, isStorageSpecifier: true, isFunctionSpecifier: true},
-    { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true, isStorageSpecifier: true, isFunctionSpecifier: true},
-    { representation: "mutable"              , name: "mutable"          , isSpecifier: true, isStorageSpecifier: true, isFunctionSpecifier: true},
-    { representation: "friend"               , name: "friend"           , isSpecifier: true, isFunctionSpecifier: true},
-    { representation: "explicit"             , name: "explicit"         , isSpecifier: true, isFunctionSpecifier: true},
-    { representation: "virtual"              , name: "virtual"          , isSpecifier: true, isFunctionSpecifier: true},
+    { representation: "inline"               , name: "inline"           , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
@@ -248,23 +248,23 @@ tokens = [
     { representation: "__declspec("           , name: "ms attribute start"     , isAttributeStart: true, isMsAttribute: true},
     { representation: ")"                     , name: "ms attribute end"       , isAttributeEnd: true  , isMsAttribute: true},
 
-    #
+    # 
     # misc
-    #
+    # 
     # https://en.cppreference.com/w/cpp/keyword
     { representation: "this"            , name: "this"          },
     { representation: "template"        , name: "template"      },
     { representation: "namespace"       , name: "namespace"     },
     { representation: "using"           , name: "using"         },
     { representation: "operator"        , name: "operator"      },
-    #
+    # 
     { representation: "typedef"         , name: "typedef"       },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
     { representation: "typename"        , name: "typename"      },
-    #
+    # 
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
-    #
+    # 
     { representation: "concept"                    , name: "concept"                    },
     { representation: "requires"                   , name: "requires"                   },
     { representation: "export"                     , name: "export"                     },
@@ -279,7 +279,7 @@ tokens = [
     { representation: "module"                     , name: "module"                     },
     { representation: "reflexpr"                   , name: "reflexpr"                   },
     { representation: "synchronized"               , name: "synchronized"               },
-    #
+    # 
     { representation: "audit"                      , name: "audit"                      , isSpecialIdentifier: true , isValidFunctionName: true},
     { representation: "axiom"                      , name: "axiom"                      , isSpecialIdentifier: true , isValidFunctionName: true},
     { representation: "transaction_safe"           , name: "transaction_safe"           , isSpecialIdentifier: true , isValidFunctionName: true},
@@ -288,7 +288,7 @@ tokens = [
 
 
 
-@cpp_tokens = TokenHelper.new tokens, for_each_token: ->(each) do
+@cpp_tokens = TokenHelper.new tokens, for_each_token: ->(each) do 
     # isSymbol, isWordish
     if each[:representation] =~ /[a-zA-Z0-9_]/
         each[:isWordish] = true

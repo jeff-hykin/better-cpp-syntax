@@ -1,67 +1,67 @@
-- source: '#'
-  scopesBegin:
+- scopesBegin:
     - meta.preprocessor.include.c
     - keyword.control.directive.include.c
   scopes:
     - punctuation.definition.directive.c
-- source: include
-  scopesEnd:
+  source: '#'
+- scopesEnd:
     - keyword.control.directive.include.c
-- source: <
-  scopesBegin:
+  source: include
+- scopesBegin:
     - string.quoted.other.lt-gt.include.c
   scopes:
     - punctuation.definition.string.begin.c
+  source: <
 - source: glib-object.h
-- source: '>'
+- scopesEnd:
+    - string.quoted.other.lt-gt.include.c
   scopes:
     - punctuation.definition.string.end.c
-  scopesEnd:
-    - string.quoted.other.lt-gt.include.c
-- source: '#'
-  scopesBegin:
+  source: '>'
+- scopesBegin:
     - keyword.control.directive.include.c
   scopes:
     - punctuation.definition.directive.c
-- source: include
-  scopesEnd:
+  source: '#'
+- scopesEnd:
     - keyword.control.directive.include.c
-- source: '"'
-  scopesBegin:
+  source: include
+- scopesBegin:
     - string.quoted.double.include.c
   scopes:
     - punctuation.definition.string.begin.c
+  source: '"'
 - source: tllt-cp-cooking-details-dto.h
-- source: '"'
-  scopes:
-    - punctuation.definition.string.end.c
-  scopesEnd:
+- scopesEnd:
     - meta.preprocessor.include.c
     - string.quoted.double.include.c
-- source: G_DEFINE_TYPE
-  scopesBegin:
+  scopes:
+    - punctuation.definition.string.end.c
+  source: '"'
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: G_DEFINE_TYPE
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
+  source: (
 - source: TlltCpCookingDetailsDto
-- source: ','
-  scopes:
+- scopes:
     - punctuation.separator.delimiter.c
+  source: ','
 - source: ' tllt_cp_cooking_details_dto'
-- source: ','
-  scopes:
+- scopes:
     - punctuation.separator.delimiter.c
+  source: ','
 - source: ' G_TYPE_OBJECT'
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
+  source: ;

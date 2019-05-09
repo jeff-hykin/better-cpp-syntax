@@ -1,68 +1,68 @@
-- source: void
-  scopes:
+- scopes:
     - storage.type.primitive.cpp
-- source: function
-  scopesBegin:
+  source: void
+- scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-- source: (
-  scopes:
+  source: function
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: '{'
-  scopesBegin:
+  source: )
+- scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-- source: a
-  scopes:
+  source: '{'
+- scopes:
     - variable.other.object.access.cpp
-- source: '->'
-  scopes:
+  source: a
+- scopes:
     - punctuation.separator.pointer-access.cpp
-- source: b->
-  scopes:
+  source: '->'
+- scopes:
     - variable.other.object.property.cpp
-- source: c
-  scopes:
+  source: b->
+- scopes:
     - variable.other.property.cpp
-- source: =
-  scopes:
+  source: c
+- scopes:
     - keyword.operator.assignment.cpp
-- source: '1'
-  scopes:
+  source: =
+- scopes:
     - constant.numeric.decimal.cpp
-- source: ;
-  scopes:
+  source: '1'
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: a
-  scopes:
+  source: ;
+- scopes:
     - variable.other.object.access.cpp
-- source: .
-  scopes:
+  source: a
+- scopes:
     - punctuation.separator.dot-access.cpp
-- source: b.
-  scopes:
+  source: .
+- scopes:
     - variable.other.object.property.cpp
-- source: c
-  scopes:
+  source: b.
+- scopes:
     - variable.other.property.cpp
-- source: =
-  scopes:
+  source: c
+- scopes:
     - keyword.operator.assignment.cpp
-- source: '1'
-  scopes:
+  source: =
+- scopes:
     - constant.numeric.decimal.cpp
-- source: ;
-  scopes:
+  source: '1'
+- scopes:
     - punctuation.terminator.statement.cpp
-- source: '}'
-  scopes:
+  source: ;
+- scopes:
     - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

@@ -1,26 +1,26 @@
-- source: static
-  scopes:
+- scopes:
     - storage.modifier.c
+  source: static
 - source: ' gboolean'
-- source: tllt_toaster_run
-  scopesBegin:
+- scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-- source: (
-  scopes:
+  source: tllt_toaster_run
+- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
+  source: (
 - source: 'gpointer '
-- source: user_data
-  scopes:
+- scopes:
     - variable.parameter.probably.c
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  scopesEnd:
+  source: user_data
+- scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
-- source: ;
   scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
     - punctuation.terminator.statement.c
+  source: ;

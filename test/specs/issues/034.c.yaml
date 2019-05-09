@@ -1,56 +1,56 @@
-- source: '#'
-  scopesBegin:
+- scopesBegin:
     - meta.preprocessor.macro.c
     - keyword.control.directive.define.c
   scopes:
     - punctuation.definition.directive.c
-- source: define
-  scopesEnd:
+  source: '#'
+- scopesEnd:
     - keyword.control.directive.define.c
-- source: IS_UPGRADE_ADDR
-  scopes:
+  source: define
+- scopes:
     - entity.name.function.preprocessor.c
-- source: (
-  scopes:
+  source: IS_UPGRADE_ADDR
+- scopes:
     - punctuation.definition.parameters.begin.c
-- source: addr
-  scopes:
+  source: (
+- scopes:
     - variable.parameter.preprocessor.c
-- source: )
-  scopes:
+  source: addr
+- scopes:
     - punctuation.definition.parameters.end.c
-- source: (
+  source: )
+- scopesEnd:
+    - meta.preprocessor.macro.c
   scopes:
     - punctuation.section.parens.begin.bracket.round.c
-  scopesEnd:
-    - meta.preprocessor.macro.c
-- source: /*
-  scopesBegin:
+  source: (
+- scopesBegin:
     - comment.block.c
   scopes:
     - punctuation.definition.comment.begin.c
+  source: /*
 - source: '((addr) >= UPGRADE_BASE_ADDR) && '
-- source: '*/'
+- scopesEnd:
+    - comment.block.c
   scopes:
     - punctuation.definition.comment.end.c
-  scopesEnd:
-    - comment.block.c
-- source: (
-  scopesBegin:
+  source: '*/'
+- scopesBegin:
     - meta.parens.c
   scopes:
     - punctuation.section.parens.begin.bracket.round.c
+  source: (
 - source: addr
-- source: )
+- scopesEnd:
+    - meta.parens.c
   scopes:
     - punctuation.section.parens.end.bracket.round.c
-  scopesEnd:
-    - meta.parens.c
-- source: <
-  scopes:
+  source: )
+- scopes:
     - keyword.operator.comparison.c
+  source: <
 - source: ' UPGRADE_BASE_ADDR '
-- source: +
-  scopes:
+- scopes:
     - keyword.operator.c
+  source: +
 - source: ' UPGRADE_SPACE_SIZE)'

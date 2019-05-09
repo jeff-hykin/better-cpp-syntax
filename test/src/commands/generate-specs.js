@@ -3,6 +3,7 @@
 const path = require("path");
 const fs = require("fs");
 const yaml = require("js-yaml");
+const stringify = require("json-stable-stringify");
 
 const argv = require("../arguments");
 const generateSpec = require("../generateSpec");
