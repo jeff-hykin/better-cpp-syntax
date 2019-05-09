@@ -74,7 +74,7 @@ def numeric_constant(allow_user_defined_literals: false)
     numeric_suffix = newPattern(
         should_fully_match: ["u","l","UL","llU"],
         should_not_fully_match: ["lLu","uU","lug"],
-        match: /[uU]/.or(/[uU]ll?/).or(/[uU]LL?/).or(/ll?[uU]?/).or(/LL?[uU]?/).lookAheadToAvoid(/\w/),
+        match: /[uU]/.or(/[uU]ll?/).or(/[uU]LL?/).or(/ll?[uU]?/).or(/LL?[uU]?/).or(/[fF]/).lookAheadToAvoid(/\w/),
         tag_as: "keyword.other.unit.suffix.integer",
         )
 
