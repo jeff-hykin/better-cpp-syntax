@@ -534,24 +534,27 @@
         ]
     },
     {
-        "source": "enum"
+        "source": "enum",
+        "scopes": [
+            "storage.type.enum",
+            "meta.block.enum",
+            "meta.head.enum"
+        ]
     },
     {
         "source": "{",
         "scopesBegin": [
-            "meta.block.cpp"
         ],
         "scopes": [
-            "punctuation.section.block.begin.bracket.curly.cpp"
+            "punctuation.section.block.begin.bracket.curly.enum.cpp"
         ]
     },
     {
         "source": "}",
         "scopes": [
-            "punctuation.section.block.end.bracket.curly.cpp"
+            "punctuation.section.block.end.bracket.curly.enum.cpp"
         ],
         "scopesEnd": [
-            "meta.block.cpp"
         ]
     },
     {

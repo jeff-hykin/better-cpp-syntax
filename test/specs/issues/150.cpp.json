@@ -26,19 +26,26 @@
     },
     {
         "source": "//",
-        "scopesBegin": [
-            "meta.body.enum.cpp"
+        "scopes": [
+            "meta.body.enum.cpp",
+            "comment.line.double-slash",
+            "punctuation.definition.comment"
         ]
     },
     {
         "source": "comment",
         "scopes": [
             "meta.enum.definition.cpp",
-            "constant.other.enum.cpp"
+            "variable.other.enummember.cpp"
         ]
     },
     {
-        "source": "definition"
+        "source": "definition",
+        "scopes": [
+            "meta.body.enum",
+            "meta.enum.definition.cpp",
+            "variable.other.enummember.cpp"
+        ]
     },
     {
         "source": "/*"
@@ -56,13 +63,13 @@
         "source": "definition3",
         "scopesBegin": [
             "meta.enum.definition.cpp",
-            "constant.other.enum.cpp"
+            "variable.other.enummember.cpp"
         ]
     },
     {
         "source": "definition",
-        "scopesEnd": [
-            "constant.other.enum.cpp"
+        "scopes": [
+            "variable.other.enummember.cpp"
         ]
     },
     {
@@ -85,7 +92,7 @@
         "source": "comment",
         "scopes": [
             "meta.enum.definition.cpp",
-            "constant.other.enum.cpp"
+            "variable.other.enummember.cpp"
         ]
     },
     {
