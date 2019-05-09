@@ -408,7 +408,7 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\s<>:,*&\w]/
+    characters_in_template_call = /[\s<>():,*&\w]/
     cpp_grammar[:user_defined_template_type] = newPattern(
             match: variable_name,
             tag_as: 'storage.type.user-defined'
@@ -422,13 +422,9 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
         match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).zeroOrMoreOf(
-            match: characters_in_template_call,
-            includes: [:template_call_context]
-        ).or(
-            match: /[\s<>:,*&()\w]*?/,
-            includes: [:function_type]
-        ).then(/>/).maybe(@spaces),
-        
+                match: characters_in_template_call,
+                includes: [:function_type, :template_call_context]
+            ).then(/>/).maybe(@spaces)
         )
     cpp_grammar[:template_call_range] = PatternRange.new(
             tag_as: 'meta.template.call',
@@ -537,7 +533,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call).then(/::/)
     preceding_scopes = newPattern(
         match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution ]
@@ -558,14 +554,15 @@ cpp_grammar = Grammar.new(
 # Types
 #
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>"],
+        should_fully_match: ["A","A::B","A::B<C>::D<E>", "function<void(void, usertype uservalue)>"],
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
         ).maybe(inline_attribute).maybe(@spaces)
-        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:]/),
+        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call).lookAheadToAvoid(/[\w<:]/),
         tag_as: "entity.name.type meta.qualified_type",
         includes: [
+            :function_type,
             :storage_types,
             :number_literal,
             :string_context_c,
@@ -575,11 +572,12 @@ cpp_grammar = Grammar.new(
     # this matches a single function type inside a template, e.g. std::function<void(void)>
     cpp_grammar[:function_type] = newPattern(
         match: lookBehindFor(/</).maybe(@spaces).then(qualified_type).maybe(@spaces).then(/\(/).then(
-            match: /\.+/,
+            match: /.+/,
             includes: [
                 :function_parameters,
             ]
         ).then(/\)/).maybe(@spaces).lookAheadFor(/>/),
+        tag_as: "meta.function_type"
     )
 #
 # Declarations
@@ -943,10 +941,10 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    ends_parameter = /[,)>]|\.\.\./
+    ends_parameter = /[,)]|\.\.\./
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = PatternRange.new(
-        start_pattern: lookBehindFor(/[,(<]/),
+        start_pattern: lookBehindFor(/[,(]/),
         end_pattern: lookAheadFor(ends_parameter),
         tag_as: "meta.function.parameter",
         includes: [
