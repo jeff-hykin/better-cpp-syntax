@@ -1047,12 +1047,12 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]|\n|\/[\/\*]/,
+            match: /[,;]/.or(/\n/),
             includes: [
                 :comma,
                 :semicolon,
             ],
-        ).or(lookAheadFor(/\}/))),
+        ).or(lookAheadFor(/\}/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
         tag_as: "meta.enum.definition",
     )
     # see https://en.cppreference.com/w/cpp/language/enum
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, :comments_context ],
+            body_includes: [ :enumerator_list, :comments_context, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

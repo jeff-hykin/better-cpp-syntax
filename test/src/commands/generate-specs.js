@@ -42,5 +42,5 @@ async function generateSpecs() {
 
 function keyCompare(key1, key2) {
     const order = ["source", "scopesBegin", "scopes", "scopesEnd"];
-    return order.indexOf(key1.key) > order.indexOf(key2.key) ? 1 : -1;
+    return order.indexOf(key1) - order.indexOf(key2);
 }

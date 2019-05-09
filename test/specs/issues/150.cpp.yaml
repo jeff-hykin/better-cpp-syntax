@@ -1,55 +1,69 @@
-- scopesBegin:
+- source: enum
+  scopesBegin:
     - meta.block.enum.cpp
     - meta.head.enum.cpp
   scopes:
     - storage.type.enum.cpp
-  source: enum
-- scopes:
+- source: enum1
+  scopes:
     - entity.name.type.enum.cpp
-  source: enum1
-- scopesEnd:
-    - meta.head.enum.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.enum.cpp
-  source: '{'
-- scopesBegin:
+  scopesEnd:
+    - meta.head.enum.cpp
+- source: //
+  scopesBegin:
     - meta.body.enum.cpp
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' comment'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' comment'
-- scopesBegin:
-    - meta.enum.definition.cpp
+- source: definition
   scopes:
-    - variable.other.enummember.cpp
-  source: definition
-- scopesEnd:
-    - meta.enum.definition.cpp
-  source: /*
-- source: ' block comment */, '
-- scopesBegin:
     - meta.enum.definition.cpp
     - variable.other.enummember.cpp
-  source: definition3
-- scopesEnd:
-    - variable.other.enummember.cpp
-  source: definition
-- scopes:
+- source: /*
+  scopesBegin:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+- source: ' block comment '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  scopesEnd:
+    - comment.block.cpp
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
-- scopes:
-    - variable.other.enummember.cpp
-  source: definition2
-- source: //
-- scopesEnd:
+- source: definition3
+  scopesBegin:
     - meta.enum.definition.cpp
+    - variable.other.enummember.cpp
+- source: definition
+  scopesEnd:
+    - variable.other.enummember.cpp
+- source: ','
+  scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+- source: definition2
   scopes:
     - variable.other.enummember.cpp
-  source: comment
-- scopes:
+  scopesEnd:
+    - meta.enum.definition.cpp
+- source: //
+  scopesBegin:
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+- source: ' comment'
+  scopesEnd:
+    - comment.line.double-slash.cpp
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.enum.cpp
-  source: '}'
