@@ -1,39 +1,39 @@
-- scopes:
+- source: int
+  scopes:
     - storage.type.built-in.primitive.c
-  source: int
-- scopesBegin:
+- source: main
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: main
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopesBegin:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: '{'
+  scopesBegin:
     - meta.block.c
   scopes:
     - punctuation.section.block.begin.bracket.curly.c
-  source: '{'
-- scopes:
+- source: int
+  scopes:
     - storage.type.built-in.primitive.c
-  source: int
 - source: ' test_enum '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
-- scopes:
+- source: '1'
+  scopes:
     - constant.numeric.decimal.c
-  source: '1'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.c
-  source: '}'

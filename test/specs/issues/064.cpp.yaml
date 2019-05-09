@@ -1,850 +1,850 @@
-- scopes:
+- source: void
+  scopes:
     - storage.type.primitive.cpp
-  source: void
-- scopesBegin:
+- source: function
+  scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-  source: function
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  source: )
-- scopesBegin:
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-  source: '{'
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
 - source: '[] '
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
 - source: '[] '
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
 - source: '[] '
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
 - source: '[] '
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
+  scopesEnd:
+    - meta.parens.block.cpp
 - source: '[] '
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
+  scopesEnd:
+    - meta.parens.block.cpp
 - source: '[] '
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
-    - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
-    - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
-    - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
-    - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
 - source: ' ::'
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
+  scopesEnd:
+    - meta.parens.block.cpp
 - source: '[] '
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.cpp
-  source: '*'
 - source: 'a '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.cpp
-  source: =
-- scopes:
+- source: new
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.new.cpp
-  source: new
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: '2'
+  scopes:
     - constant.numeric.decimal.cpp
-  source: '2'
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' f'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
+  scopesEnd:
+    - meta.parens.block.cpp
 - source: '[] '
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
 - source: ' a'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
 - source: ' a'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
 - source: ' a'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
 - source: ' a'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
-- scopesBegin:
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
-- scopesBegin:
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' b'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: delete
+  scopes:
     - keyword.operator.wordlike.cpp
     - memory.cpp
     - keyword.operator.delete.cpp
-  source: delete
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' b'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
 - source: '    ::'
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
-- scopesBegin:
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' b'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: delete
+  scopesBegin:
     - keyword.operator.wordlike.cpp
     - memory.cpp
   scopes:
     - keyword.operator.delete.array.cpp
-  source: delete
-- scopesEnd:
-    - keyword.operator.wordlike.cpp
-    - memory.cpp
+- source: '[]'
   scopes:
     - keyword.operator.delete.array.bracket.cpp
-  source: '[]'
-- scopesBegin:
+  scopesEnd:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
 - source: a
-- scopes:
+- source: ','
+  scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
-  source: ','
 - source: ' b'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopes:
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.cpp
-  source: '}'

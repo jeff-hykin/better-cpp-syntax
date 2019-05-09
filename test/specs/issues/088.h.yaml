@@ -1,95 +1,95 @@
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' .h file with C++ syntax highlighting'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' .h file with C++ syntax highlighting'
-- scopesBegin:
+- source: '#'
+  scopesBegin:
     - meta.preprocessor.cpp
     - keyword.control.directive.conditional.cpp
   scopes:
     - punctuation.definition.directive.cpp
-  source: '#'
-- scopesEnd:
+- source: ifdef
+  scopesEnd:
     - keyword.control.directive.conditional.cpp
-  source: ifdef
-- scopesEnd:
-    - meta.preprocessor.cpp
+- source: USE_IN_HLSL
   scopes:
     - entity.name.function.preprocessor.cpp
-  source: USE_IN_HLSL
+  scopesEnd:
+    - meta.preprocessor.cpp
 - source: cbuffer  testCB
-- scopesBegin:
+- source: '#'
+  scopesBegin:
     - meta.preprocessor.cpp
     - keyword.control.directive.conditional.cpp
   scopes:
     - punctuation.definition.directive.cpp
-  source: '#'
-- scopesEnd:
+- source: else
+  scopesEnd:
     - meta.preprocessor.cpp
     - keyword.control.directive.conditional.cpp
-  source: else
-- scopesBegin:
+- source: struct
+  scopesBegin:
     - meta.block.struct.cpp
     - meta.head.struct.cpp
   scopes:
     - storage.type.struct.cpp
-  source: struct
-- scopes:
+- source: testCB
+  scopes:
     - entity.name.type.struct.cpp
-  source: testCB
-- scopes:
+- source: '#endif'
+  scopes:
     - 'keyword.control.directive.#endif.cpp'
-  source: '#endif'
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' <= this #endif is highlighted white although its valid'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' <= this #endif is highlighted white although its valid'
-- scopesEnd:
-    - meta.head.struct.cpp
+- source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct.cpp
-  source: '{'
-- scopesBegin:
+  scopesEnd:
+    - meta.head.struct.cpp
+- source: float
+  scopesBegin:
     - meta.body.struct.cpp
   scopes:
     - storage.type.primitive.cpp
-  source: float
 - source: ' Brightness'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' ...'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' ...'
-- scopesEnd:
-    - meta.body.struct.cpp
+- source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct.cpp
-  source: '}'
-- scopesEnd:
-    - meta.block.struct.cpp
+  scopesEnd:
+    - meta.body.struct.cpp
+- source: ;
   scopes:
     - punctuation.terminator.statement.cpp
-  source: ;
-- scopesBegin:
+  scopesEnd:
+    - meta.block.struct.cpp
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
 - source: ' the .h file with this struct definition can be used in HLSL and in C++ code '
-- scopes:
+- source: //
+  scopes:
     - punctuation.definition.comment.cpp
-  source: //
 - source: ' this way'

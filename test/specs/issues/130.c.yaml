@@ -1,74 +1,74 @@
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: function
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: function
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopesBegin:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: '{'
+  scopesBegin:
     - meta.block.c
   scopes:
     - punctuation.section.block.begin.bracket.curly.c
-  source: '{'
-- scopes:
+- source: a
+  scopes:
     - variable.other.object.access.c
-  source: a
-- scopes:
+- source: '->'
+  scopes:
     - punctuation.separator.pointer-access.c
-  source: '->'
-- scopes:
+- source: b
+  scopes:
     - variable.other.object.access.c
-  source: b
-- scopes:
+- source: '->'
+  scopes:
     - punctuation.separator.pointer-access.c
-  source: '->'
-- scopes:
+- source: c
+  scopes:
     - variable.other.member.c
-  source: c
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
-- scopes:
+- source: '1'
+  scopes:
     - constant.numeric.decimal.c
-  source: '1'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: a
+  scopes:
     - variable.other.object.access.c
-  source: a
-- scopes:
+- source: .
+  scopes:
     - punctuation.separator.dot-access.c
-  source: .
-- scopes:
+- source: b
+  scopes:
     - variable.other.object.access.c
-  source: b
-- scopes:
+- source: .
+  scopes:
     - punctuation.separator.dot-access.c
-  source: .
-- scopes:
+- source: c
+  scopes:
     - variable.other.member.c
-  source: c
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
-- scopes:
+- source: '1'
+  scopes:
     - constant.numeric.decimal.c
-  source: '1'
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.c
-  source: '}'
