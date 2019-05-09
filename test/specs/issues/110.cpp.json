@@ -1,0 +1,159 @@
+[
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "function",
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopesBegin": [
+            "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
+        ]
+    },
+    {
+        "source": "switch",
+        "scopesBegin": [
+            "meta.block.switch.cpp",
+            "meta.head.switch.cpp"
+        ],
+        "scopes": [
+            "keyword.control.switch.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.conditional.switch.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.conditional.switch.cpp"
+        ]
+    },
+    {
+        "source": "1",
+        "scopes": [
+            "constant.numeric.decimal.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.conditional.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.switch.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.switch.cpp"
+        ]
+    },
+    {
+        "source": "case",
+        "scopesBegin": [
+            "meta.body.switch.cpp",
+            "meta.conditional.case.cpp"
+        ],
+        "scopes": [
+            "keyword.control.case.cpp"
+        ]
+    },
+    {
+        "source": "1",
+        "scopes": [
+            "constant.numeric.decimal.cpp"
+        ]
+    },
+    {
+        "source": ":",
+        "scopes": [
+            "colon.cpp",
+            "punctuation.separator.case.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.case.cpp"
+        ]
+    },
+    {
+        "source": "break",
+        "scopes": [
+            "keyword.control.break.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ]
+    },
+    {
+        "source": "default",
+        "scopesBegin": [
+            "meta.conditional.case.cpp"
+        ],
+        "scopes": [
+            "keyword.control.default.cpp"
+        ]
+    },
+    {
+        "source": ":",
+        "scopes": [
+            "colon.cpp",
+            "punctuation.separator.case.default.cpp"
+        ],
+        "scopesEnd": [
+            "meta.conditional.case.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.switch.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.switch.cpp",
+            "meta.body.switch.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.cpp"
+        ]
+    }
+]

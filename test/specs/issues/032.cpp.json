@@ -1,0 +1,107 @@
+[
+    {
+        "source": "const",
+        "scopes": [
+            "storage.modifier.specifier.const.cpp"
+        ]
+    },
+    {
+        "source": "char",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "*",
+        "scopes": [
+            "keyword.operator.cpp"
+        ]
+    },
+    {
+        "source": " a "
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "keyword.operator.assignment.cpp"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
+        ]
+    },
+    {
+        "source": "foo ??/"
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
+        ]
+    },
+    {
+        "source": "?",
+        "scopesBegin": [
+            "keyword.operator.ternary.cpp"
+        ]
+    },
+    {
+        "source": "?",
+        "scopesEnd": [
+            "keyword.operator.ternary.cpp"
+        ]
+    },
+    {
+        "source": "/",
+        "scopes": [
+            "keyword.operator.cpp"
+        ]
+    },
+    {
+        "source": "?",
+        "scopesBegin": [
+            "keyword.operator.ternary.cpp"
+        ]
+    },
+    {
+        "source": "?",
+        "scopesEnd": [
+            "keyword.operator.ternary.cpp"
+        ]
+    },
+    {
+        "source": "/",
+        "scopes": [
+            "keyword.operator.cpp"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
+        ]
+    },
+    {
+        "source": ";"
+    },
+    {
+        "source": "class A <%"
+    },
+    {
+        "source": "    A(); //test"
+    },
+    {
+        "source": "%>;"
+    }
+]

@@ -1,0 +1,212 @@
+[
+    {
+        "source": "extern",
+        "scopesBegin": [
+            "meta.block.extern.cpp",
+            "meta.head.extern.cpp"
+        ],
+        "scopes": [
+            "storage.type.extern.cpp"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
+        ]
+    },
+    {
+        "source": "C"
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.extern.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.extern.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopesBegin": [
+            "meta.body.extern.cpp",
+            "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " this one is okay",
+        "scopesEnd": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "inBlock",
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopesBegin": [
+            "meta.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.extern.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.extern.cpp"
+        ]
+    },
+    {
+        "source": "extern",
+        "scopesBegin": [
+            "meta.tail.extern.cpp",
+            "meta.block.extern.cpp",
+            "meta.head.extern.cpp"
+        ],
+        "scopes": [
+            "storage.type.extern.cpp"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.cpp"
+        ]
+    },
+    {
+        "source": "C"
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.cpp"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.cpp"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "inBlock",
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ]
+    },
+    {
+        "source": "//",
+        "scopesBegin": [
+            "comment.line.double-slash.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.cpp"
+        ]
+    },
+    {
+        "source": " this one is not",
+        "scopesEnd": [
+            "comment.line.double-slash.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.extern.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.extern.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.body.extern.cpp",
+            "punctuation.section.block.end.bracket.curly.extern.cpp"
+        ]
+    }
+]

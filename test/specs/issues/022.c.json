@@ -1,0 +1,408 @@
+[
+    {
+        "source": "sscanf",
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "user_input"
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
+        ]
+    },
+    {
+        "source": "%c",
+        "scopes": [
+            "constant.other.placeholder.c"
+        ]
+    },
+    {
+        "source": "%",
+        "scopes": [
+            "invalid.illegal.placeholder.c"
+        ]
+    },
+    {
+        "source": "[^"
+    },
+    {
+        "source": "\\n",
+        "scopes": [
+            "constant.character.escape.c"
+        ]
+    },
+    {
+        "source": "]"
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.c"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": "&",
+        "scopes": [
+            "keyword.operator.c"
+        ]
+    },
+    {
+        "source": "arg0",
+        "scopes": [
+            "variable.parameter.probably.c"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": " arg_str"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "//",
+        "scopesBegin": [
+            "comment.line.double-slash.c"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.c"
+        ]
+    },
+    {
+        "source": " reads char into arg0, the remainder until \\n to arg_str",
+        "scopesEnd": [
+            "comment.line.double-slash.c"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "test",
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": "{",
+        "scopesBegin": [
+            "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "    t "
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "keyword.operator.assignment.c"
+        ]
+    },
+    {
+        "source": "time",
+        "scopesBegin": [
+            "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.arguments.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "NULL",
+        "scopes": [
+            "constant.language.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "    tmp "
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "keyword.operator.assignment.c"
+        ]
+    },
+    {
+        "source": "localtime",
+        "scopesBegin": [
+            "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.arguments.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "&",
+        "scopes": [
+            "keyword.operator.c"
+        ]
+    },
+    {
+        "source": "t"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "strftime",
+        "scopesBegin": [
+            "meta.function-call.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.arguments.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "timestr"
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": "sizeof",
+        "scopes": [
+            "keyword.operator.sizeof.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "timestr"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.c"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
+        ]
+    },
+    {
+        "source": "%",
+        "scopes": [
+            "invalid.illegal.placeholder.c"
+        ]
+    },
+    {
+        "source": "Y-"
+    },
+    {
+        "source": "%",
+        "scopes": [
+            "invalid.illegal.placeholder.c"
+        ]
+    },
+    {
+        "source": "m-"
+    },
+    {
+        "source": "%d",
+        "scopes": [
+            "constant.other.placeholder.c"
+        ]
+    },
+    {
+        "source": "%",
+        "scopes": [
+            "invalid.illegal.placeholder.c"
+        ]
+    },
+    {
+        "source": "H:"
+    },
+    {
+        "source": "%",
+        "scopes": [
+            "invalid.illegal.placeholder.c"
+        ]
+    },
+    {
+        "source": "M:"
+    },
+    {
+        "source": "%s",
+        "scopes": [
+            "constant.other.placeholder.c"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.c"
+        ]
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "punctuation.separator.delimiter.c"
+        ]
+    },
+    {
+        "source": " tmp"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.arguments.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ]
+    }
+]

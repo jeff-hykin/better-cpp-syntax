@@ -1,0 +1,30 @@
+[
+    {
+        "source": "using",
+        "scopesBegin": [
+            "meta.using-namespace.cpp"
+        ],
+        "scopes": [
+            "keyword.other.using.directive.cpp"
+        ]
+    },
+    {
+        "source": "namespace",
+        "scopes": [
+            "keyword.other.namespace.directive.cpp",
+            "storage.type.namespace.directive.cpp"
+        ]
+    },
+    {
+        "source": "std",
+        "scopes": [
+            "entity.name.type.namespace.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ]
+    }
+]

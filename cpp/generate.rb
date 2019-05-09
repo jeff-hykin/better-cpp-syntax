@@ -43,7 +43,7 @@ cpp_grammar = Grammar.new(
         else
             end_pattern = lookBehindFor(/\}/).or(lookAheadFor(lookahead_endings))
         end
-        return Range.new(
+        return PatternRange.new(
             tag_as: tag_as,
             start_pattern: newPattern(
                     match: start_pattern,
@@ -53,9 +53,9 @@ cpp_grammar = Grammar.new(
             includes: [
                 *primary_includes,
                 # Head
-                Range.new(
+                PatternRange.new(
                     tag_as: "meta.head."+name,
-                    start_pattern: /\G| /,
+                    start_pattern: /\G ?/,
                     end_pattern: newPattern(
                         match: /\{/.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
@@ -63,7 +63,7 @@ cpp_grammar = Grammar.new(
                     includes: head_includes
                 ),
                 # Body
-                Range.new(
+                PatternRange.new(
                     tag_as: "meta.body."+name, # body is everything in the {}'s
                     start_pattern: lookBehindFor(/\{/),
                     end_pattern: newPattern(
@@ -73,7 +73,7 @@ cpp_grammar = Grammar.new(
                     includes: body_includes
                 ),
                 # Tail
-                Range.new(
+                PatternRange.new(
                     tag_as: "meta.tail."+name,
                     start_pattern: lookBehindFor(/}/).then(/[\s\n]*/),
                     end_pattern: newPattern(/[\s\n]*/).lookAheadFor(/;/),
@@ -99,6 +99,7 @@ cpp_grammar = Grammar.new(
             :storage_specifiers,
             :access_control_keywords,
             :exception_keywords,
+            :static_assert,
             :other_keywords,
             :memory_operators,
             :the_this_keyword,
@@ -290,7 +291,7 @@ cpp_grammar = Grammar.new(
 #
 # Control flow
 #
-    cpp_grammar[:default_statement] = Range.new(
+    cpp_grammar[:default_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
                 match: variableBounds[ /default/ ],
@@ -302,7 +303,7 @@ cpp_grammar = Grammar.new(
             ),
             includes: [:conditional_context]
         )
-    cpp_grammar[:case_statement] = Range.new(
+    cpp_grammar[:case_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
                 match: variableBounds[ /case/ ],
@@ -314,7 +315,7 @@ cpp_grammar = Grammar.new(
             ),
             includes: [:conditional_context]
         )
-    cpp_grammar[:switch_conditional_parentheses] = Range.new(
+    cpp_grammar[:switch_conditional_parentheses] = PatternRange.new(
             tag_as: "meta.conditional.switch",
             start_pattern: newPattern(
                 match: /\(/,
@@ -333,9 +334,6 @@ cpp_grammar = Grammar.new(
                 match: variableBounds[/switch/],
                 tag_as: "keyword.control.switch"
             ),
-            primary_includes: [
-                :switch_conditional_parentheses
-            ],
             head_includes: [
                 :switch_conditional_parentheses,
                 :$initial_context
@@ -350,7 +348,7 @@ cpp_grammar = Grammar.new(
 #
 # C++ Attributes
 #
-    cpp_grammar[:attributes] = Range.new(
+    cpp_grammar[:attributes] = PatternRange.new(
         tag_as: "support.other.attribute",
         start_pattern: newPattern(
             match: @cpp_tokens.that(:isAttributeStart),
@@ -363,7 +361,7 @@ cpp_grammar = Grammar.new(
         includes: [
             # allow nested attributes
             :attributes,
-            Range.new(
+            PatternRange.new(
                 start_pattern: newPattern(/\(/),
                 end_pattern: newPattern(/\)/),
                 includes: [
@@ -416,10 +414,10 @@ cpp_grammar = Grammar.new(
     # because it's embedded inside of other patterns
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
-        match: /</.zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
+        match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).zeroOrMoreOf(characters_in_template_call).then(/>/).maybe(@spaces),
         includes: [:template_call_context]
         )
-    cpp_grammar[:template_call_range] = Range.new(
+    cpp_grammar[:template_call_range] = PatternRange.new(
             tag_as: 'meta.template.call',
             start_pattern: newPattern(
                 match: /</,
@@ -449,7 +447,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
             ),
         )
-    cpp_grammar[:template_definition] = Range.new(
+    cpp_grammar[:template_definition] = PatternRange.new(
         tag_as: 'meta.template.definition',
         start_pattern: template_start,
         end_pattern: newPattern(
@@ -460,7 +458,7 @@ cpp_grammar = Grammar.new(
             # a template call inside of a non-isolated template definition
             # however this is rolling the dice: because if there is a less-than operator in a defaulted argument, then this pattern will screw everything up
             # a better solution would be nice, but its going to be difficult/impossible
-            Range.new(
+            PatternRange.new(
                 start_pattern: newPattern(
                         match: lookBehindFor(/\w/).maybe(@spaces).then(/</),
                         tag_as: "punctuation.section.angle-brackets.begin.template.call"
@@ -597,7 +595,7 @@ cpp_grammar = Grammar.new(
             tag_as: "variable.other",
         ).then(after_declaration),
     )
-    cpp_grammar[:declarations] = Range.new(
+    cpp_grammar[:declarations] = PatternRange.new(
         start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(/::/)
             .lookBehindToAvoid(/operator/)
@@ -606,7 +604,7 @@ cpp_grammar = Grammar.new(
         end_pattern: @semicolon.or(lookAheadFor(/\{/)),
         tag_as: "declarations",
         includes: [
-            Range.new(
+            PatternRange.new(
                 start_pattern: newPattern(
                     match: /\=/,
                     tag_as: "keyword.operator.assignment",
@@ -616,7 +614,7 @@ cpp_grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
-            Range.new(
+            PatternRange.new(
                 start_pattern: lookAheadFor(/\w/).maybe(@spaces).then(
                     match: /\{/,
                     tag_as: "punctuation.section.block.begin.bracket.curly.initializer",
@@ -662,7 +660,7 @@ cpp_grammar = Grammar.new(
 # Functions
 #
     functionTemplate = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
-        new_range = Range.new(
+        new_range = PatternRange.new(
             tag_content_as: "meta.#{tag_content_as}",
             start_pattern: newPattern(
                     match: match_name,
@@ -740,14 +738,44 @@ cpp_grammar = Grammar.new(
                 /\[/.maybe(@spaces).then(/\]/).maybe(@spaces),
             ).lookAheadFor(/,|\)|\n/)
         )
-    cpp_grammar[:function_definition] = Range.new(
+    cpp_grammar[:function_definition] = PatternRange.new(
         tag_as: "meta.function.definition.parameters",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
         end_pattern: lookBehindFor(/\)/),
         includes: [ :parameter_struct, :function_context_c ]
         )
+    # static assert is special as it can be outside of normal places function calls can be
+    cpp_grammar[:static_assert] = PatternRange.new(
+        start_pattern: newPattern(
+            match: /static_assert|_Static_assert/,
+            tag_as: "keyword.other.static_assert",
+        ).maybe(@spaces).then(
+            match: /\(/,
+            tag_as: "punctuation.section.arguments.begin.bracket.round",
+        ),
+        end_pattern: newPattern(
+            match: /\)/,
+            tag_as: "punctuation.section.arguments.end.bracket.round",
+        ),
+        includes: [
+            # special handling for the assert message
+            PatternRange.new(
+                start_pattern: newPattern(
+                    match: /,/,
+                    tag_as: "comma punctuation.separator.delimiter",
+                ).maybe(@spaces).lookAheadFor(maybe(/L|u8|u|U/.maybe(@spaces).then(/\"/))),
+                end_pattern: lookAheadFor(/\)/),
+                tag_as: "meta.static_assert.message",
+                includes: [
+                    :string_context,
+                    :string_context_c,
+                ]
+            ),
+            :function_call_context_c,
+        ]
+    )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-    cpp_grammar[:function_call] = Range.new(
+    cpp_grammar[:function_call] = PatternRange.new(
         start_pattern: avoid_invalid_function_names.then(
                 preceding_scopes
             ).then(
@@ -870,7 +898,7 @@ cpp_grammar = Grammar.new(
 #
 # Function pointers
 #
-    cpp_grammar[:function_pointer] = Range.new(
+    cpp_grammar[:function_pointer] = PatternRange.new(
         start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
                 match: /\*/,
                 tag_as: "variable.other.pointer.function",
@@ -888,7 +916,7 @@ cpp_grammar = Grammar.new(
 #
     ends_parameter = /[,)>]|\.\.\./
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
-    cpp_grammar[:function_parameters] = Range.new(
+    cpp_grammar[:function_parameters] = PatternRange.new(
         start_pattern: lookBehindFor(/[,(<]/),
         end_pattern: lookAheadFor(ends_parameter),
         tag_as: "meta.function.parameter",
@@ -931,7 +959,7 @@ cpp_grammar = Grammar.new(
     # words must have spaces, the variable_name_without_bounds is for implicit overloads
     operator_wordish = @spaces.then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
     after_operator_keyword = operator_symbols.or(operator_wordish)
-    cpp_grammar[:operator_overload] = operator_overload = Range.new(
+    cpp_grammar[:operator_overload] = operator_overload = PatternRange.new(
         tag_as: "meta.function.definition.parameters.operator-overload",
         start_pattern: newPattern(
                 match: /operator/,
@@ -1002,7 +1030,7 @@ cpp_grammar = Grammar.new(
             )
         )
     # access to method
-    cpp_grammar[:method_access] = method_access = Range.new(
+    cpp_grammar[:method_access] = method_access = PatternRange.new(
         tag_content_as: "meta.function-call.member",
         start_pattern: member_start.then(
                 match: variable_name_without_bounds,
@@ -1021,7 +1049,7 @@ cpp_grammar = Grammar.new(
 # Namespace
 #
     # see https://en.cppreference.com/w/cpp/language/namespace
-    cpp_grammar[:using_namespace] = Range.new(
+    cpp_grammar[:using_namespace] = PatternRange.new(
         tag_as: "meta.using-namespace",
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /using/,
@@ -1077,7 +1105,7 @@ cpp_grammar = Grammar.new(
 #
     array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
-    cpp_grammar[:lambdas] = lambdas = Range.new(
+    cpp_grammar[:lambdas] = lambdas = PatternRange.new(
         start_pattern: newPattern(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
@@ -1101,7 +1129,7 @@ cpp_grammar = Grammar.new(
             ),
         includes: [
             # check for parameters first
-            Range.new(
+            PatternRange.new(
                 tag_as: 'meta.function.definition.parameters.lambda',
                 start_pattern: newPattern(
                         match: /\(/,
@@ -1127,7 +1155,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "storage.type.return-type.lambda"
             ),
             # then find the body
-            Range.new(
+            PatternRange.new(
                 tag_as: "meta.function.definition.body.lambda",
                 start_pattern: newPattern(
                         match: /\{/,
@@ -1160,21 +1188,43 @@ cpp_grammar = Grammar.new(
 #
 # Classes, structs, unions, enums
 #
+    cpp_grammar[:enumerator_list] = newPattern(
+        match: newPattern(
+            match: variable_name,
+            tag_as: "variable.other.enummember",
+        ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
+        .maybe(
+            newPattern(
+                match: /\=/,
+                tag_as: "keyword.operator.assignment",
+            ).maybe(@spaces).then(
+                match: /.+?/,
+                includes: [ :evaluation_context ]
+            ).maybe(@spaces)
+        ).then(newPattern(
+            match: /[,;]|\n|\/[\/\*]/,
+            includes: [
+                :comma,
+                :semicolon,
+            ],
+        ).or(lookAheadFor(/\}/))),
+        tag_as: "meta.enum.definition",
+    )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
     cpp_grammar[:enum_block] = blockFinderFor(
             name: "enum",
             tag_as: "meta.block.enum",
             start_pattern: newPattern(
-                    match: /enum/,
+                    match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
-                ).then(@spaces).maybe(
-                    # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
-                    newPattern(
+                ).maybe(
+                    @spaces.then(
+                        # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
-                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)))
-                ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    )
+                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
@@ -1189,6 +1239,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
+            body_includes: [ :enumerator_list, :comments_context ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

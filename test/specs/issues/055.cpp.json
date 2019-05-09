@@ -1,0 +1,145 @@
+[
+    {
+        "source": "enum",
+        "scopesBegin": [
+            "meta.block.enum.cpp",
+            "meta.head.enum.cpp"
+        ],
+        "scopes": [
+            "storage.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "foo",
+        "scopes": [
+            "entity.name.type.enum.cpp"
+        ]
+    },
+    {
+        "source": ":",
+        "scopes": [
+            "colon.cpp",
+            "punctuation.separator.type-specifier.cpp"
+        ]
+    },
+    {
+        "source": "std",
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
+        ]
+    },
+    {
+        "source": "::",
+        "scopes": [
+            "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
+        ]
+    },
+    {
+        "source": "int8_t",
+        "scopes": [
+            "storage.type.integral.int8_t.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.enum.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.enum.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "meta.body.enum.cpp",
+            "punctuation.section.block.end.bracket.curly.enum.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ],
+        "scopesEnd": [
+            "meta.block.enum.cpp"
+        ]
+    },
+    {
+        "source": "void",
+        "scopes": [
+            "storage.type.primitive.cpp"
+        ]
+    },
+    {
+        "source": "foo",
+        "scopesBegin": [
+            "meta.function.definition.parameters.cpp",
+            "meta.function.definition.parameters.cpp"
+        ],
+        "scopes": [
+            "entity.name.function.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "enum",
+        "scopesBegin": [
+            "meta.block.enum.cpp",
+            "meta.head.enum.cpp"
+        ],
+        "scopes": [
+            "storage.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "foo",
+        "scopes": [
+            "entity.name.type.enum.cpp"
+        ]
+    },
+    {
+        "source": "::"
+    },
+    {
+        "source": "bar",
+        "scopesBegin": [
+            "meta.scope-resolution.cpp"
+        ],
+        "scopes": [
+            "entity.name.type.namespace.scope-resolution.cpp"
+        ]
+    },
+    {
+        "source": "::",
+        "scopes": [
+            "punctuation.separator.namespace.access.cpp"
+        ],
+        "scopesEnd": [
+            "meta.scope-resolution.cpp"
+        ]
+    },
+    {
+        "source": "baz quix)",
+        "scopesEnd": [
+            "meta.head.enum.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ]
+    }
+]

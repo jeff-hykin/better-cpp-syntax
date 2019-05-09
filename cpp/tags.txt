@@ -89,6 +89,7 @@ keyword.other.decltype.cpp
 keyword.other.namespace.definition.cpp
 keyword.other.namespace.directive.cpp
 keyword.other.operator.overload.cpp
+keyword.other.static_assert.cpp
 keyword.other.typename.cpp
 keyword.other.unit.binary.cpp
 keyword.other.unit.exponent.decimal.cpp
@@ -122,6 +123,7 @@ meta.declaration.type.alias.cpp
 meta.declaration.type.alias.value.unknown.cpp
 meta.definition.variable.cpp
 meta.encoding.cpp
+meta.enum.definition.cpp
 meta.function-call.cpp
 meta.function.constructor.cpp
 meta.function.constructor.initializer-list.cpp
@@ -152,6 +154,7 @@ meta.preprocessor.pragma.cpp
 meta.qualified_type.cpp
 meta.scope-resolution.cpp
 meta.section.cpp
+meta.static_assert.message.cpp
 meta.tail.class.cpp
 meta.tail.enum.cpp
 meta.tail.extern.cpp
@@ -267,7 +270,7 @@ storage.type.decltype.cpp
 storage.type.enum.cpp
 storage.type.enum.enum-key.$3.cpp
 storage.type.extern.cpp
-storage.type.integral.$13.cpp
+storage.type.integral.$12.cpp
 storage.type.modifier.access.$0.cpp
 storage.type.modifier.access.control.$0.cpp
 storage.type.modifier.final.cpp
@@ -292,6 +295,7 @@ support.type.posix-reserved.cpp
 support.type.posix-reserved.pthread.cpp
 variable.language.this.cpp
 variable.other.cpp
+variable.other.enummember.cpp
 variable.other.macro.argument.cpp
 variable.other.object.access.cpp
 variable.other.object.cpp

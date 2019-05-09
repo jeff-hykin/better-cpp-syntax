@@ -1,0 +1,182 @@
+[
+    {
+        "source": "struct",
+        "scopes": [
+            "storage.type.struct.c"
+        ]
+    },
+    {
+        "source": " foo "
+    },
+    {
+        "source": "{",
+        "scopesBegin": [
+            "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "int",
+        "scopesBegin": [
+            "meta.function-call.c"
+        ],
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "*",
+        "scopes": [
+            "keyword.operator.c"
+        ]
+    },
+    {
+        "source": "bar"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.parens.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "union",
+        "scopes": [
+            "storage.type.union.c"
+        ]
+    },
+    {
+        "source": " baz "
+    },
+    {
+        "source": "{",
+        "scopesBegin": [
+            "meta.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.c"
+        ]
+    },
+    {
+        "source": "int",
+        "scopesBegin": [
+            "meta.function-call.c"
+        ],
+        "scopes": [
+            "storage.type.built-in.primitive.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": "*",
+        "scopes": [
+            "keyword.operator.c"
+        ]
+    },
+    {
+        "source": "quz"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function-call.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.parens.block.c"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.parens.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.c"
+        ],
+        "scopesEnd": [
+            "meta.block.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    }
+]

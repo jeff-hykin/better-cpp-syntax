@@ -271,6 +271,10 @@
 // templates
 //
     
+    void func() {
+        std::cout << max<int>(a, b) << std::endl;
+        std::cout << max(a, b) << std::endl;
+    }
     
     namespace test {
         template <class T>
@@ -400,6 +404,15 @@ class ClassH : public foo::ClassF, public foo::ClassG {
       };
 
 // 
+// enums
+// 
+    enum{ thing };
+    enum {};
+    enum A {
+        a, b
+    };
+
+// 
 // inheritance
 // 
 
@@ -463,6 +476,8 @@ int main() {
     return 0;
 }
 
+    
+    
 //
 // Attributes
 //

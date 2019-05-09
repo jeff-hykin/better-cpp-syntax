@@ -1,0 +1,52 @@
+[
+    {
+        "source": "class",
+        "scopesBegin": [
+            "meta.block.class.cpp",
+            "meta.head.class.cpp"
+        ],
+        "scopes": [
+            "storage.type.class.cpp"
+        ]
+    },
+    {
+        "source": "C",
+        "scopes": [
+            "entity.name.type.class.cpp"
+        ]
+    },
+    {
+        "source": "{",
+        "scopes": [
+            "punctuation.section.block.begin.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.head.class.cpp"
+        ]
+    },
+    {
+        "source": "public :",
+        "scopesBegin": [
+            "meta.body.class.cpp"
+        ],
+        "scopes": [
+            "storage.type.modifier.access.control.public",
+            ":.cpp"
+        ]
+    },
+    {
+        "source": "}",
+        "scopes": [
+            "punctuation.section.block.end.bracket.curly.class.cpp"
+        ],
+        "scopesEnd": [
+            "meta.body.class.cpp"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.cpp"
+        ]
+    }
+]

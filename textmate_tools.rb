@@ -88,7 +88,7 @@ class Grammar
             end
             return { include: new_value }
         # if its a pattern, then convert it to a tag
-        elsif (data.instance_of? Regexp) or (data.instance_of? Range)
+        elsif (data.instance_of? Regexp) or (data.instance_of? PatternRange)
             return data.to_tag(ignore_repository_entry: ignore_repository_entry)
         # if its a hash, then just add it as-is
         elsif (data.instance_of? Hash)
@@ -122,7 +122,7 @@ class Grammar
             #             tag_as: 'a.tag.name'
             #         ),
             #         # and/or ranges
-            #         Range.new(
+            #         PatternRange.new(
             #             start_pattern: /thing/,
             #             end_pattern: /endThing/,
             #             includes: [ :name_of_thing_in_repo ] # <- this list also uses this convertIncludesToPatternList() function
@@ -148,7 +148,7 @@ class Grammar
             #             match: /thing/,
             #             name: 'a.tag.name'
             #         },
-            #         # range conversion
+            #         # PatternRange conversion
             #         {
             #             begin: /thing/,
             #             end: /thing/,
@@ -203,29 +203,25 @@ class Grammar
     #
     # Interal Helpers
     #
-    def forEachPatternDo(data, a_lambda)
-        if data.is_a? Array 
-            for each in data
-                forEachPatternDo(each, a_lambda)
+    def forEachPatternDo(original_data, a_lambda)
+        if original_data.is_a? Array
+            new_data = []
+            for each in original_data
+                new_data << forEachPatternDo(each, a_lambda)
             end
-        elsif data.is_a? Hash
-            for each in data.dup
+        elsif original_data.is_a? Hash
+            new_data = {}
+            for each in original_data.dup
                 key = each[0]
                 value = each[1]
                 
-                if value == nil
-                    next
-                elsif value.is_a? Array
-                    for each_sub_hash in value
-                        forEachPatternDo(each_sub_hash, a_lambda)
-                    end
-                elsif value.is_a? Hash
-                    forEachPatternDo(value, a_lambda)
-                end
-                
-                a_lambda[data]
+                new_data[key] = forEachPatternDo(value, a_lambda)
             end
+            new_data = a_lambda[new_data]
+        else
+            return original_data
         end
+        return new_data
     end
     
     #
@@ -239,7 +235,7 @@ class Grammar
         # add it to the repository
         @data[:repository][key] = value
         # tell the object it was added to a repository
-        if (value.instance_of? Regexp) || (value.instance_of? Range)
+        if (value.instance_of? Regexp) || (value.instance_of? PatternRange)
             value.repository_name = key
         end
     end
@@ -286,6 +282,7 @@ class Grammar
         # 
         @all_tags = Set.new()
         post_processing = ->(each_pattern) do
+            each_pattern = each_pattern.dup
             for each_key in each_pattern.dup.keys
                 #
                 # convert all keys to strings
@@ -324,9 +321,10 @@ class Grammar
                     each_pattern[each_key] = new_names.join(' ')
                 end
             end
+            return each_pattern
         end
-        forEachPatternDo(textmate_output[:repository], post_processing)
-        forEachPatternDo(textmate_output[:patterns], post_processing)
+        textmate_output[:repository] = forEachPatternDo(textmate_output[:repository], post_processing)
+        textmate_output[:patterns]   = forEachPatternDo(textmate_output[:patterns], post_processing)
         return textmate_output
     end
     
@@ -797,9 +795,9 @@ end
         //.backReference(reference)
     end
 #
-# Range
+# PatternRange
 #
-class Range
+class PatternRange
     attr_accessor :as_tag, :repository_name
     
     def initialize(key_arguments)
@@ -868,7 +866,7 @@ class Range
         #
         start_pattern = key_arguments[:start_pattern]
         if not ( (start_pattern.is_a? Regexp) and start_pattern != // )
-            raise "The start pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+            raise "The start pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
         @as_tag[:begin] = start_pattern.without_default_mode_modifiers
         key_arguments.delete(:start_pattern)
@@ -882,7 +880,7 @@ class Range
         #
         end_pattern = key_arguments[:end_pattern]
         if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
-            raise "The end pattern for a Range needs to be a non-empty regular expression\nThe Range causing the problem is:\n#{key_arguments}"
+            raise "The end pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
         @as_tag[:end] = end_pattern.without_default_mode_modifiers
         key_arguments.delete(:end_pattern)

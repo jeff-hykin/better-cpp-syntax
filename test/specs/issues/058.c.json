@@ -1,0 +1,37 @@
+[
+    {
+        "source": "COMM_Bool "
+    },
+    {
+        "source": "GetThing",
+        "scopesBegin": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ],
+        "scopes": [
+            "entity.name.function.c"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parameters.begin.bracket.round.c"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parameters.end.bracket.round.c"
+        ],
+        "scopesEnd": [
+            "meta.function.c",
+            "meta.function.definition.parameters.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    }
+]

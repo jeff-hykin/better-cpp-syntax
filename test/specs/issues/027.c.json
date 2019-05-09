@@ -1,0 +1,62 @@
+[
+    {
+        "source": "/*",
+        "scopesBegin": [
+            "comment.block.c"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.c"
+        ]
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "punctuation.definition.comment.end.c"
+        ],
+        "scopesEnd": [
+            "comment.block.c"
+        ]
+    },
+    {
+        "source": " #define a cout "
+    },
+    {
+        "source": "<<",
+        "scopes": [
+            "keyword.operator.bitwise.shift.c"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopesBegin": [
+            "string.quoted.double.c"
+        ],
+        "scopes": [
+            "punctuation.definition.string.begin.c"
+        ]
+    },
+    {
+        "source": "this works :/"
+    },
+    {
+        "source": "\\n",
+        "scopes": [
+            "constant.character.escape.c"
+        ]
+    },
+    {
+        "source": "\"",
+        "scopes": [
+            "punctuation.definition.string.end.c"
+        ],
+        "scopesEnd": [
+            "string.quoted.double.c"
+        ]
+    },
+    {
+        "source": ";",
+        "scopes": [
+            "punctuation.terminator.statement.c"
+        ]
+    }
+]

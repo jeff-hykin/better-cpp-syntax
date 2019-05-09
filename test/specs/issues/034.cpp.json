@@ -1,0 +1,111 @@
+[
+    {
+        "source": "#",
+        "scopesBegin": [
+            "meta.preprocessor.macro.cpp",
+            "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
+        ]
+    },
+    {
+        "source": "define",
+        "scopesEnd": [
+            "keyword.control.directive.define.cpp"
+        ]
+    },
+    {
+        "source": "IS_UPGRADE_ADDR",
+        "scopes": [
+            "entity.name.function.preprocessor.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.definition.parameters.begin.cpp"
+        ]
+    },
+    {
+        "source": "addr",
+        "scopes": [
+            "variable.parameter.preprocessor.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.definition.parameters.end.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.preprocessor.macro.cpp"
+        ]
+    },
+    {
+        "source": "/*",
+        "scopesBegin": [
+            "comment.block.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.comment.begin.cpp"
+        ]
+    },
+    {
+        "source": "((addr) >= UPGRADE_BASE_ADDR) && "
+    },
+    {
+        "source": "*/",
+        "scopes": [
+            "punctuation.definition.comment.end.cpp"
+        ],
+        "scopesEnd": [
+            "comment.block.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.parens.cpp"
+        ],
+        "scopes": [
+            "punctuation.section.parens.begin.bracket.round.cpp"
+        ]
+    },
+    {
+        "source": "addr"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.parens.end.bracket.round.cpp"
+        ],
+        "scopesEnd": [
+            "meta.parens.cpp"
+        ]
+    },
+    {
+        "source": "<",
+        "scopes": [
+            "keyword.operator.comparison.cpp"
+        ]
+    },
+    {
+        "source": " UPGRADE_BASE_ADDR "
+    },
+    {
+        "source": "+",
+        "scopes": [
+            "keyword.operator.cpp"
+        ]
+    },
+    {
+        "source": " UPGRADE_SPACE_SIZE)"
+    }
+]

@@ -1,0 +1,164 @@
+[
+    {
+        "source": "#",
+        "scopesBegin": [
+            "meta.preprocessor.macro.cpp",
+            "keyword.control.directive.define.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.directive.cpp"
+        ]
+    },
+    {
+        "source": "define",
+        "scopesEnd": [
+            "keyword.control.directive.define.cpp"
+        ]
+    },
+    {
+        "source": "TEST",
+        "scopes": [
+            "entity.name.function.preprocessor.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.definition.parameters.begin.cpp"
+        ]
+    },
+    {
+        "source": "name",
+        "scopes": [
+            "variable.parameter.preprocessor.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.definition.parameters.end.cpp"
+        ]
+    },
+    {
+        "source": "_ts",
+        "scopes": [
+            "variable.other.object.access.cpp"
+        ]
+    },
+    {
+        "source": "->",
+        "scopes": [
+            "punctuation.separator.pointer-access.cpp"
+        ]
+    },
+    {
+        "source": "test",
+        "scopes": [
+            "entity.name.function.member.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopes": [
+            "punctuation.section.arguments.begin.bracket.round.function.member.cpp"
+        ]
+    },
+    {
+        "source": "name",
+        "scopes": [
+            "meta.function-call.member"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.section.arguments.end.bracket.round.function.member.cpp"
+        ]
+    },
+    {
+        "source": "=",
+        "scopes": [
+            "keyword.operator.assignment.cpp"
+        ]
+    },
+    {
+        "source": "[",
+        "scopes": [
+            "punctuation.definition.capture.begin.lambda.cpp"
+        ]
+    },
+    {
+        "source": "&",
+        "scopes": [
+            "meta.lambda.capture.cpp",
+            "keyword.operator.cpp"
+        ]
+    },
+    {
+        "source": "]",
+        "scopes": [
+            "punctuation.definition.capture.end.lambda.cpp"
+        ]
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.function.definition.parameters.lambda.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.parameters.begin.lambda.cpp"
+        ]
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.definition.parameters.end.lambda.cpp"
+        ],
+        "scopesEnd": [
+            "meta.function.definition.parameters.lambda.cpp"
+        ]
+    },
+    {
+        "source": "->",
+        "scopes": [
+            "punctuation.definition.lambda.return-type.cpp"
+        ]
+    },
+    {
+        "source": " bool",
+        "scopes": [
+            "storage.type.return-type.lambda.cpp"
+        ]
+    },
+    {
+        "source": "#define ASSERT"
+    },
+    {
+        "source": "(",
+        "scopesBegin": [
+            "meta.function.definition.parameters.lambda.cpp"
+        ],
+        "scopes": [
+            "punctuation.definition.parameters.begin.lambda.cpp"
+        ]
+    },
+    {
+        "source": "expected"
+    },
+    {
+        "source": ",",
+        "scopes": [
+            "comma.cpp",
+            "punctuation.separator.delimiter.cpp"
+        ]
+    },
+    {
+        "source": " actual"
+    },
+    {
+        "source": ")",
+        "scopes": [
+            "punctuation.definition.parameters.end.lambda.cpp"
+        ]
+    }
+]
