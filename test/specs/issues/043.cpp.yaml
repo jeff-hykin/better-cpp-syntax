@@ -1,74 +1,74 @@
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopesBegin:
+- source: main
+  scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
   scopes:
     - entity.name.function.cpp
-  source: main
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-  source: (
-- scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
-  source: )
-- scopesBegin:
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
     - meta.block.cpp
   scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-  source: '{'
-- scopes:
+- source: if
+  scopes:
     - keyword.control.if.cpp
-  source: if
-- scopes:
+- source: constexpr
+  scopes:
     - storage.modifier.specificer.functional.pre-parameters.constexpr.cpp
-  source: constexpr
-- scopesBegin:
+- source: (
+  scopesBegin:
     - meta.parens.block.cpp
   scopes:
     - punctuation.section.parens.begin.bracket.round.cpp
-  source: (
-- scopesBegin:
+- source: std
+  scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
-  source: std
-- scopesEnd:
-    - meta.scope-resolution.cpp
+- source: '::'
   scopes:
     - punctuation.separator.namespace.access.cpp
-  source: '::'
+  scopesEnd:
+    - meta.scope-resolution.cpp
 - source: is_signed_v
-- scopes:
+- source: <
+  scopes:
     - keyword.operator.comparison.cpp
-  source: <
-- scopes:
+- source: char
+  scopes:
     - storage.type.primitive.cpp
-  source: char
-- scopes:
+- source: '>'
+  scopes:
     - keyword.operator.comparison.cpp
-  source: '>'
-- scopesEnd:
-    - meta.parens.block.cpp
+- source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.cpp
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.parens.block.cpp
+- source: '{'
+  scopes:
     - punctuation.section.block.begin.bracket.curly.cpp
-  source: '{'
-- scopesBegin:
+- source: //
+  scopesBegin:
     - comment.line.double-slash.cpp
   scopes:
     - punctuation.definition.comment.cpp
-  source: //
-- scopesEnd:
+- source: ' no syntax highlighting'
+  scopesEnd:
     - comment.line.double-slash.cpp
-  source: ' no syntax highlighting'
-- scopesBegin:
+- source: '}'
+  scopesBegin:
     - punctuation.section.block.end.bracket.curly.cpp
-  source: '}'
 - source: '}'

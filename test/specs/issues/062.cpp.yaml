@@ -1,10 +1,10 @@
-- scopes:
+- source: typedef
+  scopes:
     - keyword.other.typedef.cpp
-  source: typedef
 - source: ' foo '
-- scopes:
+- source: int
+  scopes:
     - storage.type.primitive.cpp
-  source: int
-- scopes:
+- source: ;
+  scopes:
     - punctuation.terminator.statement.cpp
-  source: ;

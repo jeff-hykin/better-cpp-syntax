@@ -1,310 +1,310 @@
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
 - source: Type
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
 - source: 'Type '
-- scopes:
+- source: foo
+  scopes:
     - variable.parameter.probably.c
-  source: foo
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
-    - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesBegin:
-    - meta.function.definition.parameters.c
+- source: (
   scopes:
-    - entity.name.function.c
-  source: Type
-- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopes:
-    - keyword.operator.c
-  source: '*'
-- scopesEnd:
-    - meta.function.definition.parameters.c
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
-    - punctuation.section.parens.begin.bracket.round.c
-  source: (
 - source: Type
-- scopes:
-    - punctuation.section.parens.end.bracket.round.c
-  source: )
-- scopesEnd:
-    - meta.function.c
+  scopesBegin:
     - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+- source: '*'
+  scopes:
+    - keyword.operator.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.c
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesBegin:
+- source: Type
+  scopesBegin:
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: Type
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.c
-  source: '*'
-- scopes:
+- source: foo
+  scopes:
     - variable.parameter.probably.c
-  source: foo
-- scopesEnd:
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.c
+- source: (
+  scopes:
     - punctuation.section.parens.begin.bracket.round.c
-  source: (
 - source: Type
-- scopes:
+- source: )
+  scopes:
     - punctuation.section.parens.end.bracket.round.c
-  source: )
-- scopesEnd:
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
+- source: ;
   scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
 - source: 'Type '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
 - source: ' value'
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
 - source: 'Type foo '
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
 - source: ' value'
-- scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
-    - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesBegin:
-    - meta.function.definition.parameters.c
+- source: (
   scopes:
-    - entity.name.function.c
-  source: Type
-- scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopes:
-    - keyword.operator.c
-  source: '*'
-- scopesEnd:
-    - meta.function.definition.parameters.c
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
-    - punctuation.section.parens.begin.bracket.round.c
-  source: (
 - source: Type
-- scopes:
-    - punctuation.section.parens.end.bracket.round.c
-  source: )
-- scopes:
-    - keyword.operator.assignment.c
-  source: =
-- source: ' value'
-- scopesEnd:
-    - meta.function.c
+  scopesBegin:
     - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+- source: '*'
+  scopes:
+    - keyword.operator.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.c
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+- source: =
+  scopes:
+    - keyword.operator.assignment.c
+- source: ' value'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+- source: ;
+  scopes:
     - punctuation.terminator.statement.c
-  source: ;
-- scopes:
+- source: void
+  scopes:
     - storage.type.built-in.primitive.c
-  source: void
-- scopesBegin:
+- source: bar
+  scopesBegin:
     - meta.function.c
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: bar
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopesBegin:
+- source: Type
+  scopesBegin:
     - meta.function.definition.parameters.c
   scopes:
     - entity.name.function.c
-  source: Type
-- scopes:
+- source: (
+  scopes:
     - punctuation.section.parameters.begin.bracket.round.c
-  source: (
-- scopes:
+- source: '*'
+  scopes:
     - keyword.operator.c
-  source: '*'
-- scopes:
+- source: foo
+  scopes:
     - variable.parameter.probably.c
-  source: foo
-- scopesEnd:
-    - meta.function.definition.parameters.c
+- source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
+  scopesEnd:
+    - meta.function.definition.parameters.c
+- source: (
+  scopes:
     - punctuation.section.parens.begin.bracket.round.c
-  source: (
 - source: Type
-- scopes:
+- source: )
+  scopes:
     - punctuation.section.parens.end.bracket.round.c
-  source: )
-- scopes:
+- source: =
+  scopes:
     - keyword.operator.assignment.c
-  source: =
 - source: ' value'
-- scopesEnd:
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  scopesEnd:
     - meta.function.c
     - meta.function.definition.parameters.c
+- source: ;
   scopes:
-    - punctuation.section.parameters.end.bracket.round.c
-  source: )
-- scopes:
     - punctuation.terminator.statement.c
-  source: ;
