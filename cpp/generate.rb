@@ -1036,7 +1036,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:enumerator_list] = newPattern(
         match: newPattern(
             match: variable_name,
-            tag_as: "constant.other.enum",
+            tag_as: "variable.other.enummember",
         ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
         .maybe(
             newPattern(
@@ -1047,7 +1047,7 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]|\n/,
+            match: /[,;]|\n|\/[\/\*]/,
             includes: [
                 :comma,
                 :semicolon,
@@ -1063,13 +1063,13 @@ cpp_grammar = Grammar.new(
             start_pattern: newPattern(
                     match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
-                ).then(@spaces).maybe(
-                    # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
-                    newPattern(
+                ).maybe(
+                    @spaces.then(
+                        # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
-                    ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)))
-                ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    )
+                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
@@ -1084,7 +1084,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, newPattern(@spaces) ],
+            body_includes: [ :enumerator_list, :comments_context ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

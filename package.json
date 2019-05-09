@@ -3,7 +3,14 @@
     "displayName": "Better C++ Syntax",
     "description": "The bleeding edge of the VS Code C++ syntax",
     "icon": "icon.png",
-    "version": "1.8.9",
+    "version": "1.8.11",
+    "scripts": {
+        "build" : "ruby cpp/generate.rb && ruby c/generate.rb",
+        "pretest": "npm run build",
+        "test": "node test/src/commands/test.js",
+        "pregenerate-specs": "npm run build",
+        "generate-specs": "node test/src/commands/generate-specs.js"
+    },
     "engines": {
         "vscode": "^1.0.0"
     },
@@ -40,12 +47,5 @@
         "prettyjson": "^1.2.1",
         "vscode-textmate": "^4.1.1",
         "yargs": "^13.2.2"
-    },
-    "scripts": {
-        "prepare": "ruby c/generate.rb && ruby cpp/generate.rb",
-        "pretest": "npm run prepare",
-        "test": "node test/src/commands/test.js",
-        "pregenerate-specs": "npm run prepare",
-        "generate-specs": "node test/src/commands/generate-specs.js"
     }
 }
