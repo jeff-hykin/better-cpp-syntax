@@ -340,7 +340,12 @@
     name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
     match: "(?<!\\w)(?:private|protected|public)\\s*:"
-    name: storage.type.modifier.access.control.$0.cpp
+    captures:
+      '0':
+        name: storage.type.modifier.access.control.$0.cpp
+        patterns:
+        - match: ":"
+          name: colon.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
     name: keyword.control.exception.$0.cpp

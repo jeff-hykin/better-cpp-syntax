@@ -243,7 +243,13 @@ cpp_grammar = Grammar.new(
         )
     cpp_grammar[:access_control_keywords] = newPattern(
         match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
-        tag_as: "storage.type.modifier.access.control.$match"
+        tag_as: "storage.type.modifier.access.control.$match",
+        includes: [
+            newPattern(
+                match: /:/,
+                tag_as: "colon.cpp"
+            )
+        ]
         )
     cpp_grammar[:exception_keywords] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
