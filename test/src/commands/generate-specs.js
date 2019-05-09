@@ -2,6 +2,7 @@
 
 const path = require("path");
 const fs = require("fs");
+const yaml = require("js-yaml");
 const stringify = require("json-stable-stringify");
 
 const argv = require("../arguments");
@@ -10,7 +11,7 @@ const paths = require("../paths");
 
 const tests = require("../getTests")(test => {
     const result =
-        !fs.existsSync(test.spec) ||
+        (!fs.existsSync(test.spec.yaml) && !fs.existsSync(test.spec.json)) ||
         argv["generate-all"] ||
         argv._.length !== 0;
     return result;
@@ -31,10 +32,9 @@ async function generateSpecs() {
 
         const spec = await generateSpec(test.fixture, fixture);
         fs.writeFileSync(
-            test.spec,
-            stringify(spec, {
-                cmp: keyCompare,
-                space: 4
+            test.spec.yaml,
+            yaml.dump(JSON.parse(JSON.stringify(spec)), {
+                sortKeys: keyCompare
             })
         );
     }

@@ -1,0 +1,235 @@
+- scopesBegin:
+    - meta.block.switch.cpp
+    - meta.head.switch.cpp
+  scopes:
+    - keyword.control.switch.cpp
+  source: switch
+- scopesBegin:
+    - meta.conditional.switch.cpp
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
+  source: (
+- source: test
+- scopesEnd:
+    - meta.conditional.switch.cpp
+  scopes:
+    - punctuation.section.parens.end.bracket.round.conditional.switch.cpp
+  source: )
+- scopesEnd:
+    - meta.head.switch.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.switch.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.switch.cpp
+    - meta.conditional.case.cpp
+  scopes:
+    - keyword.control.case.cpp
+  source: case
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopesEnd:
+    - meta.conditional.case.cpp
+  scopes:
+    - colon.cpp
+    - punctuation.separator.case.cpp
+  source: ':'
+- scopes:
+    - keyword.control.break.cpp
+  source: break
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.conditional.case.cpp
+  scopes:
+    - keyword.control.case.cpp
+  source: case
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '2'
+- scopesEnd:
+    - meta.conditional.case.cpp
+  scopes:
+    - colon.cpp
+    - punctuation.separator.case.cpp
+  source: ':'
+- scopesBegin:
+    - support.other.attribute.cpp
+  scopes:
+    - punctuation.section.attribute.begin.cpp
+  source: '[['
+- scopes:
+    - entity.other.attribute.fallthrough.cpp
+  source: fallthrough
+- scopesEnd:
+    - support.other.attribute.cpp
+  scopes:
+    - punctuation.section.attribute.end.cpp
+  source: ']]'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.conditional.case.cpp
+  scopes:
+    - keyword.control.case.cpp
+  source: case
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '3'
+- scopesEnd:
+    - meta.conditional.case.cpp
+  scopes:
+    - colon.cpp
+    - punctuation.separator.case.cpp
+  source: ':'
+- scopes:
+    - keyword.control.break.cpp
+  source: break
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' no syntax highlighting'
+- scopesEnd:
+    - meta.block.switch.cpp
+    - meta.body.switch.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.switch.cpp
+  source: '}'
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: func1
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - support.other.attribute.cpp
+  scopes:
+    - punctuation.section.attribute.begin.cpp
+  source: '[['
+- scopes:
+    - entity.other.attribute.noreturn.cpp
+  source: noreturn
+- scopesEnd:
+    - support.other.attribute.cpp
+  scopes:
+    - punctuation.section.attribute.end.cpp
+  source: ']]'
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: func2
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesBegin:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+  source: /*
+- source: syntax highlighting
+- scopesEnd:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  source: '*/'
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' no syntax highlighting'
+- scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+  source: struct
+- scopes:
+    - entity.name.type.struct.cpp
+  source: st
+- scopesEnd:
+    - meta.head.struct.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.struct.cpp
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' syntax highlighting works now'
+- scopesEnd:
+    - meta.body.struct.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+  source: '}'
+- scopesEnd:
+    - meta.block.struct.cpp
+  scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: func3
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

@@ -1,0 +1,83 @@
+- scopesBegin:
+    - meta.preprocessor.macro.cpp
+    - keyword.control.directive.define.cpp
+  scopes:
+    - punctuation.definition.directive.cpp
+  source: '#'
+- scopesEnd:
+    - keyword.control.directive.define.cpp
+  source: define
+- scopes:
+    - entity.name.function.preprocessor.cpp
+  source: TEST
+- scopes:
+    - punctuation.definition.parameters.begin.cpp
+  source: (
+- scopes:
+    - variable.parameter.preprocessor.cpp
+  source: name
+- scopes:
+    - punctuation.definition.parameters.end.cpp
+  source: )
+- scopes:
+    - variable.other.object.access.cpp
+  source: _ts
+- scopes:
+    - punctuation.separator.pointer-access.cpp
+  source: '->'
+- scopes:
+    - entity.name.function.member.cpp
+  source: test
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+  source: (
+- scopes:
+    - meta.function-call.member
+  source: name
+- scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+  source: )
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopes:
+    - punctuation.definition.capture.begin.lambda.cpp
+  source: '['
+- scopes:
+    - meta.lambda.capture.cpp
+    - keyword.operator.cpp
+  source: '&'
+- scopes:
+    - punctuation.definition.capture.end.lambda.cpp
+  source: ']'
+- scopesBegin:
+    - meta.function.definition.parameters.lambda.cpp
+  scopes:
+    - punctuation.definition.parameters.begin.lambda.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.lambda.cpp
+  scopes:
+    - punctuation.definition.parameters.end.lambda.cpp
+  source: )
+- scopes:
+    - punctuation.definition.lambda.return-type.cpp
+  source: '->'
+- scopes:
+    - storage.type.return-type.lambda.cpp
+  source: ' bool'
+- source: '#define ASSERT'
+- scopesBegin:
+    - meta.function.definition.parameters.lambda.cpp
+  scopes:
+    - punctuation.definition.parameters.begin.lambda.cpp
+  source: (
+- source: expected
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- source: ' actual'
+- scopes:
+    - punctuation.definition.parameters.end.lambda.cpp
+  source: )

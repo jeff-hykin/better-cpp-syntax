@@ -1,0 +1,15 @@
+- scopesBegin:
+    - meta.using-namespace.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+  source: using
+- scopes:
+    - keyword.other.namespace.directive.cpp
+    - storage.type.namespace.directive.cpp
+  source: namespace
+- scopes:
+    - entity.name.type.namespace.cpp
+  source: std
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

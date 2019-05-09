@@ -1,0 +1,55 @@
+- scopesBegin:
+    - meta.block.enum.cpp
+    - meta.head.enum.cpp
+  scopes:
+    - storage.type.enum.cpp
+  source: enum
+- scopes:
+    - entity.name.type.enum.cpp
+  source: enum1
+- scopesEnd:
+    - meta.head.enum.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.enum.cpp
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' comment'
+- scopesBegin:
+    - meta.enum.definition.cpp
+  scopes:
+    - variable.other.enummember.cpp
+  source: definition
+- scopesEnd:
+    - meta.enum.definition.cpp
+  source: /*
+- source: ' block comment */, '
+- scopesBegin:
+    - meta.enum.definition.cpp
+    - variable.other.enummember.cpp
+  source: definition3
+- scopesEnd:
+    - variable.other.enummember.cpp
+  source: definition
+- scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+  source: ','
+- scopes:
+    - variable.other.enummember.cpp
+  source: definition2
+- source: //
+- scopesEnd:
+    - meta.enum.definition.cpp
+  scopes:
+    - variable.other.enummember.cpp
+  source: comment
+- scopes:
+    - punctuation.section.block.end.bracket.curly.enum.cpp
+  source: '}'

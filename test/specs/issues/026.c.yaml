@@ -1,0 +1,94 @@
+- scopes:
+    - storage.type.struct.c
+  source: struct
+- source: ' foo '
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesBegin:
+    - meta.function-call.c
+  scopes:
+    - storage.type.built-in.primitive.c
+  source: int
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- source: bar
+- scopesEnd:
+    - meta.function-call.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopesBegin:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.union.c
+  source: union
+- source: ' baz '
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesBegin:
+    - meta.function-call.c
+  scopes:
+    - storage.type.built-in.primitive.c
+  source: int
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- source: quz
+- scopesEnd:
+    - meta.function-call.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopesBegin:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;

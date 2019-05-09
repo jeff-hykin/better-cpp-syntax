@@ -1,0 +1,117 @@
+- scopesBegin:
+    - meta.block.extern.cpp
+    - meta.head.extern.cpp
+  scopes:
+    - storage.type.extern.cpp
+  source: extern
+- scopesBegin:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: '"'
+- source: C
+- scopesEnd:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: '"'
+- scopesEnd:
+    - meta.head.extern.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.extern.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.extern.cpp
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' this one is okay'
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: inBlock
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopesEnd:
+    - meta.body.extern.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.extern.cpp
+  source: '}'
+- scopesBegin:
+    - meta.tail.extern.cpp
+    - meta.block.extern.cpp
+    - meta.head.extern.cpp
+  scopes:
+    - storage.type.extern.cpp
+  source: extern
+- scopesBegin:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+  source: '"'
+- source: C
+- scopesEnd:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: '"'
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: inBlock
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' this one is not'
+- scopesEnd:
+    - meta.head.extern.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.extern.cpp
+  source: '{'
+- scopes:
+    - meta.body.extern.cpp
+    - punctuation.section.block.end.bracket.curly.extern.cpp
+  source: '}'

@@ -1,0 +1,10 @@
+- scopes:
+    - keyword.other.typedef.c
+  source: typedef
+- source: ' foo '
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: int
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;

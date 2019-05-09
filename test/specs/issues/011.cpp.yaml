@@ -1,0 +1,58 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: bool
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: aaaa
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - storage.modifier.specifier.const.cpp
+  source: const
+- scopes:
+    - storage.type.primitive.cpp
+  source: char
+- scopes:
+    - keyword.operator.cpp
+  source: '*'
+- scopesBegin:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+  source: /*
+- source: ' comment '
+- scopesEnd:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  source: '*/'
+- scopes:
+    - variable.parameter.cpp
+  source: ' some_var'
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopes:
+    - keyword.control.return.cpp
+  source: return
+- scopes:
+    - constant.language.true.cpp
+  source: 'true'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'

@@ -1,0 +1,56 @@
+- scopesBegin:
+    - meta.preprocessor.macro.c
+    - keyword.control.directive.define.c
+  scopes:
+    - punctuation.definition.directive.c
+  source: '#'
+- scopesEnd:
+    - keyword.control.directive.define.c
+  source: define
+- scopes:
+    - entity.name.function.preprocessor.c
+  source: IS_UPGRADE_ADDR
+- scopes:
+    - punctuation.definition.parameters.begin.c
+  source: (
+- scopes:
+    - variable.parameter.preprocessor.c
+  source: addr
+- scopes:
+    - punctuation.definition.parameters.end.c
+  source: )
+- scopesEnd:
+    - meta.preprocessor.macro.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopesBegin:
+    - comment.block.c
+  scopes:
+    - punctuation.definition.comment.begin.c
+  source: /*
+- source: '((addr) >= UPGRADE_BASE_ADDR) && '
+- scopesEnd:
+    - comment.block.c
+  scopes:
+    - punctuation.definition.comment.end.c
+  source: '*/'
+- scopesBegin:
+    - meta.parens.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: addr
+- scopesEnd:
+    - meta.parens.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - keyword.operator.comparison.c
+  source: <
+- source: ' UPGRADE_BASE_ADDR '
+- scopes:
+    - keyword.operator.c
+  source: +
+- source: ' UPGRADE_SPACE_SIZE)'

@@ -1,0 +1,222 @@
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: LineReader
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: Line_Reader
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- source: ' Line\'
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: u00b7Reader
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- source: ' Line\'
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: U0002070EReader
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.struct.c
+  source: struct
+- source: ' LineReader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.struct.c
+  source: struct
+- source: ' Line_Reader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.struct.c
+  source: struct
+- source: ' Line\u00b7Reader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.struct.c
+  source: struct
+- source: ' Line\U0002070EReader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.enum.c
+  source: enum
+- source: ' LineReader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.enum.c
+  source: enum
+- source: ' Line_Reader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.enum.c
+  source: enum
+- source: ' Line\u00b7Reader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.enum.c
+  source: enum
+- source: ' Line\U0002070EReader'
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesEnd:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;

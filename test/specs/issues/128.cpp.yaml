@@ -1,0 +1,69 @@
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: "\tentries "
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopes:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+    - keyword.operator.new.cpp
+  source: new
+- source: ' symbolTableEntry '
+- scopes:
+    - keyword.operator.cpp
+  source: '*'
+- scopesBegin:
+    - meta.bracket.square.access.cpp
+  scopes:
+    - punctuation.definition.begin.bracket.square.cpp
+  source: '['
+- source: entriesCount
+- scopesEnd:
+    - meta.bracket.square.access.cpp
+  scopes:
+    - punctuation.definition.end.bracket.square.cpp
+  source: ']'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

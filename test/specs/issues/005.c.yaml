@@ -1,0 +1,25 @@
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: int
+- source: ' foo '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- scopes:
+    - constant.numeric.decimal.c
+  source: '1'
+- scopes:
+    - keyword.operator.c
+  source: +
+- scopes:
+    - constant.numeric.decimal.c
+  source: '11'
+- scopes:
+    - keyword.operator.c
+  source: +
+- scopes:
+    - constant.numeric.decimal.c
+  source: '111'
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
