@@ -1,0 +1,310 @@
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- source: Type
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- source: 'Type '
+- scopes:
+    - variable.parameter.probably.c
+  source: foo
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesBegin:
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: Type
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- scopesEnd:
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: Type
+- scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesBegin:
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: Type
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- scopes:
+    - variable.parameter.probably.c
+  source: foo
+- scopesEnd:
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: Type
+- scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- source: 'Type '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- source: ' value'
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- source: 'Type foo '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- source: ' value'
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesBegin:
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: Type
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- scopesEnd:
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: Type
+- scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- source: ' value'
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: bar
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesBegin:
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: Type
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '*'
+- scopes:
+    - variable.parameter.probably.c
+  source: foo
+- scopesEnd:
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: Type
+- scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- source: ' value'
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;

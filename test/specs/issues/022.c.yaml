@@ -1,0 +1,206 @@
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: sscanf
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- source: user_input
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- scopesBegin:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.begin.c
+  source: '"'
+- scopes:
+    - constant.other.placeholder.c
+  source: '%c'
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: '[^'
+- scopes:
+    - constant.character.escape.c
+  source: \n
+- source: ']'
+- scopesEnd:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.end.c
+  source: '"'
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- scopes:
+    - keyword.operator.c
+  source: '&'
+- scopes:
+    - variable.parameter.probably.c
+  source: arg0
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- source: ' arg_str'
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopesBegin:
+    - comment.line.double-slash.c
+  scopes:
+    - punctuation.definition.comment.c
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.c
+  source: ' reads char into arg0, the remainder until \n to arg_str'
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: test
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- source: '    t '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- scopesBegin:
+    - meta.function-call.c
+  scopes:
+    - entity.name.function.c
+  source: time
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.c
+  source: (
+- scopes:
+    - constant.language.c
+  source: 'NULL'
+- scopesEnd:
+    - meta.function-call.c
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- source: '    tmp '
+- scopes:
+    - keyword.operator.assignment.c
+  source: =
+- scopesBegin:
+    - meta.function-call.c
+  scopes:
+    - entity.name.function.c
+  source: localtime
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.c
+  source: (
+- scopes:
+    - keyword.operator.c
+  source: '&'
+- source: t
+- scopesEnd:
+    - meta.function-call.c
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopesBegin:
+    - meta.function-call.c
+  scopes:
+    - entity.name.function.c
+  source: strftime
+- scopes:
+    - punctuation.section.arguments.begin.bracket.round.c
+  source: (
+- source: timestr
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- scopes:
+    - keyword.operator.sizeof.c
+  source: sizeof
+- scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- source: timestr
+- scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- scopesBegin:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.begin.c
+  source: '"'
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: Y-
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: m-
+- scopes:
+    - constant.other.placeholder.c
+  source: '%d'
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: 'H:'
+- scopes:
+    - invalid.illegal.placeholder.c
+  source: '%'
+- source: 'M:'
+- scopes:
+    - constant.other.placeholder.c
+  source: '%s'
+- scopesEnd:
+    - string.quoted.double.c
+  scopes:
+    - punctuation.definition.string.end.c
+  source: '"'
+- scopes:
+    - punctuation.separator.delimiter.c
+  source: ','
+- source: ' tmp'
+- scopesEnd:
+    - meta.function-call.c
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.terminator.statement.c
+  source: ;
+- scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'

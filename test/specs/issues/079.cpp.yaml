@@ -1,0 +1,182 @@
+- source: 'template '
+- scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: MyStack
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call.cpp
+  source: <
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopes:
+    - comma.cpp
+    - punctuation.separator.template.argument.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '6'
+- scopesEnd:
+    - meta.head.class.cpp
+    - meta.template.call.cpp
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call.cpp
+  source: '>'
+- scopesEnd:
+    - meta.block.class.cpp
+  scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- source: template
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: MyStack
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopes:
+    - comma.cpp
+    - punctuation.separator.template.argument.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '6'
+- scopesEnd:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: MyStack
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.modifier.specifier.extern.cpp
+  source: extern
+- source: ' template '
+- scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: MyStack
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call.cpp
+  source: <
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopes:
+    - comma.cpp
+    - punctuation.separator.template.argument.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '6'
+- scopesEnd:
+    - meta.head.class.cpp
+    - meta.template.call.cpp
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call.cpp
+  source: '>'
+- scopesEnd:
+    - meta.block.class.cpp
+  scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopes:
+    - storage.modifier.specifier.extern.cpp
+  source: extern
+- source: ' template'
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: MyStack
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopes:
+    - comma.cpp
+    - punctuation.separator.template.argument.cpp
+  source: ','
+- scopes:
+    - constant.numeric.decimal.cpp
+  source: '6'
+- scopesEnd:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+  source: MyStack
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+  source: (
+- scopes:
+    - storage.type.primitive.cpp
+  source: void
+- scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  source: )
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

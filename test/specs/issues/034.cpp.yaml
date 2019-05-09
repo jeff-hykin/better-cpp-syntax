@@ -1,0 +1,56 @@
+- scopesBegin:
+    - meta.preprocessor.macro.cpp
+    - keyword.control.directive.define.cpp
+  scopes:
+    - punctuation.definition.directive.cpp
+  source: '#'
+- scopesEnd:
+    - keyword.control.directive.define.cpp
+  source: define
+- scopes:
+    - entity.name.function.preprocessor.cpp
+  source: IS_UPGRADE_ADDR
+- scopes:
+    - punctuation.definition.parameters.begin.cpp
+  source: (
+- scopes:
+    - variable.parameter.preprocessor.cpp
+  source: addr
+- scopes:
+    - punctuation.definition.parameters.end.cpp
+  source: )
+- scopesEnd:
+    - meta.preprocessor.macro.cpp
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
+- scopesBegin:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+  source: /*
+- source: '((addr) >= UPGRADE_BASE_ADDR) && '
+- scopesEnd:
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  source: '*/'
+- scopesBegin:
+    - meta.parens.cpp
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+  source: (
+- source: addr
+- scopesEnd:
+    - meta.parens.cpp
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+  source: )
+- scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- source: ' UPGRADE_BASE_ADDR '
+- scopes:
+    - keyword.operator.cpp
+  source: +
+- source: ' UPGRADE_SPACE_SIZE)'

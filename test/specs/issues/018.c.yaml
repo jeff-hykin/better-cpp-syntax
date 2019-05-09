@@ -1,0 +1,58 @@
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: function
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopes:
+    - keyword.operator.sizeof.c
+  source: sizeof
+- scopesBegin:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopes:
+    - constant.numeric.decimal.c
+  source: '1000'
+- scopesEnd:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - keyword.operator.sizeof.c
+  source: sizeof
+- scopesBegin:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.c
+  source: (
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: int
+- scopesEnd:
+    - meta.parens.block.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.c
+  source: )
+- scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'

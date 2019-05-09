@@ -1,0 +1,17 @@
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: std
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- scopes:
+    - storage.type.cpp
+  source: size_t
+- source: ' size'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

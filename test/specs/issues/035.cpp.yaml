@@ -1,0 +1,233 @@
+- scopesBegin:
+    - meta.block.namespace.cpp
+    - meta.head.namespace.cpp
+  scopes:
+    - keyword.other.namespace.definition.cpp
+    - storage.type.namespace.definition.cpp
+  source: namespace
+- scopes:
+    - entity.name.type.namespace.cpp
+  source: test
+- scopesEnd:
+    - meta.head.namespace.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.namespace.cpp
+  scopes:
+    - storage.type.template.cpp
+  source: template
+- scopes:
+    - punctuation.section.angle-brackets.start.template.definition.cpp
+  source: <
+- scopesBegin:
+    - meta.template.definition.cpp
+  scopes:
+    - storage.type.template.argument.class
+    - .cpp
+  source: 'class '
+- scopesEnd:
+    - meta.template.definition.cpp
+  scopes:
+    - entity.name.type.template.cpp
+  source: T
+- scopes:
+    - punctuation.section.angle-brackets.end.template.definition.cpp
+  source: '>'
+- scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+  source: struct
+- scopes:
+    - entity.name.type.struct.cpp
+  source: test
+- scopesEnd:
+    - meta.head.struct.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.struct.cpp
+  scopes:
+    - storage.type.template.cpp
+  source: template
+- scopes:
+    - punctuation.section.angle-brackets.start.template.definition.cpp
+  source: <
+- scopesBegin:
+    - meta.template.definition.cpp
+  scopes:
+    - storage.type.template.cpp
+  source: 'class '
+- scopes:
+    - entity.name.type.template.cpp
+  source: U
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+  source: std
+- scopesEnd:
+    - meta.scope-resolution.cpp
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  source: '::'
+- source: vector
+- scopesBegin:
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: <
+- scopes:
+    - storage.type.primitive.cpp
+  source: int
+- scopesEnd:
+    - meta.template.definition.cpp
+    - meta.template.call.cpp
+  scopes:
+    - keyword.operator.comparison.cpp
+  source: '>'
+- scopes:
+    - punctuation.section.angle-brackets.end.template.definition.cpp
+  source: '>'
+- scopes:
+    - storage.type.primitive.cpp
+  source: bool
+- scopesBegin:
+    - meta.function.definition.parameters.operator-overload.cpp
+  scopes:
+    - keyword.other.operator.overload.cpp
+  source: operator
+- scopes:
+    - entity.name.operator.overloadee.cpp
+  source: ()
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
+  source: (
+- source: 'U '
+- scopes:
+    - variable.parameter.cpp
+  source: k
+- scopesEnd:
+    - meta.function.definition.parameters.operator-overload.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+  source: )
+- scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+  source: '{'
+- scopesEnd:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  source: '}'
+- scopesEnd:
+    - meta.body.struct.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+  source: struct
+- scopes:
+    - entity.name.type.struct.cpp
+  source: test2
+- scopesEnd:
+    - meta.head.struct.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  source: '{'
+- scopesBegin:
+    - meta.body.struct.cpp
+  scopes:
+    - storage.type.primitive.cpp
+  source: bool
+- scopesBegin:
+    - meta.function.definition.parameters.operator-overload.cpp
+  scopes:
+    - keyword.other.operator.overload.cpp
+  source: operator
+- scopes:
+    - entity.name.operator.overloadee.cpp
+  source: ()
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
+  source: (
+- scopesEnd:
+    - meta.function.definition.parameters.operator-overload.cpp
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+  source: )
+- scopes:
+    - keyword.operator.assignment.cpp
+  source: =
+- scopes:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+    - keyword.operator.delete.cpp
+  source: delete
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesEnd:
+    - meta.body.struct.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+  source: '}'
+- scopesEnd:
+    - meta.block.struct.cpp
+  scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesEnd:
+    - meta.block.namespace.cpp
+    - meta.body.namespace.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace.cpp
+  source: '}'
+- scopesBegin:
+    - comment.line.double-slash.cpp
+  scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- source: ' namespace test'
+- scopes:
+    - punctuation.definition.comment.cpp
+  source: //
+- scopesEnd:
+    - comment.line.double-slash.cpp
+  source: ' no syntax highlighting'
+- scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: test2
+- scopesEnd:
+    - meta.head.class.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  source: '{'
+- scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

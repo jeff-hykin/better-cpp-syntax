@@ -1,0 +1,68 @@
+- scopes:
+    - storage.type.built-in.primitive.c
+  source: void
+- scopesBegin:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - entity.name.function.c
+  source: function
+- scopes:
+    - punctuation.section.parameters.begin.bracket.round.c
+  source: (
+- scopesEnd:
+    - meta.function.c
+    - meta.function.definition.parameters.c
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.c
+  source: )
+- scopesBegin:
+    - meta.block.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.c
+  source: '{'
+- scopesBegin:
+    - meta.block.switch.c
+    - meta.head.switch.c
+  scopes:
+    - keyword.control.switch.c
+  source: switch
+- scopesBegin:
+    - meta.conditional.switch.c
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.conditional.switch.c
+  source: (
+- scopes:
+    - constant.numeric.decimal.c
+  source: '1'
+- scopesEnd:
+    - meta.conditional.switch.c
+  scopes:
+    - punctuation.section.parens.end.bracket.round.conditional.switch.c
+  source: )
+- scopesEnd:
+    - meta.head.switch.c
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.switch.c
+  source: '{'
+- scopesBegin:
+    - meta.body.switch.c
+    - meta.conditional.case.c
+  scopes:
+    - keyword.control.default.c
+  source: default
+- scopesEnd:
+    - meta.conditional.case.c
+  scopes:
+    - colon.c
+    - punctuation.separator.case.default.c
+  source: ':'
+- scopesEnd:
+    - meta.block.switch.c
+    - meta.body.switch.c
+  scopes:
+    - punctuation.section.block.end.bracket.curly.switch.c
+  source: '}'
+- scopes:
+    - punctuation.section.block.end.bracket.curly.c
+  source: '}'

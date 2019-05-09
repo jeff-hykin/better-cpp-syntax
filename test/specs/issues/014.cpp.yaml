@@ -1,0 +1,51 @@
+- scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: B
+- scopesEnd:
+    - meta.head.class.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  source: '{'
+- scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;
+- scopesBegin:
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+  source: class
+- scopes:
+    - entity.name.type.class.cpp
+  source: A
+- scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+  source: ':'
+- scopes:
+    - storage.type.modifier.access.public.cpp
+  source: public
+- scopes:
+    - entity.name.type.inherited.cpp
+  source: B
+- scopesEnd:
+    - meta.head.class.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  source: '{'
+- scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  source: '}'
+- scopes:
+    - punctuation.terminator.statement.cpp
+  source: ;

@@ -1,6 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 
+const yaml = require("js-yaml");
+
 const runTest = require("../testRunner");
 const argv = require("../arguments");
 const paths = require("../paths");
@@ -25,12 +27,12 @@ async function runTests() {
             .readFileSync(test.fixture)
             .toString()
             .split("\n");
-        const spec = fs.readFileSync(test.spec);
+        const spec = fs.readFileSync(test.spec.default);
         const result = await runTest(
             registry,
             path.relative(paths.fixtureDir, test.fixture),
             fixture,
-            JSON.parse(spec)
+            yaml.safeLoad(spec, { filename: test.spec.default, json: true })
         );
         totalResult = result ? totalResult : result;
         console.groupEnd();

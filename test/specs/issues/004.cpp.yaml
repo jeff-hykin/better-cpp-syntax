@@ -1,0 +1,141 @@
+- scopesBegin:
+    - constant.numeric.decimal.cpp
+  source: '10102'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '0232'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- scopesEnd:
+    - constant.numeric.decimal.cpp
+  source: '2323'
+- scopesBegin:
+    - string.quoted.double.cpp
+    - punctuation.definition.string.begin.cpp
+  scopes:
+    - meta.encoding.cpp
+  source: L
+- scopesEnd:
+    - punctuation.definition.string.begin.cpp
+  source: '"'
+- source: abcdef
+- scopesEnd:
+    - string.quoted.double.cpp
+  scopes:
+    - punctuation.definition.string.end.cpp
+  source: '"'
+- scopes:
+    - keyword.other.unit.binary.cpp
+  source: 0b
+- scopes:
+    - constant.numeric.binary.cpp
+  source: '10010110'
+- scopesBegin:
+    - constant.numeric.decimal.cpp
+  source: '100'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- scopesEnd:
+    - constant.numeric.decimal.cpp
+  source: '000'
+- scopes:
+    - keyword.other.unit.user-defined.cpp
+  source: ms
+- scopesBegin:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '234'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '567'
+- scopesEnd:
+    - constant.numeric.decimal.cpp
+  source: '0'
+- scopes:
+    - constant.numeric.decimal.point.cpp
+  source: .
+- scopesBegin:
+    - constant.numeric.decimal.cpp
+  source: '12'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '34'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- scopesEnd:
+    - constant.numeric.decimal.cpp
+  source: '56'
+- scopes:
+    - keyword.other.unit.suffix.floating-point.cpp
+  source: f
+- scopes:
+    - keyword.other.unit.binary.cpp
+  source: 0b
+- scopesBegin:
+    - constant.numeric.binary.cpp
+  source: '1001'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- scopesEnd:
+    - constant.numeric.binary.cpp
+  source: '1101'
+- scopes:
+    - keyword.other.unit.hexadecimal.cpp
+  source: 0x
+- scopesBegin:
+    - constant.numeric.hexadecimal.cpp
+  source: '0'
+- source: .
+- scopesEnd:
+    - constant.numeric.hexadecimal.cpp
+  source: '5'
+- scopes:
+    - keyword.other.unit.exponent.hexadecimal.cpp
+  source: p
+- scopes:
+    - constant.numeric.exponent.hexadecimal.cpp
+  source: '10'
+- scopes:
+    - keyword.other.unit.suffix.floating-point.cpp
+  source: L
+- scopes:
+    - keyword.other.unit.hexadecimal.cpp
+  source: 0x
+- scopesBegin:
+    - constant.numeric.hexadecimal.cpp
+  source: AB
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- scopesEnd:
+    - constant.numeric.hexadecimal.cpp
+  source: CD
+- scopesBegin:
+    - constant.numeric.decimal.cpp
+  source: '1'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '2'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '3'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '4'
+- scopes:
+    - punctuation.separator.constant.numeric.cpp
+  source: ''''
+- source: '5'
