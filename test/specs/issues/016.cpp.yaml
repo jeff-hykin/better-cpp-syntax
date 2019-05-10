@@ -23,10 +23,16 @@
     - punctuation.section.parameters.begin.bracket.round.cpp
 - source: long
   scopes:
-    - storage.type.primitive.cpp
+    - meta.function.parameter
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
 - source: double
   scopes:
-    - variable.parameter.cpp
+    - meta.function.parameter
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
