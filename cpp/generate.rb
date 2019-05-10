@@ -814,7 +814,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 # function pointer
 #
     array_brackets = newPattern(
-        match:  /\[/.then(
+        match: /\[/.then(
                 match: /\w*/,
                 includes: [:evaluation_context]
             ).then(
@@ -824,7 +824,8 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
         start_pattern: qualified_type.maybe(@spaces).then(
-                /\(/
+                match: /\(/,
+                tag_as: "punctuation.section.parens.begin.bracket.round.function-pointer"
             ).maybe(@spaces).then(
                 match: /\*/,
                 tag_as: "punctuation.definition.function.pointer.dereference",
@@ -836,12 +837,17 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                 array_brackets
             ).then(
                 # closing ) for the variable name
-                /\)/
+                match: /\)/,
+                tag_as: "punctuation.section.parens.end.bracket.round.function-pointer"
             ).maybe(@spaces).then(
                 # opening ( for the parameter types
-                /\(/
+                match: /\(/,
+                tag_as: "punctuation.section.parameters.begin.bracket.round.function-pointer"
             ),
-        end_pattern: /\)/.then(after_declaration),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.parameters.end.bracket.round.function-pointer"
+            ).then(after_declaration),
         includes: [
             :parameter_struct, :function_context_c,
         ]
