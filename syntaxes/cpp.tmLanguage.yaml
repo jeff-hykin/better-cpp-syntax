@@ -768,9 +768,12 @@
       '10':
         patterns:
         - include: "#evaluation_context"
-    end: "\\)\\s*(?!\\()(?:\\[(\\w*)\\]\\s*)*(?=[{=,);]|\\n)"
+    end: "\\)(?:\\[(\\w*)\\]\\s*)*\\s*(?!\\()(?:\\[(\\w*)\\]\\s*)*(?=[{=,);]|\\n)"
     endCaptures:
       '1':
+        patterns:
+        - include: "#evaluation_context"
+      '2':
         patterns:
         - include: "#evaluation_context"
     patterns:
