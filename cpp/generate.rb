@@ -626,7 +626,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:declaration] = variableDeclaration["variable.other"]
     cpp_grammar[:parameter_declaration] = variableDeclaration["variable.parameter"]
     cpp_grammar[:declarations] = PatternRange.new(
-        start_pattern: /^/.maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
+        start_pattern: lookBehindFor(/;/).or(/^/).maybe(@spaces).lookAheadToAvoid(/~/).then(declaration_storage_specifiers).then(qualified_type).maybe(@spaces)
             .lookAheadToAvoid(/::/)
             .lookBehindToAvoid(/operator/)
             .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/))
