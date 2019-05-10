@@ -34,9 +34,11 @@
     - punctuation.definition.comment.end.cpp
   scopesEnd:
     - comment.block.cpp
-- source: ' some_var'
+- source: some_var
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp

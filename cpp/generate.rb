@@ -587,7 +587,8 @@ cpp_grammar = Grammar.new(
 #
     can_appear_before_variable_declaration = newPattern(
         match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
-        tag_as: "entity.name.type.modifier",
+        # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+        tag_as: "keyword.operator",
     )
     can_appear_before_variable_declaration_with_spaces = newPattern(
         match: maybe(@spaces).maybe(can_appear_before_variable_declaration).maybe(@spaces),
@@ -968,15 +969,17 @@ cpp_grammar = Grammar.new(
             # is considered a parameter
             lookBehindFor(/\*\//).maybe(@spaces).then(
                 match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
-                tag_as: "variable.other.type_modifier"
-            ).then(
+                # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+                tag_as: "keyword.operator"
+            ).maybe(@spaces).then(
                 match: variable_name,
                 tag_as: "variable.parameter"
             ),
             :parameter_declaration,
-            declaration_storage_specifiers.then(qualified_type).then(
+            declaration_storage_specifiers.then(qualified_type).maybe(@spaces).then(
                 match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
-                tag_as: "variable.other.type_modifier"
+                # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+                tag_as: "keyword.operator"
             ),
 
             :comments_context,
