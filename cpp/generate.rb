@@ -827,7 +827,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                 match: identifier,
                 tag_as: "variable.other.pointer.function"
             ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
-        end_pattern: /\)/.zeroOrMoreOf(array_brackets).then(after_declaration),
+        end_pattern: /\)/.then(after_declaration),
         includes: [
             :parameter_struct, :function_context_c,
         ]
