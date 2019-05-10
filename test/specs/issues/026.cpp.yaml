@@ -31,6 +31,52 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: '('
+- source: '*'
+  scopes:
+    - variable.other.pointer.function
+- source: bar
+  scopes:
+    - variable.other.pointer.function
+- source: )(
+- source: )
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: '('
+- source: '*'
+  scopes:
+    - variable.other.pointer.function
+- source: bar
+  scopes:
+    - variable.other.pointer.function
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: )(
+- source: )
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct.cpp
