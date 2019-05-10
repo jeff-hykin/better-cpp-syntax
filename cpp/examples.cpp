@@ -150,7 +150,6 @@
 //
     auto a = new int(5);
     delete a;
-    new (&a_storage_of_callable.callable) type(forward<Callable>(a_callable));
     int *array = new int[100];
     delete[] array;
     char should_always_be_a_newline;
