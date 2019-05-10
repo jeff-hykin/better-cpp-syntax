@@ -992,10 +992,10 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    ends_parameter = /[,)>]|\.\.\.|\n/
+    ends_parameter = /[\],)>]|\.\.\.|\n/
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = PatternRange.new(
-        start_pattern: lookBehindFor(/[,(<]|\*\//),
+        start_pattern: lookBehindFor(/[\[,(<]|\*\//),
         end_pattern: lookAheadFor(ends_parameter),
         tag_as: "meta.function.parameter",
         includes: [
@@ -1015,6 +1015,15 @@ cpp_grammar = Grammar.new(
             # restore probably_a_parameter "feature" where an identifier after a comment
             # is considered a parameter
             lookBehindFor(/\*\//).maybe(@spaces).then(
+                match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
+                # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+                tag_as: "keyword.operator"
+            ).maybe(@spaces).then(
+                match: variable_name,
+                tag_as: "variable.parameter"
+            ),
+            # and also for ...
+            lookBehindFor(/\.\.\./).maybe(@spaces).then(
                 match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
                 # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
                 tag_as: "keyword.operator"

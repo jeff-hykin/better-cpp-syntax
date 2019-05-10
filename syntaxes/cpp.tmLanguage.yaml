@@ -1054,8 +1054,8 @@
     - include: "#function_parameters"
   function_parameters:
     name: meta.function.parameter.cpp
-    begin: "(?<=[,(<]|\\*\\/)"
-    end: "(?=[,)>]|\\.\\.\\.|\\n)"
+    begin: "(?<=[\\[,(<]|\\*\\/)"
+    end: "(?=[\\],)>]|\\.\\.\\.|\\n)"
     patterns:
     - include: "#attributes"
     - match: "(\\=)\\s*([^,)>]+)"
@@ -1068,6 +1068,12 @@
           - include: "#evaluation_context"
     - include: "#function_pointer"
     - match: "(?<=\\*\\/)\\s*((?-mix:\\s*(?:(?:(?:(?:\\*)+|(?:&)+)))?\\s*))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+      captures:
+        '1':
+          name: keyword.operator.cpp
+        '2':
+          name: variable.parameter.cpp
+    - match: "(?<=\\.\\.\\.)\\s*((?-mix:\\s*(?:(?:(?:(?:\\*)+|(?:&)+)))?\\s*))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
       captures:
         '1':
           name: keyword.operator.cpp
