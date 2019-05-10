@@ -813,20 +813,34 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 #
 # function pointer
 #
-    array_brackets = /\[/.then(
-        match: /\w*/,
-        includes: [:evaluation_context]
-    ).then(/\]/).maybe(@spaces)
-    after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
-        .lookAheadFor(/[{=,);]|\n/)
+    array_brackets = newPattern(
+        match:  /\[/.then(
+                match: /\w*/,
+                includes: [:evaluation_context]
+            ).then(
+                /\]/
+            ).maybe(@spaces)
+        )
+    after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
-        start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
+        start_pattern: qualified_type.maybe(@spaces).then(
+                /\(/
+            ).maybe(@spaces).then(
                 match: /\*/,
-                tag_as: "variable.other.pointer.function",
+                tag_as: "punctuation.definition.function.pointer.dereference",
             ).maybe(@spaces).maybe(
                 match: identifier,
-                tag_as: "variable.other.pointer.function"
-            ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
+                tag_as: "variable.other.definition.pointer.function"
+            ).maybe(@spaces).zeroOrMoreOf(
+                # an array of function pointers ?
+                array_brackets
+            ).then(
+                # closing ) for the variable name
+                /\)/
+            ).maybe(@spaces).then(
+                # opening ( for the parameter types
+                /\(/
+            ),
         end_pattern: /\)/.then(after_declaration),
         includes: [
             :parameter_struct, :function_context_c,

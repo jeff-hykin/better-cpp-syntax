@@ -762,17 +762,13 @@
       '7':
         name: punctuation.separator.namespace.access.cpp
       '8':
-        name: variable.other.pointer.function.cpp
+        name: punctuation.definition.function.pointer.dereference.cpp
       '9':
-        name: variable.other.pointer.function.cpp
+        name: variable.other.definition.pointer.function.cpp
       '10':
         patterns:
         - include: "#evaluation_context"
-    end: "\\)\\s*(?!\\()(?:\\[(\\w*)\\]\\s*)*(?=[{=,);]|\\n)"
-    endCaptures:
-      '1':
-        patterns:
-        - include: "#evaluation_context"
+    end: "\\)\\s*(?=[{=,);]|\\n)(?!\\()"
     patterns:
     - include: "#parameter_struct"
     - include: "#function_context_c"
