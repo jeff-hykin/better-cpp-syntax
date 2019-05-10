@@ -114,8 +114,12 @@
     - storage.modifier.specifier.const.cpp
 - source: bool
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
-- source: ' isPoint '
+- source: 'isPoint'
+  scopes:
+    - variable.other
 - source: =
   scopes:
     - keyword.operator.assignment.cpp
@@ -414,27 +418,21 @@
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
 - source: <
-  scopesBegin:
-    - meta.template.call.cpp
   scopes:
-    - keyword.operator.comparison.cpp
+    - meta.template.call.cpp
 - source: IsPoint
   scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
 - source: <
-  scopesBegin:
-    - meta.template.call.cpp
   scopes:
-    - keyword.operator.comparison.cpp
+    - meta.template.call.cpp
 - source: T
   scopes:
     - storage.type.user-defined.cpp
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
-  scopesEnd:
     - meta.template.call.cpp
 - source: '::'
   scopes:
@@ -446,8 +444,6 @@
     - storage.type.user-defined.cpp
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
-  scopesEnd:
     - meta.template.call.cpp
 - source: '::'
   scopes:
@@ -482,27 +478,21 @@
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
 - source: <
-  scopesBegin:
-    - meta.template.call.cpp
   scopes:
-    - keyword.operator.comparison.cpp
+    - meta.template.call.cpp
 - source: IsPoint
   scopesBegin:
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
 - source: <
-  scopesBegin:
-    - meta.template.call.cpp
   scopes:
-    - keyword.operator.comparison.cpp
+    - meta.template.call.cpp
 - source: U
   scopes:
     - storage.type.user-defined.cpp
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
-  scopesEnd:
     - meta.template.call.cpp
 - source: '::'
   scopes:
@@ -514,8 +504,6 @@
     - storage.type.user-defined.cpp
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
-  scopesEnd:
     - meta.template.call.cpp
 - source: '::'
   scopes:
@@ -609,8 +597,12 @@
     - storage.modifier.specifier.const.cpp
 - source: bool
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
-- source: ' isPoint '
+- source: isPoint
+  scopes:
+    - variable.other
 - source: =
   scopes:
     - keyword.operator.assignment.cpp
@@ -674,8 +666,12 @@
     - storage.modifier.specifier.const.cpp
 - source: bool
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other
 - source: =
   scopes:
     - keyword.operator.assignment.cpp
@@ -739,8 +735,12 @@
     - storage.modifier.specifier.const.cpp
 - source: bool
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other
 - source: =
   scopes:
     - keyword.operator.assignment.cpp

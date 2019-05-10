@@ -10,10 +10,21 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: 'Stats '
+- source: 'Stats'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: aStats
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
@@ -35,7 +46,21 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: '    Stats aStats'
+- source: 'Stats'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+- source: aStats
+  scopes:
+    - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
@@ -57,7 +82,21 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: '    Stats aStats'
+- source: 'Stats'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+- source: aStats
+  scopes:
+    - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp

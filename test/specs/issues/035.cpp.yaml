@@ -82,14 +82,10 @@
 - source: <
   scopesBegin:
     - meta.template.call.cpp
-  scopes:
-    - keyword.operator.comparison.cpp
 - source: int
   scopes:
     - storage.type.primitive.cpp
 - source: '>'
-  scopes:
-    - keyword.operator.comparison.cpp
   scopesEnd:
     - meta.template.definition.cpp
     - meta.template.call.cpp
@@ -110,10 +106,21 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
-- source: 'U '
+- source: 'U'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: k
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload.cpp

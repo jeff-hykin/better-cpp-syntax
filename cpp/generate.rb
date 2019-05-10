@@ -600,7 +600,7 @@ cpp_grammar = Grammar.new(
         includes: [:evaluation_context]
     ).then(/\]/).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
-        .lookAheadFor(/[{=,);]/)
+        .lookAheadFor(/[{=,);]|\n/)
 
     declaration_storage_specifiers = newPattern(
         match: zeroOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
@@ -632,7 +632,6 @@ cpp_grammar = Grammar.new(
             .lookAheadToAvoid(maybe(can_appear_before_variable_declaration_with_spaces.then(variable_name).maybe(@spaces).maybe(@cpp_tokens.that(:canAppearAfterOperatorKeyword)).maybe(@spaces)).then(/\(/))
             .lookAheadFor(/[\w\*\&]|\\[uU]/),
         end_pattern: @semicolon.or(lookAheadFor(/\{/)),
-        tag_as: "declarations",
         includes: [
             PatternRange.new(
                 start_pattern: newPattern(
@@ -947,7 +946,7 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    ends_parameter = /[,)>]|\.\.\./
+    ends_parameter = /[,)>]|\.\.\.|\n/
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = PatternRange.new(
         start_pattern: lookBehindFor(/[,(<]|\*\//),

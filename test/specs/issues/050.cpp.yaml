@@ -153,6 +153,7 @@
     - punctuation.section.parameters.begin.bracket.round.cpp
 - source: /*
   scopesBegin:
+    - meta.function.parameter
     - comment.block.cpp
   scopes:
     - punctuation.definition.comment.begin.cpp
@@ -161,6 +162,7 @@
   scopes:
     - punctuation.definition.comment.end.cpp
   scopesEnd:
+    - meta.function.parameter
     - comment.block.cpp
 - source: )
   scopes:

@@ -15,33 +15,19 @@
 - source: int
   scopesBegin:
     - meta.body.struct.cpp
-    - meta.function.constructor.cpp
   scopes:
-    - entity.name.function.constructor.cpp
-- source: (
-  scopes:
-    - punctuation.definition.parameters.begin.constructor.cpp
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: ' ('
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - variable.other.pointer.function
 - source: bar
   scopes:
-    - variable.parameter.cpp
+    - variable.other.pointer.function
+- source: )(
 - source: )
-  scopes:
-    - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
-- source: (
-  scopesBegin:
-    - meta.parens.cpp
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
@@ -72,33 +58,20 @@
 - source: int
   scopesBegin:
     - meta.body.union.cpp
-    - meta.function.constructor.cpp
   scopes:
-    - entity.name.function.constructor.cpp
-- source: (
   scopes:
-    - punctuation.definition.parameters.begin.constructor.cpp
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: ' ('
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - variable.other.pointer.function
 - source: quz
   scopes:
-    - variable.parameter.cpp
+    - variable.other.pointer.function
+- source: )(
 - source: )
-  scopes:
-    - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
-- source: (
-  scopesBegin:
-    - meta.parens.cpp
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
