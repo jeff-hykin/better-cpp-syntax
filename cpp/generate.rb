@@ -548,6 +548,27 @@ cpp_grammar = Grammar.new(
             )
         )
 #
+# Types
+#
+cpp_grammar[:qualified_type] = qualified_type = newPattern(
+    should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a"],
+    should_not_partial_match: ["return", "static const"],
+    match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
+        @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
+    ).maybe(inline_attribute).maybe(@spaces)
+    .zeroOrMoreOf(newPattern(@cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))).then(@spaces))
+    .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:.]/),
+    tag_as: "entity.name.type meta.qualified_type",
+    includes: [
+        newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
+        :function_type,
+        :storage_types,
+        :number_literal,
+        :string_context_c,
+        :comma,
+    ],
+)
+#
 # Functions
 #
     functionTemplate = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
@@ -789,6 +810,22 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
+#
+# function pointer
+#
+    cpp_grammar[:function_pointer] = PatternRange.new(
+        start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
+                match: /\*/,
+                tag_as: "variable.other.pointer.function",
+            ).maybe(@spaces).maybe(
+                match: identifier,
+                tag_as: "variable.other.pointer.function"
+            ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
+        end_pattern: /\)/.then(after_declaration),
+        includes: [
+            :function_parameters,
+        ]
+    )
 #
 # Probably a parameter
 #
