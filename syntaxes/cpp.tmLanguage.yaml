@@ -338,7 +338,7 @@
     name: storage.modifier.specifier.functional.post-parameters.$0.cpp
   storage_specifiers:
     match: "(?<!\\w)(?:const|static|volatile|register|restrict|extern|inline|constexpr|mutable)(?!\\w)"
-    name: storage.modifier.specifier.$1.cpp
+    name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
     match: "(?<!\\w)((?:private|protected|public))\\s*:"
     captures:
@@ -1155,8 +1155,8 @@
     - include: "#function_parameters"
   function_parameters:
     name: meta.function.parameter.cpp
-    begin: "(?<=[,(])"
-    end: "(?=[,)]|\\.\\.\\.)"
+    begin: "(?<=[,(<]|\\*\\/)"
+    end: "(?=[,)>]|\\.\\.\\.)"
     patterns:
     - include: "#attributes"
     - match: "(\\=)\\s*([^,)>]+)"
@@ -1168,11 +1168,18 @@
           patterns:
           - include: "#evaluation_context"
     - include: "#function_pointer"
-    - include: "#parameter_declaration"
-    - match: "(?:((?<!\\w)(?:const|static|volatile|register|restrict|extern|inline|constexpr|mutable)(?!\\w))\\s+)*(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?(?![\\w<:]))((?-mix:\\s*(?:(?:(?:(?:\\*)+|(?:&)+)))?\\s*))"
+    - match: "(?<=\\*\\/)\\s*((?-mix:\\s*(?:(?:(?:(?:\\*)+|(?:&)+)))?\\s*))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
       captures:
         '1':
-          name: storage.modifier.specifier.$1.cpp
+          name: variable.other.type_modifier.cpp
+        '2':
+          name: variable.parameter.cpp
+    - include: "#parameter_declaration"
+    - match: "((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern|inline|constexpr|mutable)(?!\\w)))\\s+)*)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:((?<!<)<(?!<)((?:[\\s<>():,*&\\w])*)>\\s*))?(?![\\w<:]))((?-mix:\\s*(?:(?:(?:(?:\\*)+|(?:&)+)))?\\s*))"
+      captures:
+        '1':
+          patterns:
+          - include: "#storage_specifiers"
         '2':
           name: entity.name.type.cpp meta.qualified_type.cpp
           patterns:

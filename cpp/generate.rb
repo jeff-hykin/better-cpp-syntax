@@ -944,10 +944,10 @@ cpp_grammar = Grammar.new(
 #
 # Function parameters
 #
-    ends_parameter = /[,)]|\.\.\./
+    ends_parameter = /[,)>]|\.\.\./
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(ends_parameter)
     cpp_grammar[:function_parameters] = PatternRange.new(
-        start_pattern: lookBehindFor(/[,(]/),
+        start_pattern: lookBehindFor(/[,(<]|\*\//),
         end_pattern: lookAheadFor(ends_parameter),
         tag_as: "meta.function.parameter",
         includes: [
@@ -964,11 +964,21 @@ cpp_grammar = Grammar.new(
                 ),
             ),
             :function_pointer,
+            # restore probably_a_parameter "feature" where an identifier after a comment
+            # is considered a parameter
+            lookBehindFor(/\*\//).maybe(@spaces).then(
+                match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
+                tag_as: "variable.other.type_modifier"
+            ).then(
+                match: variable_name,
+                tag_as: "variable.parameter"
+            ),
             :parameter_declaration,
-            zeroOrMoreOf(storage_specifier.then(@spaces)).then(qualified_type).then(
+            declaration_storage_specifiers.then(qualified_type).then(
                 match: can_appear_before_variable_declaration_with_spaces.without_numbered_capture_groups,
                 tag_as: "variable.other.type_modifier"
             ),
+
             :comments_context,
             :vararg_ellipses,
             # the following four are to support incorrectly identified function calls
