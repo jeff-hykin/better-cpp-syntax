@@ -557,14 +557,16 @@ cpp_grammar = Grammar.new(
 # Types
 #
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "function<void(void, usertype uservalue)>"],
+        should_fully_match: ["A","A::B","A::B<C>::D<E>", "function<void(void, usertype uservalue)>", "unsigned char","long long int", "unsigned short int","struct a"],
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
-            @cpp_tokens.that(:isWord, not(:isType)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
+            @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
         ).maybe(inline_attribute).maybe(@spaces)
+        .zeroOrMoreOf(newPattern(@cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))).then(@spaces))
         .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call).lookAheadToAvoid(/[\w<:]/),
         tag_as: "entity.name.type meta.qualified_type",
         includes: [
+            newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
             :function_type,
             :storage_types,
             :number_literal,
@@ -616,7 +618,7 @@ cpp_grammar = Grammar.new(
             .then(can_appear_before_variable_declaration_with_spaces)
             .maybe(inline_attribute).maybe(@spaces)
             .then(
-                match: variable_name,
+                match: lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name),
                 tag_as: variable_tag,
             ).then(after_declaration),
         )
@@ -657,7 +659,7 @@ cpp_grammar = Grammar.new(
             ),
             can_appear_before_variable_declaration_with_spaces.maybe(inline_attribute)
             .maybe(@spaces).then(
-                match: variable_name,
+                match: lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name),
                 tag_as: "variable.other",
             ).then(after_declaration),
             :comments_context,
