@@ -813,6 +813,12 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 #
 # function pointer
 #
+    array_brackets = /\[/.then(
+        match: /\w*/,
+        includes: [:evaluation_context]
+    ).then(/\]/).maybe(@spaces)
+    after_declaration = maybe(@spaces).lookAheadToAvoid(/\(/).zeroOrMoreOf(array_brackets)
+        .lookAheadFor(/[{=,);]|\n/)
     cpp_grammar[:function_pointer] = PatternRange.new(
         start_pattern: qualified_type.maybe(@spaces).then(/\(/).maybe(@spaces).then(
                 match: /\*/,
@@ -823,7 +829,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             ).maybe(@spaces).zeroOrMoreOf(array_brackets).then(/\)/).maybe(@spaces).then(/\(/),
         end_pattern: /\)/.then(after_declaration),
         includes: [
-            :function_parameters,
+            :parameter_struct, :function_context_c,
         ]
     )
 #
@@ -1211,7 +1217,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context  ],
+            body_includes: [ :function_pointer, :constructor_context, :$initial_context ],
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]

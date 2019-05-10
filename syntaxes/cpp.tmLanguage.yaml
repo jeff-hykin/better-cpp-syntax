@@ -574,6 +574,35 @@
       '4':
         name: punctuation.separator.namespace.access.cpp
     name: meta.scope-resolution.cpp
+  qualified_type:
+    match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.])"
+    captures:
+      '0':
+        name: entity.name.type.cpp meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+      '1':
+        patterns:
+        - include: "#attributes"
+      '2':
+        name: meta.scope-resolution.cpp
+      '3':
+        patterns:
+        - include: "#scope_resolution"
+      '4':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '5':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_context"
+      '6':
+        name: punctuation.separator.namespace.access.cpp
   struct_declare:
     match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s+((?:\\*|&\\s*)*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
     captures:
@@ -703,6 +732,50 @@
   assignment_operator:
     match: "\\="
     name: keyword.operator.assignment.cpp
+  function_pointer:
+    begin: "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))\\s*\\(\\s*(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:\\[(\\w*)\\]\\s*)*\\)\\s*\\("
+    beginCaptures:
+      '1':
+        name: entity.name.type.cpp meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+      '2':
+        patterns:
+        - include: "#attributes"
+      '3':
+        name: meta.scope-resolution.cpp
+      '4':
+        patterns:
+        - include: "#scope_resolution"
+      '5':
+        name: entity.name.type.namespace.scope-resolution.cpp
+      '6':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_context"
+      '7':
+        name: punctuation.separator.namespace.access.cpp
+      '8':
+        name: variable.other.pointer.function.cpp
+      '9':
+        name: variable.other.pointer.function.cpp
+      '10':
+        patterns:
+        - include: "#evaluation_context"
+    end: "\\)\\s*(?!\\()(?:\\[(\\w*)\\]\\s*)*(?=[{=,);]|\\n)"
+    endCaptures:
+      '1':
+        patterns:
+        - include: "#evaluation_context"
+    patterns:
+    - include: "#parameter_struct"
+    - include: "#function_context_c"
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
@@ -1044,6 +1117,7 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.class.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.class.cpp
@@ -1099,6 +1173,7 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.struct.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.struct.cpp
@@ -1154,6 +1229,7 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.union.cpp
       patterns:
+      - include: "#function_pointer"
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.union.cpp
