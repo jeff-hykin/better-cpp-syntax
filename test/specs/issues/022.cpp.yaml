@@ -1,4 +1,7 @@
-- source: sscanf
+- source: void
+  scopes:
+    - storage.type.primitive.cpp
+- source: test
   scopesBegin:
     - meta.function.definition.parameters.cpp
     - meta.function.definition.parameters.cpp
@@ -7,6 +10,25 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+- source: sscanf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.cpp
 - source: user_input
 - source: ','
   scopes:
@@ -38,8 +60,6 @@
   scopes:
     - keyword.operator.cpp
 - source: arg0
-  scopes:
-    - variable.parameter.cpp
 - source: ','
   scopes:
     - comma.cpp
@@ -47,10 +67,9 @@
 - source: ' arg_str'
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.arguments.end.bracket.round.cpp
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function-call
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
@@ -62,29 +81,6 @@
 - source: ' reads char into arg0, the remainder until \n to arg_str'
   scopesEnd:
     - comment.line.double-slash.cpp
-- source: void
-  scopes:
-    - storage.type.primitive.cpp
-- source: test
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-  scopes:
-    - entity.name.function.cpp
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
-- source: '{'
-  scopesBegin:
-    - meta.block.cpp
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
 - source: '    t '
 - source: =
   scopes:
