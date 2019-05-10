@@ -24,20 +24,41 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: 'bar '
+- source: 'bar'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: a
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: ','
   scopes:
     - comma.cpp
     - punctuation.separator.delimiter.cpp
 - source: int
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
 - source: b
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp
@@ -96,8 +117,19 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
-- source: 'bar '
+- source: 'bar'
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: a
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
   scopes:
     - variable.parameter.cpp
 - source: ','
@@ -105,11 +137,21 @@
     - comma.cpp
     - punctuation.separator.delimiter.cpp
 - source: int
+  scopesBegin:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
 - source: b
   scopes:
     - variable.parameter.cpp
+  scopesEnd:
+    - meta.function.parameter
+    - meta.variable.declaration
+    - meta.definition.variable
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.cpp

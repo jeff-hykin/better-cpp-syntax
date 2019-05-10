@@ -11,10 +11,14 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.cpp
 - source: const
+  scopesBegin:
+    - meta.function.parameter
   scopes:
     - storage.modifier.specifier.const.cpp
 - source: char
   scopes:
+    - entity.name.type
+    - meta.qualified_type
     - storage.type.primitive.cpp
 - source: '*'
   scopes:
