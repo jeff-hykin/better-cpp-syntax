@@ -411,7 +411,7 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\s<>():,*&\w]/
+    characters_in_template_call = /[\s<>:,*&\w]/
     cpp_grammar[:user_defined_template_type] = newPattern(
             match: variable_name,
             tag_as: 'storage.type.user-defined'
@@ -536,7 +536,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes = newPattern(
         match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution ]
@@ -547,7 +547,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.type.namespace.scope-resolution"
             ).maybe(@spaces).maybe(
-                template_call
+                template_call.without_numbered_capture_groups
             ).then(
                 match: /::/,
                 tag_as: "punctuation.separator.namespace.access"
@@ -557,13 +557,13 @@ cpp_grammar = Grammar.new(
 # Types
 #
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "function<void(void, usertype uservalue)>", "unsigned char","long long int", "unsigned short int","struct a"],
+        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a"],
         should_not_partial_match: ["return", "static const"],
         match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
             @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
         ).maybe(inline_attribute).maybe(@spaces)
         .zeroOrMoreOf(newPattern(@cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))).then(@spaces))
-        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call).lookAheadToAvoid(/[\w<:]/),
+        .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:.]/),
         tag_as: "entity.name.type meta.qualified_type",
         includes: [
             newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
