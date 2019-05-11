@@ -617,16 +617,14 @@ cpp_grammar = Grammar.new(
     )
     cpp_grammar[:type_alias] = newPattern(
         tag_as: "meta.declaration.type.alias",
-        should_fully_match: ["using A = B;", "using _Sat = std::allocator_traits<Allocator>;"],
+        should_fully_match: ["using A = B;", "using _Sat = std::allocator_traits<Allocator>;","using const_pointer_t = const uint8_t *\n","using T = typename std::iterator_traits<InputIt>::value_type;", "using pcb = details::pointer_control_block<Y, default_delete<Y>>;"],
         should_not_partial_match: ["using namespace std;","using std::swap;", "using B::B;"],
         match: newPattern(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
             ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
                 qualified_type
-            ).maybe(@spaces).then(
-                ref_deref_definition_pattern
-            ).then(
+            ).maybe(@spaces.then(
                 assignment_operator
             ).maybe(@spaces).maybe(
                 match: /typename/,
