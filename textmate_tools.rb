@@ -795,6 +795,21 @@ end
         //.backReference(reference)
     end
 #
+# alternate operator patterns
+#
+@double_hash          = newPattern(match: /##|%:%:/)      # no tag
+@hash                 = newPattern(match: /##|%:|\?\?=/)  # no tag
+@open_square_bracket  = newPattern(match: /\[|<:|\?\?\(/, tag_as: "punctuation.definition.begin.bracket.square")
+@close_square_bracket = newPattern(match: /\[|:>|\?\?\)/, tag_as: "punctuation.definition.end.bracket.square")
+@open_curly_brace     = newPattern(match: /\{|<%|\?\?</ , tag_as: "punctuation.section.block.begin.bracket.curly")
+@close_curly_brace    = newPattern(match: /\}|%>|\?\?>/ , tag_as: "punctuation.section.block.end.bracket.curly")
+# trigraphs only
+@backslash            = newPattern(match: /\\|\?\?\//   , tag_as: "constant.character.escape")
+@caret                = newPattern(match: /\^|\?\?\'/)    # no tag
+@pipe                 = newPattern(match: /\||\?\?!/)     # no tag
+@tilda                = newPattern(match: /~|\?\?-/)      # no tag
+
+#
 # PatternRange
 #
 class PatternRange
