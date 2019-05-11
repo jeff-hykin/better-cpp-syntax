@@ -2333,23 +2333,15 @@
     - include: "#operators"
     - include: "#vararg_ellipses"
     - name: meta.function.definition.parameters.cpp
-      begin: |-
-        (?x)
-        (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
-        (
-        (?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name
-        |
-        (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
-        )
-        \s*(\()
+      begin: "(?!(?:(?:::|\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\.|\\->|\\+\\+|\\-\\-|\\+|\\-|!|not|~|compl|\\*|&|sizeof|sizeof\\.\\.\\.|new|new\\[\\]|delete|delete\\[\\]|\\.\\*|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|not_eq|&|bitand|\\^|xor|\\||bitor|&&|and|\\|\\||or|\\?:|throw|=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|and_eq|\\^=|xor_eq|\\|=|or_eq|,|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast)|(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default))\\s*\\()((?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|::))+|(?<=operator)(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)))\\s*(\\()"
       beginCaptures:
         '1':
           name: entity.name.function.cpp
         '2':
           name: punctuation.section.parameters.begin.bracket.round.cpp
-      end: !ruby/regexp /\)|:/
+      end: "(\\)|:)"
       endCaptures:
-        '0':
+        '1':
           name: punctuation.section.parameters.end.bracket.round.cpp
       patterns:
       - include: "#probably_a_parameter"
