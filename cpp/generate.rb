@@ -813,20 +813,27 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 #
 # function pointer
 #
+    optional_type_modifier = maybe(@spaces).maybe(
+            match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
+            # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+            tag_as: "keyword.operator",
+        ).maybe(@spaces)
     array_brackets = newPattern(
-        match: /\[/.then(
-                match: /\w*/,
-                includes: [:evaluation_context]
-            ).then(
-                /\]/
-            ).maybe(@spaces)
-        )
+            match: /\[/,
+            tag_as: "punctuation.definition.begin.bracket.square"
+        ).then(
+            match: /\w*/,
+            includes: [:evaluation_context]
+        ).then(
+            match: /\]/,
+            tag_as: "punctuation.definition.end.bracket.square"
+        ).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
-        start_pattern: qualified_type.maybe(@spaces).then(
+        start_pattern: newPattern(
                 match: /\(/,
-                tag_as: "punctuation.section.parens.begin.bracket.round.function-pointer"
-            ).maybe(@spaces).then(
+                tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
+            ).then(
                 match: /\*/,
                 tag_as: "punctuation.definition.function.pointer.dereference",
             ).maybe(@spaces).maybe(
@@ -838,15 +845,15 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             ).then(
                 # closing ) for the variable name
                 match: /\)/,
-                tag_as: "punctuation.section.parens.end.bracket.round.function-pointer"
+                tag_as: "punctuation.section.parens.end.bracket.round.function.pointer"
             ).maybe(@spaces).then(
                 # opening ( for the parameter types
                 match: /\(/,
-                tag_as: "punctuation.section.parameters.begin.bracket.round.function-pointer"
+                tag_as: "punctuation.section.parameters.begin.bracket.round.function.pointer"
             ),
         end_pattern: newPattern(
                 match: /\)/,
-                tag_as: "punctuation.section.parameters.end.bracket.round.function-pointer"
+                tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
             ).then(after_declaration),
         includes: [
             :parameter_struct, :function_context_c,
