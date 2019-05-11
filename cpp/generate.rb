@@ -617,6 +617,8 @@ cpp_grammar = Grammar.new(
     )
     cpp_grammar[:type_alias] = newPattern(
         tag_as: "meta.declaration.type.alias",
+        should_fully_match: ["using A = B;", "using _Sat = std::allocator_traits<Allocator>;"],
+        should_not_partial_match: ["using namespace std;","using std::swap;", "using B::B;"],
         match: newPattern(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
@@ -643,7 +645,7 @@ cpp_grammar = Grammar.new(
                 ref_deref_definition_pattern
             ).maybe(
                 array_brackets
-            ).maybe(@spaces).then(@semicolon),
+            ).maybe(@spaces).then(@semicolon.or(/\n/)),
     )
 #
 # Functions
