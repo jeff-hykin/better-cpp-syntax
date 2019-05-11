@@ -797,17 +797,17 @@ end
 #
 # alternate operator patterns
 #
-@double_hash          = newPattern(match: /##|%:%:|\?\?=\?\?=/) # no tag
-@hash                 = newPattern(match: /##|%:|\?\?=/)        # no tag
-@open_square_bracket  = newPattern(match: /\[|<:|\?\?\(/      , tag_as: "punctuation.definition.begin.bracket.square")
-@close_square_bracket = newPattern(match: /\[|:>|\?\?\)/      , tag_as: "punctuation.definition.end.bracket.square")
-@open_curly_brace     = newPattern(match: /\{|<%|\?\?</       , tag_as: "punctuation.section.block.begin.bracket.curly")
-@close_curly_brace    = newPattern(match: /\}|%>|\?\?>/       , tag_as: "punctuation.section.block.end.bracket.curly")
+@double_hash          = /##|%:%:|\?\?=\?\?=/
+@hash                 = /##|%:|\?\?=/
+@open_square_bracket  = /\[|<:|\?\?\(/
+@close_square_bracket = /\[|:>|\?\?\)/
+@open_curly_brace     = /\{|<%|\?\?</
+@close_curly_brace    = /\}|%>|\?\?>/
 # trigraphs only
-@backslash            = newPattern(match: /\\|\?\?\//         , tag_as: "constant.character.escape")
-@caret                = newPattern(match: /\^|\?\?\'/)          # no tag
-@pipe                 = newPattern(match: /\||\?\?!/)           # no tag
-@tilda                = newPattern(match: /~|\?\?-/)            # no tag
+@backslash            = /\\|\?\?\//
+@caret                = /\^|\?\?\'/
+@pipe                 = /\||\?\?!/
+@tilda                = /~|\?\?-/
 
 #
 # PatternRange

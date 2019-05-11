@@ -771,12 +771,12 @@
           "name": "keyword.control.switch.cpp"
         }
       },
-      "end": "(?:(?<=\\})|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
       "patterns": [
         {
           "name": "meta.head.switch.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.switch.cpp"
@@ -793,8 +793,8 @@
         },
         {
           "name": "meta.body.switch.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.switch.cpp"
@@ -814,7 +814,7 @@
         },
         {
           "name": "meta.tail.switch.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -1682,12 +1682,12 @@
           "name": "entity.name.type.namespace.cpp"
         }
       },
-      "end": "(?:(?<=\\})|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
       "patterns": [
         {
           "name": "meta.head.namespace.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.namespace.cpp"
@@ -1696,8 +1696,8 @@
         },
         {
           "name": "meta.body.namespace.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.namespace.cpp"
@@ -1711,7 +1711,7 @@
         },
         {
           "name": "meta.tail.namespace.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -1906,7 +1906,7 @@
           "name": "storage.type.integral.$12.cpp"
         }
       },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.terminator.statement.cpp"
@@ -1919,7 +1919,7 @@
         {
           "name": "meta.head.enum.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.enum.cpp"
@@ -1933,8 +1933,8 @@
         },
         {
           "name": "meta.body.enum.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.enum.cpp"
@@ -1957,7 +1957,7 @@
         },
         {
           "name": "meta.tail.enum.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -2028,7 +2028,7 @@
           ]
         }
       },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.terminator.statement.cpp"
@@ -2041,7 +2041,7 @@
         {
           "name": "meta.head.class.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.class.cpp"
@@ -2064,8 +2064,8 @@
         },
         {
           "name": "meta.body.class.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.class.cpp"
@@ -2085,7 +2085,7 @@
         },
         {
           "name": "meta.tail.class.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -2136,7 +2136,7 @@
           ]
         }
       },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.terminator.statement.cpp"
@@ -2149,7 +2149,7 @@
         {
           "name": "meta.head.struct.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.struct.cpp"
@@ -2172,8 +2172,8 @@
         },
         {
           "name": "meta.body.struct.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.struct.cpp"
@@ -2193,7 +2193,7 @@
         },
         {
           "name": "meta.tail.struct.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -2244,7 +2244,7 @@
           ]
         }
       },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.terminator.statement.cpp"
@@ -2257,7 +2257,7 @@
         {
           "name": "meta.head.union.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.union.cpp"
@@ -2280,8 +2280,8 @@
         },
         {
           "name": "meta.body.union.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.union.cpp"
@@ -2301,7 +2301,7 @@
         },
         {
           "name": "meta.tail.union.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
@@ -2322,7 +2322,7 @@
           "name": "storage.type.extern.cpp"
         }
       },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.terminator.statement.cpp"
@@ -2335,7 +2335,7 @@
         {
           "name": "meta.head.extern.cpp",
           "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.begin.bracket.curly.extern.cpp"
@@ -2349,8 +2349,8 @@
         },
         {
           "name": "meta.body.extern.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.block.end.bracket.curly.extern.cpp"
@@ -2364,7 +2364,7 @@
         },
         {
           "name": "meta.tail.extern.cpp",
-          "begin": "(?<=})[\\s\\n]*",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
