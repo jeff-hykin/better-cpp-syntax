@@ -31,7 +31,7 @@ cpp_grammar = Grammar.new(
     # TODO eventually move this outside of the # Utils section
     ref_deref_definition_pattern = newPattern(
         should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
-        should_not_partial_match: [ '&*', '&&&' ],
+        should_not_fully_match: [ '&*', '&&&' ],
         match: newPattern(
             match: zeroOrMoreOf(/\*/.maybe(@spaces)),
             tag_as: "storage.modifier.pointer"
