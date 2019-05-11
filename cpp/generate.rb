@@ -32,11 +32,11 @@ cpp_grammar = Grammar.new(
     # TODO eventually move this outside of the # Utils section
     ref_deref_definition_pattern = newPattern(
             match: zeroOrMoreOf(/\*/.maybe(@spaces)),
-            tag_as: "keyword.operator.dereference"
+            tag_as: "storage.modifier.pointer"
         ).then(
             # TODO: make a readble regex way to do the {0,2} and replace this with it
             match: /(?:\&\s*?){0,2}/,
-            tag_as: "keyword.operator.reference"
+            tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
@@ -841,7 +841,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                 tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
             ).then(after_declaration),
         includes: [
-            :parameter_struct, :function_context_c,
+            :parameter_struct, :probably_a_parameter, :function_context_c,
         ]
     )
 #

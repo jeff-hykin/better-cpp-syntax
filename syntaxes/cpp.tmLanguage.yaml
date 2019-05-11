@@ -611,9 +611,9 @@
       '2':
         name: entity.name.type.struct.cpp
       '3':
-        name: keyword.operator.dereference.cpp
+        name: storage.modifier.pointer.cpp
       '4':
-        name: keyword.operator.reference.cpp
+        name: storage.modifier.reference.cpp
       '5':
         name: variable.other.object.declare.cpp
   parameter_struct:
@@ -624,9 +624,9 @@
       '2':
         name: entity.name.type.struct.parameter.cpp
       '3':
-        name: keyword.operator.dereference.cpp
+        name: storage.modifier.pointer.cpp
       '4':
-        name: keyword.operator.reference.cpp
+        name: storage.modifier.reference.cpp
       '5':
         name: variable.other.object.declare.cpp
   function_definition:
@@ -758,9 +758,9 @@
       '7':
         name: punctuation.separator.namespace.access.cpp
       '8':
-        name: keyword.operator.dereference.cpp
+        name: storage.modifier.pointer.cpp
       '9':
-        name: keyword.operator.reference.cpp
+        name: storage.modifier.reference.cpp
       '10':
         name: punctuation.section.parens.begin.bracket.round.function.pointer.cpp
       '11':
@@ -784,6 +784,7 @@
         name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
     patterns:
     - include: "#parameter_struct"
+    - include: "#probably_a_parameter"
     - include: "#function_context_c"
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
