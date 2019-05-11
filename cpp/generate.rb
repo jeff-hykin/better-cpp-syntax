@@ -28,6 +28,16 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "comma punctuation.separator.delimiter"
         )
+    # TODO maybe change this tag see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
+    # TODO eventually move this outside of the # Utils section
+    ref_deref_definition_pattern = newPattern(
+            match: zeroOrMoreOf(/\*/.maybe(@spaces)),
+            tag_as: "keyword.operator.dereference"
+        ).then(
+            # TODO: make a readble regex way to do the {0,2} and replace this with it
+            match: /(?:\&\s*?){0,2}/,
+            tag_as: "keyword.operator.reference"
+        ).maybe(@spaces)
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
@@ -605,18 +615,8 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             ).then(@spaces).then(
                 match: variable_name,
                 tag_as: "entity.name.type.struct",
-            ).then(@spaces).zeroOrMoreOf(
-                match: /\*|&/.maybe(@spaces),
-                includes: [
-                    newPattern(
-                        match: /\*/,
-                        tag_as: "keyword.operator.dereference"
-                    ),
-                    newPattern(
-                        match: /&/,
-                        tag_as: "keyword.operator.reference"
-                    ),
-                ]
+            ).maybe(@spaces).then(
+                ref_deref_definition_pattern.or(@spaces)
             ).then(
                 match: variable_name,
                 tag_as: "variable.other.object.declare",
@@ -630,18 +630,8 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             ).then(@spaces).then(
                 match: variable_name,
                 tag_as: "entity.name.type.struct.parameter",
-            ).then(@spaces).zeroOrMoreOf(
-                match: /\*|&/.maybe(@spaces),
-                includes: [
-                    newPattern(
-                        match: /\*/,
-                        tag_as: "keyword.operator.dereference"
-                    ),
-                    newPattern(
-                        match: /&/,
-                        tag_as: "keyword.operator.reference"
-                    ),
-                ]
+            ).maybe(@spaces).then(
+                ref_deref_definition_pattern.or(@spaces)
             # this is a maybe because its possible to have a type declare without an actual parameter
             ).maybe(
                 match: variable_name,
@@ -813,11 +803,6 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 #
 # function pointer
 #
-    optional_type_modifier = maybe(@spaces).maybe(
-            match: oneOrMoreOf(/\*/).oneOrMoreOf(/&/),
-            # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
-            tag_as: "keyword.operator",
-        ).maybe(@spaces)
     array_brackets = newPattern(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square"
@@ -830,7 +815,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
         ).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
-        start_pattern: qualified_type.then(optional_type_modifier).then(
+        start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
                 match: /\(/,
                 tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
             ).then(
