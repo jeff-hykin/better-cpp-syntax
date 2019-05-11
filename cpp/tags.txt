@@ -26,6 +26,7 @@ entity.name.function.preprocessor.cpp
 entity.name.operator.overloadee.cpp
 entity.name.tag.pragma-mark.cpp
 entity.name.type.$3.cpp
+entity.name.type.cpp
 entity.name.type.enum.cpp
 entity.name.type.inherited.cpp
 entity.name.type.namespace.cpp
@@ -67,7 +68,6 @@ keyword.operator.decrement.cpp
 keyword.operator.delete.array.bracket.cpp
 keyword.operator.delete.array.cpp
 keyword.operator.delete.cpp
-keyword.operator.dereference.cpp
 keyword.operator.functionlike.cpp
 keyword.operator.increment.cpp
 keyword.operator.logical.cpp
@@ -76,7 +76,6 @@ keyword.operator.minus.exponent.hexadecimal.cpp
 keyword.operator.new.cpp
 keyword.operator.plus.exponent.decimal.cpp
 keyword.operator.plus.exponent.hexadecimal.cpp
-keyword.operator.reference.cpp
 keyword.operator.sizeof.cpp
 keyword.operator.ternary.cpp
 keyword.operator.typeid.cpp
@@ -143,6 +142,7 @@ meta.preprocessor.diagnostic.cpp
 meta.preprocessor.include.cpp
 meta.preprocessor.macro.cpp
 meta.preprocessor.pragma.cpp
+meta.qualified_type.cpp
 meta.scope-resolution.cpp
 meta.section.cpp
 meta.static_assert.message.cpp
@@ -167,6 +167,7 @@ punctuation.definition.comment.cpp
 punctuation.definition.comment.end.cpp
 punctuation.definition.directive.cpp
 punctuation.definition.end.bracket.square.cpp
+punctuation.definition.function.pointer.dereference.cpp
 punctuation.definition.initializer-list.parameters.cpp
 punctuation.definition.lambda.return-type.cpp
 punctuation.definition.parameters.begin.constructor.cpp
@@ -218,14 +219,18 @@ punctuation.section.block.end.bracket.curly.struct.cpp
 punctuation.section.block.end.bracket.curly.switch.cpp
 punctuation.section.block.end.bracket.curly.union.cpp
 punctuation.section.parameters.begin.bracket.round.cpp
+punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
 punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
 punctuation.section.parameters.end.bracket.round.cpp
+punctuation.section.parameters.end.bracket.round.function.pointer.cpp
 punctuation.section.parameters.end.bracket.round.operator-overload.cpp
 punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
 punctuation.section.parens.begin.bracket.round.cpp
+punctuation.section.parens.begin.bracket.round.function.pointer.cpp
 punctuation.section.parens.begin.bracket.round.initialization.cpp
 punctuation.section.parens.end.bracket.round.conditional.switch.cpp
 punctuation.section.parens.end.bracket.round.cpp
+punctuation.section.parens.end.bracket.round.function.pointer.cpp
 punctuation.section.parens.end.bracket.round.initialization.cpp
 punctuation.separator.attribute.cpp
 punctuation.separator.case.cpp
@@ -248,6 +253,8 @@ punctuation.whitespace.comment.leading.cpp
 storage.modifier.array.bracket.square.cpp
 storage.modifier.cpp
 storage.modifier.lambda.$0.cpp
+storage.modifier.pointer.cpp
+storage.modifier.reference.cpp
 storage.modifier.specificer.functional.pre-parameters.$0.cpp
 storage.modifier.specifier.$0.cpp
 storage.modifier.specifier.functional.post-parameters.$0.cpp
@@ -283,6 +290,7 @@ support.type.posix-reserved.cpp
 support.type.posix-reserved.pthread.cpp
 variable.language.this.cpp
 variable.other.cpp
+variable.other.definition.pointer.function.cpp
 variable.other.enummember.cpp
 variable.other.macro.argument.cpp
 variable.other.object.access.cpp

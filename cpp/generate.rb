@@ -28,6 +28,20 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "comma punctuation.separator.delimiter"
         )
+    # TODO eventually move this outside of the # Utils section
+    ref_deref_definition_pattern = newPattern(
+        should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
+        should_not_fully_match: [ '&*', '&&&' ],
+        match: newPattern(
+            match: zeroOrMoreOf(/\*/.maybe(@spaces)),
+            tag_as: "storage.modifier.pointer"
+        ).then(
+            # TODO: make a readble regex way to do the {0,2} and replace this with it
+            match: /(?:\&\s*?){0,2}/,
+            tag_as: "storage.modifier.reference"
+        ).maybe(@spaces)
+    )
+    
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
@@ -89,7 +103,6 @@ cpp_grammar = Grammar.new(
 #
 #
     cpp_grammar[:$initial_context] = [
-            :parameter_struct, # TODO this is here because it needs to activate inside of function-pointer parameters. Once function-pointer syntax is implemented, remove it from here
             :struct_declare,
             :special_block_context,
             :macro_argument,
@@ -548,6 +561,27 @@ cpp_grammar = Grammar.new(
             )
         )
 #
+# Types
+#
+cpp_grammar[:qualified_type] = qualified_type = newPattern(
+    should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a"],
+    should_not_partial_match: ["return", "static const"],
+    match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
+        @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
+    ).maybe(inline_attribute).maybe(@spaces)
+    .zeroOrMoreOf(newPattern(@cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))).then(@spaces))
+    .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:.]/),
+    tag_as: "entity.name.type meta.qualified_type",
+    includes: [
+        newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
+        :function_type,
+        :storage_types,
+        :number_literal,
+        :string_context_c,
+        :comma,
+    ],
+)
+#
 # Functions
 #
     functionTemplate = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
@@ -584,18 +618,8 @@ cpp_grammar = Grammar.new(
             ).then(@spaces).then(
                 match: variable_name,
                 tag_as: "entity.name.type.struct",
-            ).then(@spaces).zeroOrMoreOf(
-                match: /\*|&/.maybe(@spaces),
-                includes: [
-                    newPattern(
-                        match: /\*/,
-                        tag_as: "keyword.operator.dereference"
-                    ),
-                    newPattern(
-                        match: /&/,
-                        tag_as: "keyword.operator.reference"
-                    ),
-                ]
+            ).maybe(@spaces).then(
+                ref_deref_definition_pattern.or(@spaces)
             ).then(
                 match: variable_name,
                 tag_as: "variable.other.object.declare",
@@ -609,18 +633,8 @@ cpp_grammar = Grammar.new(
             ).then(@spaces).then(
                 match: variable_name,
                 tag_as: "entity.name.type.struct.parameter",
-            ).then(@spaces).zeroOrMoreOf(
-                match: /\*|&/.maybe(@spaces),
-                includes: [
-                    newPattern(
-                        match: /\*/,
-                        tag_as: "keyword.operator.dereference"
-                    ),
-                    newPattern(
-                        match: /&/,
-                        tag_as: "keyword.operator.reference"
-                    ),
-                ]
+            ).maybe(@spaces).then(
+                ref_deref_definition_pattern.or(@spaces)
             # this is a maybe because its possible to have a type declare without an actual parameter
             ).maybe(
                 match: variable_name,
@@ -789,6 +803,50 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
+#
+# function pointer
+#
+    array_brackets = newPattern(
+            match: /\[/,
+            tag_as: "punctuation.definition.begin.bracket.square"
+        ).then(
+            match: /\w*/,
+            includes: [:evaluation_context]
+        ).then(
+            match: /\]/,
+            tag_as: "punctuation.definition.end.bracket.square"
+        ).maybe(@spaces)
+    after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
+    cpp_grammar[:function_pointer] = PatternRange.new(
+        start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
+                match: /\(/,
+                tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
+            ).then(
+                match: /\*/,
+                tag_as: "punctuation.definition.function.pointer.dereference",
+            ).maybe(@spaces).maybe(
+                match: identifier,
+                tag_as: "variable.other.definition.pointer.function"
+            ).maybe(@spaces).zeroOrMoreOf(
+                # an array of function pointers ?
+                array_brackets
+            ).then(
+                # closing ) for the variable name
+                match: /\)/,
+                tag_as: "punctuation.section.parens.end.bracket.round.function.pointer"
+            ).maybe(@spaces).then(
+                # opening ( for the parameter types
+                match: /\(/,
+                tag_as: "punctuation.section.parameters.begin.bracket.round.function.pointer"
+            ),
+        end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
+            ).then(after_declaration),
+        includes: [
+            :parameter_struct, :probably_a_parameter, :function_context_c,
+        ]
+    )
 #
 # Probably a parameter
 #
@@ -1174,7 +1232,7 @@ cpp_grammar = Grammar.new(
                 :template_call_range,
                 :comments_context,
             ],
-            body_includes: [ :constructor_context, :$initial_context  ],
+            body_includes: [ :function_pointer, :constructor_context, :$initial_context ],
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]

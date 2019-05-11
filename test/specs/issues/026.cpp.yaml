@@ -15,33 +15,130 @@
 - source: int
   scopesBegin:
     - meta.body.struct.cpp
-    - meta.function.constructor.cpp
   scopes:
-    - entity.name.function.constructor.cpp
-- source: (
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '('
   scopes:
-    - punctuation.definition.parameters.begin.constructor.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: bar
   scopes:
-    - variable.parameter.cpp
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
-  scopesBegin:
-    - meta.parens.cpp
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: '('
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: bar
+  scopes:
+    - variable.other.definition.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: '('
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: bar
+  scopes:
+    - variable.other.definition.pointer.function
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: int
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: '('
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: fcnPtr
+  scopes:
+    - variable.other.definition.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: int
+  scopes:
+    - storage.type.primitive
+- source: a
+  scopes:
+    - variable.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
@@ -72,33 +169,28 @@
 - source: int
   scopesBegin:
     - meta.body.union.cpp
-    - meta.function.constructor.cpp
   scopes:
-    - entity.name.function.constructor.cpp
-- source: (
+    - entity.name.type
+    - meta.qualified_type
+    - storage.type.primitive
+- source: '('
   scopes:
-    - punctuation.definition.parameters.begin.constructor.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: quz
   scopes:
-    - variable.parameter.cpp
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.constructor.cpp
-  scopesEnd:
-    - meta.function.constructor.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
-  scopesBegin:
-    - meta.parens.cpp
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
-  scopesEnd:
-    - meta.parens.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
