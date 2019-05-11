@@ -28,9 +28,11 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "comma punctuation.separator.delimiter"
         )
-    # TODO maybe change this tag see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
     # TODO eventually move this outside of the # Utils section
     ref_deref_definition_pattern = newPattern(
+        should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
+        should_not_partial_match: [ '&*', '&&&' ],
+        match: newPattern(
             match: zeroOrMoreOf(/\*/.maybe(@spaces)),
             tag_as: "storage.modifier.pointer"
         ).then(
@@ -38,6 +40,8 @@ cpp_grammar = Grammar.new(
             match: /(?:\&\s*?){0,2}/,
             tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
+    )
+    
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
