@@ -814,7 +814,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 # function pointer
 #
     optional_type_modifier = maybe(@spaces).maybe(
-            match: oneOrMoreOf(/\*/).or(oneOrMoreOf(/&/)),
+            match: oneOrMoreOf(/\*/).oneOrMoreOf(/&/),
             # TODO maybe change see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/135#issuecomment-490727262
             tag_as: "keyword.operator",
         ).maybe(@spaces)
@@ -830,7 +830,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
         ).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
-        start_pattern: newPattern(
+        start_pattern: qualified_type.then(optional_type_modifier).then(
                 match: /\(/,
                 tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
             ).then(
