@@ -330,7 +330,7 @@ class Grammar
     
     def saveAsJsonTo(file_location, inherit_or_embedded: :inherit)
         new_file = File.open(file_location+".json", "w")
-        new_file.write(self.to_h(inherit_or_embedded: inherit_or_embedded).to_json)
+        new_file.write(JSON.pretty_generate(self.to_h(inherit_or_embedded: inherit_or_embedded)))
         new_file.close
     end
     
