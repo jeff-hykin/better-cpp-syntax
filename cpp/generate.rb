@@ -623,7 +623,7 @@ cpp_grammar = Grammar.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
             ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
-                qualified_type
+                variable_name
             ).maybe(@spaces.then(
                 assignment_operator
             ).maybe(@spaces).maybe(
