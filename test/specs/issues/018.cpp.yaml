@@ -97,15 +97,20 @@
   scopesEnd:
     - meta.function-call.cpp
 - source: using
+  scopesBegin:
+    - meta.declaration.type.alias
   scopes:
-    - keyword.other.using.cpp
-- source: ' type '
+    - keyword.other.using.directive
+- source: type
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: =
   scopes:
     - keyword.operator.assignment.cpp
 - source: decltype
   scopesBegin:
-    - meta.function-call.cpp
+    - meta.declaration.type.alias.value.unknown
   scopes:
     - keyword.operator.functionlike.cpp
     - keyword.other.decltype.cpp
@@ -130,7 +135,8 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype.cpp
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.declaration.type.alias
+    - meta.declaration.type.alias.value.unknown
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.cpp

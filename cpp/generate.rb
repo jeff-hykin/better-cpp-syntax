@@ -623,7 +623,7 @@ cpp_grammar = Grammar.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
             ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
-                variable_name
+                qualified_type
             ).maybe(@spaces).then(
                 assignment_operator
             ).maybe(@spaces).maybe(
@@ -633,7 +633,7 @@ cpp_grammar = Grammar.new(
                 declaration_storage_specifiers
             ).then(
                 qualified_type.or(
-                    match: /.+/,
+                    match: /.+/.lookBehindToAvoid(/;/),
                     tag_as: "meta.declaration.type.alias.value.unknown",
                     includes: [
                         :evaluation_context,
