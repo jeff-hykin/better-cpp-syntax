@@ -2139,7 +2139,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "$base"
+              "include": "#runtime_context"
             }
           ]
         },
@@ -2160,7 +2160,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "$base"
+              "include": "#runtime_context"
             }
           ]
         },
@@ -2170,7 +2170,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#runtime_context"
             }
           ]
         }
