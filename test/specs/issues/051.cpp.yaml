@@ -13,13 +13,19 @@
 - source: using
   scopesBegin:
     - meta.body.namespace.cpp
+    - meta.declaration.type.alias
   scopes:
-    - keyword.other.using.cpp
-- source: ' A '
+    - keyword.other.using.directive
+- source: A
+  scopes:
+    - entity.name.type
+    - meta.qualified_type
 - source: =
   scopes:
     - keyword.operator.assignment.cpp
 - source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown
   scopes:
     - keyword.operator.functionlike.cpp
     - keyword.other.decltype.cpp
@@ -34,9 +40,13 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias
 - source: decltype
   scopes:
     - keyword.operator.functionlike.cpp

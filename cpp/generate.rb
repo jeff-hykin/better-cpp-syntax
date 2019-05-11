@@ -28,6 +28,20 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "comma punctuation.separator.delimiter"
         )
+    cpp_grammar[:assignment_operator] = assignment_operator = newPattern(
+        match: /\=/,
+        tag_as: "keyword.operator.assignment",
+        )
+    array_brackets = newPattern(
+            match: /\[/,
+            tag_as: "punctuation.definition.begin.bracket.square"
+        ).then(
+            match: /\w*/,
+            includes: [:evaluation_context]
+        ).then(
+            match: /\]/,
+            tag_as: "punctuation.definition.end.bracket.square"
+        ).maybe(@spaces)
     # TODO eventually move this outside of the # Utils section
     ref_deref_definition_pattern = newPattern(
         should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
@@ -250,7 +264,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
         tag_as: "storage.modifier.specifier.functional.post-parameters.$match"
         )
-    cpp_grammar[:storage_specifiers] = newPattern(
+    cpp_grammar[:storage_specifiers] = storage_specifier = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
         tag_as: "storage.modifier.specifier.$match"
         )
@@ -306,6 +320,12 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:control_flow_keywords] = control_flow_keywords = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
         tag_as: "keyword.control.$match"
+        )
+    declaration_storage_specifiers = newPattern(
+        match: zeroOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
+        includes: [
+            :storage_specifiers
+        ]
         )
 #
 # Control flow
@@ -581,6 +601,25 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
         :comma,
     ],
 )
+cpp_grammar[:type_alias] = newPattern(
+    match: newPattern(
+            match:/using/,
+            tag_as: "keyword.other.using.directive",
+        ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(qualified_type).maybe(@spaces).then(ref_deref_definition_pattern)
+        .then(assignment_operator)
+        .maybe(@spaces).maybe(
+            match: /typename/,
+            tag_as: "keyword.other.typename",
+        ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(
+            match: /.+/,
+            tag_as: "meta.declaration.type.alias.value.unknown",
+            includes: [
+                :evaluation_context,
+            ]
+        ))
+        .then(ref_deref_definition_pattern).maybe(array_brackets).maybe(@spaces).then(@semicolon),
+    tag_as: "meta.declaration.type.alias"
+)
 #
 # Functions
 #
@@ -717,11 +756,6 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
-    
-    cpp_grammar[:assignment_operator] = newPattern(
-        match: /\=/,
-        tag_as: "keyword.operator.assignment",
-        )
         
     cpp_grammar[:operators] += [
             functionTemplate[
@@ -806,16 +840,6 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
 #
 # function pointer
 #
-    array_brackets = newPattern(
-            match: /\[/,
-            tag_as: "punctuation.definition.begin.bracket.square"
-        ).then(
-            match: /\w*/,
-            includes: [:evaluation_context]
-        ).then(
-            match: /\]/,
-            tag_as: "punctuation.definition.end.bracket.square"
-        ).maybe(@spaces)
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     cpp_grammar[:function_pointer] = PatternRange.new(
         start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
@@ -1618,6 +1642,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
     cpp_grammar[:special_block_context] = [
             :attributes,
             :using_namespace,
+            :type_alias,
             :namespace_block,
             :class_block,
             :struct_block,

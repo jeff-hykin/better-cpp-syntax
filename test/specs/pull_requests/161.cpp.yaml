@@ -1,0 +1,309 @@
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: A
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: 'std::C'
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: C
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown.cpp
+  scopes:
+    - keyword.operator.functionlike.cpp
+    - keyword.other.decltype.cpp
+    - storage.type.decltype.cpp
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype.cpp
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: struct
+  scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+- source: A
+  scopes:
+    - entity.name.type.struct.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  scopesEnd:
+    - meta.head.struct.cpp
+- source: using
+  scopesBegin:
+    - meta.body.struct.cpp
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: A
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: 'std::C'
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: C
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown.cpp
+  scopes:
+    - keyword.operator.functionlike.cpp
+    - keyword.other.decltype.cpp
+    - storage.type.decltype.cpp
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype.cpp
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+  scopesEnd:
+    - meta.body.struct.cpp
+- source: void
+  scopesBegin:
+    - meta.tail.struct.cpp
+  scopes:
+    - storage.type.primitive.cpp
+- source: foo
+  scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: A
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive.cpp
+- source: B
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: 'std::C'
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias.cpp
+  scopes:
+    - keyword.other.using.directive
+- source: C
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown.cpp
+  scopes:
+    - keyword.operator.functionlike.cpp
+    - keyword.other.decltype.cpp
+    - storage.type.decltype.cpp
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype.cpp
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary.cpp
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.declaration.type.alias.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
