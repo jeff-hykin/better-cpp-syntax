@@ -583,43 +583,68 @@ cpp_grammar = Grammar.new(
 #
 # Types
 #
-cpp_grammar[:qualified_type] = qualified_type = newPattern(
-    should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a"],
-    should_not_partial_match: ["return", "static const"],
-    match: maybe(@spaces).lookBehindToAvoid(/\w/).lookAheadFor(/\w/).lookAheadToAvoid(
-        @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator)).lookAheadToAvoid(/[\w]/).maybe(@spaces)
-    ).maybe(inline_attribute).maybe(@spaces)
-    .zeroOrMoreOf(newPattern(@cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))).then(@spaces))
-    .maybe(scope_resolution).maybe(@spaces).then(identifier).maybe(template_call.without_numbered_capture_groups).lookAheadToAvoid(/[\w<:.]/),
-    tag_as: "entity.name.type meta.qualified_type",
-    includes: [
-        newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
-        :function_type,
-        :storage_types,
-        :number_literal,
-        :string_context_c,
-        :comma,
-    ],
-)
-cpp_grammar[:type_alias] = newPattern(
-    match: newPattern(
-            match:/using/,
-            tag_as: "keyword.other.using.directive",
-        ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(qualified_type).maybe(@spaces).then(ref_deref_definition_pattern)
-        .then(assignment_operator)
-        .maybe(@spaces).maybe(
-            match: /typename/,
-            tag_as: "keyword.other.typename",
-        ).maybe(@spaces).then(declaration_storage_specifiers).then(qualified_type.or(
-            match: /.+/,
-            tag_as: "meta.declaration.type.alias.value.unknown",
-            includes: [
-                :evaluation_context,
-            ]
-        ))
-        .then(ref_deref_definition_pattern).maybe(array_brackets).maybe(@spaces).then(@semicolon),
-    tag_as: "meta.declaration.type.alias"
-)
+    non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
+    builtin_type_creators_and_specificers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
+    cpp_grammar[:qualified_type] = qualified_type = newPattern(
+        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a"],
+        should_not_partial_match: ["return", "static const"],
+        match: maybe(@spaces).lookBehindToAvoid(
+                /\w/
+            ).lookAheadFor(
+                /\w/
+            ).lookAheadToAvoid(
+                non_type_keywords.lookAheadToAvoid(/[\w]/).maybe(@spaces)
+            ).maybe(
+                inline_attribute
+            ).maybe(@spaces).zeroOrMoreOf(
+                builtin_type_creators_and_specificers.then(@spaces)
+            ).maybe(
+                scope_resolution
+            ).maybe(@spaces).then(
+                identifier
+            ).maybe(
+                template_call.without_numbered_capture_groups
+            ).lookAheadToAvoid(/[\w<:.]/),
+        tag_as: "entity.name.type meta.qualified_type",
+        includes: [
+            newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
+            :function_type,
+            :storage_types,
+            :number_literal,
+            :string_context_c,
+            :comma,
+        ],
+    )
+    cpp_grammar[:type_alias] = newPattern(
+        tag_as: "meta.declaration.type.alias",
+        match: newPattern(
+                match:/using/,
+                tag_as: "keyword.other.using.directive",
+            ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
+                qualified_type
+            ).maybe(@spaces).then(
+                ref_deref_definition_pattern
+            ).then(
+                assignment_operator
+            ).maybe(@spaces).maybe(
+                match: /typename/,
+                tag_as: "keyword.other.typename",
+            ).maybe(@spaces).then(
+                declaration_storage_specifiers
+            ).then(
+                qualified_type.or(
+                    match: /.+/,
+                    tag_as: "meta.declaration.type.alias.value.unknown",
+                    includes: [
+                        :evaluation_context,
+                    ]
+                )
+            ).then(
+                ref_deref_definition_pattern
+            ).maybe(
+                array_brackets
+            ).maybe(@spaces).then(@semicolon),
+    )
 #
 # Functions
 #
