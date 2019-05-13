@@ -1,0 +1,92 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include.cpp
+    - keyword.control.directive.include.cpp
+  scopes:
+    - punctuation.definition.directive.cpp
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include.cpp
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include.cpp
+  scopes:
+    - punctuation.definition.string.begin.cpp
+- source: sample.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end.cpp
+  scopesEnd:
+    - meta.preprocessor.include.cpp
+    - string.quoted.double.include.cpp
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace.cpp
+    - meta.head.namespace.cpp
+  scopes:
+    - keyword.other.namespace.definition.cpp
+    - storage.type.namespace.definition.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+  scopesEnd:
+    - meta.head.namespace.cpp
+- source: void
+  scopesBegin:
+    - meta.body.namespace.cpp
+  scopes:
+    - storage.type.primitive.cpp
+- source: failedToLoadCriticalData
+  scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+- source: const
+  scopes:
+    - storage.modifier.specifier.const.cpp
+- source: ' string'
+- source: '&'
+  scopes:
+    - keyword.operator.cpp
+- source: ' what'
+  scopes:
+    - variable.parameter.cpp
+- source: ','
+  scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+- source: bool
+  scopes:
+    - storage.type.primitive.cpp
+- source: 'throwExcp '
+  scopes:
+    - variable.parameter.defaulted.cpp
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: 'false'
+  scopes:
+    - constant.language.false.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
+  scopesEnd:
+    - meta.block.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace.cpp

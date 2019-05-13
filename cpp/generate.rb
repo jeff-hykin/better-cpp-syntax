@@ -987,7 +987,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /namespace/,
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
-            ).then(@spaces).maybe(inline_attribute).maybe(@spaces).then(
+            ).then(@spaces.or(inline_attribute).or(lookAheadFor(/\{|\n/))).maybe(inline_attribute).maybe(@spaces).then(
                 # Named namespace (with possible scope )
                 preceding_scopes
             ).maybe(@spaces).then(
@@ -997,7 +997,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                 # anonymous namespaces
                 ).or(
                     lookAheadFor(/\{/)
-                )
+                ).or(/\n/)
             ),
         )
 
