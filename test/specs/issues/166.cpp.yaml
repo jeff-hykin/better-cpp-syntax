@@ -19,8 +19,7 @@
     - storage.type.modifier.virtual.cpp
 - source: 'std::exception'
   scopes:
-    - entity.name.type.cpp
-    - meta.qualified_type.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp
@@ -66,8 +65,7 @@
     - storage.type.modifier.access.public.cpp
 - source: 'std::exception'
   scopes:
-    - entity.name.type.cpp
-    - meta.qualified_type.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class.cpp

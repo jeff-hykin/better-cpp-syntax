@@ -220,11 +220,7 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public.cpp
-- source: std
-  scopes:
-    - entity.name.type.inherited.cpp
-- source: '::'
-- source: true_type
+- source: std::true_type
   scopes:
     - entity.name.type.inherited.cpp
 - source: ' \'
@@ -327,11 +323,7 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public.cpp
-- source: std
-  scopes:
-    - entity.name.type.inherited.cpp
-- source: '::'
-- source: true_type
+- source: std::true_type
   scopes:
     - entity.name.type.inherited.cpp
 - source: ' \'
