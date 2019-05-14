@@ -1,0 +1,95 @@
+- source: class
+  scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+- source: Runtime_Error
+  scopes:
+    - entity.name.type.class.cpp
+- source: ':'
+  scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+- source: public
+  scopes:
+    - storage.type.modifier.access.public.cpp
+- source: virtual
+  scopes:
+    - storage.type.modifier.virtual.cpp
+- source: 'std::exception'
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  scopesEnd:
+    - meta.head.class.cpp
+- source: /*
+  scopesBegin:
+    - meta.body.class.cpp
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+- source: '        snip'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  scopesEnd:
+    - comment.block.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  scopesEnd:
+    - meta.body.class.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: class
+  scopesBegin:
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+- source: Runtime_Error
+  scopes:
+    - entity.name.type.class.cpp
+- source: ':'
+  scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+- source: virtual
+  scopes:
+    - storage.type.modifier.virtual.cpp
+- source: public
+  scopes:
+    - storage.type.modifier.access.public.cpp
+- source: 'std::exception'
+  scopes:
+    - entity.name.type.cpp
+    - meta.qualified_type.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  scopesEnd:
+    - meta.head.class.cpp
+- source: /*
+  scopesBegin:
+    - meta.body.class.cpp
+    - comment.block.cpp
+  scopes:
+    - punctuation.definition.comment.begin.cpp
+- source: '        snip'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.cpp
+  scopesEnd:
+    - comment.block.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class.cpp
+  scopesEnd:
+    - meta.body.class.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp

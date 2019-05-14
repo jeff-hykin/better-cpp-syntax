@@ -1156,7 +1156,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
-    can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isAccessSpecifier) + [ ',', ':' ]
+    can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isAccessSpecifier) + [ ',', ':', 'virtual' ]
     can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
     cpp_grammar[:inhertance_context] = [
         newPattern(
@@ -1167,8 +1167,12 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
             match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
             tag_as: "storage.type.modifier.access.$match",
         ),
-        lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier)).then(
-            match: variable_name,
+        newPattern(
+            match: variableBounds[ /virtual/ ],
+            tag_as: "storage.type.modifier.virtual",
+        ),
+        lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
+            match: qualified_type.without_numbered_capture_groups,
             tag_as: "entity.name.type.inherited"
         )
     ]
@@ -1220,7 +1224,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
                                     @spaces
                                 ).lookAheadToAvoid(
                                     @cpp_tokens.that(:isAccessSpecifier)
-                                ).then(variable_name)
+                                ).then(qualified_type.without_numbered_capture_groups)
                             ),
                             includes: [ :inhertance_context ]
                         )
