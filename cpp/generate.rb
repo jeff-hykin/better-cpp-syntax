@@ -1059,7 +1059,7 @@ cpp_grammar = Grammar.new(
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /namespace/,
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
-            ).then(@spaces).maybe(inline_attribute).maybe(@spaces).then(
+            ).then(@spaces.or(inline_attribute).or(lookAheadFor(/\{|\n/))).maybe(inline_attribute).maybe(@spaces).then(
                 # Named namespace (with possible scope )
                 preceding_scopes
             ).maybe(@spaces).then(
@@ -1069,7 +1069,7 @@ cpp_grammar = Grammar.new(
                 # anonymous namespaces
                 ).or(
                     lookAheadFor(/\{/)
-                )
+                ).or(/\n/)
             ),
         )
 
