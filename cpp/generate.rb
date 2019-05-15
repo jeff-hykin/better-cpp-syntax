@@ -1156,7 +1156,7 @@ cpp_grammar[:qualified_type] = qualified_type = newPattern(
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
-    can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isAccessSpecifier) + [ ',', ':', 'virtual' ]
+    can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isInheritanceSpecifier) + [ ',', ':', ]
     can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
     cpp_grammar[:inhertance_context] = [
         newPattern(
