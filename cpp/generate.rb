@@ -255,6 +255,7 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.$match"
         )
     cpp_grammar[:access_control_keywords] = newPattern(
+        tag_as: "storage.type.modifier.access.control.$reference(access_specifier)",
         match: lookBehindToAvoid(@standard_character).then(
                 match: @cpp_tokens.that(:isAccessSpecifier),
                 reference: "access_specifier"
@@ -262,7 +263,6 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon"
             ),
-        tag_as: "storage.type.modifier.access.control.$reference(access_specifier)",
         )
     cpp_grammar[:exception_keywords] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
