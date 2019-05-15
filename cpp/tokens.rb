@@ -205,7 +205,7 @@ tokens = [
     { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
-    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true, isInheritanceSpecifier: true },
     { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
@@ -218,9 +218,9 @@ tokens = [
     { representation: "constexpr"              , name: "constexpr"          , isLambdaSpecifier: true },
     { representation: "consteval"              , name: "consteval"          , isLambdaSpecifier: true },
     # accessor
-    { representation: "private"               , name: "private"             , isAccessSpecifier: true },
-    { representation: "protected"             , name: "protected"           , isAccessSpecifier: true },
-    { representation: "public"                , name: "public"              , isAccessSpecifier: true },
+    { representation: "private"               , name: "private"             , isAccessSpecifier: true, isInheritanceSpecifier: true },
+    { representation: "protected"             , name: "protected"           , isAccessSpecifier: true, isInheritanceSpecifier: true },
+    { representation: "public"                , name: "public"              , isAccessSpecifier: true, isInheritanceSpecifier: true },
     # pre processor directives
     { representation: "if"                    , name: "if"                     , isPreprocessorDirective: true },
     { representation: "elif"                  , name: "elif"                   , isPreprocessorDirective: true },
