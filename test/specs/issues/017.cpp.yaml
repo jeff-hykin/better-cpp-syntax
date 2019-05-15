@@ -126,15 +126,45 @@
 - source: void
   scopes:
     - storage.type.primitive.cpp
-- source: Line\u00b7Reader();
+- source: Line\u00b7Reader
   scopesBegin:
     - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
 - source: void
   scopes:
     - storage.type.primitive.cpp
-- source: Line\U0002070EReader();
+- source: Line\U0002070EReader
   scopesBegin:
     - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
 - source: namespace
   scopesBegin:
     - meta.block.namespace.cpp

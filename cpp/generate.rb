@@ -762,6 +762,29 @@ cpp_grammar = Grammar.new(
             ),
         includes: [ :function_call_context_c ]
         )
+    cpp_grammar[:legacy_function_definition] = PatternRange.new(
+            tag_as: "meta.function.definition.parameters",
+            # this pattern was posessive but that depends on https://github.com/jeff-hykin/cpp-textmate-grammar/issues/127
+            # integration testing says we are fin however
+            start_pattern: lookAheadToAvoid(newPattern(@cpp_tokens.that(:isOperator).or(@cpp_tokens.that(:isControlFlow))).maybe(@spaces).then(/\(/))
+                .then(
+                    match: oneOrMoreOf(identifier.or(/::/)).or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
+                    tag_as: "entity.name.function"
+                ).maybe(@spaces)
+                .then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round"
+                ),
+            # no idea why this matches :
+            end_pattern: newPattern(
+                match: /\)|:/,
+                tag_as: "punctuation.section.parameters.end.bracket.round"
+            ),
+            includes: [
+                :probably_a_parameter,
+                :function_context_c,
+            ],
+        )
 #
 # Operators
 #
@@ -3057,32 +3080,7 @@ cpp_grammar = Grammar.new(
             :storage_types,
             :operators,
             :vararg_ellipses,
-            {
-                name: "meta.function.definition.parameters",
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function"
-                    },
-                    "2" => {
-                        name: "punctuation.section.parameters.begin.bracket.round"
-                    },
-                },
-                end: /\)|:/,
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parameters.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#probably_a_parameter"
-                    },
-                    {
-                        include: "#function_context_c"
-                    }
-                ]
-            },
+            :legacy_function_definition,
             {
                 begin: "\\(",
                 beginCaptures: {
