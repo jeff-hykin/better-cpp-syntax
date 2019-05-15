@@ -269,14 +269,14 @@ cpp_grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.$match"
         )
     cpp_grammar[:access_control_keywords] = newPattern(
-        match: lookBehindToAvoid(@standard_character).then(@cpp_tokens.that(:isAccessSpecifier)).maybe(@spaces).then(/:/),
-        tag_as: "storage.type.modifier.access.control.$match",
-        includes: [
-            newPattern(
+        tag_as: "storage.type.modifier.access.control.$reference(access_specifier)",
+        match: lookBehindToAvoid(@standard_character).then(
+                match: @cpp_tokens.that(:isAccessSpecifier),
+                reference: "access_specifier"
+            ).maybe(@spaces).then(
                 match: /:/,
-                tag_as: "colon.cpp"
-            )
-        ]
+                tag_as: "colon"
+            ),
         )
     cpp_grammar[:exception_keywords] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],

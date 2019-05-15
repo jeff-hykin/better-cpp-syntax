@@ -341,13 +341,11 @@
     match: "(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)"
     name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
-    match: "(?<!\\w)(?:private|protected|public)\\s*:"
+    match: "(?<!\\w)((?:private|protected|public))\\s*(:)"
     captures:
-      '0':
-        name: storage.type.modifier.access.control.$0.cpp
-        patterns:
-        - match: ":"
-          name: colon.cpp
+      '2':
+        name: colon.cpp
+    name: storage.type.modifier.access.control.$1.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
     name: keyword.control.exception.$0.cpp
