@@ -8,9 +8,12 @@
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
+        "preversion": "npm test",
+        "version": "npm run build && git add -A syntaxes",
         "pregenerate-specs": "npm run build",
         "generate-specs": "node test/src/commands/generate-specs.js",
-        "sort-specs": "node test/src/commands/sort-specs.js"
+        "sort-specs": "node test/src/commands/sort-specs.js",
+        "vscode:prepublish": "npm run build"
     },
     "engines": {
         "vscode": "^1.0.0"
