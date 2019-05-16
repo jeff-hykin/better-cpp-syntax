@@ -384,6 +384,10 @@ class Regexp
     def maybe        (*arguments) processRegexOperator(arguments, 'maybe'        ) end
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
+    def many         (*arguments) processRegexOperator(arguments, 'many'         ) end
+    def posessively() processQuantifierModifier('+') end
+    def lazily()      processQuantifierModifier('?') end
+    def greedily()    processQuantifierModifier('' ) end
     def backReference(reference)
         #
         # generate the new regex
@@ -653,6 +657,16 @@ class Regexp
                 if no_attributes
                     new_regex = /#{self_as_string}(?:#{other_regex_as_string})*/
                 end
+            when 'many'
+                min_as_string = attributes[:min].to_s
+                max_as_string = attributes[:max].to_s
+                if attributes[:count] != nil
+                    min_as_string = max_as_string = attributes[:count].to_s
+                end
+                new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{min_as_string},#{max_as_string}})/
+                if no_attributes
+                    new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{min_as_string},#{max_as_string}}/
+                end
         end
         
         #
@@ -701,6 +715,18 @@ class Regexp
         #
         # carry over attributes
         #
+        new_regex.group_attributes = self.group_attributes
+        return new_regex
+    end
+
+    def processQuantifierModifier(modifier)
+        self_as_string = self.without_default_mode_modifiers
+        index = self_as_string[-1] == ')' ? -2 : -1
+        if not /[+*?}]/ =~ self_as_string[index]
+            raise "\n\n attempted to modify a non quantifier pattern\npattern is #{self_as_string}"
+        end
+        new_regex = /#{self_as_string.insert(index, modifier)}/
+        
         new_regex.group_attributes = self.group_attributes
         return new_regex
     end
@@ -793,6 +819,9 @@ end
     end
     def backReference(reference)
         //.backReference(reference)
+    end
+    def many(*arguments)
+        //.many(*arguments)
     end
 #
 # PatternRange

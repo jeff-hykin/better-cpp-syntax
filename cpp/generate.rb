@@ -764,11 +764,9 @@ cpp_grammar = Grammar.new(
         )
     cpp_grammar[:legacy_function_definition] = PatternRange.new(
             tag_as: "meta.function.definition.parameters",
-            # this pattern was posessive but that depends on https://github.com/jeff-hykin/cpp-textmate-grammar/issues/127
-            # integration testing says we are fin however
             start_pattern: lookAheadToAvoid(newPattern(@cpp_tokens.that(:isOperator).or(@cpp_tokens.that(:isControlFlow))).maybe(@spaces).then(/\(/))
                 .then(
-                    match: oneOrMoreOf(identifier.or(/::/)).or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
+                    match: oneOrMoreOf(identifier.or(/::/)).posessively().or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
                     tag_as: "entity.name.function"
                 ).maybe(@spaces)
                 .then(
