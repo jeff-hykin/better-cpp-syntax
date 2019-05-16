@@ -663,6 +663,11 @@ class Regexp
                 if attributes[:count] != nil
                     min_as_string = max_as_string = attributes[:count].to_s
                 end
+                # remove used attributes
+                attributes.delete(:count)
+                attributes.delete(:min)
+                attributes.delete(:max)
+                no_attributes = attributes == {}
                 new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{min_as_string},#{max_as_string}})/
                 if no_attributes
                     new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{min_as_string},#{max_as_string}}/
