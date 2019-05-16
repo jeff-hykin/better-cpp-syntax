@@ -385,9 +385,9 @@ class Regexp
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
     def many         (*arguments) processRegexOperator(arguments, 'many'         ) end
-    def posessively() processQuantifierModifier('+') end
-    def lazily()      processQuantifierModifier('?') end
-    def greedily()    processQuantifierModifier('' ) end
+    def possessively() processQuantifierModifier('+') end
+    def lazily()       processQuantifierModifier('?') end
+    def greedily()     processQuantifierModifier('' ) end
     def backReference(reference)
         #
         # generate the new regex

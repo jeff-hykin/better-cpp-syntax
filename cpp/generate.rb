@@ -766,7 +766,7 @@ cpp_grammar = Grammar.new(
             tag_as: "meta.function.definition.parameters",
             start_pattern: lookAheadToAvoid(newPattern(@cpp_tokens.that(:isOperator).or(@cpp_tokens.that(:isControlFlow))).maybe(@spaces).then(/\(/))
                 .then(
-                    match: oneOrMoreOf(identifier.or(/::/)).posessively().or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
+                    match: oneOrMoreOf(identifier.or(/::/)).possessively().or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
                     tag_as: "entity.name.function"
                 ).maybe(@spaces)
                 .then(
