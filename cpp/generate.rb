@@ -207,6 +207,12 @@ cpp_grammar = Grammar.new(
             :string_context,
             :comma_in_template_argument
         ]
+    cpp_grammar[:attributes_context] = [
+        :attributes,
+        :cpp_attributes,
+        :gcc_attributes,
+        :ms_attributes,
+    ]
 
 #
 #
@@ -387,54 +393,67 @@ cpp_grammar = Grammar.new(
 #
 # C++ Attributes
 #
-    cpp_grammar[:attributes] = PatternRange.new(
-        tag_as: "support.other.attribute",
-        start_pattern: newPattern(
-            match: @cpp_tokens.that(:isAttributeStart),
-            tag_as: "punctuation.section.attribute.begin",
-        ),
-        end_pattern: newPattern(
-            match:  @cpp_tokens.that(:isAttributeEnd),
-            tag_as: "punctuation.section.attribute.end",
-        ),
-        includes: [
-            # allow nested attributes
-            :attributes,
-            PatternRange.new(
-                start_pattern: newPattern(/\(/),
-                end_pattern: newPattern(/\)/),
-                includes: [
-                    :attributes,
-                    :string_context_c,
-                ],
+    attributeRangeFinder = ->(start_pattern, end_pattern) do
+        return PatternRange.new(
+            tag_as: "support.other.attribute",
+            start_pattern: newPattern(
+                match: start_pattern,
+                tag_as: "punctuation.section.attribute.begin",
             ),
-            newPattern(match: /using/, tag_as: "keyword.other.using.directive")
-            .then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.namespace",
+            end_pattern: newPattern(
+                match: end_pattern,
+                tag_as: "punctuation.section.attribute.end",
             ),
-            newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
-            newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
-            newPattern(
-                match: variable_name.lookAheadFor(/::/),
-                tag_as: "entity.name.type.namespace"
-            ),
-            newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
-        ],
-    )
+            includes: [
+                # allow nested attributes
+                :attributes_context,
+                PatternRange.new(
+                    start_pattern: /\(/,
+                    end_pattern: /\)/,
+                    includes: [
+                        :attributes_context,
+                        :string_context_c,
+                    ],
+                ),
+                newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
+                    match: variable_name,
+                    tag_as: "entity.name.type.namespace",
+                ),
+                newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
+                newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
+                newPattern(
+                    match: variable_name.lookAheadFor(/::/),
+                    tag_as: "entity.name.type.namespace"
+                ),
+                newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
+            ]
+        )
+    end
+    
+    cpp_attribute_start = /\[\[/
+    cpp_attribute_end   = /\]\]/
+    gcc_attribute_start = /__attribute\(\(/
+    gcc_attribute_end   = /\)\)/
+    ms_attribute_start  = /__declspec\(/
+    ms_attribute_end    = /\)/
+    
+    cpp_grammar[:cpp_attributes] = attributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
+    cpp_grammar[:gcc_attributes] = attributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
+    cpp_grammar[:ms_attributes]  = attributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
+    
     inline_attribute = newPattern(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
         should_partial_match: ["struct [[deprecated]] st"],
         # match one of the three attribute styles
         match: newPattern(
-            @cpp_tokens.that(:isAttributeStart, :isCppAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isCppAttribute))
-        ).or(
-            @cpp_tokens.that(:isAttributeStart, :isGccAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isGccAttribute))
-        ).or(
-            @cpp_tokens.that(:isAttributeStart, :isMsAttribute).then(/.*?/).then(@cpp_tokens.that(:isAttributeEnd, :isMsAttribute))
-        ).lookAheadToAvoid(/\)/),
+                cpp_attribute_start.then(/.*?/).then(cpp_attribute_end)
+            ).or(
+                gcc_attribute_start.then(/.*?/).then(gcc_attribute_end)
+            ).or(
+                ms_attribute_start.then(/.*?/).then(ms_attribute_end)
+            ).lookAheadToAvoid(/\)/),
         includes: [
-            :attributes,
+            :attributes_context,
         ],
     )
 #
@@ -1694,7 +1713,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     cpp_grammar[:special_block_context] = [
-            :attributes,
+            :attributes_context,
             :using_namespace,
             :type_alias,
             :namespace_block,
@@ -3081,7 +3100,7 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_define_line_context
         ]
     cpp_grammar[:function_context_c] = [
-            :attributes,
+            :attributes_context,
             :comments_context,
             :storage_types,
             :operators,
@@ -3109,7 +3128,7 @@ cpp_grammar = Grammar.new(
             :$initial_context
         ]
     cpp_grammar[:function_call_context_c] = [
-            :attributes,
+            :attributes_context,
             :comments_context,
             :storage_types,
             :method_access,
