@@ -766,12 +766,14 @@ cpp_grammar = Grammar.new(
             tag_as: "meta.function.definition.parameters",
             # this pattern was posessive but that depends on https://github.com/jeff-hykin/cpp-textmate-grammar/issues/127
             # integration testing says we are fin however
-            start_pattern: lookAheadToAvoid(newPattern(@cpp_tokens.that(:isOperator).or(@cpp_tokens.that(:isControlFlow))).maybe(@spaces).then(/\(/))
-                .then(
-                    match: oneOrMoreOf(identifier.or(/::/)).or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
+            start_pattern: lookAheadToAvoid(
+                    newPattern(
+                        @cpp_tokens.that(:isOperator).or(@cpp_tokens.that(:isControlFlow))
+                    ).maybe(@spaces).then(/\(/)
+                ).then(
+                    match: /#{identifier.or(/::/)}++/.or(lookBehindFor(/operator/).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword))),
                     tag_as: "entity.name.function"
-                ).maybe(@spaces)
-                .then(
+                ).maybe(@spaces).then(
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round"
                 ),
