@@ -208,10 +208,10 @@ cpp_grammar = Grammar.new(
             :comma_in_template_argument
         ]
     cpp_grammar[:attributes_context] = [
-        :attributes,
         :cpp_attributes,
         :gcc_attributes,
         :ms_attributes,
+        :alignas_attribute,
     ]
 
 #
@@ -436,10 +436,13 @@ cpp_grammar = Grammar.new(
     gcc_attribute_end   = /\)\)/
     ms_attribute_start  = /__declspec\(/
     ms_attribute_end    = /\)/
+    alignas_start       = /alignas\(/
+    alignas_end         = /\)/
     
-    cpp_grammar[:cpp_attributes] = attributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
-    cpp_grammar[:gcc_attributes] = attributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
-    cpp_grammar[:ms_attributes]  = attributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
+    cpp_grammar[:cpp_attributes   ] = attributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
+    cpp_grammar[:gcc_attributes   ] = attributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
+    cpp_grammar[:ms_attributes    ] = attributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
+    cpp_grammar[:alignas_attribute] = attributeRangeFinder[ alignas_start      , alignas_end       ]
     
     inline_attribute = newPattern(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
@@ -451,6 +454,8 @@ cpp_grammar = Grammar.new(
                 gcc_attribute_start.then(/.*?/).then(gcc_attribute_end)
             ).or(
                 ms_attribute_start.then(/.*?/).then(ms_attribute_end)
+            ).or(
+                alignas_start.then(/.*?/).then(alignas_end)
             ).lookAheadToAvoid(/\)/),
         includes: [
             :attributes_context,
