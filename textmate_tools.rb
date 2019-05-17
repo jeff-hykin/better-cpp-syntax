@@ -868,10 +868,11 @@ class PatternRange
         if not ( (start_pattern.is_a? Regexp) and start_pattern != // )
             raise "The start pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
-        @as_tag[:begin] = start_pattern.without_default_mode_modifiers
+        start_pattern_as_tag =  start_pattern.to_tag(without_optimizations: true)
+        @as_tag[:begin] = start_pattern_as_tag[:match]
         key_arguments.delete(:start_pattern)
-        begin_captures = start_pattern.to_tag(without_optimizations: true)[:captures]
-        if begin_captures != {} && begin_captures.to_s != "" 
+        begin_captures = start_pattern_as_tag[:captures]
+        if begin_captures != {} && begin_captures.to_s != ""
             @as_tag[:beginCaptures] = begin_captures
         end
         
@@ -882,9 +883,10 @@ class PatternRange
         if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
             raise "The end pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
-        @as_tag[:end] = end_pattern.without_default_mode_modifiers
+        end_pattern_as_tag = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)
+        @as_tag[:end] = end_pattern_as_tag[:match]
         key_arguments.delete(:end_pattern)
-        end_captures = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)[:captures]
+        end_captures = end_pattern_as_tag[:captures]
         if end_captures != {} && end_captures.to_s != ""
             @as_tag[:endCaptures] = end_captures
         end
