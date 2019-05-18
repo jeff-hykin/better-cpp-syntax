@@ -2161,6 +2161,9 @@
             },
             {
               "include": "$base"
+            },
+            {
+              "include": "#block_innards"
             }
           ]
         },
@@ -2240,6 +2243,9 @@
       "patterns": [
         {
           "include": "$base"
+        },
+        {
+          "include": "#block_innards"
         }
       ]
     },

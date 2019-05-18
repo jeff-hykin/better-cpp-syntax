@@ -34,7 +34,8 @@ c_grammar = Grammar.new(
 # Contexts
 #
     c_grammar[:conditional_context] = [
-            :$initial_context
+            :$initial_context,
+            :block_innards
         ]
     evalutation_context = [
         "#function-call-innards",

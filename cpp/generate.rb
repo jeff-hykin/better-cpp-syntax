@@ -387,6 +387,7 @@ cpp_grammar = Grammar.new(
                 :default_statement,
                 :case_statement,
                 :$initial_context,
+                :block_innards # this is just for C support, it should be removed in the future
             ],
             needs_semicolon: false,
         )
