@@ -124,14 +124,33 @@
   scopes:
     - punctuation.terminator.statement.cpp
 - source: class
+  scopes:
+    - meta.head.class.cpp
+    - storage.type.class.cpp
+- source: alignas(
+  scopesBegin:
+    - support.other.attribute.cpp
+  scopes:
+    - punctuation.section.attribute.begin.cpp
+- source: '32'
+  scopes:
+    - constant.numeric.decimal.cpp
+- source: )
+  scopes:
+    - punctuation.section.attribute.end.cpp
+  scopesEnd:
+    - support.other.attribute.cpp
+- source: ChildClass
   scopesBegin:
     - meta.head.class.cpp
   scopes:
-    - storage.type.class.cpp
-- source: alignas
-  scopes:
     - entity.name.type.class.cpp
-- source: '(32) ChildClass : '
+- source: ':'
+  scopes:
+    - colon.cpp
+    - punctuation.separator.inhertance.cpp
+  scopesEnd:
+    - meta.head.class.cpp
 - source: public
   scopes:
     - storage.type.modifier.access.public.cpp
@@ -140,9 +159,8 @@
     - entity.name.type.inherited.cpp
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
-  scopesEnd:
     - meta.head.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class.cpp
 - source: '}'
   scopes:
     - meta.body.class.cpp

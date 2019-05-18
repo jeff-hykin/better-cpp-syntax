@@ -427,6 +427,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "entity.name.type.namespace"
                 ),
                 newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
+                :number_literal,
             ]
         )
     end
@@ -460,6 +461,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadToAvoid(/\)/),
         includes: [
             :attributes_context,
+            :number_literal, # for alignas
         ],
     )
 #

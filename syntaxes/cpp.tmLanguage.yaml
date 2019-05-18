@@ -478,6 +478,7 @@
       name: entity.name.type.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
   gcc_attributes:
     name: support.other.attribute.cpp
     begin: "(__attribute\\(\\()"
@@ -509,6 +510,7 @@
       name: entity.name.type.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
   ms_attributes:
     name: support.other.attribute.cpp
     begin: "(__declspec\\()"
@@ -540,6 +542,7 @@
       name: entity.name.type.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
   alignas_attribute:
     name: support.other.attribute.cpp
     begin: "(alignas\\()"
@@ -571,6 +574,7 @@
       name: entity.name.type.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
   user_defined_template_type:
     match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
     name: storage.type.user-defined.cpp
@@ -690,6 +694,7 @@
       '1':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '2':
         name: meta.scope-resolution.cpp
       '3':
@@ -721,6 +726,7 @@
       '3':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '4':
         name: meta.scope-resolution.cpp
       '5':
@@ -754,6 +760,7 @@
       '13':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '14':
         name: meta.scope-resolution.cpp
       '15':
@@ -938,6 +945,7 @@
       '2':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '3':
         name: meta.scope-resolution.cpp
       '4':
@@ -1102,9 +1110,11 @@
       '3':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '4':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
         - include: "#scope_resolution"
@@ -1193,6 +1203,7 @@
       '2':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '3':
         name: keyword.operator.assignment.cpp
       '4':
@@ -1216,6 +1227,7 @@
       '4':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         name: entity.name.type.enum.cpp
       '6':
@@ -1289,9 +1301,11 @@
       '4':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
@@ -1345,9 +1359,11 @@
       '4':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
@@ -1401,9 +1417,11 @@
       '4':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
         - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
