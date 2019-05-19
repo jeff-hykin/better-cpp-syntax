@@ -434,7 +434,7 @@ cpp_grammar = Grammar.new(
     
     cpp_attribute_start = /\[\[/
     cpp_attribute_end   = /\]\]/
-    gcc_attribute_start = /__attribute\(\(/
+    gcc_attribute_start = /__attribute(?:__)?\(\(/
     gcc_attribute_end   = /\)\)/
     ms_attribute_start  = /__declspec\(/
     ms_attribute_end    = /\)/
@@ -447,7 +447,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:alignas_attribute] = attributeRangeFinder[ alignas_start      , alignas_end       ]
     
     inline_attribute = newPattern(
-        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
+        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
         should_partial_match: ["struct [[deprecated]] st"],
         # match one of the three attribute styles
         match: newPattern(
