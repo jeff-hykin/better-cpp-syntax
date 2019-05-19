@@ -607,10 +607,7 @@ class Regexp
 
         pattern_attributes = Marshal.load(Marshal.dump(attributes))
         # pattern_attributes.keep_if { |k, v| @@textmate_attributes.key? k }
-       #  attributes.delete_if { |k, v| @@textmate_attributes.key? k }
-       p "begin"
-       p [attributes]
-       p [pattern_attributes]
+        attributes.delete_if { |k, v| @@textmate_attributes.key? k }
         
         no_attributes = pattern_attributes == {}
         
@@ -621,9 +618,18 @@ class Regexp
         other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
-                new_regex = /#{self_as_string}(#{other_regex_as_string})/
-                if no_attributes
-                    new_regex = /#{self_as_string}#{other_regex_as_string}/
+                if attributes[:dont_back_track?]
+                    # atomic groups
+                    attributes.delete(:dont_back_track?)
+                    new_regex = /#{self_as_string}((?>#{other_regex_as_string}))/
+                    if no_attributes
+                        new_regex = /#{self_as_string}(?>#{other_regex_as_string})/
+                    end
+                elsif
+                    new_regex = /#{self_as_string}(#{other_regex_as_string})/
+                    if no_attributes
+                        new_regex = /#{self_as_string}#{other_regex_as_string}/
+                    end
                 end
             when 'or'
                 new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
@@ -665,6 +671,15 @@ class Regexp
                 end
         end
         
+        if attributes[:dont_back_track?]
+            new_regex_as_string = new_regex.without_default_mode_modifiers
+            index = new_regex_as_string[-1] == ')' ? -2 : -1
+            if not /[+*?]/ =~ new_regex_as_string[index]
+                raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+            end
+            new_regex = /#{new_regex_as_string.insert(index, '+')}/
+        end
+
         #
         # Make changes to capture groups/attributes
         #
