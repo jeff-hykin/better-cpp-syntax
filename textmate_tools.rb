@@ -354,6 +354,20 @@ end
 class Regexp
     attr_accessor :repository_name
     attr_accessor :has_top_level_group
+    @@textmate_attributes = {
+        name: "",
+        match: "",
+        patterns: "",
+        comment: "",
+        tag_as: "",
+        includes: "",
+        reference: "",
+        should_fully_match: "",
+        should_not_fully_match: "",
+        should_partial_match: "",
+        should_not_partial_match: "",
+        repository: "",
+    }
     
     def self.runTest(test_name, arguments, lambda, new_regex)
         if arguments[test_name] != nil
@@ -533,18 +547,7 @@ class Regexp
             
             # check for unknown names
             attributes_copy = Marshal.load(Marshal.dump(raw_attributes))
-            attributes_copy.delete(:name)
-            attributes_copy.delete(:match)
-            attributes_copy.delete(:patterns)
-            attributes_copy.delete(:comment)
-            attributes_copy.delete(:tag_as)
-            attributes_copy.delete(:includes)
-            attributes_copy.delete(:reference)
-            attributes_copy.delete(:should_fully_match)
-            attributes_copy.delete(:should_not_fully_match)
-            attributes_copy.delete(:should_partial_match)
-            attributes_copy.delete(:should_not_partial_match)
-            attributes_copy.delete(:repository)
+            attributes_copy.delete_if { |k, v| @@textmate_attributes.key? k }
             if attributes_copy.size != 0
                 raise "\n\nThere are arugments being given to a newPattern or a helper that are not understood\nThe unknown arguments are:\n#{attributes_copy}\n\nThe normal arguments are#{raw_attributes}"
             end
@@ -601,8 +604,15 @@ class Regexp
         if other_regex == nil
             other_regex = //
         end
+
+        pattern_attributes = Marshal.load(Marshal.dump(attributes))
+        # pattern_attributes.keep_if { |k, v| @@textmate_attributes.key? k }
+       #  attributes.delete_if { |k, v| @@textmate_attributes.key? k }
+       p "begin"
+       p [attributes]
+       p [pattern_attributes]
         
-        no_attributes = attributes == {}
+        no_attributes = pattern_attributes == {}
         
         #
         # Create the new regex
@@ -662,10 +672,10 @@ class Regexp
         if no_attributes
             new_regex.group_attributes = self.group_attributes + other_regex.group_attributes
         else
-            new_regex.group_attributes = self.group_attributes + [ attributes ] + other_regex.group_attributes
+            new_regex.group_attributes = self.group_attributes + [ pattern_attributes ] + other_regex.group_attributes
         end
         # if there are arributes, then those attributes are top-level
-        if (self == //) and (attributes != {})
+        if (self == //) and (pattern_attributes != {})
             new_regex.has_top_level_group = true
         end
         
@@ -678,10 +688,10 @@ class Regexp
         else
             test_regex = new_regex
         end
-        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
-        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
-        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
-        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
+        Regexp.runTest(:should_partial_match    , pattern_attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
+        Regexp.runTest(:should_not_partial_match, pattern_attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
+        Regexp.runTest(:should_fully_match      , pattern_attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
+        Regexp.runTest(:should_not_fully_match  , pattern_attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
         return new_regex
     end
     

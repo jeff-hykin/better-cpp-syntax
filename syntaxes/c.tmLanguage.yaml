@@ -1258,13 +1258,6 @@
         - include: "#member_access"
         - include: "#method_access"
         - match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          captures:
-            '1':
-              name: variable.other.object.access.c
-            '2':
-              name: punctuation.separator.dot-access.c
-            '3':
-              name: punctuation.separator.pointer-access.c
       '5':
         name: variable.other.member.c
   method_access:
@@ -1282,13 +1275,6 @@
         - include: "#member_access"
         - include: "#method_access"
         - match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          captures:
-            '1':
-              name: variable.other.object.access.c
-            '2':
-              name: punctuation.separator.dot-access.c
-            '3':
-              name: punctuation.separator.pointer-access.c
       '5':
         name: entity.name.function.member.c
       '6':
@@ -1310,8 +1296,7 @@
         '2':
           name: constant.numeric.hexadecimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '4':
@@ -1319,8 +1304,7 @@
         '5':
           name: constant.numeric.hexadecimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '6':
           name: punctuation.separator.constant.numeric
         '8':
@@ -1332,8 +1316,7 @@
         '11':
           name: constant.numeric.exponent.hexadecimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '12':
           name: keyword.other.unit.suffix.floating-point.c
     - match: "(\\G(?=[0-9.])(?!0[xXbB]))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:([lLfF](?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
@@ -1341,8 +1324,7 @@
         '2':
           name: constant.numeric.decimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '4':
@@ -1350,8 +1332,7 @@
         '5':
           name: constant.numeric.decimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '6':
           name: punctuation.separator.constant.numeric
         '8':
@@ -1363,8 +1344,7 @@
         '11':
           name: constant.numeric.exponent.decimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '12':
           name: keyword.other.unit.suffix.floating-point.c
     - match: "(\\G0[bB])([01](?:(?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
@@ -1374,8 +1354,7 @@
         '2':
           name: constant.numeric.binary.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '4':
@@ -1387,8 +1366,7 @@
         '2':
           name: constant.numeric.octal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '4':
@@ -1400,8 +1378,7 @@
         '2':
           name: constant.numeric.hexadecimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '5':
@@ -1413,8 +1390,7 @@
         '8':
           name: constant.numeric.exponent.hexadecimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '9':
           name: keyword.other.unit.suffix.integer.c
     - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
@@ -1422,8 +1398,7 @@
         '2':
           name: constant.numeric.decimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric
         '5':
@@ -1435,8 +1410,7 @@
         '8':
           name: constant.numeric.exponent.decimal.c
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '9':
           name: keyword.other.unit.suffix.integer.c
     - match: "(?:(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))+"

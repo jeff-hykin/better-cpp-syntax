@@ -185,8 +185,7 @@
         '2':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -194,8 +193,7 @@
         '5':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '6':
           name: punctuation.separator.constant.numeric.cpp
         '8':
@@ -207,8 +205,7 @@
         '11':
           name: constant.numeric.exponent.hexadecimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '12':
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
@@ -218,8 +215,7 @@
         '2':
           name: constant.numeric.decimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -227,8 +223,7 @@
         '5':
           name: constant.numeric.decimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '6':
           name: punctuation.separator.constant.numeric.cpp
         '8':
@@ -240,8 +235,7 @@
         '11':
           name: constant.numeric.exponent.decimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '12':
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
@@ -253,8 +247,7 @@
         '2':
           name: constant.numeric.binary.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -268,8 +261,7 @@
         '2':
           name: constant.numeric.octal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '4':
@@ -283,8 +275,7 @@
         '2':
           name: constant.numeric.hexadecimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '5':
@@ -296,8 +287,7 @@
         '8':
           name: constant.numeric.exponent.hexadecimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '9':
           name: keyword.other.unit.suffix.integer.cpp
         '10':
@@ -307,8 +297,7 @@
         '2':
           name: constant.numeric.decimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '3':
           name: punctuation.separator.constant.numeric.cpp
         '5':
@@ -320,8 +309,7 @@
         '8':
           name: constant.numeric.exponent.decimal.cpp
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.cpp
+          - match: "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
         '9':
           name: keyword.other.unit.suffix.integer.cpp
         '10':
@@ -684,8 +672,7 @@
       '0':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
-        - match: "(?:class|struct|union|enum)"
-          name: storage.type.$0.cpp
+        - match: "((?:class|struct|union|enum))"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -716,8 +703,7 @@
       '2':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
-        - match: "(?:class|struct|union|enum)"
-          name: storage.type.$0.cpp
+        - match: "((?:class|struct|union|enum))"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -750,8 +736,7 @@
       '12':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
-        - match: "(?:class|struct|union|enum)"
-          name: storage.type.$0.cpp
+        - match: "((?:class|struct|union|enum))"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -935,8 +920,7 @@
       '1':
         name: entity.name.type.cpp meta.qualified_type.cpp
         patterns:
-        - match: "(?:class|struct|union|enum)"
-          name: storage.type.$0.cpp
+        - match: "((?:class|struct|union|enum))"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1028,18 +1012,8 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "((?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))))"
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          captures:
-            '1':
-              name: variable.language.this.cpp
-            '2':
-              name: variable.other.object.access.cpp
-            '3':
-              name: punctuation.separator.dot-access.cpp
-            '4':
-              name: punctuation.separator.pointer-access.cpp
         - include: "#member_access"
         - include: "#method_access"
       '6':
@@ -1058,18 +1032,8 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "((?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))))"
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
-          captures:
-            '1':
-              name: variable.language.this.cpp
-            '2':
-              name: variable.other.object.access.cpp
-            '3':
-              name: punctuation.separator.dot-access.cpp
-            '4':
-              name: punctuation.separator.pointer-access.cpp
         - include: "#member_access"
         - include: "#method_access"
       '6':

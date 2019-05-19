@@ -2270,18 +2270,7 @@
               "include": "#method_access"
             },
             {
-              "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.other.object.access.c"
-                },
-                "2": {
-                  "name": "punctuation.separator.dot-access.c"
-                },
-                "3": {
-                  "name": "punctuation.separator.pointer-access.c"
-                }
-              }
+              "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
             }
           ]
         },
@@ -2312,18 +2301,7 @@
               "include": "#method_access"
             },
             {
-              "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.other.object.access.c"
-                },
-                "2": {
-                  "name": "punctuation.separator.dot-access.c"
-                },
-                "3": {
-                  "name": "punctuation.separator.pointer-access.c"
-                }
-              }
+              "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
             }
           ]
         },
@@ -2360,8 +2338,7 @@
               "name": "constant.numeric.hexadecimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2375,8 +2352,7 @@
               "name": "constant.numeric.hexadecimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2396,8 +2372,7 @@
               "name": "constant.numeric.exponent.hexadecimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2413,8 +2388,7 @@
               "name": "constant.numeric.decimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2428,8 +2402,7 @@
               "name": "constant.numeric.decimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2449,8 +2422,7 @@
               "name": "constant.numeric.exponent.decimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2469,8 +2441,7 @@
               "name": "constant.numeric.binary.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2492,8 +2463,7 @@
               "name": "constant.numeric.octal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2515,8 +2485,7 @@
               "name": "constant.numeric.hexadecimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2536,8 +2505,7 @@
               "name": "constant.numeric.exponent.hexadecimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2553,8 +2521,7 @@
               "name": "constant.numeric.decimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
@@ -2574,8 +2541,7 @@
               "name": "constant.numeric.exponent.decimal.c",
               "patterns": [
                 {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric"
+                  "match": "((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))"
                 }
               ]
             },
