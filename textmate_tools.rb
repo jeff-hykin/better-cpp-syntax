@@ -618,7 +618,25 @@ class Regexp
         other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
-                if attributes[:dont_back_track?]
+                if attributes[:how_many_times?] or attributes[:atMost] or attributes[:atLeast]
+                    # repeat pattern
+                    # support for atLeast: 1.times, atMost: 2.times
+                    atLeast = attributes[:atLeast].is_a? Enumerator ? attributes[:atLeast].size : attributes[:atLeast]
+                    atMost = attributes[:atMost].is_a? Enumerator ? attributes[:atMost].size : attributes[:atMost]
+                    if atLeast == 0 and atMost == nil
+                        # rewrite to zeroOrMoreOf
+                        return this.processRegexOperator(arguments, 'zeroOrMoreOf')
+                    elsif atLeast == nil and atMost = nil
+                        # rewrite to oneOrMoreOf
+                        return this.processRegexOperator(arguments, 'oneOrMoreOf')
+                    else
+                        # custom range
+                        new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{atLeast},#{atMost}})/
+                        if no_attributes
+                            new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{atLeast},#{atMost}}/
+                        end
+                    end
+                elsif attributes[:dont_back_track?]
                     # atomic groups
                     attributes.delete(:dont_back_track?)
                     new_regex = /#{self_as_string}((?>#{other_regex_as_string}))/
@@ -678,6 +696,15 @@ class Regexp
                 raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
             end
             new_regex = /#{new_regex_as_string.insert(index, '+')}/
+        end
+
+        if attributes[:how_many_times?]
+            new_regex_as_string = new_regex.without_default_mode_modifiers
+            index = new_regex_as_string[-1] == ')' ? -2 : -1
+            if not /[+*}?]/ =~ new_regex_as_string[index]
+                raise "\n\n :how_many_times? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+            end
+            new_regex = /#{new_regex_as_string.insert(index, '?')}/
         end
 
         #
