@@ -1028,8 +1028,16 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          captures:
+            '1':
+              name: variable.language.this.cpp
+            '2':
+              name: variable.other.object.property.cpp
+            '3':
+              name: punctuation.separator.dot-access.cpp
+            '4':
+              name: punctuation.separator.pointer-access.cpp
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           captures:
             '1':
@@ -1058,8 +1066,16 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          captures:
+            '1':
+              name: variable.language.this.cpp
+            '2':
+              name: variable.other.object.property.cpp
+            '3':
+              name: punctuation.separator.dot-access.cpp
+            '4':
+              name: punctuation.separator.pointer-access.cpp
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           captures:
             '1':
