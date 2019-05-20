@@ -71,7 +71,8 @@ module.exports = class OnigScanner {
                 result.line,
                 result.matchTime,
                 result.chosen,
-                result.match === null
+                result.match === null,
+                this.patterns.length === 1
             );
         }
         // use a genuine OnigScanner return as the results are slightly different

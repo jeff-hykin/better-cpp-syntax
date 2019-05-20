@@ -27,11 +27,15 @@ class patternCoverage {
             }
         }
     }
-    record(source, time, chosen, failure) {
+    record(source, time, chosen, failure, onlyPattern) {
         this.empty = false;
         const index = failure ? 0 : chosen ? 2 : 1;
         this.coverage[source].count[index] += 1;
         this.coverage[source].sumTime[index] += time;
+        if (onlyPattern && chosen) {
+            this.coverage[source].count[1] += 1;
+            this.coverage[source].sumTime[1] += time;
+        }
     }
     report() {
         let averages = [0, 0, 0];
@@ -39,6 +43,7 @@ class patternCoverage {
             if (coverage.count[0] > 0) {
                 averages[0] += 1;
             }
+            // if the recorded pattern is the only pattern in the set, don't count matched unChosen against it
             if (coverage.count[1] > 0) {
                 averages[1] += 1;
             }
