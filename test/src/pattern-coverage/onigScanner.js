@@ -1,0 +1,80 @@
+// this files acts like a onigScanner except that it checks each pattern in turn to
+// determine which pattern actually matched.
+// it also double checks with an actual onigScanner
+const vsctm = require("vscode-textmate");
+const oniguruma = require("oniguruma");
+const _ = require("lodash");
+
+module.exports = class OnigScanner {
+    /**
+     * @param {string[]} patterns
+     */
+    constructor(patterns, recorder) {
+        this.onigScanner = new oniguruma.OnigScanner(patterns);
+        this.regexps = patterns.map(
+            pattern => new oniguruma.OnigRegExp(pattern)
+        );
+        this.patterns = patterns;
+        this.recorder = recorder;
+    }
+    /**
+     * @param {string} string
+     * @param {number} startPosition
+     * @returns {vsctm.IOnigMatch}
+     */
+    findNextMatchSync(string, startPosition = 0) {
+        /**
+         * @typedef {{line: string, matchTime: number, match: object, chosen: boolean}} Result
+         * @type {Result}
+         */
+        let results = [];
+        // construct a list of result objects
+        for (const [index, value] of this.regexps.entries()) {
+            const startTime = Date.now();
+            const match = value.searchSync(string.toString(), startPosition);
+            const endTime = Date.now();
+            try {
+                results.push({
+                    match,
+                    matchTime: endTime - startTime,
+                    line: this.patterns[index].match(
+                        /^\(\?#(source\..+:\d+)\)/
+                    )[1],
+                    chosen: false // chosen is calculated after the fact
+                });
+            } catch (e) {
+                console.log(this.patterns[index]);
+            }
+        }
+        // chose the best match
+        // best match means the match with the earliest starting position for the 0th sub-expression
+        // for two equally good choices, pick the first
+        // see https://github.com/atom/node-oniguruma/blob/master/src/onig-searcher.cc
+        /**
+         * @type {Result}
+         */
+        let chosenResult = results[0];
+        for (const result of results) {
+            if (result.match) {
+                if (
+                    chosenResult.match === null ||
+                    result.match[0].start < chosenResult.match[0].start
+                ) {
+                    chosenResult = result;
+                }
+            }
+        }
+        chosenResult.chosen = true;
+        //report all results
+        for (const result of results) {
+            this.recorder.record(
+                result.line,
+                result.matchTime,
+                result.chosen,
+                result.match === null
+            );
+        }
+        // use a genuine OnigScanner return as the results are slightly different
+        return this.onigScanner.findNextMatchSync(string, startPosition);
+    }
+};
