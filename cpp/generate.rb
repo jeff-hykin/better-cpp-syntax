@@ -1018,11 +1018,18 @@ cpp_grammar = Grammar.new(
         )
     member_context = [
             mid_member = newPattern(
-                tag_as: "variable.other.object.property",
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
-                    partial_member.without_numbered_capture_groups
+                    # this is duplicated from partial_member until #181 is resolved
+                    the_this_keyword.or(
+                        newPattern(
+                            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+                            tag_as: "variable.other.object.property",
+                        )
+                    ).then(
+                        member_operator
+                    )
                 )
             ),
             partial_member,
