@@ -592,7 +592,7 @@ cpp_grammar = Grammar.new(
 #
     one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes = newPattern(
-        match: zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+        match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution ]
         )
     cpp_grammar[:scope_resolution] = scope_resolution = newPattern(
@@ -1080,26 +1080,44 @@ cpp_grammar = Grammar.new(
             ),
         end_pattern: @semicolon,
         )
-    # TODO: add support for namespace name = qualified-namespace ;
+    cpp_grammar[:namespace_alias] = newPattern(
+        tag_as: "meta.declaration.namespace.alias",
+        should_fully_match: ["namespace foo = bar;", "namespace fs=boost::filesystem;", "namespace std = ::std;"],
+        should_not_partial_match: ["namespace foo {", "using namespace std;"],
+        match: lookBehindToAvoid(@standard_character).then(
+                    match: /namespace/,
+                    tag_as: "keyword.other.namespace.alias storage.type.namespace.alias"
+                ).then(@spaces).then(
+                    match: variable_name,
+                    tag_as: "entity.name.type.namespace.alias",
+                ).maybe(@spaces).then(assignment_operator).maybe(@spaces).then(
+                    tag_as: "meta.declaration.namespace.alias.value",
+                    match: preceding_scopes.maybe(@spaces).then(
+                            match: variable_name,
+                            tag_as: "entity.name.type.namespace",
+                    ).maybe(@spaces)
+                    .then(@semicolon.or(/\n/)),
+                ),
+    )
     cpp_grammar[:namespace_block] = blockFinderFor(
         name: "namespace",
         tag_as: "meta.block.namespace",
         needs_semicolon: false,
-        start_pattern: lookBehindToAvoid(@standard_character).then(
-                match: /namespace/,
+        start_pattern: newPattern(
+                match: variableBounds[/namespace/],
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
-            ).then(@spaces.or(inline_attribute).or(lookAheadFor(/\{|\n/))).maybe(inline_attribute).maybe(@spaces).then(
-                # Named namespace (with possible scope )
-                preceding_scopes
-            ).maybe(@spaces).then(
-                newPattern(
+            ),
+        head_includes: [
+            :attributes_context,
+            newPattern(preceding_scopes).maybe(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.type.namespace",
-                # anonymous namespaces
-                ).or(
-                    lookAheadFor(/\{/)
-                ).or(/\n/)
-            ),
+                ).maybe(@spaces).maybe(/::/.maybe(@spaces).then(
+                    match: /inline/,
+                    tag_as: "storage.modifier.inline"
+                )
+                )
+        ]
         )
 
 #
@@ -1724,6 +1742,7 @@ cpp_grammar = Grammar.new(
             :attributes_context,
             :using_namespace,
             :type_alias,
+            :namespace_alias,
             :namespace_block,
             :class_block,
             :struct_block,

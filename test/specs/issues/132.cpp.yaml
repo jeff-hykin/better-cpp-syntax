@@ -67,6 +67,7 @@
     - storage.type.namespace.definition.cpp
 - source: scoped
   scopesBegin:
+    - meta.head.namespace.cpp
     - meta.scope-resolution.cpp
   scopes:
     - entity.name.type.namespace.scope-resolution.cpp
@@ -76,8 +77,6 @@
   scopesEnd:
     - meta.scope-resolution.cpp
 - source: console
-  scopesBegin:
-    - meta.head.namespace.cpp
   scopes:
     - entity.name.type.namespace.cpp
 - source: '{'

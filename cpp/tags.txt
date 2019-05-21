@@ -29,6 +29,7 @@ entity.name.type.$3.cpp
 entity.name.type.cpp
 entity.name.type.enum.cpp
 entity.name.type.inherited.cpp
+entity.name.type.namespace.alias.cpp
 entity.name.type.namespace.cpp
 entity.name.type.namespace.scope-resolution.cpp
 entity.name.type.struct.cpp
@@ -82,6 +83,7 @@ keyword.operator.typeid.cpp
 keyword.operator.wordlike.cpp
 keyword.other.$0.cpp
 keyword.other.decltype.cpp
+keyword.other.namespace.alias.cpp
 keyword.other.namespace.definition.cpp
 keyword.other.namespace.directive.cpp
 keyword.other.operator.overload.cpp
@@ -115,6 +117,8 @@ meta.body.union.cpp
 meta.bracket.square.access.cpp
 meta.conditional.case.cpp
 meta.conditional.switch.cpp
+meta.declaration.namespace.alias.cpp
+meta.declaration.namespace.alias.value.cpp
 meta.declaration.type.alias.cpp
 meta.declaration.type.alias.value.unknown.cpp
 meta.encoding.cpp
@@ -255,6 +259,7 @@ punctuation.vararg-ellipses.template.definition.cpp
 punctuation.whitespace.comment.leading.cpp
 storage.modifier.array.bracket.square.cpp
 storage.modifier.cpp
+storage.modifier.inline.cpp
 storage.modifier.lambda.$0.cpp
 storage.modifier.pointer.cpp
 storage.modifier.reference.cpp
@@ -273,6 +278,7 @@ storage.type.modifier.access.$0.cpp
 storage.type.modifier.access.control.$1.cpp
 storage.type.modifier.final.cpp
 storage.type.modifier.virtual.cpp
+storage.type.namespace.alias.cpp
 storage.type.namespace.definition.cpp
 storage.type.namespace.directive.cpp
 storage.type.primitive.cpp
