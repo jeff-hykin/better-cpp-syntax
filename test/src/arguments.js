@@ -18,5 +18,10 @@ module.exports = require("yargs")
         type: "boolean",
         describe: "treat .h as source.c"
     })
+    .option("coverage", {
+        default: false,
+        type: "boolean",
+        describe: "display the code coverage on running a test"
+    })
     .strict()
     .example("$0 issues/002.cpp").argv;
