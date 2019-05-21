@@ -1008,28 +1008,23 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = the_this_keyword.or(
+    partialMemberFinder = ->(tag_name) do
+        the_this_keyword.or(
             newPattern(
                 match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: "variable.other.object.access",
+                tag_as: tag_name,
             )
         ).then(
             member_operator
         )
+    end
+    partial_member = partialMemberFinder["variable.other.object.access"] 
     member_context = [
             mid_member = newPattern(
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
-                    # this is duplicated from partial_member until #181 is resolved
-                    the_this_keyword.or(
-                        newPattern(
-                            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                            tag_as: "variable.other.object.property",
-                        )
-                    ).then(
-                        member_operator
-                    )
+                    partialMemberFinder["variable.other.object.property"]
                 )
             ),
             partial_member,
