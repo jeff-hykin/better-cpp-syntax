@@ -6,8 +6,11 @@ const yaml = require("js-yaml");
 const runTest = require("../testRunner");
 const argv = require("../arguments");
 const paths = require("../paths");
+
 const registry = require("../registry").getRegistry(
-    require("../pattern-coverage/oniguruma-decorator").getOniguruma
+    argv.coverage
+        ? require("../pattern-coverage/oniguruma-decorator").getOniguruma
+        : undefined
 );
 const coverage = require("../pattern-coverage/patternCoverage");
 
