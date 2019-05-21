@@ -41,8 +41,6 @@ async function runTests() {
         console.groupEnd();
     }
     console.log();
-    if (argv.coverage) {
-        coverage.reportAllRecorders();
-    }
+    coverage.reportAllRecorders();
     process.exit(totalResult ? 0 : 1);
 }
