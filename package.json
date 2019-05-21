@@ -7,6 +7,7 @@
     "scripts": {
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
         "pretest": "npm run build",
+        "cov": "npm run test --coverage",
         "test": "node test/src/commands/test.js",
         "preversion": "npm test",
         "version": "npm run build && git add -A syntaxes",
