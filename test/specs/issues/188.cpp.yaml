@@ -1,0 +1,90 @@
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: main
+  scopesBegin:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+  scopes:
+    - entity.name.function.cpp
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters.cpp
+- source: '{'
+  scopesBegin:
+    - meta.block.cpp
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.cpp
+- source: ceil
+  scopesBegin:
+    - meta.function-call.cpp
+  scopes:
+    - entity.name.function.call.cpp
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.cpp
+- source: static_cast
+  scopes:
+    - keyword.operator.wordlike.cpp
+    - keyword.operator.cast.static_cast.cpp
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: f64_t
+  scopes:
+    - support.type.posix-reserved.cpp
+- source: '>'
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+- source: audio_spec
+  scopes:
+    - variable.other.object.access.cpp
+- source: .
+  scopes:
+    - punctuation.separator.dot-access.cpp
+- source: freq
+  scopes:
+    - variable.other.property.cpp
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+- source: /
+  scopes:
+    - keyword.operator.cpp
+- source: static_cast
+  scopes:
+    - keyword.operator.wordlike.cpp
+    - keyword.operator.cast.static_cast.cpp
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: f64_t
+  scopes:
+    - support.type.posix-reserved.cpp
+- source: '>'
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.cpp
+- source: tgt_fps
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.cpp
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.cpp
+  scopesEnd:
+    - meta.function-call.cpp
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.cpp
