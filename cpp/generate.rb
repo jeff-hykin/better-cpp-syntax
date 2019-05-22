@@ -1367,10 +1367,11 @@ cpp_grammar = Grammar.new(
             end_pattern: lookBehindFor(/;/),
             includes: [
                 generateClassOrStructBlockFinder[name, [
-                    newPattern(
+                    ref_deref_definition_pattern.then(
                         match: variable_name,
                         tag_as: "entity.name.type.alias"
-                    )
+                    ),
+                    /,/,
                 ]]
             ]
         )

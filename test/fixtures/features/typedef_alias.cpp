@@ -9,3 +9,6 @@ typedef class bar {
 typedef union foobar {
 
 } foobar;
+typedef struct _OVERLAPPED {
+
+} OVERLAPPED, *LPOVERLAPPED;

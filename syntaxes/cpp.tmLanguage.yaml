@@ -1580,8 +1580,15 @@
         begin: "(?<=})[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
-        - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-          name: entity.name.type.alias.cpp
+        - match: "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
   typedef_struct:
     begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)struct(?!\\w))"
     beginCaptures:
@@ -1645,8 +1652,15 @@
         begin: "(?<=})[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
-        - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-          name: entity.name.type.alias.cpp
+        - match: "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
   typedef_union:
     begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)union(?!\\w))"
     beginCaptures:
@@ -1710,8 +1724,15 @@
         begin: "(?<=})[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
-        - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
-          name: entity.name.type.alias.cpp
+        - match: "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
   hacky_fix_for_stray_directive:
     match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     name: keyword.control.directive.$0.cpp
