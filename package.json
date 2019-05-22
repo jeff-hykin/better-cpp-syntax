@@ -8,6 +8,7 @@
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
+        "cov": "npm test -- --coverage",
         "preversion": "npm test",
         "version": "npm run build && git add -A syntaxes",
         "pregenerate-specs": "npm run build",

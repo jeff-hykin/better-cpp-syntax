@@ -39,6 +39,7 @@ class patternCoverage {
     }
     report() {
         let averages = [0, 0, 0];
+        let notConsidered = 0;
         for (const coverage of Object.values(this.coverage)) {
             if (coverage.count[0] > 0) {
                 averages[0] += 1;
@@ -50,10 +51,14 @@ class patternCoverage {
             if (coverage.count[2] > 0) {
                 averages[2] += 1;
             }
+            if (_.every(coverage.count, v => v === 0)) {
+                notConsidered += 1;
+            }
         }
-        averages[0] /= Object.keys(this.coverage).length;
-        averages[1] /= Object.keys(this.coverage).length;
-        averages[2] /= Object.keys(this.coverage).length;
+        const totalPatterns = Object.keys(this.coverage).length;
+        averages[0] /= totalPatterns;
+        averages[1] /= totalPatterns;
+        averages[2] /= totalPatterns;
         console.log(
             "code coverage for %s:\n\t%f%% / %f%% / %f%% / %f%%\n\t(match failure / match not chosen / match chosen / average)",
             this.scopeName,
@@ -61,6 +66,11 @@ class patternCoverage {
             (averages[1] * 100).toFixed(2),
             (averages[2] * 100).toFixed(2),
             (_.mean(averages) * 100).toFixed(2)
+        );
+        console.log(
+            "\t%d (%f%%) patterns were never considered",
+            notConsidered,
+            ((notConsidered / totalPatterns) * 100).toFixed(2)
         );
     }
     isEmpty() {
