@@ -197,6 +197,7 @@ cpp_grammar = Grammar.new(
             :hacky_fix_for_stray_directive,
         ]
     cpp_grammar[:storage_types] = [
+            :storage_specifiers,
             :primitive_types,
             :non_primitive_types,
             :pthread_types,

@@ -1101,7 +1101,6 @@
       patterns:
       - include: "#type_casting_operators"
       - include: "#function_call"
-      - include: "$base"
     - name: meta.tail.function.definition.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
