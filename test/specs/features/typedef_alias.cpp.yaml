@@ -86,3 +86,43 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.block.union.cpp
+- source: typedef
+  scopes:
+    - keyword.other.typedef.cpp
+- source: struct
+  scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+- source: _OVERLAPPED
+  scopes:
+    - entity.name.type.struct.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  scopesEnd:
+    - meta.head.struct.cpp
+- source: '}'
+  scopes:
+    - meta.body.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+- source: OVERLAPPED
+  scopesBegin:
+    - meta.tail.struct.cpp
+  scopes:
+    - entity.name.type.alias.cpp
+- source: ','
+- source: '*'
+  scopes:
+    - storage.modifier.pointer.cpp
+- source: LPOVERLAPPED
+  scopes:
+    - entity.name.type.alias.cpp
+  scopesEnd:
+    - meta.tail.struct.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
