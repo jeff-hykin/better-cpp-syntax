@@ -6,7 +6,10 @@ const yaml = require("js-yaml");
 const runTest = require("../testRunner");
 const argv = require("../arguments");
 const paths = require("../paths");
-const registry = require("../registry");
+const registry = require("../registry").getRegistry(
+    require("../pattern-coverage/oniguruma-decorator").getOniguruma
+);
+const coverage = require("../pattern-coverage/patternCoverage");
 
 const tests = require("../getTests")(
     test =>
@@ -37,5 +40,7 @@ async function runTests() {
         totalResult = result ? totalResult : result;
         console.groupEnd();
     }
+    console.log();
+    coverage.reportAllRecorders();
     process.exit(totalResult ? 0 : 1);
 }

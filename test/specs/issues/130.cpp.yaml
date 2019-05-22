@@ -27,9 +27,12 @@
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access.cpp
-- source: b->
+- source: b
   scopes:
     - variable.other.object.property.cpp
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access.cpp
 - source: c
   scopes:
     - variable.other.property.cpp
@@ -48,9 +51,12 @@
 - source: .
   scopes:
     - punctuation.separator.dot-access.cpp
-- source: b.
+- source: b
   scopes:
     - variable.other.object.property.cpp
+- source: .
+  scopes:
+    - punctuation.separator.dot-access.cpp
 - source: c
   scopes:
     - variable.other.property.cpp

@@ -477,7 +477,7 @@ cpp_grammar = Grammar.new(
     
     cpp_attribute_start = /\[\[/
     cpp_attribute_end   = /\]\]/
-    gcc_attribute_start = /__attribute\(\(/
+    gcc_attribute_start = /__attribute(?:__)?\(\(/
     gcc_attribute_end   = /\)\)/
     ms_attribute_start  = /__declspec\(/
     ms_attribute_end    = /\)/
@@ -490,7 +490,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:alignas_attribute] = attributeRangeFinder[ alignas_start      , alignas_end       ]
     
     inline_attribute = newPattern(
-        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
+        should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
         should_partial_match: ["struct [[deprecated]] st"],
         # match one of the three attribute styles
         match: newPattern(
@@ -1064,21 +1064,23 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = the_this_keyword.or(
+    partialMemberFinder = ->(tag_name) do
+        the_this_keyword.or(
             newPattern(
                 match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: "variable.other.object.access",
+                tag_as: tag_name,
             )
         ).then(
             member_operator
         )
+    end
+    partial_member = partialMemberFinder["variable.other.object.access"] 
     member_context = [
             mid_member = newPattern(
-                tag_as: "variable.other.object.property",
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
-                    partial_member.without_numbered_capture_groups
+                    partialMemberFinder["variable.other.object.property"]
                 )
             ),
             partial_member,
