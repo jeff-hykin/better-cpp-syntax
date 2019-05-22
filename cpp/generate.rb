@@ -79,7 +79,6 @@ cpp_grammar = Grammar.new(
                 ),
             end_pattern: end_pattern,
             includes: [
-                *primary_includes,
                 # Head
                 PatternRange.new(
                     tag_as: "meta.head."+name,
@@ -90,6 +89,7 @@ cpp_grammar = Grammar.new(
                     ),
                     includes: head_includes
                 ),
+                *primary_includes,
                 # Body
                 PatternRange.new(
                     tag_as: "meta.body."+name, # body is everything in the {}'s
