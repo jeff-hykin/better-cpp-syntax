@@ -289,7 +289,7 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.exception.$match"
         )
     cpp_grammar[:other_keywords] = newPattern(
-        match: variableBounds[ /(using|typedef)/ ],
+        match: variableBounds[ /(typedef)/ ],
         tag_as: "keyword.other.$match"
         )
     cpp_grammar[:the_this_keyword] = the_this_keyword = newPattern(
@@ -1283,7 +1283,7 @@ cpp_grammar = Grammar.new(
         match: /final/,
         tag_as: "storage.type.modifier.final",
     )
-    generateClassOrStructBlockFinder = ->(name) do
+    generateClassOrStructBlockFinder = ->(name, tail_includes = [:$initial_context]) do
         return blockFinderFor(
             tag_as: "meta.block.#{name}",
             name: name,
@@ -1340,6 +1340,7 @@ cpp_grammar = Grammar.new(
                 :comments_context,
             ],
             body_includes: [ :function_pointer, :constructor_context, :$initial_context ],
+            tail_includes: tail_includes
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1357,7 +1358,26 @@ cpp_grammar = Grammar.new(
         head_includes: [ :$initial_context ],
         secondary_includes: [ :$initial_context ]
         )
-
+    generateTypedefClassOrStructBlockFinder =-> (name) do
+        return PatternRange.new(
+            start_pattern: newPattern(
+                match: variableBounds[/typedef/],
+                tag_as: "keyword.other.typedef"
+            ).maybe(@spaces).lookAheadFor(variableBounds[/#{name}/]),
+            end_pattern: lookBehindFor(/;/),
+            includes: [
+                generateClassOrStructBlockFinder[name, [
+                    newPattern(
+                        match: variable_name,
+                        tag_as: "entity.name.type.alias"
+                    )
+                ]]
+            ]
+        )
+    end
+    cpp_grammar[:typedef_class] = generateTypedefClassOrStructBlockFinder["class"]
+    cpp_grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
+    cpp_grammar[:typedef_union] = generateTypedefClassOrStructBlockFinder["union"]
 #
 # preprocessor directives
 #
@@ -1727,6 +1747,9 @@ cpp_grammar = Grammar.new(
             :using_namespace,
             :type_alias,
             :namespace_block,
+            :typedef_class,
+            :typedef_struct,
+            :typedef_union,
             :class_block,
             :struct_block,
             :union_block,

@@ -1,5 +1,5 @@
 const getTokens = require("./getTokens");
-const registry = require("./registry");
+const registry = require("./registry").default;
 const _ = require("lodash");
 
 /**
