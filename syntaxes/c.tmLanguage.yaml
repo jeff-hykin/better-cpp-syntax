@@ -1239,7 +1239,7 @@
       patterns:
       - include: "#string_context"
       - include: "#string_context_c"
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   conditional_context:
     patterns:
     - include: "$base"

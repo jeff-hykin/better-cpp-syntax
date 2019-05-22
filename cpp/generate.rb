@@ -856,7 +856,7 @@ cpp_grammar = Grammar.new(
                     :string_context_c,
                 ]
             ),
-            :function_call_context_c,
+            :function_call_context,
         ]
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
@@ -878,7 +878,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call"
             ),
-        includes: [ :function_call_context_c ]
+        includes: [ :function_call_context ]
         )
 #
 # Operators
@@ -1104,11 +1104,10 @@ cpp_grammar = Grammar.new(
         )
     # access to method
     cpp_grammar[:method_access] = method_access = PatternRange.new(
-        tag_content_as: "meta.function-call.member",
         start_pattern: member_start.then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.member"
-            ).then(
+            ).maybe(@spaces).then(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
             ),
@@ -1116,7 +1115,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
-        includes: [:function_call_context_c],
+        includes: [:function_call_context],
         )
 #
 # Namespace
@@ -1492,7 +1491,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function_call_context_c"
+                    include: "#function_call_context"
                 }
             ]
         }
@@ -1948,7 +1947,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function_call_context_c"
+                    include: "#function_call_context"
                 }
             ]
         },
@@ -3153,6 +3152,35 @@ cpp_grammar = Grammar.new(
                 include: "#preprocessor_rule_define_line_context"
             }
         ]
+    legacy_memory_new_call = {
+            begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+            beginCaptures: {
+                "1" => {
+                    name: "keyword.operator.wordlike memory keyword.operator.new"
+                },
+                "2" => {
+                    patterns: [
+                        {
+                            include: "#template_call_innards"
+                        }
+                    ]
+                },
+                "3" => {
+                    name: "punctuation.section.arguments.begin.bracket.round"
+                },
+            },
+            end: "\\)",
+            endCaptures: {
+                "0" => {
+                    name: "punctuation.section.arguments.end.bracket.round"
+                }
+            },
+            patterns: [
+                {
+                    include: "#function_call_context"
+                }
+            ]
+        }
     cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
             :comments_context,
             :storage_types,
@@ -3203,62 +3231,15 @@ cpp_grammar = Grammar.new(
             },
             :preprocessor_rule_define_line_context
         ]
-    cpp_grammar[:function_call_context_c] = [
+    cpp_grammar[:function_call_context] = [
             :attributes_context,
             :comments_context,
+            :operators,
             :storage_types,
             :method_access,
             :member_access,
-            :operators,
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "keyword.operator.wordlike memory keyword.operator.new"
-                    },
-                    "2" => {
-                        patterns: [
-                            {
-                                include: "#template_call_innards"
-                            }
-                        ]
-                    },
-                    "3" => {
-                        name: "punctuation.section.arguments.begin.bracket.round"
-                    },
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.arguments.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function_call_context_c"
-                    }
-                ]
-            },
+            legacy_memory_new_call,
             :function_call,
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function_call_context_c"
-                    }
-                ]
-            },
             :block_context
         ]
 

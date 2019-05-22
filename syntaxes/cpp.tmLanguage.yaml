@@ -1128,7 +1128,7 @@
       patterns:
       - include: "#string_context"
       - include: "#string_context_c"
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   function_call:
     begin: "(?!\\s)(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(\\()"
     beginCaptures:
@@ -1148,7 +1148,7 @@
       '1':
         name: punctuation.section.arguments.end.bracket.round.function.call.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   operators:
     patterns:
     - include: "#sizeof_operator"
@@ -1318,8 +1318,7 @@
       '6':
         name: variable.other.property.cpp
   method_access:
-    contentName: meta.function-call.member.cpp
-    begin: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(\\()"
+    begin: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(\\()"
     beginCaptures:
       '1':
         name: variable.language.this.cpp
@@ -1362,7 +1361,7 @@
       '1':
         name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   using_namespace:
     name: meta.using-namespace.cpp
     begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
@@ -2029,7 +2028,7 @@
       '0':
         name: punctuation.definition.end.bracket.square.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   empty_square_brackets:
     name: storage.modifier.array.bracket.square.cpp
     match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
@@ -2340,7 +2339,7 @@
         '0':
           name: punctuation.section.parens.end.bracket.round.initialization.cpp
       patterns:
-      - include: "#function_call_context_c"
+      - include: "#function_call_context"
     - begin: "{"
       beginCaptures:
         '0':
@@ -3047,14 +3046,14 @@
       patterns:
       - include: "#preprocessor_rule_define_line_functions_context"
     - include: "#preprocessor_rule_define_line_context"
-  function_call_context_c:
+  function_call_context:
     patterns:
     - include: "#attributes_context"
     - include: "#comments_context"
+    - include: "#operators"
     - include: "#storage_types"
     - include: "#method_access"
     - include: "#member_access"
-    - include: "#operators"
     - begin: |-
         (?x)
         (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
@@ -3077,16 +3076,6 @@
         '0':
           name: punctuation.section.arguments.end.bracket.round.cpp
       patterns:
-      - include: "#function_call_context_c"
+      - include: "#function_call_context"
     - include: "#function_call"
-    - begin: "\\("
-      beginCaptures:
-        '0':
-          name: punctuation.section.parens.begin.bracket.round.cpp
-      end: "\\)"
-      endCaptures:
-        '0':
-          name: punctuation.section.parens.end.bracket.round.cpp
-      patterns:
-      - include: "#function_call_context_c"
     - include: "#block_context"

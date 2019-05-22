@@ -2140,7 +2140,7 @@
           ]
         },
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -2177,7 +2177,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -2503,8 +2503,7 @@
       }
     },
     "method_access": {
-      "contentName": "meta.function-call.member.cpp",
-      "begin": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(\\()",
+      "begin": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(\\()",
       "beginCaptures": {
         "1": {
           "name": "variable.language.this.cpp"
@@ -2577,7 +2576,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -3831,7 +3830,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -4334,7 +4333,7 @@
           },
           "patterns": [
             {
-              "include": "#function_call_context_c"
+              "include": "#function_call_context"
             }
           ]
         },
@@ -5629,13 +5628,16 @@
         }
       ]
     },
-    "function_call_context_c": {
+    "function_call_context": {
       "patterns": [
         {
           "include": "#attributes_context"
         },
         {
           "include": "#comments_context"
+        },
+        {
+          "include": "#operators"
         },
         {
           "include": "#storage_types"
@@ -5645,9 +5647,6 @@
         },
         {
           "include": "#member_access"
-        },
-        {
-          "include": "#operators"
         },
         {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*((?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?)) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
@@ -5674,31 +5673,12 @@
           },
           "patterns": [
             {
-              "include": "#function_call_context_c"
+              "include": "#function_call_context"
             }
           ]
         },
         {
           "include": "#function_call"
-        },
-        {
-          "begin": "\\(",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.cpp"
-            }
-          },
-          "end": "\\)",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.parens.end.bracket.round.cpp"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#function_call_context_c"
-            }
-          ]
         },
         {
           "include": "#block_context"
