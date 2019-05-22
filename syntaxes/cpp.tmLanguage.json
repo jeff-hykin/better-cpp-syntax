@@ -2168,7 +2168,7 @@
       "name": "variable.other.macro.argument.cpp"
     },
     "lambdas": {
-      "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))",
+      "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*>])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))",
       "beginCaptures": {
         "2": {
           "name": "punctuation.definition.capture.begin.lambda.cpp"
