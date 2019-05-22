@@ -125,13 +125,16 @@
       "include": "#parentheses"
     },
     {
+      "include": "#type_casting_operators"
+    },
+    {
       "include": "#function_definition"
     },
     {
       "include": "#function_call"
     },
     {
-      "include": "#scope_resolution_inner"
+      "include": "#scope_resolution_inner_generated"
     },
     {
       "include": "#storage_types"
@@ -363,7 +366,7 @@
     "template_definition_context": {
       "patterns": [
         {
-          "include": "#scope_resolution_template_definition_inner"
+          "include": "#scope_resolution_template_definition_inner_generated"
         },
         {
           "include": "#template_definition_argument"
@@ -388,7 +391,7 @@
           "include": "#language_constants"
         },
         {
-          "include": "#scope_resolution_template_call_inner"
+          "include": "#scope_resolution_template_call_inner_generated"
         },
         {
           "include": "#user_defined_template_type"
@@ -746,12 +749,16 @@
       "name": "keyword.control.exception.$0.cpp"
     },
     "other_keywords": {
-      "match": "(?<!\\w)(using|typedef)(?!\\w)",
+      "match": "(?<!\\w)(typedef)(?!\\w)",
       "name": "keyword.other.$0.cpp"
     },
     "the_this_keyword": {
       "match": "(?<!\\w)this(?!\\w)",
       "name": "variable.language.this.cpp"
+    },
+    "type_casting_operators": {
+      "match": "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)",
+      "name": "keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp"
     },
     "memory_operators": {
       "match": "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)",
@@ -1301,19 +1308,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_inner": {
+    "scope_resolution_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -1339,19 +1346,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_template_call_inner"
+              "include": "#scope_resolution_template_call_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_template_call_inner": {
+    "scope_resolution_template_call_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_template_call_inner"
+              "include": "#scope_resolution_template_call_inner_generated"
             }
           ]
         },
@@ -1377,19 +1384,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_template_definition_inner"
+              "include": "#scope_resolution_template_definition_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_template_definition_inner": {
+    "scope_resolution_template_definition_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_template_definition_inner"
+              "include": "#scope_resolution_template_definition_inner_generated"
             }
           ]
         },
@@ -1415,19 +1422,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_call_inner"
+              "include": "#scope_resolution_function_call_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_function_call_inner": {
+    "scope_resolution_function_call_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_call_inner"
+              "include": "#scope_resolution_function_call_inner_generated"
             }
           ]
         },
@@ -1453,19 +1460,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_inner"
+              "include": "#scope_resolution_function_definition_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_function_definition_inner": {
+    "scope_resolution_function_definition_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_inner"
+              "include": "#scope_resolution_function_definition_inner_generated"
             }
           ]
         },
@@ -1491,19 +1498,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_alias_inner"
+              "include": "#scope_resolution_namespace_alias_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_namespace_alias_inner": {
+    "scope_resolution_namespace_alias_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_alias_inner"
+              "include": "#scope_resolution_namespace_alias_inner_generated"
             }
           ]
         },
@@ -1529,19 +1536,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_using_inner"
+              "include": "#scope_resolution_namespace_using_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_namespace_using_inner": {
+    "scope_resolution_namespace_using_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_using_inner"
+              "include": "#scope_resolution_namespace_using_inner_generated"
             }
           ]
         },
@@ -1567,19 +1574,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_block_inner"
+              "include": "#scope_resolution_namespace_block_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_namespace_block_inner": {
+    "scope_resolution_namespace_block_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_block_inner"
+              "include": "#scope_resolution_namespace_block_inner_generated"
             }
           ]
         },
@@ -1605,19 +1612,19 @@
         "0": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_operator_overload_inner"
+              "include": "#scope_resolution_function_definition_operator_overload_inner_generated"
             }
           ]
         }
       }
     },
-    "scope_resolution_function_definition_operator_overload_inner": {
+    "scope_resolution_function_definition_operator_overload_inner_generated": {
       "match": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)",
       "captures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_operator_overload_inner"
+              "include": "#scope_resolution_function_definition_operator_overload_inner_generated"
             }
           ]
         },
@@ -1663,7 +1670,7 @@
               "include": "#comma"
             },
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             },
             {
               "include": "#template_call_range"
@@ -1687,7 +1694,7 @@
         "3": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -1739,7 +1746,7 @@
               "include": "#comma"
             },
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             },
             {
               "include": "#template_call_range"
@@ -1763,7 +1770,7 @@
         "5": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -1820,7 +1827,7 @@
               "include": "#comma"
             },
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             },
             {
               "include": "#template_call_range"
@@ -1844,7 +1851,7 @@
         "16": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -1968,7 +1975,7 @@
               "include": "#comma"
             },
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             },
             {
               "include": "#template_call_range"
@@ -1992,7 +1999,7 @@
         "5": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -2022,7 +2029,7 @@
         "13": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_inner"
+              "include": "#scope_resolution_function_definition_inner_generated"
             }
           ]
         },
@@ -2074,6 +2081,9 @@
             }
           },
           "patterns": [
+            {
+              "include": "#type_casting_operators"
+            },
             {
               "include": "#function_call"
             },
@@ -2135,12 +2145,12 @@
       ]
     },
     "function_call": {
-      "begin": "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(\\()",
+      "begin": "(?!\\s)(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(\\()",
       "beginCaptures": {
         "1": {
           "patterns": [
             {
-              "include": "#scope_resolution_function_call_inner"
+              "include": "#scope_resolution_function_call_inner_generated"
             }
           ]
         },
@@ -2184,10 +2194,6 @@
         },
         {
           "include": "#typeid_operator"
-        },
-        {
-          "match": "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)",
-          "name": "keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp"
         },
         {
           "include": "#method_access"
@@ -2298,7 +2304,7 @@
               "include": "#comma"
             },
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             },
             {
               "include": "#template_call_range"
@@ -2322,7 +2328,7 @@
         "4": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -2412,7 +2418,7 @@
           "name": "entity.name.operator.overloadee.cpp",
           "patterns": [
             {
-              "include": "#scope_resolution_function_definition_operator_overload_inner"
+              "include": "#scope_resolution_function_definition_operator_overload_inner_generated"
             }
           ]
         },
@@ -2588,7 +2594,7 @@
         "3": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_using_inner"
+              "include": "#scope_resolution_namespace_using_inner_generated"
             }
           ]
         },
@@ -2621,7 +2627,7 @@
         "5": {
           "patterns": [
             {
-              "include": "#scope_resolution_namespace_alias_inner"
+              "include": "#scope_resolution_namespace_alias_inner_generated"
             }
           ]
         },
@@ -2666,7 +2672,7 @@
                 "1": {
                   "patterns": [
                     {
-                      "include": "#scope_resolution_namespace_block_inner"
+                      "include": "#scope_resolution_namespace_block_inner_generated"
                     }
                   ]
                 },
@@ -2715,7 +2721,7 @@
       "name": "variable.other.macro.argument.cpp"
     },
     "lambdas": {
-      "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))",
+      "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*>])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))",
       "beginCaptures": {
         "2": {
           "name": "punctuation.definition.capture.begin.lambda.cpp"
@@ -2870,7 +2876,7 @@
         "8": {
           "patterns": [
             {
-              "include": "#scope_resolution_inner"
+              "include": "#scope_resolution_inner_generated"
             }
           ]
         },
@@ -3385,6 +3391,423 @@
         }
       ]
     },
+    "typedef_class": {
+      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)class(?!\\w))",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.typedef.cpp"
+        }
+      },
+      "end": "(?<=;)",
+      "patterns": [
+        {
+          "name": "meta.block.class.cpp",
+          "begin": "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.head.class.cpp"
+            },
+            "3": {
+              "name": "storage.type.$3.cpp"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "5": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "6": {
+              "name": "entity.name.type.$3.cpp"
+            },
+            "7": {
+              "name": "storage.type.modifier.final.cpp"
+            },
+            "8": {
+              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+            },
+            "9": {
+              "patterns": [
+                {
+                  "include": "#inhertance_context"
+                }
+              ]
+            }
+          },
+          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.terminator.statement.cpp"
+            },
+            "2": {
+              "name": "punctuation.terminator.statement.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "name": "meta.head.class.cpp",
+              "begin": "\\G ?",
+              "end": "((?:\\{|(?=;)))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.begin.bracket.curly.class.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#preprocessor_context"
+                },
+                {
+                  "include": "#inhertance_context"
+                },
+                {
+                  "include": "#template_call_range"
+                },
+                {
+                  "include": "#comments_context"
+                }
+              ]
+            },
+            {
+              "name": "meta.body.class.cpp",
+              "begin": "(?<=\\{)",
+              "end": "(\\})",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.end.bracket.curly.class.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#function_pointer"
+                },
+                {
+                  "include": "#constructor_context"
+                },
+                {
+                  "include": "$base"
+                }
+              ]
+            },
+            {
+              "name": "meta.tail.class.cpp",
+              "begin": "(?<=})[\\s\\n]*",
+              "end": "[\\s\\n]*(?=;)",
+              "patterns": [
+                {
+                  "match": "(\\s*((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
+                  "captures": {
+                    "2": {
+                      "name": "storage.modifier.pointer.cpp"
+                    },
+                    "3": {
+                      "name": "storage.modifier.reference.cpp"
+                    },
+                    "4": {
+                      "name": "entity.name.type.alias.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": ","
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "typedef_struct": {
+      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)struct(?!\\w))",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.typedef.cpp"
+        }
+      },
+      "end": "(?<=;)",
+      "patterns": [
+        {
+          "name": "meta.block.struct.cpp",
+          "begin": "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.head.struct.cpp"
+            },
+            "3": {
+              "name": "storage.type.$3.cpp"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "5": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "6": {
+              "name": "entity.name.type.$3.cpp"
+            },
+            "7": {
+              "name": "storage.type.modifier.final.cpp"
+            },
+            "8": {
+              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+            },
+            "9": {
+              "patterns": [
+                {
+                  "include": "#inhertance_context"
+                }
+              ]
+            }
+          },
+          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.terminator.statement.cpp"
+            },
+            "2": {
+              "name": "punctuation.terminator.statement.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "name": "meta.head.struct.cpp",
+              "begin": "\\G ?",
+              "end": "((?:\\{|(?=;)))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.begin.bracket.curly.struct.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#preprocessor_context"
+                },
+                {
+                  "include": "#inhertance_context"
+                },
+                {
+                  "include": "#template_call_range"
+                },
+                {
+                  "include": "#comments_context"
+                }
+              ]
+            },
+            {
+              "name": "meta.body.struct.cpp",
+              "begin": "(?<=\\{)",
+              "end": "(\\})",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.end.bracket.curly.struct.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#function_pointer"
+                },
+                {
+                  "include": "#constructor_context"
+                },
+                {
+                  "include": "$base"
+                }
+              ]
+            },
+            {
+              "name": "meta.tail.struct.cpp",
+              "begin": "(?<=})[\\s\\n]*",
+              "end": "[\\s\\n]*(?=;)",
+              "patterns": [
+                {
+                  "match": "(\\s*((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
+                  "captures": {
+                    "2": {
+                      "name": "storage.modifier.pointer.cpp"
+                    },
+                    "3": {
+                      "name": "storage.modifier.reference.cpp"
+                    },
+                    "4": {
+                      "name": "entity.name.type.alias.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": ","
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "typedef_union": {
+      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)union(?!\\w))",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.typedef.cpp"
+        }
+      },
+      "end": "(?<=;)",
+      "patterns": [
+        {
+          "name": "meta.block.union.cpp",
+          "begin": "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))",
+          "beginCaptures": {
+            "1": {
+              "name": "meta.head.union.cpp"
+            },
+            "3": {
+              "name": "storage.type.$3.cpp"
+            },
+            "4": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "5": {
+              "patterns": [
+                {
+                  "include": "#attributes_context"
+                },
+                {
+                  "include": "#number_literal"
+                }
+              ]
+            },
+            "6": {
+              "name": "entity.name.type.$3.cpp"
+            },
+            "7": {
+              "name": "storage.type.modifier.final.cpp"
+            },
+            "8": {
+              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+            },
+            "9": {
+              "patterns": [
+                {
+                  "include": "#inhertance_context"
+                }
+              ]
+            }
+          },
+          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.terminator.statement.cpp"
+            },
+            "2": {
+              "name": "punctuation.terminator.statement.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "name": "meta.head.union.cpp",
+              "begin": "\\G ?",
+              "end": "((?:\\{|(?=;)))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.begin.bracket.curly.union.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#preprocessor_context"
+                },
+                {
+                  "include": "#inhertance_context"
+                },
+                {
+                  "include": "#template_call_range"
+                },
+                {
+                  "include": "#comments_context"
+                }
+              ]
+            },
+            {
+              "name": "meta.body.union.cpp",
+              "begin": "(?<=\\{)",
+              "end": "(\\})",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.end.bracket.curly.union.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#function_pointer"
+                },
+                {
+                  "include": "#constructor_context"
+                },
+                {
+                  "include": "$base"
+                }
+              ]
+            },
+            {
+              "name": "meta.tail.union.cpp",
+              "begin": "(?<=})[\\s\\n]*",
+              "end": "[\\s\\n]*(?=;)",
+              "patterns": [
+                {
+                  "match": "(\\s*((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
+                  "captures": {
+                    "2": {
+                      "name": "storage.modifier.pointer.cpp"
+                    },
+                    "3": {
+                      "name": "storage.modifier.reference.cpp"
+                    },
+                    "4": {
+                      "name": "entity.name.type.alias.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": ","
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
     "hacky_fix_for_stray_directive": {
       "match": "(?<!\\w)#(?:endif|else|elif)(?!\\w)",
       "name": "keyword.control.directive.$0.cpp"
@@ -3757,6 +4180,15 @@
           "include": "#namespace_block"
         },
         {
+          "include": "#typedef_class"
+        },
+        {
+          "include": "#typedef_struct"
+        },
+        {
+          "include": "#typedef_union"
+        },
+        {
           "include": "#class_block"
         },
         {
@@ -3876,6 +4308,9 @@
         },
         {
           "include": "#member_access"
+        },
+        {
+          "include": "#type_casting_operators"
         },
         {
           "include": "#function_call"

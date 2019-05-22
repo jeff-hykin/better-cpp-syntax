@@ -55,7 +55,7 @@ cpp_grammar = Grammar.new(
             tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
     )
-    functionCallTemplate = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
+    functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
             tag_content_as: "meta.#{tag_content_as}",
             start_pattern: newPattern(
@@ -79,7 +79,7 @@ cpp_grammar = Grammar.new(
         return new_range
     end
     
-    def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
+    def generateBlockFinder( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
             end_pattern = newPattern(
@@ -179,9 +179,10 @@ cpp_grammar = Grammar.new(
             :operators,
             :block,
             :parentheses,
+            :type_casting_operators,
             :function_definition,
             :function_call,
-            :scope_resolution_inner,
+            :scope_resolution_inner_generated,
             :storage_types,
             :line_continuation_character,
             :square_brackets,
@@ -227,7 +228,7 @@ cpp_grammar = Grammar.new(
             :$initial_context
         ]
     cpp_grammar[:template_definition_context] = [
-            :scope_resolution_template_definition_inner,
+            :scope_resolution_template_definition_inner_generated,
             :template_definition_argument,
             :template_argument_defaulted,
             :template_call_innards,
@@ -236,7 +237,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:template_call_context] = [
             :storage_types,
             :language_constants,
-            :scope_resolution_template_call_inner,
+            :scope_resolution_template_call_inner_generated,
             :user_defined_template_type,
             :operators,
             :number_literal,
@@ -294,7 +295,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
         tag_as: "storage.type"
         )
-    cpp_grammar[:decltype] = functionCallTemplate[
+    cpp_grammar[:decltype] = functionCallGenerator[
                 repository_name: "decltype_specifier",
                 match_name: variableBounds[/decltype/],
                 tag_name_as: "keyword.operator.functionlike keyword.other.decltype storage.type.decltype",
@@ -332,7 +333,7 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.exception.$match"
         )
     cpp_grammar[:other_keywords] = newPattern(
-        match: variableBounds[ /(using|typedef)/ ],
+        match: variableBounds[ /(typedef)/ ],
         tag_as: "keyword.other.$match"
         )
     cpp_grammar[:the_this_keyword] = the_this_keyword = newPattern(
@@ -340,7 +341,7 @@ cpp_grammar = Grammar.new(
         tag_as: "variable.language.this"
         )
     # TODO: enhance casting operators to include <>'s
-    type_casting_operators = newPattern(
+    cpp_grammar[:type_casting_operators] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
         tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
@@ -415,7 +416,7 @@ cpp_grammar = Grammar.new(
             ),
             includes: [ :conditional_context ]
         )
-    cpp_grammar[:switch_statement] = blockFinderFor(
+    cpp_grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
             tag_as: "meta.block.switch",
             start_pattern: newPattern(
@@ -437,7 +438,7 @@ cpp_grammar = Grammar.new(
 #
 # C++ Attributes
 #
-    attributeRangeFinder = ->(start_pattern, end_pattern) do
+    generateAttributeRangeFinder = ->(start_pattern, end_pattern) do
         return PatternRange.new(
             tag_as: "support.other.attribute",
             start_pattern: newPattern(
@@ -484,10 +485,10 @@ cpp_grammar = Grammar.new(
     alignas_start       = /alignas\(/
     alignas_end         = /\)/
     
-    cpp_grammar[:cpp_attributes   ] = attributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
-    cpp_grammar[:gcc_attributes   ] = attributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
-    cpp_grammar[:ms_attributes    ] = attributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
-    cpp_grammar[:alignas_attribute] = attributeRangeFinder[ alignas_start      , alignas_end       ]
+    cpp_grammar[:cpp_attributes   ] = generateAttributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
+    cpp_grammar[:gcc_attributes   ] = generateAttributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
+    cpp_grammar[:ms_attributes    ] = generateAttributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
+    cpp_grammar[:alignas_attribute] = generateAttributeRangeFinder[ alignas_start      , alignas_end       ]
     
     inline_attribute = newPattern(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
@@ -645,10 +646,10 @@ cpp_grammar = Grammar.new(
     one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes = newPattern(
         match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
-        includes: [ :scope_resolution_inner ]
+        includes: [ :scope_resolution_inner_generated ]
         )
-    scopeResolutionFinder = ->(tag_extension, grammar_name, hidden_grammar_name) do
-        
+    generateScopeResolutionFinder = ->(tag_extension, grammar_name) do
+        hidden_grammar_name = (grammar_name.to_s+"_inner_generated").to_sym
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
@@ -671,15 +672,15 @@ cpp_grammar = Grammar.new(
                 ),
             )
     end
-    scope_resolution = scopeResolutionFinder["", :scope_resolution, :scope_resolution_inner]
-    scopeResolutionFinder[".template.call"       ,:scope_resolution_template_call       , :scope_resolution_template_call_inner       ]
-    scopeResolutionFinder[".template.definition" ,:scope_resolution_template_definition , :scope_resolution_template_definition_inner ]
-    scopeResolutionFinder[".function.call"       ,:scope_resolution_function_call       , :scope_resolution_function_call_inner       ]
-    scopeResolutionFinder[".function.definition" ,:scope_resolution_function_definition , :scope_resolution_function_definition_inner ]
-    scopeResolutionFinder[".namespace.alias"     ,:scope_resolution_namespace_alias     , :scope_resolution_namespace_alias_inner     ]
-    scopeResolutionFinder[".namespace.using"     ,:scope_resolution_namespace_using     , :scope_resolution_namespace_using_inner     ]
-    scopeResolutionFinder[".namespace.block"     ,:scope_resolution_namespace_block     , :scope_resolution_namespace_block_inner     ]
-    scopeResolutionFinder[".function.definition.operator-overload" ,:scope_resolution_function_definition_operator_overload, :scope_resolution_function_definition_operator_overload_inner]
+    scope_resolution = generateScopeResolutionFinder["", :scope_resolution]
+    generateScopeResolutionFinder[".template.call"       ,:scope_resolution_template_call       ]
+    generateScopeResolutionFinder[".template.definition" ,:scope_resolution_template_definition ]
+    generateScopeResolutionFinder[".function.call"       ,:scope_resolution_function_call       ]
+    generateScopeResolutionFinder[".function.definition" ,:scope_resolution_function_definition ]
+    generateScopeResolutionFinder[".namespace.alias"     ,:scope_resolution_namespace_alias     ]
+    generateScopeResolutionFinder[".namespace.using"     ,:scope_resolution_namespace_using     ]
+    generateScopeResolutionFinder[".namespace.block"     ,:scope_resolution_namespace_block     ]
+    generateScopeResolutionFinder[".function.definition.operator-overload" ,:scope_resolution_function_definition_operator_overload]
     
 #
 # Types
@@ -715,7 +716,7 @@ cpp_grammar = Grammar.new(
             :number_literal,
             :string_context_c,
             :comma,
-            :scope_resolution_inner,
+            :scope_resolution_inner_generated,
             cpp_grammar[:template_call_range],
             newPattern(
                 match: identifier,
@@ -793,7 +794,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(/,|\)|\n/)
         )
         
-    cpp_grammar[:function_definition] = blockFinderFor(
+    cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: newPattern(
@@ -824,7 +825,7 @@ cpp_grammar = Grammar.new(
                 ]
             )
         ],
-        body_includes: [ :function_call, :$initial_context ],
+        body_includes: [ :type_casting_operators, :function_call, :$initial_context ],
         tail_includes: [ :$initial_context ],
         secondary_includes:[]
     )
@@ -860,8 +861,10 @@ cpp_grammar = Grammar.new(
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     cpp_grammar[:function_call] = PatternRange.new(
-        start_pattern: cpp_grammar[:scope_resolution_function_call].then(
+        start_pattern: lookAheadToAvoid(@space).then(
                 avoid_invalid_function_names
+            ).then(
+                cpp_grammar[:scope_resolution_function_call]
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
@@ -888,7 +891,7 @@ cpp_grammar = Grammar.new(
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
-        cpp_grammar[:operators].push(functionCallTemplate[
+        cpp_grammar[:operators].push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
             tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
@@ -898,7 +901,6 @@ cpp_grammar = Grammar.new(
     end
         
     cpp_grammar[:operators] += [
-            type_casting_operators,
             :method_access,
             :member_access,
             normal_word_operators,
@@ -1036,7 +1038,7 @@ cpp_grammar = Grammar.new(
             ).then(
                 match: after_operator_keyword,
                 tag_as: "entity.name.operator.overloadee",
-                includes: [:scope_resolution_function_definition_operator_overload_inner]
+                includes: [:scope_resolution_function_definition_operator_overload_inner_generated]
             ).maybe(@spaces).then(
                 match: /\(/,
                 tag_as: "punctuation.section.parameters.begin.bracket.round.operator-overload"
@@ -1064,7 +1066,7 @@ cpp_grammar = Grammar.new(
     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partialMemberFinder = ->(tag_name) do
+    generatePartialMemberFinder = ->(tag_name) do
         the_this_keyword.or(
             newPattern(
                 match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
@@ -1074,13 +1076,13 @@ cpp_grammar = Grammar.new(
             member_operator
         )
     end
-    partial_member = partialMemberFinder["variable.other.object.access"] 
+    partial_member = generatePartialMemberFinder["variable.other.object.access"] 
     member_context = [
             mid_member = newPattern(
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
-                    partialMemberFinder["variable.other.object.property"]
+                    generatePartialMemberFinder["variable.other.object.property"]
                 )
             ),
             partial_member,
@@ -1158,7 +1160,7 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
     )
-    cpp_grammar[:namespace_block] = blockFinderFor(
+    cpp_grammar[:namespace_block] = generateBlockFinder(
         name: "namespace",
         tag_as: "meta.block.namespace",
         needs_semicolon: false,
@@ -1204,7 +1206,7 @@ cpp_grammar = Grammar.new(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
-                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*>]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
                         match: /\[/.lookAheadToAvoid(/\[/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
@@ -1306,7 +1308,7 @@ cpp_grammar = Grammar.new(
     )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
-    cpp_grammar[:enum_block] = blockFinderFor(
+    cpp_grammar[:enum_block] = generateBlockFinder(
             name: "enum",
             tag_as: "meta.block.enum",
             start_pattern: newPattern(
@@ -1362,8 +1364,8 @@ cpp_grammar = Grammar.new(
         match: /final/,
         tag_as: "storage.type.modifier.final",
     )
-    generateClassOrStructBlockFinder = ->(name) do
-        return blockFinderFor(
+    generateClassOrStructBlockFinder = ->(name, tail_includes = [:$initial_context]) do
+        return generateBlockFinder(
             tag_as: "meta.block.#{name}",
             name: name,
             start_pattern: newPattern(
@@ -1419,6 +1421,7 @@ cpp_grammar = Grammar.new(
                 :comments_context,
             ],
             body_includes: [ :function_pointer, :constructor_context, :$initial_context ],
+            tail_includes: tail_includes
         )
     end
     cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
@@ -1426,7 +1429,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:union_block] = generateClassOrStructBlockFinder["union"]
     # the following is a legacy pattern, I'm not sure if it is still accurate
     # I have no idea why it matches a double quote
-    cpp_grammar[:extern_block] = blockFinderFor(
+    cpp_grammar[:extern_block] = generateBlockFinder(
         name: 'extern',
         tag_as: "meta.block.extern",
         start_pattern: newPattern(
@@ -1436,7 +1439,27 @@ cpp_grammar = Grammar.new(
         head_includes: [ :$initial_context ],
         secondary_includes: [ :$initial_context ]
         )
-
+    generateTypedefClassOrStructBlockFinder =-> (name) do
+        return PatternRange.new(
+            start_pattern: newPattern(
+                match: variableBounds[/typedef/],
+                tag_as: "keyword.other.typedef"
+            ).maybe(@spaces).lookAheadFor(variableBounds[/#{name}/]),
+            end_pattern: lookBehindFor(/;/),
+            includes: [
+                generateClassOrStructBlockFinder[name, [
+                    ref_deref_definition_pattern.then(
+                        match: variable_name,
+                        tag_as: "entity.name.type.alias"
+                    ),
+                    /,/,
+                ]]
+            ]
+        )
+    end
+    cpp_grammar[:typedef_class] = generateTypedefClassOrStructBlockFinder["class"]
+    cpp_grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
+    cpp_grammar[:typedef_union] = generateTypedefClassOrStructBlockFinder["union"]
 #
 # preprocessor directives
 #
@@ -1804,6 +1827,9 @@ cpp_grammar = Grammar.new(
             :type_alias,
             :namespace_alias,
             :namespace_block,
+            :typedef_class,
+            :typedef_struct,
+            :typedef_union,
             :class_block,
             :struct_block,
             :union_block,
@@ -1901,6 +1927,7 @@ cpp_grammar = Grammar.new(
         :preprocessor_rule_conditional_block,
         :method_access,
         :member_access,
+        :type_casting_operators,
         :function_call,
         {
             name: "meta.initialization",
