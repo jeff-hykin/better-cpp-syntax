@@ -1,288 +1,289 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: func
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: 'stream '
+  scopesBegin:
+    - meta.body.function.definition
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '56'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '48'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '40'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '32'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '24'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '16'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: 'val '
 - source: '>>'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: '8'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: static_cast
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.wordlike.cpp
-    - keyword.operator.cast.static_cast.cpp
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: uint8_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: val
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.cpp
+    - meta.parens
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition

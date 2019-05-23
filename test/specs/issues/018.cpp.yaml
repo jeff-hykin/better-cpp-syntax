@@ -1,101 +1,98 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: function
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: typeid
+  scopesBegin:
+    - meta.body.function.definition
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.typeid.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
 - source: int
   scopes:
     - meta.arguments.operator.typeid
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: typeid
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.typeid.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
 - source: long
   scopes:
     - meta.arguments.operator.typeid
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: sizeof
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.sizeof.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof
 - source: '1000'
   scopes:
     - meta.arguments.operator.sizeof
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: sizeof
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.sizeof.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof
 - source: int
   scopes:
     - meta.arguments.operator.sizeof
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: decltype
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.other.decltype.cpp
-    - storage.type.decltype.cpp
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.decltype.cpp
+    - punctuation.section.arguments.begin.bracket.round.decltype
 - source: int
   scopes:
     - meta.arguments.decltype
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.decltype.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.decltype
 - source: using
   scopesBegin:
     - meta.declaration.type.alias
@@ -103,40 +100,40 @@
     - keyword.other.using.directive
 - source: type
   scopes:
-    - entity.name.type
     - meta.qualified_type
+    - entity.name.type
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: decltype
   scopesBegin:
     - meta.declaration.type.alias.value.unknown
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.other.decltype.cpp
-    - storage.type.decltype.cpp
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.decltype.cpp
+    - punctuation.section.arguments.begin.bracket.round.decltype
 - source: a_storage_of_callable
   scopesBegin:
     - meta.arguments.decltype
   scopes:
-    - variable.other.object.access.cpp
+    - variable.other.object.access
 - source: .
   scopes:
-    - punctuation.separator.dot-access.cpp
+    - punctuation.separator.dot-access
 - source: callable
   scopes:
-    - variable.other.property.cpp
+    - variable.other.property
   scopesEnd:
     - meta.arguments.decltype
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.decltype.cpp
+    - punctuation.section.arguments.end.bracket.round.decltype
   scopesEnd:
     - meta.declaration.type.alias
     - meta.declaration.type.alias.value.unknown
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition

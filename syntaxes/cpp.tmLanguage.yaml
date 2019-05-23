@@ -143,6 +143,7 @@
     - include: "#hacky_fix_for_stray_directive"
   storage_types:
     patterns:
+    - include: "#storage_specifiers"
     - include: "#primitive_types"
     - include: "#non_primitive_types"
     - include: "#pthread_types"
@@ -1101,6 +1102,7 @@
       patterns:
       - include: "#type_casting_operators"
       - include: "#function_call"
+      - include: "$base"
     - name: meta.tail.function.definition.cpp
       begin: "(?<=})[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"

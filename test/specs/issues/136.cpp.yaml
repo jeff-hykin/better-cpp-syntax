@@ -1,83 +1,81 @@
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.macro.cpp
-    - keyword.control.directive.define.cpp
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
   scopes:
-    - punctuation.definition.directive.cpp
+    - punctuation.definition.directive
 - source: define
   scopesEnd:
-    - keyword.control.directive.define.cpp
+    - keyword.control.directive.define
 - source: TEST
   scopes:
-    - entity.name.function.preprocessor.cpp
+    - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.cpp
+    - punctuation.definition.parameters.begin
 - source: name
   scopes:
-    - variable.parameter.preprocessor.cpp
+    - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.cpp
+    - punctuation.definition.parameters.end
 - source: _ts
   scopes:
-    - variable.other.object.access.cpp
+    - variable.other.object.access
 - source: '->'
   scopes:
-    - punctuation.separator.pointer-access.cpp
+    - punctuation.separator.pointer-access
 - source: test
   scopes:
-    - entity.name.function.member.cpp
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: name
-  scopes:
-    - meta.function-call.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '['
   scopes:
-    - punctuation.definition.capture.begin.lambda.cpp
+    - punctuation.definition.capture.begin.lambda
 - source: '&'
   scopes:
-    - meta.lambda.capture.cpp
-    - keyword.operator.cpp
+    - meta.lambda.capture
+    - keyword.operator
 - source: ']'
   scopes:
-    - punctuation.definition.capture.end.lambda.cpp
+    - punctuation.definition.capture.end.lambda
 - source: (
   scopesBegin:
-    - meta.function.definition.parameters.lambda.cpp
+    - meta.function.definition.parameters.lambda
   scopes:
-    - punctuation.definition.parameters.begin.lambda.cpp
+    - punctuation.definition.parameters.begin.lambda
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.lambda.cpp
+    - punctuation.definition.parameters.end.lambda
   scopesEnd:
-    - meta.function.definition.parameters.lambda.cpp
+    - meta.function.definition.parameters.lambda
 - source: '->'
   scopes:
-    - punctuation.definition.lambda.return-type.cpp
+    - punctuation.definition.lambda.return-type
 - source: ' bool'
   scopes:
-    - storage.type.return-type.lambda.cpp
+    - storage.type.return-type.lambda
 - source: '#define ASSERT'
 - source: (
   scopesBegin:
-    - meta.function.definition.parameters.lambda.cpp
+    - meta.function.definition.parameters.lambda
   scopes:
-    - punctuation.definition.parameters.begin.lambda.cpp
+    - punctuation.definition.parameters.begin.lambda
 - source: expected
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' actual'
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.lambda.cpp
+    - punctuation.definition.parameters.end.lambda

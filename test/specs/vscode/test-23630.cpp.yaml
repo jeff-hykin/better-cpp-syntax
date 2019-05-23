@@ -1,0 +1,35 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: ifndef
+  scopesEnd:
+    - keyword.control.directive.conditional
+- source: _UCRT
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: _UCRT
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: endif

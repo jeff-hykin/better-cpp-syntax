@@ -1,56 +1,56 @@
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.macro.cpp
-    - keyword.control.directive.define.cpp
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
   scopes:
-    - punctuation.definition.directive.cpp
+    - punctuation.definition.directive
 - source: define
   scopesEnd:
-    - keyword.control.directive.define.cpp
+    - keyword.control.directive.define
 - source: IS_UPGRADE_ADDR
   scopes:
-    - entity.name.function.preprocessor.cpp
+    - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.cpp
+    - punctuation.definition.parameters.begin
 - source: addr
   scopes:
-    - variable.parameter.preprocessor.cpp
+    - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.cpp
+    - punctuation.definition.parameters.end
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
   scopesEnd:
-    - meta.preprocessor.macro.cpp
+    - meta.preprocessor.macro
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: '((addr) >= UPGRADE_BASE_ADDR) && '
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: (
   scopesBegin:
-    - meta.parens.cpp
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: addr
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.cpp
+    - meta.parens
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: ' UPGRADE_BASE_ADDR '
 - source: +
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: ' UPGRADE_SPACE_SIZE)'

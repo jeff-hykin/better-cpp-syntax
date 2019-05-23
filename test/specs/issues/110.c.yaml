@@ -1,68 +1,68 @@
 - source: void
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: function
   scopesBegin:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+    - meta.function
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.c
+    - entity.name.function
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.c
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.c
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+    - meta.function
+    - meta.function.definition.parameters
 - source: '{'
   scopesBegin:
-    - meta.block.c
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.c
+    - punctuation.section.block.begin.bracket.curly
 - source: switch
   scopesBegin:
-    - meta.block.switch.c
-    - meta.head.switch.c
+    - meta.block.switch
+    - meta.head.switch
   scopes:
-    - keyword.control.switch.c
+    - keyword.control.switch
 - source: (
   scopesBegin:
-    - meta.conditional.switch.c
+    - meta.conditional.switch
   scopes:
-    - punctuation.section.parens.begin.bracket.round.conditional.switch.c
+    - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: '1'
   scopes:
-    - constant.numeric.decimal.c
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.conditional.switch.c
+    - punctuation.section.parens.end.bracket.round.conditional.switch
   scopesEnd:
-    - meta.conditional.switch.c
+    - meta.conditional.switch
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.switch.c
+    - punctuation.section.block.begin.bracket.curly.switch
   scopesEnd:
-    - meta.head.switch.c
+    - meta.head.switch
 - source: default
   scopesBegin:
-    - meta.body.switch.c
-    - meta.conditional.case.c
+    - meta.body.switch
+    - meta.conditional.case
   scopes:
-    - keyword.control.default.c
+    - keyword.control.default
 - source: ':'
   scopes:
-    - colon.c
-    - punctuation.separator.case.default.c
+    - colon
+    - punctuation.separator.case.default
   scopesEnd:
-    - meta.conditional.case.c
+    - meta.conditional.case
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.switch.c
+    - punctuation.section.block.end.bracket.curly.switch
   scopesEnd:
-    - meta.block.switch.c
-    - meta.body.switch.c
+    - meta.block.switch
+    - meta.body.switch
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.c
+    - punctuation.section.block.end.bracket.curly
