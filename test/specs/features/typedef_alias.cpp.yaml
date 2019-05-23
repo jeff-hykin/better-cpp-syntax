@@ -1,0 +1,128 @@
+- source: typedef
+  scopes:
+    - keyword.other.typedef.cpp
+- source: struct
+  scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+- source: foo
+  scopes:
+    - entity.name.type.struct.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  scopesEnd:
+    - meta.head.struct.cpp
+- source: '}'
+  scopes:
+    - meta.body.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+- source: foo
+  scopes:
+    - meta.tail.struct.cpp
+    - entity.name.type.alias.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.block.struct.cpp
+- source: typedef
+  scopes:
+    - keyword.other.typedef.cpp
+- source: class
+  scopesBegin:
+    - meta.block.class.cpp
+    - meta.head.class.cpp
+  scopes:
+    - storage.type.class.cpp
+- source: bar
+  scopes:
+    - entity.name.type.class.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class.cpp
+  scopesEnd:
+    - meta.head.class.cpp
+- source: '}'
+  scopes:
+    - meta.body.class.cpp
+    - punctuation.section.block.end.bracket.curly.class.cpp
+- source: bar
+  scopes:
+    - meta.tail.class.cpp
+    - entity.name.type.alias.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.block.class.cpp
+- source: typedef
+  scopes:
+    - keyword.other.typedef.cpp
+- source: union
+  scopesBegin:
+    - meta.block.union.cpp
+    - meta.head.union.cpp
+  scopes:
+    - storage.type.union.cpp
+- source: foobar
+  scopes:
+    - entity.name.type.union.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.union.cpp
+  scopesEnd:
+    - meta.head.union.cpp
+- source: '}'
+  scopes:
+    - meta.body.union.cpp
+    - punctuation.section.block.end.bracket.curly.union.cpp
+- source: foobar
+  scopes:
+    - meta.tail.union.cpp
+    - entity.name.type.alias.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+  scopesEnd:
+    - meta.block.union.cpp
+- source: typedef
+  scopes:
+    - keyword.other.typedef.cpp
+- source: struct
+  scopesBegin:
+    - meta.block.struct.cpp
+    - meta.head.struct.cpp
+  scopes:
+    - storage.type.struct.cpp
+- source: _OVERLAPPED
+  scopes:
+    - entity.name.type.struct.cpp
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct.cpp
+  scopesEnd:
+    - meta.head.struct.cpp
+- source: '}'
+  scopes:
+    - meta.body.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct.cpp
+- source: OVERLAPPED
+  scopesBegin:
+    - meta.tail.struct.cpp
+  scopes:
+    - entity.name.type.alias.cpp
+- source: ','
+- source: '*'
+  scopes:
+    - storage.modifier.pointer.cpp
+- source: LPOVERLAPPED
+  scopes:
+    - entity.name.type.alias.cpp
+  scopesEnd:
+    - meta.tail.struct.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp

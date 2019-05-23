@@ -2,6 +2,7 @@ module.exports = require("yargs")
     .usage("Usage: $0 [options] [fixture]")
     .wrap(require("yargs").terminalWidth())
     .demandCommand(0)
+    // --color is parsed by chalk
     .option("color", {
         default: true,
         describe: "enable color",
@@ -17,6 +18,11 @@ module.exports = require("yargs")
         default: false,
         type: "boolean",
         describe: "treat .h as source.c"
+    })
+    .option("coverage", {
+        default: false,
+        type: "boolean",
+        describe: "display code coverage on running a test"
     })
     .strict()
     .example("$0 issues/002.cpp").argv;

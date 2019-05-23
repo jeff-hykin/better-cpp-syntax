@@ -307,7 +307,7 @@ class Grammar
                 #
                 # add the language endings
                 # 
-                if each_key == "name"
+                if each_key == "name" || each_key == "contentName"
                     new_names = []
                     for each_tag in each_pattern[each_key].split(/\s/)
                         each_with_ending = each_tag

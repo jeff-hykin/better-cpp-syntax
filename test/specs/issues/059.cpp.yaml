@@ -93,9 +93,12 @@
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access.cpp
-- source: wakeup.
+- source: wakeup
   scopes:
     - variable.other.object.property.cpp
+- source: '.'
+  scopes:
+    - punctuation.separator.dot-access.cpp
 - source: connect
   scopes:
     - entity.name.function.member.cpp

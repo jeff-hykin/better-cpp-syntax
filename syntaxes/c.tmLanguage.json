@@ -2235,7 +2235,7 @@
           ]
         },
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -2280,7 +2280,7 @@
       }
     },
     "method_access": {
-      "contentName": "meta.function-call.member",
+      "contentName": "meta.function-call.member.c",
       "begin": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()",
       "beginCaptures": {
         "1": {

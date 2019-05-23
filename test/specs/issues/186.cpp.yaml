@@ -1,0 +1,94 @@
+- source: std
+  scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  scopesEnd:
+    - meta.scope-resolution.cpp
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: ','
+  scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift.cpp
+- source: '*'
+  scopes:
+    - keyword.operator.cpp
+- source: 'g '
+- source: =
+  scopes:
+    - keyword.operator.assignment.cpp
+- source: new
+  scopes:
+    - keyword.operator.wordlike.cpp
+    - memory.cpp
+    - keyword.operator.new.cpp
+- source: std
+  scopesBegin:
+    - meta.scope-resolution.cpp
+  scopes:
+    - entity.name.type.namespace.scope-resolution.cpp
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access.cpp
+  scopesEnd:
+    - meta.scope-resolution.cpp
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: ','
+  scopes:
+    - comma.cpp
+    - punctuation.separator.delimiter.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift.cpp
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access.cpp
+  scopes:
+    - punctuation.definition.begin.bracket.square.cpp
+- source: 'n'
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.cpp
+  scopesEnd:
+    - meta.bracket.square.access.cpp
+- source: ;
+  scopes:
+    - punctuation.terminator.statement.cpp
+- source: for
+  scopes:
+    - keyword.control.for.cpp
+- source: int
+  scopes:
+    - storage.type.primitive.cpp
