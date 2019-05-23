@@ -1,66 +1,66 @@
 - source: auto
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: ' bar '
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '{'
   scopesBegin:
-    - meta.block.cpp
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly
 - source: 0x
   scopes:
-    - keyword.other.unit.hexadecimal.cpp
+    - keyword.other.unit.hexadecimal
 - source: '28'
   scopes:
-    - constant.numeric.hexadecimal.cpp
+    - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: 0x
   scopes:
-    - keyword.other.unit.hexadecimal.cpp
+    - keyword.other.unit.hexadecimal
 - source: d4
   scopes:
-    - constant.numeric.hexadecimal.cpp
+    - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: 0x
   scopes:
-    - keyword.other.unit.hexadecimal.cpp
+    - keyword.other.unit.hexadecimal
 - source: '96'
   scopes:
-    - constant.numeric.hexadecimal.cpp
+    - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: 0x
   scopes:
-    - keyword.other.unit.hexadecimal.cpp
+    - keyword.other.unit.hexadecimal
 - source: '75'
   scopes:
-    - constant.numeric.hexadecimal.cpp
+    - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: 0x
   scopes:
-    - keyword.other.unit.hexadecimal.cpp
+    - keyword.other.unit.hexadecimal
 - source: 4c
   scopes:
-    - constant.numeric.hexadecimal.cpp
+    - constant.numeric.hexadecimal
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.cpp
+    - meta.block
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

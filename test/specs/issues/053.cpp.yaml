@@ -1,60 +1,60 @@
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: foo
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: bar
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - meta.head.class.cpp
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: foo
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: bar
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - meta.head.class.cpp
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

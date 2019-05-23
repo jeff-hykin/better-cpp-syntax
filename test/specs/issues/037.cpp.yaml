@@ -1,79 +1,73 @@
 - source: test
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access.cpp
+    - meta.bracket.square.access
   scopes:
-    - punctuation.definition.begin.bracket.square.cpp
+    - punctuation.definition.begin.bracket.square
 - source: '0'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square.cpp
+    - punctuation.definition.end.bracket.square
   scopesEnd:
-    - meta.bracket.square.access.cpp
+    - meta.bracket.square.access
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '5'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' no syntax highlighting;'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: test
   scopesBegin:
-    - meta.bracket.square.access.cpp
+    - meta.bracket.square.access
   scopes:
-    - variable.other.object.cpp
+    - variable.other.object
 - source: '['
   scopes:
-    - punctuation.definition.begin.bracket.square.cpp
+    - punctuation.definition.begin.bracket.square
 - source: '5'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square.cpp
+    - punctuation.definition.end.bracket.square
 - source: '['
   scopes:
-    - punctuation.definition.begin.bracket.square.cpp
+    - punctuation.definition.begin.bracket.square
 - source: '5'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square.cpp
+    - punctuation.definition.end.bracket.square
   scopesEnd:
-    - meta.bracket.square.access.cpp
+    - meta.bracket.square.access
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '5'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

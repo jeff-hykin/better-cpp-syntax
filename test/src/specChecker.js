@@ -125,6 +125,8 @@ module.exports["SpecChecker"] = class SpecChecker {
         return fixtures
             .filter(f => f.c.trim() !== "")
             .map(f => {
+                // return if in correct spec style
+                if (f.scopes) return f;
                 const scopes = _.tail(f.t.split(" "));
                 // f is spread back in to allow for gradual replacement
                 return { source: f.c, scopes, ...f };

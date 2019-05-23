@@ -1,92 +1,93 @@
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.include.cpp
-    - keyword.control.directive.include.cpp
+    - meta.preprocessor.include
+    - keyword.control.directive.include
   scopes:
-    - punctuation.definition.directive.cpp
+    - punctuation.definition.directive
 - source: include
   scopesEnd:
-    - keyword.control.directive.include.cpp
+    - keyword.control.directive.include
 - source: '"'
   scopesBegin:
-    - string.quoted.double.include.cpp
+    - string.quoted.double.include
   scopes:
-    - punctuation.definition.string.begin.cpp
+    - punctuation.definition.string.begin
 - source: sample.h
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.cpp
+    - punctuation.definition.string.end
   scopesEnd:
-    - meta.preprocessor.include.cpp
-    - string.quoted.double.include.cpp
+    - meta.preprocessor.include
+    - string.quoted.double.include
 - source: namespace
   scopesBegin:
-    - meta.block.namespace.cpp
-    - meta.head.namespace.cpp
+    - meta.block.namespace
+    - meta.head.namespace
   scopes:
-    - keyword.other.namespace.definition.cpp
-    - storage.type.namespace.definition.cpp
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - meta.head.namespace.cpp
+    - meta.head.namespace
 - source: void
   scopesBegin:
-    - meta.body.namespace.cpp
+    - meta.body.namespace
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: failedToLoadCriticalData
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters
   scopes:
-    - storage.modifier.specifier.const.cpp
+    - storage.modifier.specifier.const
 - source: ' string'
 - source: '&'
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: ' what'
   scopes:
-    - variable.parameter.cpp
+    - variable.parameter
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: 'throwExcp '
   scopes:
-    - variable.parameter.defaulted.cpp
+    - variable.parameter.defaulted
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
-- source: 'false'
-  scopes:
-    - constant.language.false.cpp
+    - keyword.operator.assignment
+- source: ' false'
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
-    - meta.block.cpp
+    - meta.head.function.definition
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.namespace.cpp
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace

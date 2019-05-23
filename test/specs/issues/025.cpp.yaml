@@ -1,108 +1,81 @@
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: FillStats
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
-- source: 'Stats '
-- source: aStats
-  scopes:
-    - variable.parameter.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: Stats aStats
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: FillStats
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '    Stats aStats'
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: FillStats
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '    Stats aStats'
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: FillStats
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: bool
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: FillStats
 - source: (
   scopesBegin:
-    - meta.parens.cpp
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: '    Stats aStats'
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.cpp
+    - meta.parens
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

@@ -1,315 +1,351 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: Type
+  scopes:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: 'Type '
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: foo
   scopes:
-    - variable.parameter.cpp
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: Type
   scopesBegin:
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.cpp
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: Type
   scopesBegin:
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.cpp
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: foo
   scopes:
-    - variable.parameter.cpp
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: 'Type '
+  scopesBegin:
+    - meta.function.definition.parameters
   scopes:
-    - variable.parameter.defaulted.cpp
+    - variable.parameter.defaulted
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: ' value'
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: 'Type '
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: 'foo '
   scopes:
-    - variable.parameter.defaulted.cpp
+    - variable.parameter.defaulted
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: ' value'
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: Type
   scopesBegin:
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.cpp
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: ' value'
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: bar
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: Type
   scopesBegin:
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.cpp
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator.cpp
+    - punctuation.definition.function.pointer.dereference
 - source: foo
   scopes:
-    - variable.parameter.cpp
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: ' value'
+  scopesEnd:
+    - meta.function.definition.parameters
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

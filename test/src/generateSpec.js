@@ -2,6 +2,10 @@ const getTokens = require("./getTokens");
 const registry = require("./registry").default;
 const _ = require("lodash");
 
+function removeScopeName(scope) {
+    return scope.replace(/\.c(pp)?$/, "");
+}
+
 /**
  * @param {string} path
  * @param {string[]} fixture
@@ -13,7 +17,7 @@ module.exports = async function generateSpec(path, fixture) {
         if (source.trim() === "") {
             return true;
         }
-        const scopes = _.tail(token.scopes);
+        const scopes = _.tail(token.scopes).map(removeScopeName);
         spec.push({
             source,
             scopes

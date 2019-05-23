@@ -1,656 +1,636 @@
 - source: struct
   scopesBegin:
-    - meta.block.struct.cpp
-    - meta.head.struct.cpp
+    - meta.block.struct
+    - meta.head.struct
   scopes:
-    - storage.type.struct.cpp
+    - storage.type.struct
 - source: copy_storage_helper
   scopes:
-    - entity.name.type.struct.cpp
+    - entity.name.type.struct
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
+    - meta.template.call
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call.cpp
+    - punctuation.section.angle-brackets.begin.template.call
 - source: pointerT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: 'false'
   scopes:
-    - constant.language.false.cpp
+    - constant.language.false
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.call.cpp
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
+    - meta.template.call
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' copyableT'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct.cpp
+    - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
-    - meta.head.struct.cpp
+    - meta.head.struct
 - source: '[['
   scopesBegin:
-    - meta.body.struct.cpp
-    - support.other.attribute.cpp
+    - meta.body.struct
+    - support.other.attribute
   scopes:
-    - punctuation.section.attribute.begin.cpp
+    - punctuation.section.attribute.begin
 - source: noreturn
   scopes:
-    - entity.other.attribute.noreturn.cpp
+    - entity.other.attribute.noreturn
 - source: ']]'
   scopes:
-    - punctuation.section.attribute.end.cpp
+    - punctuation.section.attribute.end
   scopesEnd:
-    - support.other.attribute.cpp
+    - support.other.attribute
 - source: void
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload.cpp
+    - meta.function.definition.parameters.operator-overload
   scopes:
-    - keyword.other.operator.overload.cpp
+    - keyword.other.operator.overload
 - source: ()
   scopes:
-    - entity.name.operator.overloadee.cpp
+    - entity.name.operator.overloadee
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
+    - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: 'pointerT '
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ptr
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const.cpp
+    - storage.modifier.specifier.const
 - source: ' hashT'
 - source: '&'
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: hf
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' pointerT '
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ptr_old
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: size_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: 'off'
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: size_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: cnt
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+    - punctuation.section.parameters.end.bracket.round.operator-overload
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload.cpp
+    - meta.function.definition.parameters.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const.cpp
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopesBegin:
-    - meta.block.cpp
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' `allocatorT::value_type` is not copy-constructible.'
 - source: //
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' Throw an exception unconditionally, even when there is nothing to copy.'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: noadl
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: sprintf_and_throw
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.begin.template.call
 - source: domain_error
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '"'
   scopesBegin:
-    - string.quoted.double.cpp
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.cpp
+    - punctuation.definition.string.begin
 - source: 'cow_hashmap: `'
 - source: '%s'
   scopes:
-    - constant.other.placeholder.cpp
+    - constant.other.placeholder
 - source: '` is not copy-constructible.'
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.cpp
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.cpp
+    - string.quoted.double
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: typeid
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.typeid.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
 - source: typename
   scopesBegin:
     - meta.arguments.operator.typeid
   scopes:
-    - storage.modifier.cpp
+    - storage.modifier
 - source: allocatorT
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: value_type
   scopesEnd:
     - meta.arguments.operator.typeid
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: .
   scopes:
-    - punctuation.separator.dot-access.cpp
+    - punctuation.separator.dot-access
 - source: name
   scopes:
-    - entity.name.function.member.cpp
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.cpp
+    - meta.block
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
-    - meta.body.struct.cpp
+    - meta.body.struct
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.block.struct.cpp
+    - meta.block.struct
 - source: template
   scopesBegin:
-    - meta.template.definition.cpp
+    - meta.template.definition
   scopes:
-    - storage.type.template.cpp
+    - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition.cpp
+    - punctuation.section.angle-brackets.start.template.definition
 - source: 'typename '
   scopes:
     - storage.type.template.argument.typename
-    - .cpp
+    - ''
 - source: pointerT
   scopes:
-    - entity.name.type.template.cpp
+    - entity.name.type.template
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: 'typename '
   scopes:
     - storage.type.template.argument.typename
-    - .cpp
+    - ''
 - source: hashT
   scopes:
-    - entity.name.type.template.cpp
+    - entity.name.type.template
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: 'typename '
   scopes:
     - storage.type.template.argument.typename
-    - .cpp
+    - ''
 - source: allocatorT
   scopes:
-    - entity.name.type.template.cpp
+    - entity.name.type.template
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.definition.cpp
+    - punctuation.section.angle-brackets.end.template.definition
   scopesEnd:
-    - meta.template.definition.cpp
+    - meta.template.definition
 - source: struct
   scopesBegin:
-    - meta.block.struct.cpp
-    - meta.head.struct.cpp
+    - meta.block.struct
+    - meta.head.struct
   scopes:
-    - storage.type.struct.cpp
+    - storage.type.struct
 - source: copy_storage_helper
   scopes:
-    - entity.name.type.struct.cpp
+    - entity.name.type.struct
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
+    - meta.template.call
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call.cpp
+    - punctuation.section.angle-brackets.begin.template.call
 - source: pointerT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.template.argument.cpp
+    - comma
+    - punctuation.separator.template.argument
 - source: 'false'
   scopes:
-    - constant.language.false.cpp
+    - constant.language.false
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.call.cpp
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
+    - meta.template.call
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' copyableT'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct.cpp
+    - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
-    - meta.head.struct.cpp
+    - meta.head.struct
 - source: '[['
   scopesBegin:
-    - meta.body.struct.cpp
-    - support.other.attribute.cpp
+    - meta.body.struct
+    - support.other.attribute
   scopes:
-    - punctuation.section.attribute.begin.cpp
+    - punctuation.section.attribute.begin
 - source: noreturn
   scopes:
-    - entity.other.attribute.noreturn.cpp
+    - entity.other.attribute.noreturn
 - source: ']]'
   scopes:
-    - punctuation.section.attribute.end.cpp
+    - punctuation.section.attribute.end
   scopesEnd:
-    - support.other.attribute.cpp
+    - support.other.attribute
 - source: void
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload.cpp
+    - meta.function.definition.parameters.operator-overload
   scopes:
-    - keyword.other.operator.overload.cpp
+    - keyword.other.operator.overload
 - source: ()
   scopes:
-    - entity.name.operator.overloadee.cpp
+    - entity.name.operator.overloadee
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
+    - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: 'pointerT '
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ptr
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const.cpp
+    - storage.modifier.specifier.const
 - source: ' hashT'
 - source: '&'
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: hf
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' pointerT '
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ptr_old
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: size_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: 'off'
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: size_t
   scopes:
-    - storage.type.cpp
+    - storage.type
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: cnt
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+    - punctuation.section.parameters.end.bracket.round.operator-overload
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload.cpp
+    - meta.function.definition.parameters.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const.cpp
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopesBegin:
-    - meta.block.cpp
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' `allocatorT::value_type` is not copy-constructible.'
 - source: //
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' Throw an exception unconditionally, even when there is nothing to copy.'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: noadl
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: sprintf_and_throw
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.begin.template.call
 - source: domain_error
   scopes:
-    - storage.type.user-defined.cpp
+    - storage.type.user-defined
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '"'
   scopesBegin:
-    - string.quoted.double.cpp
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.cpp
+    - punctuation.definition.string.begin
 - source: 'cow_hashmap: `'
 - source: '%s'
   scopes:
-    - constant.other.placeholder.cpp
+    - constant.other.placeholder
 - source: '` is not copy-constructible.'
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.cpp
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.cpp
+    - string.quoted.double
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: typeid
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.typeid.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
 - source: typename
   scopesBegin:
     - meta.arguments.operator.typeid
   scopes:
-    - storage.modifier.cpp
+    - storage.modifier
 - source: allocatorT
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: value_type
   scopesEnd:
     - meta.arguments.operator.typeid
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: .
   scopes:
-    - punctuation.separator.dot-access.cpp
+    - punctuation.separator.dot-access
 - source: name
   scopes:
-    - entity.name.function.member.cpp
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.cpp
+    - meta.block
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
-    - meta.body.struct.cpp
+    - meta.body.struct
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
