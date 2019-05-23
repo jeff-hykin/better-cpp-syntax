@@ -15,11 +15,11 @@
 - source: //
   scopesBegin:
     - meta.body.enum
-  scopes:
     - comment.line.double-slash
+  scopes:
     - punctuation.definition.comment
 - source: comment
-  scopes:
+  scopesEnd:
     - comment.line.double-slash
 - source: definition
   scopes:
@@ -41,32 +41,29 @@
     - comma
     - punctuation.separator.delimiter
 - source: definition3
-  scopes:
+  scopesBegin:
     - meta.enum.definition
     - variable.other.enummember
 - source: definition
-  scopes:
-    - meta.enum.definition
+  scopesEnd:
     - variable.other.enummember
 - source: ','
   scopes:
-    - meta.enum.definition
     - comma
     - punctuation.separator.delimiter
 - source: definition2
   scopes:
-    - meta.enum.definition
     - variable.other.enummember
+  scopesEnd:
+    - meta.enum.definition
 - source: //
-  scopes:
+  scopesBegin:
     - comment.line.double-slash
+  scopes:
     - punctuation.definition.comment
 - source: comment
-  scopes:
+  scopesEnd:
     - comment.line.double-slash
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.enum
-  scopesEnd:
-    - meta.block.enum
-    - meta.body.enum

@@ -1,198 +1,179 @@
 - source: sscanf
-  scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: user_input
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: '"'
   scopesBegin:
-    - string.quoted.double.cpp
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.cpp
+    - punctuation.definition.string.begin
 - source: '%c'
   scopes:
-    - constant.other.placeholder.cpp
+    - constant.other.placeholder
 - source: ' %[^'
 - source: \n
   scopes:
-    - constant.character.escape.cpp
+    - constant.character.escape
 - source: ']'
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.cpp
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.cpp
+    - string.quoted.double
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: '&'
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: arg0
-  scopes:
-    - variable.parameter.cpp
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' arg_str'
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' reads char into arg0, the remainder until \n to arg_str'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: test
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: '    t '
+  scopesBegin:
+    - meta.body.function.definition
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: time
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: 'NULL'
   scopes:
-    - constant.language.NULL.cpp
+    - constant.language.NULL
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '    tmp '
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: localtime
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '&'
   scopes:
-    - keyword.operator.cpp
+    - keyword.operator
 - source: t
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: strftime
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: timestr
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: sizeof
   scopes:
-    - keyword.operator.functionlike.cpp
-    - keyword.operator.sizeof.cpp
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof
 - source: timestr
   scopes:
     - meta.arguments.operator.sizeof
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: '"'
   scopesBegin:
-    - string.quoted.double.cpp
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.cpp
+    - punctuation.definition.string.begin
 - source: '%Y-%m-'
 - source: '%d'
   scopes:
-    - constant.other.placeholder.cpp
+    - constant.other.placeholder
 - source: ' %H:%M:'
 - source: '%s'
   scopes:
-    - constant.other.placeholder.cpp
+    - constant.other.placeholder
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.cpp
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.cpp
+    - string.quoted.double
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' tmp'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition

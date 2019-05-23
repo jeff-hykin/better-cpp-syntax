@@ -1,94 +1,94 @@
 - source: struct
   scopes:
-    - storage.type.struct.c
+    - storage.type.struct
 - source: ' foo '
 - source: '{'
   scopesBegin:
-    - meta.block.c
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.c
+    - punctuation.section.block.begin.bracket.curly
 - source: int
   scopesBegin:
-    - meta.function-call.c
+    - meta.function-call
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.c
+    - punctuation.section.parens.begin.bracket.round
 - source: '*'
   scopes:
-    - keyword.operator.c
+    - keyword.operator
 - source: bar
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.c
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.c
+    - meta.function-call
 - source: (
   scopesBegin:
-    - meta.parens.block.c
+    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round.c
+    - punctuation.section.parens.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.c
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block.c
+    - meta.parens.block
 - source: ;
   scopes:
-    - punctuation.terminator.statement.c
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.c
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.c
+    - meta.block
 - source: ;
   scopes:
-    - punctuation.terminator.statement.c
+    - punctuation.terminator.statement
 - source: union
   scopes:
-    - storage.type.union.c
+    - storage.type.union
 - source: ' baz '
 - source: '{'
   scopesBegin:
-    - meta.block.c
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.c
+    - punctuation.section.block.begin.bracket.curly
 - source: int
   scopesBegin:
-    - meta.function-call.c
+    - meta.function-call
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.c
+    - punctuation.section.parens.begin.bracket.round
 - source: '*'
   scopes:
-    - keyword.operator.c
+    - keyword.operator
 - source: quz
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.c
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.function-call.c
+    - meta.function-call
 - source: (
   scopesBegin:
-    - meta.parens.block.c
+    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round.c
+    - punctuation.section.parens.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.c
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block.c
+    - meta.parens.block
 - source: ;
   scopes:
-    - punctuation.terminator.statement.c
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.c
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.c
+    - meta.block
 - source: ;
   scopes:
-    - punctuation.terminator.statement.c
+    - punctuation.terminator.statement

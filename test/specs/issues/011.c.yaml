@@ -1,21 +1,21 @@
 - source: bool
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: aaaa
   scopesBegin:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+    - meta.function
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.c
+    - entity.name.function
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.c
+    - punctuation.section.parameters.begin.bracket.round
 - source: const
   scopes:
-    - storage.modifier.c
+    - storage.modifier
 - source: char
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: '*/* comment */ some_var) { return true; }'
   scopes:
-    - invalid.illegal.stray-comment-end.c
+    - invalid.illegal.stray-comment-end

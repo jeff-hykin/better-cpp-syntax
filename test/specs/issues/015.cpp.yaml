@@ -1,31 +1,31 @@
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: C
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: 'public '
   scopesBegin:
-    - meta.body.class.cpp
-  scopes:
+    - meta.body.class
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - storage.type.modifier.access.control.public
     - colon
+  scopesEnd:
+    - storage.type.modifier.access.control.public
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - punctuation.section.block.end.bracket.curly.class
   scopesEnd:
-    - meta.body.class.cpp
+    - meta.body.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

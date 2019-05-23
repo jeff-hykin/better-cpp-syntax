@@ -1,139 +1,118 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: func
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: std
   scopesBegin:
-    - meta.scope-resolution.cpp
+    - meta.body.function.definition
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: 'cout '
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: max
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.begin.template.call
 - source: int
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
+    - meta.template.call
+    - meta.template.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' b'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: std
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: endl
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: std
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: 'cout '
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: max
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
 - source: ','
   scopes:
-    - comma.cpp
-    - punctuation.separator.delimiter.cpp
+    - comma
+    - punctuation.separator.delimiter
 - source: ' b'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '<<'
   scopes:
-    - keyword.operator.bitwise.shift.cpp
+    - keyword.operator.bitwise.shift
 - source: std
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution
 - source: endl
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition
