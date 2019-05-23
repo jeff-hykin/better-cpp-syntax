@@ -626,7 +626,7 @@ class Regexp
                     if atLeast == 0 and atMost == nil
                         # rewrite to zeroOrMoreOf
                         return this.processRegexOperator(arguments, 'zeroOrMoreOf')
-                    elsif atLeast == nil and atMost = nil
+                    elsif atLeast == nil and atMost == nil
                         # rewrite to oneOrMoreOf
                         return this.processRegexOperator(arguments, 'oneOrMoreOf')
                     else
