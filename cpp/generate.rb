@@ -669,7 +669,7 @@ cpp_grammar = Grammar.new(
                     template_call
                 ).then(
                     match: /::/,
-                    tag_as: "punctuation.separator.scope-resolution"+tag_extension
+                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
                 ),
             )
     end

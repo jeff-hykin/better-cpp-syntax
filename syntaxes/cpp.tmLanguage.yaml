@@ -714,7 +714,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
   scope_resolution_template_call:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -734,7 +734,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.template.call.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.template.call.cpp
   scope_resolution_template_definition:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -754,7 +754,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.template.definition.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.template.definition.cpp
   scope_resolution_function_call:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -774,7 +774,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.function.call.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.call.cpp
   scope_resolution_function_definition:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -794,7 +794,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.function.definition.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.definition.cpp
   scope_resolution_namespace_alias:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -814,7 +814,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.namespace.alias.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.alias.cpp
   scope_resolution_namespace_using:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -834,7 +834,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.namespace.using.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.using.cpp
   scope_resolution_namespace_block:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -854,7 +854,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.namespace.block.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.block.cpp
   scope_resolution_function_definition_operator_overload:
     match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
@@ -874,7 +874,7 @@
         patterns:
         - include: "#template_call_range"
       '4':
-        name: punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
   qualified_type:
     match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.])"
     captures:
@@ -906,7 +906,7 @@
         patterns:
         - include: "#template_call_range"
       '6':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '7':
         name: entity.name.type.cpp
   type_alias:
@@ -942,7 +942,7 @@
         patterns:
         - include: "#template_call_range"
       '8':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '9':
         name: entity.name.type.cpp
       '10':
@@ -980,7 +980,7 @@
         patterns:
         - include: "#template_call_range"
       '19':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '20':
         name: entity.name.type.cpp
       '21':
@@ -1061,7 +1061,7 @@
         patterns:
         - include: "#template_call_range"
       '8':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '9':
         name: entity.name.type.cpp
       '11':
@@ -1225,7 +1225,7 @@
         patterns:
         - include: "#template_call_range"
       '7':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '8':
         name: entity.name.type.cpp
       '10':
@@ -1540,7 +1540,7 @@
         patterns:
         - include: "#template_call_range"
       '11':
-        name: punctuation.separator.scope-resolution.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '12':
         name: storage.type.integral.$12.cpp
     end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
