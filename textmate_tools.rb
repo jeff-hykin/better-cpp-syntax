@@ -600,14 +600,14 @@ class Regexp
     
     def processRegexOperator(arguments, operator)
         # first parse the arguments
-        other_regex, attributes = Regexp.processGrammarArguments(arguments, operator)
+        other_regex, pattern_attributes = Regexp.processGrammarArguments(arguments, operator)
         if other_regex == nil
             other_regex = //
         end
-
-        pattern_attributes = Marshal.load(Marshal.dump(attributes))
-        # pattern_attributes.keep_if { |k, v| @@textmate_attributes.key? k }
-        attributes.delete_if { |k, v| @@textmate_attributes.key? k }
+        # pattern_attributes does not clone well, option_attributes must be the clone
+        option_attributes = pattern_attributes.clone
+        pattern_attributes.keep_if { |k, v| @@textmate_attributes.key? k }
+        option_attributes.delete_if { |k, v| @@textmate_attributes.key? k }
         
         no_attributes = pattern_attributes == {}
         
@@ -618,27 +618,30 @@ class Regexp
         other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
-                if attributes[:how_many_times?] or attributes[:atMost] or attributes[:atLeast]
+                if option_attributes[:how_many_times?] or option_attributes[:atMost] or option_attributes[:atLeast]
                     # repeat pattern
                     # support for atLeast: 1.times, atMost: 2.times
-                    atLeast = attributes[:atLeast].is_a? Enumerator ? attributes[:atLeast].size : attributes[:atLeast]
-                    atMost = attributes[:atMost].is_a? Enumerator ? attributes[:atMost].size : attributes[:atMost]
+                    atLeast = (option_attributes[:atLeast].is_a? Enumerator) ? option_attributes[:atLeast].size : option_attributes[:atLeast]
+                    atMost = (option_attributes[:atMost].is_a? Enumerator) ? option_attributes[:atMost].size : option_attributes[:atMost]
                     if atLeast == 0 and atMost == nil
                         # rewrite to zeroOrMoreOf
-                        return this.processRegexOperator(arguments, 'zeroOrMoreOf')
+                        return self.processRegexOperator(arguments, 'zeroOrMoreOf')
                     elsif atLeast == nil and atMost == nil
                         # rewrite to oneOrMoreOf
-                        return this.processRegexOperator(arguments, 'oneOrMoreOf')
+                        return self.processRegexOperator(arguments, 'oneOrMoreOf')
                     else
+                        if atLeast == nil
+                            atLeast = 1
+                        end
                         # custom range
                         new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{atLeast},#{atMost}})/
                         if no_attributes
                             new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{atLeast},#{atMost}}/
                         end
                     end
-                elsif attributes[:dont_back_track?]
+                elsif option_attributes[:dont_back_track?]
                     # atomic groups
-                    attributes.delete(:dont_back_track?)
+                    option_attributes.delete(:dont_back_track?)
                     new_regex = /#{self_as_string}((?>#{other_regex_as_string}))/
                     if no_attributes
                         new_regex = /#{self_as_string}(?>#{other_regex_as_string})/
@@ -689,7 +692,7 @@ class Regexp
                 end
         end
         
-        if attributes[:dont_back_track?]
+        if option_attributes[:dont_back_track?]
             new_regex_as_string = new_regex.without_default_mode_modifiers
             index = new_regex_as_string[-1] == ')' ? -2 : -1
             if not /[+*?]/ =~ new_regex_as_string[index]
@@ -698,7 +701,7 @@ class Regexp
             new_regex = /#{new_regex_as_string.insert(index, '+')}/
         end
 
-        if attributes[:how_many_times?]
+        if option_attributes[:how_many_times?] == :asFewAsPossible
             new_regex_as_string = new_regex.without_default_mode_modifiers
             index = new_regex_as_string[-1] == ')' ? -2 : -1
             if not /[+*}?]/ =~ new_regex_as_string[index]

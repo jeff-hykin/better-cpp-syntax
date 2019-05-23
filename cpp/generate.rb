@@ -51,7 +51,9 @@ cpp_grammar = Grammar.new(
             tag_as: "storage.modifier.pointer"
         ).then(
             # TODO: make a readble regex way to do the {0,2} and replace this with it
-            match: /(?:\&\s*?){0,2}/,
+            match: /&/.maybe(@spaces),
+            atLeast: 0.times,
+            atMost: 2.times,
             tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
     )
