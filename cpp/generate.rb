@@ -463,13 +463,13 @@ cpp_grammar = Grammar.new(
                 ),
                 newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
                     match: variable_name,
-                    tag_as: "entity.name.type.namespace",
+                    tag_as: "entity.name.namespace",
                 ),
                 newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
                 newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
                 newPattern(
                     match: variable_name.lookAheadFor(/::/),
-                    tag_as: "entity.name.type.namespace"
+                    tag_as: "entity.name.namespace"
                 ),
                 newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
                 :number_literal,
@@ -808,8 +808,6 @@ cpp_grammar = Grammar.new(
                 tag_as: "entity.name.function.definition"
             ).maybe(@spaces).lookAheadFor(/\(/)
         ),
-        needs_semicolon: false,
-        primary_includes: [],
         head_includes:[
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
@@ -826,9 +824,8 @@ cpp_grammar = Grammar.new(
                 ]
             )
         ],
+        needs_semicolon: false,
         body_includes: [ :type_casting_operators, :function_call, :$initial_context ],
-        tail_includes: [ :$initial_context ],
-        secondary_includes:[]
     )
     # static assert is special as it can be outside of normal places function calls can be
     cpp_grammar[:static_assert] = PatternRange.new(
@@ -1134,7 +1131,7 @@ cpp_grammar = Grammar.new(
                 cpp_grammar[:scope_resolution_namespace_using]
             ).then(
                 match: variable_name,
-                tag_as: "entity.name.type.namespace"
+                tag_as: "entity.name.namespace"
             ).lookAheadFor(
                 /;|\n/
             ),
@@ -1149,12 +1146,12 @@ cpp_grammar = Grammar.new(
                     tag_as: "keyword.other.namespace.alias storage.type.namespace.alias"
                 ).then(@spaces).then(
                     match: variable_name,
-                    tag_as: "entity.name.type.namespace.alias",
+                    tag_as: "entity.name.namespace.alias",
                 ).maybe(@spaces).then(assignment_operator).maybe(@spaces).then(
                     tag_as: "meta.declaration.namespace.alias.value",
                     match: cpp_grammar[:scope_resolution_namespace_alias].maybe(@spaces).then(
                             match: variable_name,
-                            tag_as: "entity.name.type.namespace",
+                            tag_as: "entity.name.namespace",
                     ).maybe(@spaces).then(
                         @semicolon.or(/\n/)
                     ),
@@ -1172,7 +1169,7 @@ cpp_grammar = Grammar.new(
             :attributes_context,
             cpp_grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
-                    tag_as: "entity.name.type.namespace",
+                    tag_as: "entity.name.namespace",
                 ).maybe(@spaces).maybe(
                     newPattern(
                         match: /::/,

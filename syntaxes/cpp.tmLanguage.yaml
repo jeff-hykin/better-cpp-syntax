@@ -155,6 +155,7 @@
     - include: "#probably_a_parameter"
     - include: "#attributes_context"
     - include: "#comments_context"
+    - include: "#comments"
     - include: "#storage_types"
     - include: "#operators"
     - include: "#vararg_ellipses"
@@ -501,13 +502,13 @@
         '1':
           name: keyword.other.using.directive.cpp
         '2':
-          name: entity.name.type.namespace.cpp
+          name: entity.name.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
       name: punctuation.accessor.attribute.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      name: entity.name.type.namespace.cpp
+      name: entity.name.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
     - include: "#number_literal"
@@ -533,13 +534,13 @@
         '1':
           name: keyword.other.using.directive.cpp
         '2':
-          name: entity.name.type.namespace.cpp
+          name: entity.name.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
       name: punctuation.accessor.attribute.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      name: entity.name.type.namespace.cpp
+      name: entity.name.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
     - include: "#number_literal"
@@ -565,13 +566,13 @@
         '1':
           name: keyword.other.using.directive.cpp
         '2':
-          name: entity.name.type.namespace.cpp
+          name: entity.name.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
       name: punctuation.accessor.attribute.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      name: entity.name.type.namespace.cpp
+      name: entity.name.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
     - include: "#number_literal"
@@ -597,13 +598,13 @@
         '1':
           name: keyword.other.using.directive.cpp
         '2':
-          name: entity.name.type.namespace.cpp
+          name: entity.name.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
       name: punctuation.accessor.attribute.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      name: entity.name.type.namespace.cpp
+      name: entity.name.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
     - include: "#number_literal"
@@ -1375,7 +1376,7 @@
         patterns:
         - include: "#scope_resolution_namespace_using_inner_generated"
       '4':
-        name: entity.name.type.namespace.cpp
+        name: entity.name.namespace.cpp
     end: "(;)"
     endCaptures:
       '1':
@@ -1386,7 +1387,7 @@
       '1':
         name: keyword.other.namespace.alias.cpp storage.type.namespace.alias.cpp
       '2':
-        name: entity.name.type.namespace.alias.cpp
+        name: entity.name.namespace.alias.cpp
       '3':
         name: keyword.operator.assignment.cpp
       '4':
@@ -1395,7 +1396,7 @@
         patterns:
         - include: "#scope_resolution_namespace_alias_inner_generated"
       '6':
-        name: entity.name.type.namespace.cpp
+        name: entity.name.namespace.cpp
       '7':
         name: punctuation.terminator.statement.cpp
     name: meta.declaration.namespace.alias.cpp
@@ -1423,7 +1424,7 @@
             patterns:
             - include: "#scope_resolution_namespace_block_inner_generated"
           '2':
-            name: entity.name.type.namespace.cpp
+            name: entity.name.namespace.cpp
           '3':
             name: punctuation.separator.scope-resolution.namespace.block.cpp
           '4':

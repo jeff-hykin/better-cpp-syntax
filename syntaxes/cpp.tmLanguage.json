@@ -336,6 +336,9 @@
           "include": "#comments_context"
         },
         {
+          "include": "#comments"
+        },
+        {
           "include": "#storage_types"
         },
         {
@@ -949,7 +952,7 @@
               "name": "keyword.other.using.directive.cpp"
             },
             "2": {
-              "name": "entity.name.type.namespace.cpp"
+              "name": "entity.name.namespace.cpp"
             }
           }
         },
@@ -963,7 +966,7 @@
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
@@ -1011,7 +1014,7 @@
               "name": "keyword.other.using.directive.cpp"
             },
             "2": {
-              "name": "entity.name.type.namespace.cpp"
+              "name": "entity.name.namespace.cpp"
             }
           }
         },
@@ -1025,7 +1028,7 @@
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
@@ -1073,7 +1076,7 @@
               "name": "keyword.other.using.directive.cpp"
             },
             "2": {
-              "name": "entity.name.type.namespace.cpp"
+              "name": "entity.name.namespace.cpp"
             }
           }
         },
@@ -1087,7 +1090,7 @@
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
@@ -1135,7 +1138,7 @@
               "name": "keyword.other.using.directive.cpp"
             },
             "2": {
-              "name": "entity.name.type.namespace.cpp"
+              "name": "entity.name.namespace.cpp"
             }
           }
         },
@@ -1149,7 +1152,7 @@
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         },
         {
           "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
@@ -2601,7 +2604,7 @@
           ]
         },
         "4": {
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         }
       },
       "end": "(;)",
@@ -2618,7 +2621,7 @@
           "name": "keyword.other.namespace.alias.cpp storage.type.namespace.alias.cpp"
         },
         "2": {
-          "name": "entity.name.type.namespace.alias.cpp"
+          "name": "entity.name.namespace.alias.cpp"
         },
         "3": {
           "name": "keyword.operator.assignment.cpp"
@@ -2634,7 +2637,7 @@
           ]
         },
         "6": {
-          "name": "entity.name.type.namespace.cpp"
+          "name": "entity.name.namespace.cpp"
         },
         "7": {
           "name": "punctuation.terminator.statement.cpp"
@@ -2679,7 +2682,7 @@
                   ]
                 },
                 "2": {
-                  "name": "entity.name.type.namespace.cpp"
+                  "name": "entity.name.namespace.cpp"
                 },
                 "3": {
                   "name": "punctuation.separator.scope-resolution.namespace.block.cpp"
