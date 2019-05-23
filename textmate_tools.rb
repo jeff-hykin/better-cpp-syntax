@@ -699,9 +699,7 @@ class Regexp
                 raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
             end
             new_regex = /#{new_regex_as_string.insert(index, '+')}/
-        end
-
-        if option_attributes[:how_many_times?] == :asFewAsPossible
+        elsif option_attributes[:how_many_times?] == :asFewAsPossible
             new_regex_as_string = new_regex.without_default_mode_modifiers
             index = new_regex_as_string[-1] == ')' ? -2 : -1
             if not /[+*}?]/ =~ new_regex_as_string[index]
