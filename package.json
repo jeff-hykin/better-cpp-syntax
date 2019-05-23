@@ -3,7 +3,7 @@
     "displayName": "Better C++ Syntax",
     "description": "The bleeding edge of the VS Code C++ syntax",
     "icon": "icon.png",
-    "version": "1.8.16",
+    "version": "1.9.0",
     "scripts": {
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
         "pretest": "npm run build",
