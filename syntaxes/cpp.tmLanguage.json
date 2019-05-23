@@ -302,6 +302,9 @@
     "storage_types": {
       "patterns": [
         {
+          "include": "#storage_specifiers"
+        },
+        {
           "include": "#primitive_types"
         },
         {
@@ -2086,6 +2089,9 @@
             },
             {
               "include": "#function_call"
+            },
+            {
+              "include": "$base"
             }
           ]
         },
