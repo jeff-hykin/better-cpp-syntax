@@ -648,10 +648,6 @@ c_grammar.addToRepository({
                 name: "comment.block.c"
             },
             {
-                match: "\\*/.*\\n",
-                name: "invalid.illegal.stray-comment-end.c"
-            },
-            {
                 captures: {
                     "1" => {
                         name: "meta.toc-list.banner.line.c"
