@@ -50,7 +50,6 @@ cpp_grammar = Grammar.new(
             match: zeroOrMoreOf(/\*/.maybe(@spaces)),
             tag_as: "storage.modifier.pointer"
         ).then(
-            # TODO: make a readble regex way to do the {0,2} and replace this with it
             match: /&/.maybe(@spaces),
             atLeast: 0.times,
             atMost: 2.times,
