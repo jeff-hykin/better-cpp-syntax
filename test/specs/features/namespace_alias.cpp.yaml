@@ -1,107 +1,103 @@
 - source: namespace
   scopesBegin:
-    - meta.declaration.namespace.alias.cpp
+    - meta.declaration.namespace.alias
   scopes:
-    - keyword.other.namespace.alias.cpp
-    - storage.type.namespace.alias.cpp
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
 - source: foo
   scopes:
-    - entity.name.type.namespace.alias.cpp
+    - entity.name.type.namespace.alias
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: bar
   scopesBegin:
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.type.namespace
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias.value
 - source: namespace
   scopes:
-    - keyword.other.namespace.alias.cpp
-    - storage.type.namespace.alias.cpp
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
 - source: fs
   scopes:
-    - entity.name.type.namespace.alias.cpp
+    - entity.name.type.namespace.alias
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: boost
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution.namespace.alias
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution.namespace.alias
 - source: filesystem
   scopesBegin:
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.type.namespace
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias.value
 - source: namespace
   scopes:
-    - keyword.other.namespace.alias.cpp
-    - storage.type.namespace.alias.cpp
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
 - source: std
   scopes:
-    - entity.name.type.namespace.alias.cpp
+    - entity.name.type.namespace.alias
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '::'
 - source: std
   scopesBegin:
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.type.namespace
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.declaration.namespace.alias.cpp
-    - meta.declaration.namespace.alias.value.cpp
+    - meta.declaration.namespace.alias
+    - meta.declaration.namespace.alias.value
 - source: namespace
   scopesBegin:
-    - meta.block.namespace.cpp
-    - meta.head.namespace.cpp
+    - meta.block.namespace
+    - meta.head.namespace
   scopes:
-    - keyword.other.namespace.definition.cpp
-    - storage.type.namespace.definition.cpp
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: foo
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.type.namespace
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - meta.head.namespace.cpp
+    - meta.head.namespace
 - source: '}'
   scopes:
-    - meta.body.namespace.cpp
-    - punctuation.section.block.end.bracket.curly.namespace.cpp
+    - meta.body.namespace
+    - punctuation.section.block.end.bracket.curly.namespace
   scopesEnd:
-    - meta.block.namespace.cpp
+    - meta.block.namespace
 - source: using
   scopesBegin:
-    - meta.using-namespace.cpp
+    - meta.using-namespace
   scopes:
-    - keyword.other.using.directive.cpp
+    - keyword.other.using.directive
 - source: namespace
   scopes:
-    - keyword.other.namespace.directive.cpp
-    - storage.type.namespace.directive.cpp
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
 - source: std
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.type.namespace

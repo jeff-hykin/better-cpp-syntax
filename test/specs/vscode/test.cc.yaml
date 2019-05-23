@@ -1,0 +1,528 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional
+- source: B4G_DEBUG_CHECK
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor
+- source: fprintf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: stderr
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: num_candidate_ret=
+- source: '%d'
+  scopes:
+    - constant.other.placeholder
+- source: ':'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: ' num_candidate'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int
+  scopes:
+    - storage.type.primitive
+- source: ' i'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: i
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: num_candidate
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: i
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: fprintf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: stderr
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '%d'
+  scopes:
+    - constant.other.placeholder
+- source: ','
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: user_candidate
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: i
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: fprintf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: stderr
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ;
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: 'O '
+  scopesBegin:
+    - meta.function.definition.parameters
+- source: obj
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: LOG_INFO
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: not hilighted as string
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: LOG_INFO
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: 'obj '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ', even worse; '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: obj
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: x
+  scopes:
+    - variable.other.property
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ' check this out.'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' everything from this point on is interpeted as a string literal...'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '    O x'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: std
+  scopesBegin:
+    - meta.function.definition
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.scope-resolution
+- source: unique_ptr
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: O
+  scopes:
+    - storage.type.user-defined
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: o
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: new
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - keyword.operator.wordlike
+    - alias
+    - keyword.operator.new
+- source: O
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' sadness.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: sprintf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: options
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: STYLE=Keramik;TITLE=
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: ;THEME=
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: int
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+- source: main2
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: printf
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ;
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' the rest of'
+  scopesEnd:
+    - comment.line.double-slash
+- source: asm
+  scopes:
+    - storage.type.asm
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'movw $0x38, '
+- source: '%a'
+  scopes:
+    - constant.other.placeholder
+- source: 'x; ltr '
+- source: '%a'
+  scopes:
+    - constant.other.placeholder
+- source: x
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: fn
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '{};'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' the rest of'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

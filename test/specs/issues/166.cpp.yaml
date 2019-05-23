@@ -1,93 +1,93 @@
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: Runtime_Error
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: virtual
   scopes:
-    - storage.type.modifier.virtual.cpp
+    - storage.type.modifier.virtual
 - source: 'std::exception'
   scopes:
     - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: /*
   scopesBegin:
-    - meta.body.class.cpp
-    - comment.block.cpp
+    - meta.body.class
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: '        snip'
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - punctuation.section.block.end.bracket.curly.class
   scopesEnd:
-    - meta.body.class.cpp
+    - meta.body.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: Runtime_Error
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
 - source: virtual
   scopes:
-    - storage.type.modifier.virtual.cpp
+    - storage.type.modifier.virtual
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: 'std::exception'
   scopes:
     - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: /*
   scopesBegin:
-    - meta.body.class.cpp
-    - comment.block.cpp
+    - meta.body.class
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: '        snip'
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - punctuation.section.block.end.bracket.curly.class
   scopesEnd:
-    - meta.body.class.cpp
+    - meta.body.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

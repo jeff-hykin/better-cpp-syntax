@@ -1,161 +1,150 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: function
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: auto
+  scopesBegin:
+    - meta.body.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: ' postWakeup '
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: wpi
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
+    - punctuation.separator.scope-resolution
 - source: uv
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution.function.call
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution.function.call
 - source: Async
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution.function.call
 - source: <
   scopesBegin:
-    - meta.template.call.cpp
-    - keyword.operator.comparison.cpp
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.call.cpp
-    - keyword.operator.comparison.cpp
+    - meta.template.call
+    - meta.template.call
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.scope-resolution.function.call
 - source: Create
-  scopesBegin:
-    - meta.function-call.cpp
   scopes:
-    - entity.name.function.call.cpp
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: loop
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function-call.cpp
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '    m_postMessageWakeup'
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: ' postWakeup'
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: postWakeup
   scopes:
-    - variable.other.object.access.cpp
+    - variable.other.object.access
 - source: '->'
   scopes:
-    - punctuation.separator.pointer-access.cpp
+    - punctuation.separator.pointer-access
 - source: wakeup
   scopes:
-    - variable.other.object.property.cpp
-- source: '.'
+    - variable.other.object.property
+- source: .
   scopes:
-    - punctuation.separator.dot-access.cpp
+    - punctuation.separator.dot-access
 - source: connect
   scopes:
-    - entity.name.function.member.cpp
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: '['
-  scopesBegin:
-    - meta.function-call.member
   scopes:
-    - punctuation.definition.capture.begin.lambda.cpp
+    - punctuation.definition.capture.begin.lambda
 - source: this
   scopes:
-    - meta.lambda.capture.cpp
-    - variable.language.this.cpp
+    - meta.lambda.capture
 - source: ']'
   scopes:
-    - punctuation.definition.capture.end.lambda.cpp
+    - punctuation.definition.capture.end.lambda
 - source: '{'
   scopesBegin:
-    - meta.function.definition.body.lambda.cpp
+    - meta.function.definition.body.lambda
   scopes:
-    - punctuation.section.block.begin.bracket.curly.lambda.cpp
+    - punctuation.section.block.begin.bracket.curly.lambda
 - source: auto
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: ' pipe '
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: m_pipe
   scopes:
-    - variable.other.object.access.cpp
+    - variable.other.object.access
 - source: .
   scopes:
-    - punctuation.separator.dot-access.cpp
+    - punctuation.separator.dot-access
 - source: lock
   scopes:
-    - entity.name.function.member.cpp
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member.cpp
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.lambda.cpp
+    - punctuation.section.block.end.bracket.curly.lambda
   scopesEnd:
-    - meta.function-call.member
-    - meta.function.definition.body.lambda.cpp
+    - meta.function.definition.body.lambda
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member.cpp
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition
