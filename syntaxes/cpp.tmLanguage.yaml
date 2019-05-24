@@ -155,11 +155,14 @@
     - include: "#probably_a_parameter"
     - include: "#attributes_context"
     - include: "#comments_context"
+    - include: "#string_context"
+    - include: "#string_context_c"
     - include: "#storage_types"
     - include: "#operators"
     - include: "#vararg_ellipses"
     - include: "#function_pointer"
     - include: "#comma"
+    - include: "#string"
   evaluation_context:
     patterns:
     - include: "$base"

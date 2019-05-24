@@ -209,11 +209,14 @@ cpp_grammar = Grammar.new(
             :probably_a_parameter,
             :attributes_context,
             :comments_context,
+            :string_context,
+            :string_context_c,
             :storage_types,
             :operators,
             :vararg_ellipses,
             :function_pointer,
             :comma,
+            :string
         ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
