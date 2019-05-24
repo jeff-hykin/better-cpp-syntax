@@ -336,16 +336,7 @@
           "include": "#comments_context"
         },
         {
-          "include": "#string_context"
-        },
-        {
-          "include": "#string_context_c"
-        },
-        {
           "include": "#storage_types"
-        },
-        {
-          "include": "#operators"
         },
         {
           "include": "#vararg_ellipses"
@@ -357,7 +348,16 @@
           "include": "#comma"
         },
         {
-          "include": "#string"
+          "include": "#language_constants"
+        },
+        {
+          "include": "#number_literal"
+        },
+        {
+          "include": "#string_context"
+        },
+        {
+          "include": "#operators"
         }
       ]
     },
@@ -2078,6 +2078,9 @@
               "patterns": [
                 {
                   "include": "#function_parameter_context"
+                },
+                {
+                  "include": "#function_call_context"
                 }
               ]
             }
@@ -5650,6 +5653,9 @@
         },
         {
           "include": "#operators"
+        },
+        {
+          "include": "#string_context"
         },
         {
           "include": "#storage_types"

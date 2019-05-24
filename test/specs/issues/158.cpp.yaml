@@ -71,7 +71,9 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: ' false'
+- source: 'false'
+  scopes:
+    - constant.language.false
   scopesEnd:
     - meta.function.definition.parameters
 - source: )

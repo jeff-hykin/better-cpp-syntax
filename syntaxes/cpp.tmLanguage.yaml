@@ -155,14 +155,14 @@
     - include: "#probably_a_parameter"
     - include: "#attributes_context"
     - include: "#comments_context"
-    - include: "#string_context"
-    - include: "#string_context_c"
     - include: "#storage_types"
-    - include: "#operators"
     - include: "#vararg_ellipses"
     - include: "#function_pointer"
     - include: "#comma"
-    - include: "#string"
+    - include: "#language_constants"
+    - include: "#number_literal"
+    - include: "#string_context"
+    - include: "#operators"
   evaluation_context:
     patterns:
     - include: "$base"
@@ -1096,6 +1096,7 @@
             name: punctuation.section.parameters.end.bracket.round.cpp
         patterns:
         - include: "#function_parameter_context"
+        - include: "#function_call_context"
     - name: meta.body.function.definition.cpp
       begin: "(?<=\\{)"
       end: "(\\})"
@@ -3055,6 +3056,7 @@
     - include: "#attributes_context"
     - include: "#comments_context"
     - include: "#operators"
+    - include: "#string_context"
     - include: "#storage_types"
     - include: "#method_access"
     - include: "#member_access"

@@ -209,14 +209,16 @@ cpp_grammar = Grammar.new(
             :probably_a_parameter,
             :attributes_context,
             :comments_context,
-            :string_context,
-            :string_context_c,
             :storage_types,
-            :operators,
             :vararg_ellipses,
             :function_pointer,
             :comma,
-            :string
+            # the following are a temp workaround for defaulted arguments
+            # e.g. aFunc(int a = 10 + 10)
+            :language_constants,
+            :number_literal,
+            :string_context,
+            :operators,
         ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
@@ -823,7 +825,10 @@ cpp_grammar = Grammar.new(
                     tag_as: "punctuation.section.parameters.end.bracket.round"
                     ),
                 includes: [
-                    :function_parameter_context
+                    :function_parameter_context,
+                    # TODO: the function_call_context is included here as workaround for function-initializations like issue #198
+                    # e.g. std::string ("hello");
+                    :function_call_context,
                 ]
             )
         ],
@@ -1004,7 +1009,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
             ).then(after_declaration),
         includes: [
-            :function_parameter_context
+            :function_parameter_context,
         ]
     )
 #
@@ -3236,6 +3241,7 @@ cpp_grammar = Grammar.new(
             :attributes_context,
             :comments_context,
             :operators,
+            :string_context,
             :storage_types,
             :method_access,
             :member_access,
