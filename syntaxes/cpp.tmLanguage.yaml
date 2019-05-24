@@ -156,10 +156,13 @@
     - include: "#attributes_context"
     - include: "#comments_context"
     - include: "#storage_types"
-    - include: "#operators"
     - include: "#vararg_ellipses"
     - include: "#function_pointer"
     - include: "#comma"
+    - include: "#language_constants"
+    - include: "#number_literal"
+    - include: "#string_context"
+    - include: "#operators"
   evaluation_context:
     patterns:
     - include: "$base"
