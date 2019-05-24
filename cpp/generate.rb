@@ -210,10 +210,15 @@ cpp_grammar = Grammar.new(
             :attributes_context,
             :comments_context,
             :storage_types,
-            :operators,
             :vararg_ellipses,
             :function_pointer,
             :comma,
+            # the following are a temp workaround for defaulted arguments
+            # e.g. aFunc(int a = 10 + 10)
+            :language_constants,
+            :number_literal,
+            :string_context,
+            :operators,
         ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
@@ -821,6 +826,8 @@ cpp_grammar = Grammar.new(
                     ),
                 includes: [
                     :function_parameter_context,
+                    # TODO: the function_call_context is included here as workaround for function-initializations like issue #198
+                    # e.g. std::string ("hello");
                     :function_call_context,
                 ]
             )
