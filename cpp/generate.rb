@@ -820,7 +820,8 @@ cpp_grammar = Grammar.new(
                     tag_as: "punctuation.section.parameters.end.bracket.round"
                     ),
                 includes: [
-                    :function_parameter_context
+                    :function_parameter_context,
+                    :function_call_context,
                 ]
             )
         ],
@@ -1001,7 +1002,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
             ).then(after_declaration),
         includes: [
-            :function_parameter_context
+            :function_parameter_context,
         ]
     )
 #
@@ -3233,6 +3234,7 @@ cpp_grammar = Grammar.new(
             :attributes_context,
             :comments_context,
             :operators,
+            :string_context,
             :storage_types,
             :method_access,
             :member_access,

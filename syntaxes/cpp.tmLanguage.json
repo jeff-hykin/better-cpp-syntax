@@ -2069,6 +2069,9 @@
               "patterns": [
                 {
                   "include": "#function_parameter_context"
+                },
+                {
+                  "include": "#function_call_context"
                 }
               ]
             }
@@ -5641,6 +5644,9 @@
         },
         {
           "include": "#operators"
+        },
+        {
+          "include": "#string_context"
         },
         {
           "include": "#storage_types"
