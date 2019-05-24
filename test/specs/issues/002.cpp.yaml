@@ -68,8 +68,8 @@
     - entity.name.scope-resolution.function.definition.operator-overload
 - source: '::'
   scopes:
-    - >-
-      punctuation.separator.scope-resolution.function.definition.operator-overload
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition.operator-overload
 - source: string &
   scopesEnd:
     - entity.name.operator.overloadee

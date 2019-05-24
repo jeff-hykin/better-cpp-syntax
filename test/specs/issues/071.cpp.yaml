@@ -99,6 +99,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: templated
 - source: <
@@ -129,6 +130,7 @@
     - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.call
 - source: type
   scopes:
@@ -144,6 +146,7 @@
     - meta.template.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: type value
 - source: ;
@@ -207,6 +210,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: templated
 - source: <
@@ -237,6 +241,7 @@
     - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.call
 - source: type
   scopes:
@@ -252,6 +257,7 @@
     - meta.template.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: type value
 - source: ;

@@ -16,6 +16,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: int8_t
   scopes:
@@ -48,20 +49,27 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'enum foo::bar::baz '
+- source: 'enum'
   scopesBegin:
     - meta.function.definition.parameters
-- source: quix
+    - meta.block.enum
+    - meta.head.enum
   scopes:
-    - variable.parameter
-  scopesEnd:
-    - meta.function.definition.parameters
-- source: )
+    - storage.type.enum
+- source: foo
   scopes:
-    - punctuation.section.parameters.end.bracket.round
+    - entity.name.type.enum
+- source: '::'
+- source: bar
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'baz quix)'
   scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
+    - meta.head.enum
 - source: ;
   scopes:
     - punctuation.terminator.statement

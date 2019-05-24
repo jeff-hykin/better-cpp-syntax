@@ -198,6 +198,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: sprintf_and_throw
   scopes:
@@ -256,6 +257,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value_type
   scopesEnd:
@@ -538,6 +540,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: sprintf_and_throw
   scopes:
@@ -596,6 +599,7 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value_type
   scopesEnd:

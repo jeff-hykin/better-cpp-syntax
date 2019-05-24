@@ -7,7 +7,7 @@
     - storage.type.namespace.definition
 - source: test
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace
@@ -73,6 +73,7 @@
     - entity.name.scope-resolution.template.definition
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.definition
 - source: vector
 - source: <

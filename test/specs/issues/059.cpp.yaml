@@ -34,12 +34,14 @@
     - entity.name.scope-resolution
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: uv
   scopes:
     - entity.name.scope-resolution.function.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.function.call
 - source: Async
   scopes:
@@ -58,6 +60,7 @@
     - meta.template.call
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.function.call
 - source: Create
   scopes:
