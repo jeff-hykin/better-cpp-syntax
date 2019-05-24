@@ -38,7 +38,7 @@
     - storage.type.namespace.directive
 - source: std
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -179,6 +179,7 @@
     - entity.name.scope-resolution.function.definition
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.function.definition
 - source: set_values
   scopesBegin:

@@ -43,3 +43,14 @@
   scopes:
     - punctuation.definition.comment
 - source: ' a comment /* no nest */'
+  scopesEnd:
+    - comment.line.double-slash
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' no nest '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end

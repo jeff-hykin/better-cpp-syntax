@@ -6,7 +6,7 @@
     - storage.type.namespace.alias
 - source: foo
   scopes:
-    - entity.name.type.namespace.alias
+    - entity.name.namespace.alias
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -14,7 +14,7 @@
   scopesBegin:
     - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -26,7 +26,7 @@
     - storage.type.namespace.alias
 - source: fs
   scopes:
-    - entity.name.type.namespace.alias
+    - entity.name.namespace.alias
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -35,12 +35,13 @@
     - entity.name.scope-resolution.namespace.alias
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.namespace.alias
 - source: filesystem
   scopesBegin:
     - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -52,7 +53,7 @@
     - storage.type.namespace.alias
 - source: std
   scopes:
-    - entity.name.type.namespace.alias
+    - entity.name.namespace.alias
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -61,7 +62,7 @@
   scopesBegin:
     - meta.declaration.namespace.alias.value
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -77,7 +78,7 @@
     - storage.type.namespace.definition
 - source: foo
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace
@@ -100,4 +101,4 @@
     - storage.type.namespace.directive
 - source: std
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace

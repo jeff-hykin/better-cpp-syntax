@@ -7,7 +7,7 @@
     - storage.type.namespace.definition
 - source: foo
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace
@@ -23,7 +23,7 @@
     - storage.type.namespace.definition
 - source: bar
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace
@@ -70,10 +70,11 @@
     - entity.name.scope-resolution.namespace.block
 - source: '::'
   scopes:
+    - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.namespace.block
 - source: console
   scopes:
-    - entity.name.type.namespace
+    - entity.name.namespace
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.namespace
