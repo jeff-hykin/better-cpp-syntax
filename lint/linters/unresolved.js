@@ -58,16 +58,18 @@ class Unresolved {
         for (const name of this.unresolved) {
             console.warn(
                 chalk.redBright(
-                    "[Unresolved]  %s is referenced but could not be found",
-                    name
+                    "[Unresolved]  ",
+                    name,
+                    "is referenced but could not be found"
                 )
             );
         }
         for (const name of this.unused) {
             console.warn(
                 chalk.yellowBright(
-                    "[Unresolved]  %s is named but is not used",
-                    name
+                    "[Unresolved]  ",
+                    name,
+                    "is named but is not used"
                 )
             );
         }
