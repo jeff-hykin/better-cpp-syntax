@@ -45,7 +45,7 @@
 - source: ' a comment /* no nest */'
   scopesEnd:
     - comment.line.double-slash
-- source: '/*'
+- source: /*
   scopesBegin:
     - comment.block
   scopes:
@@ -54,5 +54,3 @@
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end
-  scopesEnd:
-    - comment.block

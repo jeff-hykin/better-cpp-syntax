@@ -49,7 +49,7 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'enum'
+- source: enum
   scopesBegin:
     - meta.function.definition.parameters
     - meta.block.enum
@@ -67,7 +67,7 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'baz quix)'
+- source: baz quix)
   scopesEnd:
     - meta.head.enum
 - source: ;

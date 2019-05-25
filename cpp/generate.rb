@@ -152,6 +152,7 @@ cpp_grammar = Grammar.new(
             :static_assert,
             :other_keywords,
             :memory_operators,
+            :using_name,
             :the_this_keyword,
             :language_constants,
             :template_isolated_definition,
@@ -312,6 +313,7 @@ cpp_grammar = Grammar.new(
 #
 # Keywords and Keyword-ish things
 #
+    cpp_grammar[:using_name] = newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
     cpp_grammar[:functional_specifiers_pre_parameters] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specificer.functional.pre-parameters.$match"
@@ -466,10 +468,7 @@ cpp_grammar = Grammar.new(
                         :string_context_c,
                     ],
                 ),
-                newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
-                    match: variable_name,
-                    tag_as: "entity.name.namespace",
-                ),
+                :using_name,
                 newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
                 newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
                 newPattern(
@@ -1187,7 +1186,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "storage.modifier.inline"
                     )
                 )
-        ]
+        ],
         )
 
 #

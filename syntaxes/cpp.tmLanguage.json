@@ -44,6 +44,9 @@
       "include": "#memory_operators"
     },
     {
+      "include": "#using_name"
+    },
+    {
       "include": "#the_this_keyword"
     },
     {
@@ -735,6 +738,14 @@
         }
       ]
     },
+    "using_name": {
+      "match": "(using)\\s+(?!namespace\\b)",
+      "captures": {
+        "1": {
+          "name": "keyword.other.using.directive.cpp"
+        }
+      }
+    },
     "functional_specifiers_pre_parameters": {
       "match": "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)",
       "name": "storage.modifier.specificer.functional.pre-parameters.$0.cpp"
@@ -952,15 +963,7 @@
           ]
         },
         {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp"
-            },
-            "2": {
-              "name": "entity.name.namespace.cpp"
-            }
-          }
+          "include": "#using_name"
         },
         {
           "match": ",",
@@ -1014,15 +1017,7 @@
           ]
         },
         {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp"
-            },
-            "2": {
-              "name": "entity.name.namespace.cpp"
-            }
-          }
+          "include": "#using_name"
         },
         {
           "match": ",",
@@ -1076,15 +1071,7 @@
           ]
         },
         {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp"
-            },
-            "2": {
-              "name": "entity.name.namespace.cpp"
-            }
-          }
+          "include": "#using_name"
         },
         {
           "match": ",",
@@ -1138,15 +1125,7 @@
           ]
         },
         {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp"
-            },
-            "2": {
-              "name": "entity.name.namespace.cpp"
-            }
-          }
+          "include": "#using_name"
         },
         {
           "match": ",",
