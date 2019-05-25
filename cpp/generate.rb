@@ -829,7 +829,11 @@ cpp_grammar = Grammar.new(
                     # e.g. std::string ("hello");
                     :function_call_context,
                 ]
-            )
+            ),
+            :comments_context,
+            # initial context is here for things like noexcept()
+            # TODO: fix this pattern an make it more strict
+            :$initial_context
         ],
         needs_semicolon: false,
         body_includes: [ :type_casting_operators, :function_call, :$initial_context ],

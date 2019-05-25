@@ -97,7 +97,14 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
-- source: ' // this one is not'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' this one is not'
+  scopesEnd:
+    - comment.line.double-slash
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition

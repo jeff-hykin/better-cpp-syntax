@@ -2062,6 +2062,12 @@
                   "include": "#function_call_context"
                 }
               ]
+            },
+            {
+              "include": "#comments_context"
+            },
+            {
+              "include": "$base"
             }
           ]
         },

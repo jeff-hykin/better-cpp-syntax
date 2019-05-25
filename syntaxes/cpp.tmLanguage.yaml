@@ -1083,6 +1083,8 @@
         patterns:
         - include: "#function_parameter_context"
         - include: "#function_call_context"
+      - include: "#comments_context"
+      - include: "$base"
     - name: meta.body.function.definition.cpp
       begin: "(?<=\\{)"
       end: "(\\})"
