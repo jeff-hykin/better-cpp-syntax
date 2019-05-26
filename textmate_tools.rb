@@ -618,25 +618,25 @@ class Regexp
         other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
-                if option_attributes[:how_many_times?] or option_attributes[:atMost] or option_attributes[:atLeast]
+                if option_attributes[:how_many_times?] or option_attributes[:at_most] or option_attributes[:at_least]
                     # repeat pattern
-                    # support for atLeast: 1.times, atMost: 2.times
-                    atLeast = (option_attributes[:atLeast].is_a? Enumerator) ? option_attributes[:atLeast].size : option_attributes[:atLeast]
-                    atMost = (option_attributes[:atMost].is_a? Enumerator) ? option_attributes[:atMost].size : option_attributes[:atMost]
-                    if atLeast == 0 and atMost == nil
+                    # support for at_least: 1.times, at_most: 2.times
+                    at_least = (option_attributes[:at_least].is_a? Enumerator) ? option_attributes[:at_least].size : option_attributes[:at_least]
+                    at_most = (option_attributes[:at_most].is_a? Enumerator) ? option_attributes[:at_most].size : option_attributes[:at_most]
+                    if at_least == 0 and at_most == nil
                         # rewrite to zeroOrMoreOf
                         return self.processRegexOperator(arguments, 'zeroOrMoreOf')
-                    elsif atLeast == nil and atMost == nil
+                    elsif at_least == nil and at_most == nil
                         # rewrite to oneOrMoreOf
                         return self.processRegexOperator(arguments, 'oneOrMoreOf')
                     else
-                        if atLeast == nil
-                            atLeast = 1
+                        if at_least == nil
+                            at_least = 1
                         end
                         # custom range
-                        new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{atLeast},#{atMost}})/
+                        new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{at_least},#{at_most}})/
                         if no_attributes
-                            new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{atLeast},#{atMost}}/
+                            new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{at_least},#{at_most}}/
                         end
                     end
                 elsif option_attributes[:dont_back_track?]
@@ -699,7 +699,7 @@ class Regexp
                 raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
             end
             new_regex = /#{new_regex_as_string.insert(index, '+')}/
-        elsif option_attributes[:how_many_times?] == :asFewAsPossible
+        elsif option_attributes[:how_many_times?] == :as_few_as_possible
             new_regex_as_string = new_regex.without_default_mode_modifiers
             index = new_regex_as_string[-1] == ')' ? -2 : -1
             if not /[+*}?]/ =~ new_regex_as_string[index]

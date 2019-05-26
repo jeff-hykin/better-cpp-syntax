@@ -51,8 +51,8 @@ cpp_grammar = Grammar.new(
             tag_as: "storage.modifier.pointer"
         ).then(
             match: /&/.maybe(@spaces),
-            atLeast: 0.times,
-            atMost: 2.times,
+            at_least: 0.times,
+            at_most: 2.times,
             tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
     )
