@@ -76,7 +76,7 @@ class Spellcheck {
         return !spell.correct(name);
     }
     reportError(rule, word) {
-        let message = word + " is not spelled correctly.";
+        let message = word + " is not spelled correctly. ";
         if (rule.repositoryName) {
             message += "Rule is " + rule.repositoryName;
         } else {
