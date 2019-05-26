@@ -620,9 +620,17 @@ class Regexp
             when 'then'
                 if option_attributes[:how_many_times?] or option_attributes[:at_most] or option_attributes[:at_least]
                     # repeat pattern
+                    
                     # support for at_least: 1.times, at_most: 2.times
                     at_least = (option_attributes[:at_least].is_a? Enumerator) ? option_attributes[:at_least].size : option_attributes[:at_least]
                     at_most = (option_attributes[:at_most].is_a? Enumerator) ? option_attributes[:at_most].size : option_attributes[:at_most]
+                    # support how_many_times?: 5
+                    if option_attributes[:how_many_times?].is_a? Enumerator
+                        at_least = at_most = option_attributes[:how_many_times?].size
+                    elsif option_attributes[:how_many_times?].is_a? Integer
+                        at_least = at_most = option_attributes[:how_many_times?]
+                    end
+                    
                     if at_least == 0 and at_most == nil
                         # rewrite to zeroOrMoreOf
                         return self.processRegexOperator(arguments, 'zeroOrMoreOf')
@@ -647,6 +655,7 @@ class Regexp
                         new_regex = /#{self_as_string}(?>#{other_regex_as_string})/
                     end
                 elsif
+                    # plain pattern
                     new_regex = /#{self_as_string}(#{other_regex_as_string})/
                     if no_attributes
                         new_regex = /#{self_as_string}#{other_regex_as_string}/
