@@ -17,7 +17,10 @@ const fs = require("fs");
  * }} TextMateRule
  */
 
-const linters = [require("./linters/unresolved")];
+const linters = [
+    require("./linters/unresolved"),
+    require("./linters/spell-check")
+];
 
 const grammar = JSON.parse(fs.readFileSync(process.argv[2]).toString());
 /**
