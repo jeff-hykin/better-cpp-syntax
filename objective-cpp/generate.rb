@@ -91,14 +91,14 @@ objective_cpp_grammar[:$initial_context] = [
     "name" => "string.quoted.double",
     "patterns" => [
       {
-        "include" => "source.c#string_escaped_char",
+        "include" => "#string_escaped_char",
       },
       {
         "match" => "(?x)%\n\t\t\t\t\t\t(\\d+\\$)?                             # field (argument #)\n\t\t\t\t\t\t[#0\\- +']*                          # flags\n\t\t\t\t\t\t((-?\\d+)|\\*(-?\\d+\\$)?)?              # minimum field width\n\t\t\t\t\t\t(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?         # precision\n\t\t\t\t\t\t[@]                                  # conversion type\n\t\t\t\t\t",
         "name" => "constant.other.placeholder",
       },
       {
-        "include" => "source.c#string_placeholder",
+        "include" => "#string_placeholder",
       },
     ],
   },
@@ -316,34 +316,34 @@ objective_cpp_grammar[:"c_lang"] = {
     },
     {
       "match": "\\b(break|continue|do|else|for|goto|if|_Pragma|return|while)\\b",
-      "name": "keyword.control.c",
+      "name": "keyword.control",
     },
     {
       "include": "#storage_types",
     },
     {
       "match": "typedef",
-      "name": "keyword.other.typedef.c",
+      "name": "keyword.other.typedef",
     },
     {
       "match": "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
-      "name": "storage.modifier.c",
+      "name": "storage.modifier",
     },
     {
       "match": "\\bk[A-Z]\\w*\\b",
-      "name": "constant.other.variable.mac-classic.c",
+      "name": "constant.other.variable.mac-classic",
     },
     {
       "match": "\\bg[A-Z]\\w*\\b",
-      "name": "variable.other.readwrite.global.mac-classic.c",
+      "name": "variable.other.readwrite.global.mac-classic",
     },
     {
       "match": "\\bs[A-Z]\\w*\\b",
-      "name": "variable.other.readwrite.static.mac-classic.c",
+      "name": "variable.other.readwrite.static.mac-classic",
     },
     {
       "match": "\\b(NULL|true|false|TRUE|FALSE)\\b",
-      "name": "constant.language.c",
+      "name": "constant.language",
     },
     {
       "include": "#operators",
@@ -358,29 +358,29 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.define.c",
+          "name": "keyword.control.directive.define",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
         "3": {
-          "name": "entity.name.function.preprocessor.c",
+          "name": "entity.name.function.preprocessor",
         },
         "5": {
-          "name": "punctuation.definition.parameters.begin.c",
+          "name": "punctuation.definition.parameters.begin",
         },
         "6": {
-          "name": "variable.parameter.preprocessor.c",
+          "name": "variable.parameter.preprocessor",
         },
         "8": {
-          "name": "punctuation.separator.parameters.c",
+          "name": "punctuation.separator.parameters",
         },
         "9": {
-          "name": "punctuation.definition.parameters.end.c",
+          "name": "punctuation.definition.parameters.end",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.macro.c",
+      "name": "meta.preprocessor.macro",
       "patterns": [
         {
           "include": "#preprocessor-rule-define-line-contents",
@@ -391,29 +391,29 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*(error|warning))\\b\\s*",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.diagnostic.$3.c",
+          "name": "keyword.control.directive.diagnostic.$3",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.diagnostic.c",
+      "name": "meta.preprocessor.diagnostic",
       "patterns": [
         {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.c",
+          "name": "string.quoted.double",
           "patterns": [
             {
               "include": "#line_continuation_character",
@@ -424,16 +424,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "'",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.c",
+          "name": "string.quoted.single",
           "patterns": [
             {
               "include": "#line_continuation_character",
@@ -443,7 +443,7 @@ objective_cpp_grammar[:"c_lang"] = {
         {
           "begin": "[^'\"]",
           "end": "(?<!\\\\)(?=\\s*\\n)",
-          "name": "string.unquoted.single.c",
+          "name": "string.unquoted.single",
           "patterns": [
             {
               "include": "#line_continuation_character",
@@ -459,14 +459,14 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.$3.c",
+          "name": "keyword.control.directive.$3",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.include.c",
+      "name": "meta.preprocessor.include",
       "patterns": [
         {
           "include": "#line_continuation_character",
@@ -475,31 +475,31 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.include.c",
+          "name": "string.quoted.double.include",
         },
         {
           "begin": "<",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": ">",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.other.lt-gt.include.c",
+          "name": "string.quoted.other.lt-gt.include",
         },
       ],
     },
@@ -510,14 +510,14 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*line)\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.line.c",
+          "name": "keyword.control.directive.line",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.c",
+      "name": "meta.preprocessor",
       "patterns": [
         {
           "include": "#strings",
@@ -534,18 +534,18 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*(?:((#)\\s*undef))\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.undef.c",
+          "name": "keyword.control.directive.undef",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.c",
+      "name": "meta.preprocessor",
       "patterns": [
         {
           "match": "[a-zA-Z_$][\\w$]*",
-          "name": "entity.name.function.preprocessor.c",
+          "name": "entity.name.function.preprocessor",
         },
         {
           "include": "#line_continuation_character",
@@ -556,21 +556,21 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*(?:((#)\\s*pragma))\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.pragma.c",
+          "name": "keyword.control.directive.pragma",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "name": "meta.preprocessor.pragma.c",
+      "name": "meta.preprocessor.pragma",
       "patterns": [
         {
           "include": "#strings",
         },
         {
           "match": "[a-zA-Z_$][\\w\\-$]*",
-          "name": "entity.other.attribute-name.pragma.preprocessor.c",
+          "name": "entity.other.attribute-name.pragma.preprocessor",
         },
         {
           "include": "#numbers",
@@ -582,27 +582,27 @@ objective_cpp_grammar[:"c_lang"] = {
     },
     {
       "match": "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
-      "name": "support.type.sys-types.c",
+      "name": "support.type.sys-types",
     },
     {
       "match": "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
-      "name": "support.type.pthread.c",
+      "name": "support.type.pthread",
     },
     {
       "match": "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
-      "name": "support.type.stdint.c",
+      "name": "support.type.stdint",
     },
     {
       "match": "\\b(noErr|kNilOptions|kInvalidID|kVariableLengthArray)\\b",
-      "name": "support.constant.mac-classic.c",
+      "name": "support.constant.mac-classic",
     },
     {
       "match": "(?x) \\b\n(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam\n|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr\n|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber\n|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64\n|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32\n|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr\n|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\n\\b",
-      "name": "support.type.mac-classic.c",
+      "name": "support.type.mac-classic",
     },
     {
       "match": "\\b([A-Za-z0-9_]+_t)\\b",
-      "name": "support.type.posix-reserved.c",
+      "name": "support.type.posix-reserved",
     },
     {
       "include": "#block",
@@ -611,7 +611,7 @@ objective_cpp_grammar[:"c_lang"] = {
       "include": "#parens",
     },
     {
-      "name": "meta.function.c",
+      "name": "meta.function",
       "begin": "(?<!\\w)(?!\\s*(?:not|compl|sizeof|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|alignof|alignas|_Alignof|_Alignas|while|for|do|if|else|goto|switch|return|break|case|continue|default|void|char|short|int|signed|unsigned|long|float|double|bool|_Bool|_Complex|_Imaginary|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|memory_order|atomic_bool|atomic_char|atomic_schar|atomic_uchar|atomic_short|atomic_ushort|atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_llong|atomic_ullong|atomic_char16_t|atomic_char32_t|atomic_wchar_t|atomic_int_least8_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_least16_t|atomic_int_least32_t|atomic_uint_least32_t|atomic_int_least64_t|atomic_uint_least64_t|atomic_int_fast8_t|atomic_uint_fast8_t|atomic_int_fast16_t|atomic_uint_fast16_t|atomic_int_fast32_t|atomic_uint_fast32_t|atomic_int_fast64_t|atomic_uint_fast64_t|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_intmax_t|atomic_uintmax_t|struct|union|enum|typedef|auto|register|static|extern|thread_local|inline|_Noreturn|const|volatile|restrict|_Atomic)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
       "end": "(?<=\\))",
       "patterns": [
@@ -624,20 +624,20 @@ objective_cpp_grammar[:"c_lang"] = {
       "include": "#line_continuation_character",
     },
     {
-      "name": "meta.bracket.square.access.c",
+      "name": "meta.bracket.square.access",
       "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
       "beginCaptures": {
         "1": {
-          "name": "variable.object.c",
+          "name": "variable.object",
         },
         "2": {
-          "name": "punctuation.definition.begin.bracket.square.c",
+          "name": "punctuation.definition.begin.bracket.square",
         },
       },
       "end": "\\]",
       "endCaptures": {
         "0": {
-          "name": "punctuation.definition.end.bracket.square.c",
+          "name": "punctuation.definition.end.bracket.square",
         },
       },
       "patterns": [
@@ -647,16 +647,16 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     {
-      "name": "storage.modifier.array.bracket.square.c",
+      "name": "storage.modifier.array.bracket.square",
       "match": "\\[\\s*\\]",
     },
     {
       "match": ";",
-      "name": "punctuation.terminator.statement.c",
+      "name": "punctuation.terminator.statement",
     },
     {
       "match": ",",
-      "name": "punctuation.separator.delimiter.c",
+      "name": "punctuation.separator.delimiter",
     },
   ],
   "repository": {
@@ -664,54 +664,54 @@ objective_cpp_grammar[:"c_lang"] = {
       "match": "(?<=(?:[a-zA-Z_0-9] |[&*>\\]\\)]))\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))",
       "captures": {
         "1": {
-          "name": "variable.parameter.probably.c",
+          "name": "variable.parameter.probably",
         },
       },
     },
     "access-method": {
-      "name": "meta.function-call.member.c",
+      "name": "meta.function-call.member",
       "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
       "beginCaptures": {
         "1": {
-          "name": "variable.object.c",
+          "name": "variable.object",
         },
         "2": {
-          "name": "punctuation.separator.dot-access.c",
+          "name": "punctuation.separator.dot-access",
         },
         "3": {
-          "name": "punctuation.separator.pointer-access.c",
+          "name": "punctuation.separator.pointer-access",
         },
         "4": {
           "patterns": [
             {
               "match": "\\.",
-              "name": "punctuation.separator.dot-access.c",
+              "name": "punctuation.separator.dot-access",
             },
             {
               "match": "->",
-              "name": "punctuation.separator.pointer-access.c",
+              "name": "punctuation.separator.pointer-access",
             },
             {
               "match": "[a-zA-Z_][a-zA-Z_0-9]*",
-              "name": "variable.object.c",
+              "name": "variable.object",
             },
             {
-              "name": "everything.else.c",
+              "name": "everything.else",
               "match": ".+",
             },
           ],
         },
         "5": {
-          "name": "entity.name.function.member.c",
+          "name": "entity.name.function.member",
         },
         "6": {
-          "name": "punctuation.section.arguments.begin.bracket.round.function.member.c",
+          "name": "punctuation.section.arguments.begin.bracket.round.function.member",
         },
       },
       "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.arguments.end.bracket.round.function.member.c",
+          "name": "punctuation.section.arguments.end.bracket.round.function.member",
         },
       },
       "patterns": [
@@ -726,16 +726,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.c",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.c",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
-          "name": "meta.block.c",
+          "name": "meta.block",
           "patterns": [
             {
               "include": "#block_innards",
@@ -765,20 +765,20 @@ objective_cpp_grammar[:"c_lang"] = {
           "include": "#c_function_call",
         },
         {
-          "name": "meta.initialization.c",
+          "name": "meta.initialization",
           "begin": "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
           "beginCaptures": {
             "1": {
-              "name": "variable.other.c",
+              "name": "variable.other",
             },
             "2": {
-              "name": "punctuation.section.parens.begin.bracket.round.initialization.c",
+              "name": "punctuation.section.parens.begin.bracket.round.initialization",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.initialization.c",
+              "name": "punctuation.section.parens.end.bracket.round.initialization",
             },
           },
           "patterns": [
@@ -791,13 +791,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.c",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.c",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
           "patterns": [
@@ -817,7 +817,7 @@ objective_cpp_grammar[:"c_lang"] = {
     "c_function_call": {
       "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
       "end": "(?<=\\))(?!\\w)",
-      "name": "meta.function-call.c",
+      "name": "meta.function-call",
       "patterns": [
         {
           "include": "#function-call-innards",
@@ -829,41 +829,41 @@ objective_cpp_grammar[:"c_lang"] = {
         {
           "captures": {
             "1": {
-              "name": "meta.toc-list.banner.block.c",
+              "name": "meta.toc-list.banner.block",
             },
           },
           "match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
-          "name": "comment.block.c",
+          "name": "comment.block",
         },
         {
           "begin": "/\\*",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.begin.c",
+              "name": "punctuation.definition.comment.begin",
             },
           },
           "end": "\\*/",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.end.c",
+              "name": "punctuation.definition.comment.end",
             },
           },
-          "name": "comment.block.c",
+          "name": "comment.block",
         },
         {
           "captures": {
             "1": {
-              "name": "meta.toc-list.banner.line.c",
+              "name": "meta.toc-list.banner.line",
             },
           },
           "match": "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-          "name": "comment.line.banner.c",
+          "name": "comment.line.banner",
         },
         {
           "begin": "(^[ \\t]+)?(?=//)",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.whitespace.comment.leading.c",
+              "name": "punctuation.whitespace.comment.leading",
             },
           },
           "end": "(?!\\G)",
@@ -872,11 +872,11 @@ objective_cpp_grammar[:"c_lang"] = {
               "begin": "//",
               "beginCaptures": {
                 "0": {
-                  "name": "punctuation.definition.comment.c",
+                  "name": "punctuation.definition.comment",
                 },
               },
               "end": "(?=\\n)",
-              "name": "comment.line.double-slash.c",
+              "name": "comment.line.double-slash",
               "patterns": [
                 {
                   "include": "#line_continuation_character",
@@ -905,24 +905,24 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\\\)\\n",
           "captures": {
             "1": {
-              "name": "constant.character.escape.line-continuation.c",
+              "name": "constant.character.escape.line-continuation",
             },
           },
         },
       ],
     },
     "parens": {
-      "name": "meta.parens.c",
+      "name": "meta.parens",
       "begin": "\\(",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.section.parens.begin.bracket.round.c",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
       },
       "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.parens.end.bracket.round.c",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
       },
       "patterns": [
@@ -932,17 +932,17 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     "parens-block": {
-      "name": "meta.parens.block.c",
+      "name": "meta.parens.block",
       "begin": "\\(",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.section.parens.begin.bracket.round.c",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
       },
       "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.parens.end.bracket.round.c",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
       },
       "patterns": [
@@ -951,85 +951,85 @@ objective_cpp_grammar[:"c_lang"] = {
         },
         {
           "match": "(?-mix:(?<!:):(?!:))",
-          "name": "punctuation.range-based.c",
+          "name": "punctuation.range-based",
         },
       ],
     },
     "pragma-mark": {
       "captures": {
         "1": {
-          "name": "meta.preprocessor.pragma.c",
+          "name": "meta.preprocessor.pragma",
         },
         "2": {
-          "name": "keyword.control.directive.pragma.pragma-mark.c",
+          "name": "keyword.control.directive.pragma.pragma-mark",
         },
         "3": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
         "4": {
-          "name": "entity.name.tag.pragma-mark.c",
+          "name": "entity.name.tag.pragma-mark",
         },
       },
       "match": "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
-      "name": "meta.section.c",
+      "name": "meta.section",
     },
     "operators": {
       "patterns": [
         {
           "match": "(?<![\\w$])(sizeof)(?![\\w$])",
-          "name": "keyword.operator.sizeof.c",
+          "name": "keyword.operator.sizeof",
         },
         {
           "match": "--",
-          "name": "keyword.operator.decrement.c",
+          "name": "keyword.operator.decrement",
         },
         {
           "match": "\\+\\+",
-          "name": "keyword.operator.increment.c",
+          "name": "keyword.operator.increment",
         },
         {
           "match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
-          "name": "keyword.operator.assignment.compound.c",
+          "name": "keyword.operator.assignment.compound",
         },
         {
           "match": "&=|\\^=|<<=|>>=|\\|=",
-          "name": "keyword.operator.assignment.compound.bitwise.c",
+          "name": "keyword.operator.assignment.compound.bitwise",
         },
         {
           "match": "<<|>>",
-          "name": "keyword.operator.bitwise.shift.c",
+          "name": "keyword.operator.bitwise.shift",
         },
         {
           "match": "!=|<=|>=|==|<|>",
-          "name": "keyword.operator.comparison.c",
+          "name": "keyword.operator.comparison",
         },
         {
           "match": "&&|!|\\|\\|",
-          "name": "keyword.operator.logical.c",
+          "name": "keyword.operator.logical",
         },
         {
           "match": "&|\\||\\^|~",
-          "name": "keyword.operator.c",
+          "name": "keyword.operator",
         },
         {
           "match": "=",
-          "name": "keyword.operator.assignment.c",
+          "name": "keyword.operator.assignment",
         },
         {
           "match": "%|\\*|/|-|\\+",
-          "name": "keyword.operator.c",
+          "name": "keyword.operator",
         },
         {
           "begin": "(\\?)",
           "beginCaptures": {
             "1": {
-              "name": "keyword.operator.ternary.c",
+              "name": "keyword.operator.ternary",
             },
           },
           "end": "(:)",
           "endCaptures": {
             "1": {
-              "name": "keyword.operator.ternary.c",
+              "name": "keyword.operator.ternary",
             },
           },
           "patterns": [
@@ -1049,16 +1049,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.c",
+          "name": "string.quoted.double",
           "patterns": [
             {
               "include": "#string_escaped_char",
@@ -1075,16 +1075,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "'",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.c",
+          "name": "string.quoted.single",
           "patterns": [
             {
               "include": "#string_escaped_char",
@@ -1100,11 +1100,11 @@ objective_cpp_grammar[:"c_lang"] = {
       "patterns": [
         {
           "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
-          "name": "constant.character.escape.c",
+          "name": "constant.character.escape",
         },
         {
           "match": "\\\\.",
-          "name": "invalid.illegal.unknown-escape.c",
+          "name": "invalid.illegal.unknown-escape",
         },
       ],
     },
@@ -1112,13 +1112,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "patterns": [
         {
           "match": "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-          "name": "constant.other.placeholder.c",
+          "name": "constant.other.placeholder",
         },
         {
           "match": "(%)(?!\"\\s*(PRI|SCN))",
           "captures": {
             "1": {
-              "name": "invalid.illegal.placeholder.c",
+              "name": "invalid.illegal.placeholder",
             },
           },
         },
@@ -1128,21 +1128,21 @@ objective_cpp_grammar[:"c_lang"] = {
       "patterns": [
         {
           "match": "(?-mix:(?<!\\w)(?:void|char|short|int|signed|unsigned|long|float|double|bool|_Bool)(?!\\w))",
-          "name": "storage.type.built-in.primitive.c",
+          "name": "storage.type.built-in.primitive",
         },
         {
           "match": "(?-mix:(?<!\\w)(?:_Complex|_Imaginary|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|memory_order|atomic_bool|atomic_char|atomic_schar|atomic_uchar|atomic_short|atomic_ushort|atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_llong|atomic_ullong|atomic_char16_t|atomic_char32_t|atomic_wchar_t|atomic_int_least8_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_least16_t|atomic_int_least32_t|atomic_uint_least32_t|atomic_int_least64_t|atomic_uint_least64_t|atomic_int_fast8_t|atomic_uint_fast8_t|atomic_int_fast16_t|atomic_uint_fast16_t|atomic_int_fast32_t|atomic_uint_fast32_t|atomic_int_fast64_t|atomic_uint_fast64_t|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_intmax_t|atomic_uintmax_t)(?!\\w))",
-          "name": "storage.type.built-in.c",
+          "name": "storage.type.built-in",
         },
         {
           "match": "(?-mix:\\b(asm|__asm__|enum|struct|union)\\b)",
-          "name": "storage.type.$1.c",
+          "name": "storage.type.$1",
         },
       ],
     },
     "vararg_ellipses": {
       "match": "(?<!\\.)\\.\\.\\.(?!\\.)",
-      "name": "punctuation.vararg-ellipses.c",
+      "name": "punctuation.vararg-ellipses",
     },
     "preprocessor-rule-conditional": {
       "patterns": [
@@ -1150,32 +1150,32 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1195,14 +1195,14 @@ objective_cpp_grammar[:"c_lang"] = {
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1218,7 +1218,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "^\\s*#\\s*(else|elif|endif)\\b",
           "captures": {
             "0": {
-              "name": "invalid.illegal.stray-$1.c",
+              "name": "invalid.illegal.stray-$1",
             },
           },
         },
@@ -1230,32 +1230,32 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1275,14 +1275,14 @@ objective_cpp_grammar[:"c_lang"] = {
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1298,7 +1298,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "^\\s*#\\s*(else|elif|endif)\\b",
           "captures": {
             "0": {
-              "name": "invalid.illegal.stray-$1.c",
+              "name": "invalid.illegal.stray-$1",
             },
           },
         },
@@ -1308,11 +1308,11 @@ objective_cpp_grammar[:"c_lang"] = {
       "patterns": [
         {
           "match": "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         {
           "match": "\\bdefined\\b",
-          "name": "invalid.illegal.macro-name.c",
+          "name": "invalid.illegal.macro-name",
         },
         {
           "include": "#comments",
@@ -1327,13 +1327,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\\?",
           "beginCaptures": {
             "0": {
-              "name": "keyword.operator.ternary.c",
+              "name": "keyword.operator.ternary",
             },
           },
           "end": ":",
           "endCaptures": {
             "0": {
-              "name": "keyword.operator.ternary.c",
+              "name": "keyword.operator.ternary",
             },
           },
           "patterns": [
@@ -1347,11 +1347,11 @@ objective_cpp_grammar[:"c_lang"] = {
         },
         {
           "match": "\\b(NULL|true|false|TRUE|FALSE)\\b",
-          "name": "constant.language.c",
+          "name": "constant.language",
         },
         {
           "match": "[a-zA-Z_$][\\w$]*",
-          "name": "entity.name.function.preprocessor.c",
+          "name": "entity.name.function.preprocessor",
         },
         {
           "include": "#line_continuation_character",
@@ -1360,13 +1360,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.c",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)|(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.c",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
@@ -1383,32 +1383,32 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1431,13 +1431,13 @@ objective_cpp_grammar[:"c_lang"] = {
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
@@ -1445,7 +1445,7 @@ objective_cpp_grammar[:"c_lang"] = {
                 {
                   "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
                   "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                   "patterns": [
                     {
                       "include": "#preprocessor-rule-conditional-line",
@@ -1458,7 +1458,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.if-branch.c",
+              "contentName": "comment.block.preprocessor.if-branch",
               "begin": "\\n",
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
               "patterns": [
@@ -1480,32 +1480,32 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1528,13 +1528,13 @@ objective_cpp_grammar[:"c_lang"] = {
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
@@ -1542,7 +1542,7 @@ objective_cpp_grammar[:"c_lang"] = {
                 {
                   "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
                   "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                   "patterns": [
                     {
                       "include": "#preprocessor-rule-conditional-line",
@@ -1555,7 +1555,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.if-branch.in-block.c",
+              "contentName": "comment.block.preprocessor.if-branch.in-block",
               "begin": "\\n",
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
               "patterns": [
@@ -1575,13 +1575,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
@@ -1589,7 +1589,7 @@ objective_cpp_grammar[:"c_lang"] = {
         {
           "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
           "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
           "patterns": [
             {
               "include": "#preprocessor-rule-conditional-line",
@@ -1600,7 +1600,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "include": "#comments",
         },
         {
-          "contentName": "comment.block.preprocessor.elif-branch.c",
+          "contentName": "comment.block.preprocessor.elif-branch",
           "begin": "\\n",
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
@@ -1620,35 +1620,35 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
             "3": {
-              "name": "constant.numeric.preprocessor.c",
+              "name": "constant.numeric.preprocessor",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1659,17 +1659,17 @@ objective_cpp_grammar[:"c_lang"] = {
               "include": "#comments",
             },
             {
-              "contentName": "comment.block.preprocessor.else-branch.c",
+              "contentName": "comment.block.preprocessor.else-branch",
               "begin": "^\\s*((#)\\s*else\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1683,17 +1683,17 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.if-branch.c",
+              "contentName": "comment.block.preprocessor.if-branch",
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
@@ -1725,32 +1725,32 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "end": "^\\s*((#)\\s*endif\\b)",
           "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.c",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.c",
+              "name": "punctuation.definition.directive",
             },
           },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
               "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-              "name": "meta.preprocessor.c",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
                   "include": "#preprocessor-rule-conditional-line",
@@ -1761,17 +1761,17 @@ objective_cpp_grammar[:"c_lang"] = {
               "include": "#comments",
             },
             {
-              "contentName": "comment.block.preprocessor.else-branch.in-block.c",
+              "contentName": "comment.block.preprocessor.else-branch.in-block",
               "begin": "^\\s*((#)\\s*else\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1785,17 +1785,17 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.if-branch.in-block.c",
+              "contentName": "comment.block.preprocessor.if-branch.in-block",
               "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
@@ -1825,13 +1825,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1839,7 +1839,7 @@ objective_cpp_grammar[:"c_lang"] = {
         {
           "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
           "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
           "patterns": [
             {
               "include": "#preprocessor-rule-conditional-line",
@@ -1854,17 +1854,17 @@ objective_cpp_grammar[:"c_lang"] = {
           "end": "(?=^\\s*((#)\\s*(?:endif)\\b))",
           "patterns": [
             {
-              "contentName": "comment.block.preprocessor.elif-branch.c",
+              "contentName": "comment.block.preprocessor.elif-branch",
               "begin": "^\\s*((#)\\s*(else)\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1878,17 +1878,17 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.elif-branch.c",
+              "contentName": "comment.block.preprocessor.elif-branch",
               "begin": "^\\s*((#)\\s*(elif)\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
@@ -1912,13 +1912,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1926,7 +1926,7 @@ objective_cpp_grammar[:"c_lang"] = {
         {
           "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
           "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
           "patterns": [
             {
               "include": "#preprocessor-rule-conditional-line",
@@ -1941,17 +1941,17 @@ objective_cpp_grammar[:"c_lang"] = {
           "end": "(?=^\\s*((#)\\s*(?:endif)\\b))",
           "patterns": [
             {
-              "contentName": "comment.block.preprocessor.elif-branch.in-block.c",
+              "contentName": "comment.block.preprocessor.elif-branch.in-block",
               "begin": "^\\s*((#)\\s*(else)\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -1965,17 +1965,17 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.elif-branch.c",
+              "contentName": "comment.block.preprocessor.elif-branch",
               "begin": "^\\s*((#)\\s*(elif)\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.c",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.c",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.c",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
@@ -1999,13 +1999,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*else\\b)",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -2019,13 +2019,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "^\\s*((#)\\s*else\\b)",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.c",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.c",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.c",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -2044,16 +2044,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.c",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.c",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
-          "name": "meta.block.c",
+          "name": "meta.block",
           "patterns": [
             {
               "include": "#preprocessor-rule-define-line-blocks",
@@ -2062,16 +2062,16 @@ objective_cpp_grammar[:"c_lang"] = {
         },
         {
           "match": "\\(",
-          "name": "punctuation.section.parens.begin.bracket.round.c",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
         {
           "match": "\\)",
-          "name": "punctuation.section.parens.end.bracket.round.c",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
         {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
           "end": "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
-          "name": "meta.function.c",
+          "name": "meta.function",
           "patterns": [
             {
               "include": "#preprocessor-rule-define-line-functions",
@@ -2082,16 +2082,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.c",
+          "name": "string.quoted.double",
           "patterns": [
             {
               "include": "#string_escaped_char",
@@ -2108,16 +2108,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "'",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.c",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.c",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.c",
+          "name": "string.quoted.single",
           "patterns": [
             {
               "include": "#string_escaped_char",
@@ -2144,13 +2144,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.c",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.c",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
           "patterns": [
@@ -2191,16 +2191,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.c",
+              "name": "entity.name.function",
             },
             "2": {
-              "name": "punctuation.section.arguments.begin.bracket.round.c",
+              "name": "punctuation.section.arguments.begin.bracket.round",
             },
           },
           "end": "(\\))|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.arguments.end.bracket.round.c",
+              "name": "punctuation.section.arguments.end.bracket.round",
             },
           },
           "patterns": [
@@ -2213,13 +2213,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.c",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "(\\))|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.parens.end.bracket.round.c",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
@@ -2248,20 +2248,20 @@ objective_cpp_grammar[:"c_lang"] = {
           "include": "#vararg_ellipses",
         },
         {
-          "name": "meta.function.definition.parameters.c",
+          "name": "meta.function.definition.parameters",
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.c",
+              "name": "entity.name.function",
             },
             "2": {
-              "name": "punctuation.section.parameters.begin.bracket.round.c",
+              "name": "punctuation.section.parameters.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parameters.end.bracket.round.c",
+              "name": "punctuation.section.parameters.end.bracket.round",
             },
           },
           "patterns": [
@@ -2277,13 +2277,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.c",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.c",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
@@ -2318,16 +2318,16 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.c",
+              "name": "entity.name.function",
             },
             "2": {
-              "name": "punctuation.section.arguments.begin.bracket.round.c",
+              "name": "punctuation.section.arguments.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.arguments.end.bracket.round.c",
+              "name": "punctuation.section.arguments.end.bracket.round",
             },
           },
           "patterns": [
@@ -2340,13 +2340,13 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.c",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.c",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
@@ -2361,17 +2361,17 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     "default_statement": {
-      "name": "meta.conditional.case.c",
+      "name": "meta.conditional.case",
       "begin": "((?<!\\w)default(?!\\w))",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.default.c",
+          "name": "keyword.control.default",
         },
       },
       "end": "(:)",
       "endCaptures": {
         "1": {
-          "name": "colon.c punctuation.separator.case.default.c",
+          "name": "colon.c punctuation.separator.case.default",
         },
       },
       "patterns": [
@@ -2381,17 +2381,17 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     "case_statement": {
-      "name": "meta.conditional.case.c",
+      "name": "meta.conditional.case",
       "begin": "((?<!\\w)case(?!\\w))",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.case.c",
+          "name": "keyword.control.case",
         },
       },
       "end": "(:)",
       "endCaptures": {
         "1": {
-          "name": "colon.c punctuation.separator.case.c",
+          "name": "colon.c punctuation.separator.case",
         },
       },
       "patterns": [
@@ -2401,25 +2401,25 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     "switch_statement": {
-      "name": "meta.block.switch.c",
+      "name": "meta.block.switch",
       "begin": "(((?<!\\w)switch(?!\\w)))",
       "beginCaptures": {
         "1": {
-          "name": "meta.head.switch.c",
+          "name": "meta.head.switch",
         },
         "2": {
-          "name": "keyword.control.switch.c",
+          "name": "keyword.control.switch",
         },
       },
       "end": "(?:(?<=\\})|(?=[;>\\[\\]=]))",
       "patterns": [
         {
-          "name": "meta.head.switch.c",
+          "name": "meta.head.switch",
           "begin": "\\G ?",
           "end": "((?:\\{|(?=;)))",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.switch.c",
+              "name": "punctuation.section.block.begin.bracket.curly.switch",
             },
           },
           "patterns": [
@@ -2432,12 +2432,12 @@ objective_cpp_grammar[:"c_lang"] = {
           ],
         },
         {
-          "name": "meta.body.switch.c",
+          "name": "meta.body.switch",
           "begin": "(?<=\\{)",
           "end": "(\\})",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.end.bracket.curly.switch.c",
+              "name": "punctuation.section.block.end.bracket.curly.switch",
             },
           },
           "patterns": [
@@ -2456,7 +2456,7 @@ objective_cpp_grammar[:"c_lang"] = {
           ],
         },
         {
-          "name": "meta.tail.switch.c",
+          "name": "meta.tail.switch",
           "begin": "(?<=})[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
@@ -2468,17 +2468,17 @@ objective_cpp_grammar[:"c_lang"] = {
       ],
     },
     "switch_conditional_parentheses": {
-      "name": "meta.conditional.switch.c",
+      "name": "meta.conditional.switch",
       "begin": "(\\()",
       "beginCaptures": {
         "1": {
-          "name": "punctuation.section.parens.begin.bracket.round.conditional.switch.c",
+          "name": "punctuation.section.parens.begin.bracket.round.conditional.switch",
         },
       },
       "end": "(\\))",
       "endCaptures": {
         "1": {
-          "name": "punctuation.section.parens.end.bracket.round.conditional.switch.c",
+          "name": "punctuation.section.parens.end.bracket.round.conditional.switch",
         },
       },
       "patterns": [
@@ -2491,25 +2491,25 @@ objective_cpp_grammar[:"c_lang"] = {
       "begin": "(static_assert|_Static_assert)\\s*(\\()",
       "beginCaptures": {
         "1": {
-          "name": "keyword.other.static_assert.c",
+          "name": "keyword.other.static_assert",
         },
         "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.c",
+          "name": "punctuation.section.arguments.begin.bracket.round",
         },
       },
       "end": "(\\))",
       "endCaptures": {
         "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.c",
+          "name": "punctuation.section.arguments.end.bracket.round",
         },
       },
       "patterns": [
         {
-          "name": "meta.static_assert.message.c",
+          "name": "meta.static_assert.message",
           "begin": "(,)\\s*(?=(?:L|u8|u|U\\s*\\\")?)",
           "beginCaptures": {
             "1": {
-              "name": "comma.c punctuation.separator.delimiter.c",
+              "name": "comma.c punctuation.separator.delimiter",
             },
           },
           "end": "(?=\\))",
@@ -2541,13 +2541,13 @@ objective_cpp_grammar[:"c_lang"] = {
       "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:void|char|short|int|signed|unsigned|long|float|double|bool|_Bool|_Complex|_Imaginary|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|memory_order|atomic_bool|atomic_char|atomic_schar|atomic_uchar|atomic_short|atomic_ushort|atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_llong|atomic_ullong|atomic_char16_t|atomic_char32_t|atomic_wchar_t|atomic_int_least8_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_least16_t|atomic_int_least32_t|atomic_uint_least32_t|atomic_int_least64_t|atomic_uint_least64_t|atomic_int_fast8_t|atomic_uint_fast8_t|atomic_int_fast16_t|atomic_uint_fast16_t|atomic_int_fast32_t|atomic_uint_fast32_t|atomic_int_fast64_t|atomic_uint_fast64_t|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_intmax_t|atomic_uintmax_t))[a-zA-Z_]\\w*\\b(?!\\())",
       "captures": {
         "1": {
-          "name": "variable.other.object.access.c",
+          "name": "variable.other.object.access",
         },
         "2": {
-          "name": "punctuation.separator.dot-access.c",
+          "name": "punctuation.separator.dot-access",
         },
         "3": {
-          "name": "punctuation.separator.pointer-access.c",
+          "name": "punctuation.separator.pointer-access",
         },
         "4": {
           "patterns": [
@@ -2561,35 +2561,35 @@ objective_cpp_grammar[:"c_lang"] = {
               "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.c",
+                  "name": "variable.other.object.access",
                 },
                 "2": {
-                  "name": "punctuation.separator.dot-access.c",
+                  "name": "punctuation.separator.dot-access",
                 },
                 "3": {
-                  "name": "punctuation.separator.pointer-access.c",
+                  "name": "punctuation.separator.pointer-access",
                 },
               },
             },
           ],
         },
         "5": {
-          "name": "variable.other.member.c",
+          "name": "variable.other.member",
         },
       },
     },
     "method_access": {
-      "contentName": "meta.function-call.member.c",
+      "contentName": "meta.function-call.member",
       "begin": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()",
       "beginCaptures": {
         "1": {
-          "name": "variable.other.object.access.c",
+          "name": "variable.other.object.access",
         },
         "2": {
-          "name": "punctuation.separator.dot-access.c",
+          "name": "punctuation.separator.dot-access",
         },
         "3": {
-          "name": "punctuation.separator.pointer-access.c",
+          "name": "punctuation.separator.pointer-access",
         },
         "4": {
           "patterns": [
@@ -2603,29 +2603,29 @@ objective_cpp_grammar[:"c_lang"] = {
               "match": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
               "captures": {
                 "1": {
-                  "name": "variable.other.object.access.c",
+                  "name": "variable.other.object.access",
                 },
                 "2": {
-                  "name": "punctuation.separator.dot-access.c",
+                  "name": "punctuation.separator.dot-access",
                 },
                 "3": {
-                  "name": "punctuation.separator.pointer-access.c",
+                  "name": "punctuation.separator.pointer-access",
                 },
               },
             },
           ],
         },
         "5": {
-          "name": "entity.name.function.member.c",
+          "name": "entity.name.function.member",
         },
         "6": {
-          "name": "punctuation.section.arguments.begin.bracket.round.function.member.c",
+          "name": "punctuation.section.arguments.begin.bracket.round.function.member",
         },
       },
       "end": "(\\))",
       "endCaptures": {
         "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.function.member.c",
+          "name": "punctuation.section.arguments.end.bracket.round.function.member",
         },
       },
       "patterns": [
@@ -2642,10 +2642,10 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G0[xX])(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?(?:((?<!')([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:([lLfF](?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "1": {
-              "name": "keyword.other.unit.hexadecimal.c",
+              "name": "keyword.other.unit.hexadecimal",
             },
             "2": {
-              "name": "constant.numeric.hexadecimal.c",
+              "name": "constant.numeric.hexadecimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2657,10 +2657,10 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "4": {
-              "name": "constant.numeric.hexadecimal.c",
+              "name": "constant.numeric.hexadecimal",
             },
             "5": {
-              "name": "constant.numeric.hexadecimal.c",
+              "name": "constant.numeric.hexadecimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2672,16 +2672,16 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "8": {
-              "name": "keyword.other.unit.exponent.hexadecimal.c",
+              "name": "keyword.other.unit.exponent.hexadecimal",
             },
             "9": {
-              "name": "keyword.operator.plus.exponent.hexadecimal.c",
+              "name": "keyword.operator.plus.exponent.hexadecimal",
             },
             "10": {
-              "name": "keyword.operator.minus.exponent.hexadecimal.c",
+              "name": "keyword.operator.minus.exponent.hexadecimal",
             },
             "11": {
-              "name": "constant.numeric.exponent.hexadecimal.c",
+              "name": "constant.numeric.exponent.hexadecimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2690,7 +2690,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             "12": {
-              "name": "keyword.other.unit.suffix.floating-point.c",
+              "name": "keyword.other.unit.suffix.floating-point",
             },
           },
         },
@@ -2698,7 +2698,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G(?=[0-9.])(?!0[xXbB]))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:([lLfF](?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "2": {
-              "name": "constant.numeric.decimal.c",
+              "name": "constant.numeric.decimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2710,10 +2710,10 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "4": {
-              "name": "constant.numeric.decimal.point.c",
+              "name": "constant.numeric.decimal.point",
             },
             "5": {
-              "name": "constant.numeric.decimal.c",
+              "name": "constant.numeric.decimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2725,16 +2725,16 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "8": {
-              "name": "keyword.other.unit.exponent.decimal.c",
+              "name": "keyword.other.unit.exponent.decimal",
             },
             "9": {
-              "name": "keyword.operator.plus.exponent.decimal.c",
+              "name": "keyword.operator.plus.exponent.decimal",
             },
             "10": {
-              "name": "keyword.operator.minus.exponent.decimal.c",
+              "name": "keyword.operator.minus.exponent.decimal",
             },
             "11": {
-              "name": "constant.numeric.exponent.decimal.c",
+              "name": "constant.numeric.exponent.decimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2743,7 +2743,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             "12": {
-              "name": "keyword.other.unit.suffix.floating-point.c",
+              "name": "keyword.other.unit.suffix.floating-point",
             },
           },
         },
@@ -2751,10 +2751,10 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G0[bB])([01](?:(?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "1": {
-              "name": "keyword.other.unit.binary.c",
+              "name": "keyword.other.unit.binary",
             },
             "2": {
-              "name": "constant.numeric.binary.c",
+              "name": "constant.numeric.binary",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2766,7 +2766,7 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "4": {
-              "name": "keyword.other.unit.suffix.integer.c",
+              "name": "keyword.other.unit.suffix.integer",
             },
           },
         },
@@ -2774,10 +2774,10 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G0)((?:(?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))+)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "1": {
-              "name": "keyword.other.unit.octal.c",
+              "name": "keyword.other.unit.octal",
             },
             "2": {
-              "name": "constant.numeric.octal.c",
+              "name": "constant.numeric.octal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2789,7 +2789,7 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "4": {
-              "name": "keyword.other.unit.suffix.integer.c",
+              "name": "keyword.other.unit.suffix.integer",
             },
           },
         },
@@ -2797,10 +2797,10 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G0[xX])([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?<!')([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "1": {
-              "name": "keyword.other.unit.hexadecimal.c",
+              "name": "keyword.other.unit.hexadecimal",
             },
             "2": {
-              "name": "constant.numeric.hexadecimal.c",
+              "name": "constant.numeric.hexadecimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2812,16 +2812,16 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "5": {
-              "name": "keyword.other.unit.exponent.hexadecimal.c",
+              "name": "keyword.other.unit.exponent.hexadecimal",
             },
             "6": {
-              "name": "keyword.operator.plus.exponent.hexadecimal.c",
+              "name": "keyword.operator.plus.exponent.hexadecimal",
             },
             "7": {
-              "name": "keyword.operator.minus.exponent.hexadecimal.c",
+              "name": "keyword.operator.minus.exponent.hexadecimal",
             },
             "8": {
-              "name": "constant.numeric.exponent.hexadecimal.c",
+              "name": "constant.numeric.exponent.hexadecimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2830,7 +2830,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             "9": {
-              "name": "keyword.other.unit.suffix.integer.c",
+              "name": "keyword.other.unit.suffix.integer",
             },
           },
         },
@@ -2838,7 +2838,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "match": "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
           "captures": {
             "2": {
-              "name": "constant.numeric.decimal.c",
+              "name": "constant.numeric.decimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2850,16 +2850,16 @@ objective_cpp_grammar[:"c_lang"] = {
               "name": "punctuation.separator.constant.numeric",
             },
             "5": {
-              "name": "keyword.other.unit.exponent.decimal.c",
+              "name": "keyword.other.unit.exponent.decimal",
             },
             "6": {
-              "name": "keyword.operator.plus.exponent.decimal.c",
+              "name": "keyword.operator.plus.exponent.decimal",
             },
             "7": {
-              "name": "keyword.operator.minus.exponent.decimal.c",
+              "name": "keyword.operator.minus.exponent.decimal",
             },
             "8": {
-              "name": "constant.numeric.exponent.decimal.c",
+              "name": "constant.numeric.exponent.decimal",
               "patterns": [
                 {
                   "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
@@ -2868,7 +2868,7 @@ objective_cpp_grammar[:"c_lang"] = {
               ],
             },
             "9": {
-              "name": "keyword.other.unit.suffix.integer.c",
+              "name": "keyword.other.unit.suffix.integer",
             },
           },
         },
@@ -2880,91 +2880,670 @@ objective_cpp_grammar[:"c_lang"] = {
     },
   },
 }
-objective_cpp_grammar[:"cpp_lang"] = {
+objective_cpp_grammar[:cpp_lang] = {
   "patterns": [
     {
-      "include": "#struct_declare",
+          "include": "#special_block",
+        },
+    {
+          "include": "#strings",
+        },
+    {
+          "match": "\\b(friend|explicit|virtual|override|final|noexcept)\\b",
+          "name": "storage.modifier.cpp",
+        },
+    {
+          "match": "\\b(private:|protected:|public:)",
+          "name": "storage.type.modifier.access.cpp",
+        },
+    {
+          "match": "\\b(catch|try|throw|using)\\b",
+          "name": "keyword.control.cpp",
+        },
+    {
+          "match": "\\bdelete\\b(\\s*\\[\\])?|\\bnew\\b(?!])",
+          "name": "keyword.control.cpp",
+        },
+    {
+          "match": "\\b(f|m)[A-Z]\\w*\\b",
+          "name": "variable.other.readwrite.member.cpp",
+        },
+    {
+          "match": "\\bthis\\b",
+          "name": "variable.language.this.cpp",
+        },
+    {
+          "match": "\\bnullptr\\b",
+          "name": "constant.language.cpp",
+        },
+    {
+          "include": "#template_definition",
+        },
+    {
+          "match": "\\btemplate\\b\\s*",
+          "name": "storage.type.template.cpp",
+        },
+    {
+          "match": "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*",
+          "name": "keyword.operator.cast.cpp",
+        },
+    {
+          "name": "punctuation.separator.namespace.access.cpp",
+          "match": "((?:[a-zA-Z_][a-zA-Z_0-9]*::)*)([a-zA-Z_][a-zA-Z_0-9]*)(::)",
+          "captures": {
+            "1": {
+              "name": "entity.scope.c",
+            },
+            "2": {
+              "name": "entity.scope.name.c",
+            },
+            "3": {
+              "name": "punctuation.separator.namespace.access.cpp",
+            },
+          },
+        },
+    {
+          "match": "\\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\b",
+          "name": "keyword.operator.cpp",
+        },
+    {
+          "match": "\\b(decltype|wchar_t|char16_t|char32_t)\\b",
+          "name": "storage.type.cpp",
+        },
+    {
+          "match": "\\b(constexpr|export|mutable|typename|thread_local)\\b",
+          "name": "storage.modifier.cpp",
+        },
+    {
+          "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.cpp",
+            },
+            "2": {
+              "name": "punctuation.definition.parameters.begin.c",
+            },
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.c",
+            },
+          },
+          "name": "meta.function.destructor.cpp",
+          "patterns": [
+            {
+                  "include": "$base",
+                },
+          ],
+        },
+    {
+          "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.cpp",
+            },
+            "2": {
+              "name": "punctuation.definition.parameters.begin.c",
+            },
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.c",
+            },
+          },
+          "name": "meta.function.destructor.prototype.cpp",
+          "patterns": [
+            {
+                  "include": "$base",
+                },
+          ],
+        },
+    {
+          "include": "#c_lang",
+        },
+  ],
+  "repository": {
+    "template_definition": {
+      "begin": "\\b(template)\\s*(<)\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.template.cpp",
+        },
+        "2": {
+          "name": "meta.template.angle-brackets.start.cpp",
+        },
+      },
+      "end": ">",
+      "endCaptures": {
+        "0": {
+          "name": "meta.template.angle-brackets.end.cpp",
+        },
+      },
+      "name": "template.definition",
+      "patterns": [
+        {
+                  "include": "#template_definition_argument",
+                },
+      ],
+    },
+    "template_definition_argument": {
+      "match": "\\s*(?:([a-zA-Z_][a-zA-Z_0-9]*\\s*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)|([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_][a-zA-Z_0-9]*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))(,|(?=>))",
+      "captures": {
+        "1": {
+          "name": "storage.type.template.cpp",
+        },
+        "2": {
+          "name": "storage.type.template.cpp",
+        },
+        "3": {
+          "name": "entity.name.type.template.cpp",
+        },
+        "4": {
+          "name": "storage.type.template.cpp",
+        },
+        "5": {
+          "name": "meta.template.operator.ellipsis",
+        },
+        "6": {
+          "name": "entity.name.type.template.cpp",
+        },
+        "7": {
+          "name": "storage.type.template.cpp",
+        },
+        "8": {
+          "name": "entity.name.type.template.cpp",
+        },
+        "9": {
+          "name": "keyword.operator.assignment.c",
+        },
+        "10": {
+          "name": "constant.language.cpp",
+        },
+        "11": {
+          "name": "meta.template.operator.comma.cpp",
+        },
+      },
+    },
+    "angle_brackets": {
+      "begin": "<",
+      "end": ">",
+      "name": "meta.angle-brackets.cpp",
+      "patterns": [
+        {
+                  "include": "#angle_brackets",
+                },
+        {
+                  "include": "$base",
+                },
+      ],
+    },
+    "block": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.block.begin.bracket.curly.c",
+        },
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.block.end.bracket.curly.c",
+        },
+      },
+      "name": "meta.block.cpp",
+      "patterns": [
+        {
+                  "captures": {
+                    "1": {
+                      "name": "support.function.any-method.c",
+                    },
+                    "2": {
+                      "name": "punctuation.definition.parameters.c",
+                    },
+                  },
+                  "match": "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
+                  "name": "meta.function-call.c",
+                },
+        {
+                  "include": "$base",
+                },
+      ],
+    },
+    "constructor": {
+      "patterns": [
+        {
+                  "begin": "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch|enumerate|r?iterate)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "entity.name.function.constructor.cpp",
+                    },
+                    "2": {
+                      "name": "punctuation.definition.parameters.begin.c",
+                    },
+                  },
+                  "end": "\\)",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.parameters.end.c",
+                    },
+                  },
+                  "name": "meta.function.constructor.cpp",
+                  "patterns": [
+                    {
+                          "include": "#probably_a_parameter",
+                        },
+                    {
+                          "include": "#function-innards",
+                        },
+                  ],
+                },
+        {
+                  "begin": "(?x)\n(:)\n(\n  (?=\n    \\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n    \\s* (\\() # opening bracket\n  )\n)",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "punctuation.definition.parameters.c",
+                    },
+                  },
+                  "end": "(?=\\{)",
+                  "name": "meta.function.constructor.initializer-list.cpp",
+                  "patterns": [
+                    {
+                          "include": "$base",
+                        },
+                  ],
+                },
+      ],
+    },
+    "special_block": {
+      "patterns": [
+        {
+                  "begin": "\\b(using)\\b\\s*(namespace)\\b\\s*((?:[_A-Za-z][_A-Za-z0-9]*\\b(::)?)*)",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "keyword.control.cpp",
+                    },
+                    "2": {
+                      "name": "storage.type.namespace.cpp",
+                    },
+                    "3": {
+                      "name": "entity.name.type.cpp",
+                    },
+                  },
+                  "end": ";",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.terminator.statement.c",
+                    },
+                  },
+                  "name": "meta.using-namespace-declaration.cpp",
+                },
+        {
+                  "begin": "\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "storage.type.namespace.cpp",
+                    },
+                    "2": {
+                      "name": "entity.name.type.cpp",
+                    },
+                  },
+                  "captures": {
+                    "1": {
+                      "name": "keyword.control.namespace.$2",
+                    },
+                  },
+                  "end": "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
+                  "name": "meta.namespace-block.cpp",
+                  "patterns": [
+                    {
+                          "begin": "\\{",
+                          "beginCaptures": {
+                            "0": {
+                              "name": "punctuation.definition.scope.cpp",
+                            },
+                          },
+                          "end": "\\}",
+                          "endCaptures": {
+                            "0": {
+                              "name": "punctuation.definition.scope.cpp",
+                            },
+                          },
+                          "patterns": [
+                            {
+                                  "include": "#special_block",
+                                },
+                            {
+                                  "include": "#constructor",
+                                },
+                            {
+                                  "include": "$base",
+                                },
+                          ],
+                        },
+                    {
+                          "include": "$base",
+                        },
+                  ],
+                },
+        {
+                  "begin": "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "storage.type.class.cpp",
+                    },
+                    "2": {
+                      "name": "storage.type.struct.cpp",
+                    },
+                    "3": {
+                      "name": "entity.name.type.cpp",
+                    },
+                    "5": {
+                      "name": "storage.type.modifier.access.cpp",
+                    },
+                    "6": {
+                      "name": "entity.name.type.inherited.cpp",
+                    },
+                    "7": {
+                      "patterns": [
+                        {
+                                  "match": "(public|protected|private)",
+                                  "name": "storage.type.modifier.access.cpp",
+                                },
+                        {
+                                  "match": "[_A-Za-z][_A-Za-z0-9]*",
+                                  "name": "entity.name.type.inherited.cpp",
+                                },
+                      ],
+                    },
+                  },
+                  "end": "(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))",
+                  "name": "meta.class-struct-block.cpp",
+                  "patterns": [
+                    {
+                          "include": "#angle_brackets",
+                        },
+                    {
+                          "begin": "\\{",
+                          "beginCaptures": {
+                            "0": {
+                              "name": "punctuation.section.block.begin.bracket.curly.cpp",
+                            },
+                          },
+                          "end": "(\\})(\\s*\\n)?",
+                          "endCaptures": {
+                            "1": {
+                              "name": "punctuation.section.block.end.bracket.curly.cpp",
+                            },
+                            "2": {
+                              "name": "invalid.illegal.you-forgot-semicolon.cpp",
+                            },
+                          },
+                          "patterns": [
+                            {
+                                  "include": "#special_block",
+                                },
+                            {
+                                  "include": "#constructor",
+                                },
+                            {
+                                  "include": "$base",
+                                },
+                          ],
+                        },
+                    {
+                          "include": "$base",
+                        },
+                  ],
+                },
+        {
+                  "begin": "\\b(extern)(?=\\s*\")",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "storage.modifier.cpp",
+                    },
+                  },
+                  "end": "(?<=\\})|(?=\\w)|(?=\\s*#\\s*endif\\b)",
+                  "name": "meta.extern-block.cpp",
+                  "patterns": [
+                    {
+                          "begin": "\\{",
+                          "beginCaptures": {
+                            "0": {
+                              "name": "punctuation.section.block.begin.bracket.curly.c",
+                            },
+                          },
+                          "end": "\\}|(?=\\s*#\\s*endif\\b)",
+                          "endCaptures": {
+                            "0": {
+                              "name": "punctuation.section.block.end.bracket.curly.c",
+                            },
+                          },
+                          "patterns": [
+                            {
+                                  "include": "#special_block",
+                                },
+                            {
+                                  "include": "$base",
+                                },
+                          ],
+                        },
+                    {
+                          "include": "$base",
+                        },
+                  ],
+                },
+      ],
+    },
+    "strings": {
+      "patterns": [
+        {
+                  "begin": "(u|u8|U|L)?\"",
+                  "beginCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.string.begin.cpp",
+                    },
+                    "1": {
+                      "name": "meta.encoding.cpp",
+                    },
+                  },
+                  "end": "\"",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.string.end.cpp",
+                    },
+                  },
+                  "name": "string.quoted.double.cpp",
+                  "patterns": [
+                    {
+                          "match": "\\\\u\\h{4}|\\\\U\\h{8}",
+                          "name": "constant.character.escape.cpp",
+                        },
+                    {
+                          "match": "\\\\['\"?\\\\abfnrtv]",
+                          "name": "constant.character.escape.cpp",
+                        },
+                    {
+                          "match": "\\\\[0-7]{1,3}",
+                          "name": "constant.character.escape.cpp",
+                        },
+                    {
+                          "match": "\\\\x\\h+",
+                          "name": "constant.character.escape.cpp",
+                        },
+                    {
+                          "include": "#string_placeholder",
+                        },
+                  ],
+                },
+        {
+                  "begin": "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
+                  "beginCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.string.begin.cpp",
+                    },
+                    "1": {
+                      "name": "meta.encoding.cpp",
+                    },
+                    "3": {
+                      "name": "invalid.illegal.delimiter-too-long.cpp",
+                    },
+                  },
+                  "end": "\\)\\2(\\3)\"",
+                  "endCaptures": {
+                    "0": {
+                      "name": "punctuation.definition.string.end.cpp",
+                    },
+                    "1": {
+                      "name": "invalid.illegal.delimiter-too-long.cpp",
+                    },
+                  },
+                  "name": "string.quoted.double.raw.cpp",
+                },
+      ],
+    },
+  },
+}
+objective_cpp_grammar[:cpp_lang_newish] = {
+  "patterns": [
+    {
+      "include": "#special_block",
     },
     {
-      "include": "#special_block_context",
+      "match": "(?-mix:##[a-zA-Z_]\\w*(?!\\w))",
+      "name": "variable.other.macro.argument",
     },
     {
-      "include": "#macro_argument",
+      "include": "#strings",
     },
     {
-      "include": "#string_context",
+      "match": "(?<!\\w)((?:inline|constexpr|mutable|friend|explicit|virtual))(?!\\w)",
+      "name": "storage.modifier.specificer.functional.pre-parameters.$1",
     },
     {
-      "include": "#functional_specifiers_pre_parameters",
+      "match": "(?<!\\w)((?:final|override|volatile|const|noexcept))(?!\\w)(?=\\s*(?:(?:(?:(?:\\{|;))|[\\n\\r])))",
+      "name": "storage.modifier.specifier.functional.post-parameters.$1",
     },
     {
-      "include": "#qualifiers_and_specifiers_post_parameters",
+      "match": "(?<!\\w)((?:const|static|volatile|register|restrict|extern))(?!\\w)",
+      "name": "storage.modifier.specifier.$1",
     },
     {
-      "include": "#storage_specifiers",
+      "match": "(?<!\\w)((?:private|protected|public)) *:",
+      "name": "storage.type.modifier.access.control.$1",
     },
     {
-      "include": "#access_control_keywords",
+      "match": "(?<!\\w)(?:throw|try|catch)(?!\\w)",
+      "name": "keyword.control.exception.$1",
     },
     {
-      "include": "#exception_keywords",
-    },
-    {
-      "include": "#static_assert",
-    },
-    {
-      "include": "#other_keywords",
+      "match": "(?<!\\w)(using|typedef)(?!\\w)",
+      "name": "keyword.other.$1",
     },
     {
       "include": "#memory_operators",
     },
     {
-      "include": "#the_this_keyword",
+      "match": "\\bthis\\b",
+      "name": "variable.language.this",
     },
     {
-      "include": "#language_constants",
-    },
-    {
-      "include": "#template_isolated_definition",
+      "include": "#constants",
     },
     {
       "include": "#template_definition",
     },
     {
+      "match": "\\btemplate\\b\\s*",
+      "name": "storage.type.template",
+    },
+    {
+      "match": "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*",
+      "name": "keyword.operator.cast.$1",
+    },
+    {
       "include": "#scope_resolution",
     },
     {
-      "include": "#misc_storage_modifiers_1",
+      "match": "\\b(decltype|wchar_t|char16_t|char32_t)\\b",
+      "name": "storage.type",
     },
     {
-      "include": "#destructor",
+      "match": "\\b(constexpr|export|mutable|typename|thread_local)\\b",
+      "name": "storage.modifier",
     },
     {
-      "include": "#destructor_prototype",
+      "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.destructor",
+        },
+        "2": {
+          "name": "punctuation.definition.parameters.begin.destructor",
+        },
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end.destructor",
+        },
+      },
+      "name": "meta.function.destructor",
+      "patterns": [
+        {
+          "include": "$base",
+        },
+      ],
     },
     {
-      "include": "#lambdas",
+      "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function",
+        },
+        "2": {
+          "name": "punctuation.definition.parameters.begin",
+        },
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end",
+        },
+      },
+      "name": "meta.function.destructor.prototype",
+      "patterns": [
+        {
+          "include": "$base",
+        },
+      ],
     },
     {
-      "include": "#preprocessor_context",
+      "include": "#preprocessor-rule-enabled",
     },
     {
-      "include": "#comments_context",
+      "include": "#preprocessor-rule-disabled",
     },
     {
-      "include": "#switch_statement",
+      "include": "#preprocessor-rule-conditional",
     },
     {
-      "include": "#control_flow_keywords",
+      "include": "#comments-c",
     },
     {
-      "include": "#storage_types",
+      "match": "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
+      "name": "keyword.control.$1",
     },
     {
-      "include": "#assembly",
+      "include": "#storage_types_c",
     },
     {
-      "include": "#misc_storage_modifiers_2",
+      "match": "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
+      "name": "storage.modifier",
+    },
+    {
+      "include": "#operators",
     },
     {
       "include": "#operator_overload",
@@ -2973,3321 +3552,68 @@ objective_cpp_grammar[:"cpp_lang"] = {
       "include": "#number_literal",
     },
     {
-      "include": "#string_context_c",
+      "include": "#strings-c",
     },
     {
-      "include": "#meta_preprocessor_macro",
-    },
-    {
-      "include": "#meta_preprocessor_diagnostic",
-    },
-    {
-      "include": "#meta_preprocessor_include",
-    },
-    {
-      "include": "#pragma_mark",
-    },
-    {
-      "include": "#meta_preprocessor_line",
-    },
-    {
-      "include": "#meta_preprocessor_undef",
-    },
-    {
-      "include": "#meta_preprocessor_pragma",
-    },
-    {
-      "include": "#operators",
-    },
-    {
-      "include": "#block",
-    },
-    {
-      "include": "#parentheses",
-    },
-    {
-      "include": "#function_definition",
-    },
-    {
-      "include": "#line_continuation_character",
-    },
-    {
-      "include": "#square_brackets",
-    },
-    {
-      "include": "#empty_square_brackets",
-    },
-    {
-      "include": "#semicolon",
-    },
-    {
-      "include": "#comma",
-    },
-  ],
-  "repository": {
-    "sizeof_operator": {
-      "contentName": "meta.arguments.operator.sizeof",
-      "begin": "((?<!\\w)sizeof(?!\\w))(\\()",
+      "begin": "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
       "beginCaptures": {
         "1": {
-          "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp",
+          "name": "keyword.control.directive.define",
         },
         "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "alignof_operator": {
-      "contentName": "meta.arguments.operator.alignof",
-      "begin": "((?<!\\w)alignof(?!\\w))(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.operator.functionlike.cpp keyword.operator.alignof.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.operator.alignof.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.operator.alignof.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "alignas_operator": {
-      "contentName": "meta.arguments.operator.alignas",
-      "begin": "((?<!\\w)alignas(?!\\w))(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.operator.functionlike.cpp keyword.operator.alignas.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.operator.alignas.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.operator.alignas.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "typeid_operator": {
-      "contentName": "meta.arguments.operator.typeid",
-      "begin": "((?<!\\w)typeid(?!\\w))(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.operator.functionlike.cpp keyword.operator.typeid.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.operator.typeid.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "decltype_specifier": {
-      "contentName": "meta.arguments.decltype",
-      "begin": "((?<!\\w)decltype(?!\\w))(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.decltype.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.decltype.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "semicolon": {
-      "match": ";",
-      "name": "punctuation.terminator.statement.cpp",
-    },
-    "comma": {
-      "match": ",",
-      "name": "comma.cpp punctuation.separator.delimiter.cpp",
-    },
-    "assignment_operator": {
-      "match": "\\=",
-      "name": "keyword.operator.assignment.cpp",
-    },
-    "preprocessor_context": {
-      "patterns": [
-        {
-          "include": "#preprocessor_rule_enabled",
-        },
-        {
-          "include": "#preprocessor_rule_disabled",
-        },
-        {
-          "include": "#preprocessor_rule_conditional",
-        },
-        {
-          "include": "#hacky_fix_for_stray_directive",
-        },
-      ],
-    },
-    "storage_types": {
-      "patterns": [
-        {
-          "include": "#primitive_types",
-        },
-        {
-          "include": "#non_primitive_types",
-        },
-        {
-          "include": "#pthread_types",
-        },
-        {
-          "include": "#posix_reserved_types",
-        },
-      ],
-    },
-    "evaluation_context": {
-      "patterns": [
-        {
-          "include": "$base",
-        },
-      ],
-    },
-    "conditional_context": {
-      "patterns": [
-        {
-          "include": "$base",
-        },
-      ],
-    },
-    "template_definition_context": {
-      "patterns": [
-        {
-          "include": "#scope_resolution",
-        },
-        {
-          "include": "#template_definition_argument",
-        },
-        {
-          "include": "#template_argument_defaulted",
-        },
-        {
-          "include": "#template_call_innards",
-        },
-        {
-          "include": "#evaluation_context",
-        },
-      ],
-    },
-    "template_call_context": {
-      "patterns": [
-        {
-          "include": "#storage_types",
-        },
-        {
-          "include": "#language_constants",
-        },
-        {
-          "include": "#scope_resolution",
-        },
-        {
-          "include": "#user_defined_template_type",
-        },
-        {
-          "include": "#operators",
-        },
-        {
-          "include": "#number_literal",
-        },
-        {
-          "include": "#string_context",
-        },
-        {
-          "include": "#comma_in_template_argument",
-        },
-      ],
-    },
-    "attributes_context": {
-      "patterns": [
-        {
-          "include": "#cpp_attributes",
-        },
-        {
-          "include": "#gcc_attributes",
-        },
-        {
-          "include": "#ms_attributes",
-        },
-        {
-          "include": "#alignas_attribute",
-        },
-      ],
-    },
-    "number_literal": {
-      "begin": "(?<!\\w)(?=\\d|\\.\\d)",
-      "end": "(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))",
-      "patterns": [
-        {
-          "match": "(\\G0[xX])(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?(?:((?<!')([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:([lLfF](?!\\w)))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.unit.hexadecimal.cpp",
-            },
-            "2": {
-              "name": "constant.numeric.hexadecimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "4": {
-              "name": "constant.numeric.hexadecimal.cpp",
-            },
-            "5": {
-              "name": "constant.numeric.hexadecimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "6": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "8": {
-              "name": "keyword.other.unit.exponent.hexadecimal.cpp",
-            },
-            "9": {
-              "name": "keyword.operator.plus.exponent.hexadecimal.cpp",
-            },
-            "10": {
-              "name": "keyword.operator.minus.exponent.hexadecimal.cpp",
-            },
-            "11": {
-              "name": "constant.numeric.exponent.hexadecimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "12": {
-              "name": "keyword.other.unit.suffix.floating-point.cpp",
-            },
-            "13": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(\\G(?=[0-9.])(?!0[xXbB]))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*))?(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:([lLfF](?!\\w)))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "2": {
-              "name": "constant.numeric.decimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "4": {
-              "name": "constant.numeric.decimal.point.cpp",
-            },
-            "5": {
-              "name": "constant.numeric.decimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "6": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "8": {
-              "name": "keyword.other.unit.exponent.decimal.cpp",
-            },
-            "9": {
-              "name": "keyword.operator.plus.exponent.decimal.cpp",
-            },
-            "10": {
-              "name": "keyword.operator.minus.exponent.decimal.cpp",
-            },
-            "11": {
-              "name": "constant.numeric.exponent.decimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "12": {
-              "name": "keyword.other.unit.suffix.floating-point.cpp",
-            },
-            "13": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(\\G0[bB])([01](?:(?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?((?:\\w(?<![0-9])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.unit.binary.cpp",
-            },
-            "2": {
-              "name": "constant.numeric.binary.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "4": {
-              "name": "keyword.other.unit.suffix.integer.cpp",
-            },
-            "5": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(\\G0)((?:(?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))+)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?((?:\\w(?<![0-9])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.unit.octal.cpp",
-            },
-            "2": {
-              "name": "constant.numeric.octal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "4": {
-              "name": "keyword.other.unit.suffix.integer.cpp",
-            },
-            "5": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(\\G0[xX])([0-9a-fA-F](?:(?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?<!')([pP])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.unit.hexadecimal.cpp",
-            },
-            "2": {
-              "name": "constant.numeric.hexadecimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "5": {
-              "name": "keyword.other.unit.exponent.hexadecimal.cpp",
-            },
-            "6": {
-              "name": "keyword.operator.plus.exponent.hexadecimal.cpp",
-            },
-            "7": {
-              "name": "keyword.operator.minus.exponent.hexadecimal.cpp",
-            },
-            "8": {
-              "name": "constant.numeric.exponent.hexadecimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "9": {
-              "name": "keyword.other.unit.suffix.integer.cpp",
-            },
-            "10": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:(?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)(?:((?<!')([eE])(\\+)?(\\-)?((?-mix:(?:[0-9](?:(?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))))*)))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))",
-          "captures": {
-            "2": {
-              "name": "constant.numeric.decimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "3": {
-              "name": "punctuation.separator.constant.numeric.cpp",
-            },
-            "5": {
-              "name": "keyword.other.unit.exponent.decimal.cpp",
-            },
-            "6": {
-              "name": "keyword.operator.plus.exponent.decimal.cpp",
-            },
-            "7": {
-              "name": "keyword.operator.minus.exponent.decimal.cpp",
-            },
-            "8": {
-              "name": "constant.numeric.exponent.decimal.cpp",
-              "patterns": [
-                {
-                  "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                  "name": "punctuation.separator.constant.numeric.cpp",
-                },
-              ],
-            },
-            "9": {
-              "name": "keyword.other.unit.suffix.integer.cpp",
-            },
-            "10": {
-              "name": "keyword.other.unit.user-defined.cpp",
-            },
-          },
-        },
-        {
-          "match": "(?:(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))+",
-          "name": "invalid.illegal.constant.numeric.cpp",
-        },
-      ],
-    },
-    "language_constants": {
-      "match": "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)",
-      "name": "constant.language.$0.cpp",
-    },
-    "primitive_types": {
-      "match": "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)",
-      "name": "storage.type.primitive.cpp",
-    },
-    "non_primitive_types": {
-      "match": "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)",
-      "name": "storage.type.cpp",
-    },
-    "functional_specifiers_pre_parameters": {
-      "match": "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)",
-      "name": "storage.modifier.specificer.functional.pre-parameters.$0.cpp",
-    },
-    "qualifiers_and_specifiers_post_parameters": {
-      "match": "(?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r]))",
-      "name": "storage.modifier.specifier.functional.post-parameters.$0.cpp",
-    },
-    "storage_specifiers": {
-      "match": "(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)",
-      "name": "storage.modifier.specifier.$0.cpp",
-    },
-    "access_control_keywords": {
-      "match": "(?<!\\w)((?:private|protected|public))\\s*(:)",
-      "captures": {
-        "2": {
-          "name": "colon.cpp",
-        },
-      },
-      "name": "storage.type.modifier.access.control.$1.cpp",
-    },
-    "exception_keywords": {
-      "match": "(?<!\\w)(?:throw|try|catch)(?!\\w)",
-      "name": "keyword.control.exception.$0.cpp",
-    },
-    "other_keywords": {
-      "match": "(?<!\\w)(typedef)(?!\\w)",
-      "name": "keyword.other.$0.cpp",
-    },
-    "the_this_keyword": {
-      "match": "(?<!\\w)this(?!\\w)",
-      "name": "variable.language.this.cpp",
-    },
-    "memory_operators": {
-      "match": "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)",
-      "captures": {
-        "1": {
-          "name": "keyword.operator.delete.array.cpp",
-        },
-        "2": {
-          "name": "keyword.operator.delete.array.bracket.cpp",
+          "name": "punctuation.definition.directive",
         },
         "3": {
-          "name": "keyword.operator.delete.cpp",
-        },
-        "4": {
-          "name": "keyword.operator.new.cpp",
-        },
-      },
-      "name": "keyword.operator.wordlike.cpp memory.cpp",
-    },
-    "control_flow_keywords": {
-      "match": "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)",
-      "name": "keyword.control.$0.cpp",
-    },
-    "default_statement": {
-      "name": "meta.conditional.case.cpp",
-      "begin": "((?<!\\w)default(?!\\w))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.default.cpp",
-        },
-      },
-      "end": "(:)",
-      "endCaptures": {
-        "1": {
-          "name": "colon.cpp punctuation.separator.case.default.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#conditional_context",
-        },
-      ],
-    },
-    "case_statement": {
-      "name": "meta.conditional.case.cpp",
-      "begin": "((?<!\\w)case(?!\\w))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.case.cpp",
-        },
-      },
-      "end": "(:)",
-      "endCaptures": {
-        "1": {
-          "name": "colon.cpp punctuation.separator.case.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#conditional_context",
-        },
-      ],
-    },
-    "switch_conditional_parentheses": {
-      "name": "meta.conditional.switch.cpp",
-      "begin": "(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.parens.begin.bracket.round.conditional.switch.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parens.end.bracket.round.conditional.switch.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#conditional_context",
-        },
-      ],
-    },
-    "switch_statement": {
-      "name": "meta.block.switch.cpp",
-      "begin": "(((?<!\\w)switch(?!\\w)))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.switch.cpp",
-        },
-        "2": {
-          "name": "keyword.control.switch.cpp",
-        },
-      },
-      "end": "(?:(?<=\\})|(?=[;>\\[\\]=]))",
-      "patterns": [
-        {
-          "name": "meta.head.switch.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.switch.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#switch_conditional_parentheses",
-            },
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.switch.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.switch.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#default_statement",
-            },
-            {
-              "include": "#case_statement",
-            },
-            {
-              "include": "$base",
-            },
-            {
-              "include": "#block_innards",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.switch.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "cpp_attributes": {
-      "name": "support.other.attribute.cpp",
-      "begin": "(\\[\\[)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.begin.cpp",
-        },
-      },
-      "end": "(\\]\\])",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.end.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#attributes_context",
-        },
-        {
-          "begin": "\\(",
-          "end": "\\)",
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#string_context_c",
-            },
-          ],
-        },
-        {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp",
-            },
-            "2": {
-              "name": "entity.name.type.namespace.cpp",
-            },
-          },
-        },
-        {
-          "match": ",",
-          "name": "punctuation.separator.attribute.cpp",
-        },
-        {
-          "match": ":",
-          "name": "punctuation.accessor.attribute.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-          "name": "entity.other.attribute.$0.cpp",
-        },
-        {
-          "include": "#number_literal",
-        },
-      ],
-    },
-    "gcc_attributes": {
-      "name": "support.other.attribute.cpp",
-      "begin": "(__attribute(?:__)?\\(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.begin.cpp",
-        },
-      },
-      "end": "(\\)\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.end.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#attributes_context",
-        },
-        {
-          "begin": "\\(",
-          "end": "\\)",
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#string_context_c",
-            },
-          ],
-        },
-        {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp",
-            },
-            "2": {
-              "name": "entity.name.type.namespace.cpp",
-            },
-          },
-        },
-        {
-          "match": ",",
-          "name": "punctuation.separator.attribute.cpp",
-        },
-        {
-          "match": ":",
-          "name": "punctuation.accessor.attribute.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-          "name": "entity.other.attribute.$0.cpp",
-        },
-        {
-          "include": "#number_literal",
-        },
-      ],
-    },
-    "ms_attributes": {
-      "name": "support.other.attribute.cpp",
-      "begin": "(__declspec\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.begin.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.end.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#attributes_context",
-        },
-        {
-          "begin": "\\(",
-          "end": "\\)",
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#string_context_c",
-            },
-          ],
-        },
-        {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp",
-            },
-            "2": {
-              "name": "entity.name.type.namespace.cpp",
-            },
-          },
-        },
-        {
-          "match": ",",
-          "name": "punctuation.separator.attribute.cpp",
-        },
-        {
-          "match": ":",
-          "name": "punctuation.accessor.attribute.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-          "name": "entity.other.attribute.$0.cpp",
-        },
-        {
-          "include": "#number_literal",
-        },
-      ],
-    },
-    "alignas_attribute": {
-      "name": "support.other.attribute.cpp",
-      "begin": "(alignas\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.begin.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.attribute.end.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#attributes_context",
-        },
-        {
-          "begin": "\\(",
-          "end": "\\)",
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#string_context_c",
-            },
-          ],
-        },
-        {
-          "match": "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "captures": {
-            "1": {
-              "name": "keyword.other.using.directive.cpp",
-            },
-            "2": {
-              "name": "entity.name.type.namespace.cpp",
-            },
-          },
-        },
-        {
-          "match": ",",
-          "name": "punctuation.separator.attribute.cpp",
-        },
-        {
-          "match": ":",
-          "name": "punctuation.accessor.attribute.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)",
-          "name": "entity.name.type.namespace.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-          "name": "entity.other.attribute.$0.cpp",
-        },
-        {
-          "include": "#number_literal",
-        },
-      ],
-    },
-    "user_defined_template_type": {
-      "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-      "name": "storage.type.user-defined.cpp",
-    },
-    "comma_in_template_argument": {
-      "match": ",",
-      "name": "comma.cpp punctuation.separator.template.argument.cpp",
-    },
-    "template_call_innards": {
-      "match": "(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*",
-      "captures": {
-        "0": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-      },
-    },
-    "template_call_range": {
-      "name": "meta.template.call.cpp",
-      "begin": "(<)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.angle-brackets.begin.template.call.cpp",
-        },
-      },
-      "end": "(>)",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.angle-brackets.end.template.call.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#template_call_context",
-        },
-      ],
-    },
-    "template_isolated_definition": {
-      "match": "(?<!\\w)(template)\\s*(<)((?:.)*)(>\\s*$)",
-      "captures": {
-        "1": {
-          "name": "storage.type.template.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.angle-brackets.start.template.definition.cpp",
-        },
-        "3": {
-          "name": "meta.template.definition.cpp",
-          "patterns": [
-            {
-              "include": "#template_definition_context",
-            },
-          ],
-        },
-        "4": {
-          "name": "punctuation.section.angle-brackets.end.template.definition.cpp",
-        },
-      },
-    },
-    "template_definition": {
-      "name": "meta.template.definition.cpp",
-      "begin": "(?<!\\w)(template)\\s*(<)",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.template.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.angle-brackets.start.template.definition.cpp",
-        },
-      },
-      "end": "(>)",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.angle-brackets.end.template.definition.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "begin": "((?<=\\w)\\s*<)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.angle-brackets.begin.template.call.cpp",
-            },
-          },
-          "end": "(>)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.angle-brackets.begin.template.call.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        {
-          "include": "#template_definition_context",
-        },
-      ],
-    },
-    "template_argument_defaulted": {
-      "match": "(?<=<|,)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*([=])",
-      "captures": {
-        "1": {
-          "name": "storage.type.template.cpp",
-        },
-        "2": {
-          "name": "entity.name.type.template.cpp",
-        },
-        "3": {
-          "name": "keyword.operator.assignment.cpp",
-        },
-      },
-    },
-    "template_definition_argument": {
-      "match": "(?:(?:\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s+)+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(\\.\\.\\.)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))\\s*(?:(,)|(?=>|$))",
-      "captures": {
-        "1": {
-          "name": "storage.type.template.argument.$1.cpp",
-        },
-        "2": {
-          "name": "storage.type.template.argument.$2.cpp",
-        },
-        "3": {
-          "name": "entity.name.type.template.cpp",
-        },
-        "4": {
-          "name": "storage.type.template.cpp",
+          "name": "entity.name.function.preprocessor",
         },
         "5": {
-          "name": "ellipses.cpp punctuation.vararg-ellipses.template.definition.cpp",
+          "name": "punctuation.definition.parameters.begin",
         },
         "6": {
-          "name": "entity.name.type.template.cpp",
-        },
-        "7": {
-          "name": "comma.cpp punctuation.separator.template.argument.cpp",
-        },
-      },
-    },
-    "scope_resolution": {
-      "match": "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)",
-      "captures": {
-        "1": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "2": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "3": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "4": {
-          "name": "punctuation.separator.namespace.access.cpp",
-        },
-      },
-      "name": "meta.scope-resolution.cpp",
-    },
-    "qualified_type": {
-      "match": "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.])",
-      "captures": {
-        "0": {
-          "name": "entity.name.type.cpp meta.qualified_type.cpp",
-          "patterns": [
-            {
-              "match": "(?:class|struct|union|enum)",
-              "name": "storage.type.$0.cpp",
-            },
-            {
-              "include": "#function_type",
-            },
-            {
-              "include": "#storage_types",
-            },
-            {
-              "include": "#number_literal",
-            },
-            {
-              "include": "#string_context_c",
-            },
-            {
-              "include": "#comma",
-            },
-          ],
-        },
-        "1": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "2": {
-          "name": "meta.scope-resolution.cpp",
-        },
-        "3": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "4": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "5": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "6": {
-          "name": "punctuation.separator.namespace.access.cpp",
-        },
-      },
-    },
-    "type_alias": {
-      "match": "(using)\\s*(?!namespace)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))\\s*(\\=)\\s*(typename)?\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(?:(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))|(.+(?<!;)))(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)(?:(\\[)(\\w*)(\\])\\s*)?\\s*(?:(;)|\\n)",
-      "captures": {
-        "1": {
-          "name": "keyword.other.using.directive.cpp",
-        },
-        "2": {
-          "name": "entity.name.type.cpp meta.qualified_type.cpp",
-          "patterns": [
-            {
-              "match": "(?:class|struct|union|enum)",
-              "name": "storage.type.$0.cpp",
-            },
-            {
-              "include": "#function_type",
-            },
-            {
-              "include": "#storage_types",
-            },
-            {
-              "include": "#number_literal",
-            },
-            {
-              "include": "#string_context_c",
-            },
-            {
-              "include": "#comma",
-            },
-          ],
-        },
-        "3": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "4": {
-          "name": "meta.scope-resolution.cpp",
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "7": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
+          "name": "variable.parameter.preprocessor",
         },
         "8": {
-          "name": "punctuation.separator.namespace.access.cpp",
+          "name": "punctuation.separator.parameters",
         },
         "9": {
-          "name": "keyword.operator.assignment.cpp",
-        },
-        "10": {
-          "name": "keyword.other.typename.cpp",
-        },
-        "11": {
-          "patterns": [
-            {
-              "include": "#storage_specifiers",
-            },
-          ],
-        },
-        "12": {
-          "name": "entity.name.type.cpp meta.qualified_type.cpp",
-          "patterns": [
-            {
-              "match": "(?:class|struct|union|enum)",
-              "name": "storage.type.$0.cpp",
-            },
-            {
-              "include": "#function_type",
-            },
-            {
-              "include": "#storage_types",
-            },
-            {
-              "include": "#number_literal",
-            },
-            {
-              "include": "#string_context_c",
-            },
-            {
-              "include": "#comma",
-            },
-          ],
-        },
-        "13": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "14": {
-          "name": "meta.scope-resolution.cpp",
-        },
-        "15": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "16": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "17": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "18": {
-          "name": "punctuation.separator.namespace.access.cpp",
-        },
-        "19": {
-          "name": "meta.declaration.type.alias.value.unknown.cpp",
-          "patterns": [
-            {
-              "include": "#evaluation_context",
-            },
-          ],
-        },
-        "21": {
-          "name": "storage.modifier.pointer.cpp",
-        },
-        "22": {
-          "name": "storage.modifier.reference.cpp",
-        },
-        "23": {
-          "name": "punctuation.definition.begin.bracket.square.cpp",
-        },
-        "24": {
-          "patterns": [
-            {
-              "include": "#evaluation_context",
-            },
-          ],
-        },
-        "25": {
-          "name": "punctuation.definition.end.bracket.square.cpp",
-        },
-        "26": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "name": "meta.declaration.type.alias.cpp",
-    },
-    "struct_declare": {
-      "match": "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-      "captures": {
-        "1": {
-          "name": "storage.type.struct.declare.cpp",
-        },
-        "2": {
-          "name": "entity.name.type.struct.cpp",
-        },
-        "4": {
-          "name": "storage.modifier.pointer.cpp",
-        },
-        "5": {
-          "name": "storage.modifier.reference.cpp",
-        },
-        "6": {
-          "name": "variable.other.object.declare.cpp",
-        },
-      },
-    },
-    "parameter_struct": {
-      "match": "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?\\s*(?:\\[\\s*\\]\\s*)?(?=,|\\)|\\n)",
-      "captures": {
-        "1": {
-          "name": "storage.type.struct.parameter.cpp",
-        },
-        "2": {
-          "name": "entity.name.type.struct.parameter.cpp",
-        },
-        "4": {
-          "name": "storage.modifier.pointer.cpp",
-        },
-        "5": {
-          "name": "storage.modifier.reference.cpp",
-        },
-        "6": {
-          "name": "variable.other.object.declare.cpp",
-        },
-      },
-    },
-    "function_definition": {
-      "name": "meta.function.definition.parameters.cpp",
-      "begin": "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*\\()",
-      "end": "(?<=\\))",
-      "patterns": [
-        {
-          "include": "#parameter_struct",
-        },
-        {
-          "include": "#function_context_c",
-        },
-      ],
-    },
-    "static_assert": {
-      "begin": "(static_assert|_Static_assert)\\s*(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.static_assert.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.static_assert.message.cpp",
-          "begin": "(,)\\s*(?=(?:L|u8|u|U\\s*\\\")?)",
-          "beginCaptures": {
-            "1": {
-              "name": "comma.cpp punctuation.separator.delimiter.cpp",
-            },
-          },
-          "end": "(?=\\))",
-          "patterns": [
-            {
-              "include": "#string_context",
-            },
-            {
-              "include": "#string_context_c",
-            },
-          ],
-        },
-        {
-          "include": "#function_call_context_c",
-        },
-      ],
-    },
-    "function_call": {
-      "begin": "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(\\()",
-      "beginCaptures": {
-        "1": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "2": {
-          "name": "entity.name.function.call.cpp",
-        },
-        "3": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "4": {
-          "name": "punctuation.section.arguments.begin.bracket.round.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#function_call_context_c",
-        },
-      ],
-    },
-    "legacy_function_definition": {
-      "name": "meta.function.definition.parameters.cpp",
-      "begin": "(?!(?:(?:::|\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\.|\\->|\\+\\+|\\-\\-|\\+|\\-|!|not|~|compl|\\*|&|sizeof|sizeof\\.\\.\\.|new|new\\[\\]|delete|delete\\[\\]|\\.\\*|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|not_eq|&|bitand|\\^|xor|\\||bitor|&&|and|\\|\\||or|\\?:|throw|=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|and_eq|\\^=|xor_eq|\\|=|or_eq|,|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast)|(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default))\\s*\\()((?:(?-mix:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|::)++|(?<=operator)(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|new|new\\[\\]|delete|delete\\[\\]|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)))\\s*(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.cpp",
-        },
-        "2": {
-          "name": "punctuation.section.parameters.begin.bracket.round.cpp",
-        },
-      },
-      "end": "(\\)|:)",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parameters.end.bracket.round.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#probably_a_parameter",
-        },
-        {
-          "include": "#function_context_c",
-        },
-      ],
-    },
-    "operators": {
-      "patterns": [
-        {
-          "include": "#sizeof_operator",
-        },
-        {
-          "include": "#alignof_operator",
-        },
-        {
-          "include": "#alignas_operator",
-        },
-        {
-          "include": "#typeid_operator",
-        },
-        {
-          "include": "#decltype_specifier",
-        },
-        {
-          "match": "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)",
-          "name": "keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp",
-        },
-        {
-          "include": "#method_access",
-        },
-        {
-          "include": "#member_access",
-        },
-        {
-          "match": "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)",
-          "name": "keyword.operator.wordlike.cpp alias.cpp keyword.operator.$0.cpp",
-        },
-        {
-          "include": "#vararg_ellipses",
-        },
-        {
-          "match": "--",
-          "name": "keyword.operator.decrement.cpp",
-        },
-        {
-          "match": "\\+\\+",
-          "name": "keyword.operator.increment.cpp",
-        },
-        {
-          "match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
-          "name": "keyword.operator.assignment.compound.cpp",
-        },
-        {
-          "match": "&=|\\^=|<<=|>>=|\\|=",
-          "name": "keyword.operator.assignment.compound.bitwise.cpp",
-        },
-        {
-          "match": "<<|>>",
-          "name": "keyword.operator.bitwise.shift.cpp",
-        },
-        {
-          "match": "!=|<=|>=|==|<|>",
-          "name": "keyword.operator.comparison.cpp",
-        },
-        {
-          "match": "&&|!|\\|\\|",
-          "name": "keyword.operator.logical.cpp",
-        },
-        {
-          "match": "&|\\||\\^|~",
-          "name": "keyword.operator.cpp",
-        },
-        {
-          "include": "#assignment_operator",
-        },
-        {
-          "match": "%|\\*|/|-|\\+",
-          "name": "keyword.operator.cpp",
-        },
-        {
-          "begin": "\\?",
-          "beginCaptures": {
-            "0": {
-              "name": "keyword.operator.ternary.cpp",
-            },
-          },
-          "end": ":",
-          "applyEndPatternLast": true,
-          "endCaptures": {
-            "0": {
-              "name": "keyword.operator.ternary.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#method_access",
-            },
-            {
-              "include": "#member_access",
-            },
-            {
-              "include": "#function_call_c",
-            },
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "function_pointer": {
-      "begin": "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))\\s*(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)(\\()(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:(\\[)(\\w*)(\\])\\s*)*(\\))\\s*(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.type.cpp meta.qualified_type.cpp",
-          "patterns": [
-            {
-              "match": "(?:class|struct|union|enum)",
-              "name": "storage.type.$0.cpp",
-            },
-            {
-              "include": "#function_type",
-            },
-            {
-              "include": "#storage_types",
-            },
-            {
-              "include": "#number_literal",
-            },
-            {
-              "include": "#string_context_c",
-            },
-            {
-              "include": "#comma",
-            },
-          ],
-        },
-        "2": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "3": {
-          "name": "meta.scope-resolution.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "5": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "6": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "7": {
-          "name": "punctuation.separator.namespace.access.cpp",
-        },
-        "9": {
-          "name": "storage.modifier.pointer.cpp",
-        },
-        "10": {
-          "name": "storage.modifier.reference.cpp",
-        },
-        "11": {
-          "name": "punctuation.section.parens.begin.bracket.round.function.pointer.cpp",
-        },
-        "12": {
-          "name": "punctuation.definition.function.pointer.dereference.cpp",
-        },
-        "13": {
-          "name": "variable.other.definition.pointer.function.cpp",
-        },
-        "14": {
-          "name": "punctuation.definition.begin.bracket.square.cpp",
-        },
-        "15": {
-          "patterns": [
-            {
-              "include": "#evaluation_context",
-            },
-          ],
-        },
-        "16": {
-          "name": "punctuation.definition.end.bracket.square.cpp",
-        },
-        "17": {
-          "name": "punctuation.section.parens.end.bracket.round.function.pointer.cpp",
-        },
-        "18": {
-          "name": "punctuation.section.parameters.begin.bracket.round.function.pointer.cpp",
-        },
-      },
-      "end": "(\\))\\s*(?=[{=,);]|\\n)(?!\\()",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parameters.end.bracket.round.function.pointer.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#parameter_struct",
-        },
-        {
-          "include": "#probably_a_parameter",
-        },
-        {
-          "include": "#function_context_c",
-        },
-      ],
-    },
-    "probably_a_parameter": {
-      "match": "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))",
-      "captures": {
-        "1": {
-          "name": "variable.parameter.defaulted.cpp",
-        },
-        "2": {
-          "name": "variable.parameter.cpp",
-        },
-      },
-    },
-    "operator_overload": {
-      "name": "meta.function.definition.parameters.operator-overload.cpp",
-      "begin": "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:&)?)))\\s*(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.operator.overload.cpp",
-        },
-        "2": {
-          "name": "entity.name.operator.overloadee.cpp",
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "3": {
-          "name": "punctuation.section.parameters.begin.bracket.round.operator-overload.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parameters.end.bracket.round.operator-overload.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#probably_a_parameter",
-        },
-        {
-          "include": "#function_context_c",
-        },
-      ],
-    },
-    "member_access": {
-      "match": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())",
-      "captures": {
-        "1": {
-          "name": "variable.language.this.cpp",
-        },
-        "2": {
-          "name": "variable.other.object.access.cpp",
-        },
-        "3": {
-          "name": "punctuation.separator.dot-access.cpp",
-        },
-        "4": {
-          "name": "punctuation.separator.pointer-access.cpp",
-        },
-        "5": {
-          "patterns": [
-            {
-              "match": "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.language.this.cpp",
-                },
-                "2": {
-                  "name": "variable.other.object.property.cpp",
-                },
-                "3": {
-                  "name": "punctuation.separator.dot-access.cpp",
-                },
-                "4": {
-                  "name": "punctuation.separator.pointer-access.cpp",
-                },
-              },
-            },
-            {
-              "match": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.language.this.cpp",
-                },
-                "2": {
-                  "name": "variable.other.object.access.cpp",
-                },
-                "3": {
-                  "name": "punctuation.separator.dot-access.cpp",
-                },
-                "4": {
-                  "name": "punctuation.separator.pointer-access.cpp",
-                },
-              },
-            },
-            {
-              "include": "#member_access",
-            },
-            {
-              "include": "#method_access",
-            },
-          ],
-        },
-        "6": {
-          "name": "variable.other.property.cpp",
-        },
-      },
-    },
-    "method_access": {
-      "contentName": "meta.function-call.member",
-      "begin": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "variable.language.this.cpp",
-        },
-        "2": {
-          "name": "variable.other.object.access.cpp",
-        },
-        "3": {
-          "name": "punctuation.separator.dot-access.cpp",
-        },
-        "4": {
-          "name": "punctuation.separator.pointer-access.cpp",
-        },
-        "5": {
-          "patterns": [
-            {
-              "match": "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.language.this.cpp",
-                },
-                "2": {
-                  "name": "variable.other.object.property.cpp",
-                },
-                "3": {
-                  "name": "punctuation.separator.dot-access.cpp",
-                },
-                "4": {
-                  "name": "punctuation.separator.pointer-access.cpp",
-                },
-              },
-            },
-            {
-              "match": "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
-              "captures": {
-                "1": {
-                  "name": "variable.language.this.cpp",
-                },
-                "2": {
-                  "name": "variable.other.object.access.cpp",
-                },
-                "3": {
-                  "name": "punctuation.separator.dot-access.cpp",
-                },
-                "4": {
-                  "name": "punctuation.separator.pointer-access.cpp",
-                },
-              },
-            },
-            {
-              "include": "#member_access",
-            },
-            {
-              "include": "#method_access",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.function.member.cpp",
-        },
-        "7": {
-          "name": "punctuation.section.arguments.begin.bracket.round.function.member.cpp",
-        },
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.function.member.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#function_call_context_c",
-        },
-      ],
-    },
-    "using_namespace": {
-      "name": "meta.using-namespace.cpp",
-      "begin": "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.using.directive.cpp",
-        },
-        "2": {
-          "name": "keyword.other.namespace.directive.cpp storage.type.namespace.directive.cpp",
-        },
-        "3": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "4": {
-          "name": "entity.name.type.namespace.cpp",
-        },
-      },
-      "end": "(;)",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-    },
-    "namespace_block": {
-      "name": "meta.block.namespace.cpp",
-      "begin": "((?<!\\w)(namespace)(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?=\\{|\\n))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)\\s*(?:(?:((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))|(?=\\{))|\\n))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.namespace.cpp",
-        },
-        "2": {
-          "name": "keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp",
-        },
-        "3": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.type.namespace.cpp",
-        },
-      },
-      "end": "(?:(?<=\\})|(?=[;>\\[\\]=]))",
-      "patterns": [
-        {
-          "name": "meta.head.namespace.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.namespace.cpp",
-            },
-          },
-        },
-        {
-          "name": "meta.body.namespace.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.namespace.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.namespace.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "macro_argument": {
-      "match": "##(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)",
-      "name": "variable.other.macro.argument.cpp",
-    },
-    "lambdas": {
-      "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))",
-      "beginCaptures": {
-        "2": {
-          "name": "punctuation.definition.capture.begin.lambda.cpp",
-        },
-        "3": {
-          "name": "meta.lambda.capture.cpp",
-          "patterns": [
-            {
-              "include": "#probably_a_parameter",
-            },
-            {
-              "include": "#function_context_c",
-            },
-          ],
-        },
-        "4": {
-          "name": "punctuation.definition.capture.end.lambda.cpp",
-        },
-      },
-      "end": "(?<=})",
-      "patterns": [
-        {
-          "name": "meta.function.definition.parameters.lambda.cpp",
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.parameters.begin.lambda.cpp",
-            },
-          },
-          "end": "(\\))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.parameters.end.lambda.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#probably_a_parameter",
-            },
-            {
-              "include": "#function_context_c",
-            },
-          ],
-        },
-        {
-          "match": "(?<!\\w)(?:mutable|constexpr|consteval)(?!\\w)",
-          "name": "storage.modifier.lambda.$0.cpp",
-        },
-        {
-          "match": "(->)(.+?(?=\\{|$))?",
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.lambda.return-type.cpp",
-            },
-            "2": {
-              "name": "storage.type.return-type.lambda.cpp",
-            },
-          },
-        },
-        {
-          "name": "meta.function.definition.body.lambda.cpp",
-          "begin": "(\\{)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.lambda.cpp",
-            },
-          },
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.lambda.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "pthread_types": {
-      "match": "(?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)",
-      "name": "support.type.posix-reserved.pthread.cpp",
-    },
-    "posix_reserved_types": {
-      "match": "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)",
-      "name": "support.type.posix-reserved.cpp",
-    },
-    "enumerator_list": {
-      "match": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:(?:((?:[,;]|\\n))|(?=\\}))|(?=(?:\\/\\/|\\/\\*)))",
-      "captures": {
-        "1": {
-          "name": "variable.other.enummember.cpp",
-        },
-        "2": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "3": {
-          "name": "keyword.operator.assignment.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#evaluation_context",
-            },
-          ],
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#comma",
-            },
-            {
-              "include": "#semicolon",
-            },
-          ],
-        },
-      },
-      "name": "meta.enum.definition.cpp",
-    },
-    "enum_block": {
-      "name": "meta.block.enum.cpp",
-      "begin": "(((?<!\\w)enum(?!\\w))(?:\\s+(class|struct))?(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.enum.cpp",
-        },
-        "2": {
-          "name": "storage.type.enum.cpp",
-        },
-        "3": {
-          "name": "storage.type.enum.enum-key.$3.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "5": {
-          "name": "entity.name.type.enum.cpp",
-        },
-        "6": {
-          "name": "colon.cpp punctuation.separator.type-specifier.cpp",
-        },
-        "7": {
-          "name": "meta.scope-resolution.cpp",
-        },
-        "8": {
-          "patterns": [
-            {
-              "include": "#scope_resolution",
-            },
-          ],
-        },
-        "9": {
-          "name": "entity.name.type.namespace.scope-resolution.cpp",
-        },
-        "10": {
-          "name": "meta.template.call.cpp",
-          "patterns": [
-            {
-              "include": "#template_call_context",
-            },
-          ],
-        },
-        "11": {
-          "name": "punctuation.separator.namespace.access.cpp",
-        },
-        "12": {
-          "name": "storage.type.integral.$12.cpp",
-        },
-      },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-        "2": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.head.enum.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.enum.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.enum.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.enum.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#enumerator_list",
-            },
-            {
-              "include": "#comments_context",
-            },
-            {
-              "include": "#comma",
-            },
-            {
-              "include": "#semicolon",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.enum.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "inhertance_context": {
-      "patterns": [
-        {
-          "match": ",",
-          "name": "comma.cpp punctuation.separator.delimiter.inhertance.cpp",
-        },
-        {
-          "match": "(?<!\\w)(?:private|protected|public)(?!\\w)",
-          "name": "storage.type.modifier.access.$0.cpp",
-        },
-        {
-          "match": "(?<!\\w)virtual(?!\\w)",
-          "name": "storage.type.modifier.virtual.cpp",
-        },
-        {
-          "match": "(?<=virtual|private|protected|public|,|:)\\s*(?!(?:(?:private|protected|public)|virtual))((?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))",
-          "captures": {
-            "1": {
-              "name": "entity.name.type.inherited.cpp",
-            },
-          },
-        },
-      ],
-    },
-    "class_block": {
-      "name": "meta.block.class.cpp",
-      "begin": "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.class.cpp",
-        },
-        "3": {
-          "name": "storage.type.$3.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.type.$3.cpp",
-        },
-        "7": {
-          "name": "storage.type.modifier.final.cpp",
-        },
-        "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp",
-        },
-        "9": {
-          "patterns": [
-            {
-              "include": "#inhertance_context",
-            },
-          ],
-        },
-      },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-        "2": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.head.class.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.class.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#preprocessor_context",
-            },
-            {
-              "include": "#inhertance_context",
-            },
-            {
-              "include": "#template_call_range",
-            },
-            {
-              "include": "#comments_context",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.class.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.class.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#function_pointer",
-            },
-            {
-              "include": "#constructor_context",
-            },
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.class.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "struct_block": {
-      "name": "meta.block.struct.cpp",
-      "begin": "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.struct.cpp",
-        },
-        "3": {
-          "name": "storage.type.$3.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.type.$3.cpp",
-        },
-        "7": {
-          "name": "storage.type.modifier.final.cpp",
-        },
-        "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp",
-        },
-        "9": {
-          "patterns": [
-            {
-              "include": "#inhertance_context",
-            },
-          ],
-        },
-      },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-        "2": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.head.struct.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.struct.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#preprocessor_context",
-            },
-            {
-              "include": "#inhertance_context",
-            },
-            {
-              "include": "#template_call_range",
-            },
-            {
-              "include": "#comments_context",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.struct.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.struct.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#function_pointer",
-            },
-            {
-              "include": "#constructor_context",
-            },
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.struct.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "union_block": {
-      "name": "meta.block.union.cpp",
-      "begin": "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.union.cpp",
-        },
-        "3": {
-          "name": "storage.type.$3.cpp",
-        },
-        "4": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "5": {
-          "patterns": [
-            {
-              "include": "#attributes_context",
-            },
-            {
-              "include": "#number_literal",
-            },
-          ],
-        },
-        "6": {
-          "name": "entity.name.type.$3.cpp",
-        },
-        "7": {
-          "name": "storage.type.modifier.final.cpp",
-        },
-        "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp",
-        },
-        "9": {
-          "patterns": [
-            {
-              "include": "#inhertance_context",
-            },
-          ],
-        },
-      },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-        "2": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.head.union.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.union.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#preprocessor_context",
-            },
-            {
-              "include": "#inhertance_context",
-            },
-            {
-              "include": "#template_call_range",
-            },
-            {
-              "include": "#comments_context",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.union.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.union.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#function_pointer",
-            },
-            {
-              "include": "#constructor_context",
-            },
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.union.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "extern_block": {
-      "name": "meta.block.extern.cpp",
-      "begin": "((\\bextern)(?=\\s*\\\"))",
-      "beginCaptures": {
-        "1": {
-          "name": "meta.head.extern.cpp",
-        },
-        "2": {
-          "name": "storage.type.extern.cpp",
-        },
-      },
-      "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-        "2": {
-          "name": "punctuation.terminator.statement.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "name": "meta.head.extern.cpp",
-          "begin": "\\G ?",
-          "end": "((?:\\{|(?=;)))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.extern.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.body.extern.cpp",
-          "begin": "(?<=\\{)",
-          "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.block.end.bracket.curly.extern.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "name": "meta.tail.extern.cpp",
-          "begin": "(?<=})[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "include": "$base",
-        },
-      ],
-    },
-    "typedef_class": {
-      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)class(?!\\w))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.typedef.cpp",
-        },
-      },
-      "end": "(?<=;)",
-      "patterns": [
-        {
-          "name": "meta.block.class.cpp",
-          "begin": "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-          "beginCaptures": {
-            "1": {
-              "name": "meta.head.class.cpp",
-            },
-            "3": {
-              "name": "storage.type.$3.cpp",
-            },
-            "4": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "5": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "6": {
-              "name": "entity.name.type.$3.cpp",
-            },
-            "7": {
-              "name": "storage.type.modifier.final.cpp",
-            },
-            "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp",
-            },
-            "9": {
-              "patterns": [
-                {
-                  "include": "#inhertance_context",
-                },
-              ],
-            },
-          },
-          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-            "2": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "name": "meta.head.class.cpp",
-              "begin": "\\G ?",
-              "end": "((?:\\{|(?=;)))",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.begin.bracket.curly.class.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#preprocessor_context",
-                },
-                {
-                  "include": "#inhertance_context",
-                },
-                {
-                  "include": "#template_call_range",
-                },
-                {
-                  "include": "#comments_context",
-                },
-              ],
-            },
-            {
-              "name": "meta.body.class.cpp",
-              "begin": "(?<=\\{)",
-              "end": "(\\})",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.end.bracket.curly.class.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#function_pointer",
-                },
-                {
-                  "include": "#constructor_context",
-                },
-                {
-                  "include": "$base",
-                },
-              ],
-            },
-            {
-              "name": "meta.tail.class.cpp",
-              "begin": "(?<=})[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
-              "patterns": [
-                {
-                  "match": "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-                  "captures": {
-                    "2": {
-                      "name": "storage.modifier.pointer.cpp",
-                    },
-                    "3": {
-                      "name": "storage.modifier.reference.cpp",
-                    },
-                    "4": {
-                      "name": "entity.name.type.alias.cpp",
-                    },
-                  },
-                },
-                {
-                  "match": ",",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    "typedef_struct": {
-      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)struct(?!\\w))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.typedef.cpp",
-        },
-      },
-      "end": "(?<=;)",
-      "patterns": [
-        {
-          "name": "meta.block.struct.cpp",
-          "begin": "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-          "beginCaptures": {
-            "1": {
-              "name": "meta.head.struct.cpp",
-            },
-            "3": {
-              "name": "storage.type.$3.cpp",
-            },
-            "4": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "5": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "6": {
-              "name": "entity.name.type.$3.cpp",
-            },
-            "7": {
-              "name": "storage.type.modifier.final.cpp",
-            },
-            "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp",
-            },
-            "9": {
-              "patterns": [
-                {
-                  "include": "#inhertance_context",
-                },
-              ],
-            },
-          },
-          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-            "2": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "name": "meta.head.struct.cpp",
-              "begin": "\\G ?",
-              "end": "((?:\\{|(?=;)))",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.begin.bracket.curly.struct.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#preprocessor_context",
-                },
-                {
-                  "include": "#inhertance_context",
-                },
-                {
-                  "include": "#template_call_range",
-                },
-                {
-                  "include": "#comments_context",
-                },
-              ],
-            },
-            {
-              "name": "meta.body.struct.cpp",
-              "begin": "(?<=\\{)",
-              "end": "(\\})",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.end.bracket.curly.struct.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#function_pointer",
-                },
-                {
-                  "include": "#constructor_context",
-                },
-                {
-                  "include": "$base",
-                },
-              ],
-            },
-            {
-              "name": "meta.tail.struct.cpp",
-              "begin": "(?<=})[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
-              "patterns": [
-                {
-                  "match": "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-                  "captures": {
-                    "2": {
-                      "name": "storage.modifier.pointer.cpp",
-                    },
-                    "3": {
-                      "name": "storage.modifier.reference.cpp",
-                    },
-                    "4": {
-                      "name": "entity.name.type.alias.cpp",
-                    },
-                  },
-                },
-                {
-                  "match": ",",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    "typedef_union": {
-      "begin": "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)union(?!\\w))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.typedef.cpp",
-        },
-      },
-      "end": "(?<=;)",
-      "patterns": [
-        {
-          "name": "meta.block.union.cpp",
-          "begin": "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(?:::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))))+)*))?))",
-          "beginCaptures": {
-            "1": {
-              "name": "meta.head.union.cpp",
-            },
-            "3": {
-              "name": "storage.type.$3.cpp",
-            },
-            "4": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "5": {
-              "patterns": [
-                {
-                  "include": "#attributes_context",
-                },
-                {
-                  "include": "#number_literal",
-                },
-              ],
-            },
-            "6": {
-              "name": "entity.name.type.$3.cpp",
-            },
-            "7": {
-              "name": "storage.type.modifier.final.cpp",
-            },
-            "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp",
-            },
-            "9": {
-              "patterns": [
-                {
-                  "include": "#inhertance_context",
-                },
-              ],
-            },
-          },
-          "end": "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-            "2": {
-              "name": "punctuation.terminator.statement.cpp",
-            },
-          },
-          "patterns": [
-            {
-              "name": "meta.head.union.cpp",
-              "begin": "\\G ?",
-              "end": "((?:\\{|(?=;)))",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.begin.bracket.curly.union.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#preprocessor_context",
-                },
-                {
-                  "include": "#inhertance_context",
-                },
-                {
-                  "include": "#template_call_range",
-                },
-                {
-                  "include": "#comments_context",
-                },
-              ],
-            },
-            {
-              "name": "meta.body.union.cpp",
-              "begin": "(?<=\\{)",
-              "end": "(\\})",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.section.block.end.bracket.curly.union.cpp",
-                },
-              },
-              "patterns": [
-                {
-                  "include": "#function_pointer",
-                },
-                {
-                  "include": "#constructor_context",
-                },
-                {
-                  "include": "$base",
-                },
-              ],
-            },
-            {
-              "name": "meta.tail.union.cpp",
-              "begin": "(?<=})[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
-              "patterns": [
-                {
-                  "match": "(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-                  "captures": {
-                    "2": {
-                      "name": "storage.modifier.pointer.cpp",
-                    },
-                    "3": {
-                      "name": "storage.modifier.reference.cpp",
-                    },
-                    "4": {
-                      "name": "entity.name.type.alias.cpp",
-                    },
-                  },
-                },
-                {
-                  "match": ",",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    "hacky_fix_for_stray_directive": {
-      "match": "(?<!\\w)#(?:endif|else|elif)(?!\\w)",
-      "name": "keyword.control.directive.$0.cpp",
-    },
-    "square_brackets": {
-      "name": "meta.bracket.square.access.cpp",
-      "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
-      "beginCaptures": {
-        "1": {
-          "name": "variable.other.object.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.begin.bracket.square.cpp",
-        },
-      },
-      "end": "\\]",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.end.bracket.square.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "#function_call_context_c",
-        },
-      ],
-    },
-    "empty_square_brackets": {
-      "name": "storage.modifier.array.bracket.square.cpp",
-      "match": "(?-mix:(?-mix:(?<!delete))\\\\[\\\\s*\\\\])",
-    },
-    "assembly": {
-      "match": "(?<!\\w)(asm|__asm__)(?!\\w)",
-      "name": "storage.type.$0.cpp",
-    },
-    "misc_storage_modifiers_1": {
-      "match": "(?-mix:\\b(constexpr|export|mutable|typename|thread_local)\\b)",
-      "name": "storage.modifier.cpp",
-    },
-    "misc_storage_modifiers_2": {
-      "match": "(?-mix:\\b(const|extern|register|restrict|static|volatile|inline)\\b)",
-      "name": "storage.modifier.cpp",
-    },
-    "destructor": {
-      "name": "meta.function.destructor.cpp",
-      "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.destructor.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.parameters.begin.destructor.cpp",
-        },
-      },
-      "end": "(?-mix:\\))",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.parameters.end.destructor.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "$base",
-        },
-      ],
-    },
-    "destructor_prototype": {
-      "name": "meta.function.destructor.prototype.cpp",
-      "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.parameters.begin.cpp",
-        },
-      },
-      "end": "(?-mix:\\))",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.parameters.end.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "include": "$base",
-        },
-      ],
-    },
-    "meta_preprocessor_macro": {
-      "name": "meta.preprocessor.macro.cpp",
-      "begin": "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.directive.define.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-        "3": {
-          "name": "entity.name.function.preprocessor.cpp",
-        },
-        "5": {
-          "name": "punctuation.definition.parameters.begin.cpp",
-        },
-        "6": {
-          "name": "variable.parameter.preprocessor.cpp",
-        },
-        "8": {
-          "name": "punctuation.separator.parameters.cpp",
-        },
-        "9": {
-          "name": "punctuation.definition.parameters.end.cpp",
+          "name": "punctuation.definition.parameters.end",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor.macro",
       "patterns": [
         {
-          "include": "#preprocessor_rule_define_line_context",
+          "include": "#preprocessor-rule-define-line-contents",
         },
       ],
     },
-    "meta_preprocessor_diagnostic": {
-      "name": "meta.preprocessor.diagnostic.cpp",
+    {
       "begin": "^\\s*((#)\\s*(error|warning))\\b\\s*",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.diagnostic.$3.cpp",
+          "name": "keyword.control.directive.diagnostic.$3",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor.diagnostic",
       "patterns": [
         {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.cpp",
+          "name": "string.quoted.double",
           "patterns": [
             {
               "include": "#line_continuation_character",
@@ -6298,16 +3624,16 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "'",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.cpp",
+          "name": "string.quoted.single",
           "patterns": [
             {
               "include": "#line_continuation_character",
@@ -6317,30 +3643,30 @@ objective_cpp_grammar[:"cpp_lang"] = {
         {
           "begin": "[^'\"]",
           "end": "(?<!\\\\)(?=\\s*\\n)",
-          "name": "string.unquoted.single.cpp",
+          "name": "string.unquoted.single",
           "patterns": [
             {
               "include": "#line_continuation_character",
             },
             {
-              "include": "#comments_context",
+              "include": "#comments-c",
             },
           ],
         },
       ],
     },
-    "meta_preprocessor_include": {
-      "name": "meta.preprocessor.include.cpp",
+    {
       "begin": "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.$3.cpp",
+          "name": "keyword.control.directive.$3",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor.include",
       "patterns": [
         {
           "include": "#line_continuation_character",
@@ -6349,49 +3675,52 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.include.cpp",
+          "name": "string.quoted.double.include",
         },
         {
           "begin": "<",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": ">",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.other.lt-gt.include.cpp",
+          "name": "string.quoted.other.lt-gt.include",
         },
       ],
     },
-    "meta_preprocessor_line": {
-      "name": "meta.preprocessor.cpp",
+    {
+      "include": "#pragma-mark",
+    },
+    {
       "begin": "^\\s*((#)\\s*line)\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.line.cpp",
+          "name": "keyword.control.directive.line",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor",
       "patterns": [
         {
-          "include": "#string_context_c",
+          "include": "#strings-c",
         },
         {
           "include": "#number_literal",
@@ -6401,47 +3730,47 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "meta_preprocessor_undef": {
-      "name": "meta.preprocessor.cpp",
+    {
       "begin": "^\\s*(?:((#)\\s*undef))\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.undef.cpp",
+          "name": "keyword.control.directive.undef",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor",
       "patterns": [
         {
-          "match": "(?-mix:[a-zA-Z_$][\\w$]*)",
-          "name": "entity.name.function.preprocessor.cpp",
+          "match": "[a-zA-Z_$][\\w$]*",
+          "name": "entity.name.function.preprocessor",
         },
         {
           "include": "#line_continuation_character",
         },
       ],
     },
-    "meta_preprocessor_pragma": {
-      "name": "meta.preprocessor.pragma.cpp",
+    {
       "begin": "^\\s*(?:((#)\\s*pragma))\\b",
       "beginCaptures": {
         "1": {
-          "name": "keyword.control.directive.pragma.cpp",
+          "name": "keyword.control.directive.pragma",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+      "name": "meta.preprocessor.pragma",
       "patterns": [
         {
-          "include": "#string_context_c",
+          "include": "#strings-c",
         },
         {
           "match": "[a-zA-Z_$][\\w\\-$]*",
-          "name": "entity.other.attribute-name.pragma.preprocessor.cpp",
+          "name": "entity.other.attribute-name.pragma.preprocessor",
         },
         {
           "include": "#number_literal",
@@ -6451,31 +3780,507 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "constructor_context": {
+    {
+      "match": "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
+      "name": "support.type.sys-types",
+    },
+    {
+      "match": "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
+      "name": "support.type.pthread",
+    },
+    {
+      "match": "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
+      "name": "support.type.stdint",
+    },
+    {
+      "match": "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)",
+      "name": "support.type.posix-reserved",
+    },
+    {
+      "include": "#block-c",
+    },
+    {
+      "include": "#parens-c",
+    },
+    {
+      "begin": "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=[a-zA-Z_]\\w*\\s*\\()",
+      "end": "(?<=\\))",
+      "name": "meta.function.definition",
+      "patterns": [
+        {
+          "include": "#function-innards-c",
+        },
+      ],
+    },
+    {
+      "include": "#line_continuation_character",
+    },
+    {
+      "name": "meta.bracket.square.access",
+      "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.other.object",
+        },
+        "2": {
+          "name": "punctuation.definition.begin.bracket.square",
+        },
+      },
+      "end": "\\]",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.end.bracket.square",
+        },
+      },
+      "patterns": [
+        {
+          "include": "#function-call-innards-c",
+        },
+      ],
+    },
+    {
+      "name": "storage.modifier.array.bracket.square",
+      "match": "(?-mix:(?<!delete))\\\\[\\\\s*\\\\]",
+    },
+    {
+      "match": ";",
+      "name": "punctuation.terminator.statement",
+    },
+    {
+      "match": ",",
+      "name": "punctuation.separator.delimiter",
+    },
+  ],
+  "repository": {
+    "literal_numeric_seperator": {
+      "match": "(?<!')'(?!')",
+      "name": "punctuation.separator.constant.numeric",
+    },
+    "number_literal": {
+      "match": "((?<!\\w)(?:(?:(?:(0[xX])(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F]))))(?:([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*))?(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?|(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?((?:(?:(?<=[0-9])\\.|\\.(?=[0-9]))))(?:([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*))?(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:([lLfF](?!\\w)))?|(?:(?:(?:(?:(?:(0[bB])((?:(?:(?:[01]|((?<!')'(?!')))))+)|(0)((?:(?:(?:[0-7]|((?<!')'(?!')))))+)))|(0[xX])([0-9a-fA-F](?:(?:(?:[0-9a-fA-F]|((?<!')'(?!')))))*)(?:([pP])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?))|([0-9](?:(?:(?:[0-9]|((?<!')'(?!')))))*)(?:([eE])(\\+)?(\\-)?((?:[0-9](?:(?:(?:[0-9]|(?:(?<!')'(?!')))))*)))?)(?:((?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:(?:LL[uU]|ll[uU]))|[uU]LL))|[uU]ll))|ll))|LL))|[uUlL]))(?!\\w)))?))(\\w*))",
+      "captures": {
+        "2": {
+          "name": "keyword.other.unit.hexadecimal",
+        },
+        "3": {
+          "name": "constant.numeric.hexadecimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "4": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "5": {
+          "name": "constant.numeric.hexadecimal",
+        },
+        "6": {
+          "name": "constant.numeric.hexadecimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "7": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "8": {
+          "name": "keyword.other.unit.exponent.hexadecimal",
+        },
+        "9": {
+          "name": "keyword.operator.plus.exponent.hexadecimal",
+        },
+        "10": {
+          "name": "keyword.operator.minus.exponent.hexadecimal",
+        },
+        "11": {
+          "name": "constant.numeric.exponent.hexadecimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "12": {
+          "name": "constant.numeric.decimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "13": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "14": {
+          "name": "constant.numeric.decimal.point",
+        },
+        "15": {
+          "name": "constant.numeric.decimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "16": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "17": {
+          "name": "keyword.other.unit.exponent.decimal",
+        },
+        "18": {
+          "name": "keyword.operator.plus.exponent.decimal",
+        },
+        "19": {
+          "name": "keyword.operator.minus.exponent.decimal",
+        },
+        "20": {
+          "name": "constant.numeric.exponent.decimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "21": {
+          "name": "keyword.other.unit.suffix.floating-point",
+        },
+        "22": {
+          "name": "keyword.other.unit.binary",
+        },
+        "23": {
+          "name": "constant.numeric.binary",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "24": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "25": {
+          "name": "keyword.other.unit.octal",
+        },
+        "26": {
+          "name": "constant.numeric.octal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "27": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "28": {
+          "name": "keyword.other.unit.hexadecimal",
+        },
+        "29": {
+          "name": "constant.numeric.hexadecimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "30": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "31": {
+          "name": "keyword.other.unit.exponent.hexadecimal",
+        },
+        "32": {
+          "name": "keyword.operator.plus.exponent.hexadecimal",
+        },
+        "33": {
+          "name": "keyword.operator.minus.exponent.hexadecimal",
+        },
+        "34": {
+          "name": "constant.numeric.exponent.hexadecimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "35": {
+          "name": "constant.numeric.decimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "36": {
+          "name": "punctuation.separator.constant.numeric",
+        },
+        "37": {
+          "name": "keyword.other.unit.exponent.decimal",
+        },
+        "38": {
+          "name": "keyword.operator.plus.exponent.decimal",
+        },
+        "39": {
+          "name": "keyword.operator.minus.exponent.decimal",
+        },
+        "40": {
+          "name": "constant.numeric.exponent.decimal",
+          "patterns": [
+            {
+              "include": "#literal_numeric_seperator",
+            },
+          ],
+        },
+        "41": {
+          "name": "keyword.other.unit.suffix.integer",
+        },
+        "42": {
+          "name": "keyword.other.unit.user-defined",
+        },
+      },
+    },
+    "constants": {
+      "match": "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)",
+      "name": "constant.language",
+    },
+    "storage_types_c": {
+      "patterns": [
+        {
+          "match": "(?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w)",
+          "name": "storage.type.primitive",
+        },
+        {
+          "match": "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)",
+          "name": "storage.type",
+        },
+        {
+          "match": "(?<!\\w)(asm|__asm__|enum|union|struct)(?!\\w)",
+          "name": "storage.type.$1",
+        },
+      ],
+    },
+    "memory_operators": {
+      "match": "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.memory.delete.array",
+        },
+        "2": {
+          "name": "keyword.operator.memory.delete.array.bracket",
+        },
+        "3": {
+          "name": "keyword.operator.memory.delete",
+        },
+        "4": {
+          "name": "keyword.operator.memory.new",
+        },
+      },
+      "name": "keyword.operator.memory",
+    },
+    "template_call_innards": {
+      "match": "<(?:[\\s<>,\\w])*>\\s*",
+      "captures": {
+        "0": {
+          "name": "meta.template.call",
+          "patterns": [
+            {
+              "include": "#storage_types_c",
+            },
+            {
+              "include": "#constants",
+            },
+            {
+              "include": "#scope_resolution",
+            },
+            {
+              "match": "(?<!\\w)[a-zA-Z_]\\w*(?!\\w)",
+              "name": "storage.type.user-defined",
+            },
+            {
+              "include": "#operators",
+            },
+            {
+              "include": "#number_literal",
+            },
+            {
+              "include": "#strings",
+            },
+            {
+              "match": ",",
+              "name": "punctuation.separator.comma.template.argument",
+            },
+          ],
+        },
+      },
+    },
+    "template_definition": {
+      "name": "meta.template.definition",
+      "begin": "(?-mix:(?<!\\w)(template)\\s*(<))",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.template",
+        },
+        "2": {
+          "name": "punctuation.section.angle-brackets.start.template.definition",
+        },
+      },
+      "end": "(?-mix:(>))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.angle-brackets.end.template.definition",
+        },
+      },
+      "patterns": [
+        {
+          "include": "#scope_resolution",
+        },
+        {
+          "include": "#template_definition_argument",
+        },
+        {
+          "include": "#template_call_innards",
+        },
+      ],
+    },
+    "template_definition_argument": {
+      "match": "((?:(?:(?:(?:(?:(?:\\s*([a-zA-Z_]\\w*)|((?:[a-zA-Z_]\\w*\\s+)+)([a-zA-Z_]\\w*)))|([a-zA-Z_]\\w*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_]\\w*)))|((?:[a-zA-Z_]\\w*\\s+)*)([a-zA-Z_]\\w*)\\s*([=])\\s*(\\w+)))\\s*(?:(?:(,)|(?=>))))",
+      "captures": {
+        "2": {
+          "name": "storage.type.template.argument.$1",
+        },
+        "3": {
+          "name": "storage.type.template.argument.$2",
+        },
+        "4": {
+          "name": "entity.name.type.template",
+        },
+        "5": {
+          "name": "storage.type.template",
+        },
+        "6": {
+          "name": "keyword.operator.ellipsis.template.definition",
+        },
+        "7": {
+          "name": "entity.name.type.template",
+        },
+        "8": {
+          "name": "storage.type.template",
+        },
+        "9": {
+          "name": "entity.name.type.template",
+        },
+        "10": {
+          "name": "keyword.operator.assignment",
+        },
+        "11": {
+          "name": "constant.other",
+        },
+        "12": {
+          "name": "punctuation.separator.comma.template.argument",
+        },
+      },
+    },
+    "scope_resolution": {
+      "match": "((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*\\s*)([a-zA-Z_]\\w*)\\s*((?:<(?:[\\s<>,\\w])*>\\s*))?(::)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#scope_resolution",
+            },
+          ],
+        },
+        "2": {
+          "name": "entity.name.namespace.scope-resolution",
+        },
+        "3": {
+          "patterns": [
+            {
+              "include": "#template_call_innards",
+            },
+          ],
+        },
+        "4": {
+          "name": "punctuation.separator.namespace.access",
+        },
+      },
+      "name": "meta.scope-resolution",
+    },
+    "angle_brackets": {
+      "begin": "<",
+      "end": ">",
+      "name": "meta.angle-brackets",
+      "patterns": [
+        {
+          "include": "#angle_brackets",
+        },
+        {
+          "include": "$base",
+        },
+      ],
+    },
+    "block": {
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.block.begin.bracket.curly",
+        },
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.block.end.bracket.curly",
+        },
+      },
+      "name": "meta.block",
+      "patterns": [
+        {
+          "captures": {
+            "1": {
+              "name": "support.function.any-method",
+            },
+            "2": {
+              "name": "punctuation.definition.parameters",
+            },
+          },
+          "match": "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|return)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
+          "name": "meta.function-call",
+        },
+        {
+          "include": "$base",
+        },
+      ],
+    },
+    "constructor": {
       "patterns": [
         {
           "begin": "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.constructor.cpp",
+              "name": "entity.name.function.constructor",
             },
             "2": {
-              "name": "punctuation.definition.parameters.begin.constructor.cpp",
+              "name": "punctuation.definition.parameters.begin.constructor",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.parameters.end.constructor.cpp",
+              "name": "punctuation.definition.parameters.end.constructor",
             },
           },
-          "name": "meta.function.constructor.cpp",
+          "name": "meta.function.constructor",
           "patterns": [
             {
               "include": "#probably_a_parameter",
             },
             {
-              "include": "#function_context_c",
+              "include": "#function-innards-c",
             },
           ],
         },
@@ -6483,11 +4288,11 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "(?x)\n(:)\n(\n  (?=\n    \\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n    \\s* (\\() # opening bracket\n  )\n)",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.initializer-list.parameters.cpp",
+              "name": "punctuation.definition.initializer-list.parameters",
             },
           },
           "end": "(?=\\{)",
-          "name": "meta.function.constructor.initializer-list.cpp",
+          "name": "meta.function.constructor.initializer-list",
           "patterns": [
             {
               "include": "$base",
@@ -6496,84 +4301,241 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "special_block_context": {
+    "special_block": {
       "patterns": [
         {
-          "include": "#attributes_context",
+          "comment": "https://en.cppreference.com/w/cpp/language/namespace",
+          "begin": "\\b(using)\\s+(namespace)\\s+(?:((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*)?((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?=;|\\n)",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.using.directive",
+            },
+            "2": {
+              "name": "keyword.other.namespace.directive storage.type.namespace.directive",
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#scope_resolution",
+                },
+              ],
+            },
+            "4": {
+              "name": "entity.name.namespace",
+            },
+          },
+          "end": ";",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.terminator.statement",
+            },
+          },
+          "name": "meta.using-namespace-declaration",
         },
         {
-          "include": "#using_namespace",
+          "begin": "(?<!\\w)(namespace)\\s+(?:(?:((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*[a-zA-Z_]\\w*)|(?={)))",
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.namespace.definition storage.type.namespace.definition",
+            },
+            "2": {
+              "patterns": [
+                {
+                  "match": "(?-mix:(?<!\\w)[a-zA-Z_]\\w*(?!\\w))",
+                  "name": "entity.name.type",
+                },
+                {
+                  "match": "::",
+                  "name": "punctuation.separator.namespace.access",
+                },
+              ],
+            },
+          },
+          "end": "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
+          "name": "meta.namespace-block",
+          "patterns": [
+            {
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.scope",
+                },
+              },
+              "end": "\\}",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.definition.scope",
+                },
+              },
+              "patterns": [
+                {
+                  "include": "#special_block",
+                },
+                {
+                  "include": "#constructor",
+                },
+                {
+                  "include": "$base",
+                },
+              ],
+            },
+            {
+              "include": "$base",
+            },
+          ],
         },
         {
-          "include": "#type_alias",
+          "begin": "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.class",
+            },
+            "2": {
+              "name": "storage.type.struct",
+            },
+            "3": {
+              "name": "entity.name.type",
+            },
+            "5": {
+              "name": "storage.type.modifier.access",
+            },
+            "6": {
+              "name": "entity.name.type.inherited",
+            },
+            "7": {
+              "patterns": [
+                {
+                  "match": "(public|protected|private)",
+                  "name": "storage.type.modifier.access",
+                },
+                {
+                  "match": "[_A-Za-z][_A-Za-z0-9]*",
+                  "name": "entity.name.type.inherited",
+                },
+              ],
+            },
+          },
+          "end": "(?<=\\})|(;)|(?=(\\(|\\)|>|\\[|\\]|=))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.terminator.statement",
+            },
+          },
+          "name": "meta.class-struct-block",
+          "patterns": [
+            {
+              "include": "#angle_brackets",
+            },
+            {
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.block.begin.bracket.curly",
+                },
+              },
+              "end": "(\\})(\\s*\\n)?",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.block.end.bracket.curly",
+                },
+                "2": {
+                  "name": "invalid.illegal.you-forgot-semicolon",
+                },
+              },
+              "patterns": [
+                {
+                  "include": "#special_block",
+                },
+                {
+                  "include": "#constructor",
+                },
+                {
+                  "include": "$base",
+                },
+              ],
+            },
+            {
+              "include": "$base",
+            },
+          ],
         },
         {
-          "include": "#namespace_block",
-        },
-        {
-          "include": "#typedef_class",
-        },
-        {
-          "include": "#typedef_struct",
-        },
-        {
-          "include": "#typedef_union",
-        },
-        {
-          "include": "#class_block",
-        },
-        {
-          "include": "#struct_block",
-        },
-        {
-          "include": "#union_block",
-        },
-        {
-          "include": "#enum_block",
-        },
-        {
-          "include": "#extern_block",
+          "begin": "\\b(extern)(?=\\s*\")",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier",
+            },
+          },
+          "end": "(?<=\\})|(?=\\w)|(?=\\s*#\\s*endif\\b)",
+          "name": "meta.extern-block",
+          "patterns": [
+            {
+              "begin": "\\{",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.block.begin.bracket.curly",
+                },
+              },
+              "end": "\\}|(?=\\s*#\\s*endif\\b)",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.block.end.bracket.curly",
+                },
+              },
+              "patterns": [
+                {
+                  "include": "#special_block",
+                },
+                {
+                  "include": "$base",
+                },
+              ],
+            },
+            {
+              "include": "$base",
+            },
+          ],
         },
       ],
     },
-    "string_context": {
+    "strings": {
       "patterns": [
         {
           "begin": "(u|u8|U|L)?\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
             "1": {
-              "name": "meta.encoding.cpp",
+              "name": "meta.encoding",
             },
           },
           "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.cpp",
+          "name": "string.quoted.double",
           "patterns": [
             {
               "match": "\\\\u\\h{4}|\\\\U\\h{8}",
-              "name": "constant.character.escape.cpp",
+              "name": "constant.character.escape",
             },
             {
               "match": "\\\\['\"?\\\\abfnrtv]",
-              "name": "constant.character.escape.cpp",
+              "name": "constant.character.escape",
             },
             {
               "match": "\\\\[0-7]{1,3}",
-              "name": "constant.character.escape.cpp",
+              "name": "constant.character.escape",
             },
             {
               "match": "\\\\x\\h+",
-              "name": "constant.character.escape.cpp",
+              "name": "constant.character.escape",
             },
             {
-              "include": "#string_escapes_context_c",
+              "include": "#string_placeholder-c",
             },
           ],
         },
@@ -6581,88 +4543,225 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
             "1": {
-              "name": "meta.encoding.cpp",
+              "name": "meta.encoding",
             },
             "3": {
-              "name": "invalid.illegal.delimiter-too-long.cpp",
+              "name": "invalid.illegal.delimiter-too-long",
             },
           },
           "end": "\\)\\2(\\3)\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
             "1": {
-              "name": "invalid.illegal.delimiter-too-long.cpp",
+              "name": "invalid.illegal.delimiter-too-long",
             },
           },
-          "name": "string.quoted.double.raw.cpp",
+          "name": "string.quoted.double.raw",
         },
       ],
     },
-    "block": {
-      "begin": "{",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.section.block.begin.bracket.curly.cpp",
+    "probably_a_parameter": {
+      "match": "(?:(?:([a-zA-Z_]\\w*)\\s*(?==)|(?<=\\w\\s|\\*\\/|[&*>\\]\\)])\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:(?:,|\\))))))",
+      "captures": {
+        "1": {
+          "name": "variable.parameter.probably.defaulted",
+        },
+        "2": {
+          "name": "variable.parameter.probably",
         },
       },
-      "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+    },
+    "operator_overload": {
+      "begin": "((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*(operator)((?:(?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*[a-zA-Z_]\\w*\\s*(?:&)?)))))\\s*(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.scope",
+        },
+        "2": {
+          "name": "keyword.other.operator.overload",
+        },
+        "3": {
+          "name": "entity.name.operator.overloadee",
+        },
+        "4": {
+          "name": "punctuation.section.parameters.begin.bracket.round",
+        },
+      },
+      "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.block.end.bracket.curly.cpp",
+          "name": "punctuation.section.parameters.end.bracket.round",
         },
       },
-      "name": "meta.block.cpp",
+      "name": "meta.function.definition.parameters.operator-overload",
       "patterns": [
         {
-          "include": "#block_context",
+          "include": "#probably_a_parameter",
+        },
+        {
+          "include": "#function-innards-c",
         },
       ],
     },
-    "block_context": {
+    "access-method": {
+      "name": "meta.function-call.member",
+      "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.other.object",
+        },
+        "2": {
+          "name": "punctuation.separator.dot-access",
+        },
+        "3": {
+          "name": "punctuation.separator.pointer-access",
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "\\.",
+              "name": "punctuation.separator.dot-access",
+            },
+            {
+              "match": "->",
+              "name": "punctuation.separator.pointer-access",
+            },
+            {
+              "match": "[a-zA-Z_][a-zA-Z_0-9]*",
+              "name": "variable.other.object",
+            },
+            {
+              "name": "everything.else",
+              "match": ".+",
+            },
+          ],
+        },
+        "5": {
+          "name": "entity.name.function.member",
+        },
+        "6": {
+          "name": "punctuation.section.arguments.begin.bracket.round.function.member",
+        },
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.arguments.end.bracket.round.function.member",
+        },
+      },
       "patterns": [
         {
-          "include": "#preprocessor_rule_enabled_block",
+          "include": "#function-call-innards-c",
+        },
+      ],
+    },
+    "access-member": {
+      "name": "variable.other.object.access",
+      "match": "(?:(?:([a-zA-Z_]\\w*)|(?<=\\]|\\))))\\s*(?:(?:((?:(?:\\.|\\.\\*)))|((?:(?:->|->\\*)))))\\s*((?:[a-zA-Z_]\\w*\\s*(?:(?:\\.|->))\\s*)*)\\b(?!(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t))([a-zA-Z_]\\w*)\\b(?!\\()",
+      "captures": {
+        "1": {
+          "name": "variable.other.object",
+        },
+        "2": {
+          "name": "punctuation.separator.dot-access",
+        },
+        "3": {
+          "name": "punctuation.separator.pointer-access",
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "\\.",
+              "name": "punctuation.separator.dot-access",
+            },
+            {
+              "match": "->",
+              "name": "punctuation.separator.pointer-access",
+            },
+            {
+              "match": "[a-zA-Z_]\\w*",
+              "name": "variable.other.object",
+            },
+            {
+              "match": ".+",
+              "name": "everything.else",
+            },
+          ],
+        },
+        "5": {
+          "name": "variable.other.member",
+        },
+      },
+    },
+    "block-c": {
+      "patterns": [
+        {
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.block.begin.bracket.curly",
+            },
+          },
+          "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.block.end.bracket.curly",
+            },
+          },
+          "name": "meta.block",
+          "patterns": [
+            {
+              "include": "#block_innards-c",
+            },
+          ],
+        },
+      ],
+    },
+    "block_innards-c": {
+      "patterns": [
+        {
+          "include": "#preprocessor-rule-enabled-block",
         },
         {
-          "include": "#preprocessor_rule_disabled_block",
+          "include": "#preprocessor-rule-disabled-block",
         },
         {
-          "include": "#preprocessor_rule_conditional_block",
+          "include": "#preprocessor-rule-conditional-block",
         },
         {
-          "include": "#method_access",
+          "include": "#access-method",
         },
         {
-          "include": "#member_access",
+          "include": "#access-member",
         },
         {
-          "include": "#function_call_c",
+          "include": "#c_function_call",
         },
         {
-          "name": "meta.initialization.cpp",
+          "name": "meta.initialization",
           "begin": "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
           "beginCaptures": {
             "1": {
-              "name": "variable.other.cpp",
+              "name": "variable.other",
             },
             "2": {
-              "name": "punctuation.section.parens.begin.bracket.round.initialization.cpp",
+              "name": "punctuation.section.parens.begin.bracket.round.initialization",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.initialization.cpp",
+              "name": "punctuation.section.parens.end.bracket.round.initialization",
             },
           },
           "patterns": [
             {
-              "include": "#function_call_context_c",
+              "include": "#function-call-innards-c",
             },
           ],
         },
@@ -6670,79 +4769,79 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.cpp",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.cpp",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
           "patterns": [
             {
-              "include": "#block_context",
+              "include": "#block_innards-c",
             },
           ],
         },
         {
-          "include": "#parentheses_block",
+          "include": "#parens-block-c",
         },
         {
           "include": "$base",
         },
       ],
     },
-    "function_call_c": {
-      "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*(?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?)\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+    "c_function_call": {
+      "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
       "end": "(?<=\\))(?!\\w)",
-      "name": "meta.function-call.cpp",
+      "name": "meta.function-call",
       "patterns": [
         {
-          "include": "#function_call_context_c",
+          "include": "#function-call-innards-c",
         },
       ],
     },
-    "comments_context": {
+    "comments-c": {
       "patterns": [
         {
           "captures": {
             "1": {
-              "name": "meta.toc-list.banner.block.cpp",
+              "name": "meta.toc-list.banner.block",
             },
           },
           "match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
-          "name": "comment.block.cpp",
+          "name": "comment.block",
         },
         {
           "begin": "/\\*",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.begin.cpp",
+              "name": "punctuation.definition.comment.begin",
             },
           },
           "end": "\\*/",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.end.cpp",
+              "name": "punctuation.definition.comment.end",
             },
           },
-          "name": "comment.block.cpp",
+          "name": "comment.block",
         },
         {
           "captures": {
             "1": {
-              "name": "meta.toc-list.banner.line.cpp",
+              "name": "meta.toc-list.banner.line",
             },
           },
           "match": "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-          "name": "comment.line.banner.cpp",
+          "name": "comment.line.banner",
         },
         {
           "begin": "(^[ \\t]+)?(?=//)",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.whitespace.comment.leading.cpp",
+              "name": "punctuation.whitespace.comment.leading",
             },
           },
           "end": "(?!\\G)",
@@ -6751,11 +4850,11 @@ objective_cpp_grammar[:"cpp_lang"] = {
               "begin": "//",
               "beginCaptures": {
                 "0": {
-                  "name": "punctuation.definition.comment.cpp",
+                  "name": "punctuation.definition.comment",
                 },
               },
               "end": "(?=\\n)",
-              "name": "comment.line.double-slash.cpp",
+              "name": "comment.line.double-slash",
               "patterns": [
                 {
                   "include": "#line_continuation_character",
@@ -6774,30 +4873,34 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "include": "#disabled",
         },
         {
-          "include": "#pragma_mark",
+          "include": "#pragma-mark",
         },
       ],
     },
     "line_continuation_character": {
-      "match": "(\\\\)\\n",
-      "captures": {
-        "1": {
-          "name": "constant.character.escape.line-continuation.cpp",
+      "patterns": [
+        {
+          "match": "(\\\\)\\n",
+          "captures": {
+            "1": {
+              "name": "constant.character.escape.line-continuation",
+            },
+          },
         },
-      },
+      ],
     },
-    "parentheses": {
-      "name": "meta.parens.cpp",
+    "parens-c": {
+      "name": "punctuation.section.parens-c\b",
       "begin": "\\(",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.section.parens.begin.bracket.round.cpp",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
       },
       "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.parens.end.bracket.round.cpp",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
       },
       "patterns": [
@@ -6806,67 +4909,147 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "parentheses_block": {
-      "name": "meta.parens.block.cpp",
+    "parens-block-c": {
+      "name": "meta.block.parens",
       "begin": "\\(",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.section.parens.begin.bracket.round.cpp",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
       },
       "end": "\\)",
       "endCaptures": {
         "0": {
-          "name": "punctuation.section.parens.end.bracket.round.cpp",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
       },
       "patterns": [
         {
-          "include": "#block_context",
+          "include": "#block_innards-c",
         },
         {
-          "match": "(?-mix:(?<!:):(?!:))",
-          "name": "colon.cpp punctuation.separator.range-based.cpp",
+          "match": "(?<!:):(?!:)",
+          "name": "punctuation.range-based",
         },
       ],
     },
-    "pragma_mark": {
+    "pragma-mark": {
       "captures": {
         "1": {
-          "name": "meta.preprocessor.pragma.cpp",
+          "name": "meta.preprocessor.pragma",
         },
         "2": {
-          "name": "keyword.control.directive.pragma.pragma-mark.cpp",
+          "name": "keyword.control.directive.pragma.pragma-mark",
         },
         "3": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
         "4": {
-          "name": "entity.name.tag.pragma-mark.cpp",
+          "name": "entity.name.tag.pragma-mark",
         },
       },
       "match": "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
-      "name": "meta.section.cpp",
+      "name": "meta.section",
     },
-    "string_context_c": {
+    "operators": {
+      "patterns": [
+        {
+          "match": "(?-mix:(?<!\\w)((?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept))(?!\\w))",
+          "name": "keyword.operator.$1",
+        },
+        {
+          "match": "--",
+          "name": "keyword.operator.decrement",
+        },
+        {
+          "match": "\\+\\+",
+          "name": "keyword.operator.increment",
+        },
+        {
+          "match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
+          "name": "keyword.operator.assignment.compound",
+        },
+        {
+          "match": "&=|\\^=|<<=|>>=|\\|=",
+          "name": "keyword.operator.assignment.compound.bitwise",
+        },
+        {
+          "match": "<<|>>",
+          "name": "keyword.operator.bitwise.shift",
+        },
+        {
+          "match": "!=|<=|>=|==|<|>",
+          "name": "keyword.operator.comparison",
+        },
+        {
+          "match": "&&|!|\\|\\|",
+          "name": "keyword.operator.logical",
+        },
+        {
+          "match": "&|\\||\\^|~",
+          "name": "keyword.operator",
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment",
+        },
+        {
+          "match": "%|\\*|/|-|\\+",
+          "name": "keyword.operator",
+        },
+        {
+          "begin": "\\?",
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.operator.ternary",
+            },
+          },
+          "end": ":",
+          "applyEndPatternLast": true,
+          "endCaptures": {
+            "0": {
+              "name": "keyword.operator.ternary",
+            },
+          },
+          "patterns": [
+            {
+              "include": "#access-method",
+            },
+            {
+              "include": "#access-member",
+            },
+            {
+              "include": "#c_function_call",
+            },
+            {
+              "include": "$base",
+            },
+          ],
+        },
+      ],
+    },
+    "strings-c": {
       "patterns": [
         {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.cpp",
+          "name": "string.quoted.double",
           "patterns": [
             {
-              "include": "#string_escapes_context_c",
+              "include": "#string_escaped_char-c",
+            },
+            {
+              "include": "#string_placeholder-c",
             },
             {
               "include": "#line_continuation_character",
@@ -6877,19 +5060,19 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "(?-mix:(?<![\\da-fA-F])')",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.cpp",
+          "name": "string.quoted.single",
           "patterns": [
             {
-              "include": "#string_escapes_context_c",
+              "include": "#string_escaped_char-c",
             },
             {
               "include": "#line_continuation_character",
@@ -6898,177 +5081,205 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "string_escapes_context_c": {
+    "string_escaped_char-c": {
       "patterns": [
         {
           "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
-          "name": "constant.character.escape.cpp",
+          "name": "constant.character.escape",
         },
         {
           "match": "\\\\.",
-          "name": "invalid.illegal.unknown-escape.cpp",
+          "name": "invalid.illegal.unknown-escape",
         },
+      ],
+    },
+    "string_placeholder-c": {
+      "patterns": [
         {
           "match": "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-          "name": "constant.other.placeholder.cpp",
+          "name": "constant.other.placeholder",
         },
       ],
     },
-    "vararg_ellipses": {
+    "vararg_ellipses-c": {
       "match": "(?<!\\.)\\.\\.\\.(?!\\.)",
-      "name": "punctuation.vararg-ellipses.cpp",
+      "name": "punctuation.vararg-ellipses",
     },
-    "preprocessor_rule_conditional": {
-      "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
+    "preprocessor-rule-conditional": {
       "patterns": [
         {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#preprocessor_rule_enabled_elif",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_else",
-        },
-        {
-          "include": "#preprocessor_rule_disabled_elif",
-        },
-        {
-          "begin": "^\\s*((#)\\s*elif\\b)",
+          "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
           "beginCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
             "1": {
-              "name": "keyword.control.directive.conditional.cpp",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.cpp",
+              "name": "punctuation.definition.directive",
             },
           },
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "#preprocessor-rule-enabled-elif",
+            },
+            {
+              "include": "#preprocessor-rule-enabled-else",
+            },
+            {
+              "include": "#preprocessor-rule-disabled-elif",
+            },
+            {
+              "begin": "^\\s*((#)\\s*elif\\b)",
+              "beginCaptures": {
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "$base",
             },
           ],
         },
         {
-          "include": "$base",
+          "match": "^\\s*#\\s*(else|elif|endif)\\b",
+          "captures": {
+            "0": {
+              "name": "invalid.illegal.stray-$1",
+            },
+          },
         },
       ],
     },
-    "preprocessor_rule_conditional_block": {
-      "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
+    "preprocessor-rule-conditional-block": {
       "patterns": [
         {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#preprocessor_rule_enabled_elif_block",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_else_block",
-        },
-        {
-          "include": "#preprocessor_rule_disabled_elif",
-        },
-        {
-          "begin": "^\\s*((#)\\s*elif\\b)",
+          "begin": "^\\s*((#)\\s*if(?:n?def)?\\b)",
           "beginCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
             "1": {
-              "name": "keyword.control.directive.conditional.cpp",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.cpp",
+              "name": "punctuation.definition.directive",
             },
           },
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "#preprocessor-rule-enabled-elif-block",
+            },
+            {
+              "include": "#preprocessor-rule-enabled-else-block",
+            },
+            {
+              "include": "#preprocessor-rule-disabled-elif",
+            },
+            {
+              "begin": "^\\s*((#)\\s*elif\\b)",
+              "beginCaptures": {
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "#block_innards-c",
             },
           ],
         },
         {
-          "include": "#block_context",
+          "match": "^\\s*#\\s*(else|elif|endif)\\b",
+          "captures": {
+            "0": {
+              "name": "invalid.illegal.stray-$1",
+            },
+          },
         },
       ],
     },
-    "preprocessor_rule_conditional_line_context": {
+    "preprocessor-rule-conditional-line": {
       "patterns": [
         {
           "match": "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
-          "name": "keyword.control.directive.conditional.cpp",
+          "name": "keyword.control.directive.conditional",
         },
         {
           "match": "\\bdefined\\b",
-          "name": "invalid.illegal.macro-name.cpp",
+          "name": "invalid.illegal.macro-name",
         },
         {
-          "include": "#comments_context",
+          "include": "#comments-c",
         },
         {
-          "include": "#string_context_c",
+          "include": "#strings-c",
         },
         {
           "include": "#number_literal",
@@ -7077,18 +5288,18 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "\\?",
           "beginCaptures": {
             "0": {
-              "name": "keyword.operator.ternary.cpp",
+              "name": "keyword.operator.ternary",
             },
           },
           "end": ":",
           "endCaptures": {
             "0": {
-              "name": "keyword.operator.ternary.cpp",
+              "name": "keyword.operator.ternary",
             },
           },
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "include": "#preprocessor-rule-conditional-line",
             },
           ],
         },
@@ -7096,11 +5307,11 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "include": "#operators",
         },
         {
-          "include": "#language_constants",
+          "include": "#constants",
         },
         {
-          "match": "(?-mix:[a-zA-Z_$][\\w$]*)",
-          "name": "entity.name.function.preprocessor.cpp",
+          "match": "[a-zA-Z_$][\\w$]*",
+          "name": "entity.name.function.preprocessor",
         },
         {
           "include": "#line_continuation_character",
@@ -7109,220 +5320,228 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.cpp",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)|(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.cpp",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "include": "#preprocessor-rule-conditional-line",
             },
           ],
         },
       ],
     },
-    "preprocessor_rule_disabled": {
-      "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
+    "preprocessor-rule-disabled": {
       "patterns": [
         {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#comments_context",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_elif",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_else",
-        },
-        {
-          "include": "#preprocessor_rule_disabled_elif",
-        },
-        {
-          "begin": "^\\s*((#)\\s*elif\\b)",
+          "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.cpp",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.cpp",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.cpp",
+              "name": "punctuation.definition.directive",
             },
           },
-          "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
           "patterns": [
             {
               "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.cpp",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+              "name": "meta.preprocessor",
               "patterns": [
                 {
-                  "include": "#preprocessor_rule_conditional_line_context",
+                  "include": "#preprocessor-rule-conditional-line",
                 },
               ],
             },
             {
-              "include": "$base",
-            },
-          ],
-        },
-        {
-          "contentName": "comment.block.preprocessor.if-branch",
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-          "patterns": [
-            {
-              "include": "#disabled",
+              "include": "#comments-c",
             },
             {
-              "include": "#pragma_mark",
+              "include": "#preprocessor-rule-enabled-elif",
             },
-          ],
-        },
-      ],
-    },
-    "preprocessor_rule_disabled_block": {
-      "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "include": "#preprocessor-rule-enabled-else",
             },
-          ],
-        },
-        {
-          "include": "#comments_context",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_elif_block",
-        },
-        {
-          "include": "#preprocessor_rule_enabled_else_block",
-        },
-        {
-          "include": "#preprocessor_rule_disabled_elif",
-        },
-        {
-          "begin": "^\\s*((#)\\s*elif\\b)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.preprocessor.cpp",
-            },
-            "1": {
-              "name": "keyword.control.directive.conditional.cpp",
-            },
-            "2": {
-              "name": "punctuation.definition.directive.cpp",
-            },
-          },
-          "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-          "patterns": [
             {
-              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-              "name": "meta.preprocessor.cpp",
+              "include": "#preprocessor-rule-disabled-elif",
+            },
+            {
+              "begin": "^\\s*((#)\\s*elif\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
               "patterns": [
                 {
-                  "include": "#preprocessor_rule_conditional_line_context",
+                  "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                  "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                  "name": "meta.preprocessor",
+                  "patterns": [
+                    {
+                      "include": "#preprocessor-rule-conditional-line",
+                    },
+                  ],
+                },
+                {
+                  "include": "$base",
                 },
               ],
             },
             {
-              "include": "#block_context",
-            },
-          ],
-        },
-        {
-          "contentName": "comment.block.preprocessor.if-branch.in-block",
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-          "patterns": [
-            {
-              "include": "#disabled",
-            },
-            {
-              "include": "#pragma_mark",
+              "begin": "\\n",
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.if-branch",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
+                },
+              ],
             },
           ],
         },
       ],
     },
-    "preprocessor_rule_disabled_elif": {
+    "preprocessor-rule-disabled-block": {
+      "patterns": [
+        {
+          "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+          "beginCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
+          "patterns": [
+            {
+              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "#comments-c",
+            },
+            {
+              "include": "#preprocessor-rule-enabled-elif-block",
+            },
+            {
+              "include": "#preprocessor-rule-enabled-else-block",
+            },
+            {
+              "include": "#preprocessor-rule-disabled-elif",
+            },
+            {
+              "begin": "^\\s*((#)\\s*elif\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+              "patterns": [
+                {
+                  "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+                  "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+                  "name": "meta.preprocessor",
+                  "patterns": [
+                    {
+                      "include": "#preprocessor-rule-conditional-line",
+                    },
+                  ],
+                },
+                {
+                  "include": "#block_innards-c",
+                },
+              ],
+            },
+            {
+              "begin": "\\n",
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.if-branch.in-block",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    "preprocessor-rule-disabled-elif": {
       "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.cpp",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
@@ -7330,307 +5549,315 @@ objective_cpp_grammar[:"cpp_lang"] = {
         {
           "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
           "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "include": "#preprocessor-rule-conditional-line",
             },
           ],
         },
         {
-          "include": "#comments_context",
+          "include": "#comments-c",
         },
         {
+          "begin": "\\n",
+          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "contentName": "comment.block.preprocessor.elif-branch",
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
               "include": "#disabled",
             },
             {
-              "include": "#pragma_mark",
+              "include": "#pragma-mark",
             },
           ],
         },
       ],
     },
-    "preprocessor_rule_enabled": {
-      "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-        "3": {
-          "name": "constant.numeric.preprocessor.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
+    "preprocessor-rule-enabled": {
       "patterns": [
         {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#comments_context",
-        },
-        {
-          "contentName": "comment.block.preprocessor.else-branch",
-          "begin": "^\\s*((#)\\s*else\\b)",
+          "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
           "beginCaptures": {
             "0": {
-              "name": "meta.preprocessor.cpp",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.cpp",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.cpp",
+              "name": "punctuation.definition.directive",
+            },
+            "3": {
+              "name": "constant.numeric.preprocessor",
             },
           },
-          "end": "(?=^\\s*((#)\\s*endif\\b))",
-          "patterns": [
-            {
-              "include": "#disabled",
-            },
-            {
-              "include": "#pragma_mark",
-            },
-          ],
-        },
-        {
-          "contentName": "comment.block.preprocessor.if-branch",
-          "begin": "^\\s*((#)\\s*elif\\b)",
-          "beginCaptures": {
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
             "0": {
-              "name": "meta.preprocessor.cpp",
+              "name": "meta.preprocessor",
             },
             "1": {
-              "name": "keyword.control.directive.conditional.cpp",
+              "name": "keyword.control.directive.conditional",
             },
             "2": {
-              "name": "punctuation.definition.directive.cpp",
+              "name": "punctuation.definition.directive",
             },
           },
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#disabled",
+              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
             },
             {
-              "include": "#pragma_mark",
-            },
-          ],
-        },
-        {
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-          "patterns": [
-            {
-              "include": "$base",
-            },
-          ],
-        },
-      ],
-    },
-    "preprocessor_rule_enabled_block": {
-      "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "^\\s*((#)\\s*endif\\b)",
-      "endCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "patterns": [
-        {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#comments_context",
-        },
-        {
-          "contentName": "comment.block.preprocessor.else-branch.in-block",
-          "begin": "^\\s*((#)\\s*else\\b)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.preprocessor.cpp",
-            },
-            "1": {
-              "name": "keyword.control.directive.conditional.cpp",
-            },
-            "2": {
-              "name": "punctuation.definition.directive.cpp",
-            },
-          },
-          "end": "(?=^\\s*((#)\\s*endif\\b))",
-          "patterns": [
-            {
-              "include": "#disabled",
+              "include": "#comments-c",
             },
             {
-              "include": "#pragma_mark",
-            },
-          ],
-        },
-        {
-          "contentName": "comment.block.preprocessor.if-branch.in-block",
-          "begin": "^\\s*((#)\\s*elif\\b)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.preprocessor.cpp",
-            },
-            "1": {
-              "name": "keyword.control.directive.conditional.cpp",
-            },
-            "2": {
-              "name": "punctuation.definition.directive.cpp",
-            },
-          },
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-          "patterns": [
-            {
-              "include": "#disabled",
-            },
-            {
-              "include": "#pragma_mark",
-            },
-          ],
-        },
-        {
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-          "patterns": [
-            {
-              "include": "#block_context",
-            },
-          ],
-        },
-      ],
-    },
-    "preprocessor_rule_enabled_elif": {
-      "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.preprocessor.cpp",
-        },
-        "1": {
-          "name": "keyword.control.directive.conditional.cpp",
-        },
-        "2": {
-          "name": "punctuation.definition.directive.cpp",
-        },
-      },
-      "end": "(?=^\\s*((#)\\s*endif\\b))",
-      "patterns": [
-        {
-          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_rule_conditional_line_context",
-            },
-          ],
-        },
-        {
-          "include": "#comments_context",
-        },
-        {
-          "begin": "\\n",
-          "end": "(?=^\\s*((#)\\s*(?:endif)\\b))",
-          "patterns": [
-            {
-              "contentName": "comment.block.preprocessor.elif-branch",
-              "begin": "^\\s*((#)\\s*(else)\\b)",
+              "begin": "^\\s*((#)\\s*else\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.cpp",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.cpp",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.cpp",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*endif\\b))",
+              "contentName": "comment.block.preprocessor.else-branch",
               "patterns": [
                 {
                   "include": "#disabled",
                 },
                 {
-                  "include": "#pragma_mark",
+                  "include": "#pragma-mark",
                 },
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.elif-branch",
-              "begin": "^\\s*((#)\\s*(elif)\\b)",
+              "begin": "^\\s*((#)\\s*elif\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.cpp",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.cpp",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.cpp",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.if-branch",
               "patterns": [
                 {
                   "include": "#disabled",
                 },
                 {
-                  "include": "#pragma_mark",
+                  "include": "#pragma-mark",
+                },
+              ],
+            },
+            {
+              "begin": "\\n",
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "patterns": [
+                {
+                  "include": "$base",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    "preprocessor-rule-enabled-block": {
+      "patterns": [
+        {
+          "begin": "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+          "beginCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
+          "end": "^\\s*((#)\\s*endif\\b)",
+          "endCaptures": {
+            "0": {
+              "name": "meta.preprocessor",
+            },
+            "1": {
+              "name": "keyword.control.directive.conditional",
+            },
+            "2": {
+              "name": "punctuation.definition.directive",
+            },
+          },
+          "patterns": [
+            {
+              "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+              "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+              "name": "meta.preprocessor",
+              "patterns": [
+                {
+                  "include": "#preprocessor-rule-conditional-line",
+                },
+              ],
+            },
+            {
+              "include": "#comments-c",
+            },
+            {
+              "begin": "^\\s*((#)\\s*else\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*endif\\b))",
+              "contentName": "comment.block.preprocessor.else-branch.in-block",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
+                },
+              ],
+            },
+            {
+              "begin": "^\\s*((#)\\s*elif\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.if-branch.in-block",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
+                },
+              ],
+            },
+            {
+              "begin": "\\n",
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "patterns": [
+                {
+                  "include": "#block_innards-c",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    "preprocessor-rule-enabled-elif": {
+      "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+      "beginCaptures": {
+        "0": {
+          "name": "meta.preprocessor",
+        },
+        "1": {
+          "name": "keyword.control.directive.conditional",
+        },
+        "2": {
+          "name": "punctuation.definition.directive",
+        },
+      },
+      "end": "(?=^\\s*((#)\\s*endif\\b))",
+      "patterns": [
+        {
+          "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+          "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+          "name": "meta.preprocessor",
+          "patterns": [
+            {
+              "include": "#preprocessor-rule-conditional-line",
+            },
+          ],
+        },
+        {
+          "include": "#comments-c",
+        },
+        {
+          "begin": "\\n",
+          "end": "(?=^\\s*((#)\\s*(?:endif)\\b))",
+          "patterns": [
+            {
+              "begin": "^\\s*((#)\\s*(else)\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*endif\\b))",
+              "contentName": "comment.block.preprocessor.elif-branch",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
+                },
+              ],
+            },
+            {
+              "begin": "^\\s*((#)\\s*(elif)\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.elif-branch",
+              "patterns": [
+                {
+                  "include": "#disabled",
+                },
+                {
+                  "include": "#pragma-mark",
                 },
               ],
             },
@@ -7641,17 +5868,17 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "preprocessor_rule_enabled_elif_block": {
+    "preprocessor-rule-enabled-elif-block": {
       "begin": "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.cpp",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -7659,86 +5886,86 @@ objective_cpp_grammar[:"cpp_lang"] = {
         {
           "begin": "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
           "end": "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
           "patterns": [
             {
-              "include": "#preprocessor_rule_conditional_line_context",
+              "include": "#preprocessor-rule-conditional-line",
             },
           ],
         },
         {
-          "include": "#comments_context",
+          "include": "#comments-c",
         },
         {
           "begin": "\\n",
           "end": "(?=^\\s*((#)\\s*(?:endif)\\b))",
           "patterns": [
             {
+              "begin": "^\\s*((#)\\s*(else)\\b)",
+              "beginCaptures": {
+                "0": {
+                  "name": "meta.preprocessor",
+                },
+                "1": {
+                  "name": "keyword.control.directive.conditional",
+                },
+                "2": {
+                  "name": "punctuation.definition.directive",
+                },
+              },
+              "end": "(?=^\\s*((#)\\s*endif\\b))",
               "contentName": "comment.block.preprocessor.elif-branch.in-block",
-              "begin": "^\\s*((#)\\s*(else)\\b)",
-              "beginCaptures": {
-                "0": {
-                  "name": "meta.preprocessor.cpp",
-                },
-                "1": {
-                  "name": "keyword.control.directive.conditional.cpp",
-                },
-                "2": {
-                  "name": "punctuation.definition.directive.cpp",
-                },
-              },
-              "end": "(?=^\\s*((#)\\s*endif\\b))",
               "patterns": [
                 {
                   "include": "#disabled",
                 },
                 {
-                  "include": "#pragma_mark",
+                  "include": "#pragma-mark",
                 },
               ],
             },
             {
-              "contentName": "comment.block.preprocessor.elif-branch",
               "begin": "^\\s*((#)\\s*(elif)\\b)",
               "beginCaptures": {
                 "0": {
-                  "name": "meta.preprocessor.cpp",
+                  "name": "meta.preprocessor",
                 },
                 "1": {
-                  "name": "keyword.control.directive.conditional.cpp",
+                  "name": "keyword.control.directive.conditional",
                 },
                 "2": {
-                  "name": "punctuation.definition.directive.cpp",
+                  "name": "punctuation.definition.directive",
                 },
               },
               "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+              "contentName": "comment.block.preprocessor.elif-branch",
               "patterns": [
                 {
                   "include": "#disabled",
                 },
                 {
-                  "include": "#pragma_mark",
+                  "include": "#pragma-mark",
                 },
               ],
             },
             {
-              "include": "#block_context",
+              "include": "#block_innards-c",
             },
           ],
         },
       ],
     },
-    "preprocessor_rule_enabled_else": {
+    "preprocessor-rule-enabled-else": {
       "begin": "^\\s*((#)\\s*else\\b)",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.cpp",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
@@ -7748,70 +5975,70 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "preprocessor_rule_enabled_else_block": {
+    "preprocessor-rule-enabled-else-block": {
       "begin": "^\\s*((#)\\s*else\\b)",
       "beginCaptures": {
         "0": {
-          "name": "meta.preprocessor.cpp",
+          "name": "meta.preprocessor",
         },
         "1": {
-          "name": "keyword.control.directive.conditional.cpp",
+          "name": "keyword.control.directive.conditional",
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp",
+          "name": "punctuation.definition.directive",
         },
       },
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#block_context",
+          "include": "#block_innards-c",
         },
       ],
     },
-    "preprocessor_rule_define_line_context": {
+    "preprocessor-rule-define-line-contents": {
       "patterns": [
         {
-          "include": "#vararg_ellipses",
+          "include": "#vararg_ellipses-c",
         },
         {
-          "match": "(?-mix:##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))",
-          "name": "variable.other.macro.argument.cpp",
+          "match": "(?-mix:##?[a-zA-Z_]\\w*(?!\\w))",
+          "name": "variable.other.macro.argument",
         },
         {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.cpp",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.cpp",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
-          "name": "meta.block.cpp",
+          "name": "meta.block",
           "patterns": [
             {
-              "include": "#preprocessor_rule_define_line_blocks_context",
+              "include": "#preprocessor-rule-define-line-blocks",
             },
           ],
         },
         {
           "match": "\\(",
-          "name": "punctuation.section.parens.begin.bracket.round.cpp",
+          "name": "punctuation.section.parens.begin.bracket.round",
         },
         {
           "match": "\\)",
-          "name": "punctuation.section.parens.end.bracket.round.cpp",
+          "name": "punctuation.section.parens.end.bracket.round",
         },
         {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
           "end": "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
-          "name": "meta.function.cpp",
+          "name": "meta.function",
           "patterns": [
             {
-              "include": "#preprocessor_rule_define_line_functions_context",
+              "include": "#preprocessor-rule-define-line-functions",
             },
           ],
         },
@@ -7819,19 +6046,22 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "\"",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "\"|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.double.cpp",
+          "name": "string.quoted.double",
           "patterns": [
             {
-              "include": "#string_escapes_context_c",
+              "include": "#string_escaped_char-c",
+            },
+            {
+              "include": "#string_placeholder-c",
             },
             {
               "include": "#line_continuation_character",
@@ -7842,19 +6072,19 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "'",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin.cpp",
+              "name": "punctuation.definition.string.begin",
             },
           },
           "end": "'|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.string.end.cpp",
+              "name": "punctuation.definition.string.end",
             },
           },
-          "name": "string.quoted.single.cpp",
+          "name": "string.quoted.single",
           "patterns": [
             {
-              "include": "#string_escapes_context_c",
+              "include": "#string_escaped_char-c",
             },
             {
               "include": "#line_continuation_character",
@@ -7862,61 +6092,61 @@ objective_cpp_grammar[:"cpp_lang"] = {
           ],
         },
         {
-          "include": "#method_access",
+          "include": "#access-method",
         },
         {
-          "include": "#member_access",
+          "include": "#access-member",
         },
         {
           "include": "$base",
         },
       ],
     },
-    "preprocessor_rule_define_line_blocks_context": {
+    "preprocessor-rule-define-line-blocks": {
       "patterns": [
         {
           "begin": "{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.cpp",
+              "name": "punctuation.section.block.begin.bracket.curly",
             },
           },
           "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.cpp",
+              "name": "punctuation.section.block.end.bracket.curly",
             },
           },
           "patterns": [
             {
-              "include": "#preprocessor_rule_define_line_blocks_context",
+              "include": "#preprocessor-rule-define-line-blocks",
             },
             {
-              "include": "#preprocessor_rule_define_line_context",
+              "include": "#preprocessor-rule-define-line-contents",
             },
           ],
         },
         {
-          "include": "#preprocessor_rule_define_line_context",
+          "include": "#preprocessor-rule-define-line-contents",
         },
       ],
     },
-    "preprocessor_rule_define_line_functions_context": {
+    "preprocessor-rule-define-line-functions": {
       "patterns": [
         {
-          "include": "#comments_context",
+          "include": "#comments-c",
         },
         {
-          "include": "#storage_types",
+          "include": "#storage_types_c",
         },
         {
-          "include": "#vararg_ellipses",
+          "include": "#vararg_ellipses-c",
         },
         {
-          "include": "#method_access",
+          "include": "#access-method",
         },
         {
-          "include": "#member_access",
+          "include": "#access-member",
         },
         {
           "include": "#operators",
@@ -7925,21 +6155,21 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.cpp",
+              "name": "entity.name.function",
             },
             "2": {
-              "name": "punctuation.section.arguments.begin.bracket.round.cpp",
+              "name": "punctuation.section.arguments.begin.bracket.round",
             },
           },
           "end": "(\\))|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.arguments.end.bracket.round.cpp",
+              "name": "punctuation.section.arguments.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#preprocessor_rule_define_line_functions_context",
+              "include": "#preprocessor-rule-define-line-functions",
             },
           ],
         },
@@ -7947,62 +6177,82 @@ objective_cpp_grammar[:"cpp_lang"] = {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.cpp",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "(\\))|(?<!\\\\)(?=\\s*\\n)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.parens.end.bracket.round.cpp",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#preprocessor_rule_define_line_functions_context",
+              "include": "#preprocessor-rule-define-line-functions",
             },
           ],
         },
         {
-          "include": "#preprocessor_rule_define_line_context",
+          "include": "#preprocessor-rule-define-line-contents",
         },
       ],
     },
-    "function_context_c": {
+    "function-innards-c": {
       "patterns": [
         {
-          "include": "#attributes_context",
+          "include": "#comments-c",
         },
         {
-          "include": "#comments_context",
-        },
-        {
-          "include": "#storage_types",
+          "include": "#storage_types_c",
         },
         {
           "include": "#operators",
         },
         {
-          "include": "#vararg_ellipses",
+          "include": "#vararg_ellipses-c",
         },
         {
-          "include": "#legacy_function_definition",
+          "name": "meta.function.definition.parameters",
+          "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function",
+            },
+            "2": {
+              "name": "punctuation.section.parameters.begin.bracket.round",
+            },
+          },
+          "end": "\\)|:",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.parameters.end.bracket.round",
+            },
+          },
+          "patterns": [
+            {
+              "include": "#probably_a_parameter",
+            },
+            {
+              "include": "#function-innards-c",
+            },
+          ],
         },
         {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.cpp",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.cpp",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#function_context_c",
+              "include": "#function-innards-c",
             },
           ],
         },
@@ -8011,31 +6261,28 @@ objective_cpp_grammar[:"cpp_lang"] = {
         },
       ],
     },
-    "function_call_context_c": {
+    "function-call-innards-c": {
       "patterns": [
         {
-          "include": "#attributes_context",
+          "include": "#comments-c",
         },
         {
-          "include": "#comments_context",
+          "include": "#storage_types_c",
         },
         {
-          "include": "#storage_types",
+          "include": "#access-method",
         },
         {
-          "include": "#method_access",
-        },
-        {
-          "include": "#member_access",
+          "include": "#access-member",
         },
         {
           "include": "#operators",
         },
         {
-          "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*((?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?)) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+          "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*((?:(?:<(?:[\\s<>,\\w])*>\\s*))?) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
           "beginCaptures": {
             "1": {
-              "name": "keyword.operator.wordlike.cpp memory.cpp keyword.operator.new.cpp",
+              "name": "keyword.operator.memory.new",
             },
             "2": {
               "patterns": [
@@ -8045,59 +6292,92 @@ objective_cpp_grammar[:"cpp_lang"] = {
               ],
             },
             "3": {
-              "name": "punctuation.section.arguments.begin.bracket.round.cpp",
+              "name": "punctuation.section.arguments.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.arguments.end.bracket.round.cpp",
+              "name": "punctuation.section.arguments.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#function_call_context_c",
+              "include": "#function-call-innards-c",
             },
           ],
         },
         {
-          "include": "#function_call",
+          "begin": "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:[a-zA-Z_]\\w*\\s*(?:(?:<(?:[\\s<>,\\w])*>\\s*))?::)*)\\s*([a-zA-Z_]\\w*)\\s*(?:((?:<(?:[\\s<>,\\w])*>\\s*)))?(\\()",
+          "beginCaptures": {
+            "1": {
+              "patterns": [
+                {
+                  "include": "#scope_resolution",
+                },
+              ],
+            },
+            "2": {
+              "name": "entity.name.function.call",
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#template_call_innards",
+                },
+              ],
+            },
+            "4": {
+              "name": "punctuation.section.arguments.begin.bracket.round",
+            },
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.arguments.end.bracket.round",
+            },
+          },
+          "patterns": [
+            {
+              "include": "#function-call-innards-c",
+            },
+          ],
         },
         {
           "begin": "\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.parens.begin.bracket.round.cpp",
+              "name": "punctuation.section.parens.begin.bracket.round",
             },
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.parens.end.bracket.round.cpp",
+              "name": "punctuation.section.parens.end.bracket.round",
             },
           },
           "patterns": [
             {
-              "include": "#function_call_context_c",
+              "include": "#function-call-innards-c",
             },
           ],
         },
         {
-          "include": "#block_context",
+          "include": "#block_innards-c",
         },
       ],
     },
   },
 }
-objective_cpp_grammar[:"string_escaped_char"] = {
+objective_cpp_grammar[:string_escaped_char] = {
   patterns: [
     {
       match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
-      name: "constant.character.escape.c",
+      name: "constant.character.escape",
     },
     {
       match: "\\\\.",
-      name: "invalid.illegal.unknown-escape.c",
+      name: "invalid.illegal.unknown-escape",
     },
   ],
 }
@@ -8105,33 +6385,33 @@ objective_cpp_grammar[:string_placeholder] = {
   patterns: [
     {
       match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-      name: "constant.other.placeholder.c",
+      name: "constant.other.placeholder",
     },
     {
       match: "(%)(?!\"\\s*(PRI|SCN))",
       captures: {
         "1" => {
-          name: "invalid.illegal.placeholder.c",
+          name: "invalid.illegal.placeholder",
         },
       },
     },
   ],
 }
 objective_cpp_grammar[:bracketed_content] = { "begin" => "\\[", "beginCaptures" => { "0" => { "name" => "punctuation.section.scope.begin" } }, "end" => "\\]", "endCaptures" => { "0" => { "name" => "punctuation.section.scope.end" } }, "name" => "meta.bracketed", "patterns" => [{ "begin" => "(?=predicateWithFormat:)(?<=NSPredicate )(predicateWithFormat:)", "beginCaptures" => { "1" => { "name" => "support.function.any-method" }, "2" => { "name" => "punctuation.separator.arguments" } }, "end" => "(?=\\])", "name" => "meta.function-call.predicate", "patterns" => [{ "captures" => { "1" => { "name" => "punctuation.separator.arguments" } }, "match" => "\\bargument(Array|s)(:)", "name" => "support.function.any-method.name-of-parameter" }, { "captures" => { "1" => { "name" => "punctuation.separator.arguments" } }, "match" => "\\b\\w+(:)", "name" => "invalid.illegal.unknown-method" }, { "begin" => "@\"", "beginCaptures" => { "0" => { "name" => "punctuation.definition.string.begin" } }, "end" => "\"", "endCaptures" => { "0" => { "name" => "punctuation.definition.string.end" } }, "name" => "string.quoted.double", "patterns" => [{ "match" => "\\b(AND|OR|NOT|IN)\\b", "name" => "keyword.operator.logical.predicate.cocoa" }, { "match" => "\\b(ALL|ANY|SOME|NONE)\\b", "name" => "constant.language.predicate.cocoa" }, { "match" => "\\b(NULL|NIL|SELF|TRUE|YES|FALSE|NO|FIRST|LAST|SIZE)\\b", "name" => "constant.language.predicate.cocoa" }, { "match" => "\\b(MATCHES|CONTAINS|BEGINSWITH|ENDSWITH|BETWEEN)\\b", "name" => "keyword.operator.comparison.predicate.cocoa" }, { "match" => "\\bC(ASEINSENSITIVE|I)\\b", "name" => "keyword.other.modifier.predicate.cocoa" }, { "match" => "\\b(ANYKEY|SUBQUERY|CAST|TRUEPREDICATE|FALSEPREDICATE)\\b", "name" => "keyword.other.predicate.cocoa" }, { "match" => "\\\\(\\\\|[abefnrtv'\"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-zA-Z0-9]+)", "name" => "constant.character.escape" }, { "match" => "\\\\.", "name" => "invalid.illegal.unknown-escape" }] }, { "include" => "#special_variables" }, { "include" => "#c_functions" }, { "include" => "$base" }] }, { "begin" => "(?=\\w)(?<=[\\w\\])\"] )(\\w+(?:(:)|(?=\\])))", "beginCaptures" => { "1" => { "name" => "support.function.any-method" }, "2" => { "name" => "punctuation.separator.arguments" } }, "end" => "(?=\\])", "name" => "meta.function-call", "patterns" => [{ "captures" => { "1" => { "name" => "punctuation.separator.arguments" } }, "match" => "\\b\\w+(:)", "name" => "support.function.any-method.name-of-parameter" }, { "include" => "#special_variables" }, { "include" => "#c_functions" }, { "include" => "$base" }] }, { "include" => "#special_variables" }, { "include" => "#c_functions" }, { "include" => "$self" }] }
-objective_cpp_grammar[:c_functions] = { "patterns" => [{ "captures" => { "1" => { "name" => "punctuation.whitespace.support.function.leading.c" }, "2" => { "name" => "support.function.C99.c" } }, "match" => "(\\s*)\\b(hypot(f|l)?|s(scanf|ystem|nprintf|ca(nf|lb(n(f|l)?|ln(f|l)?))|i(n(h(f|l)?|f|l)?|gn(al|bit))|tr(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?)|error|pbrk|ftime|len|rchr|xfrm)|printf|et(jmp|vbuf|locale|buf)|qrt(f|l)?|w(scanf|printf)|rand)|n(e(arbyint(f|l)?|xt(toward(f|l)?|after(f|l)?))|an(f|l)?)|c(s(in(h(f|l)?|f|l)?|qrt(f|l)?)|cos(h(f)?|f|l)?|imag(f|l)?|t(ime|an(h(f|l)?|f|l)?)|o(s(h(f|l)?|f|l)?|nj(f|l)?|pysign(f|l)?)|p(ow(f|l)?|roj(f|l)?)|e(il(f|l)?|xp(f|l)?)|l(o(ck|g(f|l)?)|earerr)|a(sin(h(f|l)?|f|l)?|cos(h(f|l)?|f|l)?|tan(h(f|l)?|f|l)?|lloc|rg(f|l)?|bs(f|l)?)|real(f|l)?|brt(f|l)?)|t(ime|o(upper|lower)|an(h(f|l)?|f|l)?|runc(f|l)?|gamma(f|l)?|mp(nam|file))|i(s(space|n(ormal|an)|cntrl|inf|digit|u(nordered|pper)|p(unct|rint)|finite|w(space|c(ntrl|type)|digit|upper|p(unct|rint)|lower|al(num|pha)|graph|xdigit|blank)|l(ower|ess(equal|greater)?)|al(num|pha)|gr(eater(equal)?|aph)|xdigit|blank)|logb(f|l)?|max(div|abs))|di(v|fftime)|_Exit|unget(c|wc)|p(ow(f|l)?|ut(s|c(har)?|wc(har)?)|error|rintf)|e(rf(c(f|l)?|f|l)?|x(it|p(2(f|l)?|f|l|m1(f|l)?)?))|v(s(scanf|nprintf|canf|printf|w(scanf|printf))|printf|f(scanf|printf|w(scanf|printf))|w(scanf|printf)|a_(start|copy|end|arg))|qsort|f(s(canf|e(tpos|ek))|close|tell|open|dim(f|l)?|p(classify|ut(s|c|w(s|c))|rintf)|e(holdexcept|set(e(nv|xceptflag)|round)|clearexcept|testexcept|of|updateenv|r(aiseexcept|ror)|get(e(nv|xceptflag)|round))|flush|w(scanf|ide|printf|rite)|loor(f|l)?|abs(f|l)?|get(s|c|pos|w(s|c))|re(open|e|ad|xp(f|l)?)|m(in(f|l)?|od(f|l)?|a(f|l|x(f|l)?)?))|l(d(iv|exp(f|l)?)|o(ngjmp|cal(time|econv)|g(1(p(f|l)?|0(f|l)?)|2(f|l)?|f|l|b(f|l)?)?)|abs|l(div|abs|r(int(f|l)?|ound(f|l)?))|r(int(f|l)?|ound(f|l)?)|gamma(f|l)?)|w(scanf|c(s(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?|mbs)|pbrk|ftime|len|r(chr|tombs)|xfrm)|to(b|mb)|rtomb)|printf|mem(set|c(hr|py|mp)|move))|a(s(sert|ctime|in(h(f|l)?|f|l)?)|cos(h(f|l)?|f|l)?|t(o(i|f|l(l)?)|exit|an(h(f|l)?|2(f|l)?|f|l)?)|b(s|ort))|g(et(s|c(har)?|env|wc(har)?)|mtime)|r(int(f|l)?|ound(f|l)?|e(name|alloc|wind|m(ove|quo(f|l)?|ainder(f|l)?))|a(nd|ise))|b(search|towc)|m(odf(f|l)?|em(set|c(hr|py|mp)|move)|ktime|alloc|b(s(init|towcs|rtowcs)|towc|len|r(towc|len))))\\b" }, { "captures" => { "1" => { "name" => "punctuation.whitespace.function-call.leading.c" }, "2" => { "name" => "support.function.any-method.c" }, "3" => { "name" => "punctuation.definition.parameters.c" } }, "match" => "(?x) (?: (?= \\s )  (?:(?<=else|new|return) | (?<!\\w)) (\\s+))?\n            \t\t\t(\\b \n            \t\t\t\t(?!(while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\\s*\\()(?:(?!NS)[A-Za-z_][A-Za-z0-9_]*+\\b | :: )++                  # actual name\n            \t\t\t)\n            \t\t\t \\s*(\\()", "name" => "meta.function-call.c" }] }
+objective_cpp_grammar[:c_functions] = { "patterns" => [{ "captures" => { "1" => { "name" => "punctuation.whitespace.support.function.leading" }, "2" => { "name" => "support.function.C99" } }, "match" => "(\\s*)\\b(hypot(f|l)?|s(scanf|ystem|nprintf|ca(nf|lb(n(f|l)?|ln(f|l)?))|i(n(h(f|l)?|f|l)?|gn(al|bit))|tr(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?)|error|pbrk|ftime|len|rchr|xfrm)|printf|et(jmp|vbuf|locale|buf)|qrt(f|l)?|w(scanf|printf)|rand)|n(e(arbyint(f|l)?|xt(toward(f|l)?|after(f|l)?))|an(f|l)?)|c(s(in(h(f|l)?|f|l)?|qrt(f|l)?)|cos(h(f)?|f|l)?|imag(f|l)?|t(ime|an(h(f|l)?|f|l)?)|o(s(h(f|l)?|f|l)?|nj(f|l)?|pysign(f|l)?)|p(ow(f|l)?|roj(f|l)?)|e(il(f|l)?|xp(f|l)?)|l(o(ck|g(f|l)?)|earerr)|a(sin(h(f|l)?|f|l)?|cos(h(f|l)?|f|l)?|tan(h(f|l)?|f|l)?|lloc|rg(f|l)?|bs(f|l)?)|real(f|l)?|brt(f|l)?)|t(ime|o(upper|lower)|an(h(f|l)?|f|l)?|runc(f|l)?|gamma(f|l)?|mp(nam|file))|i(s(space|n(ormal|an)|cntrl|inf|digit|u(nordered|pper)|p(unct|rint)|finite|w(space|c(ntrl|type)|digit|upper|p(unct|rint)|lower|al(num|pha)|graph|xdigit|blank)|l(ower|ess(equal|greater)?)|al(num|pha)|gr(eater(equal)?|aph)|xdigit|blank)|logb(f|l)?|max(div|abs))|di(v|fftime)|_Exit|unget(c|wc)|p(ow(f|l)?|ut(s|c(har)?|wc(har)?)|error|rintf)|e(rf(c(f|l)?|f|l)?|x(it|p(2(f|l)?|f|l|m1(f|l)?)?))|v(s(scanf|nprintf|canf|printf|w(scanf|printf))|printf|f(scanf|printf|w(scanf|printf))|w(scanf|printf)|a_(start|copy|end|arg))|qsort|f(s(canf|e(tpos|ek))|close|tell|open|dim(f|l)?|p(classify|ut(s|c|w(s|c))|rintf)|e(holdexcept|set(e(nv|xceptflag)|round)|clearexcept|testexcept|of|updateenv|r(aiseexcept|ror)|get(e(nv|xceptflag)|round))|flush|w(scanf|ide|printf|rite)|loor(f|l)?|abs(f|l)?|get(s|c|pos|w(s|c))|re(open|e|ad|xp(f|l)?)|m(in(f|l)?|od(f|l)?|a(f|l|x(f|l)?)?))|l(d(iv|exp(f|l)?)|o(ngjmp|cal(time|econv)|g(1(p(f|l)?|0(f|l)?)|2(f|l)?|f|l|b(f|l)?)?)|abs|l(div|abs|r(int(f|l)?|ound(f|l)?))|r(int(f|l)?|ound(f|l)?)|gamma(f|l)?)|w(scanf|c(s(s(tr|pn)|nc(py|at|mp)|c(spn|hr|oll|py|at|mp)|to(imax|d|u(l(l)?|max)|k|f|l(d|l)?|mbs)|pbrk|ftime|len|r(chr|tombs)|xfrm)|to(b|mb)|rtomb)|printf|mem(set|c(hr|py|mp)|move))|a(s(sert|ctime|in(h(f|l)?|f|l)?)|cos(h(f|l)?|f|l)?|t(o(i|f|l(l)?)|exit|an(h(f|l)?|2(f|l)?|f|l)?)|b(s|ort))|g(et(s|c(har)?|env|wc(har)?)|mtime)|r(int(f|l)?|ound(f|l)?|e(name|alloc|wind|m(ove|quo(f|l)?|ainder(f|l)?))|a(nd|ise))|b(search|towc)|m(odf(f|l)?|em(set|c(hr|py|mp)|move)|ktime|alloc|b(s(init|towcs|rtowcs)|towc|len|r(towc|len))))\\b" }, { "captures" => { "1" => { "name" => "punctuation.whitespace.function-call.leading" }, "2" => { "name" => "support.function.any-method" }, "3" => { "name" => "punctuation.definition.parameters" } }, "match" => "(?x) (?: (?= \\s )  (?:(?<=else|new|return) | (?<!\\w)) (\\s+))?\n            \t\t\t(\\b \n            \t\t\t\t(?!(while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\\s*\\()(?:(?!NS)[A-Za-z_][A-Za-z0-9_]*+\\b | :: )++                  # actual name\n            \t\t\t)\n            \t\t\t \\s*(\\()", "name" => "meta.function-call" }] }
 objective_cpp_grammar[:comment] = { "patterns" => [{ "begin" => "/\\*", "captures" => { "0" => { "name" => "punctuation.definition.comment" } }, "end" => "\\*/", "name" => "comment.block" }, { "begin" => "(^[ \\t]+)?(?=//)", "beginCaptures" => { "1" => { "name" => "punctuation.whitespace.comment.leading" } }, "end" => "(?!\\G)", "patterns" => [{ "begin" => "//", "beginCaptures" => { "0" => { "name" => "punctuation.definition.comment" } }, "end" => "\\n", "name" => "comment.line.double-slash", "patterns" => [{ "match" => "(?>\\\\\\s*\\n)", "name" => "punctuation.separator.continuation" }] }] }] }
 objective_cpp_grammar[:disabled] = { "begin" => "^\\s*#\\s*if(n?def)?\\b.*$", "comment" => "eat nested preprocessor if(def)s", "end" => "^\\s*#\\s*endif\\b.*$", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }
 objective_cpp_grammar[:implementation_innards] = { "patterns" => [{ "include" => "#preprocessor-rule-enabled-implementation" }, { "include" => "#preprocessor-rule-disabled-implementation" }, { "include" => "#preprocessor-rule-other-implementation" }, { "include" => "#property_directive" }, { "include" => "#special_variables" }, { "include" => "#method_super" }, { "include" => "$base" }] }
 objective_cpp_grammar[:interface_innards] = { "patterns" => [{ "include" => "#preprocessor-rule-enabled-interface" }, { "include" => "#preprocessor-rule-disabled-interface" }, { "include" => "#preprocessor-rule-other-interface" }, { "include" => "#properties" }, { "include" => "#protocol_list" }, { "include" => "#method" }, { "include" => "$base" }] }
 objective_cpp_grammar[:method] = { "begin" => "^(-|\\+)\\s*", "end" => "(?=\\{|#)|;", "name" => "meta.function", "patterns" => [{ "begin" => "(\\()", "beginCaptures" => { "1" => { "name" => "punctuation.definition.type.begin" } }, "end" => "(\\))\\s*(\\w+\\b)", "endCaptures" => { "1" => { "name" => "punctuation.definition.type.end" }, "2" => { "name" => "entity.name.function" } }, "name" => "meta.return-type", "patterns" => [{ "include" => "#protocol_list" }, { "include" => "#protocol_type_qualifier" }, { "include" => "$base" }] }, { "match" => "\\b\\w+(?=:)", "name" => "entity.name.function.name-of-parameter" }, { "begin" => "((:))\\s*(\\()", "beginCaptures" => { "1" => { "name" => "entity.name.function.name-of-parameter" }, "2" => { "name" => "punctuation.separator.arguments" }, "3" => { "name" => "punctuation.definition.type.begin" } }, "end" => "(\\))\\s*(\\w+\\b)?", "endCaptures" => { "1" => { "name" => "punctuation.definition.type.end" }, "2" => { "name" => "variable.parameter.function" } }, "name" => "meta.argument-type", "patterns" => [{ "include" => "#protocol_list" }, { "include" => "#protocol_type_qualifier" }, { "include" => "$base" }] }, { "include" => "#comment" }] }
 objective_cpp_grammar[:method_super] = { "begin" => "^(?=-|\\+)", "end" => "(?<=\\})|(?=#)", "name" => "meta.function-with-body", "patterns" => [{ "include" => "#method" }, { "include" => "$base" }] }
-objective_cpp_grammar[:'pragma-mark'] = { "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.pragma.c" }, "3" => { "name" => "meta.toc-list.pragma-mark.c" } }, "match" => "^\\s*(#\\s*(pragma\\s+mark)\\s+(.*))", "name" => "meta.section" }
-objective_cpp_grammar[:'preprocessor-rule-disabled-implementation'] = { "begin" => "^\\s*(#(if)\\s+(0)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.if.c" }, "3" => { "name" => "constant.numeric.preprocessor.c" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.else.c" } }, "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "name" => "comment.block.preprocessor.if-branch.c", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }] }
-objective_cpp_grammar[:'preprocessor-rule-disabled-interface'] = { "begin" => "^\\s*(#(if)\\s+(0)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.if.c" }, "3" => { "name" => "constant.numeric.preprocessor.c" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.else.c" } }, "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "name" => "comment.block.preprocessor.if-branch.c", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }] }
-objective_cpp_grammar[:'preprocessor-rule-enabled-implementation'] = { "begin" => "^\\s*(#(if)\\s+(0*1)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.if.c" }, "3" => { "name" => "constant.numeric.preprocessor.c" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.else.c" } }, "contentName" => "comment.block.preprocessor.else-branch.c", "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#implementation_innards" }] }] }
-objective_cpp_grammar[:'preprocessor-rule-enabled-interface'] = { "begin" => "^\\s*(#(if)\\s+(0*1)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.if.c" }, "3" => { "name" => "constant.numeric.preprocessor.c" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.else.c" } }, "contentName" => "comment.block.preprocessor.else-branch.c", "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }] }
-objective_cpp_grammar[:'preprocessor-rule-other-implementation'] = { "begin" => "^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.c" } }, "end" => "^\\s*(#\\s*(endif)\\b).*?(?:(?=(?://|/\\*))|$)", "patterns" => [{ "include" => "#implementation_innards" }] }
-objective_cpp_grammar[:'preprocessor-rule-other-interface'] = { "begin" => "^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))", "captures" => { "1" => { "name" => "meta.preprocessor.c" }, "2" => { "name" => "keyword.control.import.c" } }, "end" => "^\\s*(#\\s*(endif)\\b).*?(?:(?=(?://|/\\*))|$)", "patterns" => [{ "include" => "#interface_innards" }] }
+objective_cpp_grammar[:'pragma-mark'] = { "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.pragma" }, "3" => { "name" => "meta.toc-list.pragma-mark" } }, "match" => "^\\s*(#\\s*(pragma\\s+mark)\\s+(.*))", "name" => "meta.section" }
+objective_cpp_grammar[:'preprocessor-rule-disabled-implementation'] = { "begin" => "^\\s*(#(if)\\s+(0)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.if" }, "3" => { "name" => "constant.numeric.preprocessor" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.else" } }, "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "name" => "comment.block.preprocessor.if-branch", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }] }
+objective_cpp_grammar[:'preprocessor-rule-disabled-interface'] = { "begin" => "^\\s*(#(if)\\s+(0)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.if" }, "3" => { "name" => "constant.numeric.preprocessor" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.else" } }, "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "name" => "comment.block.preprocessor.if-branch", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }] }
+objective_cpp_grammar[:'preprocessor-rule-enabled-implementation'] = { "begin" => "^\\s*(#(if)\\s+(0*1)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.if" }, "3" => { "name" => "constant.numeric.preprocessor" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.else" } }, "contentName" => "comment.block.preprocessor.else-branch", "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#implementation_innards" }] }] }
+objective_cpp_grammar[:'preprocessor-rule-enabled-interface'] = { "begin" => "^\\s*(#(if)\\s+(0*1)\\b)", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.if" }, "3" => { "name" => "constant.numeric.preprocessor" } }, "end" => "^\\s*(#\\s*(endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "begin" => "^\\s*(#\\s*(else)\\b).*", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import.else" } }, "contentName" => "comment.block.preprocessor.else-branch", "end" => "(?=^\\s*#\\s*endif\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#disabled" }, { "include" => "#pragma-mark" }] }, { "begin" => "", "end" => "(?=^\\s*#\\s*(else|endif)\\b.*?(?:(?=(?://|/\\*))|$))", "patterns" => [{ "include" => "#interface_innards" }] }] }
+objective_cpp_grammar[:'preprocessor-rule-other-implementation'] = { "begin" => "^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import" } }, "end" => "^\\s*(#\\s*(endif)\\b).*?(?:(?=(?://|/\\*))|$)", "patterns" => [{ "include" => "#implementation_innards" }] }
+objective_cpp_grammar[:'preprocessor-rule-other-interface'] = { "begin" => "^\\s*(#\\s*(if(n?def)?)\\b.*?(?:(?=(?://|/\\*))|$))", "captures" => { "1" => { "name" => "meta.preprocessor" }, "2" => { "name" => "keyword.control.import" } }, "end" => "^\\s*(#\\s*(endif)\\b).*?(?:(?=(?://|/\\*))|$)", "patterns" => [{ "include" => "#interface_innards" }] }
 objective_cpp_grammar[:properties] = { "patterns" => [{ "begin" => "((@)property)\\s*(\\()", "beginCaptures" => { "1" => { "name" => "keyword.other.property" }, "2" => { "name" => "punctuation.definition.keyword" }, "3" => { "name" => "punctuation.section.scope.begin" } }, "end" => "(\\))", "endCaptures" => { "1" => { "name" => "punctuation.section.scope.end" } }, "name" => "meta.property-with-attributes", "patterns" => [{ "match" => "\\b(getter|setter|readonly|readwrite|assign|retain|copy|nonatomic|strong|weak)\\b", "name" => "keyword.other.property.attribute" }] }, { "captures" => { "1" => { "name" => "keyword.other.property" }, "2" => { "name" => "punctuation.definition.keyword" } }, "match" => "((@)property)\\b", "name" => "meta.property" }] }
 objective_cpp_grammar[:property_directive] = { "captures" => { "1" => { "name" => "punctuation.definition.keyword" } }, "match" => "(@)(dynamic|synthesize)\\b", "name" => "keyword.other.property.directive" }
 objective_cpp_grammar[:protocol_list] = { "begin" => "(<)", "beginCaptures" => { "1" => { "name" => "punctuation.section.scope.begin" } }, "end" => "(>)", "endCaptures" => { "1" => { "name" => "punctuation.section.scope.end" } }, "name" => "meta.protocol-list", "patterns" => [{ "match" => "\\bNS(GlyphStorage|M(utableCopying|enuItem)|C(hangeSpelling|o(ding|pying|lorPicking(Custom|Default)))|T(oolbarItemValidations|ext(Input|AttachmentCell))|I(nputServ(iceProvider|erMouseTracker)|gnoreMisspelledWords)|Obj(CTypeSerializationCallBack|ect)|D(ecimalNumberBehaviors|raggingInfo)|U(serInterfaceValidations|RL(HandleClient|DownloadDelegate|ProtocolClient|AuthenticationChallengeSender))|Validated(ToobarItem|UserInterfaceItem)|Locking)\\b", "name" => "support.other.protocol" }] }
