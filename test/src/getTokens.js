@@ -20,6 +20,22 @@ module.exports = async function(registry, path, fixture, process) {
         ) {
             sourceName = "source.c";
         }
+        if (
+            pa.extname(path).startsWith("x") ||
+            pa.extname(path) == ".m" ||
+            path.includes("/objc/") ||
+            (argv["header-objc"] && pa.extname(path) == ".h")
+        ) {
+            sourceName = "source.objc";
+        }
+        if (
+            pa.extname(path).includes("X") ||
+            pa.extname(path).includes("M") ||
+            pa.extname(path) == ".mm" ||
+            path.includes("/objcpp/")
+        ) {
+            sourceName = "source.objcpp";
+        }
         const grammar = await registry.loadGrammar(sourceName);
         let ruleStack = null;
         let lineNumber = 1;

@@ -3,7 +3,7 @@ const registry = require("./registry").default;
 const _ = require("lodash");
 
 function removeScopeName(scope) {
-    return scope.replace(/\.c(pp)?$/, "");
+    return scope.replace(/\.(obj)?c(pp)?$/, "");
 }
 
 /**
