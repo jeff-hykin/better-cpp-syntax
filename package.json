@@ -1,9 +1,9 @@
 {
     "name": "better-cpp-syntax",
-    "displayName": "Better C++ Syntax",
-    "description": "The bleeding edge of the VS Code C++ syntax",
+    "displayName": "Better Syntax",
+    "description": "The bleeding edge of some VS Code syntaxes",
     "icon": "icon.png",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "scripts": {
         "build": "ruby scripts/generate.rb",
         "prelint": "npm run build",
@@ -18,6 +18,17 @@
         "sort-specs": "node test/src/commands/sort-specs.js",
         "vscode:prepublish": "npm run build"
     },
+    "keywords": [
+        "C++",
+        "cpp",
+        "c",
+        "objective-c",
+        "objective-cpp",
+        "objective-c++",
+        "syntax",
+        "textmate",
+        "highlighting"
+    ],
     "engines": {
         "vscode": "^1.0.0"
     },
