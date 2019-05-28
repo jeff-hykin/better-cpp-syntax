@@ -24,8 +24,24 @@ function getRegistry(getOnigLib) {
                         "c.tmLanguage.json"
                     );
                     break;
+                case "source.objcpp":
+                    grammarPath = path.join(
+                        testDir,
+                        "../syntaxes",
+                        "objcpp.tmLanguage.json"
+                    );
+                    break;
+                case "source.objc":
+                    grammarPath = path.join(
+                        testDir,
+                        "../syntaxes",
+                        "objc.tmLanguage.json"
+                    );
+                    break;
                 default:
-                    return Promise.reject("requested non c/c++ grammar");
+                    return Promise.reject(
+                        "requested non c/c++/objc/objc++ grammar"
+                    );
             }
             return Promise.resolve(
                 rewriteGrammar(

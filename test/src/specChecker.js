@@ -7,7 +7,7 @@ const vsctm = require("vscode-textmate");
  */
 
 function removeScopeName(scope) {
-    return scope.replace(/\.c(pp)?$/, "");
+    return scope.replace(/\.(obj)?c(pp)?$/, "");
 }
 
 module.exports["SpecChecker"] = class SpecChecker {
