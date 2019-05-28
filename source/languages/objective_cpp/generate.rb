@@ -45,6 +45,7 @@ objective_cpp_grammar[:function_body_context] = [
 #
 #  
 objective_cpp_grammar[:$initial_context] = [
+    :function_call,
     :function_definition, # prefer the C++ function 
     :posix_reserved_types,
     :objective_c,

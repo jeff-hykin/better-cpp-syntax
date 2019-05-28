@@ -7,6 +7,7 @@
 - This file essentially an updated/improved fork of the atom syntax
 - see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master
 :patterns:
+- include: "#function_call"
 - include: "#function_definition"
 - include: "#posix_reserved_types"
 - include: "#objective_c"
