@@ -11,6 +11,7 @@
         "pretest": "npm run build",
         "test": "node test/source/commands/test.js",
         "cov": "npm test -- --coverage",
+        "gen": "npm run generate-specs -- --generate-all",
         "preversion": "npm test",
         "version": "npm run build && git add -A syntaxes",
         "pregenerate-specs": "npm run build",
