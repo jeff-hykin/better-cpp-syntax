@@ -2370,7 +2370,7 @@ objective_cpp_grammar[:"c_lang"] = {
       "end": "(:)",
       "endCaptures": {
         "1": {
-          "name": "colon.c punctuation.separator.case.default",
+          "name": "punctuation.separator.case.default",
         },
       },
       "patterns": [
@@ -2390,7 +2390,7 @@ objective_cpp_grammar[:"c_lang"] = {
       "end": "(:)",
       "endCaptures": {
         "1": {
-          "name": "colon.c punctuation.separator.case",
+          "name": "punctuation.separator.case",
         },
       },
       "patterns": [
@@ -2508,7 +2508,7 @@ objective_cpp_grammar[:"c_lang"] = {
           "begin": "(,)\\s*(?=(?:L|u8|u|U\\s*\\\")?)",
           "beginCaptures": {
             "1": {
-              "name": "comma.c punctuation.separator.delimiter",
+              "name": "punctuation.separator.delimiter",
             },
           },
           "end": "(?=\\))",

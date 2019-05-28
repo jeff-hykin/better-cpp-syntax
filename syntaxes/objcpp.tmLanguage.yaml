@@ -1316,7 +1316,7 @@
         end: "(:)"
         endCaptures:
           '1':
-            name: colon.c.objcpp punctuation.separator.case.default.objcpp
+            name: punctuation.separator.case.default.objcpp
         patterns:
         - include: "#conditional_context"
       case_statement:
@@ -1328,7 +1328,7 @@
         end: "(:)"
         endCaptures:
           '1':
-            name: colon.c.objcpp punctuation.separator.case.objcpp
+            name: punctuation.separator.case.objcpp
         patterns:
         - include: "#conditional_context"
       switch_statement:
@@ -1394,7 +1394,7 @@
           begin: (,)\s*(?=(?:L|u8|u|U\s*\")?)
           beginCaptures:
             '1':
-              name: comma.c.objcpp punctuation.separator.delimiter.objcpp
+              name: punctuation.separator.delimiter.objcpp
           end: "(?=\\))"
           patterns:
           - include: "#string_context"
