@@ -356,11 +356,11 @@ cpp_grammar = Grammar.new(
     look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]|\.\.\./).maybe(@spaces)
     cpp_grammar[:primitive_types] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
-        tag_as: "storage.type.primitive"
+        tag_as: "storage.type.primitive storage.type.built-in.primitive"
         )
     cpp_grammar[:non_primitive_types] = newPattern(
         match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
-        tag_as: "storage.type"
+        tag_as: "storage.type storage.type.built-in"
         )
     cpp_grammar[:decltype] = functionCallGenerator[
                 repository_name: "decltype_specifier",
@@ -1343,12 +1343,12 @@ cpp_grammar = Grammar.new(
     # generally this section is for things that need a #include, (the support category)
     # it will be for things such as cout, cin, vector, string, map, etc
     cpp_grammar[:pthread_types] = pthread_types = newPattern(
-        tag_as: "support.type.posix-reserved.pthread",
+        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
         match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
         )
     cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        tag_as: "support.type.posix-reserved"
+        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
         )
     cpp_grammar[:predefined_macros] = predefinedMacros()
 
