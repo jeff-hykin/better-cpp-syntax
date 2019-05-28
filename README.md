@@ -1,9 +1,8 @@
 # What does this do?
-This will get you the bleeding-edge syntax highlighting for C++.
-This used to be a fix, but then VS Code starting using it as the official source for C++ highlighting.
+This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
 ## How do I use it?
-Just install the VS Code extension and the changes will automatically be applied to all C++/C files.
+Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
 ### Before Better C++
@@ -24,6 +23,7 @@ It fixes:
 - The marking of some %'s as invalid inside of strings https://github.com/atom/language-c/issues/289
 - The highlighting of namespaces with ::'s https://github.com/atom/language-c/issues/260 
 - The issue of the C++ syntax depending on (and getting screwed up by) the C syntax
+- multiple inheritance https://github.com/atom/language-c/issues/245
 - And many many more issues (#318, #309, #270, #246, etc)
 
 It adds:
@@ -38,12 +38,10 @@ It adds:
 - Many other features
 
 ## Contributing
-This is a project that is converting legacy JSON file into ruby files that generate a JSON file. The main ruby file "generate.rb" uses tools (that are in beta) that help generate the JSON file. If you want to contribute, take a look at `number_literal = newPattern(` inside of "generate.rb" to see how the new syntax looks. Take a look at `"comments-c" => {` to see how the old syntax looks. The code is ready for contributions, and in the future there will be much more documentation for contributors.
+If you'd like to help improve the syntax, take a look at `souce/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
-- Fix multiple inheritance https://github.com/atom/language-c/issues/245
-- Start coding patterns according to the offical C++ syntax specifications
-- Fix function-pointer tagging
+- Function-pointer tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
@@ -56,6 +54,6 @@ I love regular expressions, and I plan on actively maintaining this.
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
-<br>@matter123 has written almost every pull request, containing entirely new patterns and fixes for numerous things 
-<br>Thanks fnadeau and @matter123!
+<br>@matter123 has written basically every pull request, from simple bugfixes up to the entire textmate testing suite
+<br>Thanks @matter123!
 <br>The rest of the ruby is authored by @jeff-hykin
