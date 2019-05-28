@@ -9,13 +9,13 @@
         "prelint": "npm run build",
         "lint": "ruby scripts/lint.rb",
         "pretest": "npm run build",
-        "test": "node test/src/commands/test.js",
+        "test": "node test/source/commands/test.js",
         "cov": "npm test -- --coverage",
         "preversion": "npm test",
         "version": "npm run build && git add -A syntaxes",
         "pregenerate-specs": "npm run build",
-        "generate-specs": "node test/src/commands/generate-specs.js",
-        "sort-specs": "node test/src/commands/sort-specs.js",
+        "generate-specs": "node test/source/commands/generate-specs.js",
+        "sort-specs": "node test/source/commands/sort-specs.js",
         "vscode:prepublish": "npm run build"
     },
     "keywords": [
