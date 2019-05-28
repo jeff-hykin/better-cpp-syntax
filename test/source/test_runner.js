@@ -1,5 +1,5 @@
-const getTokens = require("./getTokens");
-const SpecChecker = require("./specChecker").SpecChecker;
+const getTokens = require("./get_tokens");
+const SpecChecker = require("./spec_checker").SpecChecker;
 
 /**
  * @param {vsctm.Registry} registry

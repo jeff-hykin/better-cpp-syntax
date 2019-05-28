@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const vsctm = require("vscode-textmate");
-const rewriteGrammar = require("./pattern-coverage/rewriteGrammar");
+const rewriteGrammar = require("./pattern_coverage/rewrite_grammar");
 
 const testDir = path.dirname(__dirname);
 
