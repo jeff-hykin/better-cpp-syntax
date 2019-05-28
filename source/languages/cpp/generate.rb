@@ -3,6 +3,7 @@ require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/trigraph_support.rb'
+require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative './tokens.rb'
 
 # todo
