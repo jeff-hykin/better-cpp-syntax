@@ -8,6 +8,7 @@
 - see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master
 :patterns:
 - include: "#function_definition"
+- include: "#posix_reserved_types"
 - include: "#objective_c"
 - include: "#struct_declare"
 - include: "#special_block_context"
@@ -142,6 +143,7 @@
     name: keyword.operator.assignment.objcpp
   function_body_context:
     patterns:
+    - include: "#function_call"
     - include: "#objective_c"
     - include: "#type_casting_operators"
     - include: "#function_call"
@@ -4356,8 +4358,6 @@
         |UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)
         \b
       name: support.type.mac-classic.objcpp
-    - match: "\\b([A-Za-z0-9_]+_t)\\b"
-      name: support.type.posix-reserved.objcpp
     - include: "#block"
     - include: "#parens"
     - name: meta.function.objcpp
@@ -5248,28 +5248,6 @@
         - include: "#storage_types"
         - include: "#operators"
         - include: "#vararg_ellipses"
-        - name: meta.function.definition.parameters.objcpp
-          begin: |-
-            (?x)
-            (?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
-            (
-            (?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name
-            |
-            (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
-            )
-            \s*(\()
-          beginCaptures:
-            '1':
-              name: entity.name.function.objcpp
-            '2':
-              name: punctuation.section.parameters.begin.bracket.round.objcpp
-          end: "\\)"
-          endCaptures:
-            '0':
-              name: punctuation.section.parameters.end.bracket.round.objcpp
-          patterns:
-          - include: "#probably_a_parameter"
-          - include: "#function-innards"
         - begin: "\\("
           beginCaptures:
             '0':

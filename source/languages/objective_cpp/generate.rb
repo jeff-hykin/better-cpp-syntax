@@ -34,6 +34,7 @@ end
 objective_cpp_grammar[:lambdas] = {}
 # override function_body_context
 objective_cpp_grammar[:function_body_context] = [
+    :function_call,
     :objective_c,
     *@cpp_grammar[:function_body_context],
 ]
@@ -45,6 +46,7 @@ objective_cpp_grammar[:function_body_context] = [
 #  
 objective_cpp_grammar[:$initial_context] = [
     :function_definition, # prefer the C++ function 
+    :posix_reserved_types,
     :objective_c,
     *@cpp_grammar[:$initial_context]
 ]
@@ -685,10 +687,6 @@ objective_cpp_grammar[:c_lang] = {
     {
       "match": "(?x) \\b\n(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam\n|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr\n|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber\n|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64\n|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32\n|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr\n|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\n\\b",
       "name": "support.type.mac-classic",
-    },
-    {
-      "match": "\\b([A-Za-z0-9_]+_t)\\b",
-      "name": "support.type.posix-reserved",
     },
     {
       "include": "#block",
@@ -2332,32 +2330,6 @@ objective_cpp_grammar[:c_lang] = {
         },
         {
           "include": "#vararg_ellipses",
-        },
-        {
-          "name": "meta.function.definition.parameters",
-          "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "entity.name.function",
-            },
-            "2": {
-              "name": "punctuation.section.parameters.begin.bracket.round",
-            },
-          },
-          "end": "\\)",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.parameters.end.bracket.round",
-            },
-          },
-          "patterns": [
-            {
-              "include": "#probably_a_parameter",
-            },
-            {
-              "include": "#function-innards",
-            },
-          ],
         },
         {
           "begin": "\\(",
