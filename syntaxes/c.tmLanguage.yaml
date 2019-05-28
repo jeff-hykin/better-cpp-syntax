@@ -1177,11 +1177,11 @@
         name: meta.head.switch.c
       '2':
         name: keyword.control.switch.c
-    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
+    end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.switch.c
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.switch.c
@@ -1189,8 +1189,8 @@
       - include: "#switch_conditional_parentheses"
       - include: "$base"
     - name: meta.body.switch.c
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.switch.c
@@ -1200,7 +1200,7 @@
       - include: "$base"
       - include: "#block_innards"
     - name: meta.tail.switch.c
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"

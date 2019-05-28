@@ -1,4 +1,5 @@
-const char * a = "foo ??/" ??/??/";
-class A <%
-    A(); //test
-%>;
+const char *a = "foo ??/" ? ? / ? ? / ";
+
+                                            class A <
+                                        % A(); // test
+% > ;

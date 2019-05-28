@@ -513,11 +513,11 @@
         name: meta.head.switch.cpp
       '2':
         name: keyword.control.switch.cpp
-    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
+    end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.switch.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.switch.cpp
@@ -525,8 +525,8 @@
       - include: "#switch_conditional_parentheses"
       - include: "$base"
     - name: meta.body.switch.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.switch.cpp
@@ -536,7 +536,7 @@
       - include: "$base"
       - include: "#block_innards"
     - name: meta.tail.switch.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1114,11 +1114,11 @@
         - include: "#scope_resolution_function_definition_inner_generated"
       '14':
         name: entity.name.function.definition.cpp
-    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
+    end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.function.definition.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.function.definition.cpp
@@ -1138,15 +1138,15 @@
       - include: "#comments_context"
       - include: "$base"
     - name: meta.body.function.definition.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.function.definition.cpp
       patterns:
       - include: "#function_call_innards"
     - name: meta.tail.function.definition.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1449,11 +1449,11 @@
         name: meta.head.namespace.cpp
       '2':
         name: keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp
-    end: "(?:(?<=\\})|(?=[;>\\[\\]=]))"
+    end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.namespace.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.namespace.cpp
@@ -1471,15 +1471,15 @@
           '4':
             name: storage.modifier.inline.cpp
     - name: meta.body.namespace.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.namespace.cpp
       patterns:
       - include: "$base"
     - name: meta.tail.namespace.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1585,7 +1585,7 @@
         name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '12':
         name: storage.type.integral.$12.cpp
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+    end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1594,15 +1594,15 @@
     patterns:
     - name: meta.head.enum.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.enum.cpp
       patterns:
       - include: "$base"
     - name: meta.body.enum.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
@@ -1612,7 +1612,7 @@
       - include: "#comma"
       - include: "#semicolon"
     - name: meta.tail.enum.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1653,7 +1653,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+    end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1662,7 +1662,7 @@
     patterns:
     - name: meta.head.class.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.class.cpp
@@ -1672,8 +1672,8 @@
       - include: "#template_call_range"
       - include: "#comments_context"
     - name: meta.body.class.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.class.cpp
@@ -1682,7 +1682,7 @@
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.class.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1711,7 +1711,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+    end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1720,7 +1720,7 @@
     patterns:
     - name: meta.head.struct.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.struct.cpp
@@ -1730,8 +1730,8 @@
       - include: "#template_call_range"
       - include: "#comments_context"
     - name: meta.body.struct.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.struct.cpp
@@ -1740,7 +1740,7 @@
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.struct.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1769,7 +1769,7 @@
       '9':
         patterns:
         - include: "#inhertance_context"
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+    end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1778,7 +1778,7 @@
     patterns:
     - name: meta.head.union.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.union.cpp
@@ -1788,8 +1788,8 @@
       - include: "#template_call_range"
       - include: "#comments_context"
     - name: meta.body.union.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.union.cpp
@@ -1798,7 +1798,7 @@
       - include: "#constructor_context"
       - include: "$base"
     - name: meta.tail.union.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1810,7 +1810,7 @@
         name: meta.head.extern.cpp
       '2':
         name: storage.type.extern.cpp
-    end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+    end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
@@ -1819,22 +1819,22 @@
     patterns:
     - name: meta.head.extern.cpp
       begin: "\\G ?"
-      end: "((?:\\{|(?=;)))"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.extern.cpp
       patterns:
       - include: "$base"
     - name: meta.body.extern.cpp
-      begin: "(?<=\\{)"
-      end: "(\\})"
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
       endCaptures:
         '1':
           name: punctuation.section.block.end.bracket.curly.extern.cpp
       patterns:
       - include: "$base"
     - name: meta.tail.extern.cpp
-      begin: "(?<=})[\\s\\n]*"
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
@@ -1870,7 +1870,7 @@
         '9':
           patterns:
           - include: "#inhertance_context"
-      end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
       endCaptures:
         '1':
           name: punctuation.terminator.statement.cpp
@@ -1879,7 +1879,7 @@
       patterns:
       - name: meta.head.class.cpp
         begin: "\\G ?"
-        end: "((?:\\{|(?=;)))"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
         endCaptures:
           '1':
             name: punctuation.section.block.begin.bracket.curly.class.cpp
@@ -1889,8 +1889,8 @@
         - include: "#template_call_range"
         - include: "#comments_context"
       - name: meta.body.class.cpp
-        begin: "(?<=\\{)"
-        end: "(\\})"
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
         endCaptures:
           '1':
             name: punctuation.section.block.end.bracket.curly.class.cpp
@@ -1899,7 +1899,7 @@
         - include: "#constructor_context"
         - include: "$base"
       - name: meta.tail.class.cpp
-        begin: "(?<=})[\\s\\n]*"
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
         - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
@@ -1942,7 +1942,7 @@
         '9':
           patterns:
           - include: "#inhertance_context"
-      end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
       endCaptures:
         '1':
           name: punctuation.terminator.statement.cpp
@@ -1951,7 +1951,7 @@
       patterns:
       - name: meta.head.struct.cpp
         begin: "\\G ?"
-        end: "((?:\\{|(?=;)))"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
         endCaptures:
           '1':
             name: punctuation.section.block.begin.bracket.curly.struct.cpp
@@ -1961,8 +1961,8 @@
         - include: "#template_call_range"
         - include: "#comments_context"
       - name: meta.body.struct.cpp
-        begin: "(?<=\\{)"
-        end: "(\\})"
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
         endCaptures:
           '1':
             name: punctuation.section.block.end.bracket.curly.struct.cpp
@@ -1971,7 +1971,7 @@
         - include: "#constructor_context"
         - include: "$base"
       - name: meta.tail.struct.cpp
-        begin: "(?<=})[\\s\\n]*"
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
         - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
@@ -2014,7 +2014,7 @@
         '9':
           patterns:
           - include: "#inhertance_context"
-      end: "(?:(?:(?<=})\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
       endCaptures:
         '1':
           name: punctuation.terminator.statement.cpp
@@ -2023,7 +2023,7 @@
       patterns:
       - name: meta.head.union.cpp
         begin: "\\G ?"
-        end: "((?:\\{|(?=;)))"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
         endCaptures:
           '1':
             name: punctuation.section.block.begin.bracket.curly.union.cpp
@@ -2033,8 +2033,8 @@
         - include: "#template_call_range"
         - include: "#comments_context"
       - name: meta.body.union.cpp
-        begin: "(?<=\\{)"
-        end: "(\\})"
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
         endCaptures:
           '1':
             name: punctuation.section.block.end.bracket.curly.union.cpp
@@ -2043,7 +2043,7 @@
         - include: "#constructor_context"
         - include: "$base"
       - name: meta.tail.union.cpp
-        begin: "(?<=})[\\s\\n]*"
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
         patterns:
         - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
