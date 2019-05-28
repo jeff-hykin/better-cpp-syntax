@@ -558,7 +558,12 @@
       patterns:
       - include: "#attributes_context"
       - include: "#string_context_c"
-    - include: "#using_name"
+    - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+      captures:
+        '1':
+          name: keyword.other.using.directive.cpp
+        '2':
+          name: entity.name.type.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
@@ -585,7 +590,12 @@
       patterns:
       - include: "#attributes_context"
       - include: "#string_context_c"
-    - include: "#using_name"
+    - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+      captures:
+        '1':
+          name: keyword.other.using.directive.cpp
+        '2':
+          name: entity.name.type.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
@@ -612,7 +622,12 @@
       patterns:
       - include: "#attributes_context"
       - include: "#string_context_c"
-    - include: "#using_name"
+    - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+      captures:
+        '1':
+          name: keyword.other.using.directive.cpp
+        '2':
+          name: entity.name.type.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
@@ -639,7 +654,12 @@
       patterns:
       - include: "#attributes_context"
       - include: "#string_context_c"
-    - include: "#using_name"
+    - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+      captures:
+        '1':
+          name: keyword.other.using.directive.cpp
+        '2':
+          name: entity.name.type.namespace.cpp
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"

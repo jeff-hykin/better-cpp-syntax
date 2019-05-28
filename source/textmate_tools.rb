@@ -14,7 +14,7 @@ require 'set'
         # add a "is alreadly a group" flag to prevent double wrapping
 
 class Grammar
-    attr_accessor :data, :all_tags
+    attr_accessor :data, :all_tags, :language_ending
     
     #
     # Globally accessible current grammar object

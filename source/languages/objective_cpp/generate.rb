@@ -1,8 +1,7 @@
-require_relative "./tokens.rb"
 require_relative "../../textmate_tools.rb"
+require_relative '../../repo_specific_helpers.rb'
+require_relative "./tokens.rb"
 require_relative "../../shared_patterns/numeric.rb"
-
-Dir.chdir __dir__
 
 objective_cpp_grammar = Grammar.new(
   name: "Objective-C++",
@@ -6418,10 +6417,7 @@ objective_cpp_grammar[:protocol_list] = { "begin" => "(<)", "beginCaptures" => {
 objective_cpp_grammar[:protocol_type_qualifier] = { "match" => "\\b(in|out|inout|oneway|bycopy|byref)\\b", "name" => "storage.modifier.protocol" }
 objective_cpp_grammar[:special_variables] = { "patterns" => [{ "match" => "\\b_cmd\\b", "name" => "variable.other.selector" }, { "match" => "\\b(self|super)\\b", "name" => "variable.language" }] }
 
-@syntax_location = "../../../syntaxes/objcpp.tmLanguage"
-objective_cpp_grammar.saveAsYamlTo(@syntax_location)
-objective_cpp_grammar.saveAsJsonTo(@syntax_location)
-objective_cpp_grammar.saveTagsTo("tags.txt")
+@syntax_location = saveGrammar(objective_cpp_grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = objective_cpp_grammar

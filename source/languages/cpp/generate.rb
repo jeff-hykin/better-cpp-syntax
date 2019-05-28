@@ -1,4 +1,5 @@
 require_relative '../../textmate_tools.rb'
+require_relative '../../repo_specific_helpers.rb'
 require_relative './tokens.rb'
 require_relative '../../shared_patterns/numeric.rb'
 require_relative '../../shared_patterns/predefined_macros.rb'
@@ -3314,14 +3315,8 @@ cpp_grammar = Grammar.new(
             :block_context
         ]
 
-
-Dir.chdir __dir__
-
 # Save
-@syntax_location = "../../../syntaxes/cpp.tmLanguage"
-cpp_grammar.saveAsYamlTo(@syntax_location)
-cpp_grammar.saveAsJsonTo(@syntax_location)
-cpp_grammar.saveTagsTo("tags.txt")
+@syntax_location = saveGrammar(cpp_grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = cpp_grammar
