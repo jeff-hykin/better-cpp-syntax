@@ -295,9 +295,6 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
-  scopesBegin:
-    - meta.function.definition
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -305,48 +302,28 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unique_ptr
-  scopes:
-    - entity.name.type
 - source: <
-  scopesBegin:
-    - meta.template.call
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - keyword.operator.comparison
 - source: O
-  scopes:
-    - storage.type.user-defined
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.call
-  scopesEnd:
-    - meta.qualified_type
-    - meta.template.call
+    - keyword.operator.comparison
 - source: o
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
-    - entity.name.function.definition
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: new
-  scopesBegin:
-    - meta.function.definition.parameters
   scopes:
     - keyword.operator.wordlike
     - alias
     - keyword.operator.new
-- source: O
-  scopes:
-    - variable.parameter
-  scopesEnd:
-    - meta.function.definition.parameters
+- source: ' O'
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
