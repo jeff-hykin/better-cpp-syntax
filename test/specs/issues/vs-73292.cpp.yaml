@@ -1,39 +1,40 @@
 - source: int
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: main
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: int
+  scopesBegin:
+    - meta.body.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: ' test_enum '
 - source: =
   scopes:
-    - keyword.operator.assignment.cpp
+    - keyword.operator.assignment
 - source: '1'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition

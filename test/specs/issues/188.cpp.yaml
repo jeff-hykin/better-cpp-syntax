@@ -1,0 +1,97 @@
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: ceil
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: static_cast
+  scopes:
+    - entity.name.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: f64_t
+  scopes:
+    - support.type.posix-reserved
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: audio_spec
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: freq
+  scopes:
+    - variable.other.property
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: /
+  scopes:
+    - keyword.operator
+- source: static_cast
+  scopes:
+    - entity.name.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: f64_t
+  scopes:
+    - support.type.posix-reserved
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: tgt_fps
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

@@ -1,0 +1,679 @@
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' C Program to find roots of a quadratic equation when coefficients are entered by user. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+- source: /*
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' Library function sqrt() computes the square root. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: stdio.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: math.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' This is needed to use sqrt() function.'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: float
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' b'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' c'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' determinant'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' r1'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: r2
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' real'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' imag'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Enter coefficients a, b and c: '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scanf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '%f'
+  scopesBegin:
+    - constant.other.placeholder
+- source: '%f'
+- source: '%f'
+  scopesEnd:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: a
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: b
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: c
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  determinant'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: b
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: b
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '4'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: c
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: determinant
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '      r1'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: b
+- source: +
+  scopes:
+    - keyword.operator
+- source: sqrt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: determinant
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: /
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '      r2'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: b
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: sqrt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: determinant
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: /
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Roots are: '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: ' and '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 'r1 '
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' r2'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: else
+  scopesBegin:
+    - keyword.control
+- source: if
+  scopesEnd:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: determinant
+- source: ==
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '    r1 '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' r2 '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: b
+- source: /
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Roots are: '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: ' and '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' r1'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' r2'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: else
+  scopes:
+    - keyword.control
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '    real'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: b
+- source: /
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    imag '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: sqrt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: determinant
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: /
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Roots are: '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: +
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: 'i and '
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: '-'
+- source: '%.2f'
+  scopes:
+    - constant.other.placeholder
+- source: i
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' real'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' imag'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' real'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' imag'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

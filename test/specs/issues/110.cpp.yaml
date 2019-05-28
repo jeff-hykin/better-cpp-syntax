@@ -1,88 +1,88 @@
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: function
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: switch
   scopesBegin:
-    - meta.block.switch.cpp
-    - meta.head.switch.cpp
+    - meta.body.function.definition
+    - meta.block.switch
+    - meta.head.switch
   scopes:
-    - keyword.control.switch.cpp
+    - keyword.control.switch
 - source: (
   scopesBegin:
-    - meta.conditional.switch.cpp
+    - meta.conditional.switch
   scopes:
-    - punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
+    - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: '1'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.conditional.switch.cpp
+    - punctuation.section.parens.end.bracket.round.conditional.switch
   scopesEnd:
-    - meta.conditional.switch.cpp
+    - meta.conditional.switch
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.switch.cpp
+    - punctuation.section.block.begin.bracket.curly.switch
   scopesEnd:
-    - meta.head.switch.cpp
+    - meta.head.switch
 - source: case
   scopesBegin:
-    - meta.body.switch.cpp
-    - meta.conditional.case.cpp
+    - meta.body.switch
+    - meta.conditional.case
   scopes:
-    - keyword.control.case.cpp
+    - keyword.control.case
 - source: '1'
   scopes:
-    - constant.numeric.decimal.cpp
+    - constant.numeric.decimal
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.case.cpp
+    - colon
+    - punctuation.separator.case
   scopesEnd:
-    - meta.conditional.case.cpp
+    - meta.conditional.case
 - source: break
   scopes:
-    - keyword.control.break.cpp
+    - keyword.control.break
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: default
   scopesBegin:
-    - meta.conditional.case.cpp
+    - meta.conditional.case
   scopes:
-    - keyword.control.default.cpp
+    - keyword.control.default
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.case.default.cpp
+    - colon
+    - punctuation.separator.case.default
   scopesEnd:
-    - meta.conditional.case.cpp
+    - meta.conditional.case
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.switch.cpp
+    - punctuation.section.block.end.bracket.curly.switch
   scopesEnd:
-    - meta.block.switch.cpp
-    - meta.body.switch.cpp
+    - meta.block.switch
+    - meta.body.switch
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.cpp
+    - punctuation.section.block.end.bracket.curly.function.definition

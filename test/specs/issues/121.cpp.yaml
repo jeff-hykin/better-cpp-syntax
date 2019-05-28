@@ -1,152 +1,170 @@
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ' Works '
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: ChildClass
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: ParentClass
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - meta.head.class.cpp
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.block.class.cpp
+    - meta.block.class
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ' Highlighting lost '
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: class
   scopesBegin:
-    - meta.block.class.cpp
-    - meta.head.class.cpp
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: DLLEXPORT
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: 'ChildClass : '
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: ParentClass
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: class
   scopesBegin:
-    - meta.head.class.cpp
+    - meta.head.class
   scopes:
-    - storage.type.class.cpp
+    - storage.type.class
 - source: ChildClass
   scopes:
-    - entity.name.type.class.cpp
+    - entity.name.type.class
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.inhertance.cpp
+    - colon
+    - punctuation.separator.inhertance
 - source: /*
   scopesBegin:
-    - comment.block.cpp
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.cpp
+    - punctuation.definition.comment.begin
 - source: ' comment '
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.cpp
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.cpp
+    - comment.block
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: ParentClass
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: alignas(
   scopesBegin:
-    - meta.head.class.cpp
+    - support.other.attribute
   scopes:
-    - storage.type.class.cpp
-- source: alignas
+    - punctuation.section.attribute.begin
+- source: '32'
   scopes:
-    - entity.name.type.class.cpp
-- source: '(32) ChildClass : '
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.attribute.end
+  scopesEnd:
+    - support.other.attribute
+- source: ChildClass
+  scopesBegin:
+    - meta.head.class
+  scopes:
+    - entity.name.type.class
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.inhertance
+  scopesEnd:
+    - meta.head.class
 - source: public
   scopes:
-    - storage.type.modifier.access.public.cpp
+    - storage.type.modifier.access.public
 - source: ParentClass
   scopes:
-    - entity.name.type.inherited.cpp
+    - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class.cpp
-  scopesEnd:
-    - meta.head.class.cpp
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
-    - meta.body.class.cpp
-    - punctuation.section.block.end.bracket.curly.class.cpp
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

@@ -1,91 +1,86 @@
 - source: namespace
   scopesBegin:
-    - meta.block.namespace.cpp
-    - meta.head.namespace.cpp
+    - meta.block.namespace
+    - meta.head.namespace
   scopes:
-    - keyword.other.namespace.definition.cpp
-    - storage.type.namespace.definition.cpp
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: foo
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.namespace
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - meta.head.namespace.cpp
+    - meta.head.namespace
 - source: namespace
   scopesBegin:
-    - meta.body.namespace.cpp
-    - meta.block.namespace.cpp
-    - meta.head.namespace.cpp
+    - meta.body.namespace
+    - meta.block.namespace
+    - meta.head.namespace
   scopes:
-    - keyword.other.namespace.definition.cpp
-    - storage.type.namespace.definition.cpp
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: bar
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.namespace
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - meta.head.namespace.cpp
+    - meta.head.namespace
 - source: //
   scopesBegin:
-    - meta.body.namespace.cpp
-    - comment.line.double-slash.cpp
+    - meta.body.namespace
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' foo'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.namespace.cpp
+    - punctuation.section.block.end.bracket.curly.namespace
   scopesEnd:
-    - meta.block.namespace.cpp
-    - meta.body.namespace.cpp
+    - meta.block.namespace
+    - meta.body.namespace
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.namespace.cpp
+    - punctuation.section.block.end.bracket.curly.namespace
   scopesEnd:
-    - meta.block.namespace.cpp
-    - meta.body.namespace.cpp
+    - meta.block.namespace
+    - meta.body.namespace
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' namespace foo::bar'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: namespace
   scopesBegin:
-    - meta.block.namespace.cpp
+    - meta.block.namespace
+    - meta.head.namespace
   scopes:
-    - meta.head.namespace.cpp
-    - keyword.other.namespace.definition.cpp
-    - storage.type.namespace.definition.cpp
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: scoped
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution.namespace.block
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.block
 - source: console
-  scopesBegin:
-    - meta.head.namespace.cpp
   scopes:
-    - entity.name.type.namespace.cpp
+    - entity.name.namespace
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.namespace.cpp
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - meta.head.namespace.cpp
+    - meta.head.namespace
 - source: '}'
   scopes:
-    - meta.body.namespace.cpp
-    - punctuation.section.block.end.bracket.curly.namespace.cpp
+    - meta.body.namespace
+    - punctuation.section.block.end.bracket.curly.namespace

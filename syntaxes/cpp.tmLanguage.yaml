@@ -18,11 +18,11 @@
 - include: "#static_assert"
 - include: "#other_keywords"
 - include: "#memory_operators"
+- include: "#using_name"
 - include: "#the_this_keyword"
 - include: "#language_constants"
 - include: "#template_isolated_definition"
 - include: "#template_definition"
-- include: "#scope_resolution"
 - include: "#misc_storage_modifiers_1"
 - include: "#destructor"
 - include: "#destructor_prototype"
@@ -31,7 +31,6 @@
 - include: "#comments_context"
 - include: "#switch_statement"
 - include: "#control_flow_keywords"
-- include: "#storage_types"
 - include: "#assembly"
 - include: "#misc_storage_modifiers_2"
 - include: "#operator_overload"
@@ -47,15 +46,33 @@
 - include: "#operators"
 - include: "#block"
 - include: "#parentheses"
+- include: "#type_casting_operators"
 - include: "#function_definition"
+- include: "#function_call"
+- include: "#scope_resolution_inner_generated"
+- include: "#storage_types"
 - include: "#line_continuation_character"
 - include: "#square_brackets"
 - include: "#empty_square_brackets"
 - include: "#semicolon"
 - include: "#comma"
 :repository:
+  decltype_specifier:
+    contentName: meta.arguments.decltype.cpp
+    begin: "((?<!\\w)decltype(?!\\w))(\\()"
+    beginCaptures:
+      '1':
+        name: keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp
+      '2':
+        name: punctuation.section.arguments.begin.bracket.round.decltype.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.arguments.end.bracket.round.decltype.cpp
+    patterns:
+    - include: "#evaluation_context"
   sizeof_operator:
-    contentName: meta.arguments.operator.sizeof
+    contentName: meta.arguments.operator.sizeof.cpp
     begin: "((?<!\\w)sizeof(?!\\w))(\\()"
     beginCaptures:
       '1':
@@ -69,7 +86,7 @@
     patterns:
     - include: "#evaluation_context"
   alignof_operator:
-    contentName: meta.arguments.operator.alignof
+    contentName: meta.arguments.operator.alignof.cpp
     begin: "((?<!\\w)alignof(?!\\w))(\\()"
     beginCaptures:
       '1':
@@ -83,7 +100,7 @@
     patterns:
     - include: "#evaluation_context"
   alignas_operator:
-    contentName: meta.arguments.operator.alignas
+    contentName: meta.arguments.operator.alignas.cpp
     begin: "((?<!\\w)alignas(?!\\w))(\\()"
     beginCaptures:
       '1':
@@ -97,7 +114,7 @@
     patterns:
     - include: "#evaluation_context"
   typeid_operator:
-    contentName: meta.arguments.operator.typeid
+    contentName: meta.arguments.operator.typeid.cpp
     begin: "((?<!\\w)typeid(?!\\w))(\\()"
     beginCaptures:
       '1':
@@ -110,26 +127,67 @@
         name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
     patterns:
     - include: "#evaluation_context"
-  decltype_specifier:
-    contentName: meta.arguments.decltype
-    begin: "((?<!\\w)decltype(?!\\w))(\\()"
-    beginCaptures:
-      '1':
-        name: keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp
-      '2':
-        name: punctuation.section.arguments.begin.bracket.round.decltype.cpp
-    end: "(\\))"
-    endCaptures:
-      '1':
-        name: punctuation.section.arguments.end.bracket.round.decltype.cpp
-    patterns:
-    - include: "#evaluation_context"
   semicolon:
     match: ";"
     name: punctuation.terminator.statement.cpp
   comma:
     match: ","
     name: comma.cpp punctuation.separator.delimiter.cpp
+  assignment_operator:
+    match: "\\="
+    name: keyword.operator.assignment.cpp
+  function_call_innards:
+    patterns:
+    - include: "#type_casting_operators"
+    - include: "#function_call"
+    - include: "#struct_declare"
+    - include: "#special_block_context"
+    - include: "#macro_argument"
+    - include: "#string_context"
+    - include: "#functional_specifiers_pre_parameters"
+    - include: "#qualifiers_and_specifiers_post_parameters"
+    - include: "#storage_specifiers"
+    - include: "#access_control_keywords"
+    - include: "#exception_keywords"
+    - include: "#static_assert"
+    - include: "#other_keywords"
+    - include: "#memory_operators"
+    - include: "#using_name"
+    - include: "#the_this_keyword"
+    - include: "#language_constants"
+    - include: "#template_isolated_definition"
+    - include: "#template_definition"
+    - include: "#misc_storage_modifiers_1"
+    - include: "#destructor"
+    - include: "#destructor_prototype"
+    - include: "#lambdas"
+    - include: "#preprocessor_context"
+    - include: "#comments_context"
+    - include: "#switch_statement"
+    - include: "#control_flow_keywords"
+    - include: "#assembly"
+    - include: "#misc_storage_modifiers_2"
+    - include: "#operator_overload"
+    - include: "#number_literal"
+    - include: "#string_context_c"
+    - include: "#meta_preprocessor_macro"
+    - include: "#meta_preprocessor_diagnostic"
+    - include: "#meta_preprocessor_include"
+    - include: "#pragma_mark"
+    - include: "#meta_preprocessor_line"
+    - include: "#meta_preprocessor_undef"
+    - include: "#meta_preprocessor_pragma"
+    - include: "#operators"
+    - include: "#block"
+    - include: "#parentheses"
+    - include: "#type_casting_operators"
+    - include: "#scope_resolution_inner_generated"
+    - include: "#storage_types"
+    - include: "#line_continuation_character"
+    - include: "#square_brackets"
+    - include: "#empty_square_brackets"
+    - include: "#semicolon"
+    - include: "#comma"
   preprocessor_context:
     patterns:
     - include: "#preprocessor_rule_enabled"
@@ -138,10 +196,26 @@
     - include: "#hacky_fix_for_stray_directive"
   storage_types:
     patterns:
+    - include: "#storage_specifiers"
     - include: "#primitive_types"
     - include: "#non_primitive_types"
     - include: "#pthread_types"
     - include: "#posix_reserved_types"
+    - include: "#decltype"
+  function_parameter_context:
+    patterns:
+    - include: "#parameter_struct"
+    - include: "#probably_a_parameter"
+    - include: "#attributes_context"
+    - include: "#comments_context"
+    - include: "#storage_types"
+    - include: "#vararg_ellipses"
+    - include: "#function_pointer"
+    - include: "#comma"
+    - include: "#language_constants"
+    - include: "#number_literal"
+    - include: "#string_context"
+    - include: "#operators"
   evaluation_context:
     patterns:
     - include: "$base"
@@ -150,7 +224,7 @@
     - include: "$base"
   template_definition_context:
     patterns:
-    - include: "#scope_resolution"
+    - include: "#scope_resolution_template_definition_inner_generated"
     - include: "#template_definition_argument"
     - include: "#template_argument_defaulted"
     - include: "#template_call_innards"
@@ -159,12 +233,18 @@
     patterns:
     - include: "#storage_types"
     - include: "#language_constants"
-    - include: "#scope_resolution"
+    - include: "#scope_resolution_template_call_inner_generated"
     - include: "#user_defined_template_type"
     - include: "#operators"
     - include: "#number_literal"
     - include: "#string_context"
     - include: "#comma_in_template_argument"
+  attributes_context:
+    patterns:
+    - include: "#cpp_attributes"
+    - include: "#gcc_attributes"
+    - include: "#ms_attributes"
+    - include: "#alignas_attribute"
   number_literal:
     begin: "(?<!\\w)(?=\\d|\\.\\d)"
     end: "(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
@@ -328,6 +408,25 @@
   non_primitive_types:
     match: "(?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)"
     name: storage.type.cpp
+  decltype:
+    contentName: meta.arguments.decltype.cpp
+    begin: "((?<!\\w)decltype(?!\\w))(\\()"
+    beginCaptures:
+      '1':
+        name: keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp
+      '2':
+        name: punctuation.section.arguments.begin.bracket.round.decltype.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.arguments.end.bracket.round.decltype.cpp
+    patterns:
+    - include: "#evaluation_context"
+  using_name:
+    match: "(using)\\s+(?!namespace\\b)"
+    captures:
+      '1':
+        name: keyword.other.using.directive.cpp
   functional_specifiers_pre_parameters:
     match: "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)"
     name: storage.modifier.specificer.functional.pre-parameters.$0.cpp
@@ -338,22 +437,23 @@
     match: "(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)"
     name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
-    match: "(?<!\\w)(?:private|protected|public)\\s*:"
+    match: "(?<!\\w)((?:private|protected|public))\\s*(:)"
     captures:
-      '0':
-        name: storage.type.modifier.access.control.$0.cpp
-        patterns:
-        - match: ":"
-          name: colon.cpp
+      '2':
+        name: colon.cpp
+    name: storage.type.modifier.access.control.$1.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
     name: keyword.control.exception.$0.cpp
   other_keywords:
-    match: "(?<!\\w)(using|typedef)(?!\\w)"
+    match: "(?<!\\w)(typedef)(?!\\w)"
     name: keyword.other.$0.cpp
   the_this_keyword:
     match: "(?<!\\w)this(?!\\w)"
     name: variable.language.this.cpp
+  type_casting_operators:
+    match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
+    name: keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp
   memory_operators:
     match: "(?<!\\w)(?:(?:(delete)\\s*(\\[\\])|(delete))|(new))(?!\\w)"
     captures:
@@ -434,42 +534,120 @@
       - include: "#default_statement"
       - include: "#case_statement"
       - include: "$base"
+      - include: "#block_innards"
     - name: meta.tail.switch.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
       - include: "$base"
-  attributes:
+  cpp_attributes:
     name: support.other.attribute.cpp
-    begin: "((?:\\[\\[|__attribute\\(\\(|__attribute__\\(\\(|__declspec\\())"
+    begin: "(\\[\\[)"
     beginCaptures:
       '1':
         name: punctuation.section.attribute.begin.cpp
-    end: "((?:\\]\\]|\\)\\)|\\)))"
+    end: "(\\]\\])"
     endCaptures:
       '1':
         name: punctuation.section.attribute.end.cpp
     patterns:
-    - include: "#attributes"
+    - include: "#attributes_context"
     - begin: "\\("
       end: "\\)"
       patterns:
-      - include: "#attributes"
+      - include: "#attributes_context"
       - include: "#string_context_c"
-    - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
-      captures:
-        '1':
-          name: keyword.other.using.directive.cpp
-        '2':
-          name: entity.name.type.namespace.cpp
+    - include: "#using_name"
     - match: ","
       name: punctuation.separator.attribute.cpp
     - match: ":"
       name: punctuation.accessor.attribute.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
-      name: entity.name.type.namespace.cpp
+      name: entity.name.namespace.cpp
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
+  gcc_attributes:
+    name: support.other.attribute.cpp
+    begin: "(__attribute(?:__)?\\(\\()"
+    beginCaptures:
+      '1':
+        name: punctuation.section.attribute.begin.cpp
+    end: "(\\)\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.attribute.end.cpp
+    patterns:
+    - include: "#attributes_context"
+    - begin: "\\("
+      end: "\\)"
+      patterns:
+      - include: "#attributes_context"
+      - include: "#string_context_c"
+    - include: "#using_name"
+    - match: ","
+      name: punctuation.separator.attribute.cpp
+    - match: ":"
+      name: punctuation.accessor.attribute.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
+      name: entity.name.namespace.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+      name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
+  ms_attributes:
+    name: support.other.attribute.cpp
+    begin: "(__declspec\\()"
+    beginCaptures:
+      '1':
+        name: punctuation.section.attribute.begin.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.attribute.end.cpp
+    patterns:
+    - include: "#attributes_context"
+    - begin: "\\("
+      end: "\\)"
+      patterns:
+      - include: "#attributes_context"
+      - include: "#string_context_c"
+    - include: "#using_name"
+    - match: ","
+      name: punctuation.separator.attribute.cpp
+    - match: ":"
+      name: punctuation.accessor.attribute.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
+      name: entity.name.namespace.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+      name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
+  alignas_attribute:
+    name: support.other.attribute.cpp
+    begin: "(alignas\\()"
+    beginCaptures:
+      '1':
+        name: punctuation.section.attribute.begin.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.attribute.end.cpp
+    patterns:
+    - include: "#attributes_context"
+    - begin: "\\("
+      end: "\\)"
+      patterns:
+      - include: "#attributes_context"
+      - include: "#string_context_c"
+    - include: "#using_name"
+    - match: ","
+      name: punctuation.separator.attribute.cpp
+    - match: ":"
+      name: punctuation.accessor.attribute.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)(?=::)"
+      name: entity.name.namespace.cpp
+    - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
+      name: entity.other.attribute.$0.cpp
+    - include: "#number_literal"
   user_defined_template_type:
     match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
     name: storage.type.user-defined.cpp
@@ -477,12 +655,12 @@
     match: ","
     name: comma.cpp punctuation.separator.template.argument.cpp
   template_call_innards:
-    match: "(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*"
+    match: "(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*"
     captures:
       '0':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
   template_call_range:
     name: meta.template.call.cpp
     begin: "(<)"
@@ -559,25 +737,190 @@
       '7':
         name: comma.cpp punctuation.separator.template.argument.cpp
   scope_resolution:
-    match: "((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)"
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_inner_generated"
+  scope_resolution_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
     captures:
       '1':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_inner_generated"
       '2':
-        name: entity.name.type.namespace.scope-resolution.cpp
+        name: entity.name.scope-resolution.cpp
       '3':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
       '4':
-        name: punctuation.separator.namespace.access.cpp
-    name: meta.scope-resolution.cpp
-  qualified_type:
-    match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.])"
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+  scope_resolution_template_call:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
     captures:
       '0':
-        name: entity.name.type.cpp meta.qualified_type.cpp
+        patterns:
+        - include: "#scope_resolution_template_call_inner_generated"
+  scope_resolution_template_call_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_template_call_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.template.call.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.template.call.cpp
+  scope_resolution_template_definition:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_template_definition_inner_generated"
+  scope_resolution_template_definition_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_template_definition_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.template.definition.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.template.definition.cpp
+  scope_resolution_function_call:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_function_call_inner_generated"
+  scope_resolution_function_call_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_function_call_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.function.call.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.call.cpp
+  scope_resolution_function_definition:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_function_definition_inner_generated"
+  scope_resolution_function_definition_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_function_definition_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.function.definition.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.definition.cpp
+  scope_resolution_namespace_alias:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_namespace_alias_inner_generated"
+  scope_resolution_namespace_alias_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_namespace_alias_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.namespace.alias.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.alias.cpp
+  scope_resolution_namespace_using:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_namespace_using_inner_generated"
+  scope_resolution_namespace_using_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_namespace_using_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.namespace.using.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.using.cpp
+  scope_resolution_namespace_block:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_namespace_block_inner_generated"
+  scope_resolution_namespace_block_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_namespace_block_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.namespace.block.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.namespace.block.cpp
+  scope_resolution_function_definition_operator_overload:
+    match: "(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*"
+    captures:
+      '0':
+        patterns:
+        - include: "#scope_resolution_function_definition_operator_overload_inner_generated"
+  scope_resolution_function_definition_operator_overload_inner_generated:
+    match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)"
+    captures:
+      '1':
+        patterns:
+        - include: "#scope_resolution_function_definition_operator_overload_inner_generated"
+      '2':
+        name: entity.name.scope-resolution.function.definition.operator-overload.cpp
+      '3':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '4':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
+  qualified_type:
+    match: "\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.])"
+    captures:
+      '0':
+        name: meta.qualified_type.cpp
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
@@ -586,24 +929,121 @@
         - include: "#number_literal"
         - include: "#string_context_c"
         - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*"
+          name: entity.name.type.cpp
       '1':
         patterns:
-        - include: "#attributes"
-      '2':
-        name: meta.scope-resolution.cpp
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '3':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_inner_generated"
       '4':
-        name: entity.name.type.namespace.scope-resolution.cpp
+        name: entity.name.scope-resolution.cpp
       '5':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
       '6':
-        name: punctuation.separator.namespace.access.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '7':
+        name: entity.name.type.cpp
+  type_alias:
+    match: "(using)\\s*(?!namespace)(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))\\s*(\\=)\\s*(typename)?\\s*((?:(?-mix:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))\\s+)*)(?:(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))|(.+(?<!;)))(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)(?:(\\[)(\\w*)(\\])\\s*)?\\s*(?:(;)|\\n)"
+    captures:
+      '1':
+        name: keyword.other.using.directive.cpp
+      '2':
+        name: meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*"
+          name: entity.name.type.cpp
+      '3':
+        patterns:
+        - include: "#attributes_context"
+        - include: "#number_literal"
+      '5':
+        patterns:
+        - include: "#scope_resolution_inner_generated"
+      '6':
+        name: entity.name.scope-resolution.cpp
+      '7':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '8':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '9':
+        name: entity.name.type.cpp
+      '10':
+        name: keyword.operator.assignment.cpp
+      '11':
+        name: keyword.other.typename.cpp
+      '12':
+        patterns:
+        - include: "#storage_specifiers"
+      '13':
+        name: meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*"
+          name: entity.name.type.cpp
+      '14':
+        patterns:
+        - include: "#attributes_context"
+        - include: "#number_literal"
+      '16':
+        patterns:
+        - include: "#scope_resolution_inner_generated"
+      '17':
+        name: entity.name.scope-resolution.cpp
+      '18':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '19':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '20':
+        name: entity.name.type.cpp
+      '21':
+        name: meta.declaration.type.alias.value.unknown.cpp
+        patterns:
+        - include: "#evaluation_context"
+      '23':
+        name: storage.modifier.pointer.cpp
+      '24':
+        name: storage.modifier.reference.cpp
+      '25':
+        name: punctuation.definition.begin.bracket.square.cpp
+      '26':
+        patterns:
+        - include: "#evaluation_context"
+      '27':
+        name: punctuation.definition.end.bracket.square.cpp
+      '28':
+        name: punctuation.terminator.statement.cpp
+    name: meta.declaration.type.alias.cpp
   struct_declare:
-    match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+    match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
     captures:
       '1':
         name: storage.type.struct.declare.cpp
@@ -616,7 +1056,7 @@
       '6':
         name: variable.other.object.declare.cpp
   parameter_struct:
-    match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?\\s*(?:\\[\\s*\\]\\s*)?(?=,|\\)|\\n)"
+    match: "(struct)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)|\\s+)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?\\s*(?:\\[\\s*\\]\\s*)?(?=,|\\)|\\n)"
     captures:
       '1':
         name: storage.type.struct.parameter.cpp
@@ -629,12 +1069,87 @@
       '6':
         name: variable.other.object.declare.cpp
   function_definition:
-    name: meta.function.definition.parameters.cpp
-    begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()(?=(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*\\()"
-    end: "(?<=\\))"
+    name: meta.function.definition.cpp
+    begin: "((\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))(?:\\s+|(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*))((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?=\\())"
+    beginCaptures:
+      '1':
+        name: meta.head.function.definition.cpp
+      '2':
+        name: meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*"
+          name: entity.name.type.cpp
+      '3':
+        patterns:
+        - include: "#attributes_context"
+        - include: "#number_literal"
+      '5':
+        patterns:
+        - include: "#scope_resolution_inner_generated"
+      '6':
+        name: entity.name.scope-resolution.cpp
+      '7':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '8':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '9':
+        name: entity.name.type.cpp
+      '11':
+        name: storage.modifier.pointer.cpp
+      '12':
+        name: storage.modifier.reference.cpp
+      '13':
+        patterns:
+        - include: "#scope_resolution_function_definition_inner_generated"
+      '14':
+        name: entity.name.function.definition.cpp
+    end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
-    - include: "#parameter_struct"
-    - include: "#function_context_c"
+    - name: meta.head.function.definition.cpp
+      begin: "\\G ?"
+      end: "((?:\\{|<%|\\?\\?<|(?=;)))"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.begin.bracket.curly.function.definition.cpp
+      patterns:
+      - contentName: meta.function.definition.parameters.cpp
+        begin: "(\\()"
+        beginCaptures:
+          '1':
+            name: punctuation.section.parameters.begin.bracket.round.cpp
+        end: "(\\))"
+        endCaptures:
+          '1':
+            name: punctuation.section.parameters.end.bracket.round.cpp
+        patterns:
+        - include: "#function_parameter_context"
+        - include: "#function_call_context"
+      - include: "#comments_context"
+      - include: "$base"
+    - name: meta.body.function.definition.cpp
+      begin: "(?<=\\{|<%|\\?\\?<)"
+      end: "(\\}|%>|\\?\\?>)"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.end.bracket.curly.function.definition.cpp
+      patterns:
+      - include: "#function_call_innards"
+    - name: meta.tail.function.definition.cpp
+      begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
+      end: "[\\s\\n]*(?=;)"
+      patterns:
+      - include: "$base"
   static_assert:
     begin: "(static_assert|_Static_assert)\\s*(\\()"
     beginCaptures:
@@ -656,36 +1171,33 @@
       patterns:
       - include: "#string_context"
       - include: "#string_context_c"
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   function_call:
-    begin: "(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(\\()"
+    begin: "(?!\\s)(?<!\\w)(?!\\s*(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|NULL|true|false|nullptr|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\s*\\()((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(\\()"
     beginCaptures:
       '1':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_function_call_inner_generated"
       '2':
         name: entity.name.function.call.cpp
       '3':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
       '4':
-        name: punctuation.section.arguments.begin.bracket.round.cpp
+        name: punctuation.section.arguments.begin.bracket.round.function.call.cpp
     end: "(\\))"
     endCaptures:
       '1':
-        name: punctuation.section.arguments.end.bracket.round.cpp
+        name: punctuation.section.arguments.end.bracket.round.function.call.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   operators:
     patterns:
     - include: "#sizeof_operator"
     - include: "#alignof_operator"
     - include: "#alignas_operator"
     - include: "#typeid_operator"
-    - include: "#decltype_specifier"
-    - match: "(?<!\\w)(?:static_cast|dynamic_cast|const_cast|reinterpret_cast)(?!\\w)"
-      name: keyword.operator.wordlike.cpp keyword.operator.cast.$0.cpp
     - include: "#method_access"
     - include: "#member_access"
     - match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
@@ -724,14 +1236,11 @@
       - include: "#member_access"
       - include: "#function_call_c"
       - include: "$base"
-  assignment_operator:
-    match: "\\="
-    name: keyword.operator.assignment.cpp
   function_pointer:
-    begin: "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?(?![\\w<:.]))\\s*(((?:\\*\\s*)*)((?:\\&\\s*?){0,2})\\s*)(\\()(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:(\\[)(\\w*)(\\])\\s*)*(\\))\\s*(\\()"
+    begin: "(\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))\\s*(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)(\\()(\\*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)?\\s*(?:(\\[)(\\w*)(\\])\\s*)*(\\))\\s*(\\()"
     beginCaptures:
       '1':
-        name: entity.name.type.cpp meta.qualified_type.cpp
+        name: meta.qualified_type.cpp
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
@@ -740,51 +1249,54 @@
         - include: "#number_literal"
         - include: "#string_context_c"
         - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*"
+          name: entity.name.type.cpp
       '2':
         patterns:
-        - include: "#attributes"
-      '3':
-        name: meta.scope-resolution.cpp
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '4':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_inner_generated"
       '5':
-        name: entity.name.type.namespace.scope-resolution.cpp
+        name: entity.name.scope-resolution.cpp
       '6':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
       '7':
-        name: punctuation.separator.namespace.access.cpp
-      '9':
-        name: storage.modifier.pointer.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '8':
+        name: entity.name.type.cpp
       '10':
-        name: storage.modifier.reference.cpp
+        name: storage.modifier.pointer.cpp
       '11':
-        name: punctuation.section.parens.begin.bracket.round.function.pointer.cpp
+        name: storage.modifier.reference.cpp
       '12':
-        name: punctuation.definition.function.pointer.dereference.cpp
+        name: punctuation.section.parens.begin.bracket.round.function.pointer.cpp
       '13':
-        name: variable.other.definition.pointer.function.cpp
+        name: punctuation.definition.function.pointer.dereference.cpp
       '14':
-        name: punctuation.definition.begin.bracket.square.cpp
+        name: variable.other.definition.pointer.function.cpp
       '15':
+        name: punctuation.definition.begin.bracket.square.cpp
+      '16':
         patterns:
         - include: "#evaluation_context"
-      '16':
-        name: punctuation.definition.end.bracket.square.cpp
       '17':
-        name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
+        name: punctuation.definition.end.bracket.square.cpp
       '18':
+        name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
+      '19':
         name: punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
     end: "(\\))\\s*(?=[{=,);]|\\n)(?!\\()"
     endCaptures:
       '1':
         name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
     patterns:
-    - include: "#parameter_struct"
-    - include: "#probably_a_parameter"
-    - include: "#function_context_c"
+    - include: "#function_parameter_context"
   probably_a_parameter:
     match: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?==))|((?<=\\w
       |\\*\\/|[&*>\\]\\)]|\\.\\.\\.)\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))))"
@@ -795,14 +1307,14 @@
         name: variable.parameter.cpp
   operator_overload:
     name: meta.function.definition.parameters.operator-overload.cpp
-    begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:&)?)))\\s*(\\()"
+    begin: "(operator)((?:\\s*(?:\\+\\+|\\-\\-|\\(\\)|\\[\\]|\\->|\\+\\+|\\-\\-|\\+|\\-|!|~|\\*|&|\\->\\*|\\*|\\/|%|\\+|\\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\\^|\\||&&|\\|\\||=|\\+=|\\-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=|,)|\\s+(?:(?:new|new\\[\\]|delete|delete\\[\\])|(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:&)?)))\\s*(\\()"
     beginCaptures:
       '1':
         name: keyword.other.operator.overload.cpp
       '2':
         name: entity.name.operator.overloadee.cpp
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_function_definition_operator_overload_inner_generated"
       '3':
         name: punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
     end: "(\\))"
@@ -810,8 +1322,7 @@
       '1':
         name: punctuation.section.parameters.end.bracket.round.operator-overload.cpp
     patterns:
-    - include: "#probably_a_parameter"
-    - include: "#function_context_c"
+    - include: "#function_parameter_context"
   member_access:
     match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!auto[^(?-mix:\\w)]|void[^(?-mix:\\w)]|char[^(?-mix:\\w)]|short[^(?-mix:\\w)]|int[^(?-mix:\\w)]|signed[^(?-mix:\\w)]|unsigned[^(?-mix:\\w)]|long[^(?-mix:\\w)]|float[^(?-mix:\\w)]|double[^(?-mix:\\w)]|bool[^(?-mix:\\w)]|wchar_t[^(?-mix:\\w)]|u_char[^(?-mix:\\w)]|u_short[^(?-mix:\\w)]|u_int[^(?-mix:\\w)]|u_long[^(?-mix:\\w)]|ushort[^(?-mix:\\w)]|uint[^(?-mix:\\w)]|u_quad_t[^(?-mix:\\w)]|quad_t[^(?-mix:\\w)]|qaddr_t[^(?-mix:\\w)]|caddr_t[^(?-mix:\\w)]|daddr_t[^(?-mix:\\w)]|div_t[^(?-mix:\\w)]|dev_t[^(?-mix:\\w)]|fixpt_t[^(?-mix:\\w)]|blkcnt_t[^(?-mix:\\w)]|blksize_t[^(?-mix:\\w)]|gid_t[^(?-mix:\\w)]|in_addr_t[^(?-mix:\\w)]|in_port_t[^(?-mix:\\w)]|ino_t[^(?-mix:\\w)]|key_t[^(?-mix:\\w)]|mode_t[^(?-mix:\\w)]|nlink_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|pid_t[^(?-mix:\\w)]|off_t[^(?-mix:\\w)]|segsz_t[^(?-mix:\\w)]|swblk_t[^(?-mix:\\w)]|uid_t[^(?-mix:\\w)]|id_t[^(?-mix:\\w)]|clock_t[^(?-mix:\\w)]|size_t[^(?-mix:\\w)]|ssize_t[^(?-mix:\\w)]|time_t[^(?-mix:\\w)]|useconds_t[^(?-mix:\\w)]|suseconds_t[^(?-mix:\\w)]|int8_t[^(?-mix:\\w)]|int16_t[^(?-mix:\\w)]|int32_t[^(?-mix:\\w)]|int64_t[^(?-mix:\\w)]|uint8_t[^(?-mix:\\w)]|uint16_t[^(?-mix:\\w)]|uint32_t[^(?-mix:\\w)]|uint64_t[^(?-mix:\\w)]|int_least8_t[^(?-mix:\\w)]|int_least16_t[^(?-mix:\\w)]|int_least32_t[^(?-mix:\\w)]|int_least64_t[^(?-mix:\\w)]|uint_least8_t[^(?-mix:\\w)]|uint_least16_t[^(?-mix:\\w)]|uint_least32_t[^(?-mix:\\w)]|uint_least64_t[^(?-mix:\\w)]|int_fast8_t[^(?-mix:\\w)]|int_fast16_t[^(?-mix:\\w)]|int_fast32_t[^(?-mix:\\w)]|int_fast64_t[^(?-mix:\\w)]|uint_fast8_t[^(?-mix:\\w)]|uint_fast16_t[^(?-mix:\\w)]|uint_fast32_t[^(?-mix:\\w)]|uint_fast64_t[^(?-mix:\\w)]|intptr_t[^(?-mix:\\w)]|uintptr_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|intmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)]|uintmax_t[^(?-mix:\\w)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\b(?!\\())"
     captures:
@@ -825,8 +1336,16 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          captures:
+            '1':
+              name: variable.language.this.cpp
+            '2':
+              name: variable.other.object.property.cpp
+            '3':
+              name: punctuation.separator.dot-access.cpp
+            '4':
+              name: punctuation.separator.pointer-access.cpp
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           captures:
             '1':
@@ -842,8 +1361,7 @@
       '6':
         name: variable.other.property.cpp
   method_access:
-    contentName: meta.function-call.member
-    begin: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(\\()"
+    begin: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(\\()"
     beginCaptures:
       '1':
         name: variable.language.this.cpp
@@ -855,8 +1373,16 @@
         name: punctuation.separator.pointer-access.cpp
       '5':
         patterns:
-        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?-mix:(?:(?:(?<!\\w)this(?!\\w))|(?:(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->))))"
-          name: variable.other.object.property.cpp
+        - match: "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
+          captures:
+            '1':
+              name: variable.language.this.cpp
+            '2':
+              name: variable.other.object.property.cpp
+            '3':
+              name: punctuation.separator.dot-access.cpp
+            '4':
+              name: punctuation.separator.pointer-access.cpp
         - match: "(?:((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))"
           captures:
             '1':
@@ -878,10 +1404,10 @@
       '1':
         name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   using_namespace:
     name: meta.using-namespace.cpp
-    begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
+    begin: "(?<!\\w)(using)\\s+(namespace)\\s+(?:((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*))?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))(?=;|\\n)"
     beginCaptures:
       '1':
         name: keyword.other.using.directive.cpp
@@ -889,29 +1415,40 @@
         name: keyword.other.namespace.directive.cpp storage.type.namespace.directive.cpp
       '3':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_namespace_using_inner_generated"
       '4':
-        name: entity.name.type.namespace.cpp
+        name: entity.name.namespace.cpp
     end: "(;)"
     endCaptures:
       '1':
         name: punctuation.terminator.statement.cpp
+  namespace_alias:
+    match: "(?<!\\w)(namespace)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(\\=)\\s*(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(;)|\\n))"
+    captures:
+      '1':
+        name: keyword.other.namespace.alias.cpp storage.type.namespace.alias.cpp
+      '2':
+        name: entity.name.namespace.alias.cpp
+      '3':
+        name: keyword.operator.assignment.cpp
+      '4':
+        name: meta.declaration.namespace.alias.value.cpp
+      '5':
+        patterns:
+        - include: "#scope_resolution_namespace_alias_inner_generated"
+      '6':
+        name: entity.name.namespace.cpp
+      '7':
+        name: punctuation.terminator.statement.cpp
+    name: meta.declaration.namespace.alias.cpp
   namespace_block:
     name: meta.block.namespace.cpp
-    begin: "((?<!\\w)(namespace)\\s+(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)\\s*(?:((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))|(?=\\{)))"
+    begin: "(((?<!\\w)namespace(?!\\w)))"
     beginCaptures:
       '1':
         name: meta.head.namespace.cpp
       '2':
         name: keyword.other.namespace.definition.cpp storage.type.namespace.definition.cpp
-      '3':
-        patterns:
-        - include: "#attributes"
-      '4':
-        patterns:
-        - include: "#scope_resolution"
-      '5':
-        name: entity.name.type.namespace.cpp
     end: "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))"
     patterns:
     - name: meta.head.namespace.cpp
@@ -920,6 +1457,19 @@
       endCaptures:
         '1':
           name: punctuation.section.block.begin.bracket.curly.namespace.cpp
+      patterns:
+      - include: "#attributes_context"
+      - match: "((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:(::)\\s*(inline))?"
+        captures:
+          '1':
+            patterns:
+            - include: "#scope_resolution_namespace_block_inner_generated"
+          '2':
+            name: entity.name.namespace.cpp
+          '3':
+            name: punctuation.separator.scope-resolution.namespace.block.cpp
+          '4':
+            name: storage.modifier.inline.cpp
     - name: meta.body.namespace.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -937,15 +1487,14 @@
     match: "##(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)"
     name: variable.other.macro.argument.cpp
   lambdas:
-    begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
+    begin: "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*>])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:.*\\[.*?\\].*?)*.*?)(\\]))"
     beginCaptures:
       '2':
         name: punctuation.definition.capture.begin.lambda.cpp
       '3':
         name: meta.lambda.capture.cpp
         patterns:
-        - include: "#probably_a_parameter"
-        - include: "#function_context_c"
+        - include: "#function_parameter_context"
       '4':
         name: punctuation.definition.capture.end.lambda.cpp
     end: "(?<=})"
@@ -960,8 +1509,7 @@
         '1':
           name: punctuation.definition.parameters.end.lambda.cpp
       patterns:
-      - include: "#probably_a_parameter"
-      - include: "#function_context_c"
+      - include: "#function_parameter_context"
     - match: "(?<!\\w)(?:mutable|constexpr|consteval)(?!\\w)"
       name: storage.modifier.lambda.$0.cpp
     - match: "(->)(.+?(?=\\{|$))?"
@@ -988,13 +1536,14 @@
     match: "(?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)"
     name: support.type.posix-reserved.cpp
   enumerator_list:
-    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:(?:((?:[,;]|\\n))|(?=\\}))|(?=(?:\\/\\/|\\/\\*)))"
+    match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))\\s*(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:(?:((?:[,;]|\\n))|(?=\\}))|(?=(?:\\/\\/|\\/\\*)))"
     captures:
       '1':
         name: variable.other.enummember.cpp
       '2':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '3':
         name: keyword.operator.assignment.cpp
       '4':
@@ -1007,7 +1556,7 @@
     name: meta.enum.definition.cpp
   enum_block:
     name: meta.block.enum.cpp
-    begin: "(((?<!\\w)enum(?!\\w))(?:\\s+(class|struct))?(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[\\s<>:,\\w])*>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
+    begin: "(((?<!\\w)enum(?!\\w))(?:\\s+(class|struct))?(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s*(:)\\s*(?:(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(::)))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w)))?)"
     beginCaptures:
       '1':
         name: meta.head.enum.cpp
@@ -1017,24 +1566,23 @@
         name: storage.type.enum.enum-key.$3.cpp
       '4':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         name: entity.name.type.enum.cpp
       '6':
         name: colon.cpp punctuation.separator.type-specifier.cpp
-      '7':
-        name: meta.scope-resolution.cpp
       '8':
         patterns:
-        - include: "#scope_resolution"
+        - include: "#scope_resolution_inner_generated"
       '9':
-        name: entity.name.type.namespace.scope-resolution.cpp
+        name: entity.name.scope-resolution.cpp
       '10':
         name: meta.template.call.cpp
         patterns:
-        - include: "#template_call_context"
+        - include: "#template_call_range"
       '11':
-        name: punctuation.separator.namespace.access.cpp
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
       '12':
         name: storage.type.integral.$12.cpp
     end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
@@ -1074,13 +1622,15 @@
       name: comma.cpp punctuation.separator.delimiter.inhertance.cpp
     - match: "(?<!\\w)(?:private|protected|public)(?!\\w)"
       name: storage.type.modifier.access.$0.cpp
-    - match: "(?<=private|protected|public|,|:)\\s*(?!(?:private|protected|public))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+    - match: "(?<!\\w)virtual(?!\\w)"
+      name: storage.type.modifier.virtual.cpp
+    - match: "(?<=virtual|private|protected|public|,|:)\\s*(?!(?:(?:private|protected|public)|virtual))((?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))"
       captures:
         '1':
           name: entity.name.type.inherited.cpp
   class_block:
     name: meta.block.class.cpp
-    begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
     beginCaptures:
       '1':
         name: meta.head.class.cpp
@@ -1088,10 +1638,12 @@
         name: storage.type.$3.cpp
       '4':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
@@ -1136,7 +1688,7 @@
       - include: "$base"
   struct_block:
     name: meta.block.struct.cpp
-    begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
     beginCaptures:
       '1':
         name: meta.head.struct.cpp
@@ -1144,10 +1696,12 @@
         name: storage.type.$3.cpp
       '4':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
@@ -1192,7 +1746,7 @@
       - include: "$base"
   union_block:
     name: meta.block.union.cpp
-    begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[).*?(?:\\]\\])|(?:__attribute\\(\\(|__attribute__\\(\\().*?(?:\\)\\)))|(?:__declspec\\().*?(?:\\)))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))+)*))?))"
+    begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
     beginCaptures:
       '1':
         name: meta.head.union.cpp
@@ -1200,10 +1754,12 @@
         name: storage.type.$3.cpp
       '4':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '5':
         patterns:
-        - include: "#attributes"
+        - include: "#attributes_context"
+        - include: "#number_literal"
       '6':
         name: entity.name.type.$3.cpp
       '7':
@@ -1283,6 +1839,222 @@
       patterns:
       - include: "$base"
     - include: "$base"
+  typedef_class:
+    begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)class(?!\\w))"
+    beginCaptures:
+      '1':
+        name: keyword.other.typedef.cpp
+    end: "(?<=;)"
+    patterns:
+    - name: meta.block.class.cpp
+      begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
+      beginCaptures:
+        '1':
+          name: meta.head.class.cpp
+        '3':
+          name: storage.type.$3.cpp
+        '4':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '5':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '6':
+          name: entity.name.type.$3.cpp
+        '7':
+          name: storage.type.modifier.final.cpp
+        '8':
+          name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
+          patterns:
+          - include: "#inhertance_context"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      endCaptures:
+        '1':
+          name: punctuation.terminator.statement.cpp
+        '2':
+          name: punctuation.terminator.statement.cpp
+      patterns:
+      - name: meta.head.class.cpp
+        begin: "\\G ?"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.begin.bracket.curly.class.cpp
+        patterns:
+        - include: "#preprocessor_context"
+        - include: "#inhertance_context"
+        - include: "#template_call_range"
+        - include: "#comments_context"
+      - name: meta.body.class.cpp
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.end.bracket.curly.class.cpp
+        patterns:
+        - include: "#function_pointer"
+        - include: "#constructor_context"
+        - include: "$base"
+      - name: meta.tail.class.cpp
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
+        end: "[\\s\\n]*(?=;)"
+        patterns:
+        - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
+  typedef_struct:
+    begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)struct(?!\\w))"
+    beginCaptures:
+      '1':
+        name: keyword.other.typedef.cpp
+    end: "(?<=;)"
+    patterns:
+    - name: meta.block.struct.cpp
+      begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
+      beginCaptures:
+        '1':
+          name: meta.head.struct.cpp
+        '3':
+          name: storage.type.$3.cpp
+        '4':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '5':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '6':
+          name: entity.name.type.$3.cpp
+        '7':
+          name: storage.type.modifier.final.cpp
+        '8':
+          name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
+          patterns:
+          - include: "#inhertance_context"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      endCaptures:
+        '1':
+          name: punctuation.terminator.statement.cpp
+        '2':
+          name: punctuation.terminator.statement.cpp
+      patterns:
+      - name: meta.head.struct.cpp
+        begin: "\\G ?"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.begin.bracket.curly.struct.cpp
+        patterns:
+        - include: "#preprocessor_context"
+        - include: "#inhertance_context"
+        - include: "#template_call_range"
+        - include: "#comments_context"
+      - name: meta.body.struct.cpp
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.end.bracket.curly.struct.cpp
+        patterns:
+        - include: "#function_pointer"
+        - include: "#constructor_context"
+        - include: "$base"
+      - name: meta.tail.struct.cpp
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
+        end: "[\\s\\n]*(?=;)"
+        patterns:
+        - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
+  typedef_union:
+    begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)union(?!\\w))"
+    beginCaptures:
+      '1':
+        name: keyword.other.typedef.cpp
+    end: "(?<=;)"
+    patterns:
+    - name: meta.block.union.cpp
+      begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))?(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*(?:,)?\\s*(?:(?:private|protected|public))?\\s*(?:\\s*(?:,)?\\s*(?!(?:private|protected|public))(?-mix:(?:\\s*(?<!\\w)(?=\\w)(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)(?![\\w])\\s*)(?:(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))?\\s*(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))\\s+)*(?:(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*\\s*(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?::)*\\s*)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)\\s*(?:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*))?(?:::)))?\\s*(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)))?(?![\\w<:.]))))+)*))?))"
+      beginCaptures:
+        '1':
+          name: meta.head.union.cpp
+        '3':
+          name: storage.type.$3.cpp
+        '4':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '5':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '6':
+          name: entity.name.type.$3.cpp
+        '7':
+          name: storage.type.modifier.final.cpp
+        '8':
+          name: colon.cpp punctuation.separator.inhertance.cpp
+        '9':
+          patterns:
+          - include: "#inhertance_context"
+      end: "(?:(?:(?<=\\}|%>|\\?\\?>)\\s*(;)|(;))|(?=[;>\\[\\]=]))"
+      endCaptures:
+        '1':
+          name: punctuation.terminator.statement.cpp
+        '2':
+          name: punctuation.terminator.statement.cpp
+      patterns:
+      - name: meta.head.union.cpp
+        begin: "\\G ?"
+        end: "((?:\\{|<%|\\?\\?<|(?=;)))"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.begin.bracket.curly.union.cpp
+        patterns:
+        - include: "#preprocessor_context"
+        - include: "#inhertance_context"
+        - include: "#template_call_range"
+        - include: "#comments_context"
+      - name: meta.body.union.cpp
+        begin: "(?<=\\{|<%|\\?\\?<)"
+        end: "(\\}|%>|\\?\\?>)"
+        endCaptures:
+          '1':
+            name: punctuation.section.block.end.bracket.curly.union.cpp
+        patterns:
+        - include: "#function_pointer"
+        - include: "#constructor_context"
+        - include: "$base"
+      - name: meta.tail.union.cpp
+        begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
+        end: "[\\s\\n]*(?=;)"
+        patterns:
+        - match: "(\\s*((?:\\*\\s*)*)((?:&\\s*){0,2})\\s*)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*(?!\\w))"
+          captures:
+            '2':
+              name: storage.modifier.pointer.cpp
+            '3':
+              name: storage.modifier.reference.cpp
+            '4':
+              name: entity.name.type.alias.cpp
+        - match: ","
   hacky_fix_for_stray_directive:
     match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     name: keyword.control.directive.$0.cpp
@@ -1299,7 +2071,7 @@
       '0':
         name: punctuation.definition.end.bracket.square.cpp
     patterns:
-    - include: "#function_call_context_c"
+    - include: "#function_call_context"
   empty_square_brackets:
     name: storage.modifier.array.bracket.square.cpp
     match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
@@ -1504,8 +2276,7 @@
           name: punctuation.definition.parameters.end.constructor.cpp
       name: meta.function.constructor.cpp
       patterns:
-      - include: "#probably_a_parameter"
-      - include: "#function_context_c"
+      - include: "#function_parameter_context"
     - begin: |-
         (?x)
         (:)
@@ -1524,9 +2295,14 @@
       - include: "$base"
   special_block_context:
     patterns:
-    - include: "#attributes"
+    - include: "#attributes_context"
     - include: "#using_namespace"
+    - include: "#type_alias"
+    - include: "#namespace_alias"
     - include: "#namespace_block"
+    - include: "#typedef_class"
+    - include: "#typedef_struct"
+    - include: "#typedef_union"
     - include: "#class_block"
     - include: "#struct_block"
     - include: "#union_block"
@@ -1589,7 +2365,8 @@
     - include: "#preprocessor_rule_conditional_block"
     - include: "#method_access"
     - include: "#member_access"
-    - include: "#function_call_c"
+    - include: "#type_casting_operators"
+    - include: "#function_call"
     - name: meta.initialization.cpp
       begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)
         \ # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ |
@@ -1605,7 +2382,7 @@
         '0':
           name: punctuation.section.parens.end.bracket.round.initialization.cpp
       patterns:
-      - include: "#function_call_context_c"
+      - include: "#function_call_context"
     - begin: "{"
       beginCaptures:
         '0':
@@ -1618,19 +2395,6 @@
       - include: "#block_context"
     - include: "#parentheses_block"
     - include: "$base"
-  function_call_c:
-    begin: |-
-      (?x)
-      (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|constexpr|volatile|operator|(?:::)?new|(?:::)?delete)\s*\()
-      (?=
-      (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\s*(?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[\s<>:,\w])*>\s*)))?)\(  # actual name
-      |
-      (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))\s*\(
-      )
-    end: "(?<=\\))(?!\\w)"
-    name: meta.function-call.cpp
-    patterns:
-    - include: "#function_call_context_c"
   comments_context:
     patterns:
     - captures:
@@ -1907,7 +2671,7 @@
         patterns:
         - include: "#preprocessor_rule_conditional_line_context"
       - include: "$base"
-    - contentName: comment.block.preprocessor.if-branch
+    - contentName: comment.block.preprocessor.if-branch.cpp
       begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       patterns:
@@ -1956,7 +2720,7 @@
         patterns:
         - include: "#preprocessor_rule_conditional_line_context"
       - include: "#block_context"
-    - contentName: comment.block.preprocessor.if-branch.in-block
+    - contentName: comment.block.preprocessor.if-branch.in-block.cpp
       begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       patterns:
@@ -1979,7 +2743,7 @@
       patterns:
       - include: "#preprocessor_rule_conditional_line_context"
     - include: "#comments_context"
-    - contentName: comment.block.preprocessor.elif-branch
+    - contentName: comment.block.preprocessor.elif-branch.cpp
       begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       patterns:
@@ -2011,7 +2775,7 @@
       patterns:
       - include: "#preprocessor_rule_conditional_line_context"
     - include: "#comments_context"
-    - contentName: comment.block.preprocessor.else-branch
+    - contentName: comment.block.preprocessor.else-branch.cpp
       begin: "^\\s*((#)\\s*else\\b)"
       beginCaptures:
         '0':
@@ -2024,7 +2788,7 @@
       patterns:
       - include: "#disabled"
       - include: "#pragma_mark"
-    - contentName: comment.block.preprocessor.if-branch
+    - contentName: comment.block.preprocessor.if-branch.cpp
       begin: "^\\s*((#)\\s*elif\\b)"
       beginCaptures:
         '0':
@@ -2065,7 +2829,7 @@
       patterns:
       - include: "#preprocessor_rule_conditional_line_context"
     - include: "#comments_context"
-    - contentName: comment.block.preprocessor.else-branch.in-block
+    - contentName: comment.block.preprocessor.else-branch.in-block.cpp
       begin: "^\\s*((#)\\s*else\\b)"
       beginCaptures:
         '0':
@@ -2078,7 +2842,7 @@
       patterns:
       - include: "#disabled"
       - include: "#pragma_mark"
-    - contentName: comment.block.preprocessor.if-branch.in-block
+    - contentName: comment.block.preprocessor.if-branch.in-block.cpp
       begin: "^\\s*((#)\\s*elif\\b)"
       beginCaptures:
         '0':
@@ -2115,7 +2879,7 @@
     - begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       patterns:
-      - contentName: comment.block.preprocessor.elif-branch
+      - contentName: comment.block.preprocessor.elif-branch.cpp
         begin: "^\\s*((#)\\s*(else)\\b)"
         beginCaptures:
           '0':
@@ -2128,7 +2892,7 @@
         patterns:
         - include: "#disabled"
         - include: "#pragma_mark"
-      - contentName: comment.block.preprocessor.elif-branch
+      - contentName: comment.block.preprocessor.elif-branch.cpp
         begin: "^\\s*((#)\\s*(elif)\\b)"
         beginCaptures:
           '0':
@@ -2162,7 +2926,7 @@
     - begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:endif)\\b))"
       patterns:
-      - contentName: comment.block.preprocessor.elif-branch.in-block
+      - contentName: comment.block.preprocessor.elif-branch.in-block.cpp
         begin: "^\\s*((#)\\s*(else)\\b)"
         beginCaptures:
           '0':
@@ -2175,7 +2939,7 @@
         patterns:
         - include: "#disabled"
         - include: "#pragma_mark"
-      - contentName: comment.block.preprocessor.elif-branch
+      - contentName: comment.block.preprocessor.elif-branch.cpp
         begin: "^\\s*((#)\\s*(elif)\\b)"
         beginCaptures:
           '0':
@@ -2325,59 +3089,20 @@
       patterns:
       - include: "#preprocessor_rule_define_line_functions_context"
     - include: "#preprocessor_rule_define_line_context"
-  function_context_c:
+  function_call_context:
     patterns:
-    - include: "#attributes"
+    - include: "#attributes_context"
     - include: "#comments_context"
-    - include: "#storage_types"
     - include: "#operators"
-    - include: "#vararg_ellipses"
-    - name: meta.function.definition.parameters.cpp
-      begin: |-
-        (?x)
-        (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
-        (
-        (?:[A-Za-z_][A-Za-z0-9_]*+|::)++ # actual name
-        |
-        (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
-        )
-        \s*(\()
-      beginCaptures:
-        '1':
-          name: entity.name.function.cpp
-        '2':
-          name: punctuation.section.parameters.begin.bracket.round.cpp
-      end: !ruby/regexp /\)|:/
-      endCaptures:
-        '0':
-          name: punctuation.section.parameters.end.bracket.round.cpp
-      patterns:
-      - include: "#probably_a_parameter"
-      - include: "#function_context_c"
-    - begin: "\\("
-      beginCaptures:
-        '0':
-          name: punctuation.section.parens.begin.bracket.round.cpp
-      end: "\\)"
-      endCaptures:
-        '0':
-          name: punctuation.section.parens.end.bracket.round.cpp
-      patterns:
-      - include: "#function_context_c"
-    - include: "$base"
-  function_call_context_c:
-    patterns:
-    - include: "#attributes"
-    - include: "#comments_context"
+    - include: "#string_context"
     - include: "#storage_types"
     - include: "#method_access"
     - include: "#member_access"
-    - include: "#operators"
     - begin: |-
         (?x)
         (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
         (
-        (?:new)\s*((?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[\s<>:,\w])*>\s*)))?)) # actual name
+        (?:new)\s*((?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)))?)) # actual name
         |
         (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
         )
@@ -2395,16 +3120,6 @@
         '0':
           name: punctuation.section.arguments.end.bracket.round.cpp
       patterns:
-      - include: "#function_call_context_c"
+      - include: "#function_call_context"
     - include: "#function_call"
-    - begin: "\\("
-      beginCaptures:
-        '0':
-          name: punctuation.section.parens.begin.bracket.round.cpp
-      end: "\\)"
-      endCaptures:
-        '0':
-          name: punctuation.section.parens.end.bracket.round.cpp
-      patterns:
-      - include: "#function_call_context_c"
     - include: "#block_context"

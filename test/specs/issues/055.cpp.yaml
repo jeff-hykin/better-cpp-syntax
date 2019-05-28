@@ -1,78 +1,75 @@
 - source: enum
   scopesBegin:
-    - meta.block.enum.cpp
-    - meta.head.enum.cpp
+    - meta.block.enum
+    - meta.head.enum
   scopes:
-    - storage.type.enum.cpp
+    - storage.type.enum
 - source: foo
   scopes:
-    - entity.name.type.enum.cpp
+    - entity.name.type.enum
 - source: ':'
   scopes:
-    - colon.cpp
-    - punctuation.separator.type-specifier.cpp
+    - colon
+    - punctuation.separator.type-specifier
 - source: std
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: int8_t
   scopes:
-    - storage.type.integral.int8_t.cpp
+    - storage.type.integral.int8_t
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.enum.cpp
+    - punctuation.section.block.begin.bracket.curly.enum
   scopesEnd:
-    - meta.head.enum.cpp
+    - meta.head.enum
 - source: '}'
   scopes:
-    - meta.body.enum.cpp
-    - punctuation.section.block.end.bracket.curly.enum.cpp
+    - meta.body.enum
+    - punctuation.section.block.end.bracket.curly.enum
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.block.enum.cpp
+    - meta.block.enum
 - source: void
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: foo
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: enum
   scopesBegin:
-    - meta.block.enum.cpp
-    - meta.head.enum.cpp
+    - meta.function.definition.parameters
+    - meta.block.enum
+    - meta.head.enum
   scopes:
-    - storage.type.enum.cpp
+    - storage.type.enum
 - source: foo
   scopes:
-    - entity.name.type.enum.cpp
+    - entity.name.type.enum
 - source: '::'
 - source: bar
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: baz quix)
   scopesEnd:
-    - meta.head.enum.cpp
+    - meta.head.enum
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

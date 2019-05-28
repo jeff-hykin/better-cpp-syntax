@@ -205,7 +205,7 @@ tokens = [
     { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
-    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true, isInheritanceSpecifier: true },
     { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
     { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
@@ -218,9 +218,9 @@ tokens = [
     { representation: "constexpr"              , name: "constexpr"          , isLambdaSpecifier: true },
     { representation: "consteval"              , name: "consteval"          , isLambdaSpecifier: true },
     # accessor
-    { representation: "private"               , name: "private"             , isAccessSpecifier: true },
-    { representation: "protected"             , name: "protected"           , isAccessSpecifier: true },
-    { representation: "public"                , name: "public"              , isAccessSpecifier: true },
+    { representation: "private"               , name: "private"             , isAccessSpecifier: true, isInheritanceSpecifier: true },
+    { representation: "protected"             , name: "protected"           , isAccessSpecifier: true, isInheritanceSpecifier: true },
+    { representation: "public"                , name: "public"              , isAccessSpecifier: true, isInheritanceSpecifier: true },
     # pre processor directives
     { representation: "if"                    , name: "if"                     , isPreprocessorDirective: true },
     { representation: "elif"                  , name: "elif"                   , isPreprocessorDirective: true },
@@ -239,14 +239,6 @@ tokens = [
     { representation: "defined"               , name: "defined"                , isPreprocessorDirective: true },
     { representation: "__has_include"         , name: "__has_include"          , isPreprocessorDirective: true },
     { representation: "__has_cpp_attribute"   , name: "__has_cpp_attribute"    , isPreprocessorDirective: true },
-    # attributes
-    { representation: "[["                    , name: "C++11 attribute start"  , isAttributeStart: true, isCppAttribute: true},
-    { representation: "]]"                    , name: "C++11 attribute end"    , isAttributeEnd: true  , isCppAttribute: true},
-    { representation: "__attribute(("         , name: "gcc attribute start alt", isAttributeStart: true, isGccAttribute: true},
-    { representation: "__attribute__(("       , name: "gcc attribute start"    , isAttributeStart: true, isGccAttribute: true},
-    { representation: "))"                    , name: "gcc attribute end"      , isAttributeEnd: true  , isGccAttribute: true},
-    { representation: "__declspec("           , name: "ms attribute start"     , isAttributeStart: true, isMsAttribute: true},
-    { representation: ")"                     , name: "ms attribute end"       , isAttributeEnd: true  , isMsAttribute: true},
 
     # 
     # misc

@@ -1,104 +1,104 @@
 - source: void
   scopes:
-    - storage.type.built-in.primitive.c
+    - storage.type.built-in.primitive
 - source: function
   scopesBegin:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+    - meta.function
+    - meta.function.definition.parameters
   scopes:
-    - entity.name.function.c
+    - entity.name.function
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.c
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.c
+    - punctuation.section.parameters.end.bracket.round
   scopesEnd:
-    - meta.function.c
-    - meta.function.definition.parameters.c
+    - meta.function
+    - meta.function.definition.parameters
 - source: '{'
   scopesBegin:
-    - meta.block.c
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.c
+    - punctuation.section.block.begin.bracket.curly
 - source: cfg
   scopes:
-    - variable.other.object.access.c
+    - variable.other.object.access
 - source: .
   scopes:
-    - punctuation.separator.dot-access.c
+    - punctuation.separator.dot-access
 - source: t_low_fan
   scopes:
-    - variable.other.member.c
+    - variable.other.member
 - source: '?'
   scopes:
-    - keyword.operator.ternary.c
+    - keyword.operator.ternary
 - source: (
   scopes:
-    - punctuation.section.parens.begin.bracket.round.c
+    - punctuation.section.parens.begin.bracket.round
 - source: cfg
   scopes:
-    - variable.other.object.access.c
+    - variable.other.object.access
 - source: .
   scopes:
-    - punctuation.separator.dot-access.c
+    - punctuation.separator.dot-access
 - source: t_low_fan
   scopes:
-    - variable.other.member.c
+    - variable.other.member
 - source: ==
   scopes:
-    - keyword.operator.comparison.c
+    - keyword.operator.comparison
 - source: '1'
   scopes:
-    - constant.numeric.decimal.c
+    - constant.numeric.decimal
 - source: '?'
   scopes:
-    - keyword.operator.ternary.c
+    - keyword.operator.ternary
 - source: '"'
   scopesBegin:
-    - string.quoted.double.c
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.c
+    - punctuation.definition.string.begin
 - source: low
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.c
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.c
+    - string.quoted.double
 - source: ':'
   scopes:
-    - keyword.operator.ternary.c
+    - keyword.operator.ternary
 - source: '"'
   scopesBegin:
-    - string.quoted.double.c
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.c
+    - punctuation.definition.string.begin
 - source: high
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.c
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.c
+    - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.c
+    - punctuation.section.parens.end.bracket.round
 - source: ':'
   scopes:
-    - keyword.operator.ternary.c
+    - keyword.operator.ternary
 - source: '"'
   scopesBegin:
-    - string.quoted.double.c
+    - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin.c
+    - punctuation.definition.string.begin
 - source: 'off'
 - source: '"'
   scopes:
-    - punctuation.definition.string.end.c
+    - punctuation.definition.string.end
   scopesEnd:
-    - string.quoted.double.c
+    - string.quoted.double
 - source: ;
   scopes:
-    - punctuation.terminator.statement.c
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.c
+    - punctuation.section.block.end.bracket.curly

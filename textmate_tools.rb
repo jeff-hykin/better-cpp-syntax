@@ -307,7 +307,7 @@ class Grammar
                 #
                 # add the language endings
                 # 
-                if each_key == "name"
+                if each_key == "name" || each_key == "contentName"
                     new_names = []
                     for each_tag in each_pattern[each_key].split(/\s/)
                         each_with_ending = each_tag
@@ -354,6 +354,20 @@ end
 class Regexp
     attr_accessor :repository_name
     attr_accessor :has_top_level_group
+    @@textmate_attributes = {
+        name: "",
+        match: "",
+        patterns: "",
+        comment: "",
+        tag_as: "",
+        includes: "",
+        reference: "",
+        should_fully_match: "",
+        should_not_fully_match: "",
+        should_partial_match: "",
+        should_not_partial_match: "",
+        repository: "",
+    }
     
     def self.runTest(test_name, arguments, lambda, new_regex)
         if arguments[test_name] != nil
@@ -533,18 +547,7 @@ class Regexp
             
             # check for unknown names
             attributes_copy = Marshal.load(Marshal.dump(raw_attributes))
-            attributes_copy.delete(:name)
-            attributes_copy.delete(:match)
-            attributes_copy.delete(:patterns)
-            attributes_copy.delete(:comment)
-            attributes_copy.delete(:tag_as)
-            attributes_copy.delete(:includes)
-            attributes_copy.delete(:reference)
-            attributes_copy.delete(:should_fully_match)
-            attributes_copy.delete(:should_not_fully_match)
-            attributes_copy.delete(:should_partial_match)
-            attributes_copy.delete(:should_not_partial_match)
-            attributes_copy.delete(:repository)
+            attributes_copy.delete_if { |k, v| @@textmate_attributes.key? k }
             if attributes_copy.size != 0
                 raise "\n\nThere are arugments being given to a newPattern or a helper that are not understood\nThe unknown arguments are:\n#{attributes_copy}\n\nThe normal arguments are#{raw_attributes}"
             end
@@ -597,12 +600,16 @@ class Regexp
     
     def processRegexOperator(arguments, operator)
         # first parse the arguments
-        other_regex, attributes = Regexp.processGrammarArguments(arguments, operator)
+        other_regex, pattern_attributes = Regexp.processGrammarArguments(arguments, operator)
         if other_regex == nil
             other_regex = //
         end
+        # pattern_attributes does not clone well, option_attributes must be the clone
+        option_attributes = pattern_attributes.clone
+        pattern_attributes.keep_if { |k, v| @@textmate_attributes.key? k }
+        option_attributes.delete_if { |k, v| @@textmate_attributes.key? k }
         
-        no_attributes = attributes == {}
+        no_attributes = pattern_attributes == {}
         
         #
         # Create the new regex
@@ -611,9 +618,48 @@ class Regexp
         other_regex_as_string = other_regex.without_default_mode_modifiers
         case operator
             when 'then'
-                new_regex = /#{self_as_string}(#{other_regex_as_string})/
-                if no_attributes
-                    new_regex = /#{self_as_string}#{other_regex_as_string}/
+                if option_attributes[:how_many_times?] or option_attributes[:at_most] or option_attributes[:at_least]
+                    # repeat pattern
+                    
+                    # support for at_least: 1.times, at_most: 2.times
+                    at_least = (option_attributes[:at_least].is_a? Enumerator) ? option_attributes[:at_least].size : option_attributes[:at_least]
+                    at_most = (option_attributes[:at_most].is_a? Enumerator) ? option_attributes[:at_most].size : option_attributes[:at_most]
+                    # support how_many_times?: 5
+                    if option_attributes[:how_many_times?].is_a? Enumerator
+                        at_least = at_most = option_attributes[:how_many_times?].size
+                    elsif option_attributes[:how_many_times?].is_a? Integer
+                        at_least = at_most = option_attributes[:how_many_times?]
+                    end
+                    
+                    if at_least == 0 and at_most == nil
+                        # rewrite to zeroOrMoreOf
+                        return self.processRegexOperator(arguments, 'zeroOrMoreOf')
+                    elsif at_least == nil and at_most == nil
+                        # rewrite to oneOrMoreOf
+                        return self.processRegexOperator(arguments, 'oneOrMoreOf')
+                    else
+                        if at_least == nil
+                            at_least = 1
+                        end
+                        # custom range
+                        new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{at_least},#{at_most}})/
+                        if no_attributes
+                            new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{at_least},#{at_most}}/
+                        end
+                    end
+                elsif option_attributes[:dont_back_track?]
+                    # atomic groups
+                    option_attributes.delete(:dont_back_track?)
+                    new_regex = /#{self_as_string}((?>#{other_regex_as_string}))/
+                    if no_attributes
+                        new_regex = /#{self_as_string}(?>#{other_regex_as_string})/
+                    end
+                elsif
+                    # plain pattern
+                    new_regex = /#{self_as_string}(#{other_regex_as_string})/
+                    if no_attributes
+                        new_regex = /#{self_as_string}#{other_regex_as_string}/
+                    end
                 end
             when 'or'
                 new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
@@ -655,6 +701,22 @@ class Regexp
                 end
         end
         
+        if option_attributes[:dont_back_track?]
+            new_regex_as_string = new_regex.without_default_mode_modifiers
+            index = new_regex_as_string[-1] == ')' ? -2 : -1
+            if not /[+*?]/ =~ new_regex_as_string[index]
+                raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+            end
+            new_regex = /#{new_regex_as_string.insert(index, '+')}/
+        elsif option_attributes[:how_many_times?] == :as_few_as_possible
+            new_regex_as_string = new_regex.without_default_mode_modifiers
+            index = new_regex_as_string[-1] == ')' ? -2 : -1
+            if not /[+*}?]/ =~ new_regex_as_string[index]
+                raise "\n\n :how_many_times? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+            end
+            new_regex = /#{new_regex_as_string.insert(index, '?')}/
+        end
+
         #
         # Make changes to capture groups/attributes
         #
@@ -662,10 +724,10 @@ class Regexp
         if no_attributes
             new_regex.group_attributes = self.group_attributes + other_regex.group_attributes
         else
-            new_regex.group_attributes = self.group_attributes + [ attributes ] + other_regex.group_attributes
+            new_regex.group_attributes = self.group_attributes + [ pattern_attributes ] + other_regex.group_attributes
         end
         # if there are arributes, then those attributes are top-level
-        if (self == //) and (attributes != {})
+        if (self == //) and (pattern_attributes != {})
             new_regex.has_top_level_group = true
         end
         
@@ -678,10 +740,10 @@ class Regexp
         else
             test_regex = new_regex
         end
-        Regexp.runTest(:should_partial_match    , attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
-        Regexp.runTest(:should_not_partial_match, attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
-        Regexp.runTest(:should_fully_match      , attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
-        Regexp.runTest(:should_not_fully_match  , attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
+        Regexp.runTest(:should_partial_match    , pattern_attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
+        Regexp.runTest(:should_not_partial_match, pattern_attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
+        Regexp.runTest(:should_fully_match      , pattern_attributes, ->(each){   not (each =~ /\A#{test_regex}\z/)  } , test_regex)
+        Regexp.runTest(:should_not_fully_match  , pattern_attributes, ->(each){ (each =~ /\A#{test_regex}\z/) != nil } , test_regex)
         return new_regex
     end
     
@@ -869,10 +931,11 @@ class PatternRange
         if not ( (start_pattern.is_a? Regexp) and start_pattern != // )
             raise "The start pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
-        @as_tag[:begin] = start_pattern.without_default_mode_modifiers
+        start_pattern_as_tag =  start_pattern.to_tag(without_optimizations: true)
+        @as_tag[:begin] = start_pattern_as_tag[:match]
         key_arguments.delete(:start_pattern)
-        begin_captures = start_pattern.to_tag(without_optimizations: true)[:captures]
-        if begin_captures != {} && begin_captures.to_s != "" 
+        begin_captures = start_pattern_as_tag[:captures]
+        if begin_captures != {} && begin_captures.to_s != ""
             @as_tag[:beginCaptures] = begin_captures
         end
         
@@ -883,9 +946,10 @@ class PatternRange
         if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
             raise "The end pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
-        @as_tag[:end] = end_pattern.without_default_mode_modifiers
+        end_pattern_as_tag = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)
+        @as_tag[:end] = end_pattern_as_tag[:match]
         key_arguments.delete(:end_pattern)
-        end_captures = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)[:captures]
+        end_captures = end_pattern_as_tag[:captures]
         if end_captures != {} && end_captures.to_s != ""
             @as_tag[:endCaptures] = end_captures
         end

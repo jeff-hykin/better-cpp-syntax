@@ -559,10 +559,6 @@
           "name": "comment.block.c"
         },
         {
-          "match": "\\*/.*\\n",
-          "name": "invalid.illegal.stray-comment-end.c"
-        },
-        {
           "captures": {
             "1": {
               "name": "meta.toc-list.banner.line.c"
@@ -2161,6 +2157,9 @@
             },
             {
               "include": "$base"
+            },
+            {
+              "include": "#block_innards"
             }
           ]
         },
@@ -2232,7 +2231,7 @@
           ]
         },
         {
-          "include": "#function_call_context_c"
+          "include": "#function_call_context"
         }
       ]
     },
@@ -2240,6 +2239,9 @@
       "patterns": [
         {
           "include": "$base"
+        },
+        {
+          "include": "#block_innards"
         }
       ]
     },
@@ -2285,7 +2287,7 @@
       }
     },
     "method_access": {
-      "contentName": "meta.function-call.member",
+      "contentName": "meta.function-call.member.c",
       "begin": "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?-mix:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*([a-zA-Z_]\\w*)(\\()",
       "beginCaptures": {
         "1": {

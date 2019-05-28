@@ -1,74 +1,78 @@
 - source: int
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.primitive.cpp
+    - meta.qualified_type
+    - storage.type.primitive
 - source: main
   scopesBegin:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.cpp
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.cpp
+    - punctuation.section.parameters.begin.bracket.round
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.cpp
-  scopesEnd:
-    - meta.function.definition.parameters.cpp
-    - meta.function.definition.parameters.cpp
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-  scopesBegin:
-    - meta.block.cpp
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
 - source: if
+  scopesBegin:
+    - meta.body.function.definition
   scopes:
-    - keyword.control.if.cpp
+    - keyword.control.if
 - source: constexpr
   scopes:
-    - storage.modifier.specificer.functional.pre-parameters.constexpr.cpp
+    - storage.modifier.specificer.functional.pre-parameters.constexpr
 - source: (
   scopesBegin:
-    - meta.parens.block.cpp
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.cpp
+    - punctuation.section.parens.begin.bracket.round
 - source: std
-  scopesBegin:
-    - meta.scope-resolution.cpp
   scopes:
-    - entity.name.type.namespace.scope-resolution.cpp
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
-    - punctuation.separator.namespace.access.cpp
-  scopesEnd:
-    - meta.scope-resolution.cpp
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: is_signed_v
 - source: <
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: char
   scopes:
-    - storage.type.primitive.cpp
+    - storage.type.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison.cpp
+    - keyword.operator.comparison
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.cpp
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block.cpp
+    - meta.parens
 - source: '{'
+  scopesBegin:
+    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly.cpp
+    - punctuation.section.block.begin.bracket.curly
 - source: //
   scopesBegin:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.cpp
+    - punctuation.definition.comment
 - source: ' no syntax highlighting'
   scopesEnd:
-    - comment.line.double-slash.cpp
+    - comment.line.double-slash
 - source: '}'
-  scopesBegin:
-    - punctuation.section.block.end.bracket.curly.cpp
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

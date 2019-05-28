@@ -1,25 +1,24 @@
 - source: struct
   scopesBegin:
-    - meta.block.struct.cpp
-    - meta.head.struct.cpp
+    - meta.block.struct
+    - meta.head.struct
   scopes:
-    - storage.type.struct.cpp
+    - storage.type.struct
 - source: foo
   scopes:
-    - entity.name.type.struct.cpp
+    - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct.cpp
+    - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
-    - meta.head.struct.cpp
+    - meta.head.struct
 - source: int
   scopesBegin:
-    - meta.body.struct.cpp
+    - meta.body.struct
   scopes:
-    - entity.name.type
     - meta.qualified_type
     - storage.type.primitive
-- source: '('
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
@@ -39,16 +38,15 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: int
   scopes:
-    - entity.name.type
     - meta.qualified_type
     - storage.type.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
-- source: '('
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
@@ -68,16 +66,15 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: int
   scopes:
-    - entity.name.type
     - meta.qualified_type
     - storage.type.primitive
 - source: '&'
   scopes:
     - storage.modifier.reference
-- source: '('
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
@@ -103,10 +100,9 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: int
   scopes:
-    - entity.name.type
     - meta.qualified_type
     - storage.type.primitive
 - source: '**'
@@ -115,7 +111,7 @@
 - source: '&'
   scopes:
     - storage.modifier.reference
-- source: '('
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
@@ -141,39 +137,38 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.struct.cpp
+    - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
-    - meta.body.struct.cpp
+    - meta.body.struct
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
   scopesEnd:
-    - meta.block.struct.cpp
+    - meta.block.struct
 - source: union
   scopesBegin:
-    - meta.block.union.cpp
-    - meta.head.union.cpp
+    - meta.block.union
+    - meta.head.union
   scopes:
-    - storage.type.union.cpp
+    - storage.type.union
 - source: baz
   scopes:
-    - entity.name.type.union.cpp
+    - entity.name.type.union
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.union.cpp
+    - punctuation.section.block.begin.bracket.curly.union
   scopesEnd:
-    - meta.head.union.cpp
+    - meta.head.union
 - source: int
   scopesBegin:
-    - meta.body.union.cpp
+    - meta.body.union
   scopes:
-    - entity.name.type
     - meta.qualified_type
     - storage.type.primitive
-- source: '('
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
@@ -193,12 +188,12 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.union.cpp
+    - punctuation.section.block.end.bracket.curly.union
   scopesEnd:
-    - meta.body.union.cpp
+    - meta.body.union
 - source: ;
   scopes:
-    - punctuation.terminator.statement.cpp
+    - punctuation.terminator.statement

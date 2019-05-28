@@ -3,14 +3,20 @@
     "displayName": "Better C++ Syntax",
     "description": "The bleeding edge of the VS Code C++ syntax",
     "icon": "icon.png",
-    "version": "1.8.13",
+    "version": "1.10.0",
     "scripts": {
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
+        "prelint": "npm run build",
+        "lint": "ruby scripts/lint.rb",
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
+        "cov": "npm test -- --coverage",
+        "preversion": "npm test",
+        "version": "npm run build && git add -A syntaxes",
         "pregenerate-specs": "npm run build",
         "generate-specs": "node test/src/commands/generate-specs.js",
-        "sort-specs": "node test/src/commands/sort-specs.js"
+        "sort-specs": "node test/src/commands/sort-specs.js",
+        "vscode:prepublish": "npm run build"
     },
     "engines": {
         "vscode": "^1.0.0"
@@ -30,6 +36,11 @@
                 "language": "c",
                 "scopeName": "source.c",
                 "path": "./syntaxes/c.tmLanguage.json"
+            },
+            {
+                "language": "objective-cpp",
+                "scopeName": "source.objcpp",
+                "path": "./syntaxes/objcpp.tmLanguage.json"
             }
         ]
     },
@@ -42,10 +53,14 @@
     },
     "devDependencies": {
         "chalk": "^2.4.2",
+        "dictionary-en-us": "^2.1.1",
         "glob": "^7.1.3",
         "js-yaml": "^3.13.1",
+        "json-source-map": "^0.4.0",
         "json-stable-stringify": "^1.0.1",
         "lodash": "^4.17.11",
+        "nspell": "^2.1.2",
+        "oniguruma": "^7.1.0",
         "prettyjson": "^1.2.1",
         "vscode-textmate": "^4.1.1",
         "yargs": "^13.2.2"
