@@ -525,7 +525,10 @@ cpp_grammar = Grammar.new(
                         :string_context_c,
                     ],
                 ),
-                :using_name,
+                newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
+                    match: variable_name,
+                    tag_as: "entity.name.type.namespace",
+                ),
                 newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
                 newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
                 newPattern(
