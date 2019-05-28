@@ -5,10 +5,10 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 
 const argv = require("../arguments");
-const generateSpec = require("../generateSpec");
+const generateSpec = require("../generate_spec");
 const paths = require("../paths");
 
-const tests = require("../getTests")(test => {
+const tests = require("../get_tests")(test => {
     const result =
         (!fs.existsSync(test.spec.yaml) && !fs.existsSync(test.spec.json)) ||
         argv["generate-all"] ||

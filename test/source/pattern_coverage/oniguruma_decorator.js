@@ -1,7 +1,7 @@
 // This file wraps an IOnigLib and collects information to provide pattern coverage statistics
 const onigLibs = require("vscode-textmate");
-const OnigScanner = require("./onigScanner");
-const coverage = require("./patternCoverage");
+const OnigScanner = require("./onig_scanner");
+const coverage = require("./pattern_coverage");
 
 // from vscode-textmate src/onigLibs.ts
 let onigurumaLib = null;

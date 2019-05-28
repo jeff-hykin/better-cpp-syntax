@@ -3,18 +3,18 @@ const fs = require("fs");
 
 const yaml = require("js-yaml");
 
-const runTest = require("../testRunner");
+const runTest = require("../test_runner");
 const argv = require("../arguments");
 const paths = require("../paths");
 
 const registry = require("../registry").getRegistry(
     argv.coverage
-        ? require("../pattern-coverage/oniguruma-decorator").getOniguruma
+        ? require("../pattern_coverage/oniguruma_decorator").getOniguruma
         : undefined
 );
-const coverage = require("../pattern-coverage/patternCoverage");
+const coverage = require("../pattern_coverage/pattern_coverage");
 
-const tests = require("../getTests")(
+const tests = require("../get_tests")(
     test =>
         argv._.length == 0 ||
         argv._.includes(path.relative(paths.fixtureDir, test.fixture))

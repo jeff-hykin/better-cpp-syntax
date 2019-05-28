@@ -9,7 +9,7 @@ const yaml = require("js-yaml");
 const argv = require("../arguments");
 const paths = require("../paths");
 
-const tests = require("../getTests")(test => {
+const tests = require("../get_tests")(test => {
     const result =
         fs.existsSync(test.spec.yaml) ||
         fs.existsSync(test.spec.json) ||

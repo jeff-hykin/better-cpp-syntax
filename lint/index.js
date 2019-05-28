@@ -19,7 +19,7 @@ const fs = require("fs");
 
 const linters = [
     require("./linters/unresolved"),
-    require("./linters/spell-check")
+    require("./linters/spell_check")
 ];
 
 const grammar = JSON.parse(fs.readFileSync(process.argv[2]).toString());
