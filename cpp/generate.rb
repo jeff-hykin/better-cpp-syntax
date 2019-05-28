@@ -2,6 +2,7 @@ require_relative '../textmate_tools.rb'
 require_relative './tokens.rb'
 require_relative '../shared/numeric.rb'
 require_relative '../shared/predefined_macros.rb'
+require_relative '../shared/trigraph_support.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -86,7 +87,7 @@ cpp_grammar = Grammar.new(
         if needs_semicolon
             end_pattern = newPattern(
                 match: newPattern(
-                        lookBehindFor(/}/).maybe(@spaces).then(@semicolon)
+                        lookBehindFor(@close_curly_brace).maybe(@spaces).then(@semicolon)
                     ).or(
                         @semicolon
                     ).or(
@@ -94,7 +95,7 @@ cpp_grammar = Grammar.new(
                     )
                 )
         else
-            end_pattern = lookBehindFor(/\}/).or(lookAheadFor(lookahead_endings))
+            end_pattern = lookBehindFor(@close_curly_brace).or(lookAheadFor(lookahead_endings))
         end
         return PatternRange.new(
             tag_as: tag_as,
@@ -110,7 +111,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "meta.head."+name,
                     start_pattern: /\G ?/,
                     end_pattern: newPattern(
-                        match: /\{/.or(lookAheadFor(/;/)),
+                        match: @open_curly_brace.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
                     ),
                     includes: head_includes
@@ -118,9 +119,9 @@ cpp_grammar = Grammar.new(
                 # Body
                 PatternRange.new(
                     tag_as: "meta.body."+name, # body is everything in the {}'s
-                    start_pattern: lookBehindFor(/\{/),
+                    start_pattern: lookBehindFor(@open_curly_brace),
                     end_pattern: newPattern(
-                            match: /\}/,
+                            match: @close_curly_brace,
                             tag_as: "punctuation.section.block.end.bracket.curly."+name
                         ),
                     includes: body_includes
@@ -128,7 +129,7 @@ cpp_grammar = Grammar.new(
                 # Tail
                 PatternRange.new(
                     tag_as: "meta.tail."+name,
-                    start_pattern: lookBehindFor(/}/).then(/[\s\n]*/),
+                    start_pattern: lookBehindFor(@close_curly_brace).then(/[\s\n]*/),
                     end_pattern: newPattern(/[\s\n]*/).lookAheadFor(/;/),
                     includes: tail_includes
                 ),
