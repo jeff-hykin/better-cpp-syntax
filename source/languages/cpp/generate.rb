@@ -199,7 +199,7 @@ cpp_grammar = Grammar.new(
             :comma,
         ]
     # this is currently just :$initial_context without :function_definition
-    cpp_grammar[:function_call_innards] = [
+    cpp_grammar[:function_body_context] = [
         :type_casting_operators,
         :function_call,
         :struct_declare,
@@ -899,7 +899,7 @@ cpp_grammar = Grammar.new(
             :$initial_context
         ],
         needs_semicolon: false,
-        body_includes: [ :function_call_innards ],
+        body_includes: [ :function_body_context ],
     )
     # static assert is special as it can be outside of normal places function calls can be
     cpp_grammar[:static_assert] = PatternRange.new(

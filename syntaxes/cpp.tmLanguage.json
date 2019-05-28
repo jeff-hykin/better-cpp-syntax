@@ -290,7 +290,7 @@
       "match": "\\=",
       "name": "keyword.operator.assignment.cpp"
     },
-    "function_call_innards": {
+    "function_body_context": {
       "patterns": [
         {
           "include": "#type_casting_operators"
@@ -2272,7 +2272,7 @@
           },
           "patterns": [
             {
-              "include": "#function_call_innards"
+              "include": "#function_body_context"
             }
           ]
         },

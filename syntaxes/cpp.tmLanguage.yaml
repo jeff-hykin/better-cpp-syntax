@@ -138,7 +138,7 @@
   assignment_operator:
     match: "\\="
     name: keyword.operator.assignment.cpp
-  function_call_innards:
+  function_body_context:
     patterns:
     - include: "#type_casting_operators"
     - include: "#function_call"
@@ -1166,7 +1166,7 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.function.definition.cpp
       patterns:
-      - include: "#function_call_innards"
+      - include: "#function_body_context"
     - name: meta.tail.function.definition.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
