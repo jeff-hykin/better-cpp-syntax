@@ -1,6 +1,7 @@
 require_relative '../textmate_tools.rb'
 require_relative './tokens.rb'
 require_relative '../shared/numeric.rb'
+require_relative '../shared/predefined_macros.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -178,6 +179,7 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_line,
             :meta_preprocessor_undef,
             :meta_preprocessor_pragma,
+            :predefined_macros,
             :operators,
             :block,
             :parentheses,
@@ -1341,6 +1343,7 @@ cpp_grammar = Grammar.new(
         match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
         tag_as: "support.type.posix-reserved"
         )
+    cpp_grammar[:predefined_macros] = predefinedMacros()
 
 
 #
