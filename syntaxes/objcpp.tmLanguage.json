@@ -2885,87 +2885,87 @@
         },
         {
           "match": "\\b(friend|explicit|virtual|override|final|noexcept)\\b",
-          "name": "storage.modifier.cpp.objcpp"
+          "name": "storage.modifier.objcpp"
         },
         {
           "match": "\\b(private:|protected:|public:)",
-          "name": "storage.type.modifier.access.cpp.objcpp"
+          "name": "storage.type.modifier.access.objcpp"
         },
         {
           "match": "\\b(catch|try|throw|using)\\b",
-          "name": "keyword.control.cpp.objcpp"
+          "name": "keyword.control.objcpp"
         },
         {
           "match": "\\bdelete\\b(\\s*\\[\\])?|\\bnew\\b(?!])",
-          "name": "keyword.control.cpp.objcpp"
+          "name": "keyword.control.objcpp"
         },
         {
           "match": "\\b(f|m)[A-Z]\\w*\\b",
-          "name": "variable.other.readwrite.member.cpp.objcpp"
+          "name": "variable.other.readwrite.member.objcpp"
         },
         {
           "match": "\\bthis\\b",
-          "name": "variable.language.this.cpp.objcpp"
+          "name": "variable.language.this.objcpp"
         },
         {
           "match": "\\bnullptr\\b",
-          "name": "constant.language.cpp.objcpp"
+          "name": "constant.language.objcpp"
         },
         {
           "include": "#template_definition"
         },
         {
           "match": "\\btemplate\\b\\s*",
-          "name": "storage.type.template.cpp.objcpp"
+          "name": "storage.type.template.objcpp"
         },
         {
           "match": "\\b(const_cast|dynamic_cast|reinterpret_cast|static_cast)\\b\\s*",
-          "name": "keyword.operator.cast.cpp.objcpp"
+          "name": "keyword.operator.cast.objcpp"
         },
         {
-          "name": "punctuation.separator.namespace.access.cpp.objcpp",
+          "name": "punctuation.separator.namespace.access.objcpp",
           "match": "((?:[a-zA-Z_][a-zA-Z_0-9]*::)*)([a-zA-Z_][a-zA-Z_0-9]*)(::)",
           "captures": {
             "1": {
-              "name": "entity.scope.c.objcpp"
+              "name": "entity.scope.objcpp"
             },
             "2": {
-              "name": "entity.scope.name.c.objcpp"
+              "name": "entity.scope.name.objcpp"
             },
             "3": {
-              "name": "punctuation.separator.namespace.access.cpp.objcpp"
+              "name": "punctuation.separator.namespace.access.objcpp"
             }
           }
         },
         {
           "match": "\\b(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\b",
-          "name": "keyword.operator.cpp.objcpp"
+          "name": "keyword.operator.objcpp"
         },
         {
           "match": "\\b(decltype|wchar_t|char16_t|char32_t)\\b",
-          "name": "storage.type.cpp.objcpp"
+          "name": "storage.type.objcpp"
         },
         {
           "match": "\\b(constexpr|export|mutable|typename|thread_local)\\b",
-          "name": "storage.modifier.cpp.objcpp"
+          "name": "storage.modifier.objcpp"
         },
         {
           "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.cpp.objcpp"
+              "name": "entity.name.function.objcpp"
             },
             "2": {
-              "name": "punctuation.definition.parameters.begin.c.objcpp"
+              "name": "punctuation.definition.parameters.begin.objcpp"
             }
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.parameters.end.c.objcpp"
+              "name": "punctuation.definition.parameters.end.objcpp"
             }
           },
-          "name": "meta.function.destructor.cpp.objcpp",
+          "name": "meta.function.destructor.objcpp",
           "patterns": [
             {
               "include": "$base"
@@ -2976,19 +2976,19 @@
           "begin": "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
           "beginCaptures": {
             "1": {
-              "name": "entity.name.function.cpp.objcpp"
+              "name": "entity.name.function.objcpp"
             },
             "2": {
-              "name": "punctuation.definition.parameters.begin.c.objcpp"
+              "name": "punctuation.definition.parameters.begin.objcpp"
             }
           },
           "end": "\\)",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.parameters.end.c.objcpp"
+              "name": "punctuation.definition.parameters.end.objcpp"
             }
           },
-          "name": "meta.function.destructor.prototype.cpp.objcpp",
+          "name": "meta.function.destructor.prototype.objcpp",
           "patterns": [
             {
               "include": "$base"
@@ -3004,16 +3004,16 @@
           "begin": "\\b(template)\\s*(<)\\s*",
           "beginCaptures": {
             "1": {
-              "name": "storage.type.template.cpp.objcpp"
+              "name": "storage.type.template.objcpp"
             },
             "2": {
-              "name": "meta.template.angle-brackets.start.cpp.objcpp"
+              "name": "meta.template.angle-brackets.start.objcpp"
             }
           },
           "end": ">",
           "endCaptures": {
             "0": {
-              "name": "meta.template.angle-brackets.end.cpp.objcpp"
+              "name": "meta.template.angle-brackets.end.objcpp"
             }
           },
           "name": "template.definition.objcpp",
@@ -3027,44 +3027,44 @@
           "match": "\\s*(?:([a-zA-Z_][a-zA-Z_0-9]*\\s*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)|([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\.\\.\\.)\\s*([a-zA-Z_][a-zA-Z_0-9]*)|((?:[a-zA-Z_][a-zA-Z_0-9]*\\s+)*)([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)\\s*(\\w+))(,|(?=>))",
           "captures": {
             "1": {
-              "name": "storage.type.template.cpp.objcpp"
+              "name": "storage.type.template.objcpp"
             },
             "2": {
-              "name": "storage.type.template.cpp.objcpp"
+              "name": "storage.type.template.objcpp"
             },
             "3": {
-              "name": "entity.name.type.template.cpp.objcpp"
+              "name": "entity.name.type.template.objcpp"
             },
             "4": {
-              "name": "storage.type.template.cpp.objcpp"
+              "name": "storage.type.template.objcpp"
             },
             "5": {
               "name": "meta.template.operator.ellipsis.objcpp"
             },
             "6": {
-              "name": "entity.name.type.template.cpp.objcpp"
+              "name": "entity.name.type.template.objcpp"
             },
             "7": {
-              "name": "storage.type.template.cpp.objcpp"
+              "name": "storage.type.template.objcpp"
             },
             "8": {
-              "name": "entity.name.type.template.cpp.objcpp"
+              "name": "entity.name.type.template.objcpp"
             },
             "9": {
-              "name": "keyword.operator.assignment.c.objcpp"
+              "name": "keyword.operator.assignment.objcpp"
             },
             "10": {
-              "name": "constant.language.cpp.objcpp"
+              "name": "constant.language.objcpp"
             },
             "11": {
-              "name": "meta.template.operator.comma.cpp.objcpp"
+              "name": "meta.template.operator.comma.objcpp"
             }
           }
         },
         "angle_brackets": {
           "begin": "<",
           "end": ">",
-          "name": "meta.angle-brackets.cpp.objcpp",
+          "name": "meta.angle-brackets.objcpp",
           "patterns": [
             {
               "include": "#angle_brackets"
@@ -3078,28 +3078,28 @@
           "begin": "\\{",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.section.block.begin.bracket.curly.c.objcpp"
+              "name": "punctuation.section.block.begin.bracket.curly.objcpp"
             }
           },
           "end": "\\}",
           "endCaptures": {
             "0": {
-              "name": "punctuation.section.block.end.bracket.curly.c.objcpp"
+              "name": "punctuation.section.block.end.bracket.curly.objcpp"
             }
           },
-          "name": "meta.block.cpp.objcpp",
+          "name": "meta.block.objcpp",
           "patterns": [
             {
               "captures": {
                 "1": {
-                  "name": "support.function.any-method.c.objcpp"
+                  "name": "support.function.any-method.objcpp"
                 },
                 "2": {
-                  "name": "punctuation.definition.parameters.c.objcpp"
+                  "name": "punctuation.definition.parameters.objcpp"
                 }
               },
               "match": "(?x)\n(\n  (?!while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\n  (?:\\b[A-Za-z_][A-Za-z0-9_]*+\\b|::)*+ # actual name\n)\n\\s*(\\() # opening bracket",
-              "name": "meta.function-call.c.objcpp"
+              "name": "meta.function-call.objcpp"
             },
             {
               "include": "$base"
@@ -3112,19 +3112,19 @@
               "begin": "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch|enumerate|r?iterate)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
               "beginCaptures": {
                 "1": {
-                  "name": "entity.name.function.constructor.cpp.objcpp"
+                  "name": "entity.name.function.constructor.objcpp"
                 },
                 "2": {
-                  "name": "punctuation.definition.parameters.begin.c.objcpp"
+                  "name": "punctuation.definition.parameters.begin.objcpp"
                 }
               },
               "end": "\\)",
               "endCaptures": {
                 "0": {
-                  "name": "punctuation.definition.parameters.end.c.objcpp"
+                  "name": "punctuation.definition.parameters.end.objcpp"
                 }
               },
-              "name": "meta.function.constructor.cpp.objcpp",
+              "name": "meta.function.constructor.objcpp",
               "patterns": [
                 {
                   "include": "#probably_a_parameter"
@@ -3138,11 +3138,11 @@
               "begin": "(?x)\n(:)\n(\n  (?=\n    \\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n    \\s* (\\() # opening bracket\n  )\n)",
               "beginCaptures": {
                 "1": {
-                  "name": "punctuation.definition.parameters.c.objcpp"
+                  "name": "punctuation.definition.parameters.objcpp"
                 }
               },
               "end": "(?=\\{)",
-              "name": "meta.function.constructor.initializer-list.cpp.objcpp",
+              "name": "meta.function.constructor.initializer-list.objcpp",
               "patterns": [
                 {
                   "include": "$base"
@@ -3157,31 +3157,31 @@
               "begin": "\\b(using)\\b\\s*(namespace)\\b\\s*((?:[_A-Za-z][_A-Za-z0-9]*\\b(::)?)*)",
               "beginCaptures": {
                 "1": {
-                  "name": "keyword.control.cpp.objcpp"
+                  "name": "keyword.control.objcpp"
                 },
                 "2": {
-                  "name": "storage.type.namespace.cpp.objcpp"
+                  "name": "storage.type.namespace.objcpp"
                 },
                 "3": {
-                  "name": "entity.name.type.cpp.objcpp"
+                  "name": "entity.name.type.objcpp"
                 }
               },
               "end": ";",
               "endCaptures": {
                 "0": {
-                  "name": "punctuation.terminator.statement.c.objcpp"
+                  "name": "punctuation.terminator.statement.objcpp"
                 }
               },
-              "name": "meta.using-namespace-declaration.cpp.objcpp"
+              "name": "meta.using-namespace-declaration.objcpp"
             },
             {
               "begin": "\\b(namespace)\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+",
               "beginCaptures": {
                 "1": {
-                  "name": "storage.type.namespace.cpp.objcpp"
+                  "name": "storage.type.namespace.objcpp"
                 },
                 "2": {
-                  "name": "entity.name.type.cpp.objcpp"
+                  "name": "entity.name.type.objcpp"
                 }
               },
               "captures": {
@@ -3190,19 +3190,19 @@
                 }
               },
               "end": "(?<=\\})|(?=(;|,|\\(|\\)|>|\\[|\\]|=))",
-              "name": "meta.namespace-block.cpp.objcpp",
+              "name": "meta.namespace-block.objcpp",
               "patterns": [
                 {
                   "begin": "\\{",
                   "beginCaptures": {
                     "0": {
-                      "name": "punctuation.definition.scope.cpp.objcpp"
+                      "name": "punctuation.definition.scope.objcpp"
                     }
                   },
                   "end": "\\}",
                   "endCaptures": {
                     "0": {
-                      "name": "punctuation.definition.scope.cpp.objcpp"
+                      "name": "punctuation.definition.scope.objcpp"
                     }
                   },
                   "patterns": [
@@ -3226,35 +3226,35 @@
               "begin": "\\b(?:(class)|(struct))\\b\\s*([_A-Za-z][_A-Za-z0-9]*\\b)?+(\\s*:\\s*(public|protected|private)\\s*([_A-Za-z][_A-Za-z0-9]*\\b)((\\s*,\\s*(public|protected|private)\\s*[_A-Za-z][_A-Za-z0-9]*\\b)*))?",
               "beginCaptures": {
                 "1": {
-                  "name": "storage.type.class.cpp.objcpp"
+                  "name": "storage.type.class.objcpp"
                 },
                 "2": {
-                  "name": "storage.type.struct.cpp.objcpp"
+                  "name": "storage.type.struct.objcpp"
                 },
                 "3": {
-                  "name": "entity.name.type.cpp.objcpp"
+                  "name": "entity.name.type.objcpp"
                 },
                 "5": {
-                  "name": "storage.type.modifier.access.cpp.objcpp"
+                  "name": "storage.type.modifier.access.objcpp"
                 },
                 "6": {
-                  "name": "entity.name.type.inherited.cpp.objcpp"
+                  "name": "entity.name.type.inherited.objcpp"
                 },
                 "7": {
                   "patterns": [
                     {
                       "match": "(public|protected|private)",
-                      "name": "storage.type.modifier.access.cpp.objcpp"
+                      "name": "storage.type.modifier.access.objcpp"
                     },
                     {
                       "match": "[_A-Za-z][_A-Za-z0-9]*",
-                      "name": "entity.name.type.inherited.cpp.objcpp"
+                      "name": "entity.name.type.inherited.objcpp"
                     }
                   ]
                 }
               },
               "end": "(?<=\\})|(?=(;|\\(|\\)|>|\\[|\\]|=))",
-              "name": "meta.class-struct-block.cpp.objcpp",
+              "name": "meta.class-struct-block.objcpp",
               "patterns": [
                 {
                   "include": "#angle_brackets"
@@ -3263,16 +3263,16 @@
                   "begin": "\\{",
                   "beginCaptures": {
                     "0": {
-                      "name": "punctuation.section.block.begin.bracket.curly.cpp.objcpp"
+                      "name": "punctuation.section.block.begin.bracket.curly.objcpp"
                     }
                   },
                   "end": "(\\})(\\s*\\n)?",
                   "endCaptures": {
                     "1": {
-                      "name": "punctuation.section.block.end.bracket.curly.cpp.objcpp"
+                      "name": "punctuation.section.block.end.bracket.curly.objcpp"
                     },
                     "2": {
-                      "name": "invalid.illegal.you-forgot-semicolon.cpp.objcpp"
+                      "name": "invalid.illegal.you-forgot-semicolon.objcpp"
                     }
                   },
                   "patterns": [
@@ -3296,23 +3296,23 @@
               "begin": "\\b(extern)(?=\\s*\")",
               "beginCaptures": {
                 "1": {
-                  "name": "storage.modifier.cpp.objcpp"
+                  "name": "storage.modifier.objcpp"
                 }
               },
               "end": "(?<=\\})|(?=\\w)|(?=\\s*#\\s*endif\\b)",
-              "name": "meta.extern-block.cpp.objcpp",
+              "name": "meta.extern-block.objcpp",
               "patterns": [
                 {
                   "begin": "\\{",
                   "beginCaptures": {
                     "0": {
-                      "name": "punctuation.section.block.begin.bracket.curly.c.objcpp"
+                      "name": "punctuation.section.block.begin.bracket.curly.objcpp"
                     }
                   },
                   "end": "\\}|(?=\\s*#\\s*endif\\b)",
                   "endCaptures": {
                     "0": {
-                      "name": "punctuation.section.block.end.bracket.curly.c.objcpp"
+                      "name": "punctuation.section.block.end.bracket.curly.objcpp"
                     }
                   },
                   "patterns": [
@@ -3337,35 +3337,35 @@
               "begin": "(u|u8|U|L)?\"",
               "beginCaptures": {
                 "0": {
-                  "name": "punctuation.definition.string.begin.cpp.objcpp"
+                  "name": "punctuation.definition.string.begin.objcpp"
                 },
                 "1": {
-                  "name": "meta.encoding.cpp.objcpp"
+                  "name": "meta.encoding.objcpp"
                 }
               },
               "end": "\"",
               "endCaptures": {
                 "0": {
-                  "name": "punctuation.definition.string.end.cpp.objcpp"
+                  "name": "punctuation.definition.string.end.objcpp"
                 }
               },
-              "name": "string.quoted.double.cpp.objcpp",
+              "name": "string.quoted.double.objcpp",
               "patterns": [
                 {
                   "match": "\\\\u\\h{4}|\\\\U\\h{8}",
-                  "name": "constant.character.escape.cpp.objcpp"
+                  "name": "constant.character.escape.objcpp"
                 },
                 {
                   "match": "\\\\['\"?\\\\abfnrtv]",
-                  "name": "constant.character.escape.cpp.objcpp"
+                  "name": "constant.character.escape.objcpp"
                 },
                 {
                   "match": "\\\\[0-7]{1,3}",
-                  "name": "constant.character.escape.cpp.objcpp"
+                  "name": "constant.character.escape.objcpp"
                 },
                 {
                   "match": "\\\\x\\h+",
-                  "name": "constant.character.escape.cpp.objcpp"
+                  "name": "constant.character.escape.objcpp"
                 },
                 {
                   "include": "#string_placeholder"
@@ -3376,25 +3376,25 @@
               "begin": "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
               "beginCaptures": {
                 "0": {
-                  "name": "punctuation.definition.string.begin.cpp.objcpp"
+                  "name": "punctuation.definition.string.begin.objcpp"
                 },
                 "1": {
-                  "name": "meta.encoding.cpp.objcpp"
+                  "name": "meta.encoding.objcpp"
                 },
                 "3": {
-                  "name": "invalid.illegal.delimiter-too-long.cpp.objcpp"
+                  "name": "invalid.illegal.delimiter-too-long.objcpp"
                 }
               },
               "end": "\\)\\2(\\3)\"",
               "endCaptures": {
                 "0": {
-                  "name": "punctuation.definition.string.end.cpp.objcpp"
+                  "name": "punctuation.definition.string.end.objcpp"
                 },
                 "1": {
-                  "name": "invalid.illegal.delimiter-too-long.cpp.objcpp"
+                  "name": "invalid.illegal.delimiter-too-long.objcpp"
                 }
               },
-              "name": "string.quoted.double.raw.cpp.objcpp"
+              "name": "string.quoted.double.raw.objcpp"
             }
           ]
         }
