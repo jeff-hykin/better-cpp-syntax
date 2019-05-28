@@ -13,7 +13,10 @@ const paths = require("./paths");
 module.exports = function(predicate) {
     // grab all fixtures
     const fixtures = glob.sync(
-        path.join(paths.fixtureDir, "**/*.{c,cc,cxx,cpp,h,hh,hxx,hpp}")
+        path.join(
+            paths.fixtureDir,
+            "**/*.{c,C,cc,cxx,cpp,h,hh,hxx,hpp,m,M,mm,x,xh,xmi}"
+        )
     );
     // and grab the specs
     const tests = fixtures
