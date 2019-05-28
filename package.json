@@ -5,7 +5,7 @@
     "icon": "icon.png",
     "version": "1.10.0",
     "scripts": {
-        "build": "ruby cpp/generate.rb && ruby c/generate.rb",
+        "build": "ruby scripts/generate.rb",
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
         "cov": "npm test -- --coverage",
