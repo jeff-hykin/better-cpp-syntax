@@ -1,6 +1,7 @@
 require_relative '../textmate_tools.rb'
 require_relative './tokens.rb'
 require_relative '../shared/numeric.rb'
+require_relative '../shared/trigraph_support.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
