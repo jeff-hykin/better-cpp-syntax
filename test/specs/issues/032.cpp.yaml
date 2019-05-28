@@ -4,10 +4,11 @@
 - source: char
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' a '
+- source: 'a '
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -46,6 +47,9 @@
   scopes:
     - punctuation.definition.string.begin
 - source: ;
-- source: class A <%
-- source: '    A(); //test'
-- source: '%>;'
+- source: '                                            class A <'
+- source: '% A'
+  scopes:
+    - constant.other.placeholder
+- source: (); // test
+- source: '% > ;'

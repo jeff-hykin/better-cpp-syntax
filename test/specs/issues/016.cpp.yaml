@@ -1,6 +1,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' operator '
 - source: '"'
   scopesBegin:
@@ -21,9 +22,11 @@
 - source: long
   scopesBegin:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: double
   scopesEnd:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

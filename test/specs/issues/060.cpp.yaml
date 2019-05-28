@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: func
   scopesBegin:
     - meta.head.function.definition
@@ -36,6 +37,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -69,6 +71,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -102,6 +105,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -135,6 +139,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -168,6 +173,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -201,6 +207,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -234,6 +241,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -267,6 +275,7 @@
 - source: uint8_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: '>'
   scopes:
     - keyword.operator.comparison

@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: function
   scopesBegin:
     - meta.head.function.definition
@@ -33,6 +34,7 @@
   scopes:
     - meta.arguments.operator.typeid
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
@@ -47,6 +49,7 @@
   scopes:
     - meta.arguments.operator.typeid
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
@@ -75,6 +78,7 @@
   scopes:
     - meta.arguments.operator.sizeof
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -90,6 +94,7 @@
   scopes:
     - meta.arguments.decltype
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype

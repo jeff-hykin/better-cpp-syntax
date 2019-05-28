@@ -35,6 +35,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: inBlock
   scopesBegin:
     - meta.head.function.definition
@@ -86,6 +87,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: inBlock
   scopesBegin:
     - meta.head.function.definition

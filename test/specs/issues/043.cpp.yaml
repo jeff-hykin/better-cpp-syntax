@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main
   scopesBegin:
     - meta.head.function.definition
@@ -47,6 +48,7 @@
 - source: char
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison

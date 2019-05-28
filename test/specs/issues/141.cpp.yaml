@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: func
   scopesBegin:
     - meta.head.function.definition
@@ -45,6 +46,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call

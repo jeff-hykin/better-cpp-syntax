@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: fun
   scopesBegin:
     - meta.head.function.definition
@@ -40,6 +41,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main
   scopesBegin:
     - meta.head.function.definition
@@ -61,6 +63,7 @@
     - meta.body.function.definition
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a'
 - source: ','
   scopes:

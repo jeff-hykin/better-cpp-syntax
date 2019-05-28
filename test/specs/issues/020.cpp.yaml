@@ -8,6 +8,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -42,6 +43,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -76,6 +78,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -110,6 +113,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -140,6 +144,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: foo
   scopesBegin:
     - meta.head.function.definition
@@ -168,6 +173,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -202,6 +208,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -236,6 +243,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -270,6 +278,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison

@@ -85,6 +85,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -98,6 +99,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
     - meta.function.definition.parameters.operator-overload
@@ -154,6 +156,7 @@
     - meta.body.struct
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
     - meta.function.definition.parameters.operator-overload

@@ -71,6 +71,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
     - meta.function.definition.parameters.operator-overload
@@ -139,6 +140,7 @@
 - source: size_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: /*
   scopesBegin:
     - comment.block
@@ -157,6 +159,7 @@
 - source: size_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: /*
   scopesBegin:
     - comment.block
@@ -413,6 +416,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
     - meta.function.definition.parameters.operator-overload
@@ -481,6 +485,7 @@
 - source: size_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: /*
   scopesBegin:
     - comment.block
@@ -499,6 +504,7 @@
 - source: size_t
   scopes:
     - storage.type
+    - storage.type.built-in
 - source: /*
   scopesBegin:
     - comment.block

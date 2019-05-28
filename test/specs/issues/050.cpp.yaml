@@ -111,6 +111,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: func1
   scopesBegin:
     - meta.head.function.definition
@@ -147,6 +148,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: func2
   scopesBegin:
     - meta.head.function.definition
@@ -224,6 +226,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: func3
   scopesBegin:
     - meta.head.function.definition

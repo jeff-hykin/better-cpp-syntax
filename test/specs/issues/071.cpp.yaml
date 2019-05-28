@@ -17,6 +17,7 @@
     - meta.body.struct
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a'
 - source: ;
   scopes:
@@ -24,6 +25,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' b'
 - source: ;
   scopes:
@@ -60,6 +62,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a[] '
 - source: =
   scopes:
@@ -165,6 +168,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a'
 - source: ;
   scopes:
@@ -172,6 +176,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' b'
 - source: ;
   scopes:
@@ -266,6 +271,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a[] '
 - source: =
   scopes:
@@ -306,6 +312,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: function_declaration
   scopesBegin:
     - meta.head.function.definition
@@ -319,6 +326,7 @@
     - meta.function.definition.parameters
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - keyword.operator

@@ -16,6 +16,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -23,6 +24,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -56,6 +58,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -63,6 +66,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -86,3 +90,4 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive

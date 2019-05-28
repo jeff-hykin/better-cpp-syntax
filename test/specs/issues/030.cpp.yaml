@@ -115,6 +115,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' isPoint '
 - source: =
   scopes:
@@ -578,6 +579,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' isPoint '
 - source: =
   scopes:
@@ -643,6 +645,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' value '
 - source: =
   scopes:
@@ -708,6 +711,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' value '
 - source: =
   scopes:

@@ -63,6 +63,7 @@
     - meta.body.class
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' width'
 - source: ','
   scopes:
@@ -86,6 +87,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: set_values
   scopesBegin:
     - meta.head.function.definition
@@ -99,6 +101,7 @@
     - meta.function.definition.parameters
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -106,6 +109,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
   scopesEnd:
     - meta.function.definition.parameters
 - source: )
@@ -123,6 +127,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: area
   scopesBegin:
     - meta.head.function.definition
@@ -174,6 +179,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: Rectangle
   scopes:
     - entity.name.scope-resolution.function.definition
@@ -194,6 +200,7 @@
     - meta.function.definition.parameters
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: x
   scopes:
     - variable.parameter
@@ -204,6 +211,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: 'y'
   scopes:
     - variable.parameter
@@ -244,6 +252,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main
   scopesBegin:
     - meta.head.function.definition

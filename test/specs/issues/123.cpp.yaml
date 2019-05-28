@@ -1,6 +1,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' a '
 - source: =
   scopes:
@@ -21,6 +22,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - keyword.operator

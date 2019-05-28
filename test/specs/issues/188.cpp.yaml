@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main
   scopesBegin:
     - meta.head.function.definition
@@ -40,6 +41,7 @@
 - source: f64_t
   scopes:
     - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -76,6 +78,7 @@
 - source: f64_t
   scopes:
     - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call

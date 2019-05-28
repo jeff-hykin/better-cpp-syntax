@@ -17,6 +17,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: foo
   scopesBegin:
     - meta.head.function.definition
@@ -38,6 +39,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: b
   scopes:
     - variable.parameter
@@ -94,6 +96,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: foo
   scopesBegin:
     - meta.head.function.definition
@@ -115,6 +118,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: b
   scopes:
     - variable.parameter

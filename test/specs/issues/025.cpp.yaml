@@ -1,6 +1,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: FillStats
   scopes:
     - entity.name.function.call
@@ -17,6 +18,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: FillStats
   scopes:
     - entity.name.function.call
@@ -33,6 +35,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: FillStats
   scopes:
     - entity.name.function.call
@@ -49,6 +52,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: FillStats
   scopes:
     - entity.name.function.call
@@ -64,6 +68,7 @@
 - source: bool
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: FillStats
 - source: (
   scopesBegin:

@@ -200,6 +200,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: destroy_value
   scopesBegin:
     - meta.head.function.definition

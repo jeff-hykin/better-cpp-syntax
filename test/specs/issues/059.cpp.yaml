@@ -4,6 +4,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: function
   scopesBegin:
     - meta.head.function.definition
@@ -25,6 +26,7 @@
     - meta.body.function.definition
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' postWakeup '
 - source: =
   scopes:
@@ -118,6 +120,7 @@
 - source: auto
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' pipe '
 - source: =
   scopes:

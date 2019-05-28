@@ -60,6 +60,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ' i'
 - source: =
   scopes:
@@ -180,6 +181,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main
   scopesBegin:
     - meta.head.function.definition
@@ -386,6 +388,7 @@
   scopes:
     - meta.qualified_type
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: main2
   scopesBegin:
     - meta.head.function.definition

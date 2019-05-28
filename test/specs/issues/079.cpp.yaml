@@ -16,6 +16,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -47,6 +48,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -73,6 +75,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -100,6 +103,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -134,6 +138,7 @@
 - source: int
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -160,6 +165,7 @@
 - source: void
   scopes:
     - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
