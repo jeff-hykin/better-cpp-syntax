@@ -7,7 +7,7 @@
     "scripts": {
         "build": "ruby cpp/generate.rb && ruby c/generate.rb",
         "prelint": "npm run build",
-        "lint": "node lint/index.js syntaxes/c.tmLanguage.json && node lint/index.js syntaxes/cpp.tmLanguage.json",
+        "lint": "ruby scripts/lint.rb",
         "pretest": "npm run build",
         "test": "node test/src/commands/test.js",
         "cov": "npm test -- --coverage",
