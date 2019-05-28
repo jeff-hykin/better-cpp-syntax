@@ -1,0 +1,10 @@
+- source: __FILE__
+  scopes:
+    - entity.name.other.preprocessor.macro.predefined.__FILE__
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: __LINE__
+  scopes:
+    - entity.name.other.preprocessor.macro.predefined.__LINE__
