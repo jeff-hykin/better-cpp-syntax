@@ -528,7 +528,7 @@ cpp_grammar = Grammar.new(
                 ),
                 newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
                     match: variable_name,
-                    tag_as: "entity.name.type.namespace",
+                    tag_as: "entity.name.namespace",
                 ),
                 newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
                 newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
