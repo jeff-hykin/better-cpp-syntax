@@ -1,4 +1,4 @@
-require_relative '../textmate_tools.rb'
+require_relative '../../textmate_tools.rb'
 
 # 
 # C++ specific tokens

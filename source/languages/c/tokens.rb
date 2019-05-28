@@ -1,4 +1,4 @@
-require_relative '../textmate_tools.rb'
+require_relative '../../textmate_tools.rb'
 
 tokens = [
     { representation: "++"                   , name: "post-increment"                 , isOperator: true, isUrnaryOperator:  true, presedence:  2.1 , evaledLeftToRight: true, isPostFixOperator: true },

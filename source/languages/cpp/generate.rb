@@ -1,6 +1,6 @@
-require_relative '../textmate_tools.rb'
+require_relative '../../textmate_tools.rb'
 require_relative './tokens.rb'
-require_relative '../shared/numeric.rb'
+require_relative '../../shared_patterns/numeric.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -3311,7 +3311,7 @@ cpp_grammar = Grammar.new(
 Dir.chdir __dir__
 
 # Save
-@syntax_location = "../syntaxes/cpp.tmLanguage"
+@syntax_location = "../../../syntaxes/cpp.tmLanguage"
 cpp_grammar.saveAsYamlTo(@syntax_location)
 cpp_grammar.saveAsJsonTo(@syntax_location)
 cpp_grammar.saveTagsTo("tags.txt")
