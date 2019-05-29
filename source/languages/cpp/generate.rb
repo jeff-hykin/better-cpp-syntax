@@ -362,7 +362,7 @@ cpp_grammar = Grammar.new(
 #
 # Variable
 #
-    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U000[0-9a-fA-F]/)
+    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
     first_character = /[a-zA-Z_]/.or(universal_character)
     subsequent_character = /[a-zA-Z0-9_]/.or(universal_character)
     identifier = first_character.then(zeroOrMoreOf(subsequent_character))
@@ -1926,45 +1926,64 @@ cpp_grammar = Grammar.new(
             }
         ]
     cpp_grammar[:string_context] = [
-            {
-                begin: "(u|u8|U|L)?\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    },
-                    "1" => {
-                        name: "meta.encoding"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        match: "\\\\u\\h{4}|\\\\U\\h{8}",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\['\"?\\\\abfnrtv]",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\[0-7]{1,3}",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\x\\h+",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        include: "#string_escapes_context_c"
-                    }
+            PatternRange.new(
+                tag_as: "string.quoted.double",
+                start_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.begin",
+                    match: maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
+                        .then(/"/),
+                ),
+                end_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.end",
+                    match: /"/,
+                ),
+                includes: [
+                    # universal characters \u00AF, \U0001234F
+                    newPattern(
+                        match: universal_character,
+                        tag_as: "constant.character.escape",
+                    ),
+                    # normal escapes \r, \n, \t
+                    newPattern(
+                        match: /\\['"?\\abfnrtv]/,
+                        tag_as: "constant.character.escape",
+                    ),
+                    # octal escapes \017
+                    newPattern(
+                        match: /\\/.then(
+                            match: /[0-7]/,
+                            at_least: 1.times,
+                            at_most: 3.times,
+                        ),
+                        tag_as: "constant.character.escape",
+                    ),
+                    # hex escapes
+                    newPattern(
+                        match: /\\x/.then(
+                            match: /[0-9a-fA-F]/,
+                            how_many_times?: 2.times,
+                        ),
+                        tag_as: "constant.character.escape",
+                    ),
+                    :string_escapes_context_c
                 ]
-            },
+            ),
+            PatternRange.new(
+                tag_as: "string.quoted.single",
+                start_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.begin",
+                    match: lookBehindToAvoid(/[0-9A-Fa-f]/).maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
+                        .then(/'/),
+                ),
+                end_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.end",
+                    match: /'/,
+                ),
+                includes: [
+                    :string_escapes_context_c,
+                    :line_continuation_character,
+                ]
+            ),
             {
                 begin: "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
                 beginCaptures: {
