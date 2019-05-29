@@ -54,8 +54,11 @@ module.exports["SpecChecker"] = class SpecChecker {
             );
             return false;
         }
-        const specScopes = this.getScopes(spec);
-        const tokenScopes = token.scopes.map(removeScopeName);
+        let specScopes = this.getScopes(spec);
+        let tokenScopes = token.scopes.map(removeScopeName);
+        // remove the source tags from both
+        specScopes = specScopes.filter(each => each != "source")
+        tokenScopes = tokenScopes.filter(each => each != "source")
         if (_.isEqual(specScopes, tokenScopes)) {
             return true;
         }
