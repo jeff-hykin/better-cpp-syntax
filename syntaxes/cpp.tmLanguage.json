@@ -9,157 +9,7 @@
   ],
   "patterns": [
     {
-      "include": "#struct_declare"
-    },
-    {
-      "include": "#special_block_context"
-    },
-    {
-      "include": "#macro_argument"
-    },
-    {
-      "include": "#string_context"
-    },
-    {
-      "include": "#functional_specifiers_pre_parameters"
-    },
-    {
-      "include": "#qualifiers_and_specifiers_post_parameters"
-    },
-    {
-      "include": "#storage_specifiers"
-    },
-    {
-      "include": "#access_control_keywords"
-    },
-    {
-      "include": "#exception_keywords"
-    },
-    {
-      "include": "#static_assert"
-    },
-    {
-      "include": "#other_keywords"
-    },
-    {
-      "include": "#memory_operators"
-    },
-    {
-      "include": "#using_name"
-    },
-    {
-      "include": "#the_this_keyword"
-    },
-    {
-      "include": "#language_constants"
-    },
-    {
-      "include": "#template_isolated_definition"
-    },
-    {
-      "include": "#template_definition"
-    },
-    {
-      "include": "#misc_storage_modifiers_1"
-    },
-    {
-      "include": "#destructor"
-    },
-    {
-      "include": "#destructor_prototype"
-    },
-    {
-      "include": "#lambdas"
-    },
-    {
-      "include": "#preprocessor_context"
-    },
-    {
-      "include": "#comments_context"
-    },
-    {
-      "include": "#switch_statement"
-    },
-    {
-      "include": "#control_flow_keywords"
-    },
-    {
-      "include": "#assembly"
-    },
-    {
-      "include": "#misc_storage_modifiers_2"
-    },
-    {
-      "include": "#operator_overload"
-    },
-    {
-      "include": "#number_literal"
-    },
-    {
-      "include": "#string_context_c"
-    },
-    {
-      "include": "#meta_preprocessor_macro"
-    },
-    {
-      "include": "#meta_preprocessor_diagnostic"
-    },
-    {
-      "include": "#meta_preprocessor_include"
-    },
-    {
-      "include": "#pragma_mark"
-    },
-    {
-      "include": "#meta_preprocessor_line"
-    },
-    {
-      "include": "#meta_preprocessor_undef"
-    },
-    {
-      "include": "#meta_preprocessor_pragma"
-    },
-    {
-      "include": "#predefined_macros"
-    },
-    {
-      "include": "#operators"
-    },
-    {
-      "include": "#block"
-    },
-    {
-      "include": "#parentheses"
-    },
-    {
-      "include": "#type_casting_operators"
-    },
-    {
-      "include": "#function_definition"
-    },
-    {
-      "include": "#function_call"
-    },
-    {
-      "include": "#scope_resolution_inner_generated"
-    },
-    {
-      "include": "#storage_types"
-    },
-    {
-      "include": "#line_continuation_character"
-    },
-    {
-      "include": "#square_brackets"
-    },
-    {
-      "include": "#empty_square_brackets"
-    },
-    {
-      "include": "#semicolon"
-    },
-    {
-      "include": "#comma"
+      "include": "#source_wrapper"
     }
   ],
   "repository": {
@@ -289,6 +139,163 @@
     "assignment_operator": {
       "match": "\\=",
       "name": "keyword.operator.assignment.cpp"
+    },
+    "root_context": {
+      "patterns": [
+        {
+          "include": "#struct_declare"
+        },
+        {
+          "include": "#special_block_context"
+        },
+        {
+          "include": "#macro_argument"
+        },
+        {
+          "include": "#string_context"
+        },
+        {
+          "include": "#functional_specifiers_pre_parameters"
+        },
+        {
+          "include": "#qualifiers_and_specifiers_post_parameters"
+        },
+        {
+          "include": "#storage_specifiers"
+        },
+        {
+          "include": "#access_control_keywords"
+        },
+        {
+          "include": "#exception_keywords"
+        },
+        {
+          "include": "#static_assert"
+        },
+        {
+          "include": "#other_keywords"
+        },
+        {
+          "include": "#memory_operators"
+        },
+        {
+          "include": "#using_name"
+        },
+        {
+          "include": "#the_this_keyword"
+        },
+        {
+          "include": "#language_constants"
+        },
+        {
+          "include": "#template_isolated_definition"
+        },
+        {
+          "include": "#template_definition"
+        },
+        {
+          "include": "#misc_storage_modifiers_1"
+        },
+        {
+          "include": "#destructor"
+        },
+        {
+          "include": "#destructor_prototype"
+        },
+        {
+          "include": "#lambdas"
+        },
+        {
+          "include": "#preprocessor_context"
+        },
+        {
+          "include": "#comments_context"
+        },
+        {
+          "include": "#switch_statement"
+        },
+        {
+          "include": "#control_flow_keywords"
+        },
+        {
+          "include": "#assembly"
+        },
+        {
+          "include": "#misc_storage_modifiers_2"
+        },
+        {
+          "include": "#operator_overload"
+        },
+        {
+          "include": "#number_literal"
+        },
+        {
+          "include": "#string_context_c"
+        },
+        {
+          "include": "#meta_preprocessor_macro"
+        },
+        {
+          "include": "#meta_preprocessor_diagnostic"
+        },
+        {
+          "include": "#meta_preprocessor_include"
+        },
+        {
+          "include": "#pragma_mark"
+        },
+        {
+          "include": "#meta_preprocessor_line"
+        },
+        {
+          "include": "#meta_preprocessor_undef"
+        },
+        {
+          "include": "#meta_preprocessor_pragma"
+        },
+        {
+          "include": "#predefined_macros"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#block"
+        },
+        {
+          "include": "#parentheses"
+        },
+        {
+          "include": "#type_casting_operators"
+        },
+        {
+          "include": "#function_definition"
+        },
+        {
+          "include": "#function_call"
+        },
+        {
+          "include": "#scope_resolution_inner_generated"
+        },
+        {
+          "include": "#storage_types"
+        },
+        {
+          "include": "#line_continuation_character"
+        },
+        {
+          "include": "#square_brackets"
+        },
+        {
+          "include": "#empty_square_brackets"
+        },
+        {
+          "include": "#semicolon"
+        },
+        {
+          "include": "#comma"
+        }
+      ]
     },
     "function_body_context": {
       "patterns": [
@@ -525,14 +532,14 @@
     "evaluation_context": {
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
     "conditional_context": {
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -596,6 +603,20 @@
         },
         {
           "include": "#alignas_attribute"
+        }
+      ]
+    },
+    "source_wrapper": {
+      "patterns": [
+        {
+          "name": "source.cpp",
+          "begin": "^\\s*",
+          "end": "\\s*$(?!\\n)",
+          "patterns": [
+            {
+              "include": "#root_context"
+            }
+          ]
         }
       ]
     },
@@ -1050,7 +1071,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -1071,7 +1092,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             },
             {
               "include": "#block_innards"
@@ -1084,7 +1105,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -2257,7 +2278,7 @@
               "include": "#comments_context"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -2282,7 +2303,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -2456,7 +2477,7 @@
               "include": "#function_call_c"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -2883,7 +2904,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -2893,7 +2914,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -2974,7 +2995,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -4122,7 +4143,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4156,7 +4177,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -4284,7 +4305,7 @@
               "include": "#constructor_context"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4294,7 +4315,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -4398,7 +4419,7 @@
               "include": "#constructor_context"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4408,7 +4429,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -4512,7 +4533,7 @@
               "include": "#constructor_context"
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4522,7 +4543,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -4560,7 +4581,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4575,7 +4596,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -4585,12 +4606,12 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -4701,7 +4722,7 @@
                   "include": "#constructor_context"
                 },
                 {
-                  "include": "$base"
+                  "include": "#root_context"
                 }
               ]
             },
@@ -4840,7 +4861,7 @@
                   "include": "#constructor_context"
                 },
                 {
-                  "include": "$base"
+                  "include": "#root_context"
                 }
               ]
             },
@@ -4979,7 +5000,7 @@
                   "include": "#constructor_context"
                 },
                 {
-                  "include": "$base"
+                  "include": "#root_context"
                 }
               ]
             },
@@ -5073,7 +5094,7 @@
       },
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -5096,7 +5117,7 @@
       },
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -5359,7 +5380,7 @@
           "name": "meta.function.constructor.initializer-list.cpp",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -5564,7 +5585,7 @@
           "include": "#parentheses_block"
         },
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -5667,7 +5688,7 @@
       },
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -5847,7 +5868,7 @@
           ]
         },
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -6065,7 +6086,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         },
@@ -6315,7 +6336,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -6500,7 +6521,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "#root_context"
             }
           ]
         }
@@ -6609,7 +6630,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },
@@ -6733,7 +6754,7 @@
           "include": "#member_access"
         },
         {
-          "include": "$base"
+          "include": "#root_context"
         }
       ]
     },

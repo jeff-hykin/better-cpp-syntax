@@ -1189,7 +1189,7 @@
           name: punctuation.section.block.begin.bracket.curly.switch.c
       patterns:
       - include: "#switch_conditional_parentheses"
-      - include: "$base"
+      - include: "#root_context"
     - name: meta.body.switch.c
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -1199,13 +1199,13 @@
       patterns:
       - include: "#default_statement"
       - include: "#case_statement"
-      - include: "$base"
+      - include: "#root_context"
       - include: "#block_innards"
     - name: meta.tail.switch.c
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "$base"
+      - include: "#root_context"
   switch_conditional_parentheses:
     name: meta.conditional.switch.c
     begin: "(\\()"
