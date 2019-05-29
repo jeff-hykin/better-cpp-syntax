@@ -1,5 +1,6 @@
 - source: void
   scopesBegin:
+    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -22,7 +23,7 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\tentries "
+- source: 'entries '
 - source: =
   scopes:
     - keyword.operator.assignment

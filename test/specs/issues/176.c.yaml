@@ -57,8 +57,6 @@
   scopesEnd:
     - meta.conditional.case
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: FileAccessControl
@@ -82,8 +80,6 @@
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
-  scopesEnd:
-    - meta.block
 - source: case
   scopesBegin:
     - meta.conditional.case
