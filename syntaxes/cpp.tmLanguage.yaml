@@ -129,6 +129,7 @@
     - include: "#meta_preprocessor_pragma"
     - include: "#predefined_macros"
     - include: "#operators"
+    - include: "#attributes_context"
     - include: "#block"
     - include: "#parentheses"
     - include: "#type_casting_operators"
@@ -141,6 +142,20 @@
     - include: "#empty_square_brackets"
     - include: "#semicolon"
     - include: "#comma"
+  special_block_context:
+    patterns:
+    - include: "#using_namespace"
+    - include: "#type_alias"
+    - include: "#namespace_alias"
+    - include: "#namespace_block"
+    - include: "#typedef_class"
+    - include: "#typedef_struct"
+    - include: "#typedef_union"
+    - include: "#class_block"
+    - include: "#struct_block"
+    - include: "#union_block"
+    - include: "#enum_block"
+    - include: "#extern_block"
   function_body_context:
     patterns:
     - include: "#type_casting_operators"
@@ -2835,21 +2850,6 @@
       name: meta.function.constructor.initializer-list.cpp
       patterns:
       - include: "#root_context"
-  special_block_context:
-    patterns:
-    - include: "#attributes_context"
-    - include: "#using_namespace"
-    - include: "#type_alias"
-    - include: "#namespace_alias"
-    - include: "#namespace_block"
-    - include: "#typedef_class"
-    - include: "#typedef_struct"
-    - include: "#typedef_union"
-    - include: "#class_block"
-    - include: "#struct_block"
-    - include: "#union_block"
-    - include: "#enum_block"
-    - include: "#extern_block"
   string_context:
     patterns:
     - begin: (u|u8|U|L)?"

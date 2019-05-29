@@ -188,6 +188,7 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_pragma,
             :predefined_macros,
             :operators,
+            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
             :block,
             :parentheses,
             :type_casting_operators,
@@ -200,6 +201,21 @@ cpp_grammar = Grammar.new(
             :empty_square_brackets,
             :semicolon,
             :comma,
+        ]
+    cpp_grammar[:special_block_context] = [
+            # TODO: the :attributes_context probably belongs here but see issue #215 for why they were removed
+            :using_namespace,
+            :type_alias,
+            :namespace_alias,
+            :namespace_block,
+            :typedef_class,
+            :typedef_struct,
+            :typedef_union,
+            :class_block,
+            :struct_block,
+            :union_block,
+            :enum_block,
+            :extern_block,
         ]
     # this is currently just :root_context without :function_definition
     cpp_grammar[:function_body_context] = [
@@ -1908,21 +1924,6 @@ cpp_grammar = Grammar.new(
                     }
                 ]
             }
-        ]
-    cpp_grammar[:special_block_context] = [
-            :attributes_context,
-            :using_namespace,
-            :type_alias,
-            :namespace_alias,
-            :namespace_block,
-            :typedef_class,
-            :typedef_struct,
-            :typedef_union,
-            :class_block,
-            :struct_block,
-            :union_block,
-            :enum_block,
-            :extern_block,
         ]
     cpp_grammar[:string_context] = [
             {

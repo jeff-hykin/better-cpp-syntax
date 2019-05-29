@@ -260,6 +260,9 @@
           "include": "#operators"
         },
         {
+          "include": "#attributes_context"
+        },
+        {
           "include": "#block"
         },
         {
@@ -294,6 +297,46 @@
         },
         {
           "include": "#comma"
+        }
+      ]
+    },
+    "special_block_context": {
+      "patterns": [
+        {
+          "include": "#using_namespace"
+        },
+        {
+          "include": "#type_alias"
+        },
+        {
+          "include": "#namespace_alias"
+        },
+        {
+          "include": "#namespace_block"
+        },
+        {
+          "include": "#typedef_class"
+        },
+        {
+          "include": "#typedef_struct"
+        },
+        {
+          "include": "#typedef_union"
+        },
+        {
+          "include": "#class_block"
+        },
+        {
+          "include": "#struct_block"
+        },
+        {
+          "include": "#union_block"
+        },
+        {
+          "include": "#enum_block"
+        },
+        {
+          "include": "#extern_block"
         }
       ]
     },
@@ -5383,49 +5426,6 @@
               "include": "#root_context"
             }
           ]
-        }
-      ]
-    },
-    "special_block_context": {
-      "patterns": [
-        {
-          "include": "#attributes_context"
-        },
-        {
-          "include": "#using_namespace"
-        },
-        {
-          "include": "#type_alias"
-        },
-        {
-          "include": "#namespace_alias"
-        },
-        {
-          "include": "#namespace_block"
-        },
-        {
-          "include": "#typedef_class"
-        },
-        {
-          "include": "#typedef_struct"
-        },
-        {
-          "include": "#typedef_union"
-        },
-        {
-          "include": "#class_block"
-        },
-        {
-          "include": "#struct_block"
-        },
-        {
-          "include": "#union_block"
-        },
-        {
-          "include": "#enum_block"
-        },
-        {
-          "include": "#extern_block"
         }
       ]
     },
