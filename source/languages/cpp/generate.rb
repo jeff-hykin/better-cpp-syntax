@@ -168,7 +168,6 @@ cpp_grammar = Grammar.new(
             :template_definition,
             :misc_storage_modifiers_1,
             :destructor,
-            :destructor_prototype,
             :lambdas,
             :preprocessor_context,
             :comments_context,
@@ -240,7 +239,6 @@ cpp_grammar = Grammar.new(
         :template_definition,
         :misc_storage_modifiers_1,
         :destructor,
-        :destructor_prototype,
         :lambdas,
         :preprocessor_context,
         :comments_context,
@@ -1616,52 +1614,26 @@ cpp_grammar = Grammar.new(
             match: /\b(const|extern|register|restrict|static|volatile|inline)\b/,
             name: "storage.modifier"
         }
-    cpp_grammar[:destructor] = {
-            name: "meta.function.destructor",
-            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-            beginCaptures: {
-                "1" => {
-                    name: "entity.name.function.destructor"
-                },
-                "2" => {
-                    name: "punctuation.definition.parameters.begin.destructor"
-                }
-            },
-            end: /\)/,
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.parameters.end.destructor"
-                }
-            },
-            patterns: [
-                {
-                    include: "#root_context"
-                }
-            ]
-        }
-    cpp_grammar[:destructor_prototype] = {
-            name: "meta.function.destructor.prototype",
-            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-            beginCaptures: {
-                "1" => {
-                    name: "entity.name.function"
-                },
-                "2" => {
-                    name: "punctuation.definition.parameters.begin"
-                }
-            },
-            end: /\)/,
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.parameters.end"
-                }
-            },
-            patterns: [
-                {
-                    include: "#root_context"
-                }
-            ]
-        }
+    #destructors accept no parameters
+    cpp_grammar[:destructor] = newPattern(
+        should_fully_match: ["~bar()", "foo::~foo()"],
+        tag_as: "meta.function.destructor",
+        match: lookBehindToAvoid(/[a-zA-Z0-9_]/).then(
+            match: newPattern(
+                    newPattern(match: identifier, reference: "class_name", dont_back_track?: true).maybe(@spaces).then(/::/).maybe(@spaces)
+                    .then(/~/).backReference("class_name")
+                ).or(
+                    newPattern(/~/).then(match: identifier, dont_back_track?: true)
+                ),
+            tag_as: "entity.name.function.destructor entity.name.function.special.destructor"
+        ).maybe(@spaces).then(
+            match: /\(/,
+            tag_as: "punctuation.definition.parameters.begin.destructor",
+        ).maybe(@spaces).then(
+            match: /\)/,
+            tag_as: "punctuation.definition.parameters.end.destructor",
+        )
+    )
     cpp_grammar[:meta_preprocessor_macro] = {
             name: "meta.preprocessor.macro",
             begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
