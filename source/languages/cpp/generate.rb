@@ -1902,8 +1902,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "string.quoted.double",
                 start_pattern: newPattern(
                     tag_as: "punctuation.definition.string.begin",
-                    match: maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
-                        .then(/"/),
+                    match: maybe(match: /u|u8|U|L/, tag_as: "meta.encoding").then(/"/),
                 ),
                 end_pattern: newPattern(
                     tag_as: "punctuation.definition.string.end",

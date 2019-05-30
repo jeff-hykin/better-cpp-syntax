@@ -5113,7 +5113,7 @@
       "name": "storage.modifier.cpp"
     },
     "destructor": {
-      "match": "(?<![a-zA-Z0-9_])((?:((?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))\\s*::\\s*~\\2|~(?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)))\\s*(\\()\\s*(\\))",
+      "match": "(?<![a-zA-Z0-9_])((?:((?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8})))*))\\s*::\\s*~\\2|~(?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8})))*)))\\s*(\\()\\s*(\\))",
       "captures": {
         "1": {
           "name": "entity.name.function.destructor.cpp entity.name.function.special.destructor.cpp"
