@@ -40,8 +40,14 @@ class perfInspect {
         this.totalTime += time;
     }
     report() {
+        const labels = [
+            "match failure",
+            "matched, not chosen",
+            "matched, chosen"
+        ];
         for (let i = 0; i < 3; i += 1) {
-            console.log(i);
+            console.log(labels[i]);
+            console.log("pattern         \t average time \t total time");
             let keys = Object.keys(this.coverage).filter(
                 k =>
                     this.coverage[k].count[i] > 0 &&
