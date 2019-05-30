@@ -3633,35 +3633,42 @@
     - include: "#preprocessor_rule_define_line_context"
   function_call_context:
     patterns:
-    - include: "#attributes_context"
-    - include: "#comments_context"
-    - include: "#operators"
+    - include: "#struct_declare"
     - include: "#string_context"
-    - include: "#storage_types"
-    - include: "#method_access"
-    - include: "#member_access"
-    - begin: |-
-        (?x)
-        (?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\s*\()
-        (
-        (?:new)\s*((?-mix:(?:(?-mix:(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)))?)) # actual name
-        |
-        (?:(?<=operator)(?:[-*&<>=+!]+|\(\)|\[\]))
-        )
-        \s*(\()
-      beginCaptures:
-        '1':
-          name: keyword.operator.wordlike.cpp memory.cpp keyword.operator.new.cpp
-        '2':
-          patterns:
-          - include: "#template_call_innards"
-        '3':
-          name: punctuation.section.arguments.begin.bracket.round.cpp
-      end: "\\)"
-      endCaptures:
-        '0':
-          name: punctuation.section.arguments.end.bracket.round.cpp
-      patterns:
-      - include: "#function_call_context"
+    - include: "#functional_specifiers_pre_parameters"
+    - include: "#qualifiers_and_specifiers_post_parameters"
+    - include: "#storage_specifiers"
+    - include: "#access_control_keywords"
+    - include: "#exception_keywords"
+    - include: "#static_assert"
+    - include: "#other_keywords"
+    - include: "#memory_operators"
+    - include: "#the_this_keyword"
+    - include: "#language_constants"
+    - include: "#misc_storage_modifiers_1"
+    - include: "#lambdas"
+    - include: "#preprocessor_context"
+    - include: "#comments_context"
+    - include: "#misc_storage_modifiers_2"
+    - include: "#number_literal"
+    - include: "#string_context_c"
+    - include: "#meta_preprocessor_macro"
+    - include: "#meta_preprocessor_diagnostic"
+    - include: "#meta_preprocessor_include"
+    - include: "#pragma_mark"
+    - include: "#meta_preprocessor_line"
+    - include: "#meta_preprocessor_undef"
+    - include: "#meta_preprocessor_pragma"
+    - include: "#predefined_macros"
+    - include: "#operators"
+    - include: "#attributes_context"
+    - include: "#parentheses"
+    - include: "#type_casting_operators"
     - include: "#function_call"
-    - include: "#block_context"
+    - include: "#scope_resolution_inner_generated"
+    - include: "#storage_types"
+    - include: "#line_continuation_character"
+    - include: "#square_brackets"
+    - include: "#empty_square_brackets"
+    - include: "#semicolon"
+    - include: "#comma"
