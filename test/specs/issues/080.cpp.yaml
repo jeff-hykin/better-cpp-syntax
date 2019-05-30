@@ -1,0 +1,96 @@
+- source: class
+  scopesBegin:
+    - source
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: foo
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: ~foo
+  scopesBegin:
+    - meta.body.class
+    - meta.function.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.special.destructor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.destructor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.destructor
+  scopesEnd:
+    - meta.function.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: 'foo::~foo'
+  scopesBegin:
+    - meta.function.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.special.destructor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.destructor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.destructor
+  scopesEnd:
+    - meta.function.destructor
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: foo
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: ~bar
+  scopesBegin:
+    - meta.function.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.special.destructor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.destructor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.destructor
+  scopesEnd:
+    - meta.function.destructor
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

@@ -109,7 +109,6 @@
     - include: "#template_definition"
     - include: "#misc_storage_modifiers_1"
     - include: "#destructor"
-    - include: "#destructor_prototype"
     - include: "#lambdas"
     - include: "#preprocessor_context"
     - include: "#comments_context"
@@ -179,7 +178,6 @@
     - include: "#template_definition"
     - include: "#misc_storage_modifiers_1"
     - include: "#destructor"
-    - include: "#destructor_prototype"
     - include: "#lambdas"
     - include: "#preprocessor_context"
     - include: "#comments_context"
@@ -2642,47 +2640,15 @@
     match: !ruby/regexp /\b(const|extern|register|restrict|static|volatile|inline)\b/
     name: storage.modifier.cpp
   destructor:
-    name: meta.function.destructor.cpp
-    begin: |-
-      (?x)
-      (?:
-        ^ |                  # beginning of line
-        (?:(?<!else|new|=))  # or word + space before name
-      )
-      ((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name
-      \s*(\()              # opening bracket
-    beginCaptures:
+    match: "(?<![a-zA-Z0-9_])((?:((?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*))\\s*::\\s*~\\2|~(?>(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F]))(?:(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U000[0-9a-fA-F])))*)))\\s*(\\()\\s*(\\))"
+    captures:
       '1':
-        name: entity.name.function.destructor.cpp
-      '2':
+        name: entity.name.function.destructor.cpp entity.name.function.special.destructor.cpp
+      '3':
         name: punctuation.definition.parameters.begin.destructor.cpp
-    end: !ruby/regexp /\)/
-    endCaptures:
-      '0':
+      '4':
         name: punctuation.definition.parameters.end.destructor.cpp
-    patterns:
-    - include: "#root_context"
-  destructor_prototype:
-    name: meta.function.destructor.prototype.cpp
-    begin: |-
-      (?x)
-      (?:
-        ^ |                  # beginning of line
-        (?:(?<!else|new|=))  # or word + space before name
-      )
-      ((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name
-      \s*(\()              # opening bracket
-    beginCaptures:
-      '1':
-        name: entity.name.function.cpp
-      '2':
-        name: punctuation.definition.parameters.begin.cpp
-    end: !ruby/regexp /\)/
-    endCaptures:
-      '0':
-        name: punctuation.definition.parameters.end.cpp
-    patterns:
-    - include: "#root_context"
+    name: meta.function.destructor.cpp
   meta_preprocessor_macro:
     name: meta.preprocessor.macro.cpp
     begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t

@@ -79,17 +79,16 @@
 - source: end
   scopesEnd:
     - meta.interface-or-protocol
+    - storage.type
 - source: '@'
-  scopes:
+  scopesBegin:
     - meta.implementation
+    - storage.type
+  scopes:
     - punctuation.definition.storage.type
-  scopesEnd:
-    - meta.interface-or-protocol
 - source: implementation
-  scopes:
-    - meta.implementation
   scopesEnd:
-    - meta.interface-or-protocol
+    - meta.implementation
     - storage.type
 - source: ViewController
   scopesBegin:
