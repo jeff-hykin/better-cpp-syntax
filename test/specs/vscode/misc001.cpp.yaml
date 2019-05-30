@@ -145,13 +145,7 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: Blank
-- source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly
+- source: 'Blank{}'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

@@ -32,26 +32,23 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: static_cast
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
-  scopesBegin:
-    - meta.template.call
-    - meta.template.call
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - keyword.operator.comparison
 - source: f64_t
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.call
-  scopesEnd:
-    - meta.template.call
-    - meta.template.call
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: audio_spec
   scopes:
     - variable.other.object.access
@@ -63,38 +60,39 @@
     - variable.other.property
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: /
   scopes:
     - keyword.operator
 - source: static_cast
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
 - source: <
-  scopesBegin:
-    - meta.template.call
-    - meta.template.call
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - keyword.operator.comparison
 - source: f64_t
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.end.template.call
-  scopesEnd:
-    - meta.template.call
-    - meta.template.call
+    - keyword.operator.comparison
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: tgt_fps
 - source: )
-  scopesBegin:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.parens
+- source: )
+  scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '}'
   scopes:
