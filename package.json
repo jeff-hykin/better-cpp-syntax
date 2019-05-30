@@ -17,6 +17,7 @@
         "pregenerate-specs": "npm run build",
         "generate-specs": "node test/source/commands/generate-specs.js",
         "sort-specs": "node test/source/commands/sort-specs.js",
+        "perf": "node test/source/commands/perf-inspect.js",
         "vscode:prepublish": "npm run build"
     },
     "keywords": [

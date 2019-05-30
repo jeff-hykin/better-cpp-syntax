@@ -2,6 +2,7 @@
 const jsonSourceMap = require("json-source-map");
 const vsctm = require("vscode-textmate");
 const coverage = require("./pattern_coverage");
+const perf = require("../perf_inspect/perf_inspect");
 
 /**
  * @param {Object} pointers
@@ -97,5 +98,6 @@ module.exports = function(grammar, scopeName) {
         );
     });
     coverage.loadRecorder(grammar, scopeName);
+    perf.loadRecorder(grammar, scopeName);
     return result.data;
 };
