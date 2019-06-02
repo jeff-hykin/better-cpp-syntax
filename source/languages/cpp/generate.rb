@@ -168,7 +168,6 @@ cpp_grammar = Grammar.new(
             :template_definition,
             :misc_storage_modifiers_1,
             :destructor,
-            :destructor_prototype,
             :lambdas,
             :preprocessor_context,
             :comments_context,
@@ -240,7 +239,6 @@ cpp_grammar = Grammar.new(
         :template_definition,
         :misc_storage_modifiers_1,
         :destructor,
-        :destructor_prototype,
         :lambdas,
         :preprocessor_context,
         :comments_context,
@@ -362,7 +360,7 @@ cpp_grammar = Grammar.new(
 #
 # Variable
 #
-    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U000[0-9a-fA-F]/)
+    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
     first_character = /[a-zA-Z_]/.or(universal_character)
     subsequent_character = /[a-zA-Z0-9_]/.or(universal_character)
     identifier = first_character.then(zeroOrMoreOf(subsequent_character))
@@ -1616,52 +1614,26 @@ cpp_grammar = Grammar.new(
             match: /\b(const|extern|register|restrict|static|volatile|inline)\b/,
             name: "storage.modifier"
         }
-    cpp_grammar[:destructor] = {
-            name: "meta.function.destructor",
-            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-            beginCaptures: {
-                "1" => {
-                    name: "entity.name.function.destructor"
-                },
-                "2" => {
-                    name: "punctuation.definition.parameters.begin.destructor"
-                }
-            },
-            end: /\)/,
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.parameters.end.destructor"
-                }
-            },
-            patterns: [
-                {
-                    include: "#root_context"
-                }
-            ]
-        }
-    cpp_grammar[:destructor_prototype] = {
-            name: "meta.function.destructor.prototype",
-            begin: "(?x)\n(?:\n  ^ |                  # beginning of line\n  (?:(?<!else|new|=))  # or word + space before name\n)\n((?:[A-Za-z_][A-Za-z0-9_]*::)*+~[A-Za-z_][A-Za-z0-9_]*) # actual name\n\\s*(\\()              # opening bracket",
-            beginCaptures: {
-                "1" => {
-                    name: "entity.name.function"
-                },
-                "2" => {
-                    name: "punctuation.definition.parameters.begin"
-                }
-            },
-            end: /\)/,
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.parameters.end"
-                }
-            },
-            patterns: [
-                {
-                    include: "#root_context"
-                }
-            ]
-        }
+    #destructors accept no parameters
+    cpp_grammar[:destructor] = newPattern(
+        should_fully_match: ["~bar()", "foo::~foo()"],
+        tag_as: "meta.function.destructor",
+        match: lookBehindToAvoid(/[a-zA-Z0-9_]/).then(
+            match: newPattern(
+                    newPattern(match: identifier, reference: "class_name", dont_back_track?: true).maybe(@spaces).then(/::/).maybe(@spaces)
+                    .then(/~/).backReference("class_name")
+                ).or(
+                    newPattern(/~/).then(match: identifier, dont_back_track?: true)
+                ),
+            tag_as: "entity.name.function.destructor entity.name.function.special.destructor"
+        ).maybe(@spaces).then(
+            match: /\(/,
+            tag_as: "punctuation.definition.parameters.begin.destructor",
+        ).maybe(@spaces).then(
+            match: /\)/,
+            tag_as: "punctuation.definition.parameters.end.destructor",
+        )
+    )
     cpp_grammar[:meta_preprocessor_macro] = {
             name: "meta.preprocessor.macro",
             begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
@@ -1926,45 +1898,63 @@ cpp_grammar = Grammar.new(
             }
         ]
     cpp_grammar[:string_context] = [
-            {
-                begin: "(u|u8|U|L)?\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    },
-                    "1" => {
-                        name: "meta.encoding"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        match: "\\\\u\\h{4}|\\\\U\\h{8}",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\['\"?\\\\abfnrtv]",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\[0-7]{1,3}",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        match: "\\\\x\\h+",
-                        name: "constant.character.escape"
-                    },
-                    {
-                        include: "#string_escapes_context_c"
-                    }
+            PatternRange.new(
+                tag_as: "string.quoted.double",
+                start_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.begin",
+                    match: maybe(match: /u|u8|U|L/, tag_as: "meta.encoding").then(/"/),
+                ),
+                end_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.end",
+                    match: /"/,
+                ),
+                includes: [
+                    # universal characters \u00AF, \U0001234F
+                    newPattern(
+                        match: universal_character,
+                        tag_as: "constant.character.escape",
+                    ),
+                    # normal escapes \r, \n, \t
+                    newPattern(
+                        match: /\\['"?\\abfnrtv]/,
+                        tag_as: "constant.character.escape",
+                    ),
+                    # octal escapes \017
+                    newPattern(
+                        match: /\\/.then(
+                            match: /[0-7]/,
+                            at_least: 1.times,
+                            at_most: 3.times,
+                        ),
+                        tag_as: "constant.character.escape",
+                    ),
+                    # hex escapes
+                    newPattern(
+                        match: /\\x/.then(
+                            match: /[0-9a-fA-F]/,
+                            how_many_times?: 2.times,
+                        ),
+                        tag_as: "constant.character.escape",
+                    ),
+                    :string_escapes_context_c
                 ]
-            },
+            ),
+            PatternRange.new(
+                tag_as: "string.quoted.single",
+                start_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.begin",
+                    match: lookBehindToAvoid(/[0-9A-Fa-f]/).maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
+                        .then(/'/),
+                ),
+                end_pattern: newPattern(
+                    tag_as: "punctuation.definition.string.end",
+                    match: /'/,
+                ),
+                includes: [
+                    :string_escapes_context_c,
+                    :line_continuation_character,
+                ]
+            ),
             {
                 begin: "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
                 beginCaptures: {
@@ -3322,16 +3312,45 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_define_line_context
         ]
     cpp_grammar[:function_call_context] = [
-            :attributes_context,
-            :comments_context,
-            :operators,
+            :struct_declare,
             :string_context,
-            :storage_types,
-            :method_access,
-            :member_access,
-            legacy_memory_new_call,
+            :functional_specifiers_pre_parameters,
+            :qualifiers_and_specifiers_post_parameters,
+            :storage_specifiers,
+            :access_control_keywords,
+            :exception_keywords,
+            :static_assert,
+            :other_keywords,
+            :memory_operators,
+            :the_this_keyword,
+            :language_constants,
+            :misc_storage_modifiers_1,
+            :lambdas,
+            :preprocessor_context,
+            :comments_context,
+            :misc_storage_modifiers_2,
+            :number_literal,
+            :string_context_c,
+            :meta_preprocessor_macro,
+            :meta_preprocessor_diagnostic,
+            :meta_preprocessor_include,
+            :pragma_mark,
+            :meta_preprocessor_line,
+            :meta_preprocessor_undef,
+            :meta_preprocessor_pragma,
+            :predefined_macros,
+            :operators,
+            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
+            :parentheses,
+            :type_casting_operators,
             :function_call,
-            :block_context
+            :scope_resolution_inner_generated,
+            :storage_types,
+            :line_continuation_character,
+            :square_brackets,
+            :empty_square_brackets,
+            :semicolon,
+            :comma,
         ]
 
 # Save

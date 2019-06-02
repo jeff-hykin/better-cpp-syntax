@@ -54,14 +54,13 @@
 - source: enum
   scopesBegin:
     - meta.function.definition.parameters
-    - meta.block.enum
-    - meta.head.enum
-  scopes:
-    - storage.type.enum
 - source: foo
   scopes:
-    - entity.name.type.enum
+    - entity.name.scope-resolution
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: bar
   scopes:
     - entity.name.scope-resolution
@@ -69,9 +68,18 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: baz quix)
+- source: 'baz '
+- source: quix
+  scopes:
+    - variable.parameter
   scopesEnd:
-    - meta.head.enum
+    - meta.function.definition.parameters
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
     - punctuation.terminator.statement
