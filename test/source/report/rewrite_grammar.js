@@ -1,8 +1,7 @@
 // this modifies each rule so that regular expressions have their line numbers in them
 const jsonSourceMap = require("json-source-map");
 const vsctm = require("vscode-textmate");
-const coverage = require("./pattern_coverage");
-const perf = require("../perf_inspect/perf_inspect");
+const recorder = require("./recorder");
 
 /**
  * @param {Object} pointers
@@ -39,6 +38,17 @@ function rewriteRule(rule, jsonPointer, pointers, scopeName) {
                 scopeName
             )
         );
+    }
+    // rule.repository is apparently allowed, at least in vscode-textmate, its not documented however
+    if (rule.repository) {
+        Object.keys(rule.repository).map(key => {
+            rewriteRule(
+                rule.repository[key],
+                jsonPointer + "/repository/" + key,
+                pointers,
+                scopeName
+            );
+        });
     }
     if (rule.captures) {
         Object.keys(rule.captures).map(key => {
@@ -89,15 +99,6 @@ function rewriteRule(rule, jsonPointer, pointers, scopeName) {
 module.exports = function(grammar, scopeName) {
     const result = jsonSourceMap.parse(grammar);
     rewriteRule(result.data, "", result.pointers, scopeName);
-    Object.keys(result.data["repository"]).map(name => {
-        rewriteRule(
-            result.data["repository"][name],
-            `/repository/${name}`,
-            result.pointers,
-            scopeName
-        );
-    });
-    coverage.loadRecorder(grammar, scopeName);
-    perf.loadRecorder(grammar, scopeName);
+    recorder.loadRecorder(grammar, scopeName);
     return result.data;
 };

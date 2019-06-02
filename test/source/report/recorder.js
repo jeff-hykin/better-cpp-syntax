@@ -1,8 +1,10 @@
-// stores coverage results for grammars
+// stores record results for patterns
 const jsonSourceMap = require("json-source-map");
-const _ = require("lodash");
 
-class perfInspect {
+let recorders = {};
+let reporters = [];
+
+class recorder {
     /**
      * @typedef {{source: string, count: number[], sumTime: number[]}} Coverage
      */
@@ -15,7 +17,6 @@ class perfInspect {
         this.coverage = [];
         this.scopeName = scopeName;
         this.empty = true;
-        this.totalTime = 0;
         for (const pointer of Object.keys(pointers)) {
             if (/(?:match|begin|end|while)$/.test(pointer)) {
                 const source = scopeName + ":" + pointers[pointer].key.line;
@@ -37,36 +38,10 @@ class perfInspect {
             this.coverage[source].count[1] += 1;
             this.coverage[source].sumTime[1] += time;
         }
-        this.totalTime += time;
     }
     report() {
-        const labels = [
-            "match failure",
-            "matched, not chosen",
-            "matched, chosen"
-        ];
-        for (let i = 0; i < 3; i += 1) {
-            console.log(labels[i]);
-            console.log("pattern         \t average time \t total time");
-            let keys = Object.keys(this.coverage).filter(
-                k =>
-                    this.coverage[k].count[i] > 0 &&
-                    this.coverage[k].sumTime[i] > 0
-            );
-            keys = _.sortBy(
-                keys,
-                k => -(this.coverage[k].sumTime[i] / this.coverage[k].count[i])
-            );
-            for (const k of keys) {
-                console.log(
-                    this.coverage[k].source,
-                    " ",
-                    "\t",
-                    this.coverage[k].sumTime[i] / this.coverage[k].count[i],
-                    "\t",
-                    this.coverage[k].sumTime[i]
-                );
-            }
+        for (const reporter of reporters) {
+            reporter(this.scopeName, this.coverage);
         }
     }
     isEmpty() {
@@ -74,14 +49,15 @@ class perfInspect {
     }
 }
 
-let recorders = {};
-
 module.exports = {
     loadRecorder: function(grammar, scopeName) {
         if (recorders[scopeName]) {
             return;
         }
-        recorders[scopeName] = new perfInspect(grammar, scopeName);
+        recorders[scopeName] = new recorder(grammar, scopeName);
+    },
+    loadReporter: function(reporter) {
+        reporters.push(reporter);
     },
     getRecorder: function(scopeName) {
         return recorders[scopeName];

@@ -3,7 +3,7 @@
 // it also double checks with an actual onigScanner
 const vsctm = require("vscode-textmate");
 const oniguruma = require("oniguruma");
-const _ = require("lodash");
+const { performance } = require("perf_hooks");
 
 module.exports = class OnigScanner {
     /**
@@ -30,9 +30,9 @@ module.exports = class OnigScanner {
         let results = [];
         // construct a list of result objects
         for (const [index, value] of this.regexps.entries()) {
-            const startTime = Date.now();
+            const startTime = performance.now();
             const match = value.searchSync(string.toString(), startPosition);
-            const endTime = Date.now();
+            const endTime = performance.now();
             try {
                 results.push({
                     match,
@@ -75,7 +75,7 @@ module.exports = class OnigScanner {
                 this.patterns.length === 1
             );
         }
-        // use a genuine OnigScanner return as the results are slightly different
+        // use a genuine OnigScanner return as the result format is slightly different
         return this.onigScanner.findNextMatchSync(string, startPosition);
     }
 };

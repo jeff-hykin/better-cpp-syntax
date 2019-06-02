@@ -1,7 +1,7 @@
 // This file wraps an IOnigLib and collects information to provide pattern coverage statistics
 const onigLibs = require("vscode-textmate");
-const OnigScanner = require("../pattern_coverage/onig_scanner");
-const perf = require("./perf_inspect");
+const OnigScanner = require("./onig_scanner");
+const recorder = require("./recorder");
 
 // from vscode-textmate src/onigLibs.ts
 let onigurumaLib = null;
@@ -47,7 +47,10 @@ module.exports = {
                 const scopeName = patterns[0].match(
                     /^\(\?#(source\..+):\d+\)/
                 )[1];
-                return new OnigScanner(patterns, perf.getRecorder(scopeName));
+                return new OnigScanner(
+                    patterns,
+                    recorder.getRecorder(scopeName)
+                );
             },
             /**
              * @param {string} s
