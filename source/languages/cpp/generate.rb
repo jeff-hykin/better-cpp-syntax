@@ -340,11 +340,11 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:source_wrapper] = [
         PatternRange.new(
             # the first position
-            start_pattern: /^\s*/,
-            # the line with no newline after it
-            end_pattern: /\s*$/.lookAheadToAvoid(/\n/),
+            start_pattern: lookAheadFor(/^/),
+            # ensure end never matches
+            end_pattern: /not/.lookBehindFor(/possible/),
             tag_as: "source",
-            includes: [:root_context]
+            includes: [:root_context],
         ),
     ]
 

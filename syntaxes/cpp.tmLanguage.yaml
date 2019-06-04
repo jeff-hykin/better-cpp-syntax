@@ -266,8 +266,8 @@
   source_wrapper:
     patterns:
     - name: source.cpp
-      begin: "^\\s*"
-      end: "\\s*$(?!\\n)"
+      begin: "(?=^)"
+      end: not(?<=possible)
       patterns:
       - include: "#root_context"
   number_literal:
