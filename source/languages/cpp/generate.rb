@@ -1132,7 +1132,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
                 tag_as: "variable.parameter.defaulted"
             ).or(
-                match: look_behind_for_type.then(variable_name_without_bounds).then(stuff_after_a_parameter),
+                match: look_behind_for_type.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(stuff_after_a_parameter),
                 tag_as: "variable.parameter"
             )
         )
