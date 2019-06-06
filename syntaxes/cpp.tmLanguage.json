@@ -4343,11 +4343,11 @@
         }
       ]
     },
-    "inhertance_context": {
+    "inheritance_context": {
       "patterns": [
         {
           "match": ",",
-          "name": "comma.cpp punctuation.separator.delimiter.inhertance.cpp"
+          "name": "comma.cpp punctuation.separator.delimiter.inheritance.cpp"
         },
         {
           "match": "(?<!\\w)(?:private|protected|public)(?!\\w)",
@@ -4404,12 +4404,12 @@
           "name": "storage.type.modifier.final.cpp"
         },
         "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp"
+          "name": "colon.cpp punctuation.separator.inheritance.cpp"
         },
         "9": {
           "patterns": [
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             }
           ]
         }
@@ -4438,7 +4438,7 @@
               "include": "#preprocessor_context"
             },
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
@@ -4518,12 +4518,12 @@
           "name": "storage.type.modifier.final.cpp"
         },
         "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp"
+          "name": "colon.cpp punctuation.separator.inheritance.cpp"
         },
         "9": {
           "patterns": [
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             }
           ]
         }
@@ -4552,7 +4552,7 @@
               "include": "#preprocessor_context"
             },
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
@@ -4632,12 +4632,12 @@
           "name": "storage.type.modifier.final.cpp"
         },
         "8": {
-          "name": "colon.cpp punctuation.separator.inhertance.cpp"
+          "name": "colon.cpp punctuation.separator.inheritance.cpp"
         },
         "9": {
           "patterns": [
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             }
           ]
         }
@@ -4666,7 +4666,7 @@
               "include": "#preprocessor_context"
             },
             {
-              "include": "#inhertance_context"
+              "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
@@ -4821,12 +4821,12 @@
               "name": "storage.type.modifier.final.cpp"
             },
             "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+              "name": "colon.cpp punctuation.separator.inheritance.cpp"
             },
             "9": {
               "patterns": [
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 }
               ]
             }
@@ -4855,7 +4855,7 @@
                   "include": "#preprocessor_context"
                 },
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"
@@ -4960,12 +4960,12 @@
               "name": "storage.type.modifier.final.cpp"
             },
             "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+              "name": "colon.cpp punctuation.separator.inheritance.cpp"
             },
             "9": {
               "patterns": [
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 }
               ]
             }
@@ -4994,7 +4994,7 @@
                   "include": "#preprocessor_context"
                 },
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"
@@ -5099,12 +5099,12 @@
               "name": "storage.type.modifier.final.cpp"
             },
             "8": {
-              "name": "colon.cpp punctuation.separator.inhertance.cpp"
+              "name": "colon.cpp punctuation.separator.inheritance.cpp"
             },
             "9": {
               "patterns": [
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 }
               ]
             }
@@ -5133,7 +5133,7 @@
                   "include": "#preprocessor_context"
                 },
                 {
-                  "include": "#inhertance_context"
+                  "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"

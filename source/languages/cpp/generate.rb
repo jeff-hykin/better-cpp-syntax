@@ -1457,10 +1457,10 @@ cpp_grammar = Grammar.new(
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
     can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isInheritanceSpecifier) + [ ',', ':', ]
     can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
-    cpp_grammar[:inhertance_context] = [
+    cpp_grammar[:inheritance_context] = [
         newPattern(
             match: /,/,
-            tag_as: "comma punctuation.separator.delimiter.inhertance"
+            tag_as: "comma punctuation.separator.delimiter.inheritance"
         ),
         newPattern(
             match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
@@ -1508,7 +1508,7 @@ cpp_grammar = Grammar.new(
                         #
                         maybe(@spaces).then(
                             match: /:/,
-                            tag_as: "colon punctuation.separator.inhertance"
+                            tag_as: "colon punctuation.separator.inheritance"
                         # the following may seem redundant (removing it shouldn't change anything)
                         # this is because the follow are matched by what is inside of this Range
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
@@ -1525,13 +1525,13 @@ cpp_grammar = Grammar.new(
                                     @cpp_tokens.that(:isAccessSpecifier)
                                 ).then(qualified_type.without_numbered_capture_groups)
                             ),
-                            includes: [ :inhertance_context ]
+                            includes: [ :inheritance_context ]
                         )
                     ),
                 ),
             head_includes: [
                 :preprocessor_context,
-                :inhertance_context,
+                :inheritance_context,
                 :template_call_range,
                 :comments_context,
             ],
