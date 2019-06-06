@@ -964,7 +964,7 @@
     },
     "functional_specifiers_pre_parameters": {
       "match": "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)",
-      "name": "storage.modifier.specificer.functional.pre-parameters.$0.cpp"
+      "name": "storage.modifier.specifier.functional.pre-parameters.$0.cpp"
     },
     "qualifiers_and_specifiers_post_parameters": {
       "match": "(?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r]))",

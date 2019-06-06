@@ -410,7 +410,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:using_name] = newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
     cpp_grammar[:functional_specifiers_pre_parameters] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
-        tag_as: "storage.modifier.specificer.functional.pre-parameters.$match"
+        tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
         )
     cpp_grammar[:qualifiers_and_specifiers_post_parameters] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(/\s*/.then(/\{/.or(/;/).or(/[\n\r]/))),
@@ -793,7 +793,7 @@ cpp_grammar = Grammar.new(
 # Types
 #
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
-    builtin_type_creators_and_specificers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
+    builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
         should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
         should_not_partial_match: ["return", "static const"],
@@ -807,7 +807,7 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 inline_attribute
             ).maybe(@spaces).zeroOrMoreOf(
-                builtin_type_creators_and_specificers.then(@spaces)
+                builtin_type_creators_and_specifiers.then(@spaces)
             ).maybe(
                 scope_resolution
             ).maybe(@spaces).then(
@@ -1351,7 +1351,7 @@ cpp_grammar = Grammar.new(
                     ),
                 includes: [ :function_parameter_context ]
             ),
-            # specificers
+            # specifiers
             newPattern(
                 match: variableBounds[ @cpp_tokens.that(:isLambdaSpecifier) ],
                 tag_as: "storage.modifier.lambda.$match"
