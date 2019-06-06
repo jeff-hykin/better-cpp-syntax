@@ -79,6 +79,15 @@
         name: punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
     patterns:
     - include: "#evaluation_context"
+  inline_comment:
+    match: "(\\/\\*)(.+?)(\\*\\/)"
+    captures:
+      '1':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '2':
+        name: comment.block.cpp
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.end.cpp
   semicolon:
     match: ";"
     name: punctuation.terminator.statement.cpp

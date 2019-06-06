@@ -25,6 +25,33 @@ cpp_grammar = Grammar.new(
 #
 # Utils
 #
+    # inline comment
+    cpp_grammar[:inline_comment] = inline_comment = newPattern(
+            match: /\/\*/,
+            tag_as: "comment.block punctuation.definition.comment.begin",
+        ).then(
+            match: /.+?/,
+            tag_as: "comment.block",
+        ).then(
+            match: /\*\//,
+            tag_as: "comment.block punctuation.definition.comment.end",
+        )
+    std_space = newPattern(
+        # NOTE: this pattern can match 0-spaces so long as its still a word boundary
+        # this is the intention since things like `int/*comment*/a = 10` are valid in c++
+        # this space pattern will match inline /**/ comments that do not contain newlines
+            match: @word_boundary.zeroOrMoreOf(
+                maybe(
+                    match: @spaces,
+                    how_many_times?: :as_few_as_possible
+                ).maybe(
+                    inline_comment
+                )
+            ),
+            includes: [
+                inline_comment
+            ]
+        )
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
