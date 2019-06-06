@@ -337,14 +337,18 @@ cpp_grammar = Grammar.new(
 # 
 # source wrapper
 # 
+    # everthing is wrapped inside this context, and it should only be matched once
+    # this exists so that `source.cpp` will exist even inside of embedded files (like markdown)
     cpp_grammar[:source_wrapper] = [
         PatternRange.new(
             # the first position
-            start_pattern: /^\s*/,
-            # the line with no newline after it
-            end_pattern: /\s*$/.lookAheadToAvoid(/\n/),
+            start_pattern: lookAheadFor(/^/),
+            # ensure end never matches
+            # why? because textmate will keep looking until it hits the end of the file (which is the purpose of this wrapper)
+            # how? because the regex is trying to find "not" and then checks to see if "not" == "possible" (which can never happen)
+            end_pattern: /not/.lookBehindFor(/possible/),
             tag_as: "source",
-            includes: [:root_context]
+            includes: [:root_context],
         ),
     ]
 
