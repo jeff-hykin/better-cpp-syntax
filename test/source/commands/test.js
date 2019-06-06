@@ -7,12 +7,7 @@ const runTest = require("../test_runner");
 const argv = require("../arguments");
 const paths = require("../paths");
 
-const registry = require("../registry").getRegistry(
-    argv.coverage
-        ? require("../pattern_coverage/oniguruma_decorator").getOniguruma
-        : undefined
-);
-const coverage = require("../pattern_coverage/pattern_coverage");
+const registry = require("../registry").default;
 
 const tests = require("../get_tests")(
     test =>
@@ -44,6 +39,5 @@ async function runTests() {
         console.groupEnd();
     }
     console.log();
-    coverage.reportAllRecorders();
     process.exit(totalResult ? 0 : 1);
 }

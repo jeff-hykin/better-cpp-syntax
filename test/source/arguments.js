@@ -19,10 +19,10 @@ module.exports = require("yargs")
         type: "boolean",
         describe: "treat .h as source.c"
     })
-    .option("coverage", {
-        default: false,
-        type: "boolean",
-        describe: "display code coverage on running a test"
+    .option("perf-limit", {
+        default: 20,
+        type: "number",
+        describe: "limit the number of perf report lines (0 to disable)"
     })
     .strict()
     .example("$0 issues/002.cpp").argv;

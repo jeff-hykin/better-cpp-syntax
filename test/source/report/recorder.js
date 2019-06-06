@@ -1,8 +1,10 @@
-// stores coverage results for grammars
+// stores record results for patterns
 const jsonSourceMap = require("json-source-map");
-const _ = require("lodash");
 
-class patternCoverage {
+let recorders = {};
+let reporters = [];
+
+class recorder {
     /**
      * @typedef {{source: string, count: number[], sumTime: number[]}} Coverage
      */
@@ -38,54 +40,24 @@ class patternCoverage {
         }
     }
     report() {
-        let averages = [0, 0, 0];
-        let notConsidered = 0;
-        for (const coverage of Object.values(this.coverage)) {
-            if (coverage.count[0] > 0) {
-                averages[0] += 1;
-            }
-            // if the recorded pattern is the only pattern in the set, don't count matched unChosen against it
-            if (coverage.count[1] > 0) {
-                averages[1] += 1;
-            }
-            if (coverage.count[2] > 0) {
-                averages[2] += 1;
-            }
-            if (_.every(coverage.count, v => v === 0)) {
-                notConsidered += 1;
-            }
+        for (const reporter of reporters) {
+            reporter(this.scopeName, this.coverage);
         }
-        const totalPatterns = Object.keys(this.coverage).length;
-        averages[0] /= totalPatterns;
-        averages[1] /= totalPatterns;
-        averages[2] /= totalPatterns;
-        console.log(
-            "code coverage for %s:\n\t%f%% / %f%% / %f%% / %f%%\n\t(match failure / match not chosen / match chosen / average)",
-            this.scopeName,
-            (averages[0] * 100).toFixed(2),
-            (averages[1] * 100).toFixed(2),
-            (averages[2] * 100).toFixed(2),
-            (_.mean(averages) * 100).toFixed(2)
-        );
-        console.log(
-            "\t%d (%f%%) patterns were never considered",
-            notConsidered,
-            ((notConsidered / totalPatterns) * 100).toFixed(2)
-        );
     }
     isEmpty() {
         return this.empty;
     }
 }
 
-let recorders = {};
-
 module.exports = {
     loadRecorder: function(grammar, scopeName) {
         if (recorders[scopeName]) {
             return;
         }
-        recorders[scopeName] = new patternCoverage(grammar, scopeName);
+        recorders[scopeName] = new recorder(grammar, scopeName);
+    },
+    loadReporter: function(reporter) {
+        reporters.push(reporter);
     },
     getRecorder: function(scopeName) {
         return recorders[scopeName];

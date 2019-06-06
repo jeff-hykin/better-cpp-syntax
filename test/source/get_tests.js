@@ -44,10 +44,11 @@ module.exports = function(predicate) {
             return test;
         })
         // filter for fixtures with a spec
-        .filter(predicate)
+        .filter(predicate || (() => true))
         .filter(
             test =>
                 argv._.length == 0 ||
+                predicate === undefined ||
                 argv._.includes(path.relative(paths.fixtureDir, test.fixture))
         );
     return tests;
