@@ -289,7 +289,7 @@ cpp_grammar = Grammar.new(
             :comments_context,
             :storage_types,
             :vararg_ellipses,
-            :function_pointer,
+            :function_pointer_parameter,
             :comma,
             # the following are a temp workaround for defaulted arguments
             # e.g. aFunc(int a = 10 + 10)
@@ -767,7 +767,7 @@ cpp_grammar = Grammar.new(
                 ]
             )
         cpp_grammar[hidden_grammar_name] = newPattern(
-            should_fully_match: ["name::"],
+            should_fully_match: ["name::", "name::name2::name3::"],
             match: cpp_grammar[grammar_name].then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.scope-resolution"+tag_extension
@@ -1087,36 +1087,40 @@ cpp_grammar = Grammar.new(
 # function pointer
 #
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
-    cpp_grammar[:function_pointer] = PatternRange.new(
-        start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
-                match: /\(/,
-                tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
-            ).then(
-                match: /\*/,
-                tag_as: "punctuation.definition.function.pointer.dereference",
-            ).maybe(@spaces).maybe(
-                match: identifier,
-                tag_as: "variable.other.definition.pointer.function"
-            ).maybe(@spaces).zeroOrMoreOf(
-                # an array of function pointers ?
-                array_brackets
-            ).then(
-                # closing ) for the variable name
-                match: /\)/,
-                tag_as: "punctuation.section.parens.end.bracket.round.function.pointer"
-            ).maybe(@spaces).then(
-                # opening ( for the parameter types
-                match: /\(/,
-                tag_as: "punctuation.section.parameters.begin.bracket.round.function.pointer"
-            ),
-        end_pattern: newPattern(
-                match: /\)/,
-                tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
-            ).then(after_declaration),
-        includes: [
-            :function_parameter_context,
-        ]
-    )
+    functionPointerGenerator = ->(identifier_tag) do
+        return PatternRange.new(
+            start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
+                ).then(
+                    match: /\*/,
+                    tag_as: "punctuation.definition.function.pointer.dereference",
+                ).maybe(@spaces).maybe(
+                    match: identifier,
+                    tag_as: identifier_tag
+                ).maybe(@spaces).zeroOrMoreOf(
+                    # an array of function pointers ?
+                    array_brackets
+                ).then(
+                    # closing ) for the variable name
+                    match: /\)/,
+                    tag_as: "punctuation.section.parens.end.bracket.round.function.pointer"
+                ).maybe(@spaces).then(
+                    # opening ( for the parameter types
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round.function.pointer"
+                ),
+            end_pattern: newPattern(
+                    match: /\)/,
+                    tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
+                ).then(after_declaration),
+            includes: [
+                :function_parameter_context,
+            ]
+        )
+    end
+    cpp_grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
+    cpp_grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
 #
 # Probably a parameter
 #
