@@ -716,7 +716,12 @@ cpp_grammar = Grammar.new(
             ).or(
                 newPattern(
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                    tag_as: "storage.type.template.argument.$match",
+                    includes: [
+                        newPattern(
+                            match: variable_name_without_bounds,
+                            tag_as: "storage.type.template.argument.$match",
+                        )
+                    ],
                 ).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template",
