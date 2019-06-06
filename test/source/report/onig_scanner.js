@@ -64,7 +64,9 @@ module.exports = class OnigScanner {
                 }
             }
         }
-        chosenResult.chosen = true;
+        if (chosenResult) {
+            chosenResult.chosen = true;
+        }
         //report all results
         for (const result of results) {
             this.recorder.record(

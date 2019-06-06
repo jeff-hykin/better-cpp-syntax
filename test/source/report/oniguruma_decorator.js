@@ -43,6 +43,9 @@ module.exports = {
              * @param {string[]} patterns
              */
             createOnigScanner: patterns => {
+                if (patterns.length === 0) {
+                    return new OnigScanner(patterns, undefined);
+                }
                 // grab scopeName from first pattern
                 const scopeName = patterns[0].match(
                     /^\(\?#(source\..+):\d+\)/
