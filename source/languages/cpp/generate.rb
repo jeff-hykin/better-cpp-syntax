@@ -49,7 +49,7 @@ cpp_grammar = Grammar.new(
                 )
             ),
             includes: [
-                inline_comment
+                :inline_comment
             ]
         )
     cpp_grammar[:semicolon] = @semicolon = newPattern(
