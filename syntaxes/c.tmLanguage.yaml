@@ -512,6 +512,8 @@
         - include: source.x86
         - include: source.x86_64
         - include: source.arm
+        - include: "#string_escapes_context_c"
+        - include: "#string_escaped_char"
         - match: "(?=not)possible"
       - begin: "(\\()"
         beginCaptures:

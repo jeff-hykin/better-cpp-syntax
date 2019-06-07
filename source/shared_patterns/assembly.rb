@@ -25,8 +25,13 @@ def assembly_pattern()
                     "source.x86",
                     "source.x86_64",
                     "source.arm",
-                    # this is here because this pattern will not match if all of the includes above are not found.
-                    # it never matches to ensure no overshoot
+                    :string_escapes_context_c,
+                    :string_escaped_char,
+                    # this is needed because, when a pattern's includes consists entirely of unresolved includes,
+                    # the pattern's tags are not applied.
+                    # The overall effect is that when the user has no assembly grammar, instead
+                    # of seeing a string as before, the user sees unstyled text.
+                    # This dummy pattern prevents that
                     lookAheadFor(/not/).then(/possible/)
                 ]
             ),
