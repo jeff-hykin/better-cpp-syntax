@@ -29,11 +29,11 @@ def assembly_pattern()
             PatternRange.new(
                 start_pattern: newPattern(
                     match: /\(/,
-                    tag_as: "punctuation.section.parens.begin.bracket.round.assembly",
+                    tag_as: "punctuation.section.parens.begin.bracket.round.assembly.inner",
                 ),
                 end_pattern: newPattern(
                     match: /\)/,
-                    tag_as: "punctuation.section.parens.end.bracket.round.assembly"
+                    tag_as: "punctuation.section.parens.end.bracket.round.assembly.inner"
                 ),
                 includes: [
                     :evaluation_context

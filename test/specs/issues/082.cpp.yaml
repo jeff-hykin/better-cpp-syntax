@@ -310,10 +310,9 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'typename '
+- source: 'typename'
   scopes:
     - storage.type.template.argument.typename
-    - ''
 - source: pointerT
   scopes:
     - entity.name.type.template
@@ -321,10 +320,9 @@
   scopes:
     - comma
     - punctuation.separator.template.argument
-- source: 'typename '
+- source: 'typename'
   scopes:
     - storage.type.template.argument.typename
-    - ''
 - source: hashT
   scopes:
     - entity.name.type.template
@@ -332,10 +330,9 @@
   scopes:
     - comma
     - punctuation.separator.template.argument
-- source: 'typename '
+- source: 'typename'
   scopes:
     - storage.type.template.argument.typename
-    - ''
 - source: allocatorT
   scopes:
     - entity.name.type.template
