@@ -450,15 +450,9 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'movw $0x38, '
-- source: '%a'
+- source: 'movw $0x38, %ax; ltr %ax'
   scopes:
-    - constant.other.placeholder
-- source: 'x; ltr '
-- source: '%a'
-  scopes:
-    - constant.other.placeholder
-- source: x
+    - meta.embedded.assembly
 - source: '"'
   scopes:
     - punctuation.definition.string.end

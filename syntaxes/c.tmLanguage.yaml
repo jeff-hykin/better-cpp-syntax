@@ -497,7 +497,8 @@
         '1':
           name: punctuation.section.parens.end.bracket.round.assembly.c
       patterns:
-      - contentName: string.quoted.double.c meta.embedded.assembly.c
+      - name: string.quoted.double.c
+        contentName: meta.embedded.assembly.c
         begin: (")
         beginCaptures:
           '1':
@@ -511,6 +512,7 @@
         - include: source.x86
         - include: source.x86_64
         - include: source.arm
+        - match: "(?=not)possible"
       - begin: "(\\()"
         beginCaptures:
           '1':

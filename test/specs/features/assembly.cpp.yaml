@@ -6,37 +6,30 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.assembly
-- source: R"
+- source: R
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
 - source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.assembly
+  scopesBegin:
+    - meta.embedded.assembly
 - source: .globl func
-- source: '    .type func'
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' @function'
+- source: '    .type func, @function'
 - source: '    func:'
 - source: '    .cfi_startproc'
-- source: '    movl $'
-- source: '7'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '%'
-  scopes:
-    - keyword.operator
-- source: eax
+- source: '    movl $7, %eax'
 - source: '    retl'
 - source: '    .cfi_endproc'
 - source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.assembly
+  scopesEnd:
+    - meta.embedded.assembly
 - source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly
@@ -102,55 +95,63 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.assembly
-- source: '"leal '
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.assembly
-- source: '%'
-  scopes:
-    - keyword.operator
-- source: '0'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '%'
-  scopes:
-    - keyword.operator
-- source: '0'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '4'
-  scopes:
-    - constant.numeric.decimal
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.assembly
-- source: ',%0"'
-- source: '         : "=r" '
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.assembly
-- source: 'n'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.assembly
-- source: '         : "0" '
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.assembly
-- source: 'n'
-- source: )
+- source: '"'
   scopesBegin:
-    - punctuation.section.parens.end.bracket.round.assembly
-- source: )
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'leal (%0,%0,4),%0'
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
   scopesEnd:
+    - string.quoted.double
+- source: '         : '
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: =r
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
+- source: 'n'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly.inner
+- source: '         : '
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '0'
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
+- source: 'n'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly.inner
+- source: )
+  scopes:
     - punctuation.section.parens.end.bracket.round.assembly
 - source: ;
   scopes:
@@ -169,7 +170,19 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round.assembly
-- source: '"movq $60, %rax\n\t" '
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'movq $60, %rax\n\t'
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -178,7 +191,19 @@
 - source: ' the exit syscall number on Linux'
   scopesEnd:
     - comment.line.double-slash
-- source: '         "movq $2,  %rdi\n\t" '
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'movq $2,  %rdi\n\t'
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -187,7 +212,19 @@
 - source: ' this program returns 2'
   scopesEnd:
     - comment.line.double-slash
-- source: '         "syscall"'
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: syscall
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly

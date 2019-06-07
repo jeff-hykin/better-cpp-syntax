@@ -18,12 +18,16 @@ def assembly_pattern()
             PatternRange.new(
                 start_pattern: newPattern(match: /"/, tag_as: "punctuation.definition.string.begin"),
                 end_pattern: newPattern(match: /"/, tag_as: "punctuation.definition.string.end"),
-                tag_content_as: "string.quoted.double meta.embedded.assembly",
+                tag_as: "string.quoted.double",
+                tag_content_as: "meta.embedded.assembly",
                 includes: [
                     "source.asm",
                     "source.x86",
                     "source.x86_64",
                     "source.arm",
+                    # this is here because this pattern will not match if all of the includes above are not found.
+                    # it never matches to ensure no overshoot
+                    lookAheadFor(/not/).then(/possible/)
                 ]
             ),
             PatternRange.new(

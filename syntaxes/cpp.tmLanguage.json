@@ -5258,7 +5258,8 @@
       },
       "patterns": [
         {
-          "contentName": "string.quoted.double.cpp meta.embedded.assembly.cpp",
+          "name": "string.quoted.double.cpp",
+          "contentName": "meta.embedded.assembly.cpp",
           "begin": "(\")",
           "beginCaptures": {
             "1": {
@@ -5283,6 +5284,9 @@
             },
             {
               "include": "source.arm"
+            },
+            {
+              "match": "(?=not)possible"
             }
           ]
         },

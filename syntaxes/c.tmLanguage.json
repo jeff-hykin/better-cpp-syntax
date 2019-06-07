@@ -871,7 +871,8 @@
           },
           "patterns": [
             {
-              "contentName": "string.quoted.double.c meta.embedded.assembly.c",
+              "name": "string.quoted.double.c",
+              "contentName": "meta.embedded.assembly.c",
               "begin": "(\")",
               "beginCaptures": {
                 "1": {
@@ -896,6 +897,9 @@
                 },
                 {
                   "include": "source.arm"
+                },
+                {
+                  "match": "(?=not)possible"
                 }
               ]
             },

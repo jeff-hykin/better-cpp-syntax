@@ -2716,7 +2716,8 @@
       '1':
         name: punctuation.section.parens.end.bracket.round.assembly.cpp
     patterns:
-    - contentName: string.quoted.double.cpp meta.embedded.assembly.cpp
+    - name: string.quoted.double.cpp
+      contentName: meta.embedded.assembly.cpp
       begin: (")
       beginCaptures:
         '1':
@@ -2730,6 +2731,7 @@
       - include: source.x86
       - include: source.x86_64
       - include: source.arm
+      - match: "(?=not)possible"
     - begin: "(\\()"
       beginCaptures:
         '1':
