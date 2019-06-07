@@ -4,6 +4,7 @@ require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/trigraph_support.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
+require_relative source_dir + 'shared_patterns/assembly.rb'
 require_relative './tokens.rb'
 
 # todo
@@ -1642,10 +1643,7 @@ cpp_grammar = Grammar.new(
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    cpp_grammar[:assembly] = newPattern(
-            match: variableBounds[ /(asm|__asm__)/ ],
-            tag_as: "storage.type.$match"
-        )
+    cpp_grammar[:assembly] = assembly_pattern()
     cpp_grammar[:misc_storage_modifiers_1] = {
             match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
             name: "storage.modifier"

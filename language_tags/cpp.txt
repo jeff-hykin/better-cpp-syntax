@@ -396,6 +396,7 @@ meta.declaration.namespace.alias.cpp
 meta.declaration.namespace.alias.value.cpp
 meta.declaration.type.alias.cpp
 meta.declaration.type.alias.value.unknown.cpp
+meta.embedded.assembly.cpp
 meta.encoding.cpp
 meta.enum.definition.cpp
 meta.function.constructor.cpp
@@ -510,10 +511,12 @@ punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
 punctuation.section.parameters.end.bracket.round.cpp
 punctuation.section.parameters.end.bracket.round.function.pointer.cpp
 punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+punctuation.section.parens.begin.bracket.round.assembly.cpp
 punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
 punctuation.section.parens.begin.bracket.round.cpp
 punctuation.section.parens.begin.bracket.round.function.pointer.cpp
 punctuation.section.parens.begin.bracket.round.initialization.cpp
+punctuation.section.parens.end.bracket.round.assembly.cpp
 punctuation.section.parens.end.bracket.round.conditional.switch.cpp
 punctuation.section.parens.end.bracket.round.cpp
 punctuation.section.parens.end.bracket.round.function.pointer.cpp
@@ -557,6 +560,7 @@ storage.modifier.specifier.functional.post-parameters.$0.cpp
 storage.modifier.specifier.functional.pre-parameters.$0.cpp
 storage.type.$0.cpp
 storage.type.$3.cpp
+storage.type.asm.cpp
 storage.type.built-in.cpp
 storage.type.built-in.primitive.cpp
 storage.type.cpp

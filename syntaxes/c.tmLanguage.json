@@ -847,8 +847,84 @@
           "name": "storage.type.built-in.c"
         },
         {
-          "match": "(?-mix:\\b(asm|__asm__|enum|struct|union)\\b)",
+          "match": "(?-mix:\\b(enum|struct|union)\\b)",
           "name": "storage.type.$1.c"
+        },
+        {
+          "begin": "(\\b(?:__asm__|asm)\\b)\\s*(volatile)?\\s*(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.asm.c"
+            },
+            "2": {
+              "name": "storage.modifier.c"
+            },
+            "3": {
+              "name": "punctuation.section.parens.begin.bracket.round.assembly.c"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.end.bracket.round.assembly.c"
+            }
+          },
+          "patterns": [
+            {
+              "contentName": "string.quoted.double.c meta.embedded.assembly.c",
+              "begin": "(\")",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.begin.c"
+                }
+              },
+              "end": "(\")",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.end.c"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.asm"
+                },
+                {
+                  "include": "source.x86"
+                },
+                {
+                  "include": "source.x86_64"
+                },
+                {
+                  "include": "source.arm"
+                }
+              ]
+            },
+            {
+              "begin": "(\\()",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.begin.bracket.round.assembly.c"
+                }
+              },
+              "end": "(\\))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.end.bracket.round.assembly.c"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#evaluation_context"
+                }
+              ]
+            },
+            {
+              "include": "#comments_context"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
         }
       ]
     },
@@ -2246,6 +2322,16 @@
         },
         {
           "include": "#block_innards"
+        }
+      ]
+    },
+    "evalutation_context": {
+      "patterns": [
+        {
+          "include": "#function-call-innards"
+        },
+        {
+          "include": "$base"
         }
       ]
     },

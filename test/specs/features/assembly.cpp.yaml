@@ -1,0 +1,199 @@
+- source: asm
+  scopesBegin:
+    - source
+  scopes:
+    - storage.type.asm
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: R"
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: .globl func
+- source: '    .type func'
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: ' @function'
+- source: '    func:'
+- source: '    .cfi_startproc'
+- source: '    movl $'
+- source: '7'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: eax
+- source: '    retl'
+- source: '    .cfi_endproc'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: '"'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: int
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' n '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' extended inline assembly'
+  scopesEnd:
+    - comment.line.double-slash
+- source: asm
+  scopes:
+    - storage.type.asm
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: '"leal '
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '4'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: ',%0"'
+- source: '         : "=r" '
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: 'n'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: '         : "0" '
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: 'n'
+- source: )
+  scopesBegin:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: )
+  scopesEnd:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' standard inline assembly'
+  scopesEnd:
+    - comment.line.double-slash
+- source: asm
+  scopes:
+    - storage.type.asm
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: '"movq $60, %rax\n\t" '
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' the exit syscall number on Linux'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '         "movq $2,  %rdi\n\t" '
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' this program returns 2'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '         "syscall"'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

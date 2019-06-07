@@ -1,0 +1,193 @@
+- source: asm
+  scopes:
+    - storage.type.asm
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: '"'
+- source: .globl func
+- source: '    .type func, @function'
+- source: '    func:'
+- source: '    .cfi_startproc'
+- source: '    movl $7, %eax'
+- source: '    retl'
+- source: '    .cfi_endproc'
+- source: '"'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' n '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: func
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' extended inline assembly'
+  scopesEnd:
+    - comment.line.double-slash
+- source: asm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.asm
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly
+- source: '"leal (%0,%0,4'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly
+  scopesEnd:
+    - meta.function-call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '         : '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: r
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ' (n)'
+- source: '         : '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ' (n));'
+- source: '    // standard inline assembly'
+- source: '    asm ('
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: movq $
+- source: '60'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: rax\n\t
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ' // the exit syscall number on Linux'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: movq $
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: rdi\n\t
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ' // this program returns 2'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: syscall
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: );
+- source: '}'

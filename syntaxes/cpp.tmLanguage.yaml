@@ -2703,8 +2703,45 @@
     name: storage.modifier.array.bracket.square.cpp
     match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
   assembly:
-    match: "(?<!\\w)(asm|__asm__)(?!\\w)"
-    name: storage.type.$0.cpp
+    begin: "(\\b(?:__asm__|asm)\\b)\\s*(volatile)?\\s*(\\()"
+    beginCaptures:
+      '1':
+        name: storage.type.asm.cpp
+      '2':
+        name: storage.modifier.cpp
+      '3':
+        name: punctuation.section.parens.begin.bracket.round.assembly.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.parens.end.bracket.round.assembly.cpp
+    patterns:
+    - contentName: string.quoted.double.cpp meta.embedded.assembly.cpp
+      begin: (")
+      beginCaptures:
+        '1':
+          name: punctuation.definition.string.begin.cpp
+      end: (")
+      endCaptures:
+        '1':
+          name: punctuation.definition.string.end.cpp
+      patterns:
+      - include: source.asm
+      - include: source.x86
+      - include: source.x86_64
+      - include: source.arm
+    - begin: "(\\()"
+      beginCaptures:
+        '1':
+          name: punctuation.section.parens.begin.bracket.round.assembly.cpp
+      end: "(\\))"
+      endCaptures:
+        '1':
+          name: punctuation.section.parens.end.bracket.round.assembly.cpp
+      patterns:
+      - include: "#evaluation_context"
+    - include: "#comments_context"
+    - include: "#comments"
   misc_storage_modifiers_1:
     match: !ruby/regexp /\b(constexpr|export|mutable|typename|thread_local)\b/
     name: storage.modifier.cpp

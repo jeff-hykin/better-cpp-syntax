@@ -3,6 +3,7 @@ require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
+require_relative source_dir + 'shared_patterns/assembly.rb'
 require_relative './tokens.rb'
 
 
@@ -42,7 +43,7 @@ c_grammar = Grammar.new(
             :$initial_context,
             :block_innards
         ]
-    evalutation_context = [
+    c_grammar[:evalutation_context] = evalutation_context = [
         "#function-call-innards",
         "$base"
     ]
@@ -929,9 +930,10 @@ c_grammar.addToRepository({
                 name: "storage.type.built-in.c",
             },
             {
-                match: /\b(asm|__asm__|enum|struct|union)\b/,
+                match: /\b(enum|struct|union)\b/,
                 name: "storage.type.$1.c"
             },
+            assembly_pattern().to_tag,
         ]
     },
     "vararg_ellipses" => {

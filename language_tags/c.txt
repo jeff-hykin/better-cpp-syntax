@@ -326,6 +326,7 @@ meta.body.switch.c
 meta.bracket.square.access.c
 meta.conditional.case.c
 meta.conditional.switch.c
+meta.embedded.assembly.c
 meta.function-call.c
 meta.function-call.member.c
 meta.function.c
@@ -365,9 +366,11 @@ punctuation.section.block.end.bracket.curly.c
 punctuation.section.block.end.bracket.curly.switch.c
 punctuation.section.parameters.begin.bracket.round.c
 punctuation.section.parameters.end.bracket.round.c
+punctuation.section.parens.begin.bracket.round.assembly.c
 punctuation.section.parens.begin.bracket.round.c
 punctuation.section.parens.begin.bracket.round.conditional.switch.c
 punctuation.section.parens.begin.bracket.round.initialization.c
+punctuation.section.parens.end.bracket.round.assembly.c
 punctuation.section.parens.end.bracket.round.c
 punctuation.section.parens.end.bracket.round.conditional.switch.c
 punctuation.section.parens.end.bracket.round.initialization.c
@@ -384,6 +387,7 @@ punctuation.whitespace.comment.leading.c
 storage.modifier.array.bracket.square.c
 storage.modifier.c
 storage.type.$1.c
+storage.type.asm.c
 storage.type.built-in.c
 storage.type.built-in.primitive.c
 string.quoted.double.c
