@@ -40,17 +40,21 @@ cpp_grammar = Grammar.new(
         # NOTE: this pattern can match 0-spaces so long as its still a word boundary
         # this is the intention since things like `int/*comment*/a = 10` are valid in c++
         # this space pattern will match inline /**/ comments that do not contain newlines
-            match: @word_boundary.zeroOrMoreOf(
-                maybe(
-                    match: @spaces,
-                    how_many_times?: :as_few_as_possible
-                ).maybe(
+            match: oneOrMoreOf(
+                how_many_times?: :as_few_as_possible,
+                match: newPattern(
+                    @spaces
+                ).or(
                     inline_comment
-                )
+                ).or(
+                    @word_boundary
+                ),
+                includes: [
+                    :inline_comment
+                ]
             ),
-            includes: [
-                :inline_comment
-            ]
+            should_fully_match:["/*a comment*/", " /* with spaces */ "],
+            should_partial_match: ["namespace{", "( A"],
         )
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
