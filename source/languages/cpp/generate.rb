@@ -777,7 +777,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes = newPattern(
         match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution_inner_generated ]
@@ -787,7 +787,7 @@ cpp_grammar = Grammar.new(
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
-            match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+            match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
             includes: [
                     # then tag every `name::` seperately 
                     hidden_grammar_name,
@@ -798,7 +798,7 @@ cpp_grammar = Grammar.new(
             match: cpp_grammar[grammar_name].then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.scope-resolution"+tag_extension
-                ).maybe(@spaces).maybe(
+                ).then(/\s*+/).maybe(
                     template_call
                 ).then(
                     match: /::/,
@@ -825,21 +825,21 @@ cpp_grammar = Grammar.new(
         should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: maybe(@spaces).lookBehindToAvoid(
+        match: /\s*+/.lookAheadFor(
                 /\w/
-            ).lookAheadFor(
+            ).lookBehindToAvoid(
                 /\w/
-            ).lookAheadToAvoid(
-                non_type_keywords.lookAheadToAvoid(/[\w]/).maybe(@spaces)
             ).maybe(
                 inline_attribute
-            ).maybe(@spaces).zeroOrMoreOf(
-                builtin_type_creators_and_specifiers.then(@spaces)
+            ).then(/\s*+/).zeroOrMoreOf(
+                builtin_type_creators_and_specifiers.then(/\s++/)
             ).maybe(
                 scope_resolution
-            ).maybe(@spaces).then(
+            ).then(/\s*+/).then(
                 match: identifier,
                 tag_as: "entity.name.type",
+            ).then(@word_boundary).then(
+                lookBehindToAvoid(non_type_keywords)
             ).maybe(
                 template_call.without_numbered_capture_groups
             ).lookAheadToAvoid(/[\w<:.]/),
