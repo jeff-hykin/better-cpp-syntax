@@ -22,12 +22,11 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
   scopesBegin:
     - meta.template.definition
   scopes:
     - storage.type.template.argument.class
-    - ''
 - source: T
   scopes:
     - entity.name.type.template
