@@ -895,7 +895,7 @@ cpp_grammar = Grammar.new(
         should_not_partial_match: ["foo(bar)"],
         match: lookBehindToAvoid(/[\w\s>]/).maybe(@spaces).then(
             /\(/.maybe(@spaces).then(qualified_type).then(ref_deref_definition_pattern).then(/\)/)
-        )
+        ).lookAheadToAvoid(maybe(@spaces).then(@semicolon))
     )
 #
 # Functions
