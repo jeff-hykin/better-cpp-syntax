@@ -159,7 +159,7 @@
     - punctuation.definition.function.pointer.dereference
 - source: foo
   scopes:
-    - variable.other.definition.pointer.function
+    - variable.parameter.pointer.function
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.function.pointer
@@ -333,7 +333,7 @@
     - punctuation.definition.function.pointer.dereference
 - source: foo
   scopes:
-    - variable.other.definition.pointer.function
+    - variable.parameter.pointer.function
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.function.pointer
