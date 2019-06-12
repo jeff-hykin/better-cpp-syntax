@@ -1150,6 +1150,16 @@ class TokenHelper
         return matches.map do |each| each[:representation] end
     end
     
+    def lookBehindToAvoidWordsThat(*adjectives)
+        array_of_invalid_names = self.representationsThat(*adjectives)
+        return /\b/.lookBehindToAvoid(/#{array_of_invalid_names.map { |each| '\W'+each+'|^'+each } .join('|')}/)
+    end
+    
+    def lookAheadToAvoidWordsThat(*adjectives)
+        array_of_invalid_names = self.representationsThat(*adjectives)
+        return /\b/.lookAheadToAvoid(/#{array_of_invalid_names.map { |each| each+'\W|'+each+'\$' } .join('|')}/)
+    end
+    
     def that(*adjectives)
         matches = tokensThat(*adjectives)
         return /(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")})/

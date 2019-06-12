@@ -871,7 +871,7 @@ cpp_grammar = Grammar.new(
 #
 # Functions
 #
-    cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
+    avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
     cpp_grammar[:struct_declare] = struct_declare = newPattern(
             should_partial_match: [ "struct crypto_aead *tfm = crypto_aead_reqtfm(req);", "struct aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
@@ -916,8 +916,8 @@ cpp_grammar = Grammar.new(
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.definition"
-            ).then(@word_boundary).lookBehindToAvoid(
-                cant_be_a_function_name
+            ).then(
+                avoid_invalid_function_names
             ).then(std_space).lookAheadFor(/\(/)
         ),
         head_includes:[
@@ -983,8 +983,8 @@ cpp_grammar = Grammar.new(
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
-            ).then(@word_boundary).lookBehindToAvoid(
-                cant_be_a_function_name
+            ).then(
+                avoid_invalid_function_names
             ).then(std_space).maybe(
                 template_call
             ).then(
