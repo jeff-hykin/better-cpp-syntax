@@ -297,9 +297,9 @@ cpp_grammar = Grammar.new(
             :probably_a_parameter,
             :attributes_context,
             :comments_context,
+            :function_pointer_parameter,
             :storage_types,
             :vararg_ellipses,
-            :function_pointer_parameter,
             :comma,
             # the following are a temp workaround for defaulted arguments
             # e.g. aFunc(int a = 10 + 10)
