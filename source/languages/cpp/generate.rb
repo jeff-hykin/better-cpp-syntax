@@ -40,19 +40,8 @@ cpp_grammar = Grammar.new(
             # NOTE: this pattern can match 0-spaces so long as its still a word boundary
             # this is the intention since things like `int/*comment*/a = 10` are valid in c++
             # this space pattern will match inline /**/ comments that do not contain newlines
-            
-            # zero length match
-            newPattern(
-                # look for either word-NONWORD, NONWORD-word, or NONWORD-NONWORD
-                lookBehindFor(/\W/).or(
-                    lookAheadFor(/\W/)
-                ).or(
-                    @start_of_document
-                ).or(
-                    @end_of_document
-                )
             # >0 length match
-            ).or(
+            newPattern(
                 at_least: 1,
                 quantity_preference: :as_few_as_possible,
                 match: newPattern(
@@ -61,7 +50,18 @@ cpp_grammar = Grammar.new(
                     ).or(
                         inline_comment
                     )
-            )   
+            # zero length match
+            ).or(
+                /\b/.or(
+                    lookBehindFor(/\W/)
+                ).or(
+                    lookAheadFor(/\W/)
+                ).or(
+                    @start_of_document
+                ).or(
+                    @end_of_document
+                )
+            )
         )
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
@@ -833,20 +833,16 @@ cpp_grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
+        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: /\s*+/.lookAheadFor(
-                /\w/
-            ).lookBehindToAvoid(
-                /\w/
-            ).maybe(
+        match: std_space.maybe(
                 inline_attribute
-            ).then(/\s*+/).zeroOrMoreOf(
-                builtin_type_creators_and_specifiers.then(/\s++/)
+            ).then(std_space).zeroOrMoreOf(
+                builtin_type_creators_and_specifiers.then(std_space)
             ).maybe(
                 scope_resolution
-            ).then(/\s*+/).then(
+            ).then(std_space).then(
                 match: identifier,
                 tag_as: "entity.name.type",
             ).then(@word_boundary).then(
@@ -950,7 +946,7 @@ cpp_grammar = Grammar.new(
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.definition"
-            ).maybe(@spaces).lookAheadFor(/\(/)
+            ).then(std_space).lookAheadFor(/\(/)
         ),
         head_includes:[
             PatternRange.new(
