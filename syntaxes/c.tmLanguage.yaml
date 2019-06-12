@@ -1813,7 +1813,7 @@
     begin: "(?<!\\w)(?=\\d|\\.\\d)"
     end: "(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
     patterns:
-    - match: "(\\G0[xX])(?:([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))(?:([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))?(?:((?<!')([pP])(?:(\\+))?(?:(\\-))?((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))))?(?:([lLfF](?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.c
@@ -1846,7 +1846,7 @@
             name: punctuation.separator.constant.numeric
         '12':
           name: keyword.other.unit.suffix.floating-point.c
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))(?:([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))?((?:(?<=[0-9])\\.|\\.(?=[0-9])))(?:([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))?(?:((?<!')([eE])(?:(\\+))?(?:(\\-))?((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))))?(?:([lLfF](?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '2':
           name: constant.numeric.decimal.c
@@ -1877,7 +1877,7 @@
             name: punctuation.separator.constant.numeric
         '12':
           name: keyword.other.unit.suffix.floating-point.c
-    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '1':
           name: keyword.other.unit.binary.c
@@ -1890,7 +1890,7 @@
           name: punctuation.separator.constant.numeric
         '4':
           name: keyword.other.unit.suffix.integer.c
-    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '1':
           name: keyword.other.unit.octal.c
@@ -1903,7 +1903,7 @@
           name: punctuation.separator.constant.numeric
         '4':
           name: keyword.other.unit.suffix.integer.c
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:((?<!')([pP])(?:(\\+))?(?:(\\-))?((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.c
@@ -1927,7 +1927,7 @@
             name: punctuation.separator.constant.numeric
         '9':
           name: keyword.other.unit.suffix.integer.c
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:((?<!')([eE])(?:(\\+))?(?:(\\-))?((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*))))?(?:((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w)))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
       captures:
         '2':
           name: constant.numeric.decimal.c
