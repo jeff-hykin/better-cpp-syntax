@@ -980,6 +980,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1052,6 +1053,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1126,6 +1128,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1351,6 +1354,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1597,6 +1601,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
@@ -1730,6 +1735,7 @@
         patterns:
         - match: "(?:class|struct|union|enum)"
           name: storage.type.$0.cpp
+        - include: "#attributes_context"
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
