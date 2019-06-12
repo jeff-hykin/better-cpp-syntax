@@ -673,6 +673,7 @@ class Regexp
     def self.checkForSingleEntity(regex)
         # unwrap the regex 
         regex_as_string = regex.without_numbered_capture_groups.without_default_mode_modifiers
+        debug =  (regex_as_string =~ /[\s\S]*\+[\s\S]*/) && regex_as_string.length < 10 && regex_as_string != "\\s+"
         # remove all escaped characters
         regex_as_string.gsub!(/\\./, "a")
         # remove any ()'s or ['s in the character classes, and replace them with "a"
@@ -697,18 +698,13 @@ class Regexp
         end
 
         # regex without the ending
-        main_group = regex.without_default_mode_modifiers.gsub(quantified_ending_pattern, "")
+        main_group = regex.without_default_mode_modifiers
+        # remove the quantified ending
+        main_group = main_group[0..-(quantified_ending.length + 1)]
         
         entity = nil
         # if its a single character
         if regex_without_quantifier.length == 1
-            puts "---------"
-            puts "regex is"
-            p regex
-            puts "regex_as_string is: #{regex_as_string} "
-            puts "main_group is: #{main_group} "
-            puts "quantified_ending is: #{quantified_ending} "
-            puts "---------"
             entity = :single_char
         # if its a single escaped character
         elsif regex_without_quantifier.length == 2 && regex_without_quantifier[0] == "\\"
@@ -794,41 +790,33 @@ class Regexp
             regex_as_string
         end
         
-        case operator
-            when 'then'
-                new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
-            when 'or'
-                new_regex = /(?:#{self_as_string}|#{groupWrap[other_regex_as_string]})/
-            when 'maybe'
-                if simple_quantifier_ending.length > 0
-                    raise "\n\nSorry you can't use how_many_times?:, at_least:, or at_most with the oneOrMoreOf() function"
-                end
-                # this one is more complicated because it contains an optimization
-                # inefficient (but straightforward way): maybe(/a+/) == /(?:a+)?/
-                # efficient (but more complicated way):  maybe(/a+/) == /a*/
-                # (both forms are functionally equivlent)
-                # the following code implements the more efficient way for single character matches
-                is_an_escaped_character_with_one_or_more_quantifier = ((other_regex_as_string.size == 3) and (other_regex_as_string[0] == "\\") and (other_regex_as_string[-1] == "+"))
-                is_a_normal_character_with_one_or_more_quantifier   = ((other_regex_as_string.size == 2) and (other_regex_as_string[0] != "\\") and (other_regex_as_string[-1] == "+"))
-                if is_an_escaped_character_with_one_or_more_quantifier or is_a_normal_character_with_one_or_more_quantifier
-                    # replace the last + with a *
-                    optimized_regex_as_string = other_regex_as_string.gsub(/\+\z/, '*')
-                    new_regex = /#{self_as_string}#{groupWrap[optimized_regex_as_string]}/
-                else
-                    new_regex = /#{self_as_string}(?:#{groupWrap[other_regex_as_string]})?/
-                end
-            when 'oneOrMoreOf'
-                if simple_quantifier_ending.length > 0
-                    raise "\n\nSorry you can't use how_many_times?:, at_least:, or at_most with the oneOrMoreOf() function"
-                end
-                simple_quantifier_ending = "+"
-                new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
-            when 'zeroOrMoreOf'
-                if simple_quantifier_ending.length > 0
-                    raise "\n\nSorry you can't use how_many_times?:, at_least:, or at_most with the zeroOrMoreOf() function"
-                end
-                simple_quantifier_ending = "*"
-                new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
+        #
+        # Set quantifiers
+        # 
+        if ['maybe', 'oneOrMoreOf', 'zeroOrMoreOf'].include?(operator)
+            # then don't allow manual quantification
+            if simple_quantifier_ending.length > 0
+                raise "\n\nSorry you can't use how_many_times?:, at_least:, or at_most with the #{operator}() function"
+            end
+            # set the quantifier (which will be applied inside of groupWrap[])
+            case operator
+                when 'maybe'
+                    simple_quantifier_ending = "?"
+                when 'oneOrMoreOf'
+                    simple_quantifier_ending = "+"
+                when 'zeroOrMoreOf'
+                    simple_quantifier_ending = "*"
+            end
+        end
+        
+        # 
+        # Generate the core regex
+        # 
+        if operator == 'or'
+            new_regex = /(?:#{self_as_string}|#{groupWrap[other_regex_as_string]})/
+        # if its any other operator (including the quantifiers)
+        else
+            new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
         end
 
         #
@@ -1166,7 +1154,3 @@ class TokenHelper
     end
 end
 
-
-
-
-p Regexp.checkForSingleEntity(/\(/)
