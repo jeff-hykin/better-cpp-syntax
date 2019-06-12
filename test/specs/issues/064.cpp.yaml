@@ -131,20 +131,26 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: '::'
+- source: ' ::'
 - source: new
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.new
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -261,13 +267,17 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: '::'
+- source: ' ::'
 - source: new
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.new
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -278,7 +288,9 @@
 - source: ' f'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: int
   scopes:
     - storage.type.primitive
@@ -338,43 +350,7 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: '::'
-- source: new
-  scopes:
-    - entity.name.function.call
-- source: (
-  scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: '[] '
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
+- source: ' ::'
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -417,13 +393,16 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: '::'
 - source: new
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.new
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -434,10 +413,51 @@
 - source: ' f'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '[] '
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ::'
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.new
 - source: (
   scopesBegin:
     - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
@@ -510,13 +530,17 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: '::'
+- source: ' ::'
 - source: new
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.new
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -527,7 +551,9 @@
 - source: ' f'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: '[] '
 - source: (
   scopesBegin:
@@ -650,17 +676,23 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '::'
+- source: '    ::'
 - source: delete
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.delete
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: a
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -736,13 +768,17 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '::'
+- source: '    ::'
 - source: delete
   scopes:
-    - entity.name.function.call
+    - keyword.operator.wordlike
+    - memory
+    - keyword.operator.delete
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round
 - source: a
 - source: ','
   scopes:
@@ -751,7 +787,9 @@
 - source: ' b'
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement

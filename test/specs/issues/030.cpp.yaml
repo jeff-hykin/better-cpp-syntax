@@ -161,19 +161,15 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: IsPointDef
-  scopesBegin:
-    - meta.function
   scopes:
-    - entity.name.function
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round
-  scopesEnd:
-    - meta.function
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -264,19 +260,15 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: IsPointDef
-  scopesBegin:
-    - meta.function
   scopes:
-    - entity.name.function
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round
-  scopesEnd:
-    - meta.function
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
