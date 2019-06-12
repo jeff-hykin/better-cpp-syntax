@@ -1971,7 +1971,7 @@ cpp_grammar = Grammar.new(
                 ]
             ),
             {
-                begin: "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
+                begin: "((?:u|u8|U|L)?R)\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
                 beginCaptures: {
                     "0" => {
                         name: "punctuation.definition.string.begin"
