@@ -41,7 +41,7 @@ cpp_grammar = Grammar.new(
         # this is the intention since things like `int/*comment*/a = 10` are valid in c++
         # this space pattern will match inline /**/ comments that do not contain newlines
             match: oneOrMoreOf(
-                how_many_times?: :as_few_as_possible,
+                quantity_preference: :as_few_as_possible,
                 match: newPattern(
                     @spaces
                 ).or(
