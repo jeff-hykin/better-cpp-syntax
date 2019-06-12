@@ -12,6 +12,31 @@ require 'set'
     # add optimizations
         # add check for seeing if the last pattern was an OR with no attributes. if it was then change (a|(b|c)) to (a|b|c)
         # add a "is alreadly a group" flag to prevent double wrapping
+def checkForMatchingOuter(str, start_char, end_char)
+    # must start and end with correct chars
+    if str.length > 2 && str[0] == start_char && str[-1] == end_char
+        # remove the first and last character
+        str = str.chars
+        str.shift()
+        str.pop()
+        
+        depth = 0
+        for each in str
+            # for every open brace, 1 closed brace is allowed
+            if each == start_char
+                depth += 1
+            elsif each == end_char
+                depth -= 1
+            end
+            # if theres a closed brace before an open brace, then the outer ones dont match
+            if depth == -1
+                return false
+            end
+        end
+        return true 
+    end
+    return false
+end
 
 class Grammar
     attr_accessor :data, :all_tags, :language_ending
@@ -577,7 +602,7 @@ class Regexp
         # unescaped ('s can exist in character classes, and character class-style code can exist inside comments.
         # this removes the comments, then finds the character classes: escapes the ('s inside the character classes then 
         # reverse the string so that varaible-length lookaheads can be used instead of fixed length lookbehinds
-        as_string_reverse = self.to_s.reverse
+        as_string_reverse = self.without_default_mode_modifiers.reverse
         no_preceding_escape = /(?=(?:(?:\\\\)*)(?:[^\\]|\z))/
         reverse_character_class_match = /(\]#{no_preceding_escape}[\s\S]*?\[#{no_preceding_escape})/
         reverse_comment_match = /(\)#{no_preceding_escape}[^\)]*#\?\(#{no_preceding_escape})/
@@ -598,6 +623,104 @@ class Regexp
         return Regexp.new(reversed_but_fixed.reverse)
     end
     
+    def getQuantifierFromAttributes(option_attributes)
+        # by default assume no 
+        quantifier = ""
+        # 
+        # Simplify the quantity down to just :at_least and :at_most
+        # 
+            attributes_clone = option_attributes.clone
+            # convert Enumerators to numbers
+            for each in [:at_least, :at_most, :how_many_times?]
+                if attributes_clone[each].is_a?(Enumerator)
+                    attributes_clone[each] = attributes_clone[each].size
+                end
+            end
+            # extract the data
+            at_least       = attributes_clone[:at_least]
+            at_most        = attributes_clone[:at_most]
+            how_many_times = attributes_clone[:how_many_times?]
+            # simplify to at_least and at_most
+            if how_many_times.is_a?(Integer)
+                at_least = at_most = how_many_times
+            end
+        #
+        # Generate the ending based on :at_least and :at_most
+        #
+            # if there is no at_least, at_most, or how_many_times, then theres no quantifier
+            if at_least == nil and at_most == nil
+                quantifier = ""
+            # if there is a quantifier
+            else
+                # if there's no at_least, then assume at_least = 1
+                if at_least == nil
+                    at_least = 1
+                end
+                # this is just a different way of "zeroOrMoreOf"
+                if at_least == 0 and at_most == nil
+                    quantifier = "*"
+                # this is just a different way of "oneOrMoreOf"
+                elsif at_least == 1 and at_most == nil
+                    quantifier = "+"
+                # if it is more complicated than that, just use a range
+                else
+                    quantifier = "{#{at_least},#{at_most}}"
+                end
+            end
+        return quantifier
+    end
+    
+    def self.checkForSingleEntity(regex)
+        # unwrap the regex 
+        regex_as_string = regex.without_numbered_capture_groups.without_default_mode_modifiers
+        debug =  (regex_as_string =~ /[\s\S]*\+[\s\S]*/) && regex_as_string.length < 10 && regex_as_string != "\\s+"
+        # remove all escaped characters
+        regex_as_string.gsub!(/\\./, "a")
+        # remove any ()'s or ['s in the character classes, and replace them with "a"
+        regex_as_string.gsub!(/\[[^\]]+\]/) do |match|
+            clean_char_class = match[1..-2].gsub(/\[/, "a").gsub(/\(/,"a").gsub(/\)/, "a")
+            match[0] + clean_char_class + match[-1]
+        end
+        
+        # extract the ending quantifiers
+        zero_or_more = /\*/
+        one_or_more = /\+/
+        maybe = /\?/
+        range = /\{(?:\d+\,\d*|\d*,\d+|\d)\}/
+        greedy = /\??/
+        possessive = /\+?/
+        quantifier = /(?:#{zero_or_more}|#{one_or_more}|#{maybe}|#{range})/
+        quantified_ending_pattern = /#{quantifier}#{possessive}#{greedy}\Z/
+        quantified_ending = ""
+        regex_without_quantifier = regex_as_string.gsub(quantified_ending_pattern) do |match|
+            quantified_ending = match
+            "" # remove the ending
+        end
+
+        # regex without the ending
+        main_group = regex.without_default_mode_modifiers
+        # remove the quantified ending
+        main_group = main_group[0..-(quantified_ending.length + 1)]
+        
+        entity = nil
+        # if its a single character
+        if regex_without_quantifier.length == 1
+            entity = :single_char
+        # if its a single escaped character
+        elsif regex_without_quantifier.length == 2 && regex_without_quantifier[0] == "\\"
+            entity = :single_escaped_char
+        # if it has matching ()'s
+        elsif checkForMatchingOuter(regex_without_quantifier, "(", ")")
+            entity = :group
+        # if it has matching []'s
+        elsif checkForMatchingOuter(regex_without_quantifier, "[", "]")
+            entity = :character_class
+        end
+        
+        
+        return [entity, quantified_ending, main_group]
+    end
+    
     def processRegexOperator(arguments, operator)
         # first parse the arguments
         other_regex, pattern_attributes = Regexp.processGrammarArguments(arguments, operator)
@@ -610,111 +733,90 @@ class Regexp
         option_attributes.delete_if { |k, v| @@textmate_attributes.key? k }
         
         no_attributes = pattern_attributes == {}
-        
-        #
-        # Create the new regex
-        #
+        add_capture_group = ! no_attributes
+
         self_as_string = self.without_default_mode_modifiers
         other_regex_as_string = other_regex.without_default_mode_modifiers
-        case operator
-            when 'then'
-                if option_attributes[:how_many_times?] or option_attributes[:at_most] or option_attributes[:at_least]
-                    # repeat pattern
-                    
-                    # support for at_least: 1.times, at_most: 2.times
-                    at_least = (option_attributes[:at_least].is_a? Enumerator) ? option_attributes[:at_least].size : option_attributes[:at_least]
-                    at_most = (option_attributes[:at_most].is_a? Enumerator) ? option_attributes[:at_most].size : option_attributes[:at_most]
-                    # support how_many_times?: 5
-                    if option_attributes[:how_many_times?].is_a? Enumerator
-                        at_least = at_most = option_attributes[:how_many_times?].size
-                    elsif option_attributes[:how_many_times?].is_a? Integer
-                        at_least = at_most = option_attributes[:how_many_times?]
-                    end
-                    
-                    if at_least == 0 and at_most == nil
-                        # rewrite to zeroOrMoreOf
-                        return self.processRegexOperator(arguments, 'zeroOrMoreOf')
-                    elsif at_least == nil and at_most == nil
-                        # rewrite to oneOrMoreOf
-                        return self.processRegexOperator(arguments, 'oneOrMoreOf')
-                    else
-                        if at_least == nil
-                            at_least = 1
-                        end
-                        # custom range
-                        new_regex = /#{self_as_string}((?:#{other_regex_as_string}){#{at_least},#{at_most}})/
-                        if no_attributes
-                            new_regex = /#{self_as_string}(?:#{other_regex_as_string}){#{at_least},#{at_most}}/
+        
+        # compute the endings so the operators can use/handle them
+        simple_quantifier_ending = self.getQuantifierFromAttributes(option_attributes)
+        
+        # create a helper to handle common logic
+        groupWrap = ->(regex_as_string) do
+            # if there is a simple_quantifier_ending
+            if simple_quantifier_ending.length > 0
+                non_capture_group_is_needed = true
+                # 
+                # perform optimizations
+                # 
+                    single_entity_type, existing_ending, regex_without_quantifier  = Regexp.checkForSingleEntity(/#{regex_as_string}/)
+                    # if there is a single entity
+                    if single_entity_type != nil
+                        # if there is only one 
+                        regex_as_string = regex_without_quantifier
+                        # if adding an optional condition to a one-or-more, optimize it into a zero-or more
+                        if existing_ending == "+" && simple_quantifier_ending == "?"
+                            existing_ending = ""
+                            simple_quantifier_ending = "*"
                         end
                     end
-                elsif option_attributes[:dont_back_track?]
-                    # atomic groups
-                    option_attributes.delete(:dont_back_track?)
-                    new_regex = /#{self_as_string}((?>#{other_regex_as_string}))/
-                    if no_attributes
-                        new_regex = /#{self_as_string}(?>#{other_regex_as_string})/
+                # 
+                # Handle greedy/non-greedy endings 
+                # 
+                    if option_attributes[:quantity_preference] == :as_few_as_possible
+                        # add the non-greedy quantifier
+                        simple_quantifier_ending += "?"
+                    # raise an error for an invalid option
+                    elsif option_attributes[:quantity_preference] != nil && option_attributes[:quantity_preference] != :as_many_as_possible
+                        raise "\n\nquantity_preference: #{option_attributes[:quantity_preference]}\nis an invalid value. Valid values are:\nnil, :as_few_as_possible, :as_many_as_possible"
                     end
-                elsif
-                    # plain pattern
-                    new_regex = /#{self_as_string}(#{other_regex_as_string})/
-                    if no_attributes
-                        new_regex = /#{self_as_string}#{other_regex_as_string}/
-                    end
-                end
-            when 'or'
-                new_regex = /(?:#{self_as_string}|(#{other_regex_as_string}))/
-                if no_attributes
-                    # the extra (?:(?:)) groups are because ruby will auto-optimize away the outer most one, even if only one is given
-                    # TODO eventually there should be a better optimization for this
-                    new_regex = /(?:#{self_as_string}|#{other_regex_as_string})/
-                end
-            when 'maybe'
-                # this one is more complicated because it contains an optimization
-                # inefficient (but straightforward way): maybe(/a+/) == /(?:a+)?/
-                # efficient (but more complicated way):  maybe(/a+/) == /a*/
-                # (both forms are functionally equivlent)
-                # the following code implements the more efficient way for single character matches
-                is_an_escaped_character_with_one_or_more_quantifier = ((other_regex_as_string.size == 3) and (other_regex_as_string[0] == "\\") and (other_regex_as_string[-1] == "+"))
-                is_a_normal_character_with_one_or_more_quantifier   = ((other_regex_as_string.size == 2) and (other_regex_as_string[0] != "\\") and (other_regex_as_string[-1] == "+"))
-                if is_an_escaped_character_with_one_or_more_quantifier or is_a_normal_character_with_one_or_more_quantifier
-                    # replace the last + with a *
-                    optimized_regex_as_string = other_regex_as_string.gsub(/\+\z/, '*')
-                    new_regex = /#{self_as_string}(#{optimized_regex_as_string})/
-                    if no_attributes
-                        new_regex = /#{self_as_string}#{optimized_regex_as_string}/
-                    end
+                # if the group is not a single entity
+                if single_entity_type == nil
+                    # wrap the regex in a non-capture group, and then give it a quantity
+                    regex_as_string = "(?:#{regex_as_string})"+simple_quantifier_ending
+                # if the group is a single entity, then there is no need to wrap it
                 else
-                    new_regex = /#{self_as_string}(#{other_regex_as_string})?/
-                    if no_attributes
-                        new_regex = /#{self_as_string}(?:#{other_regex_as_string})?/
-                    end
+                    regex_as_string = regex_as_string + simple_quantifier_ending
                 end
-            when 'oneOrMoreOf'
-                new_regex = /#{self_as_string}((?:#{other_regex_as_string})+)/
-                if no_attributes
-                    new_regex = /#{self_as_string}(?:#{other_regex_as_string})+/
-                end
-            when 'zeroOrMoreOf'
-                new_regex = /#{self_as_string}((?:#{other_regex_as_string})*)/
-                if no_attributes
-                    new_regex = /#{self_as_string}(?:#{other_regex_as_string})*/
-                end
+            end
+            # if backtracking isn't allowed, then wrap it in an atomic group
+            if option_attributes[:dont_back_track?]
+                regex_as_string = "(?>#{regex_as_string})"
+            end
+            # if it should be wrapped in a capture group, then add the capture group
+            if add_capture_group
+                regex_as_string = "(#{regex_as_string})"
+            end
+            regex_as_string
         end
         
-        if option_attributes[:dont_back_track?]
-            new_regex_as_string = new_regex.without_default_mode_modifiers
-            index = new_regex_as_string[-1] == ')' ? -2 : -1
-            if not /[+*?]/ =~ new_regex_as_string[index]
-                raise "\n\n :dont_back_track? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+        #
+        # Set quantifiers
+        # 
+        if ['maybe', 'oneOrMoreOf', 'zeroOrMoreOf'].include?(operator)
+            # then don't allow manual quantification
+            if simple_quantifier_ending.length > 0
+                raise "\n\nSorry you can't use how_many_times?:, at_least:, or at_most with the #{operator}() function"
             end
-            new_regex = /#{new_regex_as_string.insert(index, '+')}/
-        elsif option_attributes[:how_many_times?] == :as_few_as_possible
-            new_regex_as_string = new_regex.without_default_mode_modifiers
-            index = new_regex_as_string[-1] == ')' ? -2 : -1
-            if not /[+*}?]/ =~ new_regex_as_string[index]
-                raise "\n\n :how_many_times? is not a vlid option for #{operator}\npattern is #{new_regex_as_string}"
+            # set the quantifier (which will be applied inside of groupWrap[])
+            case operator
+                when 'maybe'
+                    simple_quantifier_ending = "?"
+                when 'oneOrMoreOf'
+                    simple_quantifier_ending = "+"
+                when 'zeroOrMoreOf'
+                    simple_quantifier_ending = "*"
             end
-            new_regex = /#{new_regex_as_string.insert(index, '?')}/
+        end
+        
+        # 
+        # Generate the core regex
+        # 
+        if operator == 'or'
+            new_regex = /(?:#{self_as_string}|#{groupWrap[other_regex_as_string]})/
+        # if its any other operator (including the quantifiers)
+        else
+            new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
         end
 
         #
@@ -825,6 +927,8 @@ end
 @word_boundary = /\b/
 @white_space_start_boundary = /(?<=\s)(?=\S)/
 @white_space_end_boundary = /(?<=\S)(?=\s)/
+@start_of_document = /\A/
+@end_of_document = /\Z/
 
 #
 # Helper patterns
@@ -1051,3 +1155,4 @@ class TokenHelper
         return /(?:#{matches.map {|each| Regexp.escape(each[:representation]) }.join("|")})/
     end
 end
+

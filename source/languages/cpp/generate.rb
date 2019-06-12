@@ -5,6 +5,8 @@ require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/trigraph_support.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative source_dir + 'shared_patterns/assembly.rb'
+require_relative source_dir + 'shared_patterns/inline_comment.rb'
+require_relative source_dir + 'shared_patterns/std_space.rb'
 require_relative './tokens.rb'
 
 # todo
@@ -26,33 +28,8 @@ cpp_grammar = Grammar.new(
 #
 # Utils
 #
-    # inline comment
-    cpp_grammar[:inline_comment] = inline_comment = newPattern(
-            match: /\/\*/,
-            tag_as: "comment.block punctuation.definition.comment.begin",
-        ).then(
-            match: /.+?/,
-            tag_as: "comment.block",
-        ).then(
-            match: /\*\//,
-            tag_as: "comment.block punctuation.definition.comment.end",
-        )
-    std_space = newPattern(
-        # NOTE: this pattern can match 0-spaces so long as its still a word boundary
-        # this is the intention since things like `int/*comment*/a = 10` are valid in c++
-        # this space pattern will match inline /**/ comments that do not contain newlines
-            match: @word_boundary.zeroOrMoreOf(
-                maybe(
-                    match: @spaces,
-                    how_many_times?: :as_few_as_possible
-                ).maybe(
-                    inline_comment
-                )
-            ),
-            includes: [
-                :inline_comment
-            ]
-        )
+    cpp_grammar[:inline_comment] = inline_comment
+    std_space = generateStdSpace(cpp_grammar[:inline_comment])
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -76,18 +53,18 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.definition.end.bracket.square"
         ).maybe(@spaces)
     # TODO eventually move this outside of the # Utils section
-    ref_deref_definition_pattern = newPattern(
+    ref_deref_definition_pattern = maybe(
         should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
         should_not_fully_match: [ '&*', '&&&' ],
-        match: maybe(@spaces).then(
-            match: zeroOrMoreOf(/\*/.maybe(@spaces)),
+        match: std_space.then(
+            match: zeroOrMoreOf(/\*/.then(std_space)),
             tag_as: "storage.modifier.pointer"
         ).then(
-            match: /&/.maybe(@spaces),
+            match: /&/.then(std_space),
             at_least: 0.times,
             at_most: 2.times,
             tag_as: "storage.modifier.reference"
-        ).maybe(@spaces)
+        ).then(std_space)
     )
     functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
@@ -177,9 +154,14 @@ cpp_grammar = Grammar.new(
             :source_wrapper,
         ]
     cpp_grammar[:root_context] = [
+            # first preprocessor directives, which should be a part of every scope
+            :preprocessor_context,
+            # comments 
+            :comments_context,
+            # declarations 
+            :function_definition,
             :struct_declare,
             :special_block_context,
-            :macro_argument,
             :string_context,
             :functional_specifiers_pre_parameters,
             :qualifiers_and_specifiers_post_parameters,
@@ -197,8 +179,6 @@ cpp_grammar = Grammar.new(
             :misc_storage_modifiers_1,
             :destructor,
             :lambdas,
-            :preprocessor_context,
-            :comments_context,
             :switch_statement,
             :control_flow_keywords,
             :assembly,
@@ -206,20 +186,13 @@ cpp_grammar = Grammar.new(
             :operator_overload,
             :number_literal,
             :string_context_c,
-            :meta_preprocessor_macro,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
-            :pragma_mark,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
             :predefined_macros,
             :operators,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
             :block,
             :parentheses,
             :type_casting_operators,
-            :function_definition,
+            
             :function_call,
             :scope_resolution_inner_generated,
             :storage_types,
@@ -300,6 +273,14 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
+            :macro_argument,
+            :meta_preprocessor_macro,
+            :meta_preprocessor_diagnostic,
+            :meta_preprocessor_include,
+            :pragma_mark,
+            :meta_preprocessor_line,
+            :meta_preprocessor_undef,
+            :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
         ]
     cpp_grammar[:storage_types] = [
@@ -778,7 +759,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.maybe(@spaces).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call.without_numbered_capture_groups).then(/::/)
     preceding_scopes = newPattern(
         match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution_inner_generated ]
@@ -788,7 +769,7 @@ cpp_grammar = Grammar.new(
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
-            match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+            match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
             includes: [
                     # then tag every `name::` seperately 
                     hidden_grammar_name,
@@ -799,7 +780,7 @@ cpp_grammar = Grammar.new(
             match: cpp_grammar[grammar_name].then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.scope-resolution"+tag_extension
-                ).maybe(@spaces).maybe(
+                ).then(/\s*+/).maybe(
                     template_call
                 ).then(
                     match: /::/,
@@ -823,24 +804,20 @@ cpp_grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
+        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: maybe(@spaces).lookBehindToAvoid(
-                /\w/
-            ).lookAheadFor(
-                /\w/
-            ).lookAheadToAvoid(
-                non_type_keywords.lookAheadToAvoid(/[\w]/).maybe(@spaces)
-            ).maybe(
+        match: std_space.maybe(
                 inline_attribute
-            ).maybe(@spaces).zeroOrMoreOf(
-                builtin_type_creators_and_specifiers.then(@spaces)
+            ).then(std_space).zeroOrMoreOf(
+                builtin_type_creators_and_specifiers.then(std_space)
             ).maybe(
                 scope_resolution
-            ).maybe(@spaces).then(
+            ).then(std_space).then(
                 match: identifier,
                 tag_as: "entity.name.type",
+            ).then(@word_boundary).then(
+                lookBehindToAvoid(non_type_keywords)
             ).maybe(
                 template_call.without_numbered_capture_groups
             ).lookAheadToAvoid(/[\w<:.]/),
@@ -933,14 +910,14 @@ cpp_grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: newPattern(
-            qualified_type.then(@spaces.or(ref_deref_definition_pattern)).then(
+            qualified_type.then(ref_deref_definition_pattern).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
                 avoid_invalid_function_names
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.definition"
-            ).maybe(@spaces).lookAheadFor(/\(/)
+            ).then(std_space).lookAheadFor(/\(/)
         ),
         head_includes:[
             PatternRange.new(

@@ -3,7 +3,7 @@
     "displayName": "Better Syntax",
     "description": "The bleeding edge of C-like syntaxes",
     "icon": "icon.png",
-    "version": "1.11.4",
+    "version": "1.11.5",
     "scripts": {
         "build": "ruby scripts/generate.rb",
         "prelint": "npm run build",
@@ -88,9 +88,12 @@
         "json-stable-stringify": "^1.0.1",
         "lodash": "^4.17.11",
         "nspell": "^2.1.2",
-        "oniguruma": "^7.1.0",
+        "oniguruma": "^7.2.0",
         "prettyjson": "^1.2.1",
         "vscode-textmate": "^4.1.1",
-        "yargs": "^13.2.2"
+        "yargs": "^13.2.2",
+        "node-gyp": "^4.0.0"
+    },
+    "dependencies": {
     }
 }
