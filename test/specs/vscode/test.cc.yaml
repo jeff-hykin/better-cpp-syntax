@@ -440,6 +440,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: asm
+  scopesBegin:
+    - meta.asm
   scopes:
     - storage.type.asm
 - source: (
@@ -449,28 +451,20 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
-- source: 'movw $0x38, '
-  scopesBegin:
-    - meta.embedded.assembly
-- source: '%a'
+    - punctuation.definition.string.begin.assembly
+- source: 'movw $0x38, %ax; ltr %ax'
   scopes:
-    - constant.other.placeholder
-- source: 'x; ltr '
-- source: '%a'
-  scopes:
-    - constant.other.placeholder
-- source: x
-  scopesEnd:
     - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly
+  scopesEnd:
+    - meta.asm
 - source: ;
   scopes:
     - punctuation.terminator.statement

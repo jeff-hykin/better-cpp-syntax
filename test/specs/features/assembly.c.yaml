@@ -1,4 +1,6 @@
 - source: asm
+  scopesBegin:
+    - meta.asm
   scopes:
     - storage.type.asm
 - source: (
@@ -8,7 +10,7 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: .globl func
   scopesBegin:
     - meta.embedded.assembly
@@ -22,12 +24,14 @@
     - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly
+  scopesEnd:
+    - meta.asm
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -88,6 +92,7 @@
 - source: asm
   scopesBegin:
     - meta.function-call
+    - meta.asm
   scopes:
     - storage.type.asm
 - source: (
@@ -97,27 +102,29 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: 'leal (%0,%0,4),%0'
   scopes:
     - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: '         : '
+- source: ':'
+  scopes:
+    - punctuation.separator.delimiter.colon.assembly
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: =r
   scopes:
     - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: ' (n'
@@ -126,6 +133,7 @@
     - punctuation.section.parens.end.bracket.round.assembly
   scopesEnd:
     - meta.function-call
+    - meta.asm
 - source: '         : '
 - source: '"'
   scopesBegin:
@@ -164,6 +172,7 @@
 - source: asm
   scopesBegin:
     - meta.function-call
+    - meta.asm
   scopes:
     - storage.type.asm
 - source: (
@@ -173,7 +182,7 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: 'movq $60, %rax'
   scopesBegin:
     - meta.embedded.assembly
@@ -186,7 +195,7 @@
     - constant.character.escape
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: //
@@ -201,7 +210,7 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: 'movq $2,  %rdi'
   scopesBegin:
     - meta.embedded.assembly
@@ -214,7 +223,7 @@
     - constant.character.escape
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: //
@@ -229,13 +238,13 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: syscall
   scopes:
     - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: )
@@ -243,6 +252,7 @@
     - punctuation.section.parens.end.bracket.round.assembly
   scopesEnd:
     - meta.function-call
+    - meta.asm
 - source: ;
   scopes:
     - punctuation.terminator.statement
