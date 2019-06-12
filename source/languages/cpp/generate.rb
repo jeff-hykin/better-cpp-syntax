@@ -2172,6 +2172,9 @@ cpp_grammar = Grammar.new(
         },
         patterns: [
             {
+                include: "#parameter_struct",
+            },
+            {
                 include: "#root_context"
             }
         ]

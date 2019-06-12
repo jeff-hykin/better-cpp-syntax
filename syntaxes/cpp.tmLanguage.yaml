@@ -3714,6 +3714,7 @@
       '0':
         name: punctuation.section.parens.end.bracket.round.cpp
     patterns:
+    - include: "#parameter_struct"
     - include: "#root_context"
   parentheses_block:
     name: meta.parens.block.cpp
