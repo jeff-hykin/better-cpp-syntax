@@ -872,7 +872,6 @@ cpp_grammar = Grammar.new(
 # Functions
 #
     cant_be_a_function_name = @cpp_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
-    avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
     cpp_grammar[:struct_declare] = struct_declare = newPattern(
             should_partial_match: [ "struct crypto_aead *tfm = crypto_aead_reqtfm(req);", "struct aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
@@ -915,10 +914,10 @@ cpp_grammar = Grammar.new(
             qualified_type.then(ref_deref_definition_pattern).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
-                avoid_invalid_function_names
-            ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.definition"
+            ).then(@word_boundary).lookBehindToAvoid(
+                cant_be_a_function_name
             ).then(std_space).lookAheadFor(/\(/)
         ),
         head_includes:[
@@ -979,14 +978,14 @@ cpp_grammar = Grammar.new(
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
     cpp_grammar[:function_call] = PatternRange.new(
-        start_pattern: lookAheadToAvoid(@space).then(
-                avoid_invalid_function_names
-            ).then(
+        start_pattern: newPattern(
                 cpp_grammar[:scope_resolution_function_call]
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
-            ).maybe(@spaces).maybe(
+            ).then(@word_boundary).lookBehindToAvoid(
+                cant_be_a_function_name
+            ).then(std_space).maybe(
                 template_call
             ).then(
                 match: /\(/,
@@ -3221,7 +3220,7 @@ cpp_grammar = Grammar.new(
             },
             :method_access,
             :member_access,
-            :root_context
+            :evaluation_context
         ]
     cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
