@@ -37,24 +37,31 @@ cpp_grammar = Grammar.new(
             tag_as: "comment.block punctuation.definition.comment.end",
         )
     std_space = newPattern(
-        # NOTE: this pattern can match 0-spaces so long as its still a word boundary
-        # this is the intention since things like `int/*comment*/a = 10` are valid in c++
-        # this space pattern will match inline /**/ comments that do not contain newlines
-            match: oneOrMoreOf(
+            # NOTE: this pattern can match 0-spaces so long as its still a word boundary
+            # this is the intention since things like `int/*comment*/a = 10` are valid in c++
+            # this space pattern will match inline /**/ comments that do not contain newlines
+            
+            # zero length match
+            newPattern(
+                # look for either word-NONWORD, NONWORD-word, or NONWORD-NONWORD
+                lookBehindFor(/\W/).or(
+                    lookAheadFor(/\W/)
+                ).or(
+                    @start_of_document
+                ).or(
+                    @end_of_document
+                )
+            # >0 length match
+            ).or(
+                at_least: 1,
                 quantity_preference: :as_few_as_possible,
                 match: newPattern(
-                    @spaces
-                ).or(
-                    inline_comment
-                ).or(
-                    @word_boundary
-                ),
-                includes: [
-                    :inline_comment
-                ]
-            ),
-            should_fully_match:["/*a comment*/", " /* with spaces */ "],
-            should_partial_match: ["namespace{", "( A"],
+                        match: @spaces,
+                        dont_back_track?: true
+                    ).or(
+                        inline_comment
+                    )
+            )   
         )
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
@@ -79,18 +86,18 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.definition.end.bracket.square"
         ).maybe(@spaces)
     # TODO eventually move this outside of the # Utils section
-    ref_deref_definition_pattern = newPattern(
+    ref_deref_definition_pattern = maybe(
         should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
         should_not_fully_match: [ '&*', '&&&' ],
-        match: maybe(@spaces).then(
-            match: zeroOrMoreOf(/\*/.maybe(@spaces)),
+        match: std_space.then(
+            match: zeroOrMoreOf(/\*/.then(std_space)),
             tag_as: "storage.modifier.pointer"
         ).then(
-            match: /&/.maybe(@spaces),
+            match: /&/.then(std_space),
             at_least: 0.times,
             at_most: 2.times,
             tag_as: "storage.modifier.reference"
-        ).maybe(@spaces)
+        ).then(std_space)
     )
     functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
@@ -936,7 +943,7 @@ cpp_grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: newPattern(
-            qualified_type.then(@spaces.or(ref_deref_definition_pattern)).then(
+            qualified_type.then(ref_deref_definition_pattern).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
                 avoid_invalid_function_names
