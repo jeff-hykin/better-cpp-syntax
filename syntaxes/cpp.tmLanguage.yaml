@@ -3252,7 +3252,7 @@
     name: storage.modifier.array.bracket.square.cpp
     match: !ruby/regexp /(?-mix:(?<!delete))\\[\\s*\\]/
   assembly:
-    begin: "(\\b(?:__asm__|asm)\\b)\\s*(volatile)?\\s*(\\()"
+    begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
     beginCaptures:
       '1':
         name: storage.type.asm.cpp

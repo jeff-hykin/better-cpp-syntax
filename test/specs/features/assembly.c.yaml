@@ -174,9 +174,16 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'movq $60, %rax\n\t'
-  scopes:
+- source: 'movq $60, %rax'
+  scopesBegin:
     - meta.embedded.assembly
+- source: \n
+  scopesBegin:
+    - constant.character.escape
+- source: \t
+  scopesEnd:
+    - meta.embedded.assembly
+    - constant.character.escape
 - source: '"'
   scopes:
     - punctuation.definition.string.end
@@ -195,9 +202,16 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'movq $2,  %rdi\n\t'
-  scopes:
+- source: 'movq $2,  %rdi'
+  scopesBegin:
     - meta.embedded.assembly
+- source: \n
+  scopesBegin:
+    - constant.character.escape
+- source: \t
+  scopesEnd:
+    - meta.embedded.assembly
+    - constant.character.escape
 - source: '"'
   scopes:
     - punctuation.definition.string.end

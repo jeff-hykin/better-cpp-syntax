@@ -19,7 +19,11 @@
 - source: '    .type func, @function'
 - source: '    func:'
 - source: '    .cfi_startproc'
-- source: '    movl $7, %eax'
+- source: '    movl $7, '
+- source: '%e'
+  scopes:
+    - constant.other.placeholder
+- source: ax
 - source: '    retl'
 - source: '    .cfi_endproc'
 - source: )
@@ -100,8 +104,14 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'leal (%0,%0,4),%0'
+- source: leal (
+  scopesBegin:
+    - meta.embedded.assembly
+- source: '%0,%'
   scopes:
+    - constant.other.placeholder
+- source: '0,4),%0'
+  scopesEnd:
     - meta.embedded.assembly
 - source: '"'
   scopes:
@@ -175,9 +185,16 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'movq $60, %rax\n\t'
-  scopes:
+- source: 'movq $60, %rax'
+  scopesBegin:
     - meta.embedded.assembly
+- source: \n
+  scopesBegin:
+    - constant.character.escape
+- source: \t
+  scopesEnd:
+    - meta.embedded.assembly
+    - constant.character.escape
 - source: '"'
   scopes:
     - punctuation.definition.string.end
@@ -196,9 +213,16 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: 'movq $2,  %rdi\n\t'
-  scopes:
+- source: 'movq $2,  %rdi'
+  scopesBegin:
     - meta.embedded.assembly
+- source: \n
+  scopesBegin:
+    - constant.character.escape
+- source: \t
+  scopesEnd:
+    - meta.embedded.assembly
+    - constant.character.escape
 - source: '"'
   scopes:
     - punctuation.definition.string.end

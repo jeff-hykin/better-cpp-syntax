@@ -851,7 +851,7 @@
           "name": "storage.type.$1.c"
         },
         {
-          "begin": "(\\b(?:__asm__|asm)\\b)\\s*(volatile)?\\s*(\\()",
+          "begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()",
           "beginCaptures": {
             "1": {
               "name": "storage.type.asm.c"

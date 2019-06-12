@@ -132,24 +132,18 @@
     - punctuation.terminator.statement
 - source: '[['
   scopesBegin:
-    - support.other.attribute
-  scopes:
-    - punctuation.section.attribute.begin
+    - meta.function.definition
+    - meta.qualified_type
 - source: noreturn
   scopes:
-    - entity.other.attribute.noreturn
-- source: ']]'
-  scopes:
-    - punctuation.section.attribute.end
-  scopesEnd:
-    - support.other.attribute
+    - entity.name.type
+- source: ']] '
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.qualified_type
 - source: func2
   scopesBegin:
     - meta.head.function.definition
