@@ -873,9 +873,12 @@
             {
               "name": "string.quoted.double.c",
               "contentName": "meta.embedded.assembly.c",
-              "begin": "(\")",
+              "begin": "(R?)(\")",
               "beginCaptures": {
                 "1": {
+                  "name": "meta.encoding.c"
+                },
+                "2": {
                   "name": "punctuation.definition.string.begin.c"
                 }
               },

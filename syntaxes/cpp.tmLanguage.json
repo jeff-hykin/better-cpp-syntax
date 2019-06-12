@@ -6236,9 +6236,12 @@
         {
           "name": "string.quoted.double.cpp",
           "contentName": "meta.embedded.assembly.cpp",
-          "begin": "(\")",
+          "begin": "(R?)(\")",
           "beginCaptures": {
             "1": {
+              "name": "meta.encoding.cpp"
+            },
+            "2": {
               "name": "punctuation.definition.string.begin.cpp"
             }
           },

@@ -1,22 +1,28 @@
 def assembly_pattern()
     return PatternRange.new(
         start_pattern: newPattern(
-            match: /\b(?:__asm__|asm)\b/,
-            tag_as: "storage.type.asm",
-        ).maybe(@spaces).maybe(
-            match: /volatile/,
-            tag_as: "storage.modifier"
-        ).maybe(@spaces).then(
-            match: /\(/,
-            tag_as: "punctuation.section.parens.begin.bracket.round.assembly",
-        ),
+                match: /\b(?:__asm__|asm)\b/,
+                tag_as: "storage.type.asm",
+            ).maybe(@spaces).maybe(
+                match: /volatile/,
+                tag_as: "storage.modifier"
+            ).maybe(@spaces).then(
+                match: /\(/,
+                tag_as: "punctuation.section.parens.begin.bracket.round.assembly",
+            ),
         end_pattern: newPattern(
-            match: /\)/,
-            tag_as: "punctuation.section.parens.end.bracket.round.assembly"
-        ),
+                match: /\)/,
+                tag_as: "punctuation.section.parens.end.bracket.round.assembly"
+            ),
         includes: [
             PatternRange.new(
-                start_pattern: newPattern(match: /"/, tag_as: "punctuation.definition.string.begin"),
+                start_pattern: maybe(
+                    match: /R/,
+                        tag_as: "meta.encoding" # this is a temp name and should be improved once strings are improved
+                    ).then(
+                        match: /"/, 
+                        tag_as: "punctuation.definition.string.begin"
+                    ),
                 end_pattern: newPattern(match: /"/, tag_as: "punctuation.definition.string.end"),
                 tag_as: "string.quoted.double",
                 tag_content_as: "meta.embedded.assembly",
@@ -48,6 +54,10 @@ def assembly_pattern()
                     :evaluation_context
                 ]
             ),
+            newPattern(
+                match: /:/,
+                tag_as: "punctuation.separator.delimiter.assembly",
+            )
             :comments_context,
             :comments,
         ]
