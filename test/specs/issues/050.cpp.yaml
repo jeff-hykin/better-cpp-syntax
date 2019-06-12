@@ -134,10 +134,17 @@
   scopesBegin:
     - meta.function.definition
     - meta.qualified_type
+    - support.other.attribute
+  scopes:
+    - punctuation.section.attribute.begin
 - source: noreturn
   scopes:
-    - entity.name.type
-- source: ']] '
+    - entity.other.attribute.noreturn
+- source: ']]'
+  scopes:
+    - punctuation.section.attribute.end
+  scopesEnd:
+    - support.other.attribute
 - source: void
   scopes:
     - storage.type.primitive
