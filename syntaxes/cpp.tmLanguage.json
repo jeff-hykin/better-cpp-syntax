@@ -992,7 +992,7 @@
       "match": "(?<!\\w)((?:private|protected|public))\\s*(:)",
       "captures": {
         "2": {
-          "name": "colon.cpp"
+          "name": "colon.cpp punctuation.separator.delimiter.colon.access.control.cpp"
         }
       },
       "name": "storage.type.modifier.access.control.$1.cpp"
@@ -6187,6 +6187,7 @@
       "name": "keyword.control.directive.$0.cpp"
     },
     "assembly": {
+      "name": "meta.asm.cpp",
       "begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()",
       "beginCaptures": {
         "1": {
@@ -6226,10 +6227,10 @@
           },
           "patterns": [
             {
-              "include": "source.x86"
+              "include": "source.asm"
             },
             {
-              "include": "source.asm"
+              "include": "source.x86"
             },
             {
               "include": "source.x86_64"
@@ -6269,7 +6270,7 @@
         },
         {
           "match": ":",
-          "name": "punctuation.separator.delimiter.assembly.cpp"
+          "name": "punctuation.separator.delimiter.colon.assembly.cpp"
         },
         {
           "include": "#comments_context"

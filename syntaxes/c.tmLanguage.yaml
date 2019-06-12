@@ -484,7 +484,8 @@
       name: storage.type.built-in.c
     - match: !ruby/regexp /\b(enum|struct|union)\b/
       name: storage.type.$1.c
-    - begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
+    - name: meta.asm.c
+      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
       beginCaptures:
         '1':
           name: storage.type.asm.c
@@ -510,8 +511,8 @@
           '1':
             name: punctuation.definition.string.end.assembly.c
         patterns:
-        - include: source.x86
         - include: source.asm
+        - include: source.x86
         - include: source.x86_64
         - include: source.arm
         - include: "#backslash_escapes"
@@ -528,7 +529,7 @@
         patterns:
         - include: "#evaluation_context"
       - match: ":"
-        name: punctuation.separator.delimiter.assembly.c
+        name: punctuation.separator.delimiter.colon.assembly.c
       - include: "#comments_context"
       - include: "#comments"
   vararg_ellipses:

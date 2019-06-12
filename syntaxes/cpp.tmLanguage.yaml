@@ -474,7 +474,7 @@
     match: "(?<!\\w)((?:private|protected|public))\\s*(:)"
     captures:
       '2':
-        name: colon.cpp
+        name: colon.cpp punctuation.separator.delimiter.colon.access.control.cpp
     name: storage.type.modifier.access.control.$1.cpp
   exception_keywords:
     match: "(?<!\\w)(?:throw|try|catch)(?!\\w)"
@@ -3235,6 +3235,7 @@
     match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     name: keyword.control.directive.$0.cpp
   assembly:
+    name: meta.asm.cpp
     begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
     beginCaptures:
       '1':
@@ -3261,8 +3262,8 @@
         '1':
           name: punctuation.definition.string.end.assembly.cpp
       patterns:
-      - include: source.x86
       - include: source.asm
+      - include: source.x86
       - include: source.x86_64
       - include: source.arm
       - include: "#backslash_escapes"
@@ -3279,7 +3280,7 @@
       patterns:
       - include: "#evaluation_context"
     - match: ":"
-      name: punctuation.separator.delimiter.assembly.cpp
+      name: punctuation.separator.delimiter.colon.assembly.cpp
     - include: "#comments_context"
     - include: "#comments"
   backslash_escapes:

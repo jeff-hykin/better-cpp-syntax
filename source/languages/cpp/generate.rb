@@ -437,7 +437,7 @@ cpp_grammar = Grammar.new(
                 reference: "access_specifier"
             ).maybe(@spaces).then(
                 match: /:/,
-                tag_as: "colon"
+                tag_as: "colon punctuation.separator.delimiter.colon.access.control"
             ),
         )
     cpp_grammar[:exception_keywords] = newPattern(

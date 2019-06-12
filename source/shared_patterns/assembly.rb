@@ -1,6 +1,6 @@
 def assembly_pattern()
     return PatternRange.new(
-        tag_as: "meta.asm"
+        tag_as: "meta.asm",
         start_pattern: newPattern(
                 match: /\b(?:__asm__|asm)\b/,
                 tag_as: "storage.type.asm",
@@ -16,7 +16,7 @@ def assembly_pattern()
                 tag_as: "punctuation.section.parens.end.bracket.round.assembly"
             ),
         includes: [
-            PatternRange.new(
+                PatternRange.new(
                 start_pattern: maybe(
                     match: /R/,
                         tag_as: "meta.encoding" # this is a temp name and should be improved once strings are improved
@@ -40,7 +40,7 @@ def assembly_pattern()
                     # of seeing a string as before, the user sees unstyled text.
                     # This dummy pattern prevents that
                     lookAheadFor(/not/).then(/possible/)
-                ]
+                ] 
             ),
             PatternRange.new(
                 start_pattern: newPattern(
@@ -57,7 +57,7 @@ def assembly_pattern()
             ),
             newPattern(
                 match: /:/,
-                tag_as: "punctuation.separator.delimiter.assembly",
+                tag_as: "punctuation.separator.delimiter.colon.assembly",
             ),
             :comments_context,
             :comments,
