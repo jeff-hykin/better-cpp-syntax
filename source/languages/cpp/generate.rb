@@ -289,6 +289,7 @@ cpp_grammar = Grammar.new(
         :meta_preprocessor_pragma,
         :operators,
         :block,
+        :c_style_type_casting,
         :parentheses,
         :type_casting_operators,
         :scope_resolution_inner_generated,
@@ -826,7 +827,7 @@ cpp_grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
+        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "a::more::<complex, type>"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
         match: /\s*+/.lookAheadFor(
@@ -891,6 +892,14 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
+    )
+    cpp_grammar[:c_style_type_casting] = newPattern(
+        tag_as: "meta.type.cast",
+        should_fully_match: ["(int)", "( char * )", "(a::more::<complex, type> )"],
+        should_not_partial_match: ["foo(bar)"],
+        match: lookBehindToAvoid(/[\w\s>]/).maybe(@spaces).then(
+            /\(/.maybe(@spaces).then(qualified_type).then(ref_deref_definition_pattern).then(/\)/)
+        ).lookAheadToAvoid(maybe(@spaces).then(@semicolon))
     )
 #
 # Functions

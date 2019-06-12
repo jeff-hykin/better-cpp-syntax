@@ -1,0 +1,1 @@
+void function() { return (bar)0; }
