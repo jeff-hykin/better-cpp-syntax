@@ -31,6 +31,7 @@ c_grammar = Grammar.new(
         :switch_statement,
         :switch_conditional_parentheses,
         :static_assert,
+        :backslash_escapes
     ]
     for each in import_names
         c_grammar[each] = @cpp_grammar[each]
