@@ -4,8 +4,10 @@ require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/trigraph_support.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
+require_relative source_dir + 'shared_patterns/assembly.rb'
 require_relative source_dir + 'shared_patterns/inline_comment.rb'
 require_relative source_dir + 'shared_patterns/std_space.rb'
+require_relative source_dir + 'shared_patterns/backslash_escapes.rb'
 require_relative './tokens.rb'
 
 # todo
@@ -435,7 +437,7 @@ cpp_grammar = Grammar.new(
                 reference: "access_specifier"
             ).maybe(@spaces).then(
                 match: /:/,
-                tag_as: "colon"
+                tag_as: "colon punctuation.separator.delimiter.colon.access.control"
             ),
         )
     cpp_grammar[:exception_keywords] = newPattern(
@@ -822,6 +824,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
             newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
+            :attributes_context,
             :function_type,
             :storage_types,
             :number_literal,
@@ -1590,6 +1593,11 @@ cpp_grammar = Grammar.new(
         )
 
 #
+# Misc
+#
+    cpp_grammar[:assembly] = assembly_pattern()
+    cpp_grammar[:backslash_escapes] = backslash_escapes()
+#
 # Misc Legacy
 #
     cpp_grammar[:square_brackets] = {
@@ -1619,10 +1627,6 @@ cpp_grammar = Grammar.new(
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    cpp_grammar[:assembly] = newPattern(
-            match: variableBounds[ /(asm|__asm__)/ ],
-            tag_as: "storage.type.$match"
-        )
     cpp_grammar[:misc_storage_modifiers_1] = {
             match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
             name: "storage.modifier"
@@ -1973,7 +1977,7 @@ cpp_grammar = Grammar.new(
                 ]
             ),
             {
-                begin: "(u|u8|U|L)?R\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
+                begin: "((?:u|u8|U|L)?R)\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
                 beginCaptures: {
                     "0" => {
                         name: "punctuation.definition.string.begin"
@@ -2264,10 +2268,7 @@ cpp_grammar = Grammar.new(
             }
         ]
     cpp_grammar[:string_escapes_context_c] = [
-            {
-                match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
-                name: "constant.character.escape"
-            },
+            :backslash_escapes,
             {
                 match: "\\\\.",
                 name: "invalid.illegal.unknown-escape"

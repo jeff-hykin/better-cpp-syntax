@@ -847,8 +847,102 @@
           "name": "storage.type.built-in.c"
         },
         {
-          "match": "(?-mix:\\b(asm|__asm__|enum|struct|union)\\b)",
+          "match": "(?-mix:\\b(enum|struct|union)\\b)",
           "name": "storage.type.$1.c"
+        },
+        {
+          "name": "meta.asm.c",
+          "begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.asm.c"
+            },
+            "2": {
+              "name": "storage.modifier.c"
+            },
+            "3": {
+              "name": "punctuation.section.parens.begin.bracket.round.assembly.c"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.end.bracket.round.assembly.c"
+            }
+          },
+          "patterns": [
+            {
+              "name": "string.quoted.double.c",
+              "contentName": "meta.embedded.assembly.c",
+              "begin": "(R?)(\")",
+              "beginCaptures": {
+                "1": {
+                  "name": "meta.encoding.c"
+                },
+                "2": {
+                  "name": "punctuation.definition.string.begin.assembly.c"
+                }
+              },
+              "end": "(\")",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.end.assembly.c"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.asm"
+                },
+                {
+                  "include": "source.x86"
+                },
+                {
+                  "include": "source.x86_64"
+                },
+                {
+                  "include": "source.arm"
+                },
+                {
+                  "include": "#backslash_escapes"
+                },
+                {
+                  "include": "#string_escaped_char"
+                },
+                {
+                  "match": "(?=not)possible"
+                }
+              ]
+            },
+            {
+              "begin": "(\\()",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.begin.bracket.round.assembly.inner.c"
+                }
+              },
+              "end": "(\\))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.end.bracket.round.assembly.inner.c"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#evaluation_context"
+                }
+              ]
+            },
+            {
+              "match": ":",
+              "name": "punctuation.separator.delimiter.colon.assembly.c"
+            },
+            {
+              "include": "#comments_context"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
         }
       ]
     },
@@ -2239,6 +2333,10 @@
         }
       ]
     },
+    "backslash_escapes": {
+      "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
+      "name": "constant.character.escape.c"
+    },
     "conditional_context": {
       "patterns": [
         {
@@ -2246,6 +2344,16 @@
         },
         {
           "include": "#block_innards"
+        }
+      ]
+    },
+    "evalutation_context": {
+      "patterns": [
+        {
+          "include": "#function-call-innards"
+        },
+        {
+          "include": "$base"
         }
       ]
     },

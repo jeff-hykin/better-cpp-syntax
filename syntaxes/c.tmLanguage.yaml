@@ -482,8 +482,56 @@
       name: storage.type.built-in.primitive.c
     - match: !ruby/regexp /(?<!\w)(?:_Complex|_Imaginary|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|memory_order|atomic_bool|atomic_char|atomic_schar|atomic_uchar|atomic_short|atomic_ushort|atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_llong|atomic_ullong|atomic_char16_t|atomic_char32_t|atomic_wchar_t|atomic_int_least8_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_least16_t|atomic_int_least32_t|atomic_uint_least32_t|atomic_int_least64_t|atomic_uint_least64_t|atomic_int_fast8_t|atomic_uint_fast8_t|atomic_int_fast16_t|atomic_uint_fast16_t|atomic_int_fast32_t|atomic_uint_fast32_t|atomic_int_fast64_t|atomic_uint_fast64_t|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_intmax_t|atomic_uintmax_t)(?!\w)/
       name: storage.type.built-in.c
-    - match: !ruby/regexp /\b(asm|__asm__|enum|struct|union)\b/
+    - match: !ruby/regexp /\b(enum|struct|union)\b/
       name: storage.type.$1.c
+    - name: meta.asm.c
+      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
+      beginCaptures:
+        '1':
+          name: storage.type.asm.c
+        '2':
+          name: storage.modifier.c
+        '3':
+          name: punctuation.section.parens.begin.bracket.round.assembly.c
+      end: "(\\))"
+      endCaptures:
+        '1':
+          name: punctuation.section.parens.end.bracket.round.assembly.c
+      patterns:
+      - name: string.quoted.double.c
+        contentName: meta.embedded.assembly.c
+        begin: (R?)(")
+        beginCaptures:
+          '1':
+            name: meta.encoding.c
+          '2':
+            name: punctuation.definition.string.begin.assembly.c
+        end: (")
+        endCaptures:
+          '1':
+            name: punctuation.definition.string.end.assembly.c
+        patterns:
+        - include: source.asm
+        - include: source.x86
+        - include: source.x86_64
+        - include: source.arm
+        - include: "#backslash_escapes"
+        - include: "#string_escaped_char"
+        - match: "(?=not)possible"
+      - begin: "(\\()"
+        beginCaptures:
+          '1':
+            name: punctuation.section.parens.begin.bracket.round.assembly.inner.c
+        end: "(\\))"
+        endCaptures:
+          '1':
+            name: punctuation.section.parens.end.bracket.round.assembly.inner.c
+        patterns:
+        - include: "#evaluation_context"
+      - match: ":"
+        name: punctuation.separator.delimiter.colon.assembly.c
+      - include: "#comments_context"
+      - include: "#comments"
   vararg_ellipses:
     match: "(?<!\\.)\\.\\.\\.(?!\\.)"
     name: punctuation.vararg-ellipses.c
@@ -1240,10 +1288,18 @@
       - include: "#string_context"
       - include: "#string_context_c"
     - include: "#function_call_context"
+  backslash_escapes:
+    match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
+      |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )"
+    name: constant.character.escape.c
   conditional_context:
     patterns:
     - include: "$base"
     - include: "#block_innards"
+  evalutation_context:
+    patterns:
+    - include: "#function-call-innards"
+    - include: "$base"
   member_access:
     match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:void|char|short|int|signed|unsigned|long|float|double|bool|_Bool|_Complex|_Imaginary|u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t|memory_order|atomic_bool|atomic_char|atomic_schar|atomic_uchar|atomic_short|atomic_ushort|atomic_int|atomic_uint|atomic_long|atomic_ulong|atomic_llong|atomic_ullong|atomic_char16_t|atomic_char32_t|atomic_wchar_t|atomic_int_least8_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_least16_t|atomic_int_least32_t|atomic_uint_least32_t|atomic_int_least64_t|atomic_uint_least64_t|atomic_int_fast8_t|atomic_uint_fast8_t|atomic_int_fast16_t|atomic_uint_fast16_t|atomic_int_fast32_t|atomic_uint_fast32_t|atomic_int_fast64_t|atomic_uint_fast64_t|atomic_intptr_t|atomic_uintptr_t|atomic_size_t|atomic_ptrdiff_t|atomic_intmax_t|atomic_uintmax_t))[a-zA-Z_]\\w*\\b(?!\\())"
     captures:

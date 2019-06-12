@@ -39,9 +39,8 @@ function getRegistry(getOnigLib) {
                     );
                     break;
                 default:
-                    return Promise.reject(
-                        "requested non c/c++/objc/objc++ grammar"
-                    );
+                    console.error("requested non c/c++/objc/objc++ grammar");
+                    return Promise.resolve({});
             }
             return Promise.resolve(
                 rewriteGrammar(
