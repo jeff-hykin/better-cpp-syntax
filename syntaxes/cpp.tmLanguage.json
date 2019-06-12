@@ -15,12 +15,28 @@
   "repository": {
     "decltype_specifier": {
       "contentName": "meta.arguments.decltype.cpp",
-      "begin": "((?<!\\w)decltype(?!\\w))(\\()",
+      "begin": "((?<!\\w)decltype(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.decltype.cpp"
         }
       },
@@ -38,12 +54,28 @@
     },
     "sizeof_operator": {
       "contentName": "meta.arguments.operator.sizeof.cpp",
-      "begin": "((?<!\\w)sizeof(?!\\w))(\\()",
+      "begin": "((?<!\\w)sizeof(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp"
         }
       },
@@ -61,12 +93,28 @@
     },
     "alignof_operator": {
       "contentName": "meta.arguments.operator.alignof.cpp",
-      "begin": "((?<!\\w)alignof(?!\\w))(\\()",
+      "begin": "((?<!\\w)alignof(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.alignof.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.operator.alignof.cpp"
         }
       },
@@ -84,12 +132,28 @@
     },
     "alignas_operator": {
       "contentName": "meta.arguments.operator.alignas.cpp",
-      "begin": "((?<!\\w)alignas(?!\\w))(\\()",
+      "begin": "((?<!\\w)alignas(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.alignas.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.operator.alignas.cpp"
         }
       },
@@ -107,12 +171,28 @@
     },
     "typeid_operator": {
       "contentName": "meta.arguments.operator.typeid.cpp",
-      "begin": "((?<!\\w)typeid(?!\\w))(\\()",
+      "begin": "((?<!\\w)typeid(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.typeid.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp"
         }
       },
@@ -947,12 +1027,28 @@
     },
     "decltype": {
       "contentName": "meta.arguments.decltype.cpp",
-      "begin": "((?<!\\w)decltype(?!\\w))(\\()",
+      "begin": "((?<!\\w)decltype(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp"
         },
         "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        },
+        "6": {
           "name": "punctuation.section.arguments.begin.bracket.round.decltype.cpp"
         }
       },
@@ -7794,7 +7890,7 @@
           "name": "punctuation.section.parens.end.bracket.round.cpp"
         },
         {
-          "begin": "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+          "begin": "(?x)\n(?<![\\w$]|\\[)(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
           "end": "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
           "name": "meta.function.cpp",
           "patterns": [
