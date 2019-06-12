@@ -153,9 +153,14 @@ cpp_grammar = Grammar.new(
             :source_wrapper,
         ]
     cpp_grammar[:root_context] = [
+            # first preprocessor directives, which should be a part of every scope
+            :preprocessor_context,
+            # comments 
+            :comments_context,
+            # declarations 
+            :function_definition,
             :struct_declare,
             :special_block_context,
-            :macro_argument,
             :string_context,
             :functional_specifiers_pre_parameters,
             :qualifiers_and_specifiers_post_parameters,
@@ -173,8 +178,6 @@ cpp_grammar = Grammar.new(
             :misc_storage_modifiers_1,
             :destructor,
             :lambdas,
-            :preprocessor_context,
-            :comments_context,
             :switch_statement,
             :control_flow_keywords,
             :assembly,
@@ -182,20 +185,13 @@ cpp_grammar = Grammar.new(
             :operator_overload,
             :number_literal,
             :string_context_c,
-            :meta_preprocessor_macro,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
-            :pragma_mark,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
             :predefined_macros,
             :operators,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
             :block,
             :parentheses,
             :type_casting_operators,
-            :function_definition,
+            
             :function_call,
             :scope_resolution_inner_generated,
             :storage_types,
@@ -276,6 +272,14 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
+            :macro_argument,
+            :meta_preprocessor_macro,
+            :meta_preprocessor_diagnostic,
+            :meta_preprocessor_include,
+            :pragma_mark,
+            :meta_preprocessor_line,
+            :meta_preprocessor_undef,
+            :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
         ]
     cpp_grammar[:storage_types] = [
