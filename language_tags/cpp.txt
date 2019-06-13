@@ -373,6 +373,7 @@ meta.arguments.operator.alignas.cpp
 meta.arguments.operator.alignof.cpp
 meta.arguments.operator.sizeof.cpp
 meta.arguments.operator.typeid.cpp
+meta.asm.cpp
 meta.block.class.cpp
 meta.block.cpp
 meta.block.enum.cpp
@@ -396,6 +397,7 @@ meta.declaration.namespace.alias.cpp
 meta.declaration.namespace.alias.value.cpp
 meta.declaration.type.alias.cpp
 meta.declaration.type.alias.value.unknown.cpp
+meta.embedded.assembly.cpp
 meta.encoding.cpp
 meta.enum.definition.cpp
 meta.function.constructor.cpp
@@ -461,7 +463,9 @@ punctuation.definition.parameters.end.constructor.cpp
 punctuation.definition.parameters.end.cpp
 punctuation.definition.parameters.end.destructor.cpp
 punctuation.definition.parameters.end.lambda.cpp
+punctuation.definition.string.begin.assembly.cpp
 punctuation.definition.string.begin.cpp
+punctuation.definition.string.end.assembly.cpp
 punctuation.definition.string.end.cpp
 punctuation.section.angle-brackets.begin.template.call.cpp
 punctuation.section.angle-brackets.end.template.call.cpp
@@ -511,10 +515,14 @@ punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
 punctuation.section.parameters.end.bracket.round.cpp
 punctuation.section.parameters.end.bracket.round.function.pointer.cpp
 punctuation.section.parameters.end.bracket.round.operator-overload.cpp
+punctuation.section.parens.begin.bracket.round.assembly.cpp
+punctuation.section.parens.begin.bracket.round.assembly.inner.cpp
 punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
 punctuation.section.parens.begin.bracket.round.cpp
 punctuation.section.parens.begin.bracket.round.function.pointer.cpp
 punctuation.section.parens.begin.bracket.round.initialization.cpp
+punctuation.section.parens.end.bracket.round.assembly.cpp
+punctuation.section.parens.end.bracket.round.assembly.inner.cpp
 punctuation.section.parens.end.bracket.round.conditional.switch.cpp
 punctuation.section.parens.end.bracket.round.cpp
 punctuation.section.parens.end.bracket.round.function.pointer.cpp
@@ -523,6 +531,8 @@ punctuation.separator.attribute.cpp
 punctuation.separator.case.cpp
 punctuation.separator.case.default.cpp
 punctuation.separator.constant.numeric.cpp
+punctuation.separator.delimiter.colon.access.control.cpp
+punctuation.separator.delimiter.colon.assembly.cpp
 punctuation.separator.delimiter.cpp
 punctuation.separator.delimiter.inheritance.cpp
 punctuation.separator.dot-access.cpp
@@ -558,6 +568,7 @@ storage.modifier.specifier.functional.post-parameters.$0.cpp
 storage.modifier.specifier.functional.pre-parameters.$0.cpp
 storage.type.$0.cpp
 storage.type.$3.cpp
+storage.type.asm.cpp
 storage.type.built-in.cpp
 storage.type.built-in.primitive.cpp
 storage.type.cpp

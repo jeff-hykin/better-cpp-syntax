@@ -3,7 +3,7 @@
     "displayName": "Better Syntax",
     "description": "The bleeding edge of C-like syntaxes",
     "icon": "icon.png",
-    "version": "1.11.5",
+    "version": "1.11.7",
     "scripts": {
         "build": "ruby scripts/generate.rb",
         "prelint": "npm run build",
@@ -47,12 +47,18 @@
             {
                 "language": "cpp",
                 "scopeName": "source.cpp",
-                "path": "./syntaxes/cpp.tmLanguage.json"
+                "path": "./syntaxes/cpp.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.assembly.cpp": "asm"
+                }
             },
             {
                 "language": "c",
                 "scopeName": "source.c",
-                "path": "./syntaxes/c.tmLanguage.json"
+                "path": "./syntaxes/c.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.assembly.c": "asm"
+                }
             },
             {
                 "language": "objective-cpp",
