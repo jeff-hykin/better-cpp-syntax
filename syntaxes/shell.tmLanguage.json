@@ -119,7 +119,7 @@
               "name": "meta.scope.case-clause-body.shell",
               "patterns": [
                 {
-                  "include": "$self"
+                  "include": "#root_context"
                 }
               ]
             }
@@ -179,7 +179,7 @@
               "include": "#logical-expression"
             },
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -219,7 +219,7 @@
           "name": "meta.scope.subshell.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -239,7 +239,7 @@
           "name": "meta.scope.group.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         }
@@ -269,7 +269,7 @@
           "name": "meta.function.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -292,7 +292,7 @@
           "name": "meta.function.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         }
@@ -735,7 +735,7 @@
               "name": "string.unquoted.herestring.shell",
               "patterns": [
                 {
-                  "include": "$self"
+                  "include": "#root_context"
                 }
               ]
             }
@@ -808,7 +808,7 @@
               ]
             },
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -828,7 +828,7 @@
           "name": "string.interpolated.dollar.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         }
@@ -885,7 +885,7 @@
           "name": "meta.scope.for-loop.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -916,7 +916,7 @@
           "name": "meta.scope.for-in-loop.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -936,7 +936,7 @@
           "name": "meta.scope.while-loop.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -959,7 +959,7 @@
           "name": "meta.scope.select-block.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -995,12 +995,12 @@
                   "include": "#case-clause"
                 },
                 {
-                  "include": "$self"
+                  "include": "#root_context"
                 }
               ]
             },
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
@@ -1020,7 +1020,7 @@
           "name": "meta.scope.if-block.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         }
@@ -1082,7 +1082,7 @@
           "name": "meta.structure.extglob.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         }
@@ -1118,7 +1118,7 @@
           "name": "string.interpolated.process-substitution.shell",
           "patterns": [
             {
-              "include": "$self"
+              "include": "#root_context"
             }
           ]
         },
