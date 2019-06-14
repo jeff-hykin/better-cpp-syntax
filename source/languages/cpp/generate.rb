@@ -873,7 +873,7 @@ cpp_grammar = Grammar.new(
         tag_as: "meta.type.cast",
         should_fully_match: ["(int)", "( char * )", "(a::more::<complex, type> )"],
         should_not_partial_match: ["foo(bar)"],
-        match: lookBehindToAvoid(/[\w\s>]/).maybe(@spaces).then(
+        match: lookBehindToAvoid(/[\w>]/).maybe(@spaces).then(
             /\(/.maybe(@spaces).then(qualified_type).then(ref_deref_definition_pattern).then(/\)/)
         ).lookAheadToAvoid(maybe(@spaces).then(@semicolon))
     )
