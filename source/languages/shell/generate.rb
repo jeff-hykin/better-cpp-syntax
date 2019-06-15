@@ -218,7 +218,7 @@ Dir.chdir __dir__
         ]
     )
     grammar[:option] = PatternRange.new(
-        tag_as: "constant.other.option",
+        tag_as: "string.unquoted.argument constant.other.option",
         start_pattern: /\s++-/.then(possible_command_start),
         end_pattern: lookAheadFor(@space).or(command_end),
         includes: [
@@ -255,6 +255,60 @@ Dir.chdir __dir__
             ),
         includes: grammar[:logical_expression_context]
     )
+    
+    def generateVariable(regex_after_dollarsign, tag)
+        newPattern(
+            match: newPattern(
+                match: /\$/,
+                tag_as: "punctuation.definition.variable #{tag}"
+            ).then(
+                match: regex_after_dollarsign,
+                tag_as: tag,
+            )
+        )
+    end
+    
+    grammar[:variable] = [
+        generateVariable(/\@/, "variable.parameter.positional.all"),
+        generateVariable(/[0-9]/, "variable.parameter.positional"),
+        generateVariable(/\{[0-9]+\}/, "variable.parameter.positional"),
+        generateVariable(/[-*#?$!0_]/, "variable.language.special"),
+        PatternRange.new(
+            start_pattern: newPattern(
+                    match: newPattern(
+                        match: /\$/,
+                        tag_as: "punctuation.definition.variable punctuation.section.bracket.curly.variable.begin"
+                    ).then(
+                        match: /\{/,
+                        tag_as: "punctuation.section.bracket.curly.variable.begin",
+                        
+                    )
+                ),
+            end_pattern: newPattern(
+                    match: /\}/,
+                    tag_as: "punctuation.section.bracket.curly.variable.end",
+                ),
+            includes: [
+                {
+                    "match": "!|:[-=?]?|\\*|@|\#{1,2}|%{1,2}|/",
+                    "name": "keyword.operator.expansion.shell"
+                },
+                {
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.section.array.shell"
+                        },
+                        "3": {
+                            "name": "punctuation.section.array.shell"
+                        }
+                    },
+                    "match": "(\\[)([^\\]]+)(\\])"
+                },
+                :variable,
+                :string,
+            ]
+        )
+    ]
     
     
 

@@ -1611,84 +1611,6 @@
         }
       ]
     },
-    "variable": {
-      "patterns": [
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "match": "(\\$)[a-zA-Z_][a-zA-Z0-9_]*",
-          "name": "variable.other.normal.shell"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "match": "(\\$)@",
-          "name": "variable.parameter.positional.all.shell"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "match": "(\\$)[-*#?$!0_]",
-          "name": "variable.language.special.shell"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "match": "(\\$)[1-9]",
-          "name": "variable.parameter.positional.shell"
-        },
-        {
-          "begin": "\\${",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "end": "}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.variable.shell"
-            }
-          },
-          "name": "variable.other.bracket.shell",
-          "patterns": [
-            {
-              "match": "!|:[-=?]?|\\*|@|#{1,2}|%{1,2}|/",
-              "name": "keyword.operator.expansion.shell"
-            },
-            {
-              "captures": {
-                "1": {
-                  "name": "punctuation.section.array.shell"
-                },
-                "3": {
-                  "name": "punctuation.section.array.shell"
-                }
-              },
-              "match": "(\\[)([^\\]]+)(\\])"
-            },
-            {
-              "include": "#variable"
-            },
-            {
-              "include": "#string"
-            }
-          ]
-        }
-      ]
-    },
     "statement_seperator": {
       "match": "(?:(?:(?:(?:(;)|(&&))|(\\|\\|))|(&))|\\n)",
       "captures": {
@@ -1773,7 +1695,7 @@
       ]
     },
     "option": {
-      "name": "constant.other.option.shell",
+      "name": "string.unquoted.argument.shell constant.other.option.shell",
       "begin": "\\s++-(?!(?:!|%|&|\\||\\(|\\{|\\[|<|>|#|\\n|$|;))",
       "end": "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\]))",
       "patterns": [
@@ -1857,6 +1779,94 @@
         },
         {
           "include": "#support"
+        }
+      ]
+    },
+    "variable": {
+      "patterns": [
+        {
+          "match": "(\\$)(\\@)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.shell variable.parameter.positional.all.shell"
+            },
+            "2": {
+              "name": "variable.parameter.positional.all.shell"
+            }
+          }
+        },
+        {
+          "match": "(\\$)([0-9])",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.shell variable.parameter.positional.shell"
+            },
+            "2": {
+              "name": "variable.parameter.positional.shell"
+            }
+          }
+        },
+        {
+          "match": "(\\$)(\\{[0-9]+\\})",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.shell variable.parameter.positional.shell"
+            },
+            "2": {
+              "name": "variable.parameter.positional.shell"
+            }
+          }
+        },
+        {
+          "match": "(\\$)([-*#?$!0_])",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.shell variable.language.special.shell"
+            },
+            "2": {
+              "name": "variable.language.special.shell"
+            }
+          }
+        },
+        {
+          "begin": "(\\$)(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.variable.shell punctuation.section.bracket.curly.variable.begin.shell"
+            },
+            "2": {
+              "name": "punctuation.section.bracket.curly.variable.begin.shell"
+            }
+          },
+          "end": "(\\})",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.bracket.curly.variable.end.shell"
+            }
+          },
+          "patterns": [
+            {
+              "match": "!|:[-=?]?|\\*|@|#{1,2}|%{1,2}|/",
+              "name": "keyword.operator.expansion.shell"
+            },
+            {
+              "captures": {
+                "1": {
+                  "name": "punctuation.section.array.shell"
+                },
+                "3": {
+                  "name": "punctuation.section.array.shell"
+                }
+              },
+              "match": "(\\[)([^\\]]+)(\\])"
+            },
+            {
+              "include": "#variable"
+            },
+            {
+              "include": "#string"
+            }
+          ]
         }
       ]
     }
