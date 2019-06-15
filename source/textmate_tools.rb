@@ -850,6 +850,10 @@ class Regexp
     end
     
     def processRegexLookarounds(other_regex, lookaround_name)
+        # if it is an array, then join them as an or statement
+        if other_regex.is_a?(Array)
+            other_regex = Regexp.new("(?:#{Regexp.quote(other_regex.join("|"))})")
+        end
         #
         # generate the new regex
         #

@@ -2,6 +2,7 @@ source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/source_wrapper.rb'
+require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative './tokens.rb'
 require 'json'
 
@@ -11,6 +12,7 @@ Dir.chdir __dir__
 # 
 # Setup grammar
 # 
+    # Standard refernce: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
     original_grammar = JSON.parse(IO.read("original.tmlanguage.json"))
     convertBaseAndSelf!(from_json_tm_lang: original_grammar, into: "#root_context")
     grammar = Grammar.new(
@@ -30,8 +32,78 @@ Dir.chdir __dir__
 #
     grammar[:$initial_context] = source_wrapper()
     grammar[:root_context] = [
-            # import all the original patterns
-            *original_grammar["patterns"]
+            :comment,
+            :boolean,
+            :numeric_constant,
+            :pipeline,
+            :statement_seperator,
+            :logical_expression,
+            :'compound-command',
+            :loop,
+            :string,
+            :'function-definition',
+            :variable,
+            :interpolation,
+            :heredoc,
+            :herestring,
+            :redirection,
+            :pathname,
+            :keyword,
+            :assignment,
+            :command_call,
+            :support,
+        ]
+    grammar[:boolean] = newPattern(
+            match: /\b(?:true|false)\b/,
+            tag_as: "constant.language.$match"
+        )
+    grammar[:numeric_constant] = numeric_constant()
+    grammar[:command_context] = [
+            :comment,
+            :pipeline,
+            :statement_seperator,
+            :'compound-command',
+            :string,
+            :variable,
+            :interpolation,
+            :heredoc,
+            :herestring,
+            :redirection,
+            :pathname,
+            :keyword,
+            :support,
+            :assignment,
+        ]
+    grammar[:option_context] = [
+            :'compound-command',
+            :string,
+            :variable,
+            :interpolation,
+            :heredoc,
+            :herestring,
+            :redirection,
+            :pathname,
+            :keyword,
+            :support,
+        ]
+    grammar[:logical_expression_context] = [
+            :'logical-expression',
+            :comment,
+            :boolean,
+            :numeric_constant,
+            :pipeline,
+            :statement_seperator,
+            :string,
+            :variable,
+            :interpolation,
+            :heredoc,
+            :herestring,
+            :pathname,
+            :keyword,
+            :support,
+        ]
+    grammar[:variable_assignment_context] = [
+            :root_context
         ]
 #
 #
@@ -42,6 +114,147 @@ Dir.chdir __dir__
     for each_key, each_value in original_grammar["repository"]
         grammar[each_key.to_sym] = each_value
     end
+    
+    std_space = /\s*+/
+    variable_name_no_bounds = /[a-zA-Z_][a-zA-Z0-9_]*/
+    variable_name = /(?:^|\b)#{variable_name_no_bounds.without_default_mode_modifiers}+(?:\b|$)/
+    
+    # 
+    # punctuation / operators
+    # 
+    # replaces the old list pattern
+    grammar[:statement_seperator] = newPattern(
+            match: /;/,
+            tag_as: "punctuation.terminator.statement.semicolon"
+        ).or(
+            match: /&&/,
+            tag_as: "punctuation.separator.statement.and"
+        ).or(
+            match: /\|\|/,
+            tag_as: "punctuation.separator.statement.or"
+        ).or(
+            match: /&/,
+            tag_as: "punctuation.separator.statement.background"
+        ).or(
+            /\n/
+        )
+    statement_end = /[|&;]/
+    
+    # function thing() {}
+    # thing() {}
+    function_definition_start_pattern = std_space.then(
+            # this is the case with the function keyword
+            newPattern(
+                match: /\bfunction /,
+                tag_as: "storage.type.function"
+            ).then(std_space).then(
+                variable_name
+            ).maybe(
+                newPattern(
+                    match: /\(/,
+                    tag_as: "punctuation.definition.arguments",
+                ).then(std_space).then(
+                    match: /\)/,
+                    tag_as: "punctuation.definition.arguments",
+                )
+            )
+        ).or(
+            # no function keyword
+            variable_name.then(
+                std_space
+            ).then(
+                match: /\(/,
+                tag_as: "punctuation.definition.arguments",
+            ).then(std_space).then(
+                match: /\)/,
+                tag_as: "punctuation.definition.arguments",
+            )
+        )
+    grammar[:assignment] = PatternRange.new(
+        tag_as: "meta.expression.assignment",
+        start_pattern: newPattern(
+                match: variable_name,
+                tag_as: "variable.other.assignment",
+            ).then(
+                match: /\=/,
+                tag_as: "keyword.operator.assignment",
+            ),
+        end_pattern: grammar[:statement_seperator],
+        includes: [ :variable_assignment_context ]
+    )
+    
+    possible_pre_command_characters = /(?:^|;|\||&|!|\(|\{|\`)/
+    possible_command_start = lookAheadToAvoid(/(?:!|%|&|\||\(|\{|\[|<|>|#|\n|$|;)/)
+    command_end = lookAheadFor(/;|\||&|$|\n|\)|\`|\}|\{|#|\]/)
+    unquoted_string_end = lookAheadFor(/\s|;|\||&|$|\n|\)|\`/)
+    invalid_literals = Regexp.quote(@tokens.representationsThat(:areInvalidLiterals).join(""))
+    valid_literal_characters = Regexp.new("[^\s#{invalid_literals}]+")
+    
+    grammar[:command_name] = PatternRange.new(
+        tag_as: "entity.name.command",
+        start_pattern: std_space.then(possible_command_start),
+        end_pattern: lookAheadFor(@space).or(command_end),
+        includes: [
+            :command_context,
+        ]
+    )
+    grammar[:argument] = PatternRange.new(
+        tag_as: "meta.argument",
+        start_pattern: /\s++/.then(possible_command_start),
+        end_pattern: unquoted_string_end,
+        includes: [
+            :command_context,
+            newPattern(
+                tag_as: "string.unquoted.argument",
+                match: valid_literal_characters,
+                includes: [
+                    # wildcard
+                    newPattern(
+                        match: /\*/,
+                        tag_as: "variable.language.special.wildcard"
+                    ),
+                ]
+            ),
+        ]
+    )
+    grammar[:option] = PatternRange.new(
+        tag_as: "constant.other.option",
+        start_pattern: /\s++-/.then(possible_command_start),
+        end_pattern: lookAheadFor(@space).or(command_end),
+        includes: [
+            :option_context,
+        ]
+    )
+    keywords = @tokens.representationsThat(:areNonCommands)
+    keyword_patterns = /#{keywords.map { |each| each+'\W|'+each+'\$' } .join('|')}/
+    grammar[:command_call] = PatternRange.new(
+        tag_as: "meta.statement",
+        start_pattern: lookBehindFor(possible_pre_command_characters).then(std_space).lookAheadToAvoid(keyword_patterns),
+        end_pattern: command_end,
+        includes: [
+            :option,
+            :argument,
+            :command_name,
+            :command_context
+        ]
+    )
+
+    grammar[:logical_expression] = PatternRange.new(
+        tag_as: "meta.scope.logical-expression",
+        start_pattern: newPattern(
+                match: /\[/,
+                tag_as: "punctuation.definition.logical-expression",
+                at_least: 1.times,
+                at_most: 2.times,
+            ),
+        end_pattern: newPattern(
+                match: /\]/,
+                at_least: 1.times,
+                at_most: 2.times,
+                tag_as: "punctuation.definition.logical-expression"
+            ),
+        includes: grammar[:logical_expression_context]
+    )
     
     
 

@@ -15,9 +15,6 @@
 			"include": "#pipeline"
 		},
 		{
-			"include": "#list"
-		},
-		{
 			"include": "#compound-command"
 		},
 		{
@@ -738,13 +735,13 @@
 					"begin": "\\$\\({2}",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.begin.shell"
+							"name": "punctuation.definition.evaluation.arithmetic.begin.shell"
 						}
 					},
 					"end": "\\){2}",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.end.shell"
+							"name": "punctuation.definition.evaluation.arithmetic.end.shell"
 						}
 					},
 					"name": "string.other.math.shell",
@@ -758,13 +755,13 @@
 					"begin": "`",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.begin.shell"
+							"name": "punctuation.definition.evaluation.backticks.shell"
 						}
 					},
 					"end": "`",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.end.shell"
+							"name": "punctuation.definition.evaluation.backticks.shell"
 						}
 					},
 					"name": "string.interpolated.backtick.shell",
@@ -803,13 +800,13 @@
 					"begin": "\\$\\(",
 					"beginCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.begin.shell"
+							"name": "punctuation.definition.evaluation.parens.begin.shell"
 						}
 					},
 					"end": "\\)",
 					"endCaptures": {
 						"0": {
-							"name": "punctuation.definition.string.end.shell"
+							"name": "punctuation.definition.evaluation.parens.end.shell"
 						}
 					},
 					"name": "string.interpolated.dollar.shell",
@@ -830,14 +827,6 @@
 				{
 					"match": "(?<=^|;|&|\\s)(?:export|declare|typeset|local|readonly)(?=\\s|;|&|$)",
 					"name": "storage.modifier.shell"
-				}
-			]
-		},
-		"list": {
-			"patterns": [
-				{
-					"match": ";|&&|&|\\|\\|",
-					"name": "keyword.operator.list.shell"
 				}
 			]
 		},
@@ -1227,8 +1216,17 @@
 							"name": "punctuation.definition.variable.shell"
 						}
 					},
-					"match": "(\\$)[-*@#?$!0_]",
-					"name": "variable.other.special.shell"
+					"match": "(\\$)@",
+					"name": "variable.parameter.positional.all.shell"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.variable.shell"
+						}
+					},
+					"match": "(\\$)[-*#?$!0_]",
+					"name": "variable.language.special.shell"
 				},
 				{
 					"captures": {
@@ -1237,7 +1235,7 @@
 						}
 					},
 					"match": "(\\$)[1-9]",
-					"name": "variable.other.positional.shell"
+					"name": "variable.parameter.positional.shell"
 				},
 				{
 					"begin": "\\${",

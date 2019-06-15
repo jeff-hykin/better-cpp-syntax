@@ -148,29 +148,6 @@
 		"compound-command": {
 			"patterns": [
 				{
-					"begin": "\\[{1,2}",
-					"beginCaptures": {
-						"0": {
-							"name": "punctuation.definition.logical-expression.shell"
-						}
-					},
-					"end": "\\]{1,2}",
-					"endCaptures": {
-						"0": {
-							"name": "punctuation.definition.logical-expression.shell"
-						}
-					},
-					"name": "meta.scope.logical-expression.shell",
-					"patterns": [
-						{
-							"include": "#logical-expression"
-						},
-						{
-							"include": "$self"
-						}
-					]
-				},
-				{
 					"begin": "\\({2}",
 					"beginCaptures": {
 						"0": {
@@ -211,7 +188,7 @@
 					]
 				},
 				{
-					"begin": "(?<=\\s|^){(?=\\s|$)",
+					"begin": "(?<=\\s|^)\\s*+{(?=\\s|$)",
 					"beginCaptures": {
 						"0": {
 							"name": "punctuation.definition.group.shell"
