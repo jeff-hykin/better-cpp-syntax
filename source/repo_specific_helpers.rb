@@ -87,7 +87,6 @@ class Hash
             end
             # then allow manipulation of the value
             self[each_key] = a_lambda[each_value, each_key]
-            puts "self[each_key] is: #{self[each_key]} "
         end
     end
 end
@@ -102,7 +101,6 @@ class Array
                 self[each_key].recursively_set_each_value!(a_lambda)
             end
             self[each_key] = a_lambda[each_value, each_key]
-            puts "self[each_key] is: #{self[each_key]} "
         end
     end
 end
