@@ -805,7 +805,7 @@ cpp_grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void"],
+        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
         match: std_space.maybe(
@@ -815,11 +815,11 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 scope_resolution
             ).then(std_space).then(
+                lookAheadToAvoid(non_type_keywords.then(@word_boundary))
+            ).then(
                 match: identifier,
                 tag_as: "entity.name.type",
-            ).then(@word_boundary).then(
-                lookBehindToAvoid(non_type_keywords)
-            ).maybe(
+            ).then(@word_boundary).maybe(
                 template_call.without_numbered_capture_groups
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
