@@ -184,10 +184,10 @@ Dir.chdir __dir__
     )
     
     possible_pre_command_characters = /(?:^|;|\||&|!|\(|\{|\`)/
-    possible_command_start = lookAheadToAvoid(/(?:!|%|&|\||\(|\{|\[|<|>|#|\n|$|;)/)
-    command_end = lookAheadFor(/;|\||&|$|\n|\)|\`|\}|\{|#|\]/)
-    unquoted_string_end = lookAheadFor(/\s|;|\||&|$|\n|\)|\`/)
-    invalid_literals = Regexp.quote(@tokens.representationsThat(:areInvalidLiterals).join(""))
+    possible_command_start   = lookAheadToAvoid(/(?:!|%|&|\||\(|\{|\[|<|>|#|\n|$|;)/)
+    command_end              = lookAheadFor(/;|\||&|$|\n|\)|\`|\}|\{|#|\]/)
+    unquoted_string_end      = lookAheadFor(/\s|;|\||&|$|\n|\)|\`/)
+    invalid_literals         = Regexp.quote(@tokens.representationsThat(:areInvalidLiterals).join(""))
     valid_literal_characters = Regexp.new("[^\s#{invalid_literals}]+")
     
     grammar[:command_name] = PatternRange.new(
