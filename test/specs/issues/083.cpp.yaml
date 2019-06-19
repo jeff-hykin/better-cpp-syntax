@@ -34,13 +34,12 @@
     - meta.body.function.definition
   scopes:
     - variable.language.this
-- source: '-'
+- source: '->'
   scopes:
-    - keyword.operator
-- source: '>'
+    - punctuation.separator.pointer-access
+- source: a
   scopes:
-    - keyword.operator.comparison
-- source: 'a '
+    - variable.other.property
 - source: =
   scopes:
     - keyword.operator.assignment
