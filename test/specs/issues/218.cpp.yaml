@@ -276,6 +276,8 @@
   scopesEnd:
     - meta.parens.block
 - source: '{'
+  scopesBegin:
+    - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: switch
@@ -514,6 +516,8 @@
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: a
   scopes:
     - entity.name.function.call
