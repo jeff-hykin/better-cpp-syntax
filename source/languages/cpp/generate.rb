@@ -14,6 +14,9 @@ require_relative './tokens.rb'
     # fix initializer list "functions" e.g. `int a{5};`
     # fix the ... inside of macros
     # have all patterns with keywords be dynamically generated
+    # add specificity to the ternary operator
+    # add specificity to the misc_storage_modifiers
+    # remove the "memory.cpp" tag
 
 cpp_grammar = Grammar.new(
     name: "C++",
@@ -154,50 +157,65 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:$initial_context] = [
             :source_wrapper,
         ]
-    cpp_grammar[:root_context] = [
+    cpp_grammar[:ever_present_context] = [
             # first preprocessor directives, which should be a part of every scope
             :preprocessor_context,
             # comments 
             :comments_context,
-            # declarations 
+        ]
+    cpp_grammar[:root_context] = [
+            :ever_present_context,
+            # declarations
             :function_definition,
-            :struct_declare,
-            :special_block_context,
-            :string_context,
-            :functional_specifiers_pre_parameters,
-            :qualifiers_and_specifiers_post_parameters,
-            :storage_specifiers,
-            :access_control_keywords,
-            :exception_keywords,
-            :static_assert,
-            :other_keywords,
-            :memory_operators,
-            :using_name,
-            :the_this_keyword,
-            :language_constants,
-            :template_isolated_definition,
-            :template_definition,
-            :misc_storage_modifiers_1,
-            :destructor,
-            :lambdas,
-            :switch_statement,
-            :control_flow_keywords,
-            :assembly,
-            :misc_storage_modifiers_2,
             :operator_overload,
+            :destructor,
+            :struct_declare,
+            :special_block_context,         # TODO: expand these out 
+            :template_isolated_definition,  # TODO: template definitions should be mixed into the seperate definitions (class/struct/function, etc)
+            :template_definition,
+            :access_control_keywords,       # TODO: these should only be allowed inside of class/struct (maybe namespace?) blocks 
+            :block,
+            # statements
+            :static_assert,                 # it is unclear to me if static_assert can appear in the root context or not, so I'm leaving it here to be safe. https://en.cppreference.com/w/cpp/language/static_assert
+            :assembly,                      # it is unclear to me is assembly can be in the root context or not, so I'm leaving it here to be safe
+            
+            # 
+            # Evaluation Stuff that eventually needs to be removed from the root context
+            # 
+            # literals
+            :string_context,
             :number_literal,
             :string_context_c,
+            # variable-like
+            :method_access, # needs to be above :function_call, needs to be above operator
+            :member_access,
             :predefined_macros,
+            # operators
             :operators,
-            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
-            :block,
-            :parentheses,
+            :memory_operators,
+            :wordlike_operators,
+            :vararg_ellipses,
             :type_casting_operators,
-            
-            :function_call,
-            :scope_resolution_inner_generated,
+            # control flow
+            :switch_statement, # needs to be above the "switch" keyword (which will eventually be removed)
+            # keywords
+            :control_flow_keywords,
+            :exception_keywords,
+            :the_this_keyword,
+            :language_constants,
+            :other_keywords,
+            # types, modifiers, and specifiers
+            :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
+            :functional_specifiers_pre_parameters,
             :storage_types,
+            :misc_storage_modifiers,                    # TODO: this pattern needs to be removed 
+            # misc
+            :lambdas,
+            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
+            :parentheses,
+            :function_call,
             :line_continuation_character,
+            :scope_resolution_inner_generated,
             :square_brackets,
             :empty_square_brackets,
             :semicolon,
@@ -207,69 +225,21 @@ cpp_grammar = Grammar.new(
             # TODO: the :attributes_context probably belongs here but see issue #215 for why they were removed
             :using_namespace,
             :type_alias,
+            :using_name, # this needs to be below type_alias
             :namespace_alias,
             :namespace_block,
             :typedef_class,
             :typedef_struct,
             :typedef_union,
             :class_block,
+            :struct_declare,
             :struct_block,
             :union_block,
             :enum_block,
             :extern_block,
         ]
     # this is currently just :root_context without :function_definition
-    cpp_grammar[:function_body_context] = [
-        :type_casting_operators,
-        :function_call,
-        :struct_declare,
-        :special_block_context,
-        :macro_argument,
-        :string_context,
-        :functional_specifiers_pre_parameters,
-        :qualifiers_and_specifiers_post_parameters,
-        :storage_specifiers,
-        :access_control_keywords,
-        :exception_keywords,
-        :static_assert,
-        :other_keywords,
-        :memory_operators,
-        :using_name,
-        :the_this_keyword,
-        :language_constants,
-        :template_isolated_definition,
-        :template_definition,
-        :misc_storage_modifiers_1,
-        :destructor,
-        :lambdas,
-        :preprocessor_context,
-        :comments_context,
-        :switch_statement,
-        :control_flow_keywords,
-        :assembly,
-        :misc_storage_modifiers_2,
-        :operator_overload,
-        :number_literal,
-        :string_context_c,
-        :meta_preprocessor_macro,
-        :meta_preprocessor_diagnostic,
-        :meta_preprocessor_include,
-        :pragma_mark,
-        :meta_preprocessor_line,
-        :meta_preprocessor_undef,
-        :meta_preprocessor_pragma,
-        :operators,
-        :block,
-        :parentheses,
-        :type_casting_operators,
-        :scope_resolution_inner_generated,
-        :storage_types,
-        :line_continuation_character,
-        :square_brackets,
-        :empty_square_brackets,
-        :semicolon,
-        :comma,
-    ]
+    cpp_grammar[:function_body_context] = cpp_grammar[:root_context].without(:function_definition)
     cpp_grammar[:preprocessor_context] = [
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
@@ -308,14 +278,17 @@ cpp_grammar = Grammar.new(
             :string_context,
             :operators,
         ]
+    # TODO: get rid of function_call_context since its just the evaluation_context
+    cpp_grammar[:function_call_context] = [ :evaluation_context ]
     # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
     # but for now it just includes everything
-    cpp_grammar[:evaluation_context] = [
-            :root_context
-            # function call
-            # number literal
-            # lambdas
-        ]
+    cpp_grammar[:evaluation_context] = cpp_grammar[:root_context].without(
+        :function_definition,
+        :destructor,
+        :template_definition,
+        :template_isolated_definition,
+        :special_block_context,
+    )
     # eventually this context will be more exclusive (can't have class definitons inside of an if statement)
     # but for now it just includes everything
     cpp_grammar[:conditional_context] = [
@@ -1001,9 +974,9 @@ cpp_grammar = Grammar.new(
 # Operators
 #
     cpp_grammar[:operators] = []
-    normal_word_operators = newPattern(
+    cpp_grammar[:wordlike_operators] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "keyword.operator.wordlike alias keyword.operator.$match",
+        tag_as: "keyword.operator.wordlike keyword.operator.$match",
         )
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
@@ -1016,12 +989,21 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    
+    cpp_grammar[:ternary_operator] = PatternRange.new(
+        apply_end_pattern_last: true,
+        start_pattern: newPattern(
+            match: /\?/,
+            tag_as: "keyword.operator.ternary",
+        ),
+        end_pattern: newPattern(
+            match: /:/,
+            tag_as: "keyword.operator.ternary"
+        ),
+        includes: cpp_grammar[:evaluation_context]
+    )
         
     cpp_grammar[:operators] += [
-            :method_access,
-            :member_access,
-            normal_word_operators,
-            :vararg_ellipses,
             {
                 match: "--",
                 name: "keyword.operator.decrement"
@@ -1059,35 +1041,7 @@ cpp_grammar = Grammar.new(
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator"
             },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                end: ":",
-                applyEndPatternLast: true,
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#method_access"
-                    },
-                    {
-                        include: "#member_access"
-                    },
-                    {
-                        include: "#function_call_c"
-                    },
-                    {
-                        include: "#root_context"
-                    }
-                ]
-            }
+            :ternary_operator,
         ]
 #
 # function pointer
@@ -1626,14 +1580,10 @@ cpp_grammar = Grammar.new(
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    cpp_grammar[:misc_storage_modifiers_1] = {
-            match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
-            name: "storage.modifier"
-        }
-    cpp_grammar[:misc_storage_modifiers_2] = {
-            match: /\b(const|extern|register|restrict|static|volatile|inline)\b/,
-            name: "storage.modifier"
-        }
+    cpp_grammar[:misc_storage_modifiers] = newPattern(
+            match: /\b(?:export|mutable|typename|thread_local|extern|register|restrict|static|volatile|inline)\b/,
+            tag_as: "storage.modifier"
+        )
     #destructors accept no parameters
     cpp_grammar[:destructor] = newPattern(
         should_fully_match: ["~bar()", "foo::~foo()"],
@@ -2051,25 +2001,7 @@ cpp_grammar = Grammar.new(
                 }
             ]
         },
-        {
-            begin: "{",
-            beginCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.begin.bracket.curly"
-                }
-            },
-            end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.end.bracket.curly"
-                }
-            },
-            patterns: [
-                {
-                    include: "#block_context"
-                }
-            ]
-        },
+        :block,
         :parentheses_block,
         :root_context
         ]
@@ -3221,9 +3153,7 @@ cpp_grammar = Grammar.new(
                     }
                 ]
             },
-            :method_access,
-            :member_access,
-            :evaluation_context
+            :root_context
         ]
     cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
@@ -3331,47 +3261,7 @@ cpp_grammar = Grammar.new(
             },
             :preprocessor_rule_define_line_context
         ]
-    cpp_grammar[:function_call_context] = [
-            :struct_declare,
-            :string_context,
-            :functional_specifiers_pre_parameters,
-            :qualifiers_and_specifiers_post_parameters,
-            :storage_specifiers,
-            :access_control_keywords,
-            :exception_keywords,
-            :static_assert,
-            :other_keywords,
-            :memory_operators,
-            :the_this_keyword,
-            :language_constants,
-            :misc_storage_modifiers_1,
-            :lambdas,
-            :preprocessor_context,
-            :comments_context,
-            :misc_storage_modifiers_2,
-            :number_literal,
-            :string_context_c,
-            :meta_preprocessor_macro,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
-            :pragma_mark,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
-            :predefined_macros,
-            :operators,
-            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
-            :parentheses,
-            :type_casting_operators,
-            :function_call,
-            :scope_resolution_inner_generated,
-            :storage_types,
-            :line_continuation_character,
-            :square_brackets,
-            :empty_square_brackets,
-            :semicolon,
-            :comma,
-        ]
+    
 
 # Save
 @syntax_location = saveGrammar(cpp_grammar)

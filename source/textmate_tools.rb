@@ -1166,3 +1166,12 @@ class TokenHelper
     end
 end
 
+class Array
+    def without(*args)
+        copy = self.clone
+        for each in args
+            copy.delete(each)
+        end
+        return copy
+    end
+end
