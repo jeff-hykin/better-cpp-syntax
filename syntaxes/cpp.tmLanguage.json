@@ -237,325 +237,6 @@
     "ever_present_context": {
       "patterns": [
         {
-          "include": "#preprocessor_context"
-        },
-        {
-          "include": "#comments_context"
-        }
-      ]
-    },
-    "root_context": {
-      "patterns": [
-        {
-          "include": "#ever_present_context"
-        },
-        {
-          "include": "#function_definition"
-        },
-        {
-          "include": "#operator_overload"
-        },
-        {
-          "include": "#destructor"
-        },
-        {
-          "include": "#struct_declare"
-        },
-        {
-          "include": "#special_block_context"
-        },
-        {
-          "include": "#template_isolated_definition"
-        },
-        {
-          "include": "#template_definition"
-        },
-        {
-          "include": "#access_control_keywords"
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#static_assert"
-        },
-        {
-          "include": "#assembly"
-        },
-        {
-          "include": "#string_context"
-        },
-        {
-          "include": "#number_literal"
-        },
-        {
-          "include": "#string_context_c"
-        },
-        {
-          "include": "#method_access"
-        },
-        {
-          "include": "#member_access"
-        },
-        {
-          "include": "#predefined_macros"
-        },
-        {
-          "include": "#operators"
-        },
-        {
-          "include": "#memory_operators"
-        },
-        {
-          "include": "#wordlike_operators"
-        },
-        {
-          "include": "#vararg_ellipses"
-        },
-        {
-          "include": "#type_casting_operators"
-        },
-        {
-          "include": "#switch_statement"
-        },
-        {
-          "include": "#control_flow_keywords"
-        },
-        {
-          "include": "#exception_keywords"
-        },
-        {
-          "include": "#the_this_keyword"
-        },
-        {
-          "include": "#language_constants"
-        },
-        {
-          "include": "#other_keywords"
-        },
-        {
-          "include": "#qualifiers_and_specifiers_post_parameters"
-        },
-        {
-          "include": "#functional_specifiers_pre_parameters"
-        },
-        {
-          "include": "#storage_types"
-        },
-        {
-          "include": "#misc_storage_modifiers"
-        },
-        {
-          "include": "#lambdas"
-        },
-        {
-          "include": "#attributes_context"
-        },
-        {
-          "include": "#parentheses"
-        },
-        {
-          "include": "#function_call"
-        },
-        {
-          "include": "#line_continuation_character"
-        },
-        {
-          "include": "#scope_resolution_inner_generated"
-        },
-        {
-          "include": "#square_brackets"
-        },
-        {
-          "include": "#empty_square_brackets"
-        },
-        {
-          "include": "#semicolon"
-        },
-        {
-          "include": "#comma"
-        }
-      ]
-    },
-    "special_block_context": {
-      "patterns": [
-        {
-          "include": "#using_namespace"
-        },
-        {
-          "include": "#type_alias"
-        },
-        {
-          "include": "#using_name"
-        },
-        {
-          "include": "#namespace_alias"
-        },
-        {
-          "include": "#namespace_block"
-        },
-        {
-          "include": "#typedef_class"
-        },
-        {
-          "include": "#typedef_struct"
-        },
-        {
-          "include": "#typedef_union"
-        },
-        {
-          "include": "#class_block"
-        },
-        {
-          "include": "#struct_declare"
-        },
-        {
-          "include": "#struct_block"
-        },
-        {
-          "include": "#union_block"
-        },
-        {
-          "include": "#enum_block"
-        },
-        {
-          "include": "#extern_block"
-        }
-      ]
-    },
-    "function_body_context": {
-      "patterns": [
-        {
-          "include": "#ever_present_context"
-        },
-        {
-          "include": "#operator_overload"
-        },
-        {
-          "include": "#destructor"
-        },
-        {
-          "include": "#struct_declare"
-        },
-        {
-          "include": "#special_block_context"
-        },
-        {
-          "include": "#template_isolated_definition"
-        },
-        {
-          "include": "#template_definition"
-        },
-        {
-          "include": "#access_control_keywords"
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#static_assert"
-        },
-        {
-          "include": "#assembly"
-        },
-        {
-          "include": "#string_context"
-        },
-        {
-          "include": "#number_literal"
-        },
-        {
-          "include": "#string_context_c"
-        },
-        {
-          "include": "#method_access"
-        },
-        {
-          "include": "#member_access"
-        },
-        {
-          "include": "#predefined_macros"
-        },
-        {
-          "include": "#operators"
-        },
-        {
-          "include": "#memory_operators"
-        },
-        {
-          "include": "#wordlike_operators"
-        },
-        {
-          "include": "#vararg_ellipses"
-        },
-        {
-          "include": "#type_casting_operators"
-        },
-        {
-          "include": "#switch_statement"
-        },
-        {
-          "include": "#control_flow_keywords"
-        },
-        {
-          "include": "#exception_keywords"
-        },
-        {
-          "include": "#the_this_keyword"
-        },
-        {
-          "include": "#language_constants"
-        },
-        {
-          "include": "#other_keywords"
-        },
-        {
-          "include": "#qualifiers_and_specifiers_post_parameters"
-        },
-        {
-          "include": "#functional_specifiers_pre_parameters"
-        },
-        {
-          "include": "#storage_types"
-        },
-        {
-          "include": "#misc_storage_modifiers"
-        },
-        {
-          "include": "#lambdas"
-        },
-        {
-          "include": "#attributes_context"
-        },
-        {
-          "include": "#parentheses"
-        },
-        {
-          "include": "#function_call"
-        },
-        {
-          "include": "#line_continuation_character"
-        },
-        {
-          "include": "#scope_resolution_inner_generated"
-        },
-        {
-          "include": "#square_brackets"
-        },
-        {
-          "include": "#empty_square_brackets"
-        },
-        {
-          "include": "#semicolon"
-        },
-        {
-          "include": "#comma"
-        }
-      ]
-    },
-    "preprocessor_context": {
-      "patterns": [
-        {
           "include": "#preprocessor_rule_enabled"
         },
         {
@@ -590,28 +271,252 @@
         },
         {
           "include": "#hacky_fix_for_stray_directive"
+        },
+        {
+          "include": "#comments_context"
+        },
+        {
+          "include": "#line_continuation_character"
         }
       ]
     },
-    "storage_types": {
+    "root_context": {
       "patterns": [
         {
-          "include": "#storage_specifiers"
+          "include": "#ever_present_context"
         },
         {
-          "include": "#primitive_types"
+          "include": "#function_definition"
         },
         {
-          "include": "#non_primitive_types"
+          "include": "#operator_overload"
         },
         {
-          "include": "#pthread_types"
+          "include": "#destructor"
         },
         {
-          "include": "#posix_reserved_types"
+          "include": "#struct_declare"
         },
         {
-          "include": "#decltype"
+          "include": "#using_namespace"
+        },
+        {
+          "include": "#type_alias"
+        },
+        {
+          "include": "#using_name"
+        },
+        {
+          "include": "#namespace_alias"
+        },
+        {
+          "include": "#namespace_block"
+        },
+        {
+          "include": "#extern_block"
+        },
+        {
+          "include": "#typedef_class"
+        },
+        {
+          "include": "#typedef_struct"
+        },
+        {
+          "include": "#typedef_union"
+        },
+        {
+          "include": "#typedef_keyword"
+        },
+        {
+          "include": "#class_block"
+        },
+        {
+          "include": "#struct_declare"
+        },
+        {
+          "include": "#struct_block"
+        },
+        {
+          "include": "#union_block"
+        },
+        {
+          "include": "#enum_block"
+        },
+        {
+          "include": "#template_isolated_definition"
+        },
+        {
+          "include": "#template_definition"
+        },
+        {
+          "include": "#access_control_keywords"
+        },
+        {
+          "include": "#block"
+        },
+        {
+          "include": "#static_assert"
+        },
+        {
+          "include": "#assembly"
+        },
+        {
+          "include": "#evaluation_context"
+        }
+      ]
+    },
+    "function_body_context": {
+      "patterns": [
+        {
+          "include": "#ever_present_context"
+        },
+        {
+          "include": "#struct_declare"
+        },
+        {
+          "include": "#using_namespace"
+        },
+        {
+          "include": "#type_alias"
+        },
+        {
+          "include": "#using_name"
+        },
+        {
+          "include": "#namespace_alias"
+        },
+        {
+          "include": "#typedef_class"
+        },
+        {
+          "include": "#typedef_struct"
+        },
+        {
+          "include": "#typedef_union"
+        },
+        {
+          "include": "#typedef_keyword"
+        },
+        {
+          "include": "#class_block"
+        },
+        {
+          "include": "#struct_declare"
+        },
+        {
+          "include": "#struct_block"
+        },
+        {
+          "include": "#union_block"
+        },
+        {
+          "include": "#enum_block"
+        },
+        {
+          "include": "#access_control_keywords"
+        },
+        {
+          "include": "#block"
+        },
+        {
+          "include": "#static_assert"
+        },
+        {
+          "include": "#assembly"
+        },
+        {
+          "include": "#switch_statement"
+        },
+        {
+          "include": "#evaluation_context"
+        }
+      ]
+    },
+    "evaluation_context": {
+      "patterns": [
+        {
+          "include": "#ever_present_context"
+        },
+        {
+          "include": "#string_context"
+        },
+        {
+          "include": "#number_literal"
+        },
+        {
+          "include": "#string_context_c"
+        },
+        {
+          "include": "#method_access"
+        },
+        {
+          "include": "#member_access"
+        },
+        {
+          "include": "#predefined_macros"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#memory_operators"
+        },
+        {
+          "include": "#wordlike_operators"
+        },
+        {
+          "include": "#type_casting_operators"
+        },
+        {
+          "include": "#control_flow_keywords"
+        },
+        {
+          "include": "#exception_keywords"
+        },
+        {
+          "include": "#the_this_keyword"
+        },
+        {
+          "include": "#language_constants"
+        },
+        {
+          "include": "#qualifiers_and_specifiers_post_parameters"
+        },
+        {
+          "include": "#functional_specifiers_pre_parameters"
+        },
+        {
+          "include": "#storage_types"
+        },
+        {
+          "include": "#misc_storage_modifiers"
+        },
+        {
+          "include": "#lambdas"
+        },
+        {
+          "include": "#attributes_context"
+        },
+        {
+          "include": "#parentheses"
+        },
+        {
+          "include": "#function_call"
+        },
+        {
+          "include": "#scope_resolution_inner_generated"
+        },
+        {
+          "include": "#square_brackets"
+        },
+        {
+          "include": "#empty_square_brackets"
+        },
+        {
+          "include": "#semicolon"
+        },
+        {
+          "include": "#comma"
         }
       ]
     },
@@ -652,138 +557,6 @@
         },
         {
           "include": "#operators"
-        }
-      ]
-    },
-    "function_call_context": {
-      "patterns": [
-        {
-          "include": "#evaluation_context"
-        }
-      ]
-    },
-    "evaluation_context": {
-      "patterns": [
-        {
-          "include": "#ever_present_context"
-        },
-        {
-          "include": "#operator_overload"
-        },
-        {
-          "include": "#struct_declare"
-        },
-        {
-          "include": "#access_control_keywords"
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#static_assert"
-        },
-        {
-          "include": "#assembly"
-        },
-        {
-          "include": "#string_context"
-        },
-        {
-          "include": "#number_literal"
-        },
-        {
-          "include": "#string_context_c"
-        },
-        {
-          "include": "#method_access"
-        },
-        {
-          "include": "#member_access"
-        },
-        {
-          "include": "#predefined_macros"
-        },
-        {
-          "include": "#operators"
-        },
-        {
-          "include": "#memory_operators"
-        },
-        {
-          "include": "#wordlike_operators"
-        },
-        {
-          "include": "#vararg_ellipses"
-        },
-        {
-          "include": "#type_casting_operators"
-        },
-        {
-          "include": "#switch_statement"
-        },
-        {
-          "include": "#control_flow_keywords"
-        },
-        {
-          "include": "#exception_keywords"
-        },
-        {
-          "include": "#the_this_keyword"
-        },
-        {
-          "include": "#language_constants"
-        },
-        {
-          "include": "#other_keywords"
-        },
-        {
-          "include": "#qualifiers_and_specifiers_post_parameters"
-        },
-        {
-          "include": "#functional_specifiers_pre_parameters"
-        },
-        {
-          "include": "#storage_types"
-        },
-        {
-          "include": "#misc_storage_modifiers"
-        },
-        {
-          "include": "#lambdas"
-        },
-        {
-          "include": "#attributes_context"
-        },
-        {
-          "include": "#parentheses"
-        },
-        {
-          "include": "#function_call"
-        },
-        {
-          "include": "#line_continuation_character"
-        },
-        {
-          "include": "#scope_resolution_inner_generated"
-        },
-        {
-          "include": "#square_brackets"
-        },
-        {
-          "include": "#empty_square_brackets"
-        },
-        {
-          "include": "#semicolon"
-        },
-        {
-          "include": "#comma"
-        }
-      ]
-    },
-    "conditional_context": {
-      "patterns": [
-        {
-          "include": "#root_context"
         }
       ]
     },
@@ -847,6 +620,28 @@
         },
         {
           "include": "#alignas_attribute"
+        }
+      ]
+    },
+    "storage_types": {
+      "patterns": [
+        {
+          "include": "#storage_specifiers"
+        },
+        {
+          "include": "#primitive_types"
+        },
+        {
+          "include": "#non_primitive_types"
+        },
+        {
+          "include": "#pthread_types"
+        },
+        {
+          "include": "#posix_reserved_types"
+        },
+        {
+          "include": "#decltype"
         }
       ]
     },
@@ -1210,8 +1005,8 @@
       "match": "(?<!\\w)(?:throw|try|catch)(?!\\w)",
       "name": "keyword.control.exception.$0.cpp"
     },
-    "other_keywords": {
-      "match": "(?<!\\w)(typedef)(?!\\w)",
+    "typedef_keyword": {
+      "match": "(?<!\\w)typedef(?!\\w)",
       "name": "keyword.other.$0.cpp"
     },
     "the_this_keyword": {
@@ -1260,7 +1055,10 @@
       },
       "patterns": [
         {
-          "include": "#conditional_context"
+          "include": "#evaluation_context"
+        },
+        {
+          "include": "#c_conditional_context"
         }
       ]
     },
@@ -1280,7 +1078,10 @@
       },
       "patterns": [
         {
-          "include": "#conditional_context"
+          "include": "#evaluation_context"
+        },
+        {
+          "include": "#c_conditional_context"
         }
       ]
     },
@@ -1300,7 +1101,10 @@
       },
       "patterns": [
         {
-          "include": "#conditional_context"
+          "include": "#evaluation_context"
+        },
+        {
+          "include": "#c_conditional_context"
         }
       ]
     },
@@ -3057,6 +2861,9 @@
           },
           "patterns": [
             {
+              "include": "#ever_present_context"
+            },
+            {
               "contentName": "meta.function.definition.parameters.cpp",
               "begin": "(\\()",
               "beginCaptures": {
@@ -3075,12 +2882,9 @@
                   "include": "#function_parameter_context"
                 },
                 {
-                  "include": "#function_call_context"
+                  "include": "#evaluation_context"
                 }
               ]
-            },
-            {
-              "include": "#comments_context"
             },
             {
               "include": "#root_context"
@@ -3150,7 +2954,7 @@
           ]
         },
         {
-          "include": "#function_call_context"
+          "include": "#evaluation_context"
         }
       ]
     },
@@ -3203,7 +3007,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context"
+          "include": "#evaluation_context"
         }
       ]
     },
@@ -3288,24 +3092,6 @@
           "include": "#ever_present_context"
         },
         {
-          "include": "#operator_overload"
-        },
-        {
-          "include": "#struct_declare"
-        },
-        {
-          "include": "#access_control_keywords"
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#static_assert"
-        },
-        {
-          "include": "#assembly"
-        },
-        {
           "include": "#string_context"
         },
         {
@@ -3333,13 +3119,7 @@
           "include": "#wordlike_operators"
         },
         {
-          "include": "#vararg_ellipses"
-        },
-        {
           "include": "#type_casting_operators"
-        },
-        {
-          "include": "#switch_statement"
         },
         {
           "include": "#control_flow_keywords"
@@ -3352,9 +3132,6 @@
         },
         {
           "include": "#language_constants"
-        },
-        {
-          "include": "#other_keywords"
         },
         {
           "include": "#qualifiers_and_specifiers_post_parameters"
@@ -3379,9 +3156,6 @@
         },
         {
           "include": "#function_call"
-        },
-        {
-          "include": "#line_continuation_character"
         },
         {
           "include": "#scope_resolution_inner_generated"
@@ -4078,7 +3852,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context"
+          "include": "#evaluation_context"
         }
       ]
     },
@@ -5572,16 +5346,13 @@
           },
           "patterns": [
             {
-              "include": "#preprocessor_context"
+              "include": "#ever_present_context"
             },
             {
               "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
-            },
-            {
-              "include": "#comments_context"
             }
           ]
         },
@@ -5686,16 +5457,13 @@
           },
           "patterns": [
             {
-              "include": "#preprocessor_context"
+              "include": "#ever_present_context"
             },
             {
               "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
-            },
-            {
-              "include": "#comments_context"
             }
           ]
         },
@@ -5800,16 +5568,13 @@
           },
           "patterns": [
             {
-              "include": "#preprocessor_context"
+              "include": "#ever_present_context"
             },
             {
               "include": "#inheritance_context"
             },
             {
               "include": "#template_call_range"
-            },
-            {
-              "include": "#comments_context"
             }
           ]
         },
@@ -5989,16 +5754,13 @@
               },
               "patterns": [
                 {
-                  "include": "#preprocessor_context"
+                  "include": "#ever_present_context"
                 },
                 {
                   "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"
-                },
-                {
-                  "include": "#comments_context"
                 }
               ]
             },
@@ -6192,16 +5954,13 @@
               },
               "patterns": [
                 {
-                  "include": "#preprocessor_context"
+                  "include": "#ever_present_context"
                 },
                 {
                   "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"
-                },
-                {
-                  "include": "#comments_context"
                 }
               ]
             },
@@ -6395,16 +6154,13 @@
               },
               "patterns": [
                 {
-                  "include": "#preprocessor_context"
+                  "include": "#ever_present_context"
                 },
                 {
                   "include": "#inheritance_context"
                 },
                 {
                   "include": "#template_call_range"
-                },
-                {
-                  "include": "#comments_context"
                 }
               ]
             },
@@ -6642,7 +6398,7 @@
       },
       "patterns": [
         {
-          "include": "#function_call_context"
+          "include": "#evaluation_context"
         }
       ]
     },
@@ -7028,79 +6784,22 @@
       ]
     },
     "block": {
-      "begin": "{",
+      "name": "meta.block.cpp",
+      "begin": "({)",
       "beginCaptures": {
-        "0": {
+        "1": {
           "name": "punctuation.section.block.begin.bracket.curly.cpp"
         }
       },
-      "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+      "end": "(}|(?=\\s*#\\s*(?:elif|else|endif)\\b))",
       "endCaptures": {
-        "0": {
+        "1": {
           "name": "punctuation.section.block.end.bracket.curly.cpp"
         }
       },
-      "name": "meta.block.cpp",
       "patterns": [
         {
-          "include": "#block_context"
-        }
-      ]
-    },
-    "block_context": {
-      "patterns": [
-        {
-          "include": "#preprocessor_rule_enabled_block"
-        },
-        {
-          "include": "#preprocessor_rule_disabled_block"
-        },
-        {
-          "include": "#preprocessor_rule_conditional_block"
-        },
-        {
-          "include": "#method_access"
-        },
-        {
-          "include": "#member_access"
-        },
-        {
-          "include": "#type_casting_operators"
-        },
-        {
-          "include": "#function_call"
-        },
-        {
-          "name": "meta.initialization.cpp",
-          "begin": "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
-          "beginCaptures": {
-            "1": {
-              "name": "variable.other.cpp"
-            },
-            "2": {
-              "name": "punctuation.section.parens.begin.bracket.round.initialization.cpp"
-            }
-          },
-          "end": "\\)",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.parens.end.bracket.round.initialization.cpp"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#function_call_context"
-            }
-          ]
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#parentheses_block"
-        },
-        {
-          "include": "#root_context"
+          "include": "#function_body_context"
         }
       ]
     },
@@ -7206,31 +6905,11 @@
           "include": "#parameter_struct"
         },
         {
-          "include": "#root_context"
-        }
-      ]
-    },
-    "parentheses_block": {
-      "name": "meta.parens.block.cpp",
-      "begin": "\\(",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.section.parens.begin.bracket.round.cpp"
-        }
-      },
-      "end": "\\)",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.parens.end.bracket.round.cpp"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#block_context"
-        },
-        {
           "match": "(?-mix:(?<!:):(?!:))",
           "name": "colon.cpp punctuation.separator.range-based.cpp"
+        },
+        {
+          "include": "#evaluation_context"
         }
       ]
     },
@@ -7453,7 +7132,7 @@
           ]
         },
         {
-          "include": "#block_context"
+          "include": "#root_context"
         }
       ]
     },
@@ -7696,7 +7375,7 @@
               ]
             },
             {
-              "include": "#block_context"
+              "include": "#root_context"
             }
           ]
         },
@@ -7951,7 +7630,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#block_context"
+              "include": "#root_context"
             }
           ]
         }
@@ -8125,7 +7804,7 @@
               ]
             },
             {
-              "include": "#block_context"
+              "include": "#root_context"
             }
           ]
         }
@@ -8167,7 +7846,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#block_context"
+          "include": "#root_context"
         }
       ]
     },

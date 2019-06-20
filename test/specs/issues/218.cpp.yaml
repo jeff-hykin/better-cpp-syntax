@@ -203,7 +203,12 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a : a'
+- source: ' a '
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.range-based
+- source: ' a'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -262,7 +267,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'a '
@@ -274,7 +279,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -818,7 +823,12 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a: a'
+- source: ' a'
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.range-based
+- source: ' a'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

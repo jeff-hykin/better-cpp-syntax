@@ -1381,7 +1381,7 @@
     - keyword.operator.comparison
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'expression '
@@ -1399,7 +1399,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1419,7 +1419,7 @@
     - keyword.operator.comparison
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: expression
@@ -1427,7 +1427,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1444,7 +1444,7 @@
     - keyword.operator.comparison
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: expression
@@ -1452,7 +1452,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1472,7 +1472,7 @@
     - keyword.operator.comparison
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: expression
@@ -1480,7 +1480,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -4817,20 +4817,18 @@
   scopes:
     - variable.other.property
 - source: .
-- source: ~type
-  scopesBegin:
-    - meta.function.destructor
+- source: '~'
   scopes:
-    - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - keyword.operator
+- source: type
+  scopes:
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
-  scopesEnd:
-    - meta.function.destructor
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5005,8 +5003,6 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ...
-  scopes:
-    - punctuation.vararg-ellipses
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -7153,8 +7149,6 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ...
-  scopes:
-    - punctuation.vararg-ellipses
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -7445,42 +7439,31 @@
   scopesEnd:
     - comment.line.double-slash
 - source: switch
-  scopesBegin:
-    - meta.block.switch
-    - meta.head.switch
   scopes:
     - keyword.control.switch
 - source: (
   scopesBegin:
-    - meta.conditional.switch
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.conditional.switch
+    - punctuation.section.parens.begin.bracket.round
 - source: test
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.conditional.switch
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.conditional.switch
+    - meta.parens
 - source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.switch
-  scopesEnd:
-    - meta.head.switch
-- source: case
   scopesBegin:
-    - meta.body.switch
-    - meta.conditional.case
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: case
   scopes:
     - keyword.control.case
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: break
   scopes:
     - keyword.control.break
@@ -7488,19 +7471,12 @@
   scopes:
     - punctuation.terminator.statement
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: '2'
   scopes:
     - constant.numeric.decimal
-- source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
+- source: ': '
 - source: '[['
   scopesBegin:
     - support.other.attribute
@@ -7518,19 +7494,12 @@
   scopes:
     - punctuation.terminator.statement
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: '3'
   scopes:
     - constant.numeric.decimal
-- source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
+- source: ': '
 - source: break
   scopes:
     - keyword.control.break
@@ -7547,34 +7516,29 @@
     - comment.line.double-slash
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.switch
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.body.switch
+    - meta.block
 - source: switch
-  scopesBegin:
-    - meta.head.switch
   scopes:
     - keyword.control.switch
 - source: (
   scopesBegin:
-    - meta.conditional.switch
+    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round.conditional.switch
+    - punctuation.section.parens.begin.bracket.round
 - source: next
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round.conditional.switch
+    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.conditional.switch
+    - meta.parens
 - source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.switch
-  scopesEnd:
-    - meta.head.switch
-- source: case
   scopesBegin:
-    - meta.body.switch
-    - meta.conditional.case
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7591,9 +7555,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
 - source: case
   scopes:
     - keyword.control.case
@@ -7611,9 +7572,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
 - source: case
   scopes:
     - keyword.control.case
@@ -7631,9 +7589,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
 - source: case
   scopes:
     - keyword.control.case
@@ -7649,11 +7604,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -7690,8 +7640,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7706,11 +7654,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -7759,8 +7702,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7775,11 +7716,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -7828,8 +7764,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7844,11 +7778,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -7897,8 +7826,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7913,11 +7840,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -7966,8 +7888,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -7982,11 +7902,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8035,8 +7950,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8051,11 +7964,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8104,8 +8012,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8120,11 +8026,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8173,8 +8074,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8189,11 +8088,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8242,8 +8136,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8258,11 +8150,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8311,8 +8198,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8327,11 +8212,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8380,8 +8260,6 @@
   scopesEnd:
     - meta.block
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8396,11 +8274,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8438,8 +8311,6 @@
   scopesEnd:
     - comment.line.double-slash
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8454,11 +8325,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8496,8 +8362,6 @@
   scopesEnd:
     - comment.line.double-slash
 - source: case
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.case
 - source: ''''
@@ -8512,11 +8376,6 @@
   scopesEnd:
     - string.quoted.single
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case
-  scopesEnd:
-    - meta.conditional.case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8549,7 +8408,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'qavail '
@@ -8567,7 +8426,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8644,7 +8503,7 @@
     - keyword.control.for
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
@@ -8679,7 +8538,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8794,7 +8653,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: '!'
@@ -8805,7 +8664,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -8879,12 +8738,12 @@
     - keyword.operator.comparison
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'dptr '
@@ -8896,7 +8755,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: /
   scopes:
     - keyword.operator
@@ -8907,7 +8766,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -8939,7 +8798,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
@@ -8961,7 +8820,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -9042,17 +8901,17 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 0x
@@ -9069,13 +8928,13 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '&&'
   scopes:
     - keyword.operator.logical
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'cpnt '
@@ -9092,18 +8951,18 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '||'
   scopes:
     - keyword.operator.logical
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 0x
@@ -9120,12 +8979,12 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -9347,7 +9206,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'cpnt '
@@ -9364,7 +9223,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -9411,7 +9270,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'cpnt '
@@ -9428,7 +9287,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -9500,7 +9359,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'cpnt '
@@ -9517,7 +9376,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -9721,26 +9580,18 @@
   scopesEnd:
     - meta.block
 - source: default
-  scopesBegin:
-    - meta.conditional.case
   scopes:
     - keyword.control.default
 - source: ':'
-  scopes:
-    - colon
-    - punctuation.separator.case.default
-  scopesEnd:
-    - meta.conditional.case
 - source: '            thing'
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.switch
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.block.switch
-    - meta.body.switch
+    - meta.block
 - source: void
   scopesBegin:
     - meta.function.definition

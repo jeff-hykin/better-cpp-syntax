@@ -96,7 +96,9 @@
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
     - meta.template.call
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -221,7 +223,9 @@
 - source: 'std::true_type'
   scopes:
     - entity.name.type.inherited
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -320,7 +324,9 @@
 - source: 'std::true_type'
   scopes:
     - entity.name.type.inherited
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
