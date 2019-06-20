@@ -1311,6 +1311,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
             ),
         head_includes: [
+            :ever_present_context, 
             :attributes_context,
             cpp_grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
