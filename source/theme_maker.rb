@@ -4,7 +4,7 @@
 theme = {
     name: "blah",
     variation: :dark,
-    color_pallet: {
+    color_palette: {
         bright_red: "#ff5572",
         blue: "#82AAFF",
     },
