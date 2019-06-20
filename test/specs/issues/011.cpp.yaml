@@ -17,6 +17,7 @@
 - source: const
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: char
@@ -25,7 +26,7 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator
+    - storage.modifier.pointer
 - source: /*
   scopesBegin:
     - comment.block
@@ -37,11 +38,12 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: ' some_var'
+- source: some_var
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

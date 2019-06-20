@@ -111,10 +111,16 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'U '
+- source: U
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload

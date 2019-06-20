@@ -191,14 +191,18 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'O '
+- source: O
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: obj
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

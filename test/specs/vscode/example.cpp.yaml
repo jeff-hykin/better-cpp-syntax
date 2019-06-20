@@ -1966,14 +1966,18 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'ANYTYPE '
+- source: ANYTYPE
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: input
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -3344,10 +3348,14 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: ostream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' out'
+    - storage.modifier.reference
+- source: out
   scopes:
     - variable.parameter
 - source: ','
@@ -3356,14 +3364,18 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const
-- source: ' Item'
+    - storage.modifier.specifier.$5
+- source: Item
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' input_'
+    - storage.modifier.reference
+- source: input_
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -3395,13 +3407,17 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' string'
+- source: string
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '  base        '
+    - storage.modifier.reference
+- source: base
   scopes:
     - variable.parameter
 - source: ','
@@ -3410,17 +3426,19 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.$5
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '    repetitions '
+    - storage.modifier.reference
+- source: repetitions
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -3452,6 +3470,8 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: int
@@ -3460,8 +3480,8 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '     the_input   '
+    - storage.modifier.reference
+- source: the_input
   scopes:
     - variable.parameter
 - source: ','
@@ -3470,14 +3490,18 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const
-- source: ' Item'
+    - storage.modifier.specifier.$5
+- source: Item
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '   input_item  '
+    - storage.modifier.reference
+- source: input_item
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -3509,13 +3533,17 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' Item'
+- source: Item
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '    input_item  '
+    - storage.modifier.reference
+- source: input_item
   scopes:
     - variable.parameter
 - source: ','
@@ -3524,17 +3552,19 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.$5
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '    the_input   '
+    - storage.modifier.reference
+- source: the_input
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -3566,13 +3596,17 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' Item'
+- source: Item
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '    input_item  '
+    - storage.modifier.reference
+- source: input_item
   scopes:
     - variable.parameter
 - source: ','
@@ -3581,17 +3615,19 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.$5
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
-- source: '    the_input   '
+    - storage.modifier.reference
+- source: the_input
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -4265,10 +4301,16 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'U '
+- source: U
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -4369,10 +4411,16 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'U '
+- source: U
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -4473,10 +4521,16 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'U '
+- source: U
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
@@ -4659,10 +4713,13 @@
 - source: Callable
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&&'
   scopes:
-    - keyword.operator.logical
-- source: ' a_callable'
+    - storage.modifier.reference
+- source: a_callable
   scopes:
     - variable.parameter
 - source: ','
@@ -4686,14 +4743,21 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -4706,7 +4770,7 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: bool
   scopes:
     - storage.type.primitive
@@ -4723,7 +4787,7 @@
     - punctuation.terminator.statement
 - source: static
   scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: ' storage'
 - source: <
   scopes:
@@ -4926,12 +4990,18 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -5083,14 +5153,18 @@
 - source: Callable
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&&'
   scopes:
-    - keyword.operator.logical
-- source: ' c'
+    - storage.modifier.reference
+- source: c
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -5888,7 +5962,11 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'pointerT '
+- source: pointerT
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -5907,10 +5985,12 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' hashT'
+- source: hashT
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: /*
   scopesBegin:
     - comment.block
@@ -5926,7 +6006,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' pointerT '
+- source: pointerT
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -5975,6 +6057,7 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
+    - meta.parameter
     - comment.block
 - source: )
   scopes:
@@ -6539,14 +6622,18 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'ANYTYPE '
+- source: ANYTYPE
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: input
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -6637,19 +6724,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -6661,10 +6754,14 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
 - source: ','
@@ -6678,6 +6775,8 @@
 - source: thing1
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -6702,19 +6801,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                     b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -6726,10 +6831,14 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
 - source: ','
@@ -6743,6 +6852,8 @@
 - source: thing1
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -6770,19 +6881,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                     b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -6794,10 +6911,14 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
 - source: ','
@@ -6811,6 +6932,8 @@
 - source: thing1
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -6829,29 +6952,51 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.lambda.capture
   scopes:
-    - variable.parameter.defaulted
+    - variable.parameter.capture
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: ' stuff::blah['
+- source: stuff
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: blah
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
 - source: '1324'
   scopes:
     - constant.numeric.decimal
 - source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -6863,10 +7008,14 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
 - source: ','
@@ -6880,6 +7029,8 @@
 - source: thing1
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -6898,19 +7049,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                     b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -7072,12 +7229,18 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -7164,19 +7327,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -7188,10 +7357,14 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: Args
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ...
   scopes:
     - punctuation.vararg-ellipses
-- source: ' args'
+- source: args
   scopes:
     - variable.parameter
 - source: ','
@@ -7205,6 +7378,8 @@
 - source: thing1
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda
@@ -7232,19 +7407,25 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: ' a'
+- source: a
   scopesBegin:
     - meta.lambda.capture
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' b'
+- source: b
+  scopes:
+    - variable.parameter.capture
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' c '
+- source: c
+  scopes:
+    - variable.parameter.capture
   scopesEnd:
     - meta.lambda.capture
 - source: ']'
@@ -8538,7 +8719,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: static
   scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
@@ -9064,6 +9245,8 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: unsigned
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -9081,6 +9264,8 @@
 - source: mask
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda

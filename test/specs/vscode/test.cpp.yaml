@@ -101,6 +101,7 @@
 - source: int
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -114,6 +115,7 @@
     - storage.type.built-in.primitive
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -200,6 +202,7 @@
 - source: int
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -219,6 +222,7 @@
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

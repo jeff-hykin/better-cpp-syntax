@@ -15,6 +15,7 @@ require_relative './tokens.rb'
     # have all patterns with keywords be dynamically generated
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
+    # remove comma and colon
 
 cpp_grammar = Grammar.new(
     name: "C++",
@@ -265,20 +266,13 @@ cpp_grammar = Grammar.new(
             :comma,
         ]
     cpp_grammar[:function_parameter_context] = [
+            :decltype,
+            :function_pointer_parameter,
+            :parameter,
             :parameter_struct,
-            :probably_a_parameter,
             :attributes_context,
             :comments_context,
-            :function_pointer_parameter,
-            :storage_types,
-            :vararg_ellipses,
             :comma,
-            # the following are a temp workaround for defaulted arguments
-            # e.g. aFunc(int a = 10 + 10)
-            :language_constants,
-            :number_literal,
-            :string_context,
-            :operators,
         ]
     cpp_grammar[:template_definition_context] = [
             :scope_resolution_template_definition_inner_generated,
@@ -767,6 +761,7 @@ cpp_grammar = Grammar.new(
     generateScopeResolutionFinder[".namespace.alias"     ,:scope_resolution_namespace_alias     ]
     generateScopeResolutionFinder[".namespace.using"     ,:scope_resolution_namespace_using     ]
     generateScopeResolutionFinder[".namespace.block"     ,:scope_resolution_namespace_block     ]
+    generateScopeResolutionFinder[".parameter"           ,:scope_resolution_parameter           ]
     generateScopeResolutionFinder[".function.definition.operator-overload" ,:scope_resolution_function_definition_operator_overload]
     
 #
@@ -838,6 +833,21 @@ cpp_grammar = Grammar.new(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
     )
+#
+# Support
+#
+    # generally this section is for things that need a #include, (the support category)
+    # it will be for things such as cout, cin, vector, string, map, etc
+    cpp_grammar[:pthread_types] = pthread_types = newPattern(
+        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
+        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
+        )
+    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
+        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
+        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
+        )
+    cpp_grammar[:predefined_macros] = predefinedMacros()
+
 #
 # Functions
 #
@@ -1046,7 +1056,7 @@ cpp_grammar = Grammar.new(
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
-            start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
+            start_pattern: qualified_type.then(ref_deref_definition_pattern).then(
                     match: /\(/,
                     tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
                 ).then(
@@ -1079,21 +1089,82 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
     cpp_grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
 #
-# Probably a parameter
+# Parameters
 #
     array_brackets = /\[\]/.maybe(@spaces)
     comma_or_closing_paraenthese = /,/.or(/\)/)
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    cpp_grammar[:probably_a_parameter] = newPattern(
-        match: newPattern(
-                match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-                tag_as: "variable.parameter.defaulted"
+    parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
+    cpp_grammar[:parameter] = PatternRange.new(
+        tag_as: "meta.parameter",
+        # it will be a type, and a type can be one of serveral things
+        start_pattern: newPattern(
+            newPattern(
+                cpp_grammar[:primitive_types]
             ).or(
-                match: look_behind_for_type.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(stuff_after_a_parameter),
-                tag_as: "variable.parameter"
+                cpp_grammar[:non_primitive_types]
+            ).or(
+                cpp_grammar[:pthread_types]
+            ).or(
+                cpp_grammar[:posix_reserved_types]
+            ).or(
+                cpp_grammar[:storage_specifiers]
+            ).or(
+                match: one_scope_resolution,
+                tag_as: "entity.name.scope-resolution.parameter",
+                include: [
+                    newPattern(
+                        match: /::/,
+                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.parameter"
+                    )
+                ]
+            ).or(
+                # this is to match the ending of a decltype()
+                lookBehindFor(/\)/)
+            ).or(
+                match: identifier,
+                tag_as: "entity.name.type.parameter"
             )
-        )
-
+        ),
+        end_pattern: parameter_ending,
+        includes: [
+            :storage_types,
+            :scope_resolution_parameter_inner_generated,
+            :vararg_ellipses,
+            :function_pointer_parameter,
+            # tag the parameter itself
+            PatternRange.new(
+                start_pattern: newPattern(
+                    match: newPattern(
+                        newPattern(
+                            match: identifier,
+                            tag_as: "variable.parameter",
+                        ).then(std_space).lookAheadFor(/\)|,/)
+                    ).or(
+                        # this is the default-value case
+                        # its a maybe, because it could be a function pointer
+                        maybe(
+                            match: identifier,
+                            tag_as: "variable.parameter.defaulted",
+                        ).then(std_space).then(
+                            match: /\=/,
+                            tag_as: "keyword.operator.assignment.default"
+                        )
+                    )
+                ),
+                end_pattern: parameter_ending,
+                includes: [ :evaluation_context ]
+            ),
+            # tag user defined types
+            newPattern(
+                match: identifier,
+                tag_as: "entity.name.type.parameter"
+            ),
+            :template_call_range,
+            # tag the reference and dereference operator
+            ref_deref_definition_pattern
+        ]
+    )
 #
 # Operator overload
 #
@@ -1285,7 +1356,20 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ :function_parameter_context ],
+                        includes: [
+                            :the_this_keyword,
+                            newPattern(
+                                match: identifier,
+                                tag_as: "variable.parameter.capture",
+                            ).then(std_space).then(
+                                lookAheadFor(/\]|\z|$/).or(
+                                    cpp_grammar[:comma]
+                                ).or(
+                                    cpp_grammar[:assignment_operator]
+                                )
+                            ),
+                            :evaluation_context
+                        ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1336,23 +1420,6 @@ cpp_grammar = Grammar.new(
             ),
         ]
         )
-
-#
-# Support
-#
-    # generally this section is for things that need a #include, (the support category)
-    # it will be for things such as cout, cin, vector, string, map, etc
-    cpp_grammar[:pthread_types] = pthread_types = newPattern(
-        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
-        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
-        )
-    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
-        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
-        )
-    cpp_grammar[:predefined_macros] = predefinedMacros()
-
-
 #
 # Classes, structs, unions, enums
 #

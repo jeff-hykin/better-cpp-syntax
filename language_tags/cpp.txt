@@ -291,6 +291,7 @@ entity.name.scope-resolution.function.definition.operator-overload.cpp
 entity.name.scope-resolution.namespace.alias.cpp
 entity.name.scope-resolution.namespace.block.cpp
 entity.name.scope-resolution.namespace.using.cpp
+entity.name.scope-resolution.parameter.cpp
 entity.name.scope-resolution.template.call.cpp
 entity.name.scope-resolution.template.definition.cpp
 entity.name.tag.pragma-mark.cpp
@@ -299,6 +300,7 @@ entity.name.type.alias.cpp
 entity.name.type.cpp
 entity.name.type.enum.cpp
 entity.name.type.inherited.cpp
+entity.name.type.parameter.cpp
 entity.name.type.struct.cpp
 entity.name.type.struct.parameter.cpp
 entity.name.type.template.cpp
@@ -328,6 +330,7 @@ keyword.operator.alignof.cpp
 keyword.operator.assignment.compound.bitwise.cpp
 keyword.operator.assignment.compound.cpp
 keyword.operator.assignment.cpp
+keyword.operator.assignment.default.cpp
 keyword.operator.bitwise.shift.cpp
 keyword.operator.cast.$0.cpp
 keyword.operator.comparison.cpp
@@ -416,6 +419,7 @@ meta.head.struct.cpp
 meta.head.switch.cpp
 meta.head.union.cpp
 meta.lambda.capture.cpp
+meta.parameter.cpp
 meta.parens.cpp
 meta.preprocessor.cpp
 meta.preprocessor.diagnostic.cpp
@@ -541,6 +545,7 @@ punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
 punctuation.separator.scope-resolution.namespace.alias.cpp
 punctuation.separator.scope-resolution.namespace.block.cpp
 punctuation.separator.scope-resolution.namespace.using.cpp
+punctuation.separator.scope-resolution.parameter.cpp
 punctuation.separator.scope-resolution.template.call.cpp
 punctuation.separator.scope-resolution.template.definition.cpp
 punctuation.separator.template.argument.cpp
@@ -556,7 +561,7 @@ storage.modifier.inline.cpp
 storage.modifier.lambda.$0.cpp
 storage.modifier.pointer.cpp
 storage.modifier.reference.cpp
-storage.modifier.specifier.$0.cpp
+storage.modifier.specifier.$5.cpp
 storage.modifier.specifier.functional.post-parameters.$0.cpp
 storage.modifier.specifier.functional.pre-parameters.$0.cpp
 storage.type.$0.cpp
@@ -605,6 +610,7 @@ variable.other.object.cpp
 variable.other.object.declare.cpp
 variable.other.object.property.cpp
 variable.other.property.cpp
+variable.parameter.capture.cpp
 variable.parameter.cpp
 variable.parameter.defaulted.cpp
 variable.parameter.pointer.function.cpp

@@ -16,6 +16,7 @@
         "pregenerate-specs": "npm run build",
         "generate-specs": "node test/source/commands/generate-specs.js",
         "gen": "npm run generate-specs -- ",
+        "try": "npm run test -- --show-failure-only",
         "sort-specs": "node test/source/commands/sort-specs.js",
         "prereport": "npm run build",
         "report": "node test/source/commands/report",

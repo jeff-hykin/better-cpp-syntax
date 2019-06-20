@@ -132,12 +132,16 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: int
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
