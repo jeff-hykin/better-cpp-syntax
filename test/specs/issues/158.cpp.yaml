@@ -51,13 +51,16 @@
 - source: const
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' string'
+- source: string
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' what'
+    - storage.modifier.reference
+- source: what
   scopes:
     - variable.parameter
 - source: ','
@@ -68,17 +71,18 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: 'throwExcp '
+- source: throwExcp
   scopes:
     - variable.parameter.defaulted
 - source: =
   scopes:
-    - keyword.operator.assignment
+    - keyword.operator.assignment.default
 - source: 'false'
   scopes:
     - constant.language.false
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

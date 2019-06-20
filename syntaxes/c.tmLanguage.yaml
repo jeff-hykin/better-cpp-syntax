@@ -1206,7 +1206,8 @@
       '1':
         name: colon.c punctuation.separator.case.default.c
     patterns:
-    - include: "#conditional_context"
+    - include: "#evaluation_context"
+    - include: "#c_conditional_context"
   case_statement:
     name: meta.conditional.case.c
     begin: "((?<!\\w)case(?!\\w))"
@@ -1218,7 +1219,8 @@
       '1':
         name: colon.c punctuation.separator.case.c
     patterns:
-    - include: "#conditional_context"
+    - include: "#evaluation_context"
+    - include: "#c_conditional_context"
   switch_statement:
     name: meta.block.switch.c
     begin: "(((?<!\\w)switch(?!\\w)))"
@@ -1265,7 +1267,8 @@
       '1':
         name: punctuation.section.parens.end.bracket.round.conditional.switch.c
     patterns:
-    - include: "#conditional_context"
+    - include: "#evaluation_context"
+    - include: "#c_conditional_context"
   static_assert:
     begin: "(static_assert|_Static_assert)\\s*(\\()"
     beginCaptures:
@@ -1287,12 +1290,12 @@
       patterns:
       - include: "#string_context"
       - include: "#string_context_c"
-    - include: "#function_call_context"
+    - include: "#evaluation_context"
   backslash_escapes:
     match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
       |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )"
     name: constant.character.escape.c
-  conditional_context:
+  c_conditional_context:
     patterns:
     - include: "$base"
     - include: "#block_innards"

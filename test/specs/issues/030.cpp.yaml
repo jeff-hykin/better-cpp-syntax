@@ -96,7 +96,9 @@
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
     - meta.template.call
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -108,11 +110,11 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: static
-  scopes:
-    - storage.modifier.specifier.static
+  scopesBegin:
+    - storage.modifier.specifier.$5
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesEnd:
+    - storage.modifier.specifier.$5
 - source: bool
   scopes:
     - storage.type.primitive
@@ -221,7 +223,9 @@
 - source: 'std::true_type'
   scopes:
     - entity.name.type.inherited
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -320,7 +324,9 @@
 - source: 'std::true_type'
   scopes:
     - entity.name.type.inherited
-- source: ' \'
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -561,11 +567,10 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-  scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesEnd:
+    - storage.modifier.specifier.$5
 - source: bool
   scopes:
     - storage.type.primitive
@@ -626,11 +631,10 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-  scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesEnd:
+    - storage.modifier.specifier.$5
 - source: bool
   scopes:
     - storage.type.primitive
@@ -691,11 +695,10 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-  scopes:
-    - storage.modifier.specifier.static
+    - storage.modifier.specifier.$5
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesEnd:
+    - storage.modifier.specifier.$5
 - source: bool
   scopes:
     - storage.type.primitive

@@ -27,9 +27,12 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'bar '
+- source: bar
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -46,6 +49,7 @@
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -106,9 +110,12 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'bar '
+- source: bar
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -125,6 +132,7 @@
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

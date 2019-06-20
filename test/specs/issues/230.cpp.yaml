@@ -22,9 +22,19 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: struct
+- source: '<<'
   scopesBegin:
     - meta.body.function.definition
+    - keyword.operator.bitwise.shift
+- source: '<<'
+- source: '<<'
+  scopesEnd:
+    - keyword.operator.bitwise.shift
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: ' HEAD'
+- source: struct
   scopes:
     - storage.type.struct.declare
 - source: var
@@ -39,25 +49,25 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: (
+- source: ' ('
   scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - meta.type.cast
 - source: struct
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.struct.parameter
+    - storage.type.struct
 - source: var
   scopes:
-    - entity.name.type.struct.parameter
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '**'
   scopes:
     - storage.modifier.pointer
 - source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens
+    - meta.type.cast
 - source: func
   scopes:
     - entity.name.function.call
@@ -78,6 +88,243 @@
 - source: comment
   scopesEnd:
     - comment.line.double-slash
+- source: ==
+  scopesBegin:
+    - keyword.operator.comparison
+- source: ==
+- source: ==
+  scopesEnd:
+    - keyword.operator.comparison
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: class
+  scopes:
+    - storage.type.class.declare
+- source: var
+  scopes:
+    - entity.name.type.class
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ('
+  scopesBegin:
+    - meta.type.cast
+- source: class
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - storage.type.class
+- source: var
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: struct
+  scopes:
+    - storage.type.struct.declare
+- source: var
+  scopes:
+    - entity.name.type.struct
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ('
+  scopesBegin:
+    - meta.type.cast
+- source: struct
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - storage.type.struct
+- source: var
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: enum
+  scopes:
+    - storage.type.enum.declare
+- source: var
+  scopes:
+    - entity.name.type.enum
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ('
+  scopesBegin:
+    - meta.type.cast
+- source: enum
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - storage.type.enum
+- source: var
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: union
+  scopes:
+    - storage.type.union.declare
+- source: var
+  scopes:
+    - entity.name.type.union
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ('
+  scopesBegin:
+    - meta.type.cast
+- source: union
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - storage.type.union
+- source: var
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: '**'
+  scopes:
+    - storage.modifier.pointer
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: '>>'
+  scopesBegin:
+    - keyword.operator.bitwise.shift
+- source: '>>'
+- source: '>>'
+  scopesEnd:
+    - keyword.operator.bitwise.shift
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' master'
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition

@@ -72,11 +72,19 @@
   scopes:
     - punctuation.definition.parameters.begin.lambda
 - source: expected
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' actual'
+- source: actual
+  scopes:
+    - entity.name.type.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.definition.parameters.end.lambda

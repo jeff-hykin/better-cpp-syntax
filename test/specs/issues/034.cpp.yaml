@@ -38,15 +38,14 @@
     - comment.block
 - source: (
   scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - meta.type.cast
 - source: addr
-- source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
+    - meta.qualified_type
+    - entity.name.type
+- source: )
   scopesEnd:
-    - meta.parens
+    - meta.type.cast
 - source: <
   scopes:
     - keyword.operator.comparison

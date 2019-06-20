@@ -40,7 +40,7 @@ c_grammar = Grammar.new(
 #
 # Contexts
 #
-    c_grammar[:conditional_context] = [
+    c_grammar[:c_conditional_context] = [
             :$initial_context,
             :block_innards
         ]

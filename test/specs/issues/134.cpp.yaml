@@ -41,6 +41,8 @@
 - source: Type
   scopes:
     - meta.function.definition.parameters
+    - meta.parameter
+    - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -65,14 +67,18 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'Type '
+- source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: foo
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -116,6 +122,9 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
@@ -167,6 +176,9 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
@@ -196,17 +208,19 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'Type '
+- source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
-    - variable.parameter.defaulted
+    - entity.name.type.parameter
 - source: =
   scopes:
-    - keyword.operator.assignment
+    - keyword.operator.assignment.default
 - source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -231,18 +245,22 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'Type '
+- source: Type
   scopesBegin:
     - meta.function.definition.parameters
-- source: 'foo '
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: foo
   scopes:
     - variable.parameter.defaulted
 - source: =
   scopes:
-    - keyword.operator.assignment
+    - keyword.operator.assignment.default
 - source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -286,13 +304,19 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
   scopesEnd:
     - meta.function.definition.parameters
 - source: )
@@ -341,13 +365,19 @@
   scopes:
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
   scopesEnd:
     - meta.function.definition.parameters
 - source: )

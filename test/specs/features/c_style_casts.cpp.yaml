@@ -22,11 +22,100 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: return
+- source: foo
   scopesBegin:
     - meta.body.function.definition
   scopes:
-    - keyword.control.return
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: baz
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: foo
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: (
+  scopesBegin:
+    - meta.type.cast
+- source: baz
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: foo
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: (
+  scopesBegin:
+    - meta.type.cast
+- source: bar
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: baz
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' foo '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ('
+  scopesBegin:
+    - meta.type.cast
+- source: bar
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: )
+  scopesEnd:
+    - meta.type.cast
+- source: baz
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' foo '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
 - source: (
   scopesBegin:
     - meta.parens
@@ -38,6 +127,22 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: (
+  scopesBegin:
+    - meta.type.cast
+- source: bar
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: )
+  scopesEnd:
+    - meta.type.cast
 - source: '0'
   scopes:
     - constant.numeric.decimal

@@ -12,7 +12,7 @@ function removeScopeName(scope) {
  */
 module.exports = async function generateSpec(path, fixture) {
     let spec = [];
-    await getTokens(registry, path, fixture, (line, token) => {
+    await getTokens(registry, path, fixture, false, (line, token) => {
         const source = line.substring(token.startIndex, token.endIndex);
         if (source.trim() === "") {
             return true;

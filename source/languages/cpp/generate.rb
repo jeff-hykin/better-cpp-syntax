@@ -12,8 +12,10 @@ require_relative './tokens.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
-    # fix the ... inside of macros
     # have all patterns with keywords be dynamically generated
+    # add specificity to the ternary operator
+    # add specificity to the misc_storage_modifiers
+    # remove comma and colon
 
 cpp_grammar = Grammar.new(
     name: "C++",
@@ -154,124 +156,8 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:$initial_context] = [
             :source_wrapper,
         ]
-    cpp_grammar[:root_context] = [
-            # first preprocessor directives, which should be a part of every scope
-            :preprocessor_context,
-            # comments 
-            :comments_context,
-            # declarations 
-            :function_definition,
-            :struct_declare,
-            :special_block_context,
-            :string_context,
-            :functional_specifiers_pre_parameters,
-            :qualifiers_and_specifiers_post_parameters,
-            :storage_specifiers,
-            :access_control_keywords,
-            :exception_keywords,
-            :static_assert,
-            :other_keywords,
-            :memory_operators,
-            :using_name,
-            :the_this_keyword,
-            :language_constants,
-            :template_isolated_definition,
-            :template_definition,
-            :misc_storage_modifiers_1,
-            :destructor,
-            :lambdas,
-            :switch_statement,
-            :control_flow_keywords,
-            :assembly,
-            :misc_storage_modifiers_2,
-            :operator_overload,
-            :number_literal,
-            :string_context_c,
-            :predefined_macros,
-            :operators,
-            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
-            :block,
-            :parentheses,
-            :type_casting_operators,
-            
-            :function_call,
-            :scope_resolution_inner_generated,
-            :storage_types,
-            :line_continuation_character,
-            :square_brackets,
-            :empty_square_brackets,
-            :semicolon,
-            :comma,
-        ]
-    cpp_grammar[:special_block_context] = [
-            # TODO: the :attributes_context probably belongs here but see issue #215 for why they were removed
-            :using_namespace,
-            :type_alias,
-            :namespace_alias,
-            :namespace_block,
-            :typedef_class,
-            :typedef_struct,
-            :typedef_union,
-            :class_block,
-            :struct_block,
-            :union_block,
-            :enum_block,
-            :extern_block,
-        ]
-    # this is currently just :root_context without :function_definition
-    cpp_grammar[:function_body_context] = [
-        :type_casting_operators,
-        :function_call,
-        :struct_declare,
-        :special_block_context,
-        :macro_argument,
-        :string_context,
-        :functional_specifiers_pre_parameters,
-        :qualifiers_and_specifiers_post_parameters,
-        :storage_specifiers,
-        :access_control_keywords,
-        :exception_keywords,
-        :static_assert,
-        :other_keywords,
-        :memory_operators,
-        :using_name,
-        :the_this_keyword,
-        :language_constants,
-        :template_isolated_definition,
-        :template_definition,
-        :misc_storage_modifiers_1,
-        :destructor,
-        :lambdas,
-        :preprocessor_context,
-        :comments_context,
-        :switch_statement,
-        :control_flow_keywords,
-        :assembly,
-        :misc_storage_modifiers_2,
-        :operator_overload,
-        :number_literal,
-        :string_context_c,
-        :meta_preprocessor_macro,
-        :meta_preprocessor_diagnostic,
-        :meta_preprocessor_include,
-        :pragma_mark,
-        :meta_preprocessor_line,
-        :meta_preprocessor_undef,
-        :meta_preprocessor_pragma,
-        :operators,
-        :block,
-        :c_style_type_casting,
-        :parentheses,
-        :type_casting_operators,
-        :scope_resolution_inner_generated,
-        :storage_types,
-        :line_continuation_character,
-        :square_brackets,
-        :empty_square_brackets,
-        :semicolon,
-        :comma,
-    ]
-    cpp_grammar[:preprocessor_context] = [
+    cpp_grammar[:ever_present_context] = [
+            # preprocessor directives, which should be a part of every scope
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
@@ -284,43 +170,108 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_undef,
             :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
+            # comments 
+            :comments_context,
+            :line_continuation_character,
         ]
-    cpp_grammar[:storage_types] = [
-            :storage_specifiers,
-            :primitive_types,
-            :non_primitive_types,
-            :pthread_types,
-            :posix_reserved_types,
-            :decltype,
+    cpp_grammar[:root_context] = [
+            :ever_present_context,
+            # declarations (contains only the head of somthing)
+            # TODO: class pre-definition
+            # TODO: initializater calls
+            # definitions (contains a body of something)
+            :function_definition,
+            :operator_overload,
+            :destructor, 
+            :using_namespace,
+            :type_alias,
+            :using_name, # this needs to be below type_alias
+            :namespace_alias,
+            :namespace_block,
+            :extern_block,
+            :typedef_class,
+            :typedef_struct,
+            :typedef_union,
+            :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
+            :standard_declares, # struct/enum/union/class
+            :class_block,
+            :struct_block,
+            :union_block,
+            :enum_block,
+            :template_isolated_definition,  # TODO: template definitions should be mixed into the seperate definitions (class/struct/function, etc)
+            :template_definition,
+            :access_control_keywords,       # TODO: these should only be allowed inside of class/struct (maybe namespace?) blocks 
+            :block,                         # TODO: after all function definition patterns are fixed, remove this from here and put it in the function definition context
+            # statements
+            :static_assert,                 # it is unclear to me if static_assert can appear in the root context or not, so I'm leaving it here to be safe. https://en.cppreference.com/w/cpp/language/static_assert
+            :assembly,                      # it is unclear to me is assembly can be in the root context or not, so I'm leaving it here to be safe
+            
+            # eventually this needs to be removed
+            :evaluation_context
+        ]
+    cpp_grammar[:function_body_context] = cpp_grammar[:root_context].without(
+            # function bodies cant contain any of theses:
+            :namespace_block,
+            :extern_block,
+            :function_definition,
+            :operator_overload,
+            :destructor,
+            :template_isolated_definition,
+            :template_definition,
+            # this shouldn't be in root_context (it will eventually be removed), and it shouldn't really be in function body either
+            :evaluation_context,
+        ) + [
+            # functions can exclusively contain theses:
+            # TODO: fill out all of the statements here, variable declares, assignment, etc
+            # control flow
+            :switch_statement, # needs to be above the "switch" keyword (which will eventually be removed)
+            # eventually, probably, the evaluation_context should be removed from here
+            :evaluation_context
+        ]
+    cpp_grammar[:evaluation_context] = [
+            :ever_present_context,
+            # literals
+            :string_context,
+            :number_literal,
+            :string_context_c,
+            # variable-like
+            :method_access, # needs to be above :function_call, needs to be above operator
+            :member_access,
+            :predefined_macros,
+            # operators
+            :operators,
+            :memory_operators,
+            :wordlike_operators,
+            :type_casting_operators,
+            # keywords
+            :control_flow_keywords,
+            :exception_keywords,
+            :the_this_keyword,
+            :language_constants,
+            # types, modifiers, and specifiers
+            :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
+            :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
+            :storage_types,
+            :misc_storage_modifiers,                    # TODO: this pattern needs to be removed 
+            # misc
+            :lambdas,
+            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
+            :parentheses,
+            :function_call,
+            :scope_resolution_inner_generated,
+            :square_brackets,
+            :empty_square_brackets,
+            :semicolon,
+            :comma,
         ]
     cpp_grammar[:function_parameter_context] = [
-            :parameter_struct,
-            :probably_a_parameter,
+            :decltype,
+            :function_pointer_parameter,
+            :parameter,
+            :over_qualified_types,
             :attributes_context,
             :comments_context,
-            :function_pointer_parameter,
-            :storage_types,
-            :vararg_ellipses,
             :comma,
-            # the following are a temp workaround for defaulted arguments
-            # e.g. aFunc(int a = 10 + 10)
-            :language_constants,
-            :number_literal,
-            :string_context,
-            :operators,
-        ]
-    # eventually this context will be more exclusive (can't have class definitons inside of an evaluation)
-    # but for now it just includes everything
-    cpp_grammar[:evaluation_context] = [
-            :root_context
-            # function call
-            # number literal
-            # lambdas
-        ]
-    # eventually this context will be more exclusive (can't have class definitons inside of an if statement)
-    # but for now it just includes everything
-    cpp_grammar[:conditional_context] = [
-            :root_context
         ]
     cpp_grammar[:template_definition_context] = [
             :scope_resolution_template_definition_inner_generated,
@@ -340,11 +291,19 @@ cpp_grammar = Grammar.new(
             :comma_in_template_argument
         ]
     cpp_grammar[:attributes_context] = [
-        :cpp_attributes,
-        :gcc_attributes,
-        :ms_attributes,
-        :alignas_attribute,
-    ]
+            :cpp_attributes,
+            :gcc_attributes,
+            :ms_attributes,
+            :alignas_attribute,
+        ]
+    cpp_grammar[:storage_types] = [
+            :storage_specifiers,
+            :primitive_types,
+            :non_primitive_types,
+            :pthread_types,
+            :posix_reserved_types,
+            :decltype,
+        ]
 # 
 # source wrapper
 # 
@@ -445,8 +404,8 @@ cpp_grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
         tag_as: "keyword.control.exception.$match"
         )
-    cpp_grammar[:other_keywords] = newPattern(
-        match: variableBounds[ /(typedef)/ ],
+    cpp_grammar[:typedef_keyword] = newPattern(
+        match: variableBounds[ /typedef/ ],
         tag_as: "keyword.other.$match"
         )
     cpp_grammar[:the_this_keyword] = the_this_keyword = newPattern(
@@ -459,7 +418,7 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
     cpp_grammar[:memory_operators] = newPattern(
-        tag_as: "keyword.operator.wordlike memory",
+        tag_as: "keyword.operator.wordlike",
         match: lookBehindToAvoid(
                 @standard_character
             ).then(
@@ -503,7 +462,8 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case.default"
             ),
-            includes: [:conditional_context]
+            # TODO: eventually remove the c_conditional_context
+            includes: [:evaluation_context, :c_conditional_context]
         )
     cpp_grammar[:case_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
@@ -515,7 +475,8 @@ cpp_grammar = Grammar.new(
                 match: /:/,
                 tag_as: "colon punctuation.separator.case"
             ),
-            includes: [:conditional_context]
+            # TODO: eventually remove the c_conditional_context
+            includes: [:evaluation_context, :c_conditional_context]
         )
     cpp_grammar[:switch_conditional_parentheses] = PatternRange.new(
             tag_as: "meta.conditional.switch",
@@ -527,7 +488,8 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
-            includes: [ :conditional_context ]
+            # TODO: eventually remove the c_conditional_context
+            includes: [ :evaluation_context, :c_conditional_context ]
         )
     cpp_grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
@@ -798,6 +760,7 @@ cpp_grammar = Grammar.new(
     generateScopeResolutionFinder[".namespace.alias"     ,:scope_resolution_namespace_alias     ]
     generateScopeResolutionFinder[".namespace.using"     ,:scope_resolution_namespace_using     ]
     generateScopeResolutionFinder[".namespace.block"     ,:scope_resolution_namespace_block     ]
+    generateScopeResolutionFinder[".parameter"           ,:scope_resolution_parameter           ]
     generateScopeResolutionFinder[".function.definition.operator-overload" ,:scope_resolution_function_definition_operator_overload]
     
 #
@@ -806,7 +769,7 @@ cpp_grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     cpp_grammar[:qualified_type] = qualified_type = newPattern(
-        should_fully_match: ["A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "a::more::<complex, type>"],
+        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
         match: std_space.maybe(
@@ -816,11 +779,11 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 scope_resolution
             ).then(std_space).then(
+                lookAheadToAvoid(non_type_keywords.then(@word_boundary))
+            ).then(
                 match: identifier,
                 tag_as: "entity.name.type",
-            ).then(@word_boundary).then(
-                lookBehindToAvoid(non_type_keywords)
-            ).maybe(
+            ).then(@word_boundary).maybe(
                 template_call.without_numbered_capture_groups
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
@@ -869,53 +832,27 @@ cpp_grammar = Grammar.new(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
     )
-    cpp_grammar[:c_style_type_casting] = newPattern(
-        tag_as: "meta.type.cast",
-        should_fully_match: ["(int)", "( char * )", "(a::more::<complex, type> )"],
-        should_not_partial_match: ["foo(bar)"],
-        match: lookBehindToAvoid(/[\w>]/).maybe(@spaces).then(
-            /\(/.maybe(@spaces).then(qualified_type).then(ref_deref_definition_pattern).then(/\)/)
-        ).lookAheadToAvoid(maybe(@spaces).then(@semicolon))
-    )
+#
+# Support
+#
+    # generally this section is for things that need a #include, (the support category)
+    # it will be for things such as cout, cin, vector, string, map, etc
+    cpp_grammar[:pthread_types] = pthread_types = newPattern(
+        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
+        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
+        )
+    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
+        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
+        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
+        )
+    cpp_grammar[:predefined_macros] = predefinedMacros()
+
 #
 # Functions
 #
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
-    cpp_grammar[:struct_declare] = struct_declare = newPattern(
-            should_partial_match: [ "struct crypto_aead *tfm = crypto_aead_reqtfm(req);", "struct aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
-            match: newPattern(
-                match: /struct/,
-                tag_as: "storage.type.struct.declare",
-            ).then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.struct",
-            ).maybe(@spaces).then(
-                ref_deref_definition_pattern.or(@spaces)
-            ).then(
-                match: variable_name,
-                tag_as: "variable.other.object.declare",
-            )
-        )
-    cpp_grammar[:parameter_struct] = newPattern(
-            should_partial_match: [ "struct skcipher_walk *walk," ],
-            match: newPattern(
-                match: /struct/,
-                tag_as: "storage.type.struct.parameter",
-            ).then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.struct.parameter",
-            ).maybe(@spaces).then(
-                ref_deref_definition_pattern.or(@spaces)
-            # this is a maybe because its possible to have a type declare without an actual parameter
-            ).maybe(
-                match: variable_name,
-                tag_as: "variable.other.object.declare",
-            ).maybe(@spaces).maybe(
-                /\[/.maybe(@spaces).then(/\]/).maybe(@spaces),
-            ).lookAheadFor(/,|\)|\n/)
-        )
-        
+
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
@@ -930,6 +867,7 @@ cpp_grammar = Grammar.new(
             ).then(std_space).lookAheadFor(/\(/)
         ),
         head_includes:[
+            :ever_present_context, # comments and macros
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
                 start_pattern: newPattern( 
@@ -942,12 +880,11 @@ cpp_grammar = Grammar.new(
                     ),
                 includes: [
                     :function_parameter_context,
-                    # TODO: the function_call_context is included here as workaround for function-initializations like issue #198
+                    # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
                     # e.g. std::string ("hello");
-                    :function_call_context,
+                    :evaluation_context,
                 ]
             ),
-            :comments_context,
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :root_context
@@ -982,7 +919,7 @@ cpp_grammar = Grammar.new(
                     :string_context_c,
                 ]
             ),
-            :function_call_context,
+            :evaluation_context,
         ]
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
@@ -1004,15 +941,15 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call"
             ),
-        includes: [ :function_call_context ]
+        includes: [ :evaluation_context ]
         )
 #
 # Operators
 #
     cpp_grammar[:operators] = []
-    normal_word_operators = newPattern(
+    cpp_grammar[:wordlike_operators] = newPattern(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "keyword.operator.wordlike alias keyword.operator.$match",
+        tag_as: "keyword.operator.wordlike keyword.operator.$match",
         )
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
@@ -1025,12 +962,21 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    
+    cpp_grammar[:ternary_operator] = PatternRange.new(
+        apply_end_pattern_last: true,
+        start_pattern: newPattern(
+            match: /\?/,
+            tag_as: "keyword.operator.ternary",
+        ),
+        end_pattern: newPattern(
+            match: /:/,
+            tag_as: "keyword.operator.ternary"
+        ),
+        includes: cpp_grammar[:evaluation_context]
+    )
         
     cpp_grammar[:operators] += [
-            :method_access,
-            :member_access,
-            normal_word_operators,
-            :vararg_ellipses,
             {
                 match: "--",
                 name: "keyword.operator.decrement"
@@ -1068,35 +1014,7 @@ cpp_grammar = Grammar.new(
                 match: "%|\\*|/|-|\\+",
                 name: "keyword.operator"
             },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                end: ":",
-                applyEndPatternLast: true,
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#method_access"
-                    },
-                    {
-                        include: "#member_access"
-                    },
-                    {
-                        include: "#function_call_c"
-                    },
-                    {
-                        include: "#root_context"
-                    }
-                ]
-            }
+            :ternary_operator,
         ]
 #
 # function pointer
@@ -1104,7 +1022,7 @@ cpp_grammar = Grammar.new(
     after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
-            start_pattern: qualified_type.maybe(@spaces).then(ref_deref_definition_pattern).then(
+            start_pattern: qualified_type.then(ref_deref_definition_pattern).then(
                     match: /\(/,
                     tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
                 ).then(
@@ -1137,21 +1055,82 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
     cpp_grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
 #
-# Probably a parameter
+# Parameters
 #
     array_brackets = /\[\]/.maybe(@spaces)
     comma_or_closing_paraenthese = /,/.or(/\)/)
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    cpp_grammar[:probably_a_parameter] = newPattern(
-        match: newPattern(
-                match: variable_name_without_bounds.maybe(@spaces).lookAheadFor("="),
-                tag_as: "variable.parameter.defaulted"
+    parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
+    cpp_grammar[:parameter] = PatternRange.new(
+        tag_as: "meta.parameter",
+        # it will be a type, and a type can be one of serveral things
+        start_pattern: newPattern(
+            newPattern(
+                cpp_grammar[:primitive_types]
             ).or(
-                match: look_behind_for_type.lookAheadToAvoid(@cpp_tokens.that(:isType)).then(variable_name_without_bounds).then(stuff_after_a_parameter),
-                tag_as: "variable.parameter"
+                cpp_grammar[:non_primitive_types]
+            ).or(
+                cpp_grammar[:pthread_types]
+            ).or(
+                cpp_grammar[:posix_reserved_types]
+            ).or(
+                cpp_grammar[:storage_specifiers]
+            ).or(
+                match: one_scope_resolution,
+                tag_as: "entity.name.scope-resolution.parameter",
+                include: [
+                    newPattern(
+                        match: /::/,
+                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.parameter"
+                    )
+                ]
+            ).or(
+                # this is to match the ending of a decltype()
+                lookBehindFor(/\)/)
+            ).or(
+                match: identifier,
+                tag_as: "entity.name.type.parameter"
             )
-        )
-
+        ),
+        end_pattern: parameter_ending,
+        includes: [
+            :storage_types,
+            :scope_resolution_parameter_inner_generated,
+            :vararg_ellipses,
+            :function_pointer_parameter,
+            # tag the parameter itself
+            PatternRange.new(
+                start_pattern: newPattern(
+                    match: newPattern(
+                        newPattern(
+                            match: identifier,
+                            tag_as: "variable.parameter",
+                        ).then(std_space).lookAheadFor(/\)|,/)
+                    ).or(
+                        # this is the default-value case
+                        # its a maybe, because it could be a function pointer
+                        maybe(
+                            match: identifier,
+                            tag_as: "variable.parameter.defaulted",
+                        ).then(std_space).then(
+                            match: /\=/,
+                            tag_as: "keyword.operator.assignment.default"
+                        )
+                    )
+                ),
+                end_pattern: parameter_ending,
+                includes: [ :evaluation_context ]
+            ),
+            # tag user defined types
+            newPattern(
+                match: identifier,
+                tag_as: "entity.name.type.parameter"
+            ),
+            :template_call_range,
+            # tag the reference and dereference operator
+            ref_deref_definition_pattern
+        ]
+    )
 #
 # Operator overload
 #
@@ -1245,7 +1224,7 @@ cpp_grammar = Grammar.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
-        includes: [:function_call_context],
+        includes: [:evaluation_context],
         )
 #
 # Namespace
@@ -1298,6 +1277,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
             ),
         head_includes: [
+            :ever_present_context, 
             :attributes_context,
             cpp_grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
@@ -1343,7 +1323,20 @@ cpp_grammar = Grammar.new(
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
-                        includes: [ :function_parameter_context ],
+                        includes: [
+                            :the_this_keyword,
+                            newPattern(
+                                match: identifier,
+                                tag_as: "variable.parameter.capture",
+                            ).then(std_space).then(
+                                lookAheadFor(/\]|\z|$/).or(
+                                    cpp_grammar[:comma]
+                                ).or(
+                                    cpp_grammar[:assignment_operator]
+                                )
+                            ),
+                            :evaluation_context
+                        ],
                     ).then(
                         match: /\]/,
                         tag_as: "punctuation.definition.capture.end.lambda",
@@ -1394,23 +1387,6 @@ cpp_grammar = Grammar.new(
             ),
         ]
         )
-
-#
-# Support
-#
-    # generally this section is for things that need a #include, (the support category)
-    # it will be for things such as cout, cin, vector, string, map, etc
-    cpp_grammar[:pthread_types] = pthread_types = newPattern(
-        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
-        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
-        )
-    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
-        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
-        )
-    cpp_grammar[:predefined_macros] = predefinedMacros()
-
-
 #
 # Classes, structs, unions, enums
 #
@@ -1512,6 +1488,9 @@ cpp_grammar = Grammar.new(
                         ).or(
                             lookAheadFor(/{/)
                         )
+                    ).maybe(
+                        # normally macros like this wouldn't be supported, but I imagine this one is fairly common
+                        std_space.then(match: /DLLEXPORT/, tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT").then(std_space)
                     ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
@@ -1545,18 +1524,17 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
             head_includes: [
-                :preprocessor_context,
+                :ever_present_context, # directives and comments
                 :inheritance_context,
                 :template_call_range,
-                :comments_context,
             ],
             body_includes: [ :function_pointer, :constructor_context, :root_context ],
             tail_includes: tail_includes
         )
     end
-    cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
+    cpp_grammar[:class_block]  = generateClassOrStructBlockFinder["class"]
     cpp_grammar[:struct_block] = generateClassOrStructBlockFinder["struct"]
-    cpp_grammar[:union_block] = generateClassOrStructBlockFinder["union"]
+    cpp_grammar[:union_block]  = generateClassOrStructBlockFinder["union"]
     # the following is a legacy pattern, I'm not sure if it is still accurate
     # I have no idea why it matches a double quote
     cpp_grammar[:extern_block] = generateBlockFinder(
@@ -1569,7 +1547,7 @@ cpp_grammar = Grammar.new(
         head_includes: [ :root_context ],
         secondary_includes: [ :root_context ]
         )
-    generateTypedefClassOrStructBlockFinder =-> (name) do
+    generateTypedefClassOrStructBlockFinder = ->(name) do
         return PatternRange.new(
             start_pattern: newPattern(
                 match: variableBounds[/typedef/],
@@ -1587,9 +1565,63 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    cpp_grammar[:typedef_class] = generateTypedefClassOrStructBlockFinder["class"]
+    cpp_grammar[:typedef_class]  = generateTypedefClassOrStructBlockFinder["class"]
     cpp_grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
-    cpp_grammar[:typedef_union] = generateTypedefClassOrStructBlockFinder["union"]
+    cpp_grammar[:typedef_union]  = generateTypedefClassOrStructBlockFinder["union"]
+    
+    generateDeclareFor = ->(name) do
+        newPattern(
+            should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
+            match: newPattern(
+                match: /#{name}/,
+                tag_as: "storage.type.#{name}.declare",
+            ).then(std_space).then(
+                match: variable_name,
+                tag_as: "entity.name.type.#{name}",
+            ).then(
+                ref_deref_definition_pattern
+            ).then(std_space).then(
+                @cpp_tokens.lookAheadToAvoidWordsThat(:isClassInheritenceSpecifier)
+            ).then(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/:/)
+        )
+    end
+    cpp_grammar[:standard_declares] = [
+        cpp_grammar[:struct_declare] = generateDeclareFor["struct"],
+        cpp_grammar[:union_declare ] = generateDeclareFor["union"],
+        cpp_grammar[:enum_declare  ] = generateDeclareFor["enum"],
+        cpp_grammar[:class_declare ] = generateDeclareFor["class"],
+    ]
+    generateOverqualifiedTypeFor = ->(name) do
+        newPattern(
+            should_partial_match: [ "#{name} skcipher_walk *walk," ],
+            match: newPattern(
+                match: /#{name}/,
+                tag_as: "storage.type.#{name}.parameter",
+            ).then(std_space).then(
+                match: variable_name,
+                tag_as: "entity.name.type.#{name}.parameter",
+            ).then(std_space).then(
+                ref_deref_definition_pattern
+            # this is a maybe because its possible to have a type declare without an actual parameter
+            ).maybe(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            ).then(std_space).maybe(
+                /\[/.then(std_space).then(/\]/).then(std_space),
+            ).lookAheadFor(/,|\)|\n/)
+        )
+    end
+    cpp_grammar[:over_qualified_types] = [
+        cpp_grammar[:parameter_struct] = generateOverqualifiedTypeFor["struct"],
+        cpp_grammar[:parameter_enum  ] = generateOverqualifiedTypeFor["enum"],
+        cpp_grammar[:parameter_union ] = generateOverqualifiedTypeFor["union"],
+        cpp_grammar[:parameter_class ] = generateOverqualifiedTypeFor["class"],
+    ]
+    
+        
 #
 # preprocessor directives
 #
@@ -1627,7 +1659,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function_call_context"
+                    include: "#evaluation_context"
                 }
             ]
         }
@@ -1635,14 +1667,10 @@ cpp_grammar = Grammar.new(
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    cpp_grammar[:misc_storage_modifiers_1] = {
-            match: /\b(constexpr|export|mutable|typename|thread_local)\b/,
-            name: "storage.modifier"
-        }
-    cpp_grammar[:misc_storage_modifiers_2] = {
-            match: /\b(const|extern|register|restrict|static|volatile|inline)\b/,
-            name: "storage.modifier"
-        }
+    cpp_grammar[:misc_storage_modifiers] = newPattern(
+            match: /\b(?:export|mutable|typename|thread_local|extern|register|restrict|static|volatile|inline)\b/,
+            tag_as: "storage.modifier"
+        )
     #destructors accept no parameters
     cpp_grammar[:destructor] = newPattern(
         should_fully_match: ["~bar()", "foo::~foo()"],
@@ -2009,79 +2037,18 @@ cpp_grammar = Grammar.new(
                 name: "string.quoted.double.raw"
             }
         ]
-    cpp_grammar[:block] = {
-            begin: "{",
-            beginCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.begin.bracket.curly"
-                }
-            },
-            end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.end.bracket.curly"
-                }
-            },
-            name: "meta.block",
-            patterns: [
-                {
-                    include: "#block_context"
-                }
-            ]
-        }
-    cpp_grammar[:block_context] = [
-        :preprocessor_rule_enabled_block,
-        :preprocessor_rule_disabled_block,
-        :preprocessor_rule_conditional_block,
-        :method_access,
-        :member_access,
-        :type_casting_operators,
-        :function_call,
-        {
-            name: "meta.initialization",
-            begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
-            beginCaptures: {
-                "1" => {
-                    name: "variable.other"
-                },
-                "2" => {
-                    name: "punctuation.section.parens.begin.bracket.round.initialization"
-                }
-            },
-            end: "\\)",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.parens.end.bracket.round.initialization"
-                }
-            },
-            patterns: [
-                {
-                    include: "#function_call_context"
-                }
-            ]
-        },
-        {
-            begin: "{",
-            beginCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.begin.bracket.curly"
-                }
-            },
-            end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.block.end.bracket.curly"
-                }
-            },
-            patterns: [
-                {
-                    include: "#block_context"
-                }
-            ]
-        },
-        :parentheses_block,
-        :root_context
-        ]
+    cpp_grammar[:block] = PatternRange.new(
+        tag_as: "meta.block",
+        start_pattern: newPattern(
+            match: /{/,
+            tag_as: "punctuation.section.block.begin.bracket.curly"
+        ),
+        end_pattern: newPattern(
+            match: /}|(?=\s*#\s*(?:elif|else|endif)\b)/,
+            tag_as: "punctuation.section.block.end.bracket.curly"
+        ),
+        includes: [:function_body_context]
+    )
     cpp_grammar[:comments_context] = {
         patterns: [
             {
@@ -2180,35 +2147,18 @@ cpp_grammar = Grammar.new(
             }
         },
         patterns: [
+            # for whenever there is a typecast
             {
-                include: "#parameter_struct",
+                include: "#over_qualified_types",
             },
-            {
-                include: "#root_context"
-            }
-        ]
-        }
-    cpp_grammar[:parentheses_block] = {
-        name: "meta.parens.block",
-        begin: "\\(",
-        beginCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.begin.bracket.round"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.end.bracket.round"
-            }
-        },
-        patterns: [
-            {
-                include: "#block_context"
-            },
+            # for whenever there is a range based for loop 
             {
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
                 name: "colon punctuation.separator.range-based"
+            },
+            # for normal prescedence usage
+            {
+                include: "#evaluation_context"
             }
         ]
         }
@@ -2435,7 +2385,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#block_context"
+                    include: "#root_context"
                 }
             ]
         }
@@ -2664,7 +2614,7 @@ cpp_grammar = Grammar.new(
                             ]
                         },
                         {
-                            include: "#block_context"
+                            include: "#root_context"
                         }
                     ]
                 },
@@ -2919,7 +2869,7 @@ cpp_grammar = Grammar.new(
                     end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
                     patterns: [
                         {
-                            include: "#block_context"
+                            include: "#root_context"
                         }
                     ]
                 }
@@ -3094,7 +3044,7 @@ cpp_grammar = Grammar.new(
                         ]
                     },
                     {
-                        include: "#block_context"
+                        include: "#root_context"
                     }
                 ]
             }
@@ -3136,7 +3086,7 @@ cpp_grammar = Grammar.new(
         end: "(?=^\\s*((#)\\s*endif\\b))",
         patterns: [
             {
-                include: "#block_context"
+                include: "#root_context"
             }
         ]
         }
@@ -3230,9 +3180,7 @@ cpp_grammar = Grammar.new(
                     }
                 ]
             },
-            :method_access,
-            :member_access,
-            :evaluation_context
+            :root_context
         ]
     cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
             {
@@ -3265,7 +3213,7 @@ cpp_grammar = Grammar.new(
             begin: "(?x)\n(?<![\\w$]|\\[)(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
             beginCaptures: {
                 "1" => {
-                    name: "keyword.operator.wordlike memory keyword.operator.new"
+                    name: "keyword.operator.wordlike keyword.operator.new"
                 },
                 "2" => {
                     patterns: [
@@ -3286,7 +3234,7 @@ cpp_grammar = Grammar.new(
             },
             patterns: [
                 {
-                    include: "#function_call_context"
+                    include: "#evaluation_context"
                 }
             ]
         }
@@ -3340,47 +3288,7 @@ cpp_grammar = Grammar.new(
             },
             :preprocessor_rule_define_line_context
         ]
-    cpp_grammar[:function_call_context] = [
-            :struct_declare,
-            :string_context,
-            :functional_specifiers_pre_parameters,
-            :qualifiers_and_specifiers_post_parameters,
-            :storage_specifiers,
-            :access_control_keywords,
-            :exception_keywords,
-            :static_assert,
-            :other_keywords,
-            :memory_operators,
-            :the_this_keyword,
-            :language_constants,
-            :misc_storage_modifiers_1,
-            :lambdas,
-            :preprocessor_context,
-            :comments_context,
-            :misc_storage_modifiers_2,
-            :number_literal,
-            :string_context_c,
-            :meta_preprocessor_macro,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
-            :pragma_mark,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
-            :predefined_macros,
-            :operators,
-            :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
-            :parentheses,
-            :type_casting_operators,
-            :function_call,
-            :scope_resolution_inner_generated,
-            :storage_types,
-            :line_continuation_character,
-            :square_brackets,
-            :empty_square_brackets,
-            :semicolon,
-            :comma,
-        ]
+    
 
 # Save
 @syntax_location = saveGrammar(cpp_grammar)

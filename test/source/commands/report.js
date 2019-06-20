@@ -30,7 +30,7 @@ async function collectRecords() {
             .readFileSync(test)
             .toString()
             .split("\n");
-        await getTokens(registry, test, fixture, () => true);
+        await getTokens(registry, test, fixture, false, () => true);
     }
     console.log();
     recorder.reportAllRecorders();

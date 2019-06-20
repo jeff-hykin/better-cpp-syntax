@@ -1,4 +1,3 @@
-alias.cpp
 colon.cpp
 comma.cpp
 comment.block.cpp
@@ -34,6 +33,7 @@ entity.name.function.special.destructor.cpp
 entity.name.namespace.alias.cpp
 entity.name.namespace.cpp
 entity.name.operator.overloadee.cpp
+entity.name.other.preprocessor.macro.predefined.DLLEXPORT.cpp
 entity.name.other.preprocessor.macro.predefined.NDEBUG.cpp
 entity.name.other.preprocessor.macro.predefined._ATL_VER.cpp
 entity.name.other.preprocessor.macro.predefined._CHAR_UNSIGNED.cpp
@@ -292,17 +292,24 @@ entity.name.scope-resolution.function.definition.operator-overload.cpp
 entity.name.scope-resolution.namespace.alias.cpp
 entity.name.scope-resolution.namespace.block.cpp
 entity.name.scope-resolution.namespace.using.cpp
+entity.name.scope-resolution.parameter.cpp
 entity.name.scope-resolution.template.call.cpp
 entity.name.scope-resolution.template.definition.cpp
 entity.name.tag.pragma-mark.cpp
 entity.name.type.$3.cpp
 entity.name.type.alias.cpp
+entity.name.type.class.cpp
+entity.name.type.class.parameter.cpp
 entity.name.type.cpp
 entity.name.type.enum.cpp
+entity.name.type.enum.parameter.cpp
 entity.name.type.inherited.cpp
+entity.name.type.parameter.cpp
 entity.name.type.struct.cpp
 entity.name.type.struct.parameter.cpp
 entity.name.type.template.cpp
+entity.name.type.union.cpp
+entity.name.type.union.parameter.cpp
 entity.other.attribute-name.pragma.preprocessor.cpp
 entity.other.attribute.$0.cpp
 invalid.illegal.constant.numeric.cpp
@@ -329,6 +336,7 @@ keyword.operator.alignof.cpp
 keyword.operator.assignment.compound.bitwise.cpp
 keyword.operator.assignment.compound.cpp
 keyword.operator.assignment.cpp
+keyword.operator.assignment.default.cpp
 keyword.operator.bitwise.shift.cpp
 keyword.operator.cast.$0.cpp
 keyword.operator.comparison.cpp
@@ -367,7 +375,6 @@ keyword.other.unit.suffix.floating-point.cpp
 keyword.other.unit.suffix.integer.cpp
 keyword.other.unit.user-defined.cpp
 keyword.other.using.directive.cpp
-memory.cpp
 meta.arguments.decltype.cpp
 meta.arguments.operator.alignas.cpp
 meta.arguments.operator.alignof.cpp
@@ -417,9 +424,8 @@ meta.head.namespace.cpp
 meta.head.struct.cpp
 meta.head.switch.cpp
 meta.head.union.cpp
-meta.initialization.cpp
 meta.lambda.capture.cpp
-meta.parens.block.cpp
+meta.parameter.cpp
 meta.parens.cpp
 meta.preprocessor.cpp
 meta.preprocessor.diagnostic.cpp
@@ -520,13 +526,11 @@ punctuation.section.parens.begin.bracket.round.assembly.inner.cpp
 punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
 punctuation.section.parens.begin.bracket.round.cpp
 punctuation.section.parens.begin.bracket.round.function.pointer.cpp
-punctuation.section.parens.begin.bracket.round.initialization.cpp
 punctuation.section.parens.end.bracket.round.assembly.cpp
 punctuation.section.parens.end.bracket.round.assembly.inner.cpp
 punctuation.section.parens.end.bracket.round.conditional.switch.cpp
 punctuation.section.parens.end.bracket.round.cpp
 punctuation.section.parens.end.bracket.round.function.pointer.cpp
-punctuation.section.parens.end.bracket.round.initialization.cpp
 punctuation.separator.attribute.cpp
 punctuation.separator.case.cpp
 punctuation.separator.case.default.cpp
@@ -548,6 +552,7 @@ punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
 punctuation.separator.scope-resolution.namespace.alias.cpp
 punctuation.separator.scope-resolution.namespace.block.cpp
 punctuation.separator.scope-resolution.namespace.using.cpp
+punctuation.separator.scope-resolution.parameter.cpp
 punctuation.separator.scope-resolution.template.call.cpp
 punctuation.separator.scope-resolution.template.definition.cpp
 punctuation.separator.template.argument.cpp
@@ -563,7 +568,7 @@ storage.modifier.inline.cpp
 storage.modifier.lambda.$0.cpp
 storage.modifier.pointer.cpp
 storage.modifier.reference.cpp
-storage.modifier.specifier.$0.cpp
+storage.modifier.specifier.$5.cpp
 storage.modifier.specifier.functional.post-parameters.$0.cpp
 storage.modifier.specifier.functional.pre-parameters.$0.cpp
 storage.type.$0.cpp
@@ -571,10 +576,14 @@ storage.type.$3.cpp
 storage.type.asm.cpp
 storage.type.built-in.cpp
 storage.type.built-in.primitive.cpp
+storage.type.class.declare.cpp
+storage.type.class.parameter.cpp
 storage.type.cpp
 storage.type.decltype.cpp
 storage.type.enum.cpp
+storage.type.enum.declare.cpp
 storage.type.enum.enum-key.$3.cpp
+storage.type.enum.parameter.cpp
 storage.type.extern.cpp
 storage.type.integral.$12.cpp
 storage.type.modifier.access.$0.cpp
@@ -591,6 +600,8 @@ storage.type.struct.parameter.cpp
 storage.type.template.argument.$0.cpp
 storage.type.template.argument.$1.cpp
 storage.type.template.cpp
+storage.type.union.declare.cpp
+storage.type.union.parameter.cpp
 storage.type.user-defined.cpp
 string.quoted.double.cpp
 string.quoted.double.include.cpp
@@ -604,7 +615,6 @@ support.type.built-in.posix-reserved.pthread.cpp
 support.type.posix-reserved.cpp
 support.type.posix-reserved.pthread.cpp
 variable.language.this.cpp
-variable.other.cpp
 variable.other.definition.pointer.function.cpp
 variable.other.enummember.cpp
 variable.other.macro.argument.cpp
@@ -613,6 +623,7 @@ variable.other.object.cpp
 variable.other.object.declare.cpp
 variable.other.object.property.cpp
 variable.other.property.cpp
+variable.parameter.capture.cpp
 variable.parameter.cpp
 variable.parameter.defaulted.cpp
 variable.parameter.pointer.function.cpp

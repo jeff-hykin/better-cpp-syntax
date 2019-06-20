@@ -75,10 +75,16 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'argument_type '
+- source: argument_type
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload

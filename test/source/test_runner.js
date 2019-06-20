@@ -7,9 +7,9 @@ const SpecChecker = require("./spec_checker").SpecChecker;
  * @param {string[]} fixture
  * @param {object} spec
  */
-module.exports = async function(registry, path, fixture, spec) {
-    const checker = new SpecChecker(spec);
-    return getTokens(registry, path, fixture, (line, token) =>
+module.exports = async function(registry, path, fixture, spec, showFailureOnly) {
+    const checker = new SpecChecker(spec, showFailureOnly);
+    return getTokens(registry, path, fixture, showFailureOnly, (line, token) =>
         checker.checkToken(line, token)
     );
 };

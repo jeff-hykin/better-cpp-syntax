@@ -325,22 +325,26 @@
 - source: int
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator
+    - storage.modifier.pointer
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' usertype '
+- source: usertype
+  scopes:
+    - entity.name.type.parameter
 - source: user_value
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

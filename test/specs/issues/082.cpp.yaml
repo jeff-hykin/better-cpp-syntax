@@ -84,7 +84,11 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'pointerT '
+- source: pointerT
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -103,10 +107,12 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' hashT'
+- source: hashT
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: /*
   scopesBegin:
     - comment.block
@@ -122,7 +128,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' pointerT '
+- source: pointerT
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -171,6 +179,7 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
+    - meta.parameter
     - comment.block
 - source: )
   scopes:
@@ -426,7 +435,11 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'pointerT '
+- source: pointerT
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -445,10 +458,12 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' hashT'
+- source: hashT
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: /*
   scopesBegin:
     - comment.block
@@ -464,7 +479,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' pointerT '
+- source: pointerT
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -513,6 +530,7 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
+    - meta.parameter
     - comment.block
 - source: )
   scopes:
