@@ -1604,7 +1604,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: int
   scopes:
@@ -1629,7 +1628,6 @@
 - source: delete
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.delete
 - source: ' a'
 - source: ;
@@ -1638,7 +1636,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:
@@ -1713,7 +1710,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: int
   scopes:
@@ -1738,7 +1734,6 @@
 - source: delete
   scopesBegin:
     - keyword.operator.wordlike
-    - memory
   scopes:
     - keyword.operator.delete.array
 - source: '[]'
@@ -1746,7 +1741,6 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-    - memory
 - source: ' array'
 - source: ;
   scopes:
@@ -4547,7 +4541,6 @@
 - source: delete
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.delete
 - source: ;
   scopes:
@@ -4840,7 +4833,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:

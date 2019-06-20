@@ -27,7 +27,6 @@
     - meta.body.function.definition
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: ' Foo'
 - source: ;
@@ -36,7 +35,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:
@@ -55,7 +53,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:
@@ -75,7 +72,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:

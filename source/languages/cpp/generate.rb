@@ -15,7 +15,6 @@ require_relative './tokens.rb'
     # have all patterns with keywords be dynamically generated
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
-    # remove the "memory.cpp" tag
 
 cpp_grammar = Grammar.new(
     name: "C++",
@@ -426,7 +425,7 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
     cpp_grammar[:memory_operators] = newPattern(
-        tag_as: "keyword.operator.wordlike memory",
+        tag_as: "keyword.operator.wordlike",
         match: lookBehindToAvoid(
                 @standard_character
             ).then(
@@ -3123,7 +3122,7 @@ cpp_grammar = Grammar.new(
             begin: "(?x)\n(?<![\\w$]|\\[)(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
             beginCaptures: {
                 "1" => {
-                    name: "keyword.operator.wordlike memory keyword.operator.new"
+                    name: "keyword.operator.wordlike keyword.operator.new"
                 },
                 "2" => {
                     patterns: [

@@ -521,7 +521,7 @@
         name: keyword.operator.delete.cpp
       '4':
         name: keyword.operator.new.cpp
-    name: keyword.operator.wordlike.cpp memory.cpp
+    name: keyword.operator.wordlike.cpp
   control_flow_keywords:
     match: "(?<!\\w)(?:throw|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default)(?!\\w)"
     name: keyword.control.$0.cpp
