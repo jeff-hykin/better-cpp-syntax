@@ -256,6 +256,7 @@ cpp_grammar = Grammar.new(
             # misc
             :lambdas,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
+            :c_style_type_casting, # this probably needs to be above "parentheses"
             :parentheses,
             :function_call,
             :scope_resolution_inner_generated,
@@ -831,6 +832,14 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
+    )
+    cpp_grammar[:c_style_type_casting] = newPattern(
+        tag_as: "meta.type.cast",
+        should_fully_match: ["(int)", "( char * )", "(a::more::<complex, type> )"],
+        should_not_partial_match: ["foo(bar)"],
+        match: lookBehindToAvoid(/[\w>]/).maybe(@spaces).then(
+            /\(/.maybe(@spaces).then(qualified_type).then(ref_deref_definition_pattern).then(/\)/)
+        ).lookAheadToAvoid(maybe(@spaces).then(@semicolon))
     )
 #
 # Support
