@@ -13,7 +13,7 @@ NOTE: The default VS Code theme does not color much. Use a theme like one of the
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-# Before Better C++ (Material Theme)
+# Before/Without Better Syntax (Material Theme)
 ![material_before](https://user-images.githubusercontent.com/17692058/59826753-83abd080-92fc-11e9-9dfb-d891da55cd13.png)
 # After
 ![material_after](https://user-images.githubusercontent.com/17692058/59826766-8ad2de80-92fc-11e9-9bd6-3496ed5c917b.png)
