@@ -1,13 +1,19 @@
 # What does this do?
 This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
-NOTE: The default VS Code theme does not color much, so you won't see much benefit. I'd reccomend
+NOTE: The default VS Code theme does not color much. Use a theme like one of the following to benefit from the changes:
+- Material Theme
+- Noctis
+- XD Theme
+- One Monokai Theme
+- Winteriscoming
+- Popping and Locking
 
 ## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-### Before Better C++
+### Before Better C++ (Material Theme)
 ![without-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240797-8d75ef80-2897-11e9-97b6-f94af43d9fb7.png)
 ### After
 ![with-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240803-8fd84980-2897-11e9-987c-9c71c19d52fa.png)

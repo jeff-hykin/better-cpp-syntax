@@ -2,6 +2,9 @@
 
 using namespace std;
 
+// attributes
+[[gnu::hot]] [[gnu::const]] [[nodiscard]] inline int f();
+
 int func(Ret (*a_func_ptr)(Args...)) {
     auto a = 0xabcdefyards;
     auto c = 0'1'2'3'4;
@@ -11,21 +14,12 @@ int func(Ret (*a_func_ptr)(Args...)) {
     a_pointer->*thread.thing;
 }
 
-// attributes in main scope
-[[gnu::hot]] [[gnu::const]] [[nodiscard]]
-inline int f();
-
 Item  operator+( const string&  base        , const int&    repetitions ) {};
 Item  operator-( const int&     the_input   , const Item&   input_item  ) {};
 Item  operator/( const Item&    input_item  , const int&    the_input   ) {};
 Item  operator^( const Item&    input_item  , const int&    the_input   ) {};
 
-enum enum1
-    {
-        // comment
-        definition /* block comment */, definition3
-        definition, definition2 // comment
-    }
+enum enum1 { definition1, definition2, definition3 }
 
 int main() {
     // standard inline assembly
