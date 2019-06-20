@@ -183,7 +183,6 @@ cpp_grammar = Grammar.new(
             :function_definition,
             :operator_overload,
             :destructor, 
-            :struct_declare,
             :using_namespace,
             :type_alias,
             :using_name, # this needs to be below type_alias
@@ -194,8 +193,8 @@ cpp_grammar = Grammar.new(
             :typedef_struct,
             :typedef_union,
             :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
+            :standard_declares, # struct/enum/union/class
             :class_block,
-            :struct_declare,
             :struct_block,
             :union_block,
             :enum_block,
@@ -269,7 +268,7 @@ cpp_grammar = Grammar.new(
             :decltype,
             :function_pointer_parameter,
             :parameter,
-            :parameter_struct,
+            :over_qualified_types,
             :attributes_context,
             :comments_context,
             :comma,
@@ -853,40 +852,7 @@ cpp_grammar = Grammar.new(
 #
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
-    cpp_grammar[:struct_declare] = struct_declare = newPattern(
-            should_partial_match: [ "struct crypto_aead *tfm = crypto_aead_reqtfm(req);", "struct aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
-            match: newPattern(
-                match: /struct/,
-                tag_as: "storage.type.struct.declare",
-            ).then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.struct",
-            ).maybe(@spaces).then(
-                ref_deref_definition_pattern.or(@spaces)
-            ).then(
-                match: variable_name,
-                tag_as: "variable.other.object.declare",
-            )
-        )
-    cpp_grammar[:parameter_struct] = newPattern(
-            should_partial_match: [ "struct skcipher_walk *walk," ],
-            match: newPattern(
-                match: /struct/,
-                tag_as: "storage.type.struct.parameter",
-            ).then(@spaces).then(
-                match: variable_name,
-                tag_as: "entity.name.type.struct.parameter",
-            ).maybe(@spaces).then(
-                ref_deref_definition_pattern.or(@spaces)
-            # this is a maybe because its possible to have a type declare without an actual parameter
-            ).maybe(
-                match: variable_name,
-                tag_as: "variable.other.object.declare",
-            ).maybe(@spaces).maybe(
-                /\[/.maybe(@spaces).then(/\]/).maybe(@spaces),
-            ).lookAheadFor(/,|\)|\n/)
-        )
-        
+
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
@@ -1522,6 +1488,9 @@ cpp_grammar = Grammar.new(
                         ).or(
                             lookAheadFor(/{/)
                         )
+                    ).maybe(
+                        # normally macros like this wouldn't be supported, but I imagine this one is fairly common
+                        std_space.then(match: /DLLEXPORT/, tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT").then(std_space)
                     ).maybe(inline_attribute).maybe(@spaces).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
@@ -1563,9 +1532,9 @@ cpp_grammar = Grammar.new(
             tail_includes: tail_includes
         )
     end
-    cpp_grammar[:class_block] = generateClassOrStructBlockFinder["class"]
+    cpp_grammar[:class_block]  = generateClassOrStructBlockFinder["class"]
     cpp_grammar[:struct_block] = generateClassOrStructBlockFinder["struct"]
-    cpp_grammar[:union_block] = generateClassOrStructBlockFinder["union"]
+    cpp_grammar[:union_block]  = generateClassOrStructBlockFinder["union"]
     # the following is a legacy pattern, I'm not sure if it is still accurate
     # I have no idea why it matches a double quote
     cpp_grammar[:extern_block] = generateBlockFinder(
@@ -1596,9 +1565,63 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    cpp_grammar[:typedef_class] = generateTypedefClassOrStructBlockFinder["class"]
+    cpp_grammar[:typedef_class]  = generateTypedefClassOrStructBlockFinder["class"]
     cpp_grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
-    cpp_grammar[:typedef_union] = generateTypedefClassOrStructBlockFinder["union"]
+    cpp_grammar[:typedef_union]  = generateTypedefClassOrStructBlockFinder["union"]
+    
+    generateDeclareFor = ->(name) do
+        newPattern(
+            should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
+            match: newPattern(
+                match: /#{name}/,
+                tag_as: "storage.type.#{name}.declare",
+            ).then(std_space).then(
+                match: variable_name,
+                tag_as: "entity.name.type.#{name}",
+            ).then(
+                ref_deref_definition_pattern
+            ).then(std_space).then(
+                @cpp_tokens.lookAheadToAvoidWordsThat(:isClassInheritenceSpecifier)
+            ).then(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/:/)
+        )
+    end
+    cpp_grammar[:standard_declares] = [
+        cpp_grammar[:struct_declare] = generateDeclareFor["struct"],
+        cpp_grammar[:union_declare ] = generateDeclareFor["union"],
+        cpp_grammar[:enum_declare  ] = generateDeclareFor["enum"],
+        cpp_grammar[:class_declare ] = generateDeclareFor["class"],
+    ]
+    generateOverqualifiedTypeFor = ->(name) do
+        newPattern(
+            should_partial_match: [ "#{name} skcipher_walk *walk," ],
+            match: newPattern(
+                match: /#{name}/,
+                tag_as: "storage.type.#{name}.parameter",
+            ).then(std_space).then(
+                match: variable_name,
+                tag_as: "entity.name.type.#{name}.parameter",
+            ).then(std_space).then(
+                ref_deref_definition_pattern
+            # this is a maybe because its possible to have a type declare without an actual parameter
+            ).maybe(
+                match: variable_name,
+                tag_as: "variable.other.object.declare",
+            ).then(std_space).maybe(
+                /\[/.then(std_space).then(/\]/).then(std_space),
+            ).lookAheadFor(/,|\)|\n/)
+        )
+    end
+    cpp_grammar[:over_qualified_types] = [
+        cpp_grammar[:parameter_struct] = generateOverqualifiedTypeFor["struct"],
+        cpp_grammar[:parameter_enum  ] = generateOverqualifiedTypeFor["enum"],
+        cpp_grammar[:parameter_union ] = generateOverqualifiedTypeFor["union"],
+        cpp_grammar[:parameter_class ] = generateOverqualifiedTypeFor["class"],
+    ]
+    
+        
 #
 # preprocessor directives
 #
@@ -2126,7 +2149,7 @@ cpp_grammar = Grammar.new(
         patterns: [
             # for whenever there is a typecast
             {
-                include: "#parameter_struct",
+                include: "#over_qualified_types",
             },
             # for whenever there is a range based for loop 
             {

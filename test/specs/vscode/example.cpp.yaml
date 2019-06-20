@@ -6470,22 +6470,17 @@
   scopesEnd:
     - meta.block.enum
 - source: class
-  scopesBegin:
-    - meta.block.class
-    - meta.head.class
   scopes:
-    - storage.type.class
+    - storage.type.class.declare
 - source: foo
   scopes:
     - entity.name.type.class
 - source: f
-  scopesEnd:
-    - meta.head.class
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block.class
 - source: struct
   scopesBegin:
     - meta.block.struct
