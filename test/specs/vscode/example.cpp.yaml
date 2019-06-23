@@ -3364,7 +3364,7 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: Item
   scopes:
     - entity.name.type.parameter
@@ -3426,7 +3426,7 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: int
   scopes:
     - storage.type.primitive
@@ -3490,7 +3490,7 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: Item
   scopes:
     - entity.name.type.parameter
@@ -3552,7 +3552,7 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: int
   scopes:
     - storage.type.primitive
@@ -3615,7 +3615,7 @@
     - punctuation.separator.delimiter
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: int
   scopes:
     - storage.type.primitive
@@ -4770,7 +4770,7 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: bool
   scopes:
     - storage.type.primitive
@@ -4787,7 +4787,7 @@
     - punctuation.terminator.statement
 - source: static
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: ' storage'
 - source: <
   scopes:
@@ -8714,7 +8714,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: static
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr

@@ -129,7 +129,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: const
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.const
 - source: ' Rule '
 - source: '&'
   scopes:
@@ -188,7 +188,7 @@
     - meta.block
 - source: static
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: void
   scopesBegin:
     - meta.function.definition

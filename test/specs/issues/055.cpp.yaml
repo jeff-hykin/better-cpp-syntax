@@ -57,15 +57,11 @@
     - meta.parameter
   scopes:
     - storage.type.enum
-- source: foo
-  scopes:
+- source: 'foo::'
+  scopesBegin:
     - entity.name.scope-resolution.parameter
-- source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.parameter
 - source: bar
-  scopes:
+  scopesEnd:
     - entity.name.scope-resolution.parameter
 - source: '::'
   scopes:

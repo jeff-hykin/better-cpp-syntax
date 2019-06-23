@@ -445,7 +445,7 @@ cpp_grammar = Grammar.new(
         tag_as: "keyword.control.$match"
         )
     declaration_storage_specifiers = newPattern(
-        match: zeroOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
+        match: oneOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
         includes: [
             :storage_specifiers
         ]
@@ -817,7 +817,7 @@ cpp_grammar = Grammar.new(
             ).maybe(@spaces).maybe(
                 match: /typename/,
                 tag_as: "keyword.other.typename",
-            ).maybe(@spaces).then(
+            ).maybe(@spaces).maybe(
                 declaration_storage_specifiers
             ).then(
                 qualified_type.or(
