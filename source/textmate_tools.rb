@@ -1036,6 +1036,15 @@ class PatternRange
             raise "The start pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
         start_pattern_as_tag =  start_pattern.to_tag(without_optimizations: true)
+        # prevent accidental zero length matches
+        if "" =~ /#{start_pattern_as_tag[:match]}/ and not key_arguments[:zeroLengthStart?]
+            puts "Warning: #{/#{start_pattern_as_tag[:match]}/.inspect}\nmatches the zero length string (\"\").\n\n"
+            puts "This means that the patternRange always matches"
+            puts "You can disable this warning by settting :zeroLengthStart? to true."
+            puts "The tag for this patternRange is \"#{@as_tag[:name]}\"\n\n"
+        end
+        key_arguments.delete(:zeroLengthStart?)
+        
         @as_tag[:begin] = start_pattern_as_tag[:match]
         key_arguments.delete(:start_pattern)
         begin_captures = start_pattern_as_tag[:captures]
