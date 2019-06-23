@@ -86,7 +86,7 @@
     - punctuation.terminator.statement
 - source: extern
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.extern
 - source: ' template '
 - source: class
   scopesBegin:
@@ -126,7 +126,7 @@
     - meta.block.class
 - source: extern
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.extern
 - source: ' template'
 - source: MyStack
   scopes:

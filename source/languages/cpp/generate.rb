@@ -1065,7 +1065,12 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
         # it will be a type, and a type can be one of serveral things
-        start_pattern: newPattern(
+        start_pattern: maybe(
+                newPattern(
+                    match: @cpp_tokens.that(:isTypeCreator),
+                    tag_as: "storage.type.$match"
+                ).then(std_space),
+            ).then(
             newPattern(
                 cpp_grammar[:primitive_types]
             ).or(
@@ -1075,7 +1080,7 @@ cpp_grammar = Grammar.new(
             ).or(
                 cpp_grammar[:posix_reserved_types]
             ).or(
-                cpp_grammar[:storage_specifiers]
+                declaration_storage_specifiers
             ).or(
                 match: one_scope_resolution,
                 tag_as: "entity.name.scope-resolution.parameter",
@@ -1122,9 +1127,13 @@ cpp_grammar = Grammar.new(
                 end_pattern: parameter_ending,
                 includes: [ :evaluation_context ]
             ),
+            newPattern(
+                match: @cpp_tokens.that(:isTypeCreator),
+                tag_as: "storage.type.$match"
+            ),
             # tag user defined types
             newPattern(
-                match: identifier,
+                match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
             :template_call_range,

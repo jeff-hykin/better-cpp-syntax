@@ -484,7 +484,7 @@
     name: storage.modifier.specifier.functional.post-parameters.$0.cpp
   storage_specifiers:
     match: "(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)"
-    name: storage.modifier.specifier.$5.cpp
+    name: storage.modifier.specifier.$0.cpp
   access_control_keywords:
     match: "(?<!\\w)((?:private|protected|public))\\s*(:)"
     captures:
@@ -2352,21 +2352,33 @@
     - include: "#function_parameter_context"
   parameter:
     name: meta.parameter.cpp
-    begin: "(?:(?:(?:(?:(?:(?:(?:((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w)))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::))|(?<=\\)))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))"
+    begin: "(?:((?:class|struct|union|enum))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?(?:(?:(?:(?:(?:(?:(?:((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?:(?:(?<!\\w)(?:const|static|volatile|register|restrict|extern)(?!\\w))\\s+)*))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::))|(?<=\\)))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))"
     beginCaptures:
       '1':
-        name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
+        name: storage.type.$1.cpp
       '2':
-        name: storage.type.cpp storage.type.built-in.cpp
+        patterns:
+        - include: "#inline_comment"
       '3':
-        name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
       '4':
-        name: support.type.posix-reserved.cpp support.type.built-in.posix-reserved.cpp
+        name: comment.block.cpp
       '5':
-        name: storage.modifier.specifier.$5.cpp
+        name: comment.block.cpp punctuation.definition.comment.end.cpp
       '6':
-        name: entity.name.scope-resolution.parameter.cpp
+        name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
       '7':
+        name: storage.type.cpp storage.type.built-in.cpp
+      '8':
+        name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
+      '9':
+        name: support.type.posix-reserved.cpp support.type.built-in.posix-reserved.cpp
+      '10':
+        patterns:
+        - include: "#storage_specifiers"
+      '11':
+        name: entity.name.scope-resolution.parameter.cpp
+      '12':
         name: entity.name.type.parameter.cpp
     end: "(?:(?=\\))|(,))"
     endCaptures:
@@ -2409,7 +2421,9 @@
           name: comma.cpp punctuation.separator.delimiter.cpp
       patterns:
       - include: "#evaluation_context"
-    - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*"
+    - match: "(?:class|struct|union|enum)"
+      name: storage.type.$0.cpp
+    - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\b(?<!\\Wclass|^class|\\Wstruct|^struct|\\Wunion|^union|\\Wenum|^enum)"
       name: entity.name.type.parameter.cpp
     - include: "#template_call_range"
     - match: "(?:((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?:\\*((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*)((?:&((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))){0,2})((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?"
