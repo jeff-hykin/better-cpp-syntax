@@ -1020,7 +1020,7 @@ cpp_grammar = Grammar.new(
 #
 # function pointer
 #
-    after_declaration = maybe(@spaces).lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
+    after_declaration = std_space.lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
             start_pattern: qualified_type.then(ref_deref_definition_pattern).then(
@@ -1064,38 +1064,44 @@ cpp_grammar = Grammar.new(
     parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
     cpp_grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
-        # it will be a type, and a type can be one of serveral things
-        start_pattern: maybe(
+        start_pattern: newPattern(
+            # it will be a type, and a type can be one of serveral things
+            maybe(
+                # it can start with class/struct/enum/union
                 newPattern(
                     match: @cpp_tokens.that(:isTypeCreator),
                     tag_as: "storage.type.$match"
-                ).then(std_space),
+                ).then(std_space)
             ).then(
-            newPattern(
-                cpp_grammar[:primitive_types]
-            ).or(
-                cpp_grammar[:non_primitive_types]
-            ).or(
-                cpp_grammar[:pthread_types]
-            ).or(
-                cpp_grammar[:posix_reserved_types]
-            ).or(
-                declaration_storage_specifiers
-            ).or(
-                match: one_scope_resolution,
-                tag_as: "entity.name.scope-resolution.parameter",
-                include: [
-                    newPattern(
-                        match: /::/,
-                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.parameter"
-                    )
-                ]
-            ).or(
-                # this is to match the ending of a decltype()
-                lookBehindFor(/\)/)
-            ).or(
-                match: identifier,
-                tag_as: "entity.name.type.parameter"
+                newPattern(
+                    cpp_grammar[:primitive_types]
+                ).or(
+                    cpp_grammar[:non_primitive_types]
+                ).or(
+                    cpp_grammar[:pthread_types]
+                ).or(
+                    cpp_grammar[:posix_reserved_types]
+                ).or(
+                    declaration_storage_specifiers
+                ).or(
+                    match: one_scope_resolution.without_numbered_capture_groups,
+                    includes: [
+                        newPattern(
+                            match: /::/,
+                            tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.parameter"
+                        ),
+                        newPattern(
+                            match: variableBounds[identifier],
+                            tag_as: "entity.name.scope-resolution.parameter",
+                        )
+                    ]
+                ).or(
+                    # this is to match the ending of a decltype()
+                    lookBehindFor(/\)/)
+                ).or(
+                    match: identifier,
+                    tag_as: "entity.name.type.parameter"
+                )
             )
         ),
         end_pattern: parameter_ending,
@@ -1104,34 +1110,47 @@ cpp_grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             :vararg_ellipses,
             :function_pointer_parameter,
-            # tag the parameter itself
-            PatternRange.new(
-                start_pattern: newPattern(
-                    match: newPattern(
-                        newPattern(
-                            match: identifier,
-                            tag_as: "variable.parameter",
-                        ).then(std_space).lookAheadFor(/\)|,/)
-                    ).or(
-                        # this is the default-value case
-                        # its a maybe, because it could be a function pointer
-                        maybe(
-                            match: identifier,
-                            tag_as: "variable.parameter.defaulted",
-                        ).then(std_space).then(
-                            match: /\=/,
-                            tag_as: "keyword.operator.assignment.default"
-                        )
-                    )
-                ),
-                end_pattern: parameter_ending,
-                includes: [ :evaluation_context ]
-            ),
             newPattern(
                 match: @cpp_tokens.that(:isTypeCreator),
                 tag_as: "storage.type.$match"
             ),
-            # tag user defined types
+            # standard parameter
+            newPattern(
+                newPattern(
+                    match: identifier,
+                    tag_as: "variable.parameter",
+                ).then(
+                    std_space
+                # the parameter can end with
+                # 1. ) the end of the function paraentheses
+                # 2. , the end of the parameter/start of the next parameter
+                # 3. [ the start of an array-type parameter
+                # 4. = the start of a default-value assignment
+                ).lookAheadFor(/\)|,|\[|=/)
+            ),
+            # find the array []'s
+            PatternRange.new(
+                tag_as: "meta.bracket.square.array",
+                # \G only match at the begining
+                start_pattern: newPattern(
+                    match: /\[/,
+                    tag_as: "punctuation.definition.begin.bracket.square.array.type"
+                ),
+                end_pattern: newPattern(
+                    match: /\]/,
+                    tag_as: "punctuation.definition.end.bracket.square.array.type"
+                ),
+                includes: [ :evaluation_context ]
+            ),
+            # This is a range for when there is a variable-default assignment
+            # if there is no assignment, this pattern will still match, it will just end immediately after the parameter
+            PatternRange.new(
+                start_pattern: assignment_operator,
+                end_pattern: parameter_ending,
+                # this is for everything after the =, but before the next parameter
+                includes: [ :evaluation_context ]
+            ),
+            # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
             newPattern(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"

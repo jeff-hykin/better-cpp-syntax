@@ -2210,10 +2210,19 @@
         name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
       '51':
         name: punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
-    end: "(\\))\\s*(?=[{=,);]|\\n)(?!\\()"
+    end: "(\\))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=[{=,);]|\\n)(?!\\()"
     endCaptures:
       '1':
         name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        name: comment.block.cpp punctuation.definition.comment.end.cpp
     patterns:
     - include: "#function_parameter_context"
   function_pointer_parameter:
@@ -2344,10 +2353,19 @@
         name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
       '51':
         name: punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
-    end: "(\\))\\s*(?=[{=,);]|\\n)(?!\\()"
+    end: "(\\))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=[{=,);]|\\n)(?!\\()"
     endCaptures:
       '1':
         name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        name: comment.block.cpp punctuation.definition.comment.end.cpp
     patterns:
     - include: "#function_parameter_context"
   parameter:
@@ -2377,7 +2395,11 @@
         patterns:
         - include: "#storage_specifiers"
       '11':
-        name: entity.name.scope-resolution.parameter.cpp
+        patterns:
+        - match: "::"
+          name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.parameter.cpp
+        - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)"
+          name: entity.name.scope-resolution.parameter.cpp
       '12':
         name: entity.name.type.parameter.cpp
     end: "(?:(?=\\))|(,))"
@@ -2389,8 +2411,10 @@
     - include: "#scope_resolution_parameter_inner_generated"
     - include: "#vararg_ellipses"
     - include: "#function_pointer_parameter"
-    - begin: "(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\)|,)|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?)((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\=))"
-      beginCaptures:
+    - match: "(?:class|struct|union|enum)"
+      name: storage.type.$0.cpp
+    - match: "((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\)|,|\\[|=)"
+      captures:
         '1':
           name: variable.parameter.cpp
         '2':
@@ -2402,27 +2426,24 @@
           name: comment.block.cpp
         '5':
           name: comment.block.cpp punctuation.definition.comment.end.cpp
-        '6':
-          name: variable.parameter.defaulted.cpp
-        '7':
-          patterns:
-          - include: "#inline_comment"
-        '8':
-          name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '9':
-          name: comment.block.cpp
-        '10':
-          name: comment.block.cpp punctuation.definition.comment.end.cpp
-        '11':
-          name: keyword.operator.assignment.default.cpp
+    - name: meta.bracket.square.array.cpp
+      begin: "(\\[)"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.begin.bracket.square.array.type.cpp
+      end: "(\\])"
+      endCaptures:
+        '1':
+          name: punctuation.definition.end.bracket.square.array.type.cpp
+      patterns:
+      - include: "#evaluation_context"
+    - begin: 
       end: "(?:(?=\\))|(,))"
       endCaptures:
         '1':
           name: comma.cpp punctuation.separator.delimiter.cpp
       patterns:
       - include: "#evaluation_context"
-    - match: "(?:class|struct|union|enum)"
-      name: storage.type.$0.cpp
     - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\b(?<!\\Wclass|^class|\\Wstruct|^struct|\\Wunion|^union|\\Wenum|^enum)"
       name: entity.name.type.parameter.cpp
     - include: "#template_call_range"

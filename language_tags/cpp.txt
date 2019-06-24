@@ -336,7 +336,6 @@ keyword.operator.alignof.cpp
 keyword.operator.assignment.compound.bitwise.cpp
 keyword.operator.assignment.compound.cpp
 keyword.operator.assignment.cpp
-keyword.operator.assignment.default.cpp
 keyword.operator.bitwise.shift.cpp
 keyword.operator.cast.$0.cpp
 keyword.operator.comparison.cpp
@@ -398,6 +397,7 @@ meta.body.struct.cpp
 meta.body.switch.cpp
 meta.body.union.cpp
 meta.bracket.square.access.cpp
+meta.bracket.square.array.cpp
 meta.conditional.case.cpp
 meta.conditional.switch.cpp
 meta.declaration.namespace.alias.cpp
@@ -449,6 +449,7 @@ meta.toc-list.banner.block.cpp
 meta.toc-list.banner.line.cpp
 meta.using-namespace.cpp
 punctuation.accessor.attribute.cpp
+punctuation.definition.begin.bracket.square.array.type.cpp
 punctuation.definition.begin.bracket.square.cpp
 punctuation.definition.capture.begin.lambda.cpp
 punctuation.definition.capture.end.lambda.cpp
@@ -456,6 +457,7 @@ punctuation.definition.comment.begin.cpp
 punctuation.definition.comment.cpp
 punctuation.definition.comment.end.cpp
 punctuation.definition.directive.cpp
+punctuation.definition.end.bracket.square.array.type.cpp
 punctuation.definition.end.bracket.square.cpp
 punctuation.definition.function.pointer.dereference.cpp
 punctuation.definition.initializer-list.parameters.cpp
@@ -625,6 +627,5 @@ variable.other.object.property.cpp
 variable.other.property.cpp
 variable.parameter.capture.cpp
 variable.parameter.cpp
-variable.parameter.defaulted.cpp
 variable.parameter.pointer.function.cpp
 variable.parameter.preprocessor.cpp
