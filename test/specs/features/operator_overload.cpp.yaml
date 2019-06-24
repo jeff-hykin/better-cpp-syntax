@@ -1,13 +1,13 @@
 - source: Item
   scopesBegin:
     - source
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: +
@@ -15,10 +15,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -49,36 +50,36 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Item
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '-'
@@ -86,10 +87,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -120,36 +122,36 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Item
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: /
@@ -157,10 +159,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -191,36 +194,36 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Item
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ^
@@ -228,10 +231,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -262,24 +266,24 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -288,13 +292,13 @@
     - storage.modifier.specifier.functional.pre-parameters.inline
 - source: ostream
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: '&'
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
@@ -305,10 +309,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: ostream
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - entity.name.type.parameter
@@ -358,24 +363,24 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -389,9 +394,9 @@
     - comment.line.double-slash
 - source: operator
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: std
   scopes:
@@ -402,7 +407,7 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: basic_string_view
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - entity.name.operator.type
 - source: <
@@ -427,10 +432,11 @@
     - meta.template.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -441,16 +447,16 @@
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -461,9 +467,9 @@
     - comment.line.double-slash
 - source: operator
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: std
   scopes:
@@ -474,15 +480,16 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: basic_string_view
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - entity.name.operator.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -493,16 +500,16 @@
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -513,8 +520,8 @@
     - comment.line.double-slash
 - source: operator
   scopesBegin:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: string
@@ -522,27 +529,28 @@
     - entity.name.operator.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: double
@@ -550,26 +558,27 @@
     - entity.name.operator.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: template
   scopesBegin:
     - meta.template.definition
@@ -591,14 +600,14 @@
     - meta.template.definition
 - source: bool
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ()
@@ -606,10 +615,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -639,20 +649,20 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: return
   scopesBegin:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
   scopes:
     - keyword.control.return
 - source: std
@@ -755,10 +765,10 @@
 - source: '}'
   scopes:
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.body.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -769,14 +779,14 @@
     - comment.line.double-slash
 - source: void
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '""'
@@ -787,10 +797,11 @@
     - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: long
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.type.primitive
@@ -799,27 +810,27 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: void
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '""'
@@ -830,10 +841,11 @@
     - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: long
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.type.primitive
@@ -842,20 +854,20 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
     - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
@@ -870,7 +882,7 @@
     - meta.qualified_type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '""'
@@ -881,10 +893,11 @@
     - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -911,27 +924,27 @@
     - storage.type
     - storage.type.built-in
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: float
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '""'
@@ -942,10 +955,11 @@
     - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.modifier.specifier.const
@@ -957,14 +971,14 @@
   scopes:
     - storage.modifier.pointer
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement

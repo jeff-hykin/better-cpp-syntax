@@ -37,13 +37,13 @@
 - source: Example
   scopesBegin:
     - meta.body.class
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: '&'
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
@@ -54,20 +54,21 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: operator
   scopesBegin:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: int
@@ -75,21 +76,22 @@
     - entity.name.operator.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: operator
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: std
   scopes:
@@ -100,7 +102,7 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: string
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
     - entity.name.operator.type
 - source: '&'
   scopes:
@@ -109,13 +111,14 @@
     - entity.name.operator.type
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement

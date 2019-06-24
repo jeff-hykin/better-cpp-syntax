@@ -81,30 +81,30 @@
     - punctuation.terminator.statement
 - source: foo
   scopesBegin:
-    - meta.function.definition.constructor
-    - meta.head.function.definition.constructor
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
   scopes:
     - entity.name.function.constructor
-    - entity.name.function.definition.constructor
+    - entity.name.function.definition.special.constructor
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.constructor
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.constructor
+    - punctuation.section.parameters.end.bracket.round.special.constructor
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.constructor
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.head.function.definition.constructor
+    - meta.head.function.definition.special.constructor
 - source: '}'
   scopes:
-    - meta.body.function.definition.constructor
+    - meta.body.function.definition.special.constructor
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.constructor
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.function.definition.constructor
+    - meta.function.definition.special.constructor
 - source: int
   scopesBegin:
     - meta.function.definition

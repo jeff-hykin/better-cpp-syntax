@@ -1,14 +1,14 @@
 - source: void
   scopesBegin:
     - source
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '""'
@@ -19,10 +19,11 @@
     - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: long
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - storage.type.primitive
@@ -31,14 +32,14 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
-    - meta.head.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement

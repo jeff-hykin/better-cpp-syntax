@@ -65,13 +65,13 @@
     - punctuation.section.angle-brackets.end.template.definition
 - source: result_type
   scopesBegin:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ()
@@ -79,10 +79,11 @@
     - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: argument_type
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
   scopes:
     - entity.name.type.parameter
@@ -90,24 +91,24 @@
   scopes:
     - variable.parameter
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.head.function.definition.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - meta.body.function.definition.operator-overload
+    - meta.body.function.definition.special.operator-overload
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.operator-overload
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.function.definition.operator-overload
+    - meta.function.definition.special.operator-overload
 - source: template
   scopes:
     - storage.type.template

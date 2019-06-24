@@ -28,3 +28,16 @@ Thing4::~Thing4() {
 Thing4::Thing4() {
     
 }
+
+
+struct Thing5
+{
+    Thing5() = default;
+    ~Thing5() = default;
+};
+
+struct Thing6
+{
+    Thing6() = delete;
+    ~Thing6() = delete;
+};

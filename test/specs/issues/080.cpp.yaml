@@ -16,18 +16,20 @@
 - source: ~foo
   scopesBegin:
     - meta.body.class
-    - meta.function.destructor
+    - meta.function.definition.special.destructor
+    - meta.head.function.definition.special.destructor
   scopes:
     - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - entity.name.function.definition.special.destructor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.parameters.begin.bracket.round.special.destructor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
+    - punctuation.section.parameters.end.bracket.round.special.destructor
   scopesEnd:
-    - meta.function.destructor
+    - meta.function.definition.special.destructor
+    - meta.head.function.definition.special.destructor
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -41,30 +43,39 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.class
-- source: 'foo::~foo'
+- source: foo
   scopesBegin:
-    - meta.function.destructor
+    - meta.function.definition.special.destructor
   scopes:
-    - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - entity.name.type.destructor
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.destructor
+- source: ~foo
+  scopes:
+    - entity.name.function.definition.special.destructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.destructor
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.parameters.begin.bracket.round.special.destructor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
-  scopesEnd:
-    - meta.function.destructor
+    - punctuation.section.parameters.end.bracket.round.special.destructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.destructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.special.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.destructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.destructor
 - source: foo
   scopes:
     - entity.name.scope-resolution
@@ -72,20 +83,18 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: ~bar
-  scopesBegin:
-    - meta.function.destructor
+- source: '~'
   scopes:
-    - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - keyword.operator
+- source: bar
+  scopes:
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
-  scopesEnd:
-    - meta.function.destructor
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '{'
   scopesBegin:
     - meta.block
