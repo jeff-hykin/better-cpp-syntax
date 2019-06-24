@@ -344,20 +344,25 @@
   scopesEnd:
     - meta.function.definition
     - meta.body.function.definition
-- source: 'Rule '
+- source: Rule
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - meta.head.function.definition.special.operator-overload
+    - storage.modifier.reference
 - source: Rule
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.operator
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.operator
 - source: operator
   scopesBegin:
-    - meta.function.definition.special.operator-overload
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload

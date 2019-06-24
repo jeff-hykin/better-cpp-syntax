@@ -919,6 +919,10 @@ cpp_grammar = Grammar.new(
         start_pattern: newPattern(
             # find the return type (if there is one)
             maybe(qualified_type.then(inline_ref_deref_pattern)).then(
+                std_space
+            ).then(
+                inline_scope_resolution[".operator"]
+            ).then(
                 match: /operator/,
                 tag_as: "keyword.other.operator.overload",
             # find any scope resolutions
