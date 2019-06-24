@@ -25,15 +25,14 @@
   scopesBegin:
     - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
-  scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopes:
-    - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload

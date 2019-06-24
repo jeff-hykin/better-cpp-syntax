@@ -378,6 +378,25 @@ cpp_grammar = Grammar.new(
                 tag_content_as: "arguments.decltype",
                 tag_parenthese_as: "decltype"
             ]
+    cpp_grammar[:pthread_types] = pthread_types = newPattern(
+        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
+        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
+        )
+    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
+        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
+        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
+        )
+    inline_builtin_storage_type = std_space.then(
+        newPattern(
+            cpp_grammar[:primitive_types]
+        ).or(
+            cpp_grammar[:non_primitive_types]
+        ).or(
+            cpp_grammar[:pthread_types]
+        ).or(
+            cpp_grammar[:posix_reserved_types]
+        )
+    )
 
 #
 # Keywords and Keyword-ish things
@@ -858,14 +877,6 @@ cpp_grammar = Grammar.new(
 #
     # generally this section is for things that need a #include, (the support category)
     # it will be for things such as cout, cin, vector, string, map, etc
-    cpp_grammar[:pthread_types] = pthread_types = newPattern(
-        tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
-        match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
-        )
-    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
-        match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
-        tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
-        )
     cpp_grammar[:predefined_macros] = predefinedMacros()
 
 #
@@ -1384,6 +1395,40 @@ cpp_grammar = Grammar.new(
             :function_pointer_parameter,
             :decltype,
             :vararg_ellipses,
+            newPattern(
+                newPattern(
+                    match: oneOrMoreOf(
+                        # a specifier
+                        newPattern(
+                            newPattern(
+                                match: @cpp_tokens.that(:isStorageSpecifier),
+                                tag_as: "storage.modifier.specifier.parameter",
+                            ).then(std_space)
+                        # a type specifier
+                        # type specifiers are only specifiers when combined with something else ex: long vs long int
+                        ).or(
+                            newPattern(
+                                match: @cpp_tokens.that(:isTypeSpecifier),
+                                tag_as: "storage.modifier.specifier.parameter",
+                            ).then(std_space).lookAheadFor(/\w/)
+                        )
+                    ),
+                    includes: [
+                        :storage_types
+                    ]
+                ).then(std_space).then(
+                    newPattern(
+                        inline_builtin_storage_type
+                    ).or(
+                        match: variableBounds[identifier].then(
+                                @word_boundary
+                            ).then(
+                                @cpp_tokens.lookBehindToAvoidWordsThat(:isStorageSpecifier)
+                            ),
+                        tag_as: "entity.name.type.parameter",
+                    )
+                ).then(std_space).lookAheadFor(/,|\)|=/), 
+            ),
             :storage_types,
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords

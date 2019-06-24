@@ -3812,15 +3812,14 @@
   scopesBegin:
     - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
-  scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopes:
-    - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters.special.operator-overload
     - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
@@ -9345,7 +9344,7 @@
     - storage.type.built-in.primitive
 - source: shift
   scopes:
-    - variable.parameter
+    - entity.name.type.parameter
 - source: ','
   scopes:
     - comma
@@ -9356,7 +9355,7 @@
     - storage.type.built-in.primitive
 - source: mask
   scopes:
-    - variable.parameter
+    - entity.name.type.parameter
   scopesEnd:
     - meta.parameter
 - source: )

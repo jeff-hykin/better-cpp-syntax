@@ -30,6 +30,10 @@ void func19() {};
 void func20(int const thing) { return; }
 void func21(const int thing) { return; }
 void func22(decltype(1) thing) { return; }
+void func23(const Type) {};
+void func24(const int) {};
+void func25(short const int) {};
+void func26(const short int) {};
 
 class GameState {};
 struct Node {};

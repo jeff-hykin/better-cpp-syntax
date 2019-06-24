@@ -202,7 +202,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -290,7 +291,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
   scopesEnd:
     - meta.parameter
 - source: )
@@ -364,7 +366,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
   scopesEnd:
     - meta.parameter
 - source: )
@@ -710,7 +713,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: ','
   scopes:
     - comma
@@ -798,7 +802,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
   scopesEnd:
     - meta.parameter
 - source: )
@@ -872,7 +877,8 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - variable.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
   scopesEnd:
     - meta.parameter
 - source: )
@@ -1204,7 +1210,7 @@
     - storage.modifier.specifier.const
 - source: thing
   scopes:
-    - variable.parameter
+    - entity.name.type.parameter
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -1336,8 +1342,191 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
-    - meta.function.definition
     - meta.body.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func23
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Type
+  scopes:
+    - entity.name.type.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func24
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func25
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: short
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func26
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: short
+  scopesBegin:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: class
   scopesBegin:
     - meta.block.class

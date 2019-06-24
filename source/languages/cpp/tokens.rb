@@ -291,6 +291,10 @@ tokens = [
     if each[:representation] =~ /\A[a-zA-Z_][a-zA-Z0-9_]*\z/
         each[:isWord] = true
     end
+    
+    if each[:isTypeSpecifier] or each[:isStorageSpecifier]
+        each[:isPossibleStorageSpecifier] = true
+    end
 end
 
 
