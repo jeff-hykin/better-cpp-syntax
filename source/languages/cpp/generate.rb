@@ -32,8 +32,9 @@ cpp_grammar = Grammar.new(
 #
 # Utils
 #
+    $grammar = cpp_grammar
     cpp_grammar[:inline_comment] = inline_comment
-    std_space = generateStdSpace(cpp_grammar[:inline_comment])
+    def std_space() generateStdSpace($grammar[:inline_comment]) end
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -57,22 +58,26 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.definition.end.bracket.square"
         ).maybe(@spaces)
     # TODO eventually move this outside of the # Utils section
-    ref_deref_pattern = newPattern(
+    def ref_deref_pattern(pointer_tag:"storage.modifier.pointer", reference_tag: "storage.modifier.reference")
         newPattern(
-            match: zeroOrMoreOf(/\*/.maybe(std_space.lookAheadFor(/\*|\&/))),
-            tag_as: "storage.modifier.pointer"
-        ).then(
-            match: /&/.maybe(std_space.lookAheadFor(/\&/)),
-            at_least: 0.times,
-            at_most: 2.times,
-            tag_as: "storage.modifier.reference"
+            newPattern(
+                match: zeroOrMoreOf(/\*/.maybe(std_space.lookAheadFor(/\*|\&/))),
+                tag_as: pointer_tag
+            ).then(
+                match: /&/.maybe(std_space.lookAheadFor(/\&/)),
+                at_least: 0.times,
+                at_most: 2.times,
+                tag_as: reference_tag
+            )
         )
-    )
-    inline_ref_deref_pattern = maybe(
-        should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
-        should_not_fully_match: [ '&*', '&&&' ],
-        match: std_space.then(ref_deref_pattern).then(std_space)
-    )
+    end
+    def inline_ref_deref_pattern(pointer_tag:"storage.modifier.pointer", reference_tag: "storage.modifier.reference")
+        return maybe(
+            should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
+            should_not_fully_match: [ '&*', '&&&' ],
+            match: std_space.then(ref_deref_pattern(pointer_tag:pointer_tag, reference_tag:reference_tag)).then(std_space)
+        )
+    end
     functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
             tag_content_as: "meta.#{tag_content_as}",
@@ -848,7 +853,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:predefined_macros] = predefinedMacros()
 
 #
-# Functions
+# Functions, Operator Overload
 #
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
@@ -877,6 +882,85 @@ cpp_grammar = Grammar.new(
                 end_pattern: newPattern( 
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round"
+                    ),
+                includes: [
+                    :function_parameter_context,
+                    # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
+                    # e.g. std::string ("hello");
+                    :evaluation_context,
+                ]
+            ),
+            # initial context is here for things like noexcept()
+            # TODO: fix this pattern an make it more strict
+            :root_context
+        ],
+        needs_semicolon: false,
+        body_includes: [ :function_body_context ],
+    )
+    cpp_grammar[:operator_overload] = generateBlockFinder(
+        name:"function.definition.operator-overload",
+        tag_as:"meta.function.definition.operator-overload",
+        start_pattern: newPattern(
+            # find the return type (if there is one)
+            maybe(qualified_type.then(inline_ref_deref_pattern)).then(
+                match: /operator/,
+                tag_as: "keyword.other.operator.overload",
+            # find any scope resolutions
+            ).then(std_space).then(
+                match: zeroOrMoreOf(one_scope_resolution),
+                includes: [
+                    newPattern(
+                        match: variableBounds[identifier],
+                        tag_as: "entity.name.scope-resolution.operator-overload"
+                    ),
+                    newPattern(
+                        match: /::/,
+                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.operator-overload"
+                    )
+                ]
+            # find the actual operator/type
+            ).then(
+                # operator
+                newPattern(
+                    match: @cpp_tokens.that(:canAppearAfterOperatorKeyword),
+                    tag_as: "entity.name.operator",
+                # type
+                ).or(
+                    match: variableBounds[identifier].then(
+                        # possible pointer/reference variation
+                        inline_ref_deref_pattern(pointer_tag:"entity.name.operator.type.pointer", reference_tag:"entity.name.operator.type.reference")
+                    ).then(std_space).maybe(
+                        # possible array variation
+                        match: /\[\]/,
+                        tag_as: "entity.name.operator.type.array"
+                    ),
+                    tag_as: "entity.name.operator.type",
+                # custom literal
+                ).or(
+                    # see https://en.cppreference.com/w/cpp/language/user_literal
+                    newPattern(
+                        match: /""/,
+                        tag_as: "entity.name.operator.custom-literal",
+                    ).then(std_space).then(
+                        match: variableBounds[identifier],
+                        tag_as: "entity.name.operator.custom-literal",
+                    )
+                )
+            # lookahead for the start of a template type or the start of the function parameters
+            ).then(std_space).lookAheadFor(/\<|\(/)
+        ),
+        head_includes:[
+            :ever_present_context, # comments and macros
+            :template_call_range,
+            PatternRange.new(
+                tag_content_as: "meta.function.definition.parameters.operator-overload",
+                start_pattern: newPattern( 
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round.operator-overload"
+                    ),
+                end_pattern: newPattern( 
+                    match: /\)/,
+                    tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
                     ),
                 includes: [
                     :function_parameter_context,
@@ -1129,34 +1213,6 @@ cpp_grammar = Grammar.new(
             # ref_deref_pattern
         ]
     )
-#
-# Operator overload
-#
-    # symbols can have spaces
-    operator_symbols = maybe(@spaces).then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isSymbol))
-    # words must have spaces, the variable_name_without_bounds is for implicit overloads
-    operator_wordish = @spaces.then(@cpp_tokens.that(:canAppearAfterOperatorKeyword, :isWordish).or(zeroOrMoreOf(one_scope_resolution).then(variable_name_without_bounds).maybe(@spaces).maybe(/&/)))
-    after_operator_keyword = operator_symbols.or(operator_wordish)
-    cpp_grammar[:operator_overload] = operator_overload = PatternRange.new(
-        tag_as: "meta.function.definition.parameters.operator-overload",
-        start_pattern: newPattern(
-                match: /operator/,
-                tag_as: "keyword.other.operator.overload",
-            ).then(
-                match: after_operator_keyword,
-                tag_as: "entity.name.operator.overloadee",
-                includes: [:scope_resolution_function_definition_operator_overload_inner_generated]
-            ).maybe(@spaces).then(
-                match: /\(/,
-                tag_as: "punctuation.section.parameters.begin.bracket.round.operator-overload"
-            ),
-        end_pattern: newPattern(
-                match: /\)/,
-                tag_as: "punctuation.section.parameters.end.bracket.round.operator-overload"
-            ),
-        includes: [ :function_parameter_context ]
-        )
-
 #
 # Access . .* -> ->*
 #

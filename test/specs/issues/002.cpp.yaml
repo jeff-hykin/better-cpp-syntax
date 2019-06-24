@@ -1,6 +1,27 @@
-- source: class
+- source: '#'
   scopesBegin:
     - source
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: class
+  scopesBegin:
     - meta.block.class
     - meta.head.class
   scopes:
@@ -13,20 +34,24 @@
     - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
     - meta.head.class
-- source: '    Example '
+- source: Example
   scopesBegin:
     - meta.body.class
-- source: '&'
+    - meta.function.definition.operator-overload
   scopes:
-    - keyword.operator
-- source: operator
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.head.function.definition.operator-overload
+  scopes:
+    - storage.modifier.reference
+- source: operator
   scopes:
     - keyword.other.operator.overload
 - source: ++
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
@@ -34,18 +59,20 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.operator-overload
+    - meta.head.function.definition.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.operator-overload
+    - meta.head.function.definition.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: ' int'
+- source: int
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator.type
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
@@ -53,28 +80,33 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.operator-overload
+    - meta.head.function.definition.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.operator-overload
   scopes:
+    - meta.head.function.definition.operator-overload
     - keyword.other.operator.overload
 - source: std
-  scopesBegin:
-    - entity.name.operator.overloadee
   scopes:
-    - entity.name.scope-resolution.function.definition.operator-overload
+    - entity.name.scope-resolution.operator-overload
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - >-
-      punctuation.separator.scope-resolution.function.definition.operator-overload
-- source: string &
+    - punctuation.separator.scope-resolution.operator-overload
+- source: string
+  scopesBegin:
+    - meta.head.function.definition.operator-overload
+    - entity.name.operator.type
+- source: '&'
+  scopes:
+    - entity.name.operator.type.reference
   scopesEnd:
-    - entity.name.operator.overloadee
+    - entity.name.operator.type
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round.operator-overload
@@ -82,7 +114,8 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.operator-overload
   scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - meta.function.definition.operator-overload
+    - meta.head.function.definition.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -94,3 +127,42 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
