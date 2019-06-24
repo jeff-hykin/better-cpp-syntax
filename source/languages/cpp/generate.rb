@@ -189,6 +189,7 @@ cpp_grammar = Grammar.new(
             # TODO: class pre-definition
             # TODO: initializater calls
             # definitions (contains a body of something)
+            :constructor_root,
             :function_definition,
             :operator_overload,
             :destructor, 
@@ -729,6 +730,22 @@ cpp_grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    inline_scope_resolution = ->(tag_extension) do
+        newPattern(
+            match: zeroOrMoreOf(one_scope_resolution),
+            includes: [
+                newPattern(
+                    match: /::/,
+                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
+                ),
+                newPattern(
+                    match: variableBounds[identifier],
+                    tag_as: "entity.name.scope-resolution"+tag_extension
+                ),
+                :template_call_range
+            ]
+        )
+    end
     preceding_scopes = newPattern(
         match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution_inner_generated ]
@@ -907,17 +924,7 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.other.operator.overload",
             # find any scope resolutions
             ).then(std_space).then(
-                match: zeroOrMoreOf(one_scope_resolution),
-                includes: [
-                    newPattern(
-                        match: variableBounds[identifier],
-                        tag_as: "entity.name.scope-resolution.operator-overload"
-                    ),
-                    newPattern(
-                        match: /::/,
-                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.operator-overload"
-                    )
-                ]
+                inline_scope_resolution[".operator-overload"]
             # find the actual operator/type
             ).then(
                 # operator
@@ -1027,6 +1034,97 @@ cpp_grammar = Grammar.new(
             ),
         includes: [ :evaluation_context ]
         )
+#
+# Constructors
+#
+    cpp_grammar[:constructor_root] = generateBlockFinder(
+        name:"function.definition.constructor",
+        tag_as:"meta.function.definition.constructor",
+        start_pattern: newPattern(
+            newPattern(
+                inline_scope_resolution[".constructor"]
+            ).then(
+                match: newPattern(
+                    newPattern(
+                        # this is a backReference so that it matches the same name before and after the ::'s
+                        match: /(?<constructor_name>#{variableBounds[identifier]})::(?:\k<constructor_name>)/,
+                        tag_as: "entity.name.function.definition.constructor"
+                    ).then(std_space).lookAheadFor(/\(/)
+                ),
+                includes: [
+                    # the first part
+                    newPattern(
+                        match: identifier.lookAheadFor(/:/),
+                        tag_as: "entity.name.type.constructor",
+                    ),
+                    # the second part
+                    newPattern(
+                        match: lookBehindFor(/:/).then(identifier),
+                        tag_as: "entity.name.function.definition.constructor"
+                    ),
+                    # the scope operator
+                    newPattern(
+                        match: /::/,
+                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.constructor"
+                    )
+                ]
+            )
+        ),
+        head_includes:[
+            :ever_present_context, # comments and macros
+            # initializater context
+            PatternRange.new(
+                start_pattern: newPattern(
+                    match: /:/,
+                    tag_as: "punctuation.separator.initializers"
+                ),
+                end_pattern: lookAheadFor(/\{/),
+                includes: [
+                    PatternRange.new(
+                        tag_content_as: "meta.parameter.initialization",
+                        start_pattern: newPattern(
+                            newPattern(
+                                match: variableBounds[identifier],
+                                tag_as: "entity.name.function.call.initializer",
+                            ).then(
+                                match: /\(/,
+                                tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
+                            )
+                        ),
+                        end_pattern: newPattern(
+                            match: /\)/,
+                            tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
+                        ),
+                        includes: [:evaluation_context]
+                    ),
+                    cpp_grammar[:comma],
+                ]
+            ),
+            # parameters 
+            PatternRange.new(
+                tag_content_as: "meta.function.definition.parameters.constructor",
+                start_pattern: newPattern( 
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round.constructor"
+                    ),
+                end_pattern: newPattern( 
+                    match: /\)/,
+                    tag_as: "punctuation.section.parameters.end.bracket.round.constructor"
+                    ),
+                includes: [
+                    :function_parameter_context,
+                    # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
+                    # e.g. std::string ("hello");
+                    :evaluation_context,
+                ]
+            ),
+            # initial context is here for things like noexcept()
+            # TODO: fix this pattern an make it more strict
+            :root_context
+        ],
+        needs_semicolon: false,
+        body_includes: [ :function_body_context ],
+    )
 #
 # Operators
 #

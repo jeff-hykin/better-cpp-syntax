@@ -286,6 +286,9 @@
           "include": "#ever_present_context"
         },
         {
+          "include": "#constructor_root"
+        },
+        {
           "include": "#function_definition"
         },
         {
@@ -366,6 +369,9 @@
       "patterns": [
         {
           "include": "#ever_present_context"
+        },
+        {
+          "include": "#constructor_root"
         },
         {
           "include": "#using_namespace"
@@ -4017,12 +4023,15 @@
         "50": {
           "patterns": [
             {
+              "match": "::",
+              "name": "punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.operator-overload.cpp"
+            },
+            {
               "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
               "name": "entity.name.scope-resolution.operator-overload.cpp"
             },
             {
-              "match": "::",
-              "name": "punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.operator-overload.cpp"
+              "include": "#template_call_range"
             }
           ]
         },
@@ -4323,6 +4332,171 @@
       "patterns": [
         {
           "include": "#evaluation_context"
+        }
+      ]
+    },
+    "constructor_root": {
+      "name": "meta.function.definition.constructor.cpp",
+      "begin": "(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*)(((?<constructor_name>(?-mix:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))::(?:\\k<constructor_name>))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\()))",
+      "beginCaptures": {
+        "1": {
+          "name": "meta.head.function.definition.constructor.cpp"
+        },
+        "2": {
+          "patterns": [
+            {
+              "match": "::",
+              "name": "punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.constructor.cpp"
+            },
+            {
+              "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+              "name": "entity.name.scope-resolution.constructor.cpp"
+            },
+            {
+              "include": "#template_call_range"
+            }
+          ]
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?=:)",
+              "name": "entity.name.type.constructor.cpp"
+            },
+            {
+              "match": "(?<=:)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*",
+              "name": "entity.name.function.definition.constructor.cpp"
+            },
+            {
+              "match": "::",
+              "name": "punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.constructor.cpp"
+            }
+          ]
+        },
+        "4": {
+          "name": "entity.name.function.definition.constructor.cpp"
+        },
+        "5": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "6": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "7": {
+          "name": "comment.block.cpp"
+        },
+        "8": {
+          "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+        }
+      },
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "patterns": [
+        {
+          "name": "meta.head.function.definition.constructor.cpp",
+          "begin": "\\G ?",
+          "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.block.begin.bracket.curly.function.definition.constructor.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#ever_present_context"
+            },
+            {
+              "begin": "(:)",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.separator.initializers.cpp"
+                }
+              },
+              "end": "(?=\\{)",
+              "patterns": [
+                {
+                  "contentName": "meta.parameter.initialization.cpp",
+                  "begin": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(\\()",
+                  "beginCaptures": {
+                    "1": {
+                      "name": "entity.name.function.call.initializer.cpp"
+                    },
+                    "2": {
+                      "name": "punctuation.section.arguments.begin.bracket.round.function.call.initializer.cpp"
+                    }
+                  },
+                  "end": "(\\))",
+                  "endCaptures": {
+                    "1": {
+                      "name": "punctuation.section.arguments.end.bracket.round.function.call.initializer.cpp"
+                    }
+                  },
+                  "patterns": [
+                    {
+                      "include": "#evaluation_context"
+                    }
+                  ]
+                },
+                {
+                  "include": "#comma"
+                }
+              ]
+            },
+            {
+              "contentName": "meta.function.definition.parameters.constructor.cpp",
+              "begin": "(\\()",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.section.parameters.begin.bracket.round.constructor.cpp"
+                }
+              },
+              "end": "(\\))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.parameters.end.bracket.round.constructor.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#function_parameter_context"
+                },
+                {
+                  "include": "#evaluation_context"
+                }
+              ]
+            },
+            {
+              "include": "#root_context"
+            }
+          ]
+        },
+        {
+          "name": "meta.body.function.definition.constructor.cpp",
+          "begin": "(?<=\\{|<%|\\?\\?<)",
+          "end": "(\\}|%>|\\?\\?>)",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.block.end.bracket.curly.function.definition.constructor.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#function_body_context"
+            }
+          ]
+        },
+        {
+          "name": "meta.tail.function.definition.constructor.cpp",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
+          "end": "[\\s\\n]*(?=;)",
+          "patterns": [
+            {
+              "include": "#root_context"
+            }
+          ]
         }
       ]
     },
