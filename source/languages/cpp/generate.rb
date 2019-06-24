@@ -1917,7 +1917,7 @@ cpp_grammar = Grammar.new(
         }
     cpp_grammar[:constructor_context] = [
             {
-                begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
+                begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|static_assert|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
                 beginCaptures: {
                     "1" => {
                         name: "entity.name.function.constructor"

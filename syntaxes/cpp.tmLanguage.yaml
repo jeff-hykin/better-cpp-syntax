@@ -4354,7 +4354,7 @@
     - begin: |-
         (?x)
         (?:^\s*)  # beginning of line
-        ((?!while|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name
+        ((?!while|static_assert|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name
         \s*(\()  # opening bracket
       beginCaptures:
         '1':
