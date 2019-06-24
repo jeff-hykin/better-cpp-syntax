@@ -190,9 +190,9 @@ cpp_grammar = Grammar.new(
             # TODO: initializater calls
             # definitions (contains a body of something)
             :constructor_root,
+            :destructor_root,
             :function_definition,
             :operator_overload,
-            :destructor, 
             :using_namespace,
             :type_alias,
             :using_name, # this needs to be below type_alias
@@ -225,7 +225,6 @@ cpp_grammar = Grammar.new(
             :extern_block,
             :function_definition,
             :operator_overload,
-            :destructor,
             :template_isolated_definition,
             :template_definition,
             # this shouldn't be in root_context (it will eventually be removed), and it shouldn't really be in function body either
@@ -1037,7 +1036,7 @@ cpp_grammar = Grammar.new(
         includes: [ :evaluation_context ]
         )
 #
-# Constructors
+# Constructor / Destructor
 #
     constructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1071,6 +1070,23 @@ cpp_grammar = Grammar.new(
                             ),
                             includes: [:evaluation_context]
                         ),
+                        PatternRange.new(
+                            tag_content_as: "meta.parameter.initialization",
+                            start_pattern: newPattern(
+                                newPattern(
+                                    match: variableBounds[identifier],
+                                    tag_as: "entity.name.function.call.initializer",
+                                ).then(
+                                    match: /\{/,
+                                    tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
+                                )
+                            ),
+                            end_pattern: newPattern(
+                                match: /\}/,
+                                tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
+                            ),
+                            includes: [:evaluation_context]
+                        ),
                         cpp_grammar[:comma],
                     ]
                 ),
@@ -1100,9 +1116,15 @@ cpp_grammar = Grammar.new(
             body_includes: [ :function_body_context ],
         )
     end
+    # see https://en.cppreference.com/w/cpp/language/default_constructor
     cpp_grammar[:constructor_inline] = constructor[
         # find the begining of the line
-        /^/.then(std_space).then(
+        /^/.then(std_space).zeroOrMoreOf(
+            newPattern(
+                match: @cpp_tokens.that(:isFunctionSpecifier),
+                tag_as: "storage.type.modifier.specifier"
+            ).then(std_space)
+        ).then(
             tag_as: "entity.name.function.constructor entity.name.function.definition.constructor",
             match: variableBounds[identifier].lookAheadFor(/\(/)
         )
@@ -1113,8 +1135,13 @@ cpp_grammar = Grammar.new(
         ).then(
             match: newPattern(
                 newPattern(
-                    # this is a backReference so that it matches the same name before and after the ::'s
-                    /(?<constructor_name>#{variableBounds[identifier]})::(?:\k<constructor_name>)/,
+                        match: variableBounds[identifier],
+                        reference: "class_name",
+                        dont_back_track?: true
+                ).then(std_space).then(
+                    /::/
+                ).then(std_space).backReference(
+                    "class_name"
                 ).then(std_space).lookAheadFor(/\(/)
             ),
             includes: [
@@ -1136,6 +1163,109 @@ cpp_grammar = Grammar.new(
             ]
         )
     ]
+    # see https://en.cppreference.com/w/cpp/language/destructor
+    cpp_grammar[:destructor_inline] =  generateBlockFinder(
+        name:"function.definition.destructor",
+        tag_as:"meta.function.definition.destructor",
+        start_pattern: newPattern(
+            # find the begining of the line
+            /^/.then(std_space).zeroOrMoreOf(
+                newPattern(
+                    match: @cpp_tokens.that(:isFunctionSpecifier),
+                    tag_as: "storage.type.modifier.specifier"
+                ).then(std_space)
+            ).then(
+                tag_as: "entity.name.function.destructor entity.name.function.definition.destructor",
+                match: /~/.then(variableBounds[identifier].lookAheadFor(/\(/))
+            )
+        ),
+        head_includes:[
+            :ever_present_context, # comments and macros
+            PatternRange.new(
+                tag_content_as: "meta.function.definition.parameters.destructor",
+                start_pattern: newPattern( 
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round.destructor"
+                    ),
+                end_pattern: newPattern( 
+                    match: /\)/,
+                    tag_as: "punctuation.section.parameters.end.bracket.round.destructor"
+                    ),
+                # destructors cant have arguments
+                includes: []
+            ),
+            # initial context is here for things like noexcept()
+            # TODO: fix this pattern an make it more strict
+            :root_context
+        ],
+        needs_semicolon: false,
+        body_includes: [ :function_body_context ],
+        tail_includes: [
+            newPattern(
+                assignment_operator.then(std_space).then(
+                    match: /delete/,
+                    tag_as: "keyword.other."
+                )
+            )
+        ]
+    )
+    cpp_grammar[:destructor_root] =  generateBlockFinder(
+        name:"function.definition.destructor",
+        tag_as:"meta.function.definition.destructor",
+        start_pattern: newPattern(
+                inline_scope_resolution[".destructor"]
+            ).then(
+                match: newPattern(
+                    newPattern(
+                            match: variableBounds[identifier],
+                            reference: "class_name",
+                            dont_back_track?: true
+                    ).then(std_space).then(
+                        /::/
+                    ).then(std_space).then(/~/).backReference(
+                        "class_name"
+                    ).then(std_space).lookAheadFor(/\(/)
+                ),
+                includes: [
+                    # the first part
+                    newPattern(
+                        match: identifier.lookAheadFor(/:/),
+                        tag_as: "entity.name.type.destructor",
+                    ),
+                    # the second part
+                    newPattern(
+                        match: lookBehindFor(/:/).then(/~/).then(identifier),
+                        tag_as: "entity.name.function.definition.destructor"
+                    ),
+                    # the scope operator
+                    newPattern(
+                        match: /::/,
+                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.destructor"
+                    )
+                ]
+        ),
+        head_includes:[
+            :ever_present_context, # comments and macros
+            PatternRange.new(
+                tag_content_as: "meta.function.definition.parameters.destructor",
+                start_pattern: newPattern( 
+                    match: /\(/,
+                    tag_as: "punctuation.section.parameters.begin.bracket.round.destructor"
+                    ),
+                end_pattern: newPattern( 
+                    match: /\)/,
+                    tag_as: "punctuation.section.parameters.end.bracket.round.destructor"
+                    ),
+                # destructors cant have arguments
+                includes: []
+            ),
+            # initial context is here for things like noexcept()
+            # TODO: fix this pattern an make it more strict
+            :root_context
+        ],
+        needs_semicolon: false,
+        body_includes: [ :function_body_context ],
+    )
 #
 # Operators
 #
@@ -1692,7 +1822,7 @@ cpp_grammar = Grammar.new(
                 :inheritance_context,
                 :template_call_range,
             ],
-            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :root_context ],
+            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :root_context ],
             tail_includes: tail_includes
         )
     end
@@ -1835,26 +1965,6 @@ cpp_grammar = Grammar.new(
             match: /\b(?:export|mutable|typename|thread_local|extern|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier"
         )
-    #destructors accept no parameters
-    cpp_grammar[:destructor] = newPattern(
-        should_fully_match: ["~bar()", "foo::~foo()"],
-        tag_as: "meta.function.destructor",
-        match: lookBehindToAvoid(/[a-zA-Z0-9_]/).then(
-            match: newPattern(
-                    newPattern(match: identifier, reference: "class_name", dont_back_track?: true).maybe(@spaces).then(/::/).maybe(@spaces)
-                    .then(/~/).backReference("class_name")
-                ).or(
-                    newPattern(/~/).then(match: identifier, dont_back_track?: true)
-                ),
-            tag_as: "entity.name.function.destructor entity.name.function.special.destructor"
-        ).maybe(@spaces).then(
-            match: /\(/,
-            tag_as: "punctuation.definition.parameters.begin.destructor",
-        ).maybe(@spaces).then(
-            match: /\)/,
-            tag_as: "punctuation.definition.parameters.end.destructor",
-        )
-    )
     cpp_grammar[:meta_preprocessor_macro] = {
             name: "meta.preprocessor.macro",
             begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",

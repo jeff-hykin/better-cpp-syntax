@@ -28,10 +28,10 @@ entity.name.function.constructor.cpp
 entity.name.function.cpp
 entity.name.function.definition.constructor.cpp
 entity.name.function.definition.cpp
+entity.name.function.definition.destructor.cpp
 entity.name.function.destructor.cpp
 entity.name.function.member.cpp
 entity.name.function.preprocessor.cpp
-entity.name.function.special.destructor.cpp
 entity.name.namespace.alias.cpp
 entity.name.namespace.cpp
 entity.name.operator.cpp
@@ -294,6 +294,7 @@ entity.name.other.preprocessor.macro.predefined.__is_identifier.cpp
 entity.name.other.preprocessor.macro.predefined.probably.$2.cpp
 entity.name.scope-resolution.constructor.cpp
 entity.name.scope-resolution.cpp
+entity.name.scope-resolution.destructor.cpp
 entity.name.scope-resolution.function.call.cpp
 entity.name.scope-resolution.function.definition.cpp
 entity.name.scope-resolution.function.definition.operator-overload.cpp
@@ -311,6 +312,7 @@ entity.name.type.class.cpp
 entity.name.type.class.parameter.cpp
 entity.name.type.constructor.cpp
 entity.name.type.cpp
+entity.name.type.destructor.cpp
 entity.name.type.enum.cpp
 entity.name.type.enum.parameter.cpp
 entity.name.type.inherited.cpp
@@ -403,6 +405,7 @@ meta.body.enum.cpp
 meta.body.extern.cpp
 meta.body.function.definition.constructor.cpp
 meta.body.function.definition.cpp
+meta.body.function.definition.destructor.cpp
 meta.body.function.definition.operator-overload.cpp
 meta.body.namespace.cpp
 meta.body.struct.cpp
@@ -423,17 +426,19 @@ meta.function.cpp
 meta.function.definition.body.lambda.cpp
 meta.function.definition.constructor.cpp
 meta.function.definition.cpp
+meta.function.definition.destructor.cpp
 meta.function.definition.operator-overload.cpp
 meta.function.definition.parameters.constructor.cpp
 meta.function.definition.parameters.cpp
+meta.function.definition.parameters.destructor.cpp
 meta.function.definition.parameters.lambda.cpp
 meta.function.definition.parameters.operator-overload.cpp
-meta.function.destructor.cpp
 meta.head.class.cpp
 meta.head.enum.cpp
 meta.head.extern.cpp
 meta.head.function.definition.constructor.cpp
 meta.head.function.definition.cpp
+meta.head.function.definition.destructor.cpp
 meta.head.function.definition.operator-overload.cpp
 meta.head.namespace.cpp
 meta.head.struct.cpp
@@ -456,6 +461,7 @@ meta.tail.enum.cpp
 meta.tail.extern.cpp
 meta.tail.function.definition.constructor.cpp
 meta.tail.function.definition.cpp
+meta.tail.function.definition.destructor.cpp
 meta.tail.function.definition.operator-overload.cpp
 meta.tail.namespace.cpp
 meta.tail.struct.cpp
@@ -480,10 +486,8 @@ punctuation.definition.end.bracket.square.cpp
 punctuation.definition.function.pointer.dereference.cpp
 punctuation.definition.lambda.return-type.cpp
 punctuation.definition.parameters.begin.cpp
-punctuation.definition.parameters.begin.destructor.cpp
 punctuation.definition.parameters.begin.lambda.cpp
 punctuation.definition.parameters.end.cpp
-punctuation.definition.parameters.end.destructor.cpp
 punctuation.definition.parameters.end.lambda.cpp
 punctuation.definition.string.begin.assembly.cpp
 punctuation.definition.string.begin.cpp
@@ -521,6 +525,7 @@ punctuation.section.block.begin.bracket.curly.enum.cpp
 punctuation.section.block.begin.bracket.curly.extern.cpp
 punctuation.section.block.begin.bracket.curly.function.definition.constructor.cpp
 punctuation.section.block.begin.bracket.curly.function.definition.cpp
+punctuation.section.block.begin.bracket.curly.function.definition.destructor.cpp
 punctuation.section.block.begin.bracket.curly.function.definition.operator-overload.cpp
 punctuation.section.block.begin.bracket.curly.lambda.cpp
 punctuation.section.block.begin.bracket.curly.namespace.cpp
@@ -533,6 +538,7 @@ punctuation.section.block.end.bracket.curly.enum.cpp
 punctuation.section.block.end.bracket.curly.extern.cpp
 punctuation.section.block.end.bracket.curly.function.definition.constructor.cpp
 punctuation.section.block.end.bracket.curly.function.definition.cpp
+punctuation.section.block.end.bracket.curly.function.definition.destructor.cpp
 punctuation.section.block.end.bracket.curly.function.definition.operator-overload.cpp
 punctuation.section.block.end.bracket.curly.lambda.cpp
 punctuation.section.block.end.bracket.curly.namespace.cpp
@@ -541,10 +547,12 @@ punctuation.section.block.end.bracket.curly.switch.cpp
 punctuation.section.block.end.bracket.curly.union.cpp
 punctuation.section.parameters.begin.bracket.round.constructor.cpp
 punctuation.section.parameters.begin.bracket.round.cpp
+punctuation.section.parameters.begin.bracket.round.destructor.cpp
 punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
 punctuation.section.parameters.begin.bracket.round.operator-overload.cpp
 punctuation.section.parameters.end.bracket.round.constructor.cpp
 punctuation.section.parameters.end.bracket.round.cpp
+punctuation.section.parameters.end.bracket.round.destructor.cpp
 punctuation.section.parameters.end.bracket.round.function.pointer.cpp
 punctuation.section.parameters.end.bracket.round.operator-overload.cpp
 punctuation.section.parens.begin.bracket.round.assembly.cpp
@@ -574,6 +582,7 @@ punctuation.separator.pointer-access.cpp
 punctuation.separator.range-based.cpp
 punctuation.separator.scope-resolution.constructor.cpp
 punctuation.separator.scope-resolution.cpp
+punctuation.separator.scope-resolution.destructor.cpp
 punctuation.separator.scope-resolution.function.call.cpp
 punctuation.separator.scope-resolution.function.definition.cpp
 punctuation.separator.scope-resolution.function.definition.operator-overload.cpp
@@ -618,6 +627,7 @@ storage.type.integral.$12.cpp
 storage.type.modifier.access.$0.cpp
 storage.type.modifier.access.control.$1.cpp
 storage.type.modifier.final.cpp
+storage.type.modifier.specifier.cpp
 storage.type.modifier.virtual.cpp
 storage.type.namespace.alias.cpp
 storage.type.namespace.definition.cpp
