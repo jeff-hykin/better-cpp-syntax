@@ -842,7 +842,7 @@ cpp_grammar = Grammar.new(
                 declaration_storage_specifiers
             ).then(
                 qualified_type.or(
-                    match: /.+/.lookBehindToAvoid(/;/),
+                    match: /.*/.lookBehindToAvoid(/;/),
                     tag_as: "meta.declaration.type.alias.value.unknown",
                     includes: [
                         :evaluation_context,
