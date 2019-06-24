@@ -4944,20 +4944,19 @@
     - punctuation.separator.dot-access
 - source: callable
   scopes:
-    - variable.other.property
+    - variable.other.object.property
 - source: .
-- source: '~'
   scopes:
-    - keyword.operator
-- source: type
+    - punctuation.separator.dot-access
+- source: ~type
   scopes:
-    - entity.name.function.call
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: ;
   scopes:
     - punctuation.terminator.statement

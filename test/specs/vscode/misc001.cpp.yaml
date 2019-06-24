@@ -316,22 +316,19 @@
     - punctuation.separator.pointer-access
 - source: blank
   scopes:
-    - variable.other.property
+    - variable.other.object.property
 - source: .
-- source: ~Blank
-  scopesBegin:
-    - meta.function.destructor
   scopes:
-    - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - punctuation.separator.dot-access
+- source: ~Blank
+  scopes:
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
-  scopesEnd:
-    - meta.function.destructor
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: ;
   scopes:
     - punctuation.terminator.statement
