@@ -419,8 +419,6 @@ meta.declaration.type.alias.value.unknown.cpp
 meta.embedded.assembly.cpp
 meta.encoding.cpp
 meta.enum.definition.cpp
-meta.function.constructor.cpp
-meta.function.constructor.initializer-list.cpp
 meta.function.cpp
 meta.function.definition.body.lambda.cpp
 meta.function.definition.constructor.cpp
@@ -480,13 +478,10 @@ punctuation.definition.directive.cpp
 punctuation.definition.end.bracket.square.array.type.cpp
 punctuation.definition.end.bracket.square.cpp
 punctuation.definition.function.pointer.dereference.cpp
-punctuation.definition.initializer-list.parameters.cpp
 punctuation.definition.lambda.return-type.cpp
-punctuation.definition.parameters.begin.constructor.cpp
 punctuation.definition.parameters.begin.cpp
 punctuation.definition.parameters.begin.destructor.cpp
 punctuation.definition.parameters.begin.lambda.cpp
-punctuation.definition.parameters.end.constructor.cpp
 punctuation.definition.parameters.end.cpp
 punctuation.definition.parameters.end.destructor.cpp
 punctuation.definition.parameters.end.lambda.cpp
@@ -507,6 +502,7 @@ punctuation.section.arguments.begin.bracket.round.operator.alignas.cpp
 punctuation.section.arguments.begin.bracket.round.operator.alignof.cpp
 punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
 punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+punctuation.section.arguments.begin.bracket.round.static_assert.cpp
 punctuation.section.arguments.end.bracket.round.cpp
 punctuation.section.arguments.end.bracket.round.decltype.cpp
 punctuation.section.arguments.end.bracket.round.function.call.cpp
@@ -516,6 +512,7 @@ punctuation.section.arguments.end.bracket.round.operator.alignas.cpp
 punctuation.section.arguments.end.bracket.round.operator.alignof.cpp
 punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
 punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+punctuation.section.arguments.end.bracket.round.static_assert.cpp
 punctuation.section.attribute.begin.cpp
 punctuation.section.attribute.end.cpp
 punctuation.section.block.begin.bracket.curly.class.cpp

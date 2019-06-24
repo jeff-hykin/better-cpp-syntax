@@ -986,15 +986,17 @@ cpp_grammar = Grammar.new(
     # static assert is special as it can be outside of normal places function calls can be
     cpp_grammar[:static_assert] = PatternRange.new(
         start_pattern: newPattern(
-            match: /static_assert|_Static_assert/,
-            tag_as: "keyword.other.static_assert",
-        ).maybe(@spaces).then(
-            match: /\(/,
-            tag_as: "punctuation.section.arguments.begin.bracket.round",
+            std_space.then(
+                match: variableBounds[/static_assert|_Static_assert/],
+                tag_as: "keyword.other.static_assert",
+            ).then(std_space).then(
+                match: /\(/,
+                tag_as: "punctuation.section.arguments.begin.bracket.round.static_assert",
+            )
         ),
         end_pattern: newPattern(
             match: /\)/,
-            tag_as: "punctuation.section.arguments.end.bracket.round",
+            tag_as: "punctuation.section.arguments.end.bracket.round.static_assert",
         ),
         includes: [
             # special handling for the assert message
@@ -1037,94 +1039,103 @@ cpp_grammar = Grammar.new(
 #
 # Constructors
 #
-    cpp_grammar[:constructor_root] = generateBlockFinder(
-        name:"function.definition.constructor",
-        tag_as:"meta.function.definition.constructor",
-        start_pattern: newPattern(
-            newPattern(
-                inline_scope_resolution[".constructor"]
-            ).then(
-                match: newPattern(
-                    newPattern(
-                        # this is a backReference so that it matches the same name before and after the ::'s
-                        match: /(?<constructor_name>#{variableBounds[identifier]})::(?:\k<constructor_name>)/,
-                        tag_as: "entity.name.function.definition.constructor"
-                    ).then(std_space).lookAheadFor(/\(/)
-                ),
-                includes: [
-                    # the first part
-                    newPattern(
-                        match: identifier.lookAheadFor(/:/),
-                        tag_as: "entity.name.type.constructor",
+    constructor = ->(start_pattern) do
+        generateBlockFinder(
+            name:"function.definition.constructor",
+            tag_as:"meta.function.definition.constructor",
+            start_pattern: start_pattern,
+            head_includes:[
+                :ever_present_context, # comments and macros
+                # initializater context
+                PatternRange.new(
+                    start_pattern: newPattern(
+                        match: /:/,
+                        tag_as: "punctuation.separator.initializers"
                     ),
-                    # the second part
-                    newPattern(
-                        match: lookBehindFor(/:/).then(identifier),
-                        tag_as: "entity.name.function.definition.constructor"
-                    ),
-                    # the scope operator
-                    newPattern(
-                        match: /::/,
-                        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.constructor"
-                    )
-                ]
-            )
-        ),
-        head_includes:[
-            :ever_present_context, # comments and macros
-            # initializater context
-            PatternRange.new(
-                start_pattern: newPattern(
-                    match: /:/,
-                    tag_as: "punctuation.separator.initializers"
-                ),
-                end_pattern: lookAheadFor(/\{/),
-                includes: [
-                    PatternRange.new(
-                        tag_content_as: "meta.parameter.initialization",
-                        start_pattern: newPattern(
-                            newPattern(
-                                match: variableBounds[identifier],
-                                tag_as: "entity.name.function.call.initializer",
-                            ).then(
-                                match: /\(/,
-                                tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
-                            )
+                    end_pattern: lookAheadFor(/\{/),
+                    includes: [
+                        PatternRange.new(
+                            tag_content_as: "meta.parameter.initialization",
+                            start_pattern: newPattern(
+                                newPattern(
+                                    match: variableBounds[identifier],
+                                    tag_as: "entity.name.function.call.initializer",
+                                ).then(
+                                    match: /\(/,
+                                    tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
+                                )
+                            ),
+                            end_pattern: newPattern(
+                                match: /\)/,
+                                tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
+                            ),
+                            includes: [:evaluation_context]
                         ),
-                        end_pattern: newPattern(
-                            match: /\)/,
-                            tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
+                        cpp_grammar[:comma],
+                    ]
+                ),
+                # parameters 
+                PatternRange.new(
+                    tag_content_as: "meta.function.definition.parameters.constructor",
+                    start_pattern: newPattern( 
+                        match: /\(/,
+                        tag_as: "punctuation.section.parameters.begin.bracket.round.constructor"
                         ),
-                        includes: [:evaluation_context]
-                    ),
-                    cpp_grammar[:comma],
-                ]
+                    end_pattern: newPattern( 
+                        match: /\)/,
+                        tag_as: "punctuation.section.parameters.end.bracket.round.constructor"
+                        ),
+                    includes: [
+                        :function_parameter_context,
+                        # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
+                        # e.g. std::string ("hello");
+                        :evaluation_context,
+                    ]
+                ),
+                # initial context is here for things like noexcept()
+                # TODO: fix this pattern an make it more strict
+                :root_context
+            ],
+            needs_semicolon: false,
+            body_includes: [ :function_body_context ],
+        )
+    end
+    cpp_grammar[:constructor_inline] = constructor[
+        # find the begining of the line
+        /^/.then(std_space).then(
+            tag_as: "entity.name.function.constructor entity.name.function.definition.constructor",
+            match: variableBounds[identifier].lookAheadFor(/\(/)
+        )
+    ]
+    cpp_grammar[:constructor_root] = constructor[
+        newPattern(
+            inline_scope_resolution[".constructor"]
+        ).then(
+            match: newPattern(
+                newPattern(
+                    # this is a backReference so that it matches the same name before and after the ::'s
+                    /(?<constructor_name>#{variableBounds[identifier]})::(?:\k<constructor_name>)/,
+                ).then(std_space).lookAheadFor(/\(/)
             ),
-            # parameters 
-            PatternRange.new(
-                tag_content_as: "meta.function.definition.parameters.constructor",
-                start_pattern: newPattern( 
-                    match: /\(/,
-                    tag_as: "punctuation.section.parameters.begin.bracket.round.constructor"
-                    ),
-                end_pattern: newPattern( 
-                    match: /\)/,
-                    tag_as: "punctuation.section.parameters.end.bracket.round.constructor"
-                    ),
-                includes: [
-                    :function_parameter_context,
-                    # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
-                    # e.g. std::string ("hello");
-                    :evaluation_context,
-                ]
-            ),
-            # initial context is here for things like noexcept()
-            # TODO: fix this pattern an make it more strict
-            :root_context
-        ],
-        needs_semicolon: false,
-        body_includes: [ :function_body_context ],
-    )
+            includes: [
+                # the first part
+                newPattern(
+                    match: identifier.lookAheadFor(/:/),
+                    tag_as: "entity.name.type.constructor",
+                ),
+                # the second part
+                newPattern(
+                    match: lookBehindFor(/:/).then(identifier),
+                    tag_as: "entity.name.function.definition.constructor"
+                ),
+                # the scope operator
+                newPattern(
+                    match: /::/,
+                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.constructor"
+                )
+            ]
+        )
+    ]
 #
 # Operators
 #
@@ -1366,7 +1377,8 @@ cpp_grammar = Grammar.new(
     # access to method
     cpp_grammar[:method_access] = method_access = PatternRange.new(
         start_pattern: member_start.then(
-                match: variable_name_without_bounds,
+                # the ~ is for destructors
+                match: maybe(/~/).then(variable_name_without_bounds),
                 tag_as: "entity.name.function.member"
             ).maybe(@spaces).then(
                 match: /\(/,
@@ -1680,7 +1692,7 @@ cpp_grammar = Grammar.new(
                 :inheritance_context,
                 :template_call_range,
             ],
-            body_includes: [ :function_pointer, :constructor_context, :root_context ],
+            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :root_context ],
             tail_includes: tail_includes
         )
     end
@@ -2066,46 +2078,6 @@ cpp_grammar = Grammar.new(
                 }
             ]
         }
-    cpp_grammar[:constructor_context] = [
-            {
-                begin: "(?x)\n(?:^\\s*)  # beginning of line\n((?!while|static_assert|for|do|if|else|switch|catch)[A-Za-z_][A-Za-z0-9_:]*) # actual name\n\\s*(\\()  # opening bracket",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function.constructor"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.parameters.begin.constructor"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.parameters.end.constructor"
-                    }
-                },
-                name: "meta.function.constructor",
-                patterns: [
-                    {
-                        include: "#function_parameter_context"
-                    },
-                ]
-            },
-            {
-                begin: "(?x)\n(:)\n(\n  (?=\n    \\s*[A-Za-z_][A-Za-z0-9_:]* # actual name\n    \\s* (\\() # opening bracket\n  )\n)",
-                beginCaptures: {
-                    "1" => {
-                        name: "punctuation.definition.initializer-list.parameters"
-                    }
-                },
-                end: "(?=\\{)",
-                name: "meta.function.constructor.initializer-list",
-                patterns: [
-                    {
-                        include: "#root_context"
-                    }
-                ]
-            }
-        ]
     cpp_grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",

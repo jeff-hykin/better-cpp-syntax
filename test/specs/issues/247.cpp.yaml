@@ -17,14 +17,16 @@
   scopesBegin:
     - meta.body.struct
   scopes:
-    - entity.name.function.call
+    - keyword.other.static_assert
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.static_assert
 - source: 'true'
   scopes:
     - constant.language.true
 - source: ','
+  scopesBegin:
+    - meta.static_assert.message
   scopes:
     - comma
     - punctuation.separator.delimiter
@@ -38,21 +40,24 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.static_assert.message
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.static_assert
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: static_assert
   scopes:
-    - entity.name.function.call
+    - keyword.other.static_assert
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.static_assert
 - source: bar
 - source: ','
+  scopesBegin:
+    - meta.static_assert.message
   scopes:
     - comma
     - punctuation.separator.delimiter
@@ -66,36 +71,40 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.static_assert.message
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.static_assert
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: foo
   scopesBegin:
-    - meta.function.constructor
+    - meta.function.definition.constructor
+    - meta.head.function.definition.constructor
   scopes:
     - entity.name.function.constructor
+    - entity.name.function.definition.constructor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.constructor
+    - punctuation.section.parameters.begin.bracket.round.constructor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.constructor
-  scopesEnd:
-    - meta.function.constructor
+    - punctuation.section.parameters.end.bracket.round.constructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.constructor
+  scopesEnd:
+    - meta.head.function.definition.constructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.constructor
 - source: int
   scopesBegin:
     - meta.function.definition

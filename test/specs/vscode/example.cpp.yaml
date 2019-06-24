@@ -5410,27 +5410,30 @@
     - punctuation.terminator.statement
 - source: Thing
   scopesBegin:
-    - meta.function.constructor
+    - meta.function.definition.constructor
+    - meta.head.function.definition.constructor
   scopes:
     - entity.name.function.constructor
+    - entity.name.function.definition.constructor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.constructor
+    - punctuation.section.parameters.begin.bracket.round.constructor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.constructor
-  scopesEnd:
-    - meta.function.constructor
+    - punctuation.section.parameters.end.bracket.round.constructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.constructor
+  scopesEnd:
+    - meta.head.function.definition.constructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.constructor
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.class
@@ -5509,27 +5512,30 @@
     - punctuation.terminator.statement
 - source: Thing
   scopesBegin:
-    - meta.function.constructor
+    - meta.function.definition.constructor
+    - meta.head.function.definition.constructor
   scopes:
     - entity.name.function.constructor
+    - entity.name.function.definition.constructor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.constructor
+    - punctuation.section.parameters.begin.bracket.round.constructor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.constructor
-  scopesEnd:
-    - meta.function.constructor
+    - punctuation.section.parameters.end.bracket.round.constructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.constructor
+  scopesEnd:
+    - meta.head.function.definition.constructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.constructor
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct
