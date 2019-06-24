@@ -110,11 +110,11 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: static
-  scopesBegin:
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.static
 - source: const
-  scopesEnd:
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.const
 - source: bool
   scopes:
     - storage.type.primitive
@@ -567,10 +567,11 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.static
 - source: const
-  scopesEnd:
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.const
 - source: bool
   scopes:
     - storage.type.primitive
@@ -631,10 +632,11 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.static
 - source: const
-  scopesEnd:
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.const
 - source: bool
   scopes:
     - storage.type.primitive
@@ -695,10 +697,11 @@
 - source: static
   scopesBegin:
     - meta.body.struct
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.static
 - source: const
-  scopesEnd:
-    - storage.modifier.specifier.$5
+  scopes:
+    - storage.modifier.specifier.const
 - source: bool
   scopes:
     - storage.type.primitive

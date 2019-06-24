@@ -2303,19 +2303,51 @@
       ]
     },
     "static_assert": {
-      "begin": "(static_assert|_Static_assert)\\s*(\\()",
+      "begin": "((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)static_assert|_Static_assert(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
       "beginCaptures": {
         "1": {
-          "name": "keyword.other.static_assert.c"
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
         },
         "2": {
-          "name": "punctuation.section.arguments.begin.bracket.round.c"
+          "name": "comment.block.c punctuation.definition.comment.begin.c"
+        },
+        "3": {
+          "name": "comment.block.c"
+        },
+        "4": {
+          "name": "comment.block.c punctuation.definition.comment.end.c"
+        },
+        "5": {
+          "name": "keyword.other.static_assert.c"
+        },
+        "6": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "7": {
+          "name": "comment.block.c punctuation.definition.comment.begin.c"
+        },
+        "8": {
+          "name": "comment.block.c"
+        },
+        "9": {
+          "name": "comment.block.c punctuation.definition.comment.end.c"
+        },
+        "10": {
+          "name": "punctuation.section.arguments.begin.bracket.round.static_assert.c"
         }
       },
       "end": "(\\))",
       "endCaptures": {
         "1": {
-          "name": "punctuation.section.arguments.end.bracket.round.c"
+          "name": "punctuation.section.arguments.end.bracket.round.static_assert.c"
         }
       },
       "patterns": [

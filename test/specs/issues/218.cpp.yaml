@@ -2,7 +2,7 @@
   scopesBegin:
     - source
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: void
   scopesBegin:
     - meta.function.definition
@@ -601,7 +601,7 @@
     - meta.body.function.definition
 - source: static
   scopes:
-    - storage.modifier.specifier.$5
+    - storage.modifier.specifier.static
 - source: void
   scopesBegin:
     - meta.function.definition

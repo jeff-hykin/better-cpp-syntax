@@ -106,6 +106,7 @@
 - source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - meta.qualified_type
     - entity.name.type
@@ -123,13 +124,13 @@
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
   scopes:
-    - meta.parameter
     - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -157,6 +158,7 @@
 - source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - meta.qualified_type
     - entity.name.type
@@ -177,13 +179,13 @@
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
   scopes:
-    - meta.parameter
     - entity.name.type.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -216,7 +218,7 @@
     - entity.name.type.parameter
 - source: =
   scopes:
-    - keyword.operator.assignment.default
+    - keyword.operator.assignment
 - source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
@@ -253,10 +255,10 @@
     - entity.name.type.parameter
 - source: foo
   scopes:
-    - variable.parameter.defaulted
+    - variable.parameter
 - source: =
   scopes:
-    - keyword.operator.assignment.default
+    - keyword.operator.assignment
 - source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
@@ -288,6 +290,7 @@
 - source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - meta.qualified_type
     - entity.name.type
@@ -305,7 +308,6 @@
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
   scopes:
-    - meta.parameter
     - entity.name.type.parameter
 - source: )
   scopes:
@@ -313,12 +315,10 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: value
-  scopes:
-    - meta.parameter
-    - entity.name.type.parameter
+- source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -346,6 +346,7 @@
 - source: Type
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - meta.qualified_type
     - entity.name.type
@@ -366,7 +367,6 @@
     - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: Type
   scopes:
-    - meta.parameter
     - entity.name.type.parameter
 - source: )
   scopes:
@@ -374,12 +374,10 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-- source: value
-  scopes:
-    - meta.parameter
-    - entity.name.type.parameter
+- source: ' value'
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
