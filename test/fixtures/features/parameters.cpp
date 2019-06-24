@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <vector>
 
 typedef int Type;
 
@@ -8,24 +9,44 @@ Type (*fn_ptr)(const int);
 Type (*fn_ptr2)(const int, std::string);
 
 
-void func2(Type (*)(const int, std::string) = fn_ptr2) {};
-void func1(Type (*name)(const int) = fn_ptr) {};
-void func5(Type (*name)(const int)) {};
-void func6(Type (*)(int, bool)) {};
-void func3(Type name = a) {};
+void func1(Type (*)(const int, std::string) = fn_ptr2) {};
+void func2(Type (*name)(const int) = fn_ptr) {};
+void func3(Type (*name)(const int)) {};
+void func4(Type (*)(int, bool)) {};
+void func5(Type name = a) {};
+void func6(Type = a ) {};
 void func7(Type name) {};
-void func4(Type = a) {};
 void func8(Type) {};
 void func9() {};
-void func10(int const thing) { return; }
-void func11(const int thing) { return; }
+void func11( Type (*)(const int, std::string) = fn_ptr2) {};
+void func12( Type (*name)(const int) = fn_ptr) {};
+void func13( Type (*name)(const int)) {};
+void func14( Type (*)(int, bool)) {};
+void func15( Type name = a) {};
+void func16( Type = a ) {};
+void func17( Type name) {};
+void func18( Type) {};
+void func19() {};
+void func20(int const thing) { return; }
+void func21(const int thing) { return; }
+void func22(decltype(1) thing) { return; }
+
+class GameState {};
+struct Node {};
+enum Thing {};
+class Node *exploreTree(class GameState &game, std::vector<int> &searchList) {}
+class Node *expandNode(struct Node *nodePtr, class GameState &game, std::vector<int> &searchList) {}
+class Node *expandNode(struct Node *nodePtr, enum Thing &game, std::vector<int> &searchList) {}
+
+template<int, typename Callable, typename Ret, typename... Args>
+auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...)) {}
+void failedToLoadCriticalData(const std::string& what, bool throwExcp = false) {}
+void failedToLoadCriticalData(const std::string * what, bool throwExcp = false) {}
 
 int main(int argc, char *argv[1 + 1])
     {
         std::cout << "done\n";
         return 0;
     }
-    
-// TODO: add decltype example
-// TODO: add templated example
-// TODO: add more scope-resolution examples
+
+// TODO: add [[attribute]] examples

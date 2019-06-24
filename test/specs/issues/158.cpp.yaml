@@ -73,10 +73,10 @@
     - storage.type.built-in.primitive
 - source: throwExcp
   scopes:
-    - variable.parameter.defaulted
+    - variable.parameter
 - source: =
   scopes:
-    - keyword.operator.assignment.default
+    - keyword.operator.assignment
 - source: 'false'
   scopes:
     - constant.language.false

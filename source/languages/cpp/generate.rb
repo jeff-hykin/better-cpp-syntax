@@ -57,18 +57,21 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.definition.end.bracket.square"
         ).maybe(@spaces)
     # TODO eventually move this outside of the # Utils section
-    ref_deref_definition_pattern = maybe(
-        should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
-        should_not_fully_match: [ '&*', '&&&' ],
-        match: std_space.then(
-            match: zeroOrMoreOf(/\*/.then(std_space)),
+    ref_deref_pattern = newPattern(
+        newPattern(
+            match: zeroOrMoreOf(/\*/.maybe(std_space.lookAheadFor(/\*|\&/))),
             tag_as: "storage.modifier.pointer"
         ).then(
-            match: /&/.then(std_space),
+            match: /&/.maybe(std_space.lookAheadFor(/\&/)),
             at_least: 0.times,
             at_most: 2.times,
             tag_as: "storage.modifier.reference"
-        ).then(std_space)
+        )
+    )
+    inline_ref_deref_pattern = maybe(
+        should_fully_match: [ '*', '&', '**', '&&', '*&', '*&  ' ],
+        should_not_fully_match: [ '&*', '&&&' ],
+        match: std_space.then(ref_deref_pattern).then(std_space)
     )
     functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
@@ -266,12 +269,8 @@ cpp_grammar = Grammar.new(
             :comma,
         ]
     cpp_grammar[:function_parameter_context] = [
-            :decltype,
-            :function_pointer_parameter,
+            :ever_present_context, # comments and macros 
             :parameter,
-            :over_qualified_types,
-            :attributes_context,
-            :comments_context,
             :comma,
         ]
     cpp_grammar[:template_definition_context] = [
@@ -828,7 +827,7 @@ cpp_grammar = Grammar.new(
                     ]
                 )
             ).then(
-                ref_deref_definition_pattern
+                inline_ref_deref_pattern
             ).maybe(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
@@ -858,7 +857,7 @@ cpp_grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: newPattern(
-            qualified_type.then(ref_deref_definition_pattern).then(
+            qualified_type.then(inline_ref_deref_pattern).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
                 match: variable_name_without_bounds,
@@ -1023,7 +1022,7 @@ cpp_grammar = Grammar.new(
     after_declaration = std_space.lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
-            start_pattern: qualified_type.then(ref_deref_definition_pattern).then(
+            start_pattern: qualified_type.then(inline_ref_deref_pattern).then(
                     match: /\(/,
                     tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
                 ).then(
@@ -1064,59 +1063,35 @@ cpp_grammar = Grammar.new(
     parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
     cpp_grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
-        start_pattern: newPattern(
-            # it will be a type, and a type can be one of serveral things
-            maybe(
-                # it can start with class/struct/enum/union
-                newPattern(
-                    match: @cpp_tokens.that(:isTypeCreator),
-                    tag_as: "storage.type.$match"
-                ).then(std_space)
-            ).then(
-                newPattern(
-                    cpp_grammar[:primitive_types]
-                ).or(
-                    cpp_grammar[:non_primitive_types]
-                ).or(
-                    cpp_grammar[:pthread_types]
-                ).or(
-                    cpp_grammar[:posix_reserved_types]
-                ).or(
-                    declaration_storage_specifiers
-                ).or(
-                    match: one_scope_resolution.without_numbered_capture_groups,
-                    includes: [
-                        newPattern(
-                            match: /::/,
-                            tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.parameter"
-                        ),
-                        newPattern(
-                            match: variableBounds[identifier],
-                            tag_as: "entity.name.scope-resolution.parameter",
-                        )
-                    ]
-                ).or(
-                    # this is to match the ending of a decltype()
-                    lookBehindFor(/\)/)
-                ).or(
-                    match: identifier,
-                    tag_as: "entity.name.type.parameter"
-                )
-            )
-        ),
+        start_pattern: std_space.lookAheadFor(/\w/),
         end_pattern: parameter_ending,
         includes: [
+            :function_pointer_parameter,
+            :decltype,
+            :vararg_ellipses,
             :storage_types,
             :scope_resolution_parameter_inner_generated,
-            :vararg_ellipses,
-            :function_pointer_parameter,
+            # match the class/struct/enum/union keywords
             newPattern(
                 match: @cpp_tokens.that(:isTypeCreator),
                 tag_as: "storage.type.$match"
             ),
+            # This is a range for when there is a variable-default assignment
+            PatternRange.new(
+                start_pattern: lookBehindFor(/=/),
+                end_pattern: parameter_ending,
+                # this is for everything after the =, but before the next parameter
+                includes: [ :evaluation_context ]
+            ),
+            assignment_operator,
             # standard parameter
             newPattern(
-                newPattern(
+                # avoid
+                # 1. \s (otherwise the checks below wont work)
+                # 2. \( the start of the function
+                # 3. , the start of a previous parameter
+                # 4. : then end of a scope resolution::
+                lookBehindToAvoid(/\s|\(|,|:/).then(std_space).then(
                     match: identifier,
                     tag_as: "variable.parameter",
                 ).then(
@@ -1128,6 +1103,7 @@ cpp_grammar = Grammar.new(
                 # 4. = the start of a default-value assignment
                 ).lookAheadFor(/\)|,|\[|=/)
             ),
+            :attributes_context,
             # find the array []'s
             PatternRange.new(
                 tag_as: "meta.bracket.square.array",
@@ -1142,14 +1118,6 @@ cpp_grammar = Grammar.new(
                 ),
                 includes: [ :evaluation_context ]
             ),
-            # This is a range for when there is a variable-default assignment
-            # if there is no assignment, this pattern will still match, it will just end immediately after the parameter
-            PatternRange.new(
-                start_pattern: assignment_operator,
-                end_pattern: parameter_ending,
-                # this is for everything after the =, but before the next parameter
-                includes: [ :evaluation_context ]
-            ),
             # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
             newPattern(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
@@ -1157,7 +1125,8 @@ cpp_grammar = Grammar.new(
             ),
             :template_call_range,
             # tag the reference and dereference operator
-            ref_deref_definition_pattern
+            std_space.then(ref_deref_pattern)
+            # ref_deref_pattern
         ]
     )
 #
@@ -1585,7 +1554,7 @@ cpp_grammar = Grammar.new(
             end_pattern: lookBehindFor(/;/),
             includes: [
                 generateClassOrStructBlockFinder[name, [
-                    ref_deref_definition_pattern.then(
+                    inline_ref_deref_pattern.then(
                         match: variable_name,
                         tag_as: "entity.name.type.alias"
                     ),
@@ -1608,7 +1577,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name,
                 tag_as: "entity.name.type.#{name}",
             ).then(
-                ref_deref_definition_pattern
+                inline_ref_deref_pattern
             ).then(std_space).then(
                 @cpp_tokens.lookAheadToAvoidWordsThat(:isClassInheritenceSpecifier)
             ).then(
@@ -1633,7 +1602,7 @@ cpp_grammar = Grammar.new(
                 match: variable_name,
                 tag_as: "entity.name.type.#{name}.parameter",
             ).then(std_space).then(
-                ref_deref_definition_pattern
+                inline_ref_deref_pattern
             # this is a maybe because its possible to have a type declare without an actual parameter
             ).maybe(
                 match: variable_name,
