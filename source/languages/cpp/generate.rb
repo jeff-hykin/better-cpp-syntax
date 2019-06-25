@@ -130,6 +130,7 @@ cpp_grammar = Grammar.new(
                 PatternRange.new(
                     tag_as: "meta.head."+name,
                     start_pattern: /\G ?/,
+                    zeroLengthStart?: true,
                     end_pattern: newPattern(
                         match: @open_curly_brace.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
@@ -319,6 +320,7 @@ cpp_grammar = Grammar.new(
         PatternRange.new(
             # the first position
             start_pattern: lookAheadFor(/^/),
+            zeroLengthStart?: true,
             # ensure end never matches
             # why? because textmate will keep looking until it hits the end of the file (which is the purpose of this wrapper)
             # how? because the regex is trying to find "not" and then checks to see if "not" == "possible" (which can never happen)
