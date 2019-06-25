@@ -215,6 +215,7 @@ cpp_grammar = Grammar.new(
             # statements
             :static_assert,                 # it is unclear to me if static_assert can appear in the root context or not, so I'm leaving it here to be safe. https://en.cppreference.com/w/cpp/language/static_assert
             :assembly,                      # it is unclear to me is assembly can be in the root context or not, so I'm leaving it here to be safe
+            :function_pointer,
             
             # eventually this needs to be removed
             :evaluation_context

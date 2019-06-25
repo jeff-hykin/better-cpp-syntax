@@ -85,56 +85,62 @@
     - punctuation.terminator.statement
 - source: Type
   scopes:
-    - entity.name.function.call
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator
+    - punctuation.definition.function.pointer.dereference
 - source: fn_ptr
+  scopes:
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Type
   scopes:
-    - entity.name.function.call
+    - meta.qualified_type
+    - entity.name.type
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parens.begin.bracket.round.function.pointer
 - source: '*'
   scopes:
-    - keyword.operator
+    - punctuation.definition.function.pointer.dereference
 - source: fn_ptr2
+  scopes:
+    - variable.other.definition.pointer.function
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parens.end.bracket.round.function.pointer
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
 - source: const
+  scopesBegin:
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: int
@@ -147,17 +153,19 @@
     - punctuation.separator.delimiter
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.parameter
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.parameter
 - source: string
+  scopes:
+    - entity.name.type.parameter
+  scopesEnd:
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ;
   scopes:
     - punctuation.terminator.statement

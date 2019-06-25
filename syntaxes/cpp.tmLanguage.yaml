@@ -186,6 +186,7 @@
     - include: "#block"
     - include: "#static_assert"
     - include: "#assembly"
+    - include: "#function_pointer"
     - include: "#evaluation_context"
   function_body_context:
     patterns:
@@ -209,6 +210,7 @@
     - include: "#block"
     - include: "#static_assert"
     - include: "#assembly"
+    - include: "#function_pointer"
     - include: "#switch_statement"
     - include: "#evaluation_context"
   evaluation_context:
