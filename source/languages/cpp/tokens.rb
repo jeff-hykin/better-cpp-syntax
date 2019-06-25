@@ -82,6 +82,7 @@ tokens = [
     { representation: "alignas"              , name: "alignas"                        , isOperator: true,                                                                                                           isFunctionLike:  true },
     { representation: "typeid"               , name: "typeid"                         , isOperator: true,                                                                                                           isFunctionLike:  true },
     { representation: "noexcept"             , name: "noexcept"                       , isOperator: true },
+    { representation: "noexcept"             , name: "noexcept"         , isOperator: true,  isFunctionLike: true },
     { representation: "static_cast"          , name: "static_cast"                    , isOperator: true , isTypeCastingOperator: true},
     { representation: "dynamic_cast"         , name: "dynamic_cast"                   , isOperator: true , isTypeCastingOperator: true},
     { representation: "const_cast"           , name: "const_cast"                     , isOperator: true , isTypeCastingOperator: true},
