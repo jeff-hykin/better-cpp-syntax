@@ -882,6 +882,10 @@ cpp_grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
+    optional_calling_convention = std_space.maybe(
+            match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
+            tag_as: "storage.type.modifier.calling-convention"
+        ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
 
@@ -889,7 +893,7 @@ cpp_grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: newPattern(
-            qualified_type.then(inline_ref_deref_pattern).then(
+            qualified_type.then(inline_ref_deref_pattern).then(optional_calling_convention).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
                 match: variable_name_without_bounds,
@@ -929,7 +933,7 @@ cpp_grammar = Grammar.new(
         tag_as:"meta.function.definition.special.operator-overload",
         start_pattern: newPattern(
             # find the return type (if there is one)
-            maybe(qualified_type.then(inline_ref_deref_pattern)).then(
+            maybe(qualified_type.then(inline_ref_deref_pattern)).then(optional_calling_convention).then(
                 std_space
             ).then(
                 inline_scope_resolution[".operator"]
@@ -1152,13 +1156,13 @@ cpp_grammar = Grammar.new(
                 match: @cpp_tokens.that(:isFunctionSpecifier),
                 tag_as: "storage.type.modifier.specifier"
             ).then(std_space)
-        ).then(
+        ).then(optional_calling_convention).then(
             tag_as: "entity.name.function.constructor entity.name.function.definition.special.constructor",
             match: variableBounds[identifier].lookAheadFor(/\(/)
         )
     ]
     cpp_grammar[:constructor_root] = constructor[
-        newPattern(
+        newPattern(optional_calling_convention).then(
             inline_scope_resolution[".constructor"]
         ).then(
             match: newPattern(
@@ -1224,7 +1228,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:destructor_inline] = destructor[
         newPattern(
             # find the begining of the line
-            /^/.then(std_space).zeroOrMoreOf(
+            /^/.then(std_space).then(optional_calling_convention).zeroOrMoreOf(
                 newPattern(
                     match: @cpp_tokens.that(:isFunctionSpecifier),
                     tag_as: "storage.type.modifier.specifier"
@@ -1236,7 +1240,7 @@ cpp_grammar = Grammar.new(
         )
     ]
     cpp_grammar[:destructor_root] = destructor[
-        newPattern(
+        newPattern(optional_calling_convention).then(
             inline_scope_resolution[".destructor"]
         ).then(
             match: newPattern(

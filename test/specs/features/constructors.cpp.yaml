@@ -115,33 +115,34 @@
 - source: virtual
   scopesBegin:
     - meta.body.struct
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
   scopes:
     - storage.type.modifier.specifier
 - source: ~Thing3
   scopes:
     - entity.name.function.destructor
-    - entity.name.function.definition.special.destructor
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.destructor
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.destructor
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.special.destructor
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
-    - meta.head.function.definition.special.destructor
+    - meta.head.function.definition.special.member.destructor
 - source: '}'
   scopes:
-    - meta.body.function.definition.special.destructor
+    - meta.body.function.definition.special.member.destructor
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.special.destructor
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
-    - meta.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct
@@ -185,20 +186,21 @@
     - punctuation.terminator.statement
 - source: ~Thing4
   scopesBegin:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
   scopes:
     - entity.name.function.destructor
-    - entity.name.function.definition.special.destructor
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.destructor
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.destructor
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
   scopesEnd:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -214,7 +216,7 @@
     - meta.block.struct
 - source: Thing4
   scopesBegin:
-    - meta.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
   scopes:
     - entity.name.type.destructor
 - source: '::'
@@ -223,28 +225,29 @@
     - punctuation.separator.scope-resolution.destructor
 - source: ~Thing4
   scopes:
-    - entity.name.function.definition.special.destructor
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopesBegin:
-    - meta.head.function.definition.special.destructor
+    - meta.head.function.definition.special.member.destructor
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.destructor
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.destructor
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: '{'
   scopes:
     - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.special.destructor
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
-    - meta.head.function.definition.special.destructor
+    - meta.head.function.definition.special.member.destructor
 - source: '}'
   scopes:
-    - meta.body.function.definition.special.destructor
+    - meta.body.function.definition.special.member.destructor
     - >-
-      punctuation.section.block.end.bracket.curly.function.definition.special.destructor
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
-    - meta.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
 - source: Thing4
   scopesBegin:
     - meta.function.definition.special.constructor
@@ -320,17 +323,18 @@
     - punctuation.terminator.statement
 - source: ~Thing5
   scopesBegin:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
   scopes:
     - entity.name.function.destructor
-    - entity.name.function.definition.special.destructor
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.destructor
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.destructor
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -338,8 +342,8 @@
   scopes:
     - keyword.other.default.constructor
   scopesEnd:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -392,17 +396,18 @@
     - punctuation.terminator.statement
 - source: ~Thing6
   scopesBegin:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
   scopes:
     - entity.name.function.destructor
-    - entity.name.function.definition.special.destructor
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.destructor
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.destructor
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -410,8 +415,8 @@
   scopes:
     - keyword.other.delete.constructor
   scopesEnd:
-    - meta.function.definition.special.destructor
-    - meta.head.function.definition.special.destructor
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -1,18 +1,17 @@
 - source: void
   scopesBegin:
     - source
+    - meta.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: __cdecl
   scopesBegin:
-    - meta.function.definition
-  scopes:
-    - meta.qualified_type
-    - entity.name.type
-- source: __debugbreak
-  scopesBegin:
     - meta.head.function.definition
+  scopes:
+    - storage.type.modifier.calling-convention
+- source: __debugbreak
   scopes:
     - entity.name.function.definition
 - source: (
