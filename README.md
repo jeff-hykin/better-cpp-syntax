@@ -39,7 +39,7 @@ It fixes:
 
 It adds:
 - Parameter highlighting
-- Highlighting of embedded assembly code
+- Highlighting of embedded assembly code (if you have an assembly syntax installed)
 - Lambda highlighting
 - C++14 literal support (`100'000ms`)
 - Template definition syntax highlighting (including C++ 2020 syntax)
