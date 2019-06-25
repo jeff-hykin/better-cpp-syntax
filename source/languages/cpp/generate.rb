@@ -1194,21 +1194,21 @@ cpp_grammar = Grammar.new(
     # see https://en.cppreference.com/w/cpp/language/destructor
     destructor = ->(start_pattern) do
         generateBlockFinder(
-            name:"function.definition.special.destructor",
-            tag_as:"meta.function.definition.special.destructor",
+            name:"function.definition.special.member.destructor",
+            tag_as:"meta.function.definition.special.member.destructor",
             start_pattern: start_pattern,
             head_includes:[
                 :ever_present_context, # comments and macros
                 deleted_and_default_constructor,
                 PatternRange.new(
-                    tag_content_as: "meta.function.definition.parameters.special.destructor",
+                    tag_content_as: "meta.function.definition.parameters.special.member.destructor",
                     start_pattern: newPattern( 
                         match: /\(/,
-                        tag_as: "punctuation.section.parameters.begin.bracket.round.special.destructor"
+                        tag_as: "punctuation.section.parameters.begin.bracket.round.special.member.destructor"
                         ),
                     end_pattern: newPattern( 
                         match: /\)/,
-                        tag_as: "punctuation.section.parameters.end.bracket.round.special.destructor"
+                        tag_as: "punctuation.section.parameters.end.bracket.round.special.member.destructor"
                         ),
                     # destructors cant have arguments
                     includes: []
@@ -1230,7 +1230,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "storage.type.modifier.specifier"
                 ).then(std_space)
             ).then(
-                tag_as: "entity.name.function.destructor entity.name.function.definition.special.destructor",
+                tag_as: "entity.name.function.destructor entity.name.function.definition.special.member.destructor",
                 match: /~/.then(variableBounds[identifier].lookAheadFor(/\(/))
             )
         )
@@ -1259,7 +1259,7 @@ cpp_grammar = Grammar.new(
                 # the second part
                 newPattern(
                     match: lookBehindFor(/:/).then(/~/).then(identifier),
-                    tag_as: "entity.name.function.definition.special.destructor"
+                    tag_as: "entity.name.function.definition.special.member.destructor"
                 ),
                 # the scope operator
                 newPattern(

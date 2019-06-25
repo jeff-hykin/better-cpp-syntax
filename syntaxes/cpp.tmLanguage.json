@@ -4863,11 +4863,11 @@
       ]
     },
     "destructor_inline": {
-      "name": "meta.function.definition.special.destructor.cpp",
+      "name": "meta.function.definition.special.member.destructor.cpp",
       "begin": "(^((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:inline|constexpr|mutable|friend|explicit|virtual))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(~(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)(?=\\()))",
       "beginCaptures": {
         "1": {
-          "name": "meta.head.function.definition.special.destructor.cpp"
+          "name": "meta.head.function.definition.special.member.destructor.cpp"
         },
         "2": {
           "patterns": [
@@ -4905,18 +4905,18 @@
           "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
         },
         "11": {
-          "name": "entity.name.function.destructor.cpp entity.name.function.definition.special.destructor.cpp"
+          "name": "entity.name.function.destructor.cpp entity.name.function.definition.special.member.destructor.cpp"
         }
       },
       "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
       "patterns": [
         {
-          "name": "meta.head.function.definition.special.destructor.cpp",
+          "name": "meta.head.function.definition.special.member.destructor.cpp",
           "begin": "\\G ?",
           "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.function.definition.special.destructor.cpp"
+              "name": "punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor.cpp"
             }
           },
           "patterns": [
@@ -4958,17 +4958,17 @@
               ]
             },
             {
-              "contentName": "meta.function.definition.parameters.special.destructor.cpp",
+              "contentName": "meta.function.definition.parameters.special.member.destructor.cpp",
               "begin": "(\\()",
               "beginCaptures": {
                 "1": {
-                  "name": "punctuation.section.parameters.begin.bracket.round.special.destructor.cpp"
+                  "name": "punctuation.section.parameters.begin.bracket.round.special.member.destructor.cpp"
                 }
               },
               "end": "(\\))",
               "endCaptures": {
                 "1": {
-                  "name": "punctuation.section.parameters.end.bracket.round.special.destructor.cpp"
+                  "name": "punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp"
                 }
               }
             },
@@ -4978,12 +4978,12 @@
           ]
         },
         {
-          "name": "meta.body.function.definition.special.destructor.cpp",
+          "name": "meta.body.function.definition.special.member.destructor.cpp",
           "begin": "(?<=\\{|<%|\\?\\?<)",
           "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.end.bracket.curly.function.definition.special.destructor.cpp"
+              "name": "punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor.cpp"
             }
           },
           "patterns": [
@@ -4993,7 +4993,7 @@
           ]
         },
         {
-          "name": "meta.tail.function.definition.special.destructor.cpp",
+          "name": "meta.tail.function.definition.special.member.destructor.cpp",
           "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
@@ -5005,11 +5005,11 @@
       ]
     },
     "destructor_root": {
-      "name": "meta.function.definition.special.destructor.cpp",
+      "name": "meta.function.definition.special.member.destructor.cpp",
       "begin": "(((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*)(((?>(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))::((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))~\\4((?:(?:(?>\\s+)|(\\/\\*)(.+?)(\\*\\/))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\()))",
       "beginCaptures": {
         "1": {
-          "name": "meta.head.function.definition.special.destructor.cpp"
+          "name": "meta.head.function.definition.special.member.destructor.cpp"
         },
         "2": {
           "patterns": [
@@ -5034,7 +5034,7 @@
             },
             {
               "match": "(?<=:)~(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*",
-              "name": "entity.name.function.definition.special.destructor.cpp"
+              "name": "entity.name.function.definition.special.member.destructor.cpp"
             },
             {
               "match": "::",
@@ -5094,12 +5094,12 @@
       "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
       "patterns": [
         {
-          "name": "meta.head.function.definition.special.destructor.cpp",
+          "name": "meta.head.function.definition.special.member.destructor.cpp",
           "begin": "\\G ?",
           "end": "((?:\\{|<%|\\?\\?<|(?=;)))",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.begin.bracket.curly.function.definition.special.destructor.cpp"
+              "name": "punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor.cpp"
             }
           },
           "patterns": [
@@ -5141,17 +5141,17 @@
               ]
             },
             {
-              "contentName": "meta.function.definition.parameters.special.destructor.cpp",
+              "contentName": "meta.function.definition.parameters.special.member.destructor.cpp",
               "begin": "(\\()",
               "beginCaptures": {
                 "1": {
-                  "name": "punctuation.section.parameters.begin.bracket.round.special.destructor.cpp"
+                  "name": "punctuation.section.parameters.begin.bracket.round.special.member.destructor.cpp"
                 }
               },
               "end": "(\\))",
               "endCaptures": {
                 "1": {
-                  "name": "punctuation.section.parameters.end.bracket.round.special.destructor.cpp"
+                  "name": "punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp"
                 }
               }
             },
@@ -5161,12 +5161,12 @@
           ]
         },
         {
-          "name": "meta.body.function.definition.special.destructor.cpp",
+          "name": "meta.body.function.definition.special.member.destructor.cpp",
           "begin": "(?<=\\{|<%|\\?\\?<)",
           "end": "(\\}|%>|\\?\\?>)",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.block.end.bracket.curly.function.definition.special.destructor.cpp"
+              "name": "punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor.cpp"
             }
           },
           "patterns": [
@@ -5176,7 +5176,7 @@
           ]
         },
         {
-          "name": "meta.tail.function.definition.special.destructor.cpp",
+          "name": "meta.tail.function.definition.special.member.destructor.cpp",
           "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
