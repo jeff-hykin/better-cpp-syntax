@@ -11,13 +11,14 @@ def inline_comment()
                 dont_back_track?: true,
                 match: newPattern(
                     newPattern(
+                        /[^\*]/
+                    ).or(
                         oneOrMoreOf(
                             match: /\*/,
                             dont_back_track?: true,
                         # any character that is not a /
                         ).then(/[^\/]/)
-                    # any character that is not a *
-                    ).or(/[^\*]/)
+                    )
                 ),
             ).then(
                 should_fully_match: [ "*/", "*******/" ],

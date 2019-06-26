@@ -35,6 +35,7 @@ cpp_grammar = Grammar.new(
     $grammar = cpp_grammar
     cpp_grammar[:inline_comment] = inline_comment
     def std_space() generateStdSpace($grammar[:inline_comment]) end
+    leading_space = /\s*+/
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -181,7 +182,7 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
             # comments 
-            :comments_context,
+            :comments,
             :line_continuation_character,
         ]
     cpp_grammar[:root_context] = [
@@ -329,7 +330,36 @@ cpp_grammar = Grammar.new(
             includes: [:root_context],
         ),
     ]
-
+# 
+# Comments
+# 
+    cpp_grammar[:block_comment] = PatternRange.new(
+        tag_as: "comment.block",
+        start_pattern: newPattern(
+            /\s*+/.then(
+                match: /\/\*/,
+                tag_as: "punctuation.definition.comment.begin"
+            )
+        ),
+        end_pattern: newPattern(
+            match: /\*\//,
+            tag_as: "punctuation.definition.comment.end"
+        )
+    )
+    cpp_grammar[:line_comment] =  PatternRange.new(
+        tag_as: "comment.line.double-slash",
+        start_pattern: /\s*+/.then(
+            match: /\/\//,
+            tag_as: "punctuation.definition.comment"
+        ),
+        # a newline that doesnt have a line continuation
+        end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
+        includes: [ :line_continuation_character ]
+    )
+    cpp_grammar[:comments] = [
+        :block_comment,
+        :line_comment
+    ]
 #
 #
 # Numbers
@@ -815,7 +845,7 @@ cpp_grammar = Grammar.new(
         should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: std_space.maybe(
+        match: leading_space.maybe(
                 inline_attribute
             ).then(std_space).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
@@ -885,7 +915,7 @@ cpp_grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
-    optional_calling_convention = std_space.maybe(
+    optional_calling_convention = leading_space.maybe(
             match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
@@ -895,7 +925,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
-        start_pattern: newPattern(
+        start_pattern: leading_space.then(
             qualified_type.then(inline_ref_deref_pattern).then(optional_calling_convention).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
@@ -1165,7 +1195,7 @@ cpp_grammar = Grammar.new(
         )
     ]
     cpp_grammar[:constructor_root] = constructor[
-        newPattern(optional_calling_convention).then(
+        leading_space.then(optional_calling_convention).then(
             inline_scope_resolution[".constructor"]
         ).then(
             match: newPattern(
@@ -1243,7 +1273,7 @@ cpp_grammar = Grammar.new(
         )
     ]
     cpp_grammar[:destructor_root] = destructor[
-        newPattern(optional_calling_convention).then(
+        optional_calling_convention.then(
             inline_scope_resolution[".destructor"]
         ).then(
             match: newPattern(
@@ -1779,7 +1809,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :root_context ],
-            body_includes: [ :enumerator_list, :comments_context, :comma, :semicolon ],
+            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -2104,7 +2134,7 @@ cpp_grammar = Grammar.new(
                             include: "#line_continuation_character"
                         },
                         {
-                            include: "#comments_context"
+                            include: "#comments"
                         }
                     ]
                 }
@@ -2327,69 +2357,6 @@ cpp_grammar = Grammar.new(
         ),
         includes: [:function_body_context]
     )
-    cpp_grammar[:comments_context] = {
-        patterns: [
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.block"
-                    }
-                },
-                match: "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
-                name: "comment.block"
-            },
-            {
-                begin: "/\\*",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.begin"
-                    }
-                },
-                end: "\\*/",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.end"
-                    }
-                },
-                name: "comment.block"
-            },
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.line"
-                    }
-                },
-                match: "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-                name: "comment.line.banner"
-            },
-            {
-                begin: "(^[ \\t]+)?(?=//)",
-                beginCaptures: {
-                    "1" => {
-                        name: "punctuation.whitespace.comment.leading"
-                    }
-                },
-                end: "(?!\\G)",
-                patterns: [
-                    {
-                        begin: "//",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.definition.comment"
-                            }
-                        },
-                        end: "(?=\\n)",
-                        name: "comment.line.double-slash",
-                        patterns: [
-                            {
-                                include: "#line_continuation_character"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-        }
     cpp_grammar[:disabled] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
@@ -2676,7 +2643,7 @@ cpp_grammar = Grammar.new(
                 match: "\\bdefined\\b",
                 name: "invalid.illegal.macro-name"
             },
-            :comments_context,
+            :comments,
             :string_context_c,
             :number_literal,
             {
@@ -2762,7 +2729,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     include: "#preprocessor_rule_enabled_elif"
@@ -2855,7 +2822,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     include: "#preprocessor_rule_enabled_elif_block"
@@ -2937,7 +2904,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -2994,7 +2961,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     begin: "^\\s*((#)\\s*else\\b)",
@@ -3092,7 +3059,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     begin: "^\\s*((#)\\s*else\\b)",
@@ -3180,7 +3147,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3267,7 +3234,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3517,7 +3484,7 @@ cpp_grammar = Grammar.new(
             ]
         }
     cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
-            :comments_context,
+            :comments,
             :storage_types,
             :vararg_ellipses,
             :method_access,
