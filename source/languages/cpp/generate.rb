@@ -224,6 +224,9 @@ cpp_grammar = Grammar.new(
         ]
     cpp_grammar[:function_body_context] = cpp_grammar[:root_context].without(
             # function bodies cant contain any of theses:
+            :constructor_root,
+            :destructor_root,
+            :operator_overload,
             :namespace_block,
             :extern_block,
             :function_definition,

@@ -242,8 +242,6 @@
   function_body_context:
     patterns:
     - include: "#ever_present_context"
-    - include: "#constructor_root"
-    - include: "#destructor_root"
     - include: "#using_namespace"
     - include: "#type_alias"
     - include: "#using_name"
