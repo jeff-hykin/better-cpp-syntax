@@ -5333,39 +5333,47 @@
     - include: "#function_body_context"
   comments_context:
     patterns:
-    - captures:
+    - match: "^\\s*((\\/\\/)\\s*((?>[#;\\/=*C~]+)(?![#;\\/=*C~]))\\s*.+\\s*\\3\\s*(?:\\n|$))"
+      captures:
         '1':
-          name: meta.toc-list.banner.block.cpp
-      match: "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?"
-      name: comment.block.cpp
-    - begin: "/\\*"
-      beginCaptures:
-        '0':
-          name: punctuation.definition.comment.begin.cpp
-      end: "\\*/"
-      endCaptures:
-        '0':
-          name: punctuation.definition.comment.end.cpp
-      name: comment.block.cpp
-    - captures:
+          name: comment.line.double-slash.cpp
+        '2':
+          name: punctuation.definition.comment.cpp
+        '3':
+          name: meta.banner.character.cpp
+      name: meta.toc-list.banner.double-slash.cpp
+    - match: "^\\s*((\\/\\*)\\s*?((?>[#;\\/=*C~]+)(?![#;\\/=*C~]))\\s*.+\\s*\\3\\s*\\*\\/)"
+      captures:
         '1':
-          name: meta.toc-list.banner.line.cpp
-      match: "^// =(\\s*.*?)\\s*=\\s*$\\n?"
-      name: comment.line.banner.cpp
-    - begin: "(^[ \\t]+)?(?=//)"
+          name: comment.line.block.cpp
+        '2':
+          name: punctuation.definition.comment.cpp
+        '3':
+          name: meta.banner.character.cpp
+      name: meta.toc-list.banner.block.cpp
+    - contentName: comment.line.double-slash.cpp
+      begin: "((?>\\s+)?)(?<![\\\\])(\\/\\/)"
       beginCaptures:
         '1':
           name: punctuation.whitespace.comment.leading.cpp
-      end: "(?!\\G)"
+        '2':
+          name: comment.line.double-slash.cpp punctuation.definition.comment.cpp
+      end: "(?<![\\\\])\\n"
       patterns:
-      - begin: "//"
-        beginCaptures:
-          '0':
-            name: punctuation.definition.comment.cpp
-        end: "(?=\\n)"
-        name: comment.line.double-slash.cpp
-        patterns:
-        - include: "#line_continuation_character"
+      - include: "#line_continuation_characterm"
+    - contentName: comment.block.cpp
+      begin: "(((?>\\s+)?)(?<![\\\\])(\\/\\*))"
+      beginCaptures:
+        '2':
+          name: punctuation.whitespace.comment.leading.cpp
+        '3':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      end: "(?<![\\\\])(\\*\\/)"
+      endCaptures:
+        '1':
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+      patterns:
+      - include: "#line_continuation_character"
   disabled:
     begin: "^\\s*#\\s*if(n?def)?\\b.*$"
     end: "^\\s*#\\s*endif\\b"

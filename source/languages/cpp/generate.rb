@@ -2327,69 +2327,104 @@ cpp_grammar = Grammar.new(
         ),
         includes: [:function_body_context]
     )
-    cpp_grammar[:comments_context] = {
-        patterns: [
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.block"
-                    }
-                },
-                match: "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
-                name: "comment.block"
-            },
-            {
-                begin: "/\\*",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.begin"
-                    }
-                },
-                end: "\\*/",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.end"
-                    }
-                },
-                name: "comment.block"
-            },
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.line"
-                    }
-                },
-                match: "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-                name: "comment.line.banner"
-            },
-            {
-                begin: "(^[ \\t]+)?(?=//)",
-                beginCaptures: {
-                    "1" => {
-                        name: "punctuation.whitespace.comment.leading"
-                    }
-                },
-                end: "(?!\\G)",
-                patterns: [
-                    {
-                        begin: "//",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.definition.comment"
-                            }
-                        },
-                        end: "(?=\\n)",
-                        name: "comment.line.double-slash",
-                        patterns: [
-                            {
-                                include: "#line_continuation_character"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-        }
+    cpp_grammar[:comments_context] = [
+        #
+        # file banner
+        # this matches emacs style file banners ex: /* = foo.c = */
+        # a file banner is a <comment start> <some spaces> <banner start> <some spaces>
+        # <comment contents> <banner end> <some spaces> <comment end>
+        # single line
+        newPattern(
+            should_fully_match: ["// ### test.c ###", "//=test.c - test util ="],
+            should_not_partial_match: ["// ### test.c #=#", "//=test.c - test util ~~~"],
+            match: /^/.maybe(@spaces).then(
+                match: newPattern(
+                    match: /\/\//,
+                    tag_as: "punctuation.definition.comment"
+                ).maybe(
+                    match: @spaces,
+                ).then(
+                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+                    tag_as: "meta.banner.character",
+                    reference: "banner_part"
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                .maybe(@spaces).then(/(?:\n|$)/),
+                tag_as: "comment.line.double-slash",
+            ),
+            # tag is a legacy name
+            tag_as: "meta.toc-list.banner.double-slash",
+        ),
+        # multi line comment
+        newPattern(
+            should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
+            should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
+            match: /^/.maybe(@spaces).then(
+                match: newPattern(
+                    match: /\/\*/,
+                    tag_as: "punctuation.definition.comment"
+                ).maybe(
+                    match: @spaces,
+                    quantity_preference: :as_few_as_possible
+                ).then(
+                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+                    tag_as: "meta.banner.character",
+                    reference: "banner_part"
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                .maybe(@spaces).then(/\*\//),
+                tag_as: "comment.line.block",
+            ),
+            # tag is a legacy name
+            tag_as: "meta.toc-list.banner.block",
+        ),
+        #
+        # single line comment
+        #
+        PatternRange.new(
+            start_pattern: maybe(
+                # consumes extra space character
+                match: newPattern(
+                    match: @spaces,
+                    dont_back_track?: true
+                ),
+                tag_as: "punctuation.whitespace.comment.leading"
+            ).lookBehindToAvoid(/[\\]/).then(
+                match: /\/\//,
+                tag_as: "comment.line.double-slash punctuation.definition.comment"
+            ),
+            end_pattern: lookBehindToAvoid(/[\\]/).then(/\n/),
+            tag_content_as: "comment.line.double-slash",
+            includes: [
+               :line_continuation_characterm
+            ]
+        ),
+        #
+        # multi line comment
+        #
+        PatternRange.new(
+            start_pattern: newPattern(
+                should_fully_match: ["    /*", "/*"],
+                should_partial_match: ["/***/"],
+                match: maybe(
+                    # consumes extra space character
+                    match: newPattern(
+                        match: @spaces,
+                        dont_back_track?: true
+                    ),
+                    tag_as: "punctuation.whitespace.comment.leading"
+                ).lookBehindToAvoid(/[\\]/).then(
+                    match: /\/\*/,
+                    tag_as: "comment.block punctuation.definition.comment.begin"
+                )),
+            end_pattern: lookBehindToAvoid(/[\\]/).then(
+                match: /\*\//,
+                tag_as: "comment.block punctuation.definition.comment.end"
+            ),
+            tag_content_as: "comment.block",
+            includes: [
+               :line_continuation_character
+            ]
+        ),
+    ]
     cpp_grammar[:disabled] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
