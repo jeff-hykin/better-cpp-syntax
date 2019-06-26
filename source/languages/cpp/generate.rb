@@ -292,6 +292,7 @@ cpp_grammar = Grammar.new(
             :evaluation_context
         ]
     cpp_grammar[:template_call_context] = [
+            :template_call_range,
             :storage_types,
             :language_constants,
             :scope_resolution_template_call_inner_generated,
@@ -299,7 +300,8 @@ cpp_grammar = Grammar.new(
             :operators,
             :number_literal,
             :string_context,
-            :comma_in_template_argument
+            :comma_in_template_argument,
+            :qualified_type,
         ]
     cpp_grammar[:attributes_context] = [
             :cpp_attributes,

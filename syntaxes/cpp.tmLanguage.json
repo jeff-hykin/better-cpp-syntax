@@ -660,6 +660,9 @@
     "template_call_context": {
       "patterns": [
         {
+          "include": "#template_call_range"
+        },
+        {
           "include": "#storage_types"
         },
         {
@@ -682,6 +685,9 @@
         },
         {
           "include": "#comma_in_template_argument"
+        },
+        {
+          "include": "#qualified_type"
         }
       ]
     },

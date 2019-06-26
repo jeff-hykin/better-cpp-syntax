@@ -306,6 +306,7 @@
     - include: "#evaluation_context"
   template_call_context:
     patterns:
+    - include: "#template_call_range"
     - include: "#storage_types"
     - include: "#language_constants"
     - include: "#scope_resolution_template_call_inner_generated"
@@ -314,6 +315,7 @@
     - include: "#number_literal"
     - include: "#string_context"
     - include: "#comma_in_template_argument"
+    - include: "#qualified_type"
   attributes_context:
     patterns:
     - include: "#cpp_attributes"

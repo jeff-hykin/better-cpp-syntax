@@ -22,14 +22,16 @@
     - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
     - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
@@ -382,14 +384,16 @@
     - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
     - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
