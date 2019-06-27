@@ -240,8 +240,10 @@ cpp_grammar = Grammar.new(
             # TODO: fill out all of the statements here, variable declares, assignment, etc
             # control flow
             :switch_statement, # needs to be above the "switch" keyword (which will eventually be removed)
+            :goto_statement,
             # eventually, probably, the evaluation_context should be removed from here
-            :evaluation_context
+            :evaluation_context,
+            :label
         ]
     cpp_grammar[:evaluation_context] = [
             :ever_present_context,
@@ -563,6 +565,26 @@ cpp_grammar = Grammar.new(
 #
 # Control flow
 #
+    cpp_grammar[:goto_statement] = newPattern(
+        newPattern(
+            match: variableBounds[/goto/],
+            tag_as: "keyword.control.goto",
+        ).then(std_space).then(
+            match: identifier,
+            tag_as: "entity.name.label.call"
+        )
+    )
+    cpp_grammar[:label] = newPattern(
+            std_space.then(
+                tag_as: "entity.name.label",
+                match: variableBounds[identifier],
+            ).then(@word_boundary).lookBehindToAvoid(/case|default/).then(
+                std_space
+            ).then(
+                match: /:/,
+                tag_as: "punctuation.separator.label",
+            )
+        )
     cpp_grammar[:default_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
             start_pattern: newPattern(
