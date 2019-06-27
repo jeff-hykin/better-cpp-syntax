@@ -17297,7 +17297,9 @@
 - source: goto
   scopes:
     - keyword.control.goto
-- source: ' SKIP_CHAR'
+- source: SKIP_CHAR
+  scopes:
+    - entity.name.label.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17986,7 +17988,12 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '                            SKIP_CHAR:'
+- source: SKIP_CHAR
+  scopes:
+    - entity.name.label
+- source: ':'
+  scopes:
+    - punctuation.separator.label
 - source: '                            previous_char_as_string '
 - source: =
   scopes:
