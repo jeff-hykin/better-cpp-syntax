@@ -35,6 +35,7 @@ collectRecords()
 async function collectRecords() {
     global[performanceForEachFixture] = {}
     for (const eachFile of files) {
+        console.log(eachFile)
         global[currentActiveFixture] = eachFile
         const fixture = fs
             .readFileSync(eachFile)
@@ -42,5 +43,6 @@ async function collectRecords() {
             .split("\n")
         await getTokens(registry, eachFile, fixture, false, () => true)
     }
+    console.log();
     recorder.reportAllRecorders()
 }
