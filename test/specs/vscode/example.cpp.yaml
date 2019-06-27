@@ -2060,11 +2060,12 @@
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
 - source: long
-  scopesBegin:
+  scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopesEnd:
+  scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
@@ -2175,7 +2176,8 @@
     - punctuation.separator.template.argument
 - source: ANY_INPUT_TYPE
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -3867,11 +3869,12 @@
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
 - source: long
-  scopesBegin:
+  scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopesEnd:
+  scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
@@ -4692,7 +4695,7 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.struct
-- source: '    } '
+- source: '    }'
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -5988,14 +5991,16 @@
     - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
     - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma

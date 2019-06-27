@@ -35,6 +35,7 @@ cpp_grammar = Grammar.new(
     $grammar = cpp_grammar
     cpp_grammar[:inline_comment] = inline_comment
     def std_space() generateStdSpace($grammar[:inline_comment]) end
+    leading_space = /\s*+/
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -181,7 +182,7 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
             # comments 
-            :comments_context,
+            :comments,
             :line_continuation_character,
         ]
     cpp_grammar[:root_context] = [
@@ -223,6 +224,9 @@ cpp_grammar = Grammar.new(
         ]
     cpp_grammar[:function_body_context] = cpp_grammar[:root_context].without(
             # function bodies cant contain any of theses:
+            :constructor_root,
+            :destructor_root,
+            :operator_overload,
             :namespace_block,
             :extern_block,
             :function_definition,
@@ -288,6 +292,7 @@ cpp_grammar = Grammar.new(
             :evaluation_context
         ]
     cpp_grammar[:template_call_context] = [
+            :template_call_range,
             :storage_types,
             :language_constants,
             :scope_resolution_template_call_inner_generated,
@@ -295,7 +300,8 @@ cpp_grammar = Grammar.new(
             :operators,
             :number_literal,
             :string_context,
-            :comma_in_template_argument
+            :comma_in_template_argument,
+            :qualified_type,
         ]
     cpp_grammar[:attributes_context] = [
             :cpp_attributes,
@@ -329,7 +335,85 @@ cpp_grammar = Grammar.new(
             includes: [:root_context],
         ),
     ]
-
+# 
+# Comments
+# 
+    cpp_grammar[:block_comment] = PatternRange.new(
+        tag_as: "comment.block",
+        start_pattern: newPattern(
+            /\s*+/.then(
+                match: /\/\*/,
+                tag_as: "punctuation.definition.comment.begin"
+            )
+        ),
+        end_pattern: newPattern(
+            match: /\*\//,
+            tag_as: "punctuation.definition.comment.end"
+        )
+    )
+    cpp_grammar[:line_comment] =  PatternRange.new(
+        tag_as: "comment.line.double-slash",
+        start_pattern: /\s*+/.then(
+            match: /\/\//,
+            tag_as: "punctuation.definition.comment"
+        ),
+        # a newline that doesnt have a line continuation
+        end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
+        includes: [ :line_continuation_character ]
+    )
+    cpp_grammar[:emacs_file_banner] = newPattern(
+        #
+        # file banner
+        # this matches emacs style file banners ex: /* = foo.c = */
+        # a file banner is a <comment start> <some spaces> <banner start> <some spaces>
+        # <comment contents> <banner end> <some spaces> <comment end>
+        # single line
+        newPattern(
+            should_fully_match: ["// ### test.c ###", "//=test.c - test util ="],
+            should_not_partial_match: ["// ### test.c #=#", "//=test.c - test util ~~~"],
+            match: /^/.maybe(@spaces).then(
+                match: newPattern(
+                    match: /\/\//,
+                    tag_as: "punctuation.definition.comment"
+                ).maybe(
+                    match: @spaces,
+                ).then(
+                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+                    tag_as: "meta.banner.character",
+                    reference: "banner_part"
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                .maybe(@spaces).then(/(?:\n|$)/),
+                tag_as: "comment.line.double-slash",
+            ),
+            # tag is a legacy name
+            tag_as: "meta.toc-list.banner.double-slash",
+        ).or(
+            should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
+            should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
+            match: /^/.maybe(@spaces).then(
+                match: newPattern(
+                    match: /\/\*/,
+                    tag_as: "punctuation.definition.comment"
+                ).maybe(
+                    match: @spaces,
+                    quantity_preference: :as_few_as_possible
+                ).then(
+                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+                    tag_as: "meta.banner.character",
+                    reference: "banner_part"
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                .maybe(@spaces).then(/\*\//),
+                tag_as: "comment.line.block",
+            ),
+            # tag is a legacy name
+            tag_as: "meta.toc-list.banner.block",
+        )
+    )
+    cpp_grammar[:comments] = [
+        :emacs_file_banner,
+        :block_comment,
+        :line_comment,
+    ]
 #
 #
 # Numbers
@@ -815,7 +899,7 @@ cpp_grammar = Grammar.new(
         should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: std_space.maybe(
+        match: leading_space.maybe(
                 inline_attribute
             ).then(std_space).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
@@ -885,7 +969,7 @@ cpp_grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
-    optional_calling_convention = std_space.maybe(
+    optional_calling_convention = leading_space.maybe(
             match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
@@ -895,7 +979,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
-        start_pattern: newPattern(
+        start_pattern: leading_space.then(
             qualified_type.then(inline_ref_deref_pattern).then(optional_calling_convention).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
@@ -1165,7 +1249,7 @@ cpp_grammar = Grammar.new(
         )
     ]
     cpp_grammar[:constructor_root] = constructor[
-        newPattern(optional_calling_convention).then(
+        leading_space.then(optional_calling_convention).then(
             inline_scope_resolution[".constructor"]
         ).then(
             match: newPattern(
@@ -1243,7 +1327,7 @@ cpp_grammar = Grammar.new(
         )
     ]
     cpp_grammar[:destructor_root] = destructor[
-        newPattern(optional_calling_convention).then(
+        optional_calling_convention.then(
             inline_scope_resolution[".destructor"]
         ).then(
             match: newPattern(
@@ -1779,7 +1863,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :root_context ],
-            body_includes: [ :enumerator_list, :comments_context, :comma, :semicolon ],
+            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -2104,7 +2188,7 @@ cpp_grammar = Grammar.new(
                             include: "#line_continuation_character"
                         },
                         {
-                            include: "#comments_context"
+                            include: "#comments"
                         }
                     ]
                 }
@@ -2327,104 +2411,6 @@ cpp_grammar = Grammar.new(
         ),
         includes: [:function_body_context]
     )
-    cpp_grammar[:comments_context] = [
-        #
-        # file banner
-        # this matches emacs style file banners ex: /* = foo.c = */
-        # a file banner is a <comment start> <some spaces> <banner start> <some spaces>
-        # <comment contents> <banner end> <some spaces> <comment end>
-        # single line
-        newPattern(
-            should_fully_match: ["// ### test.c ###", "//=test.c - test util ="],
-            should_not_partial_match: ["// ### test.c #=#", "//=test.c - test util ~~~"],
-            match: /^/.maybe(@spaces).then(
-                match: newPattern(
-                    match: /\/\//,
-                    tag_as: "punctuation.definition.comment"
-                ).maybe(
-                    match: @spaces,
-                ).then(
-                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-                    tag_as: "meta.banner.character",
-                    reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
-                .maybe(@spaces).then(/(?:\n|$)/),
-                tag_as: "comment.line.double-slash",
-            ),
-            # tag is a legacy name
-            tag_as: "meta.toc-list.banner.double-slash",
-        ),
-        # multi line comment
-        newPattern(
-            should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
-            should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
-            match: /^/.maybe(@spaces).then(
-                match: newPattern(
-                    match: /\/\*/,
-                    tag_as: "punctuation.definition.comment"
-                ).maybe(
-                    match: @spaces,
-                    quantity_preference: :as_few_as_possible
-                ).then(
-                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-                    tag_as: "meta.banner.character",
-                    reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
-                .maybe(@spaces).then(/\*\//),
-                tag_as: "comment.line.block",
-            ),
-            # tag is a legacy name
-            tag_as: "meta.toc-list.banner.block",
-        ),
-        #
-        # single line comment
-        #
-        PatternRange.new(
-            start_pattern: maybe(
-                # consumes extra space character
-                match: newPattern(
-                    match: @spaces,
-                    dont_back_track?: true
-                ),
-                tag_as: "punctuation.whitespace.comment.leading"
-            ).lookBehindToAvoid(/[\\]/).then(
-                match: /\/\//,
-                tag_as: "comment.line.double-slash punctuation.definition.comment"
-            ),
-            end_pattern: lookBehindToAvoid(/[\\]/).then(/\n/),
-            tag_content_as: "comment.line.double-slash",
-            includes: [
-               :line_continuation_characterm
-            ]
-        ),
-        #
-        # multi line comment
-        #
-        PatternRange.new(
-            start_pattern: newPattern(
-                should_fully_match: ["    /*", "/*"],
-                should_partial_match: ["/***/"],
-                match: maybe(
-                    # consumes extra space character
-                    match: newPattern(
-                        match: @spaces,
-                        dont_back_track?: true
-                    ),
-                    tag_as: "punctuation.whitespace.comment.leading"
-                ).lookBehindToAvoid(/[\\]/).then(
-                    match: /\/\*/,
-                    tag_as: "comment.block punctuation.definition.comment.begin"
-                )),
-            end_pattern: lookBehindToAvoid(/[\\]/).then(
-                match: /\*\//,
-                tag_as: "comment.block punctuation.definition.comment.end"
-            ),
-            tag_content_as: "comment.block",
-            includes: [
-               :line_continuation_character
-            ]
-        ),
-    ]
     cpp_grammar[:disabled] = {
         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
         end: "^\\s*#\\s*endif\\b",
@@ -2711,7 +2697,7 @@ cpp_grammar = Grammar.new(
                 match: "\\bdefined\\b",
                 name: "invalid.illegal.macro-name"
             },
-            :comments_context,
+            :comments,
             :string_context_c,
             :number_literal,
             {
@@ -2797,7 +2783,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     include: "#preprocessor_rule_enabled_elif"
@@ -2890,7 +2876,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     include: "#preprocessor_rule_enabled_elif_block"
@@ -2972,7 +2958,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3029,7 +3015,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     begin: "^\\s*((#)\\s*else\\b)",
@@ -3127,7 +3113,7 @@ cpp_grammar = Grammar.new(
                     ]
                 },
                 {
-                    include: "#comments_context"
+                    include: "#comments"
                 },
                 {
                     begin: "^\\s*((#)\\s*else\\b)",
@@ -3215,7 +3201,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3302,7 +3288,7 @@ cpp_grammar = Grammar.new(
                 ]
             },
             {
-                include: "#comments_context"
+                include: "#comments"
             },
             {
                 begin: "\\n",
@@ -3552,7 +3538,7 @@ cpp_grammar = Grammar.new(
             ]
         }
     cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
-            :comments_context,
+            :comments,
             :storage_types,
             :vararg_ellipses,
             :method_access,
