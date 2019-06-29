@@ -1,38 +1,48 @@
-const fs = require("fs");
-const _ = require("lodash");
+const fs = require("fs")
+const glob = require("glob")
+const path = require("path")
+const _ = require("lodash")
 
-const getTokens = require("../get_tokens");
-const argv = require("../arguments");
-const registry = require("../registry").getRegistry(
-    require("../report/oniguruma_decorator").getOniguruma
-);
+const getTokens = require("../get_tokens")
+const argv = require("../arguments")
+const { getOniguruma } = require("../report/oniguruma_decorator")
+const { getRegistry } = require("../registry")
+const recorder = require("../report/recorder")
+const {performanceForEachFixture, currentActiveFixture} = require("../symbols")
 
-const recorder = require("../report/recorder");
-const reporters = {
-    coverage: require("../report/reporters/coverage"),
-    perf: require("../report/reporters/perf")
-};
-
-let files = _.tail(argv._);
-if (files.length === 0) {
-    // use text fixtures instead
-    files = require("../get_tests")().map(test => test.fixture);
+const registry = getRegistry(getOniguruma)
+// get all reporters
+let reporters = {}
+for (const each of glob.sync(`${__dirname}/../report/reporters/*.js`)) {
+    let filename = path.basename(each).replace(/\.js$/, "")
+    reporters[filename] = require(each)
 }
 
-recorder.loadReporter(reporters[argv._[0]]);
+//
+// Commandline args
+//
+let [reporterName, ...files] = argv._
 
-collectRecords();
+// load the one mentioned in the commandline
+recorder.loadReporter(reporters[reporterName])
+// if no files mentioned, then use all the fixtures
+if (files.length === 0) {
+    // use text fixtures instead
+    files = require("../get_tests")().map(test => test.fixture)
+}
+
+collectRecords()
 async function collectRecords() {
-    let totalResult = true;
-    for (const test of files) {
-        console.log(test);
+    global[performanceForEachFixture] = {}
+    for (const eachFile of files) {
+        console.log(eachFile)
+        global[currentActiveFixture] = eachFile
         const fixture = fs
-            .readFileSync(test)
+            .readFileSync(eachFile)
             .toString()
-            .split("\n");
-        await getTokens(registry, test, fixture, () => true);
+            .split("\n")
+        await getTokens(registry, eachFile, fixture, false, () => true)
     }
     console.log();
-    recorder.reportAllRecorders();
-    process.exit(totalResult ? 0 : 1);
+    recorder.reportAllRecorders()
 }

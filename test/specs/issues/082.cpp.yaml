@@ -22,14 +22,16 @@
     - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
     - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
@@ -58,6 +60,8 @@
 - source: '[['
   scopesBegin:
     - meta.body.struct
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
     - support.other.attribute
   scopes:
     - punctuation.section.attribute.begin
@@ -73,18 +77,26 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.qualified_type
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ()
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'pointerT '
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: pointerT
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -103,10 +115,12 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' hashT'
+- source: hashT
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: /*
   scopesBegin:
     - comment.block
@@ -122,7 +136,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' pointerT '
+- source: pointerT
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -171,22 +187,24 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
     - comment.block
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
-  scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
 - source: //
   scopesBegin:
+    - meta.body.function.definition.special.operator-overload
     - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
@@ -289,9 +307,11 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct
@@ -364,14 +384,16 @@
     - punctuation.separator.template.argument
 - source: hashT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
     - punctuation.separator.template.argument
 - source: allocatorT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
@@ -400,6 +422,8 @@
 - source: '[['
   scopesBegin:
     - meta.body.struct
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
     - support.other.attribute
   scopes:
     - punctuation.section.attribute.begin
@@ -415,18 +439,26 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.qualified_type
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ()
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'pointerT '
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: pointerT
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -445,10 +477,12 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' hashT'
+- source: hashT
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: /*
   scopesBegin:
     - comment.block
@@ -464,7 +498,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: ' pointerT '
+- source: pointerT
+  scopes:
+    - entity.name.type.parameter
 - source: /*
   scopesBegin:
     - comment.block
@@ -513,22 +549,24 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
     - comment.block
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
-  scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
     - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
 - source: //
   scopesBegin:
+    - meta.body.function.definition.special.operator-overload
     - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
@@ -631,9 +669,11 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.struct

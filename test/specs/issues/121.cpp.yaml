@@ -63,8 +63,16 @@
     - storage.type.class
 - source: DLLEXPORT
   scopes:
+    - entity.name.other.preprocessor.macro.predefined.DLLEXPORT
+- source: ChildClass
+  scopes:
     - entity.name.type.class
-- source: 'ChildClass : '
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.inheritance
+  scopesEnd:
+    - meta.head.class
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -73,9 +81,8 @@
     - entity.name.type.inherited
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
     - meta.body.class

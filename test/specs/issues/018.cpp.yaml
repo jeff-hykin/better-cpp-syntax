@@ -39,6 +39,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: typeid
   scopes:
     - keyword.operator.functionlike
@@ -54,6 +57,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -68,6 +74,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -83,6 +92,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: decltype
   scopes:
     - keyword.operator.functionlike
@@ -99,6 +111,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: using
   scopesBegin:
     - meta.declaration.type.alias
@@ -138,8 +153,12 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype
   scopesEnd:
-    - meta.declaration.type.alias
     - meta.declaration.type.alias.value.unknown
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition

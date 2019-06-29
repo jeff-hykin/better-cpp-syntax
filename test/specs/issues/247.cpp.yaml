@@ -1,0 +1,151 @@
+- source: struct
+  scopesBegin:
+    - source
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: foo
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: static_assert
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - keyword.other.static_assert
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.static_assert
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: ','
+  scopesBegin:
+    - meta.static_assert.message
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: foo
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.static_assert.message
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.static_assert
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: static_assert
+  scopes:
+    - keyword.other.static_assert
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.static_assert
+- source: bar
+- source: ','
+  scopesBegin:
+    - meta.static_assert.message
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: bar
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.static_assert.message
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.static_assert
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: foo
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: foo
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: bar
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

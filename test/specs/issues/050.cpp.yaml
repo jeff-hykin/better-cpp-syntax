@@ -1,6 +1,30 @@
-- source: switch
+- source: int
   scopesBegin:
     - source
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: switch
+  scopesBegin:
+    - meta.body.function.definition
     - meta.block.switch
     - meta.head.switch
   scopes:
@@ -107,33 +131,23 @@
     - meta.block.switch
     - meta.body.switch
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func1
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
-    - entity.name.function.definition
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '[['
   scopesBegin:
-    - meta.function.definition
-    - meta.qualified_type
     - support.other.attribute
   scopes:
     - punctuation.section.attribute.begin
@@ -149,19 +163,14 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-  scopesEnd:
-    - meta.qualified_type
 - source: func2
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
-    - entity.name.function.definition
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: /*
   scopesBegin:
-    - meta.function.definition.parameters
     - comment.block
   scopes:
     - punctuation.definition.comment.begin
@@ -170,14 +179,10 @@
   scopes:
     - punctuation.definition.comment.end
   scopesEnd:
-    - meta.function.definition.parameters
     - comment.block
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -223,26 +228,21 @@
   scopesEnd:
     - meta.block.struct
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func3
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
-    - entity.name.function.definition
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

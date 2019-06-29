@@ -1,37 +1,44 @@
 - source: void
   scopesBegin:
     - source
+    - meta.function.definition.special.operator-overload
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' operator '
-- source: '"'
+- source: operator
   scopesBegin:
-    - string.quoted.double
+    - meta.head.function.definition.special.operator-overload
   scopes:
-    - punctuation.definition.string.begin
-- source: '"'
-  scopes:
-    - punctuation.definition.string.end
-  scopesEnd:
-    - string.quoted.double
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
 - source: _km
-  scopes:
-    - entity.name.function.call
+  scopesEnd:
+    - entity.name.operator.custom-literal
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: long
   scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
   scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -63,37 +63,52 @@
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
-- source: 'result_type '
+- source: result_type
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ()
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
-- source: 'argument_type '
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: argument_type
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: k
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
-  scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.operator-overload
 - source: template
   scopes:
     - storage.type.template

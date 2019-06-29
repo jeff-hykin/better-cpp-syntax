@@ -1,21 +1,17 @@
 - source: enum
   scopesBegin:
     - source
-    - meta.block.enum
-    - meta.head.enum
   scopes:
-    - storage.type.enum
+    - storage.type.enum.declare
 - source: bar
   scopes:
     - entity.name.type.enum
 - source: b
-  scopesEnd:
-    - meta.head.enum
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block.enum
 - source: int
   scopesBegin:
     - meta.function.definition
@@ -42,21 +38,17 @@
 - source: enum
   scopesBegin:
     - meta.body.function.definition
-    - meta.block.enum
-    - meta.head.enum
   scopes:
-    - storage.type.enum
+    - storage.type.enum.declare
 - source: bar
   scopes:
     - entity.name.type.enum
 - source: b
-  scopesEnd:
-    - meta.head.enum
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block.enum
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition

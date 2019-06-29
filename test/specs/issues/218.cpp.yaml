@@ -18,17 +18,12 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: '                           a '
+- source: a
   scopesBegin:
     - meta.function.definition.parameters
-- source: '   a'
+    - meta.parameter
   scopes:
-    - variable.parameter
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '                           a '
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -36,7 +31,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                           a '
+- source: a
+  scopes:
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -44,7 +41,9 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                           a '
+- source: a
+  scopes:
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -52,7 +51,19 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                           a '
+- source: a
+  scopes:
+    - entity.name.type.parameter
+- source: a
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: a
+  scopes:
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -64,7 +75,7 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '                      a'
+- source: a
   scopes:
     - variable.parameter
 - source: ','
@@ -75,7 +86,7 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '                      a'
+- source: a
   scopes:
     - variable.parameter
 - source: ','
@@ -86,7 +97,7 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '                      a'
+- source: a
   scopes:
     - variable.parameter
 - source: ','
@@ -97,11 +108,12 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '                      a'
+- source: a
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -203,7 +215,12 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a : a'
+- source: ' a '
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.range-based
+- source: ' a'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -262,7 +279,7 @@
     - keyword.control.if
 - source: (
   scopesBegin:
-    - meta.parens.block
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'a '
@@ -274,8 +291,10 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
-    - meta.parens.block
+    - meta.parens
 - source: '{'
+  scopesBegin:
+    - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: switch
@@ -514,6 +533,8 @@
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: a
   scopes:
     - entity.name.function.call
@@ -596,25 +617,12 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: '                      a '
+- source: a
   scopesBegin:
     - meta.function.definition.parameters
-- source: '                   a'
+    - meta.parameter
   scopes:
-    - variable.parameter
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '                      a '
-- source: '          a'
-  scopes:
-    - variable.parameter
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: '                      a '
+    - entity.name.type.parameter
 - source: a
   scopes:
     - variable.parameter
@@ -622,12 +630,35 @@
   scopes:
     - comma
     - punctuation.separator.delimiter
-- source: '                      a '
-- source: '                                a'
+- source: a
+  scopes:
+    - entity.name.type.parameter
+- source: a
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: a
+  scopes:
+    - entity.name.type.parameter
+- source: a
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: a
+  scopes:
+    - entity.name.type.parameter
+- source: a
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -814,7 +845,12 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a: a'
+- source: ' a'
+- source: ':'
+  scopes:
+    - colon
+    - punctuation.separator.range-based
+- source: ' a'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

@@ -1,0 +1,197 @@
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: im_a_struct
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: im_a_member
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' works fine '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: im_a_struct
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: integer_member
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' starts with a variable type "int", no color '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: im_a_struct
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: size_t_holder
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' does not work too '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: im_a_struct
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: intra_thread
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: thread
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' same issue, starts with "int" '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: im_a_struct
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: long_array
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: malloc
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '10000'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' "long" keyword '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

@@ -1,14 +1,25 @@
 # What does this do?
 This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
+NOTE: The default VS Code theme does not color much. Use a theme like one of the following to benefit from the changes:
+- Material Theme
+- Noctis
+- XD Theme
+- One Monokai Theme
+- Winteriscoming
+- Popping and Locking
+
 ## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-### Before Better C++
-![without-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240797-8d75ef80-2897-11e9-97b6-f94af43d9fb7.png)
-### After
-![with-syntax-improvement](https://user-images.githubusercontent.com/17692058/52240803-8fd84980-2897-11e9-987c-9c71c19d52fa.png)
+# Before/Without Better Syntax (Material Theme)
+![material_before](https://user-images.githubusercontent.com/17692058/59826753-83abd080-92fc-11e9-9dfb-d891da55cd13.png)
+# After
+![material_after](https://user-images.githubusercontent.com/17692058/59826766-8ad2de80-92fc-11e9-9bd6-3496ed5c917b.png)
+
+
+
 
 ## What is different from atom/language-c?
 It fixes:
@@ -28,7 +39,8 @@ It fixes:
 
 It adds:
 - Parameter highlighting
-- Highlighting of embedded assembly code
+- Highlighting of embedded assembly code (if you have an assembly syntax installed)
+- Function-pointer highlighting
 - Lambda highlighting
 - C++14 literal support (`100'000ms`)
 - Template definition syntax highlighting (including C++ 2020 syntax)
@@ -39,10 +51,9 @@ It adds:
 - Many other features
 
 ## Contributing
-If you'd like to help improve the syntax, take a look at `souce/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
+If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
-- Function-pointer tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words

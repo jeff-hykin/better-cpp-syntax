@@ -115,60 +115,85 @@
   scopes:
     - punctuation.terminator.statement
 - source: Rule
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: Rule
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' Rule '
+- source: Rule
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: ' :'
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
 - source: blank_
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: 'Blank{}'
+  scopes:
+    - meta.parameter.initialization
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - comma
     - punctuation.separator.delimiter
 - source: type
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: BlankType
+  scopes:
+    - meta.parameter.initialization
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: '*'
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
   scopes:
     - keyword.operator
 - source: this
@@ -183,9 +208,11 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
 - source: static
   scopes:
     - storage.modifier.specifier.static
@@ -204,17 +231,21 @@
 - source: (
   scopes:
     - punctuation.section.parameters.begin.bracket.round
-- source: 'Rule '
+- source: Rule
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '*'
   scopes:
-    - keyword.operator
+    - storage.modifier.pointer
 - source: rule
   scopes:
     - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -285,22 +316,19 @@
     - punctuation.separator.pointer-access
 - source: blank
   scopes:
-    - variable.other.property
+    - variable.other.object.property
 - source: .
-- source: ~Blank
-  scopesBegin:
-    - meta.function.destructor
   scopes:
-    - entity.name.function.destructor
-    - entity.name.function.special.destructor
+    - punctuation.separator.dot-access
+- source: ~Blank
+  scopes:
+    - entity.name.function.member
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin.destructor
+    - punctuation.section.arguments.begin.bracket.round.function.member
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.destructor
-  scopesEnd:
-    - meta.function.destructor
+    - punctuation.section.arguments.end.bracket.round.function.member
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -316,49 +344,65 @@
   scopesEnd:
     - meta.function.definition
     - meta.body.function.definition
-- source: 'Rule '
+- source: Rule
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - meta.head.function.definition.special.operator-overload
+    - storage.modifier.reference
 - source: Rule
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.operator
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.operator
 - source: operator
   scopesBegin:
-    - meta.function.definition.parameters.operator-overload
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
   scopes:
-    - entity.name.operator.overloadee
+    - entity.name.operator
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.operator-overload
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' Rule '
+- source: Rule
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: other
   scopes:
     - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.operator-overload
-  scopesEnd:
-    - meta.function.definition.parameters.operator-overload
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
 - source: destroy_value
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
   scopes:
     - entity.name.function.call
 - source: (
@@ -427,7 +471,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:
@@ -485,7 +528,6 @@
 - source: new
   scopes:
     - keyword.operator.wordlike
-    - memory
     - keyword.operator.new
 - source: (
   scopesBegin:
@@ -536,9 +578,11 @@
     - meta.body.switch
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly.namespace

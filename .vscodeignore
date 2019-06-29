@@ -1,9 +1,13 @@
+.gitignore
 .vscode
+debug.json
+lint/
+node_modules/
+scripts/
+source/
+test/
+**/tags.txt
 **/*.rb
 **/*.yaml
-.gitignore
-test
-debug.json
-**/tags.txt
 **/*.cpp
 **/*.c

@@ -1,0 +1,983 @@
+- source: Item
+  scopesBegin:
+    - source
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: +
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: string
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: base
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: repetitions
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Item
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '-'
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: the_input
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: Item
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: input_item
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Item
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: /
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Item
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: input_item
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: the_input
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Item
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: ^
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Item
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: input_item
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: the_input
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: inline
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.inline
+- source: ostream
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopes:
+    - keyword.other.operator.overload
+- source: ','
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: ostream
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: o
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: ostream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: manip_fun
+  scopes:
+    - variable.parameter.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: ostream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+  scopesEnd:
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' templated type conversion'
+  scopesEnd:
+    - comment.line.double-slash
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.head.function.definition.special.operator-overload
+    - keyword.other.operator.overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: basic_string_view
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - entity.name.operator.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: CharT
+  scopes:
+    - storage.type.user-defined
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.template.argument
+- source: Traits
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: noexcept
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.noexcept
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' resolution type conversion'
+  scopesEnd:
+    - comment.line.double-slash
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.head.function.definition.special.operator-overload
+    - keyword.other.operator.overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: basic_string_view
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: noexcept
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.noexcept
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' implicit conversion'
+  scopesEnd:
+    - comment.line.double-slash
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: string
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: double
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.operator-overload
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: ElementT
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: bool
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: ()
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: ElementT
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: lhs
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ElementT
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: rhs
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: char_traits
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: compare
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: lhs
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: first
+  scopes:
+    - variable.other.property
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: rhs
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: first
+  scopes:
+    - variable.other.property
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: sizeof
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof
+- source: lhs
+  scopesBegin:
+    - meta.arguments.operator.sizeof
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: first
+  scopes:
+    - variable.other.property
+  scopesEnd:
+    - meta.arguments.operator.sizeof
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' custom literals'
+  scopesEnd:
+    - comment.line.double-slash
+- source: void
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
+- source: _km
+  scopesEnd:
+    - entity.name.operator.custom-literal
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: long
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: double
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
+- source: _km
+  scopesEnd:
+    - entity.name.operator.custom-literal
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: long
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: double
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: string
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
+- source: _i18n
+  scopesEnd:
+    - entity.name.operator.custom-literal
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: std
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: float
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
+- source: _e
+  scopesEnd:
+    - entity.name.operator.custom-literal
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

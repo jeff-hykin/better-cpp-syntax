@@ -14,6 +14,11 @@ module.exports = require("yargs")
         describe: "generate spec files for all fixtures",
         type: "boolean"
     })
+    .option("show-failure-only", {
+        default: false,
+        describe: "Only show IF a spec failed, no details",
+        type: "boolean"
+    })
     .option("header-c", {
         default: false,
         type: "boolean",

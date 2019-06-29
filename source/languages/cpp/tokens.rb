@@ -82,6 +82,7 @@ tokens = [
     { representation: "alignas"              , name: "alignas"                        , isOperator: true,                                                                                                           isFunctionLike:  true },
     { representation: "typeid"               , name: "typeid"                         , isOperator: true,                                                                                                           isFunctionLike:  true },
     { representation: "noexcept"             , name: "noexcept"                       , isOperator: true },
+    { representation: "noexcept"             , name: "noexcept"                       , isOperator: true,  isFunctionLike: true },
     { representation: "static_cast"          , name: "static_cast"                    , isOperator: true , isTypeCastingOperator: true},
     { representation: "dynamic_cast"         , name: "dynamic_cast"                   , isOperator: true , isTypeCastingOperator: true},
     { representation: "const_cast"           , name: "const_cast"                     , isOperator: true , isTypeCastingOperator: true},
@@ -206,8 +207,8 @@ tokens = [
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "virtual"              , name: "virtual"          , isSpecifier: true , isFunctionSpecifier: true, isInheritanceSpecifier: true },
-    { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
-    { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true},
+    { representation: "final"                , name: "final"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true, isClassInheritenceSpecifier: true},
+    { representation: "override"             , name: "override"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true , isValidFunctionName: true, isClassInheritenceSpecifier: true},
     { representation: "volatile"             , name: "volatile"         , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
     { representation: "const"                , name: "const"            , functionQualifier: true, canAppearAfterParametersBeforeBody: true },
     { representation: "noexcept"             , name: "noexcept"         , isSpecifier: true ,      canAppearAfterParametersBeforeBody: true },
@@ -290,6 +291,10 @@ tokens = [
     # isWord
     if each[:representation] =~ /\A[a-zA-Z_][a-zA-Z0-9_]*\z/
         each[:isWord] = true
+    end
+    
+    if each[:isTypeSpecifier] or each[:isStorageSpecifier]
+        each[:isPossibleStorageSpecifier] = true
     end
 end
 

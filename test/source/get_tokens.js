@@ -1,5 +1,6 @@
 // get the tokens from the file and process them with the provided function
 const pa = require("path");
+const chalk = require("chalk");
 const vsctm = require("vscode-textmate");
 const argv = require("yargs").argv;
 
@@ -7,9 +8,11 @@ const argv = require("yargs").argv;
  * @param {vsctm.Registry} registry
  * @param {string} path
  * @param {string[]} fixture
+ * @param {boolean} showFailureOnly
  * @param {(line: string, token: vsctm.IToken) => boolean} process
  */
-module.exports = async function(registry, path, fixture, process) {
+module.exports = async function(registry, path, fixture, showFailureOnly, process) {
+    let displayedAtLeastOnce = false;
     let returnValue = true;
     try {
         let sourceName = "source.cpp";
@@ -50,7 +53,8 @@ module.exports = async function(registry, path, fixture, process) {
                 }
             }
             if (displayLine) {
-                console.log("line was:\n  %s:%d: |%s|", path, lineNumber, line);
+                showFailureOnly || console.log("line was:\n  %s:%d: |%s|", path, lineNumber, line);
+                displayedAtLeastOnce = true;
             }
             lineNumber += 1;
         }
@@ -58,5 +62,9 @@ module.exports = async function(registry, path, fixture, process) {
         console.error(e);
         returnValue = false;
     }
+    if (displayedAtLeastOnce) {
+        console.log(chalk.redBright("   Failed"))
+    }
+
     return returnValue;
 };

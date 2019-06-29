@@ -11,7 +11,7 @@ function removeScopeName(scope) {
 }
 
 module.exports["SpecChecker"] = class SpecChecker {
-    constructor(spec) {
+    constructor(spec, showFailureOnly=false) {
         /**
          * @type {Spec[]}
          */
@@ -23,6 +23,10 @@ module.exports["SpecChecker"] = class SpecChecker {
          * @type {string[]}
          */
         this.scopeStack = new Array("source");
+        /**
+         * @type {bool}
+         */
+        this.showFailureOnly = showFailureOnly;
     }
     /**
      * @param {string} line
@@ -42,12 +46,12 @@ module.exports["SpecChecker"] = class SpecChecker {
             return true;
         }
         if (this.Specs.length === 0) {
-            console.error("ran out of specs");
+            this.showFailureOnly || console.error("ran out of specs");
             return false;
         }
         const spec = this.Specs.shift();
         if (source !== spec.source) {
-            console.error(
+            this.showFailureOnly || console.error(
                 "spec mismatch: next token is |%s| but spec has |%s|",
                 source,
                 spec.source
@@ -62,33 +66,33 @@ module.exports["SpecChecker"] = class SpecChecker {
         if (_.isEqual(specScopes, tokenScopes)) {
             return true;
         }
-        console.group("scope mismatch: token |%s| has wrong scope", source);
-        console.log();
-        console.group("scopes in spec");
+        this.showFailureOnly || console.group("scope mismatch: token |%s| has wrong scope", source);
+        this.showFailureOnly || console.log();
+        this.showFailureOnly || console.group("scopes in spec");
         for (const scope of specScopes) {
             this.displayScope(scope, tokenScopes, specScopes);
         }
-        console.groupEnd();
-        console.log();
-        console.group("actual scopes");
+        this.showFailureOnly || console.groupEnd();
+        this.showFailureOnly || console.log();
+        this.showFailureOnly || console.group("actual scopes");
         for (const scope of tokenScopes) {
             this.displayScope(scope, tokenScopes, specScopes);
         }
-        console.log();
-        console.groupEnd();
-        console.groupEnd();
+        this.showFailureOnly || console.log();
+        this.showFailureOnly || console.groupEnd();
+        this.showFailureOnly || console.groupEnd();
         return false;
     }
 
     displayScope(scope, newScopes, oldScopes) {
         if (_.includes(newScopes, scope) && !_.includes(oldScopes, scope)) {
-            console.log(chalk.greenBright("+ " + scope));
+            this.showFailureOnly || console.log(chalk.greenBright("+ " + scope));
         } else if (
             !_.includes(newScopes, scope) &&
             _.includes(oldScopes, scope)
         ) {
-            console.log(chalk.redBright("- " + scope));
-        } else console.log(chalk.whiteBright("  " + scope));
+            this.showFailureOnly || console.log(chalk.redBright("- " + scope));
+        } else this.showFailureOnly || console.log(chalk.whiteBright("  " + scope));
     }
 
     /**

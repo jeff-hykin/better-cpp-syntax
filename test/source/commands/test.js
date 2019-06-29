@@ -33,7 +33,8 @@ async function runTests() {
             registry,
             path.relative(paths.fixtureDir, test.fixture),
             fixture,
-            yaml.safeLoad(spec, { filename: test.spec.default, json: true })
+            yaml.safeLoad(spec, { filename: test.spec.default, json: true }),
+            argv["show-failure-only"]
         );
         totalResult = result ? totalResult : result;
         console.groupEnd();

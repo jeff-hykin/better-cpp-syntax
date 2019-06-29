@@ -40,7 +40,7 @@ c_grammar = Grammar.new(
 #
 # Contexts
 #
-    c_grammar[:conditional_context] = [
+    c_grammar[:c_conditional_context] = [
             :$initial_context,
             :block_innards
         ]
@@ -122,7 +122,7 @@ c_grammar = Grammar.new(
     # access to attribute
     c_grammar[:member_access] =  member_access = newPattern(
         match: member_start.then(
-                match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+                match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType).then(@word_boundary)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.member"
             )
         )
