@@ -14,7 +14,7 @@ Dir.chdir __dir__
 # 
     # Standard refernce: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
     original_grammar = JSON.parse(IO.read("original.tmlanguage.json"))
-    convertBaseAndSelf!(from_json_tm_lang: original_grammar, into: "#root_context")
+    Grammar.convertSpecificIncludes(json_grammar: original_grammar, convert:["$self", "$base"], into: "#root_context")
     grammar = Grammar.new(
         name: original_grammar["name"],
         scope_name: original_grammar["scopeName"],

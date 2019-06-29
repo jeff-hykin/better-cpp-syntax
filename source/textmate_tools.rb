@@ -38,6 +38,75 @@ def checkForMatchingOuter(str, start_char, end_char)
     return false
 end
 
+# 
+# Recursive value setting
+# 
+# TODO: these names/methods should probably be formalized and then put inside their own ruby gem
+# TODO: methods should probably be added for other containers, like sets
+# TODO: probably should use blocks instead of a lambda
+#     # the hash (or array) you want to change
+#     a_hash = {
+#         a: nil,
+#         b: {
+#             c: nil,
+#             d: {
+#                 e: nil
+#             }
+#         }
+#     }
+#     # lets say you want to convert all the nil's into empty arrays []
+#     # then you'd do:
+#     a_hash.recursively_set_each_value! ->(each_value, each_key) do
+#         if each_value == nil
+#             # return an empty list
+#             []
+#         else
+#             # return the original
+#             each_value
+#         end
+#     end
+#     # this would result in:
+#     a_hash = {
+#         a: [],
+#         b: {
+#             c: []
+#             d: {
+#                 e: []
+#             }
+#         }
+#     }
+class Hash
+    def recursively_set_each_value!(a_lambda)
+        for each_key, each_value in self.clone
+            # if this was a tree, then start by exploring the tip of the first root
+            # (rather than the base of the tree)
+            # if it has a :recursively_set_each_value! method, then call it
+            if self[each_key].respond_to?(:recursively_set_each_value!)
+                self[each_key].recursively_set_each_value!(a_lambda)
+            end
+            # then allow manipulation of the value
+            self[each_key] = a_lambda[each_value, each_key]
+        end
+    end
+end
+
+class Array
+    def recursively_set_each_value!(a_lambda)
+        new_values = []
+        clone = self.clone
+        clone.each_with_index do |each_value, each_key|
+            # if it has a :recursively_set_each_value! method, then call it
+            if self[each_key].respond_to?(:recursively_set_each_value!)
+                self[each_key].recursively_set_each_value!(a_lambda)
+            end
+            self[each_key] = a_lambda[each_value, each_key]
+        end
+    end
+end
+
+
+
+
 class Grammar
     attr_accessor :data, :all_tags, :language_ending
     
@@ -208,6 +277,25 @@ class Grammar
             patterns.push(Grammar.toTag(each_include, ignore_repository_entry: ignore_repository_entry))
         end
         return patterns
+    end
+    
+    def self.convertSpecificIncludes(json_grammar:nil, convert:[], into:"")
+            tags_to_convert = convert.map{|each| each.to_s}
+            # iterate over all the keys
+            json_grammar.recursively_set_each_value! ->(each_value, each_key) do
+                    if each_key.to_s == "include"
+                        # if one of the tags matches
+                        if tags_to_convert.include?(each_value.to_s)
+                            # then replace it with the new value
+                            into
+                        else
+                            each_value
+                        end
+                    else
+                        each_value
+                    end
+                end 
+            end
     end
     
     #
