@@ -40,6 +40,7 @@ It fixes:
 It adds:
 - Parameter highlighting
 - Highlighting of embedded assembly code (if you have an assembly syntax installed)
+- Function-pointer highlighting
 - Lambda highlighting
 - C++14 literal support (`100'000ms`)
 - Template definition syntax highlighting (including C++ 2020 syntax)
@@ -53,7 +54,6 @@ It adds:
 If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
-- Function-pointer tagging
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
