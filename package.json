@@ -3,24 +3,27 @@
   "displayName": "Better Syntax",
   "description": "The bleeding edge of C-like syntaxes",
   "icon": "icon.png",
-  "version": "1.11.7",
+  "version": "1.12.6",
   "scripts": {
     "build": "ruby scripts/generate.rb",
+    "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "ruby scripts/lint.rb",
     "pretest": "npm run build",
     "test": "node test/source/commands/test.js",
-    "gen": "npm run generate-specs -- --generate-all",
+    "genall": "npm run generate-specs -- --generate-all",
     "preversion": "npm test",
     "version": "npm run build && git add -A syntaxes",
     "pregenerate-specs": "npm run build",
     "generate-specs": "node test/source/commands/generate-specs.js",
+    "gen": "npm run generate-specs -- ",
+    "try": "npm run test -- --show-failure-only",
     "sort-specs": "node test/source/commands/sort-specs.js",
     "prereport": "npm run build",
     "report": "node test/source/commands/report",
     "perf": "npm run report -- perf",
     "cov": "npm run report -- coverage",
-    "vscode:prepublish": "npm run build"
+    "publish": "ruby scripts/publish.rb"
   },
   "keywords": [
     "C++",
@@ -69,11 +72,6 @@
         "language": "objective-c",
         "scopeName": "source.objc",
         "path": "./syntaxes/objc.tmLanguage.json"
-      },
-      {
-        "language": "shellscript",
-        "scopeName": "source.shell",
-        "path": "syntaxes/shell.tmLanguage.json"
       }
     ]
   },
@@ -87,17 +85,18 @@
   "devDependencies": {
     "chalk": "^2.4.2",
     "dictionary-en-us": "^2.1.1",
-    "glob": "^7.1.3",
+    "glob": "^7.1.4",
     "js-yaml": "^3.13.1",
     "json-source-map": "^0.4.0",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.11",
+    "node-gyp": "^4.0.0",
     "nspell": "^2.1.2",
     "oniguruma": "^7.2.0",
     "prettyjson": "^1.2.1",
     "vscode-textmate": "^4.1.1",
     "yargs": "^13.2.2",
-    "node-gyp": "^4.0.0"
+    "convert-svg-to-png": "^0.5.0"
   },
   "dependencies": {
   }
