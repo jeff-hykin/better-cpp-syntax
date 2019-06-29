@@ -23,7 +23,7 @@
         "report": "node test/source/commands/report",
         "perf": "npm run report -- perf",
         "cov": "npm run report -- coverage",
-        "vscode:prepublish": "npm run build"
+        "publish": "ruby scripts/publish.rb"
     },
     "keywords": [
         "C++",
