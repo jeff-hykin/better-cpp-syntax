@@ -4,15 +4,19 @@ require 'fileutils'
 # 
 # paths
 # 
-$path_to_root = "#{__dir__}/.."
-path_to_package_json = $path_to_root + "/package.json"
+$path_to_root                = "#{__dir__}/.."
+path_to_package_json         = $path_to_root + "/package.json"
+$path_to_languages           = $path_to_root + "/source/languages"
 $path_to_convert_svg_program = "#{__dir__}/helpers/convert_svgs.js"
+
 def svgPath(language_extension)
     return $path_to_root + "/icons/#{language_extension}.svg"
 end
+
 def iconPath(language_extension)
     return "icons/#{language_extension}.png"
 end
+
 Dir.chdir __dir__
 
 # 
@@ -151,6 +155,10 @@ def packageJsonFor(language_extension, version:nil)
             language_info
         ]
     }
+    # 
+    # If theres a local package.json, use it to overwrite any exiting things
+    # 
+    new_package_json.merge!(JSON.parse(IO.read($path_to_languages+"/"+language_extension+"/package.json")))
     return new_package_json
 end
 
@@ -171,16 +179,23 @@ if language_extension == nil
 else
     # generate the new package info
     new_package_json_string = JSON.generate(packageJsonFor(language_extension, version:language_version))
-
-    # switch to the alternative_readme
-    FileUtils.mv($path_to_root+"/README.md",             $path_to_root+"/temp_readme.md")
-    FileUtils.cp($path_to_root+"/alternative_readme.md", $path_to_root+"/README.md")
-    # overwrite the package json
-    IO.write($path_to_root+"/package.json", new_package_json_string)
-    # run the build command then publish
-    system "npm run build #{language_extension} && vsce publish"
-    # once finished, restore the original package.json
-    IO.write($path_to_root+"/package.json", JSON.pretty_generate($main_package_json))
-    # switch back to the original readme
-    FileUtils.mv($path_to_root+"/temp_readme.md", $path_to_root+"/README.md")
+    begin
+        # move the current readme to a temp place
+        FileUtils.mv($path_to_root+"/README.md", $path_to_root+"/temp_readme.md")
+        # if there is a readme for the language, switch to it
+        if File.file?($path_to_languages+"/README.md")
+            FileUtils.cp($path_to_languages+"/README.md", $path_to_root+"/README.md")
+        else
+            FileUtils.cp($path_to_root+"/generic_readme.md", $path_to_root+"/README.md")
+        end
+        # overwrite the package json
+        IO.write($path_to_root+"/package.json", new_package_json_string)
+        # run the build command then publish
+        system "npm run build #{language_extension} && vsce publish"
+    ensure
+        # once finished, restore the original package.json
+        IO.write($path_to_root+"/package.json", JSON.pretty_generate($main_package_json))
+        # switch back to the original readme
+        FileUtils.mv($path_to_root+"/temp_readme.md", $path_to_root+"/README.md")
+    end
 end
