@@ -9,9 +9,16 @@ def saveGrammar(grammar)
     # 
     # save the syntax.json, the syntax.yaml, and the tags
     # 
-    grammar.saveAsYamlTo(syntax_location)
-    grammar.saveAsJsonTo(syntax_location)
-    grammar.saveTagsTo(language_tag_location)
+    # the easy (inefficient way) is to do:
+    #   grammar.saveAsYamlTo(syntax_location)
+    #   grammar.saveAsJsonTo(syntax_location)
+    #   grammar.saveTagsTo(language_tag_location)
+    # its inefficient because it rebuilds the grammar each time
+    
+    grammar_as_hash = grammar.to_h
+    IO.write(syntax_location+".json", grammar_as_hash.to_json)
+    IO.write(syntax_location+".yaml", grammar_as_hash.to_yaml)
+    IO.write(language_tag_location, grammar.all_tags.to_a.sort.join("\n"))
     
     # 
     # add to the package.json, if the language is not already in there

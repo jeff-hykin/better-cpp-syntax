@@ -314,30 +314,6 @@ class Grammar
     end
     
     #
-    # Interal Helpers
-    #
-    def forEachPatternDo(original_data, a_lambda)
-        if original_data.is_a? Array
-            new_data = []
-            for each in original_data
-                new_data << forEachPatternDo(each, a_lambda)
-            end
-        elsif original_data.is_a? Hash
-            new_data = {}
-            for each in original_data.dup
-                key = each[0]
-                value = each[1]
-                
-                new_data[key] = forEachPatternDo(value, a_lambda)
-            end
-            new_data = a_lambda[new_data]
-        else
-            return original_data
-        end
-        return new_data
-    end
-    
-    #
     # External Helpers
     #
     def [](key)
@@ -357,6 +333,18 @@ class Grammar
         @data[:repository].merge!(hash_of_repos)
     end
     
+    def convertInitialContextReference(inherit_or_embedded)
+        if @wrap_source
+            each_pattern[each_key] = '#initial_context'
+        elsif inherit_or_embedded == :inherit
+            each_pattern[each_key] = "$base"
+        elsif inherit_or_embedded == :embedded
+            each_pattern[each_key] = "$self"
+        else
+            raise "\n\nError: the inherit_or_embedded needs to be either :inherit or embedded, but it was #{inherit_or_embedded} instead"
+        end
+    end
+    
     def to_h(inherit_or_embedded: :inherit)
         # 
         # initialize output
@@ -374,7 +362,7 @@ class Grammar
         initial_context = repository_copy[:$initial_context]
         repository_copy.delete(:$initial_context)
         if @wrap_source
-            repository_copy["$initial_context"] = initial_context
+            repository_copy[:initial_context] = initial_context
             # make the actual "initial_context" be the source pattern
             textmate_output[:patterns] = Grammar.convertIncludesToPatternList [
                 # this is the source pattern that always gets matched first
@@ -388,7 +376,7 @@ class Grammar
                     end_pattern: /not/.lookBehindFor(/possible/),
                     tag_as: "source",
                     includes: [
-                        "$initial_context"
+                        :initial_context
                     ],
                 )
             ]
@@ -415,52 +403,49 @@ class Grammar
         # Add the language endings
         # 
         @all_tags = Set.new()
-        post_processing = ->(each_pattern) do
-            each_pattern = each_pattern.dup
-            for each_key in each_pattern.dup.keys
-                #
-                # convert all keys to strings
-                #
-                each_pattern[each_key.to_s] = each_pattern[each_key]
-                each_pattern.delete(each_key.to_sym)
-                each_key = each_key.to_s
+        # convert all keys into strings
+        textmate_output = JSON.parse(textmate_output.to_json)
+        language_name = textmate_output["name"] 
+        textmate_output.delete("name")
+        # convert all the language_endings
+        textmate_output.recursively_set_each_value! ->(each_value, each_key) do
+            if each_key == "include"
                 # 
                 # convert the $initial_context
                 #
-                if each_key == "include"
-                    if each_pattern[each_key] == "$initial_context"
-                        if @wrap_source
-                            each_pattern[each_key] = '$initial_context'
-                        elsif inherit_or_embedded == :inherit
-                            each_pattern[each_key] = "$base"
-                        elsif inherit_or_embedded == :embedded
-                            each_pattern[each_key] = "$self"
-                        else
-                            raise "\n\nError: the inherit_or_embedded needs to be either :inherit or embedded, but it was #{inherit_or_embedded} instead"
-                        end
+                if each_value == "$initial_context"
+                    if @wrap_source
+                        '#initial_context'
+                    elsif inherit_or_embedded == :inherit
+                        "$base"
+                    elsif inherit_or_embedded == :embedded
+                        "$self"
+                    else
+                        raise "\n\nError: the inherit_or_embedded needs to be either :inherit or embedded, but it was #{inherit_or_embedded} instead"
                     end
+                else
+                    each_value
                 end
+            elsif each_key == "name" || each_key == "contentName"
                 #
                 # add the language endings
                 # 
-                if each_key == "name" || each_key == "contentName"
-                    new_names = []
-                    for each_tag in each_pattern[each_key].split(/\s/)
-                        each_with_ending = each_tag
-                        # if it doesnt already have the ending then add it
-                        if not (each_with_ending =~ /#{@language_ending}\z/)
-                            each_with_ending += ".#{@language_ending}"
-                        end
-                        new_names << each_with_ending
-                        @all_tags.add(each_with_ending)
+                new_names = []
+                for each_tag in each_value.split(/\s/)
+                    each_with_ending = each_tag
+                    # if it doesnt already have the ending then add it
+                    if not (each_with_ending =~ /#{@language_ending}\z/)
+                        each_with_ending += ".#{@language_ending}"
                     end
-                    each_pattern[each_key] = new_names.join(' ')
+                    new_names << each_with_ending
+                    @all_tags.add(each_with_ending)
                 end
+                new_names.join(' ')
+            else
+                each_value
             end
-            return each_pattern
         end
-        textmate_output[:repository] = forEachPatternDo(textmate_output[:repository], post_processing)
-        textmate_output[:patterns]   = forEachPatternDo(textmate_output[:patterns], post_processing)
+        textmate_output["name"] = language_name
         return textmate_output
     end
     
