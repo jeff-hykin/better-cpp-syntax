@@ -116,7 +116,9 @@ def packageJsonFor(language_extension, version:nil)
         createIconFor(language_extension, PathFor[:svgIcon][language_extension])
     end
     # create the png version
-    system "node #{PathFor[:svg_helper]}"
+    if not File.file?(PathFor[:pngIcon][language_extension])
+        system "node '#{PathFor[:svg_helper]}' '#{PathFor[:pngIcon][language_extension]}'"
+    end
     new_package_json["icon"] = PathFor[:relativeIconPng][language_extension]
     # keywords
     new_package_json["keywords"] = [

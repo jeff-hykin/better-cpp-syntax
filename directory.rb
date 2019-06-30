@@ -21,6 +21,7 @@ PathFor = {
     relativeIconPng:  ->(lang_extension) { File.join("icons", lang_extension+".png"                                                             ) },
     sharedPattern:    ->(pattern_name  ) { File.join(__dir__, "source"                  , "shared_patterns"                , pattern_name+".rb" ) },
     svgIcon:          ->(lang_extension) { File.join(__dir__, "icons"                   , lang_extension+".svg"                                 ) },
+    pngIcon:          ->(lang_extension) { File.join(__dir__, "icons"                   , lang_extension+".png"                                 ) },
     languageTag:      ->(lang_extension) { File.join(__dir__, "language_tags"           , lang_extension+".txt"                                 ) },
     jsonSyntax:       ->(lang_extension) { File.join(PathFor[:syntaxes]                 , lang_extension+".tmLanguage.json"                     ) },
     yamlSyntax:       ->(lang_extension) { File.join(PathFor[:syntaxes]                 , lang_extension+".tmLanguage.yaml"                     ) },
