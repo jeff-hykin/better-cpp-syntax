@@ -1,8 +1,8 @@
-source_dir = "../../"
-require_relative source_dir + 'textmate_tools.rb'
-require_relative source_dir + 'repo_specific_helpers.rb'
-require_relative source_dir + 'shared_patterns/numeric.rb'
-require_relative source_dir + 'shared_patterns/predefined_macros.rb'
+require_relative '../../../directory'
+require_relative PathFor[:repo_helper]
+require_relative PathFor[:textmate_tools]
+require_relative PathFor[:sharedPattern]["predefined_macros"]
+require_relative PathFor[:sharedPattern]["numeric"]
 require_relative './tokens.rb'
 
 objective_cpp_grammar = Grammar.new(

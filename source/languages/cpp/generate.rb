@@ -1,13 +1,13 @@
-source_dir = "../../"
-require_relative source_dir + 'textmate_tools.rb'
-require_relative source_dir + 'repo_specific_helpers.rb'
-require_relative source_dir + 'shared_patterns/numeric.rb'
-require_relative source_dir + 'shared_patterns/trigraph_support.rb'
-require_relative source_dir + 'shared_patterns/predefined_macros.rb'
-require_relative source_dir + 'shared_patterns/assembly.rb'
-require_relative source_dir + 'shared_patterns/inline_comment.rb'
-require_relative source_dir + 'shared_patterns/std_space.rb'
-require_relative source_dir + 'shared_patterns/backslash_escapes.rb'
+require_relative '../../../directory'
+require_relative PathFor[:repo_helper]
+require_relative PathFor[:textmate_tools]
+require_relative PathFor[:sharedPattern]["numeric"]
+require_relative PathFor[:sharedPattern]["trigraph_support"]
+require_relative PathFor[:sharedPattern]["predefined_macros"]
+require_relative PathFor[:sharedPattern]["assembly"]
+require_relative PathFor[:sharedPattern]["inline_comment"]
+require_relative PathFor[:sharedPattern]["std_space"]
+require_relative PathFor[:sharedPattern]["backslash_escapes"]
 require_relative './tokens.rb'
 
 # todo
