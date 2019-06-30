@@ -241,13 +241,24 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
     - meta.head.function.definition.special.member.destructor
+- source: itng
+  scopesBegin:
+    - meta.body.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '}'
   scopes:
-    - meta.body.function.definition.special.member.destructor
     - >-
       punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
+    - meta.body.function.definition.special.member.destructor
 - source: Thing4
   scopesBegin:
     - meta.function.definition.special.constructor

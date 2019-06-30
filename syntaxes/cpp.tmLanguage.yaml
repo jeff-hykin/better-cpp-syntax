@@ -143,6 +143,7 @@ repository:
     - include: "#pthread_types"
     - include: "#posix_reserved_types"
     - include: "#decltype"
+    - include: "#typename"
   block_comment:
     name: comment.block.cpp
     begin: "\\s*+(\\/\\*)"
@@ -1299,6 +1300,95 @@ repository:
       '68':
         name: punctuation.terminator.statement.cpp
     name: meta.declaration.type.alias.cpp
+  typename:
+    match: "((?<!\\w)typename(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(::))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.]))"
+    captures:
+      '1':
+        name: storage.modifier.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '6':
+        name: meta.qualified_type.cpp
+        patterns:
+        - match: "(?:class|struct|union|enum)"
+          name: storage.type.$0.cpp
+        - include: "#attributes_context"
+        - include: "#function_type"
+        - include: "#storage_types"
+        - include: "#number_literal"
+        - include: "#string_context_c"
+        - include: "#comma"
+        - include: "#scope_resolution_inner_generated"
+        - include: "#template_call_range"
+        - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*"
+          name: entity.name.type.cpp
+      '7':
+        patterns:
+        - include: "#attributes_context"
+        - include: "#number_literal"
+      '8':
+        patterns:
+        - include: "#inline_comment"
+      '9':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '10':
+        name: comment.block.cpp
+      '11':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '12':
+        patterns:
+        - include: "#inline_comment"
+      '13':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '14':
+        name: comment.block.cpp
+      '15':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '17':
+        patterns:
+        - include: "#scope_resolution_inner_generated"
+      '18':
+        name: entity.name.scope-resolution.cpp
+      '19':
+        name: meta.template.call.cpp
+        patterns:
+        - include: "#template_call_range"
+      '20':
+        name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+      '21':
+        patterns:
+        - include: "#inline_comment"
+      '22':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '23':
+        name: comment.block.cpp
+      '24':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '25':
+        name: entity.name.type.cpp
   predefined_macros:
     patterns:
     - match: "\\b__cplusplus\\b"
