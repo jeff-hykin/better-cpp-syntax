@@ -2239,7 +2239,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "#root_context"
+              "include": "$base"
             }
           ]
         },
@@ -2260,7 +2260,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "#root_context"
+              "include": "$base"
             },
             {
               "include": "#block_innards"
@@ -2273,7 +2273,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$base"
             }
           ]
         }

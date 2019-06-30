@@ -9,7 +9,14 @@
   ],
   "patterns": [
     {
-      "include": "#source_wrapper"
+      "name": "source.cpp",
+      "begin": "(?=^)",
+      "end": "not(?<=possible)",
+      "patterns": [
+        {
+          "include": "$initial_context"
+        }
+      ]
     }
   ],
   "repository": {
@@ -301,88 +308,7 @@
         }
       ]
     },
-    "inline_comment": {
-      "match": "(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/))",
-      "captures": {
-        "1": {
-          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
-        },
-        "2": {
-          "name": "comment.block.cpp"
-        },
-        "3": {
-          "patterns": [
-            {
-              "match": "\\*\\/",
-              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
-            },
-            {
-              "match": "\\*",
-              "name": "comment.block.cpp"
-            }
-          ]
-        }
-      }
-    },
-    "semicolon": {
-      "match": ";",
-      "name": "punctuation.terminator.statement.cpp"
-    },
-    "comma": {
-      "match": ",",
-      "name": "comma.cpp punctuation.separator.delimiter.cpp"
-    },
-    "assignment_operator": {
-      "match": "\\=",
-      "name": "keyword.operator.assignment.cpp"
-    },
-    "ever_present_context": {
-      "patterns": [
-        {
-          "include": "#preprocessor_rule_enabled"
-        },
-        {
-          "include": "#preprocessor_rule_disabled"
-        },
-        {
-          "include": "#preprocessor_rule_conditional"
-        },
-        {
-          "include": "#macro_argument"
-        },
-        {
-          "include": "#meta_preprocessor_macro"
-        },
-        {
-          "include": "#meta_preprocessor_diagnostic"
-        },
-        {
-          "include": "#meta_preprocessor_include"
-        },
-        {
-          "include": "#pragma_mark"
-        },
-        {
-          "include": "#meta_preprocessor_line"
-        },
-        {
-          "include": "#meta_preprocessor_undef"
-        },
-        {
-          "include": "#meta_preprocessor_pragma"
-        },
-        {
-          "include": "#hacky_fix_for_stray_directive"
-        },
-        {
-          "include": "#comments"
-        },
-        {
-          "include": "#line_continuation_character"
-        }
-      ]
-    },
-    "root_context": {
+    "$initial_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -467,6 +393,87 @@
         },
         {
           "include": "#evaluation_context"
+        }
+      ]
+    },
+    "inline_comment": {
+      "match": "(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/))",
+      "captures": {
+        "1": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "2": {
+          "name": "comment.block.cpp"
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
+        }
+      }
+    },
+    "semicolon": {
+      "match": ";",
+      "name": "punctuation.terminator.statement.cpp"
+    },
+    "comma": {
+      "match": ",",
+      "name": "comma.cpp punctuation.separator.delimiter.cpp"
+    },
+    "assignment_operator": {
+      "match": "\\=",
+      "name": "keyword.operator.assignment.cpp"
+    },
+    "ever_present_context": {
+      "patterns": [
+        {
+          "include": "#preprocessor_rule_enabled"
+        },
+        {
+          "include": "#preprocessor_rule_disabled"
+        },
+        {
+          "include": "#preprocessor_rule_conditional"
+        },
+        {
+          "include": "#macro_argument"
+        },
+        {
+          "include": "#meta_preprocessor_macro"
+        },
+        {
+          "include": "#meta_preprocessor_diagnostic"
+        },
+        {
+          "include": "#meta_preprocessor_include"
+        },
+        {
+          "include": "#pragma_mark"
+        },
+        {
+          "include": "#meta_preprocessor_line"
+        },
+        {
+          "include": "#meta_preprocessor_undef"
+        },
+        {
+          "include": "#meta_preprocessor_pragma"
+        },
+        {
+          "include": "#hacky_fix_for_stray_directive"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#line_continuation_character"
         }
       ]
     },
@@ -732,20 +739,6 @@
         },
         {
           "include": "#decltype"
-        }
-      ]
-    },
-    "source_wrapper": {
-      "patterns": [
-        {
-          "name": "source.cpp",
-          "begin": "(?=^)",
-          "end": "not(?<=possible)",
-          "patterns": [
-            {
-              "include": "#root_context"
-            }
-          ]
         }
       ]
     },
@@ -1411,7 +1404,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1432,7 +1425,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             },
             {
               "include": "#block_innards"
@@ -1445,7 +1438,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -4206,7 +4199,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -4231,7 +4224,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -4846,7 +4839,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -4871,7 +4864,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -5263,7 +5256,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -5288,7 +5281,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -5578,7 +5571,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -5603,7 +5596,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -5775,7 +5768,7 @@
               }
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -5800,7 +5793,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -6022,7 +6015,7 @@
               }
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -6047,7 +6040,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -7532,7 +7525,7 @@
           },
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -7542,7 +7535,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -7665,7 +7658,7 @@
           },
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -7785,7 +7778,7 @@
           },
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -7819,7 +7812,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -8003,7 +7996,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -8013,7 +8006,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -8173,7 +8166,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -8183,7 +8176,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -8343,7 +8336,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -8353,7 +8346,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -8391,7 +8384,7 @@
           },
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -8406,7 +8399,7 @@
           },
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -8416,12 +8409,12 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -8588,7 +8581,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             },
@@ -8883,7 +8876,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             },
@@ -9178,7 +9171,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             },
@@ -11769,7 +11762,7 @@
           ]
         },
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -11837,7 +11830,7 @@
           ]
         },
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -11987,7 +11980,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -12080,7 +12073,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -12237,7 +12230,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -12335,7 +12328,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -12422,7 +12415,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -12509,7 +12502,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -12531,7 +12524,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -12551,7 +12544,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -12649,7 +12642,7 @@
           ]
         },
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },

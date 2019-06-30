@@ -13,13 +13,13 @@
       "end": "not(?<=possible)",
       "patterns": [
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     }
   ],
   "repository": {
-    "root_context": {
+    "$initial_context": {
       "patterns": [
         {
           "include": "#comment"
@@ -460,7 +460,7 @@
     "variable_assignment_context": {
       "patterns": [
         {
-          "include": "#root_context"
+          "include": "$initial_context"
         }
       ]
     },
@@ -515,7 +515,7 @@
               "name": "meta.scope.case-clause-body.shell",
               "patterns": [
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             }
@@ -575,7 +575,7 @@
               "include": "#logical-expression"
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -615,7 +615,7 @@
           "name": "meta.scope.subshell.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -635,7 +635,7 @@
           "name": "meta.scope.group.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -665,7 +665,7 @@
           "name": "meta.function.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -688,7 +688,7 @@
           "name": "meta.function.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -1131,7 +1131,7 @@
               "name": "string.unquoted.herestring.shell",
               "patterns": [
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             }
@@ -1204,7 +1204,7 @@
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1224,7 +1224,7 @@
           "name": "string.interpolated.dollar.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -1273,7 +1273,7 @@
           "name": "meta.scope.for-loop.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1304,7 +1304,7 @@
           "name": "meta.scope.for-in-loop.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1324,7 +1324,7 @@
           "name": "meta.scope.while-loop.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1347,7 +1347,7 @@
           "name": "meta.scope.select-block.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1383,12 +1383,12 @@
                   "include": "#case-clause"
                 },
                 {
-                  "include": "#root_context"
+                  "include": "$initial_context"
                 }
               ]
             },
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },
@@ -1408,7 +1408,7 @@
           "name": "meta.scope.if-block.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -1470,7 +1470,7 @@
           "name": "meta.structure.extglob.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         }
@@ -1506,7 +1506,7 @@
           "name": "string.interpolated.process-substitution.shell",
           "patterns": [
             {
-              "include": "#root_context"
+              "include": "$initial_context"
             }
           ]
         },

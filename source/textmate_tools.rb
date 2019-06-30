@@ -300,7 +300,7 @@ class Grammar
     #
     # Constructor
     #
-    def initialize(name:nil, scope_name:nil, global_patterns:[], repository:{}, **other)
+    def initialize(wrap_source: true, name:nil, scope_name:nil, global_patterns:[], repository:{}, **other)
         @data = {
             name: name,
             scopeName: scope_name,
@@ -308,6 +308,7 @@ class Grammar
             patterns: global_patterns,
             repository: repository,
         }
+        @wrap_source = wrap_source
         @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
         @@current_grammar = self
     end
@@ -372,7 +373,28 @@ class Grammar
         # 
         initial_context = repository_copy[:$initial_context]
         repository_copy.delete(:$initial_context)
-        textmate_output[:patterns] = Grammar.convertIncludesToPatternList(initial_context)
+        if @wrap_source
+            repository_copy["$initial_context"] = initial_context
+            # make the actual "initial_context" be the source pattern
+            textmate_output[:patterns] = Grammar.convertIncludesToPatternList [
+                # this is the source pattern that always gets matched first
+                PatternRange.new(
+                    zeroLengthStart?: true,
+                    # the first position
+                    start_pattern: lookAheadFor(/^/),
+                    # ensure end never matches
+                    # why? because textmate will keep looking until it hits the end of the file (which is the purpose of this wrapper)
+                    # how? because the regex is trying to find "not" and then checks to see if "not" == "possible" (which can never happen)
+                    end_pattern: /not/.lookBehindFor(/possible/),
+                    tag_as: "source",
+                    includes: [
+                        "$initial_context"
+                    ],
+                )
+            ]
+        else
+            textmate_output[:patterns] = Grammar.convertIncludesToPatternList(initial_context)
+        end
         for each in initial_context
             if each.is_a? Symbol
                 if self[each] == nil
@@ -407,7 +429,9 @@ class Grammar
                 #
                 if each_key == "include"
                     if each_pattern[each_key] == "$initial_context"
-                        if inherit_or_embedded == :inherit
+                        if @wrap_source
+                            each_pattern[each_key] = '$initial_context'
+                        elsif inherit_or_embedded == :inherit
                             each_pattern[each_key] = "$base"
                         elsif inherit_or_embedded == :embedded
                             each_pattern[each_key] = "$self"

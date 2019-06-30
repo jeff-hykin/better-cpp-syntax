@@ -27,7 +27,7 @@ def saveGrammar(grammar)
     if matching_langs.length == 0
         # add it to the package.json
         package_info["contributes"]["grammars"].push({
-            language: grammar.data[:name].to_s.downcase,
+            language: grammar.data[:name].to_s,
             scopeName: grammar.data[:scopeName],
             path: Pathname.new(syntax_location+".json").relative_path_from(Pathname.new(root_dir)),
         })

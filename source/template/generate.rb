@@ -1,7 +1,6 @@
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
-require_relative source_dir + 'shared_patterns/source_wrapper.rb'
 require_relative './tokens.rb'
 require 'json'
 
@@ -28,8 +27,7 @@ Dir.chdir __dir__
 # Contexts
 #
 #
-    grammar[:$initial_context] = source_wrapper()
-    grammar[:root_context] = [
+    grammar[:$initial_context] = [
             # import all the original patterns
             *original_grammar["patterns"],
         ]

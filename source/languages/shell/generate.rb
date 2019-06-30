@@ -1,7 +1,6 @@
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
-require_relative source_dir + 'shared_patterns/source_wrapper.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative './tokens.rb'
 require 'json'
@@ -14,7 +13,7 @@ Dir.chdir __dir__
 # 
     # Standard refernce: http://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html
     original_grammar = JSON.parse(IO.read("original.tmlanguage.json"))
-    Grammar.convertSpecificIncludes(json_grammar: original_grammar, convert:["$self", "$base"], into: "#root_context")
+    Grammar.convertSpecificIncludes(json_grammar: original_grammar, convert:["$self", "$base"], into: :$initial_context)
     grammar = Grammar.new(
         name: original_grammar["name"],
         scope_name: original_grammar["scopeName"],
@@ -30,8 +29,7 @@ Dir.chdir __dir__
 # Contexts
 #
 #
-    grammar[:$initial_context] = source_wrapper()
-    grammar[:root_context] = [
+    grammar[:$initial_context] = [
             :comment,
             :boolean,
             :numeric_constant,
@@ -103,7 +101,7 @@ Dir.chdir __dir__
             :support,
         ]
     grammar[:variable_assignment_context] = [
-            :root_context
+            :$initial_context
         ]
 #
 #

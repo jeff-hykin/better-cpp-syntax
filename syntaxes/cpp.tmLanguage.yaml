@@ -7,7 +7,11 @@
 - This file essentially an updated/improved fork of the atom syntax
 - see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master
 :patterns:
-- include: "#source_wrapper"
+- name: source.cpp
+  begin: "(?=^)"
+  end: not(?<=possible)
+  patterns:
+  - include: "$initial_context"
 :repository:
   decltype_specifier:
     contentName: meta.arguments.decltype.cpp
@@ -171,6 +175,36 @@
         name: punctuation.section.arguments.end.bracket.round.operator.noexcept.cpp
     patterns:
     - include: "#evaluation_context"
+  "$initial_context":
+    patterns:
+    - include: "#ever_present_context"
+    - include: "#constructor_root"
+    - include: "#destructor_root"
+    - include: "#function_definition"
+    - include: "#operator_overload"
+    - include: "#using_namespace"
+    - include: "#type_alias"
+    - include: "#using_name"
+    - include: "#namespace_alias"
+    - include: "#namespace_block"
+    - include: "#extern_block"
+    - include: "#typedef_class"
+    - include: "#typedef_struct"
+    - include: "#typedef_union"
+    - include: "#typedef_keyword"
+    - include: "#standard_declares"
+    - include: "#class_block"
+    - include: "#struct_block"
+    - include: "#union_block"
+    - include: "#enum_block"
+    - include: "#template_isolated_definition"
+    - include: "#template_definition"
+    - include: "#access_control_keywords"
+    - include: "#block"
+    - include: "#static_assert"
+    - include: "#assembly"
+    - include: "#function_pointer"
+    - include: "#evaluation_context"
   inline_comment:
     match: "(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/))"
     captures:
@@ -209,36 +243,6 @@
     - include: "#hacky_fix_for_stray_directive"
     - include: "#comments"
     - include: "#line_continuation_character"
-  root_context:
-    patterns:
-    - include: "#ever_present_context"
-    - include: "#constructor_root"
-    - include: "#destructor_root"
-    - include: "#function_definition"
-    - include: "#operator_overload"
-    - include: "#using_namespace"
-    - include: "#type_alias"
-    - include: "#using_name"
-    - include: "#namespace_alias"
-    - include: "#namespace_block"
-    - include: "#extern_block"
-    - include: "#typedef_class"
-    - include: "#typedef_struct"
-    - include: "#typedef_union"
-    - include: "#typedef_keyword"
-    - include: "#standard_declares"
-    - include: "#class_block"
-    - include: "#struct_block"
-    - include: "#union_block"
-    - include: "#enum_block"
-    - include: "#template_isolated_definition"
-    - include: "#template_definition"
-    - include: "#access_control_keywords"
-    - include: "#block"
-    - include: "#static_assert"
-    - include: "#assembly"
-    - include: "#function_pointer"
-    - include: "#evaluation_context"
   function_body_context:
     patterns:
     - include: "#ever_present_context"
@@ -332,13 +336,6 @@
     - include: "#pthread_types"
     - include: "#posix_reserved_types"
     - include: "#decltype"
-  source_wrapper:
-    patterns:
-    - name: source.cpp
-      begin: "(?=^)"
-      end: not(?<=possible)
-      patterns:
-      - include: "#root_context"
   block_comment:
     name: comment.block.cpp
     begin: "\\s*+(\\/\\*)"
@@ -735,7 +732,7 @@
           name: punctuation.section.block.begin.bracket.curly.switch.cpp
       patterns:
       - include: "#switch_conditional_parentheses"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.switch.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -745,13 +742,13 @@
       patterns:
       - include: "#default_statement"
       - include: "#case_statement"
-      - include: "#root_context"
+      - include: "$initial_context"
       - include: "#block_innards"
     - name: meta.tail.switch.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   cpp_attributes:
     name: support.other.attribute.cpp
     begin: "(\\[\\[)"
@@ -2166,7 +2163,7 @@
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -2179,7 +2176,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   operator_overload:
     name: meta.function.definition.special.operator-overload.cpp
     begin: ((?:(\s*+((?:(?:(?:\[\[.*?\]\]|__attribute(?:__)?\(\(.*?\)\))|__declspec\(.*?\))|alignas\(.*?\))(?!\)))?((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))*(((?:::)?(?:(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)?::)*\s*+)((?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)\s*+((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)?(::))?((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\b)((?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)?(?![\w<:.]))((?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:\*(?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?=\*|\&))?)*)((?:&(?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?=\&))?){0,2})((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))?))?\s*+((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)?::)*)(operator)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\s*)?::)*)(?:(?:((?:\+\+|\-\-|\(\)|\[\]|\->|\+\+|\-\-|\+|\-|!|~|\*|&|new|new\[\]|delete|delete\[\]|\->\*|\*|\/|%|\+|\-|<<|>>|<=>|<|<=|>|>=|==|!=|&|\^|\||&&|\|\||=|\+=|\-=|\*=|\/=|%=|<<=|>>=|&=|\^=|\|=|,))|((?<!\w)(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?!\w)((?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:\*(?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?=\*|\&))?)*)((?:&(?:((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?=\&))?){0,2})((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?:\[\])?)))|("")((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((?<!\w)(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?!\w)))((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?=\<|\())
@@ -2498,7 +2495,7 @@
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.special.operator-overload.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -2511,7 +2508,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   static_assert:
     begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)static_assert|_Static_assert(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()"
     beginCaptures:
@@ -2721,7 +2718,7 @@
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.special.constructor.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -2734,7 +2731,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   constructor_root:
     name: meta.function.definition.special.constructor.cpp
     begin: "(\\s*+\\s*+((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*)(((?>(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))::((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\9((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\()))"
@@ -2887,7 +2884,7 @@
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.special.constructor.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -2900,7 +2897,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   destructor_inline:
     name: meta.function.definition.special.member.destructor.cpp
     begin: "(^((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\s*+((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:inline|constexpr|mutable|friend|explicit|virtual))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(~(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)(?=\\()))"
@@ -2993,7 +2990,7 @@
         endCaptures:
           '1':
             name: punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.special.member.destructor.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -3006,7 +3003,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   destructor_root:
     name: meta.function.definition.special.member.destructor.cpp
     begin: "(\\s*+((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*)(((?>(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))::((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))~\\9((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\()))"
@@ -3123,7 +3120,7 @@
         endCaptures:
           '1':
             name: punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.function.definition.special.member.destructor.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -3136,7 +3133,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   operators:
     patterns:
     - include: "#sizeof_operator"
@@ -3904,12 +3901,12 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.namespace.cpp
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.tail.namespace.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   macro_argument:
     match: "##(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)"
     name: variable.other.macro.argument.cpp
@@ -3977,7 +3974,7 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.lambda.cpp
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   enumerator_list:
     match: "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))\\s*((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?\\s*(?:(\\=)\\s*(.+?)\\s*)?(?:(?:((?:[,;]|\\n))|(?=\\}))|(?=(?:\\/\\/|\\/\\*)))"
     captures:
@@ -4042,7 +4039,7 @@
         '1':
           name: punctuation.section.block.begin.bracket.curly.enum.cpp
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.enum.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -4058,7 +4055,7 @@
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   inheritance_context:
     patterns:
     - match: ","
@@ -4152,12 +4149,12 @@
       - include: "#static_assert"
       - include: "#constructor_inline"
       - include: "#destructor_inline"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.tail.class.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   struct_block:
     name: meta.block.struct.cpp
     begin: "((((?<!\\w)struct(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(DLLEXPORT)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?\\s*((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*,?\\s*(?:private|protected|public)?\\s*(?:\\s*,?\\s*(?!(?:private|protected|public))(?:\\s*+(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?:::))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.])))+)*))?))"
@@ -4239,12 +4236,12 @@
       - include: "#static_assert"
       - include: "#constructor_inline"
       - include: "#destructor_inline"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.tail.struct.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   union_block:
     name: meta.block.union.cpp
     begin: "((((?<!\\w)union(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(DLLEXPORT)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?\\s*((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*,?\\s*(?:private|protected|public)?\\s*(?:\\s*,?\\s*(?!(?:private|protected|public))(?:\\s*+(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?:::))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.])))+)*))?))"
@@ -4326,12 +4323,12 @@
       - include: "#static_assert"
       - include: "#constructor_inline"
       - include: "#destructor_inline"
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.tail.union.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   extern_block:
     name: meta.block.extern.cpp
     begin: ((\bextern)(?=\s*\"))
@@ -4354,7 +4351,7 @@
         '1':
           name: punctuation.section.block.begin.bracket.curly.extern.cpp
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.body.extern.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -4362,13 +4359,13 @@
         '1':
           name: punctuation.section.block.end.bracket.curly.extern.cpp
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
     - name: meta.tail.extern.cpp
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "#root_context"
-    - include: "#root_context"
+      - include: "$initial_context"
+    - include: "$initial_context"
   typedef_class:
     begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)class(?!\\w))"
     beginCaptures:
@@ -4456,7 +4453,7 @@
         - include: "#static_assert"
         - include: "#constructor_inline"
         - include: "#destructor_inline"
-        - include: "#root_context"
+        - include: "$initial_context"
       - name: meta.tail.class.cpp
         begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
@@ -4609,7 +4606,7 @@
         - include: "#static_assert"
         - include: "#constructor_inline"
         - include: "#destructor_inline"
-        - include: "#root_context"
+        - include: "$initial_context"
       - name: meta.tail.struct.cpp
         begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
@@ -4762,7 +4759,7 @@
         - include: "#static_assert"
         - include: "#constructor_inline"
         - include: "#destructor_inline"
-        - include: "#root_context"
+        - include: "$initial_context"
       - name: meta.tail.union.cpp
         begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
         end: "[\\s\\n]*(?=;)"
@@ -6161,7 +6158,7 @@
       name: meta.preprocessor.cpp
       patterns:
       - include: "#preprocessor_rule_conditional_line_context"
-    - include: "#root_context"
+    - include: "$initial_context"
   preprocessor_rule_conditional_block:
     begin: "^\\s*((#)\\s*if(?:n?def)?\\b)"
     beginCaptures:
@@ -6198,7 +6195,7 @@
       name: meta.preprocessor.cpp
       patterns:
       - include: "#preprocessor_rule_conditional_line_context"
-    - include: "#root_context"
+    - include: "$initial_context"
   preprocessor_rule_conditional_line_context:
     patterns:
     - match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))"
@@ -6275,7 +6272,7 @@
         name: meta.preprocessor.cpp
         patterns:
         - include: "#preprocessor_rule_conditional_line_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - contentName: comment.block.preprocessor.if-branch.cpp
       begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
@@ -6324,7 +6321,7 @@
         name: meta.preprocessor.cpp
         patterns:
         - include: "#preprocessor_rule_conditional_line_context"
-      - include: "#root_context"
+      - include: "$initial_context"
     - contentName: comment.block.preprocessor.if-branch.in-block.cpp
       begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
@@ -6409,7 +6406,7 @@
     - begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   preprocessor_rule_enabled_block:
     begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     beginCaptures:
@@ -6463,7 +6460,7 @@
     - begin: "\\n"
       end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))"
       patterns:
-      - include: "#root_context"
+      - include: "$initial_context"
   preprocessor_rule_enabled_elif:
     begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     beginCaptures:
@@ -6510,7 +6507,7 @@
         patterns:
         - include: "#disabled"
         - include: "#pragma_mark"
-      - include: "#root_context"
+      - include: "$initial_context"
   preprocessor_rule_enabled_elif_block:
     begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))"
     beginCaptures:
@@ -6557,7 +6554,7 @@
         patterns:
         - include: "#disabled"
         - include: "#pragma_mark"
-      - include: "#root_context"
+      - include: "$initial_context"
   preprocessor_rule_enabled_else:
     begin: "^\\s*((#)\\s*else\\b)"
     beginCaptures:
@@ -6569,7 +6566,7 @@
         name: punctuation.definition.directive.cpp
     end: "(?=^\\s*((#)\\s*endif\\b))"
     patterns:
-    - include: "#root_context"
+    - include: "$initial_context"
   preprocessor_rule_enabled_else_block:
     begin: "^\\s*((#)\\s*else\\b)"
     beginCaptures:
@@ -6581,7 +6578,7 @@
         name: punctuation.definition.directive.cpp
     end: "(?=^\\s*((#)\\s*endif\\b))"
     patterns:
-    - include: "#root_context"
+    - include: "$initial_context"
   preprocessor_rule_define_line_context:
     patterns:
     - include: "#vararg_ellipses"
@@ -6638,7 +6635,7 @@
       patterns:
       - include: "#string_escapes_context_c"
       - include: "#line_continuation_character"
-    - include: "#root_context"
+    - include: "$initial_context"
   preprocessor_rule_define_line_blocks_context:
     patterns:
     - begin: "{"
