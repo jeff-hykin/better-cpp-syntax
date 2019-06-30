@@ -57,6 +57,7 @@ require_relative './tokens.rb'
             :control_flow,
             :function_definition,
             :function_call,
+            :label,
             :numbers,
             :special_identifiers,
             :operators,
@@ -168,6 +169,17 @@ require_relative './tokens.rb'
                     tag_as: "punctuation.section.curly-brackets",
                 ),
                 includes: [ :initial_context ]
+            ),
+            grammar[:paraentheses] = PatternRange.new(
+                start_pattern: newPattern(
+                    match: /\(/,
+                    tag_as: "punctuation.section.parens",
+                ),
+                end_pattern: newPattern(
+                    match: /\)/,
+                    tag_as: "punctuation.section.parens",
+                ),
+                includes: [ :initial_context ]
             )
         ]
     # 
@@ -228,6 +240,26 @@ require_relative './tokens.rb'
                     end_pattern: lookAheadFor(/\}/),
                     includes: [ :$initial_context ],
                 ),
+                grammar[:paraentheses] = PatternRange.new(
+                    start_pattern: newPattern(
+                        match: /\(/,
+                        tag_as: "punctuation.section.parameters",
+                    ),
+                    end_pattern: newPattern(
+                        match: /\)/,
+                        tag_as: "punctuation.section.parameters",
+                    ),
+                    includes: [ :initial_context ]
+                ),
+                newPattern(
+                    newPattern(
+                        match: /:/,
+                        tag_as: "punctuation.definition.attribute entity.name.attribute"
+                    ).then(std_space).then(
+                        match: @variable,
+                        tag_as: "entity.name.attribute",
+                    ).then(std_space)
+                ),
                 # todo: make this more restrictive 
                 :$initial_context
             ]
@@ -247,6 +279,20 @@ require_relative './tokens.rb'
                 tag_as: "punctuation.section.arguments",
             ),
             includes: [ :$initial_context ]
+        )
+    # 
+    # Labels
+    # 
+        grammar[:label] = newPattern(
+            std_space.then(
+                tag_as: "entity.name.label",
+                match: @variable,
+            ).then(@word_boundary).then(
+                std_space
+            ).then(
+                match: /:/,
+                tag_as: "punctuation.separator.label",
+            )
         )
     # 
     # copy over all the repos

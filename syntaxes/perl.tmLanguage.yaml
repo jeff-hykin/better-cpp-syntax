@@ -420,6 +420,12 @@ repository:
       end: "(?=\\})"
       patterns:
       - include: "#initial_context"
+    - match: "(:)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))"
+      captures:
+        '1':
+          name: punctuation.definition.attribute.perl entity.name.attribute.perl
+        '2':
+          name: entity.name.attribute.perl
     - include: "#initial_context"
   function_call:
     begin: "((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
@@ -434,6 +440,13 @@ repository:
         name: punctuation.section.arguments.perl
     patterns:
     - include: "#initial_context"
+  label:
+    match: "(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))\\b(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(:)"
+    captures:
+      '1':
+        name: entity.name.label.perl
+      '2':
+        name: punctuation.separator.label.perl
   escaped_char:
     patterns:
     - match: "\\\\\\d+"
@@ -744,6 +757,7 @@ repository:
     - include: "#control_flow"
     - include: "#function_definition"
     - include: "#function_call"
+    - include: "#label"
     - include: "#numbers"
     - include: "#special_identifiers"
     - include: "#operators"

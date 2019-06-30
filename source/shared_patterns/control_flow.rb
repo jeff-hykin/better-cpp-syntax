@@ -2,7 +2,7 @@ def c_style_control(keyword:"", primary_inlcudes:[],  paraentheses_include:[], b
     PatternRange.new(
         start_pattern: newPattern(
             /\s*+/.then(
-                match: /#{keyword}/,
+                match: lookBehindToAvoid(@standard_character).then(/#{keyword}/).lookAheadToAvoid(@standard_character),
                 tag_as: "keyword.control.#{keyword}"
             ).then(/\s*+/)
         ),
