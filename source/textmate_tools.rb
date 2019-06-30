@@ -369,7 +369,7 @@ class Grammar
                 PatternRange.new(
                     zeroLengthStart?: true,
                     # the first position
-                    start_pattern: lookAheadFor(/^/),
+                    start_pattern: lookAheadFor(/^|\A|\G/),
                     # ensure end never matches
                     # why? because textmate will keep looking until it hits the end of the file (which is the purpose of this wrapper)
                     # how? because the regex is trying to find "not" and then checks to see if "not" == "possible" (which can never happen)
