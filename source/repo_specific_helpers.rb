@@ -16,7 +16,7 @@ def saveGrammar(grammar)
     # its inefficient because it rebuilds the grammar each time
     
     grammar_as_hash = grammar.to_h
-    IO.write(syntax_location+".json", grammar_as_hash.to_json)
+    IO.write(syntax_location+".json", JSON.pretty_generate(grammar_as_hash))
     IO.write(syntax_location+".yaml", grammar_as_hash.to_yaml)
     IO.write(language_tag_location, grammar.all_tags.to_a.sort.join("\n"))
     
