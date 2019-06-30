@@ -274,6 +274,14 @@
         }
       ]
     },
+    "keyword_operators": {
+      "patterns": [
+        {
+          "match": "(?:lt|gt|le|ge|eq|ne|cmp|and|or)",
+          "name": "keyword.operator.alias.$0.perl"
+        }
+      ]
+    },
     "operators": {
       "patterns": [
         {
@@ -295,10 +303,6 @@
               "include": "#initial_context"
             }
           ]
-        },
-        {
-          "match": "(?:lt|gt|le|ge|eq|ne|cmp|and|or)",
-          "name": "keyword.operator.alias.$0.perl"
         },
         {
           "match": "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)",
@@ -1403,7 +1407,7 @@
           "include": "#special_identifiers"
         },
         {
-          "include": "#operators"
+          "include": "#keyword_operators"
         },
         {
           "include": "#line_comment"
@@ -3506,6 +3510,9 @@
           },
           "comment": "Match empty parenthesis for ↩ snippet",
           "match": "(\\()(\\))"
+        },
+        {
+          "include": "#operators"
         },
         {
           "include": "#punctuation"

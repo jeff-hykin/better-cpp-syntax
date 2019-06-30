@@ -159,6 +159,10 @@ repository:
       name: variable.language.special.caret.perl
     - match: "(?<!\\w)undef(?!\\w)"
       name: constant.language.undef.perl
+  keyword_operators:
+    patterns:
+    - match: "(?:lt|gt|le|ge|eq|ne|cmp|and|or)"
+      name: keyword.operator.alias.$0.perl
   operators:
     patterns:
     - contentName: meta.readline.perl
@@ -172,8 +176,6 @@ repository:
           name: punctuation.separator.readline.perl
       patterns:
       - include: "#initial_context"
-    - match: "(?:lt|gt|le|ge|eq|ne|cmp|and|or)"
-      name: keyword.operator.alias.$0.perl
     - match: "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)"
       name: keyword.operator.comparision.perl
     - match: "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|<<=|>>=|&=|\\|=|\\^=|=|\\.=)"
@@ -773,7 +775,7 @@ repository:
     - include: "#label"
     - include: "#numbers"
     - include: "#special_identifiers"
-    - include: "#operators"
+    - include: "#keyword_operators"
     - include: "#line_comment"
     - begin: "^(?==[a-zA-Z]+)"
       end: "^(=cut\\b.*$)"
@@ -1878,5 +1880,6 @@ repository:
           name: punctuation.section.scope.end.perl
       comment: Match empty parenthesis for ↩ snippet
       match: "(\\()(\\))"
+    - include: "#operators"
     - include: "#punctuation"
 name: Perl

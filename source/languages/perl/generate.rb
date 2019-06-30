@@ -60,9 +60,10 @@ require_relative './tokens.rb'
             :label,
             :numbers,
             :special_identifiers,
-            :operators,
+            :keyword_operators,
             # import all the original patterns
             *original_grammar["patterns"],
+            :operators,
             :punctuation,
         ]
 #
@@ -91,6 +92,12 @@ require_relative './tokens.rb'
     # 
     # operators
     # 
+        grammar[:keyword_operators]  = [
+                newPattern(
+                match: @tokens.that(:areOperatorAliases),
+                tag_as: "keyword.operator.alias.$match",
+            ),
+        ]
         grammar[:operators] = [
             PatternRange.new(
                 tag_content_as: "meta.readline",
@@ -105,10 +112,6 @@ require_relative './tokens.rb'
                     tag_as:"punctuation.separator.readline",
                 ),
                 includes: [ :$initial_context ]
-            ),
-            newPattern(
-                match: @tokens.that(:areOperatorAliases),
-                tag_as: "keyword.operator.alias.$match",
             ),
             newPattern(
                 match: @tokens.that(:areComparisionOperators),
