@@ -180,7 +180,7 @@ require_relative './tokens.rb'
                     match: /use/,
                     tag_as: "keyword.other.use"
                 ).then(std_space).then(
-                    match: /\w+/,
+                    match: /[\w\.]+/,
                     tag_as: "entity.name.package",
                 )
             ),

@@ -305,7 +305,7 @@
           "name": "keyword.operator.comparision.perl"
         },
         {
-          "match": "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|<<=|>>=|&=|\\|=|\\^=|=|\\.=)",
+          "match": "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|<<=|>>=|&=|\\|=|\\^=|=|\\.=)",
           "name": "keyword.operator.assignment.perl"
         },
         {
@@ -313,7 +313,7 @@
           "name": "keyword.operator.logical.perl"
         },
         {
-          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%)",
+          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\-\\-|\\+\\+)",
           "name": "keyword.operator.arithmetic.perl"
         },
         {
@@ -390,7 +390,7 @@
     },
     "using_statement": {
       "name": "meta.import.perl",
-      "begin": "(use)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\w+)",
+      "begin": "(use)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))([\\w\\.]+)",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.use.perl"
