@@ -2161,4 +2161,4 @@ c_grammar.addToRepository({
 })
 
 # Save
-@syntax_location = saveGrammar(c_grammar)
+saveGrammar(c_grammar)

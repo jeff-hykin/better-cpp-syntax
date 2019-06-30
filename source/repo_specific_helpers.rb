@@ -1,11 +1,6 @@
-require 'pathname'
+require_relative '../directory.rb'
 
 def saveGrammar(grammar)
-    root_dir = __dir__+"/../"
-    # paths relative to the project root
-    package_json_location = root_dir + "./package.json"
-    syntax_location       = root_dir + "./syntaxes/#{grammar.language_ending}.tmLanguage"
-    language_tag_location = root_dir + "./language_tags/#{grammar.language_ending}.txt"
     # 
     # save the syntax.json, the syntax.yaml, and the tags
     # 
@@ -16,15 +11,15 @@ def saveGrammar(grammar)
     # its inefficient because it rebuilds the grammar each time
     
     grammar_as_hash = grammar.to_h
-    IO.write(syntax_location+".json", JSON.pretty_generate(grammar_as_hash))
-    IO.write(syntax_location+".yaml", grammar_as_hash.to_yaml)
-    IO.write(language_tag_location, grammar.all_tags.to_a.sort.join("\n"))
+    IO.write(PathFor[:jsonSyntax ][grammar.language_ending], JSON.pretty_generate(grammar_as_hash))
+    IO.write(PathFor[:yamlSyntax ][grammar.language_ending], grammar_as_hash.to_yaml)
+    IO.write(PathFor[:languageTag][grammar.language_ending], grammar.all_tags.to_a.sort.join("\n"))
     
     # 
     # add to the package.json, if the language is not already in there
     # 
     # TODO: this should probably be made generic and packaged up inside the textmate_tools.rb as a "addToVsCodePackageJson"
-    package_info = JSON.parse(IO.read(package_json_location))
+    package_info = JSON.parse(IO.read(PathFor[:package_json]))
     languages = package_info["contributes"]["grammars"]
     # remove all the languages that are not the current language
     matching_langs = languages.select do |each|
@@ -36,11 +31,9 @@ def saveGrammar(grammar)
         package_info["contributes"]["grammars"].push({
             language: grammar.data[:name].to_s,
             scopeName: grammar.data[:scopeName],
-            path: Pathname.new(syntax_location+".json").relative_path_from(Pathname.new(root_dir)),
+            path: Pathname.new(PathFor[:jsonSyntax][grammar.language_ending]).relative_path_from(Pathname.new(PathFor[:root])),
         })
         # save it as pretty json
-        IO.write(package_json_location, JSON.pretty_generate(package_info))
+        IO.write(PathFor[:package_json], JSON.pretty_generate(package_info))
     end
-    
-    return syntax_location
 end

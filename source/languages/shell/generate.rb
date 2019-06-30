@@ -323,4 +323,4 @@ Dir.chdir __dir__
 
  
 # Save
-@syntax_location = saveGrammar(grammar)
+saveGrammar(grammar)

@@ -2931,7 +2931,7 @@ objective_cpp_grammar[:protocol_list] = { "begin" => "(<)", "beginCaptures" => {
 objective_cpp_grammar[:protocol_type_qualifier] = { "match" => "\\b(in|out|inout|oneway|bycopy|byref)\\b", "name" => "storage.modifier.protocol" }
 objective_cpp_grammar[:special_variables] = { "patterns" => [{ "match" => "\\b_cmd\\b", "name" => "variable.other.selector" }, { "match" => "\\b(self|super)\\b", "name" => "variable.language" }] }
 
-@syntax_location = saveGrammar(objective_cpp_grammar)
+saveGrammar(objective_cpp_grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = objective_cpp_grammar

@@ -1,8 +1,8 @@
-require 'json'
+require_relative '../directory.rb'
 
-for each in Dir[__dir__() +"/../test/fixtures/**/*"]
+for each in Dir[PathFor[:fixtures]+"/**/*"]
     if File.file?(each)
         puts "#{File.basename(each)}"
-        `node test/source/commands/report perf2 "#{each}"`
+        `node #{PathFor[:report]} perf2 "#{each}"`
     end
 end

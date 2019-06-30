@@ -2969,4 +2969,4 @@ objective_cpp_grammar[:string_placeholder] = {
 }
 
 
-@syntax_location = saveGrammar(objective_cpp_grammar)
+saveGrammar(objective_cpp_grammar)

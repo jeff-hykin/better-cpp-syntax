@@ -3591,7 +3591,7 @@ cpp_grammar = Grammar.new(
     
 
 # Save
-@syntax_location = saveGrammar(cpp_grammar)
+saveGrammar(cpp_grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = cpp_grammar

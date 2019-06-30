@@ -42,4 +42,4 @@ Dir.chdir __dir__
     end
  
 # Save
-@syntax_location = saveGrammar(grammar)
+saveGrammar(grammar)
