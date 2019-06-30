@@ -1,9 +1,8 @@
 {
-  "name": "better-syntax",
+  "name": "better-cpp-syntax",
   "displayName": "Better Syntax",
-  "description": "A bundle of syntax impovements to several languages",
-  "icon": "icon.png",
-  "version": "1.0.0",
+  "description": "The bleeding edge of C-like syntaxes",
+  "version": "1.12.8",
   "scripts": {
     "build": "ruby scripts/generate.rb",
     "perfall": "ruby scripts/perf_all.rb",
@@ -26,6 +25,12 @@
     "publish": "ruby scripts/publish.rb"
   },
   "keywords": [
+    "C++",
+    "cpp",
+    "c",
+    "objective-c",
+    "objective-cpp",
+    "objective-c++",
     "syntax",
     "textmate",
     "highlighting",
@@ -66,37 +71,7 @@
         "language": "objective-c",
         "scopeName": "source.objc",
         "path": "./syntaxes/objc.tmLanguage.json"
-      },
-      {
-        "language": "shellscript",
-        "scopeName": "source.shell",
-        "path": "syntaxes/shell.tmLanguage.json"
       }
     ]
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "repository": {
-    "url": "https://github.com/jeff-hykin/cpp-textmate-grammer",
-    "type": "git"
-  },
-  "devDependencies": {
-    "chalk": "^2.4.2",
-    "dictionary-en-us": "^2.1.1",
-    "glob": "^7.1.4",
-    "js-yaml": "^3.13.1",
-    "json-source-map": "^0.4.0",
-    "json-stable-stringify": "^1.0.1",
-    "lodash": "^4.17.11",
-    "node-gyp": "^4.0.0",
-    "nspell": "^2.1.2",
-    "oniguruma": "^7.2.0",
-    "prettyjson": "^1.2.1",
-    "vscode-textmate": "^4.1.1",
-    "yargs": "^13.2.2",
-    "convert-svg-to-png": "^0.5.0"
-  },
-  "dependencies": {
   }
 }
