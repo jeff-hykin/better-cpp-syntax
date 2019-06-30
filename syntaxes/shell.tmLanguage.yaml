@@ -880,7 +880,7 @@ repository:
     - include: "#variable_assignment_context"
   command_name:
     name: entity.name.command.shell
-    begin: "\\G\\s*+(?!(?:!|%|&|\\||\\(|\\{|\\[|<|>|#|\\n|$|;))"
+    begin: "\\s*+(?!(?:!|%|&|\\||\\(|\\{|\\[|<|>|#|\\n|$|;))"
     end: "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\])(?!\\\\\\n))"
     patterns:
     - include: "#command_context"
