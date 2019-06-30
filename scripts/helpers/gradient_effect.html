@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .image-container {
+            background-image: url("img_nature.jpg");
+            background-size: cover;
+            background-image: linear-gradient(to bottom right, limegreen, #38d7ff);
+            position: relative;
+            min-height: 175px;
+            width: 175px;
+            padding: 10px;
+        }
+
+        .text {
+            background-color: white;
+            color: black;
+            font-size: 10vw;
+            font-weight: bold;
+            margin: 0 auto;
+            padding: 8px;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            align-content: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            border-radius: 50vh;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Responsive Cutout Text Effect</h2>
+
+    <div class="image-container">
+        <div class="text">C++</div>
+    </div>
+
+</body>
+
+</html>
