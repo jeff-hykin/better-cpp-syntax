@@ -232,6 +232,7 @@ tokens = [
     { representation: "**=",  areOperators: true, areArithmeticOperators: true, areAssignmentOperators: true },
     { representation: "%=",   areOperators: true, areArithmeticOperators: true, areAssignmentOperators: true },
     { representation: "--",   areOperators: true, areArithmeticOperators: true, areAssignmentOperators: true },
+    { representation: "++",   areOperators: true, areArithmeticOperators: true, areAssignmentOperators: true },
     # comparision,
     { representation: "==",   areOperators: true, areComparisionOperators: true },
     { representation: "!=",   areOperators: true, areComparisionOperators: true },
@@ -242,11 +243,20 @@ tokens = [
     { representation: "<=>",  areOperators: true, areComparisionOperators: true },
     { representation: "=~",   areOperators: true, areComparisionOperators: true },
     { representation: "!~",   areOperators: true, areComparisionOperators: true },
+    
+    { representation: "lt",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "gt",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "le",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "ge",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "eq",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "ne",   areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "cmp",  areOperators: true, areComparisionOperators: true, areOperatorAliases: true },
+    { representation: "~~",   areOperators: true, areComparisionOperators: true },
     # logical operators,
     { representation: "&&",   areOperators: true, areLogicalOperators: true },
-    { representation: "and",  areOperators: true, areLogicalOperators: true, isOperatorAlias: true },
+    { representation: "and",  areOperators: true, areLogicalOperators: true, areOperatorAliases: true },
     { representation: "||",   areOperators: true, areLogicalOperators: true },
-    { representation: "or",   areOperators: true, areLogicalOperators: true, isOperatorAlias: true },
+    { representation: "or",   areOperators: true, areLogicalOperators: true, areOperatorAliases: true },
     { representation: "//",   areOperators: true, areLogicalOperators: true },
     # bitwise,
     { representation: "<<",   areOperators: true, areBitwiseOperators: true },
@@ -261,6 +271,9 @@ tokens = [
     { representation: "^=",   areOperators: true, areBitwiseOperators: true, areAssignmentOperators: true },
     # assignment,
     { representation: "=",    areOperators: true, areAssignmentOperators: true },
+    # other
+    { representation: ".",    areOperators: true },
+    { representation: ".=",   areOperators: true, areAssignmentOperators: true },
 ]
 
 @tokens = TokenHelper.new tokens

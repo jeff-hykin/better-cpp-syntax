@@ -6,7 +6,7 @@ use warnings;
 # check if its version 2.4 or higher
 # if it doesn't ex
 
-sub is_a_command {
+sub is_a_command{
     my $command_name = $_[0];
     my $output = `command -v $command_name`;
     if ($output =~ /.+/) {
@@ -23,6 +23,7 @@ if ($^O eq "linux") {
 } elsif ($^O eq "darwin") {
     # just run the mac command
     # is_a_command("ruby");
+    print(100)
     # system("eval `curl -L git.io/fjBzd`")
 } else {
     print "Wtf, what operating system are you running this on?";

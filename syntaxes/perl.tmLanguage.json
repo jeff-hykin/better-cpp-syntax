@@ -262,23 +262,67 @@
         }
       ]
     },
-    "special_vars": {
+    "special_identifiers": {
       "patterns": [
         {
           "match": "\\$\\^[A-Z^_?\\[\\]]",
           "name": "variable.language.special.caret.perl"
+        },
+        {
+          "match": "(?<!\\w)undef(?!\\w)",
+          "name": "constant.language.undef.perl"
         }
       ]
     },
     "operators": {
       "patterns": [
         {
-          "match": "(?:==|!=|>|<|>=|<=|<=>|=~|!~)",
+          "contentName": "meta.readline.perl",
+          "begin": "(?<!\\s|\\w)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(<)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.separator.readline.perl"
+            }
+          },
+          "end": "(>)",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.separator.readline.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "match": "(?:lt|gt|le|ge|eq|ne|cmp|and|or)",
+          "name": "keyword.operator.alias.$0.perl"
+        },
+        {
+          "match": "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)",
           "name": "keyword.operator.comparision.perl"
         },
         {
-          "match": "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|<<=|>>=|&=|\\|=|\\^=|=)",
+          "match": "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|<<=|>>=|&=|\\|=|\\^=|=|\\.=)",
           "name": "keyword.operator.assignment.perl"
+        },
+        {
+          "match": "(?:&&|and|\\|\\||or|\\/\\/)",
+          "name": "keyword.operator.logical.perl"
+        },
+        {
+          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%)",
+          "name": "keyword.operator.arithmetic.perl"
+        },
+        {
+          "match": "(?:<<|>>|&|\\||\\^)",
+          "name": "keyword.operator.bitwise.perl"
+        },
+        {
+          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~|&&|and|\\|\\||or|\\/\\/|<<|>>|&|\\||\\^|<<=|>>=|&=|\\|=|\\^=|=|\\.|\\.=)",
+          "name": "keyword.operator.perl"
         }
       ]
     },
@@ -286,10 +330,61 @@
       "match": ";",
       "name": "punctuation.terminator.statement.perl"
     },
+    "comma": {
+      "match": ",",
+      "name": "punctuation.separator.comma.perl"
+    },
+    "square_brackets": {
+      "begin": "(\\[)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.square-brackets.perl"
+        }
+      },
+      "end": "(\\])",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.square-brackets.perl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "curly_brackets": {
+      "begin": "(\\{)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.curly-brackets.perl"
+        }
+      },
+      "end": "(\\})",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.curly-brackets.perl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
     "punctuation": {
       "patterns": [
         {
           "include": "#semicolon"
+        },
+        {
+          "include": "#comma"
+        },
+        {
+          "include": "#square_brackets"
+        },
+        {
+          "include": "#curly_brackets"
         }
       ]
     },
@@ -310,6 +405,371 @@
           "name": "punctuation.terminator.statement.perl"
         }
       }
+    },
+    "if_statement": {
+      "begin": "\\s*+(if)\\s*+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.if.perl"
+        }
+      },
+      "end": "(?:(;)|(\\}))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.perl"
+        },
+        "2": {
+          "name": "punctuation.section.block.control.perl"
+        }
+      },
+      "patterns": [
+        {
+          "contentName": "meta.control.evaluation.perl",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.control.body.perl",
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.control.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "elsif_statement": {
+      "begin": "\\s*+(elsif)\\s*+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.elsif.perl"
+        }
+      },
+      "end": "(?:(;)|(\\}))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.perl"
+        },
+        "2": {
+          "name": "punctuation.section.block.control.perl"
+        }
+      },
+      "patterns": [
+        {
+          "contentName": "meta.control.evaluation.perl",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.control.body.perl",
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.control.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "else_statement": {
+      "begin": "\\s*+(else)\\s*+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.else.perl"
+        }
+      },
+      "end": "(?:(;)|(\\}))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.perl"
+        },
+        "2": {
+          "name": "punctuation.section.block.control.perl"
+        }
+      },
+      "patterns": [
+        {
+          "contentName": "meta.control.evaluation.perl",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.control.body.perl",
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.control.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "while_statement": {
+      "begin": "\\s*+(while)\\s*+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.while.perl"
+        }
+      },
+      "end": "(?:(;)|(\\}))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.perl"
+        },
+        "2": {
+          "name": "punctuation.section.block.control.perl"
+        }
+      },
+      "patterns": [
+        {
+          "contentName": "meta.control.evaluation.perl",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.control.body.perl",
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.control.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "for_statement": {
+      "begin": "\\s*+(for)\\s*+",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.for.perl"
+        }
+      },
+      "end": "(?:(;)|(\\}))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.perl"
+        },
+        "2": {
+          "name": "punctuation.section.block.control.perl"
+        }
+      },
+      "patterns": [
+        {
+          "contentName": "meta.control.evaluation.perl",
+          "begin": "(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.control.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.control.body.perl",
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.control.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "control_flow": {
+      "patterns": [
+        {
+          "include": "#if_statement"
+        },
+        {
+          "include": "#elsif_statement"
+        },
+        {
+          "include": "#else_statement"
+        },
+        {
+          "include": "#while_statement"
+        },
+        {
+          "include": "#for_statement"
+        }
+      ]
+    },
+    "function_definition": {
+      "begin": "(sub)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?:(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))?)",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sub.perl"
+        },
+        "2": {
+          "name": "entity.name.function.definition.perl"
+        }
+      },
+      "end": "(?:(\\})|(;))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.block.function.perl"
+        },
+        "2": {
+          "name": "punctuation.terminator.statement.perl"
+        }
+      },
+      "patterns": [
+        {
+          "begin": "(\\{)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.block.function.perl"
+            }
+          },
+          "end": "(?=\\})",
+          "patterns": [
+            {
+              "include": "#initial_context"
+            }
+          ]
+        },
+        {
+          "include": "#initial_context"
+        }
+      ]
+    },
+    "function_call": {
+      "begin": "((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.call.perl"
+        },
+        "2": {
+          "name": "punctuation.section.arguments.perl"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.arguments.perl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#initial_context"
+        }
+      ]
     },
     "escaped_char": {
       "patterns": [
@@ -742,16 +1202,22 @@
           "include": "#using_statement"
         },
         {
+          "include": "#control_flow"
+        },
+        {
+          "include": "#function_definition"
+        },
+        {
+          "include": "#function_call"
+        },
+        {
           "include": "#numbers"
         },
         {
-          "include": "#special_vars"
+          "include": "#special_identifiers"
         },
         {
           "include": "#operators"
-        },
-        {
-          "include": "#punctuation"
         },
         {
           "include": "#line_comment"
@@ -2851,6 +3317,9 @@
           },
           "comment": "Match empty parenthesis for ↩ snippet",
           "match": "(\\()(\\))"
+        },
+        {
+          "include": "#punctuation"
         }
       ]
     }

@@ -23,7 +23,7 @@ struct Thing4
 };
 
 Thing4::~Thing4() {
-    
+    itng()
 }
 Thing4::Thing4() {
     

@@ -2,6 +2,8 @@ require_relative '../../../directory'
 require_relative PathFor[:repo_helper]
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
+require_relative PathFor[:sharedPattern]["control_flow"]
+require_relative PathFor[:sharedPattern]["variable"]
 require_relative './tokens.rb'
 
 # 
@@ -52,12 +54,15 @@ require_relative './tokens.rb'
 #
     grammar[:$initial_context] = [
             :using_statement,
+            :control_flow,
+            :function_definition,
+            :function_call,
             :numbers,
-            :special_vars,
+            :special_identifiers,
             :operators,
-            :punctuation,
             # import all the original patterns
             *original_grammar["patterns"],
+            :punctuation,
         ]
 #
 #
@@ -71,17 +76,39 @@ require_relative './tokens.rb'
     # 
     # builtins
     # 
-        grammar[:special_vars] = [
+        grammar[:special_identifiers] = [
             newPattern(
                 match: /\$\^[A-Z^_?\[\]]/,
                 tag_as: "variable.language.special.caret"
             ),
+            newPattern(
+                match: variableBounds(/undef/),
+                tag_as: "constant.language.undef",
+            )
         ]
             
     # 
     # operators
     # 
         grammar[:operators] = [
+            PatternRange.new(
+                tag_content_as: "meta.readline",
+                start_pattern: newPattern(
+                    lookBehindToAvoid(/\s|\w/).then(std_space).then(
+                        match: /</,
+                        tag_as: "punctuation.separator.readline",
+                    )
+                ),
+                end_pattern: newPattern(
+                    match: />/,
+                    tag_as:"punctuation.separator.readline",
+                ),
+                includes: [ :$initial_context ]
+            ),
+            newPattern(
+                match: @tokens.that(:areOperatorAliases),
+                tag_as: "keyword.operator.alias.$match",
+            ),
             newPattern(
                 match: @tokens.that(:areComparisionOperators),
                 tag_as: "keyword.operator.comparision",
@@ -89,6 +116,22 @@ require_relative './tokens.rb'
             newPattern(
                 match: @tokens.that(:areAssignmentOperators),
                 tag_as: "keyword.operator.assignment",
+            ),
+            newPattern(
+                match: @tokens.that(:areLogicalOperators),
+                tag_as: "keyword.operator.logical",
+            ),
+            newPattern(
+                match: @tokens.that(:areArithmeticOperators, not(:areAssignmentOperators)),
+                tag_as: "keyword.operator.arithmetic",
+            ),
+            newPattern(
+                match: @tokens.that(:areBitwiseOperators, not(:areAssignmentOperators)),
+                tag_as: "keyword.operator.bitwise",
+            ),
+            newPattern(
+                match: @tokens.that(:areOperators),
+                tag_as: "keyword.operator",
             ),
         ]
     # 
@@ -99,6 +142,33 @@ require_relative './tokens.rb'
                 match: /;/,
                 tag_as: "punctuation.terminator.statement"
             ),
+            grammar[:comma] = newPattern(
+                match: /,/,
+                tag_as: "punctuation.separator.comma"
+            ),
+            # unknown/other
+            grammar[:square_brackets] = PatternRange.new(
+                start_pattern: newPattern(
+                    match: /\[/,
+                    tag_as: "punctuation.section.square-brackets",
+                ),
+                end_pattern: newPattern(
+                    match: /\]/,
+                    tag_as: "punctuation.section.square-brackets",
+                ),
+                includes: [ :initial_context ]
+            ),
+            grammar[:curly_brackets] = PatternRange.new(
+                start_pattern: newPattern(
+                    match: /\{/,
+                    tag_as: "punctuation.section.curly-brackets",
+                ),
+                end_pattern: newPattern(
+                    match: /\}/,
+                    tag_as: "punctuation.section.curly-brackets",
+                ),
+                includes: [ :initial_context ]
+            )
         ]
     # 
     # imports
@@ -116,6 +186,67 @@ require_relative './tokens.rb'
             ),
             end_pattern: grammar[:semicolon],
             includes: []
+        )
+    # 
+    # control flow
+    # 
+        grammar[:control_flow] = [
+            grammar[:if_statement]    = c_style_control(keyword:"if"    , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:elsif_statement] = c_style_control(keyword:"elsif" , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:else_statement]  = c_style_control(keyword:"else"  , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:while_statement] = c_style_control(keyword:"while" , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:for_statement]   = c_style_control(keyword:"for"   , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+        ]
+    # 
+    # function definition
+    # 
+        # see https://perldoc.perl.org/perlsub.html
+        grammar[:function_definition] = PatternRange.new(
+            start_pattern: newPattern(
+                newPattern(
+                    match: /sub/,
+                    tag_as: "storage.type.sub",
+                ).then(std_space).maybe(
+                    match: @variable,
+                    tag_as: "entity.name.function.definition",
+                )
+            ),
+            end_pattern: newPattern(
+                newPattern(
+                    match: /\}/,
+                    tag_as: "punctuation.section.block.function",
+                ).or(
+                    grammar[:semicolon]
+                )
+            ),
+            includes: [
+                PatternRange.new(
+                    start_pattern: newPattern(
+                        match: /\{/,
+                        tag_as: "punctuation.section.block.function",  
+                    ),
+                    end_pattern: lookAheadFor(/\}/),
+                    includes: [ :$initial_context ],
+                ),
+                # todo: make this more restrictive 
+                :$initial_context
+            ]
+        )
+        grammar[:function_call] = PatternRange.new(
+            start_pattern: newPattern(
+                newPattern(
+                    match: @variable,
+                    tag_as: "entity.name.function.call",
+                ).then(std_space).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.arguments",
+                )
+            ),
+            end_pattern: newPattern(
+                match: /\)/,
+                tag_as: "punctuation.section.arguments",
+            ),
+            includes: [ :$initial_context ]
         )
     # 
     # copy over all the repos
