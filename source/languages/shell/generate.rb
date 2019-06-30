@@ -228,6 +228,7 @@ Dir.chdir __dir__
     keywords = @tokens.representationsThat(:areNonCommands)
     keyword_patterns = /#{keywords.map { |each| each+'\W|'+each+'\$' } .join('|')}/
     grammar[:command_call] = PatternRange.new(
+        zeroLengthStart?: true,
         tag_as: "meta.statement",
         start_pattern: lookBehindFor(possible_pre_command_characters).then(std_space).lookAheadToAvoid(keyword_patterns),
         end_pattern: command_end,
