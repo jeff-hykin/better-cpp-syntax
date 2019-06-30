@@ -4,9 +4,6 @@ require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
 require_relative './tokens.rb'
 
-# go to where this file is located
-Dir.chdir __dir__
-
 # 
 # Setup grammar
 # 
