@@ -214,12 +214,24 @@ repository:
         name: punctuation.section.curly-brackets.perl
     patterns:
     - include: "#initial_context"
+  paraentheses:
+    begin: "(\\()"
+    beginCaptures:
+      '1':
+        name: punctuation.section.parameters.perl
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.parameters.perl
+    patterns:
+    - include: "#initial_context"
   punctuation:
     patterns:
     - include: "#semicolon"
     - include: "#comma"
     - include: "#square_brackets"
     - include: "#curly_brackets"
+    - include: "#paraentheses"
   using_statement:
     name: meta.import.perl
     begin: "(use)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))([\\w\\.]+)"
@@ -233,7 +245,7 @@ repository:
       '1':
         name: punctuation.terminator.statement.perl
   if_statement:
-    begin: "\\s*+(if)\\s*+"
+    begin: "\\s*+((?<!\\w)if(?!\\w))\\s*+"
     beginCaptures:
       '1':
         name: keyword.control.if.perl
@@ -265,7 +277,7 @@ repository:
       - include: "#initial_context"
     - include: "#initial_context"
   elsif_statement:
-    begin: "\\s*+(elsif)\\s*+"
+    begin: "\\s*+((?<!\\w)elsif(?!\\w))\\s*+"
     beginCaptures:
       '1':
         name: keyword.control.elsif.perl
@@ -297,7 +309,7 @@ repository:
       - include: "#initial_context"
     - include: "#initial_context"
   else_statement:
-    begin: "\\s*+(else)\\s*+"
+    begin: "\\s*+((?<!\\w)else(?!\\w))\\s*+"
     beginCaptures:
       '1':
         name: keyword.control.else.perl
@@ -329,7 +341,7 @@ repository:
       - include: "#initial_context"
     - include: "#initial_context"
   while_statement:
-    begin: "\\s*+(while)\\s*+"
+    begin: "\\s*+((?<!\\w)while(?!\\w))\\s*+"
     beginCaptures:
       '1':
         name: keyword.control.while.perl
@@ -361,7 +373,7 @@ repository:
       - include: "#initial_context"
     - include: "#initial_context"
   for_statement:
-    begin: "\\s*+(for)\\s*+"
+    begin: "\\s*+((?<!\\w)for(?!\\w))\\s*+"
     beginCaptures:
       '1':
         name: keyword.control.for.perl
@@ -420,6 +432,7 @@ repository:
       end: "(?=\\})"
       patterns:
       - include: "#initial_context"
+    - include: "#paraentheses"
     - match: "(:)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))"
       captures:
         '1':

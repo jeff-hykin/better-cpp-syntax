@@ -1,20 +1,3 @@
-# The application shall quote the following characters if they are to represent themselves:
-
-# and the following may need to be quoted under certain circumstances. That is, these characters may be special depending on conditions described elsewhere in this volume of POSIX.1-2017:
-# *   ?   [   #   ˜   =   %
-
-# reserved words
-# ! { }, case do done elif else esac fi for if in then until while
-# [[ ]] function select
-
-# Shell Variables 
-# ENV HOME IFS LANG LC_ALL LC_COLLATE LC_CTYPE LC_MESSAGES LINENO NLSPATH PATH PPID PS1 PS2 PS4 PWD
-
-# utils
-# alias bg cd command false fc fg getopts hash jobs kill newgrp pwd read true umask unalias wait
-
-
-
 require_relative '../../textmate_tools.rb'
 tokens = [
     { representation: 'ENV'    , areBuiltIn: true },
