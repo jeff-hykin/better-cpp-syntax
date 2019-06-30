@@ -280,22 +280,21 @@ class Grammar
     end
     
     def self.convertSpecificIncludes(json_grammar:nil, convert:[], into:"")
-            tags_to_convert = convert.map{|each| each.to_s}
-            # iterate over all the keys
-            json_grammar.recursively_set_each_value! ->(each_value, each_key) do
-                    if each_key.to_s == "include"
-                        # if one of the tags matches
-                        if tags_to_convert.include?(each_value.to_s)
-                            # then replace it with the new value
-                            into
-                        else
-                            each_value
-                        end
-                    else
-                        each_value
-                    end
-                end 
+        tags_to_convert = convert.map{|each| each.to_s}
+        # iterate over all the keys
+        json_grammar.recursively_set_each_value! ->(each_value, each_key) do
+            if each_key.to_s == "include"
+                # if one of the tags matches
+                if tags_to_convert.include?(each_value.to_s)
+                    # then replace it with the new value
+                    into
+                else
+                    each_value
+                end
+            else
+                each_value
             end
+        end
     end
     
     #
