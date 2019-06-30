@@ -35,7 +35,7 @@ require_relative './tokens.rb'
 #
 #
     # copy over all the repos
-    for each_key, each_value in original_grammar["repository"]
+    for each_key, each_value in original_grammar["repository"] || []
         grammar[each_key.to_sym] = each_value
     end
  
