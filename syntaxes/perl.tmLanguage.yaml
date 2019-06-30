@@ -663,6 +663,81 @@ repository:
           name: punctuation.definition.variable.perl
       match: "([\\$\\@\\%](#)?)[0-9_]\\b"
       name: variable.other.readwrite.global.special.perl
+  regexp:
+    patterns:
+    - match: "\\\\[bB]|\\^|\\$"
+      name: keyword.control.anchor.regexp.perl
+    - match: "\\\\[1-9]\\d*"
+      name: keyword.other.back-reference.regexp.perl
+    - match: "[?+*]|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??"
+      name: keyword.operator.quantifier.regexp.perl
+    - match: "\\|"
+      name: keyword.operator.or.regexp.perl
+    - end: "(\\))"
+      begin: "(\\()((\\?=)|(\\?!))"
+      beginCaptures:
+        '3':
+          name: meta.assertion.look-ahead.regexp.perl
+        '4':
+          name: meta.assertion.negative-look-ahead.regexp.perl
+        '1':
+          name: punctuation.definition.group.regexp.perl
+      patterns:
+      - include: "#regexp"
+      endCaptures:
+        '1':
+          name: punctuation.definition.group.regexp.perl
+      name: meta.group.assertion.regexp.perl
+    - end: "\\)"
+      begin: "\\((\\?:)?"
+      beginCaptures:
+        '0':
+          name: punctuation.definition.group.regexp.perl
+      patterns:
+      - include: "#regexp"
+      endCaptures:
+        '0':
+          name: punctuation.definition.group.regexp.perl
+      name: meta.group.regexp.perl
+    - end: "(\\])"
+      begin: "(\\[)(\\^)?"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.character-class.regexp.perl
+        '2':
+          name: keyword.operator.negation.regexp.perl
+      patterns:
+      - match: "(?:.|(\\\\(?:[0-7]{3}|x\\h\\h|u\\h\\h\\h\\h))|(\\\\c[A-Z])|(\\\\.))\\-(?:[^\\]\\\\]|(\\\\(?:[0-7]{3}|x\\h\\h|u\\h\\h\\h\\h))|(\\\\c[A-Z])|(\\\\.))"
+        captures:
+          '3':
+            name: constant.character.escape.backslash.regexp.perl
+          '4':
+            name: constant.character.numeric.regexp.perl
+          '5':
+            name: constant.character.control.regexp.perl
+          '1':
+            name: constant.character.numeric.regexp.perl
+          '6':
+            name: constant.character.escape.backslash.regexp.perl
+          '2':
+            name: constant.character.control.regexp.perl
+        name: constant.other.character-class.range.regexp.perl
+      - include: "#regex-character-class"
+      endCaptures:
+        '1':
+          name: punctuation.definition.character-class.regexp.perl
+      name: constant.other.character-class.set.regexp.perl
+    - include: "#regex-character-class"
+  regex-character-class:
+    patterns:
+    - match: "\\\\[wWsSdD]|\\."
+      name: constant.character.character-class.regexp.perl
+    - match: "\\\\([0-7]{3}|x\\h\\h|u\\h\\h\\h\\h)"
+      name: constant.character.numeric.regexp.perl
+    - match: "\\\\c[A-Z]"
+      name: constant.character.control.regexp.perl
+    - match: "\\\\."
+      name: constant.character.escape.backslash.regexp.perl
   initial_context:
     patterns:
     - include: "#using_statement"
@@ -1082,6 +1157,7 @@ repository:
         name: keyword.control.anchor.perl
       - include: "#escaped_char"
       - include: "#variable"
+      - include: "#regexp"
     - captures:
         '1':
           name: constant.other.key.perl
