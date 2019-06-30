@@ -216,8 +216,16 @@ Dir.chdir __dir__
         ]
     )
     grammar[:option] = PatternRange.new(
-        tag_as: "string.unquoted.argument constant.other.option",
-        start_pattern: /\s++-/.then(possible_command_start),
+        tag_content_as: "string.unquoted.argument constant.other.option",
+        start_pattern: newPattern(  
+            /\s++/.then(
+                match: /-/,
+                tag_as: "string.unquoted.argument constant.other.option.dash"
+            ).then(
+                match: possible_command_start,
+                tag_as: "string.unquoted.argument constant.other.option",
+            )
+        ),
         end_pattern: lookAheadFor(@space).or(command_end),
         includes: [
             :option_context,
@@ -306,7 +314,9 @@ Dir.chdir __dir__
                 :variable,
                 :string,
             ]
-        )
+        ),
+        # normal variables
+        generateVariable(/\w+/, "variable.other.normal")
     ]
     
     
