@@ -171,7 +171,7 @@ repository:
     - include: "#pathname"
     - include: "#keyword"
     - include: "#support"
-    - include: "#assignment"
+    - include: "#line_continuation"
   option_context:
     patterns:
     - include: "#compound-command"
@@ -203,6 +203,9 @@ repository:
   variable_assignment_context:
     patterns:
     - include: "#initial_context"
+  line_continuation:
+    match: "\\\\(?=\\n)"
+    name: constant.character.escape.line-continuation.shell
   case-clause:
     patterns:
     - begin: "(?=\\S)"
@@ -877,8 +880,8 @@ repository:
     - include: "#variable_assignment_context"
   command_name:
     name: entity.name.command.shell
-    begin: "\\s*+(?!(?:!|%|&|\\||\\(|\\{|\\[|<|>|#|\\n|$|;))"
-    end: "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\]))"
+    begin: "\\G\\s*+(?!(?:!|%|&|\\||\\(|\\{|\\[|<|>|#|\\n|$|;))"
+    end: "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\])(?!\\\\\\n))"
     patterns:
     - include: "#command_context"
   argument:
@@ -902,13 +905,13 @@ repository:
         name: string.unquoted.argument.shell constant.other.option.dash.shell
       '2':
         name: string.unquoted.argument.shell constant.other.option.shell
-    end: "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\]))"
+    end: "(?:(?=\\s)|(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\])(?!\\\\\\n))"
     patterns:
     - include: "#option_context"
   command_call:
     name: meta.statement.shell
     begin: "(?<=(?:^|;|\\||&|!|\\(|\\{|\\`))\\s*+(?!function\\W|function\\$|select\\W|select\\$|case\\W|case\\$|do\\W|do\\$|done\\W|done\\$|elif\\W|elif\\$|else\\W|else\\$|esac\\W|esac\\$|fi\\W|fi\\$|for\\W|for\\$|if\\W|if\\$|in\\W|in\\$|then\\W|then\\$|until\\W|until\\$|while\\W|while\\$|alias\\W|alias\\$|bg\\W|bg\\$|command\\W|command\\$|false\\W|false\\$|fc\\W|fc\\$|fg\\W|fg\\$|getopts\\W|getopts\\$|hash\\W|hash\\$|jobs\\W|jobs\\$|kill\\W|kill\\$|newgrp\\W|newgrp\\$|read\\W|read\\$|true\\W|true\\$|umask\\W|umask\\$|unalias\\W|unalias\\$|wait\\W|wait\\$)"
-    end: "(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\])"
+    end: "(?=;|\\||&|$|\\n|\\)|\\`|\\}|\\{|#|\\])(?!\\\\\\n)"
     patterns:
     - include: "#option"
     - include: "#argument"

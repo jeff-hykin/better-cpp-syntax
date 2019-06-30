@@ -2,6 +2,7 @@ require_relative '../../../directory'
 require_relative PathFor[:repo_helper]
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
+require_relative PathFor[:sharedPattern]["line_continuation"]
 require_relative './tokens.rb'
 
 # 
@@ -67,7 +68,7 @@ require_relative './tokens.rb'
             :pathname,
             :keyword,
             :support,
-            :assignment,
+            :line_continuation,
         ]
     grammar[:option_context] = [
             :'compound-command',
@@ -105,6 +106,7 @@ require_relative './tokens.rb'
 # Patterns
 #
 #
+    grammar[:line_continuation] = line_continuation()
     # copy over all the repos
     for each_key, each_value in original_grammar["repository"]
         grammar[each_key.to_sym] = each_value
@@ -180,7 +182,7 @@ require_relative './tokens.rb'
     
     possible_pre_command_characters = /(?:^|;|\||&|!|\(|\{|\`)/
     possible_command_start   = lookAheadToAvoid(/(?:!|%|&|\||\(|\{|\[|<|>|#|\n|$|;)/)
-    command_end              = lookAheadFor(/;|\||&|$|\n|\)|\`|\}|\{|#|\]/)
+    command_end              = lookAheadFor(/;|\||&|$|\n|\)|\`|\}|\{|#|\]/).lookAheadToAvoid(/\\\n/)
     unquoted_string_end      = lookAheadFor(/\s|;|\||&|$|\n|\)|\`/)
     invalid_literals         = Regexp.quote(@tokens.representationsThat(:areInvalidLiterals).join(""))
     valid_literal_characters = Regexp.new("[^\s#{invalid_literals}]+")
