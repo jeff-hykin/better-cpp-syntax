@@ -12,10 +12,9 @@ NOTE: The default VS Code theme does not color much. Use a theme like one of the
 ## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 
-# Without Better Syntax (XD Theme)
-![code_before](https://user-images.githubusercontent.com/17692058/60395944-9b573600-9b00-11e9-9748-30abe491f474.png)
-# After
-![code_after](https://user-images.githubusercontent.com/17692058/60395959-c772b700-9b00-11e9-821e-f95544b6ba3e.png)
+Before                     | After
+:-------------------------:|:-------------------------:
+![code_before](https://user-images.githubusercontent.com/17692058/60395944-9b573600-9b00-11e9-9748-30abe491f474.png) | ![code_after](https://user-images.githubusercontent.com/17692058/60395959-c772b700-9b00-11e9-821e-f95544b6ba3e.png)
 
 ## What is different?
 
