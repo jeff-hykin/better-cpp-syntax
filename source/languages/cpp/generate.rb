@@ -315,6 +315,7 @@ cpp_grammar = Grammar.new(
             :pthread_types,
             :posix_reserved_types,
             :decltype,
+            :typename,
         ]
 # 
 # Comments
@@ -959,6 +960,14 @@ cpp_grammar = Grammar.new(
             ).maybe(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
+    )
+    cpp_grammar[:typename] = newPattern(
+        should_fully_match: ["typename Alloc::select_on_container_copy_construction"],
+        should_not_partial_match: ["this_typename_is_valid"],
+        match: newPattern(
+            match: variableBounds[/typename/],
+            tag_as: "storage.modifier"
+        ).then(std_space).then(qualified_type)
     )
 #
 # Support

@@ -128,17 +128,21 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: typename
   scopes:
-    - storage.type.user-defined
+    - storage.modifier
 - source: templated
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution.template.call
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.call
+    - punctuation.separator.scope-resolution
 - source: type
   scopes:
-    - storage.type.user-defined
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopes:
     - keyword.operator
@@ -241,17 +245,21 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: typename
   scopes:
-    - storage.type.user-defined
+    - storage.modifier
 - source: templated
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution.template.call
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.call
+    - punctuation.separator.scope-resolution
 - source: type
   scopes:
-    - storage.type.user-defined
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopes:
     - keyword.operator
