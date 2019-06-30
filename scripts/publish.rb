@@ -172,7 +172,7 @@ else
         # overwrite the package json
         IO.write(PathFor[:package_json], new_package_json_string)
         # run the build command then publish
-        # system "npm run build #{language_extension} && vsce publish"
+        system "npm run build #{language_extension} && vsce publish"
     ensure
         # once finished, restore the original package.json
         IO.write(PathFor[:package_json], JSON.pretty_generate($main_package_json))
