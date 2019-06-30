@@ -169,11 +169,14 @@ if language_extension == nil
     system "npm run build && vsce publish"
 # if an extension was specified
 else
+    # generate the new package info
+    new_package_json_string = JSON.generate(packageJsonFor(language_extension, version:language_version))
+
     # switch to the alternative_readme
     FileUtils.mv($path_to_root+"/README.md",             $path_to_root+"/temp_readme.md")
-    FileUtils.mv($path_to_root+"/alternative_readme.md", $path_to_root+"/README.md")
+    FileUtils.cp($path_to_root+"/alternative_readme.md", $path_to_root+"/README.md")
     # overwrite the package json
-    IO.write($path_to_root+"/package.json", JSON.generate(packageJsonFor(language_extension, version:language_version)))
+    IO.write($path_to_root+"/package.json", new_package_json_string)
     # run the build command then publish
     system "npm run build #{language_extension} && vsce publish"
     # once finished, restore the original package.json
