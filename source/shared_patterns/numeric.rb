@@ -1,47 +1,47 @@
-def numeric_constant(allow_user_defined_literals: false)
+def numeric_constant(allow_user_defined_literals: false, separator:"'")
     # both C and C++ treat any sequence of digits, letter, periods, and valid separators
     # as a single numeric constant even if such a sequence forms no valid
     # constant/literal
     # additionally +- are part of the sequence when immediately succeeding e,E,p, or P.
     # the outer range pattern does not attempt to actually process the numbers
-    valid_single_character = /['0-9a-zA-Z_\.']/
+    valid_single_character = /(?:[0-9a-zA-Z_\.]|#{separator})/
     valid_after_exponent = lookBehindFor(/[eEpP]/).then(/[+-]/)
     start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\.\d/)
     end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
     
     number_separator_pattern = newPattern(
-        should_partial_match: [ "1'1" ],
-        should_not_partial_match: [ "1''1", "1''" ],
-        match: lookBehindFor(/[0-9a-fA-F]/).then(/'/).lookAheadFor(/[0-9a-fA-F]/),
+        should_partial_match: [ "1#{separator}1" ],
+        should_not_partial_match: [ "1#{separator}#{separator}1", "1#{separator}#{separator}" ],
+        match: lookBehindFor(/[0-9a-fA-F]/).then(/#{separator}/).lookAheadFor(/[0-9a-fA-F]/),
         tag_as:"punctuation.separator.constant.numeric",
         )
 
     hex_digits = hex_digits = newPattern(
-        should_fully_match: [ "1", "123456", "DeAdBeeF", "49'30'94", "DeA'dBe'eF", "dea234f4930" ],
-        should_not_fully_match: [ "'3902" , "de2300p1000", "0x000" ],
+        should_fully_match: [ "1", "123456", "DeAdBeeF", "49#{separator}30#{separator}94", "DeA#{separator}dBe#{separator}eF", "dea234f4930" ],
+        should_not_fully_match: [ "#{separator}3902" , "de2300p1000", "0x000" ],
         should_not_partial_match: [ "p", "x", "." ],
         match: /[0-9a-fA-F]/.zeroOrMoreOf(/[0-9a-fA-F]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.hexadecimal",
         includes: [ number_separator_pattern ],
         )
     decimal_digits = newPattern(
-        should_fully_match: [ "1", "123456", "49'30'94" , "1'2" ],
-        should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
+        should_fully_match: [ "1", "123456", "49#{separator}30#{separator}94" , "1#{separator}2" ],
+        should_not_fully_match: [ "#{separator}3902" , "1.2", "0x000" ],
         match: /[0-9]/.zeroOrMoreOf(/[0-9]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.decimal",
         includes: [ number_separator_pattern ],
         )
     # 0'004'000'000 is valid (i.e. a number separator directly after the prefix)
     octal_digits = newPattern(
-        should_fully_match: [ "1", "123456", "47'30'74" , "1'2" ],
-        should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
+        should_fully_match: [ "1", "123456", "47#{separator}30#{separator}74" , "1#{separator}2" ],
+        should_not_fully_match: [ "#{separator}3902" , "1.2", "0x000" ],
         match: oneOrMoreOf(/[0-7]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.octal",
         includes: [ number_separator_pattern ],
         )
     binary_digits = newPattern(
-        should_fully_match: [ "1", "100100", "10'00'11" , "1'0" ],
-        should_not_fully_match: [ "'3902" , "1.2", "0x000" ],
+        should_fully_match: [ "1", "100100", "10#{separator}00#{separator}11" , "1#{separator}0" ],
+        should_not_fully_match: [ "#{separator}3902" , "1.2", "0x000" ],
         match: /[01]/.zeroOrMoreOf(/[01]/.or(number_separator_pattern)),
         tag_as: "constant.numeric.binary",
         includes: [ number_separator_pattern ],
@@ -82,7 +82,7 @@ def numeric_constant(allow_user_defined_literals: false)
     hex_exponent = newPattern(
         should_fully_match: [ "p100", "p-100", "p+100", "P100" ],
         should_not_fully_match: [ "p0x0", "p-+100" ],
-        match: lookBehindToAvoid(/'/).then(
+        match: lookBehindToAvoid(/#{separator}/).then(
                 match: /[pP]/,
                 tag_as: "keyword.other.unit.exponent.hexadecimal",
             ).maybe(
@@ -100,7 +100,7 @@ def numeric_constant(allow_user_defined_literals: false)
     decimal_exponent = newPattern(
         should_fully_match: [ "e100", "e-100", "e+100", "E100", ],
         should_not_fully_match: [ "e0x0", "e-+100" ],
-        match: lookBehindToAvoid(/'/).then(
+        match: lookBehindToAvoid(/#{separator}/).then(
                 match: /[eE]/,
                 tag_as: "keyword.other.unit.exponent.decimal",
             ).maybe(

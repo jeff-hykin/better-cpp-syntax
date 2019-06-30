@@ -9,7 +9,7 @@ require_relative './tokens.rb'
 # 
     Dir.chdir __dir__
     original_grammar = JSON.parse(IO.read("original.tmlanguage.json"))
-    Grammar.convertSpecificIncludes(json_grammar: original_grammar, convert:["$self", "$base"], into: "#root_context")
+    Grammar.convertSpecificIncludes(json_grammar: original_grammar, convert:["$self", "$base"], into: :$initial_context)
     grammar = Grammar.new(
         name: original_grammar["name"],
         scope_name: original_grammar["scopeName"],

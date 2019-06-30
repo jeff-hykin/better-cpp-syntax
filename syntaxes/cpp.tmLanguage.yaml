@@ -188,9 +188,9 @@ repository:
     - include: "#line_comment"
   number_literal:
     begin: "(?<!\\w)(?=\\d|\\.\\d)"
-    end: "(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-]))"
+    end: "(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
     patterns:
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.cpp
@@ -225,7 +225,7 @@ repository:
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '2':
           name: constant.numeric.decimal.cpp
@@ -258,7 +258,7 @@ repository:
           name: keyword.other.unit.suffix.floating-point.cpp
         '13':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.binary.cpp
@@ -273,7 +273,7 @@ repository:
           name: keyword.other.unit.suffix.integer.cpp
         '5':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.octal.cpp
@@ -288,7 +288,7 @@ repository:
           name: keyword.other.unit.suffix.integer.cpp
         '5':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9a-fA-FpP])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '1':
           name: keyword.other.unit.hexadecimal.cpp
@@ -314,7 +314,7 @@ repository:
           name: keyword.other.unit.suffix.integer.cpp
         '10':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])))"
+    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?((?:\\w(?<![0-9eE])\\w*)?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])))"
       captures:
         '2':
           name: constant.numeric.decimal.cpp
@@ -338,7 +338,7 @@ repository:
           name: keyword.other.unit.suffix.integer.cpp
         '10':
           name: keyword.other.unit.user-defined.cpp
-    - match: "(?:['0-9a-zA-Z_\\.']|(?<=[eEpP])[+-])+"
+    - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
       name: invalid.illegal.constant.numeric.cpp
   language_constants:
     match: "(?<!\\w)(?:NULL|true|false|nullptr)(?!\\w)"
