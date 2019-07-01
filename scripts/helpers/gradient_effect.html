@@ -8,7 +8,7 @@
         }
         
         :root {
-            --square-size: 400px;
+            --square-size: 500px;
             --circle-size: 80%;
             --text-size: 10rem;
         }
@@ -18,12 +18,20 @@
             background-image: linear-gradient(to bottom right, limegreen, #38d7ff);
             position: relative;
             min-height: var(--square-size);
+            max-height: var(--square-size);
             width: var(--square-size);
+            min-width: var(--square-size);
+            max-width: var(--square-size);
             padding: 10px;
             margin: auto;
             margin-top: 20%;
             margin-bottom: 20%;
-            border-radius: 50vh;
+            border-radius: 100vh;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
         }
 
         .text {
@@ -57,7 +65,7 @@
 
 
     <div class="image-container">
-        <div class="text">🐳</div>
+        <div class="text">C</div>
     </div>
 
 
