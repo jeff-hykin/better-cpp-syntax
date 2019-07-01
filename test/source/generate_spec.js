@@ -1,9 +1,13 @@
 const getTokens = require("./get_tokens");
 const registry = require("./registry").default;
 const _ = require("lodash");
+const path = require("path")
+const paths = require("./paths")
 
 function removeScopeName(scope) {
-    return scope.replace(/\.(obj)?c(pp)?$/, "");
+    let languageEndings = paths["eachLanguage"].map(each => path.basename(each))
+    let matchEnding = RegExp(`\\\.(?:${languageEndings.join("|")})$`,"g")
+    return scope.replace(matchEnding, "");
 }
 
 /**

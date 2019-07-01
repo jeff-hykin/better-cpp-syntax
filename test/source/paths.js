@@ -1,8 +1,12 @@
 const path = require("path");
+const glob = require("glob");
 
-const testDir = path.dirname(__dirname);
-const fixtureDir = path.join(testDir, "fixtures");
-const specDir = path.join(testDir, "specs");
-module.exports.testDir = testDir;
-module.exports.fixtureDir = fixtureDir;
-module.exports.specDir = specDir;
+const testDir = path.dirname(__dirname)
+const root    = path.dirname(testDir)
+module.exports = {
+    testDir:      path.dirname(__dirname),
+    fixtureDir:   path.join(testDir, "fixtures"),
+    specDir:      path.join(testDir, "specs"),
+    languages:    path.join(root, "source", "languages"),
+    eachLanguage: glob.sync(path.join(root, "source/languages/*")),
+}
