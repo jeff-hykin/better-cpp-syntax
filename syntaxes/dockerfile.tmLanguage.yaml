@@ -13,6 +13,88 @@ patterns:
   patterns:
   - include: "#initial_context"
 repository:
+  strings:
+    patterns:
+    - include: "#string_single"
+    - include: "#string_double"
+  escape:
+    match: "\\\\."
+    name: constant.character.escaped.dockerfile
+  string_single:
+    name: string.quoted.single.dockerfile
+    begin: "(')"
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.dockerfile
+    end: "(')"
+    endCaptures:
+      '1':
+        name: punctuation.definition.string.end.dockerfile
+    patterns:
+    - include: "#escape"
+    - include: "#variable"
+  string_double:
+    name: string.quoted.double.dockerfile
+    begin: (")
+    beginCaptures:
+      '1':
+        name: punctuation.definition.string.begin.dockerfile
+    end: (")
+    endCaptures:
+      '1':
+        name: punctuation.definition.string.end.dockerfile
+    patterns:
+    - include: "#escape"
+    - include: "#variable"
+  comments:
+    match: "^\\s*+(#)(.*$)"
+    captures:
+      '1':
+        name: comment.line.number-sign.dockerfile punctuation.definition.comment.dockerfile
+      '2':
+        name: comment.line.number-sign.dockerfile
+  variable:
+    match: "(\\$)(\\w+)"
+    captures:
+      '1':
+        name: punctuation.definition.variable.dockerfile variable.other.dockerfile
+      '2':
+        name: variable.other.dockerfile
+  commands:
+    patterns:
+    - include: "#run_statement"
+    - include: "#from_statement"
+    - match: "^\\s*+(?:((?i-mx:ONBUILD))\\s++)?((?i-mx:CMD|ENTRYPOINT|ADD|ARG|CMD|COPY|ENTRYPOINT|ENV|EXPOSE|HEALTHCHECK|LABEL|MAINTAINER|RUN|SHELL|STOPSIGNAL|USER|VOLUME|WORKDIR))\\s"
+      captures:
+        '1':
+          name: keyword.control.onbuild.dockerfile
+        '2':
+          name: keyword.other.special-method.$2.dockerfile
+  from_statement:
+    match: "((?i-mx:FROM))\\s+([^\\s]+)(?:\\s+((?i-mx:AS))\\s+([^\\s]++))?"
+    captures:
+      '1':
+        name: keyword.other.special-method.from.dockerfile
+      '2':
+        patterns:
+        - match: "[^:@]+"
+          name: entity.name.image.dockerfile
+        - match: "(\\:)(\\S++)"
+          captures:
+            '1':
+              name: punctuation.separator.version.dockerfile constant.numeric.version.dockerfile
+            '2':
+              name: constant.numeric.version.dockerfile
+        - match: "(\\@)(\\S++)"
+          captures:
+            '1':
+              name: punctuation.separator.version.dockerfile constant.constant.language.symbol.digest.dockerfile
+            '2':
+              name: constant.constant.language.symbol.digest.dockerfile
+      '3':
+        name: keyword.other.special-method.as.dockerfile
+      '4':
+        name: entity.name.image.stage.dockerfile
   shell:
     scopeName: source.shell
     fileTypes:
@@ -24,7 +106,7 @@ repository:
     patterns:
     - name: source.shell.dockerfile
       begin: "(?=^|\\A|\\G)"
-      end: not(?<=possible)
+      end: "(?-mix:(?<=[^\\\\]\\n))"
       patterns:
       - include: "#initial_context"
     repository:
@@ -1035,32 +1117,20 @@ repository:
         - include: "#command_call"
         - include: "#support"
     name: Shell.dockerfile Script.dockerfile
-  multiline_run_statement:
+  run_statement:
     contentName: meta.command.run.dockerfile
-    while: "(?-mix:(?=^.+\\\\$)((?:.+?libavcodec-dev)?))"
-    whileCaptures:
-      '1':
-        name: storage.type.dockerfile
-    begin: "((?<!\\w)RUN(?!\\w))(?=.+\\\\$)"
+    begin: "((?<!\\w)RUN(?!\\w))"
     beginCaptures:
       '1':
         name: keyword.other.special-method.dockerfile
-    end: ".+"
+    end: "(?<=[^\\\\]\\n)"
     patterns:
-    - name: meta.inner.dockerfile
-      begin: "(pkg-config)"
-      beginCaptures:
-        '1':
-          name: keyword.other.begin.dockerfile
-      end: "(libx264-dev)"
-      endCaptures:
-        '1':
-          name: keyword.other.end.dockerfile
-    - match: "."
-      name: entity.name.test.dockerfile
+    - include: "#shell"
   initial_context:
     patterns:
-    - include: "#multiline_run_statement"
-    - match: ".+"
-      name: entity.dockerfile
+    - include: "#commands"
+    - include: "#escape"
+    - include: "#variable"
+    - include: "#comments"
+    - include: "#strings"
 name: Dockerfile
