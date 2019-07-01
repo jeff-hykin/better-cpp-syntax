@@ -1,0 +1,97 @@
+- source: //
+  scopesBegin:
+    - source
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' .h file with C++ syntax highlighting'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional
+- source: USE_IN_HLSL
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor
+- source: cbuffer  testCB
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - meta.preprocessor
+    - keyword.control.directive.conditional
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: testCB
+  scopes:
+    - entity.name.type.struct
+- source: '#endif'
+  scopes:
+    - 'keyword.control.directive.#endif'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' <= this #endif is highlighted white although its valid'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: float
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' Brightness'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' ...'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' the .h file with this struct definition can be used in HLSL and in C++ code '
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' this way'

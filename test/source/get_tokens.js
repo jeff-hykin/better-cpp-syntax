@@ -1,8 +1,37 @@
 // get the tokens from the file and process them with the provided function
-const pa = require("path");
+const path = require("path");
 const chalk = require("chalk");
-const vsctm = require("vscode-textmate");
+const vsctm = require("vscode-textmate-experimental");
 const argv = require("yargs").argv;
+const paths = require("./paths");
+const fs = require("fs");
+
+
+// retrive all the filetypes from the syntax
+let extensionsFor = {}
+for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
+    let langExtension = path.basename(eachSyntaxPath).replace(/\..+/g,"")
+    let syntax = JSON.parse(fs.readFileSync(eachSyntaxPath))
+    extensionsFor[langExtension] = syntax["fileTypes"]
+}
+
+let languageExtensionFor = (fixturePath) => {
+    let fixtureExtension = path.extname(fixturePath).replace(/\./,"");
+    let matchingLanguageExtension = null;
+    // find which lang the extension belongs to
+    for (let eachLangExtension of Object.keys(extensionsFor)) {
+        // if the path include the language, then use that
+        if (fixturePath.includes(`/${eachLangExtension}/`)) {
+            matchingLanguageExtension = eachLangExtension;
+            break;
+        // if the language extension is in their list, then there
+        } else if (extensionsFor[eachLangExtension].includes(fixtureExtension)) {
+            matchingLanguageExtension = eachLangExtension;
+            break;
+        }
+    }
+    return matchingLanguageExtension;
+}
 
 /**
  * @param {vsctm.Registry} registry
@@ -11,35 +40,16 @@ const argv = require("yargs").argv;
  * @param {boolean} showFailureOnly
  * @param {(line: string, token: vsctm.IToken) => boolean} process
  */
-module.exports = async function(registry, path, fixture, showFailureOnly, process) {
+module.exports = async function(registry, fixturePath, fixture, showFailureOnly, process) {
     let displayedAtLeastOnce = false;
     let returnValue = true;
     try {
-        let sourceName = "source.cpp";
-        if (
-            pa.extname(path) == ".c" ||
-            path.includes("/c/") ||
-            (argv["header-c"] && pa.extname(path) == ".h")
-        ) {
-            sourceName = "source.c";
+        let matchingLanguageExtension = languageExtensionFor(fixturePath);
+        if (matchingLanguageExtension == null) {
+            console.error(`I can't find the language for ${fixtureExtension}`)
+            process.exit()
         }
-        if (
-            pa.extname(path).startsWith("x") ||
-            pa.extname(path) == ".m" ||
-            path.includes("/objc/") ||
-            (argv["header-objc"] && pa.extname(path) == ".h")
-        ) {
-            sourceName = "source.objc";
-        }
-        if (
-            pa.extname(path).includes("X") ||
-            pa.extname(path).includes("M") ||
-            pa.extname(path) == ".mm" ||
-            path.includes("/objcpp/")
-        ) {
-            sourceName = "source.objcpp";
-        }
-        const grammar = await registry.loadGrammar(sourceName);
+        const grammar = await registry.loadGrammar(`source.${matchingLanguageExtension}`);
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {
@@ -53,7 +63,7 @@ module.exports = async function(registry, path, fixture, showFailureOnly, proces
                 }
             }
             if (displayLine) {
-                showFailureOnly || console.log("line was:\n  %s:%d: |%s|", path, lineNumber, line);
+                showFailureOnly || console.log("line was:\n  %s:%d: |%s|", fixturePath, lineNumber, line);
                 displayedAtLeastOnce = true;
             }
             lineNumber += 1;
