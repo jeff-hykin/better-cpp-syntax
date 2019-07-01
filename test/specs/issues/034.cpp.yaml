@@ -36,17 +36,7 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: addr
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+- source: '(addr) '
 - source: <
   scopes:
     - keyword.operator.comparison

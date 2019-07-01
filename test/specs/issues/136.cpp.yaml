@@ -65,26 +65,29 @@
 - source: ' bool'
   scopes:
     - storage.type.return-type.lambda
-- source: '#define ASSERT'
-- source: (
+- source: '#'
   scopesBegin:
-    - meta.function.definition.parameters.lambda
+    - keyword.control.directive.define
   scopes:
-    - punctuation.definition.parameters.begin.lambda
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: ASSERT
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin
 - source: expected
   scopesBegin:
-    - meta.parameter
-  scopes:
-    - entity.name.type.parameter
+    - variable.parameter.preprocessor
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: actual
-  scopes:
-    - entity.name.type.parameter
+    - punctuation.separator.parameters
+- source: ' actual'
   scopesEnd:
-    - meta.parameter
+    - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.lambda
+    - punctuation.definition.parameters.end

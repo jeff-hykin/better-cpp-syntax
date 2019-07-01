@@ -178,6 +178,7 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:ever_present_context] = [
             # preprocessor directives, which should be a part of every scope
+            :single_line_macro,
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
@@ -2074,6 +2075,18 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = newPattern(
             match: variableBounds[/#(?:endif|else|elif)/],
             tag_as: "keyword.control.directive.$match"
+        )
+    cpp_grammar[:single_line_macro] = newPattern(
+            should_fully_match: ['#define EXTERN_C extern "C"'],
+            match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
+            includes: [
+                :meta_preprocessor_macro,
+                :comments,
+                :string_context,
+                :number_literal,
+                :operators,
+                :semicolon,
+            ]
         )
 
 #
