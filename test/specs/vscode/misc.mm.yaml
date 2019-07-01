@@ -18,6 +18,8 @@
   scopes:
     - entity.scope.name
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
   scopesEnd:
     - punctuation.separator.namespace.access
 - source: optional
@@ -560,6 +562,8 @@
   scopes:
     - entity.scope.name
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
   scopesEnd:
     - punctuation.separator.namespace.access
 - source: vector
@@ -752,6 +756,8 @@
   scopes:
     - entity.scope.name
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
   scopesEnd:
     - punctuation.separator.namespace.access
 - source: 'cout '
@@ -907,6 +913,8 @@
   scopes:
     - entity.scope.name
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
   scopesEnd:
     - punctuation.separator.namespace.access
 - source: 'cout '
@@ -1062,6 +1070,8 @@
   scopes:
     - entity.scope.name
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
   scopesEnd:
     - punctuation.separator.namespace.access
 - source: 'cout '
