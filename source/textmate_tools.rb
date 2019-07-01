@@ -1126,6 +1126,11 @@ class PatternRange
         key_arguments.delete(:while)
         if while_statement != nil && while_statement != //
             @as_tag[:while] = while_statement
+            while_pattern_as_tag = while_statement.to_tag(without_optimizations: true)
+            while_captures = while_pattern_as_tag[:captures]
+            if while_captures != {} && while_captures.to_s != ""
+                @as_tag[:whileCaptures] = while_captures
+            end
         end
         
         #
@@ -1156,17 +1161,18 @@ class PatternRange
         # end_pattern
         #
         end_pattern = key_arguments[:end_pattern]
-        if not ( (end_pattern.is_a? Regexp) and end_pattern != // )
+        if @as_tag[:while] == nil and not end_pattern.is_a?(Regexp) or end_pattern == // 
             raise "The end pattern for a PatternRange needs to be a non-empty regular expression\nThe PatternRange causing the problem is:\n#{key_arguments}"
         end
-        end_pattern_as_tag = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)
-        @as_tag[:end] = end_pattern_as_tag[:match]
-        key_arguments.delete(:end_pattern)
-        end_captures = end_pattern_as_tag[:captures]
-        if end_captures != {} && end_captures.to_s != ""
-            @as_tag[:endCaptures] = end_captures
+        if end_pattern != nil
+            end_pattern_as_tag = end_pattern.to_tag(without_optimizations: true, ignore_repository_entry: true)
+            @as_tag[:end] = end_pattern_as_tag[:match]
+            key_arguments.delete(:end_pattern)
+            end_captures = end_pattern_as_tag[:captures]
+            if end_captures != {} && end_captures.to_s != ""
+                @as_tag[:endCaptures] = end_captures
+            end
         end
-        
         #
         # includes
         #
