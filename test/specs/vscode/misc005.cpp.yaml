@@ -29824,6 +29824,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
 - source: ARG
+  scopes:
+    - meta.arguments.decltype
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype
@@ -29901,6 +29903,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
 - source: ARG
+  scopes:
+    - meta.arguments.decltype
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype

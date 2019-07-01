@@ -76,15 +76,19 @@ module.exports = async function generateSpec(path, fixture) {
             }
             if (scopesEnd.length) {
                 object.scopesEnd = scopesEnd;
-                object.scopes = _.difference(object.scopes, scopesEnd);
                 for (let scope of scopesEnd.slice().reverse()) {
                     if (scope === scopeStack[scopeStack.length - 1]) {
                         scopeStack.pop();
                     }
                 }
+                let nonLocalScopes = [...scopeStack, ...scopesEnd];
+                object.scopes = [
+                    ...scopeStack,
+                    ...object.scopes.slice(nonLocalScopes.length)
+                ];
             }
         }
-        object.scopes = _.difference(object.scopes, scopeStack);
+        object.scopes = object.scopes.slice(scopeStack.length);
         if (object.scopes.length === 0) {
             object.scopes = undefined;
         }
