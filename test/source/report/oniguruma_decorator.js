@@ -1,5 +1,5 @@
 // This file wraps an IOnigLib and collects information to provide pattern coverage statistics
-const onigLibs = require("vscode-textmate");
+const onigLibs = require("vscode-textmate-experimental");
 const OnigScanner = require("./onig_scanner");
 const recorder = require("./recorder");
 

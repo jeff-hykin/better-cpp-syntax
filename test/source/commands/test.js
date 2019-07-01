@@ -5,14 +5,14 @@ const yaml = require("js-yaml");
 
 const runTest = require("../test_runner");
 const argv = require("../arguments");
-const paths = require("../paths");
+const pathFor = require("../paths");
 
 const registry = require("../registry").default;
 
 const tests = require("../get_tests")(
     test =>
         argv._.length == 0 ||
-        argv._.includes(path.relative(paths.fixtureDir, test.fixture))
+        argv._.includes(path.relative(pathFor.fixtures, test.fixture))
 );
 
 // and run the tests, is in 2 parts to allow async
@@ -22,7 +22,7 @@ async function runTests() {
     for (const test of tests) {
         console.group(
             "running test for",
-            path.relative(paths.fixtureDir, test.fixture)
+            path.relative(pathFor.fixtures, test.fixture)
         );
         const fixture = fs
             .readFileSync(test.fixture)
@@ -31,7 +31,7 @@ async function runTests() {
         const spec = fs.readFileSync(test.spec.default);
         const result = await runTest(
             registry,
-            path.relative(paths.fixtureDir, test.fixture),
+            path.relative(pathFor.fixtures, test.fixture),
             fixture,
             yaml.safeLoad(spec, { filename: test.spec.default, json: true }),
             argv["show-failure-only"]

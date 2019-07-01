@@ -1,7 +1,7 @@
 // this files acts like a onigScanner except that it checks each pattern in turn to
 // determine which pattern actually matched.
 // it also double checks with an actual onigScanner
-const vsctm = require("vscode-textmate");
+const vsctm = require("vscode-textmate-experimental");
 const oniguruma = require("oniguruma");
 const { performance } = require("perf_hooks");
 

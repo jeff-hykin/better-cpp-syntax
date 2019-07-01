@@ -3,12 +3,7 @@ const registry = require("./registry").default;
 const _ = require("lodash");
 const path = require("path")
 const paths = require("./paths")
-
-function removeScopeName(scope) {
-    let languageEndings = paths["eachLanguage"].map(each => path.basename(each))
-    let matchEnding = RegExp(`\\\.(?:${languageEndings.join("|")})$`,"g")
-    return scope.replace(matchEnding, "");
-}
+const {removeScopeName} = require("./utils")
 
 /**
  * @param {string} path

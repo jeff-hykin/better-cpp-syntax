@@ -6,7 +6,7 @@ const yaml = require("js-yaml");
 
 const argv = require("../arguments");
 const generateSpec = require("../generate_spec");
-const paths = require("../paths");
+const pathFor = require("../paths");
 
 const tests = require("../get_tests")(test => {
     const result =
@@ -22,7 +22,7 @@ async function generateSpecs() {
     for (const test of tests) {
         console.log(
             "generating spec for",
-            path.relative(paths.fixtureDir, test.fixture)
+            path.relative(pathFor.fixtures, test.fixture)
         );
         const fixture = fs
             .readFileSync(test.fixture)

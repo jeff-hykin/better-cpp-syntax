@@ -6,7 +6,12 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
-            "preLaunchTask": "build"
+        },
+		{
+            "name": "Launch And Build",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
         }
 	]
 }

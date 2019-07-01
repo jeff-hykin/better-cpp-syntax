@@ -1,14 +1,11 @@
 const _ = require("lodash");
 const chalk = require("chalk");
-const vsctm = require("vscode-textmate");
+const vsctm = require("vscode-textmate-experimental");
+const {removeScopeName} = require("./utils")
 
 /**
  * @typedef {{source: string, scopesBegin: string[], scopes: string[], scopesEnd: string[]}} Spec
  */
-
-function removeScopeName(scope) {
-    return scope.replace(/\.(obj)?c(pp)?$/, "");
-}
 
 module.exports["SpecChecker"] = class SpecChecker {
     constructor(spec, showFailureOnly=false) {

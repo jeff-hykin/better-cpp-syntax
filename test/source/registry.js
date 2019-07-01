@@ -1,17 +1,18 @@
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
-const vsctm = require("vscode-textmate");
+const vsctm = require("vscode-textmate-experimental");
 const rewriteGrammar = require("./report/rewrite_grammar");
-
-const testDir = path.dirname(__dirname);
-
+const pathFor = require('./paths')
 
 function getRegistry(getOnigLib) {
     return new vsctm.Registry({
-        loadGrammar: scopeName => {
-            let extension = scopeName.replace(/source\./, "");
-            let grammarPath = `${testDir}/../syntaxes/${extension}.tmLanguage.json`;
+        loadGrammar: sourceName => {
+            if (sourceName == null) {
+                console.error(`I can't find the language for ${fixtureExtension}`)
+                process.exit()
+            }
+            let grammarPath = pathFor.jsonSyntax(sourceName.replace(/^source\./,""))
             // check if the syntax exists
             if (!fs.existsSync(grammarPath)) {
                 console.error("requested grammar outside of this repository");
@@ -20,7 +21,7 @@ function getRegistry(getOnigLib) {
             return Promise.resolve(
                 rewriteGrammar(
                     fs.readFileSync(grammarPath).toString(),
-                    scopeName
+                    sourceName
                 )
             );
         },

@@ -1,7 +1,7 @@
 The textmate "while" key has almost no documentation. I'm writing this to explain what little I know about it.
 
 ### Where it is allowed
-The "while" key can be used inside of a pattern range (something that normally would have a begin and end). It can be used instead of an "end" pattern, or it can be used with an "end" pattern.
+The "while" key can be used inside of a pattern range (something that normally would have a begin and end). It can be used instead of an "end" pattern. You can keep the end pattern, but I don't think it will be used for anything.
 
 ### The good part
 The "while" key is stronger than the "end" pattern, as soon as the while is over, it stops and most importantly, it cuts off any ranges that are still open. This is incredibly important because almost nothing else in textmate does this, and it is useful for stopping broken syntax.

@@ -44,12 +44,7 @@ module.exports = async function(registry, fixturePath, fixture, showFailureOnly,
     let displayedAtLeastOnce = false;
     let returnValue = true;
     try {
-        let matchingLanguageExtension = languageExtensionFor(fixturePath);
-        if (matchingLanguageExtension == null) {
-            console.error(`I can't find the language for ${fixtureExtension}`)
-            process.exit()
-        }
-        const grammar = await registry.loadGrammar(`source.${matchingLanguageExtension}`);
+        const grammar = await registry.loadGrammar(`source.${languageExtensionFor(fixturePath)}`);
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {

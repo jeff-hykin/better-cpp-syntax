@@ -7,7 +7,7 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 
 const argv = require("../arguments");
-const paths = require("../paths");
+const pathFor = require("../paths");
 
 const tests = require("../get_tests")(test => {
     const result =
@@ -22,7 +22,7 @@ async function sortSpecs() {
     for (const test of tests) {
         console.log(
             "sorting spec for",
-            path.relative(paths.fixtureDir, test.fixture)
+            path.relative(pathFor.fixtures, test.fixture)
         );
 
         const spec = fs.readFileSync(test.spec.default);
