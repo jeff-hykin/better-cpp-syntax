@@ -1,3 +1,10 @@
+<p align="center">
+        <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax"><img
+            src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" /></a>
+    <a href="https://code.visualstudio.com/updates/v1_25"><img
+            src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" /></a>
+</p>
+
 # What does this do?
 This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
@@ -13,12 +20,10 @@ NOTE: The default VS Code theme does not color much. Use a theme like one of the
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-# Before/Without Better Syntax (Material Theme)
-![material_before](https://user-images.githubusercontent.com/17692058/59826753-83abd080-92fc-11e9-9dfb-d891da55cd13.png)
-# After
-![material_after](https://user-images.githubusercontent.com/17692058/59826766-8ad2de80-92fc-11e9-9bd6-3496ed5c917b.png)
 
-
+Before                     | After
+:-------------------------:|:-------------------------:
+![material_before](https://user-images.githubusercontent.com/17692058/59826753-83abd080-92fc-11e9-9dfb-d891da55cd13.png) |![material_after](https://user-images.githubusercontent.com/17692058/59826766-8ad2de80-92fc-11e9-9bd6-3496ed5c917b.png)
 
 
 ## What is different from atom/language-c?
