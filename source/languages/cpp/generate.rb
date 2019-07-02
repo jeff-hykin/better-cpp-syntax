@@ -1764,7 +1764,7 @@ cpp_grammar = Grammar.new(
                         match: /\[/.lookAheadToAvoid(/\[/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
-                        match: /(?:.*\[.*?\].*?)*.*?/,
+                        match: /(?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?/,
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
@@ -1783,7 +1783,7 @@ cpp_grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: /\]/,
+                        match: /\]/.lookAheadToAvoid(/\[/),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
             ),
