@@ -1676,7 +1676,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: Callable
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -2101,7 +2102,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -2135,7 +2137,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: streamsize
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -2169,7 +2172,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: ANY_OUTPUT_TYPE
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
@@ -2217,7 +2221,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -5022,7 +5027,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: Callable
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -5135,7 +5141,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: Args
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -5274,7 +5281,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: 'N'
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -5295,7 +5303,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: Callable
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -5984,7 +5993,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: pointerT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma
@@ -6202,7 +6212,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: domain_error
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -7391,7 +7402,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: Args
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call

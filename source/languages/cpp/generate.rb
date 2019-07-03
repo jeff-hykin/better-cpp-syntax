@@ -308,7 +308,6 @@ cpp_grammar = Grammar.new(
             :storage_types,
             :language_constants,
             :scope_resolution_template_call_inner_generated,
-            :user_defined_template_type,
             :operators,
             :number_literal,
             :string_context,
@@ -720,10 +719,6 @@ cpp_grammar = Grammar.new(
     # otherwise this pattern fails because its to computationally expensive
     some_number_of_angle_brackets = /(?:[^<>]*|[^>]*+<[^>]*+>)++/
     
-    cpp_grammar[:user_defined_template_type] = newPattern(
-            match: variable_name,
-            tag_as: 'storage.type.user-defined'
-        )
     cpp_grammar[:comma_in_template_argument] = newPattern(
             match: /,/,
             tag_as: "comma punctuation.separator.template.argument"

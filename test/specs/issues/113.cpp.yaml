@@ -76,7 +76,8 @@
     - punctuation.separator.scope-resolution.template.call
 - source: runtime_error
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call

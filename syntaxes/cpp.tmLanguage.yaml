@@ -135,7 +135,6 @@ repository:
     - include: "#storage_types"
     - include: "#language_constants"
     - include: "#scope_resolution_template_call_inner_generated"
-    - include: "#user_defined_template_type"
     - include: "#operators"
     - include: "#number_literal"
     - include: "#string_context"
@@ -724,9 +723,6 @@ repository:
     - match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)"
       name: entity.other.attribute.$0.cpp
     - include: "#number_literal"
-  user_defined_template_type:
-    match: "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)"
-    name: storage.type.user-defined.cpp
   comma_in_template_argument:
     match: ","
     name: comma.cpp punctuation.separator.template.argument.cpp

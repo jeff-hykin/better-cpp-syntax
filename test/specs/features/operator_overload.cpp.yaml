@@ -417,7 +417,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: CharT
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - comma

@@ -90,7 +90,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: __VA_ARGS__
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -210,7 +211,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -311,7 +313,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -414,7 +417,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -470,7 +474,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: U
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call

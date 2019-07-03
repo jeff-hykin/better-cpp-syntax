@@ -143,8 +143,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.call
 - source: shared_ptr
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.user-defined
+    - entity.name.type
 - source: <
   scopesBegin:
     - meta.template.call
@@ -152,11 +154,13 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: cc
   scopes:
-    - storage.type.user-defined
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
+    - meta.qualified_type
     - meta.template.call
 - source: '>'
   scopes:
