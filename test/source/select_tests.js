@@ -9,7 +9,7 @@ const defaultTest = test =>
     fs.existsSync(test.spec.yaml) || !fs.existsSync(test.spec.json);
 
 module.exports = function() {
-    if (argv._.length !== 0) {
+    if (argv._.length !== 0 || argv.all) {
         return defaultTest;
     }
     const status = execSync("git status --porcelain").toString();
