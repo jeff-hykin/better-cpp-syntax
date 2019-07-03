@@ -47,6 +47,11 @@ auto internalConversionToFuncPtr(Callable&& a_callable, Ret (*)(Args...)) {}
 void failedToLoadCriticalData(const std::string& what, bool throwExcp = false) {}
 void failedToLoadCriticalData(const std::string * what, bool throwExcp = false) {}
 
+// beginning of a function
+void aFunction(
+    int a
+);
+
 int main(int argc, char *argv[1 + 1])
     {
         std::cout << "done\n";

@@ -1567,7 +1567,11 @@ cpp_grammar = Grammar.new(
                 # 2. , the end of the parameter/start of the next parameter
                 # 3. [ the start of an array-type parameter
                 # 4. = the start of a default-value assignment
-                ).lookAheadFor(/\)|,|\[|=/)
+                # 5. \n a newline in the case of:
+                #     func(
+                #         int thing
+                #     )
+                ).lookAheadFor(/\)|,|\[|=|\n/)
             ),
             :attributes_context,
             # find the array []'s
