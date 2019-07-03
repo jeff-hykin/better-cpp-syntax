@@ -1492,9 +1492,6 @@ cpp_grammar = Grammar.new(
 #
 # Parameters
 #
-    array_brackets = /\[\]/.maybe(@spaces)
-    comma_or_closing_paraenthese = /,/.or(/\)/)
-    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
     parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
     cpp_grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
