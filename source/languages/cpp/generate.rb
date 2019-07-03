@@ -1849,12 +1849,12 @@ cpp_grammar = Grammar.new(
                 includes: [ :evaluation_context ]
             ).maybe(@spaces)
         ).then(newPattern(
-            match: /[,;]/.or(/\n/),
+            match: newPattern(/[,;]/.lookAheadToAvoid(/'/)).or(/\n/),
             includes: [
                 :comma,
                 :semicolon,
             ],
-        ).or(lookAheadFor(/\}/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
+        ).or(lookAheadFor(/\}[^']/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
         tag_as: "meta.enum.definition",
     )
     # see https://en.cppreference.com/w/cpp/language/enum
