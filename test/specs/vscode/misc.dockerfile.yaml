@@ -1,1047 +1,1102 @@
-- source: 'FROM tensorflow/tensorflow:latest'
+- source: FROM
   scopesBegin:
     - source
-    - entity
-- source: RUN apt-get update -y --fix-missing
-- source: RUN apt-get install -y ffmpeg
-  scopesEnd:
-    - entity
+  scopes:
+    - keyword.other.special-method.from
+- source: tensorflow/tensorflow
+  scopes:
+    - entity.name.image
+- source: ':'
+  scopes:
+    - punctuation.separator.version
+    - constant.numeric.version
+- source: latest
+  scopes:
+    - constant.numeric.version
 - source: RUN
   scopes:
     - keyword.other.special-method
-- source: a
+- source: apt-get
   scopesBegin:
     - meta.command.run
-    - entity.name.test
-- source: p
-- source: t
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: update
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
 - source: '-'
-- source: g
-- source: e
-- source: t
-- source: i
-- source: 'n'
-- source: s
-- source: t
-- source: a
-- source: l
-- source: l
-- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
 - source: 'y'
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
+  scopes:
+    - constant.other.option.shell
 - source: '-'
-- source: e
-- source: s
-- source: s
-- source: e
-- source: 'n'
-- source: t
-- source: i
-- source: a
-- source: l
-- source: c
-- source: m
-- source: a
-- source: k
-- source: e
+  scopes:
+    - constant.other.option.dash.shell
+- source: '-fix-missing'
+  scopes:
+    - constant.other.option.shell
   scopesEnd:
-    - entity.name.test
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+    - string.unquoted.argument.shell
+- source: RUN
+  scopes:
+    - keyword.other.special-method
+- source: apt-get
+  scopesBegin:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: 'y'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: ffmpeg
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+  scopesEnd:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+- source: RUN
+  scopes:
+    - keyword.other.special-method
+- source: apt-get
+  scopesBegin:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: 'y'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: build-essential
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: cmake
 - source: pkg-config
-  scopesBegin:
-    - meta.inner
-  scopes:
-    - keyword.other.begin
-- source: ' \'
-- source: '                    libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev \'
   scopesEnd:
-    - meta.inner
-- source: '                    libavcodec-dev'
+    - string.unquoted.argument.shell
+- source: \
   scopes:
-    - storage.type
-- source: ' libavformat-dev libswscale-dev libv4l-dev \'
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: libjpeg8-dev
+  scopes:
+    - entity.name.command.shell
+- source: libtiff5-dev
   scopesBegin:
-    - meta.inner
-- source: '                    libxvidcore-dev '
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: libjasper-dev
+- source: libpng12-dev
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: libavcodec-dev
+  scopes:
+    - entity.name.command.shell
+- source: libavformat-dev
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: libswscale-dev
+- source: libv4l-dev
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: libxvidcore-dev
+  scopes:
+    - entity.name.command.shell
 - source: libx264-dev
-  scopes:
-    - keyword.other.end
-  scopesEnd:
-    - meta.inner
-- source: \
   scopesBegin:
-    - entity.name.test
-- source: l
-- source: i
-- source: b
-- source: g
-- source: t
-- source: k
-- source: '-'
-- source: '3'
-- source: '-'
-- source: d
-- source: e
-- source: v
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
-- source: l
-- source: i
-- source: b
-- source: a
-- source: t
-- source: l
-- source: a
-- source: s
-- source: '-'
-- source: b
-- source: a
-- source: s
-- source: e
-- source: '-'
-- source: d
-- source: e
-- source: v
-- source: g
-- source: f
-- source: o
-- source: r
-- source: t
-- source: r
-- source: a
-- source: 'n'
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: libgtk-3-dev
+  scopes:
+    - entity.name.command.shell
 - source: \
-- source: l
-- source: i
-- source: b
-- source: b
-- source: o
-- source: o
-- source: s
-- source: t
-- source: '-'
-- source: a
-- source: l
-- source: l
-- source: '-'
-- source: d
-- source: e
-- source: v
+  scopes:
+    - meta.argument.shell
+    - constant.character.escape.line-continuation.shell
+- source: libatlas-base-dev
+  scopes:
+    - entity.name.command.shell
+- source: gfortran
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: libboost-all-dev
+  scopes:
+    - entity.name.command.shell
+- source: \
+  scopes:
+    - meta.argument.shell
+    - constant.character.escape.line-continuation.shell
+- source: python3
+  scopes:
+    - entity.name.command.shell
+- source: python3-dev
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: python3-numpy
   scopesEnd:
     - meta.command.run
-    - entity.name.test
-- source: '                    python3 python3-dev python3-numpy'
-  scopesBegin:
-    - entity
-- source: RUN apt-get install -y wget vim python3-tk python3-pip
-- source: WORKDIR /
-  scopesEnd:
-    - entity
+    - source.shell
+    - meta.statement.shell
+    - meta.argument.shell
+    - string.unquoted.argument.shell
 - source: RUN
   scopes:
     - keyword.other.special-method
-- source: w
+- source: apt-get
   scopesBegin:
     - meta.command.run
-    - entity.name.test
-- source: g
-- source: e
-- source: t
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
 - source: '-'
-- source: O
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: .
-- source: z
-- source: i
-- source: p
-- source: h
-- source: t
-- source: t
-- source: p
-- source: s
-- source: ':'
-- source: /
-- source: /
-- source: g
-- source: i
-- source: t
-- source: h
-- source: u
-- source: b
-- source: .
-- source: c
-- source: o
-- source: m
-- source: /
-- source: I
-- source: t
-- source: s
-- source: e
-- source: e
-- source: z
-- source: /
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: /
-- source: a
-- source: r
-- source: c
-- source: h
-- source: i
-- source: v
-- source: e
-- source: /
-- source: '3'
-- source: .
-- source: '2'
-- source: .
-- source: '0'
-- source: .
-- source: z
-- source: i
-- source: p
-- source: \
-- source: '&'
-- source: '&'
-- source: u
-- source: 'n'
-- source: z
-- source: i
-- source: p
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: .
-- source: z
-- source: i
-- source: p
-- source: \
-- source: '&'
-- source: '&'
-- source: w
-- source: g
-- source: e
-- source: t
-- source: '-'
-- source: O
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: _
-- source: c
-- source: o
-- source: 'n'
-- source: t
-- source: r
-- source: i
-- source: b
-- source: .
-- source: z
-- source: i
-- source: p
-- source: h
-- source: t
-- source: t
-- source: p
-- source: s
-- source: ':'
-- source: /
-- source: /
-- source: g
-- source: i
-- source: t
-- source: h
-- source: u
-- source: b
-- source: .
-- source: c
-- source: o
-- source: m
-- source: /
-- source: I
-- source: t
-- source: s
-- source: e
-- source: e
-- source: z
-- source: /
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: _
-- source: c
-- source: o
-- source: 'n'
-- source: t
-- source: r
-- source: i
-- source: b
-- source: /
-- source: a
-- source: r
-- source: c
-- source: h
-- source: i
-- source: v
-- source: e
-- source: /
-- source: '3'
-- source: .
-- source: '2'
-- source: .
-- source: '0'
-- source: .
-- source: z
-- source: i
-- source: p
-- source: \
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: 'y'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: wget
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: vim
+- source: python3-tk
+- source: python3-pip
   scopesEnd:
     - meta.command.run
-    - entity.name.test
-- source: '    && unzip opencv_contrib.zip'
-  scopesBegin:
-    - entity
-- source: '# install opencv3.2'
-  scopesEnd:
-    - entity
+    - source.shell
+    - meta.statement.shell
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: WORKDIR
+  scopes:
+    - keyword.other.special-method.WORKDIR
+- source: /
 - source: RUN
   scopes:
     - keyword.other.special-method
-- source: c
+- source: wget
   scopesBegin:
     - meta.command.run
-    - entity.name.test
-- source: d
-- source: /
-- source: o
-- source: p
-- source: e
-- source: 'n'
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: O
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: opencv.zip
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: 'https://github.com/Itseez/opencv/archive/3.2.0.zip'
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: unzip
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: opencv.zip
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: wget
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: O
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: opencv_contrib.zip
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: 'https://github.com/Itseez/opencv_contrib/archive/3.2.0.zip'
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: unzip
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: opencv_contrib.zip
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+  scopesEnd:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+- source: '#'
+  scopesBegin:
+    - comment.line.number-sign
+  scopes:
+    - punctuation.definition.comment
+- source: ' install opencv3.2'
+  scopesEnd:
+    - comment.line.number-sign
+- source: RUN
+  scopes:
+    - keyword.other.special-method
+- source: cd
+  scopesBegin:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: /opencv-3.2.0/
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: mkdir
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: build
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cd
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: build
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cmake
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: D
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: CMAKE_BUILD_TYPE=RELEASE
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: INSTALL_C_EXAMPLES=OFF
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: INSTALL_PYTHON_EXAMPLES=ON
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: OPENCV_EXTRA_MODULES_PATH=/opencv_contrib-3.2.0/modules
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: BUILD_EXAMPLES=OFF
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: BUILD_opencv_python2=OFF
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: BUILD_NEW_PYTHON_SUPPORT=ON
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: CMAKE_INSTALL_PREFIX=
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: $(
+  scopesBegin:
+    - string.interpolated.dollar.shell
+  scopes:
+    - punctuation.definition.evaluation.parens.begin.shell
+- source: python3
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
 - source: c
-- source: v
-- source: '-'
-- source: '3'
-- source: .
-- source: '2'
-- source: .
-- source: '0'
-- source: /
-- source: \
-- source: '&'
-- source: '&'
-- source: m
-- source: k
-- source: d
-- source: i
-- source: r
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: d
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: m
-- source: a
-- source: k
-- source: e
-- source: '-'
-- source: D
-- source: C
-- source: M
-- source: A
-- source: K
-- source: E
-- source: _
-- source: B
-- source: U
-- source: I
-- source: L
-- source: D
-- source: _
-- source: T
-- source: 'Y'
-- source: P
-- source: E
-- source: =
-- source: R
-- source: E
-- source: L
-- source: E
-- source: A
-- source: S
-- source: E
-- source: \
-- source: '-'
-- source: D
-- source: I
-- source: 'N'
-- source: S
-- source: T
-- source: A
-- source: L
-- source: L
-- source: _
-- source: C
-- source: _
-- source: E
-- source: X
-- source: A
-- source: M
-- source: P
-- source: L
-- source: E
-- source: S
-- source: =
-- source: O
-- source: F
-- source: F
-- source: \
-- source: '-'
-- source: D
-- source: I
-- source: 'N'
-- source: S
-- source: T
-- source: A
-- source: L
-- source: L
-- source: _
-- source: P
-- source: 'Y'
-- source: T
-- source: H
-- source: O
-- source: 'N'
-- source: _
-- source: E
-- source: X
-- source: A
-- source: M
-- source: P
-- source: L
-- source: E
-- source: S
-- source: =
-- source: O
-- source: 'N'
-- source: \
-- source: '-'
-- source: D
-- source: O
-- source: P
-- source: E
-- source: 'N'
-- source: C
-- source: V
-- source: _
-- source: E
-- source: X
-- source: T
-- source: R
-- source: A
-- source: _
-- source: M
-- source: O
-- source: D
-- source: U
-- source: L
-- source: E
-- source: S
-- source: _
-- source: P
-- source: A
-- source: T
-- source: H
-- source: =
-- source: /
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: _
-- source: c
-- source: o
-- source: 'n'
-- source: t
-- source: r
-- source: i
-- source: b
-- source: '-'
-- source: '3'
-- source: .
-- source: '2'
-- source: .
-- source: '0'
-- source: /
-- source: m
-- source: o
-- source: d
-- source: u
-- source: l
-- source: e
-- source: s
-- source: \
-- source: '-'
-- source: D
-- source: B
-- source: U
-- source: I
-- source: L
-- source: D
-- source: _
-- source: E
-- source: X
-- source: A
-- source: M
-- source: P
-- source: L
-- source: E
-- source: S
-- source: =
-- source: O
-- source: F
-- source: F
-- source: \
-- source: '-'
-- source: D
-- source: B
-- source: U
-- source: I
-- source: L
-- source: D
-- source: _
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: _
-- source: p
-- source: 'y'
-- source: t
-- source: h
-- source: o
-- source: 'n'
-- source: '2'
-- source: =
-- source: O
-- source: F
-- source: F
-- source: \
-- source: '-'
-- source: D
-- source: B
-- source: U
-- source: I
-- source: L
-- source: D
-- source: _
-- source: 'N'
-- source: E
-- source: W
-- source: _
-- source: P
-- source: 'Y'
-- source: T
-- source: H
-- source: O
-- source: 'N'
-- source: _
-- source: S
-- source: U
-- source: P
-- source: P
-- source: O
-- source: R
-- source: T
-- source: =
-- source: O
-- source: 'N'
-- source: \
-- source: '-'
-- source: D
-- source: C
-- source: M
-- source: A
-- source: K
-- source: E
-- source: _
-- source: I
-- source: 'N'
-- source: S
-- source: T
-- source: A
-- source: L
-- source: L
-- source: _
-- source: P
-- source: R
-- source: E
-- source: F
-- source: I
-- source: X
-- source: =
-- source: $
-- source: (
-- source: p
-- source: 'y'
-- source: t
-- source: h
-- source: o
-- source: 'n'
-- source: '3'
-- source: '-'
-- source: c
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: '"'
-- source: i
-- source: m
-- source: p
-- source: o
-- source: r
-- source: t
-- source: s
-- source: 'y'
-- source: s
-- source: ;
-- source: p
-- source: r
-- source: i
-- source: 'n'
-- source: t
-- source: (
-- source: s
-- source: 'y'
-- source: s
-- source: .
-- source: p
-- source: r
-- source: e
-- source: f
-- source: i
-- source: x
-- source: )
+  scopesBegin:
+    - meta.argument.shell
+    - string.quoted.double.shell
+  scopes:
+    - punctuation.definition.string.begin.shell
+- source: import sys; print(sys.prefix)
 - source: '"'
+  scopes:
+    - punctuation.definition.string.end.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+    - string.quoted.double.shell
 - source: )
+  scopes:
+    - punctuation.definition.evaluation.parens.end.shell
+  scopesEnd:
+    - string.interpolated.dollar.shell
 - source: \
-- source: '-'
-- source: D
-- source: P
-- source: 'Y'
-- source: T
-- source: H
-- source: O
-- source: 'N'
-- source: _
-- source: E
-- source: X
-- source: E
-- source: C
-- source: U
-- source: T
-- source: A
-- source: B
-- source: L
-- source: E
-- source: =
-- source: $
-- source: (
-- source: w
-- source: h
-- source: i
-- source: c
-- source: h
-- source: p
-- source: 'y'
-- source: t
-- source: h
-- source: o
-- source: 'n'
-- source: '3'
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: PYTHON_EXECUTABLE=
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: $(
+  scopesBegin:
+    - string.interpolated.dollar.shell
+  scopes:
+    - punctuation.definition.evaluation.parens.begin.shell
+- source: which
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: python3
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+  scopesEnd:
+    - meta.statement.shell
 - source: )
+  scopes:
+    - punctuation.definition.evaluation.parens.end.shell
+  scopesEnd:
+    - string.interpolated.dollar.shell
 - source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: WITH_FFMPEG=1
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: '-D'
+  scopes:
+    - entity.name.command.shell
+- source: WITH_CUDA=0
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.argument.shell
+- source: ..
+  scopes:
+    - entity.name.command.shell
+- source: \
+  scopes:
+    - meta.argument.shell
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: make
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
 - source: '-'
-- source: D
-- source: W
-- source: I
-- source: T
-- source: H
-- source: _
-- source: F
-- source: F
-- source: M
-- source: P
-- source: E
-- source: G
-- source: =
-- source: '1'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: j8
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: \
-- source: '-'
-- source: D
-- source: W
-- source: I
-- source: T
-- source: H
-- source: _
-- source: C
-- source: U
-- source: D
-- source: A
-- source: =
-- source: '0'
+  scopes:
+    - meta.argument.shell
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: make
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
-- source: .
-- source: .
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: ldconfig
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: m
-- source: a
-- source: k
-- source: e
-- source: '-'
-- source: j
-- source: '8'
+  scopes:
+    - meta.argument.shell
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: rm
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: /opencv.zip
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: m
-- source: a
-- source: k
-- source: e
-- source: i
-- source: 'n'
-- source: s
-- source: t
-- source: a
-- source: l
-- source: l
-- source: \
-- source: '&'
-- source: '&'
-- source: l
-- source: d
-- source: c
-- source: o
-- source: 'n'
-- source: f
-- source: i
-- source: g
-- source: \
-- source: '&'
-- source: '&'
-- source: r
-- source: m
-- source: /
-- source: o
-- source: p
-- source: e
-- source: 'n'
-- source: c
-- source: v
-- source: .
-- source: z
-- source: i
-- source: p
-- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: rm
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: /opencv_contrib.zip
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
   scopesEnd:
     - meta.command.run
-    - entity.name.test
-- source: '    && rm /opencv_contrib.zip'
+    - source.shell
+    - meta.statement.shell
+- source: '#'
   scopesBegin:
-    - entity
-- source: '# Install dlib 19.4'
+    - comment.line.number-sign
+  scopes:
+    - punctuation.definition.comment
+- source: ' Install dlib 19.4'
   scopesEnd:
-    - entity
+    - comment.line.number-sign
 - source: RUN
   scopes:
     - keyword.other.special-method
-- source: w
+- source: wget
   scopesBegin:
     - meta.command.run
-    - entity.name.test
-- source: g
-- source: e
-- source: t
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
 - source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
 - source: O
-- source: d
-- source: l
-- source: i
-- source: b
-- source: '-'
-- source: '1'
-- source: '9'
-- source: .
-- source: '4'
-- source: .
-- source: t
-- source: a
-- source: r
-- source: .
-- source: b
-- source: z
-- source: '2'
-- source: h
-- source: t
-- source: t
-- source: p
-- source: ':'
-- source: /
-- source: /
-- source: d
-- source: l
-- source: i
-- source: b
-- source: .
-- source: 'n'
-- source: e
-- source: t
-- source: /
-- source: f
-- source: i
-- source: l
-- source: e
-- source: s
-- source: /
-- source: d
-- source: l
-- source: i
-- source: b
-- source: '-'
-- source: '1'
-- source: '9'
-- source: .
-- source: '4'
-- source: .
-- source: t
-- source: a
-- source: r
-- source: .
-- source: b
-- source: z
-- source: '2'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: dlib-19.4.tar.bz2
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: 'http://dlib.net/files/dlib-19.4.tar.bz2'
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: tar
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: vxjf
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: dlib-19.4.tar.bz2
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
   scopesEnd:
     - meta.command.run
-    - entity.name.test
-- source: '    && tar -vxjf dlib-19.4.tar.bz2'
-  scopes:
-    - entity
+    - source.shell
+    - meta.statement.shell
 - source: RUN
   scopes:
     - keyword.other.special-method
-- source: c
+- source: cd
   scopesBegin:
     - meta.command.run
-    - entity.name.test
-- source: d
-- source: d
-- source: l
-- source: i
-- source: b
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: dlib-19.4
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cd
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: examples
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: mkdir
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: build
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cd
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: build
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cmake
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: ..
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cmake
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
 - source: '-'
-- source: '1'
-- source: '9'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: '-build'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: .
-- source: '4'
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: d
-- source: e
-- source: x
-- source: a
-- source: m
-- source: p
-- source: l
-- source: e
-- source: s
-- source: \
-- source: '&'
-- source: '&'
-- source: m
-- source: k
-- source: d
-- source: i
-- source: r
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: d
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: m
-- source: a
-- source: k
-- source: e
-- source: .
-- source: .
-- source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: m
-- source: a
-- source: k
-- source: e
+  scopes:
+    - meta.argument.shell
+    - support.function.builtin.shell
 - source: '-'
-- source: '-'
-- source: b
-- source: u
-- source: i
-- source: l
-- source: d
-- source: .
-- source: '-'
-- source: '-'
-- source: c
-- source: o
-- source: 'n'
-- source: f
-- source: i
-- source: g
-- source: R
-- source: e
-- source: l
-- source: e
-- source: a
-- source: s
-- source: e
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: '-config'
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: Release
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: d
-- source: /
-- source: d
-- source: l
-- source: i
-- source: b
-- source: '-'
-- source: '1'
-- source: '9'
-- source: .
-- source: '4'
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cd
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
+- source: /dlib-19.4
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - string.unquoted.argument.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: p
-- source: i
-- source: p
-- source: '3'
-- source: i
-- source: 'n'
-- source: s
-- source: t
-- source: a
-- source: l
-- source: l
-- source: s
-- source: e
-- source: t
-- source: u
-- source: p
-- source: t
-- source: o
-- source: o
-- source: l
-- source: s
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: pip3
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: setuptools
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: p
-- source: 'y'
-- source: t
-- source: h
-- source: o
-- source: 'n'
-- source: '3'
-- source: s
-- source: e
-- source: t
-- source: u
-- source: p
-- source: .
-- source: p
-- source: 'y'
-- source: i
-- source: 'n'
-- source: s
-- source: t
-- source: a
-- source: l
-- source: l
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: python3
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: setup.py
+  scopesBegin:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: install
+  scopesEnd:
+    - string.unquoted.argument.shell
 - source: \
-- source: '&'
-- source: '&'
-- source: c
-- source: d
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: cd
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+    - support.function.builtin.shell
 - source: $
-- source: W
-- source: O
-- source: R
-- source: K
-- source: D
-- source: I
-- source: R
+  scopesBegin:
+    - meta.argument.shell
+  scopes:
+    - punctuation.definition.variable.shell
+    - variable.other.normal.shell
+- source: WORKDIR
+  scopes:
+    - variable.other.normal.shell
 - source: \
+  scopes:
+    - constant.character.escape.line-continuation.shell
+  scopesEnd:
+    - meta.statement.shell
+    - meta.argument.shell
+- source: '&&'
+  scopes:
+    - punctuation.separator.statement.and.shell
+- source: rm
+  scopesBegin:
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: /dlib-19.4.tar.bz2
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
   scopesEnd:
     - meta.command.run
-    - entity.name.test
-- source: '    && rm /dlib-19.4.tar.bz2'
+    - source.shell
+    - meta.statement.shell
+- source: ADD
+  scopes:
+    - keyword.other.special-method.ADD
+- source: $
+  scopes:
+    - punctuation.definition.variable
+    - variable.other
+- source: PWD
+  scopes:
+    - variable.other
+- source: /requirements.txt /requirements.txt
+- source: RUN
+  scopes:
+    - keyword.other.special-method
+- source: pip3
   scopesBegin:
-    - entity
-- source: ADD $PWD/requirements.txt /requirements.txt
-- source: RUN pip3 install -r /requirements.txt
-- source: 'CMD ["/bin/bash"]'
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+  scopes:
+    - entity.name.command.shell
+- source: install
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+- source: '-'
+  scopesBegin:
+    - string.unquoted.argument.shell
+  scopes:
+    - constant.other.option.dash.shell
+- source: r
+  scopes:
+    - constant.other.option.shell
+  scopesEnd:
+    - string.unquoted.argument.shell
+- source: /requirements.txt
+  scopes:
+    - meta.argument.shell
+    - string.unquoted.argument.shell
+  scopesEnd:
+    - meta.command.run
+    - source.shell
+    - meta.statement.shell
+- source: CMD
+  scopes:
+    - keyword.other.special-method.CMD
+- source: '['
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: /bin/bash
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
