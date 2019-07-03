@@ -9,11 +9,7 @@ const pathFor = require("../paths");
 
 const registry = require("../registry").default;
 
-const tests = require("../get_tests")(
-    test =>
-        argv._.length == 0 ||
-        argv._.includes(path.relative(pathFor.fixtures, test.fixture))
-);
+const tests = require("../get_tests")(require("../select_tests")());
 
 // and run the tests, is in 2 parts to allow async
 runTests();

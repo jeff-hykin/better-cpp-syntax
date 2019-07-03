@@ -9,9 +9,9 @@ module.exports = require("yargs")
         type: "boolean"
     })
     .nargs("color", 0)
-    .option("--generate-all", {
+    .option("all", {
         default: false,
-        describe: "generate spec files for all fixtures",
+        describe: "run for all fixtures",
         type: "boolean"
     })
     .option("show-failure-only", {

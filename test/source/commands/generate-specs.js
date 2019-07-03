@@ -11,7 +11,7 @@ const pathFor = require("../paths");
 const tests = require("../get_tests")(test => {
     const result =
         (!fs.existsSync(test.spec.yaml) && !fs.existsSync(test.spec.json)) ||
-        argv["generate-all"] ||
+        argv.all ||
         argv._.length !== 0;
     return result;
 });
