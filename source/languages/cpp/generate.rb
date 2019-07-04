@@ -1024,6 +1024,20 @@ cpp_grammar = Grammar.new(
                     :ever_present_context,
                     # the evaluation_context is included here as workaround for function-initializations like issue #282, and #198
                     # std::mt19937 eng1(std::time(nullptr));
+                    :memory_operators,
+                    PatternRange.new(
+                        start_pattern: newPattern(
+                            inline_builtin_storage_type.then(std_space).then(
+                                match: /\(/,
+                                tag_as: "punctuation.section.arguments.begin.bracket.round.initializer"
+                            )
+                        ),
+                        end_pattern: newPattern(
+                            match: /\)/,
+                            tag_as: "punctuation.section.arguments.end.bracket.round.initializer"
+                        ),
+                        includes: [ :evaluation_context ],
+                    ),
                     :curly_initializer,
                     :parameter_or_maybe_value,
                     :comma,

@@ -4,6 +4,10 @@
 
 
 Atype aVar(Atype{1,2,3});
+Atype aVar(new Atype{1,2,3});
+Atype aVar(new int(10));
+Atype aVar(int(10));
+
 
 std::mt19937 eng1(std::time(nullptr));
 // std::mt19937 eng2(1234);

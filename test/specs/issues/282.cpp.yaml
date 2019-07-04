@@ -114,6 +114,151 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+- source: Atype
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: aVar
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: new
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: Atype
+  scopesBegin:
+    - meta.initialization
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '{'
+  scopes:
+    - punctuation.section.arguments.begin.bracket.curly.initializer
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - comma
+    - punctuation.separator.delimiter
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+  scopes:
+    - punctuation.section.arguments.end.bracket.curly.initializer
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.initialization
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Atype
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: aVar
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: new
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.initializer
+- source: '10'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.initializer
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Atype
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: aVar
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.initializer
+- source: '10'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.initializer
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: std
   scopesBegin:
     - meta.function.definition
