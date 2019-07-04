@@ -5,10 +5,11 @@
             "name": "Launch Extension",
             "type": "extensionHost",
             "request": "launch",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}"]
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
+            "preLaunchTask": "build_active_file"
         },
         {
-            "name": "Launch And Build",
+            "name": "Launch And Build All",
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
