@@ -304,6 +304,7 @@ cpp_grammar = Grammar.new(
             :evaluation_context
         ]
     cpp_grammar[:template_call_context] = [
+            :ever_present_context,
             :template_call_range,
             :storage_types,
             :language_constants,

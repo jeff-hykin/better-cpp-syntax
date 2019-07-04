@@ -311,6 +311,9 @@
     "template_call_context": {
       "patterns": [
         {
+          "include": "#ever_present_context"
+        },
+        {
           "include": "#template_call_range"
         },
         {

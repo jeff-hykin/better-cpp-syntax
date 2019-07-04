@@ -131,6 +131,7 @@ repository:
     - include: "#evaluation_context"
   template_call_context:
     patterns:
+    - include: "#ever_present_context"
     - include: "#template_call_range"
     - include: "#storage_types"
     - include: "#language_constants"
