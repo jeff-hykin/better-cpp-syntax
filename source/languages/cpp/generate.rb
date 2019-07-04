@@ -199,7 +199,7 @@ cpp_grammar = Grammar.new(
             :ever_present_context,
             # declarations (contains only the head of somthing)
             # TODO: class pre-definition
-            # TODO: initializater calls
+            # TODO: initializer calls
             # definitions (contains a body of something)
             :constructor_root,
             :destructor_root,
@@ -1020,8 +1020,13 @@ cpp_grammar = Grammar.new(
                     tag_as: "punctuation.section.parameters.end.bracket.round"
                     ),
                 includes: [
-                    :function_parameter_context,
-                    # TODO: the evaluation_context is included here as workaround for function-initializations like issue #198
+                    :ever_present_context,
+                    # the evaluation_context is included here as workaround for function-initializations like issue #282, and #198
+                    # std::mt19937 eng1(std::time(nullptr));
+                    :curly_initializer,
+                    :parameter_or_maybe_value,
+                    :comma,
+                    # the evaluation_context is included here as workaround for function-initializations like issue #282, and #198
                     # e.g. std::string ("hello");
                     :evaluation_context,
                 ]
@@ -1032,6 +1037,23 @@ cpp_grammar = Grammar.new(
         ],
         needs_semicolon: false,
         body_includes: [ :function_body_context ],
+    )
+    cpp_grammar[:curly_initializer] = PatternRange.new(
+        tag_as: "meta.initialization",
+        start_pattern: newPattern(
+            qualified_type.then(std_space).then(
+                match: /\{/,
+                tag_as: "punctuation.section.arguments.begin.bracket.curly.initializer",
+            )
+        ),
+        end_pattern: newPattern(
+            match: /\}/,
+            tag_as: "punctuation.section.arguments.end.bracket.curly.initializer",
+        ),
+        includes: [
+            :evaluation_context,
+            :comma
+        ]
     )
     cpp_grammar[:operator_overload] = generateBlockFinder(
         name:"function.definition.special.operator-overload",
@@ -1493,6 +1515,109 @@ cpp_grammar = Grammar.new(
 # Parameters
 #
     parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
+    cpp_grammar[:parameter_or_maybe_value] = PatternRange.new(
+        tag_as: "meta.parameter",
+        start_pattern: std_space.lookAheadFor(/\w/),
+        end_pattern: parameter_ending,
+        includes: [
+            :function_pointer_parameter,
+            :decltype,
+            :vararg_ellipses,
+            newPattern(
+                newPattern(
+                    match: oneOrMoreOf(
+                        # a specifier
+                        newPattern(
+                            newPattern(
+                                match: @cpp_tokens.that(:isStorageSpecifier),
+                                tag_as: "storage.modifier.specifier.parameter",
+                            ).then(std_space)
+                        # a type specifier
+                        # type specifiers are only specifiers when combined with something else ex: long vs long int
+                        ).or(
+                            newPattern(
+                                match: @cpp_tokens.that(:isTypeSpecifier),
+                                tag_as: "storage.modifier.specifier.parameter",
+                            ).then(std_space).lookAheadFor(/\w/)
+                        )
+                    ),
+                    includes: [
+                        :storage_types
+                    ]
+                ).then(std_space).then(
+                    newPattern(
+                        inline_builtin_storage_type
+                    ).or(
+                        match: variableBounds[identifier].then(
+                                @word_boundary
+                            ).then(
+                                @cpp_tokens.lookBehindToAvoidWordsThat(:isStorageSpecifier)
+                            ),
+                        tag_as: "entity.name.type.parameter",
+                    )
+                ).then(std_space).lookAheadFor(/,|\)|=/), 
+            ),
+            :storage_types,
+            :function_call, # function call is here because of #282, it should be below decltype() and function pointer, storage types, and modifiers but above scope resolution
+            :scope_resolution_parameter_inner_generated,
+            # match the class/struct/enum/union keywords
+            newPattern(
+                match: @cpp_tokens.that(:isTypeCreator),
+                tag_as: "storage.type.$match"
+            ),
+            # This is a range for when there is a variable-default assignment
+            PatternRange.new(
+                start_pattern: lookBehindFor(/=/),
+                end_pattern: parameter_ending,
+                # this is for everything after the =, but before the next parameter
+                includes: [ :evaluation_context ]
+            ),
+            assignment_operator,
+            # standard parameter
+            newPattern(
+                # avoid
+                # 1. \s (otherwise the checks below wont work)
+                # 2. \( the start of the function
+                # 3. , the start of a previous parameter
+                # 4. : then end of a scope resolution::
+                lookBehindToAvoid(/\s|\(|,|:/).then(std_space).then(
+                    match: identifier,
+                    tag_as: "variable.parameter",
+                ).then(
+                    std_space
+                # the parameter can end with
+                # 1. ) the end of the function paraentheses
+                # 2. , the end of the parameter/start of the next parameter
+                # 3. [ the start of an array-type parameter
+                # 4. = the start of a default-value assignment
+                ).lookAheadFor(/\)|,|\[|=/)
+            ),
+            :attributes_context,
+            # find the array []'s
+            PatternRange.new(
+                tag_as: "meta.bracket.square.array",
+                # \G only match at the begining
+                start_pattern: newPattern(
+                    match: /\[/,
+                    tag_as: "punctuation.definition.begin.bracket.square.array.type"
+                ),
+                end_pattern: newPattern(
+                    match: /\]/,
+                    tag_as: "punctuation.definition.end.bracket.square.array.type"
+                ),
+                includes: [ :evaluation_context ]
+            ),
+            # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
+            newPattern(
+                match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
+                tag_as: "entity.name.type.parameter"
+            ),
+            :template_call_range,
+            # tag the reference and dereference operator
+            std_space.then(ref_deref_pattern)
+            # ref_deref_pattern
+        ]
+    )
     cpp_grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
         start_pattern: std_space.lookAheadFor(/\w/),
