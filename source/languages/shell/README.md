@@ -14,7 +14,7 @@ Just install the VS Code extension and the changes will automatically be applied
 
 Before                     | After
 :-------------------------:|:-------------------------:
-![code_before](https://user-images.githubusercontent.com/17692058/60395944-9b573600-9b00-11e9-9748-30abe491f474.png) | ![code_after](https://user-images.githubusercontent.com/17692058/60395959-c772b700-9b00-11e9-821e-f95544b6ba3e.png)
+![before](https://user-images.githubusercontent.com/17692058/60762004-edc1b680-a01a-11e9-83e9-55dc02659b5c.png) | ![after](https://user-images.githubusercontent.com/17692058/60762005-f9ad7880-a01a-11e9-996f-136584164e57.png)
 The screenshots were taken with [PolaCode 2019](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.polacode-2019) with the XD Theme with the Input Mono font
 
 ## Contributing
