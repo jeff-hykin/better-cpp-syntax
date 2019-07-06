@@ -1,6 +1,7 @@
 const path = require("path");
 const glob = require("glob");
 const fs   = require("fs");
+const _ = require("lodash")
 
 const testDir            = path.dirname(__dirname)
 const fixtures           = path.join(testDir, "fixtures")
@@ -19,6 +20,6 @@ module.exports = {
     languages:      path.join(root, "source", "languages"),
     eachLanguage:   glob.sync(path.join(root, "source/languages/*")),
     eachJsonSyntax: glob.sync(path.join(syntaxes, "*.json")),
-    eachFixture:    glob.sync(path.join(fixtures,`**/*.{${languageFileTypes.flat().join(",")}}`)),
+    eachFixture:    glob.sync(path.join(fixtures,`**/*.{${_.flattenDeep(languageFileTypes).join(",")}}`)),
     jsonSyntax:     (extensionName) => path.join(syntaxes, `${extensionName}.tmLanguage.json`)
 }
