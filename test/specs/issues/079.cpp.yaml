@@ -1,6 +1,4 @@
 - source: 'template '
-  scopesBegin:
-    - source
 - source: class
   scopesBegin:
     - meta.block.class
@@ -21,8 +19,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: '6'
   scopes:
     - constant.numeric.decimal
@@ -53,8 +50,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: '6'
   scopes:
     - constant.numeric.decimal
@@ -108,8 +104,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: '6'
   scopes:
     - constant.numeric.decimal
@@ -143,8 +138,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: '6'
   scopes:
     - constant.numeric.decimal

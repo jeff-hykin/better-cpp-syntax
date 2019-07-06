@@ -1,6 +1,5 @@
 - source: namespace
   scopesBegin:
-    - source
     - meta.block.namespace
     - meta.head.namespace
   scopes:
@@ -38,8 +37,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -121,8 +119,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive

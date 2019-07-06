@@ -1,6 +1,5 @@
 - source: //
   scopesBegin:
-    - source
     - comment.line.double-slash
     - punctuation.definition.comment
 - source: //
@@ -990,12 +989,11 @@
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
 - source: long
-  scopes:
+  scopesBegin:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopes:
-    - meta.qualified_type
+  scopesEnd:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
@@ -1610,8 +1608,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -1880,8 +1877,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -1926,8 +1922,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: istream
   scopes:
     - entity.name.type.parameter
@@ -2052,11 +2047,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: StreamFailed
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -2193,8 +2188,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -2480,11 +2474,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -2508,8 +2502,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -2877,8 +2870,7 @@
     - storage.type.template.argument.int
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -2887,8 +2879,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -2897,8 +2888,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template
@@ -2935,16 +2925,18 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: '&&'
-  scopes:
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
     - storage.modifier.reference
 - source: a_callable
   scopes:
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Ret
   scopes:
     - meta.qualified_type
@@ -3316,8 +3308,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'int '
   scopes:
     - storage.type.template
@@ -3332,8 +3323,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -3352,11 +3342,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: convertToFunctionPointer
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -3368,8 +3358,11 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: '&&'
-  scopes:
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
     - storage.modifier.reference
 - source: c
   scopes:
@@ -3440,8 +3433,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: (
   scopesBegin:
     - meta.parens
@@ -3549,11 +3541,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -3577,8 +3569,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3795,11 +3786,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -3823,8 +3814,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -4108,8 +4098,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -4228,8 +4217,7 @@
 - source: ' ANYTYPE each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' vec2 '
 - source: )
   scopes:
@@ -4352,8 +4340,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -4492,8 +4479,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -4579,8 +4565,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
 - source: )
   scopes:
@@ -4626,8 +4611,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -4646,11 +4630,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -4674,8 +4658,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -4693,8 +4676,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -4792,8 +4774,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -4812,11 +4793,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -4840,8 +4821,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -4859,8 +4839,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -4905,8 +4884,7 @@
 - source: ANYSECONDTYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ANYTYPE'
 - source: '>'
   scopes:
@@ -4914,8 +4892,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_map '
 - source: )
   scopes:
@@ -4986,8 +4963,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -5006,11 +4982,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -5034,8 +5010,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pair
   scopes:
     - entity.name.type.parameter
@@ -5050,8 +5025,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -5175,8 +5149,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -5195,11 +5168,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -5223,8 +5196,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -5239,8 +5211,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -5295,8 +5266,7 @@
 - source: ANYTYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYSECONDTYPE
 - source: '>'
   scopes:
@@ -5490,7 +5460,7 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '            string '
+- source: '            string'
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -5507,8 +5477,7 @@
 - source: INDENT_SIZE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ''''
   scopesBegin:
     - string.quoted.single
@@ -6386,8 +6355,7 @@
 - source: in_
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' INDENT'
 - source: )
   scopes:
@@ -6543,8 +6511,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -7000,8 +6967,7 @@
 - source: a_time
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -7079,8 +7045,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: struct
   scopes:
     - storage.type.struct
@@ -7626,8 +7591,7 @@
 - source: buf
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -7643,8 +7607,7 @@
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -7664,8 +7627,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
     - keyword.operator
@@ -7762,8 +7724,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -8039,8 +8000,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_stream
   scopes:
     - variable.other.object.access
@@ -8265,8 +8225,7 @@
 - source: cin
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_data'
 - source: )
   scopes:
@@ -8344,8 +8303,7 @@
 - source: cin
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_string'
 - source: )
   scopes:
@@ -8427,8 +8385,7 @@
 - source: input_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_string'
 - source: )
   scopes:
@@ -8474,8 +8431,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -8519,8 +8475,7 @@
 - source: input_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_string'
 - source: )
   scopes:
@@ -9570,11 +9525,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: StreamFailed
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -9917,8 +9872,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -10182,8 +10136,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: istream
   scopes:
     - entity.name.type.parameter
@@ -10825,8 +10778,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -10960,8 +10912,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -11078,8 +11029,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -11089,8 +11039,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -11391,8 +11340,7 @@
 - source: start
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' finish '
 - source: '-'
   scopes:
@@ -11432,8 +11380,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -11466,13 +11413,11 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' start'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: base
   scopes:
     - variable.other.object.access
@@ -11536,8 +11481,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -11735,8 +11679,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -11769,8 +11712,7 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -11782,8 +11724,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' delimiter'
 - source: )
   scopesBegin:
@@ -11822,8 +11763,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -11832,8 +11772,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -11949,8 +11888,7 @@
 - source: index
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: oldstring
   scopes:
     - variable.other.object.access
@@ -12092,8 +12030,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12103,8 +12040,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -12136,8 +12072,7 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -12149,16 +12084,14 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' oldstring'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' newstring'
 - source: )
   scopes:
@@ -12194,8 +12127,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -12204,8 +12136,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12238,13 +12169,11 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' oldstring'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -12256,8 +12185,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' newstring'
 - source: )
   scopesBegin:
@@ -12296,8 +12224,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12307,8 +12234,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12341,8 +12267,7 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -12354,16 +12279,14 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' oldstring'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -12375,8 +12298,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' newstring'
 - source: )
   scopesBegin:
@@ -12415,8 +12337,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -12448,13 +12369,11 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' oldstring'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -12499,8 +12418,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12533,8 +12451,7 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.function.call
@@ -12546,16 +12463,14 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' oldstring'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -12600,8 +12515,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -12847,8 +12761,7 @@
 - source: num_front
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12894,8 +12807,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -12947,8 +12859,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input'
 - source: )
   scopes:
@@ -12985,8 +12896,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' included_characters'
 - source: )
   scopes:
@@ -13092,8 +13002,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -13159,8 +13068,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input'
 - source: )
   scopes:
@@ -13197,8 +13105,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' included_characters'
 - source: )
   scopes:
@@ -13268,8 +13175,7 @@
 - source: number_of_char_to_ignore
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: output
   scopes:
     - variable.other.object.access
@@ -13348,8 +13254,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -13423,8 +13328,7 @@
 - source: input
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' splitter'
 - source: )
   scopes:
@@ -13740,8 +13644,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -13779,8 +13682,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE2
   scopes:
     - entity.name.type.parameter
@@ -13975,8 +13877,7 @@
 - source: index
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: target
   scopes:
     - variable.other.object.access
@@ -14057,8 +13958,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -14096,8 +13996,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE2
   scopes:
     - entity.name.type.parameter
@@ -14286,8 +14185,7 @@
 - source: index
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: target
   scopes:
     - variable.other.object.access
@@ -14411,8 +14309,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -14580,8 +14477,7 @@
 - source: index
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: target
   scopes:
     - variable.other.object.access
@@ -14698,8 +14594,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -14777,8 +14672,7 @@
 - source: target
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' base'
 - source: )
   scopes:
@@ -14851,8 +14745,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -14984,8 +14877,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: target
   scopes:
     - variable.other.object.access
@@ -15076,8 +14968,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -15312,8 +15203,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -15486,8 +15376,7 @@
 - source: attempt_filename
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' is_not_obnoxious'
 - source: )
   scopes:
@@ -16698,8 +16587,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -16734,8 +16622,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_string'
 - source: )
   scopes:
@@ -16845,8 +16732,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -16855,8 +16741,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -16881,8 +16766,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -16910,8 +16794,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -16936,8 +16819,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: string
   scopes:
     - meta.qualified_type
@@ -16979,8 +16861,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -17102,8 +16983,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' content'
 - source: )
   scopes:
@@ -17228,8 +17108,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' end_characters'
 - source: )
   scopes:
@@ -17298,8 +17177,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ignore_characters'
 - source: )
   scopes:
@@ -17325,9 +17203,7 @@
 - source: goto
   scopes:
     - keyword.control.goto
-- source: SKIP_CHAR
-  scopes:
-    - entity.name.label.call
+- source: ' SKIP_CHAR'
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17471,8 +17347,7 @@
     - meta.parens
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ignore_characters'
 - source: )
   scopes:
@@ -17644,8 +17519,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' encapsulate_characters'
 - source: )
   scopes:
@@ -17724,8 +17598,7 @@
 - source: ' each_pair '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' encapsulating_pairs'
 - source: )
   scopes:
@@ -17762,8 +17635,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: AsString
   scopes:
     - entity.name.function.call
@@ -17964,8 +17836,7 @@
 - source: each
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' context'
 - source: )
   scopes:
@@ -18071,8 +17942,7 @@
 - source: index
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -18491,8 +18361,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -18502,8 +18371,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -18768,8 +18636,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -18802,15 +18669,13 @@
 - source: lower
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' upper'
 - source: )
   scopes:
@@ -18888,15 +18753,13 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' upper'
 - source: )
   scopes:
@@ -19140,11 +19003,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -19164,8 +19027,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -19361,11 +19223,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -19385,8 +19247,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -19446,8 +19307,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -19722,11 +19582,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -19746,8 +19606,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -19873,11 +19732,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -19897,8 +19756,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -19986,8 +19844,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -20300,11 +20157,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -20324,8 +20181,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -20451,11 +20307,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -20475,8 +20331,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -20536,8 +20391,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -20794,11 +20648,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -20818,8 +20672,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -20994,11 +20847,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -21018,8 +20871,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: double
   scopes:
     - storage.type.primitive
@@ -21079,8 +20931,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -21337,11 +21188,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -21361,8 +21212,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -21541,11 +21391,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -21565,8 +21415,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: long
   scopesBegin:
     - storage.type.primitive
@@ -21630,8 +21479,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -21888,11 +21736,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -21912,8 +21760,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -22038,11 +21885,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -22062,8 +21909,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -22122,8 +21968,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -22358,8 +22203,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -22423,11 +22267,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -22447,8 +22291,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -22610,11 +22453,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -22634,8 +22477,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -22782,11 +22624,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -22806,8 +22648,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYTYPE
   scopes:
     - entity.name.type.parameter
@@ -22866,8 +22707,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -23106,8 +22946,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -23293,8 +23132,7 @@
 - source: data_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input'
 - source: )
   scopes:
@@ -23331,8 +23169,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_stream'
 - source: )
   scopes:
@@ -23394,8 +23231,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -23510,8 +23346,7 @@
 - source: data_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input'
 - source: )
   scopes:
@@ -23552,8 +23387,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_stream'
 - source: )
   scopes:
@@ -23590,8 +23424,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: name
   scopes:
     - variable.other.object.access
@@ -24500,8 +24333,7 @@
 - source: cin
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' Answer'
 - source: )
   scopes:
@@ -24683,8 +24515,7 @@
 - source: answer_
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' is_it_an_int'
 - source: )
   scopes:
@@ -24932,8 +24763,7 @@
 - source: answer_
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' is_it_a_number'
 - source: )
   scopes:
@@ -25031,8 +24861,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -25042,8 +24871,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -25308,8 +25136,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: double
   scopes:
     - storage.type.primitive
@@ -25319,8 +25146,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: double
   scopes:
     - storage.type.primitive
@@ -26322,8 +26148,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -26366,8 +26191,7 @@
 - source: the_file_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_to_save'
 - source: )
   scopes:
@@ -26447,8 +26271,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -26491,8 +26314,7 @@
 - source: the_file_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_to_load'
 - source: )
   scopes:
@@ -26547,8 +26369,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: string
   scopes:
     - entity.name.type.parameter
@@ -26706,8 +26527,7 @@
     - meta.parens
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: istreambuf_iterator
   scopes:
     - entity.name.function.call
@@ -26939,11 +26759,11 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: thread_stub
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -27108,8 +26928,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -27245,8 +27064,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: //
@@ -27521,8 +27339,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANY_INPUT_TYPE
   scopes:
     - entity.name.type.parameter
@@ -27693,8 +27510,7 @@
     - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANY_INPUT_TYPE
   scopes:
     - entity.name.type.parameter
@@ -28154,18 +27970,15 @@
 - source: thread
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' attributes'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' thread_stub'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
     - keyword.operator
@@ -28219,8 +28032,7 @@
 - source: thread
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 'NULL'
   scopes:
     - constant.language.NULL
@@ -28303,8 +28115,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -28356,8 +28167,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: //
@@ -28382,8 +28192,7 @@
 - source: ANY_OUTPUT_TYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ANY_INPUT_TYPE'
 - source: '>'
   scopes:
@@ -28393,8 +28202,7 @@
     - keyword.operator
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -28413,8 +28221,7 @@
 - source: ANY_OUTPUT_TYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ANY_INPUT_TYPE'
 - source: '>'
   scopes:
@@ -28517,8 +28324,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANY_INPUT_TYPE
   scopes:
     - meta.qualified_type
@@ -29096,8 +28902,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANY_INPUT_TYPE
   scopes:
     - meta.qualified_type
@@ -29462,11 +29267,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -29709,8 +29514,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -29733,8 +29537,7 @@
 - source: ANY_OUTPUT_TYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ANY_INPUT_TYPE'
 - source: '>'
   scopes:
@@ -29744,8 +29547,7 @@
     - keyword.operator
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -29768,8 +29570,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANY_INPUT_TYPE
   scopes:
     - meta.qualified_type
@@ -29873,8 +29674,7 @@
     - punctuation.section.arguments.end.bracket.round.decltype
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: decltype
   scopes:
     - keyword.operator.functionlike
@@ -29952,8 +29752,7 @@
     - punctuation.section.arguments.end.bracket.round.decltype
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: decltype
   scopes:
     - keyword.operator.functionlike
@@ -29980,8 +29779,7 @@
 - source: FUNC
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ARG'
 - source: )
   scopesBegin:
@@ -30010,11 +29808,11 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: WaitFor
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -30073,8 +29871,7 @@
 - source: thread
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' output'
 - source: )
   scopes:
@@ -30132,8 +29929,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: //
@@ -30157,8 +29953,7 @@
     - keyword.operator
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pthread_mutex_t
   scopes:
     - support.type.posix-reserved.pthread
@@ -30735,11 +30530,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -30759,8 +30554,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -30879,8 +30673,7 @@
 - source: ' ANYTYPE each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_vector '
 - source: )
   scopes:
@@ -30901,8 +30694,7 @@
 - source: all_members
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' each'
 - source: )
   scopes:
@@ -31174,11 +30966,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -31198,8 +30990,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -31312,8 +31103,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -31616,8 +31406,7 @@
 - source: vector_content_as_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_member'
 - source: )
   scopes:
@@ -31918,8 +31707,7 @@
 - source: ' ANYTYPE each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input '
 - source: )
   scopes:
@@ -32059,8 +31847,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -32185,8 +31972,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -32238,8 +32024,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_vector'
 - source: )
   scopes:
@@ -32344,8 +32129,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -32596,8 +32380,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -32859,8 +32642,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -32914,8 +32696,7 @@
 - source: 'element_ '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_vector'
 - source: )
   scopes:
@@ -33011,8 +32792,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -33447,8 +33227,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' search_vector '
 - source: )
   scopes:
@@ -33472,8 +33251,7 @@
 - source: EachItem
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_vector'
 - source: )
   scopes:
@@ -33553,12 +33331,15 @@
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '**'
+- source: '*'
   scopesBegin:
-    - meta.head.function.definition
-  scopes:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: VectorStringToCStringArray
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -33643,8 +33424,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input'
 - source: )
   scopes:
@@ -33750,8 +33530,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input'
 - source: )
   scopes:
@@ -33819,8 +33598,7 @@
 - source: new_string
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: each
   scopes:
     - variable.other.object.access
@@ -33979,8 +33757,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector_of_c_strings
   scopes:
     - variable.other.object.access
@@ -33998,8 +33775,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' output'
 - source: )
   scopes:
@@ -34093,8 +33869,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -34104,8 +33879,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -34555,8 +34329,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -34589,8 +34362,7 @@
 - source: start
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: base
   scopes:
     - variable.other.object.access
@@ -34691,8 +34463,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -34702,8 +34473,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -34713,8 +34483,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -35254,8 +35023,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -35265,8 +35033,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -35311,18 +35078,15 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' start'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' count'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' empty'
 - source: )
   scopes:
@@ -35409,8 +35173,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -35420,8 +35183,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -35467,20 +35229,17 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' start'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' additions'
 - source: )
   scopes:
@@ -35553,8 +35312,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: T
   scopes:
     - entity.name.type.parameter
@@ -35752,8 +35510,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: T
   scopes:
     - entity.name.type.parameter
@@ -35959,8 +35716,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: T
   scopes:
     - entity.name.type.parameter
@@ -36180,8 +35936,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: T
   scopes:
     - entity.name.type.parameter
@@ -36218,8 +35973,7 @@
 - source: base
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' target'
 - source: )
   scopes:
@@ -36279,8 +36033,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -36299,11 +36052,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -36323,8 +36076,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -36342,8 +36094,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -36449,8 +36200,7 @@
 - source: all_members
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -36495,8 +36245,7 @@
 - source: all_members
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -36699,8 +36448,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -36719,11 +36467,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -36743,8 +36491,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pair
   scopes:
     - entity.name.type.parameter
@@ -36759,8 +36506,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -36825,8 +36571,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -37081,8 +36826,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -37135,8 +36879,7 @@
 - source: ' transfer_method'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' datamember1 '
 - source: )
   scopes:
@@ -37172,8 +36915,7 @@
 - source: ' transfer_method'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' datamember2 '
 - source: )
   scopes:
@@ -37332,8 +37074,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -37352,11 +37093,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -37376,8 +37117,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -37395,8 +37135,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -37493,8 +37232,7 @@
 - source: ANYTYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYSECONDTYPE
 - source: '>'
   scopes:
@@ -37502,8 +37240,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_ '
 - source: )
   scopes:
@@ -37524,8 +37261,7 @@
 - source: data_members
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' each'
 - source: )
   scopes:
@@ -37642,8 +37378,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -37662,11 +37397,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -37686,8 +37421,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -37702,8 +37436,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -37768,8 +37501,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -38024,8 +37756,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -38113,8 +37844,7 @@
 - source: ANYTYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYSECONDTYPE
 - source: '>'
   scopes:
@@ -38130,8 +37860,7 @@
 - source: ANYTYPE
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ANYSECONDTYPE
 - source: '>'
   scopes:
@@ -38165,8 +37894,7 @@
 - source: transfer_method
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_member'
 - source: )
   scopes:
@@ -38379,8 +38107,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -38418,8 +38145,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -38434,8 +38160,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -38555,8 +38280,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -38594,8 +38318,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -38610,8 +38333,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -38665,8 +38387,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_map '
 - source: )
   scopes:
@@ -38759,8 +38480,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -38797,8 +38517,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -38813,8 +38532,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -38868,8 +38586,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' input_map '
 - source: )
   scopes:
@@ -38999,8 +38716,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -39015,8 +38731,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -39059,8 +38774,7 @@
 - source: value
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_map'
 - source: )
   scopes:
@@ -39096,8 +38810,7 @@
 - source: value
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_map'
 - source: )
   scopes:
@@ -39147,8 +38860,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -39186,8 +38898,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -39202,8 +38913,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
   scopes:
     - meta.qualified_type
@@ -39246,8 +38956,7 @@
 - source: value
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_map'
 - source: )
   scopes:
@@ -39288,8 +38997,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - storage.type.template.argument.class
@@ -39327,8 +39035,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: map
   scopes:
     - entity.name.type.parameter
@@ -39343,8 +39050,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYTYPE
   scopes:
     - meta.qualified_type
@@ -39387,8 +39093,7 @@
 - source: value
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_map'
 - source: )
   scopes:
@@ -39638,22 +39343,19 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
     - keyword.operator
@@ -39845,8 +39547,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: //
@@ -40220,8 +39921,7 @@
     - meta.parens
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' vector_'
 - source: )
   scopes:
@@ -40425,8 +40125,7 @@
 - source: EachItem
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' names '
 - source: )
   scopes:
@@ -40443,8 +40142,7 @@
 - source: EachItem
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' values'
 - source: )
   scopes:
@@ -40542,8 +40240,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -41161,8 +40858,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' names'
 - source: )
   scopes:
@@ -41261,8 +40957,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: values
 - source: )
   scopes:
@@ -41361,8 +41056,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector_
 - source: )
   scopes:
@@ -41466,8 +41160,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: values
 - source: )
   scopes:
@@ -41512,8 +41205,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector_
 - source: )
   scopes:
@@ -41757,8 +41449,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' names '
 - source: )
   scopes:
@@ -42192,11 +41883,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: At
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -42789,11 +42480,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: Input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -42860,8 +42551,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -43116,8 +42806,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -43162,8 +42851,7 @@
 - source: ' transfer_method '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' vector_ '
 - source: )
   scopes:
@@ -43199,8 +42887,7 @@
 - source: ' transfer_method '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' values  '
 - source: )
   scopes:
@@ -43236,8 +42923,7 @@
 - source: ' transfer_method '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' names   '
 - source: )
   scopes:
@@ -43347,11 +43033,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '[]'
@@ -43421,11 +43107,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '[]'
@@ -43486,8 +43172,7 @@
 - source: name
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' names'
 - source: )
   scopes:
@@ -43715,11 +43400,11 @@
     - meta.qualified_type
     - meta.template.call
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -43974,11 +43659,11 @@
     - meta.qualified_type
     - meta.template.call
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -44106,11 +43791,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -44130,8 +43815,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -44233,8 +43917,7 @@
 - source: ' data_members '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -44285,8 +43968,7 @@
 - source: ' data_members '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -44337,8 +44019,7 @@
 - source: ' data_members '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -44474,11 +44155,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -44498,8 +44179,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: List
   scopes:
     - entity.name.type.parameter
@@ -45597,11 +45277,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -45625,8 +45305,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -45720,11 +45399,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -45748,8 +45427,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: List
   scopes:
     - entity.name.type.parameter
@@ -45799,8 +45477,7 @@
 - source: in_
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input_'
 - source: )
   scopes:
@@ -45925,8 +45602,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: //
@@ -46249,8 +45925,7 @@
 - source: data_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' input'
 - source: )
   scopes:
@@ -46291,8 +45966,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data_stream'
 - source: )
   scopes:
@@ -46321,8 +45995,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: type
   scopes:
     - variable.other.object.access
@@ -46404,8 +46077,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -46728,11 +46400,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: Input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -46799,8 +46471,7 @@
     - string.quoted.single
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: in_
 - source: )
   scopes:
@@ -47055,8 +46726,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: content
   scopes:
     - variable.other.object.access
@@ -47101,8 +46771,7 @@
 - source: ' transfer_method'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' data '
 - source: )
   scopes:
@@ -47138,8 +46807,7 @@
 - source: ' transfer_method'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' type '
 - source: )
   scopes:
@@ -47269,11 +46937,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47379,11 +47047,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47478,11 +47146,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47567,11 +47235,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47666,11 +47334,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47805,11 +47473,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -47966,11 +47634,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: =
@@ -48282,11 +47950,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: output
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -48306,8 +47974,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -48395,8 +48062,7 @@
 - source: ' data_members '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -48447,8 +48113,7 @@
 - source: ' data_members '
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
   scopes:
     - variable.other.object.access
@@ -48546,11 +48211,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: input
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -48570,8 +48235,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Item
   scopes:
     - entity.name.type.parameter
@@ -48846,11 +48510,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -48874,8 +48538,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -49106,8 +48769,7 @@
 - source: data_stream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' blank_list'
 - source: )
   scopes:
@@ -49175,11 +48837,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -49203,8 +48865,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Item
   scopes:
     - entity.name.type.parameter
@@ -49240,8 +48901,7 @@
 - source: in_
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: input_
 - source: )
   scopes:
@@ -49303,8 +48963,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -49446,8 +49105,7 @@
     - meta.bracket.square.array
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -49672,8 +49330,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -49905,8 +49562,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -50137,8 +49793,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -50337,8 +49992,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -50569,8 +50223,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -50793,8 +50446,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -51017,8 +50669,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -51217,8 +50868,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -51507,8 +51157,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -51731,8 +51380,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -51954,8 +51602,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -52178,8 +51825,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -52402,8 +52048,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -52782,8 +52427,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -53283,8 +52927,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -53787,8 +53430,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -54291,8 +53933,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -54387,8 +54028,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -54891,8 +54531,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -55395,8 +55034,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -55863,8 +55501,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -55960,8 +55597,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -56687,8 +56323,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -56963,8 +56598,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -57162,8 +56796,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -57362,8 +56995,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -58120,8 +57752,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -58878,8 +58509,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -59635,8 +59265,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60008,8 +59637,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60125,8 +59753,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' the_input'
 - source: )
   scopesBegin:
@@ -60217,8 +59844,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60334,8 +59960,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' the_input'
 - source: )
   scopesBegin:
@@ -60426,8 +60051,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60543,8 +60167,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' the_input'
 - source: )
   scopesBegin:
@@ -60636,8 +60259,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60729,8 +60351,7 @@
 - source: ' the_input'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: stold
   scopes:
     - entity.name.function.call
@@ -60843,8 +60464,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -60936,8 +60556,7 @@
 - source: ' the_input'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: stold
   scopes:
     - entity.name.function.call
@@ -61050,8 +60669,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -61143,8 +60761,7 @@
 - source: ' the_input'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: stold
   scopes:
     - entity.name.function.call
@@ -61256,8 +60873,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -61697,8 +61313,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: List
   scopes:
     - entity.name.type.parameter
@@ -61816,8 +61431,7 @@
 - source: '        __PutsOutputFixerStream'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -61850,8 +61464,7 @@
 - source: __PutLinesOutputFixerStream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
   scopesEnd:
     - meta.preprocessor.macro
 - source: //
@@ -61877,8 +61490,7 @@
 - source: '       cout'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
   scopesEnd:
     - meta.preprocessor.macro
 - source: //
@@ -61953,8 +61565,7 @@
 - source: __LogOutputFixerStream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -61997,8 +61608,7 @@
 - source: __LogOutputFixerStream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -62066,8 +61676,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: __OUTPUT_INDENT
   scopes:
     - variable.other.object.access
@@ -62124,8 +61733,7 @@
 - source: __LogOutputFixerStream
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
   scopesEnd:
     - meta.preprocessor.macro
 - source: class
@@ -62139,8 +61747,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -62159,8 +61766,7 @@
     - storage.type.modifier.access.control.protected
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.protected
 - source: //
@@ -62716,8 +62322,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: void
@@ -62856,8 +62461,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' content'
 - source: )
   scopes:
@@ -63039,8 +62643,7 @@
 - source: ' each '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' content'
 - source: )
   scopes:
@@ -63263,11 +62866,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ','
@@ -63291,8 +62894,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -63468,8 +63070,7 @@
 - source: ' each_char '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' content_being_output'
 - source: )
   scopes:
@@ -64199,11 +63800,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ','
@@ -64227,8 +63828,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ostream
   scopes:
     - meta.qualified_type

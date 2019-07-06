@@ -1,6 +1,5 @@
 - source: void
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -85,7 +84,7 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: '[] '
+- source: '[]'
 - source: int
   scopes:
     - storage.type.primitive
@@ -108,76 +107,11 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: '[] '
+- source: '[]'
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: ' ::'
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -197,7 +131,6 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: '[] '
 - source: (
   scopesBegin:
     - meta.parens
@@ -230,7 +163,6 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: '[] '
 - source: (
   scopesBegin:
     - meta.parens
@@ -264,110 +196,21 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: ' ::'
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
 - source: '[] '
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -386,111 +229,10 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
 - source: '[] '
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: ' ::'
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
 - source: (
   scopesBegin:
     - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: int
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: '*'
-  scopes:
-    - keyword.operator
-- source: 'a '
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: new
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.new
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: '2'
-  scopes:
-    - constant.numeric.decimal
-- source: ','
-  scopes:
-    - comma
-    - punctuation.separator.delimiter
-- source: ' f'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-- source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
@@ -531,8 +273,258 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ::'
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '[]'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '[]'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ::'
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' f'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' ::'
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
 - source: ' f'
 - source: )
   scopes:
@@ -582,8 +574,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' f'
 - source: )
   scopes:
@@ -753,8 +744,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:
@@ -776,8 +766,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:
@@ -806,8 +795,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:
@@ -835,8 +823,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:

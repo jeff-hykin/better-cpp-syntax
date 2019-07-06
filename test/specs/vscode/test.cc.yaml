@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor
     - keyword.control.directive.conditional
   scopes:
@@ -22,8 +21,7 @@
 - source: stderr
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -41,8 +39,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' num_candidate'
 - source: )
   scopes:
@@ -98,8 +95,7 @@
 - source: stderr
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -116,8 +112,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: user_candidate
   scopesBegin:
     - meta.bracket.square.access
@@ -147,8 +142,7 @@
 - source: stderr
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -350,8 +344,7 @@
 - source: options
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -372,8 +365,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ...'
 - source: )
   scopes:

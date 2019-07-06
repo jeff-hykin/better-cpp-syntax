@@ -1,12 +1,9 @@
 - source: __FILE__
-  scopesBegin:
-    - source
   scopes:
     - entity.name.other.preprocessor.macro.predefined.__FILE__
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: __LINE__
   scopes:
     - entity.name.other.preprocessor.macro.predefined.__LINE__
@@ -42,8 +39,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -99,8 +95,7 @@
     - entity.name.other.preprocessor.macro.predefined.__FILE__
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: __LINE__
   scopes:
     - entity.name.other.preprocessor.macro.predefined.__LINE__

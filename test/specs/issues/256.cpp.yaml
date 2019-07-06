@@ -1,6 +1,5 @@
 - source: class
   scopesBegin:
-    - source
     - meta.block.class
     - meta.head.class
   scopes:
@@ -136,8 +135,7 @@
     - punctuation.section.parameters.end.bracket.round.special.constructor
 - source: noexcept
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: ':'
   scopes:
     - punctuation.separator.initializers
@@ -157,13 +155,11 @@
 - source: ' {{}'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' _SSO_Cap}}'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' alloc'
   scopesEnd:
     - meta.parameter.initialization
@@ -256,11 +252,9 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: nullptr_t
   scopes:
-    - meta.qualified_type
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: '>'
@@ -292,8 +286,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: CharT
   scopes:
     - entity.name.type.parameter
@@ -302,8 +295,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -349,8 +341,7 @@
     - meta.parameter.initialization
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' alloc'
   scopesEnd:
     - meta.parameter.initialization
@@ -459,8 +450,7 @@
     - meta.bracket.square.access
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' ch'
 - source: )
   scopes:
@@ -502,8 +492,7 @@
     - meta.bracket.square.access
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: CharT
   scopes:
     - entity.name.function.call

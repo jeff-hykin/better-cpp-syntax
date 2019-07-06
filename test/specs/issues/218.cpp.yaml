@@ -1,6 +1,4 @@
 - source: static
-  scopesBegin:
-    - source
   scopes:
     - storage.modifier.specifier.static
 - source: void
@@ -29,8 +27,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -39,8 +36,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -49,8 +45,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -59,8 +54,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -69,8 +63,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -80,8 +73,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -91,8 +83,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -102,8 +93,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -137,43 +127,35 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: )
   scopes:
@@ -218,8 +200,7 @@
 - source: ' a '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' a'
 - source: )
   scopes:
@@ -328,8 +309,7 @@
 - source: ' a'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: a
@@ -379,8 +359,7 @@
 - source: ' a'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: a
@@ -430,8 +409,7 @@
 - source: ' a'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: a
@@ -481,8 +459,7 @@
 - source: ' a'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: a
@@ -544,43 +521,35 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                   a'
 - source: )
   scopes:
@@ -628,8 +597,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -638,8 +606,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -648,8 +615,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: a
   scopes:
     - entity.name.type.parameter
@@ -787,23 +753,19 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                 a'
 - source: )
   scopes:
@@ -848,8 +810,7 @@
 - source: ' a'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' a'
 - source: )
   scopes:
@@ -884,18 +845,15 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' a'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '                                                                   a'
 - source: )
   scopes:

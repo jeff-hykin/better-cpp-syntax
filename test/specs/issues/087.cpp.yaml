@@ -1,6 +1,5 @@
 - source: void
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -57,13 +56,11 @@
     - variable.other.property
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' common'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -121,13 +118,11 @@
     - variable.other.property
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' common'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double

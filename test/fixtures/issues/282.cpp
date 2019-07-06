@@ -7,6 +7,7 @@ Atype aVar(Atype{1,2,3});
 Atype aVar(new Atype{1,2,3});
 Atype aVar(new int(10));
 Atype aVar(int(10));
+mt19937 gen(time(nullptr) ^ (size_t) new char);
 
 
 std::mt19937 eng1(std::time(nullptr));

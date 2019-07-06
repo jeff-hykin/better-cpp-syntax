@@ -1,6 +1,4 @@
 - source: template
-  scopesBegin:
-    - source
   scopes:
     - storage.type.template
 - source: <
@@ -25,8 +23,7 @@
     - storage.type.template.argument.Identity
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - entity.name.type.template
@@ -126,8 +123,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'class '
   scopes:
     - storage.type.template
@@ -142,8 +138,7 @@
     - storage.type.template.argument.C
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'typename '
   scopes:
     - storage.type.template

@@ -1,6 +1,5 @@
 - source: //
   scopesBegin:
-    - source
     - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
@@ -68,8 +67,7 @@
 - source: ' width'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' height'
 - source: ;
   scopes:
@@ -79,8 +77,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: void
@@ -107,8 +104,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -211,8 +207,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -298,8 +293,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '4'
   scopes:
     - constant.numeric.decimal

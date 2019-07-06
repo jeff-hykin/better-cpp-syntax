@@ -1,6 +1,5 @@
 - source: /*
   scopesBegin:
-    - source
     - comment.block
   scopes:
     - punctuation.definition.comment.begin
@@ -21,8 +20,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -69,8 +67,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -100,8 +97,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
 - source: /*
   scopesBegin:
     - comment.block
@@ -155,8 +151,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public

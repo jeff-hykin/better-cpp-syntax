@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -1610,18 +1609,14 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.initializer
 - source: '5'
   scopes:
     - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.arguments.end.bracket.round.initializer
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2061,12 +2056,11 @@
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
 - source: long
-  scopes:
+  scopesBegin:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopes:
-    - meta.qualified_type
+  scopesEnd:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
@@ -2176,8 +2170,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANY_INPUT_TYPE
   scopes:
     - meta.qualified_type
@@ -2304,8 +2297,7 @@
 - source: acopy
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: this
   scopes:
     - variable.language.this
@@ -2364,8 +2356,7 @@
 - source: acopy
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: this
   scopes:
     - variable.language.this
@@ -2411,8 +2402,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -2424,8 +2414,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -2458,8 +2447,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -2471,8 +2459,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -3346,11 +3333,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -3374,8 +3361,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3445,8 +3431,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3518,8 +3503,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3589,8 +3573,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3661,8 +3644,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -3874,12 +3856,11 @@
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
 - source: long
-  scopes:
+  scopesBegin:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: double
-  scopes:
-    - meta.qualified_type
+  scopesEnd:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
@@ -4114,8 +4095,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:
@@ -4154,8 +4134,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: )
   scopes:
@@ -4317,8 +4296,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'int '
   scopes:
     - storage.type.template
@@ -4339,8 +4317,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -4749,8 +4726,7 @@
     - storage.type.template.argument.int
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -4759,8 +4735,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -4769,8 +4744,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template
@@ -4807,16 +4781,18 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: '&&'
-  scopes:
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
     - storage.modifier.reference
 - source: a_callable
   scopes:
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Ret
   scopes:
     - meta.qualified_type
@@ -5196,8 +5172,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'int '
   scopes:
     - storage.type.template
@@ -5212,8 +5187,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -5232,11 +5206,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: convertToFunctionPointer
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -5248,8 +5222,11 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: '&&'
-  scopes:
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
     - storage.modifier.reference
 - source: c
   scopes:
@@ -5320,8 +5297,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: (
   scopesBegin:
     - meta.parens
@@ -5384,13 +5360,11 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
 - source: 'public '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: 'private '
@@ -5398,13 +5372,11 @@
     - storage.type.modifier.access.control.private
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
 - source: private
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: protected
@@ -5412,8 +5384,7 @@
     - storage.type.modifier.access.control.protected
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.protected
 - source: auto
@@ -5486,13 +5457,11 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
 - source: 'public '
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: 'private '
@@ -5500,13 +5469,11 @@
     - storage.type.modifier.access.control.private
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
 - source: private
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: protected
@@ -5514,8 +5481,7 @@
     - storage.type.modifier.access.control.protected
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.protected
 - source: auto
@@ -5786,8 +5752,7 @@
     - storage.type.modifier.final
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -5885,8 +5850,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -5897,8 +5861,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -5926,8 +5889,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: bar
@@ -5954,8 +5916,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -5997,24 +5958,21 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: hashT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: allocatorT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'false'
   scopes:
     - constant.language.false
@@ -6089,8 +6047,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -6113,8 +6070,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pointerT
   scopes:
     - entity.name.type.parameter
@@ -6131,8 +6087,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -6150,8 +6105,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -6240,8 +6194,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typeid
   scopes:
     - keyword.operator.functionlike
@@ -6383,8 +6336,7 @@
     - variable.other.enummember
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.other.enummember
@@ -6437,8 +6389,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: definition3
   scopesBegin:
     - meta.enum.definition
@@ -6448,8 +6399,7 @@
     - variable.other.enummember
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: definition2
   scopes:
     - variable.other.enummember
@@ -6493,8 +6443,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: private
@@ -6505,22 +6454,19 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: foo
   scopes:
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -6529,22 +6475,19 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: foo
   scopes:
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: protected
   scopes:
     - storage.type.modifier.access.protected
@@ -6553,8 +6496,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
     - entity.name.type.inherited
@@ -6610,8 +6552,7 @@
     - entity.name.type.struct
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -6620,8 +6561,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -6653,8 +6593,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -6663,8 +6602,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -6673,8 +6611,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class
@@ -6844,15 +6781,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -6879,8 +6814,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -6921,15 +6855,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -6956,8 +6888,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -7001,15 +6932,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -7036,8 +6965,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -7098,15 +7026,13 @@
     - meta.bracket.square.access
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -7133,8 +7059,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -7169,15 +7094,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -7448,15 +7371,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -7483,8 +7404,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -7528,15 +7448,13 @@
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: b
   scopes:
     - variable.parameter.capture
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: c
   scopes:
     - variable.parameter.capture
@@ -7786,7 +7704,7 @@
 - source: '3'
   scopes:
     - constant.numeric.decimal
-- source: ': '
+- source: ':'
 - source: break
   scopes:
     - keyword.control.break
@@ -8731,8 +8649,7 @@
 - source: reader
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: reader
   scopes:
     - variable.other.object.access
@@ -8750,8 +8667,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Parser_Error
   scopes:
     - entity.name.scope-resolution
@@ -8906,15 +8822,13 @@
 - source: s_digits
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '32'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bptr
   scopesBegin:
     - meta.bracket.square.access
@@ -8969,8 +8883,7 @@
 - source: reader
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' i '
 - source: +
   scopes:
@@ -8980,8 +8893,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Parser_Error
   scopes:
     - entity.name.scope-resolution
@@ -9297,8 +9209,7 @@
 - source: reader
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' tlen '
 - source: +
   scopes:
@@ -9306,8 +9217,7 @@
 - source: ' xcnt'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Parser_Error
   scopes:
     - entity.name.scope-resolution
@@ -9369,8 +9279,7 @@
     - entity.name.type.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: unsigned
   scopes:
     - storage.type.primitive
@@ -9531,8 +9440,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9595,8 +9503,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9620,8 +9527,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9684,8 +9590,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9709,8 +9614,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9734,8 +9638,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9770,8 +9673,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9795,8 +9697,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9820,8 +9721,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -9845,8 +9745,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal

@@ -1,6 +1,5 @@
 - source: int
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -56,8 +55,7 @@
     - constant.numeric.decimal
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: break
@@ -76,8 +74,7 @@
     - constant.numeric.decimal
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: '[['
@@ -106,8 +103,7 @@
     - constant.numeric.decimal
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: break

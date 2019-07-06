@@ -1,6 +1,5 @@
 - source: struct
   scopesBegin:
-    - source
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -19,24 +18,21 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: hashT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: allocatorT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'false'
   scopes:
     - constant.language.false
@@ -111,8 +107,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -135,8 +130,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pointerT
   scopes:
     - entity.name.type.parameter
@@ -153,8 +147,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -172,8 +165,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -262,8 +254,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typeid
   scopes:
     - keyword.operator.functionlike
@@ -345,8 +336,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -355,8 +345,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -388,24 +377,21 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: hashT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: allocatorT
   scopes:
     - meta.qualified_type
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: 'false'
   scopes:
     - constant.language.false
@@ -480,8 +466,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -504,8 +489,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: pointerT
   scopes:
     - entity.name.type.parameter
@@ -522,8 +506,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -541,8 +524,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: size_t
   scopes:
     - storage.type
@@ -631,8 +613,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: typeid
   scopes:
     - keyword.operator.functionlike

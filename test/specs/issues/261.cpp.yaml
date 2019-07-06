@@ -1,6 +1,4 @@
 - source: constexpr
-  scopesBegin:
-    - source
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: A
@@ -10,11 +8,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: __A
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (

@@ -1,6 +1,5 @@
 - source: void
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -48,8 +47,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' N'
 - source: )
   scopes:
@@ -120,8 +118,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: randint
   scopes:
     - entity.name.function.call
@@ -133,8 +130,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '1000000006'
   scopes:
     - constant.numeric.decimal
@@ -143,8 +139,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -291,8 +286,7 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' perm '
 - source: +
   scopes:
@@ -306,8 +300,7 @@
 - source: ' N'
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' gen'
 - source: )
   scopes:

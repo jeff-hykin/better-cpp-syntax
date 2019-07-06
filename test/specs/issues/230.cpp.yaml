@@ -1,6 +1,5 @@
 - source: void
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -30,8 +29,11 @@
 - source: var
   scopes:
     - entity.name.type.class
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: thing
   scopes:
@@ -50,8 +52,11 @@
 - source: var
   scopes:
     - entity.name.type.class.parameter
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: )
   scopes:
@@ -84,8 +89,11 @@
 - source: var
   scopes:
     - entity.name.type.struct
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: thing
   scopes:
@@ -104,8 +112,11 @@
 - source: var
   scopes:
     - entity.name.type.struct.parameter
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: )
   scopes:
@@ -138,8 +149,11 @@
 - source: var
   scopes:
     - entity.name.type.enum
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: thing
   scopes:
@@ -158,8 +172,11 @@
 - source: var
   scopes:
     - entity.name.type.enum.parameter
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: )
   scopes:
@@ -192,8 +209,11 @@
 - source: var
   scopes:
     - entity.name.type.union
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: thing
   scopes:
@@ -212,8 +232,11 @@
 - source: var
   scopes:
     - entity.name.type.union.parameter
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: )
   scopes:

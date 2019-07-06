@@ -1,6 +1,5 @@
 - source: struct
   scopesBegin:
-    - source
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -28,8 +27,7 @@
   scopesBegin:
     - meta.static_assert.message
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -59,8 +57,7 @@
   scopesBegin:
     - meta.static_assert.message
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double

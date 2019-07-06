@@ -1,6 +1,5 @@
 - source: struct
   scopesBegin:
-    - source
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -110,8 +109,11 @@
     - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: '**'
-  scopes:
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
     - storage.modifier.pointer
 - source: '&'
   scopes:

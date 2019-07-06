@@ -1,6 +1,4 @@
 - source: std
-  scopesBegin:
-    - source
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -21,8 +19,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive
@@ -62,8 +59,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: int
   scopes:
     - storage.type.primitive

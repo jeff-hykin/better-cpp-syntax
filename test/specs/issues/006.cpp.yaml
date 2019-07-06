@@ -1,6 +1,4 @@
 - source: auto
-  scopesBegin:
-    - source
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -21,8 +19,7 @@
     - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -31,8 +28,7 @@
     - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -41,8 +37,7 @@
     - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -51,8 +46,7 @@
     - constant.numeric.hexadecimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal

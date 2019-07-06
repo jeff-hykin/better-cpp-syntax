@@ -1,6 +1,5 @@
 - source: class
   scopesBegin:
-    - source
     - meta.block.class
     - meta.head.class
   scopes:
@@ -19,8 +18,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: '}'

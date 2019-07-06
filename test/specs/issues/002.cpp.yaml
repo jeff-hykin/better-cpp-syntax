@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -42,11 +41,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ++
@@ -101,15 +100,15 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.operator-overload
 - source: string
-  scopesBegin:
+  scopes:
     - meta.head.function.definition.special.operator-overload
     - entity.name.operator.type
 - source: '&'
   scopes:
     - entity.name.operator.type.reference
-  scopesEnd:
-    - entity.name.operator.type
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload

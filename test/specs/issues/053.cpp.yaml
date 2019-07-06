@@ -1,6 +1,5 @@
 - source: class
   scopesBegin:
-    - source
     - meta.block.class
     - meta.head.class
   scopes:
@@ -10,8 +9,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: bar
@@ -38,8 +36,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public

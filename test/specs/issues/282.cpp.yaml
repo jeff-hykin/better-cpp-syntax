@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -75,6 +74,7 @@
 - source: Atype
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
     - meta.initialization
   scopes:
     - meta.qualified_type
@@ -87,15 +87,13 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '2'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '3'
   scopes:
     - constant.numeric.decimal
@@ -104,6 +102,7 @@
     - punctuation.section.arguments.end.bracket.curly.initializer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
     - meta.initialization
 - source: )
   scopes:
@@ -131,6 +130,7 @@
 - source: new
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
@@ -148,15 +148,13 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '2'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '3'
   scopes:
     - constant.numeric.decimal
@@ -165,6 +163,7 @@
     - punctuation.section.arguments.end.bracket.curly.initializer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
     - meta.initialization
 - source: )
   scopes:
@@ -192,6 +191,7 @@
 - source: new
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
@@ -210,6 +210,7 @@
     - punctuation.section.arguments.end.bracket.round.initializer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
@@ -236,6 +237,7 @@
 - source: int
   scopesBegin:
     - meta.function.definition.parameters
+    - meta.parameter
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -250,6 +252,73 @@
     - punctuation.section.arguments.end.bracket.round.initializer
   scopesEnd:
     - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: mt19937
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: gen
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: time
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: nullptr
+  scopes:
+    - constant.language.nullptr
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ^
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round

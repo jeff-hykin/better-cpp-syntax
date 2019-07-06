@@ -220,7 +220,7 @@ tokens = [
     { representation: "auto"                 , name: "auto"             , isSpecifier: true, isStorageSpecifier: true },
     { representation: "register"             , name: "register"         , isSpecifier: true, isStorageSpecifier: true },
     { representation: "static"               , name: "static"           , isSpecifier: true, isStorageSpecifier: true },
-    { representation: "extern"               , name: "extern"           , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "extern"               , name: "extern"           , isSpecifier: true, },
     { representation: "thread_local"         , name: "thread_local"     , isSpecifier: true, isStorageSpecifier: true },
     # function specifiers
     { representation: "inline"               , name: "inline"           , isSpecifier: true, isFunctionSpecifier: true},

@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -170,8 +169,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: type
   scopes:
     - entity.name.function.call.initializer
@@ -301,8 +299,7 @@
 - source: BlankType
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: return
@@ -352,7 +349,6 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - meta.head.function.definition.special.operator-overload
     - storage.modifier.reference
 - source: Rule
   scopes:
@@ -464,8 +460,7 @@
 - source: ' BlankType'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: new
@@ -521,8 +516,7 @@
 - source: ' CharacterSetType'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: new

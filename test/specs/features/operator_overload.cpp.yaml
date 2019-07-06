@@ -1,6 +1,5 @@
 - source: Item
   scopesBegin:
-    - source
     - meta.function.definition.special.operator-overload
   scopes:
     - meta.qualified_type
@@ -34,8 +33,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -107,8 +105,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -178,8 +175,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -250,8 +246,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -297,11 +292,11 @@
     - meta.qualified_type
     - entity.name.type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: ','
@@ -325,8 +320,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ostream
   scopes:
     - meta.qualified_type
@@ -421,8 +415,7 @@
     - entity.name.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: Traits
   scopes:
     - meta.qualified_type
@@ -444,8 +437,7 @@
     - storage.modifier.specifier.const
 - source: noexcept
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - >-
@@ -497,8 +489,7 @@
     - storage.modifier.specifier.const
 - source: noexcept
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - >-
@@ -636,8 +627,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -714,8 +704,7 @@
     - variable.other.property
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: rhs
   scopes:
     - variable.other.object.access
@@ -727,8 +716,7 @@
     - variable.other.property
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -910,8 +898,7 @@
     - storage.modifier.pointer
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter

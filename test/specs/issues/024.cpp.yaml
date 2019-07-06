@@ -1,6 +1,5 @@
 - source: class
   scopesBegin:
-    - source
     - meta.block.class
     - meta.head.class
   scopes:
@@ -33,8 +32,7 @@
     - storage.type.modifier.final
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -132,8 +130,7 @@
     - entity.name.type.class
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.inheritance
+    - punctuation.separator.colon.inheritance
   scopesEnd:
     - meta.head.class
 - source: public
@@ -144,8 +141,7 @@
     - entity.name.type.inherited
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter.inheritance
+    - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public

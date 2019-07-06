@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.pragma
     - keyword.control.directive.pragma
   scopes:
@@ -374,8 +373,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -384,8 +382,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - entity.name.type.template
@@ -394,7 +391,7 @@
     - keyword.operator.assignment
 - source: typename
   scopes:
-    - storage.modifier
+    - storage.modifier.typename
 - source: std
   scopes:
     - entity.name.scope-resolution.template.definition
@@ -441,8 +438,7 @@
     - storage.type.template.argument.type
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: class
   scopes:
     - entity.name.type.template
@@ -451,7 +447,7 @@
     - keyword.operator.assignment
 - source: typename
   scopes:
-    - storage.modifier
+    - storage.modifier.typename
 - source: std
   scopes:
     - entity.name.scope-resolution.template.definition

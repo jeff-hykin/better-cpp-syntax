@@ -1,6 +1,4 @@
 - source: sscanf
-  scopesBegin:
-    - source
   scopes:
     - entity.name.function.call
 - source: (
@@ -9,8 +7,7 @@
 - source: user_input
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -31,16 +28,14 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
     - keyword.operator
 - source: arg0
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' arg_str'
 - source: )
   scopes:
@@ -129,8 +124,7 @@
 - source: timestr
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -146,8 +140,7 @@
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -168,8 +161,7 @@
     - string.quoted.double
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' tmp'
 - source: )
   scopes:

@@ -1,6 +1,5 @@
 - source: //
   scopesBegin:
-    - source
     - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
@@ -192,11 +191,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -229,8 +228,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_string
   scopes:
     - entity.name.type.parameter
@@ -275,11 +273,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '>>'
@@ -312,8 +310,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_wstring
   scopes:
     - entity.name.type.parameter
@@ -358,11 +355,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -395,8 +392,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -444,11 +440,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
     - storage.modifier.reference
 - source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
 - source: '<<'
@@ -481,8 +477,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
@@ -530,11 +525,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -563,8 +558,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_string
   scopes:
     - entity.name.type.parameter
@@ -576,8 +570,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive
@@ -620,11 +613,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -653,8 +646,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_wstring
   scopes:
     - entity.name.type.parameter
@@ -666,8 +658,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: wchar_t
   scopes:
     - storage.type.primitive
@@ -710,11 +701,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -743,8 +734,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_string
   scopes:
     - entity.name.type.parameter
@@ -789,11 +779,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '&'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -822,8 +812,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: cow_wstring
   scopes:
     - entity.name.type.parameter

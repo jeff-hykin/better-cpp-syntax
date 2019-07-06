@@ -1,6 +1,5 @@
 - source: enum
   scopesBegin:
-    - source
     - meta.block.enum
     - meta.head.enum
   scopes:
@@ -39,8 +38,7 @@
     - comment.block
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: definition3
   scopesBegin:
     - meta.enum.definition
@@ -50,8 +48,7 @@
     - variable.other.enummember
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: definition2
   scopes:
     - variable.other.enummember

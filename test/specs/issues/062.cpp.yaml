@@ -1,9 +1,7 @@
 - source: typedef
-  scopesBegin:
-    - source
   scopes:
     - keyword.other.typedef
-- source: ' foo '
+- source: ' foo'
 - source: int
   scopes:
     - storage.type.primitive

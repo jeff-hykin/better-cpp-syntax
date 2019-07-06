@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -76,8 +75,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: int
@@ -115,8 +113,7 @@
     - storage.type.modifier.access.control.public
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.delimiter.colon.access.control
+    - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: int
@@ -149,11 +146,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: exploreTree
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -176,8 +173,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter
@@ -227,11 +223,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: expandNode
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -254,8 +250,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: class
   scopes:
     - storage.type.class
@@ -270,8 +265,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: vector
   scopes:
     - entity.name.type.parameter

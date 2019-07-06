@@ -1,6 +1,5 @@
 - source: int
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -50,8 +49,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: ']'
   scopes:
@@ -60,8 +58,7 @@
     - meta.bracket.square.access
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' c'
 - source: )
   scopes:
@@ -118,8 +115,7 @@
 - source: a
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: ' b'
 - source: ']'
   scopes:
@@ -128,8 +124,7 @@
     - meta.bracket.square.access
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.range-based
+    - punctuation.separator.colon.range-based
 - source: ' c'
 - source: )
   scopes:

@@ -1,6 +1,5 @@
 - source: enum
   scopesBegin:
-    - source
     - meta.block.enum
     - meta.head.enum
   scopes:
@@ -10,8 +9,7 @@
     - entity.name.type.enum
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.type-specifier
+    - punctuation.separator.colon.type-specifier
 - source: std
   scopes:
     - entity.name.scope-resolution

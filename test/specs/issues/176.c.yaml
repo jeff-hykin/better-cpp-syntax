@@ -52,8 +52,7 @@
 - source: ' FOO'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: '{'
@@ -92,8 +91,7 @@
 - source: ' BAR'
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: FileAccessControl

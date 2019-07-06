@@ -1,6 +1,5 @@
 - source: struct
   scopesBegin:
-    - source
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -78,15 +77,13 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '2'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '3'
   scopes:
     - constant.numeric.decimal
@@ -295,15 +292,13 @@
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '2'
   scopes:
     - constant.numeric.decimal
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: '3'
   scopes:
     - constant.numeric.decimal
@@ -342,8 +337,7 @@
     - storage.modifier.pointer
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: usertype
   scopes:
     - entity.name.type.parameter

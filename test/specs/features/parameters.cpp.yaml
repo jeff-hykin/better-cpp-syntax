@@ -1,6 +1,5 @@
 - source: '#'
   scopesBegin:
-    - source
     - meta.preprocessor.include
     - keyword.control.directive.include
   scopes:
@@ -149,8 +148,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -214,8 +212,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -443,8 +440,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -725,8 +721,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -954,8 +949,7 @@
     - storage.type.built-in.primitive
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -1218,7 +1212,7 @@
     - storage.modifier.specifier.const
 - source: thing
   scopes:
-    - entity.name.type.parameter
+    - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -1616,11 +1610,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: exploreTree
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -1643,8 +1637,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -1701,11 +1694,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: expandNode
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -1728,8 +1721,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: class
   scopes:
     - storage.type.class
@@ -1744,8 +1736,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -1802,11 +1793,11 @@
   scopesEnd:
     - meta.qualified_type
 - source: '*'
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
     - storage.modifier.pointer
 - source: expandNode
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
     - entity.name.function.definition
 - source: (
@@ -1829,8 +1820,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: enum
   scopes:
     - storage.type.enum
@@ -1845,8 +1835,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: std
   scopes:
     - entity.name.scope-resolution.parameter
@@ -1907,8 +1896,7 @@
     - storage.type.template.argument.int
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -1917,8 +1905,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -1927,8 +1914,7 @@
     - entity.name.type.template
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.template.argument
+    - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
     - storage.type.template
@@ -1965,16 +1951,18 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: '&&'
-  scopes:
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
     - storage.modifier.reference
 - source: a_callable
   scopes:
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: Ret
   scopes:
     - meta.qualified_type
@@ -2056,8 +2044,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -2123,8 +2110,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: bool
   scopes:
     - storage.type.primitive
@@ -2187,7 +2173,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - entity.name.type.parameter
+    - variable.parameter
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -2227,8 +2213,7 @@
     - variable.parameter
 - source: ','
   scopes:
-    - comma
-    - punctuation.separator.delimiter
+    - punctuation.separator.delimiter.comma
 - source: char
   scopes:
     - storage.type.primitive

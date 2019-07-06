@@ -1,6 +1,5 @@
 - source: void
   scopesBegin:
-    - source
     - meta.function.definition
   scopes:
     - meta.qualified_type
@@ -58,8 +57,7 @@
     - constant.numeric.decimal
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case
+    - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
 - source: break
@@ -75,8 +73,7 @@
     - keyword.control.default
 - source: ':'
   scopes:
-    - colon
-    - punctuation.separator.case.default
+    - punctuation.separator.colon.case.default
   scopesEnd:
     - meta.conditional.case
 - source: '}'
