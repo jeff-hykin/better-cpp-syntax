@@ -1630,18 +1630,9 @@ cpp_grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         newPattern(
-                            newPattern(
-                                match: @cpp_tokens.that(:isStorageSpecifier),
-                                tag_as: "storage.modifier.specifier.parameter",
-                            ).then(std_space)
-                        # a type specifier
-                        # type specifiers are only specifiers when combined with something else ex: long vs long int
-                        ).or(
-                            newPattern(
-                                match: @cpp_tokens.that(:isTypeSpecifier),
-                                tag_as: "storage.modifier.specifier.parameter",
-                            ).then(std_space).lookAheadFor(/\w/)
-                        )
+                            match: @cpp_tokens.that(:isStorageSpecifier),
+                            tag_as: "storage.modifier.specifier.parameter",
+                        ).then(std_space)
                     ),
                     includes: [
                         :storage_types
@@ -1738,18 +1729,9 @@ cpp_grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         newPattern(
-                            newPattern(
-                                match: @cpp_tokens.that(:isStorageSpecifier),
-                                tag_as: "storage.modifier.specifier.parameter",
-                            ).then(std_space)
-                        # a type specifier
-                        # type specifiers are only specifiers when combined with something else ex: long vs long int
-                        ).or(
-                            newPattern(
-                                match: @cpp_tokens.that(:isTypeSpecifier),
-                                tag_as: "storage.modifier.specifier.parameter",
-                            ).then(std_space).lookAheadFor(/\w/)
-                        )
+                            match: @cpp_tokens.that(:isStorageSpecifier),
+                            tag_as: "storage.modifier.specifier.parameter",
+                        ).then(std_space)
                     ),
                     includes: [
                         :storage_types

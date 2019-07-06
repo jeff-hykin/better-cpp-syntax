@@ -52,6 +52,10 @@ void aFunction(
     int a
 );
 
+void func(short a) {
+	
+}
+
 int main(int argc, char *argv[1 + 1])
     {
         std::cout << "done\n";

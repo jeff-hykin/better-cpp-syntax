@@ -9276,7 +9276,7 @@
     - storage.type.built-in.primitive
 - source: shift
   scopes:
-    - entity.name.type.parameter
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -9286,7 +9286,7 @@
     - storage.type.built-in.primitive
 - source: mask
   scopes:
-    - entity.name.type.parameter
+    - variable.parameter
   scopesEnd:
     - meta.parameter
 - source: )

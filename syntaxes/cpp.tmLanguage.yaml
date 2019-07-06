@@ -4384,7 +4384,7 @@ repository:
     - include: "#function_pointer_parameter"
     - include: "#decltype"
     - include: "#vararg_ellipses"
-    - match: "((?:((?:const|static|volatile|register|restrict|extern))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))|((?:short|signed|unsigned|long))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\w))+)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\b\\b(?<!\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=,|\\)|=)"
+    - match: "((?:((?:const|static|volatile|register|restrict|extern))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))+)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\b\\b(?<!\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=,|\\)|=)"
       captures:
         '1':
           patterns:
@@ -4405,46 +4405,46 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '7':
-          name: storage.modifier.specifier.parameter.cpp
-        '8':
           patterns:
           - include: "#inline_comment"
-        '9':
+        '8':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '10':
+        '9':
           name: comment.block.cpp
+        '10':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
         '11':
           patterns:
+          - include: "#inline_comment"
+        '12':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '13':
+          name: comment.block.cpp
+        '14':
+          patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
           - match: "\\*"
             name: comment.block.cpp
-        '12':
-          patterns:
-          - include: "#inline_comment"
-        '13':
-          name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '14':
-          name: comment.block.cpp
         '15':
           patterns:
-          - match: "\\*\\/"
-            name: comment.block.cpp punctuation.definition.comment.end.cpp
-          - match: "\\*"
-            name: comment.block.cpp
-        '16':
-          patterns:
           - include: "#inline_comment"
-        '17':
+        '16':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '18':
+        '17':
           name: comment.block.cpp
-        '19':
+        '18':
           patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
           - match: "\\*"
             name: comment.block.cpp
+        '19':
+          name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
         '20':
           patterns:
           - include: "#inline_comment"
@@ -4459,7 +4459,7 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '24':
-          name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
+          name: storage.type.cpp storage.type.built-in.cpp
         '25':
           patterns:
           - include: "#inline_comment"
@@ -4474,7 +4474,7 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '29':
-          name: storage.type.cpp storage.type.built-in.cpp
+          name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
         '30':
           patterns:
           - include: "#inline_comment"
@@ -4489,32 +4489,17 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '34':
-          name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
-        '35':
-          patterns:
-          - include: "#inline_comment"
-        '36':
-          name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '37':
-          name: comment.block.cpp
-        '38':
-          patterns:
-          - match: "\\*\\/"
-            name: comment.block.cpp punctuation.definition.comment.end.cpp
-          - match: "\\*"
-            name: comment.block.cpp
-        '39':
           name: support.type.posix-reserved.cpp support.type.built-in.posix-reserved.cpp
-        '40':
+        '35':
           name: entity.name.type.parameter.cpp
-        '41':
+        '36':
           patterns:
           - include: "#inline_comment"
-        '42':
+        '37':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '43':
+        '38':
           name: comment.block.cpp
-        '44':
+        '39':
           patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
@@ -4654,7 +4639,7 @@ repository:
     - include: "#function_pointer_parameter"
     - include: "#decltype"
     - include: "#vararg_ellipses"
-    - match: "((?:((?:const|static|volatile|register|restrict|extern))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))|((?:short|signed|unsigned|long))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\w))+)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\b\\b(?<!\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=,|\\)|=)"
+    - match: "((?:((?:const|static|volatile|register|restrict|extern))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))+)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:auto|void|char|short|int|signed|unsigned|long|float|double|bool|wchar_t)(?!\\w))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t|int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t|uintmax_t|uintmax_t)(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)[a-zA-Z_]\\w*_t(?!\\w)))|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\b\\b(?<!\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern)))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=,|\\)|=)"
       captures:
         '1':
           patterns:
@@ -4675,46 +4660,46 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '7':
-          name: storage.modifier.specifier.parameter.cpp
-        '8':
           patterns:
           - include: "#inline_comment"
-        '9':
+        '8':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '10':
+        '9':
           name: comment.block.cpp
+        '10':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
         '11':
           patterns:
+          - include: "#inline_comment"
+        '12':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '13':
+          name: comment.block.cpp
+        '14':
+          patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
           - match: "\\*"
             name: comment.block.cpp
-        '12':
-          patterns:
-          - include: "#inline_comment"
-        '13':
-          name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '14':
-          name: comment.block.cpp
         '15':
           patterns:
-          - match: "\\*\\/"
-            name: comment.block.cpp punctuation.definition.comment.end.cpp
-          - match: "\\*"
-            name: comment.block.cpp
-        '16':
-          patterns:
           - include: "#inline_comment"
-        '17':
+        '16':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '18':
+        '17':
           name: comment.block.cpp
-        '19':
+        '18':
           patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
           - match: "\\*"
             name: comment.block.cpp
+        '19':
+          name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
         '20':
           patterns:
           - include: "#inline_comment"
@@ -4729,7 +4714,7 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '24':
-          name: storage.type.primitive.cpp storage.type.built-in.primitive.cpp
+          name: storage.type.cpp storage.type.built-in.cpp
         '25':
           patterns:
           - include: "#inline_comment"
@@ -4744,7 +4729,7 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '29':
-          name: storage.type.cpp storage.type.built-in.cpp
+          name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
         '30':
           patterns:
           - include: "#inline_comment"
@@ -4759,32 +4744,17 @@ repository:
           - match: "\\*"
             name: comment.block.cpp
         '34':
-          name: support.type.posix-reserved.pthread.cpp support.type.built-in.posix-reserved.pthread.cpp
-        '35':
-          patterns:
-          - include: "#inline_comment"
-        '36':
-          name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '37':
-          name: comment.block.cpp
-        '38':
-          patterns:
-          - match: "\\*\\/"
-            name: comment.block.cpp punctuation.definition.comment.end.cpp
-          - match: "\\*"
-            name: comment.block.cpp
-        '39':
           name: support.type.posix-reserved.cpp support.type.built-in.posix-reserved.cpp
-        '40':
+        '35':
           name: entity.name.type.parameter.cpp
-        '41':
+        '36':
           patterns:
           - include: "#inline_comment"
-        '42':
+        '37':
           name: comment.block.cpp punctuation.definition.comment.begin.cpp
-        '43':
+        '38':
           name: comment.block.cpp
-        '44':
+        '39':
           patterns:
           - match: "\\*\\/"
             name: comment.block.cpp punctuation.definition.comment.end.cpp
