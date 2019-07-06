@@ -1622,6 +1622,7 @@ cpp_grammar = Grammar.new(
                 ),
                 includes: [ :evaluation_context ]
             ),
+            :operators, # this is part of the #282 workaround
             # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
             newPattern(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
@@ -2602,36 +2603,26 @@ cpp_grammar = Grammar.new(
                 }
             }
         }
-    cpp_grammar[:parentheses] = {
-        name: "meta.parens",
-        begin: "\\(",
-        beginCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.begin.bracket.round"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.end.bracket.round"
-            }
-        },
-        patterns: [
-            # for whenever there is a typecast
-            {
-                include: "#over_qualified_types",
-            },
-            # for whenever there is a range based for loop 
-            {
+    cpp_grammar[:parentheses] = PatternRange.new(
+        start_pattern: newPattern(
+            match: /\(/,
+            tag_as: "punctuation.section.parens.begin.bracket.round"
+        ),
+        end_pattern: newPattern(
+            match: /\)/,
+            tag_as: "punctuation.section.parens.end.bracket.round"
+        ),
+        includes: [
+            # TODO: for typecasting (eventually this should be replaced)
+            :over_qualified_types, 
+            # TODO: for range-based for loops (eventually this should be replaced)
+            newPattern(
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
-                name: "colon punctuation.separator.range-based"
-            },
-            # for normal prescedence usage
-            {
-                include: "#evaluation_context"
-            }
+                name: "punctuation.separator.range-based"
+            ),
+            :evaluation_context
         ]
-        }
+    )
     cpp_grammar[:pragma_mark] = {
         captures: {
             "1" => {
