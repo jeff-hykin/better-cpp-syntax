@@ -10,14 +10,19 @@
   ],
   "patterns": [
     {
-      "name": "source.dockerfile",
-      "begin": "(?=^|\\A|\\G)",
-      "end": "not(?<=possible)",
-      "patterns": [
-        {
-          "include": "#initial_context"
-        }
-      ]
+      "include": "#commands"
+    },
+    {
+      "include": "#escape"
+    },
+    {
+      "include": "#variable"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
     }
   ],
   "repository": {
@@ -2080,25 +2085,6 @@
       "patterns": [
         {
           "include": "#shell"
-        }
-      ]
-    },
-    "initial_context": {
-      "patterns": [
-        {
-          "include": "#commands"
-        },
-        {
-          "include": "#escape"
-        },
-        {
-          "include": "#variable"
-        },
-        {
-          "include": "#comments"
-        },
-        {
-          "include": "#strings"
         }
       ]
     }

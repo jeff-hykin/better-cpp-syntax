@@ -300,7 +300,7 @@ class Grammar
     #
     # Constructor
     #
-    def initialize(wrap_source: true, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
+    def initialize(wrap_source: false, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
         @data = {
             name: name,
             scopeName: scope_name,

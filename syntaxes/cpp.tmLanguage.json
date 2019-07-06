@@ -20,14 +20,88 @@
   ],
   "patterns": [
     {
-      "name": "source.cpp",
-      "begin": "(?=^|\\A|\\G)",
-      "end": "not(?<=possible)",
-      "patterns": [
-        {
-          "include": "#initial_context"
-        }
-      ]
+      "include": "#ever_present_context"
+    },
+    {
+      "include": "#constructor_root"
+    },
+    {
+      "include": "#destructor_root"
+    },
+    {
+      "include": "#function_definition"
+    },
+    {
+      "include": "#operator_overload"
+    },
+    {
+      "include": "#using_namespace"
+    },
+    {
+      "include": "#type_alias"
+    },
+    {
+      "include": "#using_name"
+    },
+    {
+      "include": "#namespace_alias"
+    },
+    {
+      "include": "#namespace_block"
+    },
+    {
+      "include": "#extern_block"
+    },
+    {
+      "include": "#typedef_class"
+    },
+    {
+      "include": "#typedef_struct"
+    },
+    {
+      "include": "#typedef_union"
+    },
+    {
+      "include": "#typedef_keyword"
+    },
+    {
+      "include": "#standard_declares"
+    },
+    {
+      "include": "#class_block"
+    },
+    {
+      "include": "#struct_block"
+    },
+    {
+      "include": "#union_block"
+    },
+    {
+      "include": "#enum_block"
+    },
+    {
+      "include": "#template_isolated_definition"
+    },
+    {
+      "include": "#template_definition"
+    },
+    {
+      "include": "#access_control_keywords"
+    },
+    {
+      "include": "#block"
+    },
+    {
+      "include": "#static_assert"
+    },
+    {
+      "include": "#assembly"
+    },
+    {
+      "include": "#function_pointer"
+    },
+    {
+      "include": "#evaluation_context"
     }
   ],
   "repository": {
@@ -1093,7 +1167,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -1114,7 +1188,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             },
             {
               "include": "#block_innards"
@@ -1127,7 +1201,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -4156,7 +4230,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -4181,7 +4255,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -4990,7 +5064,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -5015,7 +5089,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -5407,7 +5481,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -5432,7 +5506,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -5722,7 +5796,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -5747,7 +5821,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -5919,7 +5993,7 @@
               }
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -5944,7 +6018,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -6166,7 +6240,7 @@
               }
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -6191,7 +6265,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -8326,7 +8400,7 @@
           },
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -8336,7 +8410,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -8459,7 +8533,7 @@
           },
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -8579,7 +8653,7 @@
           },
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -8613,7 +8687,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -8797,7 +8871,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -8807,7 +8881,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -8967,7 +9041,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -8977,7 +9051,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -9137,7 +9211,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -9147,7 +9221,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -9185,7 +9259,7 @@
           },
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -9200,7 +9274,7 @@
           },
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -9210,12 +9284,12 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -9382,7 +9456,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#initial_context"
+                  "include": "$base"
                 }
               ]
             },
@@ -9677,7 +9751,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#initial_context"
+                  "include": "$base"
                 }
               ]
             },
@@ -9972,7 +10046,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "#initial_context"
+                  "include": "$base"
                 }
               ]
             },
@@ -12615,7 +12689,7 @@
           ]
         },
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -12683,7 +12757,7 @@
           ]
         },
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -12833,7 +12907,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -12926,7 +13000,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         },
@@ -13083,7 +13157,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -13181,7 +13255,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -13268,7 +13342,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -13355,7 +13429,7 @@
               ]
             },
             {
-              "include": "#initial_context"
+              "include": "$base"
             }
           ]
         }
@@ -13377,7 +13451,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -13397,7 +13471,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -13495,7 +13569,7 @@
           ]
         },
         {
-          "include": "#initial_context"
+          "include": "$base"
         }
       ]
     },
@@ -13591,94 +13665,6 @@
         },
         {
           "include": "#preprocessor_rule_define_line_context"
-        }
-      ]
-    },
-    "initial_context": {
-      "patterns": [
-        {
-          "include": "#ever_present_context"
-        },
-        {
-          "include": "#constructor_root"
-        },
-        {
-          "include": "#destructor_root"
-        },
-        {
-          "include": "#function_definition"
-        },
-        {
-          "include": "#operator_overload"
-        },
-        {
-          "include": "#using_namespace"
-        },
-        {
-          "include": "#type_alias"
-        },
-        {
-          "include": "#using_name"
-        },
-        {
-          "include": "#namespace_alias"
-        },
-        {
-          "include": "#namespace_block"
-        },
-        {
-          "include": "#extern_block"
-        },
-        {
-          "include": "#typedef_class"
-        },
-        {
-          "include": "#typedef_struct"
-        },
-        {
-          "include": "#typedef_union"
-        },
-        {
-          "include": "#typedef_keyword"
-        },
-        {
-          "include": "#standard_declares"
-        },
-        {
-          "include": "#class_block"
-        },
-        {
-          "include": "#struct_block"
-        },
-        {
-          "include": "#union_block"
-        },
-        {
-          "include": "#enum_block"
-        },
-        {
-          "include": "#template_isolated_definition"
-        },
-        {
-          "include": "#template_definition"
-        },
-        {
-          "include": "#access_control_keywords"
-        },
-        {
-          "include": "#block"
-        },
-        {
-          "include": "#static_assert"
-        },
-        {
-          "include": "#assembly"
-        },
-        {
-          "include": "#function_pointer"
-        },
-        {
-          "include": "#evaluation_context"
         }
       ]
     }
