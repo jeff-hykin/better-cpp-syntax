@@ -1,11 +1,11 @@
-Item  operator+( const string&  base        , const int&    repetitions ) {};
-Item  operator-( const int&     the_input   , const Item&   input_item  ) {};
-Item  operator/( const Item&    input_item  , const int&    the_input   ) {};
-Item  operator^( const Item&    input_item  , const int&    the_input   ) {};
-inline ostream& operator,(ostream& o, ostream& (*manip_fun)(ostream&)) {};
+// Item  operator+( const string&  base        , const int&    repetitions ) {};
+// Item  operator-( const int&     the_input   , const Item&   input_item  ) {};
+// Item  operator/( const Item&    input_item  , const int&    the_input   ) {};
+// Item  operator^( const Item&    input_item  , const int&    the_input   ) {};
+// inline ostream& operator,(ostream& o, ostream& (*manip_fun)(ostream&)) {};
 
 // templated type conversion
-operator std::basic_string_view<CharT, Traits>() const noexcept {}
+// operator std::basic_string_view<CharT, Traits>() const noexcept {}
 
 // resolution type conversion
 operator std::basic_string_view() const noexcept {}

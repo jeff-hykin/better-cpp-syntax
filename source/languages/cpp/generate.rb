@@ -16,6 +16,7 @@ require_relative './tokens.rb'
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
     # consider adding storage.type to user defined types
+    # switch to punctuation.accessor from punctuation.seperator.dot-access
 
 cpp_grammar = Grammar.new(
     name: "C++",

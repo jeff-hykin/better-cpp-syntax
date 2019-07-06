@@ -173,7 +173,7 @@ require_relative './tokens.rb'
         )
     grammar[:assignment] = PatternRange.new(
         tag_as: "meta.expression.assignment",
-        start_pattern: newPattern(
+        start_pattern: std_space.then(
                 match: variable_name,
                 tag_as: "variable.other.assignment",
             ).then(
