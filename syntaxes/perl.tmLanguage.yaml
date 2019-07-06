@@ -1326,7 +1326,7 @@ repository:
         name: punctuation.section.curly-brackets.perl
     patterns:
     - include: "#initial_context"
-  paraentheses:
+  parentheses:
     begin: "(\\()"
     beginCaptures:
       '1':
@@ -1343,7 +1343,7 @@ repository:
     - include: "#comma"
     - include: "#square_brackets"
     - include: "#curly_brackets"
-    - include: "#paraentheses"
+    - include: "#parentheses"
   using_statement:
     name: meta.import.perl
     begin: "(use)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))([\\w\\.]+)"
@@ -1544,7 +1544,7 @@ repository:
       end: "(?=\\})"
       patterns:
       - include: "$base"
-    - include: "#paraentheses"
+    - include: "#parentheses"
     - match: "(:)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))"
       captures:
         '1':

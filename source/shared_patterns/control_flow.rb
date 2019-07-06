@@ -1,4 +1,4 @@
-def c_style_control(keyword:"", primary_inlcudes:[],  paraentheses_include:[], body_includes:[], secondary_includes:[])
+def c_style_control(keyword:"", primary_inlcudes:[],  parentheses_include:[], body_includes:[], secondary_includes:[])
     PatternRange.new(
         start_pattern: newPattern(
             /\s*+/.then(
@@ -27,7 +27,7 @@ def c_style_control(keyword:"", primary_inlcudes:[],  paraentheses_include:[], b
                     match: /\)/,
                     tag_as: "punctuation.section.parens.control",
                 ),
-                includes: paraentheses_include
+                includes: parentheses_include
             ),
             PatternRange.new(
                 tag_content_as: "meta.control.body",

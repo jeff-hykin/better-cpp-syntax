@@ -1688,7 +1688,7 @@ cpp_grammar = Grammar.new(
                 ).then(
                     std_space
                 # the parameter can end with
-                # 1. ) the end of the function paraentheses
+                # 1. ) the end of the function parentheses
                 # 2. , the end of the parameter/start of the next parameter
                 # 3. [ the start of an array-type parameter
                 # 5. \n a newline in the case of:
@@ -1795,7 +1795,7 @@ cpp_grammar = Grammar.new(
                 ).then(
                     std_space
                 # the parameter can end with
-                # 1. ) the end of the function paraentheses
+                # 1. ) the end of the function parentheses
                 # 2. , the end of the parameter/start of the next parameter
                 # 3. [ the start of an array-type parameter
                 # 4. = the start of a default-value assignment
@@ -2299,7 +2299,7 @@ cpp_grammar = Grammar.new(
 #
 # preprocessor directives
 #
-    # TODO, change all blocks/paraentheses so that they end and the end of a macro
+    # TODO, change all blocks/parentheses so that they end and the end of a macro
     # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
     cpp_grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = newPattern(
             match: variableBounds[/#(?:endif|else|elif)/],

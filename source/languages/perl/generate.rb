@@ -173,7 +173,7 @@ require_relative './tokens.rb'
                 ),
                 includes: [ :initial_context ]
             ),
-            grammar[:paraentheses] = PatternRange.new(
+            grammar[:parentheses] = PatternRange.new(
                 start_pattern: newPattern(
                     match: /\(/,
                     tag_as: "punctuation.section.parens",
@@ -206,11 +206,11 @@ require_relative './tokens.rb'
     # control flow
     # 
         grammar[:control_flow] = [
-            grammar[:if_statement]    = c_style_control(keyword:"if"    , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
-            grammar[:elsif_statement] = c_style_control(keyword:"elsif" , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
-            grammar[:else_statement]  = c_style_control(keyword:"else"  , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
-            grammar[:while_statement] = c_style_control(keyword:"while" , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
-            grammar[:for_statement]   = c_style_control(keyword:"for"   , paraentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:if_statement]    = c_style_control(keyword:"if"    , parentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:elsif_statement] = c_style_control(keyword:"elsif" , parentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:else_statement]  = c_style_control(keyword:"else"  , parentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:while_statement] = c_style_control(keyword:"while" , parentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
+            grammar[:for_statement]   = c_style_control(keyword:"for"   , parentheses_include:[ :$initial_context ], body_includes:[ :$initial_context ], secondary_includes:[:$initial_context]),
         ]
     # 
     # function definition
@@ -243,7 +243,7 @@ require_relative './tokens.rb'
                     end_pattern: lookAheadFor(/\}/),
                     includes: [ :$initial_context ],
                 ),
-                grammar[:paraentheses] = PatternRange.new(
+                grammar[:parentheses] = PatternRange.new(
                     start_pattern: newPattern(
                         match: /\(/,
                         tag_as: "punctuation.section.parameters",
