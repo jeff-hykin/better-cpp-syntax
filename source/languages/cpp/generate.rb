@@ -55,6 +55,7 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma"
         )
+    possible_begining_of_statement = /\G/.or(lookBehindFor(/;|\n/))
     cpp_grammar[:assignment_operator] = assignment_operator = newPattern(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
@@ -1050,7 +1051,7 @@ cpp_grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
-    optional_calling_convention = leading_space.maybe(
+    optional_calling_convention = std_space.maybe(
             match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
@@ -1060,8 +1061,10 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
-        start_pattern: leading_space.then(
-            cpp_grammar[:simple_type].then(std_space).then(optional_calling_convention).then(
+        start_pattern: possible_begining_of_statement.then(std_space).then(
+            cpp_grammar[:simple_type].then(std_space).then(
+                optional_calling_convention
+            ).then(
                 cpp_grammar[:scope_resolution_function_definition]
             ).then(
                 match: variable_name_without_bounds,
@@ -2203,7 +2206,7 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(/\s*\"/),
         head_includes: [ :$initial_context ],
         secondary_includes: [ :$initial_context ]
-        )
+    )
     generateTypedefClassOrStructBlockFinder = ->(name) do
         return PatternRange.new(
             start_pattern: newPattern(
