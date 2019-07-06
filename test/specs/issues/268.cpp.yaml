@@ -1,0 +1,49 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: foo
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: explicit
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: constexpr
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.constexpr
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

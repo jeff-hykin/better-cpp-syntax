@@ -64,10 +64,11 @@
   scopesBegin:
     - meta.body.struct
     - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
   scopes:
-    - storage.type.modifier.specifier
+    - storage.modifier.specifier.functional.pre-parameters.explicit
 - source: Thing2
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
     - entity.name.function.constructor
     - entity.name.function.definition.special.constructor
@@ -115,10 +116,11 @@
   scopesBegin:
     - meta.body.struct
     - meta.function.definition.special.member.destructor
-    - meta.head.function.definition.special.member.destructor
   scopes:
-    - storage.type.modifier.specifier
+    - storage.modifier.specifier.functional.pre-parameters.virtual
 - source: ~Thing3
+  scopesBegin:
+    - meta.head.function.definition.special.member.destructor
   scopes:
     - entity.name.function.destructor
     - entity.name.function.definition.special.member.destructor

@@ -101,11 +101,11 @@
     - >-
       punctuation.section.block.end.bracket.curly.function.definition.special.constructor
 - source: explicit
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: basic_string
   scopesBegin:
     - meta.head.function.definition.special.constructor
-  scopes:
-    - storage.type.modifier.specifier
-- source: basic_string
   scopes:
     - entity.name.function.constructor
     - entity.name.function.definition.special.constructor
