@@ -212,11 +212,12 @@
     - meta.function.definition.special.constructor
     - meta.body.function.definition.special.constructor
 - source: static
-  scopes:
-    - storage.modifier.specifier.static
-- source: void
   scopesBegin:
     - meta.function.definition
+  scopes:
+    - meta.head.function.definition
+    - storage.modifier.static
+- source: void
   scopes:
     - meta.qualified_type
     - storage.type.primitive

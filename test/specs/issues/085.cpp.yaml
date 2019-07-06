@@ -82,23 +82,18 @@
   scopesEnd:
     - string.quoted.double
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: inBlock
-  scopesBegin:
-    - meta.head.function.definition
   scopes:
-    - entity.name.function.definition
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -109,10 +104,10 @@
     - comment.line.double-slash
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.function.definition
+    - punctuation.section.block.begin.bracket.curly.extern
   scopesEnd:
-    - meta.head.function.definition
+    - meta.head.extern
 - source: '}'
   scopes:
-    - meta.body.function.definition
-    - punctuation.section.block.end.bracket.curly.function.definition
+    - meta.body.extern
+    - punctuation.section.block.end.bracket.curly.extern

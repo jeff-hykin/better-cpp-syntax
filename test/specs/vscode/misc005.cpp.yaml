@@ -7433,14 +7433,12 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
-    - meta.function.definition
     - meta.body.function.definition
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - meta.head.function.definition
+    - storage.modifier.const
 - source: string
-  scopesBegin:
-    - meta.function.definition
   scopes:
     - meta.qualified_type
     - entity.name.type

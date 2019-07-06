@@ -1,9 +1,10 @@
 - source: constexpr
-  scopes:
-    - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: A
   scopesBegin:
     - meta.function.definition
+  scopes:
+    - meta.head.function.definition
+    - storage.modifier.constexpr
+- source: A
   scopes:
     - meta.qualified_type
     - entity.name.type
@@ -170,14 +171,12 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
-    - meta.function.definition
     - meta.body.function.definition
 - source: constexpr
   scopes:
-    - storage.modifier.specifier.functional.pre-parameters.constexpr
+    - meta.head.function.definition
+    - storage.modifier.constexpr
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
     - meta.qualified_type
     - storage.type.primitive

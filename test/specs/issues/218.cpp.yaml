@@ -1,9 +1,10 @@
 - source: static
-  scopes:
-    - storage.modifier.specifier.static
-- source: void
   scopesBegin:
     - meta.function.definition
+  scopes:
+    - meta.head.function.definition
+    - storage.modifier.static
+- source: void
   scopes:
     - meta.qualified_type
     - storage.type.primitive
@@ -566,14 +567,12 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
-    - meta.function.definition
     - meta.body.function.definition
 - source: static
   scopes:
-    - storage.modifier.specifier.static
+    - meta.head.function.definition
+    - storage.modifier.static
 - source: void
-  scopesBegin:
-    - meta.function.definition
   scopes:
     - meta.qualified_type
     - storage.type.primitive

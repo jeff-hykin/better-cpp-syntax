@@ -505,13 +505,12 @@
 - source: template
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+  scopesBegin:
+    - meta.qualified_type
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -593,13 +592,12 @@
 - source: template
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+  scopesBegin:
+    - meta.qualified_type
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -681,13 +679,12 @@
 - source: template
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+  scopesBegin:
+    - meta.qualified_type
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -759,13 +756,12 @@
 - source: template
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+  scopesBegin:
+    - meta.qualified_type
 - source: std
   scopes:
     - entity.name.scope-resolution

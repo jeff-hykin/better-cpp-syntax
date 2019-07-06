@@ -55,7 +55,7 @@ cpp_grammar = Grammar.new(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma"
         )
-    possible_begining_of_statement = /\G/.or(lookBehindFor(/;|\n/))
+    possible_begining_of_statement = /^|\G/.or(lookBehindFor(/;|\}/))
     cpp_grammar[:assignment_operator] = assignment_operator = newPattern(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
@@ -1061,17 +1061,31 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
-        start_pattern: possible_begining_of_statement.then(std_space).then(
-            cpp_grammar[:simple_type].then(std_space).then(
-                optional_calling_convention
+        start_pattern: newPattern(
+            possible_begining_of_statement.or(lookBehindFor(/>/)).then(
+                std_space
+            ).maybe(
+                newPattern(
+                    match: variableBounds[/template/],
+                    tag_as: "storage.type.template",
+                ).then(std_space)
+            ).zeroOrMoreOf(
+                newPattern(
+                    match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
+                    tag_as: "storage.modifier.$match"
+                ).then(std_space)
             ).then(
-                cpp_grammar[:scope_resolution_function_definition]
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.function.definition"
-            ).then(
-                avoid_invalid_function_names
-            ).then(std_space).lookAheadFor(/\(/)
+                    cpp_grammar[:simple_type].then(std_space).then(
+                    optional_calling_convention
+                ).then(
+                    cpp_grammar[:scope_resolution_function_definition]
+                ).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.function.definition"
+                ).then(
+                    avoid_invalid_function_names
+                ).then(std_space).lookAheadFor(/\(/)
+            )
         ),
         head_includes:[
             :ever_present_context, # comments and macros
