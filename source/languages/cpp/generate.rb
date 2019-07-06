@@ -1301,6 +1301,7 @@ cpp_grammar = Grammar.new(
             head_includes:[
                 :ever_present_context, # comments and macros
                 deleted_and_default_constructor,
+                :functional_specifiers_pre_parameters,
                 # ini context
                 PatternRange.new(
                     start_pattern: newPattern(
@@ -1375,10 +1376,11 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:constructor_inline] = constructor[
         # find the begining of the line
         /^/.then(std_space).zeroOrMoreOf(
-            newPattern(
-                match: @cpp_tokens.that(:isFunctionSpecifier),
-                tag_as: "storage.type.modifier.specifier"
-            ).then(std_space)
+            should_fully_match: ["constexpr", "explicit", "explicit constexpr"],
+            match:  @cpp_tokens.that(:isFunctionSpecifier).then(std_space),
+            includes: [
+                :functional_specifiers_pre_parameters
+            ]
         ).then(optional_calling_convention).then(
             tag_as: "entity.name.function.constructor entity.name.function.definition.special.constructor",
             match: variableBounds[identifier].lookAheadFor(/\(/)
@@ -1452,10 +1454,10 @@ cpp_grammar = Grammar.new(
         newPattern(
             # find the begining of the line
             /^/.then(std_space).then(optional_calling_convention).zeroOrMoreOf(
-                newPattern(
-                    match: @cpp_tokens.that(:isFunctionSpecifier),
-                    tag_as: "storage.type.modifier.specifier"
-                ).then(std_space)
+                match:  @cpp_tokens.that(:isFunctionSpecifier).then(std_space),
+                includes: [
+                    :functional_specifiers_pre_parameters
+                ]
             ).then(
                 tag_as: "entity.name.function.destructor entity.name.function.definition.special.member.destructor",
                 match: /~/.then(variableBounds[identifier].lookAheadFor(/\(/))
