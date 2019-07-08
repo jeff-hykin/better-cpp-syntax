@@ -2308,6 +2308,10 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:assembly] = assembly_pattern()
     cpp_grammar[:backslash_escapes] = backslash_escapes()
+    cpp_grammar[:macro_argument] = newPattern(
+        match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
+        tag_as: "variable.other.macro.argument"
+    )
 #
 # Misc Legacy
 #
@@ -2371,8 +2375,8 @@ cpp_grammar = Grammar.new(
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
             patterns: [
                 {
-                    include: "#preprocessor_rule_define_line_context"
-                }
+                    include: "#macro_context"
+                },
             ]
         }
     cpp_grammar[:meta_preprocessor_diagnostic] = {
@@ -3631,10 +3635,7 @@ cpp_grammar = Grammar.new(
         }
     cpp_grammar[:preprocessor_rule_define_line_context] = [
             :vararg_ellipses,
-            {
-                match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-                name: "variable.other.macro.argument"
-            },
+            :macro_argument,
             {
                 begin: "{",
                 beginCaptures: {
@@ -3829,7 +3830,34 @@ cpp_grammar = Grammar.new(
         ]
     
 
+
+# 
+# Generate macro versions of all ranged patterns 
+#
+    # TODO: this is incomplete, all the root patterns are included, but their "includes" are not converted
+    macro_context = []
+    for each in cpp_grammar[:$initial_context]
+        if cpp_grammar[each].is_a?(PatternRange)
+            tag_version = cpp_grammar[each].to_tag(ignore_repository_entry: true).dup
+            if tag_version[:end] != nil
+                tag_version[:end] = tag_version[:end].dup
+                # if there's a non-escaped newline, then the range is over
+                tag_version[:end] = "#{tag_version[:end]}|(?<!\\\\)$"
+                repo_name  = "macro_safe_#{each.to_s}".to_sym
+                cpp_grammar[repo_name] = tag_version
+                macro_context.push(repo_name)
+            else
+                macro_context.push(each)
+            end
+        else 
+            macro_context.push(each)
+        end
+    end
+    cpp_grammar[:macro_context] = macro_context
+
+# 
 # Save
+# 
 saveGrammar(cpp_grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
