@@ -114,8 +114,8 @@ require_relative './tokens.rb'
                 includes: [ :$initial_context ]
             ),
             newPattern(
-                match: @tokens.that(:areComparisionOperators),
-                tag_as: "keyword.operator.comparision",
+                match: @tokens.that(:areComparisonOperators),
+                tag_as: "keyword.operator.comparison",
             ),
             newPattern(
                 match: @tokens.that(:areAssignmentOperators),

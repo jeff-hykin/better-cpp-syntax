@@ -1287,7 +1287,7 @@ repository:
       patterns:
       - include: "$base"
     - match: "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)"
-      name: keyword.operator.comparision.perl
+      name: keyword.operator.comparison.perl
     - match: "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|<<=|>>=|&=|\\|=|\\^=|=|\\.=)"
       name: keyword.operator.assignment.perl
     - match: "(?:&&|and|\\|\\||or|\\/\\/)"
