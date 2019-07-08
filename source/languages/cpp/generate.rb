@@ -162,7 +162,6 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
-            :macro_argument,
             :meta_preprocessor_macro,
             :meta_preprocessor_diagnostic,
             :meta_preprocessor_include,
@@ -3853,6 +3852,7 @@ cpp_grammar = Grammar.new(
             macro_context.push(each)
         end
     end
+    macro_context.push(:macro_argument)
     cpp_grammar[:macro_context] = macro_context
 
 # 

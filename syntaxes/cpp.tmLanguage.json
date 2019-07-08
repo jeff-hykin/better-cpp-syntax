@@ -155,9 +155,6 @@
           "include": "#preprocessor_rule_conditional"
         },
         {
-          "include": "#macro_argument"
-        },
-        {
           "include": "#meta_preprocessor_macro"
         },
         {
@@ -19420,6 +19417,9 @@
         },
         {
           "include": "#evaluation_context"
+        },
+        {
+          "include": "#macro_argument"
         }
       ]
     }

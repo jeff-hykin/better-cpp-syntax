@@ -74,7 +74,6 @@ repository:
     - include: "#preprocessor_rule_enabled"
     - include: "#preprocessor_rule_disabled"
     - include: "#preprocessor_rule_conditional"
-    - include: "#macro_argument"
     - include: "#meta_preprocessor_macro"
     - include: "#meta_preprocessor_diagnostic"
     - include: "#meta_preprocessor_include"
@@ -10102,4 +10101,5 @@ repository:
     - include: "#macro_safe_assembly"
     - include: "#macro_safe_function_pointer"
     - include: "#evaluation_context"
+    - include: "#macro_argument"
 name: C++
