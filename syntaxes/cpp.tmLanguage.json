@@ -7429,7 +7429,7 @@
           "name": "keyword.operator.increment.cpp"
         },
         {
-          "match": "%=|\\+=|-=|\\*=|(?<!\\()/=",
+          "match": "%=|\\+=|-=|\\*=|(?<!\\()\\/=",
           "name": "keyword.operator.assignment.compound.cpp"
         },
         {
@@ -7456,7 +7456,7 @@
           "include": "#assignment_operator"
         },
         {
-          "match": "%|\\*|/|-|\\+",
+          "match": "%|\\*|\\/|-|\\+",
           "name": "keyword.operator.cpp"
         },
         {

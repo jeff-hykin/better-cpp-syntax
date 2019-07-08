@@ -1533,45 +1533,45 @@ cpp_grammar = Grammar.new(
     )
         
     cpp_grammar[:operators] += [
-            {
-                match: "--",
-                name: "keyword.operator.decrement"
-            },
-            {
-                match: "\\+\\+",
-                name: "keyword.operator.increment"
-            },
-            {
-                match: "%=|\\+=|-=|\\*=|(?<!\\()/=",
-                name: "keyword.operator.assignment.compound"
-            },
-            {
-                match: "&=|\\^=|<<=|>>=|\\|=",
-                name: "keyword.operator.assignment.compound.bitwise"
-            },
-            {
-                match: "<<|>>",
-                name: "keyword.operator.bitwise.shift"
-            },
-            {
-                match: "!=|<=|>=|==|<|>",
-                name: "keyword.operator.comparison"
-            },
-            {
-                match: "&&|!|\\|\\|",
-                name: "keyword.operator.logical"
-            },
-            {
-                match: "&|\\||\\^|~",
-                name: "keyword.operator"
-            },
-            :assignment_operator,
-            {
-                match: "%|\\*|/|-|\\+",
-                name: "keyword.operator"
-            },
-            :ternary_operator,
-        ]
+        newPattern(
+            match: /--/,
+            tag_as: "keyword.operator.decrement"
+        ),
+        newPattern(
+            match: /\+\+/,
+            tag_as: "keyword.operator.increment"
+        ),
+        newPattern(
+            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
+            tag_as: "keyword.operator.assignment.compound"
+        ),
+        newPattern(
+            match: /&=|\^=|<<=|>>=|\|=/,
+            tag_as: "keyword.operator.assignment.compound.bitwise"
+        ),
+        newPattern(
+            match: /<<|>>/,
+            tag_as: "keyword.operator.bitwise.shift"
+        ),
+        newPattern(
+            match: /!=|<=|>=|==|<|>/,
+            tag_as: "keyword.operator.comparison"
+        ),
+        newPattern(
+            match: /&&|!|\|\|/,
+            tag_as: "keyword.operator.logical"
+        ),
+        newPattern(
+            match: /&|\||\^|~/,
+            tag_as: "keyword.operator"
+        ),
+        :assignment_operator,
+        newPattern(
+            match: /%|\*|\/|-|\+/,
+            tag_as: "keyword.operator"
+        ),
+        :ternary_operator,
+    ]
 #
 # function pointer
 #

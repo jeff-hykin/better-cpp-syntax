@@ -3823,7 +3823,7 @@ repository:
       name: keyword.operator.decrement.cpp
     - match: "\\+\\+"
       name: keyword.operator.increment.cpp
-    - match: "%=|\\+=|-=|\\*=|(?<!\\()/="
+    - match: "%=|\\+=|-=|\\*=|(?<!\\()\\/="
       name: keyword.operator.assignment.compound.cpp
     - match: "&=|\\^=|<<=|>>=|\\|="
       name: keyword.operator.assignment.compound.bitwise.cpp
@@ -3836,7 +3836,7 @@ repository:
     - match: "&|\\||\\^|~"
       name: keyword.operator.cpp
     - include: "#assignment_operator"
-    - match: "%|\\*|/|-|\\+"
+    - match: "%|\\*|\\/|-|\\+"
       name: keyword.operator.cpp
     - include: "#ternary_operator"
   wordlike_operators:
