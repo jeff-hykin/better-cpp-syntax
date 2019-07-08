@@ -2372,9 +2372,10 @@ cpp_grammar = Grammar.new(
                 }
             },
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+            contentMame: "meta.preprocessor.macro.contents",
             patterns: [
                 {
-                    include: "#macro_context"
+                    include: "source.cpp.embedded.macro"
                 },
             ]
         }
@@ -3828,33 +3829,6 @@ cpp_grammar = Grammar.new(
             :preprocessor_rule_define_line_context
         ]
     
-
-
-# 
-# Generate macro versions of all ranged patterns 
-#
-    # TODO: this is incomplete, all the root patterns are included, but their "includes" are not converted
-    macro_context = []
-    for each in cpp_grammar[:$initial_context]
-        if cpp_grammar[each].is_a?(PatternRange)
-            tag_version = cpp_grammar[each].to_tag(ignore_repository_entry: true).dup
-            if tag_version[:end] != nil
-                tag_version[:end] = tag_version[:end].dup
-                # if there's a non-escaped newline, then the range is over
-                tag_version[:end] = "#{tag_version[:end]}|(?<!\\\\)$"
-                repo_name  = "macro_safe_#{each.to_s}".to_sym
-                cpp_grammar[repo_name] = tag_version
-                macro_context.push(repo_name)
-            else
-                macro_context.push(each)
-            end
-        else 
-            macro_context.push(each)
-        end
-    end
-    macro_context.push(:macro_argument)
-    cpp_grammar[:macro_context] = macro_context
-
 # 
 # Save
 # 
