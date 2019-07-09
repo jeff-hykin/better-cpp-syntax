@@ -2402,7 +2402,7 @@
     "keyword_operators": {
       "patterns": [
         {
-          "match": "(?:lt|gt|le|ge|eq|ne|cmp|and|or)",
+          "match": "(?<!\\w)(?:lt|gt|le|ge|eq|ne|cmp|and|or)(?!\\w)",
           "name": "keyword.operator.alias.$0.perl"
         }
       ]
@@ -2430,7 +2430,7 @@
           ]
         },
         {
-          "match": "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)",
+          "match": "(?:==|!=|>|<|>=|<=|<=>|=~|!~|~~)",
           "name": "keyword.operator.comparison.perl"
         },
         {
@@ -2438,7 +2438,7 @@
           "name": "keyword.operator.assignment.perl"
         },
         {
-          "match": "(?:&&|and|\\|\\||or|\\/\\/)",
+          "match": "(?:&&|\\|\\||\\/\\/)",
           "name": "keyword.operator.logical.perl"
         },
         {
@@ -2450,7 +2450,7 @@
           "name": "keyword.operator.bitwise.perl"
         },
         {
-          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~|&&|and|\\|\\||or|\\/\\/|<<|>>|&|\\||\\^|<<=|>>=|&=|\\|=|\\^=|=|\\.|\\.=)",
+          "match": "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|==|!=|>|<|>=|<=|<=>|=~|!~|~~|&&|\\|\\||\\/\\/|<<|>>|&|\\||\\^|<<=|>>=|&=|\\|=|\\^=|=|\\.|\\.=)",
           "name": "keyword.operator.perl"
         }
       ]

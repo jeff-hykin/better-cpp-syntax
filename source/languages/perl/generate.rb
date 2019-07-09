@@ -93,8 +93,8 @@ require_relative './tokens.rb'
     # operators
     # 
         grammar[:keyword_operators]  = [
-                newPattern(
-                match: @tokens.that(:areOperatorAliases),
+            newPattern(
+                match: variableBounds(@tokens.that(:areOperatorAliases)),
                 tag_as: "keyword.operator.alias.$match",
             ),
         ]
@@ -114,27 +114,27 @@ require_relative './tokens.rb'
                 includes: [ :$initial_context ]
             ),
             newPattern(
-                match: @tokens.that(:areComparisonOperators),
+                match: @tokens.that(:areComparisonOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.comparison",
             ),
             newPattern(
-                match: @tokens.that(:areAssignmentOperators),
+                match: @tokens.that(:areAssignmentOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.assignment",
             ),
             newPattern(
-                match: @tokens.that(:areLogicalOperators),
+                match: @tokens.that(:areLogicalOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.logical",
             ),
             newPattern(
-                match: @tokens.that(:areArithmeticOperators, not(:areAssignmentOperators)),
+                match: @tokens.that(:areArithmeticOperators, not(:areAssignmentOperators), not(:areOperatorAliases)),
                 tag_as: "keyword.operator.arithmetic",
             ),
             newPattern(
-                match: @tokens.that(:areBitwiseOperators, not(:areAssignmentOperators)),
+                match: @tokens.that(:areBitwiseOperators, not(:areAssignmentOperators), not(:areOperatorAliases)),
                 tag_as: "keyword.operator.bitwise",
             ),
             newPattern(
-                match: @tokens.that(:areOperators),
+                match: @tokens.that(:areOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator",
             ),
         ]
