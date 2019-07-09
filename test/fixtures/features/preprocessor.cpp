@@ -12,6 +12,9 @@
 #define thing struct Stuff \
     {
 
+#define foo namespace foo { struct bar { \
+int data, members; \
+
 
 #pragma once
 

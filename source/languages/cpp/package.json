@@ -49,6 +49,14 @@
     "grammars": [
       {
         "language": "cpp",
+        "scopeName": "source.cpp.embedded.macro",
+        "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.assembly.cpp": "asm"
+        }
+      },
+      {
+        "language": "cpp",
         "scopeName": "source.cpp",
         "path": "./syntaxes/cpp.tmLanguage.json",
         "embeddedLanguages": {

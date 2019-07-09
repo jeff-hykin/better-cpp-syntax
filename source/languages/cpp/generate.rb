@@ -2372,7 +2372,7 @@ cpp_grammar = Grammar.new(
                 }
             },
             end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            contentMame: "meta.preprocessor.macro.contents",
+            contentName: "meta.preprocessor.macro.contents",
             patterns: [
                 {
                     include: "source.cpp.embedded.macro"

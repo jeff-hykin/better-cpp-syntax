@@ -1,7 +1,7 @@
 const fs = require("fs");
 
-duplicateForEmbedding("cpp", "macro", "(?<!\\\\)\\n");
-duplicateForEmbedding("cpp", "latex", "\\\\end\\{minted\\}");
+duplicateForEmbedding("cpp", "macro", "(?<!\\\\)(?=\\n)");
+duplicateForEmbedding("cpp", "latex", "(?=\\\\end\\{minted\\})");
 // add other languages here
 
 function duplicateForEmbedding(language, scope, early_bailout_pattern) {
