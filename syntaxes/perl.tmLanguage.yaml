@@ -507,7 +507,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.html.embedded.perl
   end: "(^HTML$)"
   patterns:
@@ -524,7 +524,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.xml.embedded.perl
   end: "(^XML$)"
   patterns:
@@ -541,7 +541,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.css.embedded.perl
   end: "(^CSS$)"
   patterns:
@@ -558,7 +558,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.js.embedded.perl
   end: "(^JAVASCRIPT$)"
   patterns:
@@ -575,7 +575,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.sql.embedded.perl
   end: "(^SQL$)"
   patterns:
@@ -592,7 +592,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.postscript.embedded.perl
   end: "(^POSTSCRIPT$)"
   patterns:
@@ -609,7 +609,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: string.unquoted.heredoc.doublequote.perl
   end: "(^\\4$)"
   patterns:
@@ -625,7 +625,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.html.embedded.perl
   end: "(^HTML$)"
   patterns:
@@ -640,7 +640,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.xml.embedded.perl
   end: "(^XML$)"
   patterns:
@@ -655,7 +655,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.css.embedded.perl
   end: "(^CSS$)"
   patterns:
@@ -670,7 +670,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.js.embedded.perl
   end: "(^JAVASCRIPT$)"
   patterns:
@@ -685,7 +685,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.sql.embedded.perl
   end: "(^SQL$)"
   patterns:
@@ -700,7 +700,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.postscript.embedded.perl
   end: "(^POSTSCRIPT$)"
   patterns:
@@ -715,7 +715,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: string.unquoted.heredoc.quote.perl
   end: "(^\\4$)"
 - begin: (((<<) *\\((?![=\d\$\( ])[^;,'"`\s\)]*)))(.*)\n?
@@ -728,7 +728,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: string.unquoted.heredoc.quote.perl
   end: "(^\\4$)"
 - begin: "(((<<) *`([^`]*)`))(.*)\\n?"
@@ -741,7 +741,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: string.unquoted.heredoc.backtick.perl
   end: "(^\\4$)"
   patterns:
@@ -757,7 +757,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.html.embedded.perl
   end: "(^HTML$)"
   patterns:
@@ -774,7 +774,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: text.xml.embedded.perl
   end: "(^XML$)"
   patterns:
@@ -791,7 +791,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.js.embedded.perl
   end: "(^JAVASCRIPT$)"
   patterns:
@@ -808,7 +808,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.sql.embedded.perl
   end: "(^SQL$)"
   patterns:
@@ -825,7 +825,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '4':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: source.postscript.embedded.perl
   end: "(^POSTSCRIPT$)"
   patterns:
@@ -842,7 +842,7 @@ patterns:
       name: punctuation.definition.heredoc.perl
     '5':
       patterns:
-      - include: "$base"
+      - include: "$self"
   contentName: string.unquoted.heredoc.perl
   end: "(^\\4$)"
   patterns:
@@ -1285,7 +1285,7 @@ repository:
         '1':
           name: punctuation.separator.readline.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - match: "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)"
       name: keyword.operator.comparison.perl
     - match: "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|<<=|>>=|&=|\\|=|\\^=|=|\\.=)"
@@ -1378,7 +1378,7 @@ repository:
         '1':
           name: punctuation.section.parens.control.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - contentName: meta.control.body.perl
       begin: "(\\{)"
       beginCaptures:
@@ -1386,8 +1386,8 @@ repository:
           name: punctuation.section.block.control.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
-    - include: "$base"
+      - include: "$self"
+    - include: "$self"
   elsif_statement:
     begin: "\\s*+((?<!\\w)elsif(?!\\w))\\s*+"
     beginCaptures:
@@ -1410,7 +1410,7 @@ repository:
         '1':
           name: punctuation.section.parens.control.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - contentName: meta.control.body.perl
       begin: "(\\{)"
       beginCaptures:
@@ -1418,8 +1418,8 @@ repository:
           name: punctuation.section.block.control.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
-    - include: "$base"
+      - include: "$self"
+    - include: "$self"
   else_statement:
     begin: "\\s*+((?<!\\w)else(?!\\w))\\s*+"
     beginCaptures:
@@ -1442,7 +1442,7 @@ repository:
         '1':
           name: punctuation.section.parens.control.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - contentName: meta.control.body.perl
       begin: "(\\{)"
       beginCaptures:
@@ -1450,8 +1450,8 @@ repository:
           name: punctuation.section.block.control.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
-    - include: "$base"
+      - include: "$self"
+    - include: "$self"
   while_statement:
     begin: "\\s*+((?<!\\w)while(?!\\w))\\s*+"
     beginCaptures:
@@ -1474,7 +1474,7 @@ repository:
         '1':
           name: punctuation.section.parens.control.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - contentName: meta.control.body.perl
       begin: "(\\{)"
       beginCaptures:
@@ -1482,8 +1482,8 @@ repository:
           name: punctuation.section.block.control.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
-    - include: "$base"
+      - include: "$self"
+    - include: "$self"
   for_statement:
     begin: "\\s*+((?<!\\w)for(?!\\w))\\s*+"
     beginCaptures:
@@ -1506,7 +1506,7 @@ repository:
         '1':
           name: punctuation.section.parens.control.perl
       patterns:
-      - include: "$base"
+      - include: "$self"
     - contentName: meta.control.body.perl
       begin: "(\\{)"
       beginCaptures:
@@ -1514,8 +1514,8 @@ repository:
           name: punctuation.section.block.control.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
-    - include: "$base"
+      - include: "$self"
+    - include: "$self"
   control_flow:
     patterns:
     - include: "#if_statement"
@@ -1543,7 +1543,7 @@ repository:
           name: punctuation.section.block.function.perl
       end: "(?=\\})"
       patterns:
-      - include: "$base"
+      - include: "$self"
     - include: "#parentheses"
     - match: "(:)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))"
       captures:
@@ -1551,7 +1551,7 @@ repository:
           name: punctuation.definition.attribute.perl entity.name.attribute.perl
         '2':
           name: entity.name.attribute.perl
-    - include: "$base"
+    - include: "$self"
   function_call:
     begin: "((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
     beginCaptures:
@@ -1564,7 +1564,7 @@ repository:
       '1':
         name: punctuation.section.arguments.perl
     patterns:
-    - include: "$base"
+    - include: "$self"
   label:
     match: "(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))\\b(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(:)"
     captures:
