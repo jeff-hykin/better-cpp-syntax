@@ -200,7 +200,31 @@ require_relative './tokens.rb'
                 )
             ),
             end_pattern: grammar[:semicolon],
-            includes: []
+            includes: [
+                newPattern(
+                    match: /::/,
+                    tag_as: "punctuation.separator.resolution"
+                ),
+                # qw()
+                PatternRange.new(
+                    start_pattern: newPattern(
+                        newPattern(
+                            match: /qw/,
+                            tag_as: "entity.name.function.special"
+                        ).then(std_space).then(
+                            match: /\(/,
+                            tag_as: "punctuation.section.block.function.special",
+                        )
+                    ),
+                    end_pattern: newPattern(
+                        match: /\)/,
+                        tag_as: "punctuation.section.block.function.special",
+                    ),
+                    includes: [
+                        :variable
+                    ]
+                ),
+            ]
         )
     # 
     # control flow

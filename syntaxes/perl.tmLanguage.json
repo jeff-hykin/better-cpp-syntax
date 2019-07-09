@@ -2555,7 +2555,35 @@
         "1": {
           "name": "punctuation.terminator.statement.perl"
         }
-      }
+      },
+      "patterns": [
+        {
+          "match": "::",
+          "name": "punctuation.separator.resolution.perl"
+        },
+        {
+          "begin": "(qw)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.special.perl"
+            },
+            "2": {
+              "name": "punctuation.section.block.function.special.perl"
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.block.function.special.perl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#variable"
+            }
+          ]
+        }
+      ]
     },
     "if_statement": {
       "begin": "\\s*+((?<!\\w)if(?!\\w))\\s*+",
