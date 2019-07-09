@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-duplicateForEmbedding("cpp", "macro", "(?<!\\\\)(?=\\n)");
+duplicateForEmbedding("cpp", "macro", "(?<!\\\\)$");
 duplicateForEmbedding("cpp", "latex", "(?=\\\\end\\{minted\\})");
 // add other languages here
 

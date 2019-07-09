@@ -14,6 +14,7 @@
 
 #define foo namespace foo { struct bar { \
 int data, members; \
+int other;
 
 
 #pragma once
