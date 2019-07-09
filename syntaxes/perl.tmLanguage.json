@@ -2411,7 +2411,7 @@
       "patterns": [
         {
           "contentName": "meta.readline.perl",
-          "begin": "(?<!\\s|\\w)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(<)",
+          "begin": "(?<!\\s|\\w|<)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(<)(?!<)",
           "beginCaptures": {
             "1": {
               "name": "punctuation.separator.readline.perl"

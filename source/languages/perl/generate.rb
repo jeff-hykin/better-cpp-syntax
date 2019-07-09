@@ -102,10 +102,10 @@ require_relative './tokens.rb'
             PatternRange.new(
                 tag_content_as: "meta.readline",
                 start_pattern: newPattern(
-                    lookBehindToAvoid(/\s|\w/).then(std_space).then(
+                    lookBehindToAvoid(/\s|\w|</).then(std_space).then(
                         match: /</,
                         tag_as: "punctuation.separator.readline",
-                    )
+                    ).lookAheadToAvoid(/</)
                 ),
                 end_pattern: newPattern(
                     match: />/,
