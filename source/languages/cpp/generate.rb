@@ -9,6 +9,7 @@ require_relative PathFor[:sharedPattern]["inline_comment"]
 require_relative PathFor[:sharedPattern]["std_space"]
 require_relative PathFor[:sharedPattern]["backslash_escapes"]
 require_relative './tokens.rb'
+require_relative './raw_strings.rb'
 
 # todo
     # fix initializer list "functions" e.g. `int a{5};`
@@ -2626,30 +2627,7 @@ cpp_grammar = Grammar.new(
                     :line_continuation_character,
                 ]
             ),
-            {
-                begin: "((?:u|u8|U|L)?R)\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    },
-                    "1" => {
-                        name: "meta.encoding"
-                    },
-                    "3" => {
-                        name: "invalid.illegal.delimiter-too-long"
-                    }
-                },
-                end: "\\)\\2(\\3)\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    },
-                    "1" => {
-                        name: "invalid.illegal.delimiter-too-long"
-                    }
-                },
-                name: "string.quoted.double.raw"
-            }
+            getRawStringPatterns()
         ]
     cpp_grammar[:block] = PatternRange.new(
         tag_as: "meta.block",

@@ -7260,21 +7260,35 @@ repository:
       patterns:
       - include: "#string_escapes_context_c"
       - include: "#line_continuation_character"
-    - begin: ((?:u|u8|U|L)?R)"(?:([^ ()\\\t]{0,16})|([^ ()\\\t]*))\(
-      beginCaptures:
-        '0':
-          name: punctuation.definition.string.begin.cpp
-        '1':
-          name: meta.encoding.cpp
-        '3':
-          name: invalid.illegal.delimiter-too-long.cpp
-      end: \)\2(\3)"
-      endCaptures:
-        '0':
-          name: punctuation.definition.string.end.cpp
-        '1':
-          name: invalid.illegal.delimiter-too-long.cpp
-      name: string.quoted.double.raw.cpp
+    - patterns:
+      - name: string.quoted.double.raw.regex.cpp
+        begin: (((?:[uUL]8?)?R)\"(?:(?:_r|re)|regex)\()
+        beginCaptures:
+          '1':
+            name: punctuation.definition.string.begin.cpp
+          '2':
+            name: meta.encoding.cpp
+        end: (\)(?:(?:_r|re)|regex)\")
+        endCaptures:
+          '1':
+            name: punctuation.definition.string.end.cpp
+        patterns:
+        - include: source.regexp.python
+      - begin: ((?:u|u8|U|L)?R)"(?:([^ ()\\\t]{0,16})|([^ ()\\\t]*))\(
+        beginCaptures:
+          '0':
+            name: punctuation.definition.string.begin.cpp
+          '1':
+            name: meta.encoding.cpp
+          '3':
+            name: invalid.illegal.delimiter-too-long.cpp
+        end: \)\2(\3)"
+        endCaptures:
+          '0':
+            name: punctuation.definition.string.end.cpp
+          '1':
+            name: invalid.illegal.delimiter-too-long.cpp
+        name: string.quoted.double.raw.cpp
   block:
     name: meta.block.cpp
     begin: "({)"
