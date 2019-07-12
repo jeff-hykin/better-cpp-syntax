@@ -9868,12 +9868,6 @@
         "9": {
           "patterns": [
             {
-<<<<<<< HEAD
-              "include": "#ever_present_context"
-            },
-            {
-              "include": "#enumerator_list"
-=======
               "match": "(?<=(?:\\.\\*|\\.|->|->\\*))\\s*(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*|(?<=\\]|\\)))\\s*))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))",
               "captures": {
                 "1": {
@@ -9956,7 +9950,6 @@
                   "name": "punctuation.separator.pointer-access.cpp"
                 }
               }
->>>>>>> b5752b5d55a35b4b3c73b43bdf76ae652cab0895
             },
             {
               "include": "#member_access"
@@ -10514,10 +10507,10 @@
           },
           "patterns": [
             {
-              "include": "#enumerator_list"
+              "include": "#ever_present_context"
             },
             {
-              "include": "#comments"
+              "include": "#enumerator_list"
             },
             {
               "include": "#comma"
