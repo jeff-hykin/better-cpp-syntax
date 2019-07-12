@@ -523,7 +523,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -544,7 +544,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "$base"
+              "include": "$self"
             },
             {
               "include": "#block_innards"
@@ -557,7 +557,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -708,7 +708,7 @@
     "c_conditional_context": {
       "patterns": [
         {
-          "include": "$base"
+          "include": "$self"
         },
         {
           "include": "#block_innards"

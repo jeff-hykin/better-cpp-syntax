@@ -1646,7 +1646,7 @@
               "include": "#switch_conditional_parentheses"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -1667,7 +1667,7 @@
               "include": "#case_statement"
             },
             {
-              "include": "$base"
+              "include": "$self"
             },
             {
               "include": "#block_innards"
@@ -1680,7 +1680,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -5046,7 +5046,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -5071,7 +5071,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -5710,7 +5710,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -5735,7 +5735,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -6534,7 +6534,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -6559,7 +6559,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -6877,7 +6877,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -6902,7 +6902,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -7103,7 +7103,7 @@
               }
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -7128,7 +7128,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -7375,7 +7375,7 @@
               }
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -7400,7 +7400,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -10239,7 +10239,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -10249,7 +10249,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -10372,7 +10372,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -10492,7 +10492,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -10526,7 +10526,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -10710,7 +10710,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -10720,7 +10720,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -10880,7 +10880,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -10890,7 +10890,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -11050,7 +11050,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -11060,7 +11060,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -11123,7 +11123,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -11138,7 +11138,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -11148,12 +11148,12 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -11320,7 +11320,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -11627,7 +11627,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -11934,7 +11934,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -14585,7 +14585,7 @@
           ]
         },
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -14653,7 +14653,7 @@
           ]
         },
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -14803,7 +14803,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -14896,7 +14896,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -15053,7 +15053,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -15151,7 +15151,7 @@
           "end": "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -15238,7 +15238,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -15325,7 +15325,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -15347,7 +15347,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -15367,7 +15367,7 @@
       "end": "(?=^\\s*((#)\\s*endif\\b))",
       "patterns": [
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -15464,7 +15464,7 @@
           ]
         },
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -15875,7 +15875,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -15900,7 +15900,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -16147,7 +16147,7 @@
               }
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -16172,7 +16172,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -16664,7 +16664,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -16689,7 +16689,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -17328,7 +17328,7 @@
               ]
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -17353,7 +17353,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -17450,7 +17450,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -17460,7 +17460,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -17523,7 +17523,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -17538,7 +17538,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -17548,12 +17548,12 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
         {
-          "include": "$base"
+          "include": "$self"
         }
       ]
     },
@@ -17720,7 +17720,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -18027,7 +18027,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -18334,7 +18334,7 @@
                   "include": "#destructor_inline"
                 },
                 {
-                  "include": "$base"
+                  "include": "$self"
                 }
               ]
             },
@@ -18976,7 +18976,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -18986,7 +18986,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -19146,7 +19146,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -19156,7 +19156,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -19316,7 +19316,7 @@
               "include": "#destructor_inline"
             },
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -19326,7 +19326,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
@@ -19407,7 +19407,7 @@
           },
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         },
@@ -19441,7 +19441,7 @@
           "end": "[\\s\\n]*(?=;)",
           "patterns": [
             {
-              "include": "$base"
+              "include": "$self"
             }
           ]
         }
