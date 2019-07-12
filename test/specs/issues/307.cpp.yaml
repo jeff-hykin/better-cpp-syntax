@@ -1,0 +1,401 @@
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: BaseClass
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: protected
+  scopesBegin:
+    - meta.body.class
+    - storage.type.modifier.access.control.protected
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.protected
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' no instantiation of this base class'
+  scopesEnd:
+    - comment.line.double-slash
+- source: BaseClass
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: bool
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: argOne
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: argOther
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: m_one
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: argOne
+  scopes:
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: m_other
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: argOther
+  scopes:
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' m_one'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' m_other'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: class
+  scopesBegin:
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: ThisTest
+  scopes:
+    - entity.name.type.class
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.inheritance
+  scopesEnd:
+    - meta.head.class
+- source: public
+  scopes:
+    - storage.type.modifier.access.public
+- source: 'BaseClass<ThisTest> '
+  scopes:
+    - entity.name.type.inherited
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: ThisTest
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: someMember
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'true'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here is a comment that is colored nicely!'
+  scopesEnd:
+    - comment.line.double-slash
+- source: anotherOne
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: quiteALotOfMembers
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here''s another one!'
+  scopesEnd:
+    - comment.line.double-slash
+- source: soManyThatTheConstructorIsLong
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'true'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: iMeanReallyLong
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: BaseClass
+  scopes:
+    - entity.name.function.call.initializer
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: ThisTest
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'true'
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - constant.language.true
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+  scopesEnd:
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: //
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' this constructor call doesn''t look good'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' someMember'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' anotherOne'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' quiteALotOfMembers'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' soManyThatTheConstructorIsLong'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' iMeanReallyLong'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
