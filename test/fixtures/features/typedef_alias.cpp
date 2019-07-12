@@ -12,3 +12,5 @@ typedef union foobar {
 typedef struct _OVERLAPPED {
 
 } OVERLAPPED, *LPOVERLAPPED;
+
+typedef void (*genptr)();

@@ -31,6 +31,7 @@ patterns:
 - include: "#typedef_class"
 - include: "#typedef_struct"
 - include: "#typedef_union"
+- include: "#typedef_function_pointer"
 - include: "#typedef_keyword"
 - include: "#standard_declares"
 - include: "#class_block"
@@ -94,6 +95,7 @@ repository:
     - include: "#typedef_class"
     - include: "#typedef_struct"
     - include: "#typedef_union"
+    - include: "#typedef_function_pointer"
     - include: "#typedef_keyword"
     - include: "#standard_declares"
     - include: "#class_block"
@@ -4358,6 +4360,183 @@ repository:
           name: comment.block.cpp
     patterns:
     - include: "#function_parameter_context"
+  typedef_function_pointer:
+    begin: "((?<!\\w)typedef(?!\\w))\\s*(?=.*\\(\\*\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*\\))"
+    beginCaptures:
+      '1':
+        name: keyword.other.typedef.cpp
+    end: "(?<=;)"
+    patterns:
+    - begin: "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(::))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.]))(((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))?(?:(?:\\&|\\*)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(?:\\&|\\*))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()(\\*)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?)\\s*(?:(\\[)(\\w*)(\\])\\s*)*(\\))\\s*(\\()"
+      beginCaptures:
+        '1':
+          name: meta.qualified_type.cpp
+          patterns:
+          - match: "(?:class|struct|union|enum)"
+            name: storage.type.$0.cpp
+          - include: "#attributes_context"
+          - include: "#function_type"
+          - include: "#storage_types"
+          - include: "#number_literal"
+          - include: "#string_context_c"
+          - include: "#comma"
+          - include: "#scope_resolution_inner_generated"
+          - include: "#template_call_range"
+          - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*"
+            name: entity.name.type.cpp
+        '2':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '3':
+          patterns:
+          - include: "#inline_comment"
+        '4':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '5':
+          name: comment.block.cpp
+        '6':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '7':
+          patterns:
+          - include: "#inline_comment"
+        '8':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '9':
+          name: comment.block.cpp
+        '10':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '12':
+          patterns:
+          - include: "#scope_resolution_inner_generated"
+        '13':
+          name: entity.name.scope-resolution.cpp
+        '14':
+          name: meta.template.call.cpp
+          patterns:
+          - include: "#template_call_range"
+        '15':
+          name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+        '16':
+          patterns:
+          - include: "#inline_comment"
+        '17':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '18':
+          name: comment.block.cpp
+        '19':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '20':
+          name: entity.name.type.cpp
+        '21':
+          patterns:
+          - match: "\\*"
+            name: storage.modifier.pointer.cpp
+          - match: "(?:\\&((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))){2,}\\&"
+            captures:
+              '1':
+                patterns:
+                - include: "#inline_comment"
+              '2':
+                name: comment.block.cpp punctuation.definition.comment.begin.cpp
+              '3':
+                name: comment.block.cpp
+              '4':
+                patterns:
+                - match: "\\*\\/"
+                  name: comment.block.cpp punctuation.definition.comment.end.cpp
+                - match: "\\*"
+                  name: comment.block.cpp
+            name: invalid.illegal.reference-type.cpp
+          - match: "\\&"
+            name: storage.modifier.reference.cpp
+        '22':
+          patterns:
+          - include: "#inline_comment"
+        '23':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '24':
+          name: comment.block.cpp
+        '25':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '26':
+          patterns:
+          - include: "#inline_comment"
+        '27':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '28':
+          name: comment.block.cpp
+        '29':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '30':
+          patterns:
+          - include: "#inline_comment"
+        '31':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '32':
+          name: comment.block.cpp
+        '33':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '34':
+          name: punctuation.section.parens.begin.bracket.round.function.pointer.cpp
+        '35':
+          name: punctuation.definition.function.pointer.dereference.cpp
+        '36':
+          name: entity.name.type.alias.cpp entity.name.type.pointer.function.cpp
+        '37':
+          name: punctuation.definition.begin.bracket.square.cpp
+        '38':
+          patterns:
+          - include: "#evaluation_context"
+        '39':
+          name: punctuation.definition.end.bracket.square.cpp
+        '40':
+          name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
+        '41':
+          name: punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
+      end: "(\\))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=[{=,);]|\\n)(?!\\()"
+      endCaptures:
+        '1':
+          name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
+        '2':
+          patterns:
+          - include: "#inline_comment"
+        '3':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '4':
+          name: comment.block.cpp
+        '5':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+      patterns:
+      - include: "#function_parameter_context"
   parameter_or_maybe_value:
     name: meta.parameter.cpp
     begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=\\w)"
@@ -9444,6 +9623,183 @@ repository:
             '14':
               name: entity.name.type.alias.cpp
         - match: ","
+  macro_safe_typedef_function_pointer:
+    begin: "((?<!\\w)typedef(?!\\w))\\s*(?=.*\\(\\*\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*\\))"
+    beginCaptures:
+      '1':
+        name: keyword.other.typedef.cpp
+    end: "(?<=;)|(?<!\\\\)$"
+    patterns:
+    - begin: "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(((?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+((?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(::))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.]))(((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))?(?:(?:\\&|\\*)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(?:\\&|\\*))?((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()(\\*)\\s*((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?)\\s*(?:(\\[)(\\w*)(\\])\\s*)*(\\))\\s*(\\()"
+      beginCaptures:
+        '1':
+          name: meta.qualified_type.cpp
+          patterns:
+          - match: "(?:class|struct|union|enum)"
+            name: storage.type.$0.cpp
+          - include: "#attributes_context"
+          - include: "#function_type"
+          - include: "#storage_types"
+          - include: "#number_literal"
+          - include: "#string_context_c"
+          - include: "#comma"
+          - include: "#scope_resolution_inner_generated"
+          - include: "#template_call_range"
+          - match: "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*"
+            name: entity.name.type.cpp
+        '2':
+          patterns:
+          - include: "#attributes_context"
+          - include: "#number_literal"
+        '3':
+          patterns:
+          - include: "#inline_comment"
+        '4':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '5':
+          name: comment.block.cpp
+        '6':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '7':
+          patterns:
+          - include: "#inline_comment"
+        '8':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '9':
+          name: comment.block.cpp
+        '10':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '12':
+          patterns:
+          - include: "#scope_resolution_inner_generated"
+        '13':
+          name: entity.name.scope-resolution.cpp
+        '14':
+          name: meta.template.call.cpp
+          patterns:
+          - include: "#template_call_range"
+        '15':
+          name: punctuation.separator.namespace.access.cpp punctuation.separator.scope-resolution.cpp
+        '16':
+          patterns:
+          - include: "#inline_comment"
+        '17':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '18':
+          name: comment.block.cpp
+        '19':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '20':
+          name: entity.name.type.cpp
+        '21':
+          patterns:
+          - match: "\\*"
+            name: storage.modifier.pointer.cpp
+          - match: "(?:\\&((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))){2,}\\&"
+            captures:
+              '1':
+                patterns:
+                - include: "#inline_comment"
+              '2':
+                name: comment.block.cpp punctuation.definition.comment.begin.cpp
+              '3':
+                name: comment.block.cpp
+              '4':
+                patterns:
+                - match: "\\*\\/"
+                  name: comment.block.cpp punctuation.definition.comment.end.cpp
+                - match: "\\*"
+                  name: comment.block.cpp
+            name: invalid.illegal.reference-type.cpp
+          - match: "\\&"
+            name: storage.modifier.reference.cpp
+        '22':
+          patterns:
+          - include: "#inline_comment"
+        '23':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '24':
+          name: comment.block.cpp
+        '25':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '26':
+          patterns:
+          - include: "#inline_comment"
+        '27':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '28':
+          name: comment.block.cpp
+        '29':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '30':
+          patterns:
+          - include: "#inline_comment"
+        '31':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '32':
+          name: comment.block.cpp
+        '33':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+        '34':
+          name: punctuation.section.parens.begin.bracket.round.function.pointer.cpp
+        '35':
+          name: punctuation.definition.function.pointer.dereference.cpp
+        '36':
+          name: entity.name.type.alias.cpp entity.name.type.pointer.function.cpp
+        '37':
+          name: punctuation.definition.begin.bracket.square.cpp
+        '38':
+          patterns:
+          - include: "#evaluation_context"
+        '39':
+          name: punctuation.definition.end.bracket.square.cpp
+        '40':
+          name: punctuation.section.parens.end.bracket.round.function.pointer.cpp
+        '41':
+          name: punctuation.section.parameters.begin.bracket.round.function.pointer.cpp
+      end: "(\\))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?=[{=,);]|\\n)(?!\\()"
+      endCaptures:
+        '1':
+          name: punctuation.section.parameters.end.bracket.round.function.pointer.cpp
+        '2':
+          patterns:
+          - include: "#inline_comment"
+        '3':
+          name: comment.block.cpp punctuation.definition.comment.begin.cpp
+        '4':
+          name: comment.block.cpp
+        '5':
+          patterns:
+          - match: "\\*\\/"
+            name: comment.block.cpp punctuation.definition.comment.end.cpp
+          - match: "\\*"
+            name: comment.block.cpp
+      patterns:
+      - include: "#function_parameter_context"
   macro_safe_class_block:
     name: meta.block.class.cpp
     begin: "((((?<!\\w)class(?!\\w))(?:(?:\\s+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(DLLEXPORT)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?\\s*((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:\\s+(final)\\s*)?(?:\\s*(:)((?:\\s*,?\\s*(?:private|protected|public)?\\s*(?:\\s*,?\\s*(?!(?:private|protected|public))(?:\\s*+(?:(?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:(?:(?:short|signed|unsigned|long)|(?:class|struct|union|enum))(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))*(?:(?:(?:::)?(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?::)*\\s*+)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?:::))?(?:(?:(?:(?>\\s+)|(?:\\/\\*)(?:(?>(?:[^\\*]|(?>\\*+)[^\\/])*)(?:(?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?!(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|NULL|true|false|nullptr|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|final|override|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized|audit|axiom|transaction_safe|transaction_safe_dynamic)\\b)(?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?:(?<!<)<(?!<)(?:[^<>]*|[^>]*+<[^>]*+>)++>\\s*)?(?![\\w<:.])))+)*))?))"
@@ -10087,6 +10443,7 @@ repository:
     - include: "#macro_safe_typedef_class"
     - include: "#macro_safe_typedef_struct"
     - include: "#macro_safe_typedef_union"
+    - include: "#macro_safe_typedef_function_pointer"
     - include: "#typedef_keyword"
     - include: "#standard_declares"
     - include: "#macro_safe_class_block"

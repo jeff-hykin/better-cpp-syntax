@@ -193,6 +193,7 @@ cpp_grammar = Grammar.new(
             :typedef_class,
             :typedef_struct,
             :typedef_union,
+            :typedef_function_pointer,
             :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
             :standard_declares, # struct/enum/union/class
             :class_block,
@@ -1609,6 +1610,16 @@ cpp_grammar = Grammar.new(
     end
     cpp_grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
     cpp_grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
+    cpp_grammar[:typedef_function_pointer] = PatternRange.new(
+        start_pattern: newPattern(
+            match: variableBounds[/typedef/],
+            tag_as: "keyword.other.typedef"
+        ).maybe(@spaces).lookAheadFor(/.*\(\*\s*/.then(identifier).then(/\s*\)/)),
+        end_pattern: lookBehindFor(/;/),
+        includes: [
+            functionPointerGenerator["entity.name.type.alias entity.name.type.pointer.function"]
+        ]
+    )
 # 
 # Parameters
 #
