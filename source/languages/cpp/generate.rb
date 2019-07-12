@@ -1948,7 +1948,7 @@ cpp_grammar = Grammar.new(
                     )
                 )
         ],
-        )
+    )
 
 #
 # Preprocessor
@@ -1959,7 +1959,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:macro_argument] = newPattern(
         match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
         tag_as: "variable.other.macro.argument"
-        )
+    )
 
 #
 # Lambdas
@@ -2047,26 +2047,35 @@ cpp_grammar = Grammar.new(
 # Classes, structs, unions, enums
 #
     cpp_grammar[:enumerator_list] = newPattern(
-        match: newPattern(
-            match: variable_name,
-            tag_as: "variable.other.enummember",
-        ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
-        .maybe(
-            newPattern(
-                match: /\=/,
-                tag_as: "keyword.operator.assignment",
-            ).maybe(@spaces).then(
-                match: /.+?/,
-                includes: [ :evaluation_context ]
-            ).maybe(@spaces)
-        ).then(newPattern(
-            match: newPattern(/[,;]/.lookAheadToAvoid(/'/)).or(/\n/),
-            includes: [
-                :comma,
-                :semicolon,
-            ],
-        ).or(lookAheadFor(/\}[^']/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
         tag_as: "meta.enum.definition",
+        match: newPattern(
+            newPattern(
+                match: variable_name,
+                tag_as: "variable.other.enummember",
+            ).maybe(@spaces).maybe(
+                inline_attribute
+            ).maybe(@spaces).maybe(
+                newPattern(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ).maybe(@spaces).then(
+                    match: /.+?/,
+                    includes: [ :evaluation_context ]
+                ).maybe(@spaces)
+            ).then(
+                newPattern(
+                    match: newPattern(/[,;]/.lookAheadToAvoid(/'/)).or(/\n/),
+                    includes: [
+                        :comma,
+                        :semicolon,
+                    ],
+                ).or(
+                    lookAheadFor(/\}[^']/)).or(
+                        lookAheadFor(/\/\//.or(/\/\*/)
+                    )
+                )
+            )
+        ),
     )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
@@ -2097,7 +2106,7 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
+            body_includes: [ :ever_present_context, :enumerator_list, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
