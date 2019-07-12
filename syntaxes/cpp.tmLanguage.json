@@ -6463,6 +6463,9 @@
               "end": "(?=\\{)",
               "patterns": [
                 {
+                  "include": "#ever_present_context"
+                },
+                {
                   "contentName": "meta.parameter.initialization.cpp",
                   "begin": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(\\()",
                   "beginCaptures": {
@@ -6480,6 +6483,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }
@@ -6503,6 +6509,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }
@@ -6806,6 +6815,9 @@
               "end": "(?=\\{)",
               "patterns": [
                 {
+                  "include": "#ever_present_context"
+                },
+                {
                   "contentName": "meta.parameter.initialization.cpp",
                   "begin": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(\\()",
                   "beginCaptures": {
@@ -6823,6 +6835,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }
@@ -6846,6 +6861,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }
@@ -15807,6 +15825,9 @@
               "end": "(?=\\{)",
               "patterns": [
                 {
+                  "include": "#ever_present_context"
+                },
+                {
                   "contentName": "meta.parameter.initialization.cpp",
                   "begin": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(\\()",
                   "beginCaptures": {
@@ -15824,6 +15845,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }
@@ -15847,6 +15871,9 @@
                     }
                   },
                   "patterns": [
+                    {
+                      "include": "#ever_present_context"
+                    },
                     {
                       "include": "#evaluation_context"
                     }

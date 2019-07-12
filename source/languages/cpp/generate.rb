@@ -1301,6 +1301,7 @@ cpp_grammar = Grammar.new(
                     ),
                     end_pattern: lookAheadFor(/\{/),
                     includes: [
+                        :ever_present_context,
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
                             start_pattern: newPattern(
@@ -1316,7 +1317,10 @@ cpp_grammar = Grammar.new(
                                 match: /\)/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
-                            includes: [:evaluation_context]
+                            includes: [
+                                :ever_present_context,
+                                :evaluation_context
+                            ]
                         ),
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
@@ -1333,7 +1337,10 @@ cpp_grammar = Grammar.new(
                                 match: /\}/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
-                            includes: [:evaluation_context]
+                            includes: [
+                                :ever_present_context,
+                                :evaluation_context
+                            ]
                         ),
                         cpp_grammar[:comma],
                     ]

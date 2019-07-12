@@ -1,0 +1,190 @@
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: ThisTest
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: ThisTest
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: someMember
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'true'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here is a comment that is formatted incorrectly'
+  scopesEnd:
+    - comment.line.double-slash
+- source: anotherOne
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: quiteALotOfMembers
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here''s another one'
+  scopesEnd:
+    - comment.line.double-slash
+- source: soManyThatTheConstructorIsLong
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'true'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: iMeanReallyLong
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: 'false'
+  scopes:
+    - meta.parameter.initialization
+    - constant.language.false
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' someMember'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' anotherOne'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' quiteALotOfMembers'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' soManyThatTheConstructorIsLong'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' iMeanReallyLong'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
