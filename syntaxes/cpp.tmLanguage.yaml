@@ -129,9 +129,9 @@ repository:
     - include: "#the_this_keyword"
     - include: "#language_constants"
     - include: "#builtin_storage_type_initilizer"
+    - include: "#storage_types"
     - include: "#qualifiers_and_specifiers_post_parameters"
     - include: "#functional_specifiers_pre_parameters"
-    - include: "#storage_types"
     - include: "#misc_storage_modifiers"
     - include: "#lambdas"
     - include: "#attributes_context"
@@ -516,7 +516,7 @@ repository:
     match: "(?<!\\w)(?:inline|constexpr|mutable|friend|explicit|virtual)(?!\\w)"
     name: storage.modifier.specifier.functional.pre-parameters.$0.cpp
   qualifiers_and_specifiers_post_parameters:
-    match: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r])))"
+    match: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w))"
     captures:
       '1':
         patterns:
@@ -2582,6 +2582,7 @@ repository:
         - include: "#parameter_or_maybe_value"
         - include: "#comma"
         - include: "#evaluation_context"
+      - include: "#qualifiers_and_specifiers_post_parameters"
       - include: "$self"
     - name: meta.body.function.definition.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
@@ -4005,9 +4006,9 @@ repository:
     - include: "#the_this_keyword"
     - include: "#language_constants"
     - include: "#builtin_storage_type_initilizer"
+    - include: "#storage_types"
     - include: "#qualifiers_and_specifiers_post_parameters"
     - include: "#functional_specifiers_pre_parameters"
-    - include: "#storage_types"
     - include: "#misc_storage_modifiers"
     - include: "#lambdas"
     - include: "#attributes_context"
@@ -7492,6 +7493,7 @@ repository:
     - match: "(?<!:):(?!:)"
       name: punctuation.separator.colon.range-based.cpp
     - include: "#evaluation_context"
+    - include: "#vararg_ellipses"
   pragma_mark:
     captures:
       '1':
@@ -8683,6 +8685,7 @@ repository:
         - include: "#parameter_or_maybe_value"
         - include: "#comma"
         - include: "#evaluation_context"
+      - include: "#qualifiers_and_specifiers_post_parameters"
       - include: "$self"
     - name: meta.body.function.definition.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"

@@ -316,13 +316,13 @@
           "include": "#builtin_storage_type_initilizer"
         },
         {
+          "include": "#storage_types"
+        },
+        {
           "include": "#qualifiers_and_specifiers_post_parameters"
         },
         {
           "include": "#functional_specifiers_pre_parameters"
-        },
-        {
-          "include": "#storage_types"
         },
         {
           "include": "#misc_storage_modifiers"
@@ -1042,7 +1042,7 @@
       "name": "storage.modifier.specifier.functional.pre-parameters.$0.cpp"
     },
     "qualifiers_and_specifiers_post_parameters": {
-      "match": "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r])))",
+      "match": "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)(?:final|override|volatile|const|noexcept)(?!\\w))",
       "captures": {
         "1": {
           "patterns": [
@@ -5046,6 +5046,9 @@
               ]
             },
             {
+              "include": "#qualifiers_and_specifiers_post_parameters"
+            },
+            {
               "include": "$self"
             }
           ]
@@ -7775,13 +7778,13 @@
           "include": "#builtin_storage_type_initilizer"
         },
         {
+          "include": "#storage_types"
+        },
+        {
           "include": "#qualifiers_and_specifiers_post_parameters"
         },
         {
           "include": "#functional_specifiers_pre_parameters"
-        },
-        {
-          "include": "#storage_types"
         },
         {
           "include": "#misc_storage_modifiers"
@@ -14431,6 +14434,9 @@
         },
         {
           "include": "#evaluation_context"
+        },
+        {
+          "include": "#vararg_ellipses"
         }
       ]
     },
@@ -16662,6 +16668,9 @@
                   "include": "#evaluation_context"
                 }
               ]
+            },
+            {
+              "include": "#qualifiers_and_specifiers_post_parameters"
             },
             {
               "include": "$self"

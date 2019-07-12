@@ -256,10 +256,10 @@ cpp_grammar = Grammar.new(
             :the_this_keyword,
             :language_constants,
             # types, modifiers, and specifiers
-            :builtin_storage_type_initilizer, # needs to be above storage types
+            :builtin_storage_type_initilizer, # needs to be above :storage types
+            :storage_types,                   # needs to be above :qualifiers_and_specifiers_post_parameters
             :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
-            :storage_types,
             :misc_storage_modifiers,                    # TODO: this pattern needs to be removed 
             # misc
             :lambdas,
@@ -391,13 +391,8 @@ cpp_grammar = Grammar.new(
         :line_comment,
     ]
 #
-#
 # Numbers
 #
-#
-    #
-    # Number Literal
-    #
     cpp_grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
@@ -480,13 +475,7 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:qualifiers_and_specifiers_post_parameters] = newPattern(
         std_space.then(
             tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-            match: newPattern(
-                variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(
-                    /\s*/.then(
-                        /\{/.or(/;/).or(/[\n\r]/)
-                    )
-                )
-            )
+            match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ]
         ),
     )
     cpp_grammar[:storage_specifiers] = storage_specifier = newPattern(
@@ -1089,7 +1078,7 @@ cpp_grammar = Grammar.new(
             )
         ),
         head_includes:[
-            :ever_present_context, # comments and macros
+            :ever_present_context, # comments and macros    
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
                 start_pattern: newPattern( 
@@ -1111,6 +1100,7 @@ cpp_grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
+            :qualifiers_and_specifiers_post_parameters, 
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -2721,7 +2711,8 @@ cpp_grammar = Grammar.new(
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
                 tag_as: "punctuation.separator.colon.range-based"
             ),
-            :evaluation_context
+            :evaluation_context,
+            :vararg_ellipses
         ]
     )
     cpp_grammar[:pragma_mark] = {

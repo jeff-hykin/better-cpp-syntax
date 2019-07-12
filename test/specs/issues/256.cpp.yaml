@@ -28,41 +28,28 @@
     - punctuation.section.parameters.end.bracket.round.special.constructor
 - source: noexcept
   scopes:
-    - keyword.operator.functionlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.noexcept
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: noexcept
   scopesBegin:
-    - meta.arguments.operator.noexcept
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
-    - keyword.operator.functionlike
-    - keyword.operator.noexcept
+    - entity.name.type.parameter
 - source: (
-  scopes:
-    - punctuation.section.arguments.begin.bracket.round.operator.noexcept
 - source: Allocator
-  scopesBegin:
-    - meta.arguments.operator.noexcept
   scopes:
-    - entity.name.function.call
+    - entity.name.type.parameter
 - source: (
-  scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
-- source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
   scopesEnd:
-    - meta.arguments.operator.noexcept
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.noexcept
-  scopesEnd:
-    - meta.arguments.operator.noexcept
-- source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.operator.noexcept
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ')) '
 - source: ':'
   scopes:
     - punctuation.separator.initializers
