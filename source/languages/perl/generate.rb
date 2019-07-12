@@ -311,13 +311,13 @@ require_relative './tokens.rb'
     # Labels
     # 
         grammar[:label] = newPattern(
-            std_space.then(
+            /^/.then(std_space).then(
                 tag_as: "entity.name.label",
                 match: @variable,
             ).then(@word_boundary).then(
                 std_space
             ).then(
-                match: /:/,
+                match: /:/.lookAheadToAvoid(/:/),
                 tag_as: "punctuation.separator.label",
             )
         )
