@@ -1308,6 +1308,8 @@ cpp_grammar = Grammar.new(
                                 newPattern(
                                     match: variableBounds[identifier],
                                     tag_as: "entity.name.function.call.initializer",
+                                ).maybe(
+                                    template_call,
                                 ).then(
                                     match: /\(/,
                                     tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
