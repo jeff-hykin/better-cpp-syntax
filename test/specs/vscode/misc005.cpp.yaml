@@ -1007,18 +1007,14 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: infinity
-  scopesBegin:
-    - meta.function
   scopes:
-    - entity.name.function
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round
-  scopesEnd:
-    - meta.function
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -47766,7 +47762,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
+    - storage.modifier.specifier.const
 - source: '{'
   scopes:
     - >-
@@ -47805,7 +47801,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
+    - storage.modifier.specifier.const
 - source: '{'
   scopes:
     - >-
@@ -61622,6 +61618,8 @@
   scopes:
     - keyword.control.if
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: __OUTPUT_INDENT
@@ -61648,6 +61646,8 @@
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block

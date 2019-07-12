@@ -126,3 +126,33 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: typedef
+  scopes:
+    - keyword.other.typedef
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: genptr
+  scopes:
+    - entity.name.type.alias
+    - entity.name.type.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: ;

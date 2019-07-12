@@ -299,7 +299,7 @@ repository:
           name: punctuation.section.block.begin.bracket.curly.switch.c
       patterns:
       - include: "#switch_conditional_parentheses"
-      - include: "$base"
+      - include: "$self"
     - name: meta.body.switch.c
       begin: "(?<=\\{|<%|\\?\\?<)"
       end: "(\\}|%>|\\?\\?>)"
@@ -309,13 +309,13 @@ repository:
       patterns:
       - include: "#default_statement"
       - include: "#case_statement"
-      - include: "$base"
+      - include: "$self"
       - include: "#block_innards"
     - name: meta.tail.switch.c
       begin: "(?<=\\}|%>|\\?\\?>)[\\s\\n]*"
       end: "[\\s\\n]*(?=;)"
       patterns:
-      - include: "$base"
+      - include: "$self"
   switch_conditional_parentheses:
     name: meta.conditional.switch.c
     begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()"
@@ -396,7 +396,7 @@ repository:
     name: constant.character.escape.c
   c_conditional_context:
     patterns:
-    - include: "$base"
+    - include: "$self"
     - include: "#block_innards"
   evalutation_context:
     patterns:
