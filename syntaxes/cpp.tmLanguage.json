@@ -14388,6 +14388,29 @@
               ]
             },
             {
+              "name": "string.quoted.double.raw.sql.cpp",
+              "begin": "(((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL|)|d[dm]l)\\()",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.begin.cpp"
+                },
+                "2": {
+                  "name": "meta.encoding.cpp"
+                }
+              },
+              "end": "(\\)(?:[pP]?(?:sql|SQL|)|d[dm]l)\\\")",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.end.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.sql"
+                }
+              ]
+            },
+            {
               "begin": "((?:u|u8|U|L)?R)\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
               "beginCaptures": {
                 "0": {
