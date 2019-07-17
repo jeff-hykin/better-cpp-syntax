@@ -730,7 +730,7 @@ cpp_grammar = Grammar.new(
     some_number_of_angle_brackets = oneOrMoreOf(no_brackets_at_all.or(balanced_brackets))
     # TODO: change this to a readble form (above) once possessives (aka no back_track) is imlpemented
     # otherwise this pattern fails because its to computationally expensive
-    some_number_of_angle_brackets = /(?:[^<>]*|[^>]*+<[^>]*+>)++/
+    some_number_of_angle_brackets = /(?:[^<>]++(?:<[^<>]++>)?)++/
     
     cpp_grammar[:comma_in_template_argument] = newPattern(
             match: /,/,
