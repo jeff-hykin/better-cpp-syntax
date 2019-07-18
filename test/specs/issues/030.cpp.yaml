@@ -46,6 +46,8 @@
   scopes:
     - entity.name.function.preprocessor
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ...
@@ -54,6 +56,8 @@
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -136,11 +140,10 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
+    - meta.block.struct
     - meta.body.struct
 - source: '#'
   scopesBegin:
-    - meta.tail.struct
-    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive

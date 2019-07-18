@@ -21,9 +21,13 @@
     - punctuation.definition.parameters.end
 - source: (
   scopesBegin:
+    - meta.parens
+  scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: (
-  scopesEnd:
+  scopesBegin:
+    - meta.parens
+  scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: void
   scopes:
@@ -32,6 +36,8 @@
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: sizeof
   scopes:
     - keyword.operator.functionlike

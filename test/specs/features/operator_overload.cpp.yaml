@@ -514,10 +514,26 @@
 - source: operator
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: thing
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
 - source: string
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - entity.name.operator.type
 - source: (
@@ -529,7 +545,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
+    - storage.modifier.specifier.const
 - source: '{'
   scopes:
     - >-
@@ -558,7 +574,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
+    - storage.modifier.specifier.const
 - source: '{'
   scopes:
     - >-

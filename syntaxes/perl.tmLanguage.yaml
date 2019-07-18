@@ -1271,12 +1271,12 @@ repository:
       name: constant.language.undef.perl
   keyword_operators:
     patterns:
-    - match: "(?:lt|gt|le|ge|eq|ne|cmp|and|or)"
+    - match: "(?<!\\w)(?:lt|gt|le|ge|eq|ne|cmp|and|or)(?!\\w)"
       name: keyword.operator.alias.$0.perl
   operators:
     patterns:
     - contentName: meta.readline.perl
-      begin: "(?<!\\s|\\w)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(<)"
+      begin: "(?<!\\s|\\w|<)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(<)(?!<)"
       beginCaptures:
         '1':
           name: punctuation.separator.readline.perl
@@ -1286,17 +1286,17 @@ repository:
           name: punctuation.separator.readline.perl
       patterns:
       - include: "$self"
-    - match: "(?:==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~)"
+    - match: "(?:==|!=|>|<|>=|<=|<=>|=~|!~|~~)"
       name: keyword.operator.comparison.perl
     - match: "(?:\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|<<=|>>=|&=|\\|=|\\^=|=|\\.=)"
       name: keyword.operator.assignment.perl
-    - match: "(?:&&|and|\\|\\||or|\\/\\/)"
+    - match: "(?:&&|\\|\\||\\/\\/)"
       name: keyword.operator.logical.perl
     - match: "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\-\\-|\\+\\+)"
       name: keyword.operator.arithmetic.perl
     - match: "(?:<<|>>|&|\\||\\^)"
       name: keyword.operator.bitwise.perl
-    - match: "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|==|!=|>|<|>=|<=|<=>|=~|!~|lt|gt|le|ge|eq|ne|cmp|~~|&&|and|\\|\\||or|\\/\\/|<<|>>|&|\\||\\^|<<=|>>=|&=|\\|=|\\^=|=|\\.|\\.=)"
+    - match: "(?:\\+|\\-|\\*|\\/|\\*\\*|%|\\+=|\\-=|\\*=|\\/=|\\*\\*=|%=|\\-\\-|\\+\\+|==|!=|>|<|>=|<=|<=>|=~|!~|~~|&&|\\|\\||\\/\\/|<<|>>|&|\\||\\^|<<=|>>=|&=|\\|=|\\^=|=|\\.|\\.=)"
       name: keyword.operator.perl
   semicolon:
     match: ";"
@@ -1356,6 +1356,21 @@ repository:
     endCaptures:
       '1':
         name: punctuation.terminator.statement.perl
+    patterns:
+    - match: "::"
+      name: punctuation.separator.resolution.perl
+    - begin: "(qw)(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
+      beginCaptures:
+        '1':
+          name: entity.name.function.special.perl
+        '2':
+          name: punctuation.section.block.function.special.perl
+      end: "(\\))"
+      endCaptures:
+        '1':
+          name: punctuation.section.block.function.special.perl
+      patterns:
+      - include: "#variable"
   if_statement:
     begin: "\\s*+((?<!\\w)if(?!\\w))\\s*+"
     beginCaptures:
@@ -1566,7 +1581,7 @@ repository:
     patterns:
     - include: "$self"
   label:
-    match: "(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))\\b(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(:)"
+    match: "^(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))\\b(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(:(?!:))"
     captures:
       '1':
         name: entity.name.label.perl

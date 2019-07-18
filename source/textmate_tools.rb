@@ -351,7 +351,7 @@ class Grammar
         end
     end
     
-    def to_h(inherit_or_embedded: :inherit)
+    def to_h(inherit_or_embedded: :embedded)
         # 
         # initialize output
         # 
@@ -455,20 +455,20 @@ class Grammar
         return textmate_output
     end
     
-    def saveAsJsonTo(file_location, inherit_or_embedded: :inherit)
+    def saveAsJsonTo(file_location, inherit_or_embedded: :embedded)
         new_file = File.open(file_location+".json", "w")
         new_file.write(JSON.pretty_generate(self.to_h(inherit_or_embedded: inherit_or_embedded)))
         new_file.close
     end
     
-    def saveAsYamlTo(file_location, inherit_or_embedded: :inherit)
+    def saveAsYamlTo(file_location, inherit_or_embedded: :embedded)
         new_file = File.open(file_location+".yaml", "w")
         new_file.write(self.to_h(inherit_or_embedded: inherit_or_embedded).to_yaml)
         new_file.close
     end
     
     def saveTagsTo(file_location)
-        self.to_h(inherit_or_embedded: :inherit)
+        self.to_h(inherit_or_embedded: :embedded)
         new_file = File.open(file_location, "w")
         new_file.write(@all_tags.to_a.sort.join("\n"))
         new_file.close

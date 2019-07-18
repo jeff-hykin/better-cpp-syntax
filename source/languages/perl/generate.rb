@@ -93,8 +93,8 @@ require_relative './tokens.rb'
     # operators
     # 
         grammar[:keyword_operators]  = [
-                newPattern(
-                match: @tokens.that(:areOperatorAliases),
+            newPattern(
+                match: variableBounds(@tokens.that(:areOperatorAliases)),
                 tag_as: "keyword.operator.alias.$match",
             ),
         ]
@@ -102,10 +102,10 @@ require_relative './tokens.rb'
             PatternRange.new(
                 tag_content_as: "meta.readline",
                 start_pattern: newPattern(
-                    lookBehindToAvoid(/\s|\w/).then(std_space).then(
+                    lookBehindToAvoid(/\s|\w|</).then(std_space).then(
                         match: /</,
                         tag_as: "punctuation.separator.readline",
-                    )
+                    ).lookAheadToAvoid(/</)
                 ),
                 end_pattern: newPattern(
                     match: />/,
@@ -114,27 +114,27 @@ require_relative './tokens.rb'
                 includes: [ :$initial_context ]
             ),
             newPattern(
-                match: @tokens.that(:areComparisonOperators),
+                match: @tokens.that(:areComparisonOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.comparison",
             ),
             newPattern(
-                match: @tokens.that(:areAssignmentOperators),
+                match: @tokens.that(:areAssignmentOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.assignment",
             ),
             newPattern(
-                match: @tokens.that(:areLogicalOperators),
+                match: @tokens.that(:areLogicalOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator.logical",
             ),
             newPattern(
-                match: @tokens.that(:areArithmeticOperators, not(:areAssignmentOperators)),
+                match: @tokens.that(:areArithmeticOperators, not(:areAssignmentOperators), not(:areOperatorAliases)),
                 tag_as: "keyword.operator.arithmetic",
             ),
             newPattern(
-                match: @tokens.that(:areBitwiseOperators, not(:areAssignmentOperators)),
+                match: @tokens.that(:areBitwiseOperators, not(:areAssignmentOperators), not(:areOperatorAliases)),
                 tag_as: "keyword.operator.bitwise",
             ),
             newPattern(
-                match: @tokens.that(:areOperators),
+                match: @tokens.that(:areOperators, not(:areOperatorAliases)),
                 tag_as: "keyword.operator",
             ),
         ]
@@ -200,7 +200,31 @@ require_relative './tokens.rb'
                 )
             ),
             end_pattern: grammar[:semicolon],
-            includes: []
+            includes: [
+                newPattern(
+                    match: /::/,
+                    tag_as: "punctuation.separator.resolution"
+                ),
+                # qw()
+                PatternRange.new(
+                    start_pattern: newPattern(
+                        newPattern(
+                            match: /qw/,
+                            tag_as: "entity.name.function.special"
+                        ).then(std_space).then(
+                            match: /\(/,
+                            tag_as: "punctuation.section.block.function.special",
+                        )
+                    ),
+                    end_pattern: newPattern(
+                        match: /\)/,
+                        tag_as: "punctuation.section.block.function.special",
+                    ),
+                    includes: [
+                        :variable
+                    ]
+                ),
+            ]
         )
     # 
     # control flow
@@ -287,13 +311,13 @@ require_relative './tokens.rb'
     # Labels
     # 
         grammar[:label] = newPattern(
-            std_space.then(
+            /^/.then(std_space).then(
                 tag_as: "entity.name.label",
                 match: @variable,
             ).then(@word_boundary).then(
                 std_space
             ).then(
-                match: /:/,
+                match: /:/.lookAheadToAvoid(/:/),
                 tag_as: "punctuation.separator.label",
             )
         )
