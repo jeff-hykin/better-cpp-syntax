@@ -385,10 +385,15 @@ cpp_grammar = Grammar.new(
             tag_as: "meta.toc-list.banner.block",
         )
     )
+    cpp_grammar[:invalid_comment_end] = newPattern(
+        match: /\*\//,
+        tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
+    )
     cpp_grammar[:comments] = [
         :emacs_file_banner,
         :block_comment,
         :line_comment,
+        :invalid_comment_end,
     ]
 #
 # Numbers
