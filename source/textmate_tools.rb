@@ -539,7 +539,40 @@ class Regexp
         new_regex.group_attributes = self.group_attributes
         return new_regex
     end
-    
+    def reTag(arguments)
+        keep_tags = arguments["all"] == true or arguments["keep"] == true
+        self_as_string = self.without_default_mode_modifiers
+        new_regex = /#{self_as_string}/
+
+        # this is O(N*M) and could be expensive if reTagging a bit pattern
+        p self.group_attributes
+        new_attributes = @group_attributes.map.with_index do |attribute, index|
+            # preserves references
+            if attribute[:tag_as] == nil
+                attribute[:retagged] = true
+                next attribute
+            end
+            arguments.each do |key, tag|
+                if key == attribute[:tag_as] or key == attribute[:reference] or key == (index + 1).to_s
+                    attribute[:tag_as] = tag
+                    attribute[:retagged] = true
+                end
+            end
+            p attribute
+            next attribute
+        end
+        p new_attributes
+        if not keep_tags
+            new_attributes.each do |attribute|
+                if attribute[:retagged] != true
+                    attribute.delete(:tag_as)
+                end
+            end
+        end
+        new_attributes.each { |attribute| attribute.delete(:retagged) }
+        new_regex.group_attributes = new_attributes
+        return new_regex
+    end
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
         if not ignore_repository_entry
             # if this pattern is in the repository, then just return a reference to the repository
