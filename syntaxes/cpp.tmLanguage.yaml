@@ -1089,7 +1089,7 @@ repository:
       '8':
         name: storage.type.template.cpp
       '9':
-        name: ellipses.cpp punctuation.vararg-ellipses.template.definition.cpp
+        name: punctuation.vararg-ellipses.template.definition.cpp
       '10':
         name: entity.name.type.template.cpp
       '11':
@@ -7311,7 +7311,7 @@ repository:
         - match: ","
           name: punctuation.separator.parameters.cpp
         - match: "\\.\\.\\."
-          name: ellipses.cpp punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
+          name: punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
       '10':
         name: punctuation.definition.parameters.end.cpp
     end: "(?<!\\\\)(?=\\n)"
