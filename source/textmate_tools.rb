@@ -201,7 +201,7 @@ class Grammar
                 #     reference: "ref1",
                 #     match: newPattern(
                 #         /thing/.or(
-                #             rematch("ref1")
+                #             recursivelyMatch("ref1")
                 #         )
                 #     )
                 # )
@@ -588,7 +588,7 @@ class Regexp
         new_regex.group_attributes = self.group_attributes
         return new_regex
     end
-    def rematch(reference)
+    def recursivelyMatch(reference)
         #
         # generate the new regex
         #
@@ -1131,8 +1131,8 @@ end
     def matchResultOf(reference)
         //.matchResultOf(reference)
     end
-    def rematch(reference)
-        //.rematch(reference)
+    def recursivelyMatch(reference)
+        //.recursivelyMatch(reference)
     end
 
 #

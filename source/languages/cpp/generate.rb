@@ -741,7 +741,7 @@ cpp_grammar = Grammar.new(
                         match: /[^<>]/,
                         dont_back_track?: true,
                     ).maybe(
-                        rematch("angle_brackets")
+                        recursivelyMatch("angle_brackets")
                     )
                 ),
             ).then(/>/)
@@ -757,7 +757,6 @@ cpp_grammar = Grammar.new(
     # because it's embedded inside of other patterns
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
-        # if we add readable-support for recursive regex, then we might be able to use /<((?>[^<>]+|(\g<#groupNumberOfThisGroup>))*)>/ 
         # to match the characters in the middle of a template call
         match: some_number_of_angle_brackets.maybe(@spaces),
         includes: [ :template_call_range ]
