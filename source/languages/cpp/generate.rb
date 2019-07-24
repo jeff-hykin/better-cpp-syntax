@@ -875,7 +875,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call.without_numbered_capture_groups).then(/::/)
+    one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call).then(/::/)
     inline_scope_resolution = ->(tag_extension) do
         newPattern(
             match: zeroOrMoreOf(one_scope_resolution),
@@ -991,7 +991,7 @@ cpp_grammar = Grammar.new(
                 match: identifier,
                 tag_as: "entity.name.type",
             ).then(@word_boundary).maybe(
-                template_call.without_numbered_capture_groups
+                template_call
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
             newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
@@ -3786,35 +3786,6 @@ cpp_grammar = Grammar.new(
                 include: "#preprocessor_rule_define_line_context"
             }
         ]
-    legacy_memory_new_call = {
-            begin: "(?x)\n(?<![\\w$]|\\[)(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:new)\\s*(#{maybe(template_call.without_numbered_capture_groups)}) # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.operator.wordlike keyword.operator.new"
-                },
-                "2" => {
-                    patterns: [
-                        {
-                            include: "#template_call_innards"
-                        }
-                    ]
-                },
-                "3" => {
-                    name: "punctuation.section.arguments.begin.bracket.round"
-                },
-            },
-            end: "\\)",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.section.arguments.end.bracket.round"
-                }
-            },
-            patterns: [
-                {
-                    include: "#evaluation_context"
-                }
-            ]
-        }
     cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
             :comments,
             :storage_types,
