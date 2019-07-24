@@ -839,7 +839,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
-                    tag_as: "ellipses punctuation.vararg-ellipses.template.definition",
+                    tag_as: "punctuation.vararg-ellipses.template.definition",
                 ).maybe(@spaces).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
@@ -2387,7 +2387,7 @@ cpp_grammar = Grammar.new(
                 ),
                 newPattern(
                     match: /\.\.\./,
-                    tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
+                    tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
                 )
             ]
         ).then(
