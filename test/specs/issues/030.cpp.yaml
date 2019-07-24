@@ -46,18 +46,15 @@
   scopes:
     - entity.name.function.preprocessor
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.definition.parameters.begin
 - source: ...
   scopes:
-    - punctuation.vararg-ellipses
+    - ellipses
+    - punctuation.vararg-ellipses.variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.definition.parameters.end
 - source: \
   scopes:
     - constant.character.escape.line-continuation

@@ -2362,39 +2362,43 @@ cpp_grammar = Grammar.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier.$match"
         )
-    cpp_grammar[:meta_preprocessor_macro] = {
-            name: "meta.preprocessor.macro",
-            begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>#{preprocessor_name_no_bounds}))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.define"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                },
-                "3" => {
-                    name: "entity.name.function.preprocessor"
-                },
-                "5" => {
-                    name: "punctuation.definition.parameters.begin"
-                },
-                "6" => {
-                    name: "variable.parameter.preprocessor"
-                },
-                "8" => {
-                    name: "punctuation.separator.parameters"
-                },
-                "9" => {
-                    name: "punctuation.definition.parameters.end"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#macro_context"
-                },
+    cpp_grammar[:meta_preprocessor_macro] = PatternRange.new(
+        tag_as: "meta.preprocessor.macro",
+        start_pattern: std_space.then(
+            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
+                .maybe(@spaces).then(/define\b/),
+            tag_as: "keyword.control.directive.define"
+        ).then(@spaces).then(
+            match: identifier,
+            tag_as: "entity.name.function.preprocessor"
+        ).maybe(newPattern(
+            match: /\(/,
+            tag_as: "punctuation.definition.parameters.begin",
+        ).then(
+            match: /[^()\\]+/,
+            includes: [
+                lookBehindFor(/[(,]/).maybe(@spaces).then(
+                    match: identifier,
+                    tag_as: "variable.parameter.preprocessor"
+                ).maybe(@spaces),
+                newPattern(
+                    match: /,/,
+                    tag_as: "punctuation.separator.parameters"
+                ),
+                newPattern(
+                    match: /\.\.\./,
+                    tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
+                )
             ]
-        }
+        ).then(
+            match: /\)/,
+            tag_as: "punctuation.definition.parameters.end"
+        )),
+        end_pattern: /(?<!\\)(?=\n)/,
+        includes: [
+            :macro_context
+        ]
+    )
     cpp_grammar[:meta_preprocessor_diagnostic] = {
             name: "meta.preprocessor.diagnostic",
             begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",

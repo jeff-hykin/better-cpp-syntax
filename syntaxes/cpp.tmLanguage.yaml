@@ -7279,26 +7279,42 @@ repository:
     name: storage.modifier.$0.cpp
   meta_preprocessor_macro:
     name: meta.preprocessor.macro.cpp
-    begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>(?-mix:[a-zA-Z_$][\\w$]*)))\t
-      \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
-      \ ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t#
-      varargs ellipsis?\n\t)\n  (\\))\n)?"
+    begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((#)\\s*define\\b)\\s+((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(\\()([^()\\\\]+)(\\)))?"
     beginCaptures:
       '1':
-        name: keyword.control.directive.define.cpp
+        patterns:
+        - include: "#inline_comment"
       '2':
-        name: punctuation.definition.directive.cpp
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
       '3':
-        name: entity.name.function.preprocessor.cpp
+        name: comment.block.cpp
+      '4':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
       '5':
-        name: punctuation.definition.parameters.begin.cpp
+        name: keyword.control.directive.define.cpp
       '6':
-        name: variable.parameter.preprocessor.cpp
+        name: punctuation.definition.directive.cpp
+      '7':
+        name: entity.name.function.preprocessor.cpp
       '8':
-        name: punctuation.separator.parameters.cpp
+        name: punctuation.definition.parameters.begin.cpp
       '9':
+        patterns:
+        - match: "(?<=[(,])\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*"
+          captures:
+            '1':
+              name: variable.parameter.preprocessor.cpp
+        - match: ","
+          name: punctuation.separator.parameters.cpp
+        - match: "\\.\\.\\."
+          name: ellipses.cpp punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
+      '10':
         name: punctuation.definition.parameters.end.cpp
-    end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
+    end: "(?<!\\\\)(?=\\n)"
     patterns:
     - include: "#macro_context"
   meta_preprocessor_diagnostic:

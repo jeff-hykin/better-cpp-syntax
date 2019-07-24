@@ -29607,13 +29607,13 @@
   scopes:
     - punctuation.definition.parameters.begin
 - source: FUNC
-  scopesBegin:
+  scopes:
     - variable.parameter.preprocessor
 - source: ','
   scopes:
     - punctuation.separator.parameters
-- source: ' ARG'
-  scopesEnd:
+- source: ARG
+  scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:

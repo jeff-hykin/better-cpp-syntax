@@ -79,13 +79,13 @@
   scopes:
     - punctuation.definition.parameters.begin
 - source: expected
-  scopesBegin:
+  scopes:
     - variable.parameter.preprocessor
 - source: ','
   scopes:
     - punctuation.separator.parameters
-- source: ' actual'
-  scopesEnd:
+- source: actual
+  scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
