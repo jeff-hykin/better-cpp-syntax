@@ -2485,54 +2485,43 @@ cpp_grammar = Grammar.new(
                 }
             ]
         }
-    cpp_grammar[:meta_preprocessor_include] = {
-            name: "meta.preprocessor.include",
-            begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.$3"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#line_continuation_character"
-                },
-                {
-                    begin: "\"",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: "\"",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.double.include"
-                },
-                {
-                    begin: "<",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: ">",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.other.lt-gt.include"
-                }
-            ]
-        }
+    cpp_grammar[:meta_preprocessor_include] = newPattern(
+        match: @start_of_line.then(std_space).then(
+            match: newPattern(match: /#/, tag_as: "punctuation.definition.directive")
+            .maybe(@spaces).then(
+                    match: /include/.or(/include_next/).or(/import/),
+                    reference: "include_type"
+                ).then(@word_boundary),
+            tag_as: "keyword.control.directive.$reference(include_type)"
+        ).maybe(@spaces).then(newPattern(
+            # system header [cpp.include]/2
+            match: newPattern(
+                match: /</,
+                tag_as: "punctuation.definition.string.begin"
+            ).zeroOrMoreOf(/[^>\n]/).maybe(
+                match: />/,
+                tag_as: "punctuation.definition.string.end"
+            ).then(std_space).then(@end_of_line),
+            tag_as: "string.quoted.lt-gt.include"
+        ).or(
+            # other headers [cpp.include]/3
+            match: newPattern(
+                match: /\"/,
+                tag_as: "punctuation.definition.string.begin"
+            ).zeroOrMoreOf(/[^\"\n]/).maybe(
+                match: /\"/,
+                tag_as: "punctuation.definition.string.end"
+            ).then(std_space).then(@end_of_line),
+            tag_as: "string.quoted.double.include"
+        ).or(
+            # macro includes [cpp.include]/4
+            match: identifier.then(std_space).then(@end_of_line),
+            tag_as: "entity.name.other.preprocessor.macro.include"
+        ).or(
+            # correctly color a lone `#include`
+            match: std_space.then(@end_of_line),
+        ))
+    )
     cpp_grammar[:meta_preprocessor_line] = {
             name: "meta.preprocessor",
             begin: "^\\s*((#)\\s*line)\\b",
