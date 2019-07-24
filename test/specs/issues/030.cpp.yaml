@@ -224,9 +224,20 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'std::true_type'
+- source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -326,9 +337,20 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'std::true_type'
+- source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: \
   scopes:
     - constant.character.escape.line-continuation

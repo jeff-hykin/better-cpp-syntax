@@ -2155,8 +2155,7 @@ cpp_grammar = Grammar.new(
             tag_as: "storage.type.modifier.virtual",
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
-            match: qualified_type.without_numbered_capture_groups,
-            tag_as: "entity.name.type.inherited"
+            qualified_type
         )
     ]
     final_modifier = newPattern(

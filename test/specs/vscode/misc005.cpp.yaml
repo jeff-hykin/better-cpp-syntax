@@ -61753,7 +61753,8 @@
     - storage.type.modifier.access.public
 - source: stringstream
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
