@@ -543,10 +543,9 @@ class Regexp
         keep_tags = arguments["all"] == true or arguments["keep"] == true
         self_as_string = self.without_default_mode_modifiers
         new_regex = /#{self_as_string}/
-
+        new_attributes = Marshal.load(Marshal.dump(self.group_attributes))
         # this is O(N*M) and could be expensive if reTagging a bit pattern
-        p self.group_attributes
-        new_attributes = @group_attributes.map.with_index do |attribute, index|
+        new_attributes.map!.with_index do |attribute, index|
             # preserves references
             if attribute[:tag_as] == nil
                 attribute[:retagged] = true
@@ -558,10 +557,8 @@ class Regexp
                     attribute[:retagged] = true
                 end
             end
-            p attribute
             next attribute
         end
-        p new_attributes
         if not keep_tags
             new_attributes.each do |attribute|
                 if attribute[:retagged] != true
@@ -571,6 +568,7 @@ class Regexp
         end
         new_attributes.each { |attribute| attribute.delete(:retagged) }
         new_regex.group_attributes = new_attributes
+        new_regex.has_top_level_group = self.has_top_level_group
         return new_regex
     end
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
