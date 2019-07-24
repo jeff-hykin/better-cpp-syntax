@@ -186,7 +186,7 @@ class Grammar
         # check for a backref to the Nth group, replace it with `\N` and try again
         regex_as_string.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
             if references[$1] == nil
-                raise "When processing the backReference:#{$1}, I couldn't find the group it was referencing"
+                raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
             end
             # if the reference does exist, then replace it with it's number
             "\\#{references[$1]}"
@@ -574,7 +574,7 @@ class Regexp
     def maybe        (*arguments) processRegexOperator(arguments, 'maybe'        ) end
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
-    def backReference(reference)
+    def matchResultOf(reference)
         #
         # generate the new regex
         #
@@ -1001,7 +1001,7 @@ class Regexp
         #
         # run tests
         #
-        # temporarily implement backReferences for tests
+        # temporarily implement matchResultOfs for tests
         test_regex = Grammar.fixupBackRefs(new_regex.without_default_mode_modifiers, new_regex.group_attributes, was_first_group_removed: false)
         # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
         suppress_output do
@@ -1128,8 +1128,8 @@ end
     def zeroOrMoreOf(*arguments)
         //.zeroOrMoreOf(*arguments)
     end
-    def backReference(reference)
-        //.backReference(reference)
+    def matchResultOf(reference)
+        //.matchResultOf(reference)
     end
     def rematch(reference)
         //.rematch(reference)

@@ -357,7 +357,7 @@ cpp_grammar = Grammar.new(
                     match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
                     tag_as: "meta.banner.character",
                     reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part")
                 .maybe(@spaces).then(/(?:\n|$)/),
                 tag_as: "comment.line.double-slash",
             ),
@@ -377,7 +377,7 @@ cpp_grammar = Grammar.new(
                     match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
                     tag_as: "meta.banner.character",
                     reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).backReference("banner_part")
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part")
                 .maybe(@spaces).then(/\*\//),
                 tag_as: "comment.line.block",
             ),
@@ -1415,7 +1415,7 @@ cpp_grammar = Grammar.new(
                         dont_back_track?: true
                 ).then(std_space).then(
                     /::/
-                ).then(std_space).backReference(
+                ).then(std_space).matchResultOf(
                     "class_name"
                 ).then(std_space).lookAheadFor(/\(/)
             ),
@@ -1493,7 +1493,7 @@ cpp_grammar = Grammar.new(
                         dont_back_track?: true
                 ).then(std_space).then(
                     /::/
-                ).then(std_space).then(/~/).backReference(
+                ).then(std_space).then(/~/).matchResultOf(
                     "class_name"
                 ).then(std_space).lookAheadFor(/\(/)
             ),
