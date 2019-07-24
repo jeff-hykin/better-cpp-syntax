@@ -327,7 +327,7 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.definition.comment.end"
         )
     )
-    cpp_grammar[:line_comment] =  PatternRange.new(
+    cpp_grammar[:line_comment] = PatternRange.new(
         tag_as: "comment.line.double-slash",
         start_pattern: /\s*+/.then(
             match: /\/\//,
@@ -2385,7 +2385,7 @@ cpp_grammar = Grammar.new(
         )
     cpp_grammar[:meta_preprocessor_macro] = PatternRange.new(
         tag_as: "meta.preprocessor.macro",
-        start_pattern: std_space.then(
+        start_pattern: @start_of_line.then(std_space).then(
             match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
                 .maybe(@spaces).then(/define\b/),
             tag_as: "keyword.control.directive.define"
@@ -2489,6 +2489,8 @@ cpp_grammar = Grammar.new(
             ]
         }
     cpp_grammar[:meta_preprocessor_include] = newPattern(
+        should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
+        should_partial_match: ["#include <foo> //comment"],
         match: @start_of_line.then(std_space).then(
             match: newPattern(match: /#/, tag_as: "punctuation.definition.directive")
             .maybe(@spaces).then(
@@ -2504,8 +2506,8 @@ cpp_grammar = Grammar.new(
             ).zeroOrMoreOf(/[^>\n]/).maybe(
                 match: />/,
                 tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line),
-            tag_as: "string.quoted.lt-gt.include"
+            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+            tag_as: "string.quoted.other.lt-gt.include"
         ).or(
             # other headers [cpp.include]/3
             match: newPattern(
@@ -2514,16 +2516,17 @@ cpp_grammar = Grammar.new(
             ).zeroOrMoreOf(/[^\"\n]/).maybe(
                 match: /\"/,
                 tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line),
+            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
             tag_as: "string.quoted.double.include"
         ).or(
             # macro includes [cpp.include]/4
-            match: identifier.then(std_space).then(@end_of_line),
+            match: identifier.then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
             tag_as: "entity.name.other.preprocessor.macro.include"
         ).or(
             # correctly color a lone `#include`
-            match: std_space.then(@end_of_line),
-        ))
+            match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//))),
+        )),
+        tag_as: "meta.preprocessor.include"
     )
     cpp_grammar[:meta_preprocessor_line] = {
             name: "meta.preprocessor",
