@@ -724,13 +724,12 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    no_anglebrackets_at_all = /[^<>]*/
-    balanced_brackets = //
-    # this is effectively what is happening (below)
-    some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
-    # this is actually what is happening (recursion)
+    # this is effectively what is happening:
+    #   some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
+    # this is actually what is happening: (recursion)
     some_number_of_angle_brackets = newPattern(
-        # should_fully_match: [ "tesing", "testing<>" ],
+        should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>" ],
+        should_not_fully_match: [ "testing<>" ],
         reference: "angle_brackets",
         match: newPattern(
             lookBehindToAvoid(/</).then(
@@ -739,7 +738,7 @@ cpp_grammar = Grammar.new(
                 dont_back_track?: true,
                 match: newPattern(
                     zeroOrMoreOf(
-                        match: no_anglebrackets_at_all,
+                        match: /[^<>]/,
                         dont_back_track?: true,
                     ).maybe(
                         rematch("angle_brackets")
