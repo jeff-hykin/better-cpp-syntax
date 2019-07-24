@@ -14,7 +14,8 @@
     - meta.head.class
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
@@ -44,7 +45,8 @@
     - storage.type.modifier.access.public
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class

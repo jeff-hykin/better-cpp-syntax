@@ -3715,7 +3715,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
@@ -3750,7 +3750,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
@@ -5755,7 +5755,8 @@
     - storage.type.modifier.access.public
 - source: ClassA
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
@@ -5851,18 +5852,40 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'foo::ClassF'
+- source: foo
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: ClassF
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'foo::ClassG'
+- source: foo
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: ClassG
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '{'
   scopes:
     - meta.head.class
@@ -5889,7 +5912,8 @@
     - meta.head.class
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
@@ -5919,7 +5943,8 @@
     - storage.type.modifier.access.public
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
@@ -6123,7 +6148,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
@@ -6446,19 +6471,22 @@
     - storage.type.modifier.access.private
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: foo
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
@@ -6467,19 +6495,22 @@
     - storage.type.modifier.access.public
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: foo
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
@@ -6488,13 +6519,15 @@
     - storage.type.modifier.access.protected
 - source: bar
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
 - source: quix
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class
@@ -6553,7 +6586,8 @@
     - storage.type.modifier.access.public
 - source: A
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
@@ -6562,7 +6596,8 @@
     - storage.type.modifier.access.public
 - source: B
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -6594,7 +6629,8 @@
     - storage.type.modifier.access.public
 - source: A
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
@@ -6603,7 +6639,8 @@
     - storage.type.modifier.access.public
 - source: B
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
