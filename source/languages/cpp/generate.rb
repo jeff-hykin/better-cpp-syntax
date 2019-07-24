@@ -1192,6 +1192,7 @@ cpp_grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
+            :qualifiers_and_specifiers_post_parameters,
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context

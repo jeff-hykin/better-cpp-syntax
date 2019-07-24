@@ -3073,6 +3073,7 @@ repository:
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
+      - include: "#qualifiers_and_specifiers_post_parameters"
       - include: "$self"
     - name: meta.body.function.definition.special.operator-overload.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
@@ -9370,6 +9371,7 @@ repository:
         patterns:
         - include: "#function_parameter_context"
         - include: "#evaluation_context"
+      - include: "#qualifiers_and_specifiers_post_parameters"
       - include: "$self"
     - name: meta.body.function.definition.special.operator-overload.cpp
       begin: "(?<=\\{|<%|\\?\\?<)"
