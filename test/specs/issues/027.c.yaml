@@ -8,7 +8,19 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: ' #define a cout '
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: a
+  scopes:
+    - entity.name.function.preprocessor
+- source: ' cout '
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

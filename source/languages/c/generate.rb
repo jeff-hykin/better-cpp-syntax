@@ -4,6 +4,8 @@ require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative source_dir + 'shared_patterns/assembly.rb'
+require_relative source_dir + 'shared_patterns/inline_comment'
+require_relative source_dir + 'shared_patterns/std_space.rb'
 require_relative './tokens.rb'
 
 
@@ -25,6 +27,10 @@ c_grammar = Grammar.new(
         "see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master",
     ],
 )
+
+$grammar = c_grammar
+c_grammar[:inline_comment] = inline_comment
+def std_space() generateStdSpace($grammar[:inline_comment]) end
 
 #
 # import from C++
@@ -53,6 +59,7 @@ c_grammar = Grammar.new(
         "#function-call-innards",
         "$base"
     ]
+
 
 #
 # Variable
@@ -189,39 +196,43 @@ c_grammar[:$initial_context] = [
     "#operators",
     "#numbers",
     "#strings",
-    {
-        begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.define.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            },
-            "3" => {
-                name: "entity.name.function.preprocessor.c"
-            },
-            "5" => {
-                name: "punctuation.definition.parameters.begin.c"
-            },
-            "6" => {
-                name: "variable.parameter.preprocessor.c"
-            },
-            "8" => {
-                name: "punctuation.separator.parameters.c"
-            },
-            "9" => {
-                name: "punctuation.definition.parameters.end.c"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.macro.c",
-        patterns: [
-            {
-                include: "#preprocessor-rule-define-line-contents"
-            }
+    PatternRange.new(
+        tag_as: "meta.preprocessor.macro",
+        start_pattern: std_space.then(
+            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
+                .maybe(@spaces).then(/define\b/),
+            tag_as: "keyword.control.directive.define"
+        ).then(@spaces).then(
+            match: variable_name,
+            tag_as: "entity.name.function.preprocessor"
+        ).maybe(newPattern(
+            match: /\(/,
+            tag_as: "punctuation.definition.parameters.begin",
+        ).then(
+            match: /[^()\\]+/,
+            includes: [
+                lookBehindFor(/[(,]/).maybe(@spaces).then(
+                    match: variable_name,
+                    tag_as: "variable.parameter.preprocessor"
+                ).maybe(@spaces),
+                newPattern(
+                    match: /,/,
+                    tag_as: "punctuation.separator.parameters"
+                ),
+                newPattern(
+                    match: /\.\.\./,
+                    tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
+                )
+            ]
+        ).then(
+            match: /\)/,
+            tag_as: "punctuation.definition.parameters.end"
+        )),
+        end_pattern: /(?<!\\)(?=\n)/,
+        includes: [
+            "#preprocessor-rule-define-line-contents"
         ]
-    },
+    ),
     {
         begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
         beginCaptures: {
