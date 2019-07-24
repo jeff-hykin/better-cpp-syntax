@@ -2,6 +2,10 @@ require 'json'
 require 'yaml'
 require 'set'
 
+# This branch should
+    # create a warning whenever a grammar repo name is overwritten
+    # create an import and export method for the grammar object
+
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
         # add a warning whenever turnOffNumberedCaptureGroups successfully removes a group
