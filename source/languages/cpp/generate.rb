@@ -724,27 +724,45 @@ cpp_grammar = Grammar.new(
 #
 # Templates
 #
-    characters_in_template_call = /[\(\)\s<>:,\w]/
-    no_brackets_at_all = /[^<>]*/
-    balanced_brackets = /[^>]*+<[^>]*+>/
-    some_number_of_angle_brackets = oneOrMoreOf(no_brackets_at_all.or(balanced_brackets))
-    # TODO: change this to a readble form (above) once possessives (aka no back_track) is imlpemented
-    # otherwise this pattern fails because its to computationally expensive
-    some_number_of_angle_brackets = /(?:[^<>]++(?:<[^<>]++>)?)++/
+    no_anglebrackets_at_all = /[^<>]*/
+    balanced_brackets = //
+    # this is effectively what is happening (below)
+    some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
+    # this is actually what is happening (recursion)
+    some_number_of_angle_brackets = newPattern(
+        # should_fully_match: [ "tesing", "testing<>" ],
+        reference: "angle_brackets",
+        match: newPattern(
+            lookBehindToAvoid(/</).then(
+                /</
+            ).lookAheadToAvoid(/</).oneOrMoreOf(
+                dont_back_track?: true,
+                match: newPattern(
+                    zeroOrMoreOf(
+                        match: no_anglebrackets_at_all,
+                        dont_back_track?: true,
+                    ).maybe(
+                        rematch("angle_brackets")
+                    )
+                ),
+            ).then(/>/)
+        )
+    )
+
     
     cpp_grammar[:comma_in_template_argument] = newPattern(
-            match: /,/,
-            tag_as: "punctuation.separator.delimiter.comma.template.argument"
-        )
-    # note: template_call should indeally be a Range(), the reason its not is
+        match: /,/,
+        tag_as: "punctuation.separator.delimiter.comma.template.argument"
+    )
+    # note: template_call should ideally be a Range(), the reason its not is
     # because it's embedded inside of other patterns
     cpp_grammar[:template_call_innards] = template_call = newPattern(
         tag_as: 'meta.template.call',
         # if we add readable-support for recursive regex, then we might be able to use /<((?>[^<>]+|(\g<#groupNumberOfThisGroup>))*)>/ 
         # to match the characters in the middle of a template call
-        match: lookBehindToAvoid(/</).then(/</).lookAheadToAvoid(/</).then(some_number_of_angle_brackets).then(/>/).maybe(@spaces),
+        match: some_number_of_angle_brackets.maybe(@spaces),
         includes: [ :template_call_range ]
-        )
+    )
     cpp_grammar[:template_call_range] = PatternRange.new(
             tag_as: 'meta.template.call',
             start_pattern: newPattern(
