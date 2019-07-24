@@ -224,9 +224,20 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'std::true_type'
+- source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -326,9 +337,20 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'std::true_type'
+- source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -394,21 +416,28 @@
     - keyword.operator.assignment
 - source: typename
   scopes:
-    - storage.modifier.typename
+    - storage.modifier
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution.template.definition
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.definition
+    - punctuation.separator.scope-resolution
 - source: enable_if
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: IsPoint
   scopes:
-    - entity.name.scope-resolution.template.definition
+    - entity.name.scope-resolution.template.call
 - source: <
   scopesBegin:
     - meta.template.call
@@ -428,20 +457,29 @@
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.definition
+    - punctuation.separator.scope-resolution.template.call
 - source: isPoint
   scopes:
-    - storage.type.template.argument.isPoint
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: type
   scopes:
-    - storage.type.template.argument.type
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma.template.argument
+    - punctuation.separator.delimiter.comma
 - source: class
   scopes:
     - entity.name.type.template
@@ -450,21 +488,28 @@
     - keyword.operator.assignment
 - source: typename
   scopes:
-    - storage.modifier.typename
+    - storage.modifier
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.scope-resolution.template.definition
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.definition
+    - punctuation.separator.scope-resolution
 - source: enable_if
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: IsPoint
   scopes:
-    - entity.name.scope-resolution.template.definition
+    - entity.name.scope-resolution.template.call
 - source: <
   scopesBegin:
     - meta.template.call
@@ -484,19 +529,27 @@
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.definition
+    - punctuation.separator.scope-resolution.template.call
 - source: isPoint
   scopes:
-    - storage.type.template.argument.isPoint
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
 - source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: type
   scopes:
-    - storage.type.template.argument.type
+    - entity.name.type
   scopesEnd:
     - meta.template.definition
+    - meta.qualified_type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
