@@ -2652,7 +2652,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -2819,7 +2819,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -3082,7 +3082,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -3257,7 +3257,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -3620,7 +3620,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -4892,7 +4892,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -5355,7 +5355,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -6211,7 +6211,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -8198,7 +8198,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -8547,7 +8547,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -8905,7 +8905,7 @@
               "name": "meta.qualified_type.cpp",
               "patterns": [
                 {
-                  "match": "(?:class|struct|union|enum)",
+                  "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
                   "name": "storage.type.$0.cpp"
                 },
                 {
@@ -11009,7 +11009,7 @@
               "name": "meta.qualified_type.cpp",
               "patterns": [
                 {
-                  "match": "(?:class|struct|union|enum)",
+                  "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
                   "name": "storage.type.$0.cpp"
                 },
                 {
@@ -14807,52 +14807,161 @@
       ]
     },
     "meta_preprocessor_include": {
-      "name": "meta.preprocessor.include.cpp",
-      "begin": "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
-      "beginCaptures": {
+      "match": "(?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((#)\\s*((?:(?:include|include_next)|import))\\b)\\s*(?:(?:(?:((<)[^>\\n]*(>?)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$))|((\\\")[^\\\"\\n]*(\\\"?)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$)))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$)))|((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$))",
+      "captures": {
         "1": {
-          "name": "keyword.control.directive.$3.cpp"
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
         },
         "2": {
-          "name": "punctuation.definition.directive.cpp"
-        }
-      },
-      "end": "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-      "patterns": [
-        {
-          "include": "#line_continuation_character"
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
         },
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cpp"
+        "3": {
+          "name": "comment.block.cpp"
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
             }
-          },
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cpp"
+          ]
+        },
+        "5": {
+          "name": "keyword.control.directive.$7.cpp"
+        },
+        "6": {
+          "name": "punctuation.definition.directive.cpp"
+        },
+        "8": {
+          "name": "string.quoted.lt-gt.include.cpp"
+        },
+        "9": {
+          "name": "punctuation.definition.string.begin.cpp"
+        },
+        "10": {
+          "name": "punctuation.definition.string.end.cpp"
+        },
+        "11": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
             }
-          },
+          ]
+        },
+        "12": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "13": {
+          "name": "comment.block.cpp"
+        },
+        "14": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
+        },
+        "15": {
           "name": "string.quoted.double.include.cpp"
         },
-        {
-          "begin": "<",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cpp"
+        "16": {
+          "name": "punctuation.definition.string.begin.cpp"
+        },
+        "17": {
+          "name": "punctuation.definition.string.end.cpp"
+        },
+        "18": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
             }
-          },
-          "end": ">",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cpp"
+          ]
+        },
+        "19": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "20": {
+          "name": "comment.block.cpp"
+        },
+        "21": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
             }
-          },
-          "name": "string.quoted.other.lt-gt.include.cpp"
+          ]
+        },
+        "22": {
+          "name": "entity.name.other.preprocessor.macro.include.cpp"
+        },
+        "23": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "24": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "25": {
+          "name": "comment.block.cpp"
+        },
+        "26": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
+        },
+        "27": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "28": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "29": {
+          "name": "comment.block.cpp"
+        },
+        "30": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
         }
-      ]
+      }
     },
     "meta_preprocessor_line": {
       "name": "meta.preprocessor.cpp",
@@ -16960,7 +17069,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -17423,7 +17532,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {
@@ -19262,7 +19371,7 @@
               "name": "meta.qualified_type.cpp",
               "patterns": [
                 {
-                  "match": "(?:class|struct|union|enum)",
+                  "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
                   "name": "storage.type.$0.cpp"
                 },
                 {
@@ -20492,7 +20601,7 @@
           "name": "meta.qualified_type.cpp",
           "patterns": [
             {
-              "match": "(?:class|struct|union|enum)",
+              "match": "(?<!\\w)(?:class|struct|union|enum)(?!\\w)",
               "name": "storage.type.$0.cpp"
             },
             {

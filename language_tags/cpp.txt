@@ -39,6 +39,7 @@ entity.name.operator.type.array.cpp
 entity.name.operator.type.cpp
 entity.name.operator.type.pointer.cpp
 entity.name.operator.type.reference.cpp
+entity.name.other.preprocessor.macro.include.cpp
 entity.name.other.preprocessor.macro.predefined.DLLEXPORT.cpp
 entity.name.other.preprocessor.macro.predefined.NDEBUG.cpp
 entity.name.other.preprocessor.macro.predefined._ATL_VER.cpp
@@ -333,7 +334,7 @@ keyword.control.$5.cpp
 keyword.control.case.cpp
 keyword.control.default.cpp
 keyword.control.directive.$0.cpp
-keyword.control.directive.$3.cpp
+keyword.control.directive.$7.cpp
 keyword.control.directive.conditional.cpp
 keyword.control.directive.define.cpp
 keyword.control.directive.diagnostic.$3.cpp
@@ -458,7 +459,6 @@ meta.parameter.initialization.cpp
 meta.parens.cpp
 meta.preprocessor.cpp
 meta.preprocessor.diagnostic.cpp
-meta.preprocessor.include.cpp
 meta.preprocessor.macro.cpp
 meta.preprocessor.pragma.cpp
 meta.qualified_type.cpp
@@ -662,7 +662,7 @@ storage.type.union.parameter.cpp
 string.quoted.double.cpp
 string.quoted.double.include.cpp
 string.quoted.double.raw.cpp
-string.quoted.other.lt-gt.include.cpp
+string.quoted.lt-gt.include.cpp
 string.quoted.single.cpp
 string.unquoted.single.cpp
 support.other.attribute.cpp

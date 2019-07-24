@@ -992,7 +992,10 @@ cpp_grammar = Grammar.new(
                 template_call
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
-            newPattern(match: @cpp_tokens.that(:isTypeCreator), tag_as: "storage.type.$match"),
+            newPattern(
+                match: variableBounds[ @cpp_tokens.that(:isTypeCreator)],
+                tag_as: "storage.type.$match"
+            ),
             :attributes_context,
             :function_type,
             :storage_types,
