@@ -3,6 +3,21 @@ require_relative PathFor[:textmate_tools]
 
 patterns = {}
 # 
+# preprocessor patterns
+# 
+# see https://gcc.gnu.org/onlinedocs/cpp/
+    # include
+    # pragma
+    # define
+    # undef
+    # error
+    # warning
+    # if
+    # ifdef
+    # elif
+    # else
+    # endif
+# 
 # legacy
 #
     patterns[:meta_preprocessor_macro] = {
