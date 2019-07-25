@@ -522,6 +522,10 @@
         }
       }
     },
+    "invalid_comment_end": {
+      "match": "\\*\\/",
+      "name": "invalid.illegal.unexpected.punctuation.definition.comment.end.cpp"
+    },
     "comments": {
       "patterns": [
         {
@@ -532,6 +536,9 @@
         },
         {
           "include": "#line_comment"
+        },
+        {
+          "include": "#invalid_comment_end"
         }
       ]
     },

@@ -219,11 +219,15 @@ repository:
         name: punctuation.definition.comment.cpp
       '8':
         name: meta.banner.character.cpp
+  invalid_comment_end:
+    match: "\\*\\/"
+    name: invalid.illegal.unexpected.punctuation.definition.comment.end.cpp
   comments:
     patterns:
     - include: "#emacs_file_banner"
     - include: "#block_comment"
     - include: "#line_comment"
+    - include: "#invalid_comment_end"
   number_literal:
     begin: "(?<!\\w)(?=\\d|\\.\\d)"
     end: "(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
