@@ -589,7 +589,7 @@ class Regexp
         return new_regex
     end
     def reTag(arguments)
-        keep_tags = not (arguments[:all] == false or arguments[:keep] == false)
+        keep_tags = !(arguments[:all] == false || arguments[:keep] == false)
         self_as_string = self.without_default_mode_modifiers
         new_regex = /#{self_as_string}/
         new_attributes = Marshal.load(Marshal.dump(self.group_attributes))
