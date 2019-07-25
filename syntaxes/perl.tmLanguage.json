@@ -37,6 +37,9 @@
       "include": "#keyword_operators"
     },
     {
+      "include": "#variable_patterns"
+    },
+    {
       "include": "#line_comment"
     },
     {
@@ -2421,6 +2424,81 @@
         }
       ]
     },
+    "scalar_var": {
+      "match": "(\\$)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.scalar.perl"
+        },
+        "2": {
+          "name": "variable.other.scalar.perl"
+        }
+      }
+    },
+    "array_var": {
+      "match": "(\\@)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.array.perl"
+        },
+        "2": {
+          "name": "variable.other.array.perl"
+        }
+      }
+    },
+    "hash_var": {
+      "match": "(\\%)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.hash.perl"
+        },
+        "2": {
+          "name": "variable.other.hash.perl"
+        }
+      }
+    },
+    "ref_var": {
+      "match": "(\\\\)(?:(?:(\\$)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))|(\\@)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))))|(\\%)((?-mix:(?!\\b(?:_)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.hash.perl"
+        },
+        "2": {
+          "name": "punctuation.definition.variable.scalar.reference.perl"
+        },
+        "3": {
+          "name": "variable.other.scalar.reference.perl"
+        },
+        "4": {
+          "name": "punctuation.definition.variable.array.reference.perl"
+        },
+        "5": {
+          "name": "variable.other.array.reference.perl"
+        },
+        "6": {
+          "name": "punctuation.definition.variable.hash.reference.perl"
+        },
+        "7": {
+          "name": "variable.other.hash.reference.perl"
+        }
+      }
+    },
+    "variable_patterns": {
+      "patterns": [
+        {
+          "include": "#ref_var"
+        },
+        {
+          "include": "#scalar_var"
+        },
+        {
+          "include": "#array_var"
+        },
+        {
+          "include": "#hash_var"
+        }
+      ]
+    },
     "keyword_operators": {
       "patterns": [
         {
@@ -2965,7 +3043,7 @@
       ]
     },
     "function_call": {
-      "begin": "(?!\\b(?:qq|qw|q|m|qr|s|tr|y)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
+      "begin": "((?-mix:(?!\\b(?:qq|qw|q|m|qr|s|tr|y|return)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.call.perl"

@@ -62,6 +62,7 @@ require_relative './tokens.rb'
             :inline_regex,
             :special_identifiers,
             :keyword_operators,
+            :variable_patterns,
             # import all the original patterns
             *original_grammar["patterns"],
             :operators,
@@ -108,7 +109,65 @@ require_relative './tokens.rb'
                 tag_as: "constant.language.undef",
             )
         ]
-            
+    # 
+    # variables
+    # 
+        # preceding symbols
+            scalar = newPattern(
+                match: /\$/,
+                tag_as: "punctuation.definition.variable.scalar"
+            )
+            array = newPattern(
+                match: /\@/,
+                tag_as: "punctuation.definition.variable.array"
+            )
+            hash = newPattern(
+                match: /\%/,
+                tag_as: "punctuation.definition.variable.hash"
+            )
+            reference = newPattern(
+                match: /\\/,
+                tag_as: "punctuation.definition.variable.hash"
+            )
+        # variables with symbols
+            grammar[:scalar_var] = newPattern(
+                scalar.then(
+                    match: @variable,
+                    word_cannot_be_any_of: ["_"],
+                    tag_as: "variable.other.scalar"
+                )
+            )
+            grammar[:array_var] = newPattern(
+                array.then(
+                    match: @variable,
+                    word_cannot_be_any_of: ["_"],
+                    tag_as: "variable.other.array"
+                )
+            )
+            grammar[:hash_var] = newPattern(
+                hash.then(
+                    match: @variable,
+                    word_cannot_be_any_of: ["_"],
+                    tag_as: "variable.other.hash"
+                )
+            )
+        # referenced versions
+            grammar[:ref_var] = newPattern(
+                reference.then(
+                    grammar[:scalar_var].reTag(append: "reference").or(
+                        grammar[:array_var].reTag(append: "reference")
+                    ).or(
+                        grammar[:hash_var].reTag(append: "reference")
+                    )
+                )
+            )
+        # vars
+            grammar[:variable_patterns] = [
+                :ref_var,
+                :scalar_var,
+                :array_var,
+                :hash_var,
+            ]
     # 
     # operators
     # 
@@ -316,7 +375,7 @@ require_relative './tokens.rb'
                 newPattern(
                     match: @variable,
                     tag_as: "entity.name.function.call",
-                    word_cannot_be_any_of: ["qq", "qw", "q", "m", "qr", "s" , "tr", "y"], # see https://perldoc.perl.org/perlop.html#Quote-and-Quote-like-Operators
+                    word_cannot_be_any_of: ["qq", "qw", "q", "m", "qr", "s" , "tr", "y", "return"], # see https://perldoc.perl.org/perlop.html#Quote-and-Quote-like-Operators
                 ).then(std_space).then(
                     match: /\(/,
                     tag_as: "punctuation.section.arguments",
