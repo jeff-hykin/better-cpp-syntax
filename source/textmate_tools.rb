@@ -1,6 +1,7 @@
 require 'json'
 require 'yaml'
 require 'set'
+require 'deep_clone' # gem install deep_clone
 
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
@@ -542,6 +543,17 @@ class Regexp
         repository: "",
     }
     
+    def __deep_clone__()
+        # copy the regex
+        self_as_string = self.without_default_mode_modifiers
+        new_regex = /#{self_as_string}/
+        # copy the attributes
+        new_attributes = self.group_attributes.__deep_clone__
+        new_regex.group_attributes = new_attributes
+        new_regex.has_top_level_group = self.has_top_level_group
+        return new_regex
+    end
+    
     def self.runTest(test_name, arguments, lambda, new_regex)
         if arguments[test_name] != nil
             if not( arguments[test_name].is_a?(Array) )
@@ -590,9 +602,10 @@ class Regexp
     end
     def reTag(arguments)
         keep_tags = !(arguments[:all] == false || arguments[:keep] == false) || arguments[:append] != nil
-        self_as_string = self.without_default_mode_modifiers
-        new_regex = /#{self_as_string}/
-        new_attributes = Marshal.load(Marshal.dump(self.group_attributes))
+        
+        pattern_copy = self.__deep_clone__
+        new_attributes = pattern_copy.group_attributes
+        
         # this is O(N*M) and could be expensive if reTagging a big pattern
         new_attributes.map!.with_index do |attribute, index|
             # preserves references
@@ -619,9 +632,7 @@ class Regexp
             end
         end
         new_attributes.each { |attribute| attribute.delete(:retagged) }
-        new_regex.group_attributes = new_attributes
-        new_regex.has_top_level_group = self.has_top_level_group
-        return new_regex
+        return pattern_copy
     end
     def recursivelyMatch(reference)
         #
@@ -1173,9 +1184,13 @@ end
 # PatternRange
 #
 class PatternRange
-    attr_accessor :as_tag, :repository_name
+    attr_accessor :as_tag, :repository_name, :arguments
     
-    def initialize(key_arguments)
+    def __deep_clone__()
+        PatternRange.new(@arguments.__deep_clone__)
+    end
+    
+    def initialize(arguments)
         # parameters:
             # comment: (idk why youd ever use this, but it exists for backwards compatibility)
             # tag_as:
@@ -1187,9 +1202,18 @@ class PatternRange
             # includes:
             # repository:
             # repository_name:
+
+        # save all of the arguments for later
+        @arguments = arguments
+        # generate the tag so that errors show up
+        self.generateTag()
+    end
+    
+    def generateTag()
         
+        # generate a tag version
         @as_tag = {}
-        key_arguments = key_arguments.clone
+        key_arguments = @arguments.clone
         
         #
         # comment
@@ -1308,15 +1332,33 @@ class PatternRange
     end
     
     def to_tag(ignore_repository_entry: false)
+        # if it hasn't been generated somehow, then generate it
+        if @as_tag == nil
+            self.generateTag()
+        end
+        
         if ignore_repository_entry
             return @as_tag
         end
+        
         if @repository_name != nil
             return {
                 include: "##{@repository_name}"
             }
         end
         return @as_tag
+    end
+    
+    def reTag(arguments)
+        # create a copy
+        the_copy = self.__deep_clone__()
+        # reTag the patterns
+        the_copy.arguments[:start_pattern] = the_copy.arguments[:start_pattern].reTag(arguments)
+        the_copy.arguments[:end_pattern  ] = the_copy.arguments[:end_pattern  ].reTag(arguments) unless the_copy.arguments[:end_pattern  ] == nil
+        the_copy.arguments[:while        ] = the_copy.arguments[:while        ].reTag(arguments) unless the_copy.arguments[:while        ] == nil
+        # re-generate the tag now that the patterns have changed
+        the_copy.generateTag()
+        return the_copy
     end
 end
 
