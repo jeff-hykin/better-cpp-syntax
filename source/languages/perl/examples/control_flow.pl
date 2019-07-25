@@ -44,5 +44,3 @@ BEGIN {
 	    return ++$secret_val;
 	}
 }
-
-split( /"/, $string);
