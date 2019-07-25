@@ -28,6 +28,9 @@
       "include": "#numbers"
     },
     {
+      "include": "#inline_regex"
+    },
+    {
       "include": "#special_identifiers"
     },
     {
@@ -2387,6 +2390,25 @@
         }
       ]
     },
+    "inline_regex": {
+      "match": "(\\/)((?>(?:[^\\/\\\\]|\\\\.)*))(\\/)",
+      "captures": {
+        "1": {
+          "name": "punctuation.section.regexp.perl"
+        },
+        "2": {
+          "name": "string.regexp.perl",
+          "patterns": [
+            {
+              "include": "#regexp"
+            }
+          ]
+        },
+        "3": {
+          "name": "punctuation.section.regexp.perl"
+        }
+      }
+    },
     "special_identifiers": {
       "patterns": [
         {
@@ -2943,7 +2965,7 @@
       ]
     },
     "function_call": {
-      "begin": "(?!\\b(?:qq|qw|q|m)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
+      "begin": "(?!\\b(?:qq|qw|q|m|qr|s|tr|y)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.call.perl"

@@ -59,6 +59,7 @@ require_relative './tokens.rb'
             :function_call,
             :label,
             :numbers,
+            :inline_regex,
             :special_identifiers,
             :keyword_operators,
             # import all the original patterns
@@ -75,6 +76,25 @@ require_relative './tokens.rb'
     # numbers
     # 
         grammar[:numbers] = numeric_constant(separator:"_")
+    # 
+    # regex
+    # 
+        grammar[:inline_regex] = newPattern(
+            newPattern(
+                match: /\//,
+                tag_as: "punctuation.section.regexp"
+            ).then(
+                match: zeroOrMoreOf(
+                    match: /[^\/\\]|\\./,
+                    dont_back_track?: true,
+                ),
+                tag_as: "string.regexp",
+                includes: [ :regexp ],
+            ).then(
+                match: /\//,
+                tag_as: "punctuation.section.regexp"
+            )
+        )
     # 
     # builtins
     # 
