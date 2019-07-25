@@ -2478,7 +2478,7 @@
       },
       "patterns": [
         {
-          "include": "#initial_context"
+          "include": "$self"
         }
       ]
     },
@@ -2497,7 +2497,7 @@
       },
       "patterns": [
         {
-          "include": "#initial_context"
+          "include": "$self"
         }
       ]
     },
@@ -2516,7 +2516,7 @@
       },
       "patterns": [
         {
-          "include": "#initial_context"
+          "include": "$self"
         }
       ]
     },
@@ -2943,7 +2943,7 @@
       ]
     },
     "function_call": {
-      "begin": "((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
+      "begin": "(?!\\b(?:qq|qw|q|m)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()",
       "beginCaptures": {
         "1": {
           "name": "entity.name.function.call.perl"

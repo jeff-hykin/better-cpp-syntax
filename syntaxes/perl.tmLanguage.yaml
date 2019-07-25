@@ -1314,7 +1314,7 @@ repository:
       '1':
         name: punctuation.section.square-brackets.perl
     patterns:
-    - include: "#initial_context"
+    - include: "$self"
   curly_brackets:
     begin: "(\\{)"
     beginCaptures:
@@ -1325,7 +1325,7 @@ repository:
       '1':
         name: punctuation.section.curly-brackets.perl
     patterns:
-    - include: "#initial_context"
+    - include: "$self"
   parentheses:
     begin: "(\\()"
     beginCaptures:
@@ -1336,7 +1336,7 @@ repository:
       '1':
         name: punctuation.section.parameters.perl
     patterns:
-    - include: "#initial_context"
+    - include: "$self"
   punctuation:
     patterns:
     - include: "#semicolon"
@@ -1568,7 +1568,7 @@ repository:
           name: entity.name.attribute.perl
     - include: "$self"
   function_call:
-    begin: "((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
+    begin: "(?!\\b(?:qq|qw|q|m)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
     beginCaptures:
       '1':
         name: entity.name.function.call.perl

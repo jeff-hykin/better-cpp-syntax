@@ -160,7 +160,7 @@ require_relative './tokens.rb'
                     match: /\]/,
                     tag_as: "punctuation.section.square-brackets",
                 ),
-                includes: [ :initial_context ]
+                includes: [ :$initial_context ]
             ),
             grammar[:curly_brackets] = PatternRange.new(
                 start_pattern: newPattern(
@@ -171,7 +171,7 @@ require_relative './tokens.rb'
                     match: /\}/,
                     tag_as: "punctuation.section.curly-brackets",
                 ),
-                includes: [ :initial_context ]
+                includes: [ :$initial_context ]
             ),
             grammar[:parentheses] = PatternRange.new(
                 start_pattern: newPattern(
@@ -182,7 +182,7 @@ require_relative './tokens.rb'
                     match: /\)/,
                     tag_as: "punctuation.section.parens",
                 ),
-                includes: [ :initial_context ]
+                includes: [ :$initial_context ]
             )
         ]
     # 
@@ -276,7 +276,7 @@ require_relative './tokens.rb'
                         match: /\)/,
                         tag_as: "punctuation.section.parameters",
                     ),
-                    includes: [ :initial_context ]
+                    includes: [ :$initial_context ]
                 ),
                 newPattern(
                     newPattern(
@@ -296,6 +296,7 @@ require_relative './tokens.rb'
                 newPattern(
                     match: @variable,
                     tag_as: "entity.name.function.call",
+                    word_cannot_be_any_of: ["qq", "qw", "q", "m", "qr", "s" , "tr", "y"], # see https://perldoc.perl.org/perlop.html#Quote-and-Quote-like-Operators
                 ).then(std_space).then(
                     match: /\(/,
                     tag_as: "punctuation.section.arguments",
