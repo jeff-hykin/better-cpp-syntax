@@ -540,11 +540,11 @@ class Regexp
         return new_regex
     end
     def reTag(arguments)
-        keep_tags = arguments[:all] == true or arguments[:keep] == true
+        keep_tags = not (arguments[:all] == false or arguments[:keep] == false)
         self_as_string = self.without_default_mode_modifiers
         new_regex = /#{self_as_string}/
         new_attributes = Marshal.load(Marshal.dump(self.group_attributes))
-        # this is O(N*M) and could be expensive if reTagging a bit pattern
+        # this is O(N*M) and could be expensive if reTagging a big pattern
         new_attributes.map!.with_index do |attribute, index|
             # preserves references
             if attribute[:tag_as] == nil
