@@ -949,6 +949,14 @@ class Regexp
         self_as_string = self.without_default_mode_modifiers
         other_regex_as_string = other_regex.without_default_mode_modifiers
         
+        # handle :word_cannot_be_any_of
+        if pattern_attributes[:word_cannot_be_any_of] != nil
+            # add the boundary
+            other_regex_as_string = /(?!\b(?:#{pattern_attributes[:word_cannot_be_any_of].join("|")})\b)#{other_regex_as_string}/
+            # don't let the argument carry over to the next regex
+            pattern_attributes.delete(:word_cannot_be_any_of)
+        end
+        
         # compute the endings so the operators can use/handle them
         simple_quantifier_ending = self.getQuantifierFromAttributes(option_attributes)
         
@@ -1028,13 +1036,6 @@ class Regexp
         # if its any other operator (including the quantifiers)
         else
             new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
-        end
-        
-        if pattern_attributes[:word_cannot_be_any_of] != nil
-            # add the boundary
-            new_regex = /(?!\b(?:#{pattern_attributes[:word_cannot_be_any_of].join("|")})\b)#{new_regex.without_default_mode_modifiers}/
-            # don't let the argument carry over to the next regex
-            pattern_attributes.delete(:word_cannot_be_any_of)
         end
         
         #
