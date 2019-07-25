@@ -43,6 +43,30 @@ def checkForMatchingOuter(str, start_char, end_char)
     return false
 end
 
+# taken from https://gist.github.com/moertel/11091573
+# Temporarily redirects STDOUT and STDERR to /dev/null
+# but does print exceptions should there occur any.
+# Call as:
+#   suppress_output { puts 'never printed' }
+#
+def suppress_output
+    begin
+        original_stderr = $stderr.clone
+        original_stdout = $stdout.clone
+        $stderr.reopen(File.new('/dev/null', 'w'))
+        $stdout.reopen(File.new('/dev/null', 'w'))
+        retval = yield
+    rescue Exception => e
+        $stdout.reopen(original_stdout)
+        $stderr.reopen(original_stderr)
+        raise e
+    ensure
+        $stdout.reopen(original_stdout)
+        $stderr.reopen(original_stderr)
+    end
+    retval
+end
+
 # 
 # Recursive value setting
 # 
@@ -162,10 +186,32 @@ class Grammar
         # check for a backref to the Nth group, replace it with `\N` and try again
         regex_as_string.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
             if references[$1] == nil
-                raise "When processing the backReference:#{$1}, I couldn't find the group it was referencing"
+                raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
             end
             # if the reference does exist, then replace it with it's number
             "\\#{references[$1]}"
+        end
+        # check for a subroutine to the Nth group, replace it with `\N` and try again
+        regex_as_string.gsub! /\[:subroutine:([^\\]+?):\]/ do |match|
+            if references[$1] == nil
+                # this is empty because the subroutine call is often built before the
+                # thing it is referencing. 
+                # ex:
+                # newPattern(
+                #     reference: "ref1",
+                #     match: newPattern(
+                #         /thing/.or(
+                #             recursivelyMatch("ref1")
+                #         )
+                #     )
+                # )
+                # there's no way easy way to know if this is the case or not
+                # so by default nothing is returned so that problems are not caused
+                ""
+            else
+                # if the reference does exist, then replace it with it's number
+                "\\g<#{references[$1]}>"
+            end
         end
         return regex_as_string
     end
@@ -503,8 +549,11 @@ class Regexp
             end
             failures = []
             for each in arguments[test_name]
-                if lambda[each]
-                    failures.push(each)
+                # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+                suppress_output do
+                    if lambda[each]
+                        failures.push(each)
+                    end
                 end
             end
             if failures.size > 0
@@ -525,7 +574,7 @@ class Regexp
     def maybe        (*arguments) processRegexOperator(arguments, 'maybe'        ) end
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
-    def backReference(reference)
+    def matchResultOf(reference)
         #
         # generate the new regex
         #
@@ -569,6 +618,20 @@ class Regexp
         new_attributes.each { |attribute| attribute.delete(:retagged) }
         new_regex.group_attributes = new_attributes
         new_regex.has_top_level_group = self.has_top_level_group
+        return new_regex
+    end
+    def recursivelyMatch(reference)
+        #
+        # generate the new regex
+        #
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = "[:subroutine:#{reference}:]"
+        new_regex = /#{self_as_string}#{other_regex_as_string}/
+        
+        #
+        # carry over attributes
+        #
+        new_regex.group_attributes = self.group_attributes
         return new_regex
     end
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
@@ -969,11 +1032,11 @@ class Regexp
         #
         # run tests
         #
-        # if there are backreferences, then implement them before testing
-        if "#{new_regex}" =~ /\[:backreference:([^\\]+?):\]/
-            test_regex = /#{new_regex.to_tag[:match]}/
-        else
-            test_regex = new_regex
+        # temporarily implement matchResultOfs for tests
+        test_regex = Grammar.fixupBackRefs(new_regex.without_default_mode_modifiers, new_regex.group_attributes, was_first_group_removed: false)
+        # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+        suppress_output do
+            test_regex = Regexp.new(test_regex)
         end
         Regexp.runTest(:should_partial_match    , pattern_attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
         Regexp.runTest(:should_not_partial_match, pattern_attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
@@ -1096,8 +1159,11 @@ end
     def zeroOrMoreOf(*arguments)
         //.zeroOrMoreOf(*arguments)
     end
-    def backReference(reference)
-        //.backReference(reference)
+    def matchResultOf(reference)
+        //.matchResultOf(reference)
+    end
+    def recursivelyMatch(reference)
+        //.recursivelyMatch(reference)
     end
 
 #
@@ -1181,7 +1247,12 @@ class PatternRange
         end
         start_pattern_as_tag =  start_pattern.to_tag(without_optimizations: true)
         # prevent accidental zero length matches
-        if "" =~ /#{start_pattern_as_tag[:match]}/ and not key_arguments[:zeroLengthStart?]
+        pattern = nil
+        # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+        suppress_output do
+            pattern = /#{start_pattern_as_tag[:match]}/
+        end
+        if "" =~ pattern and not key_arguments[:zeroLengthStart?]
             puts "Warning: #{/#{start_pattern_as_tag[:match]}/.inspect}\nmatches the zero length string (\"\").\n\n"
             puts "This means that the patternRange always matches"
             puts "You can disable this warning by settting :zeroLengthStart? to true."

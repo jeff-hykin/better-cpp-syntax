@@ -76,13 +76,13 @@
   scopes:
     - punctuation.definition.parameters.begin
 - source: arg1
-  scopesBegin:
+  scopes:
     - variable.parameter.preprocessor
 - source: ','
   scopes:
     - punctuation.separator.parameters
-- source: ' arg2'
-  scopesEnd:
+- source: arg2
+  scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -103,13 +103,13 @@
   scopes:
     - punctuation.definition.parameters.begin
 - source: arg1
-  scopesBegin:
+  scopes:
     - variable.parameter.preprocessor
 - source: ','
   scopes:
     - punctuation.separator.parameters
-- source: ' arg2'
-  scopesEnd:
+- source: arg2
+  scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -244,18 +244,14 @@
   scopes:
     - entity.name.function.preprocessor
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.definition.parameters.begin
 - source: ...
   scopes:
-    - punctuation.vararg-ellipses
+    - punctuation.vararg-ellipses.variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.definition.parameters.end
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -422,9 +418,20 @@
 - source: public
   scopes:
     - storage.type.modifier.access.public
-- source: 'std::true_type'
+- source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - entity.name.type.inherited
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: \
   scopes:
     - constant.character.escape.line-continuation

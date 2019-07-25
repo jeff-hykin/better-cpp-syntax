@@ -35,7 +35,8 @@
     - storage.type.modifier.access.public
 - source: B
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class

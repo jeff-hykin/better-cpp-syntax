@@ -22,8 +22,6 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: /*
   scopesBegin:
     - comment.block
@@ -36,16 +34,12 @@
   scopesEnd:
     - comment.block
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: addr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -53,4 +47,7 @@
 - source: +
   scopes:
     - keyword.operator
-- source: ' UPGRADE_SPACE_SIZE)'
+- source: ' UPGRADE_SPACE_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
