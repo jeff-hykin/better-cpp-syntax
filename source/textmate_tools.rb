@@ -541,6 +541,7 @@ class Regexp
         should_partial_match: "",
         should_not_partial_match: "",
         repository: "",
+        word_cannot_be_any_of: ""
     }
     
     def __deep_clone__()
@@ -1028,7 +1029,14 @@ class Regexp
         else
             new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
         end
-
+        
+        if pattern_attributes[:word_cannot_be_any_of] != nil
+            # add the boundary
+            new_regex = /(?!\b(?:#{pattern_attributes[:word_cannot_be_any_of].join("|")})\b)#{new_regex.without_default_mode_modifiers}/
+            # don't let the argument carry over to the next regex
+            pattern_attributes.delete(:word_cannot_be_any_of)
+        end
+        
         #
         # Make changes to capture groups/attributes
         #
