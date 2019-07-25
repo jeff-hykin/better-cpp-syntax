@@ -589,7 +589,7 @@ class Regexp
         return new_regex
     end
     def reTag(arguments)
-        keep_tags = !(arguments[:all] == false || arguments[:keep] == false)
+        keep_tags = !(arguments[:all] == false || arguments[:keep] == false) || arguments[:append] != nil
         self_as_string = self.without_default_mode_modifiers
         new_regex = /#{self_as_string}/
         new_attributes = Marshal.load(Marshal.dump(self.group_attributes))
@@ -605,6 +605,9 @@ class Regexp
                     attribute[:tag_as] = tag
                     attribute[:retagged] = true
                 end
+            end
+            if arguments[:append] != nil
+                attribute[:tag_as] = attribute[:tag_as] + "." + arguments[:append]
             end
             next attribute
         end
