@@ -2508,7 +2508,7 @@ cpp_grammar = Grammar.new(
             match: newPattern(
                 match: /</,
                 tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^>\n]/).maybe(
+            ).zeroOrMoreOf(/[^>]/).maybe(
                 match: />/,
                 tag_as: "punctuation.definition.string.end"
             ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
@@ -2518,7 +2518,7 @@ cpp_grammar = Grammar.new(
             match: newPattern(
                 match: /\"/,
                 tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^\"\n]/).maybe(
+            ).zeroOrMoreOf(/[^\"]/).maybe(
                 match: /\"/,
                 tag_as: "punctuation.definition.string.end"
             ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
