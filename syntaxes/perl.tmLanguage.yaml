@@ -1580,7 +1580,7 @@ repository:
           name: entity.name.attribute.perl
     - include: "$self"
   function_call:
-    begin: "(?!\\b(?:qq|qw|q|m|qr|s|tr|y)\\b)((?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
+    begin: "((?-mix:(?!\\b(?:qq|qw|q|m|qr|s|tr|y)\\b)(?<!\\w)[a-zA-Z_][a-zA-Z_0-9]*(?!\\w)))(?:(?>\\s+)+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))(\\()"
     beginCaptures:
       '1':
         name: entity.name.function.call.perl

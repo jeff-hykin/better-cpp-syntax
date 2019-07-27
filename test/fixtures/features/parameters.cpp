@@ -34,6 +34,7 @@ void func23(const Type) {};
 void func24(const int) {};
 void func25(short const int) {};
 void func26(const short int) {};
+void func27(bool (*name)(int, int)) {};
 
 class GameState {};
 struct Node {};
