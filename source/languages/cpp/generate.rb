@@ -2496,7 +2496,6 @@ cpp_grammar = Grammar.new(
     cpp_grammar[:meta_preprocessor_include] = newPattern(
         should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
         should_partial_match: ["#include <foo> //comment"],
-        no_warn_match_after_newline?: true,
         match: @start_of_line.then(std_space).then(
             match: newPattern(match: /#/, tag_as: "punctuation.definition.directive")
             .maybe(@spaces).then(

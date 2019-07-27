@@ -675,7 +675,7 @@ class Regexp
 
         # check for matching after \n
         skip_newline_check = group_attributes.any? {|attribute| attribute[:no_warn_match_after_newline?]}
-        if /\\n(.*?)(?=!\||\\n)/ =~ regex_as_string and not skip_newline_check
+        if /\\n(.*?)(?:\||\\n|\]|$)/ =~ regex_as_string and not skip_newline_check
             if /[^\^$\[\]\(\)?:+*=!<>\\]/ =~ $1
                 puts "\n\nThere is a pattern that likely tries to match characters after \\n\n"
                 puts "textmate grammars only operate on a single line, \\n is the last possible character that can be matched.\n"
