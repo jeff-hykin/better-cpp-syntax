@@ -541,7 +541,8 @@ class Regexp
         should_partial_match: "",
         should_not_partial_match: "",
         repository: "",
-        word_cannot_be_any_of: ""
+        word_cannot_be_any_of: "",
+        no_warn_match_after_newline?: "",
     }
     
     def __deep_clone__()
@@ -671,6 +672,19 @@ class Regexp
             puts @group_attributes.to_yaml
             raise "Error: see printout above"
         end
+
+        # check for matching after \n
+        skip_newline_check = group_attributes.any? {|attribute| attribute[:no_warn_match_after_newline?]}
+        if /\\n(.*?)(?=!\||\\n)/ =~ regex_as_string and not skip_newline_check
+            if /[^\^$\[\]\(\)?:+*=!<>\\]/ =~ $1
+                puts group_attributes.to_yaml
+                puts "\n\nThere is a pattern that likely tries to match characters after \\n\n"
+                puts "textmate grammars only operate on a single line, \\n is the last possible character that can be matched.\n"
+                puts "Here is the pattern:\n"
+                puts regex_as_string
+            end
+        end
+        group_attributes.delete(:no_warn_match_after_newline?)
         
         #
         # Top level pattern
@@ -1019,7 +1033,6 @@ class Regexp
                     simple_quantifier_ending = "*"
             end
         end
-        
         # 
         # Generate the core regex
         # 
