@@ -33,27 +33,43 @@ patterns:
 - include: "#operators"
 - include: "#numbers"
 - include: "#strings"
-- begin: "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t
-    \ # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t
-    \ ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t#
-    varargs ellipsis?\n\t)\n  (\\))\n)?"
+- name: meta.preprocessor.macro.c
+  begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((#)\\s*define\\b)\\s+((?<!\\w)[a-zA-Z_]\\w*(?!\\w))(?:(\\()([^()\\\\]+)(\\)))?"
   beginCaptures:
     '1':
-      name: keyword.control.directive.define.c
+      patterns:
+      - include: "#inline_comment"
     '2':
-      name: punctuation.definition.directive.c
+      name: comment.block.c punctuation.definition.comment.begin.c
     '3':
-      name: entity.name.function.preprocessor.c
+      name: comment.block.c
+    '4':
+      patterns:
+      - match: "\\*\\/"
+        name: comment.block.c punctuation.definition.comment.end.c
+      - match: "\\*"
+        name: comment.block.c
     '5':
-      name: punctuation.definition.parameters.begin.c
+      name: keyword.control.directive.define.c
     '6':
-      name: variable.parameter.preprocessor.c
+      name: punctuation.definition.directive.c
+    '7':
+      name: entity.name.function.preprocessor.c
     '8':
-      name: punctuation.separator.parameters.c
+      name: punctuation.definition.parameters.begin.c
     '9':
+      patterns:
+      - match: "(?<=[(,])\\s*((?<!\\w)[a-zA-Z_]\\w*(?!\\w))\\s*"
+        captures:
+          '1':
+            name: variable.parameter.preprocessor.c
+      - match: ","
+        name: punctuation.separator.parameters.c
+      - match: "\\.\\.\\."
+        name: ellipses.c punctuation.vararg-ellipses.variable.parameter.preprocessor.c
+    '10':
       name: punctuation.definition.parameters.end.c
-  end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-  name: meta.preprocessor.macro.c
+  end: "(?<!\\\\)(?=\\n)"
   patterns:
   - include: "#preprocessor-rule-define-line-contents"
 - begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"
@@ -216,6 +232,19 @@ patterns:
 - match: ","
   name: punctuation.separator.delimiter.c
 repository:
+  inline_comment:
+    match: "(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/))"
+    captures:
+      '1':
+        name: comment.block.c punctuation.definition.comment.begin.c
+      '2':
+        name: comment.block.c
+      '3':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.c punctuation.definition.comment.end.c
+        - match: "\\*"
+          name: comment.block.c
   default_statement:
     name: meta.conditional.case.c
     begin: "((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((?<!\\w)default(?!\\w))"
