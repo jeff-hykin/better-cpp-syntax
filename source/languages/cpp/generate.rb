@@ -1654,11 +1654,11 @@ cpp_grammar = Grammar.new(
         end_pattern: parameter_ending,
         includes: [
             :ever_present_context, #macros and comments
+            :function_pointer_parameter,
             # all of these (indented) are here because of #282
                 :memory_operators,
                 :builtin_storage_type_initilizer,
                 :curly_initializer,
-            :function_pointer_parameter,
             :decltype,
             :vararg_ellipses,
             # this next pattern is for finding preceding modifiers like "const" or "short const" and then forcing the word after them to be tagged as a type "const aType" "short const int"
