@@ -11,22 +11,22 @@ const recorder = require("./recorder");
 function rewriteRule(rule, jsonPointer, pointers, scopeName) {
     if (rule.match) {
         rule.match = `(?#${scopeName}:${
-            pointers[jsonPointer + "/match"].key.line
+            pointers[jsonPointer + "/match"].key.line + 1
         })${rule.match}`;
     }
     if (rule.begin) {
         rule.begin = `(?#${scopeName}:${
-            pointers[jsonPointer + "/begin"].key.line
+            pointers[jsonPointer + "/begin"].key.line + 1
         })${rule.begin}`;
     }
     if (rule.end) {
         rule.end = `(?#${scopeName}:${
-            pointers[jsonPointer + "/end"].key.line
+            pointers[jsonPointer + "/end"].key.line + 1
         })${rule.end}`;
     }
     if (rule.while) {
         rule.while = `(?#${scopeName}:${
-            pointers[jsonPointer + "/while"].key.line
+            pointers[jsonPointer + "/while"].key.line + 1
         })${rule.while}`;
     }
     if (rule.patterns) {

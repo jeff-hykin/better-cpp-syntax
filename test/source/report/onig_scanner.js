@@ -45,7 +45,7 @@ module.exports = class OnigScanner {
             } catch (e) {
                 console.log(this.patterns[index]);
             }
-            if (match[0].start == startPosition) {
+            if (match && match[0].start == startPosition) {
                 break;
             }
         }
