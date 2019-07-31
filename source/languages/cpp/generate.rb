@@ -921,7 +921,7 @@ cpp_grammar = Grammar.new(
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
-            match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
+            match: maybe(tagged_scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
             includes: [
                     # then tag every `name::` seperately 
                     hidden_grammar_name,
@@ -934,7 +934,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ).then(/\s*+/).maybe(
                     template_call
-                ).then(scope_operator),
+                ).then(tagged_scope_operator),
             )
     end
     scope_resolution = generateScopeResolutionFinder["", :scope_resolution]
