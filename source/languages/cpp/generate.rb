@@ -879,7 +879,16 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = variable_name_without_bounds.then(/\s*+/).maybe(template_call).then(/::/)
+    one_scope_resolution = newPattern(
+        match: variable_name_without_bounds,
+        word_cannot_be_any_of: @cpp_tokens.representationsThat(
+            :isWord,
+            not(:isType),
+            not(:isVariable),
+            not(:isValidFunctionName),
+            not(:isLiteral)
+        )
+    ).then(/\s*+/).maybe(template_call).then(/::/)
     inline_scope_resolution = ->(tag_extension) do
         newPattern(
             match: zeroOrMoreOf(one_scope_resolution),
@@ -896,16 +905,23 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
+    scope_operator = newPattern(
+        match: /::/,
+        tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"
+    )
     preceding_scopes = newPattern(
-        match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
+        match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution_inner_generated ]
         )
     generateScopeResolutionFinder = ->(tag_extension, grammar_name) do
         hidden_grammar_name = (grammar_name.to_s+"_inner_generated").to_sym
+        tagged_scope_operator = scope_operator.reTag(
+            append: tag_extension[1...]
+        )
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
-            match: maybe(/::/).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
+            match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
             includes: [
                     # then tag every `name::` seperately 
                     hidden_grammar_name,
@@ -918,10 +934,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ).then(/\s*+/).maybe(
                     template_call
-                ).then(
-                    match: /::/,
-                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
-                ),
+                ).then(scope_operator),
             )
     end
     scope_resolution = generateScopeResolutionFinder["", :scope_resolution]
