@@ -2,14 +2,13 @@ const fs = require("fs");
 const { execSync } = require("child_process");
 const path = require("path");
 
-const argv = require("./arguments");
 const pathFor = require("./paths");
 
 const defaultTest = test =>
     fs.existsSync(test.spec.yaml) || !fs.existsSync(test.spec.json);
 
-module.exports = function() {
-    if (argv._.length !== 0 || argv.all) {
+module.exports = function(yargs) {
+    if (yargs.fixtures.length !== 0 || yargs.all) {
         return defaultTest;
     }
     const status = execSync("git status --porcelain").toString();
