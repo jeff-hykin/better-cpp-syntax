@@ -276,7 +276,7 @@ def predefinedMacros()
     macros << newPattern(
         newPattern(
             match: /\b__/.then(
-                match: /[A-Z_]/,
+                match: /[A-Z_]+/,
                 reference: "name",
             ).then(/__\b/),
             tag_as: "entity.name.other.preprocessor.macro.predefined.probably.$reference(name)",
