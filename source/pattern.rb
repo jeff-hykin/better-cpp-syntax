@@ -18,7 +18,7 @@ class Pattern
     def initialize(*arguments)
         arg1 = arguments[0]
         # if only a pattern, set attributes to {}
-        if arg1.instance_of? Regexp
+        if arg1.is_a? Pattern or arg1.is_a? Regexp
             @regex = arg1
             @arguments = {}
         # if its a Hash then extract the regex, and use the rest of the hash as the attributes
@@ -26,6 +26,20 @@ class Pattern
             @regex = arg1[:match]
             @arguments = arg1.clone
             @arguments.delete(:match)
+        end
+        # check for captures
+        if @regex.is_a? Regexp
+            begin
+                # this will throw a RegexpError if there are no capturing groups
+                test_regex = /#{@regex}\1/
+                #at this point @regex contains a capture group, complain
+                puts "There is a pattern that is being constructed from a regular expression"
+                puts "with a capturing group. This is not allowed, as the group cannot be tracked"
+                puts "The bad pattern is\n" + to_s
+                raise "Error: see printout above"
+            rescue RegexpError
+                # no cpature groups present, purposely do nothing
+            end
         end
     end
     def name
@@ -89,7 +103,7 @@ test = Pattern.new(
     match: /abc/,
     tag_as: "abc",
     reference: "abc"
-).then(/def/)
+).then(/(d)ef/)
 
 puts "regex:"
 puts test.to_r.inspect
