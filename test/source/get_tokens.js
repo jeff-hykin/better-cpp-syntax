@@ -2,21 +2,19 @@
 const path = require("path");
 const chalk = require("chalk");
 const vsctm = require("vscode-textmate-experimental");
-const argv = require("yargs").argv;
 const paths = require("./paths");
 const fs = require("fs");
 
-
 // retrive all the filetypes from the syntax
-let extensionsFor = {}
+let extensionsFor = {};
 for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
-    let langExtension = path.basename(eachSyntaxPath).replace(/\..+/g,"")
-    let syntax = JSON.parse(fs.readFileSync(eachSyntaxPath))
-    extensionsFor[langExtension] = syntax["fileTypes"]
+    let langExtension = path.basename(eachSyntaxPath).replace(/\..+/g, "");
+    let syntax = JSON.parse(fs.readFileSync(eachSyntaxPath));
+    extensionsFor[langExtension] = syntax["fileTypes"];
 }
 
-let languageExtensionFor = (fixturePath) => {
-    let fixtureExtension = path.extname(fixturePath).replace(/\./,"");
+let languageExtensionFor = fixturePath => {
+    let fixtureExtension = path.extname(fixturePath).replace(/\./, "");
     let matchingLanguageExtension = null;
     // find which lang the extension belongs to
     for (let eachLangExtension of Object.keys(extensionsFor)) {
@@ -24,14 +22,16 @@ let languageExtensionFor = (fixturePath) => {
         if (fixturePath.includes(`/${eachLangExtension}/`)) {
             matchingLanguageExtension = eachLangExtension;
             break;
-        // if the language extension is in their list, then there
-        } else if (extensionsFor[eachLangExtension].includes(fixtureExtension)) {
+            // if the language extension is in their list, then there
+        } else if (
+            extensionsFor[eachLangExtension].includes(fixtureExtension)
+        ) {
             matchingLanguageExtension = eachLangExtension;
             break;
         }
     }
     return matchingLanguageExtension;
-}
+};
 
 /**
  * @param {vsctm.Registry} registry
@@ -40,11 +40,19 @@ let languageExtensionFor = (fixturePath) => {
  * @param {boolean} showFailureOnly
  * @param {(line: string, token: vsctm.IToken) => boolean} process
  */
-module.exports = async function(registry, fixturePath, fixture, showFailureOnly, process) {
+module.exports = async function(
+    registry,
+    fixturePath,
+    fixture,
+    showFailureOnly,
+    process
+) {
     let displayedAtLeastOnce = false;
     let returnValue = true;
     try {
-        const grammar = await registry.loadGrammar(`source.${languageExtensionFor(fixturePath)}`);
+        const grammar = await registry.loadGrammar(
+            `source.${languageExtensionFor(fixturePath)}`
+        );
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {
@@ -58,7 +66,13 @@ module.exports = async function(registry, fixturePath, fixture, showFailureOnly,
                 }
             }
             if (displayLine) {
-                showFailureOnly || console.log("line was:\n  %s:%d: |%s|", fixturePath, lineNumber, line);
+                showFailureOnly ||
+                    console.log(
+                        "line was:\n  %s:%d: |%s|",
+                        fixturePath,
+                        lineNumber,
+                        line
+                    );
                 displayedAtLeastOnce = true;
             }
             lineNumber += 1;
@@ -68,7 +82,7 @@ module.exports = async function(registry, fixturePath, fixture, showFailureOnly,
         returnValue = false;
     }
     if (displayedAtLeastOnce) {
-        console.log(chalk.redBright("   Failed"))
+        console.log(chalk.redBright("   Failed"));
     }
 
     return returnValue;

@@ -1,48 +1,70 @@
-const fs = require("fs")
-const glob = require("glob")
-const path = require("path")
-const _ = require("lodash")
+const fs = require("fs");
+const glob = require("glob");
+const path = require("path");
+const _ = require("lodash");
 
-const getTokens = require("../get_tokens")
-const argv = require("../arguments")
-const { getOniguruma } = require("../report/oniguruma_decorator")
-const { getRegistry } = require("../registry")
-const recorder = require("../report/recorder")
-const {performanceForEachFixture, currentActiveFixture} = require("../symbols")
+const getTokens = require("../get_tokens");
+const { getOniguruma } = require("../report/oniguruma_decorator");
+const { getRegistry } = require("../registry");
+const recorder = require("../report/recorder");
+const {
+    performanceForEachFixture,
+    currentActiveFixture
+} = require("../symbols");
 
-const registry = getRegistry(getOniguruma)
 // get all reporters
-let reporters = {}
+let reporters = {};
 for (const each of glob.sync(`${__dirname}/../report/reporters/*.js`)) {
-    let filename = path.basename(each).replace(/\.js$/, "")
-    reporters[filename] = require(each)
+    let filename = path.basename(each).replace(/\.js$/, "");
+    reporters[filename] = require(each);
 }
 
-//
-// Commandline args
-//
-let [reporterName, ...files] = argv._
+async function runReport(yargs) {
+    const registry = getRegistry(getOniguruma);
+    // load the one mentioned in the commandline
+    recorder.loadReporter(reporters[yargs.reporter]);
 
-// load the one mentioned in the commandline
-recorder.loadReporter(reporters[reporterName])
-// if no files mentioned, then use all the fixtures
-if (files.length === 0) {
-    // use text fixtures instead
-    files = require("../get_tests")().map(test => test.fixture)
-}
+    // if no files mentioned, then use all the fixtures
+    let files = yargs.fixtures;
+    if (files.length === 0) {
+        // use text fixtures instead
+        files = require("../get_tests")(yargs).map(test => test.fixture);
+    } else {
+        files = _.flatten(files.map(file => glob.sync(file)));
+    }
 
-collectRecords()
-async function collectRecords() {
-    global[performanceForEachFixture] = {}
+    global[performanceForEachFixture] = {};
     for (const eachFile of files) {
-        console.log(eachFile)
-        global[currentActiveFixture] = eachFile
+        console.log(eachFile);
+        global[currentActiveFixture] = eachFile;
         const fixture = fs
             .readFileSync(eachFile)
             .toString()
-            .split("\n")
-        await getTokens(registry, eachFile, fixture, false, () => true)
+            .split("\n");
+        await getTokens(registry, eachFile, fixture, false, () => true);
     }
     console.log();
-    recorder.reportAllRecorders()
+    recorder.reportAllRecorders();
 }
+
+module.exports = {
+    command: "report <reporter> [fixtures..]",
+    desc: "Runs <reporter> and reports the collected information.",
+    builder: yargs => {
+        yargs
+            .positional("reporter", {
+                choices: Object.keys(reporters),
+                describe: "the reporter to run"
+            })
+            .positional("fixtures", {
+                default: [],
+                describe: "the fixtures to use"
+            })
+            .option("perf-limit", {
+                default: 20,
+                type: "number",
+                describe: "limit the number of perf report lines (0 to disable)"
+            });
+    },
+    handler: yargs => runReport(yargs)
+};
