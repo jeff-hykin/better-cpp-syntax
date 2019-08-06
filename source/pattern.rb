@@ -78,12 +78,13 @@ class Pattern
     end
 
     def to_tag
+        optimize = needs_to_capture && @next_regex == nil
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
-            captures: self.captures[1],
+            captures: self.captures(optimize ? 0 : 1)[1],
         }
-        if needs_to_capture
+        if optimize
             # optimize captures by removing outermost
             regex_as_string = regex_as_string[1..-2]
             output[:name] = @arguments[:tag_as]
@@ -94,15 +95,17 @@ class Pattern
         output
     end
 
-    def to_s(top_level = true)
-        regex_as_string = do_modify_regex_string(((@regex.is_a? Pattern) ? @regex.to_s : @regex.inspect))
-        output = do_get_to_s_name(top_level)
-        output += "\n  match: " + regex_as_string
-        output += ",\n  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as] != nil
-        output += ",\n  reference: " + @arguments[:reference] if @arguments[:reference] != nil
-        output += do_add_attributes()
-        output += ",\n)"
-        output += @next_regex.to_s(false) if @next_regex != nil
+    def to_s(depth = 0, top_level = true)
+        regex_as_string = (@regex.is_a? Pattern) ? @regex.to_s(depth + 2, true) : @regex.inspect
+        regex_as_string = do_modify_regex_string(regex_as_string)
+        indent = "  " * depth
+        output = indent + do_get_to_s_name(top_level)
+        output += "\n#{indent}  match: " + regex_as_string.lstrip
+        output += ",\n#{indent}  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as] != nil
+        output += ",\n#{indent}  reference: " + @arguments[:reference] if @arguments[:reference] != nil
+        output += do_add_attributes(indent)
+        output += ",\n#{indent})"
+        output += @next_regex.to_s(depth, false).lstrip if @next_regex != nil
         return output
     end
 
@@ -142,7 +145,7 @@ class Pattern
     def do_modify_regex_string(self_regex)
         return self_regex
     end
-    def do_add_attributes
+    def do_add_attributes(indent)
         return ""
     end
     def do_get_to_s_name(top_level)
@@ -170,7 +173,7 @@ class Pattern
     end
 
     def generate_capture
-        return {test: "bar"}
+        return {tag_as: @arguments[:tag_as]}
     end
 end
 
@@ -190,12 +193,12 @@ class MaybePattern < Pattern
 end
 
 test = Pattern.new(
-    match: /abc/,
+    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "aaa"),
     tag_as: "abc",
     reference: "abc"
 ).maybe(/def/).then(
     match: /ghi/,
-    tag_as: "abc"
+    tag_as: "ghi"
 )
 
 puts "regex:"
