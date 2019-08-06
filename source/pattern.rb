@@ -67,23 +67,38 @@ class Pattern
         output
     end
     def to_s(top_level = true)
-        output = top_level ? "Pattern.new(" : ".then("
-        output += "\n  match: " + ((@regex.is_a? Pattern) ? @regex.to_s : @regex.inspect)
+        regex_as_string = do_modify_regex_string(((@regex.is_a? Pattern) ? @regex.to_s : @regex.inspect))
+        output = do_get_to_s_name(top_level)
+        output += "\n  match: " + regex_as_string
         output += ",\n  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as] != nil
         output += ",\n  reference: " + @arguments[:reference] if @arguments[:reference] != nil
+        output += do_add_attributes()
         output += ",\n)"
         output += @next_regex.to_s(false) if @next_regex != nil
         return output
     end
     def to_r
         self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
-        if @arguments[:tag_as] != nil
-            self_regex = "(#{self_regex})"
-        end
+        self_regex = do_modify_regex(self_regex)
         if next_regex == nil
             return /#{self_regex}/
         end
         /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
+    end
+    def do_modify_regex(self_regex)
+        if @arguments[:tag_as] != nil
+            self_regex = "(#{self_regex})"
+        end
+        return self_regex
+    end
+    def do_modify_regex_string(self_regex)
+        return self_regex
+    end
+    def do_add_attributes
+        return ""
+    end
+    def do_get_to_s_name(top_level)
+        top_level ? "Pattern.new(" : ".then("
     end
     def start_pattern
         self
@@ -106,18 +121,18 @@ class Pattern
 end
 
 class MaybePattern < Pattern
-    def to_r
-        self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
+    def do_modify_regex(self_regex)
         if @arguments[:tag_as] != nil
             self_regex = "(#{self_regex})?"
         elsif
             self_regex = "(?:#{self_regex})?"
         end
-        if next_regex == nil
-            return /#{self_regex}/
-        end
-        /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
+        return self_regex
     end
+    def do_get_to_s_name(top_level)
+        top_level ? "maybe(" : ".maybe("
+    end
+
 end
 
 test = Pattern.new(
