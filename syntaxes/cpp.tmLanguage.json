@@ -4873,7 +4873,7 @@
           "name": "entity.name.other.preprocessor.macro.predefined._Float16.cpp"
         },
         {
-          "match": "(\\b__([A-Z_])__\\b)",
+          "match": "(\\b__([A-Z_]+)__\\b)",
           "captures": {
             "1": {
               "name": "entity.name.other.preprocessor.macro.predefined.probably.$2.cpp"

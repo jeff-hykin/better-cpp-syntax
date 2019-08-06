@@ -15,6 +15,31 @@ class Pattern
     @next_regex
     attr_accessor :next_regex
 
+    #
+    # Helpers
+    #
+
+    def needs_to_capture
+        capturing_attributes = [
+            :tag_as,
+            :reference,
+            :includes,
+            :repository,
+        ]
+        not (@arguments.keys & capturing_attributes).empty?
+    end
+
+    def insert(pattern)
+        last = self
+        last = last.next_regex while last.next_regex != nil
+        last.next_regex = pattern
+        self
+    end
+
+    #
+    # Public interface
+    #
+
     def initialize(*arguments)
         arg1 = arguments[0]
         # if only a pattern, set attributes to {}
@@ -42,6 +67,7 @@ class Pattern
             end
         end
     end
+
     def name
         if @arguments[:reference] != nil
             return @arguments[:reference]
@@ -50,14 +76,15 @@ class Pattern
         end
         self.to_s
     end
+
     def to_tag
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
             captures: self.captures,
         }
-        if @arguments[:tag_as] != nil
-            # optimize captures be removing outermost
+        if needs_to_capture
+            # optimize captures by removing outermost
             regex_as_string = regex_as_string[1..-2]
             output[:name] = @arguments[:tag_as]
         end
@@ -66,6 +93,7 @@ class Pattern
         # the appropriate number
         output
     end
+
     def to_s(top_level = true)
         regex_as_string = do_modify_regex_string(((@regex.is_a? Pattern) ? @regex.to_s : @regex.inspect))
         output = do_get_to_s_name(top_level)
@@ -77,6 +105,7 @@ class Pattern
         output += @next_regex.to_s(false) if @next_regex != nil
         return output
     end
+
     def to_r
         self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
         self_regex = do_modify_regex(self_regex)
@@ -85,8 +114,27 @@ class Pattern
         end
         /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
     end
+
+    def start_pattern
+        self
+    end
+
+    #
+    # Chaining
+    # 
+    def then(pattern)
+        pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
+        insert(pattern)
+    end
+    def maybe(pattern)
+        insert(MaybePattern.new(pattern))
+    end
+
+    #
+    # Inheritance
+    #
     def do_modify_regex(self_regex)
-        if @arguments[:tag_as] != nil
+        if needs_to_capture
             self_regex = "(#{self_regex})"
         end
         return self_regex
@@ -100,29 +148,25 @@ class Pattern
     def do_get_to_s_name(top_level)
         top_level ? "Pattern.new(" : ".then("
     end
-    def start_pattern
-        self
-    end
-    def insert(pattern)
-        last = self
-        last = last.next_regex while last.next_regex != nil
-        last.next_regex = pattern
-        self
-    end
-    def then(pattern)
-        pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
-        insert(pattern)
-    end
-    def maybe(pattern)
-        insert(MaybePattern.new(pattern))
-    end
-    def captures
+
+    #
+    # Internal
+    #
+    def captures(capture_count = 0)
+        captures = []
+        if needs_to_capture
+            captures << {capture: capture_count}.merge(generate_capture)
+            capture_count += 1
+        end
+        capture_count = @regex.captures(capture_count) if @regex.is_a? Pattern
+        capture_count = @nextregex.captures(capture_count) if @next_regex != nil
+        return capture_count, captures
     end
 end
 
 class MaybePattern < Pattern
     def do_modify_regex(self_regex)
-        if @arguments[:tag_as] != nil
+        if needs_to_capture
             self_regex = "(#{self_regex})?"
         elsif
             self_regex = "(?:#{self_regex})?"
