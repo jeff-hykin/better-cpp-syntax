@@ -1,11 +1,5 @@
 def regex_to_s(regex)
-    as_string = regex.to_s
-    # if it is the default settings (AKA -mix) then remove it
-    if (as_string.size > 6) and (as_string[0..5] == '(?-mix')
-        return regex.inspect[1..-2]
-    else 
-        return as_string
-    end
+    regex.inspect[1..-2]
 end
 
 class Pattern
@@ -19,7 +13,8 @@ class Pattern
     # Helpers
     #
 
-    def needs_to_capture
+    # does @arguments contain any attributes that require this pattern be captured
+    def needs_to_capture?
         capturing_attributes = [
             :tag_as,
             :reference,
@@ -68,6 +63,7 @@ class Pattern
         end
     end
 
+    # attempts to provide a memorable name for a pattern
     def name
         if @arguments[:reference] != nil
             return @arguments[:reference]
@@ -77,8 +73,9 @@ class Pattern
         self.to_s
     end
 
+    # converts a Pattern to a Hash represnting a textmate pattern
     def to_tag
-        optimize = needs_to_capture && @next_regex == nil
+        optimize = needs_to_capture? && @next_regex == nil
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
@@ -95,6 +92,8 @@ class Pattern
         output
     end
 
+    # Displays the Pattern as you would write it in code
+    # This displays the canonical form, that is helpers such as oneOrMoreOf() become #then
     def to_s(depth = 0, top_level = true)
         regex_as_string = (@regex.is_a? Pattern) ? @regex.to_s(depth + 2, true) : @regex.inspect
         regex_as_string = do_modify_regex_string(regex_as_string)
@@ -109,13 +108,19 @@ class Pattern
         return output
     end
 
+    # converts a pattern to a Regexp
     def to_r
         self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
         self_regex = do_modify_regex(self_regex)
         if next_regex == nil
             return /#{self_regex}/
         end
+        if atomic?
+            return /#{self_regex}#{regex_to_s(next_regex.to_r)}/
+        end
         /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
+        # tests are ran here
+        # TODO: consider making tests their own method to prevent running them repeatedly
     end
 
     def start_pattern
@@ -136,20 +141,45 @@ class Pattern
     #
     # Inheritance
     #
+
+    # what modifications to make to the @regex
+    # wrapping in a group is a common example
+    # despite the name, this works on strings
+    # called by #to_r
     def do_modify_regex(self_regex)
-        if needs_to_capture
+        if needs_to_capture?
             self_regex = "(#{self_regex})"
         end
         return self_regex
     end
+
+    # what modifications to make to @regex.to_s
+    # called by #to_s
     def do_modify_regex_string(self_regex)
         return self_regex
     end
+
+    # return a string of any additional attributes that need to be added to the #to_s output
+    # indent is the amount of space the parent block is indented, attributes are indented 2 more
+    # called by #to_s
     def do_add_attributes(indent)
         return ""
     end
+
+    # What is the name of the method that the user would call
+    # top_level is if a freestanding or chaining function is called
+    # called by #to_s
     def do_get_to_s_name(top_level)
         top_level ? "Pattern.new(" : ".then("
+    end
+
+    # is the result of #to_r atomic for the purpose of regex building.
+    # /(?:a|b)/ is atomic /(a)(b|c)/ is not. the safe answer is false.
+    # NOTE: this is not the same concept as atomic groups, all groups are considered
+    #   atomic for the purpose of regex building
+    # called by #to_r
+    def atomic?
+        false
     end
 
     #
@@ -157,7 +187,7 @@ class Pattern
     #
     def captures(capture_count = 0)
         captures = []
-        if needs_to_capture
+        if needs_to_capture?
             captures << {capture: capture_count}.merge(generate_capture)
             capture_count += 1
         end
@@ -179,7 +209,7 @@ end
 
 class MaybePattern < Pattern
     def do_modify_regex(self_regex)
-        if needs_to_capture
+        if needs_to_capture?
             self_regex = "(#{self_regex})?"
         elsif
             self_regex = "(?:#{self_regex})?"
@@ -189,7 +219,28 @@ class MaybePattern < Pattern
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
     end
+end
 
+class LookAround < Pattern
+    def do_modify_regex(self_regex)
+        case @arguments[:type]
+        when :lookAheadFor      then self_regex = "(?=#{self_regex})"
+        when :lookAheadToAvoid  then self_regex = "(?!#{self_regex})"
+        when :lookBehindFor     then self_regex = "(?<=#{self_regex})"
+        when :lookBehindToAvoid then self_regex = "(?<!#{self_regex})"
+        end
+        # TODO: do captures work in lookArounds?
+        if needs_to_capture?
+            self_regex = "(#{self_regex})"
+        end
+        return self_regex
+    end
+    def do_get_to_s_name(top_level)
+        top_level ? "lookAround(" : ".lookAround("
+    end
+    def atomic?
+        true
+    end
 end
 
 test = Pattern.new(
@@ -199,7 +250,7 @@ test = Pattern.new(
 ).maybe(/def/).then(
     match: /ghi/,
     tag_as: "ghi"
-)
+).then(/jkl/)
 
 puts "regex:"
 puts test.to_r.inspect
