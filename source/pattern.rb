@@ -81,7 +81,7 @@ class Pattern
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
-            captures: self.captures,
+            captures: self.captures[1],
         }
         if needs_to_capture
             # optimize captures by removing outermost
@@ -158,9 +158,19 @@ class Pattern
             captures << {capture: capture_count}.merge(generate_capture)
             capture_count += 1
         end
-        capture_count = @regex.captures(capture_count) if @regex.is_a? Pattern
-        capture_count = @nextregex.captures(capture_count) if @next_regex != nil
+        if @regex.is_a? Pattern
+            capture_count, new_captures = @regex.captures(capture_count) 
+            captures.concat(new_captures)
+        end
+        if @next_regex != nil
+            capture_count, new_captures = @next_regex.captures(capture_count) 
+            captures.concat(new_captures)
+        end
         return capture_count, captures
+    end
+
+    def generate_capture
+        return {test: "bar"}
     end
 end
 
@@ -183,7 +193,10 @@ test = Pattern.new(
     match: /abc/,
     tag_as: "abc",
     reference: "abc"
-).maybe(/def/)
+).maybe(/def/).then(
+    match: /ghi/,
+    tag_as: "abc"
+)
 
 puts "regex:"
 puts test.to_r.inspect
