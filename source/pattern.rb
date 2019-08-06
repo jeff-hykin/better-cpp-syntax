@@ -88,14 +88,35 @@ class Pattern
     def start_pattern
         self
     end
-    def then(pattern)
-        pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
+    def insert(pattern)
         last = self
         last = last.next_regex while last.next_regex != nil
         last.next_regex = pattern
         self
     end
+    def then(pattern)
+        pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
+        insert(pattern)
+    end
+    def maybe(pattern)
+        insert(MaybePattern.new(pattern))
+    end
     def captures
+    end
+end
+
+class MaybePattern < Pattern
+    def to_r
+        self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
+        if @arguments[:tag_as] != nil
+            self_regex = "(#{self_regex})?"
+        elsif
+            self_regex = "(?:#{self_regex})?"
+        end
+        if next_regex == nil
+            return /#{self_regex}/
+        end
+        /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
     end
 end
 
@@ -103,7 +124,7 @@ test = Pattern.new(
     match: /abc/,
     tag_as: "abc",
     reference: "abc"
-).then(/(d)ef/)
+).maybe(/def/)
 
 puts "regex:"
 puts test.to_r.inspect
