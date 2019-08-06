@@ -115,12 +115,13 @@ class Pattern
         if next_regex == nil
             return /#{self_regex}/
         end
+        # tests are ran here
+        # TODO: consider making tests their own method to prevent running them repeatedly
+        puts atomic?
         if atomic?
             return /#{self_regex}#{regex_to_s(next_regex.to_r)}/
         end
         /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
-        # tests are ran here
-        # TODO: consider making tests their own method to prevent running them repeatedly
     end
 
     def start_pattern
@@ -134,8 +135,41 @@ class Pattern
         pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
         insert(pattern)
     end
-    def maybe(pattern)
-        insert(MaybePattern.new(pattern))
+    
+    def maybe(pattern) insert(MaybePattern.new(pattern)) end
+    def lookAround(pattern) insert(LookAroundPattern.new(pattern)) end
+
+    def lookBehindToAvoid(pattern)
+        if pattern.is_a? Hash
+            pattern[:type] = :lookBehindToAvoid
+        elsif
+            pattern = {match: pattern, type: :lookBehindToAvoid}
+        end
+        lookAround(pattern)
+    end
+    def lookBehindFor(pattern)
+        if pattern.is_a? Hash
+            pattern[:type] = :lookBehindFor
+        elsif
+            pattern = {match: pattern, type: :lookBehindFor}
+        end
+        lookAround(pattern)
+    end
+    def lookAheadToAvoid(pattern)
+        if pattern.is_a? Hash
+            pattern[:type] = :lookAheadToAvoid
+        elsif
+            pattern = {match: pattern, type: :lookAheadToAvoid}
+        end
+        lookAround(pattern)
+    end
+    def lookAheadFor(pattern)
+        if pattern.is_a? Hash
+            pattern[:type] = :lookAheadFor
+        elsif
+            pattern = {match: pattern, type: :lookAheadFor}
+        end
+        lookAround(pattern)
     end
 
     #
@@ -160,7 +194,8 @@ class Pattern
     end
 
     # return a string of any additional attributes that need to be added to the #to_s output
-    # indent is the amount of space the parent block is indented, attributes are indented 2 more
+    # indent is a string with the amount of space the parent block is indented, attributes
+    # are indented 2 more spaces
     # called by #to_s
     def do_add_attributes(indent)
         return ""
@@ -221,7 +256,7 @@ class MaybePattern < Pattern
     end
 end
 
-class LookAround < Pattern
+class LookAroundPattern < Pattern
     def do_modify_regex(self_regex)
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
@@ -238,6 +273,15 @@ class LookAround < Pattern
     def do_get_to_s_name(top_level)
         top_level ? "lookAround(" : ".lookAround("
     end
+    def do_add_attributes(indent)
+        type = case @arguments[:type]
+        when :lookAheadFor      then ":lookAheadFor"
+        when :lookAheadToAvoid  then ":lookAheadToAvoid"
+        when :lookBehindFor     then ":lookBehindFor"
+        when :lookBehindToAvoid then ":lookBehindToAvoid"
+        end
+        ",\n#{indent}  type: #{type}"
+    end
     def atomic?
         true
     end
@@ -250,7 +294,7 @@ test = Pattern.new(
 ).maybe(/def/).then(
     match: /ghi/,
     tag_as: "ghi"
-).then(/jkl/)
+).lookAheadFor(/jkl/)
 
 puts "regex:"
 puts test.to_r.inspect
