@@ -147,7 +147,7 @@ class Grammar
     def self.export(*args, &block)
         # this method's goal is to safely namespace external patterns
         # usage: 
-        #     Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: true) do |grammar|
+        #     Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: true) do |grammar, namespace|
         #         # create patterns here with the grammar object
         #     end
         # 
@@ -170,25 +170,24 @@ class Grammar
         }
     end
     
-    def import(file, namespace:"")
-        # make sure the pathname is absolute
-        #     if its not then it will try to locate the file relative to the working directory, rather than relative to the source file
-        #     in the source file this can be easily fixed by adding __dir__() to the path,
-        #     however we can't use __dir__() in this method because the __dir__() changes based on its source file (aka it would be relative to this file)
-        if not Pathname.new(file).absolute?
-            raise "\n\nthe grammar.import('#{file}') needs to be an absolute path.\nThis likely means you need to change it to something like:\ngrammar.import(__dir__()+'/#{file}')"
+    def import(filepath, namespace:"")
+        if not Pathname.new(filepath).absolute?
+            # try to detect the relative path
+            source_directory = File.dirname(caller[-1].sub(/:\d+:.+?$/,""))
+            # make the filepath absolute
+            filepath = File.join(source_directory, filepath)
         end
         # make sure it has the .rb extension, for some reason its required for the load function
-        if file[-3..-1] != ".rb"
-            file += ".rb"
+        if filepath[-3..-1] != ".rb"
+            filepath += ".rb"
         end
         # import the file using load rather than require so that the @@export_data gets reset on each import
-        load(file)
+        load(filepath)
         # create a shallow copy of the grammar
         namespaced_grammar = Grammar.new(self, namespace, @@export_data[:export_options])
         if @@export_data != nil
             # run the import function with the namespaced grammar
-            output = @@export_data[:lambda][namespaced_grammar]
+            output = @@export_data[:lambda][namespaced_grammar, namespace]
             # clean up the consumed lambda
             @@export_data = nil
         end
@@ -410,8 +409,6 @@ class Grammar
             else+
                 @namespace = ""
             end
-            puts "args is: #{args} "
-            puts "kwargs is: #{kwargs} "
             @export_options  = kwargs
         # if not making a copy then run the normal init
         else
