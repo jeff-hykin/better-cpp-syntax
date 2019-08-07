@@ -1570,7 +1570,7 @@ cpp_grammar = Grammar.new(
         includes: cpp_grammar[:evaluation_context]
     )
         
-    cpp_grammar[:operators] += [
+    cpp_grammar[:operators, overwrite: true] += [
         newPattern(
             match: /--/,
             tag_as: "keyword.operator.decrement"
@@ -2005,10 +2005,6 @@ cpp_grammar = Grammar.new(
     # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
     preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
     preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
-    cpp_grammar[:macro_argument] = newPattern(
-        match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        tag_as: "variable.other.macro.argument"
-    )
 
 #
 # Lambdas

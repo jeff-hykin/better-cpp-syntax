@@ -10818,10 +10818,6 @@
         }
       ]
     },
-    "macro_argument": {
-      "match": "##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
-      "name": "variable.other.macro.argument.cpp"
-    },
     "lambdas": {
       "begin": "((?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*&\">])|(?<=\\Wreturn|^return))\\s*(\\[(?!\\[))((?:[^\\]\\[]*\\[.*?\\](?!\\s*\\[)[^\\]\\[]*?)*[^\\]\\[]*?)(\\](?!\\[)))",
       "beginCaptures": {
@@ -14755,6 +14751,10 @@
     "backslash_escapes": {
       "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
       "name": "constant.character.escape.cpp"
+    },
+    "macro_argument": {
+      "match": "##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+      "name": "variable.other.macro.argument.cpp"
     },
     "square_brackets": {
       "name": "meta.bracket.square.access.cpp",

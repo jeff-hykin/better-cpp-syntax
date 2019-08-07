@@ -139,7 +139,7 @@ end
 
 class Grammar
     attr_accessor :data, :all_tags, :language_ending
-    
+        
     #
     # Globally accessible current grammar object
     #
@@ -369,11 +369,19 @@ class Grammar
     #
     # External Helpers
     #
-    def [](key)
-        return @data[:repository][key]
+    def [](*args)
+        return @data[:repository][args[0]]
     end
     
-    def []=(key, value)
+    def []=(*args)
+        # parse out the arguments: grammar[key, (optional_overwrite)] = value
+        *keys, value = args
+        key, overwrite_option = keys
+        overwrite_allowed = overwrite_option.is_a?(Hash) && overwrite_option[:overwrite]
+        # check for accidental overwrite
+        if @data[:repository][key] != nil && (not overwrite_option)
+            puts "\n\nWarning: the #{key} repository is being overwritten.\n\nIf this is intentional, change:\ngrammar[:#{key}] = *value*\ninto:\ngrammar[:#{key}, overwrite: true] = *value*"
+        end
         # add it to the repository
         @data[:repository][key] = value
         # tell the object it was added to a repository
