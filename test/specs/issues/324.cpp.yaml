@@ -46,6 +46,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: do
   scopes:
     - keyword.control.do
@@ -57,8 +59,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.block
 - source: (
   scopesBegin:
     - meta.parens
@@ -221,7 +221,11 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: "\t}"
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: while
   scopes:
     - keyword.control.while

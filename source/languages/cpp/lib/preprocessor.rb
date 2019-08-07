@@ -2,7 +2,7 @@ require_relative '../../../../directory'
 require_relative PathFor[:textmate_tools]
 
 Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|
-    ->(std_space) do
+    ->(std_space, identifier) do
         # 
         # helpers
         # 
@@ -55,27 +55,80 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         # 
         # define
         # 
-            grammar[:single_line_macro] = newPattern(
-                    should_fully_match: ['#define EXTERN_C extern "C"'],
-                    match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
-                    includes: [
-                        :meta_preprocessor_macro,
-                        :comments,
-                        :string_context,
-                        :number_literal,
-                        :operators,
-                        :semicolon,
-                    ]
-                )
+            grammar[:single_line_macro] = Pattern.new(
+                should_fully_match: ["#define EXTERN_C extern \"C\""],
+                match: /^/.then(std_space).then(/#\s*+define\b/).then(/.*[^\\]$/),
+                includes: [ :multi_line_macro ]
+            )
+            grammar[:multi_line_macro] = PatternRange.new(
+                tag_as: "meta.preprocessor.macro",
+                start_pattern: Pattern.new(
+                    # the directive
+                    Pattern.new(
+                        tag_as: "keyword.control.directive.define",
+                        match: directive_start.then(
+                            /define\b/
+                        ),
+                    # the name of the directive
+                    ).maybe(@spaces).then(
+                        match: identifier,
+                        tag_as: "entity.name.function.preprocessor",
+                    )
+                ),
+                end_pattern: non_escaped_newline,
+                includes: [
+                    # the parameters
+                    PatternRange.new(
+                        start_pattern: Pattern.new(
+                            # find the name of the function
+                            /\G/.maybe(@spaces).then(
+                                match: /\(/,
+                                tag_as: "punctuation.definition.parameters.begin",
+                            )
+                        ),
+                        end_pattern: Pattern.new(
+                            match: /\)/,
+                            tag_as: "punctuation.definition.parameters.end"
+                        ),
+                        includes: [
+                            # a parameter
+                            Pattern.new(
+                                lookBehindFor(/[(,]/).maybe(@spaces).then(
+                                        match: identifier,
+                                        tag_as: "variable.parameter.preprocessor"
+                                ).maybe(@spaces)
+                            ),
+                            # commas
+                            Pattern.new(
+                                match: /,/,
+                                tag_as: "punctuation.separator.parameters"
+                            ),
+                            # ellipses
+                            Pattern.new(
+                                match: /\.\.\./,
+                                tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
+                            )
+                        ]
+                    ),
+                    # everything after the parameters
+                    :macro_context
+                ]
+                
+            )
+        # 
         # arguments
+        # 
+        
+        # 
         # *conditionals*
+        # 
             # if
             # ifdef
             # ifndef
             # elif
             # else
             # endif
-                grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = newPattern(
+                grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = Pattern.new(
                     match: wordBounds(/#(?:endif|else|elif)/),
                     tag_as: "keyword.control.directive.$match"
                 )
@@ -84,6 +137,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             :pragma_mark,
             :pragma,
             :single_line_macro,
+            :multi_line_macro,
             :hacky_fix_for_stray_directive,
         ].map {|each| (namespace + each.to_s).to_sym }
     end

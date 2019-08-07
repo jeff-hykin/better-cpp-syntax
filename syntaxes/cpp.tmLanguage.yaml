@@ -112,16 +112,11 @@ repository:
     - include: "#number_literal"
     - include: "#line_continuation_character"
   single_line_macro:
-    match: "^((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))#define.*(?<![\\\\])(?:\\n|$)"
+    match: "^((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))#\\s*+define\\b.*[^\\\\]$"
     captures:
       '0':
         patterns:
-        - include: "#meta_preprocessor_macro"
-        - include: "#comments"
-        - include: "#string_context"
-        - include: "#number_literal"
-        - include: "#operators"
-        - include: "#semicolon"
+        - include: "#multi_line_macro"
       '1':
         patterns:
         - include: "#inline_comment"
@@ -135,6 +130,49 @@ repository:
           name: comment.block.cpp punctuation.definition.comment.end.cpp
         - match: "\\*"
           name: comment.block.cpp
+  multi_line_macro:
+    name: meta.preprocessor.macro.cpp
+    begin: "((?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(#)\\s*define\\b)\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)"
+    beginCaptures:
+      '1':
+        name: keyword.control.directive.define.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '6':
+        name: punctuation.definition.directive.cpp
+      '7':
+        name: entity.name.function.preprocessor.cpp
+    end: "(?<!\\\\)(?=\\n)"
+    patterns:
+    - begin: "\\G\\s*(\\()"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.parameters.begin.cpp
+      end: "(\\))"
+      endCaptures:
+        '1':
+          name: punctuation.definition.parameters.end.cpp
+      patterns:
+      - match: "(?<=[(,])\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*"
+        captures:
+          '1':
+            name: variable.parameter.preprocessor.cpp
+      - match: ","
+        name: punctuation.separator.parameters.cpp
+      - match: "\\.\\.\\."
+        name: punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
+    - include: "#macro_context"
   hacky_fix_for_stray_directive:
     match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
     name: keyword.control.directive.$0.cpp
@@ -149,16 +187,15 @@ repository:
     name: keyword.operator.assignment.cpp
   ever_present_context:
     patterns:
-    - include: "#single_line_macro"
     - include: "#preprocessor_rule_enabled"
     - include: "#preprocessor_rule_disabled"
     - include: "#preprocessor_rule_conditional"
-    - include: "#meta_preprocessor_macro"
     - include: "#meta_preprocessor_diagnostic"
     - include: "#meta_preprocessor_include"
     - include: "#pragma_mark"
     - include: "#pragma"
     - include: "#single_line_macro"
+    - include: "#multi_line_macro"
     - include: "#hacky_fix_for_stray_directive"
     - include: "#meta_preprocessor_line"
     - include: "#meta_preprocessor_undef"
@@ -7704,46 +7741,6 @@ repository:
   misc_storage_modifiers:
     match: "\\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\\b"
     name: storage.modifier.$0.cpp
-  meta_preprocessor_macro:
-    name: meta.preprocessor.macro.cpp
-    begin: "(?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))((#)\\s*define\\b)\\s+((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(\\()([^()\\\\]+)(\\)))?"
-    beginCaptures:
-      '1':
-        patterns:
-        - include: "#inline_comment"
-      '2':
-        name: comment.block.cpp punctuation.definition.comment.begin.cpp
-      '3':
-        name: comment.block.cpp
-      '4':
-        patterns:
-        - match: "\\*\\/"
-          name: comment.block.cpp punctuation.definition.comment.end.cpp
-        - match: "\\*"
-          name: comment.block.cpp
-      '5':
-        name: keyword.control.directive.define.cpp
-      '6':
-        name: punctuation.definition.directive.cpp
-      '7':
-        name: entity.name.function.preprocessor.cpp
-      '8':
-        name: punctuation.definition.parameters.begin.cpp
-      '9':
-        patterns:
-        - match: "(?<=[(,])\\s*((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*"
-          captures:
-            '1':
-              name: variable.parameter.preprocessor.cpp
-        - match: ","
-          name: punctuation.separator.parameters.cpp
-        - match: "\\.\\.\\."
-          name: punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
-      '10':
-        name: punctuation.definition.parameters.end.cpp
-    end: "(?<!\\\\)(?=\\n)"
-    patterns:
-    - include: "#macro_context"
   meta_preprocessor_diagnostic:
     name: meta.preprocessor.diagnostic.cpp
     begin: "^\\s*((#)\\s*(error|warning))\\b\\s*"

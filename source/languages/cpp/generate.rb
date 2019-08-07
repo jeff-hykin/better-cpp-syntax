@@ -47,7 +47,11 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:inline_comment] = cpp_grammar.import("./lib/inline_comment")
     std_space                    = cpp_grammar.import("./lib/std_space")[inline_comment, :inline_comment]
-    preprocessor                 = cpp_grammar.import("./lib/preprocessor")[std_space]
+    universal_character          = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
+    first_character              = /[a-zA-Z_]/.or(universal_character)
+    subsequent_character         = /[a-zA-Z0-9_]/.or(universal_character)
+    identifier                   = first_character.then(zeroOrMoreOf(subsequent_character))
+    preprocessor                 = cpp_grammar.import("./lib/preprocessor")[std_space, identifier]
     leading_space = /\s*+/
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
@@ -159,11 +163,9 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:ever_present_context] = [
             # preprocessor directives, which should be a part of every scope
-            :single_line_macro,
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
-            :meta_preprocessor_macro,
             :meta_preprocessor_diagnostic,
             :meta_preprocessor_include,
             *preprocessor,
@@ -402,10 +404,6 @@ cpp_grammar = Grammar.new(
 #
 # Variable
 #
-    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
-    first_character = /[a-zA-Z_]/.or(universal_character)
-    subsequent_character = /[a-zA-Z0-9_]/.or(universal_character)
-    identifier = first_character.then(zeroOrMoreOf(subsequent_character))
     # todo: make a better name for this function
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
@@ -2375,43 +2373,6 @@ cpp_grammar = Grammar.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier.$match"
         )
-    cpp_grammar[:meta_preprocessor_macro] = PatternRange.new(
-        tag_as: "meta.preprocessor.macro",
-        start_pattern: @start_of_line.then(std_space).then(
-            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
-                .maybe(@spaces).then(/define\b/),
-            tag_as: "keyword.control.directive.define"
-        ).then(@spaces).then(
-            match: identifier,
-            tag_as: "entity.name.function.preprocessor"
-        ).maybe(newPattern(
-            match: /\(/,
-            tag_as: "punctuation.definition.parameters.begin",
-        ).then(
-            match: /[^()\\]+/,
-            includes: [
-                lookBehindFor(/[(,]/).maybe(@spaces).then(
-                    match: identifier,
-                    tag_as: "variable.parameter.preprocessor"
-                ).maybe(@spaces),
-                newPattern(
-                    match: /,/,
-                    tag_as: "punctuation.separator.parameters"
-                ),
-                newPattern(
-                    match: /\.\.\./,
-                    tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
-                )
-            ]
-        ).then(
-            match: /\)/,
-            tag_as: "punctuation.definition.parameters.end"
-        )),
-        end_pattern: /(?<!\\)(?=\n)/,
-        includes: [
-            :macro_context
-        ]
-    )
     cpp_grammar[:meta_preprocessor_diagnostic] = {
             name: "meta.preprocessor.diagnostic",
             begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
