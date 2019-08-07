@@ -2,6 +2,7 @@ require 'json'
 require 'yaml'
 require 'set'
 require 'deep_clone' # gem install deep_clone
+require 'pathname'
 
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
@@ -137,30 +138,59 @@ end
 
 
 class Grammar
-    attr_accessor :data, :all_tags, :language_ending, :namespace
+    attr_accessor :data, :all_tags, :language_ending, :namespace, :export_options
     
     # 
     # import and export methods
     # 
-    @@exported_lambda
-    def self.export(exported_lambda)
-        @@exported_lambda = exported_lambda
+    @@export_data
+    def self.export(*args, &block)
+        # this method's goal is to safely namespace external patterns
+        # usage: 
+        #     Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: true) do |grammar|
+        #         # create patterns here with the grammar object
+        #     end
+        # 
+        # however there is no perfect way to get this done because of dynamic pattern generation and things like includes
+        # because the solution is imperfect, namespacing is opt-in with explicit names of the behavior
+        # namely, 
+        # - whether or not the grammar[:repo_name] will get namespaced 
+        # - and whether or not Pattern(includes:[]) will get namespaced
+        # patterns are dynamically namespaced because it is caused by the grammar object they are being given access to
+        # this can cause unintuitive results if you are accepting a repo name as an argument for a helper function because that repo name will 
+        # get dynamically namespaced. This is designed to be prevented by turning off the insert_namespace_infront_of_all_included_repos: option
+        options = {}
+        if args.size == 1
+            options = args[0]
+        end
+        # this variable is used to pass data to the instance import() method
+        @@export_data = {
+            export_options: options,
+            lambda: block,
+        }
     end
     
     def import(file, namespace:"")
-        # make sure it has the .rb extension
+        # make sure the pathname is absolute
+        #     if its not then it will try to locate the file relative to the working directory, rather than relative to the source file
+        #     in the source file this can be easily fixed by adding __dir__() to the path,
+        #     however we can't use __dir__() in this method because the __dir__() changes based on its source file (aka it would be relative to this file)
+        if not Pathname.new(file).absolute?
+            raise "\n\nthe grammar.import('#{file}') needs to be an absolute path.\nThis likely means you need to change it to something like:\ngrammar.import(__dir__()+'/#{file}')"
+        end
+        # make sure it has the .rb extension, for some reason its required for the load function
         if file[-3..-1] != ".rb"
             file += ".rb"
         end
-        # import the file, use load rather than require so that the @@exported_lambda gets reset on each import
+        # import the file using load rather than require so that the @@export_data gets reset on each import
         load(file)
         # create a shallow copy of the grammar
-        namespaced_grammar = Grammar.new(self, namespace)
-        if @@exported_lambda != nil
+        namespaced_grammar = Grammar.new(self, namespace, @@export_data[:export_options])
+        if @@export_data != nil
             # run the import function with the namespaced grammar
-            output = @@exported_lambda[namespaced_grammar]
+            output = @@export_data[:lambda][namespaced_grammar]
             # clean up the consumed lambda
-            @@exported_lambda = nil
+            @@export_data = nil
         end
         return output
     end
@@ -376,10 +406,13 @@ class Grammar
             @data            = args[0].data
             @language_ending = args[0].language_ending
             if args[1].is_a?(String) && args[1].size > 0
-                @namespace = args[1] + "."
-            else
+                @namespace = args[1]
+            else+
                 @namespace = ""
             end
+            puts "args is: #{args} "
+            puts "kwargs is: #{kwargs} "
+            @export_options  = kwargs
         # if not making a copy then run the normal init
         else
             self.init(*args, **kwargs)
@@ -400,13 +433,38 @@ class Grammar
         @namespace       = ""
     end
     
+    # 
+    # internal helpers
+    # 
+    def insertNamespaceIfNeeded(key)
+        if @export_options != nil && @namespace.size > 0 && @export_options[:insert_namespace_infront_of_new_grammar_repos] == true
+            return (@namespace + "." + key.to_s).to_sym
+        end
+        return key
+    end
+    
+    def insertNamespaceToIncludesIfNeeded(pattern)
+        if @export_options != nil && @namespace.size > 0 && @export_options[:insert_namespace_infront_of_new_grammar_repos] == true
+            if pattern.respond_to?(:includes) && pattern.includes.is_a?(Array)
+                # change all the repo names
+                index = -1
+                for each in pattern.includes.clone
+                    index += 1
+                    if each.is_a?(Symbol)
+                        # change the old value with a new one
+                        pattern[index] = (@namespace + "." + each.to_s).to_sym
+                    end
+                end
+            end
+        end
+    end
+    
     #
     # External Helpers
     #
     def [](*args)
         key = args[0]
-        # append namespace to the key
-        key = (@namespace + key.to_s).to_sym
+        key = self.insertNamespaceIfNeeded(key)
         return @data[:repository][key]
     end
     
@@ -414,10 +472,9 @@ class Grammar
         # parse out the arguments: grammar[key, (optional_overwrite)] = value
         *keys, value = args
         key, overwrite_option = keys
-        # append namespace to the key
-        key = (@namespace + key.to_s).to_sym
-        overwrite_allowed = overwrite_option.is_a?(Hash) && overwrite_option[:overwrite]
+        key = self.insertNamespaceIfNeeded(key)
         # check for accidental overwrite
+        overwrite_allowed = overwrite_option.is_a?(Hash) && overwrite_option[:overwrite]
         if @data[:repository][key] != nil && (not overwrite_option)
             puts "\n\nWarning: the #{key} repository is being overwritten.\n\nIf this is intentional, change:\ngrammar[:#{key}] = *value*\ninto:\ngrammar[:#{key}, overwrite: true] = *value*"
         end
@@ -426,6 +483,8 @@ class Grammar
         # tell the object it was added to a repository
         if (value.instance_of? Regexp) || (value.instance_of? PatternRange)
             value.repository_name = key
+            # namespace all of the symbolic includes
+            self.insertNamespaceToIncludesIfNeeded(value)
         end
     end
     
