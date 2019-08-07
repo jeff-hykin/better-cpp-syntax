@@ -1243,6 +1243,13 @@ class Regexp
         end
 end
 
+class Pattern < Regexp
+    # overwrite the new pattern instead of initialize
+    def self.new(*args)
+        return //.then(*args)
+    end
+end
+
 #
 # Make safe failure for regex methods on strings
 #
