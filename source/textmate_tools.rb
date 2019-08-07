@@ -136,16 +136,33 @@ end
 
 
 
-
 class Grammar
-    attr_accessor :data, :all_tags, :language_ending
-        
-    #
-    # Globally accessible current grammar object
-    #
-    @@current_grammar = nil
-    def self.current_grammar
-        return @@current_grammar
+    attr_accessor :data, :all_tags, :language_ending, :namespace
+    
+    # 
+    # import and export methods
+    # 
+    @@exported_lambda
+    def self.export(exported_lambda)
+        @@exported_lambda = exported_lambda
+    end
+    
+    def import(file, namespace:"")
+        # make sure it has the .rb extension
+        if file[-3..-1] != ".rb"
+            file += ".rb"
+        end
+        # import the file, use load rather than require so that the @@exported_lambda gets reset on each import
+        load(file)
+        # create a shallow copy of the grammar
+        namespaced_grammar = Grammar.new(self, namespace)
+        if @@exported_lambda != nil
+            # run the import function with the namespaced grammar
+            output = @@exported_lambda[namespaced_grammar]
+            # clean up the consumed lambda
+            @@exported_lambda = nil
+        end
+        return output
     end
     
     #
@@ -352,7 +369,24 @@ class Grammar
     #
     # Constructor
     #
-    def initialize(wrap_source: false, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
+    def initialize(*args, **kwargs)
+        # find out if making a grammar copy or not (for importing)
+        if args[0].is_a?(Grammar)
+            # make a shallow copy
+            @data            = args[0].data
+            @language_ending = args[0].language_ending
+            if args[1].is_a?(String) && args[1].size > 0
+                @namespace = args[1] + "."
+            else
+                @namespace = ""
+            end
+        # if not making a copy then run the normal init
+        else
+            self.init(*args, **kwargs)
+        end
+    end
+    
+    def init(wrap_source: false, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
         @data = {
             name: name,
             scopeName: scope_name,
@@ -361,22 +395,27 @@ class Grammar
             patterns: global_patterns,
             repository: repository,
         }
-        @wrap_source = wrap_source
+        @wrap_source     = wrap_source
         @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
-        @@current_grammar = self
+        @namespace       = ""
     end
     
     #
     # External Helpers
     #
     def [](*args)
-        return @data[:repository][args[0]]
+        key = args[0]
+        # append namespace to the key
+        key = (@namespace + key.to_s).to_sym
+        return @data[:repository][key]
     end
     
     def []=(*args)
         # parse out the arguments: grammar[key, (optional_overwrite)] = value
         *keys, value = args
         key, overwrite_option = keys
+        # append namespace to the key
+        key = (@namespace + key.to_s).to_sym
         overwrite_allowed = overwrite_option.is_a?(Hash) && overwrite_option[:overwrite]
         # check for accidental overwrite
         if @data[:repository][key] != nil && (not overwrite_option)
