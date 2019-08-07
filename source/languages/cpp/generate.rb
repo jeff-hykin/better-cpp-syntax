@@ -45,9 +45,9 @@ cpp_grammar = Grammar.new(
 #
 # Utils
 #
-    $grammar = cpp_grammar
-    cpp_grammar[:inline_comment] = inline_comment
-    def std_space() generateStdSpace($grammar[:inline_comment]) end
+    cpp_grammar[:inline_comment] = cpp_grammar.import("./lib/inline_comment")
+    std_space                    = cpp_grammar.import("./lib/std_space")[inline_comment, :inline_comment]
+    # preprocessor                 = cpp_grammar.import("./lib/preprocessor")[std_space]
     leading_space = /\s*+/
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
