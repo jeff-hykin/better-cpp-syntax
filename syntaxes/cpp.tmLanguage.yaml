@@ -104,7 +104,7 @@ repository:
           name: comment.block.cpp
       '6':
         name: punctuation.definition.directive.cpp
-    end: "(?<!\\\\)(?=(?:\\n|$))"
+    end: "(?<!\\\\)(?=\\n)"
     patterns:
     - include: "#string_context_c"
     - match: "[a-zA-Z_$][\\w\\-$]*"

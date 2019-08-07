@@ -12,7 +12,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                     tag_as: "punctuation.definition.directive",
                 ).maybe(@spaces)
             )
-            non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(@end_of_line)
+            non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(/\n/)
         # 
         # pragma
         # 
@@ -38,13 +38,13 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 ),
                 end_pattern: non_escaped_newline,
                 includes: [
-                    "#string_context_c",
+                    :string_context_c,
                     Pattern.new(
                         match: /[a-zA-Z_$][\w\-$]*/,
                         tag_as: "entity.other.attribute-name.pragma.preprocessor",
                     ),
-                    "#number_literal",
-                    "#line_continuation_character",
+                    :number_literal,
+                    :line_continuation_character,
                 ]
             )
         # include
