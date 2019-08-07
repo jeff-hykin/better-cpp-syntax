@@ -1301,6 +1301,9 @@ end
     def lookBehindToAvoid(*arguments)
         //.lookBehindToAvoid(*arguments)
     end
+    def wordBounds(regex_pattern)
+        return lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
+    end
     def maybe(*arguments)
         //.maybe(*arguments)
     end
