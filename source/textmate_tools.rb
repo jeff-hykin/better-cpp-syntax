@@ -173,7 +173,7 @@ class Grammar
     def import(filepath, namespace:"")
         if not Pathname.new(filepath).absolute?
             # try to detect the relative path
-            source_directory = File.dirname(caller[-1].sub(/:\d+:.+?$/,""))
+            source_directory = File.dirname(caller[0].sub(/:\d+:.+?$/,""))
             # make the filepath absolute
             filepath = File.join(source_directory, filepath)
         end
@@ -185,9 +185,15 @@ class Grammar
         load(filepath)
         # create a shallow copy of the grammar
         namespaced_grammar = Grammar.new(self, namespace, @@export_data[:export_options])
+        # add the dot if needed
+        if namespace.is_a?(String) && namespace.size > 0
+            send_namespace = namespace + '.'
+        else
+            send_namespace = ''
+        end
         if @@export_data != nil
             # run the import function with the namespaced grammar
-            output = @@export_data[:lambda][namespaced_grammar, namespace]
+            output = @@export_data[:lambda][namespaced_grammar, send_namespace]
             # clean up the consumed lambda
             @@export_data = nil
         end
