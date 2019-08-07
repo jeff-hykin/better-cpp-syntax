@@ -59,11 +59,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
 - source: if
   scopes:
     - keyword.control.if
@@ -78,7 +73,11 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' {                                                       '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -96,7 +95,11 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' {                                                 '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -131,11 +134,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' #key'
+- source: '#key'
+  scopes:
+    - variable.other.macro.argument
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' #value'
+- source: '#value'
+  scopes:
+    - variable.other.macro.argument
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -145,11 +152,19 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: "\t\t\t}"
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: else
   scopes:
     - keyword.control.else
-- source: ' {                                                        '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -194,11 +209,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' #key'
+- source: '#key'
+  scopes:
+    - variable.other.macro.argument
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' #value'
+- source: '#value'
+  scopes:
+    - variable.other.macro.argument
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -208,16 +227,19 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: "\t\t\t}                                                               "
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: "\t\t}"
-- source: )
+- source: '}'
   scopes:
-    - punctuation.section.parens.end.bracket.round
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.parens
+    - meta.block
 - source: \
   scopes:
     - constant.character.escape.line-continuation

@@ -118,7 +118,10 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         # 
         # arguments
         # 
-        
+            grammar[:macro_argument] = newPattern(
+                match: /##?/.then(identifier).lookAheadToAvoid(@standard_character),
+                tag_as: "variable.other.macro.argument"
+            )
         # 
         # *conditionals*
         # 
@@ -139,6 +142,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             :single_line_macro,
             :multi_line_macro,
             :hacky_fix_for_stray_directive,
+            :macro_argument,
         ].map {|each| (namespace + each.to_s).to_sym }
     end
 end

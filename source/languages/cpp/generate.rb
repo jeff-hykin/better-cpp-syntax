@@ -171,7 +171,6 @@ cpp_grammar = Grammar.new(
             *preprocessor,
             :meta_preprocessor_line,
             :meta_preprocessor_undef,
-            :hacky_fix_for_stray_directive,
             # comments 
             :comments,
             :line_continuation_character,
@@ -2335,10 +2334,6 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:assembly] = assembly_pattern()
     cpp_grammar[:backslash_escapes] = backslash_escapes()
-    cpp_grammar[:macro_argument] = newPattern(
-        match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        tag_as: "variable.other.macro.argument"
-    )
 #
 # Misc Legacy
 #

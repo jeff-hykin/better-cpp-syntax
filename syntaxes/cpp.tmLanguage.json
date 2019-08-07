@@ -339,6 +339,10 @@
         }
       ]
     },
+    "macro_argument": {
+      "match": "##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+      "name": "variable.other.macro.argument.cpp"
+    },
     "hacky_fix_for_stray_directive": {
       "match": "(?<!\\w)#(?:endif|else|elif)(?!\\w)",
       "name": "keyword.control.directive.$0.cpp"
@@ -388,13 +392,13 @@
           "include": "#hacky_fix_for_stray_directive"
         },
         {
+          "include": "#macro_argument"
+        },
+        {
           "include": "#meta_preprocessor_line"
         },
         {
           "include": "#meta_preprocessor_undef"
-        },
-        {
-          "include": "#hacky_fix_for_stray_directive"
         },
         {
           "include": "#comments"
@@ -14910,10 +14914,6 @@
     "backslash_escapes": {
       "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
       "name": "constant.character.escape.cpp"
-    },
-    "macro_argument": {
-      "match": "##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
-      "name": "variable.other.macro.argument.cpp"
     },
     "square_brackets": {
       "name": "meta.bracket.square.access.cpp",
