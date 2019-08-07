@@ -1,7 +1,7 @@
 // get the tokens from the file and process them with the provided function
 const path = require("path");
 const chalk = require("chalk");
-const vsctm = require("vscode-textmate-experimental");
+const vsctm = require("vscode-textmate");
 const paths = require("./paths");
 const fs = require("fs");
 
