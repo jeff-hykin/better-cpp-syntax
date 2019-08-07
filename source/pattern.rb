@@ -251,7 +251,7 @@ class Pattern
     def __deep_clone__()
         options = @arguments.__deep_clone__()
         options[:match] = @regex.__deep_clone__()
-        new_pattern = Pattern.new(options)
+        new_pattern = self.class.new(options)
         new_pattern.insert!(@next_regex.__deep_clone__())
     end
 end
