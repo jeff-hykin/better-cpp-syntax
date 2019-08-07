@@ -1733,11 +1733,12 @@ cpp_grammar = Grammar.new(
                 # 1. ) the end of the function parentheses
                 # 2. , the end of the parameter/start of the next parameter
                 # 3. [ the start of an array-type parameter
+                # 4. a C++ style comment
                 # 5. \n a newline in the case of:
                 #     func(
                 #         int thing
                 #     )
-                ).lookAheadFor(/\)|,|\[|=|\n/)
+                ).lookAheadFor(/\)|,|\[|=|\/\//.or(@end_of_line))
             ),
             :attributes_context,
             # find the array []'s
