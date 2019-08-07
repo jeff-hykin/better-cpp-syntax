@@ -1,3 +1,5 @@
+require 'deep_clone'
+
 def regex_to_s(regex)
     regex.inspect[1..-2]
 end
@@ -24,11 +26,16 @@ class Pattern
         not (@arguments.keys & capturing_attributes).empty?
     end
 
-    def insert(pattern)
+    def insert!(pattern)
         last = self
         last = last.next_regex while last.next_regex != nil
         last.next_regex = pattern
         self
+    end
+
+    def insert(pattern)
+        new_pattern = self.__deep_clone__()
+        new_pattern.insert!(pattern)
     end
 
     #
@@ -117,8 +124,7 @@ class Pattern
         end
         # tests are ran here
         # TODO: consider making tests their own method to prevent running them repeatedly
-        puts atomic?
-        if atomic?
+        if @next_regex.is_a? Pattern and @next_regex.atomic?
             return /#{self_regex}#{regex_to_s(next_regex.to_r)}/
         end
         /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
@@ -214,6 +220,7 @@ class Pattern
     #   atomic for the purpose of regex building
     # called by #to_r
     def atomic?
+        return @regex.atomic? if @regex.is_a? Pattern
         false
     end
 
@@ -239,6 +246,13 @@ class Pattern
 
     def generate_capture
         return {tag_as: @arguments[:tag_as]}
+    end
+
+    def __deep_clone__()
+        options = @arguments.__deep_clone__()
+        options[:match] = @regex.__deep_clone__()
+        new_pattern = Pattern.new(options)
+        new_pattern.insert!(@next_regex.__deep_clone__())
     end
 end
 
@@ -295,6 +309,8 @@ test = Pattern.new(
     match: /ghi/,
     tag_as: "ghi"
 ).lookAheadFor(/jkl/)
+
+test2 = test.then(/mno/)
 
 puts "regex:"
 puts test.to_r.inspect
