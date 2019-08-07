@@ -60,6 +60,84 @@ repository:
           name: comment.block.cpp punctuation.definition.comment.end.cpp
         - match: "\\*"
           name: comment.block.cpp
+  pragma_mark:
+    match: "((?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(#)\\s*pragma\\s+mark)\\s+(.*)"
+    captures:
+      '1':
+        name: keyword.control.directive.pragma.pragma-mark.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '6':
+        name: punctuation.definition.directive.cpp
+      '7':
+        name: entity.name.tag.pragma-mark.cpp
+    name: meta.preprocessor.pragma.cpp
+  pragma:
+    name: meta.preprocessor.pragma.cpp
+    begin: "((?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(#)\\s*pragma\\b)"
+    beginCaptures:
+      '1':
+        name: keyword.control.directive.pragma.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '6':
+        name: punctuation.definition.directive.cpp
+    end: "(?<!\\\\)(?=(?:\\n|$))"
+    patterns:
+    - include: "#string_context_c"
+    - match: "[a-zA-Z_$][\\w\\-$]*"
+      name: entity.other.attribute-name.pragma.preprocessor.cpp
+    - include: "#number_literal"
+    - include: "#line_continuation_character"
+  single_line_macro:
+    match: "^((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))#define.*(?<![\\\\])(?:\\n|$)"
+    captures:
+      '0':
+        patterns:
+        - include: "#meta_preprocessor_macro"
+        - include: "#comments"
+        - include: "#string_context"
+        - include: "#number_literal"
+        - include: "#operators"
+        - include: "#semicolon"
+      '1':
+        patterns:
+        - include: "#inline_comment"
+      '2':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '3':
+        name: comment.block.cpp
+      '4':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+  hacky_fix_for_stray_directive:
+    match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
+    name: keyword.control.directive.$0.cpp
   semicolon:
     match: ";"
     name: punctuation.terminator.statement.cpp
@@ -79,9 +157,11 @@ repository:
     - include: "#meta_preprocessor_diagnostic"
     - include: "#meta_preprocessor_include"
     - include: "#pragma_mark"
+    - include: "#pragma"
+    - include: "#single_line_macro"
+    - include: "#hacky_fix_for_stray_directive"
     - include: "#meta_preprocessor_line"
     - include: "#meta_preprocessor_undef"
-    - include: "#meta_preprocessor_pragma"
     - include: "#hacky_fix_for_stray_directive"
     - include: "#comments"
     - include: "#line_continuation_character"
@@ -7548,33 +7628,6 @@ repository:
     - include: "#parameter_enum"
     - include: "#parameter_union"
     - include: "#parameter_class"
-  hacky_fix_for_stray_directive:
-    match: "(?<!\\w)#(?:endif|else|elif)(?!\\w)"
-    name: keyword.control.directive.$0.cpp
-  single_line_macro:
-    match: "^((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))#define.*(?<![\\\\])(?:\\n|$)"
-    captures:
-      '0':
-        patterns:
-        - include: "#meta_preprocessor_macro"
-        - include: "#comments"
-        - include: "#string_context"
-        - include: "#number_literal"
-        - include: "#operators"
-        - include: "#semicolon"
-      '1':
-        patterns:
-        - include: "#inline_comment"
-      '2':
-        name: comment.block.cpp punctuation.definition.comment.begin.cpp
-      '3':
-        name: comment.block.cpp
-      '4':
-        patterns:
-        - match: "\\*\\/"
-          name: comment.block.cpp punctuation.definition.comment.end.cpp
-        - match: "\\*"
-          name: comment.block.cpp
   assembly:
     name: meta.asm.cpp
     begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
@@ -7842,21 +7895,6 @@ repository:
     - match: "(?-mix:[a-zA-Z_$][\\w$]*)"
       name: entity.name.function.preprocessor.cpp
     - include: "#line_continuation_character"
-  meta_preprocessor_pragma:
-    name: meta.preprocessor.pragma.cpp
-    begin: "^\\s*(?:((#)\\s*pragma))\\b"
-    beginCaptures:
-      '1':
-        name: keyword.control.directive.pragma.cpp
-      '2':
-        name: punctuation.definition.directive.cpp
-    end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)"
-    patterns:
-    - include: "#string_context_c"
-    - match: "[a-zA-Z_$][\\w\\-$]*"
-      name: entity.other.attribute-name.pragma.preprocessor.cpp
-    - include: "#number_literal"
-    - include: "#line_continuation_character"
   string_context:
     patterns:
     - name: string.quoted.double.cpp
@@ -7975,18 +8013,6 @@ repository:
       name: punctuation.separator.colon.range-based.cpp
     - include: "#evaluation_context"
     - include: "#vararg_ellipses"
-  pragma_mark:
-    captures:
-      '1':
-        name: meta.preprocessor.pragma.cpp
-      '2':
-        name: keyword.control.directive.pragma.pragma-mark.cpp
-      '3':
-        name: punctuation.definition.directive.cpp
-      '4':
-        name: entity.name.tag.pragma-mark.cpp
-    match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))"
-    name: meta.section.cpp
   string_context_c:
     patterns:
     - begin: "\""

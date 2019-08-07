@@ -208,8 +208,22 @@
 - source: once
   scopes:
     - entity.other.attribute-name.pragma.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.pragma
+  scopes:
+    - punctuation.definition.directive
+- source: pragma
+  scopesEnd:
+    - keyword.control.directive.pragma
+- source: GCC
+  scopesBegin:
+    - entity.other.attribute-name.pragma.preprocessor
+- source: poison
+- source: printf
   scopesEnd:
     - meta.preprocessor.pragma
+    - entity.other.attribute-name.pragma.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.include

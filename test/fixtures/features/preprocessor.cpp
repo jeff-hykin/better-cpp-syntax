@@ -15,6 +15,8 @@
 
 #pragma once
 
+#pragma GCC poison printf 
+
 #include <type_traits>
 
 #define IsPointDef(...) \

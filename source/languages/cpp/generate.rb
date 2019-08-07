@@ -47,7 +47,7 @@ cpp_grammar = Grammar.new(
 #
     cpp_grammar[:inline_comment] = cpp_grammar.import("./lib/inline_comment")
     std_space                    = cpp_grammar.import("./lib/std_space")[inline_comment, :inline_comment]
-    # preprocessor                 = cpp_grammar.import("./lib/preprocessor")[std_space]
+    preprocessor                 = cpp_grammar.import("./lib/preprocessor")[std_space]
     leading_space = /\s*+/
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
@@ -166,10 +166,9 @@ cpp_grammar = Grammar.new(
             :meta_preprocessor_macro,
             :meta_preprocessor_diagnostic,
             :meta_preprocessor_include,
-            :pragma_mark,
+            *preprocessor,
             :meta_preprocessor_line,
             :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
             :hacky_fix_for_stray_directive,
             # comments 
             :comments,
@@ -2332,29 +2331,6 @@ cpp_grammar = Grammar.new(
         cpp_grammar[:parameter_union ] = generateOverqualifiedTypeFor["union"],
         cpp_grammar[:parameter_class ] = generateOverqualifiedTypeFor["class"],
     ]
-    
-        
-#
-# preprocessor directives
-#
-    # TODO, change all blocks/parentheses so that they end and the end of a macro
-    # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
-    cpp_grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = newPattern(
-            match: variableBounds[/#(?:endif|else|elif)/],
-            tag_as: "keyword.control.directive.$match"
-        )
-    cpp_grammar[:single_line_macro] = newPattern(
-            should_fully_match: ['#define EXTERN_C extern "C"'],
-            match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
-            includes: [
-                :meta_preprocessor_macro,
-                :comments,
-                :string_context,
-                :number_literal,
-                :operators,
-                :semicolon,
-            ]
-        )
 
 #
 # Misc
@@ -2590,34 +2566,6 @@ cpp_grammar = Grammar.new(
                 }
             ]
         }
-    cpp_grammar[:meta_preprocessor_pragma] = {
-            name: "meta.preprocessor.pragma",
-            begin: "^\\s*(?:((#)\\s*pragma))\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.pragma"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#string_context_c"
-                },
-                {
-                    match: "[a-zA-Z_$][\\w\\-$]*",
-                    name: "entity.other.attribute-name.pragma.preprocessor"
-                },
-                {
-                    include: "#number_literal"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
     cpp_grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",
@@ -2732,24 +2680,6 @@ cpp_grammar = Grammar.new(
             :vararg_ellipses
         ]
     )
-    cpp_grammar[:pragma_mark] = {
-        captures: {
-            "1" => {
-                name: "meta.preprocessor.pragma"
-            },
-            "2" => {
-                name: "keyword.control.directive.pragma.pragma-mark"
-            },
-            "3" => {
-                name: "punctuation.definition.directive"
-            },
-            "4" => {
-                name: "entity.name.tag.pragma-mark"
-            }
-        },
-        match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
-        name: "meta.section"
-        }
     cpp_grammar[:string_context_c] = [
             {
                 begin: "\"",
