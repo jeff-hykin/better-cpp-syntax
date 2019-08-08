@@ -1420,9 +1420,9 @@ grammar = Grammar.new(
         ).then(
             match: newPattern(
                 newPattern(
-                        match: variableBounds[identifier],
-                        reference: "class_name",
-                        dont_back_track?: true
+                    match: variableBounds[identifier],
+                    reference: "class_name",
+                    dont_back_track?: true
                 ).then(std_space).then(
                     /::/
                 ).then(std_space).matchResultOf(
@@ -2175,7 +2175,7 @@ grammar = Grammar.new(
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
                     ).then(
-                        @spaces.or(
+                        std_space.or(
                             inline_attribute
                         ).or(
                             lookAheadFor(/{/)
@@ -2183,16 +2183,16 @@ grammar = Grammar.new(
                     ).maybe(
                         # normally macros like this wouldn't be supported, but I imagine this one is fairly common
                         std_space.then(match: /DLLEXPORT/, tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT").then(std_space)
-                    ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    ).maybe(inline_attribute).then(std_space).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(
-                        @spaces.then(final_modifier).maybe(@spaces)
+                        std_space.then(final_modifier).then(std_space)
                     ).maybe(
                         #
                         # inheritance
                         #
-                        maybe(@spaces).then(
+                        std_space.then(
                             match: /:/,
                             tag_as: "punctuation.separator.colon.inheritance"
                         # the following may seem redundant (removing it shouldn't change anything)
@@ -2200,13 +2200,13 @@ grammar = Grammar.new(
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
                         ).zeroOrMoreOf(
-                            match: maybe(@spaces).maybe(/,/).maybe(
-                                @spaces
+                            match: std_space.maybe(/,/).then(
+                                std_space
                             ).maybe(
                                 @cpp_tokens.that(:isAccessSpecifier)
-                            ).maybe(@spaces).oneOrMoreOf(
-                                maybe(@spaces).maybe(/,/).maybe(
-                                    @spaces
+                            ).then(std_space).oneOrMoreOf(
+                                std_space.maybe(/,/).then(
+                                    std_space
                                 ).lookAheadToAvoid(
                                     @cpp_tokens.that(:isAccessSpecifier)
                                 ).then(qualified_type.without_numbered_capture_groups)
@@ -2567,7 +2567,6 @@ grammar = Grammar.new(
         end
     end
     macro_context.push(:macro_argument)
-    grammar[:macro_context] = macro_context
 
 # 
 # Save
