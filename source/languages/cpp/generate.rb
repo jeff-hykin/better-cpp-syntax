@@ -162,9 +162,7 @@ grammar = Grammar.new(
 #
 #
     grammar[:ever_present_context] = [
-            # preprocessor directives, which should be a part of every scope
             *preprocessor,
-            # comments 
             :comments,
             :line_continuation_character,
         ]
@@ -2142,6 +2140,7 @@ grammar = Grammar.new(
     can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isInheritanceSpecifier) + [ ',', ':', ]
     can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
     grammar[:inheritance_context] = [
+        :ever_present_context,
         newPattern(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma.inheritance"
@@ -2156,7 +2155,7 @@ grammar = Grammar.new(
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
             qualified_type
-        )
+        ),
     ]
     final_modifier = newPattern(
         match: /final/,
@@ -2200,17 +2199,8 @@ grammar = Grammar.new(
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
                         ).zeroOrMoreOf(
-                            match: std_space.maybe(/,/).then(
-                                std_space
-                            ).maybe(
-                                @cpp_tokens.that(:isAccessSpecifier)
-                            ).then(std_space).oneOrMoreOf(
-                                std_space.maybe(/,/).then(
-                                    std_space
-                                ).lookAheadToAvoid(
-                                    @cpp_tokens.that(:isAccessSpecifier)
-                                ).then(qualified_type.without_numbered_capture_groups)
-                            ),
+                            match: /[^{]/,
+                            dont_back_track?: true,
                             includes: [ :inheritance_context ]
                         )
                     ),
@@ -2426,26 +2416,10 @@ grammar = Grammar.new(
         ),
         includes: [:function_body_context]
     )
-    grammar[:disabled] = {
-        begin: "^\\s*#\\s*if(n?def)?\\b.*$",
-        end: "^\\s*#\\s*endif\\b",
-        patterns: [
-            {
-                include: "#disabled"
-            },
-            {
-                include: "#pragma_mark"
-            }
-        ]
-        }
-    grammar[:line_continuation_character] = {
-            match: "(\\\\)\\n",
-            captures: {
-                "1" => {
-                    name: "constant.character.escape.line-continuation"
-                }
-            }
-        }
+    grammar[:line_continuation_character] = Pattern.new(
+        match: /\\\n/,
+        tag_as: "constant.character.escape.line-continuation",
+    )
     grammar[:parentheses] = PatternRange.new(
         tag_as: "meta.parens",
         start_pattern: newPattern(
@@ -2537,11 +2511,10 @@ grammar = Grammar.new(
             #     }
             # }
         ]
-    grammar[:vararg_ellipses] = {
-        match: "(?<!\\.)\\.\\.\\.(?!\\.)",
-        name: "punctuation.vararg-ellipses"
-        }
-    
+    grammar[:vararg_ellipses] = Pattern.new(
+        match: /(?<!\.)\.\.\.(?!\.)/,
+        tag_as: "punctuation.vararg-ellipses",
+    )
 
 
 # 
@@ -2567,6 +2540,7 @@ grammar = Grammar.new(
         end
     end
     macro_context.push(:macro_argument)
+    grammar[:macro_context] = macro_context
 
 # 
 # Save
