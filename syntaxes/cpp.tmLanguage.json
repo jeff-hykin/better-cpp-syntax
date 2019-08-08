@@ -11791,6 +11791,9 @@
           },
           "patterns": [
             {
+              "include": "#ever_present_context"
+            },
+            {
               "include": "#enumerator_list"
             },
             {
@@ -20846,6 +20849,9 @@
             }
           },
           "patterns": [
+            {
+              "include": "#ever_present_context"
+            },
             {
               "include": "#enumerator_list"
             },

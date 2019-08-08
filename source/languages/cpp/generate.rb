@@ -2130,7 +2130,7 @@ grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
+            body_includes: [ :ever_present_context, :enumerator_list, :comments, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)

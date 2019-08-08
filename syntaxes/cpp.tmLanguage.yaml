@@ -6120,6 +6120,7 @@ repository:
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
+      - include: "#ever_present_context"
       - include: "#enumerator_list"
       - include: "#comments"
       - include: "#comma"
@@ -10836,6 +10837,7 @@ repository:
         '1':
           name: punctuation.section.block.end.bracket.curly.enum.cpp
       patterns:
+      - include: "#ever_present_context"
       - include: "#enumerator_list"
       - include: "#comments"
       - include: "#comma"
