@@ -926,7 +926,7 @@ cpp_grammar = Grammar.new(
     generateScopeResolutionFinder = ->(tag_extension, grammar_name) do
         hidden_grammar_name = (grammar_name.to_s+"_inner_generated").to_sym
         tagged_scope_operator = scope_operator.reTag(
-            append: tag_extension[1...]
+            append: tag_extension[1..-1]
         )
         cpp_grammar[grammar_name] = newPattern(
             # find the whole scope resolution 

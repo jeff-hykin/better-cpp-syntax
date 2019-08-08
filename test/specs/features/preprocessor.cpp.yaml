@@ -51,8 +51,6 @@
   scopes:
     - entity.name.function.preprocessor
 - source: ' thing '
-  scopesBegin:
-    - meta.preprocessor.macro.contents
 - source: '{'
   scopesBegin:
     - meta.block
@@ -62,7 +60,6 @@
   scopes:
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.preprocessor.macro.contents
     - meta.block
 - source: '#'
   scopesBegin:
@@ -91,8 +88,6 @@
   scopes:
     - punctuation.definition.parameters.end
 - source: ' arg1 arg2'
-  scopes:
-    - meta.preprocessor.macro.contents
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -119,9 +114,12 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end
-- source: ' #macro_variable ##macro_variable'
-  scopes:
-    - meta.preprocessor.macro.contents
+- source: '#macro_variable'
+  scopesBegin:
+    - variable.other.macro.argument
+- source: '##macro_variable'
+  scopesEnd:
+    - variable.other.macro.argument
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -135,7 +133,6 @@
     - entity.name.function.preprocessor
 - source: class
   scopesBegin:
-    - meta.preprocessor.macro.contents
     - meta.block.class
     - meta.head.class
   scopes:
@@ -144,7 +141,6 @@
   scopes:
     - entity.name.type.class
   scopesEnd:
-    - meta.preprocessor.macro.contents
     - meta.block.class
     - meta.head.class
 - source: '#'
@@ -160,7 +156,6 @@
     - entity.name.function.preprocessor
 - source: struct
   scopesBegin:
-    - meta.preprocessor.macro.contents
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -169,7 +164,6 @@
   scopes:
     - entity.name.type.struct
   scopesEnd:
-    - meta.preprocessor.macro.contents
     - meta.block.struct
     - meta.head.struct
 - source: '#'
@@ -185,7 +179,6 @@
     - entity.name.function.preprocessor
 - source: struct
   scopesBegin:
-    - meta.preprocessor.macro.contents
     - meta.block.struct
     - meta.head.struct
   scopes:
@@ -196,15 +189,12 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
     - meta.block.struct
     - meta.head.struct
-- source: '{'
-  scopes:
-    - meta.block
-    - punctuation.section.block.begin.bracket.curly
-  scopesEnd:
-    - meta.preprocessor.macro.contents
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -218,7 +208,6 @@
     - entity.name.function.preprocessor
 - source: namespace
   scopesBegin:
-    - meta.preprocessor.macro.contents
     - meta.block.namespace
     - meta.head.namespace
   scopes:
@@ -323,12 +312,6 @@
   scopes:
     - entity.name.function.preprocessor
 - source: (
-<<<<<<< HEAD
-  scopesBegin:
-    - meta.preprocessor.macro.contents
-    - meta.parens
-=======
->>>>>>> master
   scopes:
     - punctuation.definition.parameters.begin
 - source: ...
@@ -382,19 +365,16 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.block.struct
-    - meta.head.struct
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: \
+  scopesBegin:
+    - meta.body.struct
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.block
 - source: static
   scopes:
     - storage.modifier.specifier.static
@@ -418,9 +398,12 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: '                }'
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
-    - meta.preprocessor.macro.contents
+    - meta.block.struct
+    - meta.body.struct
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -442,8 +425,6 @@
   scopes:
     - punctuation.definition.parameters.end
 - source: \
-  scopesBegin:
-    - meta.preprocessor.macro.contents
   scopes:
     - constant.character.escape.line-continuation
 - source: IsPointDef
@@ -522,10 +503,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.block.struct
-    - meta.head.struct
 - source: '{'
   scopes:
-    - meta.block
-    - punctuation.section.block.begin.bracket.curly
+    - punctuation.section.block.begin.bracket.curly.struct

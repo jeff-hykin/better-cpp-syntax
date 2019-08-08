@@ -45,7 +45,7 @@
     - punctuation.section.parameters.end.bracket.round
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
+    - storage.modifier.specifier.const
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -122,10 +122,8 @@
     - punctuation.section.parameters.end.bracket.round
 - source: const
   scopes:
-    - storage.modifier.specifier.functional.post-parameters.const
-- source: override
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.override
+    - storage.modifier.specifier.const
+- source: ' override '
 - source: =
   scopes:
     - keyword.operator.assignment

@@ -29,36 +29,26 @@
     - punctuation.separator.delimiter.comma
   scopesEnd:
     - meta.enum.definition
-- source: '#'
-  scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
-  scopes:
-    - punctuation.definition.directive
-- source: if
-  scopesEnd:
-    - keyword.control.directive.conditional
+- source: '#if '
 - source: COND
-  scopes:
-    - entity.name.function.preprocessor
+  scopesBegin:
+    - meta.enum.definition
+    - variable.other.enummember
+- source: TWO_AND_HALF
   scopesEnd:
-    - meta.preprocessor
-- source: '    TWO_AND_HALF'
+    - variable.other.enummember
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: '#'
-  scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
-  scopes:
-    - punctuation.definition.directive
-- source: endif
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - meta.enum.definition
+- source: '#'
+- source: endif
+  scopesBegin:
+    - meta.enum.definition
+    - variable.other.enummember
 - source: THREE
-  scopes:
+  scopesEnd:
     - meta.enum.definition
     - variable.other.enummember
 - source: '}'
