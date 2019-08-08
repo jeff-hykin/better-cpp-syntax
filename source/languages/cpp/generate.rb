@@ -45,7 +45,7 @@ grammar = Grammar.new(
 #
 # Utils
 #
-    grammar[:inline_comment] = grammar.import("./lib/inline_comment")
+    grammar[:inline_comment]     = grammar.import("./lib/inline_comment")
     std_space                    = grammar.import("./lib/std_space")[inline_comment, :inline_comment]
     universal_character          = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
     first_character              = /[a-zA-Z_]/.or(universal_character)
@@ -166,11 +166,7 @@ grammar = Grammar.new(
             :preprocessor_rule_enabled,
             :preprocessor_rule_disabled,
             :preprocessor_rule_conditional,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
             *preprocessor,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
             # comments 
             :comments,
             :line_continuation_character,
@@ -2368,160 +2364,6 @@ grammar = Grammar.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier.$match"
         )
-    grammar[:meta_preprocessor_diagnostic] = {
-            name: "meta.preprocessor.diagnostic",
-            begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.diagnostic.$3"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    begin: "\"",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.double",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        }
-                    ]
-                },
-                {
-                    begin: "'",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: "'|(?<!\\\\)(?=\\s*\\n)",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.single",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        }
-                    ]
-                },
-                {
-                    begin: "[^'\"]",
-                    end: "(?<!\\\\)(?=\\s*\\n)",
-                    name: "string.unquoted.single",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        },
-                        {
-                            include: "#comments"
-                        }
-                    ]
-                }
-            ]
-        }
-    grammar[:meta_preprocessor_include] = newPattern(
-        should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
-        should_partial_match: ["#include <foo> //comment"],
-        match: @start_of_line.then(std_space).then(
-            match: newPattern(match: /#/, tag_as: "punctuation.definition.directive")
-            .maybe(@spaces).then(
-                    match: /include/.or(/include_next/).or(/import/),
-                    reference: "include_type"
-                ).then(@word_boundary),
-            tag_as: "keyword.control.directive.$reference(include_type)"
-        ).maybe(@spaces).then(newPattern(
-            # system header [cpp.include]/2
-            match: newPattern(
-                match: /</,
-                tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^>]/).maybe(
-                match: />/,
-                tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "string.quoted.other.lt-gt.include"
-        ).or(
-            # other headers [cpp.include]/3
-            match: newPattern(
-                match: /\"/,
-                tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^\"]/).maybe(
-                match: /\"/,
-                tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "string.quoted.double.include"
-        ).or(
-            # macro includes [cpp.include]/4
-            match: identifier.then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "entity.name.other.preprocessor.macro.include"
-        ).or(
-            # correctly color a lone `#include`
-            match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//))),
-        )),
-        tag_as: "meta.preprocessor.include"
-    )
-    grammar[:meta_preprocessor_line] = {
-            name: "meta.preprocessor",
-            begin: "^\\s*((#)\\s*line)\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.line"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#string_context_c"
-                },
-                {
-                    include: "#number_literal"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
-    grammar[:meta_preprocessor_undef] = {
-            name: "meta.preprocessor",
-            begin: "^\\s*(?:((#)\\s*undef))\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.undef"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    match: preprocessor_name_no_bounds,
-                    name: "entity.name.function.preprocessor"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
     grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",

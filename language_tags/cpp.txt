@@ -338,7 +338,7 @@ keyword.control.directive.$0.cpp
 keyword.control.directive.$7.cpp
 keyword.control.directive.conditional.cpp
 keyword.control.directive.define.cpp
-keyword.control.directive.diagnostic.$3.cpp
+keyword.control.directive.diagnostic.$7.cpp
 keyword.control.directive.line.cpp
 keyword.control.directive.pragma.cpp
 keyword.control.directive.pragma.pragma-mark.cpp
@@ -461,8 +461,10 @@ meta.parens.cpp
 meta.preprocessor.cpp
 meta.preprocessor.diagnostic.cpp
 meta.preprocessor.include.cpp
+meta.preprocessor.line.cpp
 meta.preprocessor.macro.cpp
 meta.preprocessor.pragma.cpp
+meta.preprocessor.undef.cpp
 meta.qualified_type.cpp
 meta.static_assert.message.cpp
 meta.tail.class.cpp
@@ -667,7 +669,7 @@ string.quoted.double.raw.regex.cpp
 string.quoted.double.raw.sql.cpp
 string.quoted.other.lt-gt.include.cpp
 string.quoted.single.cpp
-string.unquoted.single.cpp
+string.unquoted.cpp
 support.other.attribute.cpp
 support.type.built-in.posix-reserved.cpp
 support.type.built-in.posix-reserved.pthread.cpp

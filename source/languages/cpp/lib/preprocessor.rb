@@ -3,6 +3,8 @@ require_relative PathFor[:textmate_tools]
 
 Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|
     ->(std_space, identifier) do
+        # specification source https://gcc.gnu.org/onlinedocs/cpp/
+    
         # 
         # helpers
         # 
@@ -14,7 +16,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             )
             non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(/\n/)
         # 
-        # pragma
+        # #pragma
         # 
             grammar[:pragma_mark] = Pattern.new(
                 tag_as: "meta.preprocessor.pragma",
@@ -38,6 +40,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 ),
                 end_pattern: non_escaped_newline,
                 includes: [
+                    :comments,
                     :string_context_c,
                     Pattern.new(
                         match: /[a-zA-Z_$][\w\-$]*/,
@@ -47,20 +50,152 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                     :line_continuation_character,
                 ]
             )
-        # include
-        # line
-        # warning
-        # error
-        # undef
         # 
-        # define
+        # #include
         # 
-            grammar[:single_line_macro] = Pattern.new(
-                should_fully_match: ["#define EXTERN_C extern \"C\""],
-                match: /^/.then(std_space).then(/#\s*+define\b/).then(/.*[^\\]$/),
-                includes: [ :multi_line_macro ]
+            grammar[:include] = Pattern.new(
+                should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
+                should_partial_match: ["#include <foo> //comment"],
+                match: @start_of_line.then(std_space).then(
+                    tag_as: "keyword.control.directive.$reference(include_type)",
+                    match: Pattern.new(
+                        Pattern.new(
+                            match: /#/,
+                            tag_as: "punctuation.definition.directive"
+                        ).maybe(@spaces).then(
+                            match: /include/.or(/include_next/).or(/import/),
+                            reference: "include_type"
+                        ).then(@word_boundary)
+                    ),
+                ).maybe(@spaces).then(
+                    Pattern.new(
+                        # system header [cpp.include]/2
+                        match: Pattern.new(
+                            match: /</,
+                            tag_as: "punctuation.definition.string.begin"
+                        ).zeroOrMoreOf(/[^>]/).maybe(
+                            match: />/,
+                            tag_as: "punctuation.definition.string.end"
+                        ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+                        tag_as: "string.quoted.other.lt-gt.include"
+                    ).or(
+                        # other headers [cpp.include]/3
+                        match: Pattern.new(
+                            match: /\"/,
+                            tag_as: "punctuation.definition.string.begin"
+                        ).zeroOrMoreOf(/[^\"]/).maybe(
+                            match: /\"/,
+                            tag_as: "punctuation.definition.string.end"
+                        ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+                        tag_as: "string.quoted.double.include"
+                    ).or(
+                        # macro includes [cpp.include]/4
+                        match: identifier.then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+                        tag_as: "entity.name.other.preprocessor.macro.include"
+                    ).or(
+                        # correctly color a lone `#include`
+                        match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//))),
+                    )
+                ),
+                tag_as: "meta.preprocessor.include"
             )
-            grammar[:multi_line_macro] = PatternRange.new(
+        # 
+        # #line
+        # 
+            grammar[:line] = PatternRange.new(
+                tag_as: "meta.preprocessor.line",
+                start_pattern: Pattern.new(
+                    tag_as: "keyword.control.directive.line",
+                    match: directive_start.then(/line\b/)
+                ),
+                end_pattern: non_escaped_newline,
+                includes: [
+                    :string_context_c,
+                    :number_literal,
+                    :line_continuation_character,
+                ]
+            )
+        # 
+        # diagnostic (#error, #warning)
+        # 
+            grammar[:diagnostic] = PatternRange.new(
+                tag_as: "meta.preprocessor.diagnostic",
+                start_pattern: Pattern.new(
+                    Pattern.new(
+                        tag_as: "keyword.control.directive.diagnostic.$reference(directive)",
+                        match: directive_start.then(
+                            match: /error/.or(/warning/),
+                            reference: "directive"
+                        )
+                    ).then(@word_boundary).maybe(@spaces)
+                ),
+                end_pattern: non_escaped_newline,
+                includes: [
+                    # double quotes
+                    PatternRange.new(
+                        tag_as: "string.quoted.double",
+                        start_pattern: Pattern.new(
+                            match: /"/,
+                            tag_as: "punctuation.definition.string.begin",
+                        ),
+                        end_pattern: Pattern.new(
+                            Pattern.new(
+                                match: /"/,
+                                tag_as: "punctuation.definition.string.end",
+                            ).or(
+                                non_escaped_newline
+                            )
+                        ),
+                        includes: [ :line_continuation_character ]
+                    ),
+                    # single quotes
+                    PatternRange.new(
+                        tag_as: "string.quoted.single",
+                        start_pattern: Pattern.new(
+                            match: /'/,
+                            tag_as: "punctuation.definition.string.begin",
+                        ),
+                        end_pattern: Pattern.new(
+                            Pattern.new(
+                                match: /'/,
+                                tag_as: "punctuation.definition.string.end",
+                            ).or(
+                                non_escaped_newline
+                            )
+                        ),
+                        includes: [ :line_continuation_character ]
+                    ),
+                    # unquoted
+                    PatternRange.new(
+                        tag_as: "string.unquoted",
+                        start_pattern: /[^'"]/,
+                        end_pattern: non_escaped_newline,
+                        includes: [
+                            :line_continuation_character,
+                            :comments,
+                        ]
+                    )
+                ]
+            )
+        # 
+        # #undef
+        # 
+            grammar[:undef] = Pattern.new(
+                tag_as: "meta.preprocessor.undef",
+                match: Pattern.new(
+                    Pattern.new(
+                        tag_as: "keyword.control.directive.undef",
+                        match: directive_start.then(/undef\b/)
+                    ).then(std_space).then(
+                        tag_as: "entity.name.function.preprocessor",
+                        match: wordBounds(identifier),
+                    )
+                ),
+            )
+        # 
+        # #define
+        # 
+            grammar[:macro] = PatternRange.new(
                 tag_as: "meta.preprocessor.macro",
                 start_pattern: Pattern.new(
                     # the directive
@@ -111,14 +246,15 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                         ]
                     ),
                     # everything after the parameters
-                    :macro_context
+                    :macro_context,
+                    :macro_argument,
                 ]
                 
             )
         # 
         # arguments
         # 
-            grammar[:macro_argument] = newPattern(
+            grammar[:macro_argument] = Pattern.new(
                 match: /##?/.then(identifier).lookAheadToAvoid(@standard_character),
                 tag_as: "variable.other.macro.argument"
             )
@@ -139,8 +275,11 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         [
             :pragma_mark,
             :pragma,
-            :single_line_macro,
-            :multi_line_macro,
+            :include,
+            :line,
+            :diagnostic,
+            :undef,
+            :macro,
             :hacky_fix_for_stray_directive,
             :macro_argument,
         ].map {|each| (namespace + each.to_s).to_sym }
