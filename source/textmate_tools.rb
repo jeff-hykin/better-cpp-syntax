@@ -2,6 +2,7 @@ require 'json'
 require 'yaml'
 require 'set'
 require 'deep_clone' # gem install deep_clone
+require 'pathname'
 
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
@@ -136,16 +137,67 @@ end
 
 
 
-
 class Grammar
-    attr_accessor :data, :all_tags, :language_ending
+    attr_accessor :data, :all_tags, :language_ending, :namespace, :export_options
     
-    #
-    # Globally accessible current grammar object
-    #
-    @@current_grammar = nil
-    def self.current_grammar
-        return @@current_grammar
+    # 
+    # import and export methods
+    # 
+    @@export_data
+    def self.export(*args, &block)
+        # this method's goal is to safely namespace external patterns
+        # usage: 
+        #     Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: true) do |grammar, namespace|
+        #         # create patterns here with the grammar object
+        #     end
+        # 
+        # however there is no perfect way to get this done because of dynamic pattern generation and things like includes
+        # because the solution is imperfect, namespacing is opt-in with explicit names of the behavior
+        # namely, 
+        # - whether or not the grammar[:repo_name] will get namespaced 
+        # - and whether or not Pattern(includes:[]) will get namespaced
+        # patterns are dynamically namespaced because it is caused by the grammar object they are being given access to
+        # this can cause unintuitive results if you are accepting a repo name as an argument for a helper function because that repo name will 
+        # get dynamically namespaced. This is designed to be prevented by turning off the insert_namespace_infront_of_all_included_repos: option
+        options = {}
+        if args.size == 1
+            options = args[0]
+        end
+        # this variable is used to pass data to the instance import() method
+        @@export_data = {
+            export_options: options,
+            lambda: block,
+        }
+    end
+    
+    def import(filepath, namespace:"")
+        if not Pathname.new(filepath).absolute?
+            # try to detect the relative path
+            source_directory = File.dirname(caller[0].sub(/:\d+:.+?$/,""))
+            # make the filepath absolute
+            filepath = File.join(source_directory, filepath)
+        end
+        # make sure it has the .rb extension, for some reason its required for the load function
+        if filepath[-3..-1] != ".rb"
+            filepath += ".rb"
+        end
+        # import the file using load rather than require so that the @@export_data gets reset on each import
+        load(filepath)
+        # create a shallow copy of the grammar
+        namespaced_grammar = Grammar.new(self, namespace, @@export_data[:export_options])
+        # add the dot if needed
+        if namespace.is_a?(String) && namespace.size > 0
+            send_namespace = namespace + '.'
+        else
+            send_namespace = ''
+        end
+        if @@export_data != nil
+            # run the import function with the namespaced grammar
+            output = @@export_data[:lambda][namespaced_grammar, send_namespace]
+            # clean up the consumed lambda
+            @@export_data = nil
+        end
+        return output
     end
     
     #
@@ -352,7 +404,25 @@ class Grammar
     #
     # Constructor
     #
-    def initialize(wrap_source: false, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
+    def initialize(*args, **kwargs)
+        # find out if making a grammar copy or not (for importing)
+        if args[0].is_a?(Grammar)
+            # make a shallow copy
+            @data            = args[0].data
+            @language_ending = args[0].language_ending
+            if args[1].is_a?(String) && args[1].size > 0
+                @namespace = args[1]
+            else+
+                @namespace = ""
+            end
+            @export_options  = kwargs
+        # if not making a copy then run the normal init
+        else
+            self.init(*args, **kwargs)
+        end
+    end
+    
+    def init(wrap_source: false, name:nil, scope_name:nil, global_patterns:[], repository:{}, file_types:[], **other)
         @data = {
             name: name,
             scopeName: scope_name,
@@ -361,24 +431,64 @@ class Grammar
             patterns: global_patterns,
             repository: repository,
         }
-        @wrap_source = wrap_source
+        @wrap_source     = wrap_source
         @language_ending = scope_name.gsub /.+\.(.+)\z/, "\\1"
-        @@current_grammar = self
+        @namespace       = ""
+    end
+    
+    # 
+    # internal helpers
+    # 
+    def insertNamespaceIfNeeded(key)
+        if @export_options != nil && @namespace.size > 0 && @export_options[:insert_namespace_infront_of_new_grammar_repos] == true
+            return (@namespace + "." + key.to_s).to_sym
+        end
+        return key
+    end
+    
+    def insertNamespaceToIncludesIfNeeded(pattern)
+        if @export_options != nil && @namespace.size > 0 && @export_options[:insert_namespace_infront_of_new_grammar_repos] == true
+            if pattern.respond_to?(:includes) && pattern.includes.is_a?(Array)
+                # change all the repo names
+                index = -1
+                for each in pattern.includes.clone
+                    index += 1
+                    if each.is_a?(Symbol)
+                        # change the old value with a new one
+                        pattern[index] = (@namespace + "." + each.to_s).to_sym
+                    end
+                end
+            end
+        end
     end
     
     #
     # External Helpers
     #
-    def [](key)
+    def [](*args)
+        key = args[0]
+        key = self.insertNamespaceIfNeeded(key)
         return @data[:repository][key]
     end
     
-    def []=(key, value)
+    def []=(*args)
+        # parse out the arguments: grammar[key, (optional_overwrite)] = value
+        *keys, value = args
+        key, overwrite_option = keys
+        key = self.insertNamespaceIfNeeded(key)
+        # check for accidental overwrite
+        overwrite_allowed = overwrite_option.is_a?(Hash) && overwrite_option[:overwrite]
+        if @data[:repository][key] != nil && (not overwrite_option)
+            puts "\n\nWarning: the #{key} repository is being overwritten.\n\nIf this is intentional, change:\ngrammar[:#{key}] = *value*\ninto:\ngrammar[:#{key}, overwrite: true] = *value*"
+        end
         # add it to the repository
         @data[:repository][key] = value
+        # TODO: if the value is an Array, run the insertNamespaceToIncludesIfNeeded 
         # tell the object it was added to a repository
         if (value.instance_of? Regexp) || (value.instance_of? PatternRange)
             value.repository_name = key
+            # namespace all of the symbolic includes
+            self.insertNamespaceToIncludesIfNeeded(value)
         end
     end
     
@@ -1140,6 +1250,13 @@ class Regexp
         end
 end
 
+class Pattern < Regexp
+    # overwrite the new pattern instead of initialize
+    def self.new(*args)
+        return //.then(*args)
+    end
+end
+
 #
 # Make safe failure for regex methods on strings
 #
@@ -1184,6 +1301,9 @@ end
     end
     def lookBehindToAvoid(*arguments)
         //.lookBehindToAvoid(*arguments)
+    end
+    def wordBounds(regex_pattern)
+        return lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
     def maybe(*arguments)
         //.maybe(*arguments)

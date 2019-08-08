@@ -141,10 +141,236 @@
   scopes:
     - entity.name.type.class
   scopesEnd:
+    - meta.preprocessor.macro
     - meta.block.class
     - meta.head.class
 - source: '#'
   scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: __vax__
+  scopes:
+    - meta.conditional.preprocessor
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.diagnostic
+    - keyword.control.directive.diagnostic.error
+  scopes:
+    - punctuation.definition.directive
+- source: error
+  scopesEnd:
+    - keyword.control.directive.diagnostic.error
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Won't work on VAXen.  See comments at get_last_object.
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.diagnostic
+    - string.quoted.double
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: '!'
+  scopesBegin:
+    - meta.conditional.preprocessor
+  scopes:
+    - keyword.operator.logical
+- source: defined
+  scopes:
+    - keyword.control.directive.conditional.defined
+- source: (
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: FOO
+  scopes:
+    - entity.name.function.preprocessor
+- source: )
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: '&&'
+  scopes:
+    - keyword.operator.logical
+- source: defined
+  scopes:
+    - keyword.control.directive.conditional.defined
+- source: (
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: BAR
+  scopes:
+    - entity.name.function.preprocessor
+- source: )
+  scopes:
+    - punctuation.section.parens.control.defined
+  scopesEnd:
+    - meta.conditional.preprocessor
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.diagnostic
+    - keyword.control.directive.diagnostic.error
+  scopes:
+    - punctuation.definition.directive
+- source: error
+  scopesEnd:
+    - keyword.control.directive.diagnostic.error
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: BAR requires FOO.
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.diagnostic
+    - string.quoted.single
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: __vax__
+  scopes:
+    - meta.conditional.preprocessor
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.diagnostic
+    - keyword.control.directive.diagnostic.warning
+  scopes:
+    - punctuation.definition.directive
+- source: warning
+  scopesEnd:
+    - keyword.control.directive.diagnostic.warning
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Won't work on VAXen.  See comments at get_last_object.
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.diagnostic
+    - string.quoted.double
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: '!'
+  scopesBegin:
+    - meta.conditional.preprocessor
+  scopes:
+    - keyword.operator.logical
+- source: defined
+  scopes:
+    - keyword.control.directive.conditional.defined
+- source: (
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: FOO
+  scopes:
+    - entity.name.function.preprocessor
+- source: )
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: '&&'
+  scopes:
+    - keyword.operator.logical
+- source: defined
+  scopes:
+    - keyword.control.directive.conditional.defined
+- source: (
+  scopes:
+    - punctuation.section.parens.control.defined
+- source: BAR
+  scopes:
+    - entity.name.function.preprocessor
+- source: )
+  scopes:
+    - punctuation.section.parens.control.defined
+  scopesEnd:
+    - meta.conditional.preprocessor
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.diagnostic
+    - keyword.control.directive.diagnostic.warning
+  scopes:
+    - punctuation.definition.directive
+- source: warning
+  scopesEnd:
+    - keyword.control.directive.diagnostic.warning
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: BAR requires FOO.
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.diagnostic
+    - string.quoted.single
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -276,8 +502,22 @@
 - source: once
   scopes:
     - entity.other.attribute-name.pragma.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.pragma
+  scopes:
+    - punctuation.definition.directive
+- source: pragma
+  scopesEnd:
+    - keyword.control.directive.pragma
+- source: GCC
+  scopesBegin:
+    - entity.other.attribute-name.pragma.preprocessor
+- source: poison
+- source: printf
   scopesEnd:
     - meta.preprocessor.pragma
+    - entity.other.attribute-name.pragma.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.include

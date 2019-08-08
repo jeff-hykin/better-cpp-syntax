@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
-const vsctm = require("vscode-textmate-experimental");
+const vsctm = require("vscode-textmate");
 const rewriteGrammar = require("./report/rewrite_grammar");
 const pathFor = require("./paths");
 

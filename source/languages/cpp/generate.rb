@@ -19,7 +19,7 @@ require_relative './raw_strings.rb'
     # consider adding storage.type to user defined types
     # switch to punctuation.accessor from punctuation.seperator.dot-access
 
-cpp_grammar = Grammar.new(
+grammar = Grammar.new(
     name: "C++",
     scope_name: "source.cpp",
     file_types: [
@@ -45,24 +45,28 @@ cpp_grammar = Grammar.new(
 #
 # Utils
 #
-    $grammar = cpp_grammar
-    cpp_grammar[:inline_comment] = inline_comment
-    def std_space() generateStdSpace($grammar[:inline_comment]) end
+    grammar[:inline_comment]     = grammar.import("./lib/inline_comment")
+    std_space                    = grammar.import("./lib/std_space")[inline_comment, :inline_comment]
+    universal_character          = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
+    first_character              = /[a-zA-Z_]/.or(universal_character)
+    subsequent_character         = /[a-zA-Z0-9_]/.or(universal_character)
+    identifier                   = first_character.then(zeroOrMoreOf(subsequent_character))
+    preprocessor                 = grammar.import("./lib/preprocessor")[std_space, identifier]
     leading_space = /\s*+/
-    cpp_grammar[:semicolon] = @semicolon = newPattern(
+    grammar[:semicolon] = @semicolon = Pattern.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
         )
-    cpp_grammar[:comma] = newPattern(
+    grammar[:comma] = Pattern.new(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma"
         )
     possible_begining_of_statement = /^|\G/.or(lookBehindFor(/;|\}/))
-    cpp_grammar[:assignment_operator] = assignment_operator = newPattern(
+    grammar[:assignment_operator] = assignment_operator = Pattern.new(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
         )
-    array_brackets = newPattern(
+    array_brackets = Pattern.new(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square"
         ).then(
@@ -75,14 +79,14 @@ cpp_grammar = Grammar.new(
     functionCallGenerator = ->(repository_name:nil, match_name: nil, tag_name_as: nil, tag_content_as: nil, tag_parenthese_as: nil) do
         new_range = PatternRange.new(
             tag_content_as: "meta.#{tag_content_as}",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                     match: match_name,
                     tag_as: tag_name_as,
                 ).then(std_space).then(
                     match: /\(/,
                     tag_as: "punctuation.section.arguments.begin.bracket.round.#{tag_parenthese_as}"
                 ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                     match: /\)/,
                     tag_as: "punctuation.section.arguments.end.bracket.round.#{tag_parenthese_as}"
                 ),
@@ -91,7 +95,7 @@ cpp_grammar = Grammar.new(
             ]
             )
         if repository_name
-            cpp_grammar[repository_name] = new_range
+            grammar[repository_name] = new_range
         end
         return new_range
     end
@@ -99,8 +103,8 @@ cpp_grammar = Grammar.new(
     def generateBlockFinder( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
-            end_pattern = newPattern(
-                match: newPattern(
+            end_pattern = Pattern.new(
+                match: Pattern.new(
                         lookBehindFor(@close_curly_brace).maybe(@spaces).then(@semicolon)
                     ).or(
                         @semicolon
@@ -113,7 +117,7 @@ cpp_grammar = Grammar.new(
         end
         return PatternRange.new(
             tag_as: tag_as,
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                     match: start_pattern,
                     tag_as: "meta.head."+name,
                 ),
@@ -125,7 +129,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "meta.head."+name,
                     start_pattern: /\G ?/,
                     zeroLengthStart?: true,
-                    end_pattern: newPattern(
+                    end_pattern: Pattern.new(
                         match: @open_curly_brace.or(lookAheadFor(/;/)),
                         tag_as: "punctuation.section.block.begin.bracket.curly."+name
                     ),
@@ -135,7 +139,7 @@ cpp_grammar = Grammar.new(
                 PatternRange.new(
                     tag_as: "meta.body."+name, # body is everything in the {}'s
                     start_pattern: lookBehindFor(@open_curly_brace),
-                    end_pattern: newPattern(
+                    end_pattern: Pattern.new(
                             match: @close_curly_brace,
                             tag_as: "punctuation.section.block.end.bracket.curly."+name
                         ),
@@ -145,7 +149,7 @@ cpp_grammar = Grammar.new(
                 PatternRange.new(
                     tag_as: "meta.tail."+name,
                     start_pattern: lookBehindFor(@close_curly_brace).then(/[\s\n]*/),
-                    end_pattern: newPattern(/[\s\n]*/).lookAheadFor(/;/),
+                    end_pattern: Pattern.new(/[\s\n]*/).lookAheadFor(/;/),
                     includes: tail_includes
                 ),
                 *secondary_includes
@@ -157,25 +161,12 @@ cpp_grammar = Grammar.new(
 # Contexts
 #
 #
-    cpp_grammar[:ever_present_context] = [
-            # preprocessor directives, which should be a part of every scope
-            :single_line_macro,
-            :preprocessor_rule_enabled,
-            :preprocessor_rule_disabled,
-            :preprocessor_rule_conditional,
-            :meta_preprocessor_macro,
-            :meta_preprocessor_diagnostic,
-            :meta_preprocessor_include,
-            :pragma_mark,
-            :meta_preprocessor_line,
-            :meta_preprocessor_undef,
-            :meta_preprocessor_pragma,
-            :hacky_fix_for_stray_directive,
-            # comments 
+    grammar[:ever_present_context] = [
+            *preprocessor,
             :comments,
             :line_continuation_character,
         ]
-    cpp_grammar[:$initial_context] = [
+    grammar[:$initial_context] = [
             :ever_present_context,
             # declarations (contains only the head of somthing)
             # TODO: class pre-definition
@@ -212,7 +203,7 @@ cpp_grammar = Grammar.new(
             # eventually this needs to be removed
             :evaluation_context
         ]
-    cpp_grammar[:function_body_context] = cpp_grammar[:$initial_context].without(
+    grammar[:function_body_context] = grammar[:$initial_context].without(
             # function bodies cant contain any of theses:
             :constructor_root,
             :destructor_root,
@@ -235,7 +226,7 @@ cpp_grammar = Grammar.new(
             :evaluation_context,
             :label
         ]
-    cpp_grammar[:evaluation_context] = [
+    grammar[:evaluation_context] = [
             :ever_present_context,
             # literals
             :string_context,
@@ -272,19 +263,19 @@ cpp_grammar = Grammar.new(
             :semicolon,
             :comma,
         ]
-    cpp_grammar[:function_parameter_context] = [
+    grammar[:function_parameter_context] = [
             :ever_present_context, # comments and macros 
             :parameter,
             :comma,
         ]
-    cpp_grammar[:template_definition_context] = [
+    grammar[:template_definition_context] = [
             :scope_resolution_template_definition_inner_generated,
             :template_definition_argument,
             :template_argument_defaulted,
             :template_call_innards,
             :evaluation_context
         ]
-    cpp_grammar[:template_call_context] = [
+    grammar[:template_call_context] = [
             :ever_present_context,
             :template_call_range,
             :storage_types,
@@ -296,13 +287,13 @@ cpp_grammar = Grammar.new(
             :comma_in_template_argument,
             :qualified_type,
         ]
-    cpp_grammar[:attributes_context] = [
+    grammar[:attributes_context] = [
             :cpp_attributes,
             :gcc_attributes,
             :ms_attributes,
             :alignas_attribute,
         ]
-    cpp_grammar[:storage_types] = [
+    grammar[:storage_types] = [
             :storage_specifiers,
             :primitive_types,
             :non_primitive_types,
@@ -314,20 +305,20 @@ cpp_grammar = Grammar.new(
 # 
 # Comments
 # 
-    cpp_grammar[:block_comment] = PatternRange.new(
+    grammar[:block_comment] = PatternRange.new(
         tag_as: "comment.block",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             /\s*+/.then(
                 match: /\/\*/,
                 tag_as: "punctuation.definition.comment.begin"
             )
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /\*\//,
             tag_as: "punctuation.definition.comment.end"
         )
     )
-    cpp_grammar[:line_comment] = PatternRange.new(
+    grammar[:line_comment] = PatternRange.new(
         tag_as: "comment.line.double-slash",
         start_pattern: /\s*+/.then(
             match: /\/\//,
@@ -337,18 +328,18 @@ cpp_grammar = Grammar.new(
         end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
         includes: [ :line_continuation_character ]
     )
-    cpp_grammar[:emacs_file_banner] = newPattern(
+    grammar[:emacs_file_banner] = Pattern.new(
         #
         # file banner
         # this matches emacs style file banners ex: /* = foo.c = */
         # a file banner is a <comment start> <some spaces> <banner start> <some spaces>
         # <comment contents> <banner end> <some spaces> <comment end>
         # single line
-        newPattern(
+        Pattern.new(
             should_fully_match: ["// ### test.c ###", "//=test.c - test util ="],
             should_not_partial_match: ["// ### test.c #=#", "//=test.c - test util ~~~"],
             match: /^/.maybe(@spaces).then(
-                match: newPattern(
+                match: Pattern.new(
                     match: /\/\//,
                     tag_as: "punctuation.definition.comment"
                 ).maybe(
@@ -367,7 +358,7 @@ cpp_grammar = Grammar.new(
             should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
             should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
             match: /^/.maybe(@spaces).then(
-                match: newPattern(
+                match: Pattern.new(
                     match: /\/\*/,
                     tag_as: "punctuation.definition.comment"
                 ).maybe(
@@ -385,11 +376,11 @@ cpp_grammar = Grammar.new(
             tag_as: "meta.toc-list.banner.block",
         )
     )
-    cpp_grammar[:invalid_comment_end] = newPattern(
+    grammar[:invalid_comment_end] = Pattern.new(
         match: /\*\//,
         tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
     )
-    cpp_grammar[:comments] = [
+    grammar[:comments] = [
         :emacs_file_banner,
         :block_comment,
         :line_comment,
@@ -399,18 +390,10 @@ cpp_grammar = Grammar.new(
 #
 # Numbers
 #
-#
-    #
-    # Number Literal
-    #
-    cpp_grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
+    grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
 #
-    universal_character = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
-    first_character = /[a-zA-Z_]/.or(universal_character)
-    subsequent_character = /[a-zA-Z0-9_]/.or(universal_character)
-    identifier = first_character.then(zeroOrMoreOf(subsequent_character))
     # todo: make a better name for this function
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
@@ -422,7 +405,7 @@ cpp_grammar = Grammar.new(
 #
 # Constants
 #
-    cpp_grammar[:language_constants] = newPattern(
+    grammar[:language_constants] = Pattern.new(
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
         tag_as: "constant.language.$match"
         )
@@ -431,61 +414,61 @@ cpp_grammar = Grammar.new(
 # Built-In Types
 #
     look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]|\.\.\./).maybe(@spaces)
-    cpp_grammar[:primitive_types] = newPattern(
+    grammar[:primitive_types] = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
             tag_as: "storage.type.primitive storage.type.built-in.primitive"
         )
     )
-    cpp_grammar[:non_primitive_types] = newPattern(
+    grammar[:non_primitive_types] = Pattern.new(
         std_space.then(
             match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
             tag_as: "storage.type storage.type.built-in"
         )
     )
-    cpp_grammar[:decltype] = functionCallGenerator[
+    grammar[:decltype] = functionCallGenerator[
         repository_name: "decltype_specifier",
         match_name: variableBounds[/decltype/],
         tag_name_as: "keyword.operator.functionlike keyword.other.decltype storage.type.decltype",
         tag_content_as: "arguments.decltype",
         tag_parenthese_as: "decltype"
     ]
-    cpp_grammar[:pthread_types] = pthread_types = newPattern(
+    grammar[:pthread_types] = pthread_types = Pattern.new(
         std_space.then(
             tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
             match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
         )
     )
-    cpp_grammar[:posix_reserved_types] = posix_reserved_types = newPattern(
+    grammar[:posix_reserved_types] = posix_reserved_types = Pattern.new(
         std_space.then(
             match: variableBounds[  /[a-zA-Z_]/.zeroOrMoreOf(@standard_character).then(/_t/)  ],
             tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
         )
     )
     inline_builtin_storage_type = std_space.then(
-        newPattern(
-            cpp_grammar[:primitive_types]
+        Pattern.new(
+            grammar[:primitive_types]
         ).or(
-            cpp_grammar[:non_primitive_types]
+            grammar[:non_primitive_types]
         ).or(
-            cpp_grammar[:pthread_types]
+            grammar[:pthread_types]
         ).or(
-            cpp_grammar[:posix_reserved_types]
+            grammar[:posix_reserved_types]
         )
     )
 
 #
 # Keywords and Keyword-ish things
 #
-    cpp_grammar[:using_name] = newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
-    cpp_grammar[:functional_specifiers_pre_parameters] = newPattern(
+    grammar[:using_name] = Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
+    grammar[:functional_specifiers_pre_parameters] = Pattern.new(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
-    cpp_grammar[:qualifiers_and_specifiers_post_parameters] = newPattern(
+    grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
         std_space.then(
             tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-            match: newPattern(
+            match: Pattern.new(
                 variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(
                     /\s*/.then(
                         /\{/.or(/;/).or(/[\n\r]/)
@@ -494,17 +477,17 @@ cpp_grammar = Grammar.new(
             )
         ),
     )
-    cpp_grammar[:storage_specifiers] = storage_specifier = newPattern(
+    grammar[:storage_specifiers] = storage_specifier = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
             tag_as: "storage.modifier.specifier.$match"
         )
     )
-    cpp_grammar[:access_control_keywords] = newPattern(
+    grammar[:access_control_keywords] = Pattern.new(
         std_space.then(
             tag_as: "storage.type.modifier.access.control.$reference(access_specifier)",
-            match: newPattern(
-                newPattern(
+            match: Pattern.new(
+                Pattern.new(
                     match: @cpp_tokens.that(:isAccessSpecifier),
                     reference: "access_specifier"
                 ).maybe(@spaces).then(
@@ -514,38 +497,38 @@ cpp_grammar = Grammar.new(
             )
         )
     )
-    cpp_grammar[:exception_keywords] = newPattern(
+    grammar[:exception_keywords] = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
             tag_as: "keyword.control.exception.$match"
         )
     )
-    cpp_grammar[:typedef_keyword] = newPattern(
+    grammar[:typedef_keyword] = Pattern.new(
         std_space.then(
             match: variableBounds[ /typedef/ ],
             tag_as: "keyword.other.$match"
         )
     )
-    cpp_grammar[:the_this_keyword] = the_this_keyword = newPattern(
+    grammar[:the_this_keyword] = the_this_keyword = Pattern.new(
         std_space.then(
             match: variableBounds[ /this/ ],
             tag_as: "variable.language.this"
         )
     )
     # TODO: enhance casting operators to include <>'s
-    cpp_grammar[:type_casting_operators] = newPattern(
+    grammar[:type_casting_operators] = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
             tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
     )
-    cpp_grammar[:memory_operators] = newPattern(
+    grammar[:memory_operators] = Pattern.new(
         std_space.then(
             tag_as: "keyword.operator.wordlike",
-            match: newPattern(
-                newPattern(
-                    newPattern(
-                        newPattern(
+            match: Pattern.new(
+                Pattern.new(
+                    Pattern.new(
+                        Pattern.new(
                             match: /delete/,
                             tag_as: "keyword.operator.delete.array"
                         ).maybe(@spaces).then(
@@ -563,13 +546,13 @@ cpp_grammar = Grammar.new(
             )
         )
     )
-    cpp_grammar[:control_flow_keywords] = control_flow_keywords = newPattern(
+    grammar[:control_flow_keywords] = control_flow_keywords = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
             tag_as: "keyword.control.$match"
         )
     )
-    declaration_storage_specifiers = newPattern(
+    declaration_storage_specifiers = Pattern.new(
         match: oneOrMoreOf(storage_specifier.without_numbered_capture_groups.then(@spaces)),
         includes: [
             :storage_specifiers
@@ -578,8 +561,8 @@ cpp_grammar = Grammar.new(
 #
 # Control flow
 #
-    cpp_grammar[:goto_statement] = newPattern(
-        newPattern(
+    grammar[:goto_statement] = Pattern.new(
+        Pattern.new(
             match: variableBounds[/goto/],
             tag_as: "keyword.control.goto",
         ).then(std_space).then(
@@ -587,7 +570,7 @@ cpp_grammar = Grammar.new(
             tag_as: "entity.name.label.call"
         )
     )
-    cpp_grammar[:label] = newPattern(
+    grammar[:label] = Pattern.new(
             std_space.then(
                 tag_as: "entity.name.label",
                 match: variableBounds[identifier],
@@ -598,55 +581,55 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.separator.label",
             )
         )
-    cpp_grammar[:default_statement] = PatternRange.new(
+    grammar[:default_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 std_space.then(
                     match: variableBounds[ /default/ ],
                     tag_as: "keyword.control.default"
                 )
             ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                 match: /:/,
                 tag_as: "punctuation.separator.colon.case.default"
             ),
             # TODO: eventually remove the c_conditional_context
             includes: [:evaluation_context, :c_conditional_context]
         )
-    cpp_grammar[:case_statement] = PatternRange.new(
+    grammar[:case_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 std_space.then(
                     match: variableBounds[ /case/ ],
                     tag_as: "keyword.control.case"
                 )
             ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                 match: /:/,
                 tag_as: "punctuation.separator.colon.case"
             ),
             # TODO: eventually remove the c_conditional_context
             includes: [:evaluation_context, :c_conditional_context]
         )
-    cpp_grammar[:switch_conditional_parentheses] = PatternRange.new(
+    grammar[:switch_conditional_parentheses] = PatternRange.new(
             tag_as: "meta.conditional.switch",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 std_space.then(
                     match: /\(/,
                     tag_as: 'punctuation.section.parens.begin.bracket.round.conditional.switch'
                 )
             ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
             # TODO: eventually remove the c_conditional_context
             includes: [ :evaluation_context, :c_conditional_context ]
         )
-    cpp_grammar[:switch_statement] = generateBlockFinder(
+    grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
             tag_as: "meta.block.switch",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 std_space.then(
                     match: variableBounds[/switch/],
                     tag_as: "keyword.control.switch"
@@ -670,11 +653,11 @@ cpp_grammar = Grammar.new(
     generateAttributeRangeFinder = ->(start_pattern, end_pattern) do
         return PatternRange.new(
             tag_as: "support.other.attribute",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 match: start_pattern,
                 tag_as: "punctuation.section.attribute.begin",
             ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                 match: end_pattern,
                 tag_as: "punctuation.section.attribute.end",
             ),
@@ -689,17 +672,17 @@ cpp_grammar = Grammar.new(
                         :string_context_c,
                     ],
                 ),
-                newPattern(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
+                Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.namespace",
                 ),
-                newPattern(match: /,/, tag_as: "punctuation.separator.attribute"),
-                newPattern(match: /:/, tag_as: "punctuation.accessor.attribute"),
-                newPattern(
+                Pattern.new(match: /,/, tag_as: "punctuation.separator.attribute"),
+                Pattern.new(match: /:/, tag_as: "punctuation.accessor.attribute"),
+                Pattern.new(
                     match: variable_name.lookAheadFor(/::/),
                     tag_as: "entity.name.namespace"
                 ),
-                newPattern(match: variable_name, tag_as: "entity.other.attribute.$match"),
+                Pattern.new(match: variable_name, tag_as: "entity.other.attribute.$match"),
                 :number_literal,
             ]
         )
@@ -714,16 +697,16 @@ cpp_grammar = Grammar.new(
     alignas_start       = /alignas\(/
     alignas_end         = /\)/
     
-    cpp_grammar[:cpp_attributes   ] = generateAttributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
-    cpp_grammar[:gcc_attributes   ] = generateAttributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
-    cpp_grammar[:ms_attributes    ] = generateAttributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
-    cpp_grammar[:alignas_attribute] = generateAttributeRangeFinder[ alignas_start      , alignas_end       ]
+    grammar[:cpp_attributes   ] = generateAttributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
+    grammar[:gcc_attributes   ] = generateAttributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
+    grammar[:ms_attributes    ] = generateAttributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
+    grammar[:alignas_attribute] = generateAttributeRangeFinder[ alignas_start      , alignas_end       ]
     
-    inline_attribute = newPattern(
+    inline_attribute = Pattern.new(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
         should_partial_match: ["struct [[deprecated]] st"],
         # match one of the three attribute styles
-        match: newPattern(
+        match: Pattern.new(
                 cpp_attribute_start.then(/.*?/).then(cpp_attribute_end)
             ).or(
                 gcc_attribute_start.then(/.*?/).then(gcc_attribute_end)
@@ -743,16 +726,16 @@ cpp_grammar = Grammar.new(
     # this is effectively what is happening:
     #   some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
     # this is actually what is happening: (recursion)
-    some_number_of_angle_brackets = newPattern(
+    some_number_of_angle_brackets = Pattern.new(
         should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>" ],
         should_not_fully_match: [ "testing<>" ],
         reference: "angle_brackets",
-        match: newPattern(
+        match: Pattern.new(
             lookBehindToAvoid(/</).then(
                 /</
             ).lookAheadToAvoid(/</).oneOrMoreOf(
                 dont_back_track?: true,
-                match: newPattern(
+                match: Pattern.new(
                     zeroOrMoreOf(
                         match: /[^<>]/,
                         dont_back_track?: true,
@@ -765,25 +748,25 @@ cpp_grammar = Grammar.new(
     )
 
     
-    cpp_grammar[:comma_in_template_argument] = newPattern(
+    grammar[:comma_in_template_argument] = Pattern.new(
         match: /,/,
         tag_as: "punctuation.separator.delimiter.comma.template.argument"
     )
     # note: template_call should ideally be a Range(), the reason its not is
     # because it's embedded inside of other patterns
-    cpp_grammar[:template_call_innards] = template_call = newPattern(
+    grammar[:template_call_innards] = template_call = Pattern.new(
         tag_as: 'meta.template.call',
         # to match the characters in the middle of a template call
         match: some_number_of_angle_brackets.maybe(@spaces),
         includes: [ :template_call_range ]
     )
-    cpp_grammar[:template_call_range] = PatternRange.new(
+    grammar[:template_call_range] = PatternRange.new(
             tag_as: 'meta.template.call',
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 match: /</,
                 tag_as: "punctuation.section.angle-brackets.begin.template.call"
             ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                 match: />/,
                 tag_as: "punctuation.section.angle-brackets.end.template.call"
             ),
@@ -797,7 +780,7 @@ cpp_grammar = Grammar.new(
             tag_as: "punctuation.section.angle-brackets.start.template.definition"
         )
     # a template definition that is by itself on a line (this is ideal)
-    cpp_grammar[:template_isolated_definition] = newPattern(
+    grammar[:template_isolated_definition] = Pattern.new(
         match: template_start.then(
                 match:  zeroOrMoreOf(/./),
                 tag_as: "meta.template.definition",
@@ -807,10 +790,10 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
             ),
         )
-    cpp_grammar[:template_definition] = PatternRange.new(
+    grammar[:template_definition] = PatternRange.new(
         tag_as: 'meta.template.definition',
         start_pattern: template_start,
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
                 match: />/,
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
             ),
@@ -819,11 +802,11 @@ cpp_grammar = Grammar.new(
             # however this is rolling the dice: because if there is a less-than operator in a defaulted argument, then this pattern will screw everything up
             # a better solution would be nice, but its going to be difficult/impossible
             PatternRange.new(
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                         match: lookBehindFor(/\w/).maybe(@spaces).then(/</),
                         tag_as: "punctuation.section.angle-brackets.begin.template.call"
                     ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                         match: />/,
                         tag_as: "punctuation.section.angle-brackets.begin.template.call"
                     ),
@@ -832,7 +815,7 @@ cpp_grammar = Grammar.new(
             :template_definition_context,
         ]
         )
-    cpp_grammar[:template_argument_defaulted] = newPattern(
+    grammar[:template_argument_defaulted] = Pattern.new(
         match: lookBehindFor(/<|,/).maybe(@spaces).then(
                 match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
                 tag_as: "storage.type.template",
@@ -844,18 +827,18 @@ cpp_grammar = Grammar.new(
                 tag_as: "keyword.operator.assignment"
             )
         )
-    cpp_grammar[:template_definition_argument] = newPattern(
+    grammar[:template_definition_argument] = Pattern.new(
         # case 1: only one word
         std_space.then(
-            newPattern(
+            Pattern.new(
                 match: variable_name_without_bounds,
                 tag_as: "storage.type.template.argument.$match",
             # case 2: normal situation (ex: "typename T")
             ).or(
-                newPattern(
+                Pattern.new(
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
                     includes: [
-                        newPattern(
+                        Pattern.new(
                             match: variable_name_without_bounds,
                             tag_as: "storage.type.template.argument.$match",
                         )
@@ -866,7 +849,7 @@ cpp_grammar = Grammar.new(
                 )
             # case 3: ellipses (ex: "typename... Args")
             ).or(
-                newPattern(
+                Pattern.new(
                     match: variable_name_without_bounds,
                     tag_as: "storage.type.template",
                 ).maybe(@spaces).then(
@@ -877,7 +860,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "entity.name.type.template"
                 )
             ).maybe(@spaces).then(
-                newPattern(
+                Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.delimiter.comma.template.argument",
                 ).or(
@@ -889,7 +872,7 @@ cpp_grammar = Grammar.new(
 #
 # Scope resolution
 #
-    one_scope_resolution = newPattern(
+    one_scope_resolution = Pattern.new(
         match: variable_name_without_bounds,
         word_cannot_be_any_of: @cpp_tokens.representationsThat(
             :isWord,
@@ -900,14 +883,14 @@ cpp_grammar = Grammar.new(
         )
     ).then(/\s*+/).maybe(template_call).then(/::/)
     inline_scope_resolution = ->(tag_extension) do
-        newPattern(
+        Pattern.new(
             match: zeroOrMoreOf(one_scope_resolution),
             includes: [
-                newPattern(
+                Pattern.new(
                     match: /::/,
                     tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
                 ),
-                newPattern(
+                Pattern.new(
                     match: variableBounds[identifier],
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ),
@@ -915,11 +898,11 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    scope_operator = newPattern(
+    scope_operator = Pattern.new(
         match: /::/,
         tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"
     )
-    preceding_scopes = newPattern(
+    preceding_scopes = Pattern.new(
         match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
         includes: [ :scope_resolution_inner_generated ]
         )
@@ -928,7 +911,7 @@ cpp_grammar = Grammar.new(
         tagged_scope_operator = scope_operator.reTag(
             append: tag_extension[1..-1]
         )
-        cpp_grammar[grammar_name] = newPattern(
+        grammar[grammar_name] = Pattern.new(
             # find the whole scope resolution 
             should_fully_match: [ "name::name2::name3::" ],
             match: maybe(tagged_scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
@@ -937,9 +920,9 @@ cpp_grammar = Grammar.new(
                     hidden_grammar_name,
                 ]
             )
-        cpp_grammar[hidden_grammar_name] = newPattern(
+        grammar[hidden_grammar_name] = Pattern.new(
             should_fully_match: ["name::", "name::name2::name3::"],
-            match: cpp_grammar[grammar_name].then(
+            match: grammar[grammar_name].then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ).then(/\s*+/).maybe(
@@ -962,14 +945,14 @@ cpp_grammar = Grammar.new(
 # Types
 #
     ref_deref = ->(pointer_tag:"storage.modifier.pointer", reference_tag: "storage.modifier.reference") do
-        newPattern(
+        Pattern.new(
             # even though some of these "should_fully_match" cases are invalid in C++, there examples here for demoing how the pattern DOES work but not the ideal. It currently works this way for performance/convenience
             should_fully_match: [ "*", "**", "**&", "* *", "*   *   *", "**&&**", "&&&", "&&   &", "&   & &", "& &&" ],
             should_not_fully_match: [ "    *    ", " ** " , "&&&    ", "&&   &    " ],
-            match: newPattern(
+            match: Pattern.new(
                 # match as many as possible, but (see next comment)
                 maybe(std_space).zeroOrMoreOf(
-                    newPattern(
+                    Pattern.new(
                         /\&/.or(/\*/)
                     ).then(std_space)
                 # only match the space between them (not the space after the last one)
@@ -977,23 +960,23 @@ cpp_grammar = Grammar.new(
             ),
             includes: [
                 # tag all the *'s
-                newPattern(
+                Pattern.new(
                     match: /\*/,
                     tag_as: pointer_tag,
                 ),
                 # if there's an invalid number of &'s (3 or more)
-                newPattern(
+                Pattern.new(
                     should_fully_match: [ "&&&", "&&   &", "&   & &", "& &&" ],
                     should_not_fully_match: ["   &&   ",  "&&&    ", "&&   &    " ],
                     should_not_partial_match: [ "&&", "&", "& &  " ],
                     tag_as: "invalid.illegal.reference-type",
-                    match: newPattern(
+                    match: Pattern.new(
                         match: /\&/.then(std_space),
                         at_least: 2.times
                     ).then(/\&/)
                 ),
                 # tag all the &'s
-                newPattern(
+                Pattern.new(
                     match: /\&/,
                     tag_as: reference_tag,
                 ),
@@ -1002,7 +985,7 @@ cpp_grammar = Grammar.new(
     end
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
-    cpp_grammar[:qualified_type] = qualified_type = newPattern(
+    grammar[:qualified_type] = qualified_type = Pattern.new(
         should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
@@ -1021,7 +1004,7 @@ cpp_grammar = Grammar.new(
                 template_call
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
-            newPattern(
+            Pattern.new(
                 match: variableBounds[ @cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"
             ),
@@ -1032,20 +1015,20 @@ cpp_grammar = Grammar.new(
             :string_context_c,
             :comma,
             :scope_resolution_inner_generated,
-            cpp_grammar[:template_call_range],
-            newPattern(
+            grammar[:template_call_range],
+            Pattern.new(
                 match: identifier,
                 tag_as: "entity.name.type",
             ),
         ],
     )
     # TODO: create a :type that includes inline function-pointer types and array types
-    cpp_grammar[:simple_type] = qualified_type.maybe(ref_deref[])
-    cpp_grammar[:type_alias] = newPattern(
+    grammar[:simple_type] = qualified_type.maybe(ref_deref[])
+    grammar[:type_alias] = Pattern.new(
         tag_as: "meta.declaration.type.alias",
         should_fully_match: ["using A = B;", "using _Sat = std::allocator_traits<Allocator>;","using const_pointer_t = const uint8_t *\n","using T = typename std::iterator_traits<InputIt>::value_type;", "using pcb = details::pointer_control_block<Y, default_delete<Y>>;"],
         should_not_partial_match: ["using namespace std;","using std::swap;", "using B::B;"],
-        match: newPattern(
+        match: Pattern.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
             ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
@@ -1071,10 +1054,10 @@ cpp_grammar = Grammar.new(
                 array_brackets
             ).maybe(@spaces).then(@semicolon.or(/\n/)),
     )
-    cpp_grammar[:typename] = newPattern(
+    grammar[:typename] = Pattern.new(
         should_fully_match: ["typename Alloc::select_on_container_copy_construction"],
         should_not_partial_match: ["this_typename_is_valid"],
-        match: newPattern(
+        match: Pattern.new(
             match: std_space.then(variableBounds[/typename/]),
             tag_as: "storage.modifier"
         ).then(std_space).then(qualified_type)
@@ -1084,7 +1067,7 @@ cpp_grammar = Grammar.new(
 #
     # generally this section is for things that need a #include, (the support category)
     # it will be for things such as cout, cin, vector, string, map, etc
-    cpp_grammar[:predefined_macros] = predefinedMacros()
+    grammar[:predefined_macros] = predefinedMacros()
 
 #
 # Functions, Operator Overload
@@ -1096,27 +1079,27 @@ cpp_grammar = Grammar.new(
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
 
-    cpp_grammar[:function_definition] = generateBlockFinder(
+    grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             possible_begining_of_statement.or(lookBehindFor(/>/)).then(
                 std_space
             ).maybe(
-                newPattern(
+                Pattern.new(
                     match: variableBounds[/template/],
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).zeroOrMoreOf(
-                newPattern(
+                Pattern.new(
                     match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
                     tag_as: "storage.modifier.$match"
                 ).then(std_space)
             ).then(
-                    cpp_grammar[:simple_type].then(std_space).then(
+                    grammar[:simple_type].then(std_space).then(
                     optional_calling_convention
                 ).then(
-                    cpp_grammar[:scope_resolution_function_definition]
+                    grammar[:scope_resolution_function_definition]
                 ).then(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.function.definition"
@@ -1129,11 +1112,11 @@ cpp_grammar = Grammar.new(
             :ever_present_context, # comments and macros
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
-                start_pattern: newPattern( 
+                start_pattern: Pattern.new( 
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round"
                     ),
-                end_pattern: newPattern( 
+                end_pattern: Pattern.new( 
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round"
                     ),
@@ -1155,12 +1138,12 @@ cpp_grammar = Grammar.new(
         needs_semicolon: false,
         body_includes: [ :function_body_context ],
     )
-    cpp_grammar[:operator_overload] = generateBlockFinder(
+    grammar[:operator_overload] = generateBlockFinder(
         name:"function.definition.special.operator-overload",
         tag_as:"meta.function.definition.special.operator-overload",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             # find the return type (if there is one)
-            maybe(cpp_grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
+            maybe(grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
                 std_space
             ).then(
                 inline_scope_resolution[".operator"]
@@ -1173,7 +1156,7 @@ cpp_grammar = Grammar.new(
             # find the actual operator/type
             ).then(
                 # operator
-                newPattern(
+                Pattern.new(
                     match: @cpp_tokens.that(:canAppearAfterOperatorKeyword),
                     tag_as: "entity.name.operator",
                 # type
@@ -1190,7 +1173,7 @@ cpp_grammar = Grammar.new(
                 # custom literal
                 ).or(
                     # see https://en.cppreference.com/w/cpp/language/user_literal
-                    newPattern(
+                    Pattern.new(
                         match: /""/,
                         tag_as: "entity.name.operator.custom-literal",
                     ).then(std_space).then(
@@ -1206,11 +1189,11 @@ cpp_grammar = Grammar.new(
             :template_call_range,
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters.special.operator-overload",
-                start_pattern: newPattern( 
+                start_pattern: Pattern.new( 
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round.special.operator-overload"
                     ),
-                end_pattern: newPattern( 
+                end_pattern: Pattern.new( 
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round.special.operator-overload"
                     ),
@@ -1230,8 +1213,8 @@ cpp_grammar = Grammar.new(
         body_includes: [ :function_body_context ],
     )
     # static assert is special as it can be outside of normal places function calls can be
-    cpp_grammar[:static_assert] = PatternRange.new(
-        start_pattern: newPattern(
+    grammar[:static_assert] = PatternRange.new(
+        start_pattern: Pattern.new(
             std_space.then(
                 match: variableBounds[/static_assert|_Static_assert/],
                 tag_as: "keyword.other.static_assert",
@@ -1240,14 +1223,14 @@ cpp_grammar = Grammar.new(
                 tag_as: "punctuation.section.arguments.begin.bracket.round.static_assert",
             )
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /\)/,
             tag_as: "punctuation.section.arguments.end.bracket.round.static_assert",
         ),
         includes: [
             # special handling for the assert message
             PatternRange.new(
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.delimiter.comma",
                 ).maybe(@spaces).lookAheadFor(maybe(/L|u8|u|U/.maybe(@spaces).then(/\"/))),
@@ -1262,9 +1245,9 @@ cpp_grammar = Grammar.new(
         ]
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-    cpp_grammar[:function_call] = PatternRange.new(
-        start_pattern: newPattern(
-                cpp_grammar[:scope_resolution_function_call]
+    grammar[:function_call] = PatternRange.new(
+        start_pattern: Pattern.new(
+                grammar[:scope_resolution_function_call]
             ).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.function.call"
@@ -1276,7 +1259,7 @@ cpp_grammar = Grammar.new(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.function.call"
             ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call"
             ),
@@ -1286,15 +1269,15 @@ cpp_grammar = Grammar.new(
 # 
 # Initializers
 # 
-    cpp_grammar[:curly_initializer] = PatternRange.new(
+    grammar[:curly_initializer] = PatternRange.new(
         tag_as: "meta.initialization",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             qualified_type.then(std_space).then(
                 match: /\{/,
                 tag_as: "punctuation.section.arguments.begin.bracket.curly.initializer",
             )
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /\}/,
             tag_as: "punctuation.section.arguments.end.bracket.curly.initializer",
         ),
@@ -1303,14 +1286,14 @@ cpp_grammar = Grammar.new(
             :comma
         ]
     )
-    cpp_grammar[:builtin_storage_type_initilizer] =  PatternRange.new(
-        start_pattern: newPattern(
+    grammar[:builtin_storage_type_initilizer] =  PatternRange.new(
+        start_pattern: Pattern.new(
             inline_builtin_storage_type.then(std_space).then(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.initializer"
             )
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /\)/,
             tag_as: "punctuation.section.arguments.end.bracket.round.initializer"
         ),
@@ -1322,7 +1305,7 @@ cpp_grammar = Grammar.new(
     deleted_and_default_constructor = [
         # for class_name() = delete ; and class_name() = default ;
         assignment_operator.then(std_space).then(
-            newPattern(
+            Pattern.new(
                 match: /default/,
                 tag_as: "keyword.other.default.constructor",
             ).or(
@@ -1343,7 +1326,7 @@ cpp_grammar = Grammar.new(
                 :functional_specifiers_pre_parameters,
                 # ini context
                 PatternRange.new(
-                    start_pattern: newPattern(
+                    start_pattern: Pattern.new(
                         match: /:/,
                         tag_as: "punctuation.separator.initializers"
                     ),
@@ -1351,8 +1334,8 @@ cpp_grammar = Grammar.new(
                     includes: [
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
-                            start_pattern: newPattern(
-                                newPattern(
+                            start_pattern: Pattern.new(
+                                Pattern.new(
                                     match: variableBounds[identifier],
                                     tag_as: "entity.name.function.call.initializer",
                                 ).maybe(
@@ -1362,7 +1345,7 @@ cpp_grammar = Grammar.new(
                                     tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
                                 )
                             ),
-                            end_pattern: newPattern(
+                            end_pattern: Pattern.new(
                                 match: /\)/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
@@ -1370,8 +1353,8 @@ cpp_grammar = Grammar.new(
                         ),
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
-                            start_pattern: newPattern(
-                                newPattern(
+                            start_pattern: Pattern.new(
+                                Pattern.new(
                                     match: variableBounds[identifier],
                                     tag_as: "entity.name.function.call.initializer",
                                 ).then(
@@ -1379,23 +1362,23 @@ cpp_grammar = Grammar.new(
                                     tag_as: "punctuation.section.arguments.begin.bracket.round.function.call.initializer",
                                 )
                             ),
-                            end_pattern: newPattern(
+                            end_pattern: Pattern.new(
                                 match: /\}/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
                             includes: [:evaluation_context]
                         ),
-                        cpp_grammar[:comma],
+                        grammar[:comma],
                     ]
                 ),
                 # parameters 
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.constructor",
-                    start_pattern: newPattern( 
+                    start_pattern: Pattern.new( 
                         match: /\(/,
                         tag_as: "punctuation.section.parameters.begin.bracket.round.special.constructor"
                         ),
-                    end_pattern: newPattern( 
+                    end_pattern: Pattern.new( 
                         match: /\)/,
                         tag_as: "punctuation.section.parameters.end.bracket.round.special.constructor"
                         ),
@@ -1414,7 +1397,7 @@ cpp_grammar = Grammar.new(
             body_includes: [ :function_body_context ],
         )
     end
-    cpp_grammar[:constructor_inline] = constructor[
+    grammar[:constructor_inline] = constructor[
         # find the begining of the line
         /^/.then(std_space).zeroOrMoreOf(
             should_fully_match: ["constexpr", "explicit", "explicit constexpr"],
@@ -1427,15 +1410,15 @@ cpp_grammar = Grammar.new(
             match: variableBounds[identifier].lookAheadFor(/\(/)
         )
     ]
-    cpp_grammar[:constructor_root] = constructor[
+    grammar[:constructor_root] = constructor[
         leading_space.then(optional_calling_convention).then(
             inline_scope_resolution[".constructor"]
         ).then(
-            match: newPattern(
-                newPattern(
-                        match: variableBounds[identifier],
-                        reference: "class_name",
-                        dont_back_track?: true
+            match: Pattern.new(
+                Pattern.new(
+                    match: variableBounds[identifier],
+                    reference: "class_name",
+                    dont_back_track?: true
                 ).then(std_space).then(
                     /::/
                 ).then(std_space).matchResultOf(
@@ -1444,17 +1427,17 @@ cpp_grammar = Grammar.new(
             ),
             includes: [
                 # the first part
-                newPattern(
+                Pattern.new(
                     match: identifier.lookAheadFor(/:/),
                     tag_as: "entity.name.type.constructor",
                 ),
                 # the second part
-                newPattern(
+                Pattern.new(
                     match: lookBehindFor(/:/).then(identifier),
                     tag_as: "entity.name.function.definition.special.constructor"
                 ),
                 # the scope operator
-                newPattern(
+                Pattern.new(
                     match: /::/,
                     tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.constructor"
                 )
@@ -1472,11 +1455,11 @@ cpp_grammar = Grammar.new(
                 deleted_and_default_constructor,
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.member.destructor",
-                    start_pattern: newPattern( 
+                    start_pattern: Pattern.new( 
                         match: /\(/,
                         tag_as: "punctuation.section.parameters.begin.bracket.round.special.member.destructor"
                         ),
-                    end_pattern: newPattern( 
+                    end_pattern: Pattern.new( 
                         match: /\)/,
                         tag_as: "punctuation.section.parameters.end.bracket.round.special.member.destructor"
                         ),
@@ -1491,8 +1474,8 @@ cpp_grammar = Grammar.new(
             body_includes: [ :function_body_context ],
         )
     end
-    cpp_grammar[:destructor_inline] = destructor[
-        newPattern(
+    grammar[:destructor_inline] = destructor[
+        Pattern.new(
             # find the begining of the line
             /^/.then(std_space).then(optional_calling_convention).zeroOrMoreOf(
                 match:  @cpp_tokens.that(:isFunctionSpecifier).then(std_space),
@@ -1505,12 +1488,12 @@ cpp_grammar = Grammar.new(
             )
         )
     ]
-    cpp_grammar[:destructor_root] = destructor[
+    grammar[:destructor_root] = destructor[
         optional_calling_convention.then(
             inline_scope_resolution[".destructor"]
         ).then(
-            match: newPattern(
-                newPattern(
+            match: Pattern.new(
+                Pattern.new(
                         match: variableBounds[identifier],
                         reference: "class_name",
                         dont_back_track?: true
@@ -1522,17 +1505,17 @@ cpp_grammar = Grammar.new(
             ),
             includes: [
                 # the first part
-                newPattern(
+                Pattern.new(
                     match: identifier.lookAheadFor(/:/),
                     tag_as: "entity.name.type.destructor",
                 ),
                 # the second part
-                newPattern(
+                Pattern.new(
                     match: lookBehindFor(/:/).then(/~/).then(identifier),
                     tag_as: "entity.name.function.definition.special.member.destructor"
                 ),
                 # the scope operator
-                newPattern(
+                Pattern.new(
                     match: /::/,
                     tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution.destructor"
                 )
@@ -1542,15 +1525,15 @@ cpp_grammar = Grammar.new(
 #
 # Operators
 #
-    cpp_grammar[:operators] = []
-    cpp_grammar[:wordlike_operators] = newPattern(
+    grammar[:operators] = []
+    grammar[:wordlike_operators] = Pattern.new(
         match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
         tag_as: "keyword.operator.wordlike keyword.operator.$match",
         )
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
-        cpp_grammar[:operators].push(functionCallGenerator[
+        grammar[:operators].push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
             tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
@@ -1559,54 +1542,54 @@ cpp_grammar = Grammar.new(
         ])
     end
     
-    cpp_grammar[:ternary_operator] = PatternRange.new(
+    grammar[:ternary_operator] = PatternRange.new(
         apply_end_pattern_last: true,
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             match: /\?/,
             tag_as: "keyword.operator.ternary",
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /:/,
             tag_as: "keyword.operator.ternary"
         ),
-        includes: cpp_grammar[:evaluation_context]
+        includes: grammar[:evaluation_context]
     )
         
-    cpp_grammar[:operators] += [
-        newPattern(
+    grammar[:operators, overwrite: true] += [
+        Pattern.new(
             match: /--/,
             tag_as: "keyword.operator.decrement"
         ),
-        newPattern(
+        Pattern.new(
             match: /\+\+/,
             tag_as: "keyword.operator.increment"
         ),
-        newPattern(
+        Pattern.new(
             match: /%=|\+=|-=|\*=|(?<!\()\/=/,
             tag_as: "keyword.operator.assignment.compound"
         ),
-        newPattern(
+        Pattern.new(
             match: /&=|\^=|<<=|>>=|\|=/,
             tag_as: "keyword.operator.assignment.compound.bitwise"
         ),
-        newPattern(
+        Pattern.new(
             match: /<<|>>/,
             tag_as: "keyword.operator.bitwise.shift"
         ),
-        newPattern(
+        Pattern.new(
             match: /!=|<=|>=|==|<|>/,
             tag_as: "keyword.operator.comparison"
         ),
-        newPattern(
+        Pattern.new(
             match: /&&|!|\|\|/,
             tag_as: "keyword.operator.logical"
         ),
-        newPattern(
+        Pattern.new(
             match: /&|\||\^|~/,
             tag_as: "keyword.operator"
         ),
         :assignment_operator,
-        newPattern(
+        Pattern.new(
             match: /%|\*|\/|-|\+/,
             tag_as: "keyword.operator"
         ),
@@ -1618,7 +1601,7 @@ cpp_grammar = Grammar.new(
     after_declaration = std_space.lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
-            start_pattern: cpp_grammar[:simple_type].then(std_space).then(
+            start_pattern: grammar[:simple_type].then(std_space).then(
                     match: /\(/,
                     tag_as: "punctuation.section.parens.begin.bracket.round.function.pointer"
                 ).then(
@@ -1639,7 +1622,7 @@ cpp_grammar = Grammar.new(
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round.function.pointer"
                 ),
-            end_pattern: newPattern(
+            end_pattern: Pattern.new(
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round.function.pointer"
                 ).then(after_declaration),
@@ -1648,13 +1631,23 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    cpp_grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
-    cpp_grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
+    grammar[:function_pointer] = functionPointerGenerator["variable.other.definition.pointer.function"]
+    grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
+    grammar[:typedef_function_pointer] = PatternRange.new(
+        start_pattern: Pattern.new(
+            match: variableBounds[/typedef/],
+            tag_as: "keyword.other.typedef"
+        ).maybe(@spaces).lookAheadFor(/.*\(\*\s*/.then(identifier).then(/\s*\)/)),
+        end_pattern: lookBehindFor(/;/),
+        includes: [
+            functionPointerGenerator["entity.name.type.alias entity.name.type.pointer.function"]
+        ]
+    )
 # 
 # Parameters
 #
-    parameter_ending = lookAheadFor(/\)/).or(cpp_grammar[:comma])
-    cpp_grammar[:parameter_or_maybe_value] = PatternRange.new(
+    parameter_ending = lookAheadFor(/\)/).or(grammar[:comma])
+    grammar[:parameter_or_maybe_value] = PatternRange.new(
         tag_as: "meta.parameter",
         start_pattern: std_space.lookAheadFor(/\w/),
         end_pattern: parameter_ending,
@@ -1668,11 +1661,11 @@ cpp_grammar = Grammar.new(
             :decltype,
             :vararg_ellipses,
             # this next pattern is for finding preceding modifiers like "const" or "short const" and then forcing the word after them to be tagged as a type "const aType" "short const int"
-            newPattern(
-                newPattern(
+            Pattern.new(
+                Pattern.new(
                     match: oneOrMoreOf(
                         # a specifier
-                        newPattern(
+                        Pattern.new(
                             match: @cpp_tokens.that(:isStorageSpecifier),
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
@@ -1681,7 +1674,7 @@ cpp_grammar = Grammar.new(
                         :storage_types
                     ]
                 ).then(std_space).then(
-                    newPattern(
+                    Pattern.new(
                         inline_builtin_storage_type
                     ).or(
                         match: variableBounds[identifier].then(
@@ -1697,7 +1690,7 @@ cpp_grammar = Grammar.new(
             :function_call, # function call is here because of #282, it should be below decltype() and function pointer, storage types, and modifiers but above scope resolution
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
-            newPattern(
+            Pattern.new(
                 match: @cpp_tokens.that(:isTypeCreator),
                 tag_as: "storage.type.$match"
             ),
@@ -1710,7 +1703,7 @@ cpp_grammar = Grammar.new(
             ),
             # assignment_operator,
             # # standard parameter
-            newPattern(
+            Pattern.new(
                 # avoid
                 # 1. \s (otherwise the checks below wont work)
                 # 2. \( the start of the function
@@ -1737,18 +1730,18 @@ cpp_grammar = Grammar.new(
             PatternRange.new(
                 tag_as: "meta.bracket.square.array",
                 # \G only match at the begining
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /\[/,
                     tag_as: "punctuation.definition.begin.bracket.square.array.type"
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     match: /\]/,
                     tag_as: "punctuation.definition.end.bracket.square.array.type"
                 ),
                 includes: [ :evaluation_context ]
             ),
             # # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
-            newPattern(
+            Pattern.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
@@ -1758,7 +1751,7 @@ cpp_grammar = Grammar.new(
             :evaluation_context # this is part of the #282 workaround
         ]
     )
-    cpp_grammar[:parameter] = PatternRange.new(
+    grammar[:parameter] = PatternRange.new(
         tag_as: "meta.parameter",
         start_pattern: std_space.lookAheadFor(/\w/),
         end_pattern: parameter_ending,
@@ -1768,11 +1761,11 @@ cpp_grammar = Grammar.new(
             :decltype,
             :vararg_ellipses,
             # this next pattern is for finding preceding modifiers like "const" or "short const" and then forcing the word after them to be tagged as a type "const aType" "short const int"
-            newPattern(
-                newPattern(
+            Pattern.new(
+                Pattern.new(
                     match: oneOrMoreOf(
                         # a specifier
-                        newPattern(
+                        Pattern.new(
                             match: @cpp_tokens.that(:isStorageSpecifier),
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
@@ -1781,7 +1774,7 @@ cpp_grammar = Grammar.new(
                         :storage_types
                     ]
                 ).then(std_space).then(
-                    newPattern(
+                    Pattern.new(
                         inline_builtin_storage_type
                     ).or(
                         match: variableBounds[identifier].then(
@@ -1796,7 +1789,7 @@ cpp_grammar = Grammar.new(
             :storage_types,
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
-            newPattern(
+            Pattern.new(
                 match: @cpp_tokens.that(:isTypeCreator),
                 tag_as: "storage.type.$match"
             ),
@@ -1809,7 +1802,7 @@ cpp_grammar = Grammar.new(
             ),
             assignment_operator,
             # standard parameter
-            newPattern(
+            Pattern.new(
                 # avoid
                 # 1. \s (otherwise the checks below wont work)
                 # 2. \( the start of the function
@@ -1836,18 +1829,18 @@ cpp_grammar = Grammar.new(
             PatternRange.new(
                 tag_as: "meta.bracket.square.array",
                 # \G only match at the begining
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /\[/,
                     tag_as: "punctuation.definition.begin.bracket.square.array.type"
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     match: /\]/,
                     tag_as: "punctuation.definition.end.bracket.square.array.type"
                 ),
                 includes: [ :evaluation_context ]
             ),
             # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
-            newPattern(
+            Pattern.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
@@ -1862,7 +1855,7 @@ cpp_grammar = Grammar.new(
     dot_operator = /\.\*/.or(/\./)
     arrow_operator = /->\*/.or(/->/)
     dot_or_arrow_operator = /(?:\.\*|\.|->|->\*)/
-    member_operator = newPattern(
+    member_operator = Pattern.new(
             match: dot_operator,
             tag_as: "punctuation.separator.dot-access"
         ).or(
@@ -1874,7 +1867,7 @@ cpp_grammar = Grammar.new(
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
     generatePartialMemberFinder = ->(tag_name) do
         the_this_keyword.or(
-            newPattern(
+            Pattern.new(
                 match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
                 tag_as: tag_name,
             )
@@ -1884,7 +1877,7 @@ cpp_grammar = Grammar.new(
     end
     partial_member = generatePartialMemberFinder["variable.other.object.access"] 
     member_context = [
-            mid_member = newPattern(
+            mid_member = Pattern.new(
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
                     @spaces
                 ).then(
@@ -1902,14 +1895,14 @@ cpp_grammar = Grammar.new(
     # access to attribute
     type_represenetations = @cpp_tokens.representationsThat(:isType)
     lookahead_friedly_types_pattern = /#{type_represenetations.map { |each| each+"[^#{@standard_character}]" } .join('|')}/
-    cpp_grammar[:member_access] = member_access = newPattern(
+    grammar[:member_access] = member_access = Pattern.new(
         match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(lookahead_friedly_types_pattern).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.property"
             )
         )
     # access to method
-    cpp_grammar[:method_access] = method_access = PatternRange.new(
+    grammar[:method_access] = method_access = PatternRange.new(
         start_pattern: member_start.then(
                 # the ~ is for destructors
                 match: maybe(/~/).then(variable_name_without_bounds),
@@ -1918,7 +1911,7 @@ cpp_grammar = Grammar.new(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
             ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
@@ -1928,7 +1921,7 @@ cpp_grammar = Grammar.new(
 # Namespace
 #
     # see https://en.cppreference.com/w/cpp/language/namespace
-    cpp_grammar[:using_namespace] = PatternRange.new(
+    grammar[:using_namespace] = PatternRange.new(
         tag_as: "meta.using-namespace",
         start_pattern: lookBehindToAvoid(@standard_character).then(
                 match: /using/,
@@ -1937,7 +1930,7 @@ cpp_grammar = Grammar.new(
                 match: /namespace/,
                 tag_as: "keyword.other.namespace.directive storage.type.namespace.directive"
             ).then(@spaces).maybe(
-                cpp_grammar[:scope_resolution_namespace_using]
+                grammar[:scope_resolution_namespace_using]
             ).then(
                 match: variable_name,
                 tag_as: "entity.name.namespace"
@@ -1946,7 +1939,7 @@ cpp_grammar = Grammar.new(
             ),
         end_pattern: @semicolon,
         )
-    cpp_grammar[:namespace_alias] = newPattern(
+    grammar[:namespace_alias] = Pattern.new(
         tag_as: "meta.declaration.namespace.alias",
         should_fully_match: ["namespace foo = bar;", "namespace fs=boost::filesystem;", "namespace std = ::std;"],
         should_not_partial_match: ["namespace foo {", "using namespace std;"],
@@ -1958,7 +1951,7 @@ cpp_grammar = Grammar.new(
                     tag_as: "entity.name.namespace.alias",
                 ).maybe(@spaces).then(assignment_operator).maybe(@spaces).then(
                     tag_as: "meta.declaration.namespace.alias.value",
-                    match: cpp_grammar[:scope_resolution_namespace_alias].maybe(@spaces).then(
+                    match: grammar[:scope_resolution_namespace_alias].maybe(@spaces).then(
                             match: variable_name,
                             tag_as: "entity.name.namespace",
                     ).maybe(@spaces).then(
@@ -1966,22 +1959,22 @@ cpp_grammar = Grammar.new(
                     ),
                 ),
     )
-    cpp_grammar[:namespace_block] = generateBlockFinder(
+    grammar[:namespace_block] = generateBlockFinder(
         name: "namespace",
         tag_as: "meta.block.namespace",
         needs_semicolon: false,
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
                 match: variableBounds[/namespace/],
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
             ),
         head_includes: [
             :ever_present_context, 
             :attributes_context,
-            cpp_grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
+            grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.namespace",
                 ).maybe(@spaces).maybe(
-                    newPattern(
+                    Pattern.new(
                         match: /::/,
                         tag_as: "punctuation.separator.scope-resolution.namespace.block"
                     ).maybe(@spaces).then(
@@ -1993,23 +1986,12 @@ cpp_grammar = Grammar.new(
         )
 
 #
-# Preprocessor
-#
-    # not sure if this pattern is actually accurate (it was the one provided by atom/c.tmLanguage)
-    preprocessor_name_no_bounds = /[a-zA-Z_$][\w$]*/
-    preprocessor_function_name = preprocessor_name_no_bounds.lookAheadFor(maybe(@spaces).then(/\(/))
-    cpp_grammar[:macro_argument] = newPattern(
-        match: /##/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        tag_as: "variable.other.macro.argument"
-        )
-
-#
 # Lambdas
 #
     array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
-    cpp_grammar[:lambdas] = lambdas = PatternRange.new(
-        start_pattern: newPattern(
+    grammar[:lambdas] = lambdas = PatternRange.new(
+        start_pattern: Pattern.new(
                 should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
@@ -2023,14 +2005,14 @@ cpp_grammar = Grammar.new(
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
                         includes: [
                             :the_this_keyword,
-                            newPattern(
+                            Pattern.new(
                                 match: identifier,
                                 tag_as: "variable.parameter.capture",
                             ).then(std_space).then(
                                 lookAheadFor(/\]|\z|$/).or(
-                                    cpp_grammar[:comma]
+                                    grammar[:comma]
                                 ).or(
-                                    cpp_grammar[:assignment_operator]
+                                    grammar[:assignment_operator]
                                 )
                             ),
                             :evaluation_context
@@ -2040,30 +2022,30 @@ cpp_grammar = Grammar.new(
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
             ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
                 match: lookBehindFor(/}/),
             ),
         includes: [
             # check for parameters first
             PatternRange.new(
                 tag_as: 'meta.function.definition.parameters.lambda',
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                         match: /\(/,
                         tag_as:  "punctuation.definition.parameters.begin.lambda",
                     ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                         match: /\)/,
                         tag_as:  "punctuation.definition.parameters.end.lambda",
                     ),
                 includes: [ :function_parameter_context ]
             ),
             # specifiers
-            newPattern(
+            Pattern.new(
                 match: variableBounds[ @cpp_tokens.that(:isLambdaSpecifier) ],
                 tag_as: "storage.modifier.lambda.$match"
             ),
             # check for the -> syntax
-            newPattern(
+            Pattern.new(
                 match: /->/,
                 tag_as: "punctuation.definition.lambda.return-type"
             ).maybe(
@@ -2073,11 +2055,11 @@ cpp_grammar = Grammar.new(
             # then find the body
             PatternRange.new(
                 tag_as: "meta.function.definition.body.lambda",
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                         match: /\{/,
                         tag_as:  "punctuation.section.block.begin.bracket.curly.lambda",
                     ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
@@ -2088,34 +2070,43 @@ cpp_grammar = Grammar.new(
 #
 # Classes, structs, unions, enums
 #
-    cpp_grammar[:enumerator_list] = newPattern(
-        match: newPattern(
-            match: variable_name,
-            tag_as: "variable.other.enummember",
-        ).maybe(@spaces).maybe(inline_attribute).maybe(@spaces)
-        .maybe(
-            newPattern(
-                match: /\=/,
-                tag_as: "keyword.operator.assignment",
-            ).maybe(@spaces).then(
-                match: /.+?/,
-                includes: [ :evaluation_context ]
-            ).maybe(@spaces)
-        ).then(newPattern(
-            match: newPattern(/[,;]/.lookAheadToAvoid(/'/)).or(/\n/),
-            includes: [
-                :comma,
-                :semicolon,
-            ],
-        ).or(lookAheadFor(/\}[^']/)).or(lookAheadFor(/\/\//.or(/\/\*/)))),
+    grammar[:enumerator_list] = Pattern.new(
         tag_as: "meta.enum.definition",
+        match: Pattern.new(
+            Pattern.new(
+                match: variable_name,
+                tag_as: "variable.other.enummember",
+            ).maybe(@spaces).maybe(
+                inline_attribute
+            ).maybe(@spaces).maybe(
+                Pattern.new(
+                    match: /\=/,
+                    tag_as: "keyword.operator.assignment",
+                ).maybe(@spaces).then(
+                    match: /.+?/,
+                    includes: [ :evaluation_context ]
+                ).maybe(@spaces)
+            ).then(
+                Pattern.new(
+                    match: Pattern.new(/[,;]/.lookAheadToAvoid(/'/)).or(/\n/),
+                    includes: [
+                        :comma,
+                        :semicolon,
+                    ],
+                ).or(
+                    lookAheadFor(/\}[^']/)).or(
+                        lookAheadFor(/\/\//.or(/\/\*/)
+                    )
+                )
+            )
+        ),
     )
     # see https://en.cppreference.com/w/cpp/language/enum
     # this range matches both the case with brackets and the case without brackets
-    cpp_grammar[:enum_block] = generateBlockFinder(
+    grammar[:enum_block] = generateBlockFinder(
             name: "enum",
             tag_as: "meta.block.enum",
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                     match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
                 ).maybe(
@@ -2139,31 +2130,32 @@ cpp_grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
+            body_includes: [ :ever_present_context, :enumerator_list, :comments, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
     # that ^ causes an error in the lookBehindFor() so it has to be manually spread
     can_come_before_a_inherited_class = @cpp_tokens.representationsThat(:isInheritanceSpecifier) + [ ',', ':', ]
     can_come_before_a_inherited_class_regex = /#{can_come_before_a_inherited_class.join('|')}/
-    cpp_grammar[:inheritance_context] = [
-        newPattern(
+    grammar[:inheritance_context] = [
+        :ever_present_context,
+        Pattern.new(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma.inheritance"
         ),
-        newPattern(
+        Pattern.new(
             match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
             tag_as: "storage.type.modifier.access.$match",
         ),
-        newPattern(
+        Pattern.new(
             match: variableBounds[ /virtual/ ],
             tag_as: "storage.type.modifier.virtual",
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
             qualified_type
-        )
+        ),
     ]
-    final_modifier = newPattern(
+    final_modifier = Pattern.new(
         match: /final/,
         tag_as: "storage.type.modifier.final",
     )
@@ -2171,16 +2163,16 @@ cpp_grammar = Grammar.new(
         return generateBlockFinder(
             tag_as: "meta.block.#{name}",
             name: name,
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                     should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
                     should_not_fully_match: ["#{name} foo {","#{name} foo{"],
                     should_partial_match: ["#{name} foo f;", "#{name} st s;"],
-                    match: newPattern(
+                    match: Pattern.new(
                         reference: "storage_type",
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
                     ).then(
-                        @spaces.or(
+                        std_space.or(
                             inline_attribute
                         ).or(
                             lookAheadFor(/{/)
@@ -2188,16 +2180,16 @@ cpp_grammar = Grammar.new(
                     ).maybe(
                         # normally macros like this wouldn't be supported, but I imagine this one is fairly common
                         std_space.then(match: /DLLEXPORT/, tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT").then(std_space)
-                    ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    ).maybe(inline_attribute).then(std_space).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(
-                        @spaces.then(final_modifier).maybe(@spaces)
+                        std_space.then(final_modifier).then(std_space)
                     ).maybe(
                         #
                         # inheritance
                         #
-                        maybe(@spaces).then(
+                        std_space.then(
                             match: /:/,
                             tag_as: "punctuation.separator.colon.inheritance"
                         # the following may seem redundant (removing it shouldn't change anything)
@@ -2205,17 +2197,8 @@ cpp_grammar = Grammar.new(
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
                         ).zeroOrMoreOf(
-                            match: maybe(@spaces).maybe(/,/).maybe(
-                                @spaces
-                            ).maybe(
-                                @cpp_tokens.that(:isAccessSpecifier)
-                            ).maybe(@spaces).oneOrMoreOf(
-                                maybe(@spaces).maybe(/,/).maybe(
-                                    @spaces
-                                ).lookAheadToAvoid(
-                                    @cpp_tokens.that(:isAccessSpecifier)
-                                ).then(qualified_type.without_numbered_capture_groups)
-                            ),
+                            match: /[^{]/,
+                            dont_back_track?: true,
                             includes: [ :inheritance_context ]
                         )
                     ),
@@ -2229,15 +2212,15 @@ cpp_grammar = Grammar.new(
             tail_includes: tail_includes
         )
     end
-    cpp_grammar[:class_block]  = generateClassOrStructBlockFinder["class"]
-    cpp_grammar[:struct_block] = generateClassOrStructBlockFinder["struct"]
-    cpp_grammar[:union_block]  = generateClassOrStructBlockFinder["union"]
+    grammar[:class_block]  = generateClassOrStructBlockFinder["class"]
+    grammar[:struct_block] = generateClassOrStructBlockFinder["struct"]
+    grammar[:union_block]  = generateClassOrStructBlockFinder["union"]
     # the following is a legacy pattern, I'm not sure if it is still accurate
     # I have no idea why it matches a double quote
-    cpp_grammar[:extern_block] = generateBlockFinder(
+    grammar[:extern_block] = generateBlockFinder(
         name: 'extern',
         tag_as: "meta.block.extern",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
                 std_space.then(
                     match: /extern/,
                     tag_as: "storage.type.extern"
@@ -2248,7 +2231,7 @@ cpp_grammar = Grammar.new(
     )
     generateTypedefClassOrStructBlockFinder = ->(name) do
         return PatternRange.new(
-            start_pattern: newPattern(
+            start_pattern: Pattern.new(
                 match: variableBounds[/typedef/],
                 tag_as: "keyword.other.typedef"
             ).maybe(@spaces).lookAheadFor(variableBounds[/#{name}/]),
@@ -2264,14 +2247,14 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    cpp_grammar[:typedef_class]  = generateTypedefClassOrStructBlockFinder["class"]
-    cpp_grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
-    cpp_grammar[:typedef_union]  = generateTypedefClassOrStructBlockFinder["union"]
+    grammar[:typedef_class]  = generateTypedefClassOrStructBlockFinder["class"]
+    grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
+    grammar[:typedef_union]  = generateTypedefClassOrStructBlockFinder["union"]
     
     generateDeclareFor = ->(name) do
-        newPattern(
+        Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
-            match: newPattern(
+            match: Pattern.new(
                 match: /#{name}/,
                 tag_as: "storage.type.#{name}.declare",
             ).then(std_space).then(
@@ -2287,16 +2270,16 @@ cpp_grammar = Grammar.new(
             ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/:/)
         )
     end
-    cpp_grammar[:standard_declares] = [
-        cpp_grammar[:struct_declare] = generateDeclareFor["struct"],
-        cpp_grammar[:union_declare ] = generateDeclareFor["union"],
-        cpp_grammar[:enum_declare  ] = generateDeclareFor["enum"],
-        cpp_grammar[:class_declare ] = generateDeclareFor["class"],
+    grammar[:standard_declares] = [
+        grammar[:struct_declare] = generateDeclareFor["struct"],
+        grammar[:union_declare ] = generateDeclareFor["union"],
+        grammar[:enum_declare  ] = generateDeclareFor["enum"],
+        grammar[:class_declare ] = generateDeclareFor["class"],
     ]
     generateOverqualifiedTypeFor = ->(name) do
-        newPattern(
+        Pattern.new(
             should_partial_match: [ "#{name} skcipher_walk *walk," ],
-            match: newPattern(
+            match: Pattern.new(
                 match: /#{name}/,
                 tag_as: "storage.type.#{name}.parameter",
             ).then(std_space).then(
@@ -2313,49 +2296,22 @@ cpp_grammar = Grammar.new(
             ).lookAheadFor(/,|\)|\n/)
         )
     end
-    cpp_grammar[:over_qualified_types] = [
-        cpp_grammar[:parameter_struct] = generateOverqualifiedTypeFor["struct"],
-        cpp_grammar[:parameter_enum  ] = generateOverqualifiedTypeFor["enum"],
-        cpp_grammar[:parameter_union ] = generateOverqualifiedTypeFor["union"],
-        cpp_grammar[:parameter_class ] = generateOverqualifiedTypeFor["class"],
+    grammar[:over_qualified_types] = [
+        grammar[:parameter_struct] = generateOverqualifiedTypeFor["struct"],
+        grammar[:parameter_enum  ] = generateOverqualifiedTypeFor["enum"],
+        grammar[:parameter_union ] = generateOverqualifiedTypeFor["union"],
+        grammar[:parameter_class ] = generateOverqualifiedTypeFor["class"],
     ]
-    
-        
-#
-# preprocessor directives
-#
-    # TODO, change all blocks/parentheses so that they end and the end of a macro
-    # TODO, find a good solution to dealing with if statments that cross in to/out of blocks
-    cpp_grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = newPattern(
-            match: variableBounds[/#(?:endif|else|elif)/],
-            tag_as: "keyword.control.directive.$match"
-        )
-    cpp_grammar[:single_line_macro] = newPattern(
-            should_fully_match: ['#define EXTERN_C extern "C"'],
-            match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
-            includes: [
-                :meta_preprocessor_macro,
-                :comments,
-                :string_context,
-                :number_literal,
-                :operators,
-                :semicolon,
-            ]
-        )
 
 #
 # Misc
 #
-    cpp_grammar[:assembly] = assembly_pattern()
-    cpp_grammar[:backslash_escapes] = backslash_escapes()
-    cpp_grammar[:macro_argument] = newPattern(
-        match: /##?/.then(variable_name_without_bounds).lookAheadToAvoid(@standard_character),
-        tag_as: "variable.other.macro.argument"
-    )
+    grammar[:assembly] = assembly_pattern()
+    grammar[:backslash_escapes] = backslash_escapes()
 #
 # Misc Legacy
 #
-    cpp_grammar[:square_brackets] = {
+    grammar[:square_brackets] = {
             name: "meta.bracket.square.access",
             begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
             beginCaptures: {
@@ -2378,257 +2334,38 @@ cpp_grammar = Grammar.new(
                 }
             ]
         }
-    cpp_grammar[:empty_square_brackets] = {
+    grammar[:empty_square_brackets] = {
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    cpp_grammar[:misc_storage_modifiers] = newPattern(
+    grammar[:misc_storage_modifiers] = Pattern.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier.$match"
         )
-    cpp_grammar[:meta_preprocessor_macro] = PatternRange.new(
-        tag_as: "meta.preprocessor.macro",
-        start_pattern: @start_of_line.then(std_space).then(
-            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
-                .maybe(@spaces).then(/define\b/),
-            tag_as: "keyword.control.directive.define"
-        ).then(@spaces).then(
-            match: identifier,
-            tag_as: "entity.name.function.preprocessor"
-        ).maybe(newPattern(
-            match: /\(/,
-            tag_as: "punctuation.definition.parameters.begin",
-        ).then(
-            match: /[^()\\]+/,
-            includes: [
-                lookBehindFor(/[(,]/).maybe(@spaces).then(
-                    match: identifier,
-                    tag_as: "variable.parameter.preprocessor"
-                ).maybe(@spaces),
-                newPattern(
-                    match: /,/,
-                    tag_as: "punctuation.separator.parameters"
-                ),
-                newPattern(
-                    match: /\.\.\./,
-                    tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
-                )
-            ]
-        ).then(
-            match: /\)/,
-            tag_as: "punctuation.definition.parameters.end"
-        )),
-        end_pattern: /(?<!\\)(?=\n)/,
-        includes: [
-            :macro_context
-        ]
-    )
-    cpp_grammar[:meta_preprocessor_diagnostic] = {
-            name: "meta.preprocessor.diagnostic",
-            begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.diagnostic.$3"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    begin: "\"",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.double",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        }
-                    ]
-                },
-                {
-                    begin: "'",
-                    beginCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.begin"
-                        }
-                    },
-                    end: "'|(?<!\\\\)(?=\\s*\\n)",
-                    endCaptures: {
-                        "0" => {
-                            name: "punctuation.definition.string.end"
-                        }
-                    },
-                    name: "string.quoted.single",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        }
-                    ]
-                },
-                {
-                    begin: "[^'\"]",
-                    end: "(?<!\\\\)(?=\\s*\\n)",
-                    name: "string.unquoted.single",
-                    patterns: [
-                        {
-                            include: "#line_continuation_character"
-                        },
-                        {
-                            include: "#comments"
-                        }
-                    ]
-                }
-            ]
-        }
-    cpp_grammar[:meta_preprocessor_include] = newPattern(
-        should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
-        should_partial_match: ["#include <foo> //comment"],
-        match: @start_of_line.then(std_space).then(
-            match: newPattern(match: /#/, tag_as: "punctuation.definition.directive")
-            .maybe(@spaces).then(
-                    match: /include/.or(/include_next/).or(/import/),
-                    reference: "include_type"
-                ).then(@word_boundary),
-            tag_as: "keyword.control.directive.$reference(include_type)"
-        ).maybe(@spaces).then(newPattern(
-            # system header [cpp.include]/2
-            match: newPattern(
-                match: /</,
-                tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^>]/).maybe(
-                match: />/,
-                tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "string.quoted.other.lt-gt.include"
-        ).or(
-            # other headers [cpp.include]/3
-            match: newPattern(
-                match: /\"/,
-                tag_as: "punctuation.definition.string.begin"
-            ).zeroOrMoreOf(/[^\"]/).maybe(
-                match: /\"/,
-                tag_as: "punctuation.definition.string.end"
-            ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "string.quoted.double.include"
-        ).or(
-            # macro includes [cpp.include]/4
-            match: identifier.then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-            tag_as: "entity.name.other.preprocessor.macro.include"
-        ).or(
-            # correctly color a lone `#include`
-            match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//))),
-        )),
-        tag_as: "meta.preprocessor.include"
-    )
-    cpp_grammar[:meta_preprocessor_line] = {
-            name: "meta.preprocessor",
-            begin: "^\\s*((#)\\s*line)\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.line"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#string_context_c"
-                },
-                {
-                    include: "#number_literal"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
-    cpp_grammar[:meta_preprocessor_undef] = {
-            name: "meta.preprocessor",
-            begin: "^\\s*(?:((#)\\s*undef))\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.undef"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    match: preprocessor_name_no_bounds,
-                    name: "entity.name.function.preprocessor"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
-    cpp_grammar[:meta_preprocessor_pragma] = {
-            name: "meta.preprocessor.pragma",
-            begin: "^\\s*(?:((#)\\s*pragma))\\b",
-            beginCaptures: {
-                "1" => {
-                    name: "keyword.control.directive.pragma"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-            patterns: [
-                {
-                    include: "#string_context_c"
-                },
-                {
-                    match: "[a-zA-Z_$][\\w\\-$]*",
-                    name: "entity.other.attribute-name.pragma.preprocessor"
-                },
-                {
-                    include: "#number_literal"
-                },
-                {
-                    include: "#line_continuation_character"
-                }
-            ]
-        }
-    cpp_grammar[:string_context] = [
+    grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.begin",
                     match: maybe(match: /u|u8|U|L/, tag_as: "meta.encoding").then(/"/),
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /"/,
                 ),
                 includes: [
                     # universal characters \u00AF, \U0001234F
-                    newPattern(
+                    Pattern.new(
                         match: universal_character,
                         tag_as: "constant.character.escape",
                     ),
                     # normal escapes \r, \n, \t
-                    newPattern(
+                    Pattern.new(
                         match: /\\['"?\\abfnrtv]/,
                         tag_as: "constant.character.escape",
                     ),
                     # octal escapes \017
-                    newPattern(
+                    Pattern.new(
                         match: /\\/.then(
                             match: /[0-7]/,
                             at_least: 1.times,
@@ -2637,7 +2374,7 @@ cpp_grammar = Grammar.new(
                         tag_as: "constant.character.escape",
                     ),
                     # hex escapes
-                    newPattern(
+                    Pattern.new(
                         match: /\\x/.then(
                             match: /[0-9a-fA-F]/,
                             how_many_times?: 2.times,
@@ -2649,12 +2386,12 @@ cpp_grammar = Grammar.new(
             ),
             PatternRange.new(
                 tag_as: "string.quoted.single",
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.begin",
                     match: lookBehindToAvoid(/[0-9A-Fa-f]/).maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
                         .then(/'/),
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /'/,
                 ),
@@ -2665,45 +2402,29 @@ cpp_grammar = Grammar.new(
             ),
             getRawStringPatterns()
         ]
-    cpp_grammar[:block] = PatternRange.new(
+    grammar[:block] = PatternRange.new(
         tag_as: "meta.block",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             match: /{/,
             tag_as: "punctuation.section.block.begin.bracket.curly"
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /}|(?=\s*#\s*(?:elif|else|endif)\b)/,
             tag_as: "punctuation.section.block.end.bracket.curly"
         ),
         includes: [:function_body_context]
     )
-    cpp_grammar[:disabled] = {
-        begin: "^\\s*#\\s*if(n?def)?\\b.*$",
-        end: "^\\s*#\\s*endif\\b",
-        patterns: [
-            {
-                include: "#disabled"
-            },
-            {
-                include: "#pragma_mark"
-            }
-        ]
-        }
-    cpp_grammar[:line_continuation_character] = {
-            match: "(\\\\)\\n",
-            captures: {
-                "1" => {
-                    name: "constant.character.escape.line-continuation"
-                }
-            }
-        }
-    cpp_grammar[:parentheses] = PatternRange.new(
+    grammar[:line_continuation_character] = Pattern.new(
+        match: /\\\n/,
+        tag_as: "constant.character.escape.line-continuation",
+    )
+    grammar[:parentheses] = PatternRange.new(
         tag_as: "meta.parens",
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             match: /\(/,
             tag_as: "punctuation.section.parens.begin.bracket.round"
         ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
             match: /\)/,
             tag_as: "punctuation.section.parens.end.bracket.round"
         ),
@@ -2711,32 +2432,14 @@ cpp_grammar = Grammar.new(
             # TODO: for typecasting (eventually this should be replaced)
             :over_qualified_types, 
             # TODO: for range-based for loops (eventually this should be replaced)
-            newPattern(
+            Pattern.new(
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
                 tag_as: "punctuation.separator.colon.range-based"
             ),
             :evaluation_context
         ]
     )
-    cpp_grammar[:pragma_mark] = {
-        captures: {
-            "1" => {
-                name: "meta.preprocessor.pragma"
-            },
-            "2" => {
-                name: "keyword.control.directive.pragma.pragma-mark"
-            },
-            "3" => {
-                name: "punctuation.definition.directive"
-            },
-            "4" => {
-                name: "entity.name.tag.pragma-mark"
-            }
-        },
-        match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
-        name: "meta.section"
-        }
-    cpp_grammar[:string_context_c] = [
+    grammar[:string_context_c] = [
             {
                 begin: "\"",
                 beginCaptures: {
@@ -2784,7 +2487,7 @@ cpp_grammar = Grammar.new(
                 ]
             }
         ]
-    cpp_grammar[:string_escapes_context_c] = [
+    grammar[:string_escapes_context_c] = [
             :backslash_escapes,
             {
                 match: "\\\\.",
@@ -2805,1014 +2508,10 @@ cpp_grammar = Grammar.new(
             #     }
             # }
         ]
-    cpp_grammar[:vararg_ellipses] = {
-        match: "(?<!\\.)\\.\\.\\.(?!\\.)",
-        name: "punctuation.vararg-ellipses"
-        }
-    cpp_grammar[:preprocessor_rule_conditional] = {
-            begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#preprocessor_rule_enabled_elif"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_else"
-                },
-                {
-                    include: "#preprocessor_rule_disabled_elif"
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "$initial_context"
-                }
-            ]
-        }
-    cpp_grammar[:preprocessor_rule_conditional_block] = {
-            begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#preprocessor_rule_enabled_elif_block"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_else_block"
-                },
-                {
-                    include: "#preprocessor_rule_disabled_elif"
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "$initial_context"
-                }
-            ]
-        }
-    cpp_grammar[:preprocessor_rule_conditional_line_context] = [
-            {
-                match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
-                name: "keyword.control.directive.conditional"
-            },
-            {
-                match: "\\bdefined\\b",
-                name: "invalid.illegal.macro-name"
-            },
-            :comments,
-            :string_context_c,
-            :number_literal,
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                end: ":",
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_conditional_line_context"
-                    }
-                ]
-            },
-            :operators,
-            :language_constants,
-            {
-                match: preprocessor_name_no_bounds,
-                name: "entity.name.function.preprocessor"
-            },
-            :line_continuation_character,
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round"
-                    }
-                },
-                end: "\\)|(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_conditional_line_context"
-                    }
-                ]
-            }
-        ]
-    cpp_grammar[:preprocessor_rule_disabled] = {
-            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#comments"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_elif"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_else"
-                },
-                {
-                    include: "#preprocessor_rule_disabled_elif"
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                    patterns: [
-                        {
-                            begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                            end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                            name: "meta.preprocessor",
-                            patterns: [
-                                {
-                                    include: "#preprocessor_rule_conditional_line_context"
-                                }
-                            ]
-                        },
-                        {
-                            include: "$initial_context"
-                        }
-                    ]
-                },
-                {
-                    begin: "\\n",
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    "contentName" => "comment.block.preprocessor.if-branch",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                }
-            ]
-        }
-    cpp_grammar[:preprocessor_rule_disabled_block] = {
-            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#comments"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_elif_block"
-                },
-                {
-                    include: "#preprocessor_rule_enabled_else_block"
-                },
-                {
-                    include: "#preprocessor_rule_disabled_elif"
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                    patterns: [
-                        {
-                            begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                            end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                            name: "meta.preprocessor",
-                            patterns: [
-                                {
-                                    include: "#preprocessor_rule_conditional_line_context"
-                                }
-                            ]
-                        },
-                        {
-                            include: "$initial_context"
-                        }
-                    ]
-                },
-                {
-                    begin: "\\n",
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    "contentName" => "comment.block.preprocessor.if-branch.in-block",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                }
-            ]
-        }
-    cpp_grammar[:preprocessor_rule_disabled_elif] = {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor",
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_conditional_line_context"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                "contentName" => "comment.block.preprocessor.elif-branch",
-                patterns: [
-                    {
-                        include: "#disabled"
-                    },
-                    {
-                        include: "#pragma_mark"
-                    }
-                ]
-            }
-        ]
-        }
-    cpp_grammar[:preprocessor_rule_enabled] = {
-            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                },
-                "3" => {
-                    name: "constant.numeric.preprocessor"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#comments"
-                },
-                {
-                    begin: "^\\s*((#)\\s*else\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*endif\\b))",
-                    "contentName" => "comment.block.preprocessor.else-branch",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    "contentName" => "comment.block.preprocessor.if-branch",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                },
-                {
-                    begin: "\\n",
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    patterns: [
-                        {
-                            include: "$initial_context"
-                        }
-                    ]
-                }
-            ]
-        }
-    cpp_grammar[:preprocessor_rule_enabled_block] = {
-            begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-            beginCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            end: "^\\s*((#)\\s*endif\\b)",
-            endCaptures: {
-                "0" => {
-                    name: "meta.preprocessor"
-                },
-                "1" => {
-                    name: "keyword.control.directive.conditional"
-                },
-                "2" => {
-                    name: "punctuation.definition.directive"
-                }
-            },
-            patterns: [
-                {
-                    begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                    end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                    name: "meta.preprocessor",
-                    patterns: [
-                        {
-                            include: "#preprocessor_rule_conditional_line_context"
-                        }
-                    ]
-                },
-                {
-                    include: "#comments"
-                },
-                {
-                    begin: "^\\s*((#)\\s*else\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*endif\\b))",
-                    "contentName" => "comment.block.preprocessor.else-branch.in-block",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                },
-                {
-                    begin: "^\\s*((#)\\s*elif\\b)",
-                    beginCaptures: {
-                        "0" => {
-                            name: "meta.preprocessor"
-                        },
-                        "1" => {
-                            name: "keyword.control.directive.conditional"
-                        },
-                        "2" => {
-                            name: "punctuation.definition.directive"
-                        }
-                    },
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    "contentName" => "comment.block.preprocessor.if-branch.in-block",
-                    patterns: [
-                        {
-                            include: "#disabled"
-                        },
-                        {
-                            include: "#pragma_mark"
-                        }
-                    ]
-                },
-                {
-                    begin: "\\n",
-                    end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                    patterns: [
-                        {
-                            include: "$initial_context"
-                        }
-                    ]
-                }
-            ]
-
-        }
-    cpp_grammar[:preprocessor_rule_enabled_elif] = {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor",
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_conditional_line_context"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
-                patterns: [
-                    {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$initial_context"
-                    }
-                ]
-            }
-        ]
-        }
-    cpp_grammar[:preprocessor_rule_enabled_elif_block] = {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor",
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_conditional_line_context"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
-                patterns: [
-                    {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch.in-block",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma_mark"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$initial_context"
-                    }
-                ]
-            }
-        ]
-        }
-    cpp_grammar[:preprocessor_rule_enabled_else] = {
-        begin: "^\\s*((#)\\s*else\\b)",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                include: "$initial_context"
-            }
-        ]
-        }
-    cpp_grammar[:preprocessor_rule_enabled_else_block] = {
-        begin: "^\\s*((#)\\s*else\\b)",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional"
-            },
-            "2" => {
-                name: "punctuation.definition.directive"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                include: "$initial_context"
-            }
-        ]
-        }
-    cpp_grammar[:preprocessor_rule_define_line_context] = [
-            :vararg_ellipses,
-            :macro_argument,
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly"
-                    }
-                },
-                name: "meta.block",
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_define_line_blocks_context"
-                    }
-                ]
-            },
-            {
-                match: "\\(",
-                name: "punctuation.section.parens.begin.bracket.round"
-            },
-            {
-                match: "\\)",
-                name: "punctuation.section.parens.end.bracket.round"
-            },
-            {
-                begin: "(?x)\n(?<![\\w$]|\\[)(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
-                end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
-                name: "meta.function",
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_define_line_functions_context"
-                    }
-                ]
-            },
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: "'",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "'|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.single",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            :$initial_context
-        ]
-    cpp_grammar[:preprocessor_rule_define_line_blocks_context] = [
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_define_line_blocks_context"
-                    },
-                    {
-                        include: "#preprocessor_rule_define_line_context"
-                    }
-                ]
-            },
-            {
-                include: "#preprocessor_rule_define_line_context"
-            }
-        ]
-    cpp_grammar[:preprocessor_rule_define_line_functions_context] = [
-            :comments,
-            :storage_types,
-            :vararg_ellipses,
-            :method_access,
-            :member_access,
-            :operators,
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|return|typeid|alignof|alignas|sizeof|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function"
-                    },
-                    "2" => {
-                        name: "punctuation.section.arguments.begin.bracket.round"
-                    }
-                },
-                end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.arguments.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_define_line_functions_context"
-                    }
-                ]
-            },
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round"
-                    }
-                },
-                end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.parens.end.bracket.round"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor_rule_define_line_functions_context"
-                    }
-                ]
-            },
-            :preprocessor_rule_define_line_context
-        ]
-    
+    grammar[:vararg_ellipses] = Pattern.new(
+        match: /(?<!\.)\.\.\.(?!\.)/,
+        tag_as: "punctuation.vararg-ellipses",
+    )
 
 
 # 
@@ -3820,15 +2519,15 @@ cpp_grammar = Grammar.new(
 #
     # TODO: this is incomplete, all the root patterns are included, but their "includes" are not converted
     macro_context = []
-    for each in cpp_grammar[:$initial_context]
-        if cpp_grammar[each].is_a?(PatternRange)
-            tag_version = cpp_grammar[each].to_tag(ignore_repository_entry: true).dup
+    for each in grammar[:$initial_context]
+        if grammar[each].is_a?(PatternRange)
+            tag_version = grammar[each].to_tag(ignore_repository_entry: true).dup
             if tag_version[:end] != nil
                 tag_version[:end] = tag_version[:end].dup
                 # if there's a non-escaped newline, then the range is over
                 tag_version[:end] = "#{tag_version[:end]}|(?<!\\\\)$"
                 repo_name  = "macro_safe_#{each.to_s}".to_sym
-                cpp_grammar[repo_name] = tag_version
+                grammar[repo_name] = tag_version
                 macro_context.push(repo_name)
             else
                 macro_context.push(each)
@@ -3838,12 +2537,12 @@ cpp_grammar = Grammar.new(
         end
     end
     macro_context.push(:macro_argument)
-    cpp_grammar[:macro_context] = macro_context
+    grammar[:macro_context] = macro_context
 
 # 
 # Save
 # 
-saveGrammar(cpp_grammar)
+saveGrammar(grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
-@cpp_grammar = cpp_grammar
+@cpp_grammar = grammar

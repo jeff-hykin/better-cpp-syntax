@@ -8,29 +8,25 @@
     - comment.line.double-slash
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
   scopes:
     - punctuation.definition.directive
 - source: ifdef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
 - source: USE_IN_HLSL
   scopes:
+    - meta.conditional.preprocessor
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: cbuffer  testCB
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.else
   scopes:
     - punctuation.definition.directive
 - source: else
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.else
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -40,9 +36,14 @@
 - source: testCB
   scopes:
     - entity.name.type.struct
-- source: '#endif'
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
   scopes:
-    - 'keyword.control.directive.#endif'
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
 - source: //
   scopesBegin:
     - comment.line.double-slash

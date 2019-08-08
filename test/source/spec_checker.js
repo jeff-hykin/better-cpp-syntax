@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const chalk = require("chalk");
-const vsctm = require("vscode-textmate-experimental");
+const vsctm = require("vscode-textmate");
 const {removeScopeName} = require("./utils")
 
 /**
