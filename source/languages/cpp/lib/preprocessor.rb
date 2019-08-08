@@ -15,6 +15,10 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 ).maybe(@spaces)
             )
             non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(/\n/)
+            grammar[:macro_name] = macro_name = Pattern.new(
+                match: wordBounds(identifier),
+                tag_as: "entity.name.function.preprocessor",
+            )
         # 
         # #pragma
         # 
@@ -186,15 +190,20 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                     Pattern.new(
                         tag_as: "keyword.control.directive.undef",
                         match: directive_start.then(/undef\b/)
-                    ).then(std_space).then(
-                        tag_as: "entity.name.function.preprocessor",
-                        match: wordBounds(identifier),
-                    )
+                    ).then(std_space).then(macro_name)
                 ),
             )
         # 
         # #define
         # 
+            grammar[:single_line_macro] = newPattern(
+                should_fully_match: ['#define EXTERN_C extern "C"'],
+                match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
+                includes: [
+                    :macro,
+                    :comments,
+                ]
+            )
             grammar[:macro] = PatternRange.new(
                 tag_as: "meta.preprocessor.macro",
                 start_pattern: Pattern.new(
@@ -205,10 +214,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                             /define\b/
                         ),
                     # the name of the directive
-                    ).maybe(@spaces).then(
-                        match: identifier,
-                        tag_as: "entity.name.function.preprocessor",
-                    )
+                    ).maybe(@spaces).then(macro_name)
                 ),
                 end_pattern: non_escaped_newline,
                 includes: [
@@ -261,16 +267,83 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         # 
         # *conditionals*
         # 
-            # if
-            # ifdef
-            # ifndef
-            # elif
-            # else
-            # endif
-                grammar[:hacky_fix_for_stray_directive] = hacky_fix_for_stray_directive = Pattern.new(
-                    match: wordBounds(/#(?:endif|else|elif)/),
-                    tag_as: "keyword.control.directive.$match"
+            # this range only ends with #else and #endif and that decision is very intentional
+            # by doing this the syntax safely closes double-starts or double-closes 
+            # (the if-true being case 1, and the if-false being case 2)
+            # by only leaving one of the cases open (one of them has to be syntaxtically valid) this allows the grammar to parse the rest of it normally
+            # there's more complexity behind this, but thats the general idea. See the github preprocessor conditional issues for full details
+            grammar[:preprocessor_conditional_range] = PatternRange.new(
+                start_pattern: Pattern.new(
+                    tag_as: "keyword.control.directive.conditional.$reference(conditional_name)",
+                    match: directive_start.then(
+                        match: /ifndef/.or(/ifdef/).or(/if/),
+                        reference: "conditional_name",
+                    )
+                ),
+                while: @start_of_line.lookAheadToAvoid(/\s*+#\s*(?:else|endif)/),
+                includes: [
+                    # the first line (the conditional line)
+                    PatternRange.new(
+                        # start at the begining
+                        tag_as: "meta.conditional.preprocessor",
+                        start_pattern: /\G/.lookBehindFor(/ifndef|ifdef|if/),
+                        zeroLengthStart?: true,
+                        end_pattern: non_escaped_newline,
+                        includes: [ :preprocessor_conditional_context ],
+                    ),
+                    :$initial_context,
+                ]
+            )
+            grammar[:preprocessor_conditional_context] = [
+                :preprocessor_conditional_defined,
+                :comments,
+                :language_constants,
+                :string_context_c,
+                :number_literal,
+                :operators,
+                :predefined_macros,
+                :macro_name,
+                :line_continuation_character,
+            ]
+            grammar[:preprocessor_conditional_defined] = PatternRange.new(
+                start_pattern: Pattern.new(
+                    Pattern.new(
+                        match: wordBounds(/defined/),
+                        tag_as: "keyword.control.directive.conditional.defined"
+                    ).then(
+                        match: /\(/,
+                        tag_as: "punctuation.section.parens.control.defined"
+                    )
+                ),
+                end_pattern: Pattern.new(
+                    match: /\)/.or(non_escaped_newline),
+                    tag_as: "punctuation.section.parens.control.defined"
+                ),
+                includes: [
+                    :macro_name,
+                ]
+            )
+            grammar[:preprocessor_conditional_parentheses] = PatternRange.new(
+                tag_as: "meta.parens.preprocessor.conditional",
+                start_pattern: newPattern(
+                    match: /\(/,
+                    tag_as: "punctuation.section.parens.begin.bracket.round"
+                ),
+                end_pattern: newPattern(
+                    match: /\)/,
+                    tag_as: "punctuation.section.parens.end.bracket.round"
+                ),
+                include: [
+                    :preprocessor_conditional_context
+                ]
+            )
+            grammar[:preprocessor_conditional_standalone] = Pattern.new(
+                tag_as: "keyword.control.directive.$reference(conditional_name)",
+                match: directive_start.then(
+                    match: wordBounds(/(?:endif|else|elif)/),
+                    reference: "conditional_name"
                 )
+            )
         # return the preprocessor context
         [
             :pragma_mark,
@@ -279,8 +352,10 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             :line,
             :diagnostic,
             :undef,
+            :preprocessor_conditional_range,
+            :single_line_macro,
             :macro,
-            :hacky_fix_for_stray_directive,
+            :preprocessor_conditional_standalone,
             :macro_argument,
         ].map {|each| (namespace + each.to_s).to_sym }
     end

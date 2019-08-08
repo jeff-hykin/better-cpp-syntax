@@ -1,10 +1,4 @@
 comment.block.cpp
-comment.block.preprocessor.elif-branch.cpp
-comment.block.preprocessor.elif-branch.in-block.cpp
-comment.block.preprocessor.else-branch.cpp
-comment.block.preprocessor.else-branch.in-block.cpp
-comment.block.preprocessor.if-branch.cpp
-comment.block.preprocessor.if-branch.in-block.cpp
 comment.line.block.cpp
 comment.line.double-slash.cpp
 constant.character.escape.cpp
@@ -17,12 +11,10 @@ constant.numeric.exponent.decimal.cpp
 constant.numeric.exponent.hexadecimal.cpp
 constant.numeric.hexadecimal.cpp
 constant.numeric.octal.cpp
-constant.numeric.preprocessor.cpp
 constant.other.placeholder.cpp
 entity.name.function.call.cpp
 entity.name.function.call.initializer.cpp
 entity.name.function.constructor.cpp
-entity.name.function.cpp
 entity.name.function.definition.cpp
 entity.name.function.definition.special.constructor.cpp
 entity.name.function.definition.special.member.destructor.cpp
@@ -327,16 +319,16 @@ entity.other.attribute-name.pragma.preprocessor.cpp
 entity.other.attribute.$0.cpp
 invalid.illegal.constant.numeric.cpp
 invalid.illegal.delimiter-too-long.cpp
-invalid.illegal.macro-name.cpp
 invalid.illegal.reference-type.cpp
 invalid.illegal.unexpected.punctuation.definition.comment.end.cpp
 invalid.illegal.unknown-escape.cpp
 keyword.control.$5.cpp
 keyword.control.case.cpp
 keyword.control.default.cpp
-keyword.control.directive.$0.cpp
+keyword.control.directive.$6.cpp
 keyword.control.directive.$7.cpp
-keyword.control.directive.conditional.cpp
+keyword.control.directive.conditional.$7.cpp
+keyword.control.directive.conditional.defined.cpp
 keyword.control.directive.define.cpp
 keyword.control.directive.diagnostic.$7.cpp
 keyword.control.directive.line.cpp
@@ -423,6 +415,7 @@ meta.body.union.cpp
 meta.bracket.square.access.cpp
 meta.bracket.square.array.cpp
 meta.conditional.case.cpp
+meta.conditional.preprocessor.cpp
 meta.conditional.switch.cpp
 meta.declaration.namespace.alias.cpp
 meta.declaration.namespace.alias.value.cpp
@@ -431,7 +424,6 @@ meta.declaration.type.alias.value.unknown.cpp
 meta.embedded.assembly.cpp
 meta.encoding.cpp
 meta.enum.definition.cpp
-meta.function.cpp
 meta.function.definition.body.lambda.cpp
 meta.function.definition.cpp
 meta.function.definition.parameters.cpp
@@ -458,7 +450,7 @@ meta.lambda.capture.cpp
 meta.parameter.cpp
 meta.parameter.initialization.cpp
 meta.parens.cpp
-meta.preprocessor.cpp
+meta.parens.preprocessor.conditional.cpp
 meta.preprocessor.diagnostic.cpp
 meta.preprocessor.include.cpp
 meta.preprocessor.line.cpp
@@ -509,7 +501,6 @@ punctuation.section.angle-brackets.end.template.call.cpp
 punctuation.section.angle-brackets.end.template.definition.cpp
 punctuation.section.angle-brackets.start.template.definition.cpp
 punctuation.section.arguments.begin.bracket.curly.initializer.cpp
-punctuation.section.arguments.begin.bracket.round.cpp
 punctuation.section.arguments.begin.bracket.round.decltype.cpp
 punctuation.section.arguments.begin.bracket.round.function.call.cpp
 punctuation.section.arguments.begin.bracket.round.function.call.initializer.cpp
@@ -522,7 +513,6 @@ punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
 punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
 punctuation.section.arguments.begin.bracket.round.static_assert.cpp
 punctuation.section.arguments.end.bracket.curly.initializer.cpp
-punctuation.section.arguments.end.bracket.round.cpp
 punctuation.section.arguments.end.bracket.round.decltype.cpp
 punctuation.section.arguments.end.bracket.round.function.call.cpp
 punctuation.section.arguments.end.bracket.round.function.call.initializer.cpp
@@ -577,6 +567,7 @@ punctuation.section.parens.begin.bracket.round.assembly.inner.cpp
 punctuation.section.parens.begin.bracket.round.conditional.switch.cpp
 punctuation.section.parens.begin.bracket.round.cpp
 punctuation.section.parens.begin.bracket.round.function.pointer.cpp
+punctuation.section.parens.control.defined.cpp
 punctuation.section.parens.end.bracket.round.assembly.cpp
 punctuation.section.parens.end.bracket.round.assembly.inner.cpp
 punctuation.section.parens.end.bracket.round.conditional.switch.cpp

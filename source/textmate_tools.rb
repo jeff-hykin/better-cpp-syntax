@@ -483,6 +483,7 @@ class Grammar
         end
         # add it to the repository
         @data[:repository][key] = value
+        # TODO: if the value is an Array, run the insertNamespaceToIncludesIfNeeded 
         # tell the object it was added to a repository
         if (value.instance_of? Regexp) || (value.instance_of? PatternRange)
             value.repository_name = key

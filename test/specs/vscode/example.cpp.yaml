@@ -3981,18 +3981,16 @@
     - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
   scopes:
     - punctuation.definition.directive
 - source: ifndef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
 - source: CEKO_LIBRARY
   scopes:
+    - meta.conditional.preprocessor
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -4009,14 +4007,12 @@
     - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -4193,18 +4189,16 @@
     - punctuation.section.angle-brackets.end.template.definition
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
   scopes:
     - punctuation.definition.directive
 - source: ifdef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
 - source: blah
   scopes:
+    - meta.conditional.preprocessor
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -4214,51 +4208,51 @@
 - source: test
   scopes:
     - entity.name.type.struct
-- source: '#endif'
-  scopes:
-    - 'keyword.control.directive.#endif'
-- source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
+    - meta.block.struct
     - meta.head.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
 - source: //
   scopesBegin:
-    - meta.body.struct
     - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
 - source: ' seperate line template'
   scopesEnd:
     - comment.line.double-slash
-- source: template
-  scopes:
-    - storage.type.template
+- source: '            template '
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+    - keyword.operator.comparison
+- source: class
   scopesBegin:
-    - meta.template.definition
+    - meta.block.class
+    - meta.head.class
   scopes:
-    - storage.type.template
+    - storage.type.class
 - source: U
   scopes:
-    - entity.name.type.template
-- source: =
-  scopes:
-    - keyword.operator.assignment
-- source: std
-  scopes:
-    - entity.name.scope-resolution.template.definition
-- source: '::'
-  scopes:
-    - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.template.definition
+    - entity.name.type.class
+- source: '= std::'
 - source: vector
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.type
 - source: <
   scopesBegin:
-    - meta.template.call
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -4270,35 +4264,33 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.template.definition
-    - meta.template.call
+    - meta.qualified_type
     - meta.template.call
 - source: '>'
-  scopes:
-    - punctuation.section.angle-brackets.end.template.definition
-- source: template
-  scopes:
-    - storage.type.template
+- source: '            template'
 - source: <
-  scopes:
-    - punctuation.section.angle-brackets.start.template.definition
-- source: typename
   scopesBegin:
-    - meta.template.definition
+    - meta.template.call
   scopes:
-    - storage.type.template.argument.typename
+    - punctuation.section.angle-brackets.begin.template.call
+- source: typename
+  scopes:
+    - storage.modifier
 - source: RETURN_TYPE
   scopes:
-    - entity.name.type.template
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: 'N'
   scopes:
-    - entity.name.type.template
+    - meta.qualified_type
+    - entity.name.type
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -4307,81 +4299,35 @@
     - constant.numeric.decimal
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: '1'
-  scopes:
-    - constant.numeric.decimal
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: ' 1'
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: typename
-  scopes:
-    - storage.type.template.argument.typename
-- source: Callable
-  scopes:
-    - entity.name.type.template
-  scopesEnd:
-    - meta.template.definition
-- source: '> '
-  scopes:
-    - punctuation.section.angle-brackets.end.template.definition
-- source: bool
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-  scopes:
-    - meta.qualified_type
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: operator
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
-  scopes:
-    - keyword.other.operator.overload
-- source: ()
-  scopes:
-    - entity.name.operator
-- source: (
-  scopes:
-    - >-
-      punctuation.section.parameters.begin.bracket.round.special.operator-overload
-- source: U
-  scopesBegin:
-    - meta.function.definition.parameters.special.operator-overload
-    - meta.parameter
-  scopes:
-    - entity.name.type.parameter
-- source: k
-  scopes:
-    - variable.parameter
-  scopesEnd:
-    - meta.function.definition.parameters.special.operator-overload
-    - meta.parameter
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+    - punctuation.separator.delimiter.comma.inheritance
+- source: ' typename Callable> '
+- source: '            bool operator()(U k) '
 - source: '{'
   scopes:
-    - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+    - punctuation.section.block.begin.bracket.curly.class
   scopesEnd:
-    - meta.head.function.definition.special.operator-overload
+    - meta.head.class
 - source: '}'
   scopes:
-    - meta.body.function.definition.special.operator-overload
-    - >-
-      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
-  scopesEnd:
-    - meta.function.definition.special.operator-overload
-- source: '}'
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
+- source: '        }'
   scopes:
-    - punctuation.section.block.end.bracket.curly.struct
-  scopesEnd:
-    - meta.body.struct
+    - meta.tail.class
 - source: ;
   scopes:
     - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
 - source: struct
   scopesBegin:
+    - meta.block.struct
     - meta.head.struct
   scopes:
     - storage.type.struct
@@ -4673,7 +4619,11 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.struct
-- source: '    }'
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: //
   scopesBegin:
     - comment.line.double-slash

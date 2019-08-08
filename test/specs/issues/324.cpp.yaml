@@ -46,8 +46,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: do
   scopes:
     - keyword.control.do
@@ -59,6 +57,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.block
 - source: if
   scopes:
     - keyword.control.if
@@ -81,6 +81,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.block
 - source: if
   scopes:
     - keyword.control.if
@@ -103,6 +105,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.block
 - source: g_string_append_printf
   scopes:
     - entity.name.function.call
@@ -152,11 +156,7 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly
-  scopesEnd:
-    - meta.block
+- source: "\t\t\t}"
 - source: else
   scopes:
     - keyword.control.else
@@ -168,6 +168,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.block
 - source: "\t\t\t\tampersand "
 - source: =
   scopes:
@@ -227,27 +229,15 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly
-  scopesEnd:
-    - meta.block
+- source: "\t\t\t}                                                               "
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly
-  scopesEnd:
-    - meta.block
+- source: "\t\t}                                                                   "
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly
-  scopesEnd:
-    - meta.block
+- source: "\t}"
 - source: while
   scopes:
     - keyword.control.while
