@@ -46,14 +46,7 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: //
-  scopesBegin:
-    - comment.line.double-slash
-  scopes:
-    - punctuation.definition.comment
-- source: ' here is a comment that is formatted incorrectly'
-  scopesEnd:
-    - comment.line.double-slash
+- source: '  // here is a comment that is formatted incorrectly'
 - source: anotherOne
   scopes:
     - entity.name.function.call.initializer
@@ -88,14 +81,7 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: //
-  scopesBegin:
-    - comment.line.double-slash
-  scopes:
-    - punctuation.definition.comment
-- source: ' here''s another one'
-  scopesEnd:
-    - comment.line.double-slash
+- source: '  // here''s another one'
 - source: soManyThatTheConstructorIsLong
   scopes:
     - entity.name.function.call.initializer

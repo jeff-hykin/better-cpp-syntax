@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "ruby scripts/generate.rb",
+    "postbuild": "npm run prep-embedded",
     "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "ruby scripts/lint.rb",
@@ -24,7 +25,8 @@
     "report": "node test/source/index.js report",
     "perf": "npm run report -- perf",
     "cov": "npm run report -- coverage",
-    "publish": "ruby scripts/publish.rb"
+    "publish": "ruby scripts/publish.rb",
+    "prep-embedded": "node scripts/duplicateForEmbedding.js"
   },
   "keywords": [
     "syntax",
@@ -44,10 +46,19 @@
     "grammars": [
       {
         "language": "cpp",
+        "scopeName": "source.cpp.embedded.macro",
+        "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.assembly.cpp": "asm"
+        }
+      },
+      {
+        "language": "cpp",
         "scopeName": "source.cpp",
         "path": "./syntaxes/cpp.tmLanguage.json",
         "embeddedLanguages": {
-          "meta.embedded.assembly.cpp": "asm"
+          "meta.embedded.assembly.cpp": "asm",
+          "meta.preprocessor.macro.contents": "cpp"
         }
       },
       {

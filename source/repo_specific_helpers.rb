@@ -10,7 +10,7 @@ def saveGrammar(grammar)
     #   grammar.saveTagsTo(language_tag_location)
     # its inefficient because it rebuilds the grammar each time
     
-    grammar_as_hash = grammar.to_h
+    grammar_as_hash = grammar.to_h(inherit_or_embedded: :embedded)
     IO.write(PathFor[:jsonSyntax ][grammar.language_ending], JSON.pretty_generate(grammar_as_hash))
     IO.write(PathFor[:yamlSyntax ][grammar.language_ending], grammar_as_hash.to_yaml)
     IO.write(PathFor[:languageTag][grammar.language_ending], grammar.all_tags.to_a.sort.join("\n"))

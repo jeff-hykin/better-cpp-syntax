@@ -185,7 +185,6 @@ grammar = Grammar.new(
             :typedef_class,
             :typedef_struct,
             :typedef_union,
-            :typedef_function_pointer,
             :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
             :standard_declares, # struct/enum/union/class
             :class_block,
@@ -248,10 +247,10 @@ grammar = Grammar.new(
             :the_this_keyword,
             :language_constants,
             # types, modifiers, and specifiers
-            :builtin_storage_type_initilizer, # needs to be above :storage types
-            :storage_types,                   # needs to be above :qualifiers_and_specifiers_post_parameters
+            :builtin_storage_type_initilizer, # needs to be above storage types
             :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
+            :storage_types,
             :misc_storage_modifiers,                    # TODO: this pattern needs to be removed 
             # misc
             :lambdas,
@@ -388,6 +387,7 @@ grammar = Grammar.new(
         :invalid_comment_end,
     ]
 #
+#
 # Numbers
 #
     grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
@@ -468,7 +468,13 @@ grammar = Grammar.new(
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
         std_space.then(
             tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-            match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ]
+            match: newPattern(
+                variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(
+                    /\s*/.then(
+                        /\{/.or(/;/).or(/[\n\r]/)
+                    )
+                )
+            )
         ),
     )
     grammar[:storage_specifiers] = storage_specifier = Pattern.new(
@@ -1103,7 +1109,7 @@ grammar = Grammar.new(
             )
         ),
         head_includes:[
-            :ever_present_context, # comments and macros    
+            :ever_present_context, # comments and macros
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
                 start_pattern: Pattern.new( 
@@ -1125,7 +1131,6 @@ grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
-            :qualifiers_and_specifiers_post_parameters, 
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -1327,7 +1332,6 @@ grammar = Grammar.new(
                     ),
                     end_pattern: lookAheadFor(/\{/),
                     includes: [
-                        :ever_present_context,
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
                             start_pattern: Pattern.new(
@@ -1345,10 +1349,7 @@ grammar = Grammar.new(
                                 match: /\)/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
-                            includes: [
-                                :ever_present_context,
-                                :evaluation_context
-                            ]
+                            includes: [:evaluation_context]
                         ),
                         PatternRange.new(
                             tag_content_as: "meta.parameter.initialization",
@@ -1365,10 +1366,7 @@ grammar = Grammar.new(
                                 match: /\}/,
                                 tag_as: "punctuation.section.arguments.end.bracket.round.function.call.initializer",
                             ),
-                            includes: [
-                                :ever_present_context,
-                                :evaluation_context
-                            ]
+                            includes: [:evaluation_context]
                         ),
                         grammar[:comma],
                     ]
@@ -1985,7 +1983,7 @@ grammar = Grammar.new(
                     )
                 )
         ],
-    )
+        )
 
 #
 # Lambdas
@@ -2132,7 +2130,7 @@ grammar = Grammar.new(
                     )
             ),
             head_includes: [ :$initial_context ],
-            body_includes: [ :ever_present_context, :enumerator_list, :comma, :semicolon ],
+            body_includes: [ :enumerator_list, :comments, :comma, :semicolon ],
         )
     # the following are basically the equivlent of:
     #     @cpp_tokens.that(:isAccessSpecifier).or(/,/).or(/:/)
@@ -2438,8 +2436,7 @@ grammar = Grammar.new(
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
                 tag_as: "punctuation.separator.colon.range-based"
             ),
-            :evaluation_context,
-            :vararg_ellipses
+            :evaluation_context
         ]
     )
     grammar[:string_context_c] = [

@@ -419,9 +419,77 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
-    - meta.preprocessor.macro
     - meta.block.struct
     - meta.head.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: foo
+  scopes:
+    - entity.name.function.preprocessor
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: foo
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: struct
+  scopesBegin:
+    - meta.body.namespace
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: bar
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: \
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - constant.character.escape.line-continuation
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' data'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' members'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' other'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: '#'
   scopesBegin:
     - meta.preprocessor.pragma
