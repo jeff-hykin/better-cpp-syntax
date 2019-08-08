@@ -5,6 +5,8 @@ const vsctm = require("vscode-textmate-experimental");
 const paths = require("./paths");
 const fs = require("fs");
 
+const node_process = require("process");
+
 // retrive all the filetypes from the syntax
 let extensionsFor = {};
 for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
@@ -27,7 +29,7 @@ let languageExtensionFor = fixturePath => {
             extensionsFor[eachLangExtension].includes(fixtureExtension)
         ) {
             matchingLanguageExtension = eachLangExtension;
-            break;
+            // break;
         }
     }
     return matchingLanguageExtension;
@@ -45,6 +47,7 @@ module.exports = async function(
     fixturePath,
     fixture,
     showFailureOnly,
+    showLineNumbers,
     process
 ) {
     let displayedAtLeastOnce = false;
@@ -56,6 +59,11 @@ module.exports = async function(
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {
+            if (showLineNumbers) {
+                node_process.stdout.write(
+                    "Processing line: " + lineNumber + "\r"
+                );
+            }
             let r = grammar.tokenizeLine(line, ruleStack);
             ruleStack = r.ruleStack;
             let displayLine = false;
