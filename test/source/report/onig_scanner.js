@@ -45,6 +45,9 @@ module.exports = class OnigScanner {
             } catch (e) {
                 console.log(this.patterns[index]);
             }
+            if (match && match[0].start == startPosition) {
+                break;
+            }
         }
         // chose the best match
         // best match means the match with the earliest starting position for the 0th sub-expression

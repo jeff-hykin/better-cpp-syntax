@@ -2890,7 +2890,6 @@
     - storage.type.template
 - source: ...
   scopes:
-    - ellipses
     - punctuation.vararg-ellipses.template.definition
 - source: Args
   scopes:
@@ -29607,13 +29606,13 @@
   scopes:
     - punctuation.definition.parameters.begin
 - source: FUNC
-  scopesBegin:
+  scopes:
     - variable.parameter.preprocessor
 - source: ','
   scopes:
     - punctuation.separator.parameters
-- source: ' ARG'
-  scopesEnd:
+- source: ARG
+  scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -47762,7 +47761,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
@@ -47801,7 +47800,7 @@
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
   scopes:
-    - storage.modifier.specifier.const
+    - storage.modifier.specifier.functional.post-parameters.const
 - source: '{'
   scopes:
     - >-
@@ -61753,7 +61752,8 @@
     - storage.type.modifier.access.public
 - source: stringstream
   scopes:
-    - entity.name.type.inherited
+    - meta.qualified_type
+    - entity.name.type
 - source: '{'
   scopes:
     - meta.head.class

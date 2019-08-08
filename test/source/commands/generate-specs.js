@@ -4,21 +4,19 @@ const path = require("path");
 const fs = require("fs");
 const yaml = require("js-yaml");
 
-const argv = require("../arguments");
 const generateSpec = require("../generate_spec");
 const pathFor = require("../paths");
 
-const tests = require("../get_tests")(test => {
-    const result =
-        (!fs.existsSync(test.spec.yaml) && !fs.existsSync(test.spec.json)) ||
-        argv.all ||
-        argv._.length !== 0;
-    return result;
-});
+async function generateSpecs(yargs) {
+    const tests = require("../get_tests")(yargs, test => {
+        const result =
+            (!fs.existsSync(test.spec.yaml) &&
+                !fs.existsSync(test.spec.json)) ||
+            yargs.all ||
+            yargs.fixtures.length !== 0;
+        return result;
+    });
 
-// and generate the specs
-generateSpecs();
-async function generateSpecs() {
     for (const test of tests) {
         console.log(
             "generating spec for",
@@ -43,3 +41,15 @@ function keyCompare(key1, key2) {
     const order = ["source", "scopesBegin", "scopes", "scopesEnd"];
     return order.indexOf(key1) - order.indexOf(key2);
 }
+
+module.exports = {
+    command: "generate-specs [fixtures..]",
+    desc: "(re)generate spec files",
+    builder: yargs => {
+        yargs.positional("fixtures", {
+            default: [],
+            describe: "the fixtures to use"
+        });
+    },
+    handler: yargs => generateSpecs(yargs)
+};

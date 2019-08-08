@@ -24,7 +24,7 @@ module.exports = function(scopeName, coverage) {
             keys,
             k => coverage[k].sumTime[i] / coverage[k].count[i]
         );
-        keys = _.take(keys, argv["perf-limit"]);
+        keys = _.take(keys, argv.getArgs()["perf-limit"]);
         const totalMax = _.maxBy(keys, k => coverage[k].sumTime[i]);
         for (const k of keys) {
             let color =

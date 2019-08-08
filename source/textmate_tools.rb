@@ -1,6 +1,7 @@
 require 'json'
 require 'yaml'
 require 'set'
+require 'deep_clone' # gem install deep_clone
 
 # TODO
     # use the turnOffNumberedCaptureGroups to disable manual regex groups (which otherwise would completely break the group attributes)
@@ -41,6 +42,30 @@ def checkForMatchingOuter(str, start_char, end_char)
         return true 
     end
     return false
+end
+
+# taken from https://gist.github.com/moertel/11091573
+# Temporarily redirects STDOUT and STDERR to /dev/null
+# but does print exceptions should there occur any.
+# Call as:
+#   suppress_output { puts 'never printed' }
+#
+def suppress_output
+    begin
+        original_stderr = $stderr.clone
+        original_stdout = $stdout.clone
+        $stderr.reopen(File.new('/dev/null', 'w'))
+        $stdout.reopen(File.new('/dev/null', 'w'))
+        retval = yield
+    rescue Exception => e
+        $stdout.reopen(original_stdout)
+        $stderr.reopen(original_stderr)
+        raise e
+    ensure
+        $stdout.reopen(original_stdout)
+        $stderr.reopen(original_stderr)
+    end
+    retval
 end
 
 # 
@@ -162,10 +187,32 @@ class Grammar
         # check for a backref to the Nth group, replace it with `\N` and try again
         regex_as_string.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
             if references[$1] == nil
-                raise "When processing the backReference:#{$1}, I couldn't find the group it was referencing"
+                raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
             end
             # if the reference does exist, then replace it with it's number
             "\\#{references[$1]}"
+        end
+        # check for a subroutine to the Nth group, replace it with `\N` and try again
+        regex_as_string.gsub! /\[:subroutine:([^\\]+?):\]/ do |match|
+            if references[$1] == nil
+                # this is empty because the subroutine call is often built before the
+                # thing it is referencing. 
+                # ex:
+                # newPattern(
+                #     reference: "ref1",
+                #     match: newPattern(
+                #         /thing/.or(
+                #             recursivelyMatch("ref1")
+                #         )
+                #     )
+                # )
+                # there's no way easy way to know if this is the case or not
+                # so by default nothing is returned so that problems are not caused
+                ""
+            else
+                # if the reference does exist, then replace it with it's number
+                "\\g<#{references[$1]}>"
+            end
         end
         return regex_as_string
     end
@@ -494,7 +541,20 @@ class Regexp
         should_partial_match: "",
         should_not_partial_match: "",
         repository: "",
+        word_cannot_be_any_of: "",
+        no_warn_match_after_newline?: "",
     }
+    
+    def __deep_clone__()
+        # copy the regex
+        self_as_string = self.without_default_mode_modifiers
+        new_regex = /#{self_as_string}/
+        # copy the attributes
+        new_attributes = self.group_attributes.__deep_clone__
+        new_regex.group_attributes = new_attributes
+        new_regex.has_top_level_group = self.has_top_level_group
+        return new_regex
+    end
     
     def self.runTest(test_name, arguments, lambda, new_regex)
         if arguments[test_name] != nil
@@ -503,8 +563,11 @@ class Regexp
             end
             failures = []
             for each in arguments[test_name]
-                if lambda[each]
-                    failures.push(each)
+                # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+                suppress_output do
+                    if lambda[each]
+                        failures.push(each)
+                    end
                 end
             end
             if failures.size > 0
@@ -525,7 +588,7 @@ class Regexp
     def maybe        (*arguments) processRegexOperator(arguments, 'maybe'        ) end
     def oneOrMoreOf  (*arguments) processRegexOperator(arguments, 'oneOrMoreOf'  ) end
     def zeroOrMoreOf (*arguments) processRegexOperator(arguments, 'zeroOrMoreOf' ) end
-    def backReference(reference)
+    def matchResultOf(reference)
         #
         # generate the new regex
         #
@@ -539,7 +602,54 @@ class Regexp
         new_regex.group_attributes = self.group_attributes
         return new_regex
     end
-    
+    def reTag(arguments)
+        keep_tags = !(arguments[:all] == false || arguments[:keep] == false) || arguments[:append] != nil
+        
+        pattern_copy = self.__deep_clone__
+        new_attributes = pattern_copy.group_attributes
+        
+        # this is O(N*M) and could be expensive if reTagging a big pattern
+        new_attributes.map!.with_index do |attribute, index|
+            # preserves references
+            if attribute[:tag_as] == nil
+                attribute[:retagged] = true
+                next attribute
+            end
+            arguments.each do |key, tag|
+                if key == attribute[:tag_as] or key == attribute[:reference] or key == (index + 1).to_s
+                    attribute[:tag_as] = tag
+                    attribute[:retagged] = true
+                end
+            end
+            if arguments[:append] != nil
+                attribute[:tag_as] = attribute[:tag_as] + "." + arguments[:append]
+            end
+            next attribute
+        end
+        if not keep_tags
+            new_attributes.each do |attribute|
+                if attribute[:retagged] != true
+                    attribute.delete(:tag_as)
+                end
+            end
+        end
+        new_attributes.each { |attribute| attribute.delete(:retagged) }
+        return pattern_copy
+    end
+    def recursivelyMatch(reference)
+        #
+        # generate the new regex
+        #
+        self_as_string = self.without_default_mode_modifiers
+        other_regex_as_string = "[:subroutine:#{reference}:]"
+        new_regex = /#{self_as_string}#{other_regex_as_string}/
+        
+        #
+        # carry over attributes
+        #
+        new_regex.group_attributes = self.group_attributes
+        return new_regex
+    end
     def to_tag(ignore_repository_entry: false, without_optimizations: false)
         if not ignore_repository_entry
             # if this pattern is in the repository, then just return a reference to the repository
@@ -562,6 +672,18 @@ class Regexp
             puts @group_attributes.to_yaml
             raise "Error: see printout above"
         end
+
+        # check for matching after \n
+        skip_newline_check = group_attributes.any? {|attribute| attribute[:no_warn_match_after_newline?]}
+        if /\\n(.*?)(?:\||\\n|\]|$)/ =~ regex_as_string and not skip_newline_check
+            if /[^\^$\[\]\(\)?:+*=!<>\\]/ =~ $1
+                puts "\n\nThere is a pattern that likely tries to match characters after \\n\n"
+                puts "textmate grammars only operate on a single line, \\n is the last possible character that can be matched.\n"
+                puts "Here is the pattern:\n"
+                puts regex_as_string
+            end
+        end
+        group_attributes.delete(:no_warn_match_after_newline?)
         
         #
         # Top level pattern
@@ -840,6 +962,14 @@ class Regexp
         self_as_string = self.without_default_mode_modifiers
         other_regex_as_string = other_regex.without_default_mode_modifiers
         
+        # handle :word_cannot_be_any_of
+        if pattern_attributes[:word_cannot_be_any_of] != nil
+            # add the boundary
+            other_regex_as_string = /(?!\b(?:#{pattern_attributes[:word_cannot_be_any_of].join("|")})\b)#{other_regex_as_string}/
+            # don't let the argument carry over to the next regex
+            pattern_attributes.delete(:word_cannot_be_any_of)
+        end
+        
         # compute the endings so the operators can use/handle them
         simple_quantifier_ending = self.getQuantifierFromAttributes(option_attributes)
         
@@ -910,7 +1040,6 @@ class Regexp
                     simple_quantifier_ending = "*"
             end
         end
-        
         # 
         # Generate the core regex
         # 
@@ -920,7 +1049,7 @@ class Regexp
         else
             new_regex = /#{self_as_string}#{groupWrap[other_regex_as_string]}/
         end
-
+        
         #
         # Make changes to capture groups/attributes
         #
@@ -938,11 +1067,11 @@ class Regexp
         #
         # run tests
         #
-        # if there are backreferences, then implement them before testing
-        if "#{new_regex}" =~ /\[:backreference:([^\\]+?):\]/
-            test_regex = /#{new_regex.to_tag[:match]}/
-        else
-            test_regex = new_regex
+        # temporarily implement matchResultOfs for tests
+        test_regex = Grammar.fixupBackRefs(new_regex.without_default_mode_modifiers, new_regex.group_attributes, was_first_group_removed: false)
+        # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+        suppress_output do
+            test_regex = Regexp.new(test_regex)
         end
         Regexp.runTest(:should_partial_match    , pattern_attributes, ->(each){       not (each =~ test_regex)       } , test_regex)
         Regexp.runTest(:should_not_partial_match, pattern_attributes, ->(each){      (each =~ test_regex) != nil     } , test_regex)
@@ -1065,17 +1194,24 @@ end
     def zeroOrMoreOf(*arguments)
         //.zeroOrMoreOf(*arguments)
     end
-    def backReference(reference)
-        //.backReference(reference)
+    def matchResultOf(reference)
+        //.matchResultOf(reference)
+    end
+    def recursivelyMatch(reference)
+        //.recursivelyMatch(reference)
     end
 
 #
 # PatternRange
 #
 class PatternRange
-    attr_accessor :as_tag, :repository_name
+    attr_accessor :as_tag, :repository_name, :arguments
     
-    def initialize(key_arguments)
+    def __deep_clone__()
+        PatternRange.new(@arguments.__deep_clone__)
+    end
+    
+    def initialize(arguments)
         # parameters:
             # comment: (idk why youd ever use this, but it exists for backwards compatibility)
             # tag_as:
@@ -1087,9 +1223,18 @@ class PatternRange
             # includes:
             # repository:
             # repository_name:
+
+        # save all of the arguments for later
+        @arguments = arguments
+        # generate the tag so that errors show up
+        self.generateTag()
+    end
+    
+    def generateTag()
         
+        # generate a tag version
         @as_tag = {}
-        key_arguments = key_arguments.clone
+        key_arguments = @arguments.clone
         
         #
         # comment
@@ -1150,7 +1295,12 @@ class PatternRange
         end
         start_pattern_as_tag =  start_pattern.to_tag(without_optimizations: true)
         # prevent accidental zero length matches
-        if "" =~ /#{start_pattern_as_tag[:match]}/ and not key_arguments[:zeroLengthStart?]
+        pattern = nil
+        # suppress the regex warnings "nested repeat operator '?' and '+' was replaced with '*' in regular expression"
+        suppress_output do
+            pattern = /#{start_pattern_as_tag[:match]}/
+        end
+        if "" =~ pattern and not key_arguments[:zeroLengthStart?]
             puts "Warning: #{/#{start_pattern_as_tag[:match]}/.inspect}\nmatches the zero length string (\"\").\n\n"
             puts "This means that the patternRange always matches"
             puts "You can disable this warning by settting :zeroLengthStart? to true."
@@ -1203,15 +1353,33 @@ class PatternRange
     end
     
     def to_tag(ignore_repository_entry: false)
+        # if it hasn't been generated somehow, then generate it
+        if @as_tag == nil
+            self.generateTag()
+        end
+        
         if ignore_repository_entry
             return @as_tag
         end
+        
         if @repository_name != nil
             return {
                 include: "##{@repository_name}"
             }
         end
         return @as_tag
+    end
+    
+    def reTag(arguments)
+        # create a copy
+        the_copy = self.__deep_clone__()
+        # reTag the patterns
+        the_copy.arguments[:start_pattern] = the_copy.arguments[:start_pattern].reTag(arguments)
+        the_copy.arguments[:end_pattern  ] = the_copy.arguments[:end_pattern  ].reTag(arguments) unless the_copy.arguments[:end_pattern  ] == nil
+        the_copy.arguments[:while        ] = the_copy.arguments[:while        ].reTag(arguments) unless the_copy.arguments[:while        ] == nil
+        # re-generate the tag now that the patterns have changed
+        the_copy.generateTag()
+        return the_copy
     end
 end
 

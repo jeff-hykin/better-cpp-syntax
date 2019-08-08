@@ -6,19 +6,17 @@ const path = require("path");
 const fs = require("fs");
 const yaml = require("js-yaml");
 
-const argv = require("../arguments");
 const pathFor = require("../paths");
 
-const tests = require("../get_tests")(test => {
-    const result =
-        fs.existsSync(test.spec.yaml) ||
-        fs.existsSync(test.spec.json) ||
-        argv._.length !== 0;
-    return result;
-});
+async function sortSpecs(yargs) {
+    const tests = require("../get_tests")(yargs, test => {
+        const result =
+            fs.existsSync(test.spec.yaml) ||
+            fs.existsSync(test.spec.json) ||
+            yargs.fixtures.length !== 0;
+        return result;
+    });
 
-sortSpecs();
-async function sortSpecs() {
     for (const test of tests) {
         console.log(
             "sorting spec for",
@@ -39,3 +37,9 @@ function keyCompare(key1, key2) {
     const order = ["source", "scopesBegin", "scopes", "scopesEnd"];
     return order.indexOf(key1) - order.indexOf(key2);
 }
+
+module.exports = {
+    command: "sort-specs [fixtures..]",
+    desc: "sort spec files",
+    handler: yargs => sortSpecs(yargs)
+};

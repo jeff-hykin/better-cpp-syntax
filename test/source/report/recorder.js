@@ -19,7 +19,8 @@ class recorder {
         this.empty = true;
         for (const pointer of Object.keys(pointers)) {
             if (/(?:match|begin|end|while)$/.test(pointer)) {
-                const source = scopeName + ":" + pointers[pointer].key.line;
+                const source =
+                    scopeName + ":" + (pointers[pointer].key.line + 1);
                 this.coverage[source] = {
                     source,
                     // order is failure, unchosen, chosen
