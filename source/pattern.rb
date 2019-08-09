@@ -203,10 +203,13 @@ class Pattern
                 # this will throw a RegexpError if there are no capturing groups
                 _ignore = /#{@match}\1/
                 #at this point @match contains a capture group, complain
-                puts "There is a pattern that is being constructed from a regular expression"
-                puts "with a capturing group. This is not allowed, as the group cannot be tracked"
-                puts "The bad pattern is\n" + to_s
-                raise "Error: see printout above"
+                raise <<-HEREDOC.remove_indent 
+                    
+                    There is a pattern that is being constructed from a regular expression
+                    with a capturing group. This is not allowed, as the group cannot be tracked
+                    The bad pattern is
+                    #{self.to_s}
+                HEREDOC
             rescue RegexpError
                 # no cpature groups present, purposely do nothing
             end
