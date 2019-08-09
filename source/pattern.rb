@@ -35,7 +35,7 @@ class Pattern
 
     def insert!(pattern)
         last = self
-        last = last.next_regex while last.next_regex != nil
+        last = last.next_regex while last.next_regex
         last.next_regex = pattern
         self
     end
@@ -50,6 +50,7 @@ class Pattern
     #
 
     def initialize(*arguments)
+        @next_regex = nil
         arg1 = arguments[0]
         # if only a pattern, set attributes to {}
         if arg1.is_a? Pattern or arg1.is_a? Regexp
@@ -65,7 +66,7 @@ class Pattern
         if @regex.is_a? Regexp
             begin
                 # this will throw a RegexpError if there are no capturing groups
-                /#{@regex}\1/
+                _ignore = /#{@regex}\1/
                 #at this point @regex contains a capture group, complain
                 puts "There is a pattern that is being constructed from a regular expression"
                 puts "with a capturing group. This is not allowed, as the group cannot be tracked"
@@ -79,12 +80,12 @@ class Pattern
 
     # attempts to provide a memorable name for a pattern
     def name
-        if @arguments[:reference] != nil
+        if @arguments[:reference]
             return @arguments[:reference]
-        elsif @arguments[:tag_as] != nil
+        elsif @arguments[:tag_as]
             return @arguments[:tag_as]
         end
-        self.to_s
+        to_s
     end
 
     # converts a Pattern to a Hash represnting a textmate pattern
@@ -92,16 +93,14 @@ class Pattern
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
-            captures: collect_group_attributes,
         }
         if optimize_outer_group?
             # optimize captures by removing outermost
             regex_as_string = regex_as_string[1..-2]
             output[:name] = @arguments[:tag_as]
         end
-        # fixup matchResultOf and recursivelyMatch
-        # for each of the keys in output[:captures] replace $match and $reference() with
-        # the appropriate number
+
+        output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
         output
     end
 
@@ -117,7 +116,7 @@ class Pattern
 
         # tests are ran here
         # TODO: consider making tests their own method to prevent running them repeatedly
-        if @next_regex != nil
+        if @next_regex
             if @next_regex.is_a? Pattern and @next_regex.atomic?
                 self_regex += "#{regex_to_s(next_regex.to_r(groups))}"
             else
@@ -139,11 +138,11 @@ class Pattern
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
         output += "\n#{indent}  match: " + regex_as_string.lstrip
-        output += ",\n#{indent}  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as] != nil
-        output += ",\n#{indent}  reference: " + @arguments[:reference] if @arguments[:reference] != nil
+        output += ",\n#{indent}  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as]
+        output += ",\n#{indent}  reference: " + @arguments[:reference] if @arguments[:reference]
         output += do_add_attributes(indent)
         output += ",\n#{indent})"
-        output += @next_regex.to_s(depth, false).lstrip if @next_regex != nil
+        output += @next_regex.to_s(depth, false).lstrip if @next_regex
         return output
     end
 
@@ -256,27 +255,11 @@ class Pattern
             groups.concat(new_groups)
             next_group += new_groups.length
         end
-        if @next_regex != nil
+        if @next_regex
             new_groups = @next_regex.collect_group_attributes(next_group) 
             next_group += new_groups.length
         end
         groups
-    end
-    def captures(capture_count = 0)
-        captures = []
-        if needs_to_capture?
-            captures << {capture: capture_count}.merge(generate_capture)
-            capture_count += 1
-        end
-        if @regex.is_a? Pattern
-            capture_count, new_captures = @regex.captures(capture_count) 
-            captures.concat(new_captures)
-        end
-        if @next_regex != nil
-            capture_count, new_captures = @next_regex.captures(capture_count) 
-            captures.concat(new_captures)
-        end
-        return capture_count, captures
     end
 
     def fixupRegexReferences(groups, self_regex)
@@ -287,7 +270,7 @@ class Pattern
                 references[each[:reference]] = each[:group]
             end
         }
-        self_regex.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
+        self_regex.gsub!(/\[:backreference:([^\\]+?):\]/) do |match|
             if references[$1] == nil
                 raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
             end
@@ -295,8 +278,9 @@ class Pattern
             "\\#{references[$1]}"
         end
         # check for a subroutine to the Nth group, replace it with `\N` and try again
-        self_regex.gsub! /\[:subroutine:([^\\]+?):\]/ do |match|
+        self_regex.gsub!(/\[:subroutine:([^\\]+?):\]/) do |match|
             if references[$1] == nil
+                raise "When processing the recursivelyMatch:#{$1}, I couldn't find the group it was referencing"
                 # this is empty because the subroutine call is often built before the
                 # thing it is referencing. 
                 # ex:
@@ -319,8 +303,16 @@ class Pattern
         self_regex
     end
 
-    def generate_capture
-        return {tag_as: @arguments[:tag_as]}
+    def convert_group_attributes_to_captures(groups)
+        captures = Hash.new()
+        groups.each {|group|
+            output = {}
+            output[:name] = group[:tag_as]
+            # process includes
+            captures["#{group[:group]}"] = output
+        }
+        captures.reject {|capture| capture.empty?}
+        # replace $match and $reference() with the appropriate capture number
     end
 
     def __deep_clone__()
@@ -353,8 +345,8 @@ class LookAroundPattern < Pattern
         when :lookBehindFor     then self_regex = "(?<=#{self_regex})"
         when :lookBehindToAvoid then self_regex = "(?<!#{self_regex})"
         end
-        # TODO: do captures work in lookArounds?
         if needs_to_capture?
+            raise "You can only capture a lookAround of type lookAheadFor" unless @arguments[:type] == :lookAheadFor
             self_regex = "(#{self_regex})"
         end
         return self_regex
@@ -363,13 +355,7 @@ class LookAroundPattern < Pattern
         top_level ? "lookAround(" : ".lookAround("
     end
     def do_add_attributes(indent)
-        type = case @arguments[:type]
-        when :lookAheadFor      then ":lookAheadFor"
-        when :lookAheadToAvoid  then ":lookAheadToAvoid"
-        when :lookBehindFor     then ":lookBehindFor"
-        when :lookBehindToAvoid then ":lookBehindToAvoid"
-        end
-        ",\n#{indent}  type: #{type}"
+        ",\n#{indent}  type: :#{@arguments[:type]}"
     end
     def atomic?
         true
@@ -386,7 +372,7 @@ class BackReferencePattern < Pattern
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
         output += "\"#{@arguments[:backreference_key]}\")"
-        output += @next_regex.to_s(depth, false).lstrip if @next_regex != nil
+        output += @next_regex.to_s(depth, false).lstrip if @next_regex
         return output
     end
     def atomic?
@@ -403,7 +389,8 @@ test = Pattern.new(
     tag_as: "ghi"
 ).lookAheadFor(/jkl/).matchResultOf("abc")
 
-#test2 = test.then(/mno/)
+test2 = test.then(/mno/)
+puts test2
 
 puts "regex:"
 puts test.to_r.inspect
