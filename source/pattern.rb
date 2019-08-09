@@ -23,7 +23,14 @@ class Pattern
             :includes,
             :repository,
         ]
+        if @arguments == nil
+            puts @regex.class
+        end
         not (@arguments.keys & capturing_attributes).empty?
+    end
+
+    def optimize_outer_group?
+        needs_to_capture? and @next_regex == nil
     end
 
     def insert!(pattern)
@@ -58,7 +65,7 @@ class Pattern
         if @regex.is_a? Regexp
             begin
                 # this will throw a RegexpError if there are no capturing groups
-                test_regex = /#{@regex}\1/
+                /#{@regex}\1/
                 #at this point @regex contains a capture group, complain
                 puts "There is a pattern that is being constructed from a regular expression"
                 puts "with a capturing group. This is not allowed, as the group cannot be tracked"
@@ -82,13 +89,12 @@ class Pattern
 
     # converts a Pattern to a Hash represnting a textmate pattern
     def to_tag
-        optimize = needs_to_capture? && @next_regex == nil
         regex_as_string = regex_to_s(self.to_r)
         output = {
             match: regex_as_string,
-            captures: self.captures(optimize ? 0 : 1)[1],
+            captures: collect_group_attributes,
         }
-        if optimize
+        if optimize_outer_group?
             # optimize captures by removing outermost
             regex_as_string = regex_as_string[1..-2]
             output[:name] = @arguments[:tag_as]
@@ -97,6 +103,32 @@ class Pattern
         # for each of the keys in output[:captures] replace $match and $reference() with
         # the appropriate number
         output
+    end
+
+    # converts a pattern to a Regexp
+    # if groups is nil consider this Pattern to be the top_level
+    # when a pattern is top_level, group numbers and back references are relative to that pattern
+    def to_r(groups = nil)
+        top_level = groups == nil
+        groups = collect_group_attributes if top_level
+
+        self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r(groups) : @regex)
+        self_regex = do_modify_regex(self_regex)
+
+        # tests are ran here
+        # TODO: consider making tests their own method to prevent running them repeatedly
+        if @next_regex != nil
+            if @next_regex.is_a? Pattern and @next_regex.atomic?
+                self_regex += "#{regex_to_s(next_regex.to_r(groups))}"
+            else
+                self_regex += "(?:#{regex_to_s(next_regex.to_r(groups))})"
+            end
+        end
+
+        if top_level
+            return /#{fixupRegexReferences(groups, self_regex)}/
+        end
+        /#{self_regex}/
     end
 
     # Displays the Pattern as you would write it in code
@@ -113,21 +145,6 @@ class Pattern
         output += ",\n#{indent})"
         output += @next_regex.to_s(depth, false).lstrip if @next_regex != nil
         return output
-    end
-
-    # converts a pattern to a Regexp
-    def to_r
-        self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r : @regex)
-        self_regex = do_modify_regex(self_regex)
-        if next_regex == nil
-            return /#{self_regex}/
-        end
-        # tests are ran here
-        # TODO: consider making tests their own method to prevent running them repeatedly
-        if @next_regex.is_a? Pattern and @next_regex.atomic?
-            return /#{self_regex}#{regex_to_s(next_regex.to_r)}/
-        end
-        /#{self_regex}(?:#{regex_to_s(next_regex.to_r)})/
     end
 
     def start_pattern
@@ -178,6 +195,7 @@ class Pattern
         lookAround(pattern)
     end
 
+    def matchResultOf(reference) insert(BackReferencePattern.new(reference)) end
     #
     # Inheritance
     #
@@ -227,6 +245,23 @@ class Pattern
     #
     # Internal
     #
+    def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
+        groups = []
+        if needs_to_capture?
+            groups << {group: next_group}.merge(@arguments)
+            next_group += 1
+        end
+        if @regex.is_a? Pattern
+            new_groups = @regex.collect_group_attributes(next_group) 
+            groups.concat(new_groups)
+            next_group += new_groups.length
+        end
+        if @next_regex != nil
+            new_groups = @next_regex.collect_group_attributes(next_group) 
+            next_group += new_groups.length
+        end
+        groups
+    end
     def captures(capture_count = 0)
         captures = []
         if needs_to_capture?
@@ -242,6 +277,46 @@ class Pattern
             captures.concat(new_captures)
         end
         return capture_count, captures
+    end
+
+    def fixupRegexReferences(groups, self_regex)
+        references = Hash.new
+        #convert all references to group numbers
+        groups.each { |each|
+            if each[:reference]
+                references[each[:reference]] = each[:group]
+            end
+        }
+        self_regex.gsub! /\[:backreference:([^\\]+?):\]/ do |match|
+            if references[$1] == nil
+                raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
+            end
+            # if the reference does exist, then replace it with it's number
+            "\\#{references[$1]}"
+        end
+        # check for a subroutine to the Nth group, replace it with `\N` and try again
+        self_regex.gsub! /\[:subroutine:([^\\]+?):\]/ do |match|
+            if references[$1] == nil
+                # this is empty because the subroutine call is often built before the
+                # thing it is referencing. 
+                # ex:
+                # newPattern(
+                #     reference: "ref1",
+                #     match: newPattern(
+                #         /thing/.or(
+                #             recursivelyMatch("ref1")
+                #         )
+                #     )
+                # )
+                # there's no way easy way to know if this is the case or not
+                # so by default nothing is returned so that problems are not caused
+                ""
+            else
+                # if the reference does exist, then replace it with it's number
+                "\\g<#{references[$1]}>"
+            end
+        end
+        self_regex
     end
 
     def generate_capture
@@ -301,6 +376,24 @@ class LookAroundPattern < Pattern
     end
 end
 
+class BackReferencePattern < Pattern
+    def initialize(reference)
+        super(
+            match: Regexp.new("[:backreference:#{reference}:]"),
+            backreference_key: reference
+        )
+    end
+    def to_s(depth = 0, top_level = true)
+        output = top_level ? "matchResultOf(" : ".matchResultOf("
+        output += "\"#{@arguments[:backreference_key]}\")"
+        output += @next_regex.to_s(depth, false).lstrip if @next_regex != nil
+        return output
+    end
+    def atomic?
+        true
+    end
+end
+
 test = Pattern.new(
     match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "aaa"),
     tag_as: "abc",
@@ -308,9 +401,9 @@ test = Pattern.new(
 ).maybe(/def/).then(
     match: /ghi/,
     tag_as: "ghi"
-).lookAheadFor(/jkl/)
+).lookAheadFor(/jkl/).matchResultOf("abc")
 
-test2 = test.then(/mno/)
+#test2 = test.then(/mno/)
 
 puts "regex:"
 puts test.to_r.inspect
