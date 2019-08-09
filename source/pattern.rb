@@ -80,9 +80,9 @@ class Pattern
 
     # attempts to provide a memorable name for a pattern
     def name
-        if @arguments[:reference]
+        if @arguments[:reference] != nil
             return @arguments[:reference]
-        elsif @arguments[:tag_as]
+        elsif @arguments[:tag_as] != nil
             return @arguments[:tag_as]
         end
         to_s
@@ -116,8 +116,8 @@ class Pattern
 
         # tests are ran here
         # TODO: consider making tests their own method to prevent running them repeatedly
-        if @next_regex
-            if @next_regex.is_a? Pattern and @next_regex.atomic?
+        if @next_regex.is_a? Pattern
+            if @next_regex.atomic?
                 self_regex += "#{regex_to_s(next_regex.to_r(groups))}"
             else
                 self_regex += "(?:#{regex_to_s(next_regex.to_r(groups))})"
@@ -195,6 +195,7 @@ class Pattern
     end
 
     def matchResultOf(reference) insert(BackReferencePattern.new(reference)) end
+    def recursivelyMatch(reference) insert(SubroutinePattern.new(reference)) end
     #
     # Inheritance
     #
@@ -251,12 +252,13 @@ class Pattern
             next_group += 1
         end
         if @regex.is_a? Pattern
-            new_groups = @regex.collect_group_attributes(next_group) 
+            new_groups = @regex.collect_group_attributes(next_group)
             groups.concat(new_groups)
             next_group += new_groups.length
         end
-        if @next_regex
-            new_groups = @next_regex.collect_group_attributes(next_group) 
+        if @next_regex.is_a? Pattern
+            new_groups = @next_regex.collect_group_attributes(next_group)
+            groups.concat(new_groups)
             next_group += new_groups.length
         end
         groups
@@ -266,7 +268,7 @@ class Pattern
         references = Hash.new
         #convert all references to group numbers
         groups.each { |each|
-            if each[:reference]
+            if each[:reference] != nil
                 references[each[:reference]] = each[:group]
             end
         }
@@ -280,6 +282,7 @@ class Pattern
         # check for a subroutine to the Nth group, replace it with `\N` and try again
         self_regex.gsub!(/\[:subroutine:([^\\]+?):\]/) do |match|
             if references[$1] == nil
+                puts groups
                 raise "When processing the recursivelyMatch:#{$1}, I couldn't find the group it was referencing"
                 # this is empty because the subroutine call is often built before the
                 # thing it is referencing. 
@@ -362,6 +365,29 @@ class LookAroundPattern < Pattern
     end
 end
 
+class SubroutinePattern < Pattern
+    def initialize(reference)
+        if reference.is_a? String
+            super(
+                match: Regexp.new("[:subroutine:#{reference}:]"),
+                subroutine_key: reference
+            )
+        else
+            # most likely __deep_clone__ was called, just call the super initalizer
+            super(reference)
+        end
+    end
+    def to_s(depth = 0, top_level = true)
+        output = top_level ? "recursivelyMatch(" : ".recursivelyMatch("
+        output += "\"#{@arguments[:subroutine_key]}\")"
+        output += @next_regex.to_s(depth, false).lstrip if @next_regex
+        return output
+    end
+    def atomic?
+        true
+    end
+end
+
 class BackReferencePattern < Pattern
     def initialize(reference)
         if reference.is_a? String
@@ -391,8 +417,9 @@ test = Pattern.new(
     reference: "abc"
 ).maybe(/def/).then(
     match: /ghi/,
-    tag_as: "ghi"
-).lookAheadFor(/jkl/).matchResultOf("abc")
+    tag_as: "ghi",
+    reference: "ghi"
+).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi")
 
 test2 = test.then(/mno/)
 puts test2.to_r.inspect
