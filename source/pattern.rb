@@ -364,10 +364,15 @@ end
 
 class BackReferencePattern < Pattern
     def initialize(reference)
-        super(
-            match: Regexp.new("[:backreference:#{reference}:]"),
-            backreference_key: reference
-        )
+        if reference.is_a? String
+            super(
+                match: Regexp.new("[:backreference:#{reference}:]"),
+                backreference_key: reference
+            )
+        else
+            # most likely __deep_clone__ was called, just call the super initalizer
+            super(reference)
+        end
     end
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
@@ -390,7 +395,7 @@ test = Pattern.new(
 ).lookAheadFor(/jkl/).matchResultOf("abc")
 
 test2 = test.then(/mno/)
-puts test2
+puts test2.to_r.inspect
 
 puts "regex:"
 puts test.to_r.inspect
