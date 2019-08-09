@@ -151,7 +151,7 @@ class Pattern
         }
         if optimize_outer_group?
             # optimize captures by removing outermost
-            regex_as_string = regex_as_string[1..-2]
+            output[:match] = output[:match][1..-2]
             output[:name] = @arguments[:tag_as]
         end
 
@@ -337,22 +337,7 @@ class Pattern
         # check for a subroutine to the Nth group, replace it with `\N` and try again
         self_regex.gsub!(/\[:subroutine:([^\\]+?):\]/) do |match|
             if references[$1] == nil
-                puts groups
                 raise "When processing the recursivelyMatch:#{$1}, I couldn't find the group it was referencing"
-                # this is empty because the subroutine call is often built before the
-                # thing it is referencing. 
-                # ex:
-                # newPattern(
-                #     reference: "ref1",
-                #     match: newPattern(
-                #         /thing/.or(
-                #             recursivelyMatch("ref1")
-                #         )
-                #     )
-                # )
-                # there's no way easy way to know if this is the case or not
-                # so by default nothing is returned so that problems are not caused
-                ""
             else
                 # if the reference does exist, then replace it with it's number
                 "\\g<#{references[$1]}>"
@@ -466,13 +451,97 @@ class BackReferencePattern < Pattern
     end
 end
 
+
+class PatternRange < Pattern
+    @start_pattern
+    @end_pattern
+    @while_pattern
+
+    def initialize(arguments)
+        if !arguments.is_a? Hash
+            raise "PatternRange.new() expects a hash"
+        end
+
+        @start_pattern = arguments[:start_pattern]
+        @end_pattern = arguments[:end_pattern]
+        @while_pattern = arguments[:while_pattern]
+
+        @start_pattern = Pattern.new(@start_pattern) if @start_pattern.is_a? Regexp
+        @end_pattern = Pattern.new(@end_pattern) if @end_pattern.is_a? Regexp
+        @while_pattern = Pattern.new(@while_pattern) if @while_pattern.is_a? Regexp
+
+        arguments.delete(:start_pattern)
+        arguments.delete(:end_pattern)
+        arguments.delete(:while_pattern)
+
+        super(arguments)
+    end
+
+    def start_pattern
+        @start_pattern
+    end
+
+    def to_r
+        raise "PatternRange cannot be used as a part of a Pattern"
+    end
+
+    def to_tag
+        output = {
+            begin: regex_to_s(@start_pattern.to_r),
+        }
+        output[:end] =  regex_to_s(@end_pattern.to_r) if @end_pattern != nil
+        output[:while] = regex_to_s(@while_pattern.to_r) if @while_pattern != nil
+        output[:name] = @arguments[:tag_as] if @arguments[:tag_as] != nil
+        output[:contentName] = @arguments[:tag_content_as] if @arguments[:tag_content_as] != nil
+
+        output[:begin] = output[:begin][1..-2] if @start_pattern && @start_pattern.optimize_outer_group?
+        output[:end] = output[:end][1..-2] if @end_pattern && @end_pattern.optimize_outer_group?
+        output[:while] = output[:while][1..-2] if @while_pattern && @while_pattern.optimize_outer_group?
+
+        output[:beginCaptures] = convert_group_attributes_to_captures(@start_pattern.collect_group_attributes)
+        output[:endCaptures] = convert_group_attributes_to_captures(@start_pattern.collect_group_attributes)
+        output[:whileCaptures] = convert_group_attributes_to_captures(@start_pattern.collect_group_attributes)
+
+        output
+    end
+
+    def to_s
+        start_pattern = (@start_pattern.is_a? Pattern) ? @start_pattern.to_s(2, true) : @start_pattern.inspect
+        end_pattern = nil
+        while_pattern = nil
+
+        if @end_pattern != nil
+            end_pattern = (@end_pattern.is_a? Pattern) ? @end_pattern.to_s(2, true) : @end_pattern.inspect
+        end
+        if @while_pattern != nil
+            while_pattern = (@while_pattern.is_a? Pattern) ? @while_pattern.to_s(2, true) : @while_pattern.inspect
+        end
+
+        output = "PatternRange.new("
+        output += "\n  start_pattern: " + start_pattern.lstrip
+        output += ",\n  end_pattern: " + end_pattern.lstrip if end_pattern.is_a? String
+        output += ",\n  while_pattern: " + while_pattern.lstrip if while_pattern.is_a? String
+        output += ",\n)"
+        
+        output
+    end
+end
 test_pat = Pattern.new(
     match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "aaa"),
     tag_as: "abc",
     reference: "abc"
 ).maybe(/def/).then(
     match: /ghi/,
-    tag_as: "ghi"
+    tag_as: "ghi",
+    reference: "ghi"
 ).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi")
 test2 = test_pat.then(/mno/)
 puts test2.to_tag
+
+test_range = PatternRange.new(
+    start_pattern: /abc/,
+    end_pattern: /def/,
+)
+
+puts test_range
+puts test_range.to_tag
