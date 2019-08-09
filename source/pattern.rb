@@ -133,15 +133,18 @@ class Pattern
             if @at_least == nil
                 at_least = 1
             end
+            # this is just a different way of "maybe"
+            if @at_least == 0 and @at_most == 1
+                quantifier = "?"
             # this is just a different way of "zeroOrMoreOf"
-            if @at_least == 0 and @at_most == nil
+            elsif @at_least == 0 and @at_most == nil
                 quantifier = "*"
             # this is just a different way of "oneOrMoreOf"
             elsif @at_least == 1 and @at_most == nil
                 quantifier = "+"
             # if it is more complicated than that, just use a range
             else
-                quantifier = "{#{at_least},#{at_most}}"
+                quantifier = "{#{@at_least},#{@at_most}}"
             end
         end
         return quantifier
@@ -290,6 +293,7 @@ class Pattern
     end
     
     def maybe(pattern) insert(MaybePattern.new(pattern)) end
+    def or(pattern) insert(OrPattern.new(pattern)) end
     def lookAround(pattern) insert(LookAroundPattern.new(pattern)) end
 
     def lookBehindToAvoid(pattern)
@@ -349,7 +353,7 @@ class Pattern
     # in most situtaions, this just means concatenation
     def integrate_regex(previous_regex, groups)
         # by default just concat the groups
-        /#{previous_regex.to_r_s}#{@match.to_r(groups).to_r_s}/
+        /#{previous_regex.to_r_s}#{self.to_r(groups).to_r_s}/
     end
 
     # what modifications to make to @match.to_s
@@ -414,7 +418,7 @@ class Pattern
         }
         self_regex.gsub!(/\[:backreference:([^\\]+?):\]/) do |match|
             if references[$1] == nil
-                raise "When processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
+                raise "\nWhen processing the matchResultOf:#{$1}, I couldn't find the group it was referencing"
             end
             # if the reference does exist, then replace it with it's number
             "\\#{references[$1]}"
@@ -422,7 +426,7 @@ class Pattern
         # check for a subroutine to the Nth group, replace it with `\N` and try again
         self_regex.gsub!(/\[:subroutine:([^\\]+?):\]/) do |match|
             if references[$1] == nil
-                raise "When processing the recursivelyMatch:#{$1}, I couldn't find the group it was referencing"
+                raise "\nWhen processing the recursivelyMatch:#{$1}, I couldn't find the group it was referencing"
             else
                 # if the reference does exist, then replace it with it's number
                 "\\g<#{references[$1]}>"
@@ -468,10 +472,18 @@ class MaybePattern < Pattern
 end
 
 class OrPattern < Pattern
-    def integrate_regex()
+    def do_modify_regex(groups)
+        # dont add the capture groups because they will be added on the outside of the integrate_regex
+        self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
+    end
+    def integrate_regex(previous_regex, groups)
+        /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
     end
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
+    end
+    def is_single_entity?
+        true
     end
 end
 
@@ -623,16 +635,18 @@ class PatternRange < Pattern
     end
 end
 test_pat = Pattern.new(
-    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "aaa"),
-    tag_as: "abc",
-    reference: "abc"
+    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "part1.part2"),
+    tag_as: "part1",
+    reference: "abc",
 ).maybe(/def/).then(
     match: /ghi/,
-    tag_as: "ghi",
+    tag_as: "part2",
     reference: "ghi"
-).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi")
-test2 = test_pat.then(/mno/)
-puts test2.to_tag
+).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi").or(
+    match: /optional/,
+    tag_as: "variable.optional"
+)
+puts test_pat.to_tag
 
 test_range = PatternRange.new(
     start_pattern: /abc/,
