@@ -138,8 +138,8 @@ class Pattern
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
         output += "\n#{indent}  match: " + regex_as_string.lstrip
-        output += ",\n#{indent}  tag_as: " + @arguments[:tag_as] if @arguments[:tag_as]
-        output += ",\n#{indent}  reference: " + @arguments[:reference] if @arguments[:reference]
+        output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
+        output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         output += do_add_attributes(indent)
         output += ",\n#{indent})"
         output += @next_regex.to_s(depth, false).lstrip if @next_regex
@@ -385,7 +385,7 @@ class BackReferencePattern < Pattern
     end
 end
 
-test = Pattern.new(
+test_pat = Pattern.new(
     match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "aaa"),
     tag_as: "abc",
     reference: "abc"
@@ -393,15 +393,5 @@ test = Pattern.new(
     match: /ghi/,
     tag_as: "ghi"
 ).lookAheadFor(/jkl/).matchResultOf("abc")
-
-test2 = test.then(/mno/)
-puts test2.to_r.inspect
-
-puts "regex:"
-puts test.to_r.inspect
-puts "\ntag:"
-puts test.to_tag
-puts "\nname:"
-puts test.name
-puts "\ncanonical form:"
-puts test
+test2 = test_pat.then(/mno/)
+puts test2
