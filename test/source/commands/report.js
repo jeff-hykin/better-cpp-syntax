@@ -41,7 +41,7 @@ async function runReport(yargs) {
             .readFileSync(eachFile)
             .toString()
             .split("\n");
-        await getTokens(registry, eachFile, fixture, false, () => true);
+        await getTokens(registry, eachFile, fixture, false, true, () => true);
     }
     console.log();
     recorder.reportAllRecorders();
