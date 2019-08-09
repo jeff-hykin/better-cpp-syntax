@@ -1,15 +1,44 @@
 require 'deep_clone'
 
-def regex_to_s(regex)
-    regex.inspect[1..-2]
+class String
+    # a helper for writing multi-line strings for error messages 
+    # example usage 
+    #     puts <<-HEREDOC.remove_indent
+    #     This command does such and such.
+    #         this part is extra indented
+    #     HEREDOC
+    def remove_indent
+        gsub(/^[ \t]{#{self.match(/^[ \t]*/)[0].length}}/, '')
+    end
+    def to_r_s
+        return self
+    end
 end
 
+class Regexp
+    def is_single_entity?
+        # a single character or single group would be considered a single entity
+        # nil means unknown, and true means known to be true, and false means known to be false
+        return nil
+    end
+    def to_r(groups = nil)
+        return self
+    end
+    def to_r_s(groups = nil)
+        return self.inspect[1..-2]
+    end
+    def integrate_regex(other_regex, groups)
+        /#{other_regex.to_r_s}#{self.to_r_s}/
+    end
+end
+
+
 class Pattern
-    @regex
+    @match
     @type
     @arguments
-    @next_regex
-    attr_accessor :next_regex
+    @next_pattern
+    attr_accessor :next_pattern
 
     #
     # Helpers
@@ -24,19 +53,19 @@ class Pattern
             :repository,
         ]
         if @arguments == nil
-            puts @regex.class
+            puts @match.class
         end
         not (@arguments.keys & capturing_attributes).empty?
     end
 
     def optimize_outer_group?
-        needs_to_capture? and @next_regex == nil
+        needs_to_capture? and @next_pattern == nil
     end
 
     def insert!(pattern)
         last = self
-        last = last.next_regex while last.next_regex
-        last.next_regex = pattern
+        last = last.next_pattern while last.next_pattern
+        last.next_pattern = pattern
         self
     end
 
@@ -66,10 +95,30 @@ class Pattern
         if how_many_times.is_a?(Integer)
             at_least = at_most = how_many_times
         end
-        @at_least = at_least
-        @at_most = at_most
+        
+        # check if quantifying is allowed
+        # check after everything else encase additional quantifing options are created in the future
+        if self.quantifing_allowed?
+            @at_least = at_least
+            @at_most = at_most
+        else
+            # if a quantifying value was set, raise an error telling the user that its not allowed
+            if not ( at_most == nil && at_least == nil )
+                raise <<-HEREDOC.remove_indent 
+                    
+                    Inside of the #{self.name} pattern, there are some quantity arguments like:
+                        :at_least
+                        :at_most
+                        or :how_many_times?
+                    These are not allowed in this kind of #{self.do_get_to_s_name}) pattern
+                    If you did this intentionally please wrap it inside of a Pattern.new()
+                    ex: #{self.do_get_to_s_name} Pattern.new( *your_arguments* ) )
+                HEREDOC
+            end
+        end
     end
     
+    # this is a simple_quantifier because it does not include atomic-ness
     def simple_quantifier
         # Generate the ending based on :at_least and :at_most
         
@@ -97,32 +146,60 @@ class Pattern
         end
         return quantifier
     end
+    
+    # this method handles adding the at_most/at_least, dont_back_track methods
+    # it returns regex-as-a-string
+    def add_quantifier_options_to(match, groups)
+        new_regex = match.to_r(groups).to_r_s
+        quantifier = self.simple_quantifier
+        # check if there are quantifiers
+        if self.simple_quantifier() != ""
+            # if the match is not a single entity, then it needs to be wrapped
+            if not match.is_single_entity?
+                new_regex = "(?:#{new_regex})"
+            end
+            # add the quantified ending
+            new_regex += quantifier
+        end
+        # check if atomic
+        if @arguments[:dont_back_track?] == true
+            new_regex = "(?>#{new_regex})"
+        end
+        new_regex
+    end
+    
+    def add_capture_group_if_needed(regex_as_string)
+        if self.needs_to_capture?
+            regex_as_string = "(#{regex_as_string})"
+        end
+        return regex_as_string
+    end
 
     #
     # Public interface
     #
 
     def initialize(*arguments)
-        @next_regex = nil
+        @next_pattern = nil
         arg1 = arguments[0]
         # if only a pattern, set attributes to {}
         if arg1.is_a? Pattern or arg1.is_a? Regexp
-            @regex = arg1
+            @match = arg1
             @arguments = {}
         # if its a Hash then extract the regex, and use the rest of the hash as the attributes
         elsif arg1.instance_of? Hash
-            @regex = arg1[:match]
+            @match = arg1[:match]
             @arguments = arg1.clone
             @arguments.delete(:match)
             # extract the @at_least and @at_most values
             self.process_quantifiers_from_arguments()
         end
         # check for captures
-        if @regex.is_a? Regexp
+        if @match.is_a? Regexp
             begin
                 # this will throw a RegexpError if there are no capturing groups
-                _ignore = /#{@regex}\1/
-                #at this point @regex contains a capture group, complain
+                _ignore = /#{@match}\1/
+                #at this point @match contains a capture group, complain
                 puts "There is a pattern that is being constructed from a regular expression"
                 puts "with a capturing group. This is not allowed, as the group cannot be tracked"
                 puts "The bad pattern is\n" + to_s
@@ -145,7 +222,7 @@ class Pattern
 
     # converts a Pattern to a Hash represnting a textmate pattern
     def to_tag
-        regex_as_string = regex_to_s(self.to_r)
+        regex_as_string = self.to_r.to_r_s
         output = {
             match: regex_as_string,
         }
@@ -165,19 +242,18 @@ class Pattern
     def to_r(groups = nil)
         top_level = groups == nil
         groups = collect_group_attributes if top_level
-
-        self_regex = regex_to_s((@regex.is_a? Pattern) ? @regex.to_r(groups) : @regex)
-        self_regex = do_modify_regex(self_regex)
+        
+        # convert @match into a regex string
+        self_regex = self.do_modify_regex(groups).to_r_s
+        
+        # allow the next_pattern to combine itself with this regex
+        # (the default is just concatenation)
+        if @next_pattern.respond_to?(:integrate_regex)
+            self_regex = @next_pattern.integrate_regex(self_regex, groups).to_r_s
+        end
 
         # tests are ran here
         # TODO: consider making tests their own method to prevent running them repeatedly
-        if @next_regex.is_a? Pattern
-            if @next_regex.atomic?
-                self_regex += "#{regex_to_s(next_regex.to_r(groups))}"
-            else
-                self_regex += "(?:#{regex_to_s(next_regex.to_r(groups))})"
-            end
-        end
 
         if top_level
             return /#{fixupRegexReferences(groups, self_regex)}/
@@ -188,7 +264,7 @@ class Pattern
     # Displays the Pattern as you would write it in code
     # This displays the canonical form, that is helpers such as oneOrMoreOf() become #then
     def to_s(depth = 0, top_level = true)
-        regex_as_string = (@regex.is_a? Pattern) ? @regex.to_s(depth + 2, true) : @regex.inspect
+        regex_as_string = (@match.is_a? Pattern) ? @match.to_s(depth + 2, true) : @match.inspect
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
@@ -197,7 +273,7 @@ class Pattern
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         output += do_add_attributes(indent)
         output += ",\n#{indent})"
-        output += @next_regex.to_s(depth, false).lstrip if @next_regex
+        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         return output
     end
 
@@ -254,19 +330,27 @@ class Pattern
     #
     # Inheritance
     #
-
-    # what modifications to make to the @regex
+    
+    # this method should return false for child classes
+    # that manually set the quantity themselves: e.g. MaybePattern, OneOrMoreOfPattern, etc
+    def quantifing_allowed?
+        true
+    end
+    
+    # what modifications to make to the @match
     # wrapping in a group is a common example
     # despite the name, this works on strings
     # called by #to_r
-    def do_modify_regex(self_regex)
-        if needs_to_capture?
-            self_regex = "(#{self_regex})"
-        end
-        return self_regex
+    def do_modify_regex(groups)
+        self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
+    end
+    
+    def integrate_regex(previous_regex, groups)
+        # by default just concat the groups
+        /#{previous_regex.to_r_s}#{@match.to_r(groups).to_r_s}/
     end
 
-    # what modifications to make to @regex.to_s
+    # what modifications to make to @match.to_s
     # called by #to_s
     def do_modify_regex_string(self_regex)
         return self_regex
@@ -292,9 +376,8 @@ class Pattern
     # NOTE: this is not the same concept as atomic groups, all groups are considered
     #   atomic for the purpose of regex building
     # called by #to_r
-    def atomic?
-        return @regex.atomic? if @regex.is_a? Pattern
-        false
+    def is_single_entity?
+        nil
     end
 
     #
@@ -306,13 +389,13 @@ class Pattern
             groups << {group: next_group}.merge(@arguments)
             next_group += 1
         end
-        if @regex.is_a? Pattern
-            new_groups = @regex.collect_group_attributes(next_group)
+        if @match.is_a? Pattern
+            new_groups = @match.collect_group_attributes(next_group)
             groups.concat(new_groups)
             next_group += new_groups.length
         end
-        if @next_regex.is_a? Pattern
-            new_groups = @next_regex.collect_group_attributes(next_group)
+        if @next_pattern.is_a? Pattern
+            new_groups = @next_pattern.collect_group_attributes(next_group)
             groups.concat(new_groups)
             next_group += new_groups.length
         end
@@ -360,20 +443,22 @@ class Pattern
 
     def __deep_clone__()
         options = @arguments.__deep_clone__()
-        options[:match] = @regex.__deep_clone__()
+        options[:match] = @match.__deep_clone__()
         new_pattern = self.class.new(options)
-        new_pattern.insert!(@next_regex.__deep_clone__())
+        new_pattern.insert!(@next_pattern.__deep_clone__())
     end
 end
 
 class MaybePattern < Pattern
-    def do_modify_regex(self_regex)
-        if needs_to_capture?
-            self_regex = "(#{self_regex})?"
-        elsif
-            self_regex = "(?:#{self_regex})?"
-        end
-        return self_regex
+    def initialize(*args, **kwargs)
+        # run the normal pattern
+        super(*args, **kwargs)
+        # add quantifing options
+        @at_least = 0
+        @at_most = 1
+    end
+    def quantifing_allowed?
+        return false
     end
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
@@ -381,7 +466,8 @@ class MaybePattern < Pattern
 end
 
 class LookAroundPattern < Pattern
-    def do_modify_regex(self_regex)
+    def do_modify_regex(groups)
+        self_regex = @match.to_r(groups).to_r_s
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
         when :lookAheadToAvoid  then self_regex = "(?!#{self_regex})"
@@ -420,7 +506,7 @@ class SubroutinePattern < Pattern
     def to_s(depth = 0, top_level = true)
         output = top_level ? "recursivelyMatch(" : ".recursivelyMatch("
         output += "\"#{@arguments[:subroutine_key]}\")"
-        output += @next_regex.to_s(depth, false).lstrip if @next_regex
+        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         return output
     end
     def atomic?
@@ -443,7 +529,7 @@ class BackReferencePattern < Pattern
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
         output += "\"#{@arguments[:backreference_key]}\")"
-        output += @next_regex.to_s(depth, false).lstrip if @next_regex
+        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         return output
     end
     def atomic?
@@ -536,6 +622,7 @@ test_pat = Pattern.new(
     reference: "ghi"
 ).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi")
 test2 = test_pat.then(/mno/)
+<<<<<<< Updated upstream
 puts test2.to_tag
 
 test_range = PatternRange.new(
@@ -545,3 +632,6 @@ test_range = PatternRange.new(
 
 puts test_range
 puts test_range.to_tag
+=======
+puts test2
+>>>>>>> Stashed changes
