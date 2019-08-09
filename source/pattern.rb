@@ -345,6 +345,8 @@ class Pattern
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
     
+    # this pattern handles combining the previous pattern with the next pattern
+    # in most situtaions, this just means concatenation
     def integrate_regex(previous_regex, groups)
         # by default just concat the groups
         /#{previous_regex.to_r_s}#{@match.to_r(groups).to_r_s}/
@@ -462,6 +464,14 @@ class MaybePattern < Pattern
     end
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
+    end
+end
+
+class OrPattern < Pattern
+    def integrate_regex()
+    end
+    def do_get_to_s_name(top_level)
+        top_level ? "or(" : ".or("
     end
 end
 
