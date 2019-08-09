@@ -45,50 +45,56 @@ class Pattern
         new_pattern.insert!(pattern)
     end
     
-    def simple_quantifiers
-        # by default assume no quantifiers
-        quantifier = ""
+    def process_quantifiers_from_arguments
+        # this sets the @at_most and @at_least value based on the arguments
+        
         # 
         # Simplify the quantity down to just :at_least and :at_most
         # 
-            attributes_clone = @arguments.clone
-            # convert Enumerators to numbers
-            for each in [:at_least, :at_most, :how_many_times?]
-                if attributes_clone[each].is_a?(Enumerator)
-                    attributes_clone[each] = attributes_clone[each].size
-                end
+        attributes_clone = @arguments.clone
+        # convert Enumerators to numbers
+        for each in [:at_least, :at_most, :how_many_times?]
+            if attributes_clone[each].is_a?(Enumerator)
+                attributes_clone[each] = attributes_clone[each].size
             end
-            # extract the data
-            at_least       = attributes_clone[:at_least]
-            at_most        = attributes_clone[:at_most]
-            how_many_times = attributes_clone[:how_many_times?]
-            # simplify to at_least and at_most
-            if how_many_times.is_a?(Integer)
-                at_least = at_most = how_many_times
-            end
-        #
+        end
+        # extract the data
+        at_least       = attributes_clone[:at_least]
+        at_most        = attributes_clone[:at_most]
+        how_many_times = attributes_clone[:how_many_times?]
+        # simplify to at_least and at_most
+        if how_many_times.is_a?(Integer)
+            at_least = at_most = how_many_times
+        end
+        @at_least = at_least
+        @at_most = at_most
+    end
+    
+    def simple_quantifier
         # Generate the ending based on :at_least and :at_most
-        #
-            # if there is no at_least, at_most, or how_many_times, then theres no quantifier
-            if at_least == nil and at_most == nil
-                quantifier = ""
-            # if there is a quantifier
-            else
-                # if there's no at_least, then assume at_least = 1
-                if at_least == nil
-                    at_least = 1
-                end
-                # this is just a different way of "zeroOrMoreOf"
-                if at_least == 0 and at_most == nil
-                    quantifier = "*"
-                # this is just a different way of "oneOrMoreOf"
-                elsif at_least == 1 and at_most == nil
-                    quantifier = "+"
-                # if it is more complicated than that, just use a range
-                else
-                    quantifier = "{#{at_least},#{at_most}}"
-                end
+        
+        # by default assume no quantifiers
+        quantifier = ""
+        # if there is no at_least, at_most, or how_many_times, then theres no quantifier
+        if @at_least == nil and @at_most == nil
+            quantifier = ""
+        # if there is a quantifier
+        else
+            # if there's no at_least, then assume at_least = 1
+            if @at_least == nil
+                at_least = 1
             end
+            # this is just a different way of "zeroOrMoreOf"
+            if @at_least == 0 and @at_most == nil
+                quantifier = "*"
+            # this is just a different way of "oneOrMoreOf"
+            elsif @at_least == 1 and @at_most == nil
+                quantifier = "+"
+            # if it is more complicated than that, just use a range
+            else
+                quantifier = "{#{at_least},#{at_most}}"
+            end
+        end
         return quantifier
     end
 
@@ -108,6 +114,8 @@ class Pattern
             @regex = arg1[:match]
             @arguments = arg1.clone
             @arguments.delete(:match)
+            # extract the @at_least and @at_most values
+            self.process_quantifiers_from_arguments()
         end
         # check for captures
         if @regex.is_a? Regexp
