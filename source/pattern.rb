@@ -448,6 +448,12 @@ class Pattern
         }
         captures.reject {|capture| capture.empty?}
         # replace $match and $reference() with the appropriate capture number
+        captures.each do |key, value|
+            value[:name].gsub!(/\$(?:match|reference\((.+)\))/) do |match|
+                next ("$" + key) if match == "$match"
+                "$" + groups.detect{ |group| group[:reference] == $1}[:group].to_s
+            end
+        end
     end
 
     def __deep_clone__()
@@ -638,7 +644,7 @@ class PatternRange < Pattern
     end
 end
 test_pat = Pattern.new(
-    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "part1.part2"),
+    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "part1.part2.$reference(ghi)"),
     tag_as: "part1",
     reference: "abc",
 ).maybe(/def/).then(
@@ -647,7 +653,7 @@ test_pat = Pattern.new(
     reference: "ghi"
 ).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi").or(
     match: /optional/,
-    tag_as: "variable.optional"
+    tag_as: "variable.optional.$match"
 )
 puts test_pat.to_tag
 
