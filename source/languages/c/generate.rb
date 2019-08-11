@@ -18,7 +18,6 @@ c_grammar = Grammar.new(
     scope_name: "source.c",
     file_types: [
         "c",
-		"h"
     ],
     version: "",
     information_for_contributors: [

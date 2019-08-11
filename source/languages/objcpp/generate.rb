@@ -12,7 +12,6 @@ objective_cpp_grammar = Grammar.new(
     file_types: [
         "mm",
 		"M",
-		"h"
     ],
     version: "",
     information_for_contributors: [
