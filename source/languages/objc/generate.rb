@@ -11,7 +11,6 @@ objective_cpp_grammar = Grammar.new(
     scope_name: "source.objc",
     file_types: [
         "m",
-		"h"
     ],
     version: "",
     information_for_contributors: [
