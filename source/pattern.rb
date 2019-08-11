@@ -1,4 +1,5 @@
 require 'deep_clone'
+require 'yaml'
 
 class String
     # a helper for writing multi-line strings for error messages 
@@ -274,13 +275,59 @@ class Pattern
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
+        # basic pattern information
         output += "\n#{indent}  match: " + regex_as_string.lstrip
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
+        # unit tests
+        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match] + '"' if @arguments[:should_fully_match]
+        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match] + '"' if @arguments[:should_not_fully_match]
+        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match] + '"' if @arguments[:should_partially_match]
+        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match] + '"' if @arguments[:should_not_partially_match]
+        # special #then arguments
+        # subclass, ending and recursive
         output += do_add_attributes(indent)
         output += ",\n#{indent})"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         return output
+    end
+
+    def runTests
+        self_regex = @match.to_r
+        def warn(symbol)
+            puts <<-HEREDOC.remove_indent 
+
+            When testing the pattern #{self_regex.to_r_s}. The unit test for #{symbol} failed.
+            The unit test has the following patterns:
+            #{@arguments[symbol].to_yaml}
+            The Failing pattern is below:
+            #{to_s}
+        HEREDOC
+        end
+        if @arguments[:should_fully_match].is_a? Array
+            test_regex = /^(?:#{self_regex})$/
+            if @arguments[:should_fully_match].all? {|test| test =~ test_regex} == false
+                warn(:should_fully_match)
+            end
+        end
+        if @arguments[:should_not_fully_match].is_a? Array
+            test_regex = /^(?:#{self_regex})$/
+            if @arguments[:should_not_fully_match].none? {|test| test =~ test_regex} == false
+                warn(:should_not_fully_match)
+            end
+        end
+        if @arguments[:should_partially_match].is_a? Array
+            test_regex = self_regex
+            if @arguments[:should_partially_match].all? {|test| test =~ test_regex} == false
+                warn(:should_partially_match)
+            end
+        end
+        if @arguments[:should_not_partially_match].is_a? Array
+            test_regex = self_regex
+            if @arguments[:should_not_partially_match].none? {|test| test =~ test_regex} == false
+                warn(:should_not_partially_match)
+            end
+        end
     end
 
     def start_pattern
