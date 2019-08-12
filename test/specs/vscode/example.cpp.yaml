@@ -3989,7 +3989,7 @@
     - keyword.control.directive.conditional.ifndef
 - source: CEKO_LIBRARY
   scopes:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
 - source: '#'
   scopesBegin:
@@ -4197,7 +4197,7 @@
     - keyword.control.directive.conditional.ifdef
 - source: blah
   scopes:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
 - source: struct
   scopesBegin:

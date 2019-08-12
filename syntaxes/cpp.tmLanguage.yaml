@@ -403,7 +403,7 @@ repository:
       '6':
         name: punctuation.definition.directive.cpp
     patterns:
-    - name: meta.conditional.preprocessor.cpp
+    - name: meta.preprocessor.conditional.cpp
       begin: "\\G(?<=ifndef|ifdef|if)"
       end: "(?<!\\\\)(?=\\n)"
       patterns:

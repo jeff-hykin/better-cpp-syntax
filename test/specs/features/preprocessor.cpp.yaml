@@ -154,7 +154,7 @@
     - keyword.control.directive.conditional.ifdef
 - source: __vax__
   scopes:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
 - source: '#'
   scopesBegin:
@@ -195,7 +195,7 @@
     - keyword.control.directive.conditional.if
 - source: '!'
   scopesBegin:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
   scopes:
     - keyword.operator.logical
 - source: defined
@@ -226,7 +226,7 @@
   scopes:
     - punctuation.section.parens.control.defined
   scopesEnd:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
 - source: '#'
   scopesBegin:
     - meta.preprocessor.diagnostic
@@ -266,7 +266,7 @@
     - keyword.control.directive.conditional.ifdef
 - source: __vax__
   scopes:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
 - source: '#'
   scopesBegin:
@@ -307,7 +307,7 @@
     - keyword.control.directive.conditional.if
 - source: '!'
   scopesBegin:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
   scopes:
     - keyword.operator.logical
 - source: defined
@@ -338,7 +338,7 @@
   scopes:
     - punctuation.section.parens.control.defined
   scopesEnd:
-    - meta.conditional.preprocessor
+    - meta.preprocessor.conditional
 - source: '#'
   scopesBegin:
     - meta.preprocessor.diagnostic

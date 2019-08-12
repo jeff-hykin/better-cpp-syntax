@@ -123,7 +123,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         # diagnostic (#error, #warning)
         # 
             grammar[:diagnostic] = PatternRange.new(
-                tag_as: "meta.preprocessor.diagnostic",
+                tag_as: "meta.preprocessor.diagnostic.$reference(directive)",
                 start_pattern: Pattern.new(
                     Pattern.new(
                         tag_as: "keyword.control.directive.diagnostic.$reference(directive)",
@@ -285,7 +285,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                     # the first line (the conditional line)
                     PatternRange.new(
                         # start at the begining
-                        tag_as: "meta.conditional.preprocessor",
+                        tag_as: "meta.preprocessor.conditional",
                         start_pattern: /\G/.lookBehindFor(/ifndef|ifdef|if/),
                         zeroLengthStart?: true,
                         end_pattern: non_escaped_newline,
