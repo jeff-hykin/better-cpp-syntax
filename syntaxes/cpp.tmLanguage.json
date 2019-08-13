@@ -680,7 +680,7 @@
       ]
     },
     "diagnostic": {
-      "name": "meta.preprocessor.diagnostic.cpp",
+      "name": "meta.preprocessor.diagnostic.$reference(directive).cpp",
       "begin": "((?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(#)\\s*((?:error|warning)))\\b\\s*",
       "beginCaptures": {
         "1": {
