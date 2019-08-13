@@ -370,7 +370,7 @@ grammar = Grammar.new(
                     reference: "banner_part"
                 ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part")
                 .maybe(@spaces).then(/\*\//),
-                tag_as: "comment.line.block",
+                tag_as: "comment.line.banner",
             ),
             # tag is a legacy name
             tag_as: "meta.toc-list.banner.block",

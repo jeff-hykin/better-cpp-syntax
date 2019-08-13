@@ -1,10 +1,11 @@
 require_relative '../../../../directory'
 require_relative PathFor[:textmate_tools]
+require_relative PathFor[:sharedPattern]["numeric"]
 
 Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|
     ->(std_space, identifier) do
         # specification source https://gcc.gnu.org/onlinedocs/cpp/
-    
+        
         # 
         # helpers
         # 
@@ -19,6 +20,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 match: wordBounds(identifier),
                 tag_as: "entity.name.function.preprocessor",
             )
+            grammar[:preprocessor_number_literal] = numeric_constant(allow_user_defined_literals: false).reTag(append:"preprocessor")
         # 
         # #pragma
         # 
@@ -50,7 +52,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                         match: /[a-zA-Z_$][\w\-$]*/,
                         tag_as: "entity.other.attribute-name.pragma.preprocessor",
                     ),
-                    :number_literal,
+                    :preprocessor_number_literal,
                     :line_continuation_character,
                 ]
             )
@@ -115,7 +117,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 end_pattern: non_escaped_newline,
                 includes: [
                     :string_context_c,
-                    :number_literal,
+                    :preprocessor_number_literal,
                     :line_continuation_character,
                 ]
             )
@@ -224,12 +226,12 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                             # find the name of the function
                             /\G/.maybe(@spaces).then(
                                 match: /\(/,
-                                tag_as: "punctuation.definition.parameters.begin",
+                                tag_as: "punctuation.definition.parameters.begin.preprocessor",
                             )
                         ),
                         end_pattern: Pattern.new(
                             match: /\)/,
-                            tag_as: "punctuation.definition.parameters.end"
+                            tag_as: "punctuation.definition.parameters.end.preprocessor"
                         ),
                         includes: [
                             # a parameter
@@ -299,7 +301,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                 :comments,
                 :language_constants,
                 :string_context_c,
-                :number_literal,
+                :preprocessor_number_literal,
                 :operators,
                 :predefined_macros,
                 :macro_name,
