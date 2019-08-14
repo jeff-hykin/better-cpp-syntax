@@ -701,7 +701,25 @@ grammar = Grammar.new(
     grammar[:gcc_attributes   ] = generateAttributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
     grammar[:ms_attributes    ] = generateAttributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
     grammar[:alignas_attribute] = generateAttributeRangeFinder[ alignas_start      , alignas_end       ]
+
+    nested_parens_with_strings = Pattern.new(
+        reference: "nested_parens",
+        match: /\(/.zeroOrMoreOf(
+            Pattern.new(/[^"()]++/).or(
+                # string literals
+                /"(?:[^"\\]|\\.)*+"/
+            ).or(
+                recursivelyMatch("nested_parens")
+            ).then(/\)/)
+        )
+    )
+
+    puts nested_parens_with_strings
     
+    # detect a attribute start (cpp, gcc, ms, macro)
+    # cpp atribute uses recursive subexpressions to find nested attributes
+    # otherwise expect a nested_parens_with_string
+    # take the entire matched string and include he attribute context
     inline_attribute = Pattern.new(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
         should_partial_match: ["struct [[deprecated]] st"],
