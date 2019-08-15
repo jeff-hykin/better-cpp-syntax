@@ -1,0 +1,75 @@
+- source: /**
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: '*'
+  scopes:
+    - punctuation.definition.comment.continuation.documentation
+- source: '@brief'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' performs a "foo" action'
+- source: '*'
+  scopes:
+    - punctuation.definition.comment.continuation.documentation
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' a the action to preform'
+- source: '*'
+  scopes:
+    - punctuation.definition.comment.continuation.documentation
+- source: '@retval'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' ERROR_SUCCESS action performed successfully'
+- source: '*'
+  scopes:
+    - punctuation.definition.comment.continuation.documentation
+- source: '@retval'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' EPERM permission error'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: a
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
