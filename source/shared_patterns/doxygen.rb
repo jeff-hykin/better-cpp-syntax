@@ -200,6 +200,15 @@ paragraph_commands = [
     "xrefitem"
 ]
 
+command_grammars << Pattern.new(
+    match: Pattern.new(
+        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/param/),
+        tag_as: "storage.type.class.doxygen",
+    ).then(@spaces).then(
+        match: /\b\w+\b/,
+        tag_as:"variable.parameter"
+    )
+)
 # TODO: make this consume and possibly reprocess the next paragraph
 command_grammars << Pattern.new(
     match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(
