@@ -8,6 +8,7 @@ require_relative PathFor[:sharedPattern]["assembly"]
 require_relative PathFor[:sharedPattern]["inline_comment"]
 require_relative PathFor[:sharedPattern]["std_space"]
 require_relative PathFor[:sharedPattern]["backslash_escapes"]
+require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
@@ -381,6 +382,7 @@ grammar = Grammar.new(
         tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
     )
     grammar[:comments] = [
+        *doxygen(),
         :emacs_file_banner,
         :block_comment,
         :line_comment,
