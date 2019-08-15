@@ -256,6 +256,12 @@ command_grammars << Pattern.new(
     tag_as: "storage.type.class.doxygen"
 )
 
+#gtk doc
+command_grammars << Pattern.new(
+    match: /\b[A-Z]+:/.or(/@[a-z_]+:/),
+    tag_as: "storage.type.class.gtkdoc"
+)
+
 command_grammars << Pattern.new(
     match: /[\\@]\S++/.lookAheadToAvoid(@end_of_line),
     tag_as: "invalid.unknown.documentation.command",

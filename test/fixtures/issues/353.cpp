@@ -5,3 +5,16 @@
  * @retval EPERM permission error
  */
 int foo(int a);
+
+/**
+ * SECTION:meepapp
+ * @short_description: the application class
+ * @title: Meep application
+ * @section_id:
+ * @see_also: #MeepSettings
+ * @stability: Stable
+ * @include: meep/app.h
+ * @image: application.png
+ *
+ * The application class handles ...
+ */

@@ -792,6 +792,8 @@ repository:
         name: storage.type.class.doxygen.cpp
       - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.cpp
+      - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+        name: storage.type.class.gtkdoc.cpp
       - match: "[\\\\@]\\S++(?!(?:\\n|$))"
         name: invalid.unknown.documentation.command.cpp
     - name: comment.block.documentation.cpp
@@ -826,6 +828,8 @@ repository:
           name: storage.type.class.doxygen.cpp
         - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
           name: storage.type.class.doxygen.cpp
+        - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+          name: storage.type.class.gtkdoc.cpp
         - match: "[\\\\@]\\S++(?!(?:\\n|$))"
           name: invalid.unknown.documentation.command.cpp
       - match: (?<=[\s*!\/])[\\@](?:callergraph|callgraph|else|endif|f\$|f\[|f\]|hidecallergraph|hidecallgraph|hiderefby|hiderefs|hideinitializer|htmlinclude|n|nosubgrouping|private|privatesection|protected|protectedsection|public|publicsection|pure|showinitializer|showrefby|showrefs|tableofcontents|\$|\#|<|>|%|"|\.|=|::|\||\-\-|\-\-\-)\b(?:\{[^}]*\})?
@@ -844,6 +848,8 @@ repository:
         name: storage.type.class.doxygen.cpp
       - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.cpp
+      - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+        name: storage.type.class.gtkdoc.cpp
       - match: "[\\\\@]\\S++(?!(?:\\n|$))"
         name: invalid.unknown.documentation.command.cpp
     - include: "#emacs_file_banner"
