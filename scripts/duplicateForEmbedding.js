@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-duplicateForEmbedding("cpp", "latex", "(?=\\\\end\\{minted\\})");
+duplicateForEmbedding("cpp", "latex", "\\\\end\\{minted\\}");
 // add other languages here
 
 function duplicateForEmbedding(language, scope, early_bailout_pattern) {
@@ -27,7 +27,10 @@ function rewriteRules(
     repositoryName = undefined
 ) {
     if (rule.end) {
-        rule.end = `${rule.end}|${newEnding}`;
+        rule.end = `${rule.end}|(?=${newEnding})`;
+    }
+    if (rule.while) {
+        rule.while = `${rule.while}|(?:^\\s+(?!${newEnding}))`;
     }
     if (rule.patterns) {
         if (Object.keys(rule).length == 1) {
@@ -36,12 +39,12 @@ function rewriteRules(
                 return rewrite && rewriteRules(originalscopeName, r, newEnding);
             });
             if (rewrite) {
-                if (!repositoryName) {
+                if (!repositoryName || rule.patterns.length == 1) {
                     return true;
                 }
-                console.log("chose to rewrite", repositoryName);
-                rule.include = rule.include = `${originalscopeName}#${repositoryName}`;
-                delete rule["patterns"];
+                rule.patterns = [
+                    { include: `${originalscopeName}#${repositoryName}` }
+                ];
             }
         } else {
             rule.patterns.map(r =>
@@ -89,13 +92,11 @@ function rewriteRules(
             // have been rewritten
             return true;
         }
-        console.log("chose to rewrite", repositoryName);
-        rule.include = `${originalscopeName}#${repositoryName}`;
+        rule.patterns = [{ include: `${originalscopeName}#${repositoryName}` }];
         // cleanup rule, assignment doesn't work
         delete rule["match"];
         delete rule["name"];
         delete rule["captures"];
-        delete rule["patterns"];
     }
     return false;
 }
