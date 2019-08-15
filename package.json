@@ -46,8 +46,8 @@
     "grammars": [
       {
         "language": "cpp",
-        "scopeName": "source.cpp.embedded.macro",
-        "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
+        "scopeName": "source.cpp.embedded.latex",
+        "path": "./syntaxes/cpp.embedded.latex.tmLanguage.json",
         "embeddedLanguages": {
           "meta.embedded.assembly.cpp": "asm"
         }
@@ -57,8 +57,7 @@
         "scopeName": "source.cpp",
         "path": "./syntaxes/cpp.tmLanguage.json",
         "embeddedLanguages": {
-          "meta.embedded.assembly.cpp": "asm",
-          "meta.preprocessor.macro.contents": "cpp"
+          "meta.embedded.assembly.cpp": "asm"
         }
       },
       {
@@ -120,6 +119,5 @@
     "vscode-textmate": "^4.1.1",
     "yargs": "^13.2.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
