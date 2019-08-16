@@ -24,11 +24,9 @@ class Regexp
         in_set? = false
         depth = 0
         self_as_string.each_char.with_index do |c, index|
-            # allow the first and last character to be at depth 0
+            # allow the first character to be at depth 0
             # NOTE: this automatically makes a single char regexp a single entity
-            if depth == 0
-                return false if index != 0 && index != (self_as_string.length-1)
-            end
+            return false if depth = - && index != 0
             if escaped?
                 escaped? = false
                 next
