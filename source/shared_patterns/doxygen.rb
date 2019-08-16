@@ -100,6 +100,39 @@ word_commands = [
     "verbinclude",
 ]
 
+# italics
+command_grammars << Pattern.new(
+    match: Pattern.new(
+        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/(?:a|em|e)/),
+        tag_as: "storage.type.class.doxygen",
+    ).then(@spaces).then(
+        match: /\S+/,
+        tag_as:"markup.italic.doxygen"
+    )
+)
+
+#bold
+command_grammars << Pattern.new(
+    match: Pattern.new(
+        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/b/),
+        tag_as: "storage.type.class.doxygen",
+    ).then(@spaces).then(
+        match: /\S+/,
+        tag_as:"markup.bold.doxygen"
+    )
+)
+
+# inline code
+command_grammars << Pattern.new(
+    match: Pattern.new(
+        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/(?:c|p)/),
+        tag_as: "storage.type.class.doxygen",
+    ).then(@spaces).then(
+        match: /\S+/,
+        tag_as:"markup.inline.raw.string"
+    )
+)
+
 # TODO: make this consume and possibly reprocess the next word
 command_grammars << Pattern.new(
     match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(

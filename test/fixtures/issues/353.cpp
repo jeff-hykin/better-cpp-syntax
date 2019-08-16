@@ -3,6 +3,7 @@
  * @param a the action to preform
  * @retval ERROR_SUCCESS action performed successfully
  * @retval EPERM permission error
+ * @note if \c a is zero, something \b bad happens
  */
 int foo(int a);
 

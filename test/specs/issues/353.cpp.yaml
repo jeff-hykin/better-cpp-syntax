@@ -34,6 +34,27 @@
   scopes:
     - storage.type.class.doxygen
 - source: ' EPERM permission error'
+- source: '*'
+  scopes:
+    - punctuation.definition.comment.continuation.documentation
+- source: '@note'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' if '
+- source: \c
+  scopes:
+    - storage.type.class.doxygen
+- source: a
+  scopes:
+    - markup.inline.raw.string
+- source: ' is zero, something '
+- source: \b
+  scopes:
+    - storage.type.class.doxygen
+- source: bad
+  scopes:
+    - markup.bold.doxygen
+- source: ' happens'
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation

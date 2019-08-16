@@ -1527,6 +1527,39 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
+              "match": "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.italic.doxygen.cpp"
+                }
+              }
+            },
+            {
+              "match": "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.bold.doxygen.cpp"
+                }
+              }
+            },
+            {
+              "match": "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.inline.raw.string.cpp"
+                }
+              }
+            },
+            {
               "match": "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?",
               "name": "storage.type.class.doxygen.cpp"
             },
@@ -1592,6 +1625,39 @@
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 {
+                  "match": "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)",
+                  "captures": {
+                    "1": {
+                      "name": "storage.type.class.doxygen.cpp"
+                    },
+                    "2": {
+                      "name": "markup.italic.doxygen.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)",
+                  "captures": {
+                    "1": {
+                      "name": "storage.type.class.doxygen.cpp"
+                    },
+                    "2": {
+                      "name": "markup.bold.doxygen.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)",
+                  "captures": {
+                    "1": {
+                      "name": "storage.type.class.doxygen.cpp"
+                    },
+                    "2": {
+                      "name": "markup.inline.raw.string.cpp"
+                    }
+                  }
+                },
+                {
                   "match": "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?",
                   "name": "storage.type.class.doxygen.cpp"
                 },
@@ -1631,6 +1697,39 @@
             {
               "match": "(?<=[\\s*!\\/])[\\\\@](?:callergraph|callgraph|else|endif|f\\$|f\\[|f\\]|hidecallergraph|hidecallgraph|hiderefby|hiderefs|hideinitializer|htmlinclude|n|nosubgrouping|private|privatesection|protected|protectedsection|public|publicsection|pure|showinitializer|showrefby|showrefs|tableofcontents|\\$|\\#|<|>|%|\"|\\.|=|::|\\||\\-\\-|\\-\\-\\-)\\b(?:\\{[^}]*\\})?",
               "name": "storage.type.class.doxygen.cpp"
+            },
+            {
+              "match": "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.italic.doxygen.cpp"
+                }
+              }
+            },
+            {
+              "match": "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.bold.doxygen.cpp"
+                }
+              }
+            },
+            {
+              "match": "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)",
+              "captures": {
+                "1": {
+                  "name": "storage.type.class.doxygen.cpp"
+                },
+                "2": {
+                  "name": "markup.inline.raw.string.cpp"
+                }
+              }
             },
             {
               "match": "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?",
