@@ -74,7 +74,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: arg1
   scopes:
     - variable.parameter.preprocessor
@@ -86,7 +86,7 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: ' arg1 arg2'
 - source: '#'
   scopesBegin:
@@ -101,7 +101,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: arg1
   scopes:
     - variable.parameter.preprocessor
@@ -113,7 +113,7 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: '#macro_variable'
   scopesBegin:
     - variable.other.macro.argument
@@ -158,7 +158,7 @@
     - entity.name.function.preprocessor
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - keyword.control.directive.diagnostic.error
   scopes:
     - punctuation.definition.directive
@@ -175,7 +175,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - string.quoted.double
 - source: '#'
   scopesBegin:
@@ -229,7 +229,7 @@
     - meta.preprocessor.conditional
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - keyword.control.directive.diagnostic.error
   scopes:
     - punctuation.definition.directive
@@ -246,7 +246,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - string.quoted.single
 - source: '#'
   scopesBegin:
@@ -270,7 +270,7 @@
     - entity.name.function.preprocessor
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - keyword.control.directive.diagnostic.warning
   scopes:
     - punctuation.definition.directive
@@ -287,7 +287,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - string.quoted.double
 - source: '#'
   scopesBegin:
@@ -341,7 +341,7 @@
     - meta.preprocessor.conditional
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - keyword.control.directive.diagnostic.warning
   scopes:
     - punctuation.definition.directive
@@ -358,7 +358,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.preprocessor.diagnostic
+    - meta.preprocessor.diagnostic.$reference(directive)
     - string.quoted.single
 - source: '#'
   scopesBegin:
@@ -553,13 +553,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ...
   scopes:
     - punctuation.vararg-ellipses.variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -657,13 +657,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: T
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: \
   scopes:
     - constant.character.escape.line-continuation

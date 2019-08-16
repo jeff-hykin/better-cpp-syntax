@@ -12,7 +12,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: string
   scopes:
     - variable.parameter.preprocessor
@@ -42,7 +42,7 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: \
   scopes:
     - constant.character.escape.line-continuation
