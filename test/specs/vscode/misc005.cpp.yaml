@@ -1029,24 +1029,19 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.preprocessor.macro
     - constant.numeric.decimal.point
 - source: '79769'
   scopes:
     - constant.numeric.decimal
 - source: e
-  scopesBegin:
-    - meta.preprocessor.macro
   scopes:
     - keyword.other.unit.exponent.decimal
 - source: +
   scopes:
     - keyword.operator.plus.exponent.decimal
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: '308'
   scopes:
-    - constant.numeric.decimal
+    - constant.numeric.exponent.decimal
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -1066,7 +1061,6 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.preprocessor.macro
     - constant.numeric.decimal.point
 - source: '1415926535897932384626'
   scopes:
@@ -6966,8 +6960,6 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition
-    - meta.body.function.definition
     - constant.numeric.decimal.point
 - source: '0'
   scopes:
@@ -7410,11 +7402,10 @@
     - constant.numeric.decimal
 - source: e
   scopes:
-    - meta.function.definition
-    - meta.body.function.definition
-    - meta.block
     - keyword.other.unit.exponent.decimal
 - source: '6'
+  scopes:
+    - constant.numeric.exponent.decimal
 - source: ;
   scopesBegin:
     - meta.function.definition
@@ -18969,8 +18960,6 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition
-    - meta.body.function.definition
     - constant.numeric.decimal.point
 - source: '5'
   scopes:
@@ -19038,8 +19027,6 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition
-    - meta.body.function.definition
     - constant.numeric.decimal.point
 - source: '5'
   scopes:
@@ -25119,13 +25106,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -30887,7 +30874,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: FUNC
   scopes:
     - variable.parameter.preprocessor
@@ -30899,7 +30886,7 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: Task
   scopes:
     - entity.name.function.call
@@ -31654,13 +31641,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: LockManager
   scopes:
     - variable.other.object.access
@@ -31716,13 +31703,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: LockManager
   scopes:
     - variable.other.object.access
@@ -60628,17 +60615,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -60687,17 +60667,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -60895,17 +60868,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -60954,17 +60920,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -61474,17 +61433,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -61533,17 +61485,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -61741,17 +61686,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -61800,17 +61738,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -62320,17 +62251,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -62379,17 +62303,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00000000001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0000000001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -62587,17 +62504,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: '&&'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -62646,17 +62556,10 @@
     - constant.numeric.decimal
 - source: .
   scopes:
-    - meta.function.definition.special.operator-overload
-    - meta.body.function.definition.special.operator-overload
-    - meta.block
-    - meta.parens
     - constant.numeric.decimal.point
-- source: '0'
+- source: '00001'
   scopes:
-    - keyword.other.unit.octal
-- source: '0001'
-  scopes:
-    - constant.numeric.octal
+    - constant.numeric.decimal
 - source: )
   scopesBegin:
     - meta.function.definition.special.operator-overload

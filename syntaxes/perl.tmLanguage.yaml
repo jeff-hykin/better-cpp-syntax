@@ -1123,147 +1123,151 @@ patterns:
 - include: "#punctuation"
 repository:
   numbers:
-    begin: "(?<!\\w)(?=\\d|\\.\\d)"
-    end: "(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-    patterns:
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.hexadecimal.perl
-        '2':
-          name: constant.numeric.hexadecimal.perl
+    match: "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-])*"
+    captures:
+      '0':
+        patterns:
+        - begin: "(?=.)"
+          end: "$"
           patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '4':
-          name: constant.numeric.hexadecimal.perl
-        '5':
-          name: constant.numeric.hexadecimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '6':
-          name: punctuation.separator.constant.numeric.perl
-        '8':
-          name: keyword.other.unit.exponent.hexadecimal.perl
-        '9':
-          name: keyword.operator.plus.exponent.hexadecimal.perl
-        '10':
-          name: keyword.operator.minus.exponent.hexadecimal.perl
-        '11':
-          name: constant.numeric.exponent.hexadecimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '12':
-          name: keyword.other.unit.suffix.floating-point.perl
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '2':
-          name: constant.numeric.decimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '4':
-          name: constant.numeric.decimal.point.perl
-        '5':
-          name: constant.numeric.decimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '6':
-          name: punctuation.separator.constant.numeric.perl
-        '8':
-          name: keyword.other.unit.exponent.decimal.perl
-        '9':
-          name: keyword.operator.plus.exponent.decimal.perl
-        '10':
-          name: keyword.operator.minus.exponent.decimal.perl
-        '11':
-          name: constant.numeric.exponent.decimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '12':
-          name: keyword.other.unit.suffix.floating-point.perl
-    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.binary.perl
-        '2':
-          name: constant.numeric.binary.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '4':
-          name: keyword.other.unit.suffix.integer.perl
-    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.octal.perl
-        '2':
-          name: constant.numeric.octal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '4':
-          name: keyword.other.unit.suffix.integer.perl
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.hexadecimal.perl
-        '2':
-          name: constant.numeric.hexadecimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '5':
-          name: keyword.other.unit.exponent.hexadecimal.perl
-        '6':
-          name: keyword.operator.plus.exponent.hexadecimal.perl
-        '7':
-          name: keyword.operator.minus.exponent.hexadecimal.perl
-        '8':
-          name: constant.numeric.exponent.hexadecimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '9':
-          name: keyword.other.unit.suffix.integer.perl
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-]))"
-      captures:
-        '2':
-          name: constant.numeric.decimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '3':
-          name: punctuation.separator.constant.numeric.perl
-        '5':
-          name: keyword.other.unit.exponent.decimal.perl
-        '6':
-          name: keyword.operator.plus.exponent.decimal.perl
-        '7':
-          name: keyword.operator.minus.exponent.decimal.perl
-        '8':
-          name: constant.numeric.exponent.decimal.perl
-          patterns:
-          - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.perl
-        '9':
-          name: keyword.other.unit.suffix.integer.perl
-    - match: "(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-])+"
-      name: invalid.illegal.constant.numeric.perl
+          - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.hexadecimal.perl
+              '2':
+                name: constant.numeric.hexadecimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '4':
+                name: constant.numeric.hexadecimal.perl
+              '5':
+                name: constant.numeric.hexadecimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '6':
+                name: punctuation.separator.constant.numeric.perl
+              '8':
+                name: keyword.other.unit.exponent.hexadecimal.perl
+              '9':
+                name: keyword.operator.plus.exponent.hexadecimal.perl
+              '10':
+                name: keyword.operator.minus.exponent.hexadecimal.perl
+              '11':
+                name: constant.numeric.exponent.hexadecimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '12':
+                name: keyword.other.unit.suffix.floating-point.perl
+          - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)?((?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+            captures:
+              '2':
+                name: constant.numeric.decimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '4':
+                name: constant.numeric.decimal.point.perl
+              '5':
+                name: constant.numeric.decimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '6':
+                name: punctuation.separator.constant.numeric.perl
+              '8':
+                name: keyword.other.unit.exponent.decimal.perl
+              '9':
+                name: keyword.operator.plus.exponent.decimal.perl
+              '10':
+                name: keyword.operator.minus.exponent.decimal.perl
+              '11':
+                name: constant.numeric.exponent.decimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '12':
+                name: keyword.other.unit.suffix.floating-point.perl
+          - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.binary.perl
+              '2':
+                name: constant.numeric.binary.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '4':
+                name: keyword.other.unit.suffix.integer.perl
+          - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.octal.perl
+              '2':
+                name: constant.numeric.octal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '4':
+                name: keyword.other.unit.suffix.integer.perl
+          - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?<!_)([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.hexadecimal.perl
+              '2':
+                name: constant.numeric.hexadecimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '5':
+                name: keyword.other.unit.exponent.hexadecimal.perl
+              '6':
+                name: keyword.operator.plus.exponent.hexadecimal.perl
+              '7':
+                name: keyword.operator.minus.exponent.hexadecimal.perl
+              '8':
+                name: constant.numeric.exponent.hexadecimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '9':
+                name: keyword.other.unit.suffix.integer.perl
+          - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)((?<!_)([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '2':
+                name: constant.numeric.decimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '3':
+                name: punctuation.separator.constant.numeric.perl
+              '5':
+                name: keyword.other.unit.exponent.decimal.perl
+              '6':
+                name: keyword.operator.plus.exponent.decimal.perl
+              '7':
+                name: keyword.operator.minus.exponent.decimal.perl
+              '8':
+                name: constant.numeric.exponent.decimal.perl
+                patterns:
+                - match: "(?<=[0-9a-fA-F])_(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.perl
+              '9':
+                name: keyword.other.unit.suffix.integer.perl
+          - match: "(?:(?:[0-9a-zA-Z_\\.]|_)|(?<=[eEpP])[+-])+"
+            name: invalid.illegal.constant.numeric.perl
   inline_regex:
     match: "(\\/)((?>(?:[^\\/\\\\]|\\\\.)*))(\\/)"
     captures:

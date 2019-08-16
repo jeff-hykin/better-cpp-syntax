@@ -12,13 +12,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: addr
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: (
   scopesBegin:
     - meta.parens
