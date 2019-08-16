@@ -18,9 +18,50 @@ end
 
 class Regexp
     def is_single_entity?
-        # a single character or single group would be considered a single entity
-        # nil means unknown, and true means known to be true, and false means known to be false
-        return nil
+        self_as_string = to_r_s
+        return true if self_as_string.length == 2 && self_as_string[0] == '\\'
+        escaped? = false
+        in_set? = false
+        depth = 0
+        self_as_string.each_char.with_index do |c, index|
+            # allow the first and last character to be at depth 0
+            # NOTE: this automatically makes a single char regexp a single entity
+            if depth == 0
+                return false if index != 0 && index != (self_as_string.length-1)
+            end
+            if escaped?
+                escaped? = false
+                next
+            end
+            if c == '\\'
+                escaped? = true
+                next
+            end
+            if in_set?
+                if c == ']'
+                    in_set? = false
+                    depth -= 1
+                end
+                next
+            end
+            if c == '('
+                depth += 1
+            elsif c == ')'
+                depth -= 1
+            elsif c == '['
+                depth += 1
+                in_set? = true
+            end
+        end
+        # sanity check
+        if depth != 0 or escaped? or in_set?
+            puts "Internal error: when determining if a Regexp is a single entity"
+            puts "an unexpected sequence was found. This is a bug with the gem."
+            puts "This will not effect the validity of the produced grammar"
+            puts "Regexp: #{inspect} depth: #{depth} escaped?: #{escaped?} in_set?: #{in_set?}"
+            return false
+        end
+        return true
     end
     def to_r(groups = nil)
         return self
@@ -433,7 +474,7 @@ class Pattern
     #   atomic for the purpose of regex building
     # called by #to_r
     def is_single_entity?
-        nil
+        to_r.is_single_entity?
     end
 
     #
