@@ -575,7 +575,10 @@ class OrPattern < Pattern
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
     def integrate_regex(previous_regex, groups)
-        /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
+        if previous_regex.is_single_entity?
+            return /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
+        end
+        /(?:(?:#{previous_regex.to_r_s})|#{self.to_r(groups).to_r_s})/
     end
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
