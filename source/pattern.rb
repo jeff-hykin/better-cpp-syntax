@@ -290,7 +290,7 @@ class Pattern
         groups = collect_group_attributes if top_level
         
         # convert @match into a regex string
-        self_regex = self.do_modify_regex(groups).to_r_s
+        self_regex = self.do_generate_self_regex(groups).to_r_s
         
         # allow the next_pattern to combine itself with this regex
         # (the default is just concatenation)
@@ -319,11 +319,15 @@ class Pattern
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         # unit tests
-        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match] + '"' if @arguments[:should_fully_match]
-        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match] + '"' if @arguments[:should_not_fully_match]
-        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match] + '"' if @arguments[:should_partially_match]
-        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match] + '"' if @arguments[:should_not_partially_match]
+        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match] if @arguments[:should_fully_match]
+        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match] if @arguments[:should_not_fully_match]
+        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match] if @arguments[:should_partially_match]
+        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match] if @arguments[:should_not_partially_match]
         # special #then arguments
+        output += ",\n#{indent}  at_least: \"" + @arguments[:at_least] + '"' if @arguments[:at_least]
+        output += ",\n#{indent}  at_most: \"" + @arguments[:at_most] + '"' if @arguments[:at_most]
+        output += ",\n#{indent}  how_many_times: \"" + @arguments[:how_many_times] + '"' if @arguments[:how_many_times]
+        output += ",\n#{indent}  dont_backtrack?: \"" + @arguments[:dont_backtrack?] + '"' if @arguments[:dont_backtrack?]
         # subclass, ending and recursive
         output += do_add_attributes(indent)
         output += ",\n#{indent})"
@@ -430,11 +434,10 @@ class Pattern
         true
     end
     
-    # what modifications to make to the @match
-    # wrapping in a group is a common example
-    # despite the name, this works on strings
+    # convert convert @match and any applicable arguments into a complete regex for self
+    # despite the name, this returns on strings
     # called by #to_r
-    def do_modify_regex(groups)
+    def do_generate_self_regex(groups)
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
     
@@ -567,7 +570,7 @@ class MaybePattern < Pattern
 end
 
 class OrPattern < Pattern
-    def do_modify_regex(groups)
+    def do_generate_self_regex(groups)
         # dont add the capture groups because they will be added on the outside of the integrate_regex
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
@@ -582,8 +585,55 @@ class OrPattern < Pattern
     end
 end
 
+class OneOfPattern < Pattern
+    def initialize(patterns)
+        if not patterns.is_a? Array
+            puts <<-HEREDOC.remove_indent 
+                oneOf() expects an array of patterns, the provided argument is not an array.
+                The arguments to oneOf is below
+                #{patterns}
+            HEREDOC
+        end
+        # placeholder is here to avoid calling to_r in patterns prematurely
+        @match = /placeholder regex/
+        @arguments[:patterns] = patterns
+    end
+
+    def do_generate_self_regex(groups)
+        patterns_strings = @arguments[:patterns].map do |pattern|
+            regex = pattern.to_r(groups)
+            if regex.is_single_entity?
+                next regex.to_r_s
+            else
+                next "(?:#{regex.to_r_s})"
+            end
+        end
+        if needs_to_capture?
+            return "(#{patterns_strings.join "|"})"
+        else
+            return "(?:#{patterns_strings.join "|"})"
+        end
+    end
+
+    def is_single_entity?
+        true
+    end
+
+    def to_s(depth = 0, top_level = true)
+        indent = "  " * depth
+        output = top_level ? "oneOf([" : ".oneOf(["
+        output += "\n#{indent}  "
+        output += (@arguments[:patterns].map do |pattern|
+            pattern.to_s(depth + 1, true).lstrip
+        end).join ",\n#{indent}  "
+        output += "\n#{indent}])"
+        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
+        return output
+    end
+end
+
 class LookAroundPattern < Pattern
-    def do_modify_regex(groups)
+    def do_generate_self_regex(groups)
         self_regex = @match.to_r(groups).to_r_s
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
