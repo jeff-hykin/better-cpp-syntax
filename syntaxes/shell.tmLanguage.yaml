@@ -17,147 +17,151 @@ repository:
     match: "\\b(?:true|false)\\b"
     name: constant.language.$0.shell
   numeric_constant:
-    begin: "(?<!\\w)(?=\\d|\\.\\d)"
-    end: "(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-    patterns:
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.hexadecimal.shell
-        '2':
-          name: constant.numeric.hexadecimal.shell
+    match: "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])*"
+    captures:
+      '0':
+        patterns:
+        - begin: "(?=.)"
+          end: "$"
           patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '4':
-          name: constant.numeric.hexadecimal.shell
-        '5':
-          name: constant.numeric.hexadecimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '6':
-          name: punctuation.separator.constant.numeric.shell
-        '8':
-          name: keyword.other.unit.exponent.hexadecimal.shell
-        '9':
-          name: keyword.operator.plus.exponent.hexadecimal.shell
-        '10':
-          name: keyword.operator.minus.exponent.hexadecimal.shell
-        '11':
-          name: constant.numeric.exponent.hexadecimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '12':
-          name: keyword.other.unit.suffix.floating-point.shell
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '2':
-          name: constant.numeric.decimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '4':
-          name: constant.numeric.decimal.point.shell
-        '5':
-          name: constant.numeric.decimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '6':
-          name: punctuation.separator.constant.numeric.shell
-        '8':
-          name: keyword.other.unit.exponent.decimal.shell
-        '9':
-          name: keyword.operator.plus.exponent.decimal.shell
-        '10':
-          name: keyword.operator.minus.exponent.decimal.shell
-        '11':
-          name: constant.numeric.exponent.decimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '12':
-          name: keyword.other.unit.suffix.floating-point.shell
-    - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.binary.shell
-        '2':
-          name: constant.numeric.binary.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '4':
-          name: keyword.other.unit.suffix.integer.shell
-    - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.octal.shell
-        '2':
-          name: constant.numeric.octal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '4':
-          name: keyword.other.unit.suffix.integer.shell
-    - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '1':
-          name: keyword.other.unit.hexadecimal.shell
-        '2':
-          name: constant.numeric.hexadecimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '5':
-          name: keyword.other.unit.exponent.hexadecimal.shell
-        '6':
-          name: keyword.operator.plus.exponent.hexadecimal.shell
-        '7':
-          name: keyword.operator.minus.exponent.hexadecimal.shell
-        '8':
-          name: constant.numeric.exponent.hexadecimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '9':
-          name: keyword.other.unit.suffix.integer.shell
-    - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-      captures:
-        '2':
-          name: constant.numeric.decimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '3':
-          name: punctuation.separator.constant.numeric.shell
-        '5':
-          name: keyword.other.unit.exponent.decimal.shell
-        '6':
-          name: keyword.operator.plus.exponent.decimal.shell
-        '7':
-          name: keyword.operator.minus.exponent.decimal.shell
-        '8':
-          name: constant.numeric.exponent.decimal.shell
-          patterns:
-          - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-            name: punctuation.separator.constant.numeric.shell
-        '9':
-          name: keyword.other.unit.suffix.integer.shell
-    - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
-      name: invalid.illegal.constant.numeric.shell
+          - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.hexadecimal.shell
+              '2':
+                name: constant.numeric.hexadecimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '4':
+                name: constant.numeric.hexadecimal.shell
+              '5':
+                name: constant.numeric.hexadecimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '6':
+                name: punctuation.separator.constant.numeric.shell
+              '8':
+                name: keyword.other.unit.exponent.hexadecimal.shell
+              '9':
+                name: keyword.operator.plus.exponent.hexadecimal.shell
+              '10':
+                name: keyword.operator.minus.exponent.hexadecimal.shell
+              '11':
+                name: constant.numeric.exponent.hexadecimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '12':
+                name: keyword.other.unit.suffix.floating-point.shell
+          - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+            captures:
+              '2':
+                name: constant.numeric.decimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '4':
+                name: constant.numeric.decimal.point.shell
+              '5':
+                name: constant.numeric.decimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '6':
+                name: punctuation.separator.constant.numeric.shell
+              '8':
+                name: keyword.other.unit.exponent.decimal.shell
+              '9':
+                name: keyword.operator.plus.exponent.decimal.shell
+              '10':
+                name: keyword.operator.minus.exponent.decimal.shell
+              '11':
+                name: constant.numeric.exponent.decimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '12':
+                name: keyword.other.unit.suffix.floating-point.shell
+          - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.binary.shell
+              '2':
+                name: constant.numeric.binary.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '4':
+                name: keyword.other.unit.suffix.integer.shell
+          - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.octal.shell
+              '2':
+                name: constant.numeric.octal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '4':
+                name: keyword.other.unit.suffix.integer.shell
+          - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '1':
+                name: keyword.other.unit.hexadecimal.shell
+              '2':
+                name: constant.numeric.hexadecimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '5':
+                name: keyword.other.unit.exponent.hexadecimal.shell
+              '6':
+                name: keyword.operator.plus.exponent.hexadecimal.shell
+              '7':
+                name: keyword.operator.minus.exponent.hexadecimal.shell
+              '8':
+                name: constant.numeric.exponent.hexadecimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '9':
+                name: keyword.other.unit.suffix.integer.shell
+          - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+            captures:
+              '2':
+                name: constant.numeric.decimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '3':
+                name: punctuation.separator.constant.numeric.shell
+              '5':
+                name: keyword.other.unit.exponent.decimal.shell
+              '6':
+                name: keyword.operator.plus.exponent.decimal.shell
+              '7':
+                name: keyword.operator.minus.exponent.decimal.shell
+              '8':
+                name: constant.numeric.exponent.decimal.shell
+                patterns:
+                - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                  name: punctuation.separator.constant.numeric.shell
+              '9':
+                name: keyword.other.unit.suffix.integer.shell
+          - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
+            name: invalid.illegal.constant.numeric.shell
   command_context:
     patterns:
     - include: "#comment"
