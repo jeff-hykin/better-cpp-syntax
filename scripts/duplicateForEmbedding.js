@@ -15,7 +15,6 @@ function duplicateForEmbedding(language, scope, early_bailout_pattern) {
     originalScopeName = grammar["scopeName"];
     grammar["scopeName"] = grammar["scopeName"] + ".embedded." + scope;
     const deleteableRules = selectRulesForDeletion(grammar);
-    console.log(deleteableRules);
     rewriteRules(
         originalScopeName,
         deleteableRules,
