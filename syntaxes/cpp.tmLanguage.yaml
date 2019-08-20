@@ -662,7 +662,6 @@ repository:
     - include: "#ever_present_context"
     - include: "#string_context"
     - include: "#number_literal"
-    - include: "#string_context_c"
     - include: "#method_access"
     - include: "#member_access"
     - include: "#predefined_macros"
@@ -1436,7 +1435,7 @@ repository:
       end: "\\)"
       patterns:
       - include: "#attributes_context"
-      - include: "#string_context_c"
+      - include: "#string_context"
     - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))"
       captures:
         '1':
@@ -1468,7 +1467,7 @@ repository:
       end: "\\)"
       patterns:
       - include: "#attributes_context"
-      - include: "#string_context_c"
+      - include: "#string_context"
     - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))"
       captures:
         '1':
@@ -1500,7 +1499,7 @@ repository:
       end: "\\)"
       patterns:
       - include: "#attributes_context"
-      - include: "#string_context_c"
+      - include: "#string_context"
     - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))"
       captures:
         '1':
@@ -1532,7 +1531,7 @@ repository:
       end: "\\)"
       patterns:
       - include: "#attributes_context"
-      - include: "#string_context_c"
+      - include: "#string_context"
     - match: "(using)\\s+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))"
       captures:
         '1':
@@ -1980,7 +1979,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -2064,7 +2063,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -2198,7 +2197,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -2286,7 +2285,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -2473,7 +2472,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -3113,7 +3112,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -3351,7 +3350,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -3743,7 +3742,6 @@ repository:
       end: "(?=\\))"
       patterns:
       - include: "#string_context"
-      - include: "#string_context_c"
     - include: "#evaluation_context"
   function_call:
     begin: "((::)?(?:((?-mix:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))\\s*+(((?<!<)<(?!<)(?>(?:(?>[^<>]*)\\g<12>?)+)>)\\s*)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?<!\\Wnot|^not|\\Wcompl|^compl|\\Wsizeof|^sizeof|\\Wnew|^new|\\Wdelete|^delete|\\Wnot_eq|^not_eq|\\Wbitand|^bitand|\\Wxor|^xor|\\Wbitor|^bitor|\\Wand|^and|\\Wor|^or|\\Wthrow|^throw|\\Wand_eq|^and_eq|\\Wxor_eq|^xor_eq|\\Wor_eq|^or_eq|\\Walignof|^alignof|\\Walignas|^alignas|\\Wtypeid|^typeid|\\Wnoexcept|^noexcept|\\Wnoexcept|^noexcept|\\Wstatic_cast|^static_cast|\\Wdynamic_cast|^dynamic_cast|\\Wconst_cast|^const_cast|\\Wreinterpret_cast|^reinterpret_cast|\\Wwhile|^while|\\Wfor|^for|\\Wdo|^do|\\Wif|^if|\\Welse|^else|\\Wgoto|^goto|\\Wswitch|^switch|\\Wtry|^try|\\Wcatch|^catch|\\Wreturn|^return|\\Wbreak|^break|\\Wcase|^case|\\Wcontinue|^continue|\\Wdefault|^default|\\Wauto|^auto|\\Wvoid|^void|\\Wchar|^char|\\Wshort|^short|\\Wint|^int|\\Wsigned|^signed|\\Wunsigned|^unsigned|\\Wlong|^long|\\Wfloat|^float|\\Wdouble|^double|\\Wbool|^bool|\\Wwchar_t|^wchar_t|\\Wu_char|^u_char|\\Wu_short|^u_short|\\Wu_int|^u_int|\\Wu_long|^u_long|\\Wushort|^ushort|\\Wuint|^uint|\\Wu_quad_t|^u_quad_t|\\Wquad_t|^quad_t|\\Wqaddr_t|^qaddr_t|\\Wcaddr_t|^caddr_t|\\Wdaddr_t|^daddr_t|\\Wdiv_t|^div_t|\\Wdev_t|^dev_t|\\Wfixpt_t|^fixpt_t|\\Wblkcnt_t|^blkcnt_t|\\Wblksize_t|^blksize_t|\\Wgid_t|^gid_t|\\Win_addr_t|^in_addr_t|\\Win_port_t|^in_port_t|\\Wino_t|^ino_t|\\Wkey_t|^key_t|\\Wmode_t|^mode_t|\\Wnlink_t|^nlink_t|\\Wid_t|^id_t|\\Wpid_t|^pid_t|\\Woff_t|^off_t|\\Wsegsz_t|^segsz_t|\\Wswblk_t|^swblk_t|\\Wuid_t|^uid_t|\\Wid_t|^id_t|\\Wclock_t|^clock_t|\\Wsize_t|^size_t|\\Wssize_t|^ssize_t|\\Wtime_t|^time_t|\\Wuseconds_t|^useconds_t|\\Wsuseconds_t|^suseconds_t|\\Wint8_t|^int8_t|\\Wint16_t|^int16_t|\\Wint32_t|^int32_t|\\Wint64_t|^int64_t|\\Wuint8_t|^uint8_t|\\Wuint16_t|^uint16_t|\\Wuint32_t|^uint32_t|\\Wuint64_t|^uint64_t|\\Wint_least8_t|^int_least8_t|\\Wint_least16_t|^int_least16_t|\\Wint_least32_t|^int_least32_t|\\Wint_least64_t|^int_least64_t|\\Wuint_least8_t|^uint_least8_t|\\Wuint_least16_t|^uint_least16_t|\\Wuint_least32_t|^uint_least32_t|\\Wuint_least64_t|^uint_least64_t|\\Wint_fast8_t|^int_fast8_t|\\Wint_fast16_t|^int_fast16_t|\\Wint_fast32_t|^int_fast32_t|\\Wint_fast64_t|^int_fast64_t|\\Wuint_fast8_t|^uint_fast8_t|\\Wuint_fast16_t|^uint_fast16_t|\\Wuint_fast32_t|^uint_fast32_t|\\Wuint_fast64_t|^uint_fast64_t|\\Wintptr_t|^intptr_t|\\Wuintptr_t|^uintptr_t|\\Wintmax_t|^intmax_t|\\Wintmax_t|^intmax_t|\\Wuintmax_t|^uintmax_t|\\Wuintmax_t|^uintmax_t|\\WNULL|^NULL|\\Wtrue|^true|\\Wfalse|^false|\\Wnullptr|^nullptr|\\Wclass|^class|\\Wstruct|^struct|\\Wunion|^union|\\Wenum|^enum|\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern|\\Winline|^inline|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wfriend|^friend|\\Wexplicit|^explicit|\\Wvirtual|^virtual|\\Wvolatile|^volatile|\\Wconst|^const|\\Wnoexcept|^noexcept|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wconstexpr|^constexpr|\\Wconsteval|^consteval|\\Wprivate|^private|\\Wprotected|^protected|\\Wpublic|^public|\\Wthis|^this|\\Wtemplate|^template|\\Wnamespace|^namespace|\\Wusing|^using|\\Woperator|^operator|\\Wtypedef|^typedef|\\Wdecltype|^decltype|\\Wtypename|^typename|\\Wasm|^asm|\\W__asm__|^__asm__|\\Wconcept|^concept|\\Wrequires|^requires|\\Wexport|^export|\\Wthread_local|^thread_local|\\Watomic_cancel|^atomic_cancel|\\Watomic_commit|^atomic_commit|\\Watomic_noexcept|^atomic_noexcept|\\Wco_await|^co_await|\\Wco_return|^co_return|\\Wco_yield|^co_yield|\\Wimport|^import|\\Wmodule|^module|\\Wreflexpr|^reflexpr|\\Wsynchronized|^synchronized)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(((?<!<)<(?!<)(?>(?:(?>[^<>]*)\\g<12>?)+)>)\\s*)?(\\()"
@@ -3797,7 +3795,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -4783,7 +4781,6 @@ repository:
     - include: "#ever_present_context"
     - include: "#string_context"
     - include: "#number_literal"
-    - include: "#string_context_c"
     - include: "#method_access"
     - include: "#member_access"
     - include: "#predefined_macros"
@@ -4821,7 +4818,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -5002,7 +4999,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -5189,7 +5186,7 @@ repository:
           - include: "#function_type"
           - include: "#storage_types"
           - include: "#number_literal"
-          - include: "#string_context_c"
+          - include: "#string_context"
           - include: "#comma"
           - include: "#scope_resolution_inner_generated"
           - include: "#template_call_range"
@@ -6300,7 +6297,7 @@ repository:
           - include: "#function_type"
           - include: "#storage_types"
           - include: "#number_literal"
-          - include: "#string_context_c"
+          - include: "#string_context"
           - include: "#comma"
           - include: "#scope_resolution_inner_generated"
           - include: "#template_call_range"
@@ -8608,13 +8605,13 @@ repository:
         patterns:
         - include: source.regexp.python
       - name: string.quoted.double.raw.sql.cpp
-        begin: (((?:[uUL]8?)?R)\"(?:[pP]?(?:sql|SQL|)|d[dm]l)\()
+        begin: (((?:[uUL]8?)?R)\"(?:[pP]?(?:sql|SQL)|d[dm]l)\()
         beginCaptures:
           '1':
             name: punctuation.definition.string.begin.cpp
           '2':
             name: meta.encoding.cpp
-        end: (\)(?:[pP]?(?:sql|SQL|)|d[dm]l)\")
+        end: (\)(?:[pP]?(?:sql|SQL)|d[dm]l)\")
         endCaptures:
           '1':
             name: punctuation.definition.string.end.cpp
@@ -8665,32 +8662,6 @@ repository:
     - match: "(?<!:):(?!:)"
       name: punctuation.separator.colon.range-based.cpp
     - include: "#evaluation_context"
-  string_context_c:
-    patterns:
-    - begin: "\""
-      beginCaptures:
-        '0':
-          name: punctuation.definition.string.begin.cpp
-      end: "\""
-      endCaptures:
-        '0':
-          name: punctuation.definition.string.end.cpp
-      name: string.quoted.double.cpp
-      patterns:
-      - include: "#string_escapes_context_c"
-      - include: "#line_continuation_character"
-    - begin: "(?-mix:(?<![\\da-fA-F])')"
-      beginCaptures:
-        '0':
-          name: punctuation.definition.string.begin.cpp
-      end: "'"
-      endCaptures:
-        '0':
-          name: punctuation.definition.string.end.cpp
-      name: string.quoted.single.cpp
-      patterns:
-      - include: "#string_escapes_context_c"
-      - include: "#line_continuation_character"
   string_escapes_context_c:
     patterns:
     - include: "#backslash_escapes"
@@ -9097,7 +9068,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -9335,7 +9306,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"
@@ -11079,7 +11050,6 @@ repository:
       end: "(?=\\))"
       patterns:
       - include: "#string_context"
-      - include: "#string_context_c"
     - include: "#evaluation_context"
   macro_safe_assembly:
     name: meta.asm.cpp
@@ -11142,7 +11112,7 @@ repository:
         - include: "#function_type"
         - include: "#storage_types"
         - include: "#number_literal"
-        - include: "#string_context_c"
+        - include: "#string_context"
         - include: "#comma"
         - include: "#scope_resolution_inner_generated"
         - include: "#template_call_range"

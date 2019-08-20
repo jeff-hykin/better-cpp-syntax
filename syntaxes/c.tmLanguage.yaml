@@ -416,7 +416,6 @@ repository:
       end: "(?=\\))"
       patterns:
       - include: "#string_context"
-      - include: "#string_context_c"
     - include: "#evaluation_context"
   backslash_escapes:
     match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}

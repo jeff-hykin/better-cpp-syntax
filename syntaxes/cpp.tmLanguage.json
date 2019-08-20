@@ -1265,9 +1265,6 @@
           "include": "#number_literal"
         },
         {
-          "include": "#string_context_c"
-        },
-        {
           "include": "#method_access"
         },
         {
@@ -2716,7 +2713,7 @@
               "include": "#attributes_context"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             }
           ]
         },
@@ -2778,7 +2775,7 @@
               "include": "#attributes_context"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             }
           ]
         },
@@ -2840,7 +2837,7 @@
               "include": "#attributes_context"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             }
           ]
         },
@@ -2902,7 +2899,7 @@
               "include": "#attributes_context"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             }
           ]
         },
@@ -3732,7 +3729,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -3902,7 +3899,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -4168,7 +4165,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -4346,7 +4343,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -4712,7 +4709,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -5987,7 +5984,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -6453,7 +6450,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -7207,9 +7204,6 @@
           "patterns": [
             {
               "include": "#string_context"
-            },
-            {
-              "include": "#string_context_c"
             }
           ]
         },
@@ -7315,7 +7309,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -9185,9 +9179,6 @@
           "include": "#number_literal"
         },
         {
-          "include": "#string_context_c"
-        },
-        {
           "include": "#method_access"
         },
         {
@@ -9287,7 +9278,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -9639,7 +9630,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -10000,7 +9991,7 @@
                   "include": "#number_literal"
                 },
                 {
-                  "include": "#string_context_c"
+                  "include": "#string_context"
                 },
                 {
                   "include": "#comma"
@@ -12121,7 +12112,7 @@
                   "include": "#number_literal"
                 },
                 {
-                  "include": "#string_context_c"
+                  "include": "#string_context"
                 },
                 {
                   "include": "#comma"
@@ -16553,7 +16544,7 @@
             },
             {
               "name": "string.quoted.double.raw.sql.cpp",
-              "begin": "(((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL|)|d[dm]l)\\()",
+              "begin": "(((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL)|d[dm]l)\\()",
               "beginCaptures": {
                 "1": {
                   "name": "punctuation.definition.string.begin.cpp"
@@ -16562,7 +16553,7 @@
                   "name": "meta.encoding.cpp"
                 }
               },
-              "end": "(\\)(?:[pP]?(?:sql|SQL|)|d[dm]l)\\\")",
+              "end": "(\\)(?:[pP]?(?:sql|SQL)|d[dm]l)\\\")",
               "endCaptures": {
                 "1": {
                   "name": "punctuation.definition.string.end.cpp"
@@ -16650,56 +16641,6 @@
         },
         {
           "include": "#evaluation_context"
-        }
-      ]
-    },
-    "string_context_c": {
-      "patterns": [
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cpp"
-            }
-          },
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cpp"
-            }
-          },
-          "name": "string.quoted.double.cpp",
-          "patterns": [
-            {
-              "include": "#string_escapes_context_c"
-            },
-            {
-              "include": "#line_continuation_character"
-            }
-          ]
-        },
-        {
-          "begin": "(?-mix:(?<![\\da-fA-F])')",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cpp"
-            }
-          },
-          "end": "'",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cpp"
-            }
-          },
-          "name": "string.quoted.single.cpp",
-          "patterns": [
-            {
-              "include": "#string_escapes_context_c"
-            },
-            {
-              "include": "#line_continuation_character"
-            }
-          ]
         }
       ]
     },
@@ -17469,7 +17410,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -17935,7 +17876,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
@@ -21281,9 +21222,6 @@
           "patterns": [
             {
               "include": "#string_context"
-            },
-            {
-              "include": "#string_context_c"
             }
           ]
         },
@@ -21409,7 +21347,7 @@
               "include": "#number_literal"
             },
             {
-              "include": "#string_context_c"
+              "include": "#string_context"
             },
             {
               "include": "#comma"
