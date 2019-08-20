@@ -4,6 +4,8 @@ const crypto = require("crypto");
 const _ = require("lodash");
 const chalk = require("chalk");
 
+const known_prefixes = ["#macro_safe"];
+
 function clearNestedRepositoryName(rule) {
     delete rule.repositoryName;
     if (rule.patterns) {
@@ -52,6 +54,15 @@ class DuplicateValue {
         if (Object.keys(rule).length == 2 && rule.name) {
             // if the rule contains 2 keys of which one is the name (the other is repositoryName)
             // return as name only rules cannot be simplified
+            return;
+        }
+        if (
+            rule.begin &&
+            _.some(this.known_prefixes, prefix =>
+                rule.repositoryName.startsWith(prefix)
+            )
+        ) {
+            // skip begin/* rules that start with a known prefix
             return;
         }
         let hash = crypto.createHash("sha256");
