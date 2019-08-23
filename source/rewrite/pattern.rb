@@ -61,12 +61,16 @@ def is_string_single_entity?(regex_string)
 end
 
 class Regexp
-    def is_single_entity?() is_string_single_entity? to_r_s end
+    def is_single_entity?()
+        puts "Regexp#is_single_entity? called"
+        is_string_single_entity? to_r_s
+    end
     def to_r(groups = nil)
         return self
     end
     def evaluate(groups = nil) to_r_s(groups) end
     def to_r_s(groups = nil)
+        puts "Regexp#to_r_s called"
         return self.inspect[1..-2]
     end
     def integrate_pattern(other_regex, groups)
@@ -74,11 +78,11 @@ class Regexp
     end
 end
 
-
 class Pattern
     @match
     @type
     @arguments
+    @original_arguments
     @next_pattern
     attr_accessor :next_pattern
 
@@ -92,7 +96,6 @@ class Pattern
             :tag_as,
             :reference,
             :includes,
-            :repository,
         ]
         if @arguments == nil
             puts @match.class
@@ -184,6 +187,9 @@ class Pattern
             # this is just a different way of "oneOrMoreOf"
             elsif @at_least == 1 and @at_most == nil
                 quantifier = "+"
+            # exactly N times
+            elsif @at_least == @most
+                quantifier = "{#{@at_least}}"
             # if it is more complicated than that, just use a range
             else
                 quantifier = "{#{@at_least},#{@at_most}}"
@@ -229,34 +235,21 @@ class Pattern
     def initialize(*arguments)
         @next_pattern = nil
         arg1 = arguments[0]
-        # if only a pattern, set attributes to {}
-        if arg1.is_a? Pattern or arg1.is_a? Regexp
-            @match = arg1
-            @arguments = {}
-        # if its a Hash then extract the regex, and use the rest of the hash as the attributes
-        elsif arg1.instance_of? Hash
+        arg1 = {match: arg1} unless arg1.is_a? Hash
+        @original_arguments = arg1.clone
+        if arg1[:match].is_a? String
+            @match = Regexp.escape(arg1[:match])
+        elsif arg1[:match].is_a? Regexp
+            raise_if_regex_has_capture_group arg1[:match]
+            @match = arg1[:match].to_r_s
+        elsif arg1.is_a? Pattern
             @match = arg1[:match]
-            @arguments = arg1.clone
-            @arguments.delete(:match)
-            # extract the @at_least and @at_most values
-            self.process_quantifiers_from_arguments()
-        end
-        # check for captures
-        if @match.is_a? Regexp
-            begin
-                # this will throw a RegexpError if there are no capturing groups
-                _ignore = /#{@match}\1/
-                #at this point @match contains a capture group, complain
-                raise <<-HEREDOC.remove_indent 
-                    
-                    There is a pattern that is being constructed from a regular expression
-                    with a capturing group. This is not allowed, as the group cannot be tracked
-                    The bad pattern is
-                    #{self.to_s}
-                HEREDOC
-            rescue RegexpError
-                # no cpature groups present, purposely do nothing
-            end
+        else
+            puts <<-HEREDOC.remove_indent
+            Pattern.new() must be constructed with a String, Regexp, or Pattern
+            Provided arguments: #{@original_arguments}
+            HEREDOC
+            raise "See error above"
         end
     end
 
@@ -385,8 +378,8 @@ class Pattern
         pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
         insert(pattern)
     end
-    
-    def recursivelyMatch(reference) insert(SubroutinePattern.new(reference)) end
+    # other methods added by subclasses
+
     #
     # Inheritance
     #
@@ -438,6 +431,7 @@ class Pattern
     #   atomic for the purpose of regex building
     # called by #to_r
     def is_single_entity?
+        puts "Pattern#is_single_entity? called"
         to_r.is_single_entity?
     end
 
@@ -514,4 +508,20 @@ class Pattern
         new_pattern = self.class.new(options)
         new_pattern.insert!(@next_pattern.__deep_clone__())
     end
+
+    def raise_if_regex_has_capture_group(regex)
+        # this will throw a RegexpError if there are no capturing groups
+        _ignore = /#{regex}\1/
+        #at this point @match contains a capture group, complain
+        raise <<-HEREDOC.remove_indent 
+            
+            There is a pattern that is being constructed from a regular expression
+            with a capturing group. This is not allowed, as the group cannot be tracked
+            The bad pattern is
+            #{self.to_s}
+        HEREDOC
+    rescue RegexpError
+        # no cpature groups present, purposely do nothing
+    end
+
 end
