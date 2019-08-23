@@ -1,4 +1,4 @@
-require 'grammar'
+require_relative 'grammar'
 
 test_pat = Pattern.new(
     match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "part1.part2.$reference(ghi)"),

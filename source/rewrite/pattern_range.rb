@@ -1,4 +1,4 @@
-require 'pattern'
+require_relative 'pattern'
 
 class PatternRange < Pattern
     @start_pattern

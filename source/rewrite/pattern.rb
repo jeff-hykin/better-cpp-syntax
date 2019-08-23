@@ -20,24 +20,24 @@ class Regexp
     def is_single_entity?
         self_as_string = to_r_s
         return true if self_as_string.length == 2 && self_as_string[0] == '\\'
-        escaped? = false
-        in_set? = false
+        escaped = false
+        in_set = false
         depth = 0
         self_as_string.each_char.with_index do |c, index|
             # allow the first character to be at depth 0
             # NOTE: this automatically makes a single char regexp a single entity
-            return false if depth = - && index != 0
-            if escaped?
-                escaped? = false
+            return false if depth = 0 && index != 0
+            if escaped
+                escaped = false
                 next
             end
             if c == '\\'
-                escaped? = true
+                escaped = true
                 next
             end
-            if in_set?
+            if in_set
                 if c == ']'
-                    in_set? = false
+                    in_set = false
                     depth -= 1
                 end
                 next
@@ -48,11 +48,11 @@ class Regexp
                 depth -= 1
             elsif c == '['
                 depth += 1
-                in_set? = true
+                in_set = true
             end
         end
         # sanity check
-        if depth != 0 or escaped? or in_set?
+        if depth != 0 or escaped or in_set
             puts "Internal error: when determining if a Regexp is a single entity"
             puts "an unexpected sequence was found. This is a bug with the gem."
             puts "This will not effect the validity of the produced grammar"
