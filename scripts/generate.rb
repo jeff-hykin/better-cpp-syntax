@@ -24,9 +24,9 @@ def mtime(file)
 end
 
 def should_build(language_extension_name)
-    if not File.exists?(PathFor[:jsonSyntax][language_extension_name])
-        return true
-    end
+    return true if ARGV[0] == "--force"
+    return true if not File.exists?(PathFor[:jsonSyntax][language_extension_name])
+
     compare_time = mtime(PathFor[:jsonSyntax][language_extension_name])
     Dir.glob("#{PathFor[:source]}/*.rb") do |file|
         return true if mtime(file) > compare_time
@@ -55,10 +55,14 @@ end
 # Process CommandLine input
 # 
 # if no args then build all of them
-if ARGV[0] == nil
+# --force is used to bypass should_build check
+check_pos = 0
+check_pos = 1 if ARGV[0] == "--force"
+
+if ARGV[check_pos] == nil
     for each_dir in Dir[PathFor[:languages]+"/**"]
         build(File.basename(each_dir))
     end
 else
-    build(ARGV[0])
+    build(ARGV[check_pos])
 end
