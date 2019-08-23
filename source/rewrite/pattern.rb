@@ -16,58 +16,60 @@ class String
     end
 end
 
-class Regexp
-    def is_single_entity?
-        self_as_string = to_r_s
-        return true if self_as_string.length == 2 && self_as_string[0] == '\\'
-        escaped = false
-        in_set = false
-        depth = 0
-        self_as_string.each_char.with_index do |c, index|
-            # allow the first character to be at depth 0
-            # NOTE: this automatically makes a single char regexp a single entity
-            return false if depth = 0 && index != 0
-            if escaped
-                escaped = false
-                next
-            end
-            if c == '\\'
-                escaped = true
-                next
-            end
-            if in_set
-                if c == ']'
-                    in_set = false
-                    depth -= 1
-                end
-                next
-            end
-            if c == '('
-                depth += 1
-            elsif c == ')'
+def is_string_single_entity?(regex_string)
+    return true if regex_string.length == 2 && regex_string[0] == '\\'
+    escaped = false
+    in_set = false
+    depth = 0
+    regex_string.each_char.with_index do |c, index|
+        # allow the first character to be at depth 0
+        # NOTE: this automatically makes a single char regexp a single entity
+        return false if depth == 0 && index != 0
+        if escaped
+            escaped = false
+            next
+        end
+        if c == '\\'
+            escaped = true
+            next
+        end
+        if in_set
+            if c == ']'
+                in_set = false
                 depth -= 1
-            elsif c == '['
-                depth += 1
-                in_set = true
             end
+            next
         end
-        # sanity check
-        if depth != 0 or escaped or in_set
-            puts "Internal error: when determining if a Regexp is a single entity"
-            puts "an unexpected sequence was found. This is a bug with the gem."
-            puts "This will not effect the validity of the produced grammar"
-            puts "Regexp: #{inspect} depth: #{depth} escaped?: #{escaped?} in_set?: #{in_set?}"
-            return false
+        if c == '('
+            depth += 1
+        elsif c == ')'
+            depth -= 1
+        elsif c == '['
+            depth += 1
+            in_set = true
         end
-        return true
     end
+    # sanity check
+    if depth != 0 or escaped or in_set
+        puts "Internal error: when determining if a Regexp is a single entity"
+        puts "an unexpected sequence was found. This is a bug with the gem."
+        puts "This will not effect the validity of the produced grammar"
+        puts "Regexp: #{inspect} depth: #{depth} escaped?: #{escaped?} in_set?: #{in_set?}"
+        return false
+    end
+    return true
+end
+
+class Regexp
+    def is_single_entity?() is_string_single_entity? to_r_s end
     def to_r(groups = nil)
         return self
     end
+    def evaluate(groups = nil) to_r_s(groups) end
     def to_r_s(groups = nil)
         return self.inspect[1..-2]
     end
-    def integrate_regex(other_regex, groups)
+    def integrate_pattern(other_regex, groups)
         /#{other_regex.to_r_s}#{self.to_r_s}/
     end
 end
@@ -187,16 +189,18 @@ class Pattern
                 quantifier = "{#{@at_least},#{@at_most}}"
             end
         end
+        # quantifiers can be made possesive without requiring atomic groups
+        quantifier += "+" if quantifier != "" && @arguments[:dont_back_track?] == true
         return quantifier
     end
     
     # this method handles adding the at_most/at_least, dont_back_track methods
     # it returns regex-as-a-string
     def add_quantifier_options_to(match, groups)
-        new_regex = match.to_r(groups).to_r_s
+        new_regex = match.evaluate
         quantifier = self.simple_quantifier
         # check if there are quantifiers
-        if self.simple_quantifier() != ""
+        if quantifier != ""
             # if the match is not a single entity, then it needs to be wrapped
             if not match.is_single_entity?
                 new_regex = "(?:#{new_regex})"
@@ -205,7 +209,7 @@ class Pattern
             new_regex += quantifier
         end
         # check if atomic
-        if @arguments[:dont_back_track?] == true
+        if quantifier == "" && @arguments[:dont_back_track?] == true
             new_regex = "(?>#{new_regex})"
         end
         new_regex
@@ -282,30 +286,25 @@ class Pattern
         output
     end
 
+    # evaluates the pattern into a string suitable for inserting into a
+    # grammar or constructing a Regexp.
+    # if groups is nil consider this Pattern to be the top_level
+    # when a pattern is top_level, group numbers and back references are relative to that pattern
+    def evaluate(groups = nil)
+        top_level = groups == nil
+        groups = collect_group_attributes if top_level
+        self_evaluate = do_evaluate_self(groups)
+        if @next_pattern.respond_to?(:integrate_pattern)
+            self_evaluate_is_single_entity = is_string_single_entity?(self_evaluate)
+            self_evaluate = @next_pattern.integrate_pattern(self_evaluate, groups, self_evaluate_is_single_entity)
+        end
+        self_evaluate = fixupRegexReferences(groups, self_evaluate) if top_level
+        self_evaluate
+    end
     # converts a pattern to a Regexp
     # if groups is nil consider this Pattern to be the top_level
     # when a pattern is top_level, group numbers and back references are relative to that pattern
-    def to_r(groups = nil)
-        top_level = groups == nil
-        groups = collect_group_attributes if top_level
-        
-        # convert @match into a regex string
-        self_regex = self.do_generate_self_regex(groups).to_r_s
-        
-        # allow the next_pattern to combine itself with this regex
-        # (the default is just concatenation)
-        if @next_pattern.respond_to?(:integrate_regex)
-            self_regex = @next_pattern.integrate_regex(self_regex, groups).to_r_s
-        end
-
-        # tests are ran here
-        # TODO: consider making tests their own method to prevent running them repeatedly
-
-        if top_level
-            return /#{fixupRegexReferences(groups, self_regex)}/
-        end
-        /#{self_regex}/
-    end
+    def to_r(*args) Regexp.new(evaluate(*args)) end
 
     # Displays the Pattern as you would write it in code
     # This displays the canonical form, that is helpers such as oneOrMoreOf() become #then
@@ -401,15 +400,15 @@ class Pattern
     # convert convert @match and any applicable arguments into a complete regex for self
     # despite the name, this returns on strings
     # called by #to_r
-    def do_generate_self_regex(groups)
+    def do_evaluate_self(groups)
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
     
     # this pattern handles combining the previous pattern with the next pattern
     # in most situtaions, this just means concatenation
-    def integrate_regex(previous_regex, groups)
+    def integrate_pattern(previous_evaluate, groups, is_single_entity)
         # by default just concat the groups
-        /#{previous_regex.to_r_s}#{self.to_r(groups).to_r_s}/
+        "#{previous_evaluate}#{evaluate(groups)}"
     end
 
     # what modifications to make to @match.to_s

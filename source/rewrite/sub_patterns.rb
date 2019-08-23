@@ -37,14 +37,14 @@ end
 # Provides alternation
 # Either the previous pattern or provided pattern is accepted
 class OrPattern < Pattern
-    def do_generate_self_regex(groups)
-        # dont add the capture groups because they will be added on the outside of the integrate_regex
+    def do_evaluate_self(groups)
+        # dont add the capture groups because they will be added on the outside of the integrate_pattern
         self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
     end
-    def integrate_regex(previous_regex, groups)
-        # if previous_regex.is_single_entity?
-        #     return /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
-        # end
+    def integrate_pattern(previous_regex, groups, is_single_entity)
+        if is_single_entity
+            return /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
+        end
         /(?:(?:#{previous_regex.to_r_s})|#{self.to_r(groups).to_r_s})/
     end
     def do_get_to_s_name(top_level)
@@ -84,7 +84,7 @@ class OneOfPattern < Pattern
         @arguments[:patterns] = patterns
     end
 
-    def do_generate_self_regex(groups)
+    def do_evaluate_self(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.to_r(groups)
             if regex.is_single_entity?
@@ -129,7 +129,7 @@ end
 #
 
 class LookAroundPattern < Pattern
-    def do_generate_self_regex(groups)
+    def do_evaluate_self(groups)
         self_regex = @match.to_r(groups).to_r_s
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"

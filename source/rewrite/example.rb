@@ -1,7 +1,7 @@
 require_relative 'grammar'
 
 test_pat = Pattern.new(
-    match: Pattern.new(/abc/).then(match: /aaa/, tag_as: "part1.part2.$reference(ghi)"),
+    match: Pattern.new(/abc\w/).then(match: /aaa/, tag_as: "part1.part2.$reference(ghi)"),
     tag_as: "part1",
     reference: "abc",
 ).maybe(/def/).then(
