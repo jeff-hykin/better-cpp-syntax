@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'pattern'
 
 #
@@ -14,20 +16,26 @@ class MaybePattern < Pattern
         @at_least = 0
         @at_most = 1
     end
+
     def quantifing_allowed?
-        return false
+        false
     end
+
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
     end
 end
 
 # returns a new MaybePattern
-def maybe(pattern) MaybePattern.new(pattern) end
+def maybe(pattern)
+    MaybePattern.new(pattern)
+end
 
 class Pattern
-    #appends a new MaybePattern to the end of the pattern chain
-    def maybe(pattern) insert(MaybePattern.new(pattern)) end
+    # appends a new MaybePattern to the end of the pattern chain
+    def maybe(pattern)
+        insert(MaybePattern.new(pattern))
+    end
 end
 
 #
@@ -38,19 +46,21 @@ end
 # Either the previous pattern or provided pattern is accepted
 class OrPattern < Pattern
     def do_evaluate_self(groups)
-        # dont add the capture groups because they will be added on the outside of the integrate_pattern
-        self.add_capture_group_if_needed(self.add_quantifier_options_to(@match, groups))
+        # dont add the capture groups because they will be added by integrate_pattern
+        add_capture_group_if_needed(add_quantifier_options_to(@match, groups))
     end
+
     def integrate_pattern(previous_regex, groups, is_single_entity)
-        if is_single_entity
-            return "(?:#{previous_regex}|#{self.evaluate(groups)})"
-        end
-        "(?:(?:#{previous_regex})|#{self.evaluate(groups)})"
+        return "(?:#{previous_regex}|#{evaluate(groups)})" if is_single_entity
+
+        "(?:(?:#{previous_regex})|#{evaluate(groups)})"
     end
+
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
     end
-    def is_single_entity?
+
+    def single_entity?
         true
     end
 end
@@ -58,8 +68,10 @@ end
 # no top level is provided
 
 class Pattern
-    #appends a new OrPattern to the end of the pattern chain
-    def or(pattern) insert(OrPattern.new(pattern)) end
+    # appends a new OrPattern to the end of the pattern chain
+    def or(pattern)
+        insert(OrPattern.new(pattern))
+    end
 end
 
 #
@@ -72,8 +84,8 @@ class OneOfPattern < Pattern
     # create a new OneOfPattern
     # this is expects an array of patterns
     def initialize(patterns)
-        if not patterns.is_a? Array
-            puts <<-HEREDOC.remove_indent 
+        unless patterns.is_a? Array
+            puts <<-HEREDOC.remove_indent
                 oneOf() expects an array of patterns, the provided argument is not an array.
                 The arguments to oneOf is below
                 #{patterns}
@@ -83,6 +95,7 @@ class OneOfPattern < Pattern
         @match = /placeholder regex/
         @arguments[:patterns] = patterns.map do |pattern|
             next pattern if pattern.is_a? Pattern
+
             Pattern.new(pattern)
         end
     end
@@ -90,20 +103,17 @@ class OneOfPattern < Pattern
     def do_evaluate_self(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.evaluate(groups)
-            if regex.is_single_entity?
-                next regex
-            else
-                next "(?:#{regex})"
-            end
+            next regex if pattern.single_entity?
+
+            "(?:#{regex})"
         end
-        if needs_to_capture?
-            return "(#{patterns_strings.join "|"})"
-        else
-            return "(?:#{patterns_strings.join "|"})"
-        end
+
+        return "(#{patterns_strings.join '|'})" if needs_to_capture?
+
+        "(?:#{patterns_strings.join '|'})"
     end
 
-    def is_single_entity?
+    def single_entity?
         true
     end
 
@@ -116,15 +126,19 @@ class OneOfPattern < Pattern
         end).join ",\n#{indent}  "
         output += "\n#{indent}])"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
-        return output
+        output
     end
 end
 
-def oneOf(patterns) OneOfPattern.new(patterns) end
+def oneOf(patterns)
+    OneOfPattern.new(patterns)
+end
 
 class Pattern
-    #appends a new OneOfPattern to the end of the pattern chain
-    def oneOf(pattern) insert(OneOfPattern.new(pattern)) end
+    # appends a new OneOfPattern to the end of the pattern chain
+    def oneOf(pattern)
+        insert(OneOfPattern.new(pattern))
+    end
 end
 
 #
@@ -135,94 +149,116 @@ class LookAroundPattern < Pattern
     def do_evaluate_self(groups)
         self_regex = @match
         self_regex = @match.evaluate(groups) if @match.is_a? Pattern
+
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
         when :lookAheadToAvoid  then self_regex = "(?!#{self_regex})"
         when :lookBehindFor     then self_regex = "(?<=#{self_regex})"
         when :lookBehindToAvoid then self_regex = "(?<!#{self_regex})"
         end
+
         if needs_to_capture?
-            raise "You can only capture a lookAround of type lookAheadFor" unless @arguments[:type] == :lookAheadFor
+            unless @arguments[:type] == :lookAheadFor
+                raise "You can only capture a lookAround of type lookAheadFor"
+            end
+
             self_regex = "(#{self_regex})"
         end
-        return self_regex
+
+        self_regex
     end
+
     def do_get_to_s_name(top_level)
         top_level ? "lookAround(" : ".lookAround("
     end
+
     def do_add_attributes(indent)
         ",\n#{indent}  type: :#{@arguments[:type]}"
     end
-    def atomic?
+
+    def single_entity?
         true
     end
 end
 
-def lookAround(pattern) LookAroundPattern.new(pattern) end
+def lookAround(pattern)
+    LookAroundPattern.new(pattern)
+end
+
+# TODO: eliminate this code duplication
+
 def lookBehindToAvoid(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookBehindToAvoid
-    elsif
+    else
         pattern = {match: pattern, type: :lookBehindToAvoid}
     end
     lookAround(pattern)
 end
+
 def lookBehindFor(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookBehindFor
-    elsif
+    else
         pattern = {match: pattern, type: :lookBehindFor}
     end
     lookAround(pattern)
 end
+
 def lookAheadToAvoid(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookAheadToAvoid
-    elsif
+    else
         pattern = {match: pattern, type: :lookAheadToAvoid}
     end
     lookAround(pattern)
 end
+
 def lookAheadFor(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookAheadFor
-    elsif
+    else
         pattern = {match: pattern, type: :lookAheadFor}
     end
     lookAround(pattern)
 end
 
 class Pattern
-    def lookAround(pattern) insert(LookAroundPattern.new(pattern)) end
+    def lookAround(pattern)
+        insert(LookAroundPattern.new(pattern))
+    end
 
     def lookBehindToAvoid(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookBehindToAvoid
-        elsif
+        else
             pattern = {match: pattern, type: :lookBehindToAvoid}
         end
         lookAround(pattern)
     end
+
     def lookBehindFor(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookBehindFor
-        elsif
+        else
             pattern = {match: pattern, type: :lookBehindFor}
         end
         lookAround(pattern)
     end
+
     def lookAheadToAvoid(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookAheadToAvoid
-        elsif
+        else
             pattern = {match: pattern, type: :lookAheadToAvoid}
         end
         lookAround(pattern)
     end
+
     def lookAheadFor(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookAheadFor
-        elsif
+        else
             pattern = {match: pattern, type: :lookAheadFor}
         end
         lookAround(pattern)
@@ -245,21 +281,27 @@ class BackReferencePattern < Pattern
             super(reference, deep_clone)
         end
     end
+
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
         output += "\"#{@arguments[:backreference_key]}\")"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
-        return output
+        output
     end
-    def is_single_entity?
+
+    def single_entity?
         true
     end
 end
 
-def matchResultOf(reference) BackReferencePattern.new(reference) end
+def matchResultOf(reference)
+    BackReferencePattern.new(reference)
+end
 
 class Pattern
-    def matchResultOf(reference) insert(BackReferencePattern.new(reference)) end
+    def matchResultOf(reference)
+        insert(BackReferencePattern.new(reference))
+    end
 end
 
 #
@@ -278,19 +320,25 @@ class SubroutinePattern < Pattern
             super(reference, deep_clone)
         end
     end
+
     def to_s(depth = 0, top_level = true)
         output = top_level ? "recursivelyMatch(" : ".recursivelyMatch("
         output += "\"#{@arguments[:subroutine_key]}\")"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
-        return output
+        output
     end
-    def is_single_entity?
+
+    def single_entity?
         true
     end
 end
 
-def recursivelyMatch(reference) SubroutinePattern.new(reference) end
+def recursivelyMatch(reference)
+    SubroutinePattern.new(reference)
+end
 
 class Pattern
-    def recursivelyMatch(reference) insert(SubroutinePattern.new(reference)) end
+    def recursivelyMatch(reference)
+        insert(SubroutinePattern.new(reference))
+    end
 end

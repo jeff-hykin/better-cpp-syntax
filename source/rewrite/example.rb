@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'grammar'
 
 test_pat = Pattern.new(
@@ -7,10 +9,10 @@ test_pat = Pattern.new(
 ).maybe(/def/).then(
     match: /ghi/,
     tag_as: "part2",
-    reference: "ghi"
+    reference: "ghi",
 ).lookAheadFor(/jkl/).matchResultOf("abc").recursivelyMatch("ghi").or(
     match: /optional/,
-    tag_as: "variable.optional.$match"
+    tag_as: "variable.optional.$match",
 )
 puts test_pat.evaluate
 puts "foo"
