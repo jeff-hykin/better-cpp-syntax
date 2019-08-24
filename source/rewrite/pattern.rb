@@ -304,7 +304,7 @@ class Pattern
         # TODO: make this easier to understand
         # rubocop:disable Metrics/LineLength
 
-        regex_as_string = (@match.is_a? Pattern) ? @match.to_s(depth + 2, true) : "/" + @match + "/"
+        regex_as_string = @match.is_a?(Pattern) ? @match.to_s(depth + 2, true) : "/" + @match + "/"
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
@@ -522,16 +522,16 @@ class Pattern
             # process includes
             captures[group[:group].to_s] = output
         end
-        captures.reject(&:empty?)
+        captures.reject { |_, v| v.empty? }
         # replace $match and $reference() with the appropriate capture number
         captures.each do |key, value|
-            value[:name].gsub!(/\$(?:match|reference\((.+)\))/) do |match|
+            value[:name] = value[:name].gsub(/\$(?:match|reference\((.+)\))/) do |match|
                 next ("$" + key) if match == "$match"
 
-                group = groups.detect do |group|
+                reference_group = groups.detect do |group|
                     group[:reference] == Regexp.last_match(1)
                 end
-                "$" + group[:group].to_s
+                "$" + reference_group[:group].to_s
             end
         end
     end

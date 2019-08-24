@@ -16,10 +16,11 @@ test_pat = Pattern.new(
 )
 puts test_pat.evaluate
 
-#puts test_pat.groupless.to_r
+# puts test_pat.groupless.to_r
 
 test_range = PatternRange.new(
     start_pattern: /abc/,
+    tag_start_as: "abc",
     end_pattern: /def/,
 )
 
