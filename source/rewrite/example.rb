@@ -15,9 +15,8 @@ test_pat = Pattern.new(
     tag_as: "variable.optional.$match",
 )
 puts test_pat.evaluate
-puts "foo"
-puts test_pat.groupless.to_r
-puts "bar"
+
+#puts test_pat.groupless.to_r
 
 test_range = PatternRange.new(
     start_pattern: /abc/,

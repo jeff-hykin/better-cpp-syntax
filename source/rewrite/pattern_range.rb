@@ -12,13 +12,19 @@ class PatternRange < Pattern
         @end_pattern   = arguments[:end_pattern]
         @while_pattern = arguments[:while_pattern]
 
+        if !@start_pattern.nil? && !(@start_pattern.is_a? Pattern)
+            @start_pattern = Pattern.new(@start_pattern)
+        end
+        if !@end_pattern.nil? && !(@end_pattern.is_a? Pattern)
+            @end_pattern = Pattern.new(@end_pattern)
+        end
+        if !@while_pattern.nil? && !(@while_pattern.is_a? Pattern)
+            @while_pattern = Pattern.new(@while_pattern)
+        end
+
         @original_start_pattern = @start_pattern
         @original_end_pattern   = @end_pattern
         @original_while_pattern = @while_pattern
-
-        @start_pattern = Pattern.new(@start_pattern) unless @start_pattern.is_a? Pattern
-        @end_pattern   = Pattern.new(@end_pattern)   unless @end_pattern.is_a? Pattern
-        @while_pattern = Pattern.new(@while_pattern) unless @while_pattern.is_a? Pattern
 
         if @while_pattern.nil? && @end_pattern.nil?
             raise "one of `while_pattern:` or `end_pattern` must be supplied"
@@ -28,21 +34,21 @@ class PatternRange < Pattern
             raise "only one of `while_pattern:` or `end_pattern` must be supplied"
         end
 
-        if @arguments[:tag_start_as]
+        if arguments[:tag_start_as]
             @start_pattern = Pattern.new(
                 match: @start_pattern,
                 tag_as: @arguments[:tag_start_as]
             )
         end
 
-        if @arguments[:tag_end_as]
+        if (@end_pattern.is_a? Pattern) && arguments[:tag_end_as]
             @end_pattern = Pattern.new(
                 match: @end_pattern,
                 tag_as: @arguments[:tag_end_as]
             )
         end
 
-        if @arguments[:tag_while_as]
+        if (@while_pattern.is_a? Pattern) && arguments[:tag_while_as]
             @while_pattern = Pattern.new(
                 match: @while_pattern,
                 tag_as: @arguments[:tag_while_as]
@@ -54,9 +60,11 @@ class PatternRange < Pattern
         arguments.delete(:start_pattern)
         arguments.delete(:end_pattern)
         arguments.delete(:while_pattern)
+
+        @arguments = arguments
     end
 
-    def to_r(*)
+    def evaluate(*)
         raise "PatternRange cannot be used as a part of a Pattern"
     end
 
@@ -76,8 +84,12 @@ class PatternRange < Pattern
         output[:while] = output[:while][1..-2] if @while_pattern&.optimize_outer_group?
 
         output[:beginCaptures] = convert_group_attributes_to_captures(@start_pattern.collect_group_attributes)
-        output[:endCaptures]   = convert_group_attributes_to_captures(@end_pattern.collect_group_attributes)
-        output[:whileCaptures] = convert_group_attributes_to_captures(@while_pattern.collect_group_attributes)
+        unless @end_pattern.nil?
+            output[:endCaptures] = convert_group_attributes_to_captures(@end_pattern.collect_group_attributes)
+        end
+        unless @while_pattern.nil?
+            output[:whileCaptures] = convert_group_attributes_to_captures(@while_pattern.collect_group_attributes)
+        end
 
         output
         # rubocop:enable Metrics/LineLength

@@ -303,7 +303,8 @@ class Pattern
     def to_s(depth = 0, top_level = true)
         # TODO: make this easier to understand
         # rubocop:disable Metrics/LineLength
-        regex_as_string = @match.is_a? Pattern ? @match.to_s(depth + 2, true) : "/" + @match + "/"
+
+        regex_as_string = (@match.is_a? Pattern) ? @match.to_s(depth + 2, true) : "/" + @match + "/"
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
