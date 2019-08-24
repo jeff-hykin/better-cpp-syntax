@@ -33,8 +33,6 @@ class PatternRange < Pattern
         arguments.delete(:start_pattern)
         arguments.delete(:end_pattern)
         arguments.delete(:while_pattern)
-
-        super(arguments)
     end
 
     def start_pattern

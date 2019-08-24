@@ -12,7 +12,10 @@ test_pat = Pattern.new(
     match: /optional/,
     tag_as: "variable.optional.$match"
 )
-puts test_pat.to_tag
+puts test_pat.to_r
+puts "foo"
+puts test_pat.groupless.to_r
+puts "bar"
 
 test_range = PatternRange.new(
     start_pattern: /abc/,

@@ -70,7 +70,7 @@ class Regexp
     end
     def evaluate(groups = nil) to_r_s(groups) end
     def to_r_s(groups = nil)
-        puts "Regexp#to_r_s called"
+        # puts "Regexp#to_r_s called"
         return self.inspect[1..-2]
     end
     def integrate_pattern(other_regex, groups)
@@ -203,22 +203,22 @@ class Pattern
     # this method handles adding the at_most/at_least, dont_back_track methods
     # it returns regex-as-a-string
     def add_quantifier_options_to(match, groups)
-        new_regex = match.evaluate
+        match = match.evaluate if match.is_a? Pattern
         quantifier = self.simple_quantifier
         # check if there are quantifiers
         if quantifier != ""
             # if the match is not a single entity, then it needs to be wrapped
-            if not match.is_single_entity?
-                new_regex = "(?:#{new_regex})"
+            if not is_string_single_entity?(match)
+                match = "(?:#{match})"
             end
             # add the quantified ending
-            new_regex += quantifier
+            match += quantifier
         end
         # check if atomic
         if quantifier == "" && @arguments[:dont_back_track?] == true
-            new_regex = "(?>#{new_regex})"
+            match = "(?>#{match})"
         end
-        new_regex
+        match
     end
     
     def add_capture_group_if_needed(regex_as_string)
@@ -238,19 +238,26 @@ class Pattern
         arg1 = {match: arg1} unless arg1.is_a? Hash
         @original_arguments = arg1.clone
         if arg1[:match].is_a? String
-            @match = Regexp.escape(arg1[:match])
+            if arguments[1] == :deep_clone
+                @match = arg1[:match]
+            else
+                @match = Regexp.escape(arg1[:match])
+            end
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
             @match = arg1[:match].to_r_s
-        elsif arg1.is_a? Pattern
+        elsif arg1[:match].is_a? Pattern
             @match = arg1[:match]
         else
+            puts "was deep cloned" if arguments[1] == :deep_clone
             puts <<-HEREDOC.remove_indent
             Pattern.new() must be constructed with a String, Regexp, or Pattern
             Provided arguments: #{@original_arguments}
             HEREDOC
             raise "See error above"
         end
+        arg1.delete(:match)
+        @arguments = arg1
     end
 
     # attempts to provide a memorable name for a pattern
@@ -435,6 +442,25 @@ class Pattern
         to_r.is_single_entity?
     end
 
+    # does this pattern contain no capturing groups
+    def groupless?
+        collect_group_attributes == []
+    end
+    # remove capturing groups from this pattern
+    def groupless!
+        @arguments.delete(:tag_as)
+        @arguments.delete(:reference)
+        @arguments.delete(:includes)
+        raise "unable to remove capture" if needs_to_capture?
+        @match.groupless! if @match.is_a? Pattern
+        @next_pattern.groupless! if @match.is_a? Pattern
+        self
+    end
+    # create a copy of this pattern that contains no groups
+    def groupless
+        __deep_clone__.groupless!
+    end
+
     #
     # Internal
     #
@@ -505,7 +531,7 @@ class Pattern
     def __deep_clone__()
         options = @arguments.__deep_clone__()
         options[:match] = @match.__deep_clone__()
-        new_pattern = self.class.new(options)
+        new_pattern = self.class.new(options, :deep_clone)
         new_pattern.insert!(@next_pattern.__deep_clone__())
     end
 

@@ -130,7 +130,8 @@ end
 
 class LookAroundPattern < Pattern
     def do_evaluate_self(groups)
-        self_regex = @match.to_r(groups).to_r_s
+        self_regex = @match
+        self_regex = @match.evaluate(groups) if @match.is_a? Pattern
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
         when :lookAheadToAvoid  then self_regex = "(?!#{self_regex})"
@@ -230,7 +231,7 @@ end
 #
 
 class BackReferencePattern < Pattern
-    def initialize(reference)
+    def initialize(reference, deep_clone = nil)
         if reference.is_a? String
             super(
                 match: Regexp.new("[:backreference:#{reference}:]"),
@@ -238,7 +239,7 @@ class BackReferencePattern < Pattern
             )
         else
             # most likely __deep_clone__ was called, just call the super initalizer
-            super(reference)
+            super(reference, deep_clone)
         end
     end
     def to_s(depth = 0, top_level = true)
@@ -263,7 +264,7 @@ end
 #
 
 class SubroutinePattern < Pattern
-    def initialize(reference)
+    def initialize(reference, deep_clone = nil)
         if reference.is_a? String
             super(
                 match: Regexp.new("[:subroutine:#{reference}:]"),
@@ -271,7 +272,7 @@ class SubroutinePattern < Pattern
             )
         else
             # most likely __deep_clone__ was called, just call the super initalizer
-            super(reference)
+            super(reference, deep_clone)
         end
     end
     def to_s(depth = 0, top_level = true)
