@@ -527,9 +527,10 @@ class Pattern
             value[:name].gsub!(/\$(?:match|reference\((.+)\))/) do |match|
                 next ("$" + key) if match == "$match"
 
-                "$" + (groups.detect do |group|
+                group = groups.detect do |group|
                     group[:reference] == Regexp.last_match(1)
-                end)[:group].to_s
+                end
+                "$" + group[:group].to_s
             end
         end
     end
