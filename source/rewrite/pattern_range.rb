@@ -45,10 +45,10 @@ class PatternRange < Pattern
 
     def to_tag
         output = {
-            begin: @start_pattern.to_r.to_r_s,
+            begin: @start_pattern.evaluate,
         }
-        output[:end]   = @end_pattern.to_r.to_r_s   if @end_pattern   != nil
-        output[:while] = @while_pattern.to_r.to_r_s if @while_pattern != nil
+        output[:end]   = @end_pattern.evaluate   if @end_pattern   != nil
+        output[:while] = @while_pattern.evaluate if @while_pattern != nil
         output[:name]  = @arguments[:tag_as] if @arguments[:tag_as]   != nil
         output[:contentName] = @arguments[:tag_content_as] if @arguments[:tag_content_as] != nil
 

@@ -43,9 +43,9 @@ class OrPattern < Pattern
     end
     def integrate_pattern(previous_regex, groups, is_single_entity)
         if is_single_entity
-            return /(?:#{previous_regex.to_r_s}|#{self.to_r(groups).to_r_s})/
+            return "(?:#{previous_regex}|#{self.evaluate(groups)})"
         end
-        /(?:(?:#{previous_regex.to_r_s})|#{self.to_r(groups).to_r_s})/
+        "(?:(?:#{previous_regex})|#{self.evaluate(groups)})"
     end
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
@@ -81,16 +81,19 @@ class OneOfPattern < Pattern
         end
         # placeholder is here to avoid calling to_r in patterns prematurely
         @match = /placeholder regex/
-        @arguments[:patterns] = patterns
+        @arguments[:patterns] = patterns.map do |pattern|
+            next pattern if pattern.is_a? Pattern
+            Pattern.new(pattern)
+        end
     end
 
     def do_evaluate_self(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
-            regex = pattern.to_r(groups)
+            regex = pattern.evaluate(groups)
             if regex.is_single_entity?
-                next regex.to_r_s
+                next regex
             else
-                next "(?:#{regex.to_r_s})"
+                next "(?:#{regex})"
             end
         end
         if needs_to_capture?

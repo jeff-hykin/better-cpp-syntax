@@ -11,9 +11,6 @@ class String
     def remove_indent
         gsub(/^[ \t]{#{self.match(/^[ \t]*/)[0].length}}/, '')
     end
-    def to_r_s
-        return self
-    end
 end
 
 def is_string_single_entity?(regex_string)
@@ -62,19 +59,19 @@ end
 
 class Regexp
     def is_single_entity?()
-        puts "Regexp#is_single_entity? called"
         is_string_single_entity? to_r_s
     end
     def to_r(groups = nil)
         return self
     end
-    def evaluate(groups = nil) to_r_s(groups) end
+    def evaluate(groups = nil)
+        to_r_s(groups)
+    end
     def to_r_s(groups = nil)
-        # puts "Regexp#to_r_s called"
         return self.inspect[1..-2]
     end
     def integrate_pattern(other_regex, groups)
-        /#{other_regex.to_r_s}#{self.to_r_s}/
+        /#{other_regex}#{self.to_r_s}/
     end
 end
 
@@ -272,7 +269,7 @@ class Pattern
 
     # converts a Pattern to a Hash represnting a textmate pattern
     def to_tag
-        regex_as_string = self.to_r.to_r_s
+        regex_as_string = self.evaluate
         output = {
             match: regex_as_string,
         }
@@ -341,7 +338,7 @@ class Pattern
         def warn(symbol)
             puts <<-HEREDOC.remove_indent 
 
-            When testing the pattern #{self_regex.to_r_s}. The unit test for #{symbol} failed.
+            When testing the pattern #{self_regex.evaluate}. The unit test for #{symbol} failed.
             The unit test has the following patterns:
             #{@arguments[symbol].to_yaml}
             The Failing pattern is below:
@@ -438,7 +435,6 @@ class Pattern
     #   atomic for the purpose of regex building
     # called by #to_r
     def is_single_entity?
-        puts "Pattern#is_single_entity? called"
         to_r.is_single_entity?
     end
 
