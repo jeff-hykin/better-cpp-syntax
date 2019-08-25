@@ -16,6 +16,14 @@ class String
     end
 end
 
+# determines if a regex string is a single entity
+#
+# @note single entity means that for the purposes of modification, the expression is
+#   atomic, for example if appending a `+` to the end of `regex_string` matches only
+#   a prt of regex string multiple times then it is not atomic
+# @param regex_string [String] a string representing a regular expression, without the
+#   forward slash "/" at the begining and
+# @return [true, false] if the string represents an single regex entity
 def string_single_entity?(regex_string)
     return true if regex_string.length == 2 && regex_string[0] == '\\'
 
@@ -71,16 +79,8 @@ class Regexp
         self
     end
 
-    def evaluate(groups = nil)
-        to_r_s(groups)
-    end
-
     def to_r_s
         inspect[1..-2]
-    end
-
-    def integrate_pattern(other_regex, _groups)
-        "#{other_regex}#{to_r_s}"
     end
 end
 
@@ -457,6 +457,32 @@ class Pattern
     # create a copy of this pattern that contains no groups
     def groupless
         __deep_clone__.groupless!
+    end
+
+    def reTag!(arguments)
+        # tags are keep unless `all: false` or `keep: false`, and append is not a string
+        discard_tag = (arguments[:all] == false || arguments[:keep] == false)
+        discard_tag = false if arguments[:append].is_a? String
+
+        arguments.each do |key, tag|
+            if [@arguments[:tag_as], @arguments[:reference]].include? key
+                @arguments[:tag_as] = tag
+                discard_tag = false
+            end
+        end
+
+        if arguments[:append].is_a?(String) && arguments[:tag_as]
+            arguments[:tag_as] = arguments[:tag_as] + "." + arguments[:append]
+        end
+
+        @arguments.delete(:tag_as) if discard_tag
+
+        @next_pattern.reTag!(arguments) unless @next_pattern.nil?
+        self
+    end
+
+    def reTag(arguments)
+        __deep_clone__.reTag!(arguments)
     end
 
     #

@@ -15,6 +15,9 @@ test_pat = Pattern.new(
     tag_as: "variable.optional.$match",
 )
 puts test_pat.evaluate
+puts test_pat.reTag(
+    "part2" => "part3",
+).to_tag
 
 # puts test_pat.groupless.to_r
 
