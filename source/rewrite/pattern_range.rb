@@ -100,4 +100,10 @@ class PatternRange < Pattern
 
         output
     end
+
+    def reTag!(arguments)
+        @start_pattern.reTag!(arguments)
+        @stop_pattern.reTag!(arguments)
+        self
+    end
 end

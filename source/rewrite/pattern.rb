@@ -477,7 +477,7 @@ class Pattern
 
         @arguments.delete(:tag_as) if discard_tag
 
-        @next_pattern.reTag!(arguments) unless @next_pattern.nil?
+        @next_pattern&.reTag!(arguments)
         self
     end
 
