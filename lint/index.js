@@ -11,7 +11,7 @@ const fs = require("fs");
  *      whileCaptures?: {[index: string]: TextMateRule}
  *      name?: string
  *      contentName?: string
- *      includes?: string
+ *      include?: string
  *      patterns?: TextMateRule[]
  *      repositoryName?: string
  * }} TextMateRule
@@ -19,7 +19,8 @@ const fs = require("fs");
 
 const linters = [
     require("./linters/unresolved"),
-    require("./linters/spell_check")
+    require("./linters/spell_check"),
+    require("./linters/duplicate_value")
 ];
 
 const grammar = JSON.parse(fs.readFileSync(process.argv[2]).toString());
