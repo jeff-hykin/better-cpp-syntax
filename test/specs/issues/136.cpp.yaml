@@ -12,13 +12,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: name
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: _ts
   scopes:
     - variable.other.object.access
@@ -77,7 +77,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: expected
   scopes:
     - variable.parameter.preprocessor
@@ -89,4 +89,4 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
