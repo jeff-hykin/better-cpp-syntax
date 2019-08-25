@@ -267,20 +267,20 @@ def predefinedMacros()
     ]
 
     macros = cpp + msvc + gcc + clang
-    macros.map! { |macro|
-        newPattern(
-            match: /\b#{macro}\b/,
-            tag_as: "entity.name.other.preprocessor.macro.predefined.#{macro}",
-        )
-    }
-    macros << newPattern(
-        newPattern(
+    macros = [
+        Pattern.new(
+            match: /\b/.then(
+                match: /#{macros.join "|"}/,
+                tag_as: "entity.name.other.preprocessor.macro.predefined.$match"
+            ).then(/\b/)
+        ),
+        Pattern.new(
             match: /\b__/.then(
                 match: /[A-Z_]+/,
                 reference: "name",
             ).then(/__\b/),
             tag_as: "entity.name.other.preprocessor.macro.predefined.probably.$reference(name)",
         )
-    )
+    ]
     return macros
 end
