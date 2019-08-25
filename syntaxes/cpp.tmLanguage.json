@@ -16553,7 +16553,7 @@
             },
             {
               "name": "string.quoted.double.raw.sql.cpp",
-              "begin": "(((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL|)|d[dm]l)\\()",
+              "begin": "(((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL)|d[dm]l)\\()",
               "beginCaptures": {
                 "1": {
                   "name": "punctuation.definition.string.begin.cpp"
@@ -16562,7 +16562,7 @@
                   "name": "meta.encoding.cpp"
                 }
               },
-              "end": "(\\)(?:[pP]?(?:sql|SQL|)|d[dm]l)\\\")",
+              "end": "(\\)(?:[pP]?(?:sql|SQL)|d[dm]l)\\\")",
               "endCaptures": {
                 "1": {
                   "name": "punctuation.definition.string.end.cpp"
