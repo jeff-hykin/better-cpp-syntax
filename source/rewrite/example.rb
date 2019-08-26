@@ -29,3 +29,6 @@ test_range = PatternRange.new(
 
 puts test_range
 puts test_range.to_tag
+
+grammar = Grammar.new_exportable_grammar
+puts grammar
