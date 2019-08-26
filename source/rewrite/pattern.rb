@@ -272,6 +272,7 @@ class Pattern
         end
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
+        output.reject! { |_, v| v.empty? }
         output
     end
 
@@ -544,13 +545,17 @@ class Pattern
 
         groups.each do |group|
             output = {}
-            output[:name] = group[:tag_as]
-            # process includes
+            output[:name] = group[:tag_as] unless group[:group] == 0
+            if !group[:includes].nil?
+                output[:patterns] = convert_includes_to_patterns(group[:includes])
+            end
             captures[group[:group].to_s] = output
         end
-        captures.reject { |_, v| v.empty? }
+        captures.reject! { |_, v| v.empty? }
         # replace $match and $reference() with the appropriate capture number
         captures.each do |key, value|
+            next if value[:name].nil?
+
             value[:name] = value[:name].gsub(/\$(?:match|reference\((.+)\))/) do |match|
                 next ("$" + key) if match == "$match"
 
@@ -560,6 +565,17 @@ class Pattern
                 "$" + reference_group[:group].to_s
             end
         end
+    end
+
+    def convert_includes_to_patterns(includes)
+        includes = [includes] unless includes.is_a? Array
+        patterns = includes.flatten.map do |rule|
+            next {include: "##{rule}"} if rule.is_a? Symbol
+
+            rule = Pattern.new(rule) unless rule.is_a? Pattern
+            rule.to_tag
+        end
+        patterns
     end
 
     def __deep_clone__
