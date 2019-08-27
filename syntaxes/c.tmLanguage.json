@@ -1248,7 +1248,7 @@
               "name": "punctuation.definition.comment.begin.documentation.c"
             }
           },
-          "end": "(\\*\\/)",
+          "end": "([!*]+\\*\\/)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.comment.end.documentation.c"
@@ -1256,7 +1256,7 @@
           },
           "patterns": [
             {
-              "while": "(?-mix:(?:^)\\s+(?!\\*\\/)(\\**))",
+              "while": "(?-mix:(?:^)(?>\\s*)(?![!*]+\\*\\/)((?>\\**)))",
               "whileCaptures": {
                 "1": {
                   "name": "punctuation.definition.comment.continuation.documentation.c"
