@@ -818,7 +818,7 @@ repository:
       - match: "[\\\\@]\\S++(?!(?:\\n|$))"
         name: invalid.unknown.documentation.command.cpp
     - name: comment.block.documentation.cpp
-      begin: "(\\/\\*[!*]+)"
+      begin: "(\\/\\*[!*]+(?:(?:\\n|$)|(?=\\s)))"
       beginCaptures:
         '1':
           name: punctuation.definition.comment.begin.documentation.cpp

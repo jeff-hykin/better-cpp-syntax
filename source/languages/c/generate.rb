@@ -532,7 +532,7 @@ c_grammar[:comments] = [
                 end_pattern: lookAheadFor(/\n/),
                 tag_as: "comment.line.double-slash",
                 includes: [
-                    :line_continuation_character.
+                    :line_continuation_character,
                 ]
             )
         ]

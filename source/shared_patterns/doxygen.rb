@@ -316,7 +316,7 @@ command_grammars << Pattern.new(
 @block_comment = PatternRange.new(
     tag_as: "comment.block.documentation",
     start_pattern: Pattern.new(
-        match: /\/\*/.oneOrMoreOf(/[!*]/),
+        match: /\/\*/.oneOrMoreOf(/[!*]/).then(@end_of_line.or(lookAheadFor(/\s/))),
         tag_as: "punctuation.definition.comment.begin.documentation",
     ),
     end_pattern: Pattern.new(
