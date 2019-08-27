@@ -2469,27 +2469,10 @@ grammar = Grammar.new(
 # 
 # Generate macro versions of all ranged patterns 
 #
-    # TODO: this is incomplete, all the root patterns are included, but their "includes" are not converted
-    macro_context = []
-    for each in grammar[:$initial_context]
-        if grammar[each].is_a?(PatternRange)
-            tag_version = grammar[each].to_tag(ignore_repository_entry: true).dup
-            if tag_version[:end] != nil
-                tag_version[:end] = tag_version[:end].dup
-                # if there's a non-escaped newline, then the range is over
-                tag_version[:end] = "#{tag_version[:end]}|(?<!\\\\)$"
-                repo_name  = "macro_safe_#{each.to_s}".to_sym
-                grammar[repo_name] = tag_version
-                macro_context.push(repo_name)
-            else
-                macro_context.push(each)
-            end
-        else 
-            macro_context.push(each)
-        end
-    end
-    macro_context.push(:macro_argument)
-    grammar[:macro_context] = macro_context
+    # create a duplicate grammar with all pattern ranges bailed-out
+    system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
+    # assign that to the macro context
+    grammar[:macro_context] = ["source.cpp.embedded.macro"]
 
 # 
 # Save

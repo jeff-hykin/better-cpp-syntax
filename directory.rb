@@ -29,4 +29,5 @@ PathFor = {
     localReadMe:      ->(lang_extension) { File.join(PathFor[:language][lang_extension], "README.md"                                            ) },
     localPackageJson: ->(lang_extension) { File.join(PathFor[:language][lang_extension], "package.json"                                         ) },
     generator:        ->(lang_extension) { File.join(PathFor[:language][lang_extension], "generate.rb"                                          ) },
+    macro_generator:  ->(lang_extension) { File.join(PathFor[:language][lang_extension], "generate_macro_bailout.js"                            ) },
 }

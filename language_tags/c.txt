@@ -1,4 +1,6 @@
+comment.block.banner.c
 comment.block.c
+comment.block.documentation.c
 comment.block.preprocessor.elif-branch.c
 comment.block.preprocessor.elif-branch.in-block.c
 comment.block.preprocessor.else-branch.c
@@ -6,6 +8,7 @@ comment.block.preprocessor.else-branch.in-block.c
 comment.block.preprocessor.if-branch.c
 comment.block.preprocessor.if-branch.in-block.c
 comment.line.banner.c
+comment.line.documentation.c
 comment.line.double-slash.c
 constant.character.escape.c
 constant.character.escape.line-continuation.c
@@ -34,6 +37,7 @@ invalid.illegal.macro-name.c
 invalid.illegal.placeholder.c
 invalid.illegal.stray-$1.c
 invalid.illegal.unknown-escape.c
+invalid.unknown.documentation.command.c
 keyword.control.c
 keyword.control.case.c
 keyword.control.default.c
@@ -70,6 +74,9 @@ keyword.other.unit.hexadecimal.c
 keyword.other.unit.octal.c
 keyword.other.unit.suffix.floating-point.c
 keyword.other.unit.suffix.integer.c
+markup.bold.doxygen.c
+markup.inline.raw.string.c
+markup.italic.doxygen.c
 meta.asm.c
 meta.block.c
 meta.block.switch.c
@@ -99,8 +106,12 @@ meta.toc-list.banner.block.c
 meta.toc-list.banner.line.c
 punctuation.definition.begin.bracket.square.c
 punctuation.definition.comment.begin.c
+punctuation.definition.comment.begin.documentation.c
 punctuation.definition.comment.c
+punctuation.definition.comment.continuation.documentation.c
+punctuation.definition.comment.documentation.c
 punctuation.definition.comment.end.c
+punctuation.definition.comment.end.documentation.c
 punctuation.definition.directive.c
 punctuation.definition.end.bracket.square.c
 punctuation.definition.parameters.begin.c
@@ -151,6 +162,8 @@ storage.type.$1.c
 storage.type.asm.c
 storage.type.built-in.c
 storage.type.built-in.primitive.c
+storage.type.class.doxygen.c
+storage.type.class.gtkdoc
 string.quoted.double.c
 string.quoted.double.include.c
 string.quoted.other.lt-gt.include.c
@@ -168,5 +181,6 @@ variable.other.member.c
 variable.other.object.access.c
 variable.other.readwrite.global.mac-classic.c
 variable.other.readwrite.static.mac-classic.c
+variable.parameter.c
 variable.parameter.preprocessor.c
 variable.parameter.probably.c

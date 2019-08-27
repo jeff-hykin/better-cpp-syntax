@@ -282,7 +282,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                         reference: "conditional_name",
                     )
                 ),
-                while: @start_of_line.lookAheadToAvoid(/\s*+#\s*(?:else|endif)/),
+                end_pattern: @start_of_line.lookAheadToAvoid(/\s*+#\s*(?:else|endif)/),
                 includes: [
                     # the first line (the conditional line)
                     PatternRange.new(

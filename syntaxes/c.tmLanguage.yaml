@@ -638,6 +638,181 @@ repository:
                 name: keyword.other.unit.suffix.integer.c
           - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
             name: invalid.illegal.constant.numeric
+  comments:
+    patterns:
+    - name: comment.line.documentation.c
+      while: "(?-mix:(?:^)\\s*(\\/\\/[!\\/]+))"
+      whileCaptures:
+        '1':
+          name: punctuation.definition.comment.continuation.documentation.c
+      begin: "(\\/\\/[!\\/]+)"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.comment.documentation.c
+      patterns:
+      - match: (?<=[\s*!\/])[\\@](?:callergraph|callgraph|else|endif|f\$|f\[|f\]|hidecallergraph|hidecallgraph|hiderefby|hiderefs|hideinitializer|htmlinclude|n|nosubgrouping|private|privatesection|protected|protectedsection|public|publicsection|pure|showinitializer|showrefby|showrefs|tableofcontents|\$|\#|<|>|%|"|\.|=|::|\||\-\-|\-\-\-)\b(?:\{[^}]*\})?
+        name: storage.type.class.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.italic.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.bold.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.inline.raw.string.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: variable.parameter.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+        name: storage.type.class.gtkdoc
+      - match: "[\\\\@]\\S++(?!(?:\\n|$))"
+        name: invalid.unknown.documentation.command.c
+    - name: comment.block.documentation.c
+      begin: "(\\/\\*[!*]+)"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.comment.begin.documentation.c
+      end: "(\\*\\/)"
+      endCaptures:
+        '1':
+          name: punctuation.definition.comment.end.documentation.c
+      patterns:
+      - while: "(?-mix:(?:^)\\s+(?!\\*\\/)(\\**))"
+        whileCaptures:
+          '1':
+            name: punctuation.definition.comment.continuation.documentation.c
+        begin: "\\G"
+        patterns:
+        - match: (?<=[\s*!\/])[\\@](?:callergraph|callgraph|else|endif|f\$|f\[|f\]|hidecallergraph|hidecallgraph|hiderefby|hiderefs|hideinitializer|htmlinclude|n|nosubgrouping|private|privatesection|protected|protectedsection|public|publicsection|pure|showinitializer|showrefby|showrefs|tableofcontents|\$|\#|<|>|%|"|\.|=|::|\||\-\-|\-\-\-)\b(?:\{[^}]*\})?
+          name: storage.type.class.doxygen.c
+        - match: "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)"
+          captures:
+            '1':
+              name: storage.type.class.doxygen.c
+            '2':
+              name: markup.italic.doxygen.c
+        - match: "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)"
+          captures:
+            '1':
+              name: storage.type.class.doxygen.c
+            '2':
+              name: markup.bold.doxygen.c
+        - match: "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)"
+          captures:
+            '1':
+              name: storage.type.class.doxygen.c
+            '2':
+              name: markup.inline.raw.string.c
+        - match: "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?"
+          name: storage.type.class.doxygen.c
+        - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
+          name: storage.type.class.doxygen.c
+        - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+          captures:
+            '1':
+              name: storage.type.class.doxygen.c
+            '2':
+              name: variable.parameter.c
+        - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
+          name: storage.type.class.doxygen.c
+        - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
+          name: storage.type.class.doxygen.c
+        - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+          name: storage.type.class.gtkdoc
+        - match: "[\\\\@]\\S++(?!(?:\\n|$))"
+          name: invalid.unknown.documentation.command.c
+      - match: (?<=[\s*!\/])[\\@](?:callergraph|callgraph|else|endif|f\$|f\[|f\]|hidecallergraph|hidecallgraph|hiderefby|hiderefs|hideinitializer|htmlinclude|n|nosubgrouping|private|privatesection|protected|protectedsection|public|publicsection|pure|showinitializer|showrefby|showrefs|tableofcontents|\$|\#|<|>|%|"|\.|=|::|\||\-\-|\-\-\-)\b(?:\{[^}]*\})?
+        name: storage.type.class.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@](?:a|em|e))\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.italic.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@]b)\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.bold.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@](?:c|p))\\s+(\\S+)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: markup.inline.raw.string.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:a|anchor|b|c|cite|copybrief|copydetail|copydoc|def|dir|dontinclude|e|em|emoji|enum|example|extends|file|idlexcept|implements|include|includedoc|includelineno|latexinclude|link|memberof|namespace|p|package|ref|refitem|related|relates|relatedalso|relatesalso|verbinclude)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+        captures:
+          '1':
+            name: storage.type.class.doxygen.c
+          '2':
+            name: variable.parameter.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?<=[\\s*!\\/])[\\\\@](?:code|cond|docbookonly|dot|htmlonly|internal|latexonly|link|manonly|msc|parblock|rtfonly|secreflist|uml|verbatim|xmlonly|endcode|endcond|enddocbookonly|enddot|endhtmlonly|endinternal|endlatexonly|endlink|endmanonly|endmsc|endparblock|endrtfonly|endsecreflist|enduml|endverbatim|endxmlonly)\\b(?:\\{[^}]*\\})?"
+        name: storage.type.class.doxygen.c
+      - match: "(?:\\b[A-Z]+:|@[a-z_]+:)"
+        name: storage.type.class.gtkdoc
+      - match: "[\\\\@]\\S++(?!(?:\\n|$))"
+        name: invalid.unknown.documentation.command.c
+    - match: "^\\/\\* =(\\s*.*?)\\s*= \\*\\/$\\n?"
+      captures:
+        '1':
+          name: meta.toc-list.banner.block.c
+      name: comment.block.banner.c
+    - name: comment.block.c
+      begin: "(\\/\\*)"
+      beginCaptures:
+        '1':
+          name: punctuation.definition.comment.begin.c
+      end: "(\\*\\/)"
+      endCaptures:
+        '1':
+          name: punctuation.definition.comment.end.c
+    - match: "^\\/\\/ =(\\s*.*?)\\s*=$\\n?"
+      captures:
+        '1':
+          name: meta.toc-list.banner.line.c
+      name: comment.line.banner.c
+    - begin: "((?:^[ \\t]+)?)(?=\\/\\/)"
+      beginCaptures:
+        '1':
+          name: punctuation.whitespace.comment.leading.c
+      end: "(?!\\G)"
+      patterns:
+      - name: comment.line.double-slash.c
+        begin: "(\\/\\/)"
+        beginCaptures:
+          '1':
+            name: punctuation.definition.comment.c
+        end: "(?=\\n)"
+        patterns:
+        - include: "#line_continuation_character"
   probably_a_parameter:
     match: "(?<=(?:[a-zA-Z_0-9] |[&*>\\]\\)]))\\s*([a-zA-Z_]\\w*)\\s*(?=(?:\\[\\]\\s*)?(?:,|\\)))"
     captures:
@@ -735,41 +910,6 @@ repository:
     name: meta.function-call.c
     patterns:
     - include: "#function-call-innards"
-  comments:
-    patterns:
-    - captures:
-        '1':
-          name: meta.toc-list.banner.block.c
-      match: "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?"
-      name: comment.block.c
-    - begin: "/\\*"
-      beginCaptures:
-        '0':
-          name: punctuation.definition.comment.begin.c
-      end: "\\*/"
-      endCaptures:
-        '0':
-          name: punctuation.definition.comment.end.c
-      name: comment.block.c
-    - captures:
-        '1':
-          name: meta.toc-list.banner.line.c
-      match: "^// =(\\s*.*?)\\s*=\\s*$\\n?"
-      name: comment.line.banner.c
-    - begin: "(^[ \\t]+)?(?=//)"
-      beginCaptures:
-        '1':
-          name: punctuation.whitespace.comment.leading.c
-      end: "(?!\\G)"
-      patterns:
-      - begin: "//"
-        beginCaptures:
-          '0':
-            name: punctuation.definition.comment.c
-        end: "(?=\\n)"
-        name: comment.line.double-slash.c
-        patterns:
-        - include: "#line_continuation_character"
   disabled:
     begin: "^\\s*#\\s*if(n?def)?\\b.*$"
     end: "^\\s*#\\s*endif\\b"
