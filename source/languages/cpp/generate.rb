@@ -1531,13 +1531,8 @@ grammar = Grammar.new(
             match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
-        # edgecase for `sizeof...`
-        Pattern.new(
-            match: /\bsizeof\.\.\./,
-            tag_as: "keyword.operator.wordlike keyword.operator.sizeof.variadic",
-        ),
     ]
-    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
+    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
         grammar[:operators].push(functionCallGenerator[
@@ -1548,6 +1543,14 @@ grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    # edgecase for `sizeof...`
+    grammar[:operators].push(functionCallGenerator[
+        repository_name: "sizeof_variadic_operator",
+        match_name: /\bsizeof\.\.\./,
+        tag_name_as: "keyword.operator.functionlike keyword.operator.sizeof.variadic",
+        tag_content_as: "arguments.operator.sizeof.variadic",
+        tag_parenthese_as: "operator.sizeof.variadic"
+    ])
     
     grammar[:ternary_operator] = PatternRange.new(
         apply_end_pattern_last: true,

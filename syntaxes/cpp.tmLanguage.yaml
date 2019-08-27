@@ -4243,11 +4243,11 @@ repository:
   operators:
     patterns:
     - include: "#sizeof_operator"
-    - include: "#variadic-sizeof_operator"
     - include: "#alignof_operator"
     - include: "#alignas_operator"
     - include: "#typeid_operator"
     - include: "#noexcept_operator"
+    - include: "#sizeof_variadic_operator"
     - match: "--"
       name: keyword.operator.decrement.cpp
     - match: "\\+\\+"
@@ -4272,8 +4272,6 @@ repository:
     patterns:
     - match: "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)"
       name: keyword.operator.wordlike.cpp keyword.operator.$0.cpp
-    - match: "\\bsizeof\\.\\.\\."
-      name: keyword.operator.wordlike.cpp keyword.operator.sizeof.variadic.cpp
   sizeof_operator:
     contentName: meta.arguments.operator.sizeof.cpp
     begin: "((?<!\\w)sizeof(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()"
@@ -4299,33 +4297,6 @@ repository:
     endCaptures:
       '1':
         name: punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
-    patterns:
-    - include: "#evaluation_context"
-  variadic-sizeof_operator:
-    contentName: meta.arguments.operator.variadic-sizeof.cpp
-    begin: "((?<!\\w)variadic-sizeof(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()"
-    beginCaptures:
-      '1':
-        name: keyword.operator.functionlike.cpp keyword.operator.variadic-sizeof.cpp
-      '2':
-        patterns:
-        - include: "#inline_comment"
-      '3':
-        name: comment.block.cpp punctuation.definition.comment.begin.cpp
-      '4':
-        name: comment.block.cpp
-      '5':
-        patterns:
-        - match: "\\*\\/"
-          name: comment.block.cpp punctuation.definition.comment.end.cpp
-        - match: "\\*"
-          name: comment.block.cpp
-      '6':
-        name: punctuation.section.arguments.begin.bracket.round.operator.variadic-sizeof.cpp
-    end: "(\\))"
-    endCaptures:
-      '1':
-        name: punctuation.section.arguments.end.bracket.round.operator.variadic-sizeof.cpp
     patterns:
     - include: "#evaluation_context"
   alignof_operator:
@@ -4434,6 +4405,33 @@ repository:
     endCaptures:
       '1':
         name: punctuation.section.arguments.end.bracket.round.operator.noexcept.cpp
+    patterns:
+    - include: "#evaluation_context"
+  sizeof_variadic_operator:
+    contentName: meta.arguments.operator.sizeof.variadic.cpp
+    begin: "(\\bsizeof\\.\\.\\.)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()"
+    beginCaptures:
+      '1':
+        name: keyword.operator.functionlike.cpp keyword.operator.sizeof.variadic.cpp
+      '2':
+        patterns:
+        - include: "#inline_comment"
+      '3':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '4':
+        name: comment.block.cpp
+      '5':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '6':
+        name: punctuation.section.arguments.begin.bracket.round.operator.sizeof.variadic.cpp
+    end: "(\\))"
+    endCaptures:
+      '1':
+        name: punctuation.section.arguments.end.bracket.round.operator.sizeof.variadic.cpp
     patterns:
     - include: "#evaluation_context"
   ternary_operator:
