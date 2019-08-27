@@ -55,53 +55,12 @@
   scopes:
     - markup.bold.doxygen
 - source: ' happens'
-- source: '*/'
+- source: '*'
   scopes:
-    - punctuation.definition.comment.end.documentation
-  scopesEnd:
-    - comment.block.documentation
-- source: int
-  scopesBegin:
-    - meta.function.definition
-  scopes:
-    - meta.qualified_type
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: foo
-  scopesBegin:
-    - meta.head.function.definition
-  scopes:
-    - entity.name.function.definition
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round
-- source: int
-  scopesBegin:
-    - meta.function.definition.parameters
-    - meta.parameter
-  scopes:
-    - storage.type.primitive
-    - storage.type.built-in.primitive
-- source: a
-  scopes:
-    - variable.parameter
-  scopesEnd:
-    - meta.function.definition.parameters
-    - meta.parameter
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
+    - punctuation.definition.comment.continuation.documentation
+- source: /
+- source: int foo(int a);
 - source: /**
-  scopesBegin:
-    - comment.block.documentation
-  scopes:
-    - punctuation.definition.comment.begin.documentation
 - source: '*'
   scopes:
     - punctuation.definition.comment.continuation.documentation
@@ -164,6 +123,7 @@
   scopesEnd:
     - punctuation.definition.comment.continuation.documentation
 - source: ' The application class handles ...'
-- source: '*/'
+- source: '*'
   scopes:
-    - punctuation.definition.comment.end.documentation
+    - punctuation.definition.comment.continuation.documentation
+- source: /
