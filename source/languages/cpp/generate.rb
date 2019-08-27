@@ -8,6 +8,7 @@ require_relative PathFor[:sharedPattern]["assembly"]
 require_relative PathFor[:sharedPattern]["inline_comment"]
 require_relative PathFor[:sharedPattern]["std_space"]
 require_relative PathFor[:sharedPattern]["backslash_escapes"]
+require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
@@ -231,7 +232,6 @@ grammar = Grammar.new(
             # literals
             :string_context,
             :number_literal,
-            :string_context_c,
             # variable-like
             :method_access, # needs to be above :function_call, needs to be above operator
             :member_access,
@@ -381,6 +381,7 @@ grammar = Grammar.new(
         tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
     )
     grammar[:comments] = [
+        *doxygen(),
         :emacs_file_banner,
         :block_comment,
         :line_comment,
@@ -669,7 +670,7 @@ grammar = Grammar.new(
                     end_pattern: /\)/,
                     includes: [
                         :attributes_context,
-                        :string_context_c,
+                        :string_context,
                     ],
                 ),
                 Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
@@ -1012,7 +1013,7 @@ grammar = Grammar.new(
             :function_type,
             :storage_types,
             :number_literal,
-            :string_context_c,
+            :string_context,
             :comma,
             :scope_resolution_inner_generated,
             grammar[:template_call_range],
@@ -1238,7 +1239,6 @@ grammar = Grammar.new(
                 tag_as: "meta.static_assert.message",
                 includes: [
                     :string_context,
-                    :string_context_c,
                 ]
             ),
             :evaluation_context,
@@ -2439,54 +2439,6 @@ grammar = Grammar.new(
             :evaluation_context
         ]
     )
-    grammar[:string_context_c] = [
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: lookBehindToAvoid(/[\da-fA-F]/).then(/'/),
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "'",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.single",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            }
-        ]
     grammar[:string_escapes_context_c] = [
             :backslash_escapes,
             {

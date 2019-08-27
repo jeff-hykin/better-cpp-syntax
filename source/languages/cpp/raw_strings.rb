@@ -45,7 +45,7 @@ def getRawStringPatterns()
         name: "string.quoted.double.raw"
     }
     regex = generateTaggedRawString("regex", /_r/.or(/re/).or(/regex/), "source.regexp.python")
-    sql = generateTaggedRawString("sql", /[pP]?(?:sql|SQL|)/.or(/d[dm]l/), "source.sql")
+    sql = generateTaggedRawString("sql", /[pP]?(?:sql|SQL)/.or(/d[dm]l/), "source.sql")
     return [
         regex,
         sql,

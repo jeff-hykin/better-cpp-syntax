@@ -6,8 +6,8 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
     # the outer range pattern does not attempt to actually process the numbers
     valid_single_character = /(?:[0-9a-zA-Z_\.]|#{separator})/
     valid_after_exponent = lookBehindFor(/[eEpP]/).then(/[+-]/)
-    start_pattern = lookBehindToAvoid(/\w/).lookAheadFor(/\d|\.\d/)
-    end_pattern = lookAheadToAvoid(valid_single_character.or(valid_after_exponent))
+    valid_character = valid_single_character.or(valid_after_exponent)
+    end_pattern = /$/
     
     number_separator_pattern = newPattern(
         should_partial_match: [ "1#{separator}1" ],
@@ -164,23 +164,28 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
     # first a range (the whole number) is found
     # then, after the range is found, it starts to figure out what kind of number/constant it is
     # it does this by matching one of the includes
-    return PatternRange.new(
-        start_pattern: start_pattern,
-        end_pattern: end_pattern,
-        # only a single include pattern should match
+    return Pattern.new(
+        match: lookBehindToAvoid(/\w/).then(/\.?\d/).zeroOrMoreOf(valid_character),
         includes: [
-            # floating point
-            hex_prefix    .maybe(hex_digits    ).then(hex_point    ).maybe(hex_digits    ).maybe(hex_exponent    ).maybe(floating_suffix).then(hex_ending),
-            decimal_prefix.maybe(decimal_digits).then(decimal_point).maybe(decimal_digits).maybe(decimal_exponent).maybe(floating_suffix).then(decimal_ending),
-            # numeric
-            binary_prefix .then(binary_digits )                        .maybe(numeric_suffix).then(binary_ending ),
-            octal_prefix  .then(octal_digits  )                        .maybe(numeric_suffix).then(octal_ending  ),
-            hex_prefix    .then(hex_digits    ).maybe(hex_exponent    ).maybe(numeric_suffix).then(hex_ending    ),
-            decimal_prefix.then(decimal_digits).maybe(decimal_exponent).maybe(numeric_suffix).then(decimal_ending),
-            # invalid
-            newPattern(
-                match: oneOrMoreOf(valid_single_character.or(valid_after_exponent)),
-                tag_as: "invalid.illegal.constant.numeric"
+            PatternRange.new(
+                start_pattern: lookAheadFor(/./),
+                end_pattern: end_pattern,
+                # only a single include pattern should match
+                includes: [
+                    # floating point
+                    hex_prefix    .maybe(hex_digits    ).then(hex_point    ).maybe(hex_digits    ).maybe(hex_exponent    ).maybe(floating_suffix).then(hex_ending),
+                    decimal_prefix.maybe(decimal_digits).then(decimal_point).maybe(decimal_digits).maybe(decimal_exponent).maybe(floating_suffix).then(decimal_ending),
+                    # numeric
+                    binary_prefix .then(binary_digits )                        .maybe(numeric_suffix).then(binary_ending ),
+                    octal_prefix  .then(octal_digits  )                        .maybe(numeric_suffix).then(octal_ending  ),
+                    hex_prefix    .then(hex_digits    ).maybe(hex_exponent    ).maybe(numeric_suffix).then(hex_ending    ),
+                    decimal_prefix.then(decimal_digits).maybe(decimal_exponent).maybe(numeric_suffix).then(decimal_ending),
+                    # invalid
+                    newPattern(
+                        match: oneOrMoreOf(valid_single_character.or(valid_after_exponent)),
+                        tag_as: "invalid.illegal.constant.numeric"
+                    )
+                ]
             )
         ]
     )
