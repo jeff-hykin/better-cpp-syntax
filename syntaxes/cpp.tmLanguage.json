@@ -8171,8 +8171,16 @@
       ]
     },
     "wordlike_operators": {
-      "match": "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)",
-      "name": "keyword.operator.wordlike.cpp keyword.operator.$0.cpp"
+      "patterns": [
+        {
+          "match": "(?<!\\w)(?:not|compl|new|delete|not_eq|bitand|xor|bitor|and|or|and_eq|xor_eq|or_eq|noexcept)(?!\\w)",
+          "name": "keyword.operator.wordlike.cpp keyword.operator.$0.cpp"
+        },
+        {
+          "match": "\\bsizeof\\.\\.\\.",
+          "name": "keyword.operator.wordlike.cpp keyword.operator.sizeof.variadic.cpp"
+        }
+      ]
     },
     "sizeof_operator": {
       "contentName": "meta.arguments.operator.sizeof.cpp",
