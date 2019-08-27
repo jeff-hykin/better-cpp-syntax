@@ -1526,10 +1526,17 @@ grammar = Grammar.new(
 # Operators
 #
     grammar[:operators] = []
-    grammar[:wordlike_operators] = Pattern.new(
-        match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "keyword.operator.wordlike keyword.operator.$match",
-        )
+    grammar[:wordlike_operators] = [
+        Pattern.new(
+            match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
+            tag_as: "keyword.operator.wordlike keyword.operator.$match",
+        ),
+        # edgecase for `sizeof...`
+        Pattern.new(
+            match: /\bsizeof\.\.\./,
+            tag_as: "keyword.operator.wordlike keyword.operator.sizeof.variadic",
+        ),
+    ]
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]

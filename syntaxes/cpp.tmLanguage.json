@@ -8112,6 +8112,9 @@
           "include": "#sizeof_operator"
         },
         {
+          "include": "#variadic-sizeof_operator"
+        },
+        {
           "include": "#alignof_operator"
         },
         {
@@ -8211,6 +8214,54 @@
       "endCaptures": {
         "1": {
           "name": "punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#evaluation_context"
+        }
+      ]
+    },
+    "variadic-sizeof_operator": {
+      "contentName": "meta.arguments.operator.variadic-sizeof.cpp",
+      "begin": "((?<!\\w)variadic-sizeof(?!\\w))((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.functionlike.cpp keyword.operator.variadic-sizeof.cpp"
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "3": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "4": {
+          "name": "comment.block.cpp"
+        },
+        "5": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
+        },
+        "6": {
+          "name": "punctuation.section.arguments.begin.bracket.round.operator.variadic-sizeof.cpp"
+        }
+      },
+      "end": "(\\))",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.arguments.end.bracket.round.operator.variadic-sizeof.cpp"
         }
       },
       "patterns": [
