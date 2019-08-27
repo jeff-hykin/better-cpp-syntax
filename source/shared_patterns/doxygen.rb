@@ -320,17 +320,18 @@ command_grammars << Pattern.new(
         tag_as: "punctuation.definition.comment.begin.documentation",
     ),
     end_pattern: Pattern.new(
-        match: /\*\//,
+        match: oneOrMoreOf(/[!*]/).then(/\*\//),
         tag_as: "punctuation.definition.comment.end.documentation",
     ),
     includes: [
         PatternRange.new(
             start_pattern: /\G/,
             while: @start_of_line
-                .then(@spaces, dont_back_track?: true)
-                .lookAheadToAvoid(/\*\//)
+                .maybe(match: @spaces, dont_back_track?: true)
+                .lookAheadToAvoid(oneOrMoreOf(/[!*]/).then(/\*\//))
                 .zeroOrMoreOf(
                     match: /\*/,
+                    dont_back_track?: true,
                     tag_as: "punctuation.definition.comment.continuation.documentation"
                 ),
             includes: command_grammars,

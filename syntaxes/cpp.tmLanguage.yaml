@@ -822,12 +822,12 @@ repository:
       beginCaptures:
         '1':
           name: punctuation.definition.comment.begin.documentation.cpp
-      end: "(\\*\\/)"
+      end: "([!*]+\\*\\/)"
       endCaptures:
         '1':
           name: punctuation.definition.comment.end.documentation.cpp
       patterns:
-      - while: "(?-mix:(?:^)\\s+(?!\\*\\/)(\\**))"
+      - while: "(?-mix:(?:^)(?>\\s*)(?![!*]+\\*\\/)((?>\\**)))"
         whileCaptures:
           '1':
             name: punctuation.definition.comment.continuation.documentation.cpp
