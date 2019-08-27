@@ -225,6 +225,14 @@ class Pattern
     #
 
     def initialize(*arguments)
+        if arguments.length > 1 && arguments[1] != :deep_clone
+            # Pattern was likely constucted like `Pattern.new(/foo/, option: bar)`
+            puts "Pattern#new() expects a single Regexp, String, or Hash"
+            puts "Pattern#new() was provided with multiple arguments"
+            puts "arguments:"
+            puts arguments
+            raise "See error above"
+        end
         @next_pattern = nil
         arg1 = arguments[0]
         arg1 = {match: arg1} unless arg1.is_a? Hash

@@ -9,9 +9,9 @@ require_relative 'pattern'
 # An optional pattern
 # for some pattern `p` this is equivlent to (?:p?)
 class MaybePattern < Pattern
-    def initialize(*args, **kwargs)
+    def initialize(*args)
         # run the normal pattern
-        super(*args, **kwargs)
+        super(*args)
         # add quantifing options
         @at_least = 0
         @at_most = 1
