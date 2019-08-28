@@ -1,6 +1,5 @@
 command_grammars = []
 
-
 # these commands are broken up by what part of the text they capture
 # - standalone: nothing
 # - word: The next word
@@ -58,7 +57,7 @@ command_grammars << Pattern.new(
     ).then(/\b/).maybe(/\{[^}]*\}/),
     # this tag_as makes no sense but it is what jsdoc commands are tagged as
     # (storage.type.class)
-    tag_as: "storage.type.class.doxygen"
+    tag_as: "storage.type.class.doxygen",
 )
 
 word_commands = [
@@ -107,19 +106,19 @@ command_grammars << Pattern.new(
         tag_as: "storage.type.class.doxygen",
     ).then(@spaces).then(
         match: /\S+/,
-        tag_as:"markup.italic.doxygen"
-    )
+        tag_as: "markup.italic.doxygen",
+    ),
 )
 
-#bold
+# bold
 command_grammars << Pattern.new(
     match: Pattern.new(
         match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/b/),
         tag_as: "storage.type.class.doxygen",
     ).then(@spaces).then(
         match: /\S+/,
-        tag_as:"markup.bold.doxygen"
-    )
+        tag_as: "markup.bold.doxygen",
+    ),
 )
 
 # inline code
@@ -129,8 +128,8 @@ command_grammars << Pattern.new(
         tag_as: "storage.type.class.doxygen",
     ).then(@spaces).then(
         match: /\S+/,
-        tag_as:"markup.inline.raw.string"
-    )
+        tag_as: "markup.inline.raw.string",
+    ),
 )
 
 # TODO: make this consume and possibly reprocess the next word
@@ -140,7 +139,7 @@ command_grammars << Pattern.new(
     ).then(/\b/).maybe(/\{[^}]*\}/),
     # this tag_as makes no sense but it is what jsdoc commands are tagged as
     # (storage.type.class)
-    tag_as: "storage.type.class.doxygen"
+    tag_as: "storage.type.class.doxygen",
 )
 
 line_commands = [
@@ -181,7 +180,7 @@ line_commands = [
     "union",
     "until",
     "vhdlflow",
-    "weakgroup"
+    "weakgroup",
 ]
 
 # TODO: make this consume and possibly reprocess the next line
@@ -191,7 +190,7 @@ command_grammars << Pattern.new(
     ).then(/\b/).maybe(/\{[^}]*\}/),
     # this tag_as makes no sense but it is what jsdoc commands are tagged as
     # (storage.type.class)
-    tag_as: "storage.type.class.doxygen"
+    tag_as: "storage.type.class.doxygen",
 )
 
 paragraph_commands = [
@@ -230,7 +229,7 @@ paragraph_commands = [
     "tparam",
     "version",
     "warning",
-    "xrefitem"
+    "xrefitem",
 ]
 
 command_grammars << Pattern.new(
@@ -249,7 +248,7 @@ command_grammars << Pattern.new(
     ).then(/\b/).maybe(/\{[^}]*\}/),
     # this tag_as makes no sense but it is what jsdoc commands are tagged as
     # (storage.type.class)
-    tag_as: "storage.type.class.doxygen"
+    tag_as: "storage.type.class.doxygen",
 )
 
 block_commands = [
@@ -268,7 +267,7 @@ block_commands = [
     "secreflist",
     "startuml",
     "verbatim",
-    "xmlonly"
+    "xmlonly",
 ]
 
 with_end_blocks = [
@@ -276,7 +275,7 @@ with_end_blocks = [
     *block_commands.map do |block|
         block.gsub!("start", "")
         "end" + block
-    end
+    end,
 ]
 
 # TODO: make this consume and possibly reprocess the next block
@@ -286,13 +285,13 @@ command_grammars << Pattern.new(
     ).then(/\b/).maybe(/\{[^}]*\}/),
     # this tag_as makes no sense but it is what jsdoc commands are tagged as
     # (storage.type.class)
-    tag_as: "storage.type.class.doxygen"
+    tag_as: "storage.type.class.doxygen",
 )
 
-#gtk doc
+# gtk doc
 command_grammars << Pattern.new(
     match: /\b[A-Z]+:/.or(/@[a-z_]+:/),
-    tag_as: "storage.type.class.gtkdoc"
+    tag_as: "storage.type.class.gtkdoc",
 )
 
 command_grammars << Pattern.new(
@@ -306,11 +305,25 @@ command_grammars << Pattern.new(
         match: /\/\//.oneOrMoreOf(/[!\/]/),
         tag_as: "punctuation.definition.comment.documentation",
     ),
-    while: @start_of_line.maybe(@spaces, dont_back_track?: true).then(
+    while: @start_of_line.maybe(match: @spaces, dont_back_track?: true).then(
         match: /\/\//.oneOrMoreOf(/[!\/]/),
         tag_as: "punctuation.definition.comment.continuation.documentation",
     ),
     includes: command_grammars,
+)
+
+@single_line_block_comment = Pattern.new(
+    tag_as: "comment.block.documentation",
+    match: Pattern.new(
+        match: /\/\*/.oneOrMoreOf(/[!*]/).lookAheadFor(/\s/),
+        tag_as: "punctuation.definition.comment.begin.documentation",
+    ).then(
+        match: oneOrMoreOf(/./),
+        includes: command_grammars,
+    ).then(
+        match: zeroOrMoreOf(/[!*]/).then(/\*\//),
+        tag_as: "punctuation.definition.comment.end.documentation",
+    ),
 )
 
 @block_comment = PatternRange.new(
@@ -320,7 +333,7 @@ command_grammars << Pattern.new(
         tag_as: "punctuation.definition.comment.begin.documentation",
     ),
     end_pattern: Pattern.new(
-        match: oneOrMoreOf(/[!*]/).then(/\*\//),
+        match: zeroOrMoreOf(/[!*]/).then(/\*\//),
         tag_as: "punctuation.definition.comment.end.documentation",
     ),
     includes: [
@@ -328,18 +341,18 @@ command_grammars << Pattern.new(
             start_pattern: /\G/,
             while: @start_of_line
                 .maybe(match: @spaces, dont_back_track?: true)
-                .lookAheadToAvoid(oneOrMoreOf(/[!*]/).then(/\*\//))
+                .lookAheadToAvoid(zeroOrMoreOf(/[!*]/).then(/\*\//))
                 .zeroOrMoreOf(
                     match: /\*/,
                     dont_back_track?: true,
-                    tag_as: "punctuation.definition.comment.continuation.documentation"
+                    tag_as: "punctuation.definition.comment.continuation.documentation",
                 ),
             includes: command_grammars,
         ),
-        *command_grammars
-    ]
+        *command_grammars,
+    ],
 )
 
 def doxygen
-    [@line_comment, @block_comment]
+    [@line_comment, @single_line_block_comment, @block_comment]
 end
