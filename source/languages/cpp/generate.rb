@@ -381,7 +381,7 @@ grammar = Grammar.new(
         tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
     )
     grammar[:comments] = [
-        *doxygen(),
+        # *doxygen(),
         :emacs_file_banner,
         :block_comment,
         :line_comment,
