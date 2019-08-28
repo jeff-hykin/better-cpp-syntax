@@ -1,129 +1,72 @@
-- source: /**
+- source: /*
   scopesBegin:
-    - comment.block.documentation
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.documentation
+    - punctuation.definition.comment.begin
 - source: '*'
+- source: ' * @brief performs a "foo" action'
+- source: ' * @param a the action to preform'
+- source: ' * @retval ERROR_SUCCESS action performed successfully'
+- source: ' * @retval EPERM permission error'
+- source: ' * @note if \c a is zero, something \b bad happens'
+- source: '*/'
   scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@brief'
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: int
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - storage.type.class.doxygen
-- source: ' performs a "foo" action'
-- source: '*'
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@param'
+    - entity.name.function.definition
+- source: (
   scopes:
-    - storage.type.class.doxygen
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: a
   scopes:
     - variable.parameter
-- source: ' the action to preform'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@retval'
-  scopes:
-    - storage.type.class.doxygen
-- source: ' ERROR_SUCCESS action performed successfully'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@retval'
-  scopes:
-    - storage.type.class.doxygen
-- source: ' EPERM permission error'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@note'
-  scopes:
-    - storage.type.class.doxygen
-- source: ' if '
-- source: \c
-  scopes:
-    - storage.type.class.doxygen
-- source: a
-  scopes:
-    - markup.inline.raw.string
-- source: ' is zero, something '
-- source: \b
-  scopes:
-    - storage.type.class.doxygen
-- source: bad
-  scopes:
-    - markup.bold.doxygen
-- source: ' happens'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: /
-- source: int foo(int a);
-- source: /**
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: 'SECTION:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: meepapp
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@short_description:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: ' the application class'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@title:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: ' Meep application'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@section_id:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@see_also:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: ' #MeepSettings'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@stability:'
-  scopes:
-    - storage.type.class.gtkdoc
-- source: ' Stable'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@include'
-  scopes:
-    - storage.type.class.doxygen
-- source: ': meep/app.h'
-- source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: '@image'
-  scopes:
-    - storage.type.class.doxygen
-- source: ': application.png'
-- source: '*'
-  scopesBegin:
-    - punctuation.definition.comment.continuation.documentation
-- source: '*'
   scopesEnd:
-    - punctuation.definition.comment.continuation.documentation
-- source: ' The application class handles ...'
-- source: '*'
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
   scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: /
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '*'
+- source: ' * SECTION:meepapp'
+- source: ' * @short_description: the application class'
+- source: ' * @title: Meep application'
+- source: ' * @section_id:'
+- source: ' * @see_also: #MeepSettings'
+- source: ' * @stability: Stable'
+- source: ' * @include: meep/app.h'
+- source: ' * @image: application.png'
+- source: ' *'
+- source: ' * The application class handles ...'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end

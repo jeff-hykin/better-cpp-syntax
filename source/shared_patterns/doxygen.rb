@@ -1,6 +1,5 @@
-command_grammars = []
-
 def doxygen
+    command_grammars = []
     # these commands are broken up by what part of the text they capture
     # - standalone: nothing
     # - word: The next word

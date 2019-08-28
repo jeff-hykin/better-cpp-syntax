@@ -1,17 +1,16 @@
-- source: /************************************
+- source: /*
   scopesBegin:
-    - comment.block.documentation
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.documentation
-- source: '*'
+    - punctuation.definition.comment.begin
+- source: '***********************************'
+- source: ' * Comment here'
+- source: ' ***********************************'
+- source: '*/'
   scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: ' Comment here'
-- source: '************************************/'
-  scopes:
-    - punctuation.definition.comment.end.documentation
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.documentation
+    - comment.block
 - source: void
   scopesBegin:
     - meta.function.definition

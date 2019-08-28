@@ -1,17 +1,15 @@
-- source: /**
+- source: /*
   scopesBegin:
-    - comment.block.documentation
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.documentation
+    - punctuation.definition.comment.begin
 - source: '*'
-  scopes:
-    - punctuation.definition.comment.continuation.documentation
-- source: ' doc comment'
+- source: ' * doc comment'
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.documentation
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.documentation
+    - comment.block
 - source: enum
   scopesBegin:
     - meta.block.enum
@@ -42,17 +40,17 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.enum
-- source: /**
+- source: /*
   scopesBegin:
-    - comment.block.documentation
+    - comment.block
   scopes:
-    - punctuation.definition.comment.begin.documentation
-- source: ' single line doc comment '
+    - punctuation.definition.comment.begin
+- source: '* single line doc comment '
 - source: '*/'
   scopes:
-    - punctuation.definition.comment.end.documentation
+    - punctuation.definition.comment.end
   scopesEnd:
-    - comment.block.documentation
+    - comment.block
 - source: enum
   scopesBegin:
     - meta.block.enum
@@ -83,14 +81,14 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.enum
-- source: ///
+- source: //
   scopesBegin:
-    - comment.line.documentation
+    - comment.line.double-slash
   scopes:
-    - punctuation.definition.comment.documentation
-- source: '{'
+    - punctuation.definition.comment
+- source: '/{'
   scopesEnd:
-    - comment.line.documentation
+    - comment.line.double-slash
 - source: enum
   scopesBegin:
     - meta.block.enum
