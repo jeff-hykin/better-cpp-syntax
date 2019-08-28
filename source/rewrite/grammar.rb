@@ -120,6 +120,7 @@ class ExportableGrammar < Grammar
         # prefix all include symbols unless in external_repos
         # ensure the grammar does not refer to a symbol not in repository or external_repos
         # ensure the grammar has all keys named in exports
+        self
     end
 end
 
