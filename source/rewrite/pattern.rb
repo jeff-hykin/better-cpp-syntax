@@ -220,6 +220,24 @@ class Pattern
         regex_as_string
     end
 
+    def transform_includes!(&block)
+        if @arguments[:includes]
+            if @arguments[:includes].is_a? Array
+                @arguments[:includes].map! block
+            else
+                @arguments[:includes] = block.call @arguments[:includes]
+            end
+        end
+
+        @match.transform_includes!(block) if @match.is_a? Pattern
+        @next_pattern.transform_includes!(block) if @next_pattern.is_a? Pattern
+
+        self
+    end
+
+    def transform_includes(&block)
+        __deep_clone__.transform_includes!(block)
+    end
     #
     # Public interface
     #
