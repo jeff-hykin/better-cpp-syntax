@@ -17,9 +17,71 @@ cpp_grammar = Grammar.new(
     ],
 )
 
+def inline_comment()
+    newPattern(
+        match: /\/\*/,
+        tag_as: "comment.block punctuation.definition.comment.begin",
+    ).then(
+        # this pattern is complicated because its optimized to never backtrack
+        match: newPattern(
+            tag_as: "comment.block",
+            should_fully_match: [ "thing ****/", "/* thing */", "/* thing *******/" ],
+            match: zeroOrMoreOf(
+                match: newPattern(
+                    newPattern(
+                        /[^\*]/
+                    ).or(
+                        match: /\*++/.then(/[^\/]/)
+                    )
+                ),
+            ).then(
+                should_fully_match: [ "*/", "*******/" ],
+                match: newPattern(/\*++/.then(/\//)),
+                includes: [
+                    newPattern(
+                        match: /\*\//,
+                        tag_as: "comment.block punctuation.definition.comment.end"
+                    ),
+                    newPattern(
+                        match: /\*/,
+                        tag_as: "comment.block"
+                    ),
+                ]
+            )
+        )
+    )
+end
+
+def generateStdSpace(inline_comment)
+    newPattern(
+        # NOTE: this pattern can match 0-spaces so long as its still a word boundary
+        # this is the intention since things like `int/*comment*/a = 10` are valid in c++
+        # this space pattern will match inline /**/ comments that do not contain newlines
+        # >0 length match
+        match: oneOrMoreOf(
+                match: newPattern(/\s++/).or(
+                        inline_comment
+                    )
+            # zero length match
+            ).or(
+                /\b/.or(
+                    lookBehindFor(/\W/)
+                ).or(
+                    lookAheadFor(/\W/)
+                ).or(
+                    @start_of_document
+                ).or(
+                    @end_of_document
+                )
+            ),
+        includes: [ inline_comment ],
+    )
+end
+
 #
 # Utils
 #
+    std_space = generateStdSpace(inline_comment)
     cpp_grammar[:semicolon] = @semicolon = newPattern(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -55,7 +117,7 @@ cpp_grammar = Grammar.new(
             tag_as: "storage.modifier.reference"
         ).maybe(@spaces)
     )
-    
+
     def blockFinderFor( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
@@ -430,7 +492,7 @@ cpp_grammar = Grammar.new(
             ]
         )
     end
-    
+
     cpp_attribute_start = /\[\[/
     cpp_attribute_end   = /\]\]/
     gcc_attribute_start = /__attribute\(\(/
@@ -439,12 +501,12 @@ cpp_grammar = Grammar.new(
     ms_attribute_end    = /\)/
     alignas_start       = /alignas\(/
     alignas_end         = /\)/
-    
+
     cpp_grammar[:cpp_attributes   ] = attributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
     cpp_grammar[:gcc_attributes   ] = attributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
     cpp_grammar[:ms_attributes    ] = attributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
     cpp_grammar[:alignas_attribute] = attributeRangeFinder[ alignas_start      , alignas_end       ]
-    
+
     inline_attribute = newPattern(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)"],
         should_partial_match: ["struct [[deprecated]] st"],
@@ -831,7 +893,7 @@ cpp_grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
-        
+
     cpp_grammar[:operators] += [
             functionTemplate[
                 repository_name: "decltype_specifier",
@@ -1230,21 +1292,21 @@ cpp_grammar = Grammar.new(
                     match: variableBounds[ /enum/ ],
                     tag_as: "storage.type.enum"
                 ).maybe(
-                    @spaces.then(
+                    std_space.then(
                         # see "Scoped enumerations" on  https://en.cppreference.com/w/cpp/language/enum
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
                     )
-                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
+                ).then(std_space.or(inline_attribute).or(lookAheadFor(/{/))).then(std_space).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
-                    maybe(@spaces).then(
+                    std_space.then(
                         match: /:/,
                         tag_as: "colon punctuation.separator.type-specifier",
-                    ).maybe(@spaces).maybe(
+                    ).then(std_space).maybe(
                         scope_resolution
-                    ).maybe(@spaces).then(
+                    ).then(std_space).then(
                         match: variable_name,
                         tag_as: "storage.type.integral.$match",
                     )
@@ -1292,21 +1354,21 @@ cpp_grammar = Grammar.new(
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
                     ).then(
-                        @spaces.or(
+                        std_space.or(
                             inline_attribute
                         ).or(
                             lookAheadFor(/{/)
                         )
-                    ).maybe(inline_attribute).maybe(@spaces).maybe(
+                    ).maybe(inline_attribute).then(std_space).maybe(
                         match: variable_name,
                         tag_as: "entity.name.type.$reference(storage_type)",
                     ).maybe(
-                        @spaces.then(final_modifier).maybe(@spaces)
+                        std_space.then(final_modifier).then(std_space)
                     ).maybe(
                         #
                         # inheritance
                         #
-                        maybe(@spaces).then(
+                        std_space.then(
                             match: /:/,
                             tag_as: "colon punctuation.separator.inhertance"
                         # the following may seem redundant (removing it shouldn't change anything)
@@ -1314,13 +1376,13 @@ cpp_grammar = Grammar.new(
                         # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
                         # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
                         ).zeroOrMoreOf(
-                            match: maybe(@spaces).maybe(/,/).maybe(
-                                @spaces
+                            match: std_space.maybe(/,/).then(
+                                std_space
                             ).maybe(
                                 @cpp_tokens.that(:isAccessSpecifier)
-                            ).maybe(@spaces).oneOrMoreOf(
-                                maybe(@spaces).maybe(/,/).maybe(
-                                    @spaces
+                            ).then(std_space).oneOrMoreOf(
+                                std_space.maybe(/,/).maybe(
+                                    std_space
                                 ).lookAheadToAvoid(
                                     @cpp_tokens.that(:isAccessSpecifier)
                                 ).then(qualified_type.without_numbered_capture_groups)
@@ -3197,8 +3259,8 @@ Dir.chdir __dir__
 
 # Save
 @syntax_location = "../syntaxes/cpp.tmLanguage"
-cpp_grammar.saveAsYamlTo(@syntax_location)
-cpp_grammar.saveAsJsonTo(@syntax_location)
+cpp_grammar.saveAsYamlTo(@syntax_location, inherit_or_embedded: :embedded)
+cpp_grammar.saveAsJsonTo(@syntax_location, inherit_or_embedded: :embedded)
 cpp_grammar.saveTagsTo("tags.txt")
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
