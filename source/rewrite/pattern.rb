@@ -223,7 +223,7 @@ class Pattern
     def transform_includes!(&block)
         if @arguments[:includes]
             if @arguments[:includes].is_a? Array
-                @arguments[:includes].map! block
+                @arguments[:includes].map!(&block)
             else
                 @arguments[:includes] = block.call @arguments[:includes]
             end
@@ -236,7 +236,7 @@ class Pattern
     end
 
     def transform_includes(&block)
-        __deep_clone__.transform_includes!(block)
+        __deep_clone__.transform_includes!(&block)
     end
     #
     # Public interface

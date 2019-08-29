@@ -2,6 +2,7 @@
 
 require 'digest/sha1'
 require 'json'
+require 'pp'
 
 require_relative 'pattern'
 require_relative 'pattern_range'
@@ -66,7 +67,7 @@ class Grammar
                 item
             end
         elsif !value.is_a?(Pattern)
-            value = Pattern.new(item)
+            value = Pattern.new(value)
         end
         # add it to the repository
         @repository[key] = value
@@ -93,6 +94,11 @@ class Grammar
             [old_val, new_val].flatten
         end
     end
+
+    def debug
+        pp @repository
+    end
+
 end
 
 class ExportableGrammar < Grammar
@@ -104,7 +110,7 @@ class ExportableGrammar < Grammar
         # will not be unique if multiple exportable grammars are created in the same file
         # Don't do that
         @seed = Digest::MD5.hexdigest(caller_locations(3, 1).first.path)[0..10]
-        puts @seed
+        super("","")
     end
 
     def []=(key, value)
@@ -133,7 +139,7 @@ class ExportableGrammar < Grammar
             (@seed + "_" + key.to_s).to_sym
         end
         # prefix all include symbols unless in external_repos or exports
-        @repository.transform_values! fixupValue
+        @repository.transform_values! { |v| fixupValue(v) }
         # ensure the grammar does not refer to a symbol not in repository or external_repos
         # ensure the grammar has all keys named in exports
         exports.each do |key|
@@ -146,7 +152,7 @@ class ExportableGrammar < Grammar
 
     def fixupValue(value)
         if value.is_a? Symbol
-            return if [:$initial_context, :$base, :$self].include? value
+            return value if [:$initial_context, :$base, :$self].include? value
 
             if value.to_s.start_with? @seed
                 # if exports or external_repos, has changed remove the seed
@@ -160,11 +166,11 @@ class ExportableGrammar < Grammar
 
             return value if @external_repos.include?(value) || @exports.include?(value)
 
-            (@seed + "_" + key.to_s).to_sym
+            (@seed + "_" + value.to_s).to_sym
         elsif value.is_a? Array
             value.map fixupValue
         elsif value.is_a? Pattern
-            Pattern.transform_includes fixupValue
+            value.transform_includes { |v| fixupValue(v) }
         else
             raise "Unexpected object of type #{value.class} in value"
         end
