@@ -33,6 +33,13 @@ class recorder {
     record(source, time, chosen, failure, onlyPattern) {
         this.empty = false;
         const index = failure ? 0 : chosen ? 2 : 1;
+        if (this.coverage[source] === undefined) {
+            this.coverage[source] = {
+                source,
+                count: [0, 0, 0],
+                sumTime: [0, 0, 0]
+            };
+        }
         this.coverage[source].count[index] += 1;
         this.coverage[source].sumTime[index] += time;
         if (onlyPattern && chosen) {
