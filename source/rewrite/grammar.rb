@@ -89,6 +89,8 @@ class Grammar
             end
         end
 
+        export = export.export
+
         # import the repository
         @repository = @repository.merge export.repository do |_key, old_val, new_val|
             [old_val, new_val].flatten

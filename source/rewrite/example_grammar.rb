@@ -26,7 +26,7 @@ g = Grammar.new(
     "source.test",
 )
 
-ex.export
+ex.export # just to confirm that export is idempotent
 
 g.import(ex.export)
 
