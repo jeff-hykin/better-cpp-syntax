@@ -27,6 +27,8 @@ Naming/MethodName:
 Style/AndOr:
     Enabled: false
     # Enabled: true
+Style/ClassVars:
+    Enabled: false
 Style/CommentAnnotation:
     Keywords:
         - TODO
@@ -39,6 +41,8 @@ Style/Not:
     # Enabled: true
 Style/NumericPredicate:
     EnforcedStyle: comparison
+Style/PreferredHashMethods:
+    EnforcedStyle: verbose
 Style/StringLiterals:
     # EnforcedStyle: double_quotes
     Enabled: false
