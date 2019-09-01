@@ -2277,7 +2277,7 @@ grammar = Grammar.new(
             ).then(
                 match: variable_name,
                 tag_as: "variable.other.object.declare",
-            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/:/)
+            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{]/)
         )
     end
     grammar[:standard_declares] = [
