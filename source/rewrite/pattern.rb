@@ -212,6 +212,10 @@ class Pattern
             # make atomic, which allows arbitary expression to be prevented from backtracking
             match = "(?>#{match})"
         end
+        if @arguments[:word_cannot_be_any_of]
+            word_pattern = @arguments[:word_cannot_be_any_of].map {|w| Regexp.escape w}.join "|"
+            match = "(?!\\b(?:#{word_pattern})\\b)#{match}"
+        end
         match
     end
 
@@ -328,10 +332,14 @@ class Pattern
     # Displays the Pattern as you would write it in code
     # This displays the canonical form, that is helpers such as oneOrMoreOf() become #then
     def to_s(depth = 0, top_level = true)
-        # TODO: make this easier to understand
         # rubocop:disable Metrics/LineLength
 
-        regex_as_string = @match.is_a?(Pattern) ? @match.to_s(depth + 2, true) : "/" + @match + "/"
+        # TODO: make this function easier to understand
+        regex_as_string = case @original_arguments[:match]
+            when Pattern then @original_arguments[:match].to_s(depth + 2, true) end
+            when Regexp then @original_arguments[:match].inspect end
+            when String then "/" + @original_arguments[:match] + "/" end
+            end
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
@@ -349,6 +357,7 @@ class Pattern
             output += ",\n#{indent}  at_least: \"" + @arguments[:at_least] + '"' if @arguments[:at_least]
             output += ",\n#{indent}  at_most: \"" + @arguments[:at_most] + '"' if @arguments[:at_most]
             output += ",\n#{indent}  how_many_times: \"" + @arguments[:how_many_times] + '"' if @arguments[:how_many_times]
+            output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of] if @arguments[:word_cannot_be_any_of]
         end
         output += ",\n#{indent}  dont_backtrack?: \"" + @arguments[:dont_backtrack?] + '"' if @arguments[:dont_backtrack?]
         # subclass, ending and recursive
