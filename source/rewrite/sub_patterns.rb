@@ -39,6 +39,78 @@ class Pattern
 end
 
 #
+# ZeroOrMoreOf
+#
+
+# An repeated pattern
+# for some pattern `p` this is equivlent to (?:p+)
+class ZeroOrMoreOfPattern < Pattern
+    def initialize(*args)
+        # run the normal pattern
+        super(*args)
+        # add quantifing options
+        @at_least = 0
+        @at_most = nil
+    end
+
+    def quantifing_allowed?
+        false
+    end
+
+    def do_get_to_s_name(top_level)
+        top_level ? "zeroOrMoreOf(" : ".zeroOrMoreOf("
+    end
+end
+
+# returns a new ZeroOrMoreOfPattern
+def zeroOrMoreOf(pattern)
+    ZeroOrMoreOfPattern.new(pattern)
+end
+
+class Pattern
+    # appends a new ZeroOrMoreOfPattern to the end of the pattern chain
+    def zeroOrMoreOf(pattern)
+        insert(ZeroOrMoreOfPattern.new(pattern))
+    end
+end
+
+#
+# oneOrMoreOf
+#
+
+# An optional repeated pattern
+# for some pattern `p` this is equivlent to (?:p*)
+class OneOrMoreOfPattern < Pattern
+    def initialize(*args)
+        # run the normal pattern
+        super(*args)
+        # add quantifing options
+        @at_least = 1
+        @at_most = nil
+    end
+
+    def quantifing_allowed?
+        false
+    end
+
+    def do_get_to_s_name(top_level)
+        top_level ? "oneOrMoreOf(" : ".oneOrMoreOf("
+    end
+end
+
+# returns a new oneOrMoreOfPattern
+def oneOrMoreOf(pattern)
+    OneOrMoreOfPattern.new(pattern)
+end
+
+class Pattern
+    # appends a new oneOrMoreOfPattern to the end of the pattern chain
+    def oneOrMoreOf(pattern)
+        insert(OneOrMoreOfPattern.new(pattern))
+    end
+end
+
+#
 # Or
 #
 
