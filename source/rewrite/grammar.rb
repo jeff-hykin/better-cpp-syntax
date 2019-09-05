@@ -13,6 +13,8 @@ def top_level_binding
 end
 
 class Grammar
+    @@export_grammars = {}
+
     attr_accessor :repository
     def self.new_exportable_grammar
         ExportableGrammar.new
@@ -77,16 +79,8 @@ class Grammar
     def import(path_or_export)
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
-            path = path_or_export
-            file = File.read path_or_export
-            export = eval(file, top_level_binding, path, 0) # rubocop:disable Security/Eval
-
-            unless export.is_a? ExportableGrammar
-                puts "The file #{file} returned an object that was not obtained from"
-                puts "Grammar::new_exportable_grammar, this is not allowed"
-                puts "class: #{exports.class}"
-                raise "See above error"
-            end
+            require path
+            export = @@export_grammars[path]
         end
 
         export = export.export
@@ -100,19 +94,29 @@ class Grammar
     def debug
         pp @repository
     end
-
 end
 
 class ExportableGrammar < Grammar
     attr_accessor :exports, :external_repos
 
     def initialize
-        # skip: initalize, new, and new_exportable_grammar, get the file name
+        # skip: initalize, new, and new_exportable_grammar
+        location = caller_locations(3, 1).first
         # and the first 5 bytes of the hash to get the seed
         # will not be unique if multiple exportable grammars are created in the same file
         # Don't do that
-        @seed = Digest::MD5.hexdigest(caller_locations(3, 1).first.path)[0..10]
-        super("","")
+        @seed = Digest::MD5.hexdigest(location.path)[0..10]
+        super("", "")
+
+        if @@export_grammars[location.path].is_a? Hash
+            return if @@export_grammars[location.path][:line] == location.lineno
+
+            raise "Only one export grammar is allowed per file"
+        end
+        @@export_grammars[location.path] = {
+            line: location.lineno,
+            grammar: self,
+        }
     end
 
     def []=(key, value)
