@@ -2327,30 +2327,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ////////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: //////////////////////
+- source: //
+  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: '  Functions'
 - source: //
-  scopes:
-    - punctuation.definition.comment
-  scopesEnd:
-    - comment.line.double-slash
-- source: ////////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
-- source: //
   scopesBegin:
-    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: //
+  scopesEnd:
+    - punctuation.definition.comment
+- source: //////////////////////
+- source: //
   scopes:
     - punctuation.definition.comment
 - source: ' Debugging and errors '
@@ -30468,30 +30465,27 @@
     - punctuation.section.arguments.end.bracket.round.function.member
   scopesEnd:
     - meta.preprocessor.macro
-- source: //////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ////////////////////
+- source: //
+  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: ' Secondary helper functions'
 - source: //
-  scopes:
-    - punctuation.definition.comment
-  scopesEnd:
-    - comment.line.double-slash
-- source: //////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
-- source: //
   scopesBegin:
-    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: //
+  scopesEnd:
+    - punctuation.definition.comment
+- source: ////////////////////
+- source: //
   scopes:
     - punctuation.definition.comment
 - source: ' Vector functions '
@@ -39411,30 +39405,27 @@
   scopesEnd:
     - meta.function.definition
     - meta.body.function.definition
-- source: ////////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: //////////////////////
+- source: //
+  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: '  Custom Types'
 - source: //
-  scopes:
-    - punctuation.definition.comment
-  scopesEnd:
-    - comment.line.double-slash
-- source: ////////////////////////
-  scopes:
-    - comment.line.documentation
-    - punctuation.definition.comment.documentation
-- source: //
   scopesBegin:
-    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: //
+  scopesEnd:
+    - punctuation.definition.comment
+- source: //////////////////////
+- source: //
   scopes:
     - punctuation.definition.comment
 - source: ' pre-declare Item'

@@ -223,7 +223,14 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' // here is a comment that is colored nicely!'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here is a comment that is colored nicely!'
+  scopesEnd:
+    - comment.line.double-slash
 - source: anotherOne
   scopes:
     - entity.name.function.call.initializer
@@ -258,7 +265,14 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' // here''s another one!'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' here''s another one!'
+  scopesEnd:
+    - comment.line.double-slash
 - source: soManyThatTheConstructorIsLong
   scopes:
     - entity.name.function.call.initializer
