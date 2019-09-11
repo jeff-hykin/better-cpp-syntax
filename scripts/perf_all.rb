@@ -1,4 +1,4 @@
-require_relative '../directory.rb'
+require_relative '../paths.rb'
 
 for each in Dir[PathFor[:fixtures]+"/**/*"]
     if File.file?(each)

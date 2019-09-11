@@ -1,4 +1,4 @@
-require_relative '../../../../directory'
+require_relative '../../../../paths'
 require_relative PathFor[:textmate_tools]
 
 Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|

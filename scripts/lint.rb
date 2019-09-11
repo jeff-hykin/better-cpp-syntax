@@ -1,4 +1,4 @@
-require_relative '../directory.rb'
+require_relative '../paths.rb'
 
 Dir.chdir PathFor[:root]
 for each_file in Dir["#{PathFor[:syntaxes]}/**.tmLanguage.json"]

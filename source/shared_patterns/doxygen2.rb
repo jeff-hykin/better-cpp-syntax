@@ -1,4 +1,4 @@
-require_relative '../../../../directory'
+require_relative '../../../../paths'
 require_relative PathFor[:textmate_tools]
 
 # the tag_as for commands makes no sense but it is what jsdoc commands are tagged as

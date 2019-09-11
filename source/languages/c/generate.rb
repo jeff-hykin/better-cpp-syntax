@@ -1,4 +1,4 @@
-require_relative '../../../directory'
+require_relative '../../../paths'
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
