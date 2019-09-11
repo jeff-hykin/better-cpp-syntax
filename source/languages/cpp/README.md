@@ -2,6 +2,7 @@
 This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
 NOTE: The default VS Code theme does not color much. Use a theme like one of the following to benefit from the changes:
+- [Default Theme Enhanced](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes)
 - [Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme)
 - [Noctis](https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis)
 - [XD Theme](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.xd-theme)
