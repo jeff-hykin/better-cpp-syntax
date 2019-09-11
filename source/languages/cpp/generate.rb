@@ -874,15 +874,19 @@ grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = Pattern.new(
-        match: variable_name_without_bounds,
-        word_cannot_be_any_of: @cpp_tokens.representationsThat(
-            :isWord,
-            not(:isType),
-            not(:isVariable),
-            not(:isValidFunctionName),
-            not(:isLiteral)
-        )
-    ).then(/\s*+/).maybe(template_call).then(/::/)
+        Pattern.new(
+            match: variable_name_without_bounds,
+            word_cannot_be_any_of: @cpp_tokens.representationsThat(
+                :isWord,
+                not(:isType),
+                not(:isVariable),
+                not(:isValidFunctionName),
+                not(:isLiteral)
+            )
+        ).then(/\s*+/).maybe(
+            template_call
+        ).then(/::/)
+    )
     inline_scope_resolution = ->(tag_extension) do
         Pattern.new(
             match: zeroOrMoreOf(one_scope_resolution),
@@ -903,10 +907,6 @@ grammar = Grammar.new(
         match: /::/,
         tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"
     )
-    preceding_scopes = Pattern.new(
-        match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
-        includes: [ :scope_resolution_inner_generated ]
-        )
     generateScopeResolutionFinder = ->(tag_extension, grammar_name) do
         hidden_grammar_name = (grammar_name.to_s+"_inner_generated").to_sym
         tagged_scope_operator = scope_operator.reTag(
