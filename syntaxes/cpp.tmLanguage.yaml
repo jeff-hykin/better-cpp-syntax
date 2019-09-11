@@ -3619,6 +3619,7 @@ repository:
           patterns:
           - include: "#evaluation_context"
         - include: "#comma"
+        - include: "#comments"
       - contentName: meta.function.definition.parameters.special.constructor.cpp
         begin: "(\\()"
         beginCaptures:
@@ -3807,6 +3808,7 @@ repository:
           patterns:
           - include: "#evaluation_context"
         - include: "#comma"
+        - include: "#comments"
       - contentName: meta.function.definition.parameters.special.constructor.cpp
         begin: "(\\()"
         beginCaptures:

@@ -1369,6 +1369,7 @@ grammar = Grammar.new(
                             includes: [:evaluation_context]
                         ),
                         grammar[:comma],
+                        :comments,
                     ]
                 ),
                 # parameters 
