@@ -24,8 +24,8 @@ class Grammar
         import_grammar = JSON.parse File.read(path)
 
         grammar = ImportGrammar.new(
-            import_grammar["name"],
-            import_grammar["scopeName"],
+            name: import_grammar["name"],
+            scope_name: import_grammar["scopeName"],
         )
         # import "patterns" into @repository[:$initial_context]
         grammar.repository[:$initial_context] = import_grammar["patterns"]
@@ -39,13 +39,15 @@ class Grammar
 
     def initialize(keys)
         required_keys = [:name, :scope_name]
-        unless required_keys & keys == required_keys
+        unless required_keys & keys.keys == required_keys
             puts "Missing one ore more of the required grammar keys"
+            puts "Missing: #{required_keys - (required_keys & keys.keys)}"
             puts "The required grammar keys are: #{required_keys}"
+            raise "See above error"
         end
 
         @name = keys[:name]
-        @scope_name = key[:scope_name]
+        @scope_name = keys[:scope_name]
         @repository = {}
 
         keys.delete :name
@@ -65,7 +67,7 @@ class Grammar
     def []=(key, value)
         raise "Use symbols not strings" unless key.is_a? Symbol
 
-        if key.to_s.start_with?("$") && !(["$initial_context"].include? key)
+        if key.to_s.start_with?("$") && !([:$initial_context, :$base, :$self].include? key)
             puts "#{key} is not a valid repository name"
             puts "repository names starting with $ are reserved"
             raise "See above error"
@@ -80,6 +82,7 @@ class Grammar
         # ensure array is flat and only containts patterns
         if value.is_a? Array
             value = value.flatten.map do |item|
+                next item if item.is_a? Symbol
                 item = Pattern.new(item) unless item.is_a? Pattern
                 item
             end
@@ -122,7 +125,7 @@ class Grammar
         # run post linters
         # move initial context into patterns ✓
         # if version is :auto, populate with git commit ✓
-        # save as #{name}.tmLanguage.json pretty printed
+        # save as #{name}.tmLanguage.json pretty printed ✓
 
         @repository.each do |key, pattern|
             pattern.run_tests if pattern.is_a? Pattern
@@ -140,18 +143,28 @@ class Grammar
         end
         @repository.transform_values! { |v| convert_initial_context.call(v) }
 
-        output = {}
+        output = {
+            name: @name,
+            scopeName: @scope_name
+        }
 
         to_tag = lambda do |value|
             return value.map { |v| to_tag.call(v) } if value.is_a? Array
+            return {"include" => "#" + value.to_s} if value.is_a? Symbol
             value.to_tag
         end
         output[:repository] = @repository.transform_values { |value| to_tag.call(value) }
 
-        output[:pattern] = output[:repository][:$initial_context]
+        output[:patterns] = output[:repository][:$initial_context]
+        output[:patterns] ||= []
         output[:repository].delete(:$initial_context)
 
         output[:version] = auto_version()
+        output.merge!(@keys) { |old, _new| old }
+
+        out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
+        out_file.write(JSON.pretty_generate(output))
+        out_file.close
     end
 
     def auto_version
@@ -173,7 +186,10 @@ class ExportableGrammar < Grammar
         # will not be unique if multiple exportable grammars are created in the same file
         # Don't do that
         @seed = Digest::MD5.hexdigest(location.path)[0..10]
-        super("", "")
+        super(
+            name: "export",
+            scope_name: "export"
+        )
 
         if @@export_grammars[location.path].is_a? Hash
             return if @@export_grammars[location.path][:line] == location.lineno

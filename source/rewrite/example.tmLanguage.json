@@ -1,0 +1,33 @@
+{
+  "name": "example",
+  "scopeName": "source.example",
+  "repository": {
+    "abc": {
+      "match": "abc",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "include": "#p123"
+            },
+            {
+              "include": "#72056144718_test_pat"
+            },
+            {
+              "include": "#$self"
+            }
+          ]
+        }
+      }
+    },
+    "72056144718_test_pat": {
+      "match": "abcd"
+    }
+  },
+  "patterns": [
+    {
+      "include": "#abc"
+    }
+  ],
+  "version": "version"
+}

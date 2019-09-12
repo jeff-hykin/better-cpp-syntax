@@ -307,7 +307,7 @@ class Pattern
         end
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
-        output.reject! { |_, v| v.empty? }
+        output.reject! { |_, v| !v || v.empty? }
         output
     end
 
@@ -341,10 +341,10 @@ class Pattern
 
         # TODO: make this function easier to understand
         regex_as_string = case @original_arguments[:match]
-            when Pattern then @original_arguments[:match].to_s(depth + 2, true) end
-            when Regexp then @original_arguments[:match].inspect end
-            when String then "/" + @original_arguments[:match] + "/" end
-            end
+            when Pattern then @original_arguments[:match].to_s(depth + 2, true)
+            when Regexp then @original_arguments[:match].inspect
+            when String then "/" + @original_arguments[:match] + "/"
+        end
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
@@ -412,7 +412,7 @@ class Pattern
         # run related unit tests
         @match.run_tests if @match.is_a? Pattern
         @next_pattern.run_tests if @next_pattern.is_a? Pattern
-        @arguments[:includes].each { |inc| inc.run_tests if inc.is_a? Pattern }
+        @arguments[:includes]&.each { |inc| inc.run_tests if inc.is_a? Pattern }
     end
 
     def start_pattern

@@ -22,12 +22,16 @@ ex[:abc] = Pattern.new(
 ex[:test_pat] = /abcd/
 
 g = Grammar.new(
-    "test",
-    "source.test",
+    name: "example",
+    scope_name: "source.example",
 )
+
 
 ex.export # just to confirm that export is idempotent
 
 g.import(ex.export)
+g[:$initial_context] = [
+    :abc
+]
 
-g.debug
+g.save_to "."
