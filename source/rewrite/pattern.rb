@@ -247,7 +247,14 @@ class Pattern
     #
 
     def initialize(*arguments)
-        if arguments.length > 1 && arguments[1] != :deep_clone
+        if arguments.length > 1 && arguments[1] == :deep_clone
+            @arguments = arguments[0]
+            @match = @arguments[:match]
+            @arguments.delete(:match)
+            @original_arguments = arguments[2]
+            return
+        end
+        if arguments.length > 1
             # Pattern was likely constucted like `Pattern.new(/foo/, option: bar)`
             puts "Pattern#new() expects a single Regexp, String, or Hash"
             puts "Pattern#new() was provided with multiple arguments"
@@ -260,8 +267,7 @@ class Pattern
         arg1 = {match: arg1} unless arg1.is_a? Hash
         @original_arguments = arg1.clone
         if arg1[:match].is_a? String
-            # when cloned match becomes a string, but that string should not be escaped
-            arg1[:match] = Regexp.escape(arg1[:match]) unless arguments[1] == :deep_clone
+            arg1[:match] = Regexp.escape(arg1[:match])
             @match = arg1[:match]
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
@@ -269,7 +275,6 @@ class Pattern
         elsif arg1[:match].is_a? Pattern
             @match = arg1[:match]
         else
-            puts "was deep cloned" if arguments[1] == :deep_clone
             puts <<-HEREDOC.remove_indent
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
                 Provided arguments: #{@original_arguments}
@@ -404,6 +409,10 @@ class Pattern
                 warn.call :should_not_partially_match
             end
         end
+        # run related unit tests
+        @match.run_tests if @match.is_a? Pattern
+        @next_pattern.run_tests if @next_pattern.is_a? Pattern
+        @arguments[:includes].each { |inc| inc.run_tests if inc.is_a? Pattern }
     end
 
     def start_pattern
@@ -616,7 +625,7 @@ class Pattern
     def __deep_clone__
         options = @arguments.__deep_clone__
         options[:match] = @match.__deep_clone__
-        new_pattern = self.class.new(options, :deep_clone)
+        new_pattern = self.class.new(options, :deep_clone, @original_arguments)
         new_pattern.insert! @next_pattern.__deep_clone__
     end
 

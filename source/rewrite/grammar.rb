@@ -37,10 +37,25 @@ class Grammar
         grammar
     end
 
-    def initialize(name, scope_name)
-        @name = name
-        @scope_name = scope_name
+    def initialize(keys)
+        required_keys = [:name, :scope_name]
+        unless required_keys & keys == required_keys
+            puts "Missing one ore more of the required grammar keys"
+            puts "The required grammar keys are: #{required_keys}"
+        end
+
+        @name = keys[:name]
+        @scope_name = key[:scope_name]
         @repository = {}
+
+        keys.delete :name
+        keys.delete :scope_name
+
+        # auto versioning, when save_to is called grab the latest git commit or "" if not
+        # a git repo
+        keys[:version] ||= :auto
+
+        @keys = keys
     end
 
     def [](key)
@@ -62,7 +77,7 @@ class Grammar
             raise "See above error"
         end
 
-        # ensure array is flat and onlt containts patterns
+        # ensure array is flat and only containts patterns
         if value.is_a? Array
             value = value.flatten.map do |item|
                 item = Pattern.new(item) unless item.is_a? Pattern
@@ -93,6 +108,58 @@ class Grammar
 
     def debug
         pp @repository
+    end
+
+    def save_to(dir, inherit_or_embedded = :embedded)
+        # steps:
+        # rerun export grammars
+        # run test ✓
+        # run pre linters
+        # run any pre transformations
+        # generate bailout patterns
+        # transform initial_context includes to $base or $self ✓
+        # call to_tag on each pattern ✓
+        # run post linters
+        # move initial context into patterns ✓
+        # if version is :auto, populate with git commit ✓
+        # save as #{name}.tmLanguage.json pretty printed
+
+        @repository.each do |key, pattern|
+            pattern.run_tests if pattern.is_a? Pattern
+        end
+
+        convert_initial_context = lambda do |value|
+            return (inherit_or_embedded == :embedded ? :$self : :$base) if value == :$initial_context
+            if value.is_a? Array
+                return value.map { |d| convert_initial_context.call(d) }
+            end
+            if value.is_a? Pattern
+                return value.transform_includes { |d| convert_initial_context.call(d) }
+            end
+            return value
+        end
+        @repository.transform_values! { |v| convert_initial_context.call(v) }
+
+        output = {}
+
+        to_tag = lambda do |value|
+            return value.map { |v| to_tag.call(v) } if value.is_a? Array
+            value.to_tag
+        end
+        output[:repository] = @repository.transform_values { |value| to_tag.call(value) }
+
+        output[:pattern] = output[:repository][:$initial_context]
+        output[:repository].delete(:$initial_context)
+
+        output[:version] = auto_version()
+    end
+
+    def auto_version
+        return @keys[:version] unless @keys[:version] == :auto
+        commit = `git rev-parse HEAD`
+        return commit
+    rescue StandardError
+        return ""
     end
 end
 
