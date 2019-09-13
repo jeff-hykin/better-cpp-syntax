@@ -26,13 +26,15 @@ class Grammar
         grammar = ImportGrammar.new(
             name: import_grammar["name"],
             scope_name: import_grammar["scopeName"],
+            version: import_grammar["version"],
+            description: import_grammar["description"],
         )
         # import "patterns" into @repository[:$initial_context]
         grammar.repository[:$initial_context] = import_grammar["patterns"]
         # import the rest of the repository
         import_grammar["repository"].each do |key, value|
             # repository keys are kept as a hash
-            grammar.repository[key[1..-1].to_sym] = value
+            grammar.repository[key.to_sym] = value
         end
         grammar
     end
@@ -160,7 +162,8 @@ class Grammar
         output[:repository].delete(:$initial_context)
 
         output[:version] = auto_version()
-        output.merge!(@keys) { |old, _new| old }
+        output.merge!(@keys) { |key, old, _new| old }
+        puts output[:version]
 
         out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
         out_file.write(JSON.pretty_generate(output))
@@ -170,7 +173,7 @@ class Grammar
     def auto_version
         return @keys[:version] unless @keys[:version] == :auto
         commit = `git rev-parse HEAD`
-        return commit
+        return commit.strip
     rescue StandardError
         return ""
     end
@@ -267,7 +270,7 @@ class ExportableGrammar < Grammar
 end
 
 class ImportGrammar < Grammar
-    def initialize(*args)
+    def initialize(args)
         super(args)
     end
 

@@ -343,7 +343,7 @@ class Pattern
         regex_as_string = case @original_arguments[:match]
             when Pattern then @original_arguments[:match].to_s(depth + 2, true)
             when Regexp then @original_arguments[:match].inspect
-            when String then "/" + @original_arguments[:match] + "/"
+            when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
         end
         regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
