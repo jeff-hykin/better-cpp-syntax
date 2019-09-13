@@ -82,12 +82,12 @@
     - meta.block.enum
 - source: ///
   scopesBegin:
-    - comment.line.documentation
+    - comment.line.double-slash.documentation
   scopes:
     - punctuation.definition.comment.documentation
 - source: '{'
   scopesEnd:
-    - comment.line.documentation
+    - comment.line.double-slash.documentation
 - source: enum
   scopesBegin:
     - meta.block.enum

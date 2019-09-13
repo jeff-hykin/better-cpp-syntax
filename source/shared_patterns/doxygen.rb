@@ -299,17 +299,17 @@ def doxygen
         tag_as: "invalid.unknown.documentation.command",
     )
 
-    line_comment = PatternRange.new(
-        tag_as: "comment.line.documentation",
-        start_pattern: Pattern.new(
-            match: /\/\//.oneOrMoreOf(/[!\/]/),
-            tag_as: "punctuation.definition.comment.documentation",
-        ),
-        while: @start_of_line.maybe(match: @spaces, dont_back_track?: true).then(
-            match: /\/\//.oneOrMoreOf(/[!\/]/),
-            tag_as: "punctuation.definition.comment.continuation.documentation",
-        ),
-        includes: command_grammars,
+    line_comment = Pattern.new(
+        tag_as: "comment.line.double-slash.documentation",
+        match: Pattern.new(
+            @start_of_line.maybe(match: @spaces, dont_back_track?: true).then(
+                match: /\/\//.oneOrMoreOf(/[!\/]/),
+                tag_as: "punctuation.definition.comment.documentation",
+            ).then(
+                match: /.*/,
+                includes: command_grammars,
+            )
+        )
     )
 
     single_line_block_comment = Pattern.new(
@@ -329,7 +329,7 @@ def doxygen
     block_comment = PatternRange.new(
         tag_as: "comment.block.documentation",
         start_pattern: Pattern.new(
-            match: /\/\*/.oneOrMoreOf(/[!*]/).then(@end_of_line.or(lookAheadFor(/\s/))),
+            match: maybe(match: @spaces, dont_back_track?: true).then(/\/\*/).oneOrMoreOf(/[!*]/).then(@end_of_line.or(lookAheadFor(/\s/))),
             tag_as: "punctuation.definition.comment.begin.documentation",
         ),
         end_pattern: Pattern.new(
