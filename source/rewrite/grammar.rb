@@ -104,10 +104,11 @@ class Grammar
         end
 
         export = export.export
+        export.parent_grammar = self
 
         # import the repository
         @repository = @repository.merge export.repository do |_key, old_val, new_val|
-            [old_val, new_val].flatten
+            [old_val, new_val].flatten.uniq
         end
     end
 
@@ -180,7 +181,7 @@ class Grammar
 end
 
 class ExportableGrammar < Grammar
-    attr_accessor :exports, :external_repos
+    attr_accessor :exports, :external_repos, :parent_grammar
 
     def initialize
         # skip: initalize, new, and new_exportable_grammar
@@ -211,6 +212,10 @@ class ExportableGrammar < Grammar
             raise "See error above"
         end
         super(key, value)
+        if parent_grammar.is_a? Grammar
+            parent_grammar.import(self)
+        else
+        end
     end
 
     def export

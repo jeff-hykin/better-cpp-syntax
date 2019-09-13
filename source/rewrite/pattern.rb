@@ -419,6 +419,15 @@ class Pattern
         self
     end
 
+    def hash
+        @match.hash
+    end
+
+    def eql?(other)
+        return false unless other.is_a? Pattern
+        to_tag == other.to_tag
+    end
+
     #
     # Chaining
     #
