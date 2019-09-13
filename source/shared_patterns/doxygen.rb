@@ -337,18 +337,6 @@ def doxygen
             tag_as: "punctuation.definition.comment.end.documentation",
         ),
         includes: [
-            PatternRange.new(
-                start_pattern: /\G/,
-                while: @start_of_line
-                    .maybe(match: @spaces, dont_back_track?: true)
-                    .lookAheadToAvoid(zeroOrMoreOf(/[!*]/).then(/\*\//))
-                    .zeroOrMoreOf(
-                        match: /\*/,
-                        dont_back_track?: true,
-                        tag_as: "punctuation.definition.comment.continuation.documentation",
-                    ),
-                includes: command_grammars,
-            ),
             *command_grammars,
         ],
     )
