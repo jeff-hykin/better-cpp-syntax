@@ -13,8 +13,6 @@ require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
 # todo
-    # fix initializer list "functions" e.g. `int a{5};`
-    # have all patterns with keywords be dynamically generated
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
     # consider adding storage.type to user defined types
