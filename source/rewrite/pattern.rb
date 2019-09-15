@@ -242,6 +242,21 @@ class Pattern
     def transform_includes(&block)
         __deep_clone__.transform_includes!(&block)
     end
+
+    def transform_tag_as!(&block)
+        if @arguments[:tag_as]
+            @arguments[:tag_as] = block.call @arguments[:tag_as]
+        end
+
+        @match.transform_tag_as!(block) if @match.is_a? Pattern
+        @next_pattern.transform_tag_as!(block) if @next_pattern.is_a? Pattern
+
+        self
+    end
+
+    def transform_tag_as(&block)
+        __deep_clone__.transform_tag_as!(&block)
+    end
     #
     # Public interface
     #
@@ -374,6 +389,8 @@ class Pattern
     end
 
     def run_tests
+        pass = [true]
+
         self_regex = @match.to_r
         warn = lambda do |symbol|
             puts <<-HEREDOC.remove_indent
@@ -389,30 +406,35 @@ class Pattern
             test_regex = /^(?:#{self_regex})$/
             if @arguments[:should_fully_match].all? { |test| test =~ test_regex } == false
                 warn.call :should_fully_match
+                pass << false
             end
         end
         if @arguments[:should_not_fully_match].is_a? Array
             test_regex = /^(?:#{self_regex})$/
             if @arguments[:should_not_fully_match].none? { |test| test =~ test_regex } == false
                 warn.call :should_not_fully_match
+                pass << false
             end
         end
         if @arguments[:should_partially_match].is_a? Array
             test_regex = self_regex
             if @arguments[:should_partially_match].all? { |test| test =~ test_regex } == false
                 warn.call :should_partially_match
+                pass << false
             end
         end
         if @arguments[:should_not_partially_match].is_a? Array # rubocop: disable Style/GuardClause
             test_regex = self_regex
             if @arguments[:should_not_partially_match].none? { |test| test =~ test_regex } == false
                 warn.call :should_not_partially_match
+                pass << false
             end
         end
         # run related unit tests
-        @match.run_tests if @match.is_a? Pattern
-        @next_pattern.run_tests if @next_pattern.is_a? Pattern
-        @arguments[:includes]&.each { |inc| inc.run_tests if inc.is_a? Pattern }
+        pass << @match.run_tests if @match.is_a? Pattern
+        pass << @next_pattern.run_tests if @next_pattern.is_a? Pattern
+        @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? Pattern }
+        pass.none? { |v| !v}
     end
 
     def start_pattern

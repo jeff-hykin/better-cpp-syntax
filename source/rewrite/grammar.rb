@@ -8,14 +8,28 @@ require_relative 'pattern'
 require_relative 'pattern_range'
 require_relative 'sub_patterns'
 
-def top_level_binding
-    binding
+class Hash
+    def hmap(&block)
+        Hash[self.map {|k, v| block.call(k,v) }]
+    end
 end
 
 class Grammar
     @@export_grammars = {}
 
-    attr_accessor :repository
+    @@linters = []
+    @@transforms = []
+
+    def self.register_linter(linter)
+        @@linters << linter
+    end
+
+
+    def self.register_transform(transform)
+        @@transforms << transform
+    end
+
+    attr_accessor :repository, :name, :scope_name
     def self.new_exportable_grammar
         ExportableGrammar.new
     end
@@ -118,20 +132,35 @@ class Grammar
 
     def save_to(dir, inherit_or_embedded = :embedded)
         # steps:
-        # rerun export grammars
-        # run test ✓
-        # run pre linters
-        # run any pre transformations
+        # run pre linters ✓
+        # run pre transformations ✓
         # generate bailout patterns
         # transform initial_context includes to $base or $self ✓
         # call to_tag on each pattern ✓
-        # run post linters
         # move initial context into patterns ✓
         # if version is :auto, populate with git commit ✓
+        # run post transformations ✓
+        # run post linters ✓
         # save as #{name}.tmLanguage.json pretty printed ✓
 
-        @repository.each do |key, pattern|
-            pattern.run_tests if pattern.is_a? Pattern
+        @@linters.each do |linter|
+            @repository.each do |key, value|
+                if value.is_a? Array
+                    value.each do |v|
+                        raise "linting failed, see above error" unless linter.pre_lint(key, v)
+                    end
+                else
+                    raise "linting failed, see above error" unless linter.pre_lint(key, value)
+                end
+            end
+        end
+
+        repository_copy = @repository.__deep_clone__
+        @@transforms.each do |transform|
+            repository_copy = repository_copy.hmap do |key, value|
+                new_v = transform.pre_transform(key, value, self)
+                [key, new_v]
+            end
         end
 
         convert_initial_context = lambda do |value|
@@ -144,7 +173,7 @@ class Grammar
             end
             return value
         end
-        @repository.transform_values! { |v| convert_initial_context.call(v) }
+        repository_copy.transform_values! { |v| convert_initial_context.call(v) }
 
         output = {
             name: @name,
@@ -156,7 +185,7 @@ class Grammar
             return {"include" => "#" + value.to_s} if value.is_a? Symbol
             value.to_tag
         end
-        output[:repository] = @repository.transform_values { |value| to_tag.call(value) }
+        output[:repository] = repository_copy.transform_values { |value| to_tag.call(value) }
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []
@@ -164,7 +193,12 @@ class Grammar
 
         output[:version] = auto_version()
         output.merge!(@keys) { |key, old, _new| old }
-        puts output[:version]
+
+        @@transforms.each { |transform| output = transform.post_transform(output) }
+
+        @@linters.each do |linter|
+            raise "linting failed, see above error" unless linter.post_lint(output)
+        end
 
         out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
         out_file.write(JSON.pretty_generate(output))
@@ -287,3 +321,7 @@ class ImportGrammar < Grammar
         @repository[key]
     end
 end
+
+# load default linters and transforms
+Dir[File.join(__dir__, 'linters', '*.rb')].each { |file| require file }
+Dir[File.join(__dir__, 'transforms', '*.rb')].each { |file| require file }

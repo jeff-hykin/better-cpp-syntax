@@ -4,6 +4,7 @@
   "repository": {
     "abc": {
       "match": "abc",
+      "name": "abc.example",
       "captures": {
         "0": {
           "patterns": [
@@ -26,8 +27,12 @@
   },
   "patterns": [
     {
+      "match": "def",
+      "name": "abc.example def.example"
+    },
+    {
       "include": "#abc"
     }
   ],
-  "version": "1601b8586c023e879bbeccc78e3bb6248f000f68"
+  "version": "515856a26797c81f7779a330b6c7d8f09db47d29"
 }

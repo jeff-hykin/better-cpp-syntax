@@ -12,6 +12,7 @@ ex.external_repos = [
 
 ex[:abc] = Pattern.new(
     match: /abc/,
+    tag_as: "abc",
     includes: [
         :p123,
         :test_pat,
@@ -31,6 +32,10 @@ ex.export # just to confirm that export is idempotent
 
 g.import(ex.export)
 g[:$initial_context] = [
+    Pattern.new(
+        match: "def",
+        tag_as: "abc def"
+    ),
     :abc
 ]
 
