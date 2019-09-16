@@ -85,7 +85,7 @@ class Regexp
 end
 
 class Pattern
-    attr_accessor :next_pattern
+    attr_accessor :next_pattern, :arguments
 
     #
     # Helpers
