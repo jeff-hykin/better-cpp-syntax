@@ -2,6 +2,7 @@
 
 require 'deep_clone'
 require 'yaml'
+require 'textmate_grammar/grammar_plugin.rb'
 
 # Add remove indent to the String class
 class String
@@ -85,7 +86,7 @@ class Regexp
 end
 
 class Pattern
-    attr_accessor :next_pattern, :arguments
+    attr_accessor :next_pattern, :original_arguments
 
     #
     # Helpers
@@ -354,11 +355,13 @@ class Pattern
     end
 
     # Displays the Pattern as you would write it in code
-    # This displays the canonical form, that is helpers such as oneOrMoreOf() become #then
+    # TODO: make this function easier to understand
     def to_s(depth = 0, top_level = true)
         # rubocop:disable Metrics/LineLength
 
-        # TODO: make this function easier to understand
+        plugins = Grammar.plugins
+        plugins.reject! { |p| (@original_arguments.keys & p).empty? }
+
         regex_as_string = case @original_arguments[:match]
             when Pattern then @original_arguments[:match].to_s(depth + 2, true)
             when Regexp then @original_arguments[:match].inspect
@@ -384,6 +387,8 @@ class Pattern
             output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of] if @arguments[:word_cannot_be_any_of]
         end
         output += ",\n#{indent}  dont_backtrack?: \"" + @arguments[:dont_backtrack?] + '"' if @arguments[:dont_backtrack?]
+        # add any linter/transform configurations
+        plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
         # subclass, ending and recursive
         output += do_add_attributes(indent)
         output += ",\n#{indent})"

@@ -17,25 +17,18 @@ end
 class Grammar
     @@export_grammars = {}
 
-    @@linters = []
-    @@transforms = []
-
-    def self.register_linter(linter)
-        @@linters << linter
-    end
-
-
-    def self.register_transform(transform)
-        @@transforms << transform
-    end
-
     attr_accessor :repository, :name, :scope_name
     def self.new_exportable_grammar
         ExportableGrammar.new
     end
 
     def self.fromTmLanguage(path)
-        import_grammar = JSON.parse File.read(path)
+        begin
+            import_grammar = JSON.parse File.read(path)
+        rescue JSON::ParserError
+            require 'plist'
+            import_grammar = Plist.parse_xml File.read(path)
+        end
 
         grammar = ImportGrammar.new(
             name: import_grammar["name"],
@@ -210,11 +203,14 @@ class Grammar
         output = generate(options[:inherit_or_embedded])
 
         if [:json, :vscode].includes? options[:syntax_format]
-            out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
+            out_file = File.open(File.join(options[:syntax_dir], "#{options[:syntax_name]}.json"), "w")
             out_file.write(JSON.pretty_generate(output))
             out_file.close
         elsif [:plist, :textmate, :tm_language, :xml].include? options[:syntax_format]
-            # TODO: write plist version
+            require 'plist'
+            out_file = File.open(File.join(options[:syntax_dir], "#{options[:syntax_name]}"), "w")
+            out_file.write(Plist::Emit.dump(output))
+            out_file.close
         else
             puts "unxpected syntax format #{options[:syntax_format]}"
             puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml"
@@ -339,6 +335,4 @@ class ImportGrammar < Grammar
     end
 end
 
-# load default linters and transforms
-Dir[File.join(__dir__, 'linters', '*.rb')].each { |file| require file }
-Dir[File.join(__dir__, 'transforms', '*.rb')].each { |file| require file }
+require_relative 'grammar_plugin'

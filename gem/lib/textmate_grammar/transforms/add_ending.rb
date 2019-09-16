@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'base'
-
 class AddEnding < GrammarTransform
     def pre_transform(key, pattern, grammar)
         return pattern.map {|v| pre_transform(key, v, grammar)} if pattern.is_a? Array

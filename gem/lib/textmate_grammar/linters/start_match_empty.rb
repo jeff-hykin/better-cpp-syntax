@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'base'
-
 class StartMatchEmpty < GrammarLinter
     def pre_lint(key, pattern)
         return true unless pattern.is_a? PatternRange
@@ -13,6 +11,14 @@ class StartMatchEmpty < GrammarLinter
             puts "The pattern is:\n#{pattern}"
         end
         true # return true for warnings
+    end
+
+    def self.options
+        [:zeroLengthStart?]
+    end
+
+    def self.display_options(indent, options)
+        ",\n#{indent}zeroLengthStart?: #{options[:zeroLengthStart?]}"
     end
 end
 
