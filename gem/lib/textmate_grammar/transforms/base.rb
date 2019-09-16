@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GrammarTransform
     # performs a transformation on each pattern
     # returns the transformed pattern

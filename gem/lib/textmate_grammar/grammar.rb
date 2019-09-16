@@ -126,11 +126,7 @@ class Grammar
         end
     end
 
-    def debug
-        pp @repository
-    end
-
-    def save_to(dir, inherit_or_embedded = :embedded)
+    def generate(inherit_or_embedded = :embedded)
         # steps:
         # run pre linters ✓
         # run pre transformations ✓
@@ -141,7 +137,6 @@ class Grammar
         # if version is :auto, populate with git commit ✓
         # run post transformations ✓
         # run post linters ✓
-        # save as #{name}.tmLanguage.json pretty printed ✓
 
         @@linters.each do |linter|
             @repository.each do |key, value|
@@ -199,10 +194,32 @@ class Grammar
         @@linters.each do |linter|
             raise "linting failed, see above error" unless linter.post_lint(output)
         end
+    end
 
-        out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
-        out_file.write(JSON.pretty_generate(output))
-        out_file.close
+    def save_to(options)
+        default = {
+            inherit_or_embedded: :embedded,
+            generate_tags: true,
+            syntax_format: :json,
+            syntax_name: "#{@name}.tmLanguage",
+            syntax_dir: File.join(options[:dir],"syntaxes"),
+            tag_dir: File.join(options[:dir],"language_tags"),
+        }
+
+        options = default.merge(options)
+        output = generate(options[:inherit_or_embedded])
+
+        if [:json, :vscode].includes? options[:syntax_format]
+            out_file = File.open(File.join(dir, "#{@name}.tmLanguage.json"), "w")
+            out_file.write(JSON.pretty_generate(output))
+            out_file.close
+        elsif [:plist, :textmate, :tm_language, :xml].include? options[:syntax_format]
+            # TODO: write plist version
+        else
+            puts "unxpected syntax format #{options[:syntax_format]}"
+            puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml"
+            raise "see above error"
+        end
     end
 
     def auto_version

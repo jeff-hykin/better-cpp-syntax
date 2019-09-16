@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GrammarLinter
     # runs a linter on each pattern
     # returns false if linting failed

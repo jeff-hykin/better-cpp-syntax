@@ -342,7 +342,7 @@ end
 #
 
 class BackReferencePattern < Pattern
-    def initialize(reference, deep_clone = nil)
+    def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
                 match: Regexp.new("[:backreference:#{reference}:]"),
@@ -350,7 +350,7 @@ class BackReferencePattern < Pattern
             )
         else
             # most likely __deep_clone__ was called, just call the super initalizer
-            super(reference, deep_clone)
+            super(reference, deep_clone, original_arguments)
         end
     end
 
@@ -381,7 +381,7 @@ end
 #
 
 class SubroutinePattern < Pattern
-    def initialize(reference, deep_clone = nil)
+    def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
                 match: Regexp.new("[:subroutine:#{reference}:]"),
@@ -389,7 +389,7 @@ class SubroutinePattern < Pattern
             )
         else
             # most likely __deep_clone__ was called, just call the super initalizer
-            super(reference, deep_clone)
+            super(reference, deep_clone, original_arguments)
         end
     end
 

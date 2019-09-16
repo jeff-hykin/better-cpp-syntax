@@ -1,8 +1,10 @@
-require_relative '../base'
+# frozen_string_literal: true
+
+require_relative 'base'
 
 class StartMatchEmpty < GrammarLinter
     def pre_lint(key, pattern)
-        return true if unless pattern.is_a? PatternRange
+        return true unless pattern.is_a? PatternRange
         regexp = Regexp.new(pattern.start_pattern().evaluate().replace("\\G", '\uFFFF'))
         if "" =~ regexp and !(pattern.arguments[:zeroLengthStart?])
             puts "Warning: #{pattern.start_pattern().evaluate}\nmatches the zero length string (\"\").\n\n"

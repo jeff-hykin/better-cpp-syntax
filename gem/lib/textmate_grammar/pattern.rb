@@ -269,6 +269,7 @@ class Pattern
             @original_arguments = arguments[2]
             return
         end
+
         if arguments.length > 1
             # Pattern was likely constucted like `Pattern.new(/foo/, option: bar)`
             puts "Pattern#new() expects a single Regexp, String, or Hash"
@@ -298,6 +299,9 @@ class Pattern
         end
         arg1.delete(:match)
         @arguments = arg1
+
+        @at_most = nil
+        @at_least = nil
     end
 
     # attempts to provide a memorable name for a pattern
@@ -448,6 +452,10 @@ class Pattern
     def eql?(other)
         return false unless other.is_a? Pattern
         to_tag == other.to_tag
+    end
+
+    def ==(other)
+        eql? other
     end
 
     #
