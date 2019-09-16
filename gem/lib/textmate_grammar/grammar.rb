@@ -8,20 +8,35 @@ require_relative 'pattern'
 require_relative 'pattern_range'
 require_relative 'sub_patterns'
 
-class Hash
-    def hmap(&block)
-        Hash[self.map {|k, v| block.call(k,v) }]
-    end
-end
 
 class Grammar
+    #
+    # A mapping of grammar partials that have been exported
+    #
+    # @api private
+    #
     @@export_grammars = {}
 
     attr_accessor :repository, :name, :scope_name
+
+    #
+    # Create a new Exportable Grammar (Grammar Partial)
+    #
+    # @return [ExportableGrammar] the new exportable Grammar
+    #
     def self.new_exportable_grammar
         ExportableGrammar.new
     end
 
+    #
+    # import an existing grammar from a file
+    #
+    # @note the imported grammar is write only access to imported keys will raise an error
+    #
+    # @param [String] path path to a json or plist grammar
+    #
+    # @return [Grammar] The imported grammar
+    #
     def self.fromTmLanguage(path)
         begin
             import_grammar = JSON.parse File.read(path)
@@ -46,10 +61,23 @@ class Grammar
         grammar
     end
 
+    #
+    # Create a new Grammar
+    #
+    # @param [Hash] keys The grammar keys
+    # @option keys [String] :name The name of the grammar
+    # @option keys [String] :scope_name The scope_name of teh grammar, must start with
+    #   +source.+ or +text.+
+    # @option keys [String, :auto] :version (:auto) the version of the grammar, :auto uses
+    #   the current git commit as the version
+    # @option keys [Array] :patterns ([]) ignored, will be replaced with the initial context
+    # @option keys [Hash] :repository ({}) ignored, will be replaced by the generated rules
+    # @option keys all remaning options will be copied to the grammar without change
+    #
     def initialize(keys)
         required_keys = [:name, :scope_name]
         unless required_keys & keys.keys == required_keys
-            puts "Missing one ore more of the required grammar keys"
+            puts "Missing one or more of the required grammar keys"
             puts "Missing: #{required_keys - (required_keys & keys.keys)}"
             puts "The required grammar keys are: #{required_keys}"
             raise "See above error"
@@ -74,10 +102,32 @@ class Grammar
         end
     end
 
+
+    #
+    # Access a pattern in the grammar
+    #
+    # @param [Symbol] key The key the pattern is stored in
+    #
+    # @return [Pattern, Symbol, Array<Pattern, Symbol>] The stored pattern
+    #
     def [](key)
         @repository[key]
     end
 
+
+    #
+    # Store a pattern
+    #
+    # A pattern must be stored in the grammar for it to appear in the final grammar
+    #
+    # The special key :$initial_context is the pattern that will be matched at the
+    # begining of the document or whenever the root of the grammar is to be matched
+    #
+    # @param [Symbol] key The key to store the pattern in
+    # @param [Pattern, Symbol, Array<Pattern, Symbol>] value the pattern to store
+    #
+    # @return [Pattern, Symbol, Array<Pattern, Symbol>] the stored pattern
+    #
     def []=(key, value)
         raise "Use symbols not strings" unless key.is_a? Symbol
 
@@ -108,6 +158,18 @@ class Grammar
         @repository[key]
     end
 
+
+    #
+    # Import a grammar partial into this grammar
+    #
+    # @note the import is "dynamic", changes made to the grammar partial after the import
+    #   wil be reflected in the parent grammar
+    #
+    # @param [String, ExportableGrammar] path_or_export the grammar partial or the file
+    #   in which the grammar partial is declared
+    #
+    # @return [void] nothing
+    #
     def import(path_or_export)
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
@@ -124,6 +186,15 @@ class Grammar
         end
     end
 
+    #
+    # Convert the grammar into a hash suitable for exporting to a file
+    #
+    # @param [:inherit, :embedded] inherit_or_embedded Is this grammar being inherited
+    #   from, or will be embedded, this controls if :$initial_context is mapped to
+    #   +"$base"+ or +"$self"+
+    #
+    # @return [Hash] the generated grammar
+    #
     def generate(inherit_or_embedded = :embedded)
         # steps:
         # run pre linters ✓
@@ -201,6 +272,30 @@ class Grammar
         output
     end
 
+    #
+    # Save the grammar to a path
+    #
+    # @param [Hash] options options to save_to
+    # @option options :inherit_or_embedded (:embedded) see {#generate}
+    # @option options :generate_tags [Boolean] (true) generate a list of all +:tag_as+s
+    # @option options :dir [String] the location to generate the files
+    # @option options :tag_dir [String] (File.join(options[:dir],"language_tags")) the
+    #   directory to generate language tags in
+    # @option options :syntax_dir [String] (File.join(options[:dir],"syntaxes")) the
+    #   directory to generate the syntax file in
+    # @options options :syntax_format [:json,:vscode,:plist,:textmate,:tm_language,:xml]
+    #   (:json) The format to generate the syntax file in
+    # @options options :syntax_name [String] ("#{@name}.tmLanguage") the name of the syntax
+    #   file to generate without the extension
+    #
+    # @note all keys except :dir is optional
+    # @note :dir is optional if both :tag_dir and :syntax_dir are specified
+    # @note currently :vscode is an alias for :json
+    # @note currently :textmate, :tm_language, and :xml are aliases for :plist
+    # @note later the aliased :syntax_type choices may enable compatibility features
+    #
+    # @return [void] nothing
+    #
     def save_to(options)
         default = {
             inherit_or_embedded: :embedded,
@@ -225,11 +320,19 @@ class Grammar
             out_file.close
         else
             puts "unxpected syntax format #{options[:syntax_format]}"
-            puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml"
+            puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]"
             raise "see above error"
         end
     end
 
+
+    #
+    # Returns the version information
+    #
+    # @api private
+    #
+    # @return [String] The version string to use
+    #
     def auto_version
         return @keys[:version] unless @keys[:version] == :auto
         commit = `git rev-parse HEAD`
@@ -240,8 +343,21 @@ class Grammar
 end
 
 class ExportableGrammar < Grammar
-    attr_accessor :exports, :external_repos, :parent_grammar
+    # @return [Array<Symbol>] names that will be exported by the grammar partial
+    attr_accessor :exports
+    # @return [Array<Symbol>] external names the this grammar partial may reference
+    attr_accessor :external_repos
+    #
+    # Grammars that are a parent to this grammar partial
+    #
+    # @api private
+    #
+    attr_accessor :parent_grammar
 
+    #
+    # Initialize a new Exportable Grammar
+    # @note use {Grammar.new_exportable_grammar} instead
+    #
     def initialize
         # skip: initalize, new, and new_exportable_grammar
         location = caller_locations(3, 1).first
@@ -263,20 +379,30 @@ class ExportableGrammar < Grammar
             line: location.lineno,
             grammar: self,
         }
+
+        @parent_grammar = []
     end
 
+    #
+    # (see Grammar#[]=)
+    #
+    # @note grammar partials cannot constribute to $initial_context
+    #
     def []=(key, value)
         if key.to_s == "$initial_context"
             puts "ExportGrammar cannot store to $initial_context"
             raise "See error above"
         end
         super(key, value)
-        if parent_grammar.is_a? Grammar
-            parent_grammar.import(self)
-        else
-        end
+
+        parent_grammar.each { |g| g.import self }
     end
 
+    #
+    # Modifies the ExportableGrammar to namespace unexported keys
+    #
+    # @return [self]
+    #
     def export
         @repository.transform_keys! do |key|
             next if [:$initial_context, :$base, :$self].include? key
@@ -331,15 +457,19 @@ class ExportableGrammar < Grammar
             raise "Unexpected object of type #{value.class} in value"
         end
     end
+    private :fixupValue
 end
 
 class ImportGrammar < Grammar
+    # (see Grammar#initialize)
     def initialize(args)
         super(args)
     end
 
+    # (see Grammar#[])
+    # @note patterns that have been imported from a file cannot be be accessed
     def [](key)
-        unless @repository[key].is_a? Pattern
+        if @repository[key].is_a? Hash
             raise "#{key} is a not a Pattern and cannot be referenced"
         end
 

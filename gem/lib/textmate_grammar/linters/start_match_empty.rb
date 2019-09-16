@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Warns when a PatternRange has a start_pattern that matches the empty string
+#
 class StartMatchEmpty < GrammarLinter
     def pre_lint(key, pattern, options)
         return true unless pattern.is_a? PatternRange

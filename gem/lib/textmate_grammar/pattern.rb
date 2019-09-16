@@ -24,7 +24,7 @@ end
 #   a prt of regex string multiple times then it is not atomic
 # @param regex_string [String] a string representing a regular expression, without the
 #   forward slash "/" at the begining and
-# @return [true, false] if the string represents an single regex entity
+# @return [Boolean] if the string represents an single regex entity
 def string_single_entity?(regex_string)
     return true if regex_string.length == 2 && regex_string[0] == '\\'
 
@@ -72,27 +72,43 @@ end
 
 # Add convience methds to make Regexp behave a bit more like Pattern
 class Regexp
+
+    # (see #string_single_entity?)
+    # @deprecated use string_single_entity
     def single_entity?
         string_single_entity? to_r_s
     end
 
+    # (see Pattern#to_r)
+    # @deprecated function is useless
     def to_r(*)
         self
     end
 
+    # display the regex as a clean string
     def to_r_s
         inspect[1..-2]
     end
 end
 
 class Pattern
-    attr_accessor :next_pattern, :original_arguments
+    # @return [Pattern] The next pattern in the linked list of patterns
+    # @api private
+    attr_accessor :next_pattern
+    # @return [Hash] The original arguments passed into initialize
+    attr_accessor :original_arguments
 
     #
     # Helpers
     #
 
-    # does @arguments contain any attributes that require this pattern be captured
+    #
+
+    #
+    # does @arguments contain any attributes that require this pattern be captured?
+    #
+    # @return [Boolean] if this Pattern needs to capture
+    #
     def needs_to_capture?
         capturing_attributes = [
             :tag_as,
@@ -104,10 +120,28 @@ class Pattern
         !(@arguments.keys & capturing_attributes).empty?
     end
 
+    #
+    # Can the capture be optimized out
+    #
+    # When the pattern has nothing after it then its capture can instead become
+    # capture group 0
+    #
+    # @return [Boolean] can this capture become capture group 0
+    #
     def optimize_outer_group?
         needs_to_capture? and @next_pattern.nil?
     end
 
+
+    #
+    # Appends pattern to the linked list of patterns
+    #
+    # @param [Pattern] pattern the pattern to append
+    #
+    # @return [self]
+    #
+    # @see insert
+    #
     def insert!(pattern)
         last = self
         last = last.next_pattern while last.next_pattern
@@ -115,11 +149,25 @@ class Pattern
         self
     end
 
+    #
+    # Append pattern to a copy of the linked list of patterns
+    #
+    # @param [Pattern] pattern the pattern to append
+    #
+    # @return [Pattern] a copy of self with pattern appended
+    #
     def insert(pattern)
         new_pattern = __deep_clone__
         new_pattern.insert!(pattern)
     end
 
+    #
+    # sets @at_least and @at_most based on arguments
+    #
+    # @return [void]
+    #
+    # @api private
+    #
     def process_quantifiers_from_arguments
         # this sets the @at_most and @at_least value based on the arguments
 
@@ -161,7 +209,13 @@ class Pattern
         end
     end
 
+
+    #
+    # converts @at_least and @at_most into the appropriate quantifier
     # this is a simple_quantifier because it does not include atomic-ness
+    #
+    # @return [String] the quantifier
+    #
     def simple_quantifier
         # Generate the ending based on :at_least and :at_most
 
@@ -200,6 +254,15 @@ class Pattern
 
     # this method handles adding the at_most/at_least, dont_back_track methods
     # it returns regex-as-a-string
+
+    #
+    # Adds quantifiers to match
+    #
+    # @param [String, Pattern] match the pattern to add a quantifier to
+    # @param [Array] groups group information, used for evaluating match
+    #
+    # @return [String] match with quantifiers applied
+    #
     def add_quantifier_options_to(match, groups)
         match = match.evaluate(groups) if match.is_a? Pattern
         quantifier = simple_quantifier
@@ -220,11 +283,25 @@ class Pattern
         match
     end
 
+    #
+    # Adds a capture group if needed
+    #
+    # @param [String] regex_as_string the pattern as a string
+    #
+    # @return [String] the pattern, potentially with a cpature group
+    #
     def add_capture_group_if_needed(regex_as_string)
         regex_as_string = "(#{regex_as_string})" if needs_to_capture?
         regex_as_string
     end
 
+    #
+    # Uses block to recursively transform includes
+    #
+    # @param [Block] &block the block to transform includes
+    #
+    # @return [self]
+    #
     def transform_includes!(&block)
         if @arguments[:includes]
             if @arguments[:includes].is_a? Array
@@ -240,10 +317,21 @@ class Pattern
         self
     end
 
+    #
+    # (see transform_includes!)
+    # @return [Pattern] a copy of self with transformed includes
+    #
     def transform_includes(&block)
         __deep_clone__.transform_includes!(&block)
     end
 
+    #
+    # Uses block to recursively transform tag_as
+    #
+    # @param [Block] &block the block to transform tag_as
+    #
+    # @return [self]
+    #
     def transform_tag_as!(&block)
         if @arguments[:tag_as]
             @arguments[:tag_as] = block.call @arguments[:tag_as]
@@ -255,13 +343,58 @@ class Pattern
         self
     end
 
+    #
+    # (see transform_tag_as!)
+    # @return [Pattern] a copy of self with transformed tag_as
+    #
     def transform_tag_as(&block)
         __deep_clone__.transform_tag_as!(&block)
     end
+
     #
     # Public interface
     #
 
+    #
+    # Construct a new pattern
+    #
+    # @overload initialize(pattern)
+    #   matches an exact pattern
+    #   @param pattern [Pattern, Regexp, String] the pattern to match
+    # @overload initialize(opts)
+    #   @param opts [Hash] options
+    #   @option opts [Pattern, Regexp, String] :match the pattern to match
+    #   @option opts [String] :tag_as what to tag this pattern as
+    #   @option opts [Array<Pattern, Symbol>] :includes pattern includes
+    #   @option opts [String] :reference a name for this pattern can be refered to in
+    #       earlier or later parts of the pattern list, or in tag_as
+    #   @option opts [Array<String>] :should_fully_match string that this pattern should
+    #       fully match
+    #   @option opts [Array<String>] :should_partial_match string that this pattern should
+    #       partially match
+    #   @option opts [Array<String>] :should_not_fully_match string that this pattern should
+    #       not fully match
+    #   @option opts [Array<String>] :should_not_partial_match string that this pattern should
+    #       not partially match
+    #   @option opts [Enumerator, Integer] :at_most match up to N times, nil to match any
+    #       number of times
+    #   @option opts [Enumerator, Integer] :at_least match no fewer tahn N times, nil to
+    #       match any number of times
+    #   @option opts [Enumerator, Integer] :how_many_times match exactly N times
+    #   @option opts [Array<String>] :word_cannot_be_any_of list of wordlike string that
+    #       the pattern should not match (this is a qualifier not a unit test)
+    #   @option opts [Boolean] :dont_back_track? can this pattern backtrack
+    #   @note Plugins may provide additional options
+    #   @note all options except :match are optional
+    # @overload initialize(opts, deep_clone, original)
+    #   makes a copy of Pattern
+    #   @param opts [Hash] the original patterns @arguments with match
+    #   @param deep_clone [:deep_clone] identifies as a deep_clone construction
+    #   @param original [Hash] the original patterns @original_arguments
+    #   @api private
+    #   @note this should only be called by __deep_clone__, however subclasses must be
+    #       able to accept this form
+    #
     def initialize(*arguments)
         if arguments.length > 1 && arguments[1] == :deep_clone
             @arguments = arguments[0]

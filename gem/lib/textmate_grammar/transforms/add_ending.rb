@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# Adds the last portion of the scope name to each tag_as if not already present
+#
 class AddEnding < GrammarTransform
     def pre_transform(key, pattern, grammar)
         return pattern.map {|v| pre_transform(key, v, grammar)} if pattern.is_a? Array
