@@ -11,7 +11,7 @@ const { removeScopeName } = require("./utils");
  */
 module.exports = async function generateSpec(path, fixture) {
     let spec = [];
-    await getTokens(registry, path, fixture, false, (line, token) => {
+    await getTokens(registry, path, fixture, false, false, (line, token) => {
         const source = line.substring(token.startIndex, token.endIndex);
         if (source.trim() === "") {
             return true;

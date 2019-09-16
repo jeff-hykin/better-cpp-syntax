@@ -2,6 +2,7 @@ const fs = require("fs");
 const glob = require("glob");
 const path = require("path");
 const _ = require("lodash");
+const { performance } = require("perf_hooks");
 
 const getTokens = require("../get_tokens");
 const { getOniguruma } = require("../report/oniguruma_decorator");
@@ -41,7 +42,10 @@ async function runReport(yargs) {
             .readFileSync(eachFile)
             .toString()
             .split("\n");
-        await getTokens(registry, eachFile, fixture, false, () => true);
+        let startTime = performance.now();
+        await getTokens(registry, eachFile, fixture, false, true, () => true);
+        let endTime = performance.now();
+        console.log("total time: %dms", endTime - startTime);
     }
     console.log();
     recorder.reportAllRecorders();

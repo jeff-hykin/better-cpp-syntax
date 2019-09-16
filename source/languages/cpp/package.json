@@ -2,7 +2,7 @@
   "name": "better-cpp-syntax",
   "displayName": "Better C++ Syntax",
   "description": "The bleeding edge of C-like syntaxes",
-  "version": "1.12.21",
+  "version": "1.14.6",
   "icon": "icon.png",
   "scripts": {
     "build": "ruby scripts/generate.rb",
@@ -49,10 +49,19 @@
     "grammars": [
       {
         "language": "cpp",
+        "scopeName": "source.cpp.embedded.macro",
+        "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.assembly.cpp": "asm"
+        }
+      },
+      {
+        "language": "cpp",
         "scopeName": "source.cpp",
         "path": "./syntaxes/cpp.tmLanguage.json",
         "embeddedLanguages": {
-          "meta.embedded.assembly.cpp": "asm"
+          "meta.embedded.assembly.cpp": "asm",
+          "meta.preprocessor.macro.contents": "cpp"
         }
       },
       {

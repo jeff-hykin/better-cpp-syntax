@@ -21,18 +21,16 @@
     - comment.line.double-slash
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
   scopes:
     - punctuation.definition.directive
 - source: ifndef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
 - source: CEKO_LIBRARY
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -2329,27 +2327,30 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+- source: ////////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
-  scopes:
-    - punctuation.definition.comment
-- source: //////////////////////
-- source: //
-  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: '  Functions'
 - source: //
-  scopesBegin:
+  scopes:
     - punctuation.definition.comment
-- source: //
   scopesEnd:
-    - punctuation.definition.comment
-- source: //////////////////////
+    - comment.line.double-slash
+- source: ////////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
+  scopesBegin:
+    - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
 - source: ' Debugging and errors '
@@ -24098,13 +24099,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -29604,7 +29605,7 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: FUNC
   scopes:
     - variable.parameter.preprocessor
@@ -29616,7 +29617,7 @@
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: Task
   scopes:
     - entity.name.function.call
@@ -30354,13 +30355,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: LockManager
   scopes:
     - variable.other.object.access
@@ -30416,13 +30417,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: LockManager
   scopes:
     - variable.other.object.access
@@ -30467,27 +30468,30 @@
     - punctuation.section.arguments.end.bracket.round.function.member
   scopesEnd:
     - meta.preprocessor.macro
+- source: //////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
-  scopes:
-    - punctuation.definition.comment
-- source: ////////////////////
-- source: //
-  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: ' Secondary helper functions'
 - source: //
-  scopesBegin:
+  scopes:
     - punctuation.definition.comment
-- source: //
   scopesEnd:
-    - punctuation.definition.comment
-- source: ////////////////////
+    - comment.line.double-slash
+- source: //////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
+  scopesBegin:
+    - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
 - source: ' Vector functions '
@@ -39407,27 +39411,30 @@
   scopesEnd:
     - meta.function.definition
     - meta.body.function.definition
+- source: ////////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
   scopesBegin:
     - comment.line.double-slash
-  scopes:
-    - punctuation.definition.comment
-- source: //////////////////////
-- source: //
-  scopesBegin:
     - punctuation.definition.comment
 - source: //
   scopesEnd:
     - punctuation.definition.comment
 - source: '  Custom Types'
 - source: //
-  scopesBegin:
+  scopes:
     - punctuation.definition.comment
-- source: //
   scopesEnd:
-    - punctuation.definition.comment
-- source: //////////////////////
+    - comment.line.double-slash
+- source: ////////////////////////
+  scopes:
+    - comment.line.double-slash.documentation
+    - punctuation.definition.comment.documentation
 - source: //
+  scopesBegin:
+    - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
 - source: ' pre-declare Item'
@@ -64053,8 +64060,7 @@
     - meta.body.function.definition.special.operator-overload
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif

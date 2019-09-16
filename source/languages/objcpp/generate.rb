@@ -1,4 +1,4 @@
-require_relative '../../../directory'
+require_relative '../../../paths'
 require_relative PathFor[:repo_helper]
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["predefined_macros"]
@@ -12,7 +12,6 @@ objective_cpp_grammar = Grammar.new(
     file_types: [
         "mm",
 		"M",
-		"h"
     ],
     version: "",
     information_for_contributors: [

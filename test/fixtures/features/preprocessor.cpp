@@ -8,12 +8,34 @@
 
 #define thing class Stuff
 
+#ifdef __vax__
+#error "Won't work on VAXen.  See comments at get_last_object."
+#endif
+
+#if !defined(FOO) && defined(BAR)
+#error 'BAR requires FOO.'
+#endif
+
+#ifdef __vax__
+#warning "Won't work on VAXen.  See comments at get_last_object."
+#endif
+
+#if !defined(FOO) && defined(BAR)
+#warning 'BAR requires FOO.'
+#endif
+
 #define thing struct Stuff 
 #define thing struct Stuff \
     {
 
+#define foo namespace foo { struct bar { \
+int data, members; \
+int other;
+
 
 #pragma once
+
+#pragma GCC poison printf 
 
 #include <type_traits>
 
@@ -30,3 +52,4 @@
     struct IsArrayBasedPoint<T>:public std::true_type \
         {
             
+

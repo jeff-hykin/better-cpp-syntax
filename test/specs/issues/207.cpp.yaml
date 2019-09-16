@@ -169,9 +169,6 @@
   scopesEnd:
     - meta.block.class
 - source: template
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -179,6 +176,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -251,9 +251,6 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -261,6 +258,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -333,9 +333,6 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -343,6 +340,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -418,9 +418,6 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -428,6 +425,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'

@@ -1,17 +1,15 @@
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
   scopes:
     - punctuation.definition.directive
 - source: if
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
 - source: B4G_DEBUG_CHECK
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: fprintf
   scopes:
     - entity.name.function.call
@@ -162,14 +160,12 @@
     - punctuation.terminator.statement
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
 - source: void
   scopesBegin:
     - meta.function.definition

@@ -1,6 +1,6 @@
 // this modifies each rule so that regular expressions have their line numbers in them
 const jsonSourceMap = require("json-source-map");
-const vsctm = require("vscode-textmate-experimental");
+const vsctm = require("vscode-textmate");
 const recorder = require("./recorder");
 
 /**

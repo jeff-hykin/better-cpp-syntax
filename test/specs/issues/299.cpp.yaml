@@ -31,32 +31,34 @@
     - meta.enum.definition
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
   scopes:
     - punctuation.definition.directive
 - source: if
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
 - source: COND
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
-- source: '    TWO_AND_HALF'
+- source: TWO_AND_HALF
+  scopesBegin:
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
+  scopesEnd:
+    - meta.enum.definition
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
 - source: THREE
   scopes:
     - meta.enum.definition
@@ -69,18 +71,16 @@
 - source: '#'
   scopesBegin:
     - meta.tail.enum
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
   scopes:
     - punctuation.definition.directive
 - source: if
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.if
 - source: COND
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -100,8 +100,7 @@
     - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif

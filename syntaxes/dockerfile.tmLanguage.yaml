@@ -114,147 +114,151 @@ repository:
         match: "\\b(?:true|false)\\b"
         name: constant.language.$0.shell.dockerfile
       numeric_constant:
-        begin: "(?<!\\w)(?=\\d|\\.\\d)"
-        end: "(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-        patterns:
-        - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '1':
-              name: keyword.other.unit.hexadecimal.shell.dockerfile
-            '2':
-              name: constant.numeric.hexadecimal.shell.dockerfile
+        match: "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])*"
+        captures:
+          '0':
+            patterns:
+            - begin: "(?=.)"
+              end: "$"
               patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '4':
-              name: constant.numeric.hexadecimal.shell.dockerfile
-            '5':
-              name: constant.numeric.hexadecimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '6':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '8':
-              name: keyword.other.unit.exponent.hexadecimal.shell.dockerfile
-            '9':
-              name: keyword.operator.plus.exponent.hexadecimal.shell.dockerfile
-            '10':
-              name: keyword.operator.minus.exponent.hexadecimal.shell.dockerfile
-            '11':
-              name: constant.numeric.exponent.hexadecimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '12':
-              name: keyword.other.unit.suffix.floating-point.shell.dockerfile
-        - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '2':
-              name: constant.numeric.decimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '4':
-              name: constant.numeric.decimal.point.shell.dockerfile
-            '5':
-              name: constant.numeric.decimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '6':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '8':
-              name: keyword.other.unit.exponent.decimal.shell.dockerfile
-            '9':
-              name: keyword.operator.plus.exponent.decimal.shell.dockerfile
-            '10':
-              name: keyword.operator.minus.exponent.decimal.shell.dockerfile
-            '11':
-              name: constant.numeric.exponent.decimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '12':
-              name: keyword.other.unit.suffix.floating-point.shell.dockerfile
-        - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '1':
-              name: keyword.other.unit.binary.shell.dockerfile
-            '2':
-              name: constant.numeric.binary.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '4':
-              name: keyword.other.unit.suffix.integer.shell.dockerfile
-        - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '1':
-              name: keyword.other.unit.octal.shell.dockerfile
-            '2':
-              name: constant.numeric.octal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '4':
-              name: keyword.other.unit.suffix.integer.shell.dockerfile
-        - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '1':
-              name: keyword.other.unit.hexadecimal.shell.dockerfile
-            '2':
-              name: constant.numeric.hexadecimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '5':
-              name: keyword.other.unit.exponent.hexadecimal.shell.dockerfile
-            '6':
-              name: keyword.operator.plus.exponent.hexadecimal.shell.dockerfile
-            '7':
-              name: keyword.operator.minus.exponent.hexadecimal.shell.dockerfile
-            '8':
-              name: constant.numeric.exponent.hexadecimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '9':
-              name: keyword.other.unit.suffix.integer.shell.dockerfile
-        - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?(?!(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-]))"
-          captures:
-            '2':
-              name: constant.numeric.decimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '3':
-              name: punctuation.separator.constant.numeric.shell.dockerfile
-            '5':
-              name: keyword.other.unit.exponent.decimal.shell.dockerfile
-            '6':
-              name: keyword.operator.plus.exponent.decimal.shell.dockerfile
-            '7':
-              name: keyword.operator.minus.exponent.decimal.shell.dockerfile
-            '8':
-              name: constant.numeric.exponent.decimal.shell.dockerfile
-              patterns:
-              - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
-                name: punctuation.separator.constant.numeric.shell.dockerfile
-            '9':
-              name: keyword.other.unit.suffix.integer.shell.dockerfile
-        - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
-          name: invalid.illegal.constant.numeric.shell.dockerfile
+              - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+                captures:
+                  '1':
+                    name: keyword.other.unit.hexadecimal.shell.dockerfile
+                  '2':
+                    name: constant.numeric.hexadecimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '4':
+                    name: constant.numeric.hexadecimal.shell.dockerfile
+                  '5':
+                    name: constant.numeric.hexadecimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '6':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '8':
+                    name: keyword.other.unit.exponent.hexadecimal.shell.dockerfile
+                  '9':
+                    name: keyword.operator.plus.exponent.hexadecimal.shell.dockerfile
+                  '10':
+                    name: keyword.operator.minus.exponent.hexadecimal.shell.dockerfile
+                  '11':
+                    name: constant.numeric.exponent.hexadecimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '12':
+                    name: keyword.other.unit.suffix.floating-point.shell.dockerfile
+              - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?([lLfF](?!\\w))?$"
+                captures:
+                  '2':
+                    name: constant.numeric.decimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '4':
+                    name: constant.numeric.decimal.point.shell.dockerfile
+                  '5':
+                    name: constant.numeric.decimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '6':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '8':
+                    name: keyword.other.unit.exponent.decimal.shell.dockerfile
+                  '9':
+                    name: keyword.operator.plus.exponent.decimal.shell.dockerfile
+                  '10':
+                    name: keyword.operator.minus.exponent.decimal.shell.dockerfile
+                  '11':
+                    name: constant.numeric.exponent.decimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '12':
+                    name: keyword.other.unit.suffix.floating-point.shell.dockerfile
+              - match: "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+                captures:
+                  '1':
+                    name: keyword.other.unit.binary.shell.dockerfile
+                  '2':
+                    name: constant.numeric.binary.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '4':
+                    name: keyword.other.unit.suffix.integer.shell.dockerfile
+              - match: "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+                captures:
+                  '1':
+                    name: keyword.other.unit.octal.shell.dockerfile
+                  '2':
+                    name: constant.numeric.octal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '4':
+                    name: keyword.other.unit.suffix.integer.shell.dockerfile
+              - match: "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([pP])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+                captures:
+                  '1':
+                    name: keyword.other.unit.hexadecimal.shell.dockerfile
+                  '2':
+                    name: constant.numeric.hexadecimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '5':
+                    name: keyword.other.unit.exponent.hexadecimal.shell.dockerfile
+                  '6':
+                    name: keyword.operator.plus.exponent.hexadecimal.shell.dockerfile
+                  '7':
+                    name: keyword.operator.minus.exponent.hexadecimal.shell.dockerfile
+                  '8':
+                    name: constant.numeric.exponent.hexadecimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '9':
+                    name: keyword.other.unit.suffix.integer.shell.dockerfile
+              - match: "(\\G(?=[0-9.])(?!0[xXbB]))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?<!')([eE])(\\+?)(\\-?)((?:[0-9](?:[0-9]|(?:(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)))?((?:(?:(?:(?:(?:[uU]|[uU]ll?)|[uU]LL?)|ll?[uU]?)|LL?[uU]?)|[fF])(?!\\w))?$"
+                captures:
+                  '2':
+                    name: constant.numeric.decimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '3':
+                    name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '5':
+                    name: keyword.other.unit.exponent.decimal.shell.dockerfile
+                  '6':
+                    name: keyword.operator.plus.exponent.decimal.shell.dockerfile
+                  '7':
+                    name: keyword.operator.minus.exponent.decimal.shell.dockerfile
+                  '8':
+                    name: constant.numeric.exponent.decimal.shell.dockerfile
+                    patterns:
+                    - match: "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])"
+                      name: punctuation.separator.constant.numeric.shell.dockerfile
+                  '9':
+                    name: keyword.other.unit.suffix.integer.shell.dockerfile
+              - match: "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+"
+                name: invalid.illegal.constant.numeric.shell.dockerfile
       command_context:
         patterns:
         - include: "#comment"

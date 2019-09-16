@@ -24,7 +24,7 @@
     "report": "node test/source/index.js report",
     "perf": "npm run report -- perf",
     "cov": "npm run report -- coverage",
-    "publish": "ruby scripts/publish.rb"
+    "publish": "ruby scripts/publish.rb cpp"
   },
   "keywords": [
     "syntax",
@@ -44,10 +44,19 @@
     "grammars": [
       {
         "language": "cpp",
+        "scopeName": "source.cpp.embedded.macro",
+        "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.assembly.cpp": "asm"
+        }
+      },
+      {
+        "language": "cpp",
         "scopeName": "source.cpp",
         "path": "./syntaxes/cpp.tmLanguage.json",
         "embeddedLanguages": {
-          "meta.embedded.assembly.cpp": "asm"
+          "meta.embedded.assembly.cpp": "asm",
+          "meta.preprocessor.macro.contents": "cpp"
         }
       },
       {
@@ -107,8 +116,9 @@
     "oniguruma": "^7.2.0",
     "prettyjson": "^1.2.1",
     "vscode-textmate": "^4.1.1",
-    "vscode-textmate-experimental": "^4.1.1",
     "yargs": "^13.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "textmate-bailout": "^1.1.0"
+  }
 }

@@ -3944,13 +3944,13 @@
     - entity.name.function.preprocessor
 - source: (
   scopes:
-    - punctuation.definition.parameters.begin
+    - punctuation.definition.parameters.begin.preprocessor
 - source: argument
   scopes:
     - variable.parameter.preprocessor
 - source: )
   scopes:
-    - punctuation.definition.parameters.end
+    - punctuation.definition.parameters.end.preprocessor
 - source: ' cout '
 - source: '<<'
   scopes:
@@ -3981,18 +3981,16 @@
     - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
   scopes:
     - punctuation.definition.directive
 - source: ifndef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifndef
 - source: CEKO_LIBRARY
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -4009,14 +4007,12 @@
     - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
 - source: endif
   scopesEnd:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.endif
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -4193,18 +4189,16 @@
     - punctuation.section.angle-brackets.end.template.definition
 - source: '#'
   scopesBegin:
-    - meta.preprocessor
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
   scopes:
     - punctuation.definition.directive
 - source: ifdef
   scopesEnd:
-    - keyword.control.directive.conditional
+    - keyword.control.directive.conditional.ifdef
 - source: blah
   scopes:
+    - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -4214,9 +4208,14 @@
 - source: test
   scopes:
     - entity.name.type.struct
-- source: '#endif'
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
   scopes:
-    - 'keyword.control.directive.#endif'
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
@@ -4673,7 +4672,12 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.struct
-- source: '    }'
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
 - source: //
   scopesBegin:
     - comment.line.double-slash
