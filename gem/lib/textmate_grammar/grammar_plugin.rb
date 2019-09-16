@@ -22,7 +22,8 @@ class GrammarLinter < GrammarPlugin
     # runs a linter on each pattern
     # returns false if linting failed
     # pattern may be a (Pattern, Symbol, or Hash)
-    def pre_lint(key, pattern)
+    # options is a hash of any of the option keys provided by self.options
+    def pre_lint(pattern, options = {})
         true
     end
 
@@ -37,8 +38,9 @@ class GrammarTransform < GrammarPlugin
     # performs a transformation on each pattern
     # returns the transformed pattern
     # pattern should not be modified
-    # pattern may be a (Pattern, Symbol, Hash, or Array of any of the previous)
-    def pre_transform(key, pattern, grammar)
+    # pattern may be a (Pattern, Symbol, Hash)
+    # options is a hash of any of the option keys provided by self.options
+    def pre_transform(pattern, grammar, options = {})
         pattern
     end
 
@@ -66,6 +68,14 @@ class Grammar
     def plugins
         @@linters + @@transforms
     end
+end
+
+def filter_options(plugin, pattern)
+    options = {}
+    if pattern.is_a? Pattern
+        options = pattern.original_arguments.select { |k| plugin.options.includes? k}
+    end
+    return options
 end
 
 # load default linters and transforms

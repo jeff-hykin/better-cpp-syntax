@@ -67,6 +67,11 @@ class Grammar
         keys[:version] ||= :auto
 
         @keys = keys
+
+        unless @scope_name == "export" || @scope_name.start_with?("source.", "text.")
+            puts "Warning: grammar scope name should start with `source.' or `text.'"
+            puts "Examples: source.cpp text.html text.html.markdown source.js.regexp"
+        end
     end
 
     def [](key)
@@ -135,19 +140,24 @@ class Grammar
             @repository.each do |key, value|
                 if value.is_a? Array
                     value.each do |v|
-                        raise "linting failed, see above error" unless linter.pre_lint(key, v)
+                        raise "linting failed, see above error" unless linter.pre_lint(key, v, filter_options(linter, v))
                     end
                 else
-                    raise "linting failed, see above error" unless linter.pre_lint(key, value)
+                    raise "linting failed, see above error" unless linter.pre_lint(key, value, filter_options(linter, value))
                 end
             end
         end
 
         repository_copy = @repository.__deep_clone__
         @@transforms.each do |transform|
-            repository_copy = repository_copy.hmap do |key, value|
-                new_v = transform.pre_transform(key, value, self)
-                [key, new_v]
+            repository_copy = repository_copy.transform_values do |value|
+                if value.is_a? Array
+                    value.map do |v|
+                        transform.pre_transform(value, self, filter_options(transform, v))
+                    end
+                else
+                    transform.pre_transform(value, self, filter_options(transform, value))
+                end
             end
         end
 
@@ -187,6 +197,8 @@ class Grammar
         @@linters.each do |linter|
             raise "linting failed, see above error" unless linter.post_lint(output)
         end
+
+        output
     end
 
     def save_to(options)
