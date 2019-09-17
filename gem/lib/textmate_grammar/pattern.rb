@@ -384,6 +384,9 @@ class Pattern
     #       able to accept this form
     #
     def initialize(*arguments)
+        @at_most = nil
+        @at_least = nil
+
         if arguments.length > 1 && arguments[1] == :deep_clone
             @arguments = arguments[0]
             @match = @arguments[:match]
@@ -421,9 +424,6 @@ class Pattern
         end
         arg1.delete(:match)
         @arguments = arg1
-
-        @at_most = nil
-        @at_least = nil
     end
 
     # attempts to provide a memorable name for a pattern

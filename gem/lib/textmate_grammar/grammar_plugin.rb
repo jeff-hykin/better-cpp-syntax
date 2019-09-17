@@ -39,7 +39,7 @@ class GrammarLinter < GrammarPlugin
     #   options will only be populated when pattern is a Pattern
     #
     # @return [Boolean] the result of the lint
-    def pre_lint(pattern, options = {}) # rubocop:disable Lint/UnusedMethodArgument
+    def pre_lint(pattern, grammar, options = {}) # rubocop:disable Lint/UnusedMethodArgument
         true
     end
 
@@ -140,7 +140,7 @@ end
 def filter_options(plugin, pattern)
     options = {}
     if pattern.is_a? Pattern
-        options = pattern.original_arguments.select { |k| plugin.options.includes? k }
+        options = pattern.original_arguments.select { |k| plugin.class.options.include? k }
     end
     options
 end

@@ -50,8 +50,8 @@ class Grammar
         grammar = ImportGrammar.new(
             name: import_grammar["name"],
             scope_name: import_grammar["scopeName"],
-            version: import_grammar["version"],
-            description: import_grammar["description"],
+            version: import_grammar["version"] || "",
+            description: import_grammar["description"] || "",
         )
         # import "patterns" into @repository[:$initial_context]
         grammar.repository[:$initial_context] = import_grammar["patterns"]
@@ -207,23 +207,24 @@ class Grammar
 
         @@linters.each do |linter|
             msg = "linting failed, see above error"
-            @repository.each do |key, value|
+            @repository.each do |_, value|
                 if value.is_a? Array
                     value.each do |v|
-                        raise msg unless linter.pre_lint(key, v, filter_options(linter, v))
+                        raise msg unless linter.pre_lint(v, self, filter_options(linter, v))
                     end
                     next
                 end
-                raise msg unless linter.pre_lint(key, value, filter_options(linter, value))
+                raise msg unless linter.pre_lint(value, self, filter_options(linter, value))
             end
         end
 
         repository_copy = @repository.__deep_clone__
+
         @@transforms.each do |transform|
             repository_copy = repository_copy.transform_values do |value|
                 if value.is_a? Array
                     value.map do |v|
-                        transform.pre_transform(value, self, filter_options(transform, v))
+                        transform.pre_transform(v, self, filter_options(transform, v))
                     end
                 else
                     transform.pre_transform(value, self, filter_options(transform, value))
@@ -252,11 +253,15 @@ class Grammar
         }
 
         to_tag = lambda do |value|
-            return value.map { |v| to_tag.call(v) } if value.is_a? Array
-            return {"include" => "#" + value.to_s} if value.is_a? Symbol
-
-            value.to_tag
+            case value
+            when Array then return value.map { |v| to_tag.call(v) }
+            when Symbol then return {"include" => "#" + value.to_s}
+            when Hash then return value
+            when Pattern then return value.to_tag
+            else raise "Unexpected value"
+            end
         end
+
         output[:repository] = repository_copy.transform_values { |value| to_tag.call(value) }
 
         output[:patterns] = output[:repository][:$initial_context]
@@ -300,6 +305,7 @@ class Grammar
     # @return [void] nothing
     #
     def save_to(options)
+        options[:dir] ||= "."
         default = {
             inherit_or_embedded: :embedded,
             generate_tags: true,
@@ -312,7 +318,7 @@ class Grammar
         options = default.merge(options)
         output = generate(options[:inherit_or_embedded])
 
-        if [:json, :vscode].includes? options[:syntax_format]
+        if [:json, :vscode].include? options[:syntax_format]
             file_name = File.join(
                 options[:syntax_dir],
                 "#{options[:syntax_name]}.json",

@@ -46,4 +46,28 @@ class GrammarTest < MiniTest::Test
         }
         assert_equal expected, g.generate
     end
+
+    def test_import
+        import_path = File.join(__dir__, "fixtures", "import.tmLanguage.json")
+        g = Grammar.fromTmLanguage(import_path)
+
+        err = assert_raises RuntimeError do
+            g[:def]
+        end
+        assert_match "def is a not a Pattern and cannot be referenced", err.message
+
+        g[:def] = /def/
+
+        assert_kind_of(Pattern, g[:def])
+
+        g.save_to(
+            generate_tags: false,
+            syntax_dir: ".",
+            syntax_name: "import.export",
+        )
+
+        assert_equal JSON.parse(File.read(import_path)), JSON.parse(File.read("import.export.json"))
+    ensure
+        File.delete("import.export.json")
+    end
 end

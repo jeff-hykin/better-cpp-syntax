@@ -7,8 +7,8 @@ class AddEnding < GrammarTransform
     #
     # adds the ending to any tag_as in pattern if needed
     #
-    def pre_transform(pattern, grammar)
-        return pattern.map { |v| pre_transform(v, grammar) } if pattern.is_a? Array
+    def pre_transform(pattern, grammar, _)
+        return pattern.map { |v| pre_transform(v, grammar, _) } if pattern.is_a? Array
         return pattern unless pattern.is_a? Pattern
 
         ending = grammar.scope_name.split(".")[-1]
