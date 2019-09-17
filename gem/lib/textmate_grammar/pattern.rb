@@ -20,8 +20,8 @@ end
 # determines if a regex string is a single entity
 #
 # @note single entity means that for the purposes of modification, the expression is
-#   atomic, for example if appending a `+` to the end of `regex_string` matches only
-#   a prt of regex string multiple times then it is not atomic
+#   atomic, for example if appending a +*+ to the end of +regex_string+ matches only
+#   a part of regex string multiple times then it is not a single_entity
 # @param regex_string [String] a string representing a regular expression, without the
 #   forward slash "/" at the begining and
 # @return [Boolean] if the string represents an single regex entity
@@ -70,7 +70,7 @@ def string_single_entity?(regex_string)
     true
 end
 
-# Add convience methds to make Regexp behave a bit more like Pattern
+# Add convience methods to make Regexp behave a bit more like Pattern
 class Regexp
 
     # (see #string_single_entity?)
@@ -91,6 +91,11 @@ class Regexp
     end
 end
 
+#
+# Provides a base class to simplify the writing of complex regular expressions rules
+# This class completely handles capture numbers and provides convience methods for
+# many common Regexp operations
+#
 class Pattern
     # @return [Pattern] The next pattern in the linked list of patterns
     # @api private
@@ -100,8 +105,6 @@ class Pattern
 
     #
     # Helpers
-    #
-
     #
 
     #
@@ -447,7 +450,13 @@ class Pattern
         to_s
     end
 
-    # converts a Pattern to a Hash represnting a textmate pattern
+    #
+
+    #
+    # converts a Pattern to a Hash represnting a textmate rule
+    #
+    # @return [Hash] The pattern as a textmate grammar rule
+    #
     def to_tag
         regex_as_string = evaluate
         output = {
@@ -464,10 +473,16 @@ class Pattern
         output
     end
 
+    #
     # evaluates the pattern into a string suitable for inserting into a
     # grammar or constructing a Regexp.
-    # if groups is nil consider this Pattern to be the top_level
-    # when a pattern is top_level, group numbers and back references are relative to that pattern
+    #
+    # @param [Hash] groups if groups is nil consider this Pattern to be the top_level
+    #   when a pattern is top_level, group numbers and back references are relative
+    #   to that pattern
+    #
+    # @return [String] the complete pattern
+    #
     def evaluate(groups = nil)
         top_level = groups.nil?
         groups = collect_group_attributes if top_level
@@ -480,16 +495,29 @@ class Pattern
         self_evaluate
     end
 
+    #
     # converts a pattern to a Regexp
-    # if groups is nil consider this Pattern to be the top_level
-    # when a pattern is top_level, group numbers and back references are relative to that pattern
+    #
+    # @param [Hash] groups if groups is nil consider this Pattern to be the top_level
+    #   when a pattern is top_level, group numbers and back references are relative
+    #   to that pattern
+    #
+    # @return [Regexp] the pattern as a Regexp
+    #
     def to_r(*args)
         Regexp.new(evaluate(*args))
     end
 
+    #
     # Displays the Pattern as you would write it in code
-    # TODO: make this function easier to understand
+    #
+    # @param [Integer] depth the current nesting depth
+    # @param [Boolean] top_level is this a top level pattern or is it being chained
+    #
+    # @return [String] The pattern as a string
+    #
     def to_s(depth = 0, top_level = true)
+        # TODO: make this method easier to understand
         # rubocop:disable Metrics/LineLength
 
         plugins = Grammar.plugins
@@ -500,7 +528,6 @@ class Pattern
             when Regexp then @original_arguments[:match].inspect
             when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
         end
-        regex_as_string = do_modify_regex_string(regex_as_string)
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
         # basic pattern information
@@ -530,6 +557,11 @@ class Pattern
         # rubocop:enable Metrics/LineLength
     end
 
+    #
+    # Runs the unit tests, recursively
+    #
+    # @return [Boolean] If all test passed retiurn true, otherwise false
+    #
     def run_tests
         pass = [true]
 
@@ -579,25 +611,54 @@ class Pattern
         pass.none? { |v| !v}
     end
 
+    #
+    # To aid in Linters all Patterns suport start_pattern which return the pattern
+    # for initial match, for a single match pattern that is itself
+    #
+    # @return [self] This pattern
+    #
     def start_pattern
         self
     end
 
+    #
+    # Gets the patterns Hashcode
+    #
+    # @return [Integer] the Hashcodex
+    #
     def hash
+        # TODO: find a better hash code
+        # Pattern.new("abc") == Patern.new(Pattern.new("abc"))
+        # but Pattern.new("abc").hash != Patern.new(Pattern.new("abc")).hash
         @match.hash
     end
 
+    #
+    # Checks for equality
+    # A pttern is considered equal to another pattern if the result of tag_as is equivlent
+    #
+    # @param [Pattern] other the pattern to compare
+    #
+    # @return [Boolean] true if other is a Pattern and to_tag is equivlent, false otherwise
+    #
     def eql?(other)
         return false unless other.is_a? Pattern
         to_tag == other.to_tag
     end
 
+    # (see eql?)
     def ==(other)
         eql? other
     end
 
+
     #
-    # Chaining
+    # Construct a new pattern and append to the end
+    #
+    # @param pattern pattern options (see #initialize for options)
+    # @see #initialize
+    #
+    # @return [Pattern] a copy of self with a pattern inserted
     #
     def then(pattern)
         pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
@@ -605,58 +666,76 @@ class Pattern
     end
     # other methods added by subclasses
 
-    #
-    # Inheritance
-    #
-
-    # this method should return false for child classes
-    # that manually set the quantity themselves: e.g. MaybePattern, OneOrMoreOfPattern, etc
+    # controls weather @arguments[:at_most] et. al. set @at_most et. al.
+    # @note override when inheriting. Return false unless the subclass allow quantifying
+    # @return [Boolean] if quantifiing is allowed
+    # @note the default implementation returns True
     def quantifing_allowed?
         true
     end
 
-    # convert convert @match and any applicable arguments into a complete regex for self
-    # despite the name, this returns on strings
-    # called by #to_r
+
+    #
+    # evaluates @match
+    # @note optionally override when inheriting
+    # @note by default this adds quantifier options and optionally adds a capture group
+    #
+    # @param [groups] groups group attributes
+    #
+    # @return [String] the result of evaluating @match
+    #
     def do_evaluate_self(groups)
         add_capture_group_if_needed(add_quantifier_options_to(@match, groups))
     end
 
-    # this pattern handles combining the previous pattern with the next pattern
-    # in most situtaions, this just means concatenation
+    #
+    # Combines self with with the result of evaluate on the previous pattern
+    #
+    # @note optionally override when inheriting if concationation is not sufficent
+    #
+    # @param [String] previous_evaluate the result of evaluate on the previous pattern
+    #   in the linked list of patterns
+    # @param [Hash] groups group attributes
+    # @param [Boolean is_single_entity is self a single entity
+    #
+    # @return [String] the combined regexp
+    #
     def integrate_pattern(previous_evaluate, groups, _is_single_entity)
         # by default just concat the groups
         "#{previous_evaluate}#{evaluate(groups)}"
     end
 
-    # what modifications to make to @match.to_s
-    # called by #to_s
-    def do_modify_regex_string(self_regex)
-        self_regex
-    end
 
+    #
     # return a string of any additional attributes that need to be added to the #to_s output
     # indent is a string with the amount of space the parent block is indented, attributes
     # are indented 2 more spaces
     # called by #to_s
+    #
+    # @param [String] indent the spaces to indent with
+    #
+    # @return [String] the attributes to add
+    #
     def do_add_attributes(_indent)
         ""
     end
 
+    #
     # What is the name of the method that the user would call
     # top_level is if a freestanding or chaining function is called
     # called by #to_s
+    #
+    # @param [Boolean] top_level is this top_level or chained
+    #
+    # @return [String] the name of the method
+    #
     def do_get_to_s_name(top_level)
         top_level ? "Pattern.new(" : ".then("
     end
 
-    # is the result of #to_r atomic for the purpose of regex building.
-    # /(?:a|b)/ is atomic /(a)(b|c)/ is not. the safe answer is false.
-    # NOTE: this is not the same concept as atomic groups, all groups are considered
-    #   atomic for the purpose of regex building
-    # called by #to_r
+    # (see string_single_entity)
     def single_entity?
-        to_r.single_entity?
+        string_single_entity? evaluate
     end
 
     # does this pattern contain no capturing groups
@@ -681,6 +760,18 @@ class Pattern
         __deep_clone__.groupless!
     end
 
+    #
+    # Retags all tags_as
+    #
+    # @param [Hash] arguments retag options
+    # @option [Boolean] :all (true) should all tags be kept
+    # @option [Boolean] :keep (true) should all tags be kept
+    # @option [String] :append a string to append to all tags (implies :keep)
+    # @option [String] tag_as maps from an old tag_as to a new tag_as
+    # @option [String] reference maps from reference to a new tag_as
+    #
+    # @return [self]
+    #
     def reTag!(arguments)
         # tags are keep unless `all: false` or `keep: false`, and append is not a string
         discard_tag = (arguments[:all] == false || arguments[:keep] == false)
@@ -703,12 +794,24 @@ class Pattern
         self
     end
 
+    #
+    # (see retag!)
+    #
+    # @return [Pattern] a copy of self retagged
+    #
     def reTag(arguments)
         __deep_clone__.reTag!(arguments)
     end
 
+
     #
-    # Internal
+    # Collects information about the capture groups
+    #
+    # @api private
+    #
+    # @param [Integer] next_group the next group number to use
+    #
+    # @return [Hash] group attributes
     #
     def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
         groups = []
@@ -728,6 +831,16 @@ class Pattern
         groups
     end
 
+    #
+    # Convert group references into backreferences
+    #
+    # @api private
+    #
+    # @param [Hash] groups group information for the pattern
+    # @param [String] self_regex the pattern as string
+    #
+    # @return [String] the fixed up regex_string
+    #
     def fixup_regex_references(groups, self_regex)
         # rubocop:disable Metrics/LineLength
         references = {}
@@ -761,6 +874,15 @@ class Pattern
         self_regex
     end
 
+    #
+    # Converts group attributes into a captures hash
+    #
+    # @api private
+    #
+    # @param [Hash] groups group attributes
+    #
+    # @return [Hash] capture hash
+    #
     def convert_group_attributes_to_captures(groups)
         captures = {}
 
@@ -788,6 +910,15 @@ class Pattern
         end
     end
 
+    #
+    # converts an includes array into a patterns array
+    #
+    # @api private
+    #
+    # @param [Array<Pattern, Symbol>] includes an includes array
+    #
+    # @return [Array<Hash>] a patterns array
+    #
     def convert_includes_to_patterns(includes)
         includes = [includes] unless includes.is_a? Array
         patterns = includes.flatten.map do |rule|
@@ -799,6 +930,11 @@ class Pattern
         patterns
     end
 
+    #
+    # Deeply clone self
+    #
+    # @return [Pattern] a copy of self
+    #
     def __deep_clone__
         options = @arguments.__deep_clone__
         options[:match] = @match.__deep_clone__
@@ -806,6 +942,13 @@ class Pattern
         new_pattern.insert! @next_pattern.__deep_clone__
     end
 
+    #
+    # Raise an error if regex contains a capturing group
+    #
+    # @param [Regexp] regex the regexp to tesst
+    #
+    # @return [void]
+    #
     def raise_if_regex_has_capture_group(regex)
         # this will throw a RegexpError if there are no capturing groups
         _ignore = /#{regex}\1/
