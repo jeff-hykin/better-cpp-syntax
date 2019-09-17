@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
     s.name = 'textmate_grammar'
     s.version = '0.0.0'
@@ -9,4 +11,8 @@ Gem::Specification.new do |s|
     s.license = 'MIT'
 
     s.required_ruby_version = '>=2.4.0'
+
+    s.metadata = {
+        "yard.run" => "yri"
+    }
 end

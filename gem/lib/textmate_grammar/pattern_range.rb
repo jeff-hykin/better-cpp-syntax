@@ -2,9 +2,28 @@
 
 require_relative 'pattern'
 
+#
+# Provides the abaility to create begin/end and begin/while rules
+#
 class PatternRange < Pattern
     attr_reader :start_pattern
 
+    #
+    # Creates a new PatternRange
+    #
+    # @param [Hash] arguments options
+    # @option arguments [Pattern,Regexp,String] :start_pattern the start pattern
+    # @option arguments [Pattern,Regexp,String] :end_pattern the end pattern
+    # @option arguments [Pattern,Regexp,String] :while_pattern the while pattern
+    # @option arguments [String] :tag_as the tag for this pattern
+    # @option arguments [String] :tag_contents_as the tag for contents of this pattern
+    # @option arguments [String] :tag_start_as the tag for the start pattern
+    # @option arguments [String] :tag_end_as the tag for the end pattern
+    # @option arguments [String] :tag_while_as the tag for the continuation pattern
+    #
+    # Plugins may add additional options
+    # @note exactly one of :end_pattern or :while_pattern is required
+    #
     def initialize(arguments)
         raise "PatternRange.new() expects a hash" unless arguments.is_a? Hash
 
@@ -55,10 +74,22 @@ class PatternRange < Pattern
         @arguments = arguments
     end
 
-    def evaluate(*)
+    #
+    # Raises an error to prevent use inside a pattern list
+    #
+    # @param _ignored ignored
+    #
+    # @return [void]
+    #
+    def evaluate(*_ignored)
         raise "PatternRange cannot be used as a part of a Pattern"
     end
 
+    #
+    # Generate a Textmate rule from the PatternRange
+    #
+    # @return [Hash] The Textmate rule
+    #
     def to_tag
         match_key = { end_pattern: "end", while_pattern: "while" }[@stop_type]
         capture_key = { end_pattern: "endCaptures", while_pattern: "whileCaptures" }[@stop_type]
@@ -84,6 +115,11 @@ class PatternRange < Pattern
         output
     end
 
+    #
+    # Displays this pattern range as source code that would generate it
+    #
+    # @return [String] The PatternRange as source code
+    #
     def to_s
         start_pattern = @original_start_pattern.to_s(2, true)
         stop_pattern = @original_stop_pattern.to_s(2, true)
@@ -101,6 +137,9 @@ class PatternRange < Pattern
         output
     end
 
+    #
+    # (see Pattern#reTag!)
+    #
     def reTag!(arguments)
         @start_pattern.reTag!(arguments)
         @stop_pattern.reTag!(arguments)

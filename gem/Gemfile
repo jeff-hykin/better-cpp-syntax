@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 source "http://rubygems.org"
 
-ruby "2.4.0"
+ruby ">=2.4.0"
 
-gem "textmate_grammar", :path => File.expand_path("..", __FILE__)
+gem "textmate_grammar", :path => File.expand_path(__dir__)
 
 gem 'deep_clone'
 
-gem 'plist' :require => false
+gem 'plist', :require => false

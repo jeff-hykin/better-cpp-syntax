@@ -8,7 +8,9 @@ require_relative 'pattern'
 require_relative 'pattern_range'
 require_relative 'sub_patterns'
 
-
+#
+# Represents a Textmate Grammar
+#
 class Grammar
     #
     # A mapping of grammar partials that have been exported
@@ -93,15 +95,12 @@ class Grammar
         # auto versioning, when save_to is called grab the latest git commit or "" if not
         # a git repo
         keys[:version] ||= :auto
-
         @keys = keys
+        return if @scope_name == "export" || @scope_name.start_with?("source.", "text.")
 
-        unless @scope_name == "export" || @scope_name.start_with?("source.", "text.")
-            puts "Warning: grammar scope name should start with `source.' or `text.'"
-            puts "Examples: source.cpp text.html text.html.markdown source.js.regexp"
-        end
+        puts "Warning: grammar scope name should start with `source.' or `text.'"
+        puts "Examples: source.cpp text.html text.html.markdown source.js.regexp"
     end
-
 
     #
     # Access a pattern in the grammar
@@ -113,7 +112,6 @@ class Grammar
     def [](key)
         @repository[key]
     end
-
 
     #
     # Store a pattern
@@ -147,6 +145,7 @@ class Grammar
         if value.is_a? Array
             value = value.flatten.map do |item|
                 next item if item.is_a? Symbol
+
                 item = Pattern.new(item) unless item.is_a? Pattern
                 item
             end
@@ -157,7 +156,6 @@ class Grammar
         @repository[key] = value
         @repository[key]
     end
-
 
     #
     # Import a grammar partial into this grammar
@@ -208,14 +206,15 @@ class Grammar
         # run post linters ✓
 
         @@linters.each do |linter|
+            msg = "linting failed, see above error"
             @repository.each do |key, value|
                 if value.is_a? Array
                     value.each do |v|
-                        raise "linting failed, see above error" unless linter.pre_lint(key, v, filter_options(linter, v))
+                        raise msg unless linter.pre_lint(key, v, filter_options(linter, v))
                     end
-                else
-                    raise "linting failed, see above error" unless linter.pre_lint(key, value, filter_options(linter, value))
+                    next
                 end
+                raise msg unless linter.pre_lint(key, value, filter_options(linter, value))
             end
         end
 
@@ -233,25 +232,29 @@ class Grammar
         end
 
         convert_initial_context = lambda do |value|
-            return (inherit_or_embedded == :embedded ? :$self : :$base) if value == :$initial_context
-            if value.is_a? Array
-                return value.map { |d| convert_initial_context.call(d) }
+            if value == :$initial_context
+                return (inherit_or_embedded == :embedded) ? :$self : :$base
             end
+
+            return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
+
             if value.is_a? Pattern
                 return value.transform_includes { |d| convert_initial_context.call(d) }
             end
+
             return value
         end
         repository_copy.transform_values! { |v| convert_initial_context.call(v) }
 
         output = {
             name: @name,
-            scopeName: @scope_name
+            scopeName: @scope_name,
         }
 
         to_tag = lambda do |value|
             return value.map { |v| to_tag.call(v) } if value.is_a? Array
             return {"include" => "#" + value.to_s} if value.is_a? Symbol
+
             value.to_tag
         end
         output[:repository] = repository_copy.transform_values { |value| to_tag.call(value) }
@@ -260,8 +263,8 @@ class Grammar
         output[:patterns] ||= []
         output[:repository].delete(:$initial_context)
 
-        output[:version] = auto_version()
-        output.merge!(@keys) { |key, old, _new| old }
+        output[:version] = auto_version
+        output.merge!(@keys) { |_key, old, _new| old }
 
         @@transforms.each { |transform| output = transform.post_transform(output) }
 
@@ -283,9 +286,9 @@ class Grammar
     #   directory to generate language tags in
     # @option options :syntax_dir [String] (File.join(options[:dir],"syntaxes")) the
     #   directory to generate the syntax file in
-    # @options options :syntax_format [:json,:vscode,:plist,:textmate,:tm_language,:xml]
+    # @option options :syntax_format [:json,:vscode,:plist,:textmate,:tm_language,:xml]
     #   (:json) The format to generate the syntax file in
-    # @options options :syntax_name [String] ("#{@name}.tmLanguage") the name of the syntax
+    # @option options :syntax_name [String] ("#{@name}.tmLanguage") the name of the syntax
     #   file to generate without the extension
     #
     # @note all keys except :dir is optional
@@ -302,20 +305,28 @@ class Grammar
             generate_tags: true,
             syntax_format: :json,
             syntax_name: "#{@name}.tmLanguage",
-            syntax_dir: File.join(options[:dir],"syntaxes"),
-            tag_dir: File.join(options[:dir],"language_tags"),
+            syntax_dir: File.join(options[:dir], "syntaxes"),
+            tag_dir: File.join(options[:dir], "language_tags"),
         }
 
         options = default.merge(options)
         output = generate(options[:inherit_or_embedded])
 
         if [:json, :vscode].includes? options[:syntax_format]
-            out_file = File.open(File.join(options[:syntax_dir], "#{options[:syntax_name]}.json"), "w")
+            file_name = File.join(
+                options[:syntax_dir],
+                "#{options[:syntax_name]}.json",
+            )
+            out_file = File.open(file_name, "w")
             out_file.write(JSON.pretty_generate(output))
             out_file.close
         elsif [:plist, :textmate, :tm_language, :xml].include? options[:syntax_format]
             require 'plist'
-            out_file = File.open(File.join(options[:syntax_dir], "#{options[:syntax_name]}"), "w")
+            file_name = File.join(
+                options[:syntax_dir],
+                options[:syntax_name],
+            )
+            out_file = File.open(file_name, "w")
             out_file.write(Plist::Emit.dump(output))
             out_file.close
         else
@@ -324,7 +335,6 @@ class Grammar
             raise "see above error"
         end
     end
-
 
     #
     # Returns the version information
@@ -335,13 +345,19 @@ class Grammar
     #
     def auto_version
         return @keys[:version] unless @keys[:version] == :auto
-        commit = `git rev-parse HEAD`
-        return commit.strip
+
+        `git rev-parse HEAD`.strip
     rescue StandardError
-        return ""
+        ""
     end
 end
 
+#
+# Represents a partial Grammar object
+#
+# @note this has additional behavior to allow for partial grammars to reuse non exported keys
+# @note only one may exist per file
+#
 class ExportableGrammar < Grammar
     # @return [Array<Symbol>] names that will be exported by the grammar partial
     attr_accessor :exports
@@ -432,6 +448,8 @@ class ExportableGrammar < Grammar
         self
     end
 
+    private
+
     def fixupValue(value)
         if value.is_a? Symbol
             return value if [:$initial_context, :$base, :$self].include? value
@@ -457,21 +475,25 @@ class ExportableGrammar < Grammar
             raise "Unexpected object of type #{value.class} in value"
         end
     end
-    private :fixupValue
 end
 
+#
+# Represents a Textmate Grammr that has been imported
+# This exists entirely to override Grammar#[] and should not be
+# normally created
+#
+# @api private
+#
 class ImportGrammar < Grammar
     # (see Grammar#initialize)
-    def initialize(args)
-        super(args)
+    def initialize(keys)
+        super(keys)
     end
 
     # (see Grammar#[])
     # @note patterns that have been imported from a file cannot be be accessed
     def [](key)
-        if @repository[key].is_a? Hash
-            raise "#{key} is a not a Pattern and cannot be referenced"
-        end
+        raise "#{key} is a not a Pattern and cannot be referenced" if @repository[key].is_a? Hash
 
         @repository[key]
     end

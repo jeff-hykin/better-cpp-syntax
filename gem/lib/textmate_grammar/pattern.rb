@@ -72,16 +72,16 @@ end
 
 # Add convience methods to make Regexp behave a bit more like Pattern
 class Regexp
-
     # (see #string_single_entity?)
     # @deprecated use string_single_entity
-    def single_entity?
+    # @note the param regex_string is ignored and is accepted for compatibility
+    def single_entity?(regex_string = nil)
         string_single_entity? to_r_s
     end
 
     # (see Pattern#to_r)
     # @deprecated function is useless
-    def to_r(*)
+    def to_r(groups = nil)
         self
     end
 
@@ -102,10 +102,6 @@ class Pattern
     attr_accessor :next_pattern
     # @return [Hash] The original arguments passed into initialize
     attr_accessor :original_arguments
-
-    #
-    # Helpers
-    #
 
     #
     # does @arguments contain any attributes that require this pattern be captured?
@@ -134,7 +130,6 @@ class Pattern
     def optimize_outer_group?
         needs_to_capture? and @next_pattern.nil?
     end
-
 
     #
     # Appends pattern to the linked list of patterns
@@ -212,7 +207,6 @@ class Pattern
         end
     end
 
-
     #
     # converts @at_least and @at_most into the appropriate quantifier
     # this is a simple_quantifier because it does not include atomic-ness
@@ -255,9 +249,6 @@ class Pattern
         quantifier
     end
 
-    # this method handles adding the at_most/at_least, dont_back_track methods
-    # it returns regex-as-a-string
-
     #
     # Adds quantifiers to match
     #
@@ -280,7 +271,7 @@ class Pattern
             match = "(?>#{match})"
         end
         if @arguments[:word_cannot_be_any_of]
-            word_pattern = @arguments[:word_cannot_be_any_of].map {|w| Regexp.escape w}.join "|"
+            word_pattern = @arguments[:word_cannot_be_any_of].map { |w| Regexp.escape w }.join "|"
             match = "(?!\\b(?:#{word_pattern})\\b)#{match}"
         end
         match
@@ -301,7 +292,7 @@ class Pattern
     #
     # Uses block to recursively transform includes
     #
-    # @param [Block] &block the block to transform includes
+    # @yield [block] invokes the block with each array of includes to transform
     #
     # @return [self]
     #
@@ -331,14 +322,12 @@ class Pattern
     #
     # Uses block to recursively transform tag_as
     #
-    # @param [Block] &block the block to transform tag_as
+    # @yield [block] Invokes the block to with each tag_as to transform
     #
     # @return [self]
     #
     def transform_tag_as!(&block)
-        if @arguments[:tag_as]
-            @arguments[:tag_as] = block.call @arguments[:tag_as]
-        end
+        @arguments[:tag_as] = block.call @arguments[:tag_as] if @arguments[:tag_as]
 
         @match.transform_tag_as!(block) if @match.is_a? Pattern
         @next_pattern.transform_tag_as!(block) if @next_pattern.is_a? Pattern
@@ -353,10 +342,6 @@ class Pattern
     def transform_tag_as(&block)
         __deep_clone__.transform_tag_as!(&block)
     end
-
-    #
-    # Public interface
-    #
 
     #
     # Construct a new pattern
@@ -444,13 +429,10 @@ class Pattern
     # attempts to provide a memorable name for a pattern
     def name
         return @arguments[:reference] unless @arguments[:reference].nil?
-
         return @arguments[:tag_as] unless @arguments[:tag_as].nil?
 
         to_s
     end
-
-    #
 
     #
     # converts a Pattern to a Hash represnting a textmate rule
@@ -504,8 +486,8 @@ class Pattern
     #
     # @return [Regexp] the pattern as a Regexp
     #
-    def to_r(*args)
-        Regexp.new(evaluate(*args))
+    def to_r(groups = nil)
+        Regexp.new(evaluate(groups))
     end
 
     #
@@ -523,11 +505,12 @@ class Pattern
         plugins = Grammar.plugins
         plugins.reject! { |p| (@original_arguments.keys & p).empty? }
 
-        regex_as_string = case @original_arguments[:match]
+        regex_as_string =
+            case @original_arguments[:match]
             when Pattern then @original_arguments[:match].to_s(depth + 2, true)
             when Regexp then @original_arguments[:match].inspect
             when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
-        end
+            end
         indent = "  " * depth
         output = indent + do_get_to_s_name(top_level)
         # basic pattern information
@@ -597,7 +580,7 @@ class Pattern
                 pass << false
             end
         end
-        if @arguments[:should_not_partially_match].is_a? Array # rubocop: disable Style/GuardClause
+        if @arguments[:should_not_partially_match].is_a? Array
             test_regex = self_regex
             if @arguments[:should_not_partially_match].none? { |test| test =~ test_regex } == false
                 warn.call :should_not_partially_match
@@ -608,7 +591,7 @@ class Pattern
         pass << @match.run_tests if @match.is_a? Pattern
         pass << @next_pattern.run_tests if @next_pattern.is_a? Pattern
         @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? Pattern }
-        pass.none? { |v| !v}
+        pass.none?(&:!)
     end
 
     #
@@ -643,6 +626,7 @@ class Pattern
     #
     def eql?(other)
         return false unless other.is_a? Pattern
+
         to_tag == other.to_tag
     end
 
@@ -650,7 +634,6 @@ class Pattern
     def ==(other)
         eql? other
     end
-
 
     #
     # Construct a new pattern and append to the end
@@ -674,7 +657,6 @@ class Pattern
         true
     end
 
-
     #
     # evaluates @match
     # @note optionally override when inheriting
@@ -696,15 +678,14 @@ class Pattern
     # @param [String] previous_evaluate the result of evaluate on the previous pattern
     #   in the linked list of patterns
     # @param [Hash] groups group attributes
-    # @param [Boolean is_single_entity is self a single entity
+    # @param [Boolean] is_single_entity is self a single entity
     #
     # @return [String] the combined regexp
     #
-    def integrate_pattern(previous_evaluate, groups, _is_single_entity)
+    def integrate_pattern(previous_evaluate, groups, is_single_entity) # rubocop:disable Lint/UnusedMethodArgument
         # by default just concat the groups
         "#{previous_evaluate}#{evaluate(groups)}"
     end
-
 
     #
     # return a string of any additional attributes that need to be added to the #to_s output
@@ -716,7 +697,7 @@ class Pattern
     #
     # @return [String] the attributes to add
     #
-    def do_add_attributes(_indent)
+    def do_add_attributes(indent) # rubocop:disable Lint/UnusedMethodArgument
         ""
     end
 
@@ -803,7 +784,6 @@ class Pattern
         __deep_clone__.reTag!(arguments)
     end
 
-
     #
     # Collects information about the capture groups
     #
@@ -889,7 +869,7 @@ class Pattern
         groups.each do |group|
             output = {}
             output[:name] = group[:tag_as] unless group[:group] == 0
-            if !group[:includes].nil?
+            if group[:includes].is_a? Array
                 output[:patterns] = convert_includes_to_patterns(group[:includes])
             end
             captures[group[:group].to_s] = output

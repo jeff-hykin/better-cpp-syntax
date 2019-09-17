@@ -4,10 +4,16 @@
 # Runs the unit tests on each pattern
 #
 class RunPatternTests < GrammarLinter
-    def pre_lint(key, pattern)
-        return pattern.run_tests if pattern.is_a? Pattern
-        true
+    #
+    # Runs the unit tests on each pattern
+    #
+    # @return [Boolean] the result of the unit tests
+    #
+    def pre_lint(pattern)
+        return true unless pattern.is_a? Pattern
+
+        pattern.run_tests
     end
 end
 
-Grammar.register_linter(RunPatternTests.new())
+Grammar.register_linter(RunPatternTests.new)

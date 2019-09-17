@@ -2,159 +2,204 @@
 
 require_relative 'pattern'
 
-#
-# Maybe
-#
 
 # An optional pattern
-# for some pattern `p` this is equivlent to (?:p?)
+# for some pattern `p` this is equivalent to (?:p?)
 class MaybePattern < Pattern
+    #
+    # Construct a new MaybePattern
+    #
+    # @param [any] args arguments to pass to {Pattern#initialize}
+    # @api private
+    #
+    # @see maybe
+    # @see Pattern#maybe
     def initialize(*args)
         # run the normal pattern
         super(*args)
-        # add quantifing options
+        # add quantifying options
         @at_least = 0
         @at_most = 1
     end
 
-    def quantifing_allowed?
+    # (see Pattern#quantifying_allowed?)
+    # @return [false]
+    def quantifying_allowed?
         false
     end
 
+    # (see Pattern#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
     end
 end
 
-# returns a new MaybePattern
-def maybe(pattern)
-    MaybePattern.new(pattern)
-end
-
 class Pattern
-    # appends a new MaybePattern to the end of the pattern chain
+    #
+    # Optionally match pattern
+    #
+    # @param [Pattern,Regexp,String] pattern a pattern to optionally match
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def maybe(pattern)
         insert(MaybePattern.new(pattern))
     end
 end
 
-#
-# ZeroOrMoreOf
-#
+# (see Pattern#maybe)
+def maybe(pattern)
+    MaybePattern.new(pattern)
+end
 
 # An repeated pattern
-# for some pattern `p` this is equivlent to (?:p+)
+# for some pattern `p` this is equivalent to (?:p*)
 class ZeroOrMoreOfPattern < Pattern
+    #
+    # Construct a new ZeroOrMoreOfPattern
+    #
+    # @param [any] args arguments to pass to {Pattern#initialize}
+    # @api private
+    #
+    # @see zeroOrMoreOf
+    # @see Pattern#zeroOrMoreOf
     def initialize(*args)
         # run the normal pattern
         super(*args)
-        # add quantifing options
+        # add quantifying options
         @at_least = 0
         @at_most = nil
     end
 
-    def quantifing_allowed?
+    # (see Pattern#quantifying_allowed?)
+    # @return [false]
+    def quantifying_allowed?
         false
     end
 
+    # (see Pattern#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "zeroOrMoreOf(" : ".zeroOrMoreOf("
     end
 end
 
-# returns a new ZeroOrMoreOfPattern
-def zeroOrMoreOf(pattern)
-    ZeroOrMoreOfPattern.new(pattern)
-end
-
 class Pattern
-    # appends a new ZeroOrMoreOfPattern to the end of the pattern chain
+    #
+    # Match pattern zero or more times
+    #
+    # @param [Pattern,Regexp,String] pattern a pattern to match
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def zeroOrMoreOf(pattern)
         insert(ZeroOrMoreOfPattern.new(pattern))
     end
 end
 
-#
-# oneOrMoreOf
-#
+# (see Pattern#zeroOrMoreOf)
+def zeroOrMoreOf(pattern)
+    ZeroOrMoreOfPattern.new(pattern)
+end
 
 # An optional repeated pattern
-# for some pattern `p` this is equivlent to (?:p*)
+# for some pattern `p` this is equivalent to (?:p+)
 class OneOrMoreOfPattern < Pattern
     def initialize(*args)
         # run the normal pattern
         super(*args)
-        # add quantifing options
+        # add quantifying options
         @at_least = 1
         @at_most = nil
     end
 
-    def quantifing_allowed?
+    # (see Pattern#quantifying_allowed?)
+    # @return [false]
+    def quantifying_allowed?
         false
     end
 
+    # (see Pattern#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "oneOrMoreOf(" : ".oneOrMoreOf("
     end
 end
 
-# returns a new oneOrMoreOfPattern
-def oneOrMoreOf(pattern)
-    OneOrMoreOfPattern.new(pattern)
-end
-
 class Pattern
-    # appends a new oneOrMoreOfPattern to the end of the pattern chain
+    #
+    # Match pattern one or more times
+    #
+    # @param [Pattern,Regexp,String] pattern a pattern to match
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def oneOrMoreOf(pattern)
         insert(OneOrMoreOfPattern.new(pattern))
     end
 end
 
-#
-# Or
-#
+# (see Pattern#oneOrMoreOf)
+def oneOrMoreOf(pattern)
+    OneOrMoreOfPattern.new(pattern)
+end
+
 
 # Provides alternation
 # Either the previous pattern or provided pattern is accepted
+# @note OneOfPattern is likely just as powerful and less confusing
 class OrPattern < Pattern
+    # (see Pattern#do_evaluate_self)
     def do_evaluate_self(groups)
-        # dont add the capture groups because they will be added by integrate_pattern
-        add_capture_group_if_needed(add_quantifier_options_to(@match, groups))
+        # don't add the capture groups because they will be added by integrate_pattern
+        add_quantifier_options_to(@match, groups)
     end
 
-    def integrate_pattern(previous_regex, groups, is_single_entity)
-        return "(?:#{previous_regex}|#{evaluate(groups)})" if is_single_entity
+    # (see Pattern#integrate_pattern)
+    # @note this is overloaded to provide the alternation
+    def integrate_pattern(previous_evaluate, groups, is_single_entity)
+        return "(?:#{previous_evaluate}|#{evaluate(groups)})" if is_single_entity
 
-        "(?:(?:#{previous_regex})|#{evaluate(groups)})"
+        "(?:(?:#{previous_evaluate})|#{evaluate(groups)})"
     end
 
+    # (see Pattern#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
     end
 
+    # (see Pattern#single_entity?)
+    # @return [true]
     def single_entity?
         true
     end
 end
 
-# no top level is provided
-
 class Pattern
-    # appends a new OrPattern to the end of the pattern chain
+    #
+    # Match either the preceding pattern chain or pattern
+    #
+    # @param [Pattern,Regexp,String] pattern a pattern to match instead of the previous chain
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def or(pattern)
         insert(OrPattern.new(pattern))
     end
 end
 
-#
-# OneOf
-#
+# or does not have a top level option
+
 
 # Provides alternation
 # when one of the passed in patterns is accepted, this pattern is accepted
 class OneOfPattern < Pattern
     # create a new OneOfPattern
     # this is expects an array of patterns
+
+    #
+    # Create a new OneOfPattern
+    #
+    # @param [Array<Pattern,Regexp,String>] patterns a list of patterns to match
+    #
     def initialize(patterns)
         unless patterns.is_a? Array
             puts <<-HEREDOC.remove_indent
@@ -172,6 +217,7 @@ class OneOfPattern < Pattern
         end
     end
 
+    # (see Pattern#do_evaluate_self)
     def do_evaluate_self(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.evaluate(groups)
@@ -185,10 +231,13 @@ class OneOfPattern < Pattern
         "(?:#{patterns_strings.join '|'})"
     end
 
+    # (see Pattern#single_entity?)
+    # @return [true]
     def single_entity?
         true
     end
 
+    # (see Pattern#to_s)
     def to_s(depth = 0, top_level = true)
         indent = "  " * depth
         output = top_level ? "oneOf([" : ".oneOf(["
@@ -202,22 +251,33 @@ class OneOfPattern < Pattern
     end
 end
 
-def oneOf(patterns)
-    OneOfPattern.new(patterns)
-end
-
 class Pattern
-    # appends a new OneOfPattern to the end of the pattern chain
-    def oneOf(pattern)
-        insert(OneOfPattern.new(pattern))
+    #
+    # Match one of the supplied patterns
+    #
+    # @param [Array<Pattern,Regexp,String>] patterns a list of patterns to match
+    #
+    # @return [Pattern] a pattern to append to
+    #
+    def oneOf(patterns)
+        insert(OneOfPattern.new(patterns))
     end
 end
 
 #
-# Lookarounds
+# (see Pattern#oneOf)
 #
+def oneOf(patterns)
+    OneOfPattern.new(patterns)
+end
 
+#
+# Implements lookarounds
+# for some pattern p this is equivalent to one of /(?=p)/, /(?!p)/, /(?<p)/, /(?<!p)/
+# depending on the type
+#
 class LookAroundPattern < Pattern
+    # (see Pattern#do_evaluate_self)
     def do_evaluate_self(groups)
         self_regex = @match
         self_regex = @match.evaluate(groups) if @match.is_a? Pattern
@@ -240,66 +300,44 @@ class LookAroundPattern < Pattern
         self_regex
     end
 
+    # (see Pattern#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "lookAround(" : ".lookAround("
     end
 
+    # (see Pattern#do_add_attributes)
     def do_add_attributes(indent)
         ",\n#{indent}  type: :#{@arguments[:type]}"
     end
 
+    # (see Pattern#single_entity?)
+    # @return [true]
     def single_entity?
         true
     end
 end
 
-def lookAround(pattern)
-    LookAroundPattern.new(pattern)
-end
-
-# TODO: eliminate this code duplication
-
-def lookBehindToAvoid(pattern)
-    if pattern.is_a? Hash
-        pattern[:type] = :lookBehindToAvoid
-    else
-        pattern = {match: pattern, type: :lookBehindToAvoid}
-    end
-    lookAround(pattern)
-end
-
-def lookBehindFor(pattern)
-    if pattern.is_a? Hash
-        pattern[:type] = :lookBehindFor
-    else
-        pattern = {match: pattern, type: :lookBehindFor}
-    end
-    lookAround(pattern)
-end
-
-def lookAheadToAvoid(pattern)
-    if pattern.is_a? Hash
-        pattern[:type] = :lookAheadToAvoid
-    else
-        pattern = {match: pattern, type: :lookAheadToAvoid}
-    end
-    lookAround(pattern)
-end
-
-def lookAheadFor(pattern)
-    if pattern.is_a? Hash
-        pattern[:type] = :lookAheadFor
-    else
-        pattern = {match: pattern, type: :lookAheadFor}
-    end
-    lookAround(pattern)
-end
-
 class Pattern
+    #
+    # Looks around for the pattern
+    #
+    # @param [Hash] pattern pattern constructor
+    # option [Symbol] :type the look-around type
+    #   can be one of :lookAheadFor, :lookAheadToAvoid, :lookBehindFor, :lookBehindToAvoid
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def lookAround(pattern)
         insert(LookAroundPattern.new(pattern))
     end
 
+    #
+    # Equivalent to lookAround with type set to :lookBehindToAvoid
+    #
+    # @param (see lookAround)
+    #
+    # @return (see lookAround)
+    #
     def lookBehindToAvoid(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookBehindToAvoid
@@ -309,6 +347,13 @@ class Pattern
         lookAround(pattern)
     end
 
+    #
+    # Equivalent to lookAround with type set to :lookBehindFor
+    #
+    # @param (see lookAround)
+    #
+    # @return (see lookAround)
+    #
     def lookBehindFor(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookBehindFor
@@ -318,6 +363,13 @@ class Pattern
         lookAround(pattern)
     end
 
+    #
+    # Equivalent to lookAround with type set to :lookAheadToAvoid
+    #
+    # @param (see lookAround)
+    #
+    # @return (see lookAround)
+    #
     def lookAheadToAvoid(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookAheadToAvoid
@@ -327,6 +379,13 @@ class Pattern
         lookAround(pattern)
     end
 
+    #
+    # Equivalent to lookAround with type set to :lookAheadFor
+    #
+    # @param (see lookAround)
+    #
+    # @return (see lookAround)
+    #
     def lookAheadFor(pattern)
         if pattern.is_a? Hash
             pattern[:type] = :lookAheadFor
@@ -337,10 +396,58 @@ class Pattern
     end
 end
 
-#
-# matchResultOf
-#
+# (see Pattern#lookAround)
+def lookAround(pattern)
+    LookAroundPattern.new(pattern)
+end
 
+# TODO: eliminate this code duplication
+
+# (see Pattern#lookBehindToAvoid)
+def lookBehindToAvoid(pattern)
+    if pattern.is_a? Hash
+        pattern[:type] = :lookBehindToAvoid
+    else
+        pattern = {match: pattern, type: :lookBehindToAvoid}
+    end
+    lookAround(pattern)
+end
+
+# (see Pattern#lookBehindFor)
+def lookBehindFor(pattern)
+    if pattern.is_a? Hash
+        pattern[:type] = :lookBehindFor
+    else
+        pattern = {match: pattern, type: :lookBehindFor}
+    end
+    lookAround(pattern)
+end
+
+# (see Pattern#lookAheadToAvoid)
+def lookAheadToAvoid(pattern)
+    if pattern.is_a? Hash
+        pattern[:type] = :lookAheadToAvoid
+    else
+        pattern = {match: pattern, type: :lookAheadToAvoid}
+    end
+    lookAround(pattern)
+end
+
+# (see Pattern#lookAheadFor)
+def lookAheadFor(pattern)
+    if pattern.is_a? Hash
+        pattern[:type] = :lookAheadFor
+    else
+        pattern = {match: pattern, type: :lookAheadFor}
+    end
+    lookAround(pattern)
+end
+
+#
+# Implements back references
+# for some group N whose reference is "foo"
+# matchResultOf("foo") results in the pattern /\N/
+#
 class BackReferencePattern < Pattern
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
@@ -349,11 +456,12 @@ class BackReferencePattern < Pattern
                 backreference_key: reference
             )
         else
-            # most likely __deep_clone__ was called, just call the super initalizer
+            # most likely __deep_clone__ was called, just call the super initializer
             super(reference, deep_clone, original_arguments)
         end
     end
 
+    # (see Pattern#to_s)
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
         output += "\"#{@arguments[:backreference_key]}\")"
@@ -361,25 +469,37 @@ class BackReferencePattern < Pattern
         output
     end
 
+    # (see Pattern#single_entity?)
+    # @return [true]
     def single_entity?
         true
     end
 end
 
-def matchResultOf(reference)
-    BackReferencePattern.new(reference)
-end
-
 class Pattern
+
+    #
+    # Match the result of some other pattern
+    #
+    # @param [String] reference a reference to match the result of
+    #
+    # @return [Pattern] a pattern to append to
+    #
     def matchResultOf(reference)
         insert(BackReferencePattern.new(reference))
     end
 end
 
-#
-# recursivelyMatch
-#
+# (see Pattern#matchResultOf)
+def matchResultOf(reference)
+    BackReferencePattern.new(reference)
+end
 
+#
+# Implements subexp calls
+# for some group N whose reference is "foo"
+# recursivelyMatch("foo") results in the pattern /\gN/
+#
 class SubroutinePattern < Pattern
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
@@ -388,11 +508,12 @@ class SubroutinePattern < Pattern
                 subroutine_key: reference
             )
         else
-            # most likely __deep_clone__ was called, just call the super initalizer
+            # most likely __deep_clone__ was called, just call the super initializer
             super(reference, deep_clone, original_arguments)
         end
     end
 
+    # (see Pattern#to_s)
     def to_s(depth = 0, top_level = true)
         output = top_level ? "recursivelyMatch(" : ".recursivelyMatch("
         output += "\"#{@arguments[:subroutine_key]}\")"
@@ -400,17 +521,28 @@ class SubroutinePattern < Pattern
         output
     end
 
+    # (see Pattern#single_entity?)
+    # @return [true]
     def single_entity?
         true
     end
 end
 
-def recursivelyMatch(reference)
-    SubroutinePattern.new(reference)
-end
-
 class Pattern
+
+    #
+    # Recursively match some outer pattern
+    #
+    # @param [String] reference a reference to an outer pattern
+    #
+    # @return [Pattern] a Pattern to append to
+    #
     def recursivelyMatch(reference)
         insert(SubroutinePattern.new(reference))
     end
+end
+
+# (see Pattern#recursivelyMatch)
+def recursivelyMatch(reference)
+    SubroutinePattern.new(reference)
 end

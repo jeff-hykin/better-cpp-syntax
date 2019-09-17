@@ -26,6 +26,9 @@ Metrics/PerceivedComplexity:
 Naming/MethodName:
     Enabled: false
 
+Style/AsciiComments:
+    AllowedChars:
+        - ✓
 Style/AndOr:
     Enabled: false
     # Enabled: true
@@ -37,7 +40,8 @@ Style/CommentAnnotation:
         - FIXME
 Style/Documentation:
     Enabled: false
-    # Enabled: true
+Style/HashSyntax:
+    EnforcedStyle: no_mixed_keys
 Style/Not:
     Enabled: false
     # Enabled: true

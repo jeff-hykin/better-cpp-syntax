@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'textmate_grammar'
 
 class GrammarTest < MiniTest::Test
     def test_source
-        assert_silent() do
+        assert_silent do
             Grammar.new(
                 name: "test",
-                scope_name: "source.test"
+                scope_name: "source.test",
             )
         end
     end
 
     def test_text
-        assert_silent() do
+        assert_silent do
             Grammar.new(
                 name: "test",
-                scope_name: "text.test"
+                scope_name: "text.test",
             )
         end
     end
@@ -24,7 +26,7 @@ class GrammarTest < MiniTest::Test
         assert_output(/Warning: grammar scope name/) do
             Grammar.new(
                 name: "test",
-                scope_name: "test"
+                scope_name: "test",
             )
         end
     end
@@ -33,14 +35,14 @@ class GrammarTest < MiniTest::Test
         g = Grammar.new(
             name: "test",
             scope_name: "text.test",
-            version: ""
+            version: "",
         )
         expected = {
             name: "test",
             scopeName: "text.test",
             repository: {},
             patterns: [],
-            version: ""
+            version: "",
         }
         assert_equal expected, g.generate
     end

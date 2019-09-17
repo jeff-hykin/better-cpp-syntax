@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'grammar'
+require_relative 'lib/textmate_grammar'
 require 'pp'
 
 test_pat = Pattern.new(
@@ -10,8 +10,8 @@ test_pat = Pattern.new(
     includes: [
         :abc,
         "abc",
-        Pattern.new(match: /abc/, tag_as:"abc123")
-    ]
+        Pattern.new(match: /abc/, tag_as: "abc123"),
+    ],
 ).maybe(/def/).then(
     match: /ghi/,
     tag_as: "part2",
@@ -33,7 +33,7 @@ test_range = PatternRange.new(
     end_pattern: /def/,
 )
 
-# puts test_range
+puts test_range
 # puts test_range.to_tag
 
 # grammar = Grammar.new_exportable_grammar

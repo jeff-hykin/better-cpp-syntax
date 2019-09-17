@@ -1,4 +1,6 @@
-require_relative 'grammar'
+# frozen_string_literal: true
+
+require_relative '../lib/textmate_grammar'
 
 ex = Grammar.new_exportable_grammar
 
@@ -17,7 +19,7 @@ ex[:abc] = Pattern.new(
         :p123,
         :test_pat,
         :$initial_context,
-    ]
+    ],
 )
 
 ex[:test_pat] = /abcd/
@@ -27,16 +29,15 @@ g = Grammar.new(
     scope_name: "source.example",
 )
 
-
 ex.export # just to confirm that export is idempotent
 
 g.import(ex.export)
 g[:$initial_context] = [
     Pattern.new(
         match: "def",
-        tag_as: "abc def"
+        tag_as: "abc def",
     ),
-    :abc
+    :abc,
 ]
 
 g.save_to "."

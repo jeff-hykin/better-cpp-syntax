@@ -17,12 +17,11 @@ class GrammarPlugin
     # @return [String] the options as a string
     # @note each option should be prepended with +"\\n,#{indent}"+
     # @note only display the options that are unique to this plugin
-    def self.display_options(indent, options)
-        if self.options().empty?
+    def self.display_options(indent, options) # rubocop:disable Lint/UnusedMethodArgument
+        raise "Internal error: display_options called with no provided options" if options.empty?
+
+        if self.options.empty?
             raise "Internal error: display_options called on a plugin that provides no options"
-        end
-        if options.empty?
-            raise "Internal error: display_options called with no provided options"
         end
 
         raise "GrammarPlugin::options implemented but GrammarPlugin::display_options has not been"
@@ -32,26 +31,26 @@ end
 # @abstract Subclass and override {#pre_lint} and/or {#post_lint}
 #   to implement a linter
 class GrammarLinter < GrammarPlugin
+    #
     # Runs the linter on each pattern
     #
     # @param pattern [Pattern, Symbol, Hash] the pattern to lint
     # @param options [Hash] hash of any of the option keys provided by self.options.
-    #   options will only be poplated when {pattern} is a Pattern
+    #   options will only be populated when pattern is a Pattern
     #
     # @return [Boolean] the result of the lint
-    def pre_lint(pattern, options = {})
+    def pre_lint(pattern, options = {}) # rubocop:disable Lint/UnusedMethodArgument
         true
     end
-
 
     #
     # Runs the linter on the entire grammar
     #
-    # @param [Hash] grammar_hash The entire ggrammar
+    # @param [Hash] grammar_hash The entire grammar
     #
     # @return [Boolean] the result og the lint
     #
-    def post_lint(grammar_hash)
+    def post_lint(grammar_hash) # rubocop:disable Lint/UnusedMethodArgument
         true
     end
 end
@@ -65,20 +64,16 @@ class GrammarTransform < GrammarPlugin
     # @param pattern [Pattern, Symbol, Hash] the pattern to transform
     # @param grammar [Grammar] the grammar object
     # @param options [Hash] hash of any of the option keys provided by self.options.
-    #   options will only be poplated when {pattern} is a Pattern
+    #   options will only be populated when pattern is a Pattern
     #
     # @return [Pattern, Symbol, Hash] The transformed pattern. The return type should
     #   match the type of pattern
     #
     # @note pattern should not be modified
     #
-    def pre_transform(pattern, grammar, options = {})
+    def pre_transform(pattern, grammar, options = {}) # rubocop:disable Lint/UnusedMethodArgument
         pattern
     end
-
-    # performs a transformation on the entire grammar
-    # returns the transformed grammar
-    # grammar_hash should no be modified
 
     #
     # Performs the transformation on the whole grammar
@@ -109,7 +104,6 @@ class Grammar
         @@linters << linter
     end
 
-
     #
     # Register a transformation plugin
     #
@@ -134,7 +128,7 @@ class Grammar
 end
 
 #
-# Filters a {Pattern#original_arguemnts} to juct the options required for a plugin
+# Filters a {Pattern#original_arguments} to just the options required for a plugin
 #
 # @api private
 #
@@ -146,9 +140,9 @@ end
 def filter_options(plugin, pattern)
     options = {}
     if pattern.is_a? Pattern
-        options = pattern.original_arguments.select { |k| plugin.options.includes? k}
+        options = pattern.original_arguments.select { |k| plugin.options.includes? k }
     end
-    return options
+    options
 end
 
 # load default linters and transforms
