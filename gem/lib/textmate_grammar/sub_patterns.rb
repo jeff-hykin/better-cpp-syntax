@@ -2,7 +2,6 @@
 
 require_relative 'pattern'
 
-
 # An optional pattern
 # for some pattern `p` this is equivalent to (?:p?)
 class MaybePattern < Pattern
@@ -142,7 +141,6 @@ def oneOrMoreOf(pattern)
     OneOrMoreOfPattern.new(pattern)
 end
 
-
 # Provides alternation
 # Either the previous pattern or provided pattern is accepted
 # @note OneOfPattern is likely just as powerful and less confusing
@@ -187,7 +185,6 @@ class Pattern
 end
 
 # or does not have a top level option
-
 
 # Provides alternation
 # when one of the passed in patterns is accepted, this pattern is accepted
@@ -477,7 +474,6 @@ class BackReferencePattern < Pattern
 end
 
 class Pattern
-
     #
     # Match the result of some other pattern
     #
@@ -529,7 +525,6 @@ class SubroutinePattern < Pattern
 end
 
 class Pattern
-
     #
     # Recursively match some outer pattern
     #
@@ -545,4 +540,65 @@ end
 # (see Pattern#recursivelyMatch)
 def recursivelyMatch(reference)
     SubroutinePattern.new(reference)
+end
+
+#
+# Implements using a pattern that has not been defined
+#
+class PlaceholderPattern < Pattern
+    #
+    # Constructs a new placeholder pattern
+    # @overload initialize(placeholder)
+    #   @param [Symbol] placeholder the name to replace with
+    #
+    # @overload initialize(opts, deep_clone, original)
+    #   @param (see Pattern#initialize)
+    #
+    def initialize(placeholder, deep_clone = nil, original_arguments = nil)
+        if deep_clone == :deep_clone
+            super(placeholder, deep_clone, original_arguments)
+        else
+            super(
+                match: Regexp.new("placeholder"),
+                placeholder: placeholder
+            )
+        end
+    end
+
+    # (see Pattern#to_s)
+    def to_s(depth = 0, top_level = true)
+        output = top_level ? "placeholder(" : ".placeholder("
+        output += ":#{@arguments[:placeholder]})"
+        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
+        output
+    end
+
+    # (see Pattern#resolve!)
+    def resolve!(repository)
+        unless repository[@arguments[:placeholder]].is_a? Pattern
+            raise "#{@arguments[:placeholder]} is not a Pattern and cannot be subsituted"
+        end
+
+        @match = repository[@arguments[:placeholder]].resolve(repository)
+        @next_pattern.resolve!(repository) if @next_pattern.is_a? Pattern
+        self
+    end
+end
+
+class Pattern
+    #
+    # Match a pattern that does not exist yet
+    #
+    # @param [Symbol] placeholder the name of the pattern to match
+    #
+    # @return [Pattern] a pattern to append to
+    #
+    def placeholder(placeholder)
+        insert(PlaceholderPattern.new(placeholder))
+    end
+end
+
+# (see Pattern#placeholder)
+def placeholder(placeholder)
+    PlaceholderPattern.new(placeholder)
 end

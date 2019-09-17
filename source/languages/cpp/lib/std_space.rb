@@ -1,5 +1,7 @@
-require_relative '../../../../paths'
-require_relative PathFor[:textmate_tools]
+
+g = Grammar.new_exportable_grammar
+g.exports = [:std_space]
+g.external_repos = [:inline_comment]
 
 Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|
     ->(inline_comment, inline_comment_name) do

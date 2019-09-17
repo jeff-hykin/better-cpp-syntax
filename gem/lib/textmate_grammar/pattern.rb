@@ -2,7 +2,7 @@
 
 require 'deep_clone'
 require 'yaml'
-require 'textmate_grammar/grammar_plugin.rb'
+require 'textmate_grammar/grammar_plugin'
 
 # Add remove indent to the String class
 class String
@@ -70,7 +70,7 @@ def string_single_entity?(regex_string)
     true
 end
 
-# Add convience methods to make Regexp behave a bit more like Pattern
+# Add convenience methods to make Regexp behave a bit more like Pattern
 class Regexp
     # (see #string_single_entity?)
     # @deprecated use string_single_entity
@@ -93,7 +93,7 @@ end
 
 #
 # Provides a base class to simplify the writing of complex regular expressions rules
-# This class completely handles capture numbers and provides convience methods for
+# This class completely handles capture numbers and provides convenience methods for
 # many common Regexp operations
 #
 class Pattern
@@ -187,8 +187,9 @@ class Pattern
         at_least = at_most = how_many_times if how_many_times.is_a?(Integer)
 
         # check if quantifying is allowed
-        # check after everything else encase additional quantifing options are created in the future
-        if quantifing_allowed?
+        # check after everything else in case additional quantifying options
+        # are created in the future
+        if quantifying_allowed?
             @at_least = at_least
             @at_most = at_most
         # if a quantifying value was set and quantifying is not allowed, raise an error
@@ -244,7 +245,7 @@ class Pattern
                     "{#{@at_least},#{@at_most}}"
                 end
         end
-        # quantifiers can be made possesive without requiring atomic groups
+        # quantifiers can be made possessive without requiring atomic groups
         quantifier += "+" if quantifier != "" && @arguments[:dont_back_track?] == true
         quantifier
     end
@@ -267,7 +268,7 @@ class Pattern
             # add the quantified ending
             match += quantifier
         elsif @arguments[:dont_back_track?] == true
-            # make atomic, which allows arbitary expression to be prevented from backtracking
+            # make atomic, which allows arbitrary expression to be prevented from backtracking
             match = "(?>#{match})"
         end
         if @arguments[:word_cannot_be_any_of]
@@ -282,7 +283,7 @@ class Pattern
     #
     # @param [String] regex_as_string the pattern as a string
     #
-    # @return [String] the pattern, potentially with a cpature group
+    # @return [String] the pattern, potentially with a capture group
     #
     def add_capture_group_if_needed(regex_as_string)
         regex_as_string = "(#{regex_as_string})" if needs_to_capture?
@@ -305,8 +306,8 @@ class Pattern
             end
         end
 
-        @match.transform_includes!(block) if @match.is_a? Pattern
-        @next_pattern.transform_includes!(block) if @next_pattern.is_a? Pattern
+        @match.transform_includes!(&block) if @match.is_a? Pattern
+        @next_pattern.transform_includes!(&block) if @next_pattern.is_a? Pattern
 
         self
     end
@@ -329,8 +330,8 @@ class Pattern
     def transform_tag_as!(&block)
         @arguments[:tag_as] = block.call @arguments[:tag_as] if @arguments[:tag_as]
 
-        @match.transform_tag_as!(block) if @match.is_a? Pattern
-        @next_pattern.transform_tag_as!(block) if @next_pattern.is_a? Pattern
+        @match.transform_tag_as!(&block) if @match.is_a? Pattern
+        @next_pattern.transform_tag_as!(&block) if @next_pattern.is_a? Pattern
 
         self
     end
@@ -354,7 +355,7 @@ class Pattern
     #   @option opts [Pattern, Regexp, String] :match the pattern to match
     #   @option opts [String] :tag_as what to tag this pattern as
     #   @option opts [Array<Pattern, Symbol>] :includes pattern includes
-    #   @option opts [String] :reference a name for this pattern can be refered to in
+    #   @option opts [String] :reference a name for this pattern can be referred to in
     #       earlier or later parts of the pattern list, or in tag_as
     #   @option opts [Array<String>] :should_fully_match string that this pattern should
     #       fully match
@@ -366,7 +367,7 @@ class Pattern
     #       not partially match
     #   @option opts [Enumerator, Integer] :at_most match up to N times, nil to match any
     #       number of times
-    #   @option opts [Enumerator, Integer] :at_least match no fewer tahn N times, nil to
+    #   @option opts [Enumerator, Integer] :at_least match no fewer than N times, nil to
     #       match any number of times
     #   @option opts [Enumerator, Integer] :how_many_times match exactly N times
     #   @option opts [Array<String>] :word_cannot_be_any_of list of wordlike string that
@@ -396,7 +397,7 @@ class Pattern
         end
 
         if arguments.length > 1
-            # Pattern was likely constucted like `Pattern.new(/foo/, option: bar)`
+            # Pattern was likely constructed like `Pattern.new(/foo/, option: bar)`
             puts "Pattern#new() expects a single Regexp, String, or Hash"
             puts "Pattern#new() was provided with multiple arguments"
             puts "arguments:"
@@ -435,7 +436,7 @@ class Pattern
     end
 
     #
-    # converts a Pattern to a Hash represnting a textmate rule
+    # converts a Pattern to a Hash representing a textmate rule
     #
     # @return [Hash] The pattern as a textmate grammar rule
     #
@@ -523,7 +524,7 @@ class Pattern
         output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match] if @arguments[:should_partially_match]
         output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match] if @arguments[:should_not_partially_match]
         # special #then arguments
-        if quantifing_allowed?
+        if quantifying_allowed?
             output += ",\n#{indent}  at_least: \"" + @arguments[:at_least] + '"' if @arguments[:at_least]
             output += ",\n#{indent}  at_most: \"" + @arguments[:at_most] + '"' if @arguments[:at_most]
             output += ",\n#{indent}  how_many_times: \"" + @arguments[:how_many_times] + '"' if @arguments[:how_many_times]
@@ -541,9 +542,29 @@ class Pattern
     end
 
     #
+    # Resolves any placeholder patterns
+    #
+    # @param [Hash] repository the repository to resolve patterns with
+    #
+    # @return [self]
+    #
+    def resolve!(repository)
+        # default implementation does nothing to self
+        @match.resolve!(repository) if @match.is_a? Pattern
+        @next_pattern.resolve!(repository) if @next_pattern.is_a? Pattern
+        self
+    end
+
+    # (see #resolve!)
+    # @return [Pattern] a copy of self with patterns resolved
+    def resolve(repository)
+        __deep_clone__.resolve!(repository)
+    end
+
+    #
     # Runs the unit tests, recursively
     #
-    # @return [Boolean] If all test passed retiurn true, otherwise false
+    # @return [Boolean] If all test passed return true, otherwise false
     #
     def run_tests
         pass = [true]
@@ -611,14 +632,14 @@ class Pattern
     #
     def hash
         # TODO: find a better hash code
-        # Pattern.new("abc") == Patern.new(Pattern.new("abc"))
-        # but Pattern.new("abc").hash != Patern.new(Pattern.new("abc")).hash
+        # Pattern.new("abc") == Pattern.new(Pattern.new("abc"))
+        # but Pattern.new("abc").hash != Pattern.new(Pattern.new("abc")).hash
         @match.hash
     end
 
     #
     # Checks for equality
-    # A pttern is considered equal to another pattern if the result of tag_as is equivlent
+    # A pattern is considered equal to another pattern if the result of tag_as is equivlent
     #
     # @param [Pattern] other the pattern to compare
     #
@@ -651,9 +672,9 @@ class Pattern
 
     # controls weather @arguments[:at_most] et. al. set @at_most et. al.
     # @note override when inheriting. Return false unless the subclass allow quantifying
-    # @return [Boolean] if quantifiing is allowed
+    # @return [Boolean] if quantifying is allowed
     # @note the default implementation returns True
-    def quantifing_allowed?
+    def quantifying_allowed?
         true
     end
 
@@ -673,18 +694,20 @@ class Pattern
     #
     # Combines self with with the result of evaluate on the previous pattern
     #
-    # @note optionally override when inheriting if concationation is not sufficent
+    # @note optionally override when inheriting if concatenation is not sufficient
     #
-    # @param [String] previous_evaluate the result of evaluate on the previous pattern
+    # @param [String] previous the result of evaluate on the previous pattern
     #   in the linked list of patterns
     # @param [Hash] groups group attributes
-    # @param [Boolean] is_single_entity is self a single entity
+    # @param [Boolean] single_entity is self a single entity
     #
     # @return [String] the combined regexp
     #
-    def integrate_pattern(previous_evaluate, groups, is_single_entity) # rubocop:disable Lint/UnusedMethodArgument
+    def integrate_pattern(previous, groups, single_entity)
         # by default just concat the groups
-        "#{previous_evaluate}#{evaluate(groups)}"
+        return "#{previous}#{evaluate(groups)}" if single_entity
+
+        "#{previous}(?:#{evaluate(groups)})"
     end
 
     #
@@ -928,7 +951,7 @@ class Pattern
     #
     # Raise an error if regex contains a capturing group
     #
-    # @param [Regexp] regex the regexp to tesst
+    # @param [Regexp] regex the regexp to test
     #
     # @return [void]
     #
@@ -944,6 +967,6 @@ class Pattern
             #{self}
         HEREDOC
     rescue RegexpError # rubocop: disable Lint/HandleExceptions
-        # no cpature groups present, purposely do nothing
+        # no capture groups present, purposely do nothing
     end
 end

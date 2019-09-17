@@ -1,6 +1,7 @@
+require 'textmate_grammar'
+
 require_relative '../../../paths'
 require_relative PathFor[:repo_helper]
-require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
 require_relative PathFor[:sharedPattern]["trigraph_support"]
 require_relative PathFor[:sharedPattern]["predefined_macros"]
@@ -44,7 +45,7 @@ grammar = Grammar.new(
 #
 # Utils
 #
-    grammar[:inline_comment]     = grammar.import("./lib/inline_comment")
+    grammar[:inline_comment]     = grammar.import(File.join(__dir__, "./lib/inline_comment"))
     std_space                    = grammar.import("./lib/std_space")[inline_comment, :inline_comment]
     universal_character          = /\\u[0-9a-fA-F]{4}/.or(/\\U[0-9a-fA-F]{8}/)
     first_character              = /[a-zA-Z_]/.or(universal_character)
@@ -98,7 +99,7 @@ grammar = Grammar.new(
         end
         return new_range
     end
-    
+
     def generateBlockFinder( name:"", tag_as:"", start_pattern:nil, needs_semicolon: true, primary_includes: [], head_includes:[], body_includes: [ :$initial_context ], tail_includes: [ :$initial_context ], secondary_includes:[])
         lookahead_endings = /[;>\[\]=]/
         if needs_semicolon
@@ -192,13 +193,13 @@ grammar = Grammar.new(
             :enum_block,
             :template_isolated_definition,  # TODO: template definitions should be mixed into the seperate definitions (class/struct/function, etc)
             :template_definition,
-            :access_control_keywords,       # TODO: these should only be allowed inside of class/struct (maybe namespace?) blocks 
+            :access_control_keywords,       # TODO: these should only be allowed inside of class/struct (maybe namespace?) blocks
             :block,                         # TODO: after all function definition patterns are fixed, remove this from here and put it in the function definition context
             # statements
             :static_assert,                 # it is unclear to me if static_assert can appear in the root context or not, so I'm leaving it here to be safe. https://en.cppreference.com/w/cpp/language/static_assert
             :assembly,                      # it is unclear to me is assembly can be in the root context or not, so I'm leaving it here to be safe
             :function_pointer,
-            
+
             # eventually this needs to be removed
             :evaluation_context
         ]
@@ -249,7 +250,7 @@ grammar = Grammar.new(
             :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
             :storage_types,
-            :misc_storage_modifiers,                    # TODO: this pattern needs to be removed 
+            :misc_storage_modifiers,                    # TODO: this pattern needs to be removed
             # misc
             :lambdas,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
@@ -262,7 +263,7 @@ grammar = Grammar.new(
             :comma,
         ]
     grammar[:function_parameter_context] = [
-            :ever_present_context, # comments and macros 
+            :ever_present_context, # comments and macros
             :parameter,
             :comma,
         ]
@@ -300,9 +301,9 @@ grammar = Grammar.new(
             :decltype,
             :typename,
         ]
-# 
+#
 # Comments
-# 
+#
     grammar[:block_comment] = PatternRange.new(
         tag_as: "comment.block",
         start_pattern: Pattern.new(
@@ -686,7 +687,7 @@ grammar = Grammar.new(
             ]
         )
     end
-    
+
     cpp_attribute_start = /\[\[/
     cpp_attribute_end   = /\]\]/
     gcc_attribute_start = /__attribute(?:__)?\(\(/
@@ -695,12 +696,12 @@ grammar = Grammar.new(
     ms_attribute_end    = /\)/
     alignas_start       = /alignas\(/
     alignas_end         = /\)/
-    
+
     grammar[:cpp_attributes   ] = generateAttributeRangeFinder[ cpp_attribute_start, cpp_attribute_end ]
     grammar[:gcc_attributes   ] = generateAttributeRangeFinder[ gcc_attribute_start, gcc_attribute_end ]
     grammar[:ms_attributes    ] = generateAttributeRangeFinder[ ms_attribute_start , ms_attribute_end  ]
     grammar[:alignas_attribute] = generateAttributeRangeFinder[ alignas_start      , alignas_end       ]
-    
+
     inline_attribute = Pattern.new(
         should_fully_match:["[[nodiscard]]","__attribute((packed))","__declspec(fastcall)","__attribute__((constructor(101)))"],
         should_partial_match: ["struct [[deprecated]] st"],
@@ -746,7 +747,7 @@ grammar = Grammar.new(
         )
     )
 
-    
+
     grammar[:comma_in_template_argument] = Pattern.new(
         match: /,/,
         tag_as: "punctuation.separator.delimiter.comma.template.argument"
@@ -911,11 +912,11 @@ grammar = Grammar.new(
             append: tag_extension[1..-1]
         )
         grammar[grammar_name] = Pattern.new(
-            # find the whole scope resolution 
+            # find the whole scope resolution
             should_fully_match: [ "name::name2::name3::" ],
             match: maybe(tagged_scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
             includes: [
-                    # then tag every `name::` seperately 
+                    # then tag every `name::` seperately
                     hidden_grammar_name,
                 ]
             )
@@ -939,7 +940,7 @@ grammar = Grammar.new(
     generateScopeResolutionFinder[".namespace.block"     ,:scope_resolution_namespace_block     ]
     generateScopeResolutionFinder[".parameter"           ,:scope_resolution_parameter           ]
     generateScopeResolutionFinder[".function.definition.operator-overload" ,:scope_resolution_function_definition_operator_overload]
-    
+
 #
 # Types
 #
@@ -1111,11 +1112,11 @@ grammar = Grammar.new(
             :ever_present_context, # comments and macros
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters",
-                start_pattern: Pattern.new( 
+                start_pattern: Pattern.new(
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round"
                     ),
-                end_pattern: Pattern.new( 
+                end_pattern: Pattern.new(
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round"
                     ),
@@ -1188,11 +1189,11 @@ grammar = Grammar.new(
             :template_call_range,
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters.special.operator-overload",
-                start_pattern: Pattern.new( 
+                start_pattern: Pattern.new(
                     match: /\(/,
                     tag_as: "punctuation.section.parameters.begin.bracket.round.special.operator-overload"
                     ),
-                end_pattern: Pattern.new( 
+                end_pattern: Pattern.new(
                     match: /\)/,
                     tag_as: "punctuation.section.parameters.end.bracket.round.special.operator-overload"
                     ),
@@ -1264,9 +1265,9 @@ grammar = Grammar.new(
         includes: [ :evaluation_context ]
         )
 
-# 
+#
 # Initializers
-# 
+#
     grammar[:curly_initializer] = PatternRange.new(
         tag_as: "meta.initialization",
         start_pattern: Pattern.new(
@@ -1297,7 +1298,7 @@ grammar = Grammar.new(
         ),
         includes: [ :evaluation_context ],
     )
-# 
+#
 # Constructor / Destructor
 #
     deleted_and_default_constructor = [
@@ -1370,14 +1371,14 @@ grammar = Grammar.new(
                         :comments,
                     ]
                 ),
-                # parameters 
+                # parameters
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.constructor",
-                    start_pattern: Pattern.new( 
+                    start_pattern: Pattern.new(
                         match: /\(/,
                         tag_as: "punctuation.section.parameters.begin.bracket.round.special.constructor"
                         ),
-                    end_pattern: Pattern.new( 
+                    end_pattern: Pattern.new(
                         match: /\)/,
                         tag_as: "punctuation.section.parameters.end.bracket.round.special.constructor"
                         ),
@@ -1454,11 +1455,11 @@ grammar = Grammar.new(
                 deleted_and_default_constructor,
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.member.destructor",
-                    start_pattern: Pattern.new( 
+                    start_pattern: Pattern.new(
                         match: /\(/,
                         tag_as: "punctuation.section.parameters.begin.bracket.round.special.member.destructor"
                         ),
-                    end_pattern: Pattern.new( 
+                    end_pattern: Pattern.new(
                         match: /\)/,
                         tag_as: "punctuation.section.parameters.end.bracket.round.special.member.destructor"
                         ),
@@ -1550,7 +1551,7 @@ grammar = Grammar.new(
         tag_content_as: "arguments.operator.sizeof.variadic",
         tag_parenthese_as: "operator.sizeof.variadic"
     ])
-    
+
     grammar[:ternary_operator] = PatternRange.new(
         apply_end_pattern_last: true,
         start_pattern: Pattern.new(
@@ -1563,7 +1564,7 @@ grammar = Grammar.new(
         ),
         includes: grammar[:evaluation_context]
     )
-        
+
     grammar[:operators, overwrite: true] += [
         Pattern.new(
             match: /--/,
@@ -1652,7 +1653,7 @@ grammar = Grammar.new(
             functionPointerGenerator["entity.name.type.alias entity.name.type.pointer.function"]
         ]
     )
-# 
+#
 # Parameters
 #
     parameter_ending = lookAheadFor(/\)/).or(grammar[:comma])
@@ -1693,7 +1694,7 @@ grammar = Grammar.new(
                             ),
                         tag_as: "entity.name.type.parameter",
                     )
-                ).then(std_space).lookAheadFor(/,|\)|=/), 
+                ).then(std_space).lookAheadFor(/,|\)|=/),
             ),
             :storage_types,
             :function_call, # function call is here because of #282, it should be below decltype() and function pointer, storage types, and modifiers but above scope resolution
@@ -1793,7 +1794,7 @@ grammar = Grammar.new(
                             ),
                         tag_as: "entity.name.type.parameter",
                     )
-                ).then(std_space).lookAheadFor(/,|\)|=/), 
+                ).then(std_space).lookAheadFor(/,|\)|=/),
             ),
             :storage_types,
             :scope_resolution_parameter_inner_generated,
@@ -1884,7 +1885,7 @@ grammar = Grammar.new(
             member_operator
         )
     end
-    partial_member = generatePartialMemberFinder["variable.other.object.access"] 
+    partial_member = generatePartialMemberFinder["variable.other.object.access"]
     member_context = [
             mid_member = Pattern.new(
                 match: lookBehindFor(dot_or_arrow_operator).maybe(
@@ -1977,7 +1978,7 @@ grammar = Grammar.new(
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
             ),
         head_includes: [
-            :ever_present_context, 
+            :ever_present_context,
             :attributes_context,
             grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
@@ -2259,7 +2260,7 @@ grammar = Grammar.new(
     grammar[:typedef_class]  = generateTypedefClassOrStructBlockFinder["class"]
     grammar[:typedef_struct] = generateTypedefClassOrStructBlockFinder["struct"]
     grammar[:typedef_union]  = generateTypedefClassOrStructBlockFinder["union"]
-    
+
     generateDeclareFor = ->(name) do
         Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
@@ -2439,7 +2440,7 @@ grammar = Grammar.new(
         ),
         includes: [
             # TODO: for typecasting (eventually this should be replaced)
-            :over_qualified_types, 
+            :over_qualified_types,
             # TODO: for range-based for loops (eventually this should be replaced)
             Pattern.new(
                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
@@ -2475,17 +2476,17 @@ grammar = Grammar.new(
     )
 
 
-# 
-# Generate macro versions of all ranged patterns 
+#
+# Generate macro versions of all ranged patterns
 #
     # create a duplicate grammar with all pattern ranges bailed-out
     system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
     # assign that to the macro context
     grammar[:macro_context] = ["source.cpp.embedded.macro"]
 
-# 
+#
 # Save
-# 
+#
 saveGrammar(grammar)
 # TODO, upgrade the code so this is not necessary
 # for exporting to C

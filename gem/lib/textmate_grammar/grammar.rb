@@ -110,7 +110,7 @@ class Grammar
     # @return [Pattern, Symbol, Array<Pattern, Symbol>] The stored pattern
     #
     def [](key)
-        @repository[key]
+        @repository[key] || PlaceholderPattern.new(key)
     end
 
     #
@@ -171,7 +171,7 @@ class Grammar
     def import(path_or_export)
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
-            require path
+            require path_or_export
             export = @@export_grammars[path]
         end
 
@@ -210,11 +210,23 @@ class Grammar
             @repository.each do |_, value|
                 if value.is_a? Array
                     value.each do |v|
-                        raise msg unless linter.pre_lint(v, self, filter_options(linter, v))
+                        raise msg unless linter.pre_lint(
+                            v, filter_options(
+                                linter,
+                                v,
+                                {grammar: self, repository: @repository},
+                            ),
+                        )
                     end
                     next
                 end
-                raise msg unless linter.pre_lint(value, self, filter_options(linter, value))
+                raise msg unless linter.pre_lint(
+                    value, filter_options(
+                        linter,
+                        value,
+                        {grammar: self, repository: @repository}
+                    ),
+                )
             end
         end
 
@@ -224,10 +236,22 @@ class Grammar
             repository_copy = repository_copy.transform_values do |value|
                 if value.is_a? Array
                     value.map do |v|
-                        transform.pre_transform(v, self, filter_options(transform, v))
+                        transform.pre_transform(
+                            v, filter_options(
+                                transform,
+                                v,
+                                {grammar: self, repository: repository_copy},
+                            ),
+                        )
                     end
                 else
-                    transform.pre_transform(value, self, filter_options(transform, value))
+                    transform.pre_transform(
+                        value, filter_options(
+                            transform,
+                            value,
+                            {grammar: self, repository: repository_copy},
+                        ),
+                    )
                 end
             end
         end
@@ -259,7 +283,7 @@ class Grammar
             when Hash then return value
             when String then return value
             when Pattern then return value.to_tag
-            else raise "Unexpected value"
+            else raise "Unexpected value: #{value.class}"
             end
         end
 
@@ -337,7 +361,7 @@ class Grammar
             out_file.write(Plist::Emit.dump(output))
             out_file.close
         else
-            puts "unxpected syntax format #{options[:syntax_format]}"
+            puts "unexpected syntax format #{options[:syntax_format]}"
             puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]"
             raise "see above error"
         end
@@ -382,7 +406,7 @@ class ExportableGrammar < Grammar
     # @note use {Grammar.new_exportable_grammar} instead
     #
     def initialize
-        # skip: initalize, new, and new_exportable_grammar
+        # skip: initialize, new, and new_exportable_grammar
         location = caller_locations(3, 1).first
         # and the first 5 bytes of the hash to get the seed
         # will not be unique if multiple exportable grammars are created in the same file
@@ -485,7 +509,7 @@ class ExportableGrammar < Grammar
 end
 
 #
-# Represents a Textmate Grammr that has been imported
+# Represents a Textmate Grammar that has been imported
 # This exists entirely to override Grammar#[] and should not be
 # normally created
 #

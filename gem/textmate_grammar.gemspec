@@ -13,6 +13,6 @@ Gem::Specification.new do |s|
     s.required_ruby_version = '>=2.4.0'
 
     s.metadata = {
-        "yard.run" => "yri"
+        "yard.run" => "yri",
     }
 end

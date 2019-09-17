@@ -68,6 +68,6 @@ class GrammarTest < MiniTest::Test
 
         assert_equal JSON.parse(File.read(import_path)), JSON.parse(File.read("import.export.json"))
     ensure
-        File.delete("import.export.json")
+        File.delete("import.export.json") if File.exist?("import.export.json")
     end
 end

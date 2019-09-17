@@ -7,7 +7,7 @@ class StartMatchEmpty < GrammarLinter
     #
     # (see GrammarLinter#pre_lint)
     #
-    def pre_lint(pattern, _, options)
+    def pre_lint(pattern, options)
         return true unless pattern.is_a? PatternRange
 
         regexp = Regexp.new(pattern.start_pattern.evaluate.replace("\\G", '\uFFFF'))

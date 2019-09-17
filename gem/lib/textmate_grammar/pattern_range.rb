@@ -43,7 +43,7 @@ class PatternRange < Pattern
         @start_pattern = Pattern.new(@start_pattern) unless @start_pattern.is_a? Pattern
         @stop_pattern = Pattern.new(@stop_pattern) unless @stop_pattern.is_a? Pattern
 
-        # store orginals for to_s
+        # store originals for to_s
         @original_start_pattern = @start_pattern
         @original_stop_pattern  = @stop_pattern
 
@@ -143,6 +143,15 @@ class PatternRange < Pattern
     def reTag!(arguments)
         @start_pattern.reTag!(arguments)
         @stop_pattern.reTag!(arguments)
+        self
+    end
+
+    #
+    # (see Pattern#resolve!)
+    #
+    def resolve!(repository)
+        @start_pattern.resolve!(repository)
+        @stop_pattern.resolve!(repository)
         self
     end
 end
