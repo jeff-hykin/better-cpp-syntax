@@ -902,6 +902,9 @@ class Pattern
     def convert_includes_to_patterns(includes)
         includes = [includes] unless includes.is_a? Array
         patterns = includes.flatten.map do |rule|
+            next rule if rule.is_a?(String) && rule.start_with?("source.", "text.")
+            next "$self" if rule == :$self
+            next "$base" if rule == :$base
             next {include: "##{rule}"} if rule.is_a? Symbol
 
             rule = Pattern.new(rule) unless rule.is_a? Pattern

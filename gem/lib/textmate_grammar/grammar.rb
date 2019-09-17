@@ -234,7 +234,7 @@ class Grammar
 
         convert_initial_context = lambda do |value|
             if value == :$initial_context
-                return (inherit_or_embedded == :embedded) ? :$self : :$base
+                return (inherit_or_embedded == :embedded) ? "$self" : "$base"
             end
 
             return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
@@ -257,6 +257,7 @@ class Grammar
             when Array then return value.map { |v| to_tag.call(v) }
             when Symbol then return {"include" => "#" + value.to_s}
             when Hash then return value
+            when String then return value
             when Pattern then return value.to_tag
             else raise "Unexpected value"
             end
