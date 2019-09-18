@@ -3,16 +3,7 @@
   "scopeName": "source.cpp",
   "repository": {
     "std_space": {
-      "match": "(?:(?:(?:(?>\\s+)|(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/)))+)|\\b|(?=\\W)|(?=\\W)|\\A|\\Z)",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "include": "#inline_comment"
-            }
-          ]
-        }
-      }
+      "include": "#inline_comment"
     },
     "inline_comment": {
       "match": "(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/))",
@@ -36,10 +27,78 @@
           ]
         }
       }
+    },
+    "extern_linkage_specifier": {
+      "match": "((?:(?:(?:(?>\\s+)|(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/)))+)|\\b|(?=\\W)|(?=\\W)|\\A|\\Z))(extern)((?:(?:(?:(?>\\s+)|(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/)))+)|\\b|(?=\\W)|(?=\\W)|\\A|\\Z))((?:(\\\")([^\\\"]*)(\\\"))?)",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "2": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "3": {
+          "name": "comment.block.cpp"
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block punctuation.definition.comment.end"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block"
+            }
+          ]
+        },
+        "5": {
+          "name": "storage.type.extern.cpp"
+        },
+        "6": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "7": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "8": {
+          "name": "comment.block.cpp"
+        },
+        "9": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block punctuation.definition.comment.end"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block"
+            }
+          ]
+        },
+        "10": {
+          "name": "string.quoted.double.extern.cpp"
+        },
+        "11": {
+          "name": "punctuation.definition.string.begin.cpp"
+        },
+        "13": {
+          "name": "punctuation.definition.string.end.cpp"
+        }
+      },
+      "name": "meta.specifier.linkage.$12.cpp"
     }
   },
   "patterns": [
 
   ],
-  "version": "6dbf26b2eae4a1574234a30d593793a5a258c037"
+  "version": "3e224530cd5403d4c8a998b08f1c06b6aad4541d"
 }

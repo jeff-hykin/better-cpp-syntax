@@ -13,11 +13,14 @@ class AddEnding < GrammarTransform
 
         ending = options[:grammar].scope_name.split(".")[-1]
         pattern.transform_tag_as do |tag_as|
-            tag_as.split(" ").map do |tag|
+            puts tag_as
+            t = tag_as.split(" ").map do |tag|
                 next tag if tag.end_with?(ending)
 
                 tag + "." + ending
             end.join(" ")
+            puts t
+            t
         end
     end
 end

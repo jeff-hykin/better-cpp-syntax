@@ -349,6 +349,12 @@ class Pattern
     def transform_tag_as(&block)
         __deep_clone__.map! do |s|
             s.arguments[:tag_as] = block.call(s.arguments[:tag_as]) if s.arguments[:tag_as]
+            if @arguments[:includes].is_a?(Array)
+                @arguments[:includes].map! do |i|
+                    return i unless i.is_a? Pattern
+                    i.transform_tag_as(&block)
+                end
+            end
         end
     end
 
@@ -456,13 +462,15 @@ class Pattern
         output = {
             match: regex_as_string,
         }
-        if optimize_outer_group?
-            # optimize captures by removing outermost
-            output[:match] = output[:match][1..-2]
-            output[:name] = @arguments[:tag_as]
-        end
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
+        if optimize_outer_group?
+             # optimize captures by removing outermost
+            output[:match] = output[:match][1..-2]
+            output[:name] = output[:captures]["0"][:name]
+            output[:captures]["0"].delete(:name)
+            output[:captures].reject! { |_, v| !v || v.empty? }
+        end
         output.reject! { |_, v| !v || v.empty? }
         output
     end
@@ -885,13 +893,12 @@ class Pattern
 
         groups.each do |group|
             output = {}
-            output[:name] = group[:tag_as] unless group[:group] == 0 || group[:tag_as].nil?
+            output[:name] = group[:tag_as] unless group[:tag_as].nil?
             if group[:includes].is_a? Array
                 output[:patterns] = convert_includes_to_patterns(group[:includes])
             end
             captures[group[:group].to_s] = output
         end
-        captures.reject! { |_, v| v.empty? }
         # replace $match and $reference() with the appropriate capture number
         captures.each do |key, value|
             next if value[:name].nil?
