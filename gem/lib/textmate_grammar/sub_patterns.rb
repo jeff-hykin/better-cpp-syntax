@@ -205,8 +205,7 @@ class OneOfPattern < Pattern
                 #{patterns}
             HEREDOC
         end
-        # placeholder is here to avoid calling to_r in patterns prematurely
-        @match = /placeholder regex/
+        @match = "one of"
         @arguments[:patterns] = patterns.map do |pattern|
             next pattern if pattern.is_a? Pattern
 
@@ -573,14 +572,19 @@ class PlaceholderPattern < Pattern
         output
     end
 
-    # (see Pattern#resolve!)
+    #
+    # Resolves the placeholder
+    #
+    # @param [Hash] repository the repository to use to resolve the placeholder
+    #
+    # @return [self]
+    #
     def resolve!(repository)
         unless repository[@arguments[:placeholder]].is_a? Pattern
-            raise "#{@arguments[:placeholder]} is not a Pattern and cannot be subsituted"
+            raise "#{@arguments[:placeholder]} is not a Pattern and cannot be substituted"
         end
 
-        @match = repository[@arguments[:placeholder]].resolve(repository)
-        @next_pattern.resolve!(repository) if @next_pattern.is_a? Pattern
+        @match = repository[@arguments[:placeholder]]
         self
     end
 end
@@ -595,6 +599,17 @@ class Pattern
     #
     def placeholder(placeholder)
         insert(PlaceholderPattern.new(placeholder))
+    end
+
+    #
+    # Resolves any placeholder patterns
+    #
+    # @param [Hash] repository the repository to resolve patterns with
+    #
+    # @return [Pattern] a copy of self with placeholders resolved
+    #
+    def resolve(repository)
+        __deep_clone__.map! { |s| s.resolve!(repository) if s.respond_to? :resolve! }
     end
 end
 

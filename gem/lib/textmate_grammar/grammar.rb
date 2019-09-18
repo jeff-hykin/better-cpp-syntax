@@ -119,7 +119,7 @@ class Grammar
     # A pattern must be stored in the grammar for it to appear in the final grammar
     #
     # The special key :$initial_context is the pattern that will be matched at the
-    # begining of the document or whenever the root of the grammar is to be matched
+    # beginning of the document or whenever the root of the grammar is to be matched
     #
     # @param [Symbol] key The key to store the pattern in
     # @param [Pattern, Symbol, Array<Pattern, Symbol>] value the pattern to store

@@ -138,20 +138,11 @@ class PatternRange < Pattern
     end
 
     #
-    # (see Pattern#reTag!)
+    # (see Pattern#map!)
     #
-    def reTag!(arguments)
-        @start_pattern.reTag!(arguments)
-        @stop_pattern.reTag!(arguments)
-        self
-    end
-
-    #
-    # (see Pattern#resolve!)
-    #
-    def resolve!(repository)
-        @start_pattern.resolve!(repository)
-        @stop_pattern.resolve!(repository)
+    def map!(&block)
+        @start_pattern.map!(&block)
+        @stop_pattern.map!(&block)
         self
     end
 end

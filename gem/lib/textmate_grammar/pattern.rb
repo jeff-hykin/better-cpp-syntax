@@ -23,7 +23,7 @@ end
 #   atomic, for example if appending a +*+ to the end of +regex_string+ matches only
 #   a part of regex string multiple times then it is not a single_entity
 # @param regex_string [String] a string representing a regular expression, without the
-#   forward slash "/" at the begining and
+#   forward slash "/" at the beginning and
 # @return [Boolean] if the string represents an single regex entity
 def string_single_entity?(regex_string)
     return true if regex_string.length == 2 && regex_string[0] == '\\'
@@ -100,6 +100,8 @@ class Pattern
     # @return [Pattern] The next pattern in the linked list of patterns
     # @api private
     attr_accessor :next_pattern
+    # @return [Hash] The processed arguments
+    attr_accessor :arguments
     # @return [Hash] The original arguments passed into initialize
     attr_accessor :original_arguments
 
@@ -291,57 +293,49 @@ class Pattern
     end
 
     #
-    # Uses block to recursively transform includes
+    # Uses a block to transform all Patterns the list
     #
-    # @yield [block] invokes the block with each array of includes to transform
+    # @yield [self] invokes the block with self for modification
     #
     # @return [self]
     #
-    def transform_includes!(&block)
-        if @arguments[:includes]
-            if @arguments[:includes].is_a? Array
-                @arguments[:includes].map!(&block)
-            else
-                @arguments[:includes] = block.call @arguments[:includes]
-            end
-        end
-
-        @match.transform_includes!(&block) if @match.is_a? Pattern
-        @next_pattern.transform_includes!(&block) if @next_pattern.is_a? Pattern
-
+    def map!(&block)
+        yield self
+        @match.map!(&block) if @match.is_a? Pattern
+        @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
         self
     end
 
     #
-    # (see transform_includes!)
+    # Uses block to recursively transform includes
+    #
+    # @yield [Pattern,Symbol,Regexp,String] invokes the block with each include to transform
+    #
     # @return [Pattern] a copy of self with transformed includes
     #
     def transform_includes(&block)
-        __deep_clone__.transform_includes!(&block)
+        __deep_clone__.map! do |s|
+            if s.arguments[:includes]
+                if s.arguments[:includes].is_a? Array
+                    s.arguments[:includes].map!(&block)
+                else
+                    s.arguments[:includes] = block.call s.arguments[:includes]
+                end
+            end
+        end
     end
 
     #
     # Uses block to recursively transform tag_as
     #
-    # @yield [block] Invokes the block to with each tag_as to transform
+    # @yield [String] Invokes the block to with each tag_as to transform
     #
-    # @return [self]
-    #
-    def transform_tag_as!(&block)
-        @arguments[:tag_as] = block.call @arguments[:tag_as] if @arguments[:tag_as]
-
-        @match.transform_tag_as!(&block) if @match.is_a? Pattern
-        @next_pattern.transform_tag_as!(&block) if @next_pattern.is_a? Pattern
-
-        self
-    end
-
-    #
-    # (see transform_tag_as!)
     # @return [Pattern] a copy of self with transformed tag_as
     #
     def transform_tag_as(&block)
-        __deep_clone__.transform_tag_as!(&block)
+        __deep_clone__.map! do |s|
+            s.arguments[:tag_as] = block.call(s.arguments[:tag_as]) if s.arguments[:tag_as]
+        end
     end
 
     #
@@ -542,26 +536,6 @@ class Pattern
     end
 
     #
-    # Resolves any placeholder patterns
-    #
-    # @param [Hash] repository the repository to resolve patterns with
-    #
-    # @return [self]
-    #
-    def resolve!(repository)
-        # default implementation does nothing to self
-        @match.resolve!(repository) if @match.is_a? Pattern
-        @next_pattern.resolve!(repository) if @next_pattern.is_a? Pattern
-        self
-    end
-
-    # (see #resolve!)
-    # @return [Pattern] a copy of self with patterns resolved
-    def resolve(repository)
-        __deep_clone__.resolve!(repository)
-    end
-
-    #
     # Runs the unit tests, recursively
     #
     # @return [Boolean] If all test passed return true, otherwise false
@@ -616,7 +590,7 @@ class Pattern
     end
 
     #
-    # To aid in Linters all Patterns suport start_pattern which return the pattern
+    # To aid in Linters all Patterns support start_pattern which return the pattern
     # for initial match, for a single match pattern that is itself
     #
     # @return [self] This pattern
@@ -628,7 +602,7 @@ class Pattern
     #
     # Gets the patterns Hashcode
     #
-    # @return [Integer] the Hashcodex
+    # @return [Integer] the Hashcode
     #
     def hash
         # TODO: find a better hash code
@@ -639,11 +613,11 @@ class Pattern
 
     #
     # Checks for equality
-    # A pattern is considered equal to another pattern if the result of tag_as is equivlent
+    # A pattern is considered equal to another pattern if the result of tag_as is equivalent
     #
     # @param [Pattern] other the pattern to compare
     #
-    # @return [Boolean] true if other is a Pattern and to_tag is equivlent, false otherwise
+    # @return [Boolean] true if other is a Pattern and to_tag is equivalent, false otherwise
     #
     def eql?(other)
         return false unless other.is_a? Pattern
@@ -767,44 +741,34 @@ class Pattern
     #
     # Retags all tags_as
     #
-    # @param [Hash] arguments retag options
+    # @param [Hash] args retag options
     # @option [Boolean] :all (true) should all tags be kept
     # @option [Boolean] :keep (true) should all tags be kept
     # @option [String] :append a string to append to all tags (implies :keep)
     # @option [String] tag_as maps from an old tag_as to a new tag_as
     # @option [String] reference maps from reference to a new tag_as
     #
-    # @return [self]
-    #
-    def reTag!(arguments)
-        # tags are keep unless `all: false` or `keep: false`, and append is not a string
-        discard_tag = (arguments[:all] == false || arguments[:keep] == false)
-        discard_tag = false if arguments[:append].is_a? String
-
-        arguments.each do |key, tag|
-            if [@arguments[:tag_as], @arguments[:reference]].include? key
-                @arguments[:tag_as] = tag
-                discard_tag = false
-            end
-        end
-
-        if arguments[:append].is_a?(String) && arguments[:tag_as]
-            arguments[:tag_as] = arguments[:tag_as] + "." + arguments[:append]
-        end
-
-        @arguments.delete(:tag_as) if discard_tag
-
-        @next_pattern&.reTag!(arguments)
-        self
-    end
-
-    #
-    # (see retag!)
-    #
     # @return [Pattern] a copy of self retagged
     #
-    def reTag(arguments)
-        __deep_clone__.reTag!(arguments)
+    def reTag(args)
+        __deep_clone__.map! do |s|
+            # tags are keep unless `all: false` or `keep: false`, and append is not a string
+            discard_tag = (args[:all] == false || args[:keep] == false)
+            discard_tag = false if args[:append].is_a? String
+
+            args.each do |key, tag|
+                if [s.arguments[:tag_as], s.arguments[:reference]].include? key
+                    s.arguments[:tag_as] = tag
+                    discard_tag = false
+                end
+            end
+
+            if args[:append].is_a?(String) && s.arguments[:tag_as]
+                s.arguments[:tag_as] = s.arguments[:tag_as] + "." + args[:append]
+            end
+
+            s.arguments.delete(:tag_as) if discard_tag
+        end
     end
 
     #
