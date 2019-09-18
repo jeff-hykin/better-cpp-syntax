@@ -794,14 +794,11 @@ class Pattern
     #
     # @param [Integer] next_group the next group number to use
     #
-    # @return [Hash] group attributes
+    # @return [Array<Hash>] group attributes
     #
     def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
-        groups = []
-        if needs_to_capture?
-            groups << {group: next_group}.merge(@arguments)
-            next_group += 1
-        end
+        groups = do_collect_self_groups(next_group)
+        next_group += groups.length
         if @match.is_a? Pattern
             new_groups = @match.collect_group_attributes(next_group)
             groups.concat(new_groups)
@@ -812,6 +809,23 @@ class Pattern
             groups.concat(new_groups)
         end
         groups
+    end
+
+    #
+    # Collect group information about self
+    #
+    # @param [Integer] next_group The next group number to use
+    #
+    # @return [Array<Hash>] group attributes
+    #
+    def do_collect_self_groups(next_group)
+        groups = []
+        groups << {group: next_group}.merge(@arguments) if needs_to_capture?
+        groups
+    end
+
+    def inspect
+        super.split(" ")[0] + " match:" + @match.inspect
     end
 
     #

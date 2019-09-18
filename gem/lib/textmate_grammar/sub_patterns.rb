@@ -233,6 +233,17 @@ class OneOfPattern < Pattern
         "(?:#{patterns_strings.join '|'})"
     end
 
+    # (see Pattern#do_collect_self_groups)
+    def do_collect_self_groups(next_group)
+        groups = []
+        @arguments[:patterns].each do |pattern|
+            pat_groups = pattern.collect_group_attributes(next_group)
+            groups.concat(pat_groups)
+            next_group += pat_groups.length
+        end
+        groups
+    end
+
     # (see Pattern#single_entity?)
     # @return [true]
     def single_entity?

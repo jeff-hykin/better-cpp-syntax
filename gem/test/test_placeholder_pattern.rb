@@ -1,12 +1,11 @@
 require 'minitest/autorun'
 require 'textmate_grammar'
 
+require_relative 'util'
+
 class PlaceholderPatternTest < MiniTest::Test
     def test_placeholder
-        g = Grammar.new(
-            name: "test",
-            scope_name: "source.test"
-        )
+        g = test_grammar
 
         g[:abc] = oneOrMoreOf(g[:def])
         g[:def] = oneOrMoreOf(g[:ghi])
