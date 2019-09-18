@@ -1,0 +1,45 @@
+{
+  "name": "C++",
+  "scopeName": "source.cpp",
+  "repository": {
+    "std_space": {
+      "match": "(?:(?:(?:(?>\\s+)|(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/)))+)|\\b|(?=\\W)|(?=\\W)|\\A|\\Z)",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        }
+      }
+    },
+    "inline_comment": {
+      "match": "(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/))",
+      "captures": {
+        "1": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "2": {
+          "name": "comment.block.cpp"
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block punctuation.definition.comment.end"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "patterns": [
+
+  ],
+  "version": "6dbf26b2eae4a1574234a30d593793a5a258c037"
+}

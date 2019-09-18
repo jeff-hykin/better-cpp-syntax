@@ -122,7 +122,7 @@ class Grammar
     #
     # @return [Array<GrammarPlugin>] A list of all plugins
     #
-    def plugins
+    def self.plugins
         @@linters + @@transforms
     end
 end

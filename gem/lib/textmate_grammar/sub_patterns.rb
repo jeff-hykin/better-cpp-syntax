@@ -197,7 +197,11 @@ class OneOfPattern < Pattern
     #
     # @param [Array<Pattern,Regexp,String>] patterns a list of patterns to match
     #
-    def initialize(patterns)
+    def initialize(patterns, deep_clone = nil, original_arguments = nil)
+        if deep_clone == :deep_clone
+            super(patterns, deep_clone, original_arguments)
+            return
+        end
         unless patterns.is_a? Array
             puts <<-HEREDOC.remove_indent
                 oneOf() expects an array of patterns, the provided argument is not an array.
@@ -205,12 +209,14 @@ class OneOfPattern < Pattern
                 #{patterns}
             HEREDOC
         end
-        @match = "one of"
-        @arguments[:patterns] = patterns.map do |pattern|
-            next pattern if pattern.is_a? Pattern
+        super(
+            match: "one of",
+            patterns: patterns.map do |pattern|
+                next pattern if pattern.is_a? Pattern
 
-            Pattern.new(pattern)
-        end
+                Pattern.new(pattern)
+            end
+        )
     end
 
     # (see Pattern#do_evaluate_self)
@@ -231,6 +237,13 @@ class OneOfPattern < Pattern
     # @return [true]
     def single_entity?
         true
+    end
+
+    # (see Pattern#map!)
+    def map!(&block)
+        @arguments[:patterns].map! { |p| p.map!(&block) }
+        @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
+        self
     end
 
     # (see Pattern#to_s)
@@ -558,7 +571,7 @@ class PlaceholderPattern < Pattern
             super(placeholder, deep_clone, original_arguments)
         else
             super(
-                match: Regexp.new("placeholder"),
+                match: "placeholder",
                 placeholder: placeholder
             )
         end
@@ -566,10 +579,18 @@ class PlaceholderPattern < Pattern
 
     # (see Pattern#to_s)
     def to_s(depth = 0, top_level = true)
+        return super unless @match == "placeholder"
         output = top_level ? "placeholder(" : ".placeholder("
         output += ":#{@arguments[:placeholder]})"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         output
+    end
+
+    def to_tag(*args)
+        if @match == "placeholder"
+            raise "Attempting to create a tag from an unresolved placeholder"
+        end
+        super(*args)
     end
 
     #
@@ -580,12 +601,14 @@ class PlaceholderPattern < Pattern
     # @return [self]
     #
     def resolve!(repository)
+        puts "resolve!"
         unless repository[@arguments[:placeholder]].is_a? Pattern
-            raise "#{@arguments[:placeholder]} is not a Pattern and cannot be substituted"
+            raise ":#{@arguments[:placeholder]} is not a Pattern and cannot be substituted"
         end
 
         @match = repository[@arguments[:placeholder]]
         self
+        # repository[@arguments[:placeholder]].resolve(repository)
     end
 end
 

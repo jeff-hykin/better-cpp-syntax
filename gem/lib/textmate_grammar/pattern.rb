@@ -17,6 +17,20 @@ class String
     end
 end
 
+#
+# Provides to_s
+#
+class Enumerator
+    #
+    # Converts Enumerator to a string representing Integer.times
+    #
+    # @return [String] the Enumerator as a string
+    #
+    def to_s
+        size.to_s + ".times"
+    end
+end
+
 # determines if a regex string is a single entity
 #
 # @note single entity means that for the purposes of modification, the expression is
@@ -75,13 +89,13 @@ class Regexp
     # (see #string_single_entity?)
     # @deprecated use string_single_entity
     # @note the param regex_string is ignored and is accepted for compatibility
-    def single_entity?(regex_string = nil)
+    def single_entity?(regex_string = nil) # rubocop:disable Lint/UnusedMethodArgument
         string_single_entity? to_r_s
     end
 
     # (see Pattern#to_r)
     # @deprecated function is useless
-    def to_r(groups = nil)
+    def to_r(groups = nil) # rubocop:disable Lint/UnusedMethodArgument
         self
     end
 
@@ -301,8 +315,8 @@ class Pattern
     #
     def map!(&block)
         yield self
-        @match.map!(&block) if @match.is_a? Pattern
-        @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
+        @match = @match.map!(&block) if @match.is_a? Pattern
+        @next_pattern = @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
         self
     end
 
@@ -387,6 +401,7 @@ class Pattern
             @match = @arguments[:match]
             @arguments.delete(:match)
             @original_arguments = arguments[2]
+            process_quantifiers_from_arguments
             return
         end
 
@@ -403,7 +418,7 @@ class Pattern
         arg1 = {match: arg1} unless arg1.is_a? Hash
         @original_arguments = arg1.clone
         if arg1[:match].is_a? String
-            arg1[:match] = Regexp.escape(arg1[:match])
+            arg1[:match] = Regexp.escape(arg1[:match]).gsub("/", "\\/")
             @match = arg1[:match]
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
@@ -419,6 +434,8 @@ class Pattern
         end
         arg1.delete(:match)
         @arguments = arg1
+
+        process_quantifiers_from_arguments
     end
 
     # attempts to provide a memorable name for a pattern
@@ -498,7 +515,7 @@ class Pattern
         # rubocop:disable Metrics/LineLength
 
         plugins = Grammar.plugins
-        plugins.reject! { |p| (@original_arguments.keys & p).empty? }
+        plugins.reject! { |p| (@original_arguments.keys & p.class.options).empty? }
 
         regex_as_string =
             case @original_arguments[:match]
@@ -513,18 +530,19 @@ class Pattern
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         # unit tests
-        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match] if @arguments[:should_fully_match]
-        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match] if @arguments[:should_not_fully_match]
-        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match] if @arguments[:should_partially_match]
-        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match] if @arguments[:should_not_partially_match]
+        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s  if @arguments[:should_fully_match]
+        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s  if @arguments[:should_not_fully_match]
+        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s  if @arguments[:should_partially_match]
+        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s  if @arguments[:should_not_partially_match]
         # special #then arguments
         if quantifying_allowed?
-            output += ",\n#{indent}  at_least: \"" + @arguments[:at_least] + '"' if @arguments[:at_least]
-            output += ",\n#{indent}  at_most: \"" + @arguments[:at_most] + '"' if @arguments[:at_most]
-            output += ",\n#{indent}  how_many_times: \"" + @arguments[:how_many_times] + '"' if @arguments[:how_many_times]
-            output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of] if @arguments[:word_cannot_be_any_of]
+            output += ",\n#{indent}  at_least: " + @arguments[:at_least].to_s if @arguments[:at_least]
+            output += ",\n#{indent}  at_most: " + @arguments[:at_most].to_s if @arguments[:at_most]
+            output += ",\n#{indent}  how_many_times: " + @arguments[:how_many_times].to_s if @arguments[:how_many_times]
+            output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of].to_s if @arguments[:word_cannot_be_any_of]
         end
-        output += ",\n#{indent}  dont_backtrack?: \"" + @arguments[:dont_backtrack?] + '"' if @arguments[:dont_backtrack?]
+        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s  if @arguments[:dont_backtrack?]
+        output += ",\n#{indent}  includes: " + @arguments[:includes].to_s if @arguments[:includes]
         # add any linter/transform configurations
         plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
         # subclass, ending and recursive
@@ -677,11 +695,9 @@ class Pattern
     #
     # @return [String] the combined regexp
     #
-    def integrate_pattern(previous, groups, single_entity)
+    def integrate_pattern(previous, groups, single_entity) # rubocop:disable Lint/UnusedMethodArgument
         # by default just concat the groups
-        return "#{previous}#{evaluate(groups)}" if single_entity
-
-        "#{previous}(?:#{evaluate(groups)})"
+        "#{previous}#{evaluate(groups)}"
     end
 
     #
@@ -855,7 +871,7 @@ class Pattern
 
         groups.each do |group|
             output = {}
-            output[:name] = group[:tag_as] unless group[:group] == 0
+            output[:name] = group[:tag_as] unless group[:group] == 0 || group[:tag_as].nil?
             if group[:includes].is_a? Array
                 output[:patterns] = convert_includes_to_patterns(group[:includes])
             end
@@ -919,9 +935,10 @@ class Pattern
     #
     # @return [void]
     #
-    def raise_if_regex_has_capture_group(regex)
+    def raise_if_regex_has_capture_group(regex, check = 1)
         # this will throw a RegexpError if there are no capturing groups
-        _ignore = /#{regex}\1/
+        _ignore = /#{regex}#{"\\" + check.to_s}/
+        puts _ignore.inspect
         # at this point @match contains a capture group, complain
         raise <<-HEREDOC.remove_indent
 

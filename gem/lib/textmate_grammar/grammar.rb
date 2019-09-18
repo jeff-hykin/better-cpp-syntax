@@ -74,7 +74,7 @@ class Grammar
     #   the current git commit as the version
     # @option keys [Array] :patterns ([]) ignored, will be replaced with the initial context
     # @option keys [Hash] :repository ({}) ignored, will be replaced by the generated rules
-    # @option keys all remaning options will be copied to the grammar without change
+    # @option keys all remaining options will be copied to the grammar without change
     #
     def initialize(keys)
         required_keys = [:name, :scope_name]
@@ -141,7 +141,7 @@ class Grammar
             raise "See above error"
         end
 
-        # ensure array is flat and only containts patterns
+        # ensure array is flat and only contains patterns
         if value.is_a? Array
             value = value.flatten.map do |item|
                 next item if item.is_a? Symbol
@@ -172,7 +172,16 @@ class Grammar
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
             require path_or_export
-            export = @@export_grammars[path]
+            # this is an awful solution as:
+            # 1. The code must be single threaded
+            # 2. require does not always but the file on the top (if previously required)
+            # solutions:
+            # 1. use $LOAD_PATH to attempt to resolve path_or_export
+            # 2. use some form of external identifier
+            export = @@export_grammars.dig($".last, :grammar)
+            unless export.is_a? ExportableGrammar
+                raise "#{path_or_export} does not create a Exportable Grammar"
+            end
         end
 
         export = export.export
@@ -416,6 +425,8 @@ class ExportableGrammar < Grammar
             name: "export",
             scope_name: "export"
         )
+
+        puts location.path
 
         if @@export_grammars[location.path].is_a? Hash
             return if @@export_grammars[location.path][:line] == location.lineno
