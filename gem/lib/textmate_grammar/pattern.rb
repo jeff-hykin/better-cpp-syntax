@@ -172,7 +172,7 @@ class Pattern
     #
     def insert(pattern)
         new_pattern = __deep_clone__
-        new_pattern.insert!(pattern)
+        new_pattern.insert!(pattern).freeze
     end
 
     #
@@ -336,7 +336,7 @@ class Pattern
                     s.arguments[:includes] = block.call s.arguments[:includes]
                 end
             end
-        end
+        end.freeze
     end
 
     #
@@ -349,13 +349,14 @@ class Pattern
     def transform_tag_as(&block)
         __deep_clone__.map! do |s|
             s.arguments[:tag_as] = block.call(s.arguments[:tag_as]) if s.arguments[:tag_as]
-            if @arguments[:includes].is_a?(Array)
-                @arguments[:includes].map! do |i|
-                    return i unless i.is_a? Pattern
+            if s.arguments[:includes].is_a?(Array)
+                s.arguments[:includes].map! do |i|
+                    next i unless i.is_a? Pattern
+
                     i.transform_tag_as(&block)
                 end
             end
-        end
+        end.freeze
     end
 
     #
@@ -745,21 +746,14 @@ class Pattern
         collect_group_attributes == []
     end
 
-    # remove capturing groups from this pattern
-    def groupless!
-        @arguments.delete(:tag_as)
-        @arguments.delete(:reference)
-        @arguments.delete(:includes)
-        raise "unable to remove capture" if needs_to_capture?
-
-        @match.groupless! if @match.is_a? Pattern
-        @next_pattern.groupless! if @match.is_a? Pattern
-        self
-    end
-
     # create a copy of this pattern that contains no groups
     def groupless
-        __deep_clone__.groupless!
+        __deep_clone__.map! do |s|
+            s.arguments.delete(:tag_as)
+            s.arguments.delete(:reference)
+            s.arguments.delete(:includes)
+            raise "unable to remove capture" if s.needs_to_capture?
+        end.freeze
     end
 
     #
@@ -792,7 +786,7 @@ class Pattern
             end
 
             s.arguments.delete(:tag_as) if discard_tag
-        end
+        end.freeze
     end
 
     #

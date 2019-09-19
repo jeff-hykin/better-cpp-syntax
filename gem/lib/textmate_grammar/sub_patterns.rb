@@ -612,12 +612,11 @@ class PlaceholderPattern < Pattern
     # @return [self]
     #
     def resolve!(repository)
-        puts "resolve!"
         unless repository[@arguments[:placeholder]].is_a? Pattern
             raise ":#{@arguments[:placeholder]} is not a Pattern and cannot be substituted"
         end
 
-        @match = repository[@arguments[:placeholder]]
+        @match = repository[@arguments[:placeholder]].__deep_clone__
         self
         # repository[@arguments[:placeholder]].resolve(repository)
     end
@@ -643,7 +642,7 @@ class Pattern
     # @return [Pattern] a copy of self with placeholders resolved
     #
     def resolve(repository)
-        __deep_clone__.map! { |s| s.resolve!(repository) if s.respond_to? :resolve! }
+        __deep_clone__.map! { |s| s.resolve!(repository) if s.respond_to? :resolve! }.freeze
     end
 end
 

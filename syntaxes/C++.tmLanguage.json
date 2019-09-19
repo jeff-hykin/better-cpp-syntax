@@ -3,7 +3,34 @@
   "scopeName": "source.cpp",
   "repository": {
     "std_space": {
-      "include": "#inline_comment"
+      "match": "(?:(?:(?:(?>\\s+)|(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/)))+)|\\b|(?=\\W)|(?=\\W)|\\A|\\Z)",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "include": "#inline_comment"
+            }
+          ]
+        },
+        "1": {
+          "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+        },
+        "2": {
+          "name": "comment.block.cpp"
+        },
+        "3": {
+          "patterns": [
+            {
+              "match": "\\*\\/",
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+            },
+            {
+              "match": "\\*",
+              "name": "comment.block.cpp"
+            }
+          ]
+        }
+      }
     },
     "inline_comment": {
       "match": "(\\/\\*)((?:[^\\*]|\\*++[^\\/])*+(\\*++\\/))",
@@ -18,11 +45,11 @@
           "patterns": [
             {
               "match": "\\*\\/",
-              "name": "comment.block punctuation.definition.comment.end"
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
             },
             {
               "match": "\\*",
-              "name": "comment.block"
+              "name": "comment.block.cpp"
             }
           ]
         }
@@ -48,11 +75,11 @@
           "patterns": [
             {
               "match": "\\*\\/",
-              "name": "comment.block punctuation.definition.comment.end"
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
             },
             {
               "match": "\\*",
-              "name": "comment.block"
+              "name": "comment.block.cpp"
             }
           ]
         },
@@ -76,11 +103,11 @@
           "patterns": [
             {
               "match": "\\*\\/",
-              "name": "comment.block punctuation.definition.comment.end"
+              "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
             },
             {
               "match": "\\*",
-              "name": "comment.block"
+              "name": "comment.block.cpp"
             }
           ]
         },
@@ -100,5 +127,5 @@
   "patterns": [
 
   ],
-  "version": "3e224530cd5403d4c8a998b08f1c06b6aad4541d"
+  "version": "7483fbe65a469a4a2e9f53aa55ce2ba548c99d4c"
 }
