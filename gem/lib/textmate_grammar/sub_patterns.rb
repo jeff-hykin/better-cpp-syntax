@@ -591,6 +591,7 @@ class PlaceholderPattern < Pattern
     # (see Pattern#to_s)
     def to_s(depth = 0, top_level = true)
         return super unless @match == "placeholder"
+
         output = top_level ? "placeholder(" : ".placeholder("
         output += ":#{@arguments[:placeholder]})"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
@@ -598,9 +599,8 @@ class PlaceholderPattern < Pattern
     end
 
     def to_tag(*args)
-        if @match == "placeholder"
-            raise "Attempting to create a tag from an unresolved placeholder"
-        end
+        raise "Attempting to create a tag from an unresolved placeholder" if @match == "placeholder"
+
         super(*args)
     end
 

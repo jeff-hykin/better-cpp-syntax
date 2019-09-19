@@ -178,7 +178,7 @@ class Grammar
             # solutions:
             # 1. use $LOAD_PATH to attempt to resolve path_or_export
             # 2. use some form of external identifier
-            export = @@export_grammars.dig($".last, :grammar)
+            export = @@export_grammars.dig($LOADED_FEATURES.last, :grammar)
             unless export.is_a? ExportableGrammar
                 raise "#{path_or_export} does not create a Exportable Grammar"
             end
@@ -214,52 +214,35 @@ class Grammar
         # run post transformations ✓
         # run post linters ✓
 
+        repo = @repository.__deep_clone__
         @@linters.each do |linter|
             msg = "linting failed, see above error"
             @repository.each do |_, value|
                 if value.is_a? Array
                     value.each do |v|
                         raise msg unless linter.pre_lint(
-                            v, filter_options(
-                                linter,
-                                v,
-                                {grammar: self, repository: @repository},
-                            ),
+                            v, filter_options(linter, v, grammar: self, repository: repo),
                         )
                     end
                     next
                 end
                 raise msg unless linter.pre_lint(
-                    value, filter_options(
-                        linter,
-                        value,
-                        {grammar: self, repository: @repository}
-                    ),
+                    value, filter_options(linter, value, grammar: self, repository: repo),
                 )
             end
         end
 
-        repository_copy = @repository.__deep_clone__
-
         @@transforms.each do |transform|
-            repository_copy = repository_copy.transform_values do |value|
+            repo = repo.transform_values do |value|
                 if value.is_a? Array
                     value.map do |v|
                         transform.pre_transform(
-                            v, filter_options(
-                                transform,
-                                v,
-                                {grammar: self, repository: repository_copy},
-                            ),
+                            v, filter_options(transform, v, grammar: self, repository: repo),
                         )
                     end
                 else
                     transform.pre_transform(
-                        value, filter_options(
-                            transform,
-                            value,
-                            {grammar: self, repository: repository_copy},
-                        ),
+                        value, filter_options(transform, value, grammar: self, repository: repo),
                     )
                 end
             end
@@ -278,7 +261,7 @@ class Grammar
 
             return value
         end
-        repository_copy.transform_values! { |v| convert_initial_context.call(v) }
+        repo.transform_values! { |v| convert_initial_context.call(v) }
 
         output = {
             name: @name,
@@ -296,7 +279,7 @@ class Grammar
             end
         end
 
-        output[:repository] = repository_copy.transform_values { |value| to_tag.call(value) }
+        output[:repository] = repo.transform_values { |value| to_tag.call(value) }
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []

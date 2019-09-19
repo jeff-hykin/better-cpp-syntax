@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'minitest/autorun'
 require 'textmate_grammar'
 
@@ -14,7 +16,7 @@ class PlaceholderPatternTest < MiniTest::Test
         expected = {
             :abc => { :match => "(?:(?:ghi)+)+" },
             :def => { :match => "(?:ghi)+" },
-            :ghi => { :match => "ghi" }
+            :ghi => { :match => "ghi" },
         }
         assert_equal expected, g.generate[:repository]
     end

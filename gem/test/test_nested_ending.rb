@@ -5,7 +5,6 @@ require 'textmate_grammar'
 
 require_relative 'util'
 
-
 class NestedEndingTest < MiniTest::Test
     def test_nested_ending
         g = test_grammar
@@ -18,6 +17,7 @@ class NestedEndingTest < MiniTest::Test
                 Pattern.new(match: "def", tag_as: "g h i"),
             ],
         )
+
         expected = {
             :abc => {
                 :match => "abc",
@@ -26,17 +26,17 @@ class NestedEndingTest < MiniTest::Test
                         :patterns => [
                             {
                                 :match => "def",
-                                :name => "d.test e.test f.test"
+                                :name => "d.test e.test f.test",
                             },
                             {
                                 :match => "def",
-                                :name => "g.test h.test i.test"
-                            }
-                        ]
-                    }
+                                :name => "g.test h.test i.test",
+                            },
+                        ],
+                    },
                 },
-                :name=>"abc.test"
-            }
+                :name => "abc.test",
+            },
         }
         assert_equal expected, g.generate[:repository]
     end

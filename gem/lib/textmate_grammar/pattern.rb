@@ -349,12 +349,12 @@ class Pattern
     def transform_tag_as(&block)
         __deep_clone__.map! do |s|
             s.arguments[:tag_as] = block.call(s.arguments[:tag_as]) if s.arguments[:tag_as]
-            if s.arguments[:includes].is_a?(Array)
-                s.arguments[:includes].map! do |i|
-                    next i unless i.is_a? Pattern
+            next unless s.arguments[:includes].is_a?(Array)
 
-                    i.transform_tag_as(&block)
-                end
+            s.arguments[:includes].map! do |i|
+                next i unless i.is_a? Pattern
+
+                i.transform_tag_as(&block)
             end
         end.freeze
     end
@@ -466,7 +466,7 @@ class Pattern
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
         if optimize_outer_group?
-             # optimize captures by removing outermost
+            # optimize captures by removing outermost
             output[:match] = output[:match][1..-2]
             output[:name] = output[:captures]["0"][:name]
             output[:captures]["0"].delete(:name)
@@ -521,6 +521,7 @@ class Pattern
     #
     def to_s(depth = 0, top_level = true)
         # TODO: make this method easier to understand
+
         # rubocop:disable Metrics/LineLength
 
         plugins = Grammar.plugins
@@ -539,10 +540,10 @@ class Pattern
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         # unit tests
-        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s  if @arguments[:should_fully_match]
-        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s  if @arguments[:should_not_fully_match]
-        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s  if @arguments[:should_partially_match]
-        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s  if @arguments[:should_not_partially_match]
+        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s if @arguments[:should_fully_match]
+        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
+        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s if @arguments[:should_partially_match]
+        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s if @arguments[:should_not_partially_match]
         # special #then arguments
         if quantifying_allowed?
             output += ",\n#{indent}  at_least: " + @arguments[:at_least].to_s if @arguments[:at_least]
@@ -704,7 +705,7 @@ class Pattern
     #
     # @return [String] the combined regexp
     #
-    def integrate_pattern(previous, groups, single_entity) # rubocop:disable Lint/UnusedMethodArgument
+    def integrate_pattern(previous, groups, single_entity) # rubocop:disable UnusedMethodArgument
         # by default just concat the groups
         "#{previous}#{evaluate(groups)}"
     end
@@ -953,7 +954,6 @@ class Pattern
     def raise_if_regex_has_capture_group(regex, check = 1)
         # this will throw a RegexpError if there are no capturing groups
         _ignore = /#{regex}#{"\\" + check.to_s}/
-        puts _ignore.inspect
         # at this point @match contains a capture group, complain
         raise <<-HEREDOC.remove_indent
 

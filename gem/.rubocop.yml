@@ -1,3 +1,5 @@
+require:
+    - ./rubocop/avoid_return_from_block.rb
 AllCops:
     TargetRubyVersion: 2.4
 Layout/IndentationWidth:
