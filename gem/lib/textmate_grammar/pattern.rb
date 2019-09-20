@@ -422,7 +422,7 @@ class PatternBase
         warn = lambda do |symbol|
             puts <<-HEREDOC.remove_indent
 
-                When testing the pattern #{self_regex.evaluate}. The unit test for #{symbol} failed.
+                When testing the pattern #{self_regex.inspect}. The unit test for #{symbol} failed.
                 The unit test has the following patterns:
                 #{@arguments[symbol].to_yaml}
                 The Failing pattern is below:

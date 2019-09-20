@@ -267,7 +267,7 @@ class Grammar
 
         to_tag = lambda do |value|
             case value
-            when Array then return value.map { |v| to_tag.call(v) }
+            when Array then return {"patterns" => value.map { |v| to_tag.call(v) }}
             when Symbol then return {"include" => "#" + value.to_s}
             when Hash then return value
             when String then return value
@@ -488,7 +488,7 @@ class ExportableGrammar < Grammar
 
             (@seed + "_" + value.to_s).to_sym
         elsif value.is_a? Array
-            value.map fixupValue
+            value.map { |v| fixupValue(v) }
         elsif value.is_a? PatternBase
             value.transform_includes { |v| fixupValue(v) }
         else

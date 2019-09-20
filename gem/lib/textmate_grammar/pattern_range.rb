@@ -25,6 +25,8 @@ class PatternRange < PatternBase
     # @note exactly one of :end_pattern or :while_pattern is required
     #
     def initialize(arguments)
+        @original_arguments = arguments
+
         raise "PatternRange.new() expects a hash" unless arguments.is_a? Hash
 
         # ensure end_pattern: XOR while_pattern: is provided
@@ -72,6 +74,17 @@ class PatternRange < PatternBase
         arguments.delete(:while_pattern)
 
         @arguments = arguments
+    end
+
+    def __deep_clone__
+        options = @arguments.__deep_clone__
+        options[:start_pattern] = @original_start_pattern.__deep_clone__
+        if @stop_type == :end_pattern
+            options[:end_pattern] = @original_stop_pattern.__deep_clone__
+        else
+            options[:while_pattern] = @original_stop_pattern.__deep_clone__
+        end
+        self.class.new(options)
     end
 
     #

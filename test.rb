@@ -7,8 +7,11 @@ cpp_grammar = Grammar.new(
 
 cpp_grammar.import(File.join(__dir__, "source", "languages", "cpp", "lib", "std_space"))
 cpp_grammar.import(File.join(__dir__, "source", "languages", "cpp", "lib", "inline_comment"))
+cpp_grammar.import(File.join(__dir__, "source", "languages", "cpp", "lib", "preprocessor"))
 
 std_space = cpp_grammar[:std_space]
+
+cpp_grammar[:identifier] = /\w+/
 
 cpp_grammar[:extern_linkage_specifier] = Pattern.new(
     match: std_space.then(

@@ -10,7 +10,7 @@ class StartMatchEmpty < GrammarLinter
     def pre_lint(pattern, options)
         return true unless pattern.is_a? PatternRange
 
-        regexp = Regexp.new(pattern.start_pattern.evaluate.replace("\\G", '\uFFFF'))
+        regexp = Regexp.new(pattern.start_pattern.evaluate.gsub("\\G", '\uFFFF'))
         if "" =~ regexp and !options[:zeroLengthStart?]
             puts "Warning: #{pattern.start_pattern.evaluate}"
             puts "matches the zero length string (\"\").\n\n"
