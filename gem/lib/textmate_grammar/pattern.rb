@@ -398,14 +398,7 @@ class PatternBase
         output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
         output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s if @arguments[:should_partially_match]
         output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s if @arguments[:should_not_partially_match]
-        # special #then arguments
-        if quantifying_allowed?
-            output += ",\n#{indent}  at_least: " + @arguments[:at_least].to_s if @arguments[:at_least]
-            output += ",\n#{indent}  at_most: " + @arguments[:at_most].to_s if @arguments[:at_most]
-            output += ",\n#{indent}  how_many_times: " + @arguments[:how_many_times].to_s if @arguments[:how_many_times]
-            output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of].to_s if @arguments[:word_cannot_be_any_of]
-        end
-        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s  if @arguments[:dont_backtrack?]
+
         output += ",\n#{indent}  includes: " + @arguments[:includes].to_s if @arguments[:includes]
         # add any linter/transform configurations
         plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
@@ -816,7 +809,6 @@ class PatternBase
 end
 
 class Pattern < PatternBase
-
     # (see PatternBase#initialize)
     def initialize(*arguments)
         super(*arguments)
@@ -825,6 +817,7 @@ class Pattern < PatternBase
         @at_most = nil
         process_quantifiers_from_arguments
     end
+
     #
     # sets @at_least and @at_most based on arguments
     #
@@ -955,5 +948,23 @@ class Pattern < PatternBase
     # @note the default implementation returns True
     def quantifying_allowed?
         true
+    end
+
+    #
+    # (see #PatternBase#do_add_attributes)
+    #
+    def do_add_attributes(indent)
+        # rubocop:disable Metrics/LineLength
+        output = ""
+        # special #then arguments
+        if quantifying_allowed?
+            output += ",\n#{indent}  at_least: " + @arguments[:at_least].to_s if @arguments[:at_least]
+            output += ",\n#{indent}  at_most: " + @arguments[:at_most].to_s if @arguments[:at_most]
+            output += ",\n#{indent}  how_many_times: " + @arguments[:how_many_times].to_s if @arguments[:how_many_times]
+            output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of].to_s if @arguments[:word_cannot_be_any_of]
+        end
+        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s  if @arguments[:dont_backtrack?]
+        output
+        # rubocop:enable Metrics/LineLength
     end
 end

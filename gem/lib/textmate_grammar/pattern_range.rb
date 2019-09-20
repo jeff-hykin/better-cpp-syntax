@@ -138,7 +138,7 @@ class PatternRange < PatternBase
     end
 
     #
-    # (see Pattern#map!)
+    # (see PatternBase#map!)
     #
     def map!(&block)
         @start_pattern.map!(&block)

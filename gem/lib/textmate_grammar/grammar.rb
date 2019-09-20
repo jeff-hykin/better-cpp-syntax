@@ -3,6 +3,7 @@
 require 'digest/sha1'
 require 'json'
 require 'pp'
+require 'pathname'
 
 require_relative 'pattern'
 require_relative 'pattern_range'
@@ -110,7 +111,7 @@ class Grammar
     # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] The stored pattern
     #
     def [](key)
-        @repository[key] || PlaceholderPattern.new(key)
+        @repository.fetch(key, PlaceholderPattern.new(key))
     end
 
     #
@@ -149,7 +150,7 @@ class Grammar
                 item = PatternBase.new(item) unless item.is_a? PatternBase
                 item
             end
-        elsif !value.is_a?(Pattern)
+        elsif !value.is_a?(PatternBase)
             value = PatternBase.new(value)
         end
         # add it to the repository
@@ -172,13 +173,9 @@ class Grammar
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
             require path_or_export
-            # this is an awful solution as:
-            # 1. The code must be single threaded
-            # 2. require does not always but the file on the top (if previously required)
-            # solutions:
-            # 1. use $LOAD_PATH to attempt to resolve path_or_export
-            # 2. use some form of external identifier
-            export = @@export_grammars.dig($LOADED_FEATURES.last, :grammar)
+            resolved = resolve_require(path_or_export)
+
+            export = @@export_grammars.dig(resolved, :grammar)
             unless export.is_a? ExportableGrammar
                 raise "#{path_or_export} does not create a Exportable Grammar"
             end
@@ -409,8 +406,6 @@ class ExportableGrammar < Grammar
             scope_name: "export"
         )
 
-        puts location.path
-
         if @@export_grammars[location.path].is_a? Hash
             return if @@export_grammars[location.path][:line] == location.lineno
 
@@ -522,6 +517,32 @@ class ImportGrammar < Grammar
 
         @repository[key]
     end
+end
+
+#
+# Determine the absolute path that a require statement resolves to
+#
+# @note this assumes path was successfully required previously
+#
+# @param [String] path the path to resolve
+#
+# @return [String] the resolved path
+#
+def resolve_require(path)
+    path = Pathname.new path
+    return path.to_s if path.absolute? && path.extname != ""
+
+    return path.dirname.glob("#{path.basename}.{rb,so,dll}")[0].to_s if path.absolute?
+
+    $LOAD_PATH.each do |p|
+        test_path = Pathname.new(p).join(path)
+        return test_path.to_s if path.extname != "" && test_path.exist?
+
+        test_paths = test_path.dirname.glob("#{test_path.basename}.{rb,so,dll}")
+        return test_paths[0].to_s unless test_paths.empty?
+    end
+
+    ""
 end
 
 require_relative 'grammar_plugin'

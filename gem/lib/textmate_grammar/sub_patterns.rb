@@ -8,11 +8,11 @@ class MaybePattern < Pattern
     #
     # Construct a new MaybePattern
     #
-    # @param [any] args arguments to pass to {Pattern#initialize}
+    # @param [any] args arguments to pass to {PatternBase#initialize}
     # @api private
     #
     # @see maybe
-    # @see Pattern#maybe
+    # @see PatternBase#maybe
     def initialize(*args)
         # run the normal pattern
         super(*args)
@@ -27,7 +27,7 @@ class MaybePattern < Pattern
         false
     end
 
-    # (see Pattern#do_get_to_s_name)
+    # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "maybe(" : ".maybe("
     end
@@ -46,7 +46,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#maybe)
+# (see PatternBase#maybe)
 def maybe(pattern)
     MaybePattern.new(pattern)
 end
@@ -57,11 +57,11 @@ class ZeroOrMoreOfPattern < Pattern
     #
     # Construct a new ZeroOrMoreOfPattern
     #
-    # @param [any] args arguments to pass to {Pattern#initialize}
+    # @param [any] args arguments to pass to {PatternBase#initialize}
     # @api private
     #
     # @see zeroOrMoreOf
-    # @see Pattern#zeroOrMoreOf
+    # @see PatternBase#zeroOrMoreOf
     def initialize(*args)
         # run the normal pattern
         super(*args)
@@ -76,7 +76,7 @@ class ZeroOrMoreOfPattern < Pattern
         false
     end
 
-    # (see Pattern#do_get_to_s_name)
+    # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "zeroOrMoreOf(" : ".zeroOrMoreOf("
     end
@@ -95,7 +95,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#zeroOrMoreOf)
+# (see PatternBase#zeroOrMoreOf)
 def zeroOrMoreOf(pattern)
     ZeroOrMoreOfPattern.new(pattern)
 end
@@ -117,7 +117,7 @@ class OneOrMoreOfPattern < Pattern
         false
     end
 
-    # (see Pattern#do_get_to_s_name)
+    # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "oneOrMoreOf(" : ".oneOrMoreOf("
     end
@@ -136,7 +136,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#oneOrMoreOf)
+# (see PatternBase#oneOrMoreOf)
 def oneOrMoreOf(pattern)
     OneOrMoreOfPattern.new(pattern)
 end
@@ -145,17 +145,17 @@ end
 # Either the previous pattern or provided pattern is accepted
 # @note OneOfPattern is likely just as powerful and less confusing
 class OrPattern < PatternBase
-    # (see Pattern#do_evaluate_self)
+    # (see PatternBase#do_evaluate_self)
     def do_evaluate_self(groups)
         # don't add the capture groups because they will be added by integrate_pattern
         add_quantifier_options_to(@match, groups)
     end
 
-    # (see Pattern#integrate_pattern)
+    # (see PatternBase#integrate_pattern)
     # @note this is overloaded to provide the alternation
     def integrate_pattern(previous_evaluate, groups, is_single_entity)
         previous_evaluate = "(?:#{previous_evaluate})" unless is_single_entity
-        match = @match.is_a?(Pattern) ? @match.evaluate(groups) : @match
+        match = @match.is_a?(PatternBase) ? @match.evaluate(groups) : @match
         self_pattern = "(?:#{previous_evaluate}|#{match})"
         if @next_pattern.respond_to? :integrate_pattern
             single_entity = string_single_entity? self_pattern
@@ -165,12 +165,12 @@ class OrPattern < PatternBase
         self_pattern
     end
 
-    # (see Pattern#do_get_to_s_name)
+    # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
     end
 
-    # (see Pattern#single_entity?)
+    # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
         true
@@ -225,7 +225,7 @@ class OneOfPattern < PatternBase
         )
     end
 
-    # (see Pattern#do_evaluate_self)
+    # (see PatternBase#do_evaluate_self)
     def do_evaluate_self(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.evaluate(groups)
@@ -239,7 +239,7 @@ class OneOfPattern < PatternBase
         "(?:#{patterns_strings.join '|'})"
     end
 
-    # (see Pattern#do_collect_self_groups)
+    # (see PatternBase#do_collect_self_groups)
     def do_collect_self_groups(next_group)
         groups = []
         @arguments[:patterns].each do |pattern|
@@ -250,20 +250,20 @@ class OneOfPattern < PatternBase
         groups
     end
 
-    # (see Pattern#single_entity?)
+    # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
         true
     end
 
-    # (see Pattern#map!)
+    # (see PatternBase#map!)
     def map!(&block)
         @arguments[:patterns].map! { |p| p.map!(&block) }
         @next_pattern.map!(&block) if @next_pattern.is_a? PatternBase
         self
     end
 
-    # (see Pattern#to_s)
+    # (see PatternBase#to_s)
     def to_s(depth = 0, top_level = true)
         indent = "  " * depth
         output = top_level ? "oneOf([" : ".oneOf(["
@@ -291,7 +291,7 @@ class PatternBase
 end
 
 #
-# (see Pattern#oneOf)
+# (see PatternBase#oneOf)
 #
 def oneOf(patterns)
     OneOfPattern.new(patterns)
@@ -303,7 +303,7 @@ end
 # depending on the type
 #
 class LookAroundPattern < PatternBase
-    # (see Pattern#do_evaluate_self)
+    # (see PatternBase#do_evaluate_self)
     def do_evaluate_self(groups)
         self_regex = @match
         self_regex = @match.evaluate(groups) if @match.is_a? PatternBase
@@ -326,17 +326,17 @@ class LookAroundPattern < PatternBase
         self_regex
     end
 
-    # (see Pattern#do_get_to_s_name)
+    # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "lookAround(" : ".lookAround("
     end
 
-    # (see Pattern#do_add_attributes)
+    # (see PatternBase#do_add_attributes)
     def do_add_attributes(indent)
         ",\n#{indent}  type: :#{@arguments[:type]}"
     end
 
-    # (see Pattern#single_entity?)
+    # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
         true
@@ -422,14 +422,14 @@ class PatternBase
     end
 end
 
-# (see Pattern#lookAround)
+# (see PatternBase#lookAround)
 def lookAround(pattern)
     LookAroundPattern.new(pattern)
 end
 
 # TODO: eliminate this code duplication
 
-# (see Pattern#lookBehindToAvoid)
+# (see PatternBase#lookBehindToAvoid)
 def lookBehindToAvoid(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookBehindToAvoid
@@ -439,7 +439,7 @@ def lookBehindToAvoid(pattern)
     lookAround(pattern)
 end
 
-# (see Pattern#lookBehindFor)
+# (see PatternBase#lookBehindFor)
 def lookBehindFor(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookBehindFor
@@ -449,7 +449,7 @@ def lookBehindFor(pattern)
     lookAround(pattern)
 end
 
-# (see Pattern#lookAheadToAvoid)
+# (see PatternBase#lookAheadToAvoid)
 def lookAheadToAvoid(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookAheadToAvoid
@@ -459,7 +459,7 @@ def lookAheadToAvoid(pattern)
     lookAround(pattern)
 end
 
-# (see Pattern#lookAheadFor)
+# (see PatternBase#lookAheadFor)
 def lookAheadFor(pattern)
     if pattern.is_a? Hash
         pattern[:type] = :lookAheadFor
@@ -487,7 +487,7 @@ class BackReferencePattern < PatternBase
         end
     end
 
-    # (see Pattern#to_s)
+    # (see PatternBase#to_s)
     def to_s(depth = 0, top_level = true)
         output = top_level ? "matchResultOf(" : ".matchResultOf("
         output += "\"#{@arguments[:backreference_key]}\")"
@@ -495,7 +495,7 @@ class BackReferencePattern < PatternBase
         output
     end
 
-    # (see Pattern#single_entity?)
+    # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
         true
@@ -515,7 +515,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#matchResultOf)
+# (see PatternBase#matchResultOf)
 def matchResultOf(reference)
     BackReferencePattern.new(reference)
 end
@@ -538,7 +538,7 @@ class SubroutinePattern < PatternBase
         end
     end
 
-    # (see Pattern#to_s)
+    # (see PatternBase#to_s)
     def to_s(depth = 0, top_level = true)
         output = top_level ? "recursivelyMatch(" : ".recursivelyMatch("
         output += "\"#{@arguments[:subroutine_key]}\")"
@@ -546,7 +546,7 @@ class SubroutinePattern < PatternBase
         output
     end
 
-    # (see Pattern#single_entity?)
+    # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
         true
@@ -566,7 +566,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#recursivelyMatch)
+# (see PatternBase#recursivelyMatch)
 def recursivelyMatch(reference)
     SubroutinePattern.new(reference)
 end
@@ -581,7 +581,7 @@ class PlaceholderPattern < PatternBase
     #   @param [Symbol] placeholder the name to replace with
     #
     # @overload initialize(opts, deep_clone, original)
-    #   @param (see Pattern#initialize)
+    #   @param (see PatternBase#initialize)
     #
     def initialize(placeholder, deep_clone = nil, original_arguments = nil)
         if deep_clone == :deep_clone
@@ -594,7 +594,7 @@ class PlaceholderPattern < PatternBase
         end
     end
 
-    # (see Pattern#to_s)
+    # (see PatternBase#to_s)
     def to_s(depth = 0, top_level = true)
         return super unless @match == "placeholder"
 
@@ -652,7 +652,7 @@ class PatternBase
     end
 end
 
-# (see Pattern#placeholder)
+# (see PatternBase#placeholder)
 def placeholder(placeholder)
     PlaceholderPattern.new(placeholder)
 end
