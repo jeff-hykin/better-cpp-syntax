@@ -84,27 +84,6 @@ def string_single_entity?(regex_string)
     true
 end
 
-# Add convenience methods to make Regexp behave a bit more like Pattern
-class Regexp
-    # (see #string_single_entity?)
-    # @deprecated use string_single_entity
-    # @note the param regex_string is ignored and is accepted for compatibility
-    def single_entity?(regex_string = nil) # rubocop:disable Lint/UnusedMethodArgument
-        string_single_entity? to_r_s
-    end
-
-    # (see Pattern#to_r)
-    # @deprecated function is useless
-    def to_r(groups = nil) # rubocop:disable Lint/UnusedMethodArgument
-        self
-    end
-
-    # display the regex as a clean string
-    def to_r_s
-        inspect[1..-2]
-    end
-end
-
 #
 # Provides a base class to simplify the writing of complex regular expressions rules
 # This class completely handles capture numbers and provides convenience methods for
@@ -429,7 +408,7 @@ class Pattern
             @match = arg1[:match]
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
-            @match = arg1[:match].to_r_s
+            @match = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
         elsif arg1[:match].is_a? Pattern
             @match = arg1[:match]
         else

@@ -17,5 +17,20 @@ class PatternTest < MiniTest::Test
         assert_equal true, Pattern.new(match: "abc", reference: "abc").needs_to_capture?
         assert_equal true, Pattern.new(match: "abc", includes: [:abc]).needs_to_capture?
     end
-    # TODO: write more tests
+
+    def test_evaluate
+        r = Pattern.new(
+            match: "abc",
+        ).to_r
+
+        assert_match r, "abc"
+    end
+
+    def test_chaining
+        r = Pattern.new(
+            match: "abc",
+        ).then(/def/).to_r
+
+        assert_match r, "abcdef"
+    end
 end

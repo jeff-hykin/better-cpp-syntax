@@ -1,15 +1,20 @@
 # frozen_string_literal: true
 
-@space = /\s/
-@spaces = /\s+/
-@digit = /\d/
-@digits = /\d+/
-@standard_character = /\w/
-@word = /\w+/
-@word_boundary = /\b/
-@white_space_start_boundary = /(?<=\s)(?=\S)/
-@white_space_end_boundary = /(?<=\S)(?=\s)/
-@start_of_document = /\A/
-@end_of_document = /\Z/
-@start_of_line = /(?:^)/
-@end_of_line = /(?:\n|$)/
+@space = Pattern.new(/\s/)
+@spaces = oneOrMoreOf(@space)
+@digit = Pattern.new(/\d/)
+@digits = oneOrMoreOf(@digit)
+@standard_character = Pattern.new(/\w/)
+@word = oneOrMoreOf(@standard_character)
+@word_boundary = Pattern.new(/\b/)
+@white_space_start_boundary = lookBehindFor(/\s/).lookAheadFor(/\S/)
+@white_space_end_boundary = lookBehindFor(/\S/).lookAheadFor(/\s/)
+@start_of_document = Pattern.new(/\A/)
+@end_of_document = Pattern.new(/\Z/)
+@start_of_line = Pattern.new(/^/)
+@end_of_line = oneOf(
+    [
+        Pattern.new(/\n/),
+        Pattern.new(/$/),
+    ],
+)
