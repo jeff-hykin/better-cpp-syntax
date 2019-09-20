@@ -154,9 +154,15 @@ class OrPattern < Pattern
     # (see Pattern#integrate_pattern)
     # @note this is overloaded to provide the alternation
     def integrate_pattern(previous_evaluate, groups, is_single_entity)
-        return "(?:#{previous_evaluate}|#{evaluate(groups)})" if is_single_entity
+        previous_evaluate = "(?:#{previous_evaluate})" unless is_single_entity
+        match = @match.is_a?(Pattern) ? @match.evaluate(groups) : @match
+        self_pattern = "(?:#{previous_evaluate}|#{match})"
+        if @next_pattern.respond_to? :integrate_pattern
+            single_entity = string_single_entity? self_pattern
+            return @next_pattern.integrate_pattern(self_pattern, groups, single_entity)
+        end
 
-        "(?:(?:#{previous_evaluate})|#{evaluate(groups)})"
+        self_pattern
     end
 
     # (see Pattern#do_get_to_s_name)
@@ -472,7 +478,7 @@ class BackReferencePattern < Pattern
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
-                match: Regexp.new("[:backreference:#{reference}:]"),
+                match: Regexp.new("(?#[:backreference:#{reference}:])"),
                 backreference_key: reference
             )
         else
@@ -523,7 +529,7 @@ class SubroutinePattern < Pattern
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
-                match: Regexp.new("[:subroutine:#{reference}:]"),
+                match: Regexp.new("(?#[:subroutine:#{reference}:])"),
                 subroutine_key: reference
             )
         else

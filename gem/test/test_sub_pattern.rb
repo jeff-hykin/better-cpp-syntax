@@ -128,4 +128,25 @@ class SubPatternTest < MiniTest::Test
         assert_match r1, "a1a1"
         refute_match r2, "b2b2" # forward references do not work
     end
+
+    def test_subexp
+        r = wrap_complete(
+            Pattern.new(
+                match: Pattern.new("(").then(/\s*/).then(/\w+/).zeroOrMoreOf(
+                    Pattern.new(/\s+/).oneOf(
+                        [
+                            Pattern.new(/\w+/),
+                            recursivelyMatch("func_call"),
+                        ],
+                    ),
+                ).then(/\s*/).then(")"),
+                reference: "func_call"
+            ),
+        ).to_r
+
+        refute_match r, ""
+        refute_match r, "()"
+        assert_match r, "(func1)"
+        assert_match r, "(func1 arg1 (func2 arg2 arg3 (func3 ( func4 arg4))))"
+    end
 end

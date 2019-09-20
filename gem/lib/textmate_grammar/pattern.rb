@@ -679,8 +679,8 @@ class Pattern
     #
     # @param [String] previous the result of evaluate on the previous pattern
     #   in the linked list of patterns
-    # @param [Hash] groups group attributes
-    # @param [Boolean] single_entity is self a single entity
+    # @param [Array] groups group attributes
+    # @param [Boolean] single_entity is previous a single entity
     #
     # @return [String] the combined regexp
     #
@@ -829,7 +829,7 @@ class Pattern
         end
 
         # convert back references
-        self_regex = self_regex.gsub(/\[:backreference:([^\\]+?):\]/) do
+        self_regex = self_regex.gsub(/\(\?\#\[:backreference:([^\\]+?):\]\)/) do
             match_reference = Regexp.last_match(1)
             if references[match_reference].nil?
                 raise "\nWhen processing the matchResultOf:#{match_reference}, I couldn't find the group it was referencing"
@@ -840,7 +840,7 @@ class Pattern
         end
 
         # check for a subroutine to the Nth group, replace it with `\N`
-        self_regex = self_regex.gsub(/\[:subroutine:([^\\]+?):\]/) do
+        self_regex = self_regex.gsub(/\(\?\#\[:subroutine:([^\\]+?):\]\)/) do
             match_reference = Regexp.last_match(1)
             if references[match_reference].nil?
                 raise "\nWhen processing the recursivelyMatch:#{match_reference}, I couldn't find the group it was referencing"
