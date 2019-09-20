@@ -107,7 +107,7 @@ class Grammar
     #
     # @param [Symbol] key The key the pattern is stored in
     #
-    # @return [Pattern, Symbol, Array<Pattern, Symbol>] The stored pattern
+    # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] The stored pattern
     #
     def [](key)
         @repository[key] || PlaceholderPattern.new(key)
@@ -122,9 +122,9 @@ class Grammar
     # beginning of the document or whenever the root of the grammar is to be matched
     #
     # @param [Symbol] key The key to store the pattern in
-    # @param [Pattern, Symbol, Array<Pattern, Symbol>] value the pattern to store
+    # @param [PatternBase, Symbol, Array<PatternBase, Symbol>] value the pattern to store
     #
-    # @return [Pattern, Symbol, Array<Pattern, Symbol>] the stored pattern
+    # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] the stored pattern
     #
     def []=(key, value)
         raise "Use symbols not strings" unless key.is_a? Symbol
@@ -146,11 +146,11 @@ class Grammar
             value = value.flatten.map do |item|
                 next item if item.is_a? Symbol
 
-                item = Pattern.new(item) unless item.is_a? Pattern
+                item = PatternBase.new(item) unless item.is_a? PatternBase
                 item
             end
         elsif !value.is_a?(Pattern)
-            value = Pattern.new(value)
+            value = PatternBase.new(value)
         end
         # add it to the repository
         @repository[key] = value
@@ -255,7 +255,7 @@ class Grammar
 
             return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
 
-            if value.is_a? Pattern
+            if value.is_a? PatternBase
                 return value.transform_includes { |d| convert_initial_context.call(d) }
             end
 
@@ -274,7 +274,7 @@ class Grammar
             when Symbol then return {"include" => "#" + value.to_s}
             when Hash then return value
             when String then return value
-            when Pattern then return value.to_tag
+            when PatternBase then return value.to_tag
             else raise "Unexpected value: #{value.class}"
             end
         end
@@ -494,7 +494,7 @@ class ExportableGrammar < Grammar
             (@seed + "_" + value.to_s).to_sym
         elsif value.is_a? Array
             value.map fixupValue
-        elsif value.is_a? Pattern
+        elsif value.is_a? PatternBase
             value.transform_includes { |v| fixupValue(v) }
         else
             raise "Unexpected object of type #{value.class} in value"
@@ -518,7 +518,7 @@ class ImportGrammar < Grammar
     # (see Grammar#[])
     # @note patterns that have been imported from a file cannot be be accessed
     def [](key)
-        raise "#{key} is a not a Pattern and cannot be referenced" if @repository[key].is_a? Hash
+        raise "#{key} is a not a pattern and cannot be referenced" if @repository[key].is_a? Hash
 
         @repository[key]
     end

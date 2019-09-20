@@ -33,13 +33,13 @@ class MaybePattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Optionally match pattern
     #
-    # @param [Pattern,Regexp,String] pattern a pattern to optionally match
+    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to optionally match
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def maybe(pattern)
         insert(MaybePattern.new(pattern))
@@ -82,13 +82,13 @@ class ZeroOrMoreOfPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match pattern zero or more times
     #
-    # @param [Pattern,Regexp,String] pattern a pattern to match
+    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def zeroOrMoreOf(pattern)
         insert(ZeroOrMoreOfPattern.new(pattern))
@@ -123,13 +123,13 @@ class OneOrMoreOfPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match pattern one or more times
     #
-    # @param [Pattern,Regexp,String] pattern a pattern to match
+    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def oneOrMoreOf(pattern)
         insert(OneOrMoreOfPattern.new(pattern))
@@ -144,7 +144,7 @@ end
 # Provides alternation
 # Either the previous pattern or provided pattern is accepted
 # @note OneOfPattern is likely just as powerful and less confusing
-class OrPattern < Pattern
+class OrPattern < PatternBase
     # (see Pattern#do_evaluate_self)
     def do_evaluate_self(groups)
         # don't add the capture groups because they will be added by integrate_pattern
@@ -177,13 +177,13 @@ class OrPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match either the preceding pattern chain or pattern
     #
-    # @param [Pattern,Regexp,String] pattern a pattern to match instead of the previous chain
+    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match instead of the previous chain
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def or(pattern)
         insert(OrPattern.new(pattern))
@@ -194,14 +194,14 @@ end
 
 # Provides alternation
 # when one of the passed in patterns is accepted, this pattern is accepted
-class OneOfPattern < Pattern
+class OneOfPattern < PatternBase
     # create a new OneOfPattern
     # this is expects an array of patterns
 
     #
     # Create a new OneOfPattern
     #
-    # @param [Array<Pattern,Regexp,String>] patterns a list of patterns to match
+    # @param [Array<PatternBase,Regexp,String>] patterns a list of patterns to match
     #
     def initialize(patterns, deep_clone = nil, original_arguments = nil)
         if deep_clone == :deep_clone
@@ -218,9 +218,9 @@ class OneOfPattern < Pattern
         super(
             match: "one of",
             patterns: patterns.map do |pattern|
-                next pattern if pattern.is_a? Pattern
+                next pattern if pattern.is_a? PatternBase
 
-                Pattern.new(pattern)
+                PatternBase.new(pattern)
             end
         )
     end
@@ -259,7 +259,7 @@ class OneOfPattern < Pattern
     # (see Pattern#map!)
     def map!(&block)
         @arguments[:patterns].map! { |p| p.map!(&block) }
-        @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
+        @next_pattern.map!(&block) if @next_pattern.is_a? PatternBase
         self
     end
 
@@ -277,13 +277,13 @@ class OneOfPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match one of the supplied patterns
     #
-    # @param [Array<Pattern,Regexp,String>] patterns a list of patterns to match
+    # @param [Array<PatternBase,Regexp,String>] patterns a list of patterns to match
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def oneOf(patterns)
         insert(OneOfPattern.new(patterns))
@@ -302,11 +302,11 @@ end
 # for some pattern p this is equivalent to one of /(?=p)/, /(?!p)/, /(?<p)/, /(?<!p)/
 # depending on the type
 #
-class LookAroundPattern < Pattern
+class LookAroundPattern < PatternBase
     # (see Pattern#do_evaluate_self)
     def do_evaluate_self(groups)
         self_regex = @match
-        self_regex = @match.evaluate(groups) if @match.is_a? Pattern
+        self_regex = @match.evaluate(groups) if @match.is_a? PatternBase
 
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"
@@ -343,7 +343,7 @@ class LookAroundPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Looks around for the pattern
     #
@@ -351,7 +351,7 @@ class Pattern
     # option [Symbol] :type the look-around type
     #   can be one of :lookAheadFor, :lookAheadToAvoid, :lookBehindFor, :lookBehindToAvoid
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def lookAround(pattern)
         insert(LookAroundPattern.new(pattern))
@@ -474,7 +474,7 @@ end
 # for some group N whose reference is "foo"
 # matchResultOf("foo") results in the pattern /\N/
 #
-class BackReferencePattern < Pattern
+class BackReferencePattern < PatternBase
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
@@ -502,13 +502,13 @@ class BackReferencePattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match the result of some other pattern
     #
     # @param [String] reference a reference to match the result of
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def matchResultOf(reference)
         insert(BackReferencePattern.new(reference))
@@ -525,7 +525,7 @@ end
 # for some group N whose reference is "foo"
 # recursivelyMatch("foo") results in the pattern /\gN/
 #
-class SubroutinePattern < Pattern
+class SubroutinePattern < PatternBase
     def initialize(reference, deep_clone = nil, original_arguments = nil)
         if reference.is_a? String
             super(
@@ -553,13 +553,13 @@ class SubroutinePattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Recursively match some outer pattern
     #
     # @param [String] reference a reference to an outer pattern
     #
-    # @return [Pattern] a Pattern to append to
+    # @return [PatternBase] a PatternBase to append to
     #
     def recursivelyMatch(reference)
         insert(SubroutinePattern.new(reference))
@@ -574,7 +574,7 @@ end
 #
 # Implements using a pattern that has not been defined
 #
-class PlaceholderPattern < Pattern
+class PlaceholderPattern < PatternBase
     #
     # Constructs a new placeholder pattern
     # @overload initialize(placeholder)
@@ -618,8 +618,8 @@ class PlaceholderPattern < Pattern
     # @return [self]
     #
     def resolve!(repository)
-        unless repository[@arguments[:placeholder]].is_a? Pattern
-            raise ":#{@arguments[:placeholder]} is not a Pattern and cannot be substituted"
+        unless repository[@arguments[:placeholder]].is_a? PatternBase
+            raise ":#{@arguments[:placeholder]} is not a pattern and cannot be substituted"
         end
 
         @match = repository[@arguments[:placeholder]].__deep_clone__
@@ -628,13 +628,13 @@ class PlaceholderPattern < Pattern
     end
 end
 
-class Pattern
+class PatternBase
     #
     # Match a pattern that does not exist yet
     #
     # @param [Symbol] placeholder the name of the pattern to match
     #
-    # @return [Pattern] a pattern to append to
+    # @return [PatternBase] a pattern to append to
     #
     def placeholder(placeholder)
         insert(PlaceholderPattern.new(placeholder))
@@ -645,7 +645,7 @@ class Pattern
     #
     # @param [Hash] repository the repository to resolve patterns with
     #
-    # @return [Pattern] a copy of self with placeholders resolved
+    # @return [PatternBase] a copy of self with placeholders resolved
     #
     def resolve(repository)
         __deep_clone__.map! { |s| s.resolve!(repository) if s.respond_to? :resolve! }.freeze

@@ -54,11 +54,11 @@ class GrammarTest < MiniTest::Test
         err = assert_raises RuntimeError do
             g[:def]
         end
-        assert_match "def is a not a Pattern and cannot be referenced", err.message
+        assert_match "def is a not a pattern and cannot be referenced", err.message
 
         g[:def] = /def/
 
-        assert_kind_of(Pattern, g[:def])
+        assert_kind_of(PatternBase, g[:def])
 
         g.save_to(
             generate_tags: false,

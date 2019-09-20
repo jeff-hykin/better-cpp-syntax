@@ -5,16 +5,16 @@ require_relative 'pattern'
 #
 # Provides the abaility to create begin/end and begin/while rules
 #
-class PatternRange < Pattern
+class PatternRange < PatternBase
     attr_reader :start_pattern
 
     #
     # Creates a new PatternRange
     #
     # @param [Hash] arguments options
-    # @option arguments [Pattern,Regexp,String] :start_pattern the start pattern
-    # @option arguments [Pattern,Regexp,String] :end_pattern the end pattern
-    # @option arguments [Pattern,Regexp,String] :while_pattern the while pattern
+    # @option arguments [PatternBase,Regexp,String] :start_pattern the start pattern
+    # @option arguments [PatternBase,Regexp,String] :end_pattern the end pattern
+    # @option arguments [PatternBase,Regexp,String] :while_pattern the while pattern
     # @option arguments [String] :tag_as the tag for this pattern
     # @option arguments [String] :tag_contents_as the tag for contents of this pattern
     # @option arguments [String] :tag_start_as the tag for the start pattern
@@ -40,15 +40,15 @@ class PatternRange < Pattern
         @stop_pattern  = arguments[:end_pattern] || arguments[:while_pattern]
 
         # convert to patterns if needed
-        @start_pattern = Pattern.new(@start_pattern) unless @start_pattern.is_a? Pattern
-        @stop_pattern = Pattern.new(@stop_pattern) unless @stop_pattern.is_a? Pattern
+        @start_pattern = PatternBase.new(@start_pattern) unless @start_pattern.is_a? PatternBase
+        @stop_pattern = PatternBase.new(@stop_pattern) unless @stop_pattern.is_a? PatternBase
 
         # store originals for to_s
         @original_start_pattern = @start_pattern
         @original_stop_pattern  = @stop_pattern
 
         if arguments[:tag_start_as]
-            @start_pattern = Pattern.new(
+            @start_pattern = PatternBase.new(
                 match: @start_pattern,
                 tag_as: arguments[:tag_start_as],
             )
@@ -57,7 +57,7 @@ class PatternRange < Pattern
         tag_stop_as = arguments[:tag_end_as] || arguments[:tag_while_as]
 
         if tag_stop_as
-            @stop_pattern = Pattern.new(
+            @stop_pattern = PatternBase.new(
                 match: @stop_pattern,
                 tag_as: tag_stop_as,
             )

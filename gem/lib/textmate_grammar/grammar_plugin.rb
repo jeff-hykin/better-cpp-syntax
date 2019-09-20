@@ -35,9 +35,9 @@ class GrammarLinter < GrammarPlugin
     #
     # Runs the linter on each pattern
     #
-    # @param pattern [Pattern, Symbol, Hash] the pattern to lint
+    # @param pattern [PatternBase, Symbol, Hash] the pattern to lint
     # @param options [Hash] hash of any of the option keys provided by self.options.
-    #   options will only be populated when pattern is a Pattern
+    #   options will only be populated when pattern is a PatternBase
     #
     # @return [Boolean] the result of the lint
     def pre_lint(pattern, options = {}) # rubocop:disable Lint/UnusedMethodArgument
@@ -62,11 +62,11 @@ class GrammarTransform < GrammarPlugin
     #
     # Preforms the transformation on each pattern
     #
-    # @param pattern [Pattern, Symbol, Hash] the pattern to transform
+    # @param pattern [PatternBase, Symbol, Hash] the pattern to transform
     # @param options [Hash] hash of any of the option keys provided by self.options.
-    #   options will only be populated when pattern is a Pattern
+    #   options will only be populated when pattern is a PatternBase
     #
-    # @return [Pattern, Symbol, Hash] The transformed pattern. The return type should
+    # @return [PatternBase, Symbol, Hash] The transformed pattern. The return type should
     #   match the type of pattern
     #
     # @note pattern should not be modified
@@ -133,13 +133,13 @@ end
 # @api private
 #
 # @param [GrammarPlugin] plugin The plugin to filter options
-# @param [Pattern, Symbol, Hash] pattern the pattern with options to filter
+# @param [PatternBase, Symbol, Hash] pattern the pattern with options to filter
 #
 # @return [Hash] the filtered options
 #
 def filter_options(plugin, pattern, default)
     options = {}
-    if pattern.is_a? Pattern
+    if pattern.is_a? PatternBase
         options = pattern.original_arguments.select { |k| plugin.class.options.include? k }
     end
     options.merge(default)

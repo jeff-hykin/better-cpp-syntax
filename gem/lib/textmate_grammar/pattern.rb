@@ -89,8 +89,8 @@ end
 # This class completely handles capture numbers and provides convenience methods for
 # many common Regexp operations
 #
-class Pattern
-    # @return [Pattern] The next pattern in the linked list of patterns
+class PatternBase
+    # @return [PatternBase] The next pattern in the linked list of patterns
     # @api private
     attr_accessor :next_pattern
     # @return [Hash] The processed arguments
@@ -101,7 +101,7 @@ class Pattern
     #
     # does @arguments contain any attributes that require this pattern be captured?
     #
-    # @return [Boolean] if this Pattern needs to capture
+    # @return [Boolean] if this PatternBase needs to capture
     #
     def needs_to_capture?
         capturing_attributes = [
@@ -129,7 +129,7 @@ class Pattern
     #
     # Appends pattern to the linked list of patterns
     #
-    # @param [Pattern] pattern the pattern to append
+    # @param [PatternBase] pattern the pattern to append
     #
     # @return [self]
     #
@@ -145,132 +145,13 @@ class Pattern
     #
     # Append pattern to a copy of the linked list of patterns
     #
-    # @param [Pattern] pattern the pattern to append
+    # @param [PatternBase] pattern the pattern to append
     #
-    # @return [Pattern] a copy of self with pattern appended
+    # @return [PatternBase] a copy of self with pattern appended
     #
     def insert(pattern)
         new_pattern = __deep_clone__
         new_pattern.insert!(pattern).freeze
-    end
-
-    #
-    # sets @at_least and @at_most based on arguments
-    #
-    # @return [void]
-    #
-    # @api private
-    #
-    def process_quantifiers_from_arguments
-        # this sets the @at_most and @at_least value based on the arguments
-
-        #
-        # Simplify the quantity down to just :at_least and :at_most
-        #
-        attributes_clone = @arguments.clone
-        # convert Enumerators to numbers
-        [:at_least, :at_most, :how_many_times?].each do |each|
-            if attributes_clone[each].is_a?(Enumerator)
-                attributes_clone[each] = attributes_clone[each].size
-            end
-        end
-        # extract the data
-        at_least       = attributes_clone[:at_least]
-        at_most        = attributes_clone[:at_most]
-        how_many_times = attributes_clone[:how_many_times?]
-        # simplify to at_least and at_most
-        at_least = at_most = how_many_times if how_many_times.is_a?(Integer)
-
-        # check if quantifying is allowed
-        # check after everything else in case additional quantifying options
-        # are created in the future
-        if quantifying_allowed?
-            @at_least = at_least
-            @at_most = at_most
-        # if a quantifying value was set and quantifying is not allowed, raise an error
-        # telling the user that its not allowed
-        elsif !(at_most.nil? && at_least.nil?)
-            raise <<-HEREDOC.remove_indent
-
-                Inside of the #{name} pattern, there are some quantity arguments like:
-                    :at_least
-                    :at_most
-                    or :how_many_times?
-                These are not allowed in this kind of #{do_get_to_s_name}) pattern
-                If you did this intentionally please wrap it inside of a Pattern.new()
-                ex: #{do_get_to_s_name} Pattern.new( *your_arguments* ) )
-            HEREDOC
-        end
-    end
-
-    #
-    # converts @at_least and @at_most into the appropriate quantifier
-    # this is a simple_quantifier because it does not include atomic-ness
-    #
-    # @return [String] the quantifier
-    #
-    def simple_quantifier
-        # Generate the ending based on :at_least and :at_most
-
-        # by default assume no quantifiers
-        quantifier = ""
-        # if there is no at_least, at_most, or how_many_times, then theres no quantifier
-        if @at_least.nil? and @at_most.nil?
-            quantifier = ""
-        # if there is a quantifier
-        else
-            # if there's no at_least, then assume at_least = 1
-            @at_least = 1 if @at_least.nil?
-
-            quantifier =
-                if @at_least == 0 and @at_most == 1
-                    # this is just a different way of "maybe"
-                    "?"
-                elsif @at_least == 0 and @at_most.nil?
-                    # this is just a different way of "zeroOrMoreOf"
-                    "*"
-                elsif @at_least == 1 and @at_most.nil?
-                    # this is just a different way of "oneOrMoreOf"
-                    "+"
-                elsif @at_least == @most
-                    # exactly N times
-                    "{#{@at_least}}"
-                else
-                    # if it is more complicated than that, just use a range
-                    "{#{@at_least},#{@at_most}}"
-                end
-        end
-        # quantifiers can be made possessive without requiring atomic groups
-        quantifier += "+" if quantifier != "" && @arguments[:dont_back_track?] == true
-        quantifier
-    end
-
-    #
-    # Adds quantifiers to match
-    #
-    # @param [String, Pattern] match the pattern to add a quantifier to
-    # @param [Array] groups group information, used for evaluating match
-    #
-    # @return [String] match with quantifiers applied
-    #
-    def add_quantifier_options_to(match, groups)
-        match = match.evaluate(groups) if match.is_a? Pattern
-        quantifier = simple_quantifier
-        # check if there are quantifiers
-        if quantifier != ""
-            # if the match is not a single entity, then it needs to be wrapped
-            match = "(?:#{match})" unless string_single_entity?(match)
-            # add the quantified ending
-            match += quantifier
-        elsif @arguments[:dont_back_track?] == true
-            # make atomic, which allows arbitrary expression to be prevented from backtracking
-            match = "(?>#{match})"
-        end
-        if @arguments[:word_cannot_be_any_of]
-            word_pattern = @arguments[:word_cannot_be_any_of].map { |w| Regexp.escape w }.join "|"
-            match = "(?!\\b(?:#{word_pattern})\\b)#{match}"
-        end
-        match
     end
 
     #
@@ -294,17 +175,17 @@ class Pattern
     #
     def map!(&block)
         yield self
-        @match = @match.map!(&block) if @match.is_a? Pattern
-        @next_pattern = @next_pattern.map!(&block) if @next_pattern.is_a? Pattern
+        @match = @match.map!(&block) if @match.is_a? PatternBase
+        @next_pattern = @next_pattern.map!(&block) if @next_pattern.is_a? PatternBase
         self
     end
 
     #
     # Uses block to recursively transform includes
     #
-    # @yield [Pattern,Symbol,Regexp,String] invokes the block with each include to transform
+    # @yield [PatternBase,Symbol,Regexp,String] invokes the block with each include to transform
     #
-    # @return [Pattern] a copy of self with transformed includes
+    # @return [PatternBase] a copy of self with transformed includes
     #
     def transform_includes(&block)
         __deep_clone__.map! do |s|
@@ -323,7 +204,7 @@ class Pattern
     #
     # @yield [String] Invokes the block to with each tag_as to transform
     #
-    # @return [Pattern] a copy of self with transformed tag_as
+    # @return [PatternBase] a copy of self with transformed tag_as
     #
     def transform_tag_as(&block)
         __deep_clone__.map! do |s|
@@ -331,7 +212,7 @@ class Pattern
             next unless s.arguments[:includes].is_a?(Array)
 
             s.arguments[:includes].map! do |i|
-                next i unless i.is_a? Pattern
+                next i unless i.is_a? PatternBase
 
                 i.transform_tag_as(&block)
             end
@@ -343,12 +224,12 @@ class Pattern
     #
     # @overload initialize(pattern)
     #   matches an exact pattern
-    #   @param pattern [Pattern, Regexp, String] the pattern to match
+    #   @param pattern [PatternBase, Regexp, String] the pattern to match
     # @overload initialize(opts)
     #   @param opts [Hash] options
-    #   @option opts [Pattern, Regexp, String] :match the pattern to match
+    #   @option opts [PatternBase, Regexp, String] :match the pattern to match
     #   @option opts [String] :tag_as what to tag this pattern as
-    #   @option opts [Array<Pattern, Symbol>] :includes pattern includes
+    #   @option opts [Array<PatternBase, Symbol>] :includes pattern includes
     #   @option opts [String] :reference a name for this pattern can be referred to in
     #       earlier or later parts of the pattern list, or in tag_as
     #   @option opts [Array<String>] :should_fully_match string that this pattern should
@@ -370,7 +251,7 @@ class Pattern
     #   @note Plugins may provide additional options
     #   @note all options except :match are optional
     # @overload initialize(opts, deep_clone, original)
-    #   makes a copy of Pattern
+    #   makes a copy of PatternBase
     #   @param opts [Hash] the original patterns @arguments with match
     #   @param deep_clone [:deep_clone] identifies as a deep_clone construction
     #   @param original [Hash] the original patterns @original_arguments
@@ -379,22 +260,18 @@ class Pattern
     #       able to accept this form
     #
     def initialize(*arguments)
-        @at_most = nil
-        @at_least = nil
-
         if arguments.length > 1 && arguments[1] == :deep_clone
             @arguments = arguments[0]
             @match = @arguments[:match]
             @arguments.delete(:match)
             @original_arguments = arguments[2]
-            process_quantifiers_from_arguments
             return
         end
 
         if arguments.length > 1
-            # Pattern was likely constructed like `Pattern.new(/foo/, option: bar)`
-            puts "Pattern#new() expects a single Regexp, String, or Hash"
-            puts "Pattern#new() was provided with multiple arguments"
+            # PatternBase was likely constructed like `PatternBase.new(/foo/, option: bar)`
+            puts "PatternBase#new() expects a single Regexp, String, or Hash"
+            puts "PatternBase#new() was provided with multiple arguments"
             puts "arguments:"
             puts arguments
             raise "See error above"
@@ -409,7 +286,7 @@ class Pattern
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
             @match = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
-        elsif arg1[:match].is_a? Pattern
+        elsif arg1[:match].is_a? PatternBase
             @match = arg1[:match]
         else
             puts <<-HEREDOC.remove_indent
@@ -420,8 +297,6 @@ class Pattern
         end
         arg1.delete(:match)
         @arguments = arg1
-
-        process_quantifiers_from_arguments
     end
 
     # attempts to provide a memorable name for a pattern
@@ -433,7 +308,7 @@ class Pattern
     end
 
     #
-    # converts a Pattern to a Hash representing a textmate rule
+    # converts a PatternBase to a Hash representing a textmate rule
     #
     # @return [Hash] The pattern as a textmate grammar rule
     #
@@ -459,7 +334,7 @@ class Pattern
     # evaluates the pattern into a string suitable for inserting into a
     # grammar or constructing a Regexp.
     #
-    # @param [Hash] groups if groups is nil consider this Pattern to be the top_level
+    # @param [Hash] groups if groups is nil consider this PatternBase to be the top_level
     #   when a pattern is top_level, group numbers and back references are relative
     #   to that pattern
     #
@@ -480,7 +355,7 @@ class Pattern
     #
     # converts a pattern to a Regexp
     #
-    # @param [Hash] groups if groups is nil consider this Pattern to be the top_level
+    # @param [Hash] groups if groups is nil consider this PatternBase to be the top_level
     #   when a pattern is top_level, group numbers and back references are relative
     #   to that pattern
     #
@@ -491,7 +366,7 @@ class Pattern
     end
 
     #
-    # Displays the Pattern as you would write it in code
+    # Displays the PatternBase as you would write it in code
     #
     # @param [Integer] depth the current nesting depth
     # @param [Boolean] top_level is this a top level pattern or is it being chained
@@ -508,7 +383,7 @@ class Pattern
 
         regex_as_string =
             case @original_arguments[:match]
-            when Pattern then @original_arguments[:match].to_s(depth + 2, true)
+            when PatternBase then @original_arguments[:match].to_s(depth + 2, true)
             when Regexp then @original_arguments[:match].inspect
             when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
             end
@@ -590,9 +465,9 @@ class Pattern
             end
         end
         # run related unit tests
-        pass << @match.run_tests if @match.is_a? Pattern
-        pass << @next_pattern.run_tests if @next_pattern.is_a? Pattern
-        @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? Pattern }
+        pass << @match.run_tests if @match.is_a? PatternBase
+        pass << @next_pattern.run_tests if @next_pattern.is_a? PatternBase
+        @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? PatternBase }
         pass.none?(&:!)
     end
 
@@ -613,8 +488,8 @@ class Pattern
     #
     def hash
         # TODO: find a better hash code
-        # Pattern.new("abc") == Pattern.new(Pattern.new("abc"))
-        # but Pattern.new("abc").hash != Pattern.new(Pattern.new("abc")).hash
+        # PatternBase.new("abc") == PatternBase.new(PatternBase.new("abc"))
+        # but PatternBase.new("abc").hash != PatternBase.new(PatternBase.new("abc")).hash
         @match.hash
     end
 
@@ -622,12 +497,12 @@ class Pattern
     # Checks for equality
     # A pattern is considered equal to another pattern if the result of tag_as is equivalent
     #
-    # @param [Pattern] other the pattern to compare
+    # @param [PatternBase] other the pattern to compare
     #
-    # @return [Boolean] true if other is a Pattern and to_tag is equivalent, false otherwise
+    # @return [Boolean] true if other is a PatternBase and to_tag is equivalent, false otherwise
     #
     def eql?(other)
-        return false unless other.is_a? Pattern
+        return false unless other.is_a? PatternBase
 
         to_tag == other.to_tag
     end
@@ -643,21 +518,13 @@ class Pattern
     # @param pattern pattern options (see #initialize for options)
     # @see #initialize
     #
-    # @return [Pattern] a copy of self with a pattern inserted
+    # @return [PatternBase] a copy of self with a pattern inserted
     #
     def then(pattern)
-        pattern = Pattern.new(pattern) unless pattern.is_a? Pattern
+        pattern = PatternBase.new(pattern) unless pattern.is_a? PatternBase
         insert(pattern)
     end
     # other methods added by subclasses
-
-    # controls weather @arguments[:at_most] et. al. set @at_most et. al.
-    # @note override when inheriting. Return false unless the subclass allow quantifying
-    # @return [Boolean] if quantifying is allowed
-    # @note the default implementation returns True
-    def quantifying_allowed?
-        true
-    end
 
     #
     # evaluates @match
@@ -669,7 +536,9 @@ class Pattern
     # @return [String] the result of evaluating @match
     #
     def do_evaluate_self(groups)
-        add_capture_group_if_needed(add_quantifier_options_to(@match, groups))
+        match = @match
+        match = match.evaluate(groups) if match.is_a? PatternBase
+        add_capture_group_if_needed(match)
     end
 
     #
@@ -746,7 +615,7 @@ class Pattern
     # @option [String] tag_as maps from an old tag_as to a new tag_as
     # @option [String] reference maps from reference to a new tag_as
     #
-    # @return [Pattern] a copy of self retagged
+    # @return [PatternBase] a copy of self retagged
     #
     def reTag(args)
         __deep_clone__.map! do |s|
@@ -781,12 +650,12 @@ class Pattern
     def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
         groups = do_collect_self_groups(next_group)
         next_group += groups.length
-        if @match.is_a? Pattern
+        if @match.is_a? PatternBase
             new_groups = @match.collect_group_attributes(next_group)
             groups.concat(new_groups)
             next_group += new_groups.length
         end
-        if @next_pattern.is_a? Pattern
+        if @next_pattern.is_a? PatternBase
             new_groups = @next_pattern.collect_group_attributes(next_group)
             groups.concat(new_groups)
         end
@@ -893,7 +762,7 @@ class Pattern
     #
     # @api private
     #
-    # @param [Array<Pattern, Symbol>] includes an includes array
+    # @param [Array<PatternBase, Symbol>] includes an includes array
     #
     # @return [Array<Hash>] a patterns array
     #
@@ -905,7 +774,7 @@ class Pattern
             next "$base" if rule == :$base
             next {include: "##{rule}"} if rule.is_a? Symbol
 
-            rule = Pattern.new(rule) unless rule.is_a? Pattern
+            rule = PatternBase.new(rule) unless rule.is_a? PatternBase
             rule.to_tag
         end
         patterns
@@ -914,7 +783,7 @@ class Pattern
     #
     # Deeply clone self
     #
-    # @return [Pattern] a copy of self
+    # @return [PatternBase] a copy of self
     #
     def __deep_clone__
         options = @arguments.__deep_clone__
@@ -943,5 +812,148 @@ class Pattern
         HEREDOC
     rescue RegexpError # rubocop: disable Lint/HandleExceptions
         # no capture groups present, purposely do nothing
+    end
+end
+
+class Pattern < PatternBase
+
+    # (see PatternBase#initialize)
+    def initialize(*arguments)
+        super(*arguments)
+
+        @at_least = nil
+        @at_most = nil
+        process_quantifiers_from_arguments
+    end
+    #
+    # sets @at_least and @at_most based on arguments
+    #
+    # @return [void]
+    #
+    # @api private
+    #
+    def process_quantifiers_from_arguments
+        # this sets the @at_most and @at_least value based on the arguments
+
+        #
+        # Simplify the quantity down to just :at_least and :at_most
+        #
+        attributes_clone = @arguments.clone
+        # convert Enumerators to numbers
+        [:at_least, :at_most, :how_many_times?].each do |each|
+            if attributes_clone[each].is_a?(Enumerator)
+                attributes_clone[each] = attributes_clone[each].size
+            end
+        end
+        # extract the data
+        at_least       = attributes_clone[:at_least]
+        at_most        = attributes_clone[:at_most]
+        how_many_times = attributes_clone[:how_many_times?]
+        # simplify to at_least and at_most
+        at_least = at_most = how_many_times if how_many_times.is_a?(Integer)
+
+        # check if quantifying is allowed
+        # check after everything else in case additional quantifying options
+        # are created in the future
+        if quantifying_allowed?
+            @at_least = at_least
+            @at_most = at_most
+        # if a quantifying value was set and quantifying is not allowed, raise an error
+        # telling the user that its not allowed
+        elsif !(at_most.nil? && at_least.nil?)
+            raise <<-HEREDOC.remove_indent
+
+                Inside of the #{name} pattern, there are some quantity arguments like:
+                    :at_least
+                    :at_most
+                    or :how_many_times?
+                These are not allowed in this kind of #{do_get_to_s_name}) pattern
+                If you did this intentionally please wrap it inside of a Pattern.new()
+                ex: #{do_get_to_s_name} Pattern.new( *your_arguments* ) )
+            HEREDOC
+        end
+    end
+
+    #
+    # converts @at_least and @at_most into the appropriate quantifier
+    # this is a simple_quantifier because it does not include atomic-ness
+    #
+    # @return [String] the quantifier
+    #
+    def simple_quantifier
+        # Generate the ending based on :at_least and :at_most
+
+        # by default assume no quantifiers
+        quantifier = ""
+        # if there is no at_least, at_most, or how_many_times, then theres no quantifier
+        if @at_least.nil? and @at_most.nil?
+            quantifier = ""
+        # if there is a quantifier
+        else
+            # if there's no at_least, then assume at_least = 1
+            @at_least = 1 if @at_least.nil?
+
+            quantifier =
+                if @at_least == 0 and @at_most == 1
+                    # this is just a different way of "maybe"
+                    "?"
+                elsif @at_least == 0 and @at_most.nil?
+                    # this is just a different way of "zeroOrMoreOf"
+                    "*"
+                elsif @at_least == 1 and @at_most.nil?
+                    # this is just a different way of "oneOrMoreOf"
+                    "+"
+                elsif @at_least == @most
+                    # exactly N times
+                    "{#{@at_least}}"
+                else
+                    # if it is more complicated than that, just use a range
+                    "{#{@at_least},#{@at_most}}"
+                end
+        end
+        # quantifiers can be made possessive without requiring atomic groups
+        quantifier += "+" if quantifier != "" && @arguments[:dont_back_track?] == true
+        quantifier
+    end
+
+    #
+    # Adds quantifiers to match
+    #
+    # @param [String, PatternBase] match the pattern to add a quantifier to
+    # @param [Array] groups group information, used for evaluating match
+    #
+    # @return [String] match with quantifiers applied
+    #
+    def add_quantifier_options_to(match, groups)
+        match = match.evaluate(groups) if match.is_a? PatternBase
+        quantifier = simple_quantifier
+        # check if there are quantifiers
+        if quantifier != ""
+            # if the match is not a single entity, then it needs to be wrapped
+            match = "(?:#{match})" unless string_single_entity?(match)
+            # add the quantified ending
+            match += quantifier
+        elsif @arguments[:dont_back_track?] == true
+            # make atomic, which allows arbitrary expression to be prevented from backtracking
+            match = "(?>#{match})"
+        end
+        if @arguments[:word_cannot_be_any_of]
+            word_pattern = @arguments[:word_cannot_be_any_of].map { |w| Regexp.escape w }.join "|"
+            match = "(?!\\b(?:#{word_pattern})\\b)#{match}"
+        end
+        match
+    end
+
+    # (see PatternBase#do_evaluate_self)
+    def do_evaluate_self(groups)
+        add_capture_group_if_needed(add_quantifier_options_to(@match, groups))
+    end
+
+    # controls weather @arguments[:at_most] et. al. set @at_most et. al.
+    # @note override when inheriting. Return false unless the subclass allow quantifying
+    # @return [Boolean] if quantifying is allowed
+    # @note the default implementation returns True
+    def quantifying_allowed?
+        true
     end
 end

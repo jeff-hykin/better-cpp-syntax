@@ -6,7 +6,7 @@
 class ResolvePlaceholders < GrammarTransform
     # (see ResolvePlaceholders)
     def pre_transform(pattern, options)
-        return pattern unless pattern.is_a? Pattern
+        return pattern unless pattern.is_a? PatternBase
 
         pattern.resolve(options[:repository])
     end
