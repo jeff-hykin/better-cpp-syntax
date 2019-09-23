@@ -313,9 +313,8 @@ class PatternBase
     # @return [Hash] The pattern as a textmate grammar rule
     #
     def to_tag
-        regex_as_string = evaluate
         output = {
-            match: regex_as_string,
+            match: evaluate,
         }
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
