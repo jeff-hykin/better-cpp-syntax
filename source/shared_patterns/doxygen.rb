@@ -293,23 +293,18 @@ def doxygen
         match: /\b[A-Z]+:/.or(/@[a-z_]+:/),
         tag_as: "storage.type.class.gtkdoc",
     )
-
-    command_grammars << Pattern.new(
-        match: /[\\@]\S++/.lookAheadToAvoid(@end_of_line),
-        tag_as: "invalid.unknown.documentation.command",
-    )
-
-    line_comment = Pattern.new(
+    
+    line_comment = PatternRange.new(
         tag_as: "comment.line.double-slash.documentation",
-        match: Pattern.new(
+        start_pattern: Pattern.new(
             @start_of_line.maybe(match: @spaces, dont_back_track?: true).then(
                 match: /\/\//.oneOrMoreOf(/[!\/]/),
                 tag_as: "punctuation.definition.comment.documentation",
-            ).then(
-                match: /.*/,
-                includes: command_grammars,
             )
-        )
+        ),
+        # a newline that doesnt have a line continuation
+        end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
+        includes: [ :line_continuation_character, *command_grammars ]
     )
 
     single_line_block_comment = Pattern.new(
