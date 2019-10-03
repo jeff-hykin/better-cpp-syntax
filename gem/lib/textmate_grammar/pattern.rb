@@ -4,6 +4,13 @@ require 'deep_clone'
 require 'yaml'
 require 'textmate_grammar/grammar_plugin'
 
+def with_warnings(flag)
+    old_verbose, $VERBOSE = $VERBOSE, flag
+    yield
+ensure
+    $VERBOSE = old_verbose
+end
+
 # Add remove indent to the String class
 class String
     # a helper for writing multi-line strings for error messages
@@ -91,8 +98,9 @@ end
 #
 class PatternBase
     # @return [PatternBase] The next pattern in the linked list of patterns
-    # @api private
     attr_accessor :next_pattern
+    # @return [String,PatternBase] The pattern to match
+    attr_accessor :match
     # @return [Hash] The processed arguments
     attr_accessor :arguments
     # @return [Hash] The original arguments passed into initialize
@@ -362,7 +370,7 @@ class PatternBase
     # @return [Regexp] the pattern as a Regexp
     #
     def to_r(groups = nil)
-        Regexp.new(evaluate(groups))
+        with_warnings(nil) { Regexp.new(evaluate(groups)) }
     end
 
     #
@@ -430,14 +438,14 @@ class PatternBase
             HEREDOC
         end
         if @arguments[:should_fully_match].is_a? Array
-            test_regex = /^(?:#{self_regex})$/
+            test_regex = with_warnings(nil) { /^(?:#{self_regex})$/ }
             if @arguments[:should_fully_match].all? { |test| test =~ test_regex } == false
                 warn.call :should_fully_match
                 pass << false
             end
         end
         if @arguments[:should_not_fully_match].is_a? Array
-            test_regex = /^(?:#{self_regex})$/
+            test_regex = with_warnings(nil) { /^(?:#{self_regex})$/ }
             if @arguments[:should_not_fully_match].none? { |test| test =~ test_regex } == false
                 warn.call :should_not_fully_match
                 pass << false
@@ -809,6 +817,10 @@ class PatternBase
 end
 
 class Pattern < PatternBase
+    # @return [Integer,nil] the minimum amount that can be matched
+    attr_accessor :at_least
+    # @return [Integer,nil] the maximum amount that can be matched
+    attr_accessor :at_most
     # (see PatternBase#initialize)
     def initialize(*arguments)
         super(*arguments)
@@ -887,7 +899,10 @@ class Pattern < PatternBase
             @at_least = 1 if @at_least.nil?
 
             quantifier =
-                if @at_least == 0 and @at_most == 1
+                if @at_least == 1 and @at_most == 1
+                    # no qualifier
+                    ""
+                elsif @at_least == 0 and @at_most == 1
                     # this is just a different way of "maybe"
                     "?"
                 elsif @at_least == 0 and @at_most.nil?
