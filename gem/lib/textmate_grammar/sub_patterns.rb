@@ -165,6 +165,11 @@ class OrPattern < PatternBase
         self_pattern
     end
 
+    # (see PatternBase#evaluate)
+    def evaluate(groups = nil)
+        raise "evaluate is not implemented for OrPattern"
+    end
+
     # (see PatternBase#do_get_to_s_name)
     def do_get_to_s_name(top_level)
         top_level ? "or(" : ".or("
@@ -604,10 +609,20 @@ class PlaceholderPattern < PatternBase
         output
     end
 
-    def to_tag(*args)
+    # (see PatternBase#evaluate)
+    # @note this raises a runtime error if the pattern has not been resolved
+    def to_tag()
         raise "Attempting to create a tag from an unresolved placeholder" if @match == "placeholder"
 
-        super(*args)
+        super()
+    end
+
+    # (see PatternBase#evaluate)
+    # @note this raises a runtime error if the pattern has not been resolved
+    def evaluate(groups = nil)
+        raise "Attempting to evaluate an unresolved placeholder" if @match == "placeholder"
+
+        super(groups)
     end
 
     #
