@@ -193,7 +193,7 @@ class Grammar
     #
     # Convert the grammar into a hash suitable for exporting to a file
     #
-    # @param [:inherit, :embedded] inherit_or_embedded Is this grammar being inherited
+    # @param [Symbol] inherit_or_embedded Is this grammar being inherited
     #   from, or will be embedded, this controls if :$initial_context is mapped to
     #   +"$base"+ or +"$self"+
     #
@@ -280,6 +280,7 @@ class Grammar
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []
+        output[:patterns] = output[:patterns]["patterns"] if output[:patterns].is_a? Hash
         output[:repository].delete(:$initial_context)
 
         output[:version] = auto_version

@@ -128,12 +128,13 @@ class Grammar
 end
 
 #
-# Filters a {Pattern#original_arguments} to just the options required for a plugin
+# Filters a {PatternBase#original_arguments} to just the options required for a plugin
 #
 # @api private
 #
 # @param [GrammarPlugin] plugin The plugin to filter options
 # @param [PatternBase, Symbol, Hash] pattern the pattern with options to filter
+# @param [Hash] default the default options to supply to the plugin
 #
 # @return [Hash] the filtered options
 #

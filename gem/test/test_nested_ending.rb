@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'textmate_grammar'
-
-require_relative 'util'
+require_relative 'test_helper'
 
 class NestedEndingTest < MiniTest::Test
     def test_nested_ending

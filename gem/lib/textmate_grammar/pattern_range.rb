@@ -3,7 +3,7 @@
 require_relative 'pattern'
 
 #
-# Provides the abaility to create begin/end and begin/while rules
+# Provides the ability to create begin/end and begin/while rules
 #
 class PatternRange < PatternBase
     attr_reader :start_pattern
@@ -26,6 +26,8 @@ class PatternRange < PatternBase
     #
     def initialize(arguments)
         @original_arguments = arguments
+        @match = nil
+        @next_pattern = nil
 
         raise "PatternRange.new() expects a hash" unless arguments.is_a? Hash
 
@@ -119,7 +121,7 @@ class PatternRange < PatternBase
             capture_key => convert_group_attributes_to_captures(stop_groups),
         }
 
-        output[name] = @arguments[:tag_as] unless @arguments[:tag_as].nil?
+        output[:name] = @arguments[:tag_as] unless @arguments[:tag_as].nil?
         output[:contentName] = @arguments[:tag_content_as] unless @arguments[:tag_content_as].nil?
 
         output["begin"]   = output["begin"][1..-2]   if @start_pattern.optimize_outer_group?
@@ -157,5 +159,14 @@ class PatternRange < PatternBase
         @start_pattern.map!(&block)
         @stop_pattern.map!(&block)
         self
+    end
+
+    #
+    # (see PatternBase#run_tests)
+    #
+    def run_tests
+        s = @start_pattern.run_tests
+        e = @stop_pattern.run_tests
+        s && e
     end
 end

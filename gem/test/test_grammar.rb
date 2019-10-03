@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'textmate_grammar'
+require_relative 'test_helper'
 
 class GrammarTest < MiniTest::Test
     def test_source
@@ -31,20 +30,51 @@ class GrammarTest < MiniTest::Test
         end
     end
 
+    def test_missing
+        assert_output(/Missing one or more of the required grammar keys/) do
+            err = assert_raises RuntimeError do
+                Grammar.new(
+                    name: "test",
+                )
+            end
+            assert_match "See above error", err.message
+        end
+    end
+
     def test_empty_grammar
-        g = Grammar.new(
-            name: "test",
-            scope_name: "text.test",
-            version: "",
-        )
+        g = test_grammar
+
         expected = {
             name: "test",
-            scopeName: "text.test",
+            scopeName: "source.test",
             repository: {},
             patterns: [],
             version: "",
         }
         assert_equal expected, g.generate
+    end
+
+    def test_bad_key
+        g = test_grammar
+
+        assert_output(/repository names starting with \$ are reserved/) do
+            err = assert_raises RuntimeError do
+                g[:$bad_key] = "abc"
+            end
+            assert_match "See above error", err.message
+        end
+
+        assert_output(/the name 'repository' is a reserved name/) do
+            err = assert_raises RuntimeError do
+                g[:repository] = "abc"
+            end
+            assert_match "See above error", err.message
+        end
+
+        err = assert_raises RuntimeError do
+            g["string_key"] = "abc"
+        end
+        assert_match "Use symbols not strings", err.message
     end
 
     def test_import

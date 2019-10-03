@@ -13,6 +13,8 @@ gem 'plist', :require => false
 group :test do
     gem 'minitest'
     gem 'rake'
+    gem 'simplecov'
+    gem 'simplecov-lcov'
 end
 
 group :development do

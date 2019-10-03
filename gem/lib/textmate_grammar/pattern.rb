@@ -3,93 +3,7 @@
 require 'deep_clone'
 require 'yaml'
 require 'textmate_grammar/grammar_plugin'
-
-def with_warnings(flag)
-    old_verbose, $VERBOSE = $VERBOSE, flag
-    yield
-ensure
-    $VERBOSE = old_verbose
-end
-
-# Add remove indent to the String class
-class String
-    # a helper for writing multi-line strings for error messages
-    # example usage
-    #     puts <<-HEREDOC.remove_indent
-    #     This command does such and such.
-    #         this part is extra indented
-    #     HEREDOC
-    def remove_indent
-        gsub(/^[ \t]{#{match(/^[ \t]*/)[0].length}}/, '')
-    end
-end
-
-#
-# Provides to_s
-#
-class Enumerator
-    #
-    # Converts Enumerator to a string representing Integer.times
-    #
-    # @return [String] the Enumerator as a string
-    #
-    def to_s
-        size.to_s + ".times"
-    end
-end
-
-# determines if a regex string is a single entity
-#
-# @note single entity means that for the purposes of modification, the expression is
-#   atomic, for example if appending a +*+ to the end of +regex_string+ matches only
-#   a part of regex string multiple times then it is not a single_entity
-# @param regex_string [String] a string representing a regular expression, without the
-#   forward slash "/" at the beginning and
-# @return [Boolean] if the string represents an single regex entity
-def string_single_entity?(regex_string)
-    return true if regex_string.length == 2 && regex_string[0] == '\\'
-
-    escaped = false
-    in_set = false
-    depth = 0
-    regex_string.each_char.with_index do |c, index|
-        # allow the first character to be at depth 0
-        # NOTE: this automatically makes a single char regexp a single entity
-        return false if depth == 0 && index != 0
-
-        if escaped
-            escaped = false
-            next
-        end
-        if c == '\\'
-            escaped = true
-            next
-        end
-        if in_set
-            if c == ']'
-                in_set = false
-                depth -= 1
-            end
-            next
-        end
-        case c
-        when "(" then depth += 1
-        when ")" then depth -= 1
-        when "["
-            depth += 1
-            in_set = true
-        end
-    end
-    # sanity check
-    if depth != 0 or escaped or in_set
-        puts "Internal error: when determining if a Regexp is a single entity"
-        puts "an unexpected sequence was found. This is a bug with the gem."
-        puts "This will not effect the validity of the produced grammar"
-        puts "Regexp: #{inspect} depth: #{depth} escaped: #{escaped} in_set: #{in_set}"
-        return false
-    end
-    true
-end
+require 'textmate_grammar/util'
 
 #
 # Provides a base class to simplify the writing of complex regular expressions rules
@@ -308,6 +222,7 @@ class PatternBase
     end
 
     # attempts to provide a memorable name for a pattern
+    # @return [String]
     def name
         return @arguments[:reference] unless @arguments[:reference].nil?
         return @arguments[:tag_as] unless @arguments[:tag_as].nil?
@@ -369,7 +284,7 @@ class PatternBase
     # @return [Regexp] the pattern as a Regexp
     #
     def to_r(groups = nil)
-        with_warnings(nil) { Regexp.new(evaluate(groups)) }
+        with_no_warnings { Regexp.new(evaluate(groups)) }
     end
 
     #
@@ -437,14 +352,14 @@ class PatternBase
             HEREDOC
         end
         if @arguments[:should_fully_match].is_a? Array
-            test_regex = with_warnings(nil) { /^(?:#{self_regex})$/ }
+            test_regex = with_no_warnings { /^(?:#{self_regex})$/ }
             if @arguments[:should_fully_match].all? { |test| test =~ test_regex } == false
                 warn.call :should_fully_match
                 pass << false
             end
         end
         if @arguments[:should_not_fully_match].is_a? Array
-            test_regex = with_warnings(nil) { /^(?:#{self_regex})$/ }
+            test_regex = with_no_warnings { /^(?:#{self_regex})$/ }
             if @arguments[:should_not_fully_match].none? { |test| test =~ test_regex } == false
                 warn.call :should_not_fully_match
                 pass << false
@@ -467,7 +382,11 @@ class PatternBase
         # run related unit tests
         pass << @match.run_tests if @match.is_a? PatternBase
         pass << @next_pattern.run_tests if @next_pattern.is_a? PatternBase
-        @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? PatternBase }
+        if @arguments[:includes].is_a? Array
+            @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? PatternBase }
+        elsif @arguments[:includes].is_a? PatternBase
+            pass << @arguments[:includes].run_tests
+        end
         pass.none?(&:!)
     end
 
@@ -515,7 +434,7 @@ class PatternBase
     #
     # Construct a new pattern and append to the end
     #
-    # @param pattern pattern options (see #initialize for options)
+    # @param [PatternBase] pattern options (see #initialize for options)
     # @see #initialize
     #
     # @return [PatternBase] a copy of self with a pattern inserted
@@ -531,7 +450,7 @@ class PatternBase
     # @note optionally override when inheriting
     # @note by default this adds quantifier options and optionally adds a capture group
     #
-    # @param [groups] groups group attributes
+    # @param [Hash] groups group attributes
     #
     # @return [String] the result of evaluating @match
     #
@@ -596,6 +515,7 @@ class PatternBase
     end
 
     # create a copy of this pattern that contains no groups
+    # @return [PatternBase]
     def groupless
         __deep_clone__.map! do |s|
             s.arguments.delete(:tag_as)
@@ -675,6 +595,11 @@ class PatternBase
         groups
     end
 
+    #
+    # Displays the Pattern for inspection
+    #
+    # @return [String] A representation of the pattern
+    #
     def inspect
         super.split(" ")[0] + " match:" + @match.inspect
     end
@@ -739,6 +664,8 @@ class PatternBase
             output[:name] = group[:tag_as] unless group[:tag_as].nil?
             if group[:includes].is_a? Array
                 output[:patterns] = convert_includes_to_patterns(group[:includes])
+            elsif !group[:includes].nil?
+                output[:patterns] = convert_includes_to_patterns([group[:includes]])
             end
             captures[group[:group].to_s] = output
         end
@@ -796,6 +723,7 @@ class PatternBase
     # Raise an error if regex contains a capturing group
     #
     # @param [Regexp] regex the regexp to test
+    # @param [Integer] check the group to check for
     #
     # @return [void]
     #
@@ -977,7 +905,7 @@ class Pattern < PatternBase
             output += ",\n#{indent}  how_many_times: " + @arguments[:how_many_times].to_s if @arguments[:how_many_times]
             output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of].to_s if @arguments[:word_cannot_be_any_of]
         end
-        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s  if @arguments[:dont_backtrack?]
+        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s if @arguments[:dont_backtrack?]
         output
         # rubocop:enable Metrics/LineLength
     end

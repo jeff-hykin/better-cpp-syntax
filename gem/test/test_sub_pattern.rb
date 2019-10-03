@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require 'minitest/autorun'
-require 'textmate_grammar'
+require_relative 'test_helper'
 
 class SubPatternTest < MiniTest::Test
-    def wrap_complete(pat)
-        Pattern.new(/^/).then(pat).then(/$/)
-    end
-
     def test_maybe
         r = Pattern.new(
             match: "abc",
@@ -140,7 +135,7 @@ class SubPatternTest < MiniTest::Test
                         ],
                     ),
                 ).then(/\s*/).then(")"),
-                reference: "func_call"
+                reference: "func_call",
             ),
         ).to_r
 

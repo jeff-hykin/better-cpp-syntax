@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-
-def with_warnings(flag)
-    old_verbose, $VERBOSE = $VERBOSE, flag
-    yield
-ensure
-    $VERBOSE = old_verbose
-end
+require 'textmate_grammar/util'
 
 #
 # Warns when a PatternRange has a start_pattern that matches the empty string
@@ -18,7 +12,7 @@ class StartMatchEmpty < GrammarLinter
     def pre_lint(pattern, options)
         return true unless pattern.is_a? PatternRange
 
-        regexp = with_warnings(nil) do
+        regexp = with_no_warnings do
             Regexp.new(pattern.start_pattern.evaluate.gsub("\\G", '\uFFFF'))
         end
         if "" =~ regexp and !options[:zeroLengthStart?]
