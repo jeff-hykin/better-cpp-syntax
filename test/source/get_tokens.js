@@ -12,7 +12,7 @@ let extensionsFor = {};
 for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
     let langExtension = path.basename(eachSyntaxPath).replace(/\..+/g, "");
     let syntax = JSON.parse(fs.readFileSync(eachSyntaxPath));
-    extensionsFor[langExtension] = syntax["fileTypes"];
+    extensionsFor[langExtension] = syntax["fileTypes"] || [];
 }
 
 let languageExtensionFor = fixturePath => {

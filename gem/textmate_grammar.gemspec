@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
     s.homepage = 'https://github.com/jeff-hykin/cpp-textmate-grammar'
     s.license = 'MIT'
 
-    s.required_ruby_version = '>=2.4.0'
+    s.required_ruby_version = '>=2.5.0'
 
     s.metadata = {
         "yard.run" => "yri",

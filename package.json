@@ -9,7 +9,7 @@
     "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "ruby scripts/lint.rb",
-    "pretest": "npm run build",
+    "_pretest": "npm run build",
     "test": "node test/source/index.js test",
     "testall": "npm test -- --all",
     "genall": "npm run generate-specs -- --all",

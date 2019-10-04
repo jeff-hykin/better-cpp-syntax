@@ -290,12 +290,12 @@ def doxygen
 
     # gtk doc
     command_grammars << Pattern.new(
-        match: /\b[A-Z]+:/.or(/@[a-z_]+:/),
+        match: Pattern.new(/\b[A-Z]+:/).or(/@[a-z_]+:/),
         tag_as: "storage.type.class.gtkdoc",
     )
 
     command_grammars << Pattern.new(
-        match: /[\\@]\S++/.lookAheadToAvoid(@end_of_line),
+        match: Pattern.new(/[\\@]\S++/).lookAheadToAvoid(@end_of_line),
         tag_as: "invalid.unknown.documentation.command",
     )
 
@@ -303,7 +303,7 @@ def doxygen
         tag_as: "comment.line.double-slash.documentation",
         match: Pattern.new(
             @start_of_line.maybe(match: @spaces, dont_back_track?: true).then(
-                match: /\/\//.oneOrMoreOf(/[!\/]/),
+                match: Pattern.new(/\/\//).oneOrMoreOf(/[!\/]/),
                 tag_as: "punctuation.definition.comment.documentation",
             ).then(
                 match: /.*/,
@@ -315,7 +315,7 @@ def doxygen
     single_line_block_comment = Pattern.new(
         tag_as: "comment.block.documentation",
         match: Pattern.new(
-            match: /\/\*/.oneOrMoreOf(/[!*]/).lookAheadFor(/\s/),
+            match: Pattern.new(/\/\*/).oneOrMoreOf(/[!*]/).lookAheadFor(/\s/),
             tag_as: "punctuation.definition.comment.begin.documentation",
         ).then(
             match: oneOrMoreOf(/./),

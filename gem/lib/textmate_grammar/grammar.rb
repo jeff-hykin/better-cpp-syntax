@@ -20,7 +20,9 @@ class Grammar
     #
     @@export_grammars = {}
 
-    attr_accessor :repository, :name, :scope_name
+    attr_accessor :repository
+    attr_accessor :name
+    attr_accessor :scope_name
 
     #
     # Create a new Exportable Grammar (Grammar Partial)
@@ -128,7 +130,10 @@ class Grammar
     # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] the stored pattern
     #
     def []=(key, value)
-        raise "Use symbols not strings" unless key.is_a? Symbol
+        unless key.is_a? Symbol
+            puts key
+            raise "Use symbols not strings" unless key.is_a? Symbol
+        end
 
         if key.to_s.start_with?("$") && !([:$initial_context, :$base, :$self].include? key)
             puts "#{key} is not a valid repository name"
@@ -173,7 +178,7 @@ class Grammar
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
             require path_or_export
-            resolved = resolve_require(path_or_export)
+            resolved = File.expand_path resolve_require(path_or_export)
 
             export = @@export_grammars.dig(resolved, :grammar)
             unless export.is_a? ExportableGrammar
@@ -388,6 +393,7 @@ class ExportableGrammar < Grammar
     # Grammars that are a parent to this grammar partial
     #
     # @api private
+    # @return [Grammar]
     #
     attr_accessor :parent_grammar
 
@@ -401,7 +407,7 @@ class ExportableGrammar < Grammar
         # and the first 5 bytes of the hash to get the seed
         # will not be unique if multiple exportable grammars are created in the same file
         # Don't do that
-        @seed = Digest::MD5.hexdigest(location.path)[0..10]
+        @seed = Digest::MD5.hexdigest(File.basename(location.path))[0..10]
         super(
             name: "export",
             scope_name: "export"

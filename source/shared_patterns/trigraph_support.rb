@@ -1,14 +1,14 @@
 #
 # alternate operator patterns
 #
-@double_hash          = /##|%:%:|\?\?=\?\?=/
-@hash                 = /##|%:|\?\?=/
-@open_square_bracket  = /\[|<:|\?\?\(/
-@close_square_bracket = /\[|:>|\?\?\)/
-@open_curly_brace     = /\{|<%|\?\?</
-@close_curly_brace    = /\}|%>|\?\?>/
+@double_hash          = Pattern.new(/##|%:%:|\?\?=\?\?=/)
+@hash                 = Pattern.new(/##|%:|\?\?=/)
+@open_square_bracket  = Pattern.new(/\[|<:|\?\?\(/)
+@close_square_bracket = Pattern.new(/\[|:>|\?\?\)/)
+@open_curly_brace     = Pattern.new(/\{|<%|\?\?</)
+@close_curly_brace    = Pattern.new(/\}|%>|\?\?>/)
 # trigraphs only
-@backslash            = /\\|\?\?\//
-@caret                = /\^|\?\?\'/
-@pipe                 = /\||\?\?!/
-@tilda                = /~|\?\?-/
+@backslash            = Pattern.new(/\\|\?\?\//)
+@caret                = Pattern.new(/\^|\?\?\'/)
+@pipe                 = Pattern.new(/\||\?\?!/)
+@tilda                = Pattern.new(/~|\?\?-/)

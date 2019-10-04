@@ -100,4 +100,24 @@ class GrammarTest < MiniTest::Test
     ensure
         File.delete("import.export.json") if File.exist?("import.export.json")
     end
+
+    def test_export
+        eg = Grammar.new_exportable_grammar
+        eg.exports = [:abc]
+        eg[:abc] = "abc"
+        eg[:def] = "def"
+        g = test_grammar
+        g.import(eg)
+        expected = {
+            :name => "test",
+            :scopeName => "source.test",
+            :repository => {
+                :abc => {:match => "abc"},
+                :"0f591ced18d_def" => {:match => "def"},
+            },
+            :patterns => [],
+            :version => "",
+        }
+        assert_equal expected, g.generate
+    end
 end

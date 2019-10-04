@@ -609,9 +609,9 @@ class PlaceholderPattern < PatternBase
         output
     end
 
-    # (see PatternBase#evaluate)
+    # (see PatternBase#to_tag)
     # @note this raises a runtime error if the pattern has not been resolved
-    def to_tag()
+    def to_tag
         raise "Attempting to create a tag from an unresolved placeholder" if @match == "placeholder"
 
         super()
