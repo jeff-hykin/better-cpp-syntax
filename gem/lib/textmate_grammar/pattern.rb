@@ -777,6 +777,14 @@ class Pattern < PatternBase
                 attributes_clone[each] = attributes_clone[each].size
             end
         end
+
+        # canonize dont_back_track? and as_few_as_possible?
+        @arguments[:dont_back_track?] ||= @arguments[:possessive?]
+        @arguments[:as_few_as_possible?] ||= @arguments[:lazy?]
+        if @arguments[:greedy?]
+            @arguments[:dont_back_track?] = false
+            @arguments[:as_few_as_possible?] = false
+        end
         # extract the data
         at_least       = attributes_clone[:at_least]
         at_most        = attributes_clone[:at_most]
@@ -804,6 +812,10 @@ class Pattern < PatternBase
                 ex: #{do_get_to_s_name} Pattern.new( *your_arguments* ) )
             HEREDOC
         end
+
+        return unless @arguments[:dont_back_track?] && @arguments[:as_few_as_possible?]
+
+        raise ":dont_back_track? and :as_few_as_possible? cannot both be provided"
     end
 
     #
@@ -848,6 +860,7 @@ class Pattern < PatternBase
         end
         # quantifiers can be made possessive without requiring atomic groups
         quantifier += "+" if quantifier != "" && @arguments[:dont_back_track?] == true
+        quantifier += "?" if quantifier != "" && @arguments[:as_few_as_possible?] == true
         quantifier
     end
 
@@ -905,7 +918,7 @@ class Pattern < PatternBase
             output += ",\n#{indent}  how_many_times: " + @arguments[:how_many_times].to_s if @arguments[:how_many_times]
             output += ",\n#{indent}  word_cannot_be_any_of: " + @arguments[:word_cannot_be_any_of].to_s if @arguments[:word_cannot_be_any_of]
         end
-        output += ",\n#{indent}  dont_backtrack?: " + @arguments[:dont_backtrack?].to_s if @arguments[:dont_backtrack?]
+        output += ",\n#{indent}  dont_back_track?: " + @arguments[:dont_back_track?].to_s if @arguments[:dont_back_track?]
         output
         # rubocop:enable Metrics/LineLength
     end
