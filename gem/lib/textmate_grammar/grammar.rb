@@ -8,6 +8,7 @@ require 'pathname'
 require_relative 'pattern'
 require_relative 'pattern_range'
 require_relative 'sub_patterns'
+require_relative 'legacy_pattern'
 
 #
 # Represents a Textmate Grammar

@@ -51,7 +51,7 @@ grammar = Grammar.new(
     universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
-    identifier                   = first_character.then(zeroOrMoreOf(subsequent_character))
+    identifier                   = grammar[:identifier] = first_character.then(zeroOrMoreOf(subsequent_character))
     preprocessor                 = grammar.import(File.join(__dir__, "./lib/preprocessor"))
     leading_space                = Pattern.new(/\s*+/)
     grammar[:semicolon] = @semicolon = Pattern.new(
@@ -354,27 +354,27 @@ grammar = Grammar.new(
             ),
             # tag is a legacy name
             tag_as: "meta.toc-list.banner.double-slash",
-        ).or(
-            should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
-            should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
-            match: Pattern.new(/^/).maybe(@spaces).then(
-                match: Pattern.new(
-                    match: /\/\*/,
-                    tag_as: "punctuation.definition.comment"
-                ).maybe(
-                    match: @spaces,
-                    quantity_preference: :as_few_as_possible
-                ).then(
-                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-                    tag_as: "meta.banner.character",
-                    reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part")
-                .maybe(@spaces).then(/\*\//),
-                tag_as: "comment.line.banner",
-            ),
-            # tag is a legacy name
-            tag_as: "meta.toc-list.banner.block",
-        )
+        ) # ).or(
+        #     should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
+        #     should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
+        #     match: Pattern.new(/^/).maybe(@spaces).then(
+        #         match: Pattern.new(
+        #             match: /\/\*/,
+        #             tag_as: "punctuation.definition.comment"
+        #         ).maybe(
+        #             match: @spaces,
+        #             quantity_preference: :as_few_as_possible
+        #         ).then(
+        #             match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+        #             tag_as: "meta.banner.character",
+        #             reference: "banner_part2"
+        #         ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part2")
+        #         .maybe(@spaces).then(/\*\//),
+        #         tag_as: "comment.line.banner",
+        #     ),
+        #     # tag is a legacy name
+        #     tag_as: "meta.toc-list.banner.block",
+        # )
     )
     grammar[:invalid_comment_end] = Pattern.new(
         match: /\*\//,
@@ -2320,7 +2320,7 @@ grammar = Grammar.new(
 #
 # Misc Legacy
 #
-    grammar[:square_brackets] = {
+    grammar[:square_brackets] = LegacyPattern.new({
             name: "meta.bracket.square.access",
             begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
             beginCaptures: {
@@ -2342,11 +2342,11 @@ grammar = Grammar.new(
                     include: "#evaluation_context"
                 }
             ]
-        }
-    grammar[:empty_square_brackets] = {
+        })
+    grammar[:empty_square_brackets] = LegacyPattern.new ({
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
-        }
+        })
     grammar[:misc_storage_modifiers] = Pattern.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
             tag_as: "storage.modifier.$match"
@@ -2375,7 +2375,7 @@ grammar = Grammar.new(
                     ),
                     # octal escapes \017
                     Pattern.new(
-                        match: /\\/.then(
+                        match: Pattern.new("\\").then(
                             match: /[0-7]/,
                             at_least: 1.times,
                             at_most: 3.times,
@@ -2384,7 +2384,7 @@ grammar = Grammar.new(
                     ),
                     # hex escapes
                     Pattern.new(
-                        match: /\\x/.then(
+                        match: Pattern.new("\\x").then(
                             match: /[0-9a-fA-F]/,
                             how_many_times?: 2.times,
                         ),
@@ -2449,15 +2449,7 @@ grammar = Grammar.new(
         ]
     )
     grammar[:string_escapes_context_c] = [
-            :backslash_escapes,
-            {
-                match: "\\\\.",
-                name: "invalid.illegal.unknown-escape"
-            },
-            {
-                match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-                name: "constant.other.placeholder"
-            },
+            placeholder(:backslash_escapes),
             # I don't think these are actual escapes, and they incorrectly mark valid strings
             # It might be related to printf and format from C (which is low priority for C++)
             # {
@@ -2478,15 +2470,19 @@ grammar = Grammar.new(
 #
 # Generate macro versions of all ranged patterns
 #
-    # create a duplicate grammar with all pattern ranges bailed-out
-    system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
     # assign that to the macro context
     grammar[:macro_context] = ["source.cpp.embedded.macro"]
 
 #
 # Save
 #
-saveGrammar(grammar)
+grammar.save_to(
+    syntax_dir: PathFor[:syntaxes],
+    tag_dir: File.dirname(PathFor[:languageTag]["cpp"])
+)
+# create a duplicate grammar with all pattern ranges bailed-out
+system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
+
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = grammar
