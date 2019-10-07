@@ -21,7 +21,7 @@ require_relative './raw_strings.rb'
 grammar = Grammar.new(
     name: "C++",
     scope_name: "source.cpp",
-    file_types: [
+    fileTypes: [
 		"cc",
 		"cpp",
 		"cp",
@@ -41,18 +41,28 @@ grammar = Grammar.new(
     ],
 )
 
+grammar[:bad] = Pattern.new(
+    match: "abc",
+    includes: [
+        [
+            "abc"
+        ]
+    ]
+)
+
 #
 # Utils
 #
     grammar.import(File.join(__dir__, "./lib/inline_comment"))
     grammar.import(File.join(__dir__, "./lib/std_space"))
+    grammar.import(File.join(__dir__, "./lib/preprocessor"))
     inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
     universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
     identifier                   = grammar[:identifier] = first_character.then(zeroOrMoreOf(subsequent_character))
-    preprocessor                 = grammar.import(File.join(__dir__, "./lib/preprocessor"))
+    preprocessor                 = grammar[:preprocessor_context]
     leading_space                = Pattern.new(/\s*+/)
     grammar[:semicolon] = @semicolon = Pattern.new(
             match: /;/,
@@ -149,8 +159,8 @@ grammar = Grammar.new(
                 # Tail
                 PatternRange.new(
                     tag_as: "meta.tail."+name,
-                    start_pattern: lookBehindFor(@close_curly_brace).then(/[\s\n]*/),
-                    end_pattern: Pattern.new(/[\s\n]*/).lookAheadFor(/;/),
+                    start_pattern: lookBehindFor(@close_curly_brace).then(/[\s]*/),
+                    end_pattern: Pattern.new(/[\s]*/).lookAheadFor(/;/),
                     includes: tail_includes
                 ),
                 *secondary_includes
@@ -2345,7 +2355,7 @@ grammar = Grammar.new(
         })
     grammar[:empty_square_brackets] = LegacyPattern.new ({
             name: "storage.modifier.array.bracket.square",
-            match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
+            match: lookBehindToAvoid("delete").then("[").maybe(@spaces).then("]").evaluate,
         })
     grammar[:misc_storage_modifiers] = Pattern.new(
             match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,

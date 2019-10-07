@@ -12,6 +12,7 @@ class StartMatchEmpty < GrammarLinter
     def pre_lint(pattern, options)
         return true unless pattern.is_a? PatternRange
 
+        pattern = pattern.resolve(options[:repository])
         regexp = with_no_warnings do
             Regexp.new(pattern.start_pattern.evaluate.gsub("\\G", '\uFFFF'))
         end

@@ -5,7 +5,7 @@ const path = require("path");
 const pathFor = require("./paths");
 
 const defaultTest = test =>
-    fs.existsSync(test.spec.yaml) || !fs.existsSync(test.spec.json);
+    fs.existsSync(test.spec.yaml) || fs.existsSync(test.spec.json);
 
 module.exports = function(yargs) {
     if (yargs.fixtures.length !== 0 || yargs.all) {
@@ -32,6 +32,7 @@ module.exports = function(yargs) {
     if (fileExt.length === 0) {
         return defaultTest;
     }
+    console.log(fileExt);
     return test => {
         const ext = path.extname(test.fixture).slice(1);
         return defaultTest(test) && fileExt.includes(ext);

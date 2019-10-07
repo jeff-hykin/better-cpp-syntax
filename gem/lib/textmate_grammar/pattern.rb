@@ -89,17 +89,38 @@ class PatternBase
     end
 
     #
-    # Uses a block to transform all Patterns the list
+    # Uses a block to transform all Patterns in the list
     #
+    # @param [Boolean] map_includes should include patterns be mapped?
     # @yield [self] invokes the block with self for modification
     #
     # @return [self]
     #
-    def map!(&block)
+    def map!(map_includes = false, &block)
         yield self
-        @match = @match.map!(&block) if @match.is_a? PatternBase
-        @next_pattern = @next_pattern.map!(&block) if @next_pattern.is_a? PatternBase
+        @match = @match.map!(map_includes, &block) if @match.is_a? PatternBase
+        @next_pattern = @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
+        map_includes!(&block) if map_includes
         self
+    end
+
+    #
+    # Uses a block to transform all Patterns in all includes
+    # @api private
+    # @not only for use by map!
+    #
+    # @yield [self] invokes the block with the includes for modification
+    #
+    # @return [self]
+    #
+    def map_includes!(&block)
+        return self unless @arguments[:includes].is_a? Array
+
+        @arguments[:includes].map! do |s|
+            next s.map!(true, &block) if s.is_a? PatternBase
+
+            next s
+        end
     end
 
     #
@@ -111,13 +132,7 @@ class PatternBase
     #
     def transform_includes(&block)
         __deep_clone__.map! do |s|
-            if s.arguments[:includes]
-                if s.arguments[:includes].is_a? Array
-                    s.arguments[:includes].map!(&block)
-                else
-                    s.arguments[:includes] = block.call s.arguments[:includes]
-                end
-            end
+            s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
         end.freeze
     end
 
@@ -187,6 +202,7 @@ class PatternBase
             @match = @arguments[:match]
             @arguments.delete(:match)
             @original_arguments = arguments[2]
+            @next_pattern = nil
             return
         end
 
@@ -216,6 +232,11 @@ class PatternBase
                 Provided arguments: #{@original_arguments}
             HEREDOC
             raise "See error above"
+        end
+        # ensure that includes is either nil or a flat array
+        if arg1[:includes]
+            arg1[:includes] = [arg1[:includes]] unless arg1[:includes].is_a? Array
+            arg1[:includes] = arg1[:includes].flatten
         end
         arg1.delete(:match)
         @arguments = arg1
@@ -338,47 +359,10 @@ class PatternBase
     # @return [Boolean] If all test passed return true, otherwise false
     #
     def run_tests
-        pass = [true]
+        pass = [
+            run_self_tests,
+        ]
 
-        self_regex = @match.to_r
-        warn = lambda do |symbol|
-            puts <<-HEREDOC.remove_indent
-
-                When testing the pattern #{self_regex.inspect}. The unit test for #{symbol} failed.
-                The unit test has the following patterns:
-                #{@arguments[symbol].to_yaml}
-                The Failing pattern is below:
-                #{self}
-            HEREDOC
-        end
-        if @arguments[:should_fully_match].is_a? Array
-            test_regex = with_no_warnings { /^(?:#{self_regex})$/ }
-            if @arguments[:should_fully_match].all? { |test| test =~ test_regex } == false
-                warn.call :should_fully_match
-                pass << false
-            end
-        end
-        if @arguments[:should_not_fully_match].is_a? Array
-            test_regex = with_no_warnings { /^(?:#{self_regex})$/ }
-            if @arguments[:should_not_fully_match].none? { |test| test =~ test_regex } == false
-                warn.call :should_not_fully_match
-                pass << false
-            end
-        end
-        if @arguments[:should_partially_match].is_a? Array
-            test_regex = self_regex
-            if @arguments[:should_partially_match].all? { |test| test =~ test_regex } == false
-                warn.call :should_partially_match
-                pass << false
-            end
-        end
-        if @arguments[:should_not_partially_match].is_a? Array
-            test_regex = self_regex
-            if @arguments[:should_not_partially_match].none? { |test| test =~ test_regex } == false
-                warn.call :should_not_partially_match
-                pass << false
-            end
-        end
         # run related unit tests
         pass << @match.run_tests if @match.is_a? PatternBase
         pass << @next_pattern.run_tests if @next_pattern.is_a? PatternBase
@@ -387,6 +371,65 @@ class PatternBase
         elsif @arguments[:includes].is_a? PatternBase
             pass << @arguments[:includes].run_tests
         end
+        pass.none?(&:!)
+    end
+
+    #
+    # Runs the unit tests for self
+    #
+    # @return [Boolean] If all test passed return true, otherwise false
+    #
+    def run_self_tests
+        pass = [true]
+
+        # some patterns are not able to be evaluated
+        # do not attempt to unless required
+        return true unless [
+            :should_fully_match,
+            :should_not_fully_match,
+            :should_partially_match,
+            :should_not_partially_match,
+        ].any? { |k| @arguments.include? k }
+
+        copy = __deep_clone_self__
+        test_regex = copy.to_r
+        test_fully_regex = wrap_with_anchors(copy).to_r
+
+        warn = lambda do |symbol|
+            puts <<-HEREDOC.remove_indent
+
+                When testing the pattern #{test_regex.inspect}. The unit test for #{symbol} failed.
+                The unit test has the following patterns:
+                #{@arguments[symbol].to_yaml}
+                The Failing pattern is below:
+                #{self}
+            HEREDOC
+        end
+        if @arguments[:should_fully_match].is_a? Array
+            if @arguments[:should_fully_match].all? { |test| test =~ test_fully_regex } == false
+                warn.call :should_fully_match
+                pass << false
+            end
+        end
+        if @arguments[:should_not_fully_match].is_a? Array
+            if @arguments[:should_not_fully_match].none? { |test| test =~ test_fully_regex } == false
+                warn.call :should_not_fully_match
+                pass << false
+            end
+        end
+        if @arguments[:should_partially_match].is_a? Array
+            if @arguments[:should_partially_match].all? { |test| test =~ test_regex } == false
+                warn.call :should_partially_match
+                pass << false
+            end
+        end
+        if @arguments[:should_not_partially_match].is_a? Array
+            if @arguments[:should_not_partially_match].none? { |test| test =~ test_regex } == false
+                warn.call :should_not_partially_match
+                pass << false
+            end
+        end
+
         pass.none?(&:!)
     end
 
@@ -713,10 +756,13 @@ class PatternBase
     # @return [PatternBase] a copy of self
     #
     def __deep_clone__
+        __deep_clone_self__.insert! @next_pattern.__deep_clone__
+    end
+
+    def __deep_clone_self__
         options = @arguments.__deep_clone__
         options[:match] = @match.__deep_clone__
-        new_pattern = self.class.new(options, :deep_clone, @original_arguments)
-        new_pattern.insert! @next_pattern.__deep_clone__
+        self.class.new(options, :deep_clone, @original_arguments)
     end
 
     #
@@ -850,7 +896,7 @@ class Pattern < PatternBase
                 elsif @at_least == 1 and @at_most.nil?
                     # this is just a different way of "oneOrMoreOf"
                     "+"
-                elsif @at_least == @most
+                elsif @at_least == @at_most
                     # exactly N times
                     "{#{@at_least}}"
                 else

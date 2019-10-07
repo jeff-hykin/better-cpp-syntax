@@ -1,9 +1,9 @@
 require_relative '../paths.rb'
-# 
+#
 # Helpers
-# 
+#
 def build(language_extension_name)
-    Process.wait(Process.spawn("ruby", PathFor[:generator][language_extension_name]))
+    Process.wait(Process.spawn("ruby", "-w", PathFor[:generator][language_extension_name]))
     exit_code = Integer($?)
     if exit_code != 0
         puts "\n\nGenerating the syntax for '#{language_extension_name}' failed: #{exit_code}"
@@ -11,9 +11,9 @@ def build(language_extension_name)
     end
 end
 
-# 
+#
 # Process CommandLine input
-# 
+#
 # if no args then build all of them
 if ARGV[0] == nil
     for each_dir in Dir[PathFor[:languages]+"/**"]

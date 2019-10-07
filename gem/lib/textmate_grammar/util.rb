@@ -91,3 +91,7 @@ def string_single_entity?(regex_string)
     end
     true
 end
+
+def wrap_with_anchors(pat)
+    Pattern.new(/^/).then(pat).then(/$/)
+end

@@ -262,9 +262,10 @@ class OneOfPattern < PatternBase
     end
 
     # (see PatternBase#map!)
-    def map!(&block)
-        @arguments[:patterns].map! { |p| p.map!(&block) }
-        @next_pattern.map!(&block) if @next_pattern.is_a? PatternBase
+    def map!(map_includes = false, &block)
+        @arguments[:patterns].map! { |p| p.map!(map_includes, &block) }
+        @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
+        map_includes!(&block) if map_includes
         self
     end
 
@@ -593,7 +594,7 @@ class PlaceholderPattern < PatternBase
             super(placeholder, deep_clone, original_arguments)
         else
             super(
-                match: "placeholder",
+                match: Regexp.new("placeholder(?##{placeholder})"),
                 placeholder: placeholder
             )
         end
@@ -612,7 +613,10 @@ class PlaceholderPattern < PatternBase
     # (see PatternBase#to_tag)
     # @note this raises a runtime error if the pattern has not been resolved
     def to_tag
-        raise "Attempting to create a tag from an unresolved placeholder" if @match == "placeholder"
+        if @match.is_a?(String) && @match.start_with?("placeholder")
+            placeholder = @arguments[:placeholder]
+            raise "Attempting to create a tag from an unresolved placeholder `:#{placeholder}'"
+        end
 
         super()
     end
@@ -620,7 +624,9 @@ class PlaceholderPattern < PatternBase
     # (see PatternBase#evaluate)
     # @note this raises a runtime error if the pattern has not been resolved
     def evaluate(groups = nil)
-        raise "Attempting to evaluate an unresolved placeholder" if @match == "placeholder"
+        if @match.is_a?(String) && @match.start_with?("placeholder")
+            raise "Attempting to evaluate an unresolved placeholder `:#{@arguments[:placeholder]}'"
+        end
 
         super(groups)
     end
@@ -663,7 +669,7 @@ class PatternBase
     # @return [PatternBase] a copy of self with placeholders resolved
     #
     def resolve(repository)
-        __deep_clone__.map! { |s| s.resolve!(repository) if s.respond_to? :resolve! }.freeze
+        __deep_clone__.map!(true) { |s| s.resolve!(repository) if s.respond_to? :resolve! }.freeze
     end
 end
 

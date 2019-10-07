@@ -127,6 +127,12 @@ class PatternRange < PatternBase
         output["begin"]   = output["begin"][1..-2]   if @start_pattern.optimize_outer_group?
         output[match_key] = output[match_key][1..-2] if @stop_pattern.optimize_outer_group?
 
+        if @arguments[:includes].is_a? Array
+            output[:patterns] = convert_includes_to_patterns(@arguments[:includes])
+        elsif !@arguments[:includes].nil?
+            output[:patterns] = convert_includes_to_patterns([@arguments[:includes]])
+        end
+
         output
     end
 
@@ -155,9 +161,10 @@ class PatternRange < PatternBase
     #
     # (see PatternBase#map!)
     #
-    def map!(&block)
-        @start_pattern.map!(&block)
-        @stop_pattern.map!(&block)
+    def map!(map_includes = false, &block)
+        @start_pattern.map!(map_includes, &block)
+        @stop_pattern.map!(map_includes, &block)
+        map_includes!(&block) if map_includes
         self
     end
 

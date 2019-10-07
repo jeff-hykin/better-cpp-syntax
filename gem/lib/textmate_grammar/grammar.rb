@@ -132,7 +132,6 @@ class Grammar
     #
     def []=(key, value)
         unless key.is_a? Symbol
-            puts key
             raise "Use symbols not strings" unless key.is_a? Symbol
         end
 
@@ -218,7 +217,9 @@ class Grammar
         # run post linters ✓
 
         repo = @repository.__deep_clone__
+        Log.info "running pre linters."
         @@linters.each do |linter|
+            Log.info "  " + linter.class.to_s
             msg = "linting failed, see above error"
             @repository.each do |_, value|
                 if value.is_a? Array
@@ -235,7 +236,9 @@ class Grammar
             end
         end
 
+        Log.info "running pre transforms."
         @@transforms.each do |transform|
+            Log.info "  " + transform.class.to_s
             repo = repo.transform_values do |value|
                 if value.is_a? Array
                     value.map do |v|
@@ -251,6 +254,7 @@ class Grammar
             end
         end
 
+        Log.info "converting :$initial_context."
         convert_initial_context = lambda do |value|
             if value == :$initial_context
                 return (inherit_or_embedded == :embedded) ? "$self" : "$base"
@@ -271,7 +275,9 @@ class Grammar
             scopeName: @scope_name,
         }
 
+        Log.info "transforming patterns to rules."
         to_tag = lambda do |value|
+            Log.debug(value.name) if value.is_a? PatternBase
             case value
             when Array then return {"patterns" => value.map { |v| to_tag.call(v) }}
             when Symbol then return {"include" => "#" + value.to_s}
@@ -292,8 +298,10 @@ class Grammar
         output[:version] = auto_version
         output.merge!(@keys) { |_key, old, _new| old }
 
+        Log.info "running post transforms."
         @@transforms.each { |transform| output = transform.post_transform(output) }
 
+        Log.info "running post linters."
         @@linters.each do |linter|
             raise "linting failed, see above error" unless linter.post_lint(output)
         end
@@ -331,7 +339,7 @@ class Grammar
             inherit_or_embedded: :embedded,
             generate_tags: true,
             syntax_format: :json,
-            syntax_name: "#{@name}.tmLanguage",
+            syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
             syntax_dir: File.join(options[:dir], "syntaxes"),
             tag_dir: File.join(options[:dir], "language_tags"),
         }

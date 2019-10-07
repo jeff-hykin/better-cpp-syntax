@@ -24,7 +24,9 @@ class LegacyPattern < Pattern
         true
     end
 
-    def map!() end
+    def map!(*)
+        self
+    end
 
     def __deep_clone__
         self.class.new(@hash)
