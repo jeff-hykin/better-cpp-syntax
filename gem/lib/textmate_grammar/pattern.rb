@@ -111,10 +111,10 @@ class PatternBase
     #
     # @yield [self] invokes the block with the includes for modification
     #
-    # @return [self]
+    # @return [void]
     #
     def map_includes!(&block)
-        return self unless @arguments[:includes].is_a? Array
+        return unless @arguments[:includes].is_a? Array
 
         @arguments[:includes].map! do |s|
             next s.map!(true, &block) if s.is_a? PatternBase
@@ -131,7 +131,7 @@ class PatternBase
     # @return [PatternBase] a copy of self with transformed includes
     #
     def transform_includes(&block)
-        __deep_clone__.map! do |s|
+        __deep_clone__.map!(true) do |s|
             s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
         end.freeze
     end
@@ -644,7 +644,7 @@ class PatternBase
     # @return [String] A representation of the pattern
     #
     def inspect
-        super.split(" ")[0] + " match:" + @match.inspect
+        super.split(" ")[0] + " match:" + @match.inspect + ">"
     end
 
     #
@@ -739,7 +739,7 @@ class PatternBase
     def convert_includes_to_patterns(includes)
         includes = [includes] unless includes.is_a? Array
         patterns = includes.flatten.map do |rule|
-            next rule if rule.is_a?(String) && rule.start_with?("source.", "text.")
+            next {include: "#{rule}"} if rule.is_a?(String) && rule.start_with?("source.", "text.")
             next "$self" if rule == :$self
             next "$base" if rule == :$base
             next {include: "##{rule}"} if rule.is_a? Symbol

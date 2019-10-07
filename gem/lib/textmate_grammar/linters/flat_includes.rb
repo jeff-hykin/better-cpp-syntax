@@ -15,11 +15,15 @@ class FlatIncludes < GrammarLinter
 
         if pattern.arguments[:includes].is_a?(Array) &&
            pattern.arguments[:includes].none? { |v| v.is_a? Array }
-            return true
+            flat = true
+            pattern.arguments[:includes].map do |s|
+                flat = false unless pre_lint(s, options)
+            end
+            return flat
         end
 
-        puts "The pattern #{pattern.name} does not have a flat includes array"
-        puts "this is an internal error"
+        puts "The pattern `#{pattern.name}' does not have a flat includes array."
+        puts "This is an internal error"
 
         false
     end

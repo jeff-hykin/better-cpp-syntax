@@ -2688,8 +2688,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -5626,8 +5626,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -6365,8 +6365,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -7104,7 +7104,7 @@
               "include": "#ever_present_context"
             },
             {
-              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|placeholder(?#inline_comment))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
+              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
               "captures": {
                 "1": {
                   "name": "keyword.operator.assignment"
@@ -7117,9 +7117,27 @@
                   ]
                 },
                 "3": {
-                  "name": "keyword.other.default.constructor"
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
                 },
                 "4": {
+                  "name": "comment.block.cpp"
+                },
+                "5": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                },
+                "6": {
+                  "name": "keyword.other.default.constructor"
+                },
+                "7": {
                   "name": "keyword.other.delete.constructor"
                 }
               }
@@ -7249,8 +7267,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -7463,7 +7481,7 @@
               "include": "#ever_present_context"
             },
             {
-              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|placeholder(?#inline_comment))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
+              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
               "captures": {
                 "1": {
                   "name": "keyword.operator.assignment"
@@ -7476,9 +7494,27 @@
                   ]
                 },
                 "3": {
-                  "name": "keyword.other.default.constructor"
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
                 },
                 "4": {
+                  "name": "comment.block.cpp"
+                },
+                "5": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                },
+                "6": {
+                  "name": "keyword.other.default.constructor"
+                },
+                "7": {
                   "name": "keyword.other.delete.constructor"
                 }
               }
@@ -7608,8 +7644,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -7764,7 +7800,7 @@
               "include": "#ever_present_context"
             },
             {
-              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|placeholder(?#inline_comment))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
+              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
               "captures": {
                 "1": {
                   "name": "keyword.operator.assignment"
@@ -7777,9 +7813,27 @@
                   ]
                 },
                 "3": {
-                  "name": "keyword.other.default.constructor"
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
                 },
                 "4": {
+                  "name": "comment.block.cpp"
+                },
+                "5": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                },
+                "6": {
+                  "name": "keyword.other.default.constructor"
+                },
+                "7": {
                   "name": "keyword.other.delete.constructor"
                 }
               }
@@ -7825,8 +7879,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -8039,7 +8093,7 @@
               "include": "#ever_present_context"
             },
             {
-              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|placeholder(?#inline_comment))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
+              "match": "(\\=)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(?:(default)|delete)",
               "captures": {
                 "1": {
                   "name": "keyword.operator.assignment"
@@ -8052,9 +8106,27 @@
                   ]
                 },
                 "3": {
-                  "name": "keyword.other.default.constructor"
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
                 },
                 "4": {
+                  "name": "comment.block.cpp"
+                },
+                "5": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                },
+                "6": {
+                  "name": "keyword.other.default.constructor"
+                },
+                "7": {
                   "name": "keyword.other.delete.constructor"
                 }
               }
@@ -8100,8 +8172,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -11450,8 +11522,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -11751,8 +11823,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -12266,8 +12338,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -12569,8 +12641,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -12872,8 +12944,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -12968,8 +13040,8 @@
           ]
         },
         {
-          "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-          "end": "[\\s\\n]*(?=;)",
+          "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+          "end": "[\\s]*(?=;)",
           "beginCaptures": {
           },
           "endCaptures": {
@@ -13285,8 +13357,8 @@
               ]
             },
             {
-              "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
+              "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+              "end": "[\\s]*(?=;)",
               "beginCaptures": {
               },
               "endCaptures": {
@@ -13727,8 +13799,8 @@
               ]
             },
             {
-              "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
+              "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+              "end": "[\\s]*(?=;)",
               "beginCaptures": {
               },
               "endCaptures": {
@@ -14169,8 +14241,8 @@
               ]
             },
             {
-              "begin": "(?<=\\}|%>|\\?\\?>)[\\s\\n]*",
-              "end": "[\\s\\n]*(?=;)",
+              "begin": "(?<=\\}|%>|\\?\\?>)[\\s]*",
+              "end": "[\\s]*(?=;)",
               "beginCaptures": {
               },
               "endCaptures": {
@@ -17872,10 +17944,18 @@
           "name": "string.quoted.double",
           "contentName": "meta.embedded.assembly",
           "patterns": [
-            "source.asm",
-            "source.x86",
-            "source.x86_64",
-            "source.arm",
+            {
+              "include": "source.asm"
+            },
+            {
+              "include": "source.x86"
+            },
+            {
+              "include": "source.x86_64"
+            },
+            {
+              "include": "source.arm"
+            },
             {
               "include": "#backslash_escapes"
             },
@@ -17946,7 +18026,7 @@
     },
     "empty_square_brackets": {
       "name": "storage.modifier.array.bracket.square",
-      "match": "(?-mix:lookAround(\n  match: \\/delete\\/,\n  type: :lookBehindToAvoid,\n)\\\\[\\\\s*\\\\])"
+      "match": "(?<!delete)\\[(?:(?:\\s)+)?\\]"
     },
     "misc_storage_modifiers": {
       "match": "\\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\\b",
@@ -18037,7 +18117,9 @@
           },
           "name": "string.quoted.double.raw.regex",
           "patterns": [
-            "source.regexp.python"
+            {
+              "include": "source.regexp.python"
+            }
           ]
         },
         {
@@ -18058,7 +18140,9 @@
           },
           "name": "string.quoted.double.raw.sql",
           "patterns": [
-            "source.sql"
+            {
+              "include": "source.sql"
+            }
           ]
         },
         {

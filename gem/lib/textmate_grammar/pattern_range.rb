@@ -75,6 +75,12 @@ class PatternRange < PatternBase
         arguments.delete(:end_pattern)
         arguments.delete(:while_pattern)
 
+        # ensure that includes is either nil or a flat array
+        if arguments[:includes]
+            arguments[:includes] = [arguments[:includes]] unless arguments[:includes].is_a? Array
+            arguments[:includes] = arguments[:includes].flatten
+        end
+
         @arguments = arguments
     end
 
@@ -153,6 +159,7 @@ class PatternRange < PatternBase
 
             output += ",\n  #{tag}: \"" + @arguments[tag] + "\"" if @arguments[tag].is_a? String
         end
+        output += ",\n  includes: " + @arguments[:includes].to_s if @arguments[:includes]
         output += ",\n)"
 
         output
@@ -175,5 +182,9 @@ class PatternRange < PatternBase
         s = @start_pattern.run_tests
         e = @stop_pattern.run_tests
         s && e
+    end
+
+    def inspect
+        super.split(" ")[0] + " start_pattern:" + @start_pattern.inspect + ">"
     end
 end

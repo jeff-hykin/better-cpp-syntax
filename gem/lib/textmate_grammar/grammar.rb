@@ -277,12 +277,11 @@ class Grammar
 
         Log.info "transforming patterns to rules."
         to_tag = lambda do |value|
-            Log.debug(value.name) if value.is_a? PatternBase
             case value
             when Array then return {"patterns" => value.map { |v| to_tag.call(v) }}
             when Symbol then return {"include" => "#" + value.to_s}
             when Hash then return value
-            when String then return value
+            when String then return {"include" => value}
             when PatternBase then return value.to_tag
             else raise "Unexpected value: #{value.class}"
             end
