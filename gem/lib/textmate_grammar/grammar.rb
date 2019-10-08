@@ -263,12 +263,19 @@ class Grammar
             return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
 
             if value.is_a? PatternBase
-                return value.transform_includes { |d| convert_initial_context.call(d) }
+                return value.transform_includes do |d|
+                    # transform includes will call this block again if d is a patternBase
+                    next d if d.is_a? PatternBase
+
+                    convert_initial_context.call(d)
+                end
             end
+
+            puts value
 
             return value
         end
-        repo.transform_values! { |v| convert_initial_context.call(v) }
+        repo = repo.transform_values { |v| convert_initial_context.call(v) }
 
         output = {
             name: @name,

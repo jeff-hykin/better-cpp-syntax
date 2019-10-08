@@ -92,6 +92,13 @@ def string_single_entity?(regex_string)
     true
 end
 
+#
+# Wraps a pattern in start and end anchors
+#
+# @param [PatternBase] pat the pattern to wrap
+#
+# @return [PatternBase] the wrapped pattern
+#
 def wrap_with_anchors(pat)
     Pattern.new(/^/).then(pat).then(/$/)
 end
