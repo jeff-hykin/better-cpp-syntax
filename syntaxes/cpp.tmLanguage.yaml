@@ -261,7 +261,7 @@ repository:
     - include: "#preprocessor_number_literal"
     - include: "#line_continuation_character"
   include:
-    match: (?:^)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((#)\s*((?:(?:include|include_next)|import))\b)\s*(?:(?:(?:((<)[^>]*(>?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/)))|((\")[^\"]*(\"?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/))))|((?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/))))|((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/)))
+    match: (?:^)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((#)\s*((?:include|include_next))\b)\s*(?:(?:(?:((<)[^>]*(>?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/)))|((\")[^\"]*(\"?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/))))|(((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?:\.(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)*((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=(?:\/\/|;)))))|((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=(?:\/\/|;))))
     captures:
       '1':
         patterns:
@@ -346,7 +346,118 @@ repository:
           name: comment.block.cpp punctuation.definition.comment.end.cpp
         - match: "\\*"
           name: comment.block.cpp
+      '31':
+        patterns:
+        - include: "#inline_comment"
+      '32':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '33':
+        name: comment.block.cpp
+      '34':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
     name: meta.preprocessor.include.cpp
+  module_import:
+    match: (?:^)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))((import))\s*(?:(?:(?:((<)[^>]*(>?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/)))|((\")[^\"]*(\"?)((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=\/\/))))|(((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?:\.(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)*((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=(?:\/\/|;)))))|((?:(?:(?>\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+?|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z)))(?:(?:\n|$)|(?=(?:\/\/|;))))\s*;?
+    captures:
+      '1':
+        patterns:
+        - include: "#inline_comment"
+      '2':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '3':
+        name: comment.block.cpp
+      '4':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '5':
+        name: keyword.control.directive.import.cpp
+      '7':
+        name: string.quoted.other.lt-gt.include.cpp
+      '8':
+        name: punctuation.definition.string.begin.cpp
+      '9':
+        name: punctuation.definition.string.end.cpp
+      '10':
+        patterns:
+        - include: "#inline_comment"
+      '11':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '12':
+        name: comment.block.cpp
+      '13':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '14':
+        name: string.quoted.double.include.cpp
+      '15':
+        name: punctuation.definition.string.begin.cpp
+      '16':
+        name: punctuation.definition.string.end.cpp
+      '17':
+        patterns:
+        - include: "#inline_comment"
+      '18':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '19':
+        name: comment.block.cpp
+      '20':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '21':
+        name: entity.name.other.preprocessor.macro.include.cpp
+      '22':
+        patterns:
+        - include: "#inline_comment"
+      '23':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '24':
+        name: comment.block.cpp
+      '25':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '26':
+        patterns:
+        - include: "#inline_comment"
+      '27':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '28':
+        name: comment.block.cpp
+      '29':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '30':
+        patterns:
+        - include: "#inline_comment"
+      '31':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '32':
+        name: comment.block.cpp
+      '33':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+    name: meta.preprocessor.import.cpp
   line:
     name: meta.preprocessor.line.cpp
     begin: "((?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(#)\\s*line\\b)"
@@ -622,6 +733,7 @@ repository:
     - include: "#pragma_mark"
     - include: "#pragma"
     - include: "#include"
+    - include: "#module_import"
     - include: "#line"
     - include: "#diagnostic"
     - include: "#undef"
