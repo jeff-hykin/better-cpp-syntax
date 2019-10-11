@@ -117,6 +117,28 @@ class PatternBase
     end
 
     #
+    # Call the block for each pattern in the list
+    #
+    # @param [Boolean] each_includes should include patterns be called?
+    # @yield [self] invokes the block with self
+    #
+    # @return [void]
+    #
+    def each(each_includes = false, &block)
+        yield self
+        @match.each(each_includes, &block) if @match.is_a? PatternBase
+        @next_pattern.each(each_includes, &block) if @next_pattern.is_a? PatternBase
+        if each_includes
+            @arguments[:includes].each do |s|
+                next unless s.is_a? Pattern
+
+                s.each_includes(true, &block)
+            end
+        end
+    end
+
+
+    #
     # Uses a block to transform all Patterns in all includes
     # @api private
     # @not only for use by map!
