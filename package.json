@@ -5,6 +5,7 @@
   "icon": "icon.png",
   "version": "1.0.0",
   "scripts": {
+    "postinstall": "bundle install",
     "build": "ruby scripts/generate.rb",
     "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
