@@ -120,4 +120,14 @@ class GrammarTest < MiniTest::Test
         }
         assert_equal expected, g.generate
     end
+
+    def test_initial_context
+        g = test_grammar
+        g[:abc] = PatternRange.new(
+            start_pattern: /abc/,
+            end_pattern: /def/,
+            includes: [:$initial_context],
+        )
+        pp g.generate
+    end
 end

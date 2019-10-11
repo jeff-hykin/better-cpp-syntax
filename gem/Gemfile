@@ -7,6 +7,7 @@ ruby ">=2.5.0"
 gem "textmate_grammar", :path => File.expand_path(__dir__)
 
 gem 'deep_clone'
+gem 'logging'
 
 gem 'plist', :require => false
 

@@ -169,10 +169,24 @@ class PatternRange < PatternBase
     # (see PatternBase#map!)
     #
     def map!(map_includes = false, &block)
+        # TODO: should this `yield self`
+        # it would remove the need for the override of transform_includes
         @start_pattern.map!(map_includes, &block)
         @stop_pattern.map!(map_includes, &block)
         map_includes!(&block) if map_includes
         self
+    end
+
+    #
+    # (see PatternBase#transform_includes)
+    #
+    def transform_includes(&block)
+        copy = __deep_clone__
+        copy.arguments[:includes].map!(&block) if copy.arguments[:includes].is_a? Array
+
+        copy.map!(true) do |s|
+            s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
+        end.freeze
     end
 
     #

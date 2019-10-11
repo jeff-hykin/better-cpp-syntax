@@ -13,8 +13,8 @@ class IncludesThenTagAs < GrammarLinter
     #
     # @return [Boolean] if any of the patterns have a tag_as
     #
-    def has_tag_as(pattern)
-        return true unless pattern.is_a? PatternBase
+    def tag_as?(pattern)
+        return false unless pattern.is_a? PatternBase
 
         pattern.each do |s|
             return true if s.arguments[:tag_as]
@@ -32,9 +32,8 @@ class IncludesThenTagAs < GrammarLinter
 
         return false unless pre_lint(pattern.match, options)
 
-        if pattern.arguments[:includes].is_a? Array
-            return true unless has_tag_as(pattern.match)
-        end
+        return true unless pattern.arguments[:includes].is_a? Array
+        return true unless tag_as?(pattern.match)
 
         puts "The pattern `#{pattern.name}' has both an includes argument,"
         puts "and a match argument that, it or a sub pattern has a tag_as argument"
