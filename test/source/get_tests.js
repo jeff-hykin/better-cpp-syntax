@@ -12,7 +12,6 @@ const pathFor = require("./paths");
 module.exports = (yargs, testFilter = _each => true) =>
     pathFor.eachFixture
         .map(fixture => {
-            console.log(fixture);
             let specPath = fixture.replace(pathFor.fixtures, pathFor.specDir);
             return {
                 fixture,

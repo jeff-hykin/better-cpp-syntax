@@ -781,8 +781,7 @@ class PatternBase
         includes = [includes] unless includes.is_a? Array
         patterns = includes.flatten.map do |rule|
             next {include: "#{rule}"} if rule.is_a?(String) && rule.start_with?("source.", "text.")
-            next "$self" if rule == :$self
-            next "$base" if rule == :$base
+            next {include: "#{rule.to_s}"} if rule == :$self || rule == :$base
             next {include: "##{rule}"} if rule.is_a? Symbol
 
             rule = PatternBase.new(rule) unless rule.is_a? PatternBase

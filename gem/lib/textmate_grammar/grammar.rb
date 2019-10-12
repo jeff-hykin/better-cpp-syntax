@@ -252,7 +252,7 @@ class Grammar
 
         convert_initial_context = lambda do |value|
             if value == :$initial_context
-                return (inherit_or_embedded == :embedded) ? "$self" : "$base"
+                return (inherit_or_embedded == :embedded) ? :$self : :$base
             end
 
             return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
@@ -502,7 +502,7 @@ class ExportableGrammar < Grammar
         elsif value.is_a? Array
             value.map { |v| fixupValue(v) }
         elsif value.is_a? PatternBase
-            value.transform_includes { |v| fixupValue(v) }
+            return value
         else
             raise "Unexpected object of type #{value.class} in value"
         end

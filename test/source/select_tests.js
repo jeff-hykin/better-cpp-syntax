@@ -32,7 +32,6 @@ module.exports = function(yargs) {
     if (fileExt.length === 0) {
         return defaultTest;
     }
-    console.log(fileExt);
     return test => {
         const ext = path.extname(test.fixture).slice(1);
         return defaultTest(test) && fileExt.includes(ext);
