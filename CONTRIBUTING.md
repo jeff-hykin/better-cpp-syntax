@@ -4,11 +4,10 @@
 2. Make sure you have the ruby bundler `gem install bundler`
 3. Clone or fork the repo.
 4. Run `npm install`
-5. Run `bundle install`
-6. Run `npm test` to make sure everything is working
-7. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
-8. Then, in that new window, open up a C++ file, and any changes made to the project will show up in the syntax of that file.
-9. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop up.
+5. Run `npm test` to make sure everything is working
+6. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
+7. Then, in that new window, open up a C++ file, and any changes made to the project will show up in the syntax of that file.
+8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop up.
 
 ## Mapping textmate grammar constructs to readable grammars
 For a single pattern rule:
