@@ -156,6 +156,7 @@ class OrPattern < PatternBase
     def integrate_pattern(previous_evaluate, groups, is_single_entity)
         previous_evaluate = "(?:#{previous_evaluate})" unless is_single_entity
         match = @match.is_a?(PatternBase) ? @match.evaluate(groups) : @match
+        match = "(#{match})" if needs_to_capture?
         self_pattern = "(?:#{previous_evaluate}|#{match})"
         if @next_pattern.respond_to? :integrate_pattern
             single_entity = string_single_entity? self_pattern

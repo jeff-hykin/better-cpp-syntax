@@ -152,9 +152,35 @@ class Grammar
             value = value.flatten.map do |item|
                 next item if item.is_a? Symbol
 
+                # TODO: refactor this and the patternBase check below into a generic method
+                if item.is_a? Hash
+                    # check for an implicit legacy pattern
+                    legacy_keys = [
+                        "name",
+                        "contentName",
+                        "begin",
+                        "end",
+                        "while",
+                        "comment",
+                        "disabled",
+                    ]
+                    item = LegacyPattern.new(item) unless (item.keys & legacy_keys).empty?
+                end
                 item = PatternBase.new(item) unless item.is_a? PatternBase
                 item
             end
+        elsif value.is_a? Hash
+            # check for an implicit legacy pattern
+            legacy_keys = [
+                "name",
+                "contentName",
+                "begin",
+                "end",
+                "while",
+                "comment",
+                "disabled",
+            ]
+            value = LegacyPattern.new(value) unless (value.keys & legacy_keys).empty?
         elsif !value.is_a?(PatternBase)
             value = PatternBase.new(value)
         end

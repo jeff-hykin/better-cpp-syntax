@@ -2459,7 +2459,7 @@ grammar[:bad] = Pattern.new(
         ]
     )
     grammar[:string_escapes_context_c] = [
-            placeholder(:backslash_escapes),
+            grammar[:backslash_escapes],
             # I don't think these are actual escapes, and they incorrectly mark valid strings
             # It might be related to printf and format from C (which is low priority for C++)
             # {
