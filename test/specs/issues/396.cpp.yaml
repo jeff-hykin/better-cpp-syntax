@@ -25,7 +25,11 @@
   scopes:
     - entity.name.other.preprocessor.macro.include
 - source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: import
   scopes:
     - keyword.control.directive.import
 - source: ;
+  scopes:
+    - punctuation.terminator.statement
