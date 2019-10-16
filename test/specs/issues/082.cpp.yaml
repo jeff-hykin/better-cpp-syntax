@@ -286,19 +286,17 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: .
-  scopes:
-    - punctuation.separator.dot-access
 - source: name
   scopes:
-    - entity.name.function.member
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: )
-  scopes:
+  scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
@@ -645,19 +643,17 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
 - source: .
-  scopes:
-    - punctuation.separator.dot-access
 - source: name
   scopes:
-    - entity.name.function.member
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.member
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.function.member
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: )
-  scopes:
+  scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:

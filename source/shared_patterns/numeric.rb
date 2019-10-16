@@ -80,6 +80,7 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
             /[uU]LL?/,
             /ll?[uU]?/,
             /LL?[uU]?/,
+            /[fF]/, # TODO: this is actually a decimal point-less floating point number
         ]).lookAheadToAvoid(/\w/),
         tag_as: "keyword.other.unit.suffix.integer",
         )

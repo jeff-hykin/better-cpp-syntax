@@ -269,7 +269,7 @@ grammar[:bad] = Pattern.new(
             :function_call,
             :scope_resolution_inner_generated,
             :square_brackets,
-            :empty_square_brackets,
+            # :empty_square_brackets, (see https://github.com/jeff-hykin/cpp-textmate-grammar/pull/380#issuecomment-542491824)
             :semicolon,
             :comma,
         ]
@@ -2460,6 +2460,14 @@ grammar[:bad] = Pattern.new(
     )
     grammar[:string_escapes_context_c] = [
             grammar[:backslash_escapes],
+            {
+                match: "\\\\.",
+                name: "invalid.illegal.unknown-escape"
+            },
+            {
+                match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
+                name: "constant.other.placeholder"
+            },
             # I don't think these are actual escapes, and they incorrectly mark valid strings
             # It might be related to printf and format from C (which is low priority for C++)
             # {

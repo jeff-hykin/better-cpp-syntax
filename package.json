@@ -16,7 +16,7 @@
     "genall": "npm run generate-specs -- --all",
     "preversion": "npm test",
     "version": "npm run build && git add -A syntaxes",
-    "pregenerate-specs": "npm run build",
+    "_pregenerate-specs": "npm run build",
     "generate-specs": "node test/source/index.js generate-specs",
     "gen": "npm run generate-specs -- ",
     "try": "npm run test -- --show-failure-only",
