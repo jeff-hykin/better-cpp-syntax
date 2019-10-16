@@ -109,14 +109,17 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             grammar[:module_import] = Pattern.new(
                 should_fully_match: ["import <cstdlib>", "import \"my_header\"", "import INC_HEADER","import", "import <typing"],
                 should_partial_match: ["import <foo> //comment"],
+                tag_as: "meta.preprocessor.import",
                 match: @start_of_line.then(std_space).then(
                     tag_as: "keyword.control.directive.import",
                     match: Pattern.new(
                         match: /import/,
                         reference: "include_type",
                     ),
-                ).maybe(@spaces).then(include_partial).maybe(@spaces).maybe(/;/),
-                tag_as: "meta.preprocessor.import",
+                ).maybe(@spaces).then(include_partial).maybe(@spaces).maybe(
+                    match: /;/,
+                    tag_as: "punctuation.terminator.statement",
+                ),
             )
         # 
         # #line
