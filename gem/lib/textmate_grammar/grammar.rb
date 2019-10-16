@@ -279,6 +279,8 @@ class Grammar
         output[:patterns] = []
 
         output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
+        # sort repos by key name
+        output[:repository] = Hash[ output[:repository].sort_by { |key, val| key.to_s } ] 
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []

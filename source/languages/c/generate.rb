@@ -1,2166 +1,2166 @@
-require_relative '../../../paths'
-source_dir = "../../"
-require_relative source_dir + 'textmate_tools.rb'
-require_relative source_dir + 'repo_specific_helpers.rb'
-require_relative source_dir + 'shared_patterns/numeric.rb'
-require_relative source_dir + 'shared_patterns/predefined_macros.rb'
-require_relative source_dir + 'shared_patterns/assembly.rb'
-require_relative source_dir + 'shared_patterns/inline_comment'
-require_relative source_dir + 'shared_patterns/std_space.rb'
-require_relative PathFor[:sharedPattern]["doxygen"]
-require_relative './tokens.rb'
+# require_relative '../../../paths'
+# source_dir = "../../"
+# require_relative source_dir + 'textmate_tools.rb'
+# require_relative source_dir + 'repo_specific_helpers.rb'
+# require_relative source_dir + 'shared_patterns/numeric.rb'
+# require_relative source_dir + 'shared_patterns/predefined_macros.rb'
+# require_relative source_dir + 'shared_patterns/assembly.rb'
+# require_relative source_dir + 'shared_patterns/inline_comment'
+# require_relative source_dir + 'shared_patterns/std_space.rb'
+# require_relative PathFor[:sharedPattern]["doxygen"]
+# require_relative './tokens.rb'
 
 
-# misc
-builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
+# # misc
+# builtin_c99_function_names = /(_Exit|(?:nearbyint|nextafter|nexttoward|netoward|nan)[fl]?|a(?:cos|sin)h?[fl]?|abort|abs|asctime|assert|atan(?:[h2]?[fl]?)?|atexit|ato[ifl]|atoll|bsearch|btowc|cabs[fl]?|cacos|cacos[fl]|cacosh[fl]?|calloc|carg[fl]?|casinh?[fl]?|catanh?[fl]?|cbrt[fl]?|ccosh?[fl]?|ceil[fl]?|cexp[fl]?|cimag[fl]?|clearerr|clock|clog[fl]?|conj[fl]?|copysign[fl]?|cosh?[fl]?|cpow[fl]?|cproj[fl]?|creal[fl]?|csinh?[fl]?|csqrt[fl]?|ctanh?[fl]?|ctime|difftime|div|erfc?[fl]?|exit|fabs[fl]?|exp(?:2[fl]?|[fl]|m1[fl]?)?|fclose|fdim[fl]?|fe[gs]et(?:env|exceptflag|round)|feclearexcept|feholdexcept|feof|feraiseexcept|ferror|fetestexcept|feupdateenv|fflush|fgetpos|fgetw?[sc]|floor[fl]?|fmax?[fl]?|fmin[fl]?|fmod[fl]?|fopen|fpclassify|fprintf|fputw?[sc]|fread|free|freopen|frexp[fl]?|fscanf|fseek|fsetpos|ftell|fwide|fwprintf|fwrite|fwscanf|genv|get[sc]|getchar|gmtime|gwc|gwchar|hypot[fl]?|ilogb[fl]?|imaxabs|imaxdiv|isalnum|isalpha|isblank|iscntrl|isdigit|isfinite|isgraph|isgreater|isgreaterequal|isinf|isless(?:equal|greater)?|isw?lower|isnan|isnormal|isw?print|isw?punct|isw?space|isunordered|isw?upper|iswalnum|iswalpha|iswblank|iswcntrl|iswctype|iswdigit|iswgraph|isw?xdigit|labs|ldexp[fl]?|ldiv|lgamma[fl]?|llabs|lldiv|llrint[fl]?|llround[fl]?|localeconv|localtime|log[2b]?[fl]?|log1[p0][fl]?|longjmp|lrint[fl]?|lround[fl]?|malloc|mbr?len|mbr?towc|mbsinit|mbsrtowcs|mbstowcs|memchr|memcmp|memcpy|memmove|memset|mktime|modf[fl]?|perror|pow[fl]?|printf|puts|putw?c(?:har)?|qsort|raise|rand|remainder[fl]?|realloc|remove|remquo[fl]?|rename|rewind|rint[fl]?|round[fl]?|scalbl?n[fl]?|scanf|setbuf|setjmp|setlocale|setvbuf|signal|signbit|sinh?[fl]?|snprintf|sprintf|sqrt[fl]?|srand|sscanf|strcat|strchr|strcmp|strcoll|strcpy|strcspn|strerror|strftime|strlen|strncat|strncmp|strncpy|strpbrk|strrchr|strspn|strstr|strto[kdf]|strtoimax|strtol[dl]?|strtoull?|strtoumax|strxfrm|swprintf|swscanf|system|tan|tan[fl]|tanh[fl]?|tgamma[fl]?|time|tmpfile|tmpnam|tolower|toupper|trunc[fl]?|ungetw?c|va_arg|va_copy|va_end|va_start|vfw?printf|vfw?scanf|vprintf|vscanf|vsnprintf|vsprintf|vsscanf|vswprintf|vswscanf|vwprintf|vwscanf|wcrtomb|wcscat|wcschr|wcscmp|wcscoll|wcscpy|wcscspn|wcsftime|wcslen|wcsncat|wcsncmp|wcsncpy|wcspbrk|wcsrchr|wcsrtombs|wcsspn|wcsstr|wcsto[dkf]|wcstoimax|wcstol[dl]?|wcstombs|wcstoull?|wcstoumax|wcsxfrm|wctom?b|wmem(?:set|chr|cpy|cmp|move)|wprintf|wscanf)/
 
-c_grammar = Grammar.new(
-    wrap_source: false,
-    name: "C",
-    scope_name: "source.c",
-    file_types: [
-        "c",
-    ],
-    version: "",
-    information_for_contributors: [
-        "This code was auto generated by a much-more-readble ruby file",
-        "This file essentially an updated/improved fork of the atom syntax",
-        "see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master",
-    ],
-)
+# c_grammar = Grammar.new(
+#     wrap_source: false,
+#     name: "C",
+#     scope_name: "source.c",
+#     file_types: [
+#         "c",
+#     ],
+#     version: "",
+#     information_for_contributors: [
+#         "This code was auto generated by a much-more-readble ruby file",
+#         "This file essentially an updated/improved fork of the atom syntax",
+#         "see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master",
+#     ],
+# )
 
-$grammar = c_grammar
-c_grammar[:inline_comment] = inline_comment
-def std_space() generateStdSpace($grammar[:inline_comment]) end
+# $grammar = c_grammar
+# c_grammar[:inline_comment] = inline_comment
+# def std_space() generateStdSpace($grammar[:inline_comment]) end
 
-#
-# import from C++
-#
-    require_relative '../cpp/generate.rb'
-    import_names = [
-        :default_statement,
-        :case_statement,
-        :switch_statement,
-        :switch_conditional_parentheses,
-        :static_assert,
-        :backslash_escapes
-    ]
-    for each in import_names
-        c_grammar[each] = @cpp_grammar[each]
-    end
+# #
+# # import from C++
+# #
+#     require_relative '../cpp/generate.rb'
+#     import_names = [
+#         :default_statement,
+#         :case_statement,
+#         :switch_statement,
+#         :switch_conditional_parentheses,
+#         :static_assert,
+#         :backslash_escapes
+#     ]
+#     for each in import_names
+#         c_grammar[each] = @cpp_grammar[each]
+#     end
 
-#
-# Contexts
-#
-    c_grammar[:c_conditional_context] = [
-            :$initial_context,
-            :block_innards
-        ]
-    c_grammar[:evalutation_context] = evalutation_context = [
-        "#function-call-innards",
-        "$base"
-    ]
+# #
+# # Contexts
+# #
+#     c_grammar[:c_conditional_context] = [
+#             :$initial_context,
+#             :block_innards
+#         ]
+#     c_grammar[:evalutation_context] = evalutation_context = [
+#         "#function-call-innards",
+#         "$base"
+#     ]
 
 
-#
-# Variable
-#
-    # todo: make a better name for this function
-    variableBounds = ->(regex_pattern) do
-        lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
-    end
-    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
-    # word bounds are inefficient, but they are accurate
-    variable_name = variableBounds[variable_name_without_bounds]
+# #
+# # Variable
+# #
+#     # todo: make a better name for this function
+#     variableBounds = ->(regex_pattern) do
+#         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
+#     end
+#     variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+#     # word bounds are inefficient, but they are accurate
+#     variable_name = variableBounds[variable_name_without_bounds]
 
-#
-# functions
-#
-    cant_be_a_function_name = @c_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
-    avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
-    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
-    function_definition = PatternRange.new(
-        tag_as: "meta.function",
-        start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
-        end_pattern: lookBehindFor(/\)/),
-        includes: [ "#function-innards" ]
-        )
+# #
+# # functions
+# #
+#     cant_be_a_function_name = @c_tokens.that(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
+#     avoid_invalid_function_names = lookBehindToAvoid(@standard_character).lookAheadToAvoid(maybe(@spaces).then(cant_be_a_function_name).maybe(@spaces).then(/\(/))
+#     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).then(/\(/))
+#     function_definition = PatternRange.new(
+#         tag_as: "meta.function",
+#         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
+#         end_pattern: lookBehindFor(/\)/),
+#         includes: [ "#function-innards" ]
+#         )
 
-#
-# Probably a parameter
-#
-    symbols_that_can_appear_after_a_type = /[&*>\]\)]/
-    look_behind_for_type = lookBehindFor(/[a-zA-Z_0-9] /.or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
-    array_brackets = /\[\]/.maybe(@spaces)
-    comma_or_closing_paraenthese = /,/.or(/\)/)
-    stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    probably_a_parameter_1_group = newPattern(
-        match: look_behind_for_type.then(
-            newPattern(
-                match: variable_name_without_bounds,
-                tag_as: "variable.parameter.probably"
-            )).then(stuff_after_a_parameter),
-    )
+# #
+# # Probably a parameter
+# #
+#     symbols_that_can_appear_after_a_type = /[&*>\]\)]/
+#     look_behind_for_type = lookBehindFor(/[a-zA-Z_0-9] /.or(symbols_that_can_appear_after_a_type)).maybe(@spaces)
+#     array_brackets = /\[\]/.maybe(@spaces)
+#     comma_or_closing_paraenthese = /,/.or(/\)/)
+#     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
+#     probably_a_parameter_1_group = newPattern(
+#         match: look_behind_for_type.then(
+#             newPattern(
+#                 match: variable_name_without_bounds,
+#                 tag_as: "variable.parameter.probably"
+#             )).then(stuff_after_a_parameter),
+#     )
 
-#
-# Access . .* -> ->*
-#
-    dot_operator = /\.\*/.or(/\./)
-    arrow_operator = /->\*/.or(/->/)
-    member_operator = newPattern(
-            match: dot_operator,
-            tag_as: "punctuation.separator.dot-access"
-        ).or(
-            match: arrow_operator,
-            tag_as: "punctuation.separator.pointer-access"
-        )
-    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
-    # TODO: the member_access and method_access can probably be simplified considerably
-    # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = newPattern(
-            match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-            tag_as: "variable.other.object.access",
-        ).then(
-            member_operator
-        )
-    member_context = [
-            :member_access,
-            :method_access,
-            partial_member
-        ]
-    member_start = partial_member.then(
-            match: zeroOrMoreOf(subsequent_object_with_operator),
-            includes: member_context
-        ).maybe(@spaces)
-    # access to attribute
-    c_grammar[:member_access] =  member_access = newPattern(
-        match: member_start.then(
-                match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType).then(@word_boundary)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
-                tag_as: "variable.other.member"
-            )
-        )
-    # access to method
-    c_grammar[:method_access] =  method_access = PatternRange.new(
-        tag_content_as: "meta.function-call.member",
-        start_pattern: member_start.then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.function.member"
-            ).then(
-                match: /\(/,
-                tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
-            ),
-        end_pattern: newPattern(
-                match: /\)/,
-                tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
-            ),
-        includes: ["#function-call-innards"],
-        )
+# #
+# # Access . .* -> ->*
+# #
+#     dot_operator = /\.\*/.or(/\./)
+#     arrow_operator = /->\*/.or(/->/)
+#     member_operator = newPattern(
+#             match: dot_operator,
+#             tag_as: "punctuation.separator.dot-access"
+#         ).or(
+#             match: arrow_operator,
+#             tag_as: "punctuation.separator.pointer-access"
+#         )
+#     subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
+#     # TODO: the member_access and method_access can probably be simplified considerably
+#     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
+#     partial_member = newPattern(
+#             match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+#             tag_as: "variable.other.object.access",
+#         ).then(
+#             member_operator
+#         )
+#     member_context = [
+#             :member_access,
+#             :method_access,
+#             partial_member
+#         ]
+#     member_start = partial_member.then(
+#             match: zeroOrMoreOf(subsequent_object_with_operator),
+#             includes: member_context
+#         ).maybe(@spaces)
+#     # access to attribute
+#     c_grammar[:member_access] =  member_access = newPattern(
+#         match: member_start.then(
+#                 match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType).then(@word_boundary)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+#                 tag_as: "variable.other.member"
+#             )
+#         )
+#     # access to method
+#     c_grammar[:method_access] =  method_access = PatternRange.new(
+#         tag_content_as: "meta.function-call.member",
+#         start_pattern: member_start.then(
+#                 match: variable_name_without_bounds,
+#                 tag_as: "entity.name.function.member"
+#             ).then(
+#                 match: /\(/,
+#                 tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
+#             ),
+#         end_pattern: newPattern(
+#                 match: /\)/,
+#                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
+#             ),
+#         includes: ["#function-call-innards"],
+#         )
 
-    c_grammar[:predefined_macros] = predefinedMacros()
+#     c_grammar[:predefined_macros] = predefinedMacros()
 
-c_grammar[:$initial_context] = [
-    "#preprocessor-rule-enabled",
-    "#preprocessor-rule-disabled",
-    "#preprocessor-rule-conditional",
-    :predefined_macros,
-    "#comments",
-    :switch_statement,
-    {
-        match: "\\b(break|continue|do|else|for|goto|if|_Pragma|return|while)\\b",
-        name: "keyword.control.c"
-    },
-    "#storage_types",
-    newPattern(
-        match: /typedef/,
-        tag_as: "keyword.other.typedef",
-    ),
-    {
-        match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
-        name: "storage.modifier.c"
-    },
-    {
-        match: "\\bk[A-Z]\\w*\\b",
-        name: "constant.other.variable.mac-classic.c"
-    },
-    {
-        match: "\\bg[A-Z]\\w*\\b",
-        name: "variable.other.readwrite.global.mac-classic.c"
-    },
-    {
-        match: "\\bs[A-Z]\\w*\\b",
-        name: "variable.other.readwrite.static.mac-classic.c"
-    },
-    {
-        match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
-        name: "constant.language.c"
-    },
-    "#operators",
-    "#numbers",
-    "#strings",
-    PatternRange.new(
-        tag_as: "meta.preprocessor.macro",
-        start_pattern: std_space.then(
-            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
-                .maybe(@spaces).then(/define\b/),
-            tag_as: "keyword.control.directive.define"
-        ).then(@spaces).then(
-            match: variable_name,
-            tag_as: "entity.name.function.preprocessor"
-        ).maybe(newPattern(
-            match: /\(/,
-            tag_as: "punctuation.definition.parameters.begin",
-        ).then(
-            match: /[^()\\]+/,
-            includes: [
-                lookBehindFor(/[(,]/).maybe(@spaces).then(
-                    match: variable_name,
-                    tag_as: "variable.parameter.preprocessor"
-                ).maybe(@spaces),
-                newPattern(
-                    match: /,/,
-                    tag_as: "punctuation.separator.parameters"
-                ),
-                newPattern(
-                    match: /\.\.\./,
-                    tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
-                )
-            ]
-        ).then(
-            match: /\)/,
-            tag_as: "punctuation.definition.parameters.end"
-        )),
-        end_pattern: /(?<!\\)(?=\n)/,
-        includes: [
-            "#preprocessor-rule-define-line-contents"
-        ]
-    ),
-    {
-        begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.diagnostic.$3.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.diagnostic.c",
-        patterns: [
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.double.c",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: "'",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "'|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.single.c",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: "[^'\"]",
-                end: "(?<!\\\\)(?=\\s*\\n)",
-                name: "string.unquoted.single.c",
-                patterns: [
-                    {
-                        include: "#line_continuation_character"
-                    },
-                    {
-                        include: "#comments"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.$3.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.include.c",
-        patterns: [
-            {
-                include: "#line_continuation_character"
-            },
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.double.include.c"
-            },
-            {
-                begin: "<",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: ">",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.other.lt-gt.include.c"
-            }
-        ]
-    },
-    "#pragma-mark",
-    {
-        begin: "^\\s*((#)\\s*line)\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.line.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.c",
-        patterns: [
-            {
-                include: "#strings"
-            },
-            {
-                include: "#numbers"
-            },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    {
-        begin: "^\\s*(?:((#)\\s*undef))\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.undef.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.c",
-        patterns: [
-            {
-                match: "[a-zA-Z_$][\\w$]*",
-                name: "entity.name.function.preprocessor.c"
-            },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    {
-        begin: "^\\s*(?:((#)\\s*pragma))\\b",
-        beginCaptures: {
-            "1" => {
-                name: "keyword.control.directive.pragma.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
-        name: "meta.preprocessor.pragma.c",
-        patterns: [
-            {
-                include: "#strings"
-            },
-            {
-                match: "[a-zA-Z_$][\\w\\-$]*",
-                name: "entity.other.attribute-name.pragma.preprocessor.c"
-            },
-            {
-                include: "#numbers"
-            },
-            {
-                include: "#line_continuation_character"
-            }
-        ]
-    },
-    {
-        match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
-        name: "support.type.sys-types.c"
-    },
-    {
-        match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
-        name: "support.type.pthread.c"
-    },
-    {
-        match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
-        name: "support.type.stdint.c"
-    },
-    {
-        match: "\\b(noErr|kNilOptions|kInvalidID|kVariableLengthArray)\\b",
-        name: "support.constant.mac-classic.c"
-    },
-    {
-        match: "(?x) \\b\n(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam\n|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr\n|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber\n|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64\n|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32\n|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr\n|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\n\\b",
-        name: "support.type.mac-classic.c"
-    },
-    {
-        match: "\\b([A-Za-z0-9_]+_t)\\b",
-        name: "support.type.posix-reserved.c"
-    },
-    "#block",
-    "#parens",
-    function_definition.to_tag,
-    "#line_continuation_character",
-    {
-        name: "meta.bracket.square.access.c",
-        begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
-        beginCaptures: {
-            "1" => {
-                name: "variable.object.c"
-            },
-            "2" => {
-                name: "punctuation.definition.begin.bracket.square.c"
-            }
-        },
-        end: "\\]",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.definition.end.bracket.square.c"
-            }
-        },
-        patterns: [
-            {
-                include: "#function-call-innards"
-            }
-        ]
-    },
-    {
-        name: "storage.modifier.array.bracket.square.c",
-        match: "\\[\\s*\\]"
-    },
-    {
-        match: ";",
-        name: "punctuation.terminator.statement.c"
-    },
-    {
-        match: ",",
-        name: "punctuation.separator.delimiter.c"
-    }
-]
-c_grammar[:numbers] = numeric_constant
-c_grammar[:comments] = [
-    *doxygen(),
-    Pattern.new(
-        match: /^\/\* =/.then(
-            match: /\s*.*?/,
-            tag_as: "meta.toc-list.banner.block"
-        ).then(/\s*= \*\/$\n?/),
-        tag_as: "comment.block.banner"
-    ),
-    PatternRange.new(
-        start_pattern: Pattern.new(
-            match: /\/\*/,
-            tag_as: "punctuation.definition.comment.begin",
-        ),
-        end_pattern: Pattern.new(
-            match: /\*\//,
-            tag_as: "punctuation.definition.comment.end"
-        ),
-        tag_as: "comment.block"
-    ),
-    Pattern.new(
-        match: /^\/\/ =/.then(
-            match: /\s*.*?/,
-            tag_as: "meta.toc-list.banner.line"
-        ).then(/\s*=$\n?/),
-        tag_as: "comment.line.banner"
-    ),
-    PatternRange.new(
-        start_pattern: maybe(
-            match: /^[ \t]+/,
-            tag_as: "punctuation.whitespace.comment.leading"
-        ).lookAheadFor(/\/\//),
-        end_pattern: lookAheadToAvoid(/\G/),
-        includes: [
-            PatternRange.new(
-                start_pattern: Pattern.new(
-                    match: /\/\//,
-                    tag_as: "punctuation.definition.comment",
-                ),
-                end_pattern: lookAheadFor(/\n/),
-                tag_as: "comment.line.double-slash",
-                includes: [
-                    :line_continuation_character,
-                ]
-            )
-        ]
-    )
+# c_grammar[:$initial_context] = [
+#     "#preprocessor-rule-enabled",
+#     "#preprocessor-rule-disabled",
+#     "#preprocessor-rule-conditional",
+#     :predefined_macros,
+#     "#comments",
+#     :switch_statement,
+#     {
+#         match: "\\b(break|continue|do|else|for|goto|if|_Pragma|return|while)\\b",
+#         name: "keyword.control.c"
+#     },
+#     "#storage_types",
+#     newPattern(
+#         match: /typedef/,
+#         tag_as: "keyword.other.typedef",
+#     ),
+#     {
+#         match: "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
+#         name: "storage.modifier.c"
+#     },
+#     {
+#         match: "\\bk[A-Z]\\w*\\b",
+#         name: "constant.other.variable.mac-classic.c"
+#     },
+#     {
+#         match: "\\bg[A-Z]\\w*\\b",
+#         name: "variable.other.readwrite.global.mac-classic.c"
+#     },
+#     {
+#         match: "\\bs[A-Z]\\w*\\b",
+#         name: "variable.other.readwrite.static.mac-classic.c"
+#     },
+#     {
+#         match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
+#         name: "constant.language.c"
+#     },
+#     "#operators",
+#     "#numbers",
+#     "#strings",
+#     PatternRange.new(
+#         tag_as: "meta.preprocessor.macro",
+#         start_pattern: std_space.then(
+#             match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
+#                 .maybe(@spaces).then(/define\b/),
+#             tag_as: "keyword.control.directive.define"
+#         ).then(@spaces).then(
+#             match: variable_name,
+#             tag_as: "entity.name.function.preprocessor"
+#         ).maybe(newPattern(
+#             match: /\(/,
+#             tag_as: "punctuation.definition.parameters.begin",
+#         ).then(
+#             match: /[^()\\]+/,
+#             includes: [
+#                 lookBehindFor(/[(,]/).maybe(@spaces).then(
+#                     match: variable_name,
+#                     tag_as: "variable.parameter.preprocessor"
+#                 ).maybe(@spaces),
+#                 newPattern(
+#                     match: /,/,
+#                     tag_as: "punctuation.separator.parameters"
+#                 ),
+#                 newPattern(
+#                     match: /\.\.\./,
+#                     tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
+#                 )
+#             ]
+#         ).then(
+#             match: /\)/,
+#             tag_as: "punctuation.definition.parameters.end"
+#         )),
+#         end_pattern: /(?<!\\)(?=\n)/,
+#         includes: [
+#             "#preprocessor-rule-define-line-contents"
+#         ]
+#     ),
+#     {
+#         begin: "^\\s*((#)\\s*(error|warning))\\b\\s*",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "keyword.control.directive.diagnostic.$3.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?<!\\\\)(?=\\n)",
+#         name: "meta.preprocessor.diagnostic.c",
+#         patterns: [
+#             {
+#                 begin: "\"",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "\"|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.double.c",
+#                 patterns: [
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "'",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "'|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.single.c",
+#                 patterns: [
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "[^'\"]",
+#                 end: "(?<!\\\\)(?=\\s*\\n)",
+#                 name: "string.unquoted.single.c",
+#                 patterns: [
+#                     {
+#                         include: "#line_continuation_character"
+#                     },
+#                     {
+#                         include: "#comments"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     {
+#         begin: "^\\s*((#)\\s*(include(?:_next)?|import))\\b\\s*",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "keyword.control.directive.$3.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+#         name: "meta.preprocessor.include.c",
+#         patterns: [
+#             {
+#                 include: "#line_continuation_character"
+#             },
+#             {
+#                 begin: "\"",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "\"",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.double.include.c"
+#             },
+#             {
+#                 begin: "<",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: ">",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.other.lt-gt.include.c"
+#             }
+#         ]
+#     },
+#     "#pragma-mark",
+#     {
+#         begin: "^\\s*((#)\\s*line)\\b",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "keyword.control.directive.line.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+#         name: "meta.preprocessor.c",
+#         patterns: [
+#             {
+#                 include: "#strings"
+#             },
+#             {
+#                 include: "#numbers"
+#             },
+#             {
+#                 include: "#line_continuation_character"
+#             }
+#         ]
+#     },
+#     {
+#         begin: "^\\s*(?:((#)\\s*undef))\\b",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "keyword.control.directive.undef.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+#         name: "meta.preprocessor.c",
+#         patterns: [
+#             {
+#                 match: "[a-zA-Z_$][\\w$]*",
+#                 name: "entity.name.function.preprocessor.c"
+#             },
+#             {
+#                 include: "#line_continuation_character"
+#             }
+#         ]
+#     },
+#     {
+#         begin: "^\\s*(?:((#)\\s*pragma))\\b",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "keyword.control.directive.pragma.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=(?://|/\\*))|(?<!\\\\)(?=\\n)",
+#         name: "meta.preprocessor.pragma.c",
+#         patterns: [
+#             {
+#                 include: "#strings"
+#             },
+#             {
+#                 match: "[a-zA-Z_$][\\w\\-$]*",
+#                 name: "entity.other.attribute-name.pragma.preprocessor.c"
+#             },
+#             {
+#                 include: "#numbers"
+#             },
+#             {
+#                 include: "#line_continuation_character"
+#             }
+#         ]
+#     },
+#     {
+#         match: "\\b(u_char|u_short|u_int|u_long|ushort|uint|u_quad_t|quad_t|qaddr_t|caddr_t|daddr_t|div_t|dev_t|fixpt_t|blkcnt_t|blksize_t|gid_t|in_addr_t|in_port_t|ino_t|key_t|mode_t|nlink_t|id_t|pid_t|off_t|segsz_t|swblk_t|uid_t|id_t|clock_t|size_t|ssize_t|time_t|useconds_t|suseconds_t)\\b",
+#         name: "support.type.sys-types.c"
+#     },
+#     {
+#         match: "\\b(pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t)\\b",
+#         name: "support.type.pthread.c"
+#     },
+#     {
+#         match: "(?x) \\b\n(int8_t|int16_t|int32_t|int64_t|uint8_t|uint16_t|uint32_t|uint64_t|int_least8_t\n|int_least16_t|int_least32_t|int_least64_t|uint_least8_t|uint_least16_t|uint_least32_t\n|uint_least64_t|int_fast8_t|int_fast16_t|int_fast32_t|int_fast64_t|uint_fast8_t\n|uint_fast16_t|uint_fast32_t|uint_fast64_t|intptr_t|uintptr_t|intmax_t|intmax_t\n|uintmax_t|uintmax_t)\n\\b",
+#         name: "support.type.stdint.c"
+#     },
+#     {
+#         match: "\\b(noErr|kNilOptions|kInvalidID|kVariableLengthArray)\\b",
+#         name: "support.constant.mac-classic.c"
+#     },
+#     {
+#         match: "(?x) \\b\n(AbsoluteTime|Boolean|Byte|ByteCount|ByteOffset|BytePtr|CompTimeValue|ConstLogicalAddress|ConstStrFileNameParam\n|ConstStringPtr|Duration|Fixed|FixedPtr|Float32|Float32Point|Float64|Float80|Float96|FourCharCode|Fract|FractPtr\n|Handle|ItemCount|LogicalAddress|OptionBits|OSErr|OSStatus|OSType|OSTypePtr|PhysicalAddress|ProcessSerialNumber\n|ProcessSerialNumberPtr|ProcHandle|Ptr|ResType|ResTypePtr|ShortFixed|ShortFixedPtr|SignedByte|SInt16|SInt32|SInt64\n|SInt8|Size|StrFileName|StringHandle|StringPtr|TimeBase|TimeRecord|TimeScale|TimeValue|TimeValue64|UInt16|UInt32\n|UInt64|UInt8|UniChar|UniCharCount|UniCharCountPtr|UniCharPtr|UnicodeScalarValue|UniversalProcHandle|UniversalProcPtr\n|UnsignedFixed|UnsignedFixedPtr|UnsignedWide|UTF16Char|UTF32Char|UTF8Char)\n\\b",
+#         name: "support.type.mac-classic.c"
+#     },
+#     {
+#         match: "\\b([A-Za-z0-9_]+_t)\\b",
+#         name: "support.type.posix-reserved.c"
+#     },
+#     "#block",
+#     "#parens",
+#     function_definition.to_tag,
+#     "#line_continuation_character",
+#     {
+#         name: "meta.bracket.square.access.c",
+#         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "variable.object.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.begin.bracket.square.c"
+#             }
+#         },
+#         end: "\\]",
+#         endCaptures: {
+#             "0" => {
+#                 name: "punctuation.definition.end.bracket.square.c"
+#             }
+#         },
+#         patterns: [
+#             {
+#                 include: "#function-call-innards"
+#             }
+#         ]
+#     },
+#     {
+#         name: "storage.modifier.array.bracket.square.c",
+#         match: "\\[\\s*\\]"
+#     },
+#     {
+#         match: ";",
+#         name: "punctuation.terminator.statement.c"
+#     },
+#     {
+#         match: ",",
+#         name: "punctuation.separator.delimiter.c"
+#     }
+# ]
+# c_grammar[:numbers] = numeric_constant
+# c_grammar[:comments] = [
+#     *doxygen(),
+#     Pattern.new(
+#         match: /^\/\* =/.then(
+#             match: /\s*.*?/,
+#             tag_as: "meta.toc-list.banner.block"
+#         ).then(/\s*= \*\/$\n?/),
+#         tag_as: "comment.block.banner"
+#     ),
+#     PatternRange.new(
+#         start_pattern: Pattern.new(
+#             match: /\/\*/,
+#             tag_as: "punctuation.definition.comment.begin",
+#         ),
+#         end_pattern: Pattern.new(
+#             match: /\*\//,
+#             tag_as: "punctuation.definition.comment.end"
+#         ),
+#         tag_as: "comment.block"
+#     ),
+#     Pattern.new(
+#         match: /^\/\/ =/.then(
+#             match: /\s*.*?/,
+#             tag_as: "meta.toc-list.banner.line"
+#         ).then(/\s*=$\n?/),
+#         tag_as: "comment.line.banner"
+#     ),
+#     PatternRange.new(
+#         start_pattern: maybe(
+#             match: /^[ \t]+/,
+#             tag_as: "punctuation.whitespace.comment.leading"
+#         ).lookAheadFor(/\/\//),
+#         end_pattern: lookAheadToAvoid(/\G/),
+#         includes: [
+#             PatternRange.new(
+#                 start_pattern: Pattern.new(
+#                     match: /\/\//,
+#                     tag_as: "punctuation.definition.comment",
+#                 ),
+#                 end_pattern: lookAheadFor(/\n/),
+#                 tag_as: "comment.line.double-slash",
+#                 includes: [
+#                     :line_continuation_character,
+#                 ]
+#             )
+#         ]
+#     )
 
-]
-c_grammar.addToRepository({
-    "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
-    "access-method" => {
-        name: "meta.function-call.member.c",
-        begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
-        beginCaptures: {
-            "1" => {
-                name: "variable.object.c"
-            },
-            "2" => {
-                name: "punctuation.separator.dot-access.c"
-            },
-            "3" => {
-                name: "punctuation.separator.pointer-access.c"
-            },
-            "4" => {
-                patterns: [
-                    {
-                        match: "\\.",
-                        name: "punctuation.separator.dot-access.c"
-                    },
-                    {
-                        match: "->",
-                        name: "punctuation.separator.pointer-access.c"
-                    },
-                    {
-                        match: "[a-zA-Z_][a-zA-Z_0-9]*",
-                        name: "variable.object.c"
-                    },
-                    {
-                        name: "everything.else",
-                        match: ".+"
-                    }
-                ]
-            },
-            "5" => {
-                name: "entity.name.function.member.c"
-            },
-            "6" => {
-                name: "punctuation.section.arguments.begin.bracket.round.function.member.c"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.arguments.end.bracket.round.function.member.c"
-            }
-        },
-        patterns: [
-            {
-                include: "#function-call-innards"
-            }
-        ]
-    },
-    "block" => {
-        patterns: [
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly.c"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly.c"
-                    }
-                },
-                name: "meta.block.c",
-                patterns: [
-                    {
-                        include: "#block_innards"
-                    }
-                ]
-            }
-        ]
-    },
-    "block_innards" => {
-        patterns: [
-            {
-                include: "#preprocessor-rule-enabled-block"
-            },
-            {
-                include: "#preprocessor-rule-disabled-block"
-            },
-            {
-                include: "#preprocessor-rule-conditional-block"
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "#c_function_call"
-            },
-            {
-                name: "meta.initialization.c",
-                begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
-                beginCaptures: {
-                    "1" => {
-                        name: "variable.other.c"
-                    },
-                    "2" => {
-                        name: "punctuation.section.parens.begin.bracket.round.initialization.c"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round.initialization.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function-call-innards"
-                    }
-                ]
-            },
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly.c"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#block_innards"
-                    }
-                ]
-            },
-            {
-                include: "#parens-block"
-            },
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "c_function_call" => {
-        begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
-        end: "(?<=\\))(?!\\w)",
-        name: "meta.function-call.c",
-        patterns: [
-            {
-                include: "#function-call-innards"
-            }
-        ]
-    },
-    "disabled" => {
-        begin: "^\\s*#\\s*if(n?def)?\\b.*$",
-        end: "^\\s*#\\s*endif\\b",
-        patterns: [
-            {
-                include: "#disabled"
-            },
-            {
-                include: "#pragma-mark"
-            }
-        ]
-    },
-    "line_continuation_character" => {
-        patterns: [
-            {
-                match: "(\\\\)\\n",
-                captures: {
-                    "1" => {
-                        name: "constant.character.escape.line-continuation.c"
-                    }
-                }
-            }
-        ]
-    },
-    "parens" => {
-        name: "meta.parens",
-        begin: "\\(",
-        beginCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.begin.bracket.round.c"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.end.bracket.round.c"
-            }
-        },
-        patterns: [
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "parens-block" => {
-        name: "meta.parens.block",
-        begin: "\\(",
-        beginCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.begin.bracket.round.c"
-            }
-        },
-        end: "\\)",
-        endCaptures: {
-            "0" => {
-                name: "punctuation.section.parens.end.bracket.round.c"
-            }
-        },
-        patterns: [
-            {
-                include: "#block_innards"
-            },
-            {
-                match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
-                name: "punctuation.range-based"
-            }
-        ]
-    },
-    "pragma-mark" => {
-        captures: {
-            "1" => {
-                name: "meta.preprocessor.pragma.c"
-            },
-            "2" => {
-                name: "keyword.control.directive.pragma.pragma-mark.c"
-            },
-            "3" => {
-                name: "punctuation.definition.directive.c"
-            },
-            "4" => {
-                name: "entity.name.tag.pragma-mark.c"
-            }
-        },
-        match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
-        name: "meta.section"
-    },
-    "operators" => {
-        patterns: [
-            {
-                match: "(?<![\\w$])(sizeof)(?![\\w$])",
-                name: "keyword.operator.sizeof.c"
-            },
-            {
-                match: "--",
-                name: "keyword.operator.decrement.c"
-            },
-            {
-                match: "\\+\\+",
-                name: "keyword.operator.increment.c"
-            },
-            {
-                match: "%=|\\+=|-=|\\*=|(?<!\\()/=",
-                name: "keyword.operator.assignment.compound.c"
-            },
-            {
-                match: "&=|\\^=|<<=|>>=|\\|=",
-                name: "keyword.operator.assignment.compound.bitwise.c"
-            },
-            {
-                match: "<<|>>",
-                name: "keyword.operator.bitwise.shift.c"
-            },
-            {
-                match: "!=|<=|>=|==|<|>",
-                name: "keyword.operator.comparison.c"
-            },
-            {
-                match: "&&|!|\\|\\|",
-                name: "keyword.operator.logical.c"
-            },
-            {
-                match: "&|\\||\\^|~",
-                name: "keyword.operator.c"
-            },
-            {
-                match: "=",
-                name: "keyword.operator.assignment.c"
-            },
-            {
-                match: "%|\\*|/|-|\\+",
-                name: "keyword.operator.c"
-            },
-            PatternRange.new(
-                start_pattern: newPattern(
-                    match: /\?/,
-                    tag_as: "keyword.operator.ternary",
-                ),
-                end_pattern: newPattern(
-                    match: /:/,
-                    tag_as: "keyword.operator.ternary",
-                ),
-                includes: [ *evalutation_context ]
-            ).to_tag,
-        ]
-    },
-    "strings" => {
-        patterns: [
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.double.c",
-                patterns: [
-                    {
-                        include: "#string_escaped_char"
-                    },
-                    {
-                        include: "#string_placeholder"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: "'",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "'",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.single.c",
-                patterns: [
-                    {
-                        include: "#string_escaped_char"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            }
-        ]
-    },
-    "string_escaped_char" => {
-        patterns: [
-            {
-                match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
-                name: "constant.character.escape.c"
-            },
-            {
-                match: "\\\\.",
-                name: "invalid.illegal.unknown-escape.c"
-            }
-        ]
-    },
-    "string_placeholder" => {
-        patterns: [
-            {
-                match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-                name: "constant.other.placeholder.c"
-            },
-            {
-                match: "(%)(?!\"\\s*(PRI|SCN))",
-                captures: {
-                    "1" => {
-                        name: "invalid.illegal.placeholder.c"
-                    }
-                }
-            }
-        ]
-    },
-    "storage_types" => {
-        patterns: [
-            {
-                match: variableBounds[ @c_tokens.that(:isType, :isPrimitive) ],
-                name: "storage.type.built-in.primitive.c",
-            },
-            {
-                match: variableBounds[ @c_tokens.that(:isType, not(:isPrimitive)) ],
-                name: "storage.type.built-in.c",
-            },
-            {
-                match: /\b(enum|struct|union)\b/,
-                name: "storage.type.$1.c"
-            },
-            assembly_pattern().to_tag,
-        ]
-    },
-    "vararg_ellipses" => {
-        match: "(?<!\\.)\\.\\.\\.(?!\\.)",
-        name: "punctuation.vararg-ellipses.c"
-    },
-    "preprocessor-rule-conditional" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-elif"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-else"
-                    },
-                    {
-                        include: "#preprocessor-rule-disabled-elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            },
-            {
-                match: "^\\s*#\\s*(else|elif|endif)\\b",
-                captures: {
-                    "0" => {
-                        name: "invalid.illegal.stray-$1.c"
-                    }
-                }
-            }
-        ]
-    },
-    "preprocessor-rule-conditional-block" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-elif-block"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-else-block"
-                    },
-                    {
-                        include: "#preprocessor-rule-disabled-elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#block_innards"
-                    }
-                ]
-            },
-            {
-                match: "^\\s*#\\s*(else|elif|endif)\\b",
-                captures: {
-                    "0" => {
-                        name: "invalid.illegal.stray-$1.c"
-                    }
-                }
-            }
-        ]
-    },
-    "preprocessor-rule-conditional-line" => {
-        patterns: [
-            {
-                match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
-                name: "keyword.control.directive.conditional.c"
-            },
-            {
-                match: "\\bdefined\\b",
-                name: "invalid.illegal.macro-name.c"
-            },
-            {
-                include: "#comments"
-            },
-            {
-                include: "#strings"
-            },
-            {
-                include: "#numbers"
-            },
-            {
-                begin: "\\?",
-                beginCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                end: ":",
-                endCaptures: {
-                    "0" => {
-                        name: "keyword.operator.ternary.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-conditional-line"
-                    }
-                ]
-            },
-            {
-                include: "#operators"
-            },
-            {
-                match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
-                name: "constant.language.c"
-            },
-            {
-                match: "[a-zA-Z_$][\\w$]*",
-                name: "entity.name.function.preprocessor.c"
-            },
-            {
-                include: "#line_continuation_character"
-            },
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round.c"
-                    }
-                },
-                end: "\\)|(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-conditional-line"
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-disabled" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-elif"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-else"
-                    },
-                    {
-                        include: "#preprocessor-rule-disabled-elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                        patterns: [
-                            {
-                                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                                name: "meta.preprocessor.c",
-                                patterns: [
-                                    {
-                                        include: "#preprocessor-rule-conditional-line"
-                                    }
-                                ]
-                            },
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-disabled-block" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-elif-block"
-                    },
-                    {
-                        include: "#preprocessor-rule-enabled-else-block"
-                    },
-                    {
-                        include: "#preprocessor-rule-disabled-elif"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-                        patterns: [
-                            {
-                                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                                name: "meta.preprocessor.c",
-                                patterns: [
-                                    {
-                                        include: "#preprocessor-rule-conditional-line"
-                                    }
-                                ]
-                            },
-                            {
-                                include: "#block_innards"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.in-block.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-disabled-elif" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor.c"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor.c",
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-conditional-line"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                "contentName" => "comment.block.preprocessor.elif-branch.c",
-                patterns: [
-                    {
-                        include: "#disabled"
-                    },
-                    {
-                        include: "#pragma-mark"
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-enabled" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    },
-                    "3" => {
-                        name: "constant.numeric.preprocessor.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*else\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.else-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        patterns: [
-                            {
-                                include: "$base"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-enabled-block" => {
-        patterns: [
-            {
-                begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-                beginCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                end: "^\\s*((#)\\s*endif\\b)",
-                endCaptures: {
-                    "0" => {
-                        name: "meta.preprocessor.c"
-                    },
-                    "1" => {
-                        name: "keyword.control.directive.conditional.c"
-                    },
-                    "2" => {
-                        name: "punctuation.definition.directive.c"
-                    }
-                },
-                patterns: [
-                    {
-                        begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                        end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
-                        name: "meta.preprocessor.c",
-                        patterns: [
-                            {
-                                include: "#preprocessor-rule-conditional-line"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#comments"
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*else\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.else-branch.in-block.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*elif\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.if-branch.in-block.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "\\n",
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        patterns: [
-                            {
-                                include: "#block_innards"
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-enabled-elif" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor.c"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor.c",
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-conditional-line"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
-                patterns: [
-                    {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        include: "$base"
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-enabled-elif-block" => {
-        begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor.c"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
-                end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
-                name: "meta.preprocessor.c",
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-conditional-line"
-                    }
-                ]
-            },
-            {
-                include: "#comments"
-            },
-            {
-                begin: "\\n",
-                end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
-                patterns: [
-                    {
-                        begin: "^\\s*((#)\\s*(else)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*endif\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch.in-block.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        begin: "^\\s*((#)\\s*(elif)\\b)",
-                        beginCaptures: {
-                            "0" => {
-                                name: "meta.preprocessor.c"
-                            },
-                            "1" => {
-                                name: "keyword.control.directive.conditional.c"
-                            },
-                            "2" => {
-                                name: "punctuation.definition.directive.c"
-                            }
-                        },
-                        end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
-                        "contentName" => "comment.block.preprocessor.elif-branch.c",
-                        patterns: [
-                            {
-                                include: "#disabled"
-                            },
-                            {
-                                include: "#pragma-mark"
-                            }
-                        ]
-                    },
-                    {
-                        include: "#block_innards"
-                    }
-                ]
-            }
-        ]
-    },
-    "preprocessor-rule-enabled-else" => {
-        begin: "^\\s*((#)\\s*else\\b)",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor.c"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "preprocessor-rule-enabled-else-block" => {
-        begin: "^\\s*((#)\\s*else\\b)",
-        beginCaptures: {
-            "0" => {
-                name: "meta.preprocessor.c"
-            },
-            "1" => {
-                name: "keyword.control.directive.conditional.c"
-            },
-            "2" => {
-                name: "punctuation.definition.directive.c"
-            }
-        },
-        end: "(?=^\\s*((#)\\s*endif\\b))",
-        patterns: [
-            {
-                include: "#block_innards"
-            }
-        ]
-    },
-    "preprocessor-rule-define-line-contents" => {
-        patterns: [
-            {
-                include: "#vararg_ellipses"
-            },
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly.c"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly.c"
-                    }
-                },
-                name: "meta.block.c",
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-define-line-blocks"
-                    }
-                ]
-            },
-            {
-                match: "\\(",
-                name: "punctuation.section.parens.begin.bracket.round.c"
-            },
-            {
-                match: "\\)",
-                name: "punctuation.section.parens.end.bracket.round.c"
-            },
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
-                end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
-                name: "meta.function.c",
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-define-line-functions"
-                    }
-                ]
-            },
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "\"|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.double.c",
-                patterns: [
-                    {
-                        include: "#string_escaped_char"
-                    },
-                    {
-                        include: "#string_placeholder"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: "'",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin.c"
-                    }
-                },
-                end: "'|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end.c"
-                    }
-                },
-                name: "string.quoted.single.c",
-                patterns: [
-                    {
-                        include: "#string_escaped_char"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "preprocessor-rule-define-line-blocks" => {
-        patterns: [
-            {
-                begin: "{",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.begin.bracket.curly.c"
-                    }
-                },
-                end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.block.end.bracket.curly.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-define-line-blocks"
-                    },
-                    {
-                        include: "#preprocessor-rule-define-line-contents"
-                    }
-                ]
-            },
-            {
-                include: "#preprocessor-rule-define-line-contents"
-            }
-        ]
-    },
-    "preprocessor-rule-define-line-functions" => {
-        patterns: [
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#vararg_ellipses"
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "#operators"
-            },
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function.c"
-                    },
-                    "2" => {
-                        name: "punctuation.section.arguments.begin.bracket.round.c"
-                    }
-                },
-                end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.arguments.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-define-line-functions"
-                    }
-                ]
-            },
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round.c"
-                    }
-                },
-                end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
-                endCaptures: {
-                    "1" => {
-                        name: "punctuation.section.parens.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#preprocessor-rule-define-line-functions"
-                    }
-                ]
-            },
-            {
-                include: "#preprocessor-rule-define-line-contents"
-            }
-        ]
-    },
-    "function-innards" => {
-        patterns: [
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#operators"
-            },
-            {
-                include: "#vararg_ellipses"
-            },
-            {
-                name: "meta.function.definition.parameters",
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function.c"
-                    },
-                    "2" => {
-                        name: "punctuation.section.parameters.begin.bracket.round.c"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parameters.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#probably_a_parameter"
-                    },
-                    {
-                        include: "#function-innards"
-                    }
-                ]
-            },
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round.c"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function-innards"
-                    }
-                ]
-            },
-            {
-                include: "$base"
-            }
-        ]
-    },
-    "function-call-innards" => {
-        patterns: [
-            {
-                include: "#comments"
-            },
-            {
-                include: "#storage_types"
-            },
-            {
-                include: "#method_access"
-            },
-            {
-                include: "#member_access"
-            },
-            {
-                include: "#operators"
-            },
-            {
-                begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
-                beginCaptures: {
-                    "1" => {
-                        name: "entity.name.function.c"
-                    },
-                    "2" => {
-                        name: "punctuation.section.arguments.begin.bracket.round.c"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.arguments.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function-call-innards"
-                    }
-                ]
-            },
-            {
-                begin: "\\(",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.begin.bracket.round.c"
-                    }
-                },
-                end: "\\)",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.section.parens.end.bracket.round.c"
-                    }
-                },
-                patterns: [
-                    {
-                        include: "#function-call-innards"
-                    }
-                ]
-            },
-            {
-                include: "#block_innards"
-            }
-        ]
-    }
-})
+# ]
+# c_grammar.addToRepository({
+#     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
+#     "access-method" => {
+#         name: "meta.function-call.member.c",
+#         begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))\\s*(?:(\\.)|(->))((?:(?:[a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(?:\\.)|(?:->)))*)\\s*([a-zA-Z_][a-zA-Z_0-9]*)(\\()",
+#         beginCaptures: {
+#             "1" => {
+#                 name: "variable.object.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.separator.dot-access.c"
+#             },
+#             "3" => {
+#                 name: "punctuation.separator.pointer-access.c"
+#             },
+#             "4" => {
+#                 patterns: [
+#                     {
+#                         match: "\\.",
+#                         name: "punctuation.separator.dot-access.c"
+#                     },
+#                     {
+#                         match: "->",
+#                         name: "punctuation.separator.pointer-access.c"
+#                     },
+#                     {
+#                         match: "[a-zA-Z_][a-zA-Z_0-9]*",
+#                         name: "variable.object.c"
+#                     },
+#                     {
+#                         name: "everything.else",
+#                         match: ".+"
+#                     }
+#                 ]
+#             },
+#             "5" => {
+#                 name: "entity.name.function.member.c"
+#             },
+#             "6" => {
+#                 name: "punctuation.section.arguments.begin.bracket.round.function.member.c"
+#             }
+#         },
+#         end: "\\)",
+#         endCaptures: {
+#             "0" => {
+#                 name: "punctuation.section.arguments.end.bracket.round.function.member.c"
+#             }
+#         },
+#         patterns: [
+#             {
+#                 include: "#function-call-innards"
+#             }
+#         ]
+#     },
+#     "block" => {
+#         patterns: [
+#             {
+#                 begin: "{",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.begin.bracket.curly.c"
+#                     }
+#                 },
+#                 end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.end.bracket.curly.c"
+#                     }
+#                 },
+#                 name: "meta.block.c",
+#                 patterns: [
+#                     {
+#                         include: "#block_innards"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "block_innards" => {
+#         patterns: [
+#             {
+#                 include: "#preprocessor-rule-enabled-block"
+#             },
+#             {
+#                 include: "#preprocessor-rule-disabled-block"
+#             },
+#             {
+#                 include: "#preprocessor-rule-conditional-block"
+#             },
+#             {
+#                 include: "#method_access"
+#             },
+#             {
+#                 include: "#member_access"
+#             },
+#             {
+#                 include: "#c_function_call"
+#             },
+#             {
+#                 name: "meta.initialization.c",
+#                 begin: "(?x)\n(?:\n  (?:\n\t(?=\\s)(?<!else|new|return)\n\t(?<=\\w) \\s+(and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)  # or word + space before name\n  )\n)\n(\n  (?:[A-Za-z_][A-Za-z0-9_]*+ | :: )++   # actual name\n  |\n  (?:(?<=operator) (?:[-*&<>=+!]+ | \\(\\) | \\[\\]))\n)\n\\s*(\\() # opening bracket",
+#                 beginCaptures: {
+#                     "1" => {
+#                         name: "variable.other.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.section.parens.begin.bracket.round.initialization.c"
+#                     }
+#                 },
+#                 end: "\\)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.end.bracket.round.initialization.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#function-call-innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "{",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.begin.bracket.curly.c"
+#                     }
+#                 },
+#                 end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.end.bracket.curly.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#block_innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#parens-block"
+#             },
+#             {
+#                 include: "$base"
+#             }
+#         ]
+#     },
+#     "c_function_call" => {
+#         begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(?=\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+#         end: "(?<=\\))(?!\\w)",
+#         name: "meta.function-call.c",
+#         patterns: [
+#             {
+#                 include: "#function-call-innards"
+#             }
+#         ]
+#     },
+#     "disabled" => {
+#         begin: "^\\s*#\\s*if(n?def)?\\b.*$",
+#         end: "^\\s*#\\s*endif\\b",
+#         patterns: [
+#             {
+#                 include: "#disabled"
+#             },
+#             {
+#                 include: "#pragma-mark"
+#             }
+#         ]
+#     },
+#     "line_continuation_character" => {
+#         patterns: [
+#             {
+#                 match: "(\\\\)\\n",
+#                 captures: {
+#                     "1" => {
+#                         name: "constant.character.escape.line-continuation.c"
+#                     }
+#                 }
+#             }
+#         ]
+#     },
+#     "parens" => {
+#         name: "meta.parens",
+#         begin: "\\(",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "punctuation.section.parens.begin.bracket.round.c"
+#             }
+#         },
+#         end: "\\)",
+#         endCaptures: {
+#             "0" => {
+#                 name: "punctuation.section.parens.end.bracket.round.c"
+#             }
+#         },
+#         patterns: [
+#             {
+#                 include: "$base"
+#             }
+#         ]
+#     },
+#     "parens-block" => {
+#         name: "meta.parens.block",
+#         begin: "\\(",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "punctuation.section.parens.begin.bracket.round.c"
+#             }
+#         },
+#         end: "\\)",
+#         endCaptures: {
+#             "0" => {
+#                 name: "punctuation.section.parens.end.bracket.round.c"
+#             }
+#         },
+#         patterns: [
+#             {
+#                 include: "#block_innards"
+#             },
+#             {
+#                 match: lookBehindToAvoid(/:/).then(/:/).lookAheadToAvoid(/:/),
+#                 name: "punctuation.range-based"
+#             }
+#         ]
+#     },
+#     "pragma-mark" => {
+#         captures: {
+#             "1" => {
+#                 name: "meta.preprocessor.pragma.c"
+#             },
+#             "2" => {
+#                 name: "keyword.control.directive.pragma.pragma-mark.c"
+#             },
+#             "3" => {
+#                 name: "punctuation.definition.directive.c"
+#             },
+#             "4" => {
+#                 name: "entity.name.tag.pragma-mark.c"
+#             }
+#         },
+#         match: "^\\s*(((#)\\s*pragma\\s+mark)\\s+(.*))",
+#         name: "meta.section"
+#     },
+#     "operators" => {
+#         patterns: [
+#             {
+#                 match: "(?<![\\w$])(sizeof)(?![\\w$])",
+#                 name: "keyword.operator.sizeof.c"
+#             },
+#             {
+#                 match: "--",
+#                 name: "keyword.operator.decrement.c"
+#             },
+#             {
+#                 match: "\\+\\+",
+#                 name: "keyword.operator.increment.c"
+#             },
+#             {
+#                 match: "%=|\\+=|-=|\\*=|(?<!\\()/=",
+#                 name: "keyword.operator.assignment.compound.c"
+#             },
+#             {
+#                 match: "&=|\\^=|<<=|>>=|\\|=",
+#                 name: "keyword.operator.assignment.compound.bitwise.c"
+#             },
+#             {
+#                 match: "<<|>>",
+#                 name: "keyword.operator.bitwise.shift.c"
+#             },
+#             {
+#                 match: "!=|<=|>=|==|<|>",
+#                 name: "keyword.operator.comparison.c"
+#             },
+#             {
+#                 match: "&&|!|\\|\\|",
+#                 name: "keyword.operator.logical.c"
+#             },
+#             {
+#                 match: "&|\\||\\^|~",
+#                 name: "keyword.operator.c"
+#             },
+#             {
+#                 match: "=",
+#                 name: "keyword.operator.assignment.c"
+#             },
+#             {
+#                 match: "%|\\*|/|-|\\+",
+#                 name: "keyword.operator.c"
+#             },
+#             PatternRange.new(
+#                 start_pattern: newPattern(
+#                     match: /\?/,
+#                     tag_as: "keyword.operator.ternary",
+#                 ),
+#                 end_pattern: newPattern(
+#                     match: /:/,
+#                     tag_as: "keyword.operator.ternary",
+#                 ),
+#                 includes: [ *evalutation_context ]
+#             ).to_tag,
+#         ]
+#     },
+#     "strings" => {
+#         patterns: [
+#             {
+#                 begin: "\"",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "\"",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.double.c",
+#                 patterns: [
+#                     {
+#                         include: "#string_escaped_char"
+#                     },
+#                     {
+#                         include: "#string_placeholder"
+#                     },
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "'",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "'",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.single.c",
+#                 patterns: [
+#                     {
+#                         include: "#string_escaped_char"
+#                     },
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "string_escaped_char" => {
+#         patterns: [
+#             {
+#                 match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
+#                 name: "constant.character.escape.c"
+#             },
+#             {
+#                 match: "\\\\.",
+#                 name: "invalid.illegal.unknown-escape.c"
+#             }
+#         ]
+#     },
+#     "string_placeholder" => {
+#         patterns: [
+#             {
+#                 match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
+#                 name: "constant.other.placeholder.c"
+#             },
+#             {
+#                 match: "(%)(?!\"\\s*(PRI|SCN))",
+#                 captures: {
+#                     "1" => {
+#                         name: "invalid.illegal.placeholder.c"
+#                     }
+#                 }
+#             }
+#         ]
+#     },
+#     "storage_types" => {
+#         patterns: [
+#             {
+#                 match: variableBounds[ @c_tokens.that(:isType, :isPrimitive) ],
+#                 name: "storage.type.built-in.primitive.c",
+#             },
+#             {
+#                 match: variableBounds[ @c_tokens.that(:isType, not(:isPrimitive)) ],
+#                 name: "storage.type.built-in.c",
+#             },
+#             {
+#                 match: /\b(enum|struct|union)\b/,
+#                 name: "storage.type.$1.c"
+#             },
+#             assembly_pattern().to_tag,
+#         ]
+#     },
+#     "vararg_ellipses" => {
+#         match: "(?<!\\.)\\.\\.\\.(?!\\.)",
+#         name: "punctuation.vararg-ellipses.c"
+#     },
+#     "preprocessor-rule-conditional" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-elif"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-else"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-disabled-elif"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "$base"
+#                     }
+#                 ]
+#             },
+#             {
+#                 match: "^\\s*#\\s*(else|elif|endif)\\b",
+#                 captures: {
+#                     "0" => {
+#                         name: "invalid.illegal.stray-$1.c"
+#                     }
+#                 }
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-conditional-block" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if(?:n?def)?\\b)",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-elif-block"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-else-block"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-disabled-elif"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#block_innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 match: "^\\s*#\\s*(else|elif|endif)\\b",
+#                 captures: {
+#                     "0" => {
+#                         name: "invalid.illegal.stray-$1.c"
+#                     }
+#                 }
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-conditional-line" => {
+#         patterns: [
+#             {
+#                 match: "(?:\\bdefined\\b\\s*$)|(?:\\bdefined\\b(?=\\s*\\(*\\s*(?:(?!defined\\b)[a-zA-Z_$][\\w$]*\\b)\\s*\\)*\\s*(?:\\n|//|/\\*|\\?|\\:|&&|\\|\\||\\\\\\s*\\n)))",
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             {
+#                 match: "\\bdefined\\b",
+#                 name: "invalid.illegal.macro-name.c"
+#             },
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 include: "#strings"
+#             },
+#             {
+#                 include: "#numbers"
+#             },
+#             {
+#                 begin: "\\?",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "keyword.operator.ternary.c"
+#                     }
+#                 },
+#                 end: ":",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "keyword.operator.ternary.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-conditional-line"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#operators"
+#             },
+#             {
+#                 match: "\\b(NULL|true|false|TRUE|FALSE)\\b",
+#                 name: "constant.language.c"
+#             },
+#             {
+#                 match: "[a-zA-Z_$][\\w$]*",
+#                 name: "entity.name.function.preprocessor.c"
+#             },
+#             {
+#                 include: "#line_continuation_character"
+#             },
+#             {
+#                 begin: "\\(",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "\\)|(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-conditional-line"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-disabled" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#comments"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-elif"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-else"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-disabled-elif"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+#                         patterns: [
+#                             {
+#                                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                                 end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                                 name: "meta.preprocessor.c",
+#                                 patterns: [
+#                                     {
+#                                         include: "#preprocessor-rule-conditional-line"
+#                                     }
+#                                 ]
+#                             },
+#                             {
+#                                 include: "$base"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "\\n",
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.if-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-disabled-block" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#comments"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-elif-block"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-enabled-else-block"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-disabled-elif"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+#                         patterns: [
+#                             {
+#                                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                                 end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                                 name: "meta.preprocessor.c",
+#                                 patterns: [
+#                                     {
+#                                         include: "#preprocessor-rule-conditional-line"
+#                                     }
+#                                 ]
+#                             },
+#                             {
+#                                 include: "#block_innards"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "\\n",
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.if-branch.in-block.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-disabled-elif" => {
+#         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0+\\b\\)*\\s*(?:$|//|/\\*))",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "meta.preprocessor.c"
+#             },
+#             "1" => {
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=^\\s*((#)\\s*(?:elif|else|endif)\\b))",
+#         patterns: [
+#             {
+#                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                 end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                 name: "meta.preprocessor.c",
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-conditional-line"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 begin: "\\n",
+#                 end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                 "contentName" => "comment.block.preprocessor.elif-branch.c",
+#                 patterns: [
+#                     {
+#                         include: "#disabled"
+#                     },
+#                     {
+#                         include: "#pragma-mark"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     },
+#                     "3" => {
+#                         name: "constant.numeric.preprocessor.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#comments"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*else\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*endif\\b))",
+#                         "contentName" => "comment.block.preprocessor.else-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.if-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "\\n",
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         patterns: [
+#                             {
+#                                 include: "$base"
+#                             }
+#                         ]
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled-block" => {
+#         patterns: [
+#             {
+#                 begin: "^\\s*((#)\\s*if\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 end: "^\\s*((#)\\s*endif\\b)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "meta.preprocessor.c"
+#                     },
+#                     "1" => {
+#                         name: "keyword.control.directive.conditional.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.definition.directive.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                         end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?=\\n)",
+#                         name: "meta.preprocessor.c",
+#                         patterns: [
+#                             {
+#                                 include: "#preprocessor-rule-conditional-line"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#comments"
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*else\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*endif\\b))",
+#                         "contentName" => "comment.block.preprocessor.else-branch.in-block.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*elif\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.if-branch.in-block.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "\\n",
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         patterns: [
+#                             {
+#                                 include: "#block_innards"
+#                             }
+#                         ]
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled-elif" => {
+#         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "meta.preprocessor.c"
+#             },
+#             "1" => {
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=^\\s*((#)\\s*endif\\b))",
+#         patterns: [
+#             {
+#                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                 end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                 name: "meta.preprocessor.c",
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-conditional-line"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 begin: "\\n",
+#                 end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
+#                 patterns: [
+#                     {
+#                         begin: "^\\s*((#)\\s*(else)\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*endif\\b))",
+#                         "contentName" => "comment.block.preprocessor.elif-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*(elif)\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.elif-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "$base"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled-elif-block" => {
+#         begin: "^\\s*((#)\\s*elif\\b)(?=\\s*\\(*\\b0*1\\b\\)*\\s*(?:$|//|/\\*))",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "meta.preprocessor.c"
+#             },
+#             "1" => {
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=^\\s*((#)\\s*endif\\b))",
+#         patterns: [
+#             {
+#                 begin: "\\G(?=.)(?!//|/\\*(?!.*\\\\\\s*\\n))",
+#                 end: "(?=//)|(?=/\\*(?!.*\\\\\\s*\\n))|(?<!\\\\)(?=\\n)",
+#                 name: "meta.preprocessor.c",
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-conditional-line"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 begin: "\\n",
+#                 end: "(?=^\\s*((#)\\s*(?:endif)\\b))",
+#                 patterns: [
+#                     {
+#                         begin: "^\\s*((#)\\s*(else)\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*endif\\b))",
+#                         "contentName" => "comment.block.preprocessor.elif-branch.in-block.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         begin: "^\\s*((#)\\s*(elif)\\b)",
+#                         beginCaptures: {
+#                             "0" => {
+#                                 name: "meta.preprocessor.c"
+#                             },
+#                             "1" => {
+#                                 name: "keyword.control.directive.conditional.c"
+#                             },
+#                             "2" => {
+#                                 name: "punctuation.definition.directive.c"
+#                             }
+#                         },
+#                         end: "(?=^\\s*((#)\\s*(?:else|elif|endif)\\b))",
+#                         "contentName" => "comment.block.preprocessor.elif-branch.c",
+#                         patterns: [
+#                             {
+#                                 include: "#disabled"
+#                             },
+#                             {
+#                                 include: "#pragma-mark"
+#                             }
+#                         ]
+#                     },
+#                     {
+#                         include: "#block_innards"
+#                     }
+#                 ]
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled-else" => {
+#         begin: "^\\s*((#)\\s*else\\b)",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "meta.preprocessor.c"
+#             },
+#             "1" => {
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=^\\s*((#)\\s*endif\\b))",
+#         patterns: [
+#             {
+#                 include: "$base"
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-enabled-else-block" => {
+#         begin: "^\\s*((#)\\s*else\\b)",
+#         beginCaptures: {
+#             "0" => {
+#                 name: "meta.preprocessor.c"
+#             },
+#             "1" => {
+#                 name: "keyword.control.directive.conditional.c"
+#             },
+#             "2" => {
+#                 name: "punctuation.definition.directive.c"
+#             }
+#         },
+#         end: "(?=^\\s*((#)\\s*endif\\b))",
+#         patterns: [
+#             {
+#                 include: "#block_innards"
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-define-line-contents" => {
+#         patterns: [
+#             {
+#                 include: "#vararg_ellipses"
+#             },
+#             {
+#                 begin: "{",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.begin.bracket.curly.c"
+#                     }
+#                 },
+#                 end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.end.bracket.curly.c"
+#                     }
+#                 },
+#                 name: "meta.block.c",
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-define-line-blocks"
+#                     }
+#                 ]
+#             },
+#             {
+#                 match: "\\(",
+#                 name: "punctuation.section.parens.begin.bracket.round.c"
+#             },
+#             {
+#                 match: "\\)",
+#                 name: "punctuation.section.parens.end.bracket.round.c"
+#             },
+#             {
+#                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas|asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\s*\\()\n(?=\n  (?:[A-Za-z_][A-Za-z0-9_]*+|::)++\\s*\\(  # actual name\n  |\n  (?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\\s*\\(\n)",
+#                 end: "(?<=\\))(?!\\w)|(?<!\\\\)(?=\\s*\\n)",
+#                 name: "meta.function.c",
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-define-line-functions"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "\"",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "\"|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.double.c",
+#                 patterns: [
+#                     {
+#                         include: "#string_escaped_char"
+#                     },
+#                     {
+#                         include: "#string_placeholder"
+#                     },
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "'",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.begin.c"
+#                     }
+#                 },
+#                 end: "'|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.definition.string.end.c"
+#                     }
+#                 },
+#                 name: "string.quoted.single.c",
+#                 patterns: [
+#                     {
+#                         include: "#string_escaped_char"
+#                     },
+#                     {
+#                         include: "#line_continuation_character"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#method_access"
+#             },
+#             {
+#                 include: "#member_access"
+#             },
+#             {
+#                 include: "$base"
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-define-line-blocks" => {
+#         patterns: [
+#             {
+#                 begin: "{",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.begin.bracket.curly.c"
+#                     }
+#                 },
+#                 end: "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.block.end.bracket.curly.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-define-line-blocks"
+#                     },
+#                     {
+#                         include: "#preprocessor-rule-define-line-contents"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#preprocessor-rule-define-line-contents"
+#             }
+#         ]
+#     },
+#     "preprocessor-rule-define-line-functions" => {
+#         patterns: [
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 include: "#storage_types"
+#             },
+#             {
+#                 include: "#vararg_ellipses"
+#             },
+#             {
+#                 include: "#method_access"
+#             },
+#             {
+#                 include: "#member_access"
+#             },
+#             {
+#                 include: "#operators"
+#             },
+#             {
+#                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+#                 beginCaptures: {
+#                     "1" => {
+#                         name: "entity.name.function.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.section.arguments.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "1" => {
+#                         name: "punctuation.section.arguments.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-define-line-functions"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "\\(",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "(\\))|(?<!\\\\)(?=\\s*\\n)",
+#                 endCaptures: {
+#                     "1" => {
+#                         name: "punctuation.section.parens.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#preprocessor-rule-define-line-functions"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#preprocessor-rule-define-line-contents"
+#             }
+#         ]
+#     },
+#     "function-innards" => {
+#         patterns: [
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 include: "#storage_types"
+#             },
+#             {
+#                 include: "#operators"
+#             },
+#             {
+#                 include: "#vararg_ellipses"
+#             },
+#             {
+#                 name: "meta.function.definition.parameters",
+#                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+#                 beginCaptures: {
+#                     "1" => {
+#                         name: "entity.name.function.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.section.parameters.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "\\)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parameters.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#probably_a_parameter"
+#                     },
+#                     {
+#                         include: "#function-innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "\\(",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "\\)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#function-innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "$base"
+#             }
+#         ]
+#     },
+#     "function-call-innards" => {
+#         patterns: [
+#             {
+#                 include: "#comments"
+#             },
+#             {
+#                 include: "#storage_types"
+#             },
+#             {
+#                 include: "#method_access"
+#             },
+#             {
+#                 include: "#member_access"
+#             },
+#             {
+#                 include: "#operators"
+#             },
+#             {
+#                 begin: "(?x)\n(?!(?:while|for|do|if|else|switch|catch|enumerate|return|typeid|alignof|alignas|sizeof|[cr]?iterate|and|and_eq|bitand|bitor|compl|not|not_eq|or|or_eq|typeid|xor|xor_eq|alignof|alignas)\\s*\\()\n(\n(?:[A-Za-z_][A-Za-z0-9_]*+|::)++  # actual name\n|\n(?:(?<=operator)(?:[-*&<>=+!]+|\\(\\)|\\[\\]))\n)\n\\s*(\\()",
+#                 beginCaptures: {
+#                     "1" => {
+#                         name: "entity.name.function.c"
+#                     },
+#                     "2" => {
+#                         name: "punctuation.section.arguments.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "\\)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.arguments.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#function-call-innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 begin: "\\(",
+#                 beginCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.begin.bracket.round.c"
+#                     }
+#                 },
+#                 end: "\\)",
+#                 endCaptures: {
+#                     "0" => {
+#                         name: "punctuation.section.parens.end.bracket.round.c"
+#                     }
+#                 },
+#                 patterns: [
+#                     {
+#                         include: "#function-call-innards"
+#                     }
+#                 ]
+#             },
+#             {
+#                 include: "#block_innards"
+#             }
+#         ]
+#     }
+# })
 
-# Save
-saveGrammar(c_grammar)
+# # Save
+# saveGrammar(c_grammar)

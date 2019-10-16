@@ -5,11 +5,11 @@
   "icon": "icon.png",
   "version": "1.0.0",
   "scripts": {
-    "build": "ruby scripts/generate.rb",
+    "build": "bundle exec ruby scripts/generate.rb",
     "build-gem": "gem build gem/textmate_grammar.gemspec",
-    "perfall": "ruby scripts/perf_all.rb",
+    "perfall": "bundle exec ruby scripts/perf_all.rb",
     "prelint": "npm run build",
-    "lint": "ruby scripts/lint.rb",
+    "lint": "bundle exec ruby scripts/lint.rb",
     "_pretest": "npm run build",
     "test": "node test/source/index.js test",
     "testall": "npm test -- --all",
@@ -25,7 +25,7 @@
     "report": "node test/source/index.js report",
     "perf": "npm run report -- perf",
     "cov": "npm run report -- coverage",
-    "publish": "ruby scripts/publish.rb cpp"
+    "publish": "bundle exec ruby scripts/publish.rb cpp"
   },
   "keywords": [
     "syntax",
