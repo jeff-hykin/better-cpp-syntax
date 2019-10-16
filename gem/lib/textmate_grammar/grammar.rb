@@ -147,45 +147,8 @@ class Grammar
             raise "See above error"
         end
 
-        # ensure array is flat and only contains patterns
-        if value.is_a? Array
-            value = value.flatten.map do |item|
-                next item if item.is_a? Symbol
-
-                # TODO: refactor this and the patternBase check below into a generic method
-                if item.is_a? Hash
-                    # check for an implicit legacy pattern
-                    legacy_keys = [
-                        "name",
-                        "contentName",
-                        "begin",
-                        "end",
-                        "while",
-                        "comment",
-                        "disabled",
-                    ]
-                    item = LegacyPattern.new(item) unless (item.keys & legacy_keys).empty?
-                end
-                item = PatternBase.new(item) unless item.is_a? PatternBase
-                item
-            end
-        elsif value.is_a? Hash
-            # check for an implicit legacy pattern
-            legacy_keys = [
-                "name",
-                "contentName",
-                "begin",
-                "end",
-                "while",
-                "comment",
-                "disabled",
-            ]
-            value = LegacyPattern.new(value) unless (value.keys & legacy_keys).empty?
-        elsif !value.is_a?(PatternBase)
-            value = PatternBase.new(value)
-        end
         # add it to the repository
-        @repository[key] = value
+        @repository[key] = fixup_value(value)
         @repository[key]
     end
 
@@ -311,10 +274,10 @@ class Grammar
             else raise "Unexpected value: #{potential_pattern.class}"
             end
         end
-        
-        # init patterns first so they show up 
+
+        # init patterns first so they show up
         output[:patterns] = []
-        
+
         output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
         # sort repos by key name
         output[:repository] = Hash[ output[:repository].sort_by { |key, val| key.to_s } ] 

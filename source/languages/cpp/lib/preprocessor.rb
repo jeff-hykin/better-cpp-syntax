@@ -8,9 +8,11 @@ grammar.external_repos = [
     :std_space,
     :identifier,
     :comments,
-    :string_context,
-    :number_literal,
+    :language_constants,
     :line_continuation_character,
+    :number_literal,
+    :operators,
+    :string_context,
 ]
 grammar.exports = [
     :macro_name,
@@ -44,7 +46,7 @@ non_escaped_newline = lookBehindToAvoid("\\").lookAheadFor(/\n/)
 
 grammar[:macro_name] = macro_name = Pattern.new(
     match: wordBounds(identifier),
-    tag_as: "entity.name.function.preprocssor",
+    tag_as: "entity.name.function.preprocessor",
 )
 
 grammar[:pragma_mark] = Pattern.new(
@@ -296,7 +298,7 @@ grammar[:preprocessor_conditional_range] = PatternRange.new(
     includes: [
         # the first line (the conditional line)
         PatternRange.new(
-            # start at the begining
+            # start at the beginning
             tag_as: "meta.preprocessor.conditional",
             start_pattern: Pattern.new(/\G/).lookBehindFor(/ifndef|ifdef|if/),
             zeroLengthStart?: true,
@@ -311,8 +313,8 @@ grammar[:preprocessor_conditional_context] = [
     :preprocessor_conditional_defined,
     :comments,
     :language_constants,
-    :string_context_c,
-    :preprocessor_number_literal,
+    :string_context,
+    :number_literal,
     :operators,
     :predefined_macros,
     :macro_name,
