@@ -517,6 +517,8 @@ class Grammar
             patterns: [],
             repository: [],
         }
+        # sort by key alphabetically
+        @data[:repository] = Hash[ @data[:repository].sort_by { |key, val| key.to_s } ] 
         repository_copy = @data[:repository].dup
         
         # 
