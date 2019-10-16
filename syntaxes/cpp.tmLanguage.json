@@ -1,6 +1,92 @@
 {
   "name": "C++",
   "scopeName": "source.cpp",
+  "patterns": [
+    {
+      "include": "#ever_present_context"
+    },
+    {
+      "include": "#constructor_root"
+    },
+    {
+      "include": "#destructor_root"
+    },
+    {
+      "include": "#function_definition"
+    },
+    {
+      "include": "#operator_overload"
+    },
+    {
+      "include": "#using_namespace"
+    },
+    {
+      "include": "#type_alias"
+    },
+    {
+      "include": "#using_name"
+    },
+    {
+      "include": "#namespace_alias"
+    },
+    {
+      "include": "#namespace_block"
+    },
+    {
+      "include": "#extern_block"
+    },
+    {
+      "include": "#typedef_class"
+    },
+    {
+      "include": "#typedef_struct"
+    },
+    {
+      "include": "#typedef_union"
+    },
+    {
+      "include": "#typedef_keyword"
+    },
+    {
+      "include": "#standard_declares"
+    },
+    {
+      "include": "#class_block"
+    },
+    {
+      "include": "#struct_block"
+    },
+    {
+      "include": "#union_block"
+    },
+    {
+      "include": "#enum_block"
+    },
+    {
+      "include": "#template_isolated_definition"
+    },
+    {
+      "include": "#template_definition"
+    },
+    {
+      "include": "#access_control_keywords"
+    },
+    {
+      "include": "#block"
+    },
+    {
+      "include": "#static_assert"
+    },
+    {
+      "include": "#assembly"
+    },
+    {
+      "include": "#function_pointer"
+    },
+    {
+      "include": "#evaluation_context"
+    }
+  ],
   "repository": {
     "bad": {
       "match": "abc",
@@ -18243,92 +18329,6 @@
       ]
     }
   },
-  "patterns": [
-    {
-      "include": "#ever_present_context"
-    },
-    {
-      "include": "#constructor_root"
-    },
-    {
-      "include": "#destructor_root"
-    },
-    {
-      "include": "#function_definition"
-    },
-    {
-      "include": "#operator_overload"
-    },
-    {
-      "include": "#using_namespace"
-    },
-    {
-      "include": "#type_alias"
-    },
-    {
-      "include": "#using_name"
-    },
-    {
-      "include": "#namespace_alias"
-    },
-    {
-      "include": "#namespace_block"
-    },
-    {
-      "include": "#extern_block"
-    },
-    {
-      "include": "#typedef_class"
-    },
-    {
-      "include": "#typedef_struct"
-    },
-    {
-      "include": "#typedef_union"
-    },
-    {
-      "include": "#typedef_keyword"
-    },
-    {
-      "include": "#standard_declares"
-    },
-    {
-      "include": "#class_block"
-    },
-    {
-      "include": "#struct_block"
-    },
-    {
-      "include": "#union_block"
-    },
-    {
-      "include": "#enum_block"
-    },
-    {
-      "include": "#template_isolated_definition"
-    },
-    {
-      "include": "#template_definition"
-    },
-    {
-      "include": "#access_control_keywords"
-    },
-    {
-      "include": "#block"
-    },
-    {
-      "include": "#static_assert"
-    },
-    {
-      "include": "#assembly"
-    },
-    {
-      "include": "#function_pointer"
-    },
-    {
-      "include": "#evaluation_context"
-    }
-  ],
   "version": "",
   "fileTypes": [
     "cc",
