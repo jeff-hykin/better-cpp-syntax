@@ -219,74 +219,74 @@ class Grammar
         repo = @repository.__deep_clone__
         @@linters.each do |linter|
             msg = "linting failed, see above error"
-            @repository.each do |_, value|
-                if value.is_a? Array
-                    value.each do |v|
+            @repository.each do |_, potential_pattern|
+                if potential_pattern.is_a? Array
+                    potential_pattern.each do |each_potential_pattern|
                         raise msg unless linter.pre_lint(
-                            v, filter_options(linter, v, grammar: self, repository: repo),
+                            each_potential_pattern, filter_options(linter, each_potential_pattern, grammar: self, repository: repo),
                         )
                     end
                     next
                 end
                 raise msg unless linter.pre_lint(
-                    value, filter_options(linter, value, grammar: self, repository: repo),
+                    potential_pattern, filter_options(linter, potential_pattern, grammar: self, repository: repo),
                 )
             end
         end
 
         @@transforms.each do |transform|
-            repo = repo.transform_values do |value|
-                if value.is_a? Array
-                    value.map do |v|
+            repo = repo.transform_values do |potential_pattern|
+                if potential_pattern.is_a? Array
+                    potential_pattern.map do |each_potential_pattern|
                         transform.pre_transform(
-                            v, filter_options(transform, v, grammar: self, repository: repo),
+                            each_potential_pattern, filter_options(transform, each_potential_pattern, grammar: self, repository: repo),
                         )
                     end
                 else
                     transform.pre_transform(
-                        value, filter_options(transform, value, grammar: self, repository: repo),
+                        potential_pattern, filter_options(transform, potential_pattern, grammar: self, repository: repo),
                     )
                 end
             end
         end
 
-        convert_initial_context = lambda do |value|
-            if value == :$initial_context
+        convert_initial_context = lambda do |potential_pattern|
+            if potential_pattern == :$initial_context
                 return (inherit_or_embedded == :embedded) ? :$self : :$base
             end
 
-            return value.map { |d| convert_initial_context.call(d) } if value.is_a? Array
+            return potential_pattern.map { |nested_potential_pattern| convert_initial_context.call(nested_potential_pattern) } if potential_pattern.is_a? Array
 
-            if value.is_a? PatternBase
-                return value.transform_includes do |d|
+            if potential_pattern.is_a? PatternBase
+                return potential_pattern.transform_includes do |each_nested_potential_pattern|
                     # transform includes will call this block again if d is a patternBase
-                    next d if d.is_a? PatternBase
+                    next each_nested_potential_pattern if each_nested_potential_pattern.is_a? PatternBase
 
-                    convert_initial_context.call(d)
+                    convert_initial_context.call(each_nested_potential_pattern)
                 end
             end
 
-            return value
+            return potential_pattern
         end
-        repo = repo.transform_values { |v| convert_initial_context.call(v) }
+        repo = repo.transform_values { |each_potential_pattern| convert_initial_context.call(each_potential_pattern) }
 
         output = {
             name: @name,
             scopeName: @scope_name,
         }
 
-        to_tag = lambda do |value|
-            case value
-            when Array then return {"patterns" => value.map { |v| to_tag.call(v) }}
-            when Symbol then return {"include" => "#" + value.to_s}
-            when Hash then return value
-            when String then return {"include" => value}
-            when PatternBase then return value.to_tag
-            else raise "Unexpected value: #{value.class}"
+        to_tag = lambda do |potential_pattern|
+            case potential_pattern
+            when Array then return {"patterns" => potential_pattern.map { |nested_potential_pattern| to_tag.call(nested_potential_pattern) }}
+            when Symbol then return {"include" => "#" + potential_pattern.to_s}
+            when Hash then return potential_pattern
+            when String then return {"include" => potential_pattern}
+            when PatternBase then return potential_pattern.to_tag
+            else raise "Unexpected value: #{potential_pattern.class}"
             end
         end
 
-        output[:repository] = repo.transform_values { |value| to_tag.call(value) }
+        output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []
