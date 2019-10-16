@@ -285,7 +285,10 @@ class Grammar
             else raise "Unexpected value: #{potential_pattern.class}"
             end
         end
-
+        
+        # init patterns first so they show up 
+        output[:patterns] = []
+        
         output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
 
         output[:patterns] = output[:repository][:$initial_context]
