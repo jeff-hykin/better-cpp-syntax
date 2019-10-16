@@ -6,6 +6,7 @@
   "version": "1.0.0",
   "scripts": {
     "build": "ruby scripts/generate.rb",
+    "build-gem": "gem build gem/textmate_grammar.gemspec",
     "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "ruby scripts/lint.rb",
