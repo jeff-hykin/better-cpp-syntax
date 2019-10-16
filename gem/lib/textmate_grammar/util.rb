@@ -102,3 +102,49 @@ end
 def wrap_with_anchors(pat)
     Pattern.new(/^/).then(pat).then(/$/)
 end
+
+#
+# Fixes value to be either a PatternBase, Symbol, or Array of either
+#
+# @param [*] value The value to fixup
+#
+# @return [PatternBase,Symbol,Array<PatternBase,Symbol>] the fixed value
+#
+def fixup_value(value)
+    is_array = value.is_a? Array
+    # ensure array is flat and only contains patterns or symbols
+    value = [value].flatten.map do |v|
+        next v if v.is_a? Symbol
+
+        if v.is_a? String
+            next v if v.start_with?("source.", "text.", "$")
+        end
+
+        if v.is_a? Hash
+            # check for an implicit legacy pattern
+            legacy_keys = [
+                "name",
+                :name,
+                "contentName",
+                :contentName,
+                "begin",
+                :begin,
+                "end",
+                :end,
+                "while",
+                :while,
+                "comment",
+                :comment,
+                "disabled",
+                :disabled,
+            ]
+            v = LegacyPattern.new(v) unless (v.keys & legacy_keys).empty?
+        end
+
+        v = Pattern.new(v) unless v.is_a? PatternBase
+        v
+    end
+
+    value = value[0] unless is_array
+    value
+end

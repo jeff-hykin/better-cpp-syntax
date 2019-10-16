@@ -155,7 +155,7 @@
     },
     "macro_name": {
       "match": "(?<!\\w)(?:[a-zA-Z_]|(?:(?:\\\\u[0-9a-fA-F]{4})|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:(?:\\\\u[0-9a-fA-F]{4})|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
-      "name": "entity.name.function.preprocssor.cpp"
+      "name": "entity.name.function.preprocessor.cpp"
     },
     "pragma_mark": {
       "match": "(^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?pragma(?:\\s)+mark)(?:\\s)+(.*)",
@@ -625,7 +625,7 @@
           ]
         },
         "11": {
-          "name": "entity.name.function.preprocssor.cpp"
+          "name": "entity.name.function.preprocessor.cpp"
         }
       },
       "name": "meta.preprocessor.undef.cpp"
@@ -706,7 +706,7 @@
           "name": "punctuation.definition.directive.cpp"
         },
         "7": {
-          "name": "entity.name.function.preprocssor.cpp"
+          "name": "entity.name.function.preprocessor.cpp"
         }
       },
       "endCaptures": {
@@ -826,16 +826,16 @@
           "include": "#comments"
         },
         {
-          "include": "#d9bc4796b0b_language_constants"
+          "include": "#language_constants"
         },
         {
-          "include": "#d9bc4796b0b_string_context_c"
+          "include": "#string_context"
         },
         {
-          "include": "#d9bc4796b0b_preprocessor_number_literal"
+          "include": "#number_literal"
         },
         {
-          "include": "#d9bc4796b0b_operators"
+          "include": "#operators"
         },
         {
           "include": "#d9bc4796b0b_predefined_macros"
@@ -18324,7 +18324,7 @@
     "macro_context": {
       "patterns": [
         {
-          "match": "source\\.cpp\\.embedded\\.macro"
+          "include": "source.cpp.embedded.macro"
         }
       ]
     }
