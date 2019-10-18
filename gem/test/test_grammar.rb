@@ -128,6 +128,22 @@ class GrammarTest < MiniTest::Test
             end_pattern: /def/,
             includes: [:$initial_context],
         )
-        pp g.generate
+        expected = {
+            :name => "test",
+            :scopeName => "source.test",
+            :patterns => [],
+            :repository => {
+                :abc => {
+                    "begin"=>"abc",
+                    "end"=>"def",
+                    "beginCaptures"=>{},
+                    "endCaptures"=>{},
+                    :patterns => [{ :include => "$self" }],
+                },
+            },
+            :version=>"",
+        }
+
+        assert_equal expected, g.generate
     end
 end
