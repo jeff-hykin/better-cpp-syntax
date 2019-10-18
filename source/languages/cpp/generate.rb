@@ -1090,10 +1090,13 @@ grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).zeroOrMoreOf(
-                Pattern.new(
-                    match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
-                    tag_as: "storage.modifier.$match"
-                ).then(std_space)
+                match: storage_modifiers = Pattern.new(
+                    Pattern.new(
+                        match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
+                        tag_as: "storage.modifier.$match"
+                    ).then(std_space)
+                ),
+                includes: [storage_modifiers],
             ).then(
                     grammar[:simple_type].then(std_space).then(
                     optional_calling_convention
