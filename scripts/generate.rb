@@ -8,8 +8,8 @@ $uncommited_files = nil
 def get_uncommited
     if $uncommited_files == nil
         git_status = `git status --porcelain`
-        $uncommited_files = git_status.split("\n").filter {|file| /^.M/ =~ file}.map do |file|
-            /M (.+)/ =~ file
+        $uncommited_files = git_status.split("\n").filter {|file| /^.[M?]/ =~ file}.map do |file|
+            /[M?] (.+)/ =~ file
             File.join(PathFor[:root], $1)
         end
     end
