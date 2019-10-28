@@ -5,13 +5,14 @@ end
 grammar = Grammar.new_exportable_grammar
 
 grammar.external_repos = [
-    :std_space,
-    :identifier,
     :comments,
+    :identifier,
     :language_constants,
     :line_continuation_character,
     :number_literal,
     :operators,
+    :predefined_macros,
+    :std_space,
     :string_context,
 ]
 grammar.exports = [
