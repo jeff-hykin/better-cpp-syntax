@@ -27,6 +27,4 @@ def test_grammar
     )
 end
 
-def wrap_complete(pat)
-    Pattern.new(/^/).then(pat).then(/$/)
-end
+alias :wrap_complete :wrap_with_anchors

@@ -100,7 +100,7 @@ end
 # @return [PatternBase] the wrapped pattern
 #
 def wrap_with_anchors(pat)
-    Pattern.new(/^/).then(pat).then(/$/)
+    Pattern.new(/^/).then(Pattern.new(pat)).then(/$/)
 end
 
 #

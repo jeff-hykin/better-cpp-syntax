@@ -107,6 +107,17 @@ class PatternRange < PatternBase
     end
 
     #
+    # Raises an error to prevent use inside a pattern list
+    #
+    # @param _ignored ignored
+    #
+    # @return [void]
+    #
+    def do_evaluate_self(*_ignored)
+        raise "PatternRange cannot be used as a part of a Pattern"
+    end
+
+    #
     # Generate a Textmate rule from the PatternRange
     #
     # @return [Hash] The Textmate rule

@@ -141,62 +141,6 @@ def oneOrMoreOf(pattern)
     OneOrMoreOfPattern.new(pattern)
 end
 
-# Provides alternation
-# Either the previous pattern or provided pattern is accepted
-# @note OneOfPattern is likely just as powerful and less confusing
-class OrPattern < PatternBase
-    # (see PatternBase#do_evaluate_self)
-    def do_evaluate_self(groups)
-        # don't add the capture groups because they will be added by integrate_pattern
-        add_quantifier_options_to(@match, groups)
-    end
-
-    # (see PatternBase#integrate_pattern)
-    # @note this is overloaded to provide the alternation
-    def integrate_pattern(previous_evaluate, groups, is_single_entity)
-        previous_evaluate = "(?:#{previous_evaluate})" unless is_single_entity
-        match = @match.is_a?(PatternBase) ? @match.evaluate(groups) : @match
-        match = "(#{match})" if needs_to_capture?
-        self_pattern = "(?:#{previous_evaluate}|#{match})"
-        if @next_pattern.respond_to? :integrate_pattern
-            single_entity = string_single_entity? self_pattern
-            return @next_pattern.integrate_pattern(self_pattern, groups, single_entity)
-        end
-
-        self_pattern
-    end
-
-    # (see PatternBase#evaluate)
-    def evaluate(groups = nil)
-        raise "evaluate is not implemented for OrPattern"
-    end
-
-    # (see PatternBase#do_get_to_s_name)
-    def do_get_to_s_name(top_level)
-        top_level ? "or(" : ".or("
-    end
-
-    # (see PatternBase#single_entity?)
-    # @return [true]
-    def single_entity?
-        true
-    end
-end
-
-class PatternBase
-    #
-    # Match either the preceding pattern chain or pattern
-    #
-    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match instead of the previous chain
-    #
-    # @return [PatternBase] a pattern to append to
-    #
-    def or(pattern)
-        insert(OrPattern.new(pattern))
-    end
-end
-
-# or does not have a top level option
 
 # Provides alternation
 # when one of the passed in patterns is accepted, this pattern is accepted

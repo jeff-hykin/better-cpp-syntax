@@ -10,6 +10,7 @@ require_relative 'pattern'
 require_relative 'sub_patterns/pattern_range'
 require_relative 'sub_patterns/sub_patterns'
 require_relative 'sub_patterns/legacy_pattern'
+require_relative 'sub_patterns/or_pattern'
 
 #
 # Represents a Textmate Grammar

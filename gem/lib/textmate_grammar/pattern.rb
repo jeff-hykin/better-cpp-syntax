@@ -4,6 +4,8 @@ require 'deep_clone'
 require 'yaml'
 require 'textmate_grammar/grammar_plugin'
 require 'textmate_grammar/util'
+require 'textmate_grammar/regex_operator'
+require 'textmate_grammar/regex_operators/concat'
 
 #
 # Provides a base class to simplify the writing of complex regular expressions rules
@@ -327,11 +329,16 @@ class PatternBase
     def evaluate(groups = nil)
         top_level = groups.nil?
         groups = collect_group_attributes if top_level
-        self_evaluate = do_evaluate_self(groups)
-        if @next_pattern.respond_to?(:integrate_pattern)
-            single_entity = string_single_entity?(self_evaluate)
-            self_evaluate = @next_pattern.integrate_pattern(self_evaluate, groups, single_entity)
+        evaluate_array = ['']
+
+        pat = self
+        while pat.is_a? PatternBase
+            evaluate_array << pat.evaluate_operator
+            evaluate_array << pat.do_evaluate_self(groups)
+            pat = pat.next_pattern
         end
+
+        self_evaluate = RegexOperator.evaluate(evaluate_array)
         self_evaluate = fixup_regex_references(groups, self_evaluate) if top_level
         self_evaluate
     end
@@ -524,7 +531,9 @@ class PatternBase
     # @return [PatternBase] a copy of self with a pattern inserted
     #
     def then(pattern)
-        pattern = PatternBase.new(pattern) unless pattern.is_a? PatternBase
+        unless pattern.is_a?(PatternBase) && pattern.next_pattern == nil
+            pattern = PatternBase.new(pattern)
+        end
         insert(pattern)
     end
     # other methods added by subclasses
@@ -532,7 +541,7 @@ class PatternBase
     #
     # evaluates @match
     # @note optionally override when inheriting
-    # @note by default this adds quantifier options and optionally adds a capture group
+    # @note by default this optionally adds a capture group
     #
     # @param [Hash] groups group attributes
     #
@@ -545,20 +554,12 @@ class PatternBase
     end
 
     #
-    # Combines self with with the result of evaluate on the previous pattern
+    # Returns the operator to use when evaluating
     #
-    # @note optionally override when inheriting if concatenation is not sufficient
+    # @return [RegexOperator] the operator to use
     #
-    # @param [String] previous the result of evaluate on the previous pattern
-    #   in the linked list of patterns
-    # @param [Array] groups group attributes
-    # @param [Boolean] single_entity is previous a single entity
-    #
-    # @return [String] the combined regexp
-    #
-    def integrate_pattern(previous, groups, single_entity) # rubocop:disable UnusedMethodArgument
-        # by default just concat the groups
-        "#{previous}#{evaluate(groups)}"
+    def evaluate_operator
+        ConcatOperator.new
     end
 
     #
