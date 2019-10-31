@@ -2,6 +2,10 @@ module Generated
     class Rule
         # @return [String] The location of this rule
         attr_accessor :location
+
+        def initialize(location)
+            @location = location
+        end
     end
 
     #
@@ -11,8 +15,13 @@ module Generated
         # @return [String] The included Rule name
         attr_accessor :rule
 
-        def initialize(rule)
+        def initialize(location, rule)
+            super(location)
             @rule = rule
+        end
+
+        def to_h
+            {"include" => @rule}
         end
     end
 
@@ -22,17 +31,31 @@ module Generated
     class NameRule < Rule
         # @return [String] The name of the rule
         attr_accessor :name
+
+        def initialize(location, name)
+            super(location)
+            @name = name
+        end
+
+        def to_h
+            {"name" => @name}
+        end
     end
 
     #
-    # Represents a rule inf the form of { patterns = (Rule...); }
+    # Represents a rule in the form of { patterns = (Rule...); }
     #
     class PatternRule < Rule
         # @return [Array<Rule>] The list of rules
         attr_accessor :rules
 
-        def initialize(rules)
+        def initialize(location, rules)
+            super(location)
             @rules = rules
+        end
+
+        def to_h
+            {"patterns" => @rules.map(&:to_h)}
         end
     end
 
@@ -43,6 +66,18 @@ module Generated
         attr_accessor :name
         # @return [Hash<String=>Rule>] The capture rules
         attr_accessor :captures
+
+        def initialize(location)
+            super(location)
+        end
+
+        def to_h
+            {
+                "match" => @match,
+                "name" => @name,
+                "captures" => @captures.transform_values(&:to_h)
+            }.compact
+        end
     end
 
     class BeginEndRule < Rule
@@ -58,6 +93,21 @@ module Generated
         attr_accessor :beginCaptures
         # @return [Hash<String=>Rule>] The captures rules for end
         attr_accessor :endCaptures
+
+        def initialize(location)
+            super(location)
+        end
+
+        def to_h
+            {
+                "begin" => @begin,
+                "end" => @end,
+                "name" => @name,
+                "contentName" => @contentName
+                "beginCaptures" => @beginCaptures.transform_values(&:to_h)
+                "endCaptures" => @endCaptures.transform_values(&:to_h)
+            }.compact
+        end
     end
 
     class BeginWhileRule < Rule
@@ -73,5 +123,20 @@ module Generated
         attr_accessor :beginCaptures
         # @return [Hash<String=>Rule>] The captures rules for while
         attr_accessor :whileCaptures
+
+        def initialize(location)
+            super(location)
+        end
+
+        def to_h
+            {
+                "begin" => @begin,
+                "while" => @while,
+                "name" => @name,
+                "contentName" => @contentName
+                "beginCaptures" => @beginCaptures.transform_values(&:to_h)
+                "whileCaptures" => @whileCaptures.transform_values(&:to_h)
+            }.compact
+        end
     end
 end
