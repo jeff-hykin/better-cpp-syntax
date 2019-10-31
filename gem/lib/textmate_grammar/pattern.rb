@@ -532,7 +532,7 @@ class PatternBase
     #
     def then(pattern)
         unless pattern.is_a?(PatternBase) && pattern.next_pattern == nil
-            pattern = PatternBase.new(pattern)
+            pattern = Pattern.new(pattern)
         end
         insert(pattern)
     end

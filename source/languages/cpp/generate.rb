@@ -364,27 +364,27 @@ grammar[:bad] = Pattern.new(
             ),
             # tag is a legacy name
             tag_as: "meta.toc-list.banner.double-slash",
-        ) # ).or(
-        #     should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
-        #     should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
-        #     match: Pattern.new(/^/).maybe(@spaces).then(
-        #         match: Pattern.new(
-        #             match: /\/\*/,
-        #             tag_as: "punctuation.definition.comment"
-        #         ).maybe(
-        #             match: @spaces,
-        #             quantity_preference: :as_few_as_possible
-        #         ).then(
-        #             match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-        #             tag_as: "meta.banner.character",
-        #             reference: "banner_part2"
-        #         ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part2")
-        #         .maybe(@spaces).then(/\*\//),
-        #         tag_as: "comment.line.banner",
-        #     ),
-        #     # tag is a legacy name
-        #     tag_as: "meta.toc-list.banner.block",
-        # )
+        ).or(
+            # should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
+            # should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
+            match: Pattern.new(/^/).maybe(@spaces).then(
+                match: Pattern.new(
+                    match: /\/\*/,
+                    tag_as: "punctuation.definition.comment"
+                ).maybe(
+                    match: @spaces,
+                    quantity_preference: :as_few_as_possible
+                ).then(
+                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
+                    tag_as: "meta.banner.character",
+                    reference: "banner_part2"
+                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part2")
+                .maybe(@spaces).then(/\*\//),
+                tag_as: "comment.line.banner",
+            ),
+            # tag is a legacy name
+            tag_as: "meta.toc-list.banner.block",
+        )
     )
     grammar[:invalid_comment_end] = Pattern.new(
         match: /\*\//,

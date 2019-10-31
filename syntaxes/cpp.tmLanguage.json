@@ -3258,7 +3258,7 @@
       ]
     },
     "emacs_file_banner": {
-      "match": "(^(?:(?:\\s)+)?((\\/\\/)(?:(?:\\s)+)?((?:[#;\\/=*C~]+)++(?![#;\\/=*C~]))(?:(?:\\s)+)?.+(?:(?:\\s)+)?\\4(?:(?:\\s)+)?(?:\\n|$)))",
+      "match": "(?:(^(?:(?:\\s)+)?((\\/\\/)(?:(?:\\s)+)?((?:[#;\\/=*C~]+)++(?![#;\\/=*C~]))(?:(?:\\s)+)?.+(?:(?:\\s)+)?\\4(?:(?:\\s)+)?(?:\\n|$)))|(^(?:(?:\\s)+)?((\\/\\*)(?:(?:\\s)+)?((?:[#;\\/=*C~]+)++(?![#;\\/=*C~]))(?:(?:\\s)+)?.+(?:(?:\\s)+)?\\8(?:(?:\\s)+)?\\*\\/)))",
       "captures": {
         "1": {
           "name": "meta.toc-list.banner.double-slash.cpp"
@@ -3270,6 +3270,18 @@
           "name": "punctuation.definition.comment.cpp"
         },
         "4": {
+          "name": "meta.banner.character.cpp"
+        },
+        "5": {
+          "name": "meta.toc-list.banner.block.cpp"
+        },
+        "6": {
+          "name": "comment.line.banner.cpp"
+        },
+        "7": {
+          "name": "punctuation.definition.comment.cpp"
+        },
+        "8": {
           "name": "meta.banner.character.cpp"
         }
       }
@@ -13988,11 +14000,11 @@
               "name": "constant.character.escape.cpp"
             },
             {
-              "match": "\\\\[0-7]",
+              "match": "\\\\[0-7]{1,3}",
               "name": "constant.character.escape.cpp"
             },
             {
-              "match": "\\\\x[0-9a-fA-F]",
+              "match": "\\\\x[0-9a-fA-F]{2}",
               "name": "constant.character.escape.cpp"
             },
             {
