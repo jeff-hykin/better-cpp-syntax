@@ -6,9 +6,10 @@ require 'pp'
 require 'pathname'
 
 require_relative 'pattern'
-require_relative 'pattern_range'
-require_relative 'sub_patterns'
-require_relative 'legacy_pattern'
+# TODO: decide which of these should move to textmate_grammar.rb
+require_relative 'sub_patterns/pattern_range'
+require_relative 'sub_patterns/sub_patterns'
+require_relative 'sub_patterns/legacy_pattern'
 
 #
 # Represents a Textmate Grammar
@@ -280,7 +281,7 @@ class Grammar
 
         output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
         # sort repos by key name
-        output[:repository] = Hash[ output[:repository].sort_by { |key, val| key.to_s } ] 
+        output[:repository] = Hash[ output[:repository].sort_by { |key, val| key.to_s } ]
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []

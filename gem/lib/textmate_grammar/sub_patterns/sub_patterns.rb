@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'pattern'
+require_relative '../pattern'
 
 # An optional pattern
 # for some pattern `p` this is equivalent to (?:p?)

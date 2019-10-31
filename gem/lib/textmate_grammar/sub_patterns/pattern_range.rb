@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'pattern'
+require_relative '../pattern'
 
 #
 # Provides the ability to create begin/end and begin/while rules
