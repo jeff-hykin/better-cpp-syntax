@@ -148,3 +148,63 @@ def fixup_value(value)
     value = value[0] unless is_array
     value
 end
+
+#
+# Determine the absolute path that a require statement resolves to
+#
+# @note this assumes path was successfully required previously
+#
+# @param [String] path the path to resolve
+#
+# @return [String] the resolved path
+#
+def resolve_require(path)
+    path = Pathname.new path
+    return path.to_s if path.absolute? && path.extname != ""
+
+    return path.dirname.glob("#{path.basename}.{rb,so,dll}")[0].to_s if path.absolute?
+
+    $LOAD_PATH.each do |p|
+        test_path = Pathname.new(p).join(path)
+        return test_path.to_s if path.extname != "" && test_path.exist?
+
+        test_paths = test_path.dirname.glob("#{test_path.basename}.{rb,so,dll}")
+        return test_paths[0].to_s unless test_paths.empty?
+    end
+
+    ""
+end
+
+#
+# Converts an output into a set of tags
+#
+# @param [Hash] output output of Grammar#generate
+#
+# @return [Set<String>] The tags in the grammar
+#
+def get_tags(output)
+    repository = output[:repository]
+    repository[:$initial_context] = {patterns: output[:patterns]}
+    tags = Set.new
+    add_tags = lambda do |rule|
+
+        tags.merge(rule[:name].split(" ")) if rule[:name]
+        tags.merge(rule[:contentName].split(" ")) if rule[:contentName]
+        # handle strings
+        rule[:patterns] = rule["patterns"] if rule["patterns"]
+        rule[:captures] = rule["captures"] if rule["captures"]
+        rule[:beginCaptures] = rule["beginCaptures"] if rule["beginCaptures"]
+        rule[:endCaptures] = rule["endCaptures"] if rule["endCaptures"]
+        rule[:whileCaptures] = rule["whileCaptures"] if rule["whileCaptures"]
+
+        rule[:patterns].each { |p| add_tags.call(p) } if rule[:patterns]
+        rule[:captures].values.each { |p| add_tags.call(p) } if rule[:captures]
+        rule[:beginCaptures].values.each { |p| add_tags.call(p) } if rule[:beginCaptures]
+        rule[:endCaptures].values.each { |p| add_tags.call(p) } if rule[:endCaptures]
+        rule[:whileCaptures].values.each { |p| add_tags.call(p) } if rule[:whileCaptures]
+    end
+
+    repository.values.each { |p| add_tags.call(p) }
+
+    tags
+end

@@ -342,7 +342,7 @@ class Grammar
     # Save the grammar to a path
     #
     # @param [Hash] options options to save_to
-    # @option options :inherit_or_embedded (:embedded) see {#generate}
+    # @option options :inherit_or_embedded (:embedded) see #generate
     # @option options :generate_tags [Boolean] (true) generate a list of all +:tag_as+s
     # @option options :dir [String] the location to generate the files
     # @option options :tag_dir [String] (File.join(options[:dir],"language_tags")) the
@@ -397,6 +397,16 @@ class Grammar
             puts "unexpected syntax format #{options[:syntax_format]}"
             puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]"
             raise "see above error"
+        end
+
+        if options[:generate_tags]
+            file_name = File.join(
+                options[:tag_dir],
+                "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            )
+            new_file = File.open(file_name, "w")
+            new_file.write(get_tags(output).to_a.sort.join("\n"))
+            new_file.close
         end
     end
 
@@ -516,6 +526,7 @@ class ExportableGrammar < Grammar
     private
 
     def fixupValue(value)
+        # TDOD: rename this function it is too similar to fixup_value
         if value.is_a? Symbol
             return value if [:$initial_context, :$base, :$self].include? value
 
@@ -562,32 +573,6 @@ class ImportGrammar < Grammar
 
         @repository[key]
     end
-end
-
-#
-# Determine the absolute path that a require statement resolves to
-#
-# @note this assumes path was successfully required previously
-#
-# @param [String] path the path to resolve
-#
-# @return [String] the resolved path
-#
-def resolve_require(path)
-    path = Pathname.new path
-    return path.to_s if path.absolute? && path.extname != ""
-
-    return path.dirname.glob("#{path.basename}.{rb,so,dll}")[0].to_s if path.absolute?
-
-    $LOAD_PATH.each do |p|
-        test_path = Pathname.new(p).join(path)
-        return test_path.to_s if path.extname != "" && test_path.exist?
-
-        test_paths = test_path.dirname.glob("#{test_path.basename}.{rb,so,dll}")
-        return test_paths[0].to_s unless test_paths.empty?
-    end
-
-    ""
 end
 
 require_relative 'grammar_plugin'
