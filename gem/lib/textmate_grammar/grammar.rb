@@ -186,6 +186,61 @@ class Grammar
         end
     end
 
+
+    #
+    # Runs a set of pre transformations
+    #
+    # @api private
+    #
+    # @param [Hash] repository The repository
+    # @param [:before_pre_linter,:after_pre_linter] stage the stage to run
+    #
+    # @return [Hash] the modified repository
+    #
+    def run_pre_transform_stage(repository, stage)
+        @@transforms[stage]
+        .sort { |a, b| a[:priority] <=> b[:priority] }
+        .map { |a| a[:transform] }
+        .each do |transform|
+            repository = repository.transform_values do |potential_pattern|
+                if potential_pattern.is_a? Array
+                    potential_pattern.map do |each|
+                        transform.pre_transform(
+                            each,
+                            filter_options(
+                                transform,
+                                each,
+                                grammar: self,
+                                repository: repository,
+                            ),
+                        )
+                    end
+                else
+                    transform.pre_transform(
+                        potential_pattern,
+                        filter_options(
+                            transform,
+                            potential_pattern,
+                            grammar: self,
+                            repository: repository,
+                        ),
+                    )
+                end
+            end
+        end
+
+        repository
+    end
+
+    def run_post_transform_stage(output, stage)
+        @@transforms[stage]
+        .sort { |a, b| a[:priority] <=> b[:priority] }
+        .map { |a| a[:transform] }
+        .each { |transform| output = transform.post_transform(output) }
+
+        output
+    end
+
     #
     # Convert the grammar into a hash suitable for exporting to a file
     #
@@ -196,21 +251,13 @@ class Grammar
     # @return [Hash] the generated grammar
     #
     def generate(inherit_or_embedded = :embedded)
-        # steps:
-        # run pre linters ✓
-        # run pre transformations ✓
-        # generate bailout patterns
-        # transform initial_context includes to $base or $self ✓
-        # call to_tag on each pattern ✓
-        # move initial context into patterns ✓
-        # if version is :auto, populate with git commit ✓
-        # run post transformations ✓
-        # run post linters ✓
 
         repo = @repository.__deep_clone__
+        repo = run_pre_transform_stage(repo, :before_pre_linter)
+
         @@linters.each do |linter|
             msg = "linting failed, see above error"
-            @repository.each do |_, potential_pattern|
+            repo.each do |_, potential_pattern|
                 if potential_pattern.is_a? Array
                     potential_pattern.each do |each_potential_pattern|
                         raise msg unless linter.pre_lint(
@@ -225,21 +272,7 @@ class Grammar
             end
         end
 
-        @@transforms.each do |transform|
-            repo = repo.transform_values do |potential_pattern|
-                if potential_pattern.is_a? Array
-                    potential_pattern.map do |each_potential_pattern|
-                        transform.pre_transform(
-                            each_potential_pattern, filter_options(transform, each_potential_pattern, grammar: self, repository: repo),
-                        )
-                    end
-                else
-                    transform.pre_transform(
-                        potential_pattern, filter_options(transform, potential_pattern, grammar: self, repository: repo),
-                    )
-                end
-            end
-        end
+        repo = run_pre_transform_stage(repo, :after_pre_linter)
 
         convert_initial_context = lambda do |potential_pattern|
             if potential_pattern == :$initial_context
@@ -292,11 +325,15 @@ class Grammar
         output[:version] = auto_version
         output.merge!(@keys) { |_key, old, _new| old }
 
-        @@transforms.each { |transform| output = transform.post_transform(output) }
+        output = run_post_transform_stage(output, :before_pre_linter)
+        output = run_post_transform_stage(output, :after_pre_linter)
+        output = run_post_transform_stage(output, :before_post_linter)
 
         @@linters.each do |linter|
             raise "linting failed, see above error" unless linter.post_lint(output)
         end
+
+        output = run_post_transform_stage(output, :after_post_linter)
 
         output
     end

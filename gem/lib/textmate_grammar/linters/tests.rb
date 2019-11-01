@@ -12,7 +12,7 @@ class RunPatternTests < GrammarLinter
     def pre_lint(pattern, options)
         return true unless pattern.is_a? PatternBase
 
-        pattern.resolve(options[:repository]).run_tests
+        pattern.run_tests
     end
 end
 

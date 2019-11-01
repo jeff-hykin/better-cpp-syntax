@@ -12,4 +12,6 @@ class ResolvePlaceholders < GrammarTransform
     end
 end
 
-Grammar.register_transform(ResolvePlaceholders.new)
+# resolving placeholders has no dependencies and makes analyzing patterns much nicer
+# so it happens fairly early
+Grammar.register_transform(ResolvePlaceholders.new, 0)

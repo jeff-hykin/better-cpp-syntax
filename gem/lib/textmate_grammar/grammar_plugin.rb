@@ -91,7 +91,12 @@ end
 
 class Grammar
     @@linters = []
-    @@transforms = []
+    @@transforms = {
+        before_pre_linter: [],
+        after_pre_linter: [],
+        before_post_linter: [],
+        after_post_linter: [],
+    }
 
     #
     # Register a linter plugin
@@ -108,11 +113,29 @@ class Grammar
     # Register a transformation plugin
     #
     # @param [GrammarTransform] transform the transformation plugin
+    # @param [Numeric] priority an optional priority
+    #
+    # @note The priority controls when a transformation runs in relation to
+    #  other events in addition to ordering transformations
+    #  priorities < 100 have their pre transform run before pre linters
+    #  priorities >= 100 have their pre transform run after pre linters
+    #  priorities >= 200 do not have their pre_transform function ran
+    #  priorities < 300 have their post transorm run before post linters
+    #  priorities >= 300 have their post transorm run before post linters
     #
     # @return [void] nothing
     #
-    def self.register_transform(transform)
-        @@transforms << transform
+    def self.register_transform(transform, priority = 150)
+        key = case
+              when priority < 100 then :before_pre_linter
+              when priority < 200 then :after_pre_linter
+              when priority < 300 then :before_post_linter
+              else :after_post_linter
+              end
+        @@transforms[key] << {
+            priority: priority,
+            transform: transform,
+        }
     end
 
     #
@@ -123,7 +146,7 @@ class Grammar
     # @return [Array<GrammarPlugin>] A list of all plugins
     #
     def self.plugins
-        @@linters + @@transforms
+        @@linters + @@transforms.values.flatten.map { |v| v[:transform] }
     end
 end
 
