@@ -134,14 +134,14 @@ class GrammarTest < MiniTest::Test
             :patterns => [],
             :repository => {
                 :abc => {
-                    "begin"=>"abc",
-                    "end"=>"def",
-                    "beginCaptures"=>{},
-                    "endCaptures"=>{},
+                    "begin" => "abc",
+                    "end" => "def",
+                    "beginCaptures" => {},
+                    "endCaptures" => {},
                     :patterns => [{ :include => "$self" }],
                 },
             },
-            :version=>"",
+            :version => "",
         }
 
         assert_equal expected, g.generate

@@ -35,7 +35,7 @@ class IncludesThenTagAs < GrammarLinter
         return true unless pattern.arguments[:includes].is_a? Array
         return true unless tag_as?(pattern.match)
 
-        return true # TODO fix issue
+        return true # TODO: fix issue
 
         puts "The pattern `#{pattern.name}' has both an includes argument,"
         puts "and a match argument that, it or a sub pattern has a tag_as argument"

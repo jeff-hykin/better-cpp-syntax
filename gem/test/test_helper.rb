@@ -27,4 +27,4 @@ def test_grammar
     )
 end
 
-alias :wrap_complete :wrap_with_anchors
+alias wrap_complete wrap_with_anchors

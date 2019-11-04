@@ -126,12 +126,12 @@ class Grammar
     # @return [void] nothing
     #
     def self.register_transform(transform, priority = 150)
-        key = case
-              when priority < 100 then :before_pre_linter
-              when priority < 200 then :after_pre_linter
-              when priority < 300 then :before_post_linter
-              else :after_post_linter
+        key = if priority < 100 then :before_pre_linter
+              elsif priority < 200 then :after_pre_linter
+              elsif priority < 300 then :before_post_linter
+              else :after_pre_linter
               end
+
         @@transforms[key] << {
             priority: priority,
             transform: transform,

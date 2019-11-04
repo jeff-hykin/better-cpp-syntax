@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../pattern'
-
-class LegacyPattern < Pattern
+class LegacyPattern < PatternBase
     def initialize(hash)
         super("placeholder")
-        @hash = hash
+        @hash = hash.transform_keys(&:to_sym)
     end
 
     def evaluate(*_ignored)

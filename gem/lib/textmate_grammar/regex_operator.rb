@@ -46,15 +46,13 @@ class RegexOperator
             split = []
             if op.association == :right
                 elems = break_right(arr) { |elem| elem == op }
-                if elems[0].length == 0
-                    next
-                end
+                next if elems[0].empty?
+
                 split = [elems[0][0..-2], elems[1]]
             else
                 elems = break_left(arr) { |elem| elem == op }
-                if elems[1].length == 0
-                    next
-                end
+                next if elems[1].empty?
+
                 split = [elems[0], elems[1][1..-1]]
             end
             arr = op.do_evaluate_self(split[0], split[1])
@@ -67,7 +65,7 @@ class RegexOperator
         arr.first
     end
 
-    def do_evaluate_self(arr_left, arr_right)
+    def do_evaluate_self(arr_left, arr_right) # rubocop:disable Lint/UnusedMethodArgument
         raise NotImplementedError
     end
 
@@ -109,7 +107,7 @@ class RegexOperator
             true
         end).reverse
 
-        if fold.length == 0 || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
+        if fold.empty? || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
             puts "fold_left generated an invalid fold expression"
             raise "see above error"
         end
@@ -136,8 +134,8 @@ class RegexOperator
             true
         end
 
-        if fold.length == 0 || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
-            puts "fold_left generated an invalid fold expression"
+        if fold.empty? || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
+            puts "fold_right generated an invalid fold expression"
             raise "see above error"
         end
 

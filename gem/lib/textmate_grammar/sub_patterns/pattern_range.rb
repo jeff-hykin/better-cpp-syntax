@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../pattern'
-
 #
 # Provides the ability to create begin/end and begin/while rules
 #
@@ -181,11 +179,11 @@ class PatternRange < PatternBase
     #
     def map!(map_includes = false, &block)
         yield self
-        # TODO: should this `yield self`
-        # it would remove the need for the override of transform_includes
+
         @start_pattern.map!(map_includes, &block)
         @stop_pattern.map!(map_includes, &block)
         map_includes!(&block) if map_includes
+
         self
     end
 
@@ -195,7 +193,6 @@ class PatternRange < PatternBase
     def transform_includes(&block)
         copy = __deep_clone__
         copy.arguments[:includes].map!(&block) if copy.arguments[:includes].is_a? Array
-
 
         copy.map!(true) do |s|
             s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array

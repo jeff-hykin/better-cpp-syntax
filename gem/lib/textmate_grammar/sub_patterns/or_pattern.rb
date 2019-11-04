@@ -1,19 +1,23 @@
 # frozen_string_literal: true
 
-require_relative '../pattern'
 require_relative '../regex_operators/alternation'
 
 # Provides alternation
 # Either the previous pattern or provided pattern is accepted
 # @note OneOfPattern is likely just as powerful and less confusing
 class OrPattern < PatternBase
-
     def evaluate_operator
         AlternationOperator.new
     end
 
-    # (see PatternBase#evaluate)
-    def evaluate(groups = nil)
+    #
+    # Raises an error to prevent use as initial type
+    #
+    # @param _ignored ignored
+    #
+    # @return [void]
+    #
+    def evaluate(*_ignored)
         raise "evaluate is not implemented for OrPattern"
     end
 
@@ -33,7 +37,8 @@ class PatternBase
     #
     # Match either the preceding pattern chain or pattern
     #
-    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match instead of the previous chain
+    # @param [PatternBase,Regexp,String,Hash] pattern a pattern to match
+    #   instead of the previous chain
     #
     # @return [PatternBase] a pattern to append to
     #

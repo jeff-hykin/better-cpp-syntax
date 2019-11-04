@@ -15,6 +15,6 @@ class AlternationOperator < RegexOperator
         # that could be generated (anything lower is required to be closed)
         self_string = "(?:#{left[0]}|#{arr_right[0]})"
 
-        [left[1],self_string,arr_right[1..-1]].flatten
+        [left[1], self_string, arr_right[1..-1]].flatten
     end
 end

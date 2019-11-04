@@ -187,21 +187,15 @@ def get_tags(output)
     repository[:$initial_context] = {patterns: output[:patterns]}
     tags = Set.new
     add_tags = lambda do |rule|
-
+        rule = rule.transform_keys(&:to_sym)
         tags.merge(rule[:name].split(" ")) if rule[:name]
         tags.merge(rule[:contentName].split(" ")) if rule[:contentName]
-        # handle strings
-        rule[:patterns] = rule["patterns"] if rule["patterns"]
-        rule[:captures] = rule["captures"] if rule["captures"]
-        rule[:beginCaptures] = rule["beginCaptures"] if rule["beginCaptures"]
-        rule[:endCaptures] = rule["endCaptures"] if rule["endCaptures"]
-        rule[:whileCaptures] = rule["whileCaptures"] if rule["whileCaptures"]
 
-        rule[:patterns].each { |p| add_tags.call(p) } if rule[:patterns]
-        rule[:captures].values.each { |p| add_tags.call(p) } if rule[:captures]
-        rule[:beginCaptures].values.each { |p| add_tags.call(p) } if rule[:beginCaptures]
-        rule[:endCaptures].values.each { |p| add_tags.call(p) } if rule[:endCaptures]
-        rule[:whileCaptures].values.each { |p| add_tags.call(p) } if rule[:whileCaptures]
+        rule[:patterns]&.each { |p| add_tags.call(p) }
+        rule[:captures]&.values&.each { |p| add_tags.call(p) }
+        rule[:beginCaptures]&.values&.each { |p| add_tags.call(p) }
+        rule[:endCaptures]&.values&.each { |p| add_tags.call(p) }
+        rule[:whileCaptures]&.values&.each { |p| add_tags.call(p) }
     end
 
     repository.values.each { |p| add_tags.call(p) }

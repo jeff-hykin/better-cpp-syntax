@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generated
     class Rule
         # @return [String] The location of this rule
@@ -75,7 +77,7 @@ module Generated
             {
                 "match" => @match,
                 "name" => @name,
-                "captures" => @captures.transform_values(&:to_h)
+                "captures" => @captures.transform_values(&:to_h),
             }.compact
         end
     end
@@ -103,9 +105,9 @@ module Generated
                 "begin" => @begin,
                 "end" => @end,
                 "name" => @name,
-                "contentName" => @contentName
-                "beginCaptures" => @beginCaptures.transform_values(&:to_h)
-                "endCaptures" => @endCaptures.transform_values(&:to_h)
+                "contentName" => @contentName,
+                "beginCaptures" => @beginCaptures.transform_values(&:to_h),
+                "endCaptures" => @endCaptures.transform_values(&:to_h),
             }.compact
         end
     end
@@ -133,9 +135,9 @@ module Generated
                 "begin" => @begin,
                 "while" => @while,
                 "name" => @name,
-                "contentName" => @contentName
-                "beginCaptures" => @beginCaptures.transform_values(&:to_h)
-                "whileCaptures" => @whileCaptures.transform_values(&:to_h)
+                "contentName" => @contentName,
+                "beginCaptures" => @beginCaptures.transform_values(&:to_h),
+                "whileCaptures" => @whileCaptures.transform_values(&:to_h),
             }.compact
         end
     end

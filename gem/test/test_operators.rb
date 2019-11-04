@@ -23,7 +23,7 @@ class OperatorTest < MiniTest::Test
             ConcatOperator.new,
             'D',
             ConcatOperator.new,
-            'E'
+            'E',
         ]
         assert_equal 'ABCDE', RegexOperator.evaluate(arr)
     end
@@ -41,7 +41,7 @@ class OperatorTest < MiniTest::Test
             AlternationOperator.new,
             'D',
             AlternationOperator.new,
-            'E'
+            'E',
         ]
         assert_equal '(?:(?:(?:(?:A|B)|C)|D)|E)', RegexOperator.evaluate(arr)
     end
@@ -62,7 +62,7 @@ class OperatorTest < MiniTest::Test
             ConcatOperator.new,
             'D',
             AlternationOperator.new,
-            'E'
+            'E',
         ]
         assert_equal '(?:(?:AB|C)D|E)', RegexOperator.evaluate(arr)
     end

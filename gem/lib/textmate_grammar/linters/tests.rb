@@ -9,7 +9,7 @@ class RunPatternTests < GrammarLinter
     #
     # @return [Boolean] the result of the unit tests
     #
-    def pre_lint(pattern, options)
+    def pre_lint(pattern, _options)
         return true unless pattern.is_a? PatternBase
 
         pattern.run_tests

@@ -6,11 +6,6 @@ require 'pp'
 require 'pathname'
 
 require_relative 'pattern'
-# TODO: decide which of these should move to textmate_grammar.rb
-require_relative 'sub_patterns/pattern_range'
-require_relative 'sub_patterns/sub_patterns'
-require_relative 'sub_patterns/legacy_pattern'
-require_relative 'sub_patterns/or_pattern'
 
 #
 # Represents a Textmate Grammar
@@ -186,7 +181,6 @@ class Grammar
         end
     end
 
-
     #
     # Runs a set of pre transformations
     #
@@ -199,44 +193,52 @@ class Grammar
     #
     def run_pre_transform_stage(repository, stage)
         @@transforms[stage]
-        .sort { |a, b| a[:priority] <=> b[:priority] }
-        .map { |a| a[:transform] }
-        .each do |transform|
-            repository = repository.transform_values do |potential_pattern|
-                if potential_pattern.is_a? Array
-                    potential_pattern.map do |each|
+            .sort { |a, b| a[:priority] <=> b[:priority] }
+            .map { |a| a[:transform] }
+            .each do |transform|
+                repository = repository.transform_values do |potential_pattern|
+                    if potential_pattern.is_a? Array
+                        potential_pattern.map do |each|
+                            transform.pre_transform(
+                                each,
+                                filter_options(
+                                    transform,
+                                    each,
+                                    grammar: self,
+                                    repository: repository,
+                                ),
+                            )
+                        end
+                    else
                         transform.pre_transform(
-                            each,
+                            potential_pattern,
                             filter_options(
                                 transform,
-                                each,
+                                potential_pattern,
                                 grammar: self,
                                 repository: repository,
                             ),
                         )
                     end
-                else
-                    transform.pre_transform(
-                        potential_pattern,
-                        filter_options(
-                            transform,
-                            potential_pattern,
-                            grammar: self,
-                            repository: repository,
-                        ),
-                    )
                 end
             end
-        end
 
         repository
     end
 
+    #
+    # Runs a set of post transformations
+    #
+    # @param [Hash] output The generated grammar
+    # @param [Symbol] stage the stage to run
+    #
+    # @return [Hash] The modified grammar
+    #
     def run_post_transform_stage(output, stage)
         @@transforms[stage]
-        .sort { |a, b| a[:priority] <=> b[:priority] }
-        .map { |a| a[:transform] }
-        .each { |transform| output = transform.post_transform(output) }
+            .sort { |a, b| a[:priority] <=> b[:priority] }
+            .map { |a| a[:transform] }
+            .each { |transform| output = transform.post_transform(output) }
 
         output
     end
@@ -251,7 +253,6 @@ class Grammar
     # @return [Hash] the generated grammar
     #
     def generate(inherit_or_embedded = :embedded)
-
         repo = @repository.__deep_clone__
         repo = run_pre_transform_stage(repo, :before_pre_linter)
 
@@ -315,7 +316,7 @@ class Grammar
 
         output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
         # sort repos by key name
-        output[:repository] = Hash[ output[:repository].sort_by { |key, val| key.to_s } ]
+        output[:repository] = Hash[output[:repository].sort_by { |key, _| key.to_s }]
 
         output[:patterns] = output[:repository][:$initial_context]
         output[:patterns] ||= []
@@ -399,15 +400,15 @@ class Grammar
             raise "see above error"
         end
 
-        if options[:generate_tags]
-            file_name = File.join(
-                options[:tag_dir],
-                "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
-            )
-            new_file = File.open(file_name, "w")
-            new_file.write(get_tags(output).to_a.sort.join("\n"))
-            new_file.close
-        end
+        return unless options[:generate_tags]
+
+        file_name = File.join(
+            options[:tag_dir],
+            "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+        )
+        new_file = File.open(file_name, "w")
+        new_file.write(get_tags(output).to_a.sort.join("\n"))
+        new_file.close
     end
 
     #
@@ -546,7 +547,7 @@ class ExportableGrammar < Grammar
         elsif value.is_a? Array
             value.map { |v| fixupValue(v) }
         elsif value.is_a? PatternBase
-            return value
+            value
         else
             raise "Unexpected object of type #{value.class} in value"
         end

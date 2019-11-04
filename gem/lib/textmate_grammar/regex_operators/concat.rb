@@ -14,6 +14,6 @@ class ConcatOperator < RegexOperator
 
         self_string = left[0]+right[0]
 
-        [left[1],self_string,right[1]].flatten
+        [left[1], self_string, right[1]].flatten
     end
 end

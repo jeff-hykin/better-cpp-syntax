@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Generated
     class Grammar
         # @return [String] The name of the grammar
@@ -16,15 +18,15 @@ module Generated
         attr_accessor :other_properties
 
         def to_h
-            other_properties.merge(
-                {
-                    "name" => @name,
-                    "scopeName" => @scope_name,
-                    "version" => @version,
-                    "information_for_contributors" => @information,
-                    "repository" => @repository.transform_values(&:to_h),
-                }
-            ).merge(@patterns.to_h)
+            default = {
+                "name" => @name,
+                "scopeName" => @scope_name,
+                "version" => @version,
+                "information_for_contributors" => @information,
+                "repository" => @repository.transform_values(&:to_h),
+            }
+
+            other_properties.merge(default).merge(@patterns.to_h)
         end
     end
 end
