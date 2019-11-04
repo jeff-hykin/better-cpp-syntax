@@ -818,7 +818,7 @@ class PatternBase
     #
     def raise_if_regex_has_capture_group(regex, check = 1)
         # this will throw a RegexpError if there are no capturing groups
-        _ignore = /#{regex}#{"\\" + check.to_s}/
+        _ignore = with_no_warnings { /#{regex}#{"\\" + check.to_s}/ }
         # at this point @match contains a capture group, complain
         raise <<-HEREDOC.remove_indent
 
