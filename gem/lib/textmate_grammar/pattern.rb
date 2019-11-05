@@ -121,6 +121,15 @@ class PatternBase
     end
 
     #
+    # (see #map!)
+    #
+    # @returns [PatternBase] a transformed copy of self
+    #
+    def map(map_includes = false, &block)
+        __deep_clone__.map!(map_includes, &block).freeze
+    end
+
+    #
     # Call the block for each pattern in the list
     #
     # @param [Boolean] each_includes should include patterns be called?
@@ -134,11 +143,12 @@ class PatternBase
         @next_pattern.each(each_includes, &block) if @next_pattern.is_a? PatternBase
 
         return unless each_includes
+        return unless @arguments[:includes].is_a? Array
 
         @arguments[:includes].each do |s|
             next unless s.is_a? Pattern
 
-            s.each_includes(true, &block)
+            s.each(true, &block)
         end
     end
 
@@ -176,9 +186,9 @@ class PatternBase
     # @return [PatternBase] a copy of self with transformed includes
     #
     def transform_includes(&block)
-        __deep_clone__.map!(true) do |s|
+        map(true) do |s|
             s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
-        end.freeze
+        end
     end
 
     #
