@@ -168,7 +168,11 @@ class StandardNaming < GrammarLinter
         puts "The prefix `#{tag[0..pos].join('.')}' does not follow the standard format"
         puts "The expected prefixes at this level are:"
         root.keys.each do |key|
-            puts "  #{valid_prefix}#{key}"
+            if root[:key] == false
+                puts "- #{valid_prefix}#{key}"
+            else
+                puts "  #{valid_prefix}#{key}"
+            end
         end
     end
 
