@@ -2267,7 +2267,7 @@ grammar = Grammar.new(
         Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
             match: Pattern.new(
-                match: /#{name}/,
+                match: variableBounds[/#{name}/],
                 tag_as: "storage.type.#{name}.declare",
             ).then(std_space).then(
                 match: variable_name,
