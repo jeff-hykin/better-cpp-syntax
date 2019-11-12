@@ -137,6 +137,8 @@ def fixup_value(value)
                 :comment,
                 "disabled",
                 :disabled,
+                "patterns",
+                :patterns,
             ]
             v = LegacyPattern.new(v) unless (v.keys & legacy_keys).empty?
         end

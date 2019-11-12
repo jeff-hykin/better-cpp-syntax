@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'textmate_grammar'
 
 require_relative '../../../paths'
@@ -39,15 +41,6 @@ grammar = Grammar.new(
         "This file essentially an updated/improved fork of the atom syntax",
         "see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master",
     ],
-)
-
-grammar[:bad] = Pattern.new(
-    match: "abc",
-    includes: [
-        [
-            "abc"
-        ]
-    ]
 )
 
 #
@@ -2494,13 +2487,15 @@ grammar[:bad] = Pattern.new(
 #
 # Save
 #
-grammar.save_to(
-    syntax_dir: PathFor[:syntaxes],
-    tag_dir: File.dirname(PathFor[:languageTag]["cpp"])
-)
-# create a duplicate grammar with all pattern ranges bailed-out
-system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
-
+if $PROGRAM_NAME == __FILE__
+    # this file is imported by the c grammar, dont generate if it was not directly called
+    grammar.save_to(
+        syntax_dir: PathFor[:syntaxes],
+        tag_dir: File.dirname(PathFor[:languageTag]["cpp"])
+    )
+    # create a duplicate grammar with all pattern ranges bailed-out
+    system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
+end
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = grammar

@@ -20,7 +20,7 @@ g[:std_space] = Pattern.new(
         ),
         /\b/,
         lookAheadFor(/\W/),
-        lookAheadFor(/\W/),
+        lookBehindFor(/\W/),
         @start_of_document,
         @end_of_document,
     ]),
@@ -28,32 +28,3 @@ g[:std_space] = Pattern.new(
         :inline_comment,
     ],
 )
-
-# Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_namespace_infront_of_all_included_repos: false) do |grammar, namespace|
-#     ->(inline_comment, inline_comment_name) do
-#         Pattern.new(
-#             match: Pattern.new(
-#                     at_least: 1,
-#                     quantity_preference: :as_few_as_possible,
-#                     match: Pattern.new(
-#                             match: @spaces,
-#                             dont_back_track?: true
-#                         ).or(
-#                             inline_comment
-#                         )
-#                 # zero length match
-#                 ).or(
-#                     /\b/.or(
-#                         lookBehindFor(/\W/)
-#                     ).or(
-#                         lookAheadFor(/\W/)
-#                     ).or(
-#                         @start_of_document
-#                     ).or(
-#                         @end_of_document
-#                     )
-#                 ),
-#             includes: [ inline_comment_name ],
-#         )
-#     end
-# end
