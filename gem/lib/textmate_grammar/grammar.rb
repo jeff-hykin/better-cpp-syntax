@@ -52,7 +52,9 @@ class Grammar
             name: import_grammar["name"],
             scope_name: import_grammar["scopeName"],
             version: import_grammar["version"] || "",
-            description: import_grammar["description"] || "",
+            description: import_grammar["description"] || nil,
+            information_for_contributors: import_grammar["information_for_contributors"] || nil,
+            fileTypes: import_grammar["fileTypes"] || nil,
         )
         # import "patterns" into @repository[:$initial_context]
         grammar.repository[:$initial_context] = import_grammar["patterns"]
@@ -96,7 +98,7 @@ class Grammar
         # auto versioning, when save_to is called grab the latest git commit or "" if not
         # a git repo
         keys[:version] ||= :auto
-        @keys = keys
+        @keys = keys.compact
         return if @scope_name == "export" || @scope_name.start_with?("source.", "text.")
 
         puts "Warning: grammar scope name should start with `source.' or `text.'"
