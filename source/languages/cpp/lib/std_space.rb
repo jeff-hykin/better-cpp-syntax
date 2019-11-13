@@ -13,7 +13,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                     at_least: 1,
                     # quantity_preference: :as_few_as_possible,
                     match: Pattern.new(
-                            match: @spaces,
+                            match: lookBehindToAvoid(/\s/).then(@spaces),
                             dont_back_track?: true
                         ).or(
                             inline_comment
