@@ -19,6 +19,8 @@ end
 require 'minitest/autorun'
 require 'textmate_grammar'
 
+Grammar.remove_plugin(StandardNaming)
+
 def test_grammar
     Grammar.new(
         name: "test",

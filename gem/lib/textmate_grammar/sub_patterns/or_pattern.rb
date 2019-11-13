@@ -6,6 +6,11 @@ require_relative '../regex_operators/alternation'
 # Either the previous pattern or provided pattern is accepted
 # @note OneOfPattern is likely just as powerful and less confusing
 class OrPattern < PatternBase
+    #
+    # (see PatternBase#evaluate_operator)
+    #
+    # @return [AlternationOperator] the alternation operator
+    #
     def evaluate_operator
         AlternationOperator.new
     end

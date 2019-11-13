@@ -2,12 +2,16 @@
 
 require_relative '../regex_operator'
 
+#
+# Provides alternation as described by OrPattern
+#
 class AlternationOperator < RegexOperator
     def initialize
         @precedence = 1
         @association = :right
     end
 
+    # (see RegexOperator#do_evaluate_self)
     def do_evaluate_self(arr_left, arr_right)
         left = fold_left(arr_left)
         # fold right is not applied as only the immediate right is a part of the alternation

@@ -123,7 +123,7 @@ class PatternBase
     #
     # (see #map!)
     #
-    # @returns [PatternBase] a transformed copy of self
+    # @return [PatternBase] a transformed copy of self
     #
     def map(map_includes = false, &block)
         __deep_clone__.map!(map_includes, &block).freeze
@@ -155,7 +155,7 @@ class PatternBase
     #
     # Uses a block to transform all Patterns in all includes
     # @api private
-    # @not only for use by map!
+    # @note only for use by map!
     #
     # @yield [self] invokes the block with the includes for modification
     #
@@ -812,6 +812,11 @@ class PatternBase
         __deep_clone_self__.insert! @next_pattern.__deep_clone__
     end
 
+    #
+    # Deeply clones self, without its next_pattern
+    #
+    # @return [PatternBase] a copy of self
+    #
     def __deep_clone_self__
         options = @arguments.__deep_clone__
         options[:match] = @match.__deep_clone__

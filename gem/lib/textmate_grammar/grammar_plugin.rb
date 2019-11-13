@@ -148,6 +148,21 @@ class Grammar
     def self.plugins
         @@linters + @@transforms.values.flatten.map { |v| v[:transform] }
     end
+
+    #
+    # Removes a plugin whose classname matches plugin
+    #
+    # @param [#to_s] plugin The plugin name to remove
+    #
+    # @return [void]
+    #
+    def self.remove_plugin(plugin)
+        @@linters.delete_if { |linter| linter.class.to_s == plugin.to_s }
+        @@transforms[:before_pre_linter].delete_if { |t| t[:transform].class.to_s == plugin.to_s }
+        @@transforms[:after_pre_linter].delete_if { |t| t[:transform].class.to_s == plugin.to_s }
+        @@transforms[:before_post_linter].delete_if { |t| t[:transform].class.to_s == plugin.to_s }
+        @@transforms[:after_post_linter].delete_if { |t| t[:transform].class.to_s == plugin.to_s }
+    end
 end
 
 #

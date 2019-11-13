@@ -2,12 +2,16 @@
 
 require_relative '../regex_operator'
 
+#
+# The standard RegexOperator, provides concatination
+#
 class ConcatOperator < RegexOperator
     def initialize
         @precedence = 2
         @association = :left
     end
 
+    # (see RegexOperator#do_evaluate_self)
     def do_evaluate_self(arr_left, arr_right)
         left = fold_left(arr_left)
         right = fold_right(arr_right)

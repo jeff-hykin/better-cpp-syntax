@@ -18,6 +18,8 @@ class StandardNaming < GrammarLinter
     #
     # to ease parsing, there should only every be one valid path
     # if "a" exists, dont add "a.b" to the same key
+
+    # @return [Hash] a summerixation of expected names
     EXPECTED_NAMES = {
         "comment" => {
             "line" => true,
@@ -56,6 +58,7 @@ class StandardNaming < GrammarLinter
         "invalid" => {
             "illegal" => true,
             "deprecated" => true,
+            "unknown" => true,
         }.freeze,
         "keyword" => {
             "control" => true,
@@ -146,6 +149,15 @@ class StandardNaming < GrammarLinter
         }.freeze,
     }.freeze
 
+    #
+    # Checks the tag keys at this level
+    #
+    # @param [Array<string>] tag an array of tag components
+    # @param [Numeric] index The index into tag to check
+    # @param [Hash] root the hash to check against
+    #
+    # @return [Boolean] If this is a valid tag
+    #
     def recursive_check_tag(tag, index = 0, root = EXPECTED_NAMES)
         if root.has_key?(tag[index])
             next_part = root[tag[index]]
@@ -159,6 +171,13 @@ class StandardNaming < GrammarLinter
         [false, index, root]
     end
 
+    #
+    # Checks a tag for standard naming scheme
+    #
+    # @param [String] tag the tag to check
+    #
+    # @return [void] nothing
+    #
     def check_tag(tag)
         result, pos, root = recursive_check_tag(tag)
         return if result

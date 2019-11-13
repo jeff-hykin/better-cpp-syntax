@@ -123,24 +123,16 @@ def fixup_value(value)
         if v.is_a? Hash
             # check for an implicit legacy pattern
             legacy_keys = [
-                "name",
                 :name,
-                "contentName",
                 :contentName,
-                "begin",
                 :begin,
-                "end",
                 :end,
-                "while",
                 :while,
-                "comment",
                 :comment,
-                "disabled",
                 :disabled,
-                "patterns",
                 :patterns,
             ]
-            v = LegacyPattern.new(v) unless (v.keys & legacy_keys).empty?
+            v = LegacyPattern.new(v) unless (v.keys.map(&:to_sym) & legacy_keys).empty?
         end
 
         v = Pattern.new(v) unless v.is_a? PatternBase

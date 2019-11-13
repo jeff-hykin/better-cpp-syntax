@@ -259,19 +259,18 @@ class Grammar
         repo = run_pre_transform_stage(repo, :before_pre_linter)
 
         @@linters.each do |linter|
-            msg = "linting failed, see above error"
             repo.each do |_, potential_pattern|
-                if potential_pattern.is_a? Array
-                    potential_pattern.each do |each_potential_pattern|
-                        raise msg unless linter.pre_lint(
-                            each_potential_pattern, filter_options(linter, each_potential_pattern, grammar: self, repository: repo),
-                        )
-                    end
-                    next
+                [potential_pattern].flatten.each do |each_potential_pattern|
+                    raise "linting failed, see above error" unless linter.pre_lint(
+                        each_potential_pattern,
+                        filter_options(
+                            linter,
+                            each_potential_pattern,
+                            grammar: self,
+                            repository: repo,
+                        ),
+                    )
                 end
-                raise msg unless linter.pre_lint(
-                    potential_pattern, filter_options(linter, potential_pattern, grammar: self, repository: repo),
-                )
             end
         end
 
@@ -282,12 +281,18 @@ class Grammar
                 return (inherit_or_embedded == :embedded) ? :$self : :$base
             end
 
-            return potential_pattern.map { |nested_potential_pattern| convert_initial_context.call(nested_potential_pattern) } if potential_pattern.is_a? Array
+            if potential_pattern.is_a? Array
+                return potential_pattern.map do |nested_potential_pattern|
+                    convert_initial_context.call(nested_potential_pattern)
+                end
+            end
 
             if potential_pattern.is_a? PatternBase
                 return potential_pattern.transform_includes do |each_nested_potential_pattern|
-                    # transform includes will call this block again if d is a patternBase
-                    next each_nested_potential_pattern if each_nested_potential_pattern.is_a? PatternBase
+                    # transform includes will call this block again if each_* is a patternBase
+                    if each_nested_potential_pattern.is_a? PatternBase
+                        next each_nested_potential_pattern
+                    end
 
                     convert_initial_context.call(each_nested_potential_pattern)
                 end
@@ -295,7 +300,9 @@ class Grammar
 
             return potential_pattern
         end
-        repo = repo.transform_values { |each_potential_pattern| convert_initial_context.call(each_potential_pattern) }
+        repo = repo.transform_values do |each_potential_pattern|
+            convert_initial_context.call(each_potential_pattern)
+        end
 
         output = {
             name: @name,
@@ -304,7 +311,12 @@ class Grammar
 
         to_tag = lambda do |potential_pattern|
             case potential_pattern
-            when Array then return {"patterns" => potential_pattern.map { |nested_potential_pattern| to_tag.call(nested_potential_pattern) }}
+            when Array
+                return {
+                    "patterns" => potential_pattern.map do |nested_potential_pattern|
+                        to_tag.call(nested_potential_pattern)
+                    end,
+                }
             when Symbol then return {"include" => "#" + potential_pattern.to_s}
             when Hash then return potential_pattern
             when String then return {"include" => potential_pattern}
@@ -313,10 +325,9 @@ class Grammar
             end
         end
 
-        # init patterns first so they show up
-        output[:patterns] = []
-
-        output[:repository] = repo.transform_values { |each_potential_pattern| to_tag.call(each_potential_pattern) }
+        output[:repository] = repo.transform_values do |each_potential_pattern|
+            to_tag.call(each_potential_pattern)
+        end
         # sort repos by key name
         output[:repository] = Hash[output[:repository].sort_by { |key, _| key.to_s }]
 
@@ -339,7 +350,7 @@ class Grammar
         output = run_post_transform_stage(output, :after_post_linter)
 
         Hash[
-            output.sort_by do |key,_|
+            output.sort_by do |key, _|
                 order = {
                     information_for_contributors: 0,
                     version: 1,

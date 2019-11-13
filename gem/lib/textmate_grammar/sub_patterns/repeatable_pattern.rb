@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+#
+# RepeatablePattern provides quantifiers for patterns
+#
 class RepeatablePattern < PatternBase
     # @return [Integer,nil] the minimum amount that can be matched
     attr_accessor :at_least
@@ -163,7 +166,7 @@ class RepeatablePattern < PatternBase
     end
 
     #
-    # (see #PatternBase#do_add_attributes)
+    # (see PatternBase#do_add_attributes)
     #
     def do_add_attributes(indent)
         # rubocop:disable Metrics/LineLength
@@ -320,4 +323,7 @@ def oneOrMoreOf(pattern)
     OneOrMoreOfPattern.new(pattern)
 end
 
+#
+# Pattern is a class alias for RepeatablePattern
+#
 Pattern = RepeatablePattern

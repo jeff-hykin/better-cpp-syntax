@@ -82,6 +82,9 @@ class PatternRange < PatternBase
         @arguments = arguments
     end
 
+    #
+    # (see PatternBase#__deep_clone__)
+    #
     def __deep_clone__
         options = @arguments.__deep_clone__
         options[:start_pattern] = @original_start_pattern.__deep_clone__
@@ -208,6 +211,9 @@ class PatternRange < PatternBase
         s && e
     end
 
+    #
+    # (see PatternBase#inspect)
+    #
     def inspect
         super.split(" ")[0] + " start_pattern:" + @start_pattern.inspect + ">"
     end
