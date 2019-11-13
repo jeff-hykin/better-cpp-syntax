@@ -43,47 +43,15 @@
 - source: void
   scopes:
     - storage.type.built-in.primitive
-- source: ' Line\'
-- source: u00b7Reader
+- source: Line\u00b7Reader();
   scopesBegin:
     - meta.function
-    - meta.function.definition.parameters
-  scopes:
-    - entity.name.function
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function
-    - meta.function.definition.parameters
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
 - source: void
   scopes:
     - storage.type.built-in.primitive
-- source: ' Line\'
-- source: U0002070EReader
+- source: Line\U0002070EReader();
   scopesBegin:
     - meta.function
-    - meta.function.definition.parameters
-  scopes:
-    - entity.name.function
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round
-- source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function
-    - meta.function.definition.parameters
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
 - source: struct
   scopes:
     - storage.type.struct

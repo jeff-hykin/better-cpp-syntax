@@ -16,7 +16,7 @@ require_relative './tokens.rb'
 c_grammar = grammar = Grammar.new(
     name: "C",
     scope_name: "source.c",
-    file_types: [
+    fileTypes: [
         "c",
     ],
     version: "",
@@ -936,11 +936,11 @@ c_grammar[:string_placeholder] = {
 c_grammar[:storage_types] = {
     patterns: [
         {
-            match: variableBounds[ @c_tokens.that(:isType, :isPrimitive) ],
+            match: variableBounds[ @c_tokens.that(:isType, :isPrimitive)].to_r,
             name: "storage.type.built-in.primitive.c",
         },
         {
-            match: variableBounds[ @c_tokens.that(:isType, not(:isPrimitive)) ],
+            match: variableBounds[ @c_tokens.that(:isType, not(:isPrimitive))].to_r,
             name: "storage.type.built-in.c",
         },
         {

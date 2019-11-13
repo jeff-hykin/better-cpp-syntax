@@ -336,7 +336,24 @@ class Grammar
 
         output = run_post_transform_stage(output, :after_post_linter)
 
-        output
+        Hash[
+            output.sort_by do |key,_|
+                order = {
+                    information_for_contributors: 0,
+                    version: 1,
+                    name: 2,
+                    scopeName: 3,
+                    fileTypes: 4,
+                    unknown_keys: 5,
+                    patterns: 6,
+                    repository: 7,
+                    uuid: 8,
+                }
+                next order[key.to_sym] if order.has_key? key.to_sym
+
+                order[:unknown_keys]
+            end
+        ]
     end
 
     #
