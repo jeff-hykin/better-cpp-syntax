@@ -24,6 +24,7 @@ jobs:
         ruby-version: 2.5.x
     - name: test
       run: |
+        gem install bundler
         npm ci
         npm test
       env:
