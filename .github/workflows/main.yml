@@ -3,29 +3,28 @@ name: Run Tests
 on:
   push:
     paths:
-    - '**.rb'
-    - '**.js'
-    - package.json
+      - "**.rb"
+      - "**.js"
+      - package.json
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup Node.js for use with actions
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - name: Setup Ruby for use with actions
-      uses: actions/setup-ruby@v1.0.0
-      with:
-        ruby-version: 2.5.x
-    - name: test
-      run: |
-        gem install bundler
-        npm ci
-        npm test
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Setup Node.js for use with actions
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Setup Ruby for use with actions
+        uses: actions/setup-ruby@v1.0.0
+        with:
+          ruby-version: 2.5.x
+      - name: test
+        run: |
+          gem install bundler
+          npm ci --force
+          npm test
+        env:
+          CI: true
