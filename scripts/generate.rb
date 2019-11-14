@@ -3,28 +3,29 @@ require_relative '../paths.rb'
 # Helpers
 #
 
-# grabs uncommited files exactly once
-$uncommited_files = nil
-def get_uncommited
-    if $uncommited_files == nil
+# grabs uncommitted files exactly once
+$uncommitted_files = nil
+def get_uncommitted
+    if $uncommitted_files == nil
         git_status = `git status --porcelain`
-        $uncommited_files = git_status.split("\n").filter {|file| /^.[M?]/ =~ file}.map do |file|
+        $uncommitted_files = git_status.split("\n").filter {|file| /^.[M?]/ =~ file}.map do |file|
             /[M?] (.+)/ =~ file
             File.join(PathFor[:root], $1)
         end
     end
-    $uncommited_files
+    $uncommitted_files
 end
 
 # checks with git to get correct mtime
 def mtime(file)
-    return File.mtime(file) if get_uncommited().include? file
+    return File.mtime(file) if get_uncommitted().include? file
     time = `git log -1 --format="%ad" --date=unix #{file}`
     Time.at(time.to_i)
 end
 
 def should_build(language_extension_name)
     return true if ARGV[0] == "--force"
+    return true if ENV["CI"]
     return true if not File.exists?(PathFor[:jsonSyntax][language_extension_name])
 
     compare_time = mtime(PathFor[:jsonSyntax][language_extension_name])

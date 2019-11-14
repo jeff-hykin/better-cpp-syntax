@@ -24,7 +24,7 @@ jobs:
       - name: test
         run: |
           gem install bundler
-          npm ci --force
+          npm ci
           npm test
         env:
           CI: true
