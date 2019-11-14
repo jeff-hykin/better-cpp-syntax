@@ -6,7 +6,7 @@ let reporters = [];
 
 class recorder {
     /**
-     * @typedef {{source: string, count: number[], sumTime: number[]}} Coverage
+     * @typedef {{source: string, count: number[], sumTime: number[], peakTime[]} Coverage
      */
     constructor(grammar, scopeName) {
         // converts a grammar into a list of pointers which become an array of coverage objects
@@ -25,7 +25,8 @@ class recorder {
                     source,
                     // order is failure, unchosen, chosen
                     count: [0, 0, 0],
-                    sumTime: [0, 0, 0]
+                    sumTime: [0, 0, 0],
+                    peakTime: [0, 0, 0]
                 };
             }
         }
@@ -37,11 +38,16 @@ class recorder {
             this.coverage[source] = {
                 source,
                 count: [0, 0, 0],
-                sumTime: [0, 0, 0]
+                sumTime: [0, 0, 0],
+                peakTime: [0, 0, 0]
             };
         }
         this.coverage[source].count[index] += 1;
         this.coverage[source].sumTime[index] += time;
+        this.coverage[source].peakTime[index] = Math.max(
+            this.coverage[source].peakTime[index],
+            time
+        );
         if (onlyPattern && chosen) {
             this.coverage[source].count[1] += 1;
             this.coverage[source].sumTime[1] += time;
