@@ -490,6 +490,12 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+  scopesEnd:
+    - meta.preprocessor.macro
+    - meta.block.namespace
+    - meta.body.namespace
+    - meta.block.struct
+    - meta.body.struct
 - source: '#'
   scopesBegin:
     - meta.preprocessor.pragma

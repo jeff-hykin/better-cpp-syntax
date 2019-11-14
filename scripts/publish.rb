@@ -1,4 +1,4 @@
-require_relative '../directory.rb'
+require_relative '../paths.rb'
 # 
 # get the package_json
 # 

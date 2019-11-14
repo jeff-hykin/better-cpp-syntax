@@ -1,3 +1,4 @@
+require_relative '../../../paths'
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
 require_relative source_dir + 'repo_specific_helpers.rb'
@@ -6,6 +7,7 @@ require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative source_dir + 'shared_patterns/assembly.rb'
 require_relative source_dir + 'shared_patterns/inline_comment'
 require_relative source_dir + 'shared_patterns/std_space.rb'
+require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 
 
@@ -488,6 +490,55 @@ c_grammar[:$initial_context] = [
     }
 ]
 c_grammar[:numbers] = numeric_constant
+c_grammar[:comments] = [
+    *doxygen(),
+    Pattern.new(
+        match: /^\/\* =/.then(
+            match: /\s*.*?/,
+            tag_as: "meta.toc-list.banner.block"
+        ).then(/\s*= \*\/$\n?/),
+        tag_as: "comment.block.banner"
+    ),
+    PatternRange.new(
+        start_pattern: Pattern.new(
+            match: /\/\*/,
+            tag_as: "punctuation.definition.comment.begin",
+        ),
+        end_pattern: Pattern.new(
+            match: /\*\//,
+            tag_as: "punctuation.definition.comment.end"
+        ),
+        tag_as: "comment.block"
+    ),
+    Pattern.new(
+        match: /^\/\/ =/.then(
+            match: /\s*.*?/,
+            tag_as: "meta.toc-list.banner.line"
+        ).then(/\s*=$\n?/),
+        tag_as: "comment.line.banner"
+    ),
+    PatternRange.new(
+        start_pattern: maybe(
+            match: /^[ \t]+/,
+            tag_as: "punctuation.whitespace.comment.leading"
+        ).lookAheadFor(/\/\//),
+        end_pattern: lookAheadToAvoid(/\G/),
+        includes: [
+            PatternRange.new(
+                start_pattern: Pattern.new(
+                    match: /\/\//,
+                    tag_as: "punctuation.definition.comment",
+                ),
+                end_pattern: lookAheadFor(/\n/),
+                tag_as: "comment.line.double-slash",
+                includes: [
+                    :line_continuation_character,
+                ]
+            )
+        ]
+    )
+
+]
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {
@@ -643,69 +694,6 @@ c_grammar.addToRepository({
         patterns: [
             {
                 include: "#function-call-innards"
-            }
-        ]
-    },
-    "comments" => {
-        patterns: [
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.block.c"
-                    }
-                },
-                match: "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
-                name: "comment.block.c"
-            },
-            {
-                begin: "/\\*",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.begin.c"
-                    }
-                },
-                end: "\\*/",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.comment.end.c"
-                    }
-                },
-                name: "comment.block.c"
-            },
-            {
-                captures: {
-                    "1" => {
-                        name: "meta.toc-list.banner.line.c"
-                    }
-                },
-                match: "^// =(\\s*.*?)\\s*=\\s*$\\n?",
-                name: "comment.line.banner"
-            },
-            {
-                begin: "(^[ \\t]+)?(?=//)",
-                beginCaptures: {
-                    "1" => {
-                        name: "punctuation.whitespace.comment.leading"
-                    }
-                },
-                end: "(?!\\G)",
-                patterns: [
-                    {
-                        begin: "//",
-                        beginCaptures: {
-                            "0" => {
-                                name: "punctuation.definition.comment"
-                            }
-                        },
-                        end: "(?=\\n)",
-                        name: "comment.line.double-slash",
-                        patterns: [
-                            {
-                                include: "#line_continuation_character"
-                            }
-                        ]
-                    }
-                ]
             }
         ]
     },

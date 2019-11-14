@@ -1,0 +1,84 @@
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses.template.definition
+- source: Args
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: C
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: static
+  scopesBegin:
+    - meta.body.class
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' count '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: sizeof...
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof.variadic
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof.variadic
+- source: Args
+  scopes:
+    - meta.arguments.operator.sizeof.variadic
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof.variadic
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' <--'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

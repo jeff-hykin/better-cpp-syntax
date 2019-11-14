@@ -8,10 +8,11 @@ module.exports = function(scopeName, coverage) {
     for (let i = 0; i < 3; i += 1) {
         console.log(labels[i]);
         console.log(
-            "%s   %s    %s",
+            "%s   %s    %s   %s",
             "pattern name".padEnd(22),
             "average time",
-            "total time"
+            "total time",
+            "peak time"
         );
         let keys = Object.keys(coverage).filter(
             k => coverage[k].count[i] > 0 && coverage[k].sumTime[i] > 0
@@ -36,7 +37,8 @@ module.exports = function(scopeName, coverage) {
                 color(
                     coverage[k].source.padEnd(22),
                     avgColor(average.toFixed(6).padStart(12)),
-                    totalColor(coverage[k].sumTime[i].toFixed(3).padStart(12))
+                    totalColor(coverage[k].sumTime[i].toFixed(3).padStart(12)),
+                    coverage[k].peakTime[i].toFixed(3).padStart(12)
                 )
             );
         }

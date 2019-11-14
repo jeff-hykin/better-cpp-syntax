@@ -1,4 +1,4 @@
-require_relative '../../../../directory'
+require_relative '../../../../paths'
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
 
@@ -59,6 +59,36 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
         # 
         # #include
         # 
+            include_partial = Pattern.new(
+                Pattern.new(
+                    # system header [cpp.include]/2
+                    match: Pattern.new(
+                        match: /</,
+                        tag_as: "punctuation.definition.string.begin"
+                    ).zeroOrMoreOf(/[^>]/).maybe(
+                        match: />/,
+                        tag_as: "punctuation.definition.string.end"
+                    ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+                    tag_as: "string.quoted.other.lt-gt.include"
+                ).or(
+                    # other headers [cpp.include]/3
+                    match: Pattern.new(
+                        match: /\"/,
+                        tag_as: "punctuation.definition.string.begin"
+                    ).zeroOrMoreOf(/[^\"]/).maybe(
+                        match: /\"/,
+                        tag_as: "punctuation.definition.string.end"
+                    ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
+                    tag_as: "string.quoted.double.include"
+                ).or(
+                    # macro includes [cpp.include]/4
+                    match: std_space.then(identifier).zeroOrMoreOf(/\./.then(identifier)).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//.or(/;/)))),
+                    tag_as: "entity.name.other.preprocessor.macro.include"
+                ).or(
+                    # correctly color a lone `#include`
+                    match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//.or(/;/)))),
+                )
+            )
             grammar[:include] = Pattern.new(
                 should_fully_match: ["#include <cstdlib>", "#include \"my_header\"", "#include INC_HEADER","#include", "#include <typing"],
                 should_partial_match: ["#include <foo> //comment"],
@@ -69,41 +99,27 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                             match: /#/,
                             tag_as: "punctuation.definition.directive"
                         ).maybe(@spaces).then(
-                            match: /include/.or(/include_next/).or(/import/),
+                            match: /include/.or(/include_next/),
                             reference: "include_type"
                         ).then(@word_boundary)
                     ),
-                ).maybe(@spaces).then(
-                    Pattern.new(
-                        # system header [cpp.include]/2
-                        match: Pattern.new(
-                            match: /</,
-                            tag_as: "punctuation.definition.string.begin"
-                        ).zeroOrMoreOf(/[^>]/).maybe(
-                            match: />/,
-                            tag_as: "punctuation.definition.string.end"
-                        ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-                        tag_as: "string.quoted.other.lt-gt.include"
-                    ).or(
-                        # other headers [cpp.include]/3
-                        match: Pattern.new(
-                            match: /\"/,
-                            tag_as: "punctuation.definition.string.begin"
-                        ).zeroOrMoreOf(/[^\"]/).maybe(
-                            match: /\"/,
-                            tag_as: "punctuation.definition.string.end"
-                        ).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-                        tag_as: "string.quoted.double.include"
-                    ).or(
-                        # macro includes [cpp.include]/4
-                        match: identifier.then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//))),
-                        tag_as: "entity.name.other.preprocessor.macro.include"
-                    ).or(
-                        # correctly color a lone `#include`
-                        match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//))),
-                    )
-                ),
+                ).maybe(@spaces).then(include_partial),
                 tag_as: "meta.preprocessor.include"
+            )
+            grammar[:module_import] = Pattern.new(
+                should_fully_match: ["import <cstdlib>", "import \"my_header\"", "import INC_HEADER","import", "import <typing"],
+                should_partial_match: ["import <foo> //comment"],
+                tag_as: "meta.preprocessor.import",
+                match: @start_of_line.then(std_space).then(
+                    tag_as: "keyword.control.directive.import",
+                    match: Pattern.new(
+                        match: /import/,
+                        reference: "include_type",
+                    ),
+                ).maybe(@spaces).then(include_partial).maybe(@spaces).maybe(
+                    match: /;/,
+                    tag_as: "punctuation.terminator.statement",
+                ),
             )
         # 
         # #line
@@ -282,7 +298,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
                         reference: "conditional_name",
                     )
                 ),
-                while: @start_of_line.lookAheadToAvoid(/\s*+#\s*(?:else|endif)/),
+                end_pattern: @start_of_line.lookAheadToAvoid(/\s*+#\s*(?:else|endif)/),
                 includes: [
                     # the first line (the conditional line)
                     PatternRange.new(
@@ -351,6 +367,7 @@ Grammar.export(insert_namespace_infront_of_new_grammar_repos: true, insert_names
             :pragma_mark,
             :pragma,
             :include,
+            :module_import,
             :line,
             :diagnostic,
             :undef,

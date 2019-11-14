@@ -1,4 +1,4 @@
-require_relative '../../../directory'
+require_relative '../../../paths'
 require_relative PathFor[:repo_helper]
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["numeric"]
@@ -8,12 +8,11 @@ require_relative PathFor[:sharedPattern]["assembly"]
 require_relative PathFor[:sharedPattern]["inline_comment"]
 require_relative PathFor[:sharedPattern]["std_space"]
 require_relative PathFor[:sharedPattern]["backslash_escapes"]
+require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
 # todo
-    # fix initializer list "functions" e.g. `int a{5};`
-    # have all patterns with keywords be dynamically generated
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
     # consider adding storage.type to user defined types
@@ -231,7 +230,6 @@ grammar = Grammar.new(
             # literals
             :string_context,
             :number_literal,
-            :string_context_c,
             # variable-like
             :method_access, # needs to be above :function_call, needs to be above operator
             :member_access,
@@ -381,6 +379,7 @@ grammar = Grammar.new(
         tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
     )
     grammar[:comments] = [
+        *doxygen(),
         :emacs_file_banner,
         :block_comment,
         :line_comment,
@@ -669,7 +668,7 @@ grammar = Grammar.new(
                     end_pattern: /\)/,
                     includes: [
                         :attributes_context,
-                        :string_context_c,
+                        :string_context,
                     ],
                 ),
                 Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
@@ -873,15 +872,19 @@ grammar = Grammar.new(
 # Scope resolution
 #
     one_scope_resolution = Pattern.new(
-        match: variable_name_without_bounds,
-        word_cannot_be_any_of: @cpp_tokens.representationsThat(
-            :isWord,
-            not(:isType),
-            not(:isVariable),
-            not(:isValidFunctionName),
-            not(:isLiteral)
-        )
-    ).then(/\s*+/).maybe(template_call).then(/::/)
+        Pattern.new(
+            match: variable_name_without_bounds,
+            word_cannot_be_any_of: @cpp_tokens.representationsThat(
+                :isWord,
+                not(:isType),
+                not(:isVariable),
+                not(:isValidFunctionName),
+                not(:isLiteral)
+            )
+        ).then(/\s*+/).maybe(
+            template_call
+        ).then(/::/)
+    )
     inline_scope_resolution = ->(tag_extension) do
         Pattern.new(
             match: zeroOrMoreOf(one_scope_resolution),
@@ -902,10 +905,6 @@ grammar = Grammar.new(
         match: /::/,
         tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"
     )
-    preceding_scopes = Pattern.new(
-        match: maybe(scope_operator).zeroOrMoreOf(one_scope_resolution).maybe(@spaces),
-        includes: [ :scope_resolution_inner_generated ]
-        )
     generateScopeResolutionFinder = ->(tag_extension, grammar_name) do
         hidden_grammar_name = (grammar_name.to_s+"_inner_generated").to_sym
         tagged_scope_operator = scope_operator.reTag(
@@ -1012,7 +1011,7 @@ grammar = Grammar.new(
             :function_type,
             :storage_types,
             :number_literal,
-            :string_context_c,
+            :string_context,
             :comma,
             :scope_resolution_inner_generated,
             grammar[:template_call_range],
@@ -1091,10 +1090,13 @@ grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).zeroOrMoreOf(
-                Pattern.new(
-                    match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
-                    tag_as: "storage.modifier.$match"
-                ).then(std_space)
+                match: storage_modifiers = Pattern.new(
+                    Pattern.new(
+                        match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
+                        tag_as: "storage.modifier.$match"
+                    ).then(std_space)
+                ),
+                includes: [storage_modifiers],
             ).then(
                     grammar[:simple_type].then(std_space).then(
                     optional_calling_convention
@@ -1238,7 +1240,6 @@ grammar = Grammar.new(
                 tag_as: "meta.static_assert.message",
                 includes: [
                     :string_context,
-                    :string_context_c,
                 ]
             ),
             :evaluation_context,
@@ -1369,6 +1370,7 @@ grammar = Grammar.new(
                             includes: [:evaluation_context]
                         ),
                         grammar[:comma],
+                        :comments,
                     ]
                 ),
                 # parameters 
@@ -1526,11 +1528,13 @@ grammar = Grammar.new(
 # Operators
 #
     grammar[:operators] = []
-    grammar[:wordlike_operators] = Pattern.new(
-        match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
-        tag_as: "keyword.operator.wordlike keyword.operator.$match",
-        )
-    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && !each[:isSpecifier] }
+    grammar[:wordlike_operators] = [
+        Pattern.new(
+            match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
+            tag_as: "keyword.operator.wordlike keyword.operator.$match",
+        ),
+    ]
+    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
         grammar[:operators].push(functionCallGenerator[
@@ -1541,6 +1545,14 @@ grammar = Grammar.new(
             tag_parenthese_as: "operator.#{name}"
         ])
     end
+    # edgecase for `sizeof...`
+    grammar[:operators].push(functionCallGenerator[
+        repository_name: "sizeof_variadic_operator",
+        match_name: /\bsizeof\.\.\./,
+        tag_name_as: "keyword.operator.functionlike keyword.operator.sizeof.variadic",
+        tag_content_as: "arguments.operator.sizeof.variadic",
+        tag_parenthese_as: "operator.sizeof.variadic"
+    ])
     
     grammar[:ternary_operator] = PatternRange.new(
         apply_end_pattern_last: true,
@@ -2255,7 +2267,7 @@ grammar = Grammar.new(
         Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
             match: Pattern.new(
-                match: /#{name}/,
+                match: variableBounds[/#{name}/],
                 tag_as: "storage.type.#{name}.declare",
             ).then(std_space).then(
                 match: variable_name,
@@ -2267,7 +2279,7 @@ grammar = Grammar.new(
             ).then(
                 match: variable_name,
                 tag_as: "variable.other.object.declare",
-            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/:/)
+            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{]/)
         )
     end
     grammar[:standard_declares] = [
@@ -2439,54 +2451,6 @@ grammar = Grammar.new(
             :evaluation_context
         ]
     )
-    grammar[:string_context_c] = [
-            {
-                begin: "\"",
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "\"",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.double",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            },
-            {
-                begin: lookBehindToAvoid(/[\da-fA-F]/).then(/'/),
-                beginCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.begin"
-                    }
-                },
-                end: "'",
-                endCaptures: {
-                    "0" => {
-                        name: "punctuation.definition.string.end"
-                    }
-                },
-                name: "string.quoted.single",
-                patterns: [
-                    {
-                        include: "#string_escapes_context_c"
-                    },
-                    {
-                        include: "#line_continuation_character"
-                    }
-                ]
-            }
-        ]
     grammar[:string_escapes_context_c] = [
             :backslash_escapes,
             {
@@ -2517,27 +2481,10 @@ grammar = Grammar.new(
 # 
 # Generate macro versions of all ranged patterns 
 #
-    # TODO: this is incomplete, all the root patterns are included, but their "includes" are not converted
-    macro_context = []
-    for each in grammar[:$initial_context]
-        if grammar[each].is_a?(PatternRange)
-            tag_version = grammar[each].to_tag(ignore_repository_entry: true).dup
-            if tag_version[:end] != nil
-                tag_version[:end] = tag_version[:end].dup
-                # if there's a non-escaped newline, then the range is over
-                tag_version[:end] = "#{tag_version[:end]}|(?<!\\\\)$"
-                repo_name  = "macro_safe_#{each.to_s}".to_sym
-                grammar[repo_name] = tag_version
-                macro_context.push(repo_name)
-            else
-                macro_context.push(each)
-            end
-        else 
-            macro_context.push(each)
-        end
-    end
-    macro_context.push(:macro_argument)
-    grammar[:macro_context] = macro_context
+    # create a duplicate grammar with all pattern ranges bailed-out
+    system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
+    # assign that to the macro context
+    grammar[:macro_context] = ["source.cpp.embedded.macro"]
 
 # 
 # Save

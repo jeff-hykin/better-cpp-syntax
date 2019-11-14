@@ -1,4 +1,4 @@
-require_relative '../../../directory'
+require_relative '../../../paths'
 require_relative PathFor[:repo_helper]
 require_relative PathFor[:textmate_tools]
 require_relative PathFor[:sharedPattern]["predefined_macros"]

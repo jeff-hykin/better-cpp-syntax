@@ -61,14 +61,10 @@
 - source: =
   scopes:
     - keyword.operator.assignment
-  scopesEnd:
-    - meta.parens
 - source: '0'
   scopes:
     - constant.numeric.decimal
 - source: ;
-  scopesBegin:
-    - meta.parens
   scopes:
     - punctuation.terminator.statement
 - source: i

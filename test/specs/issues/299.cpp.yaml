@@ -41,10 +41,16 @@
   scopes:
     - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-- source: '    TWO_AND_HALF'
+- source: TWO_AND_HALF
+  scopesBegin:
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
+  scopesEnd:
+    - meta.enum.definition
 - source: '#'
   scopesBegin:
     - keyword.control.directive.endif
@@ -87,11 +93,11 @@
 - source: TWO_AND_HALF
   scopes:
     - entity.name.function.preprocessor
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: '#'
   scopesBegin:
     - keyword.control.directive.endif

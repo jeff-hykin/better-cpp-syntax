@@ -517,6 +517,8 @@ class Grammar
             patterns: [],
             repository: [],
         }
+        # sort by key alphabetically
+        @data[:repository] = Hash[ @data[:repository].sort_by { |key, val| key.to_s } ] 
         repository_copy = @data[:repository].dup
         
         # 
@@ -1420,7 +1422,7 @@ class PatternRange
         suppress_output do
             pattern = /#{start_pattern_as_tag[:match]}/
         end
-        if "" =~ pattern and not key_arguments[:zeroLengthStart?]
+        if "" =~ pattern and not key_arguments[:zeroLengthStart?] and not pattern.inspect == "/\G/"
             puts "Warning: #{/#{start_pattern_as_tag[:match]}/.inspect}\nmatches the zero length string (\"\").\n\n"
             puts "This means that the patternRange always matches"
             puts "You can disable this warning by settting :zeroLengthStart? to true."
@@ -1553,7 +1555,10 @@ class TokenHelper
             end
             output
         end
-        return matches
+        # sort from longest to shortest
+        matches.sort do |token1, token2|
+            token2[:representation].length - token1[:representation].length
+        end
     end
     
     def representationsThat(*adjectives)
