@@ -10,7 +10,7 @@
     "perfall": "bundle exec ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "bundle exec ruby scripts/lint.rb",
-    "_pretest": "npm run build",
+    "pretest": "npm run build",
     "test": "node test/source/index.js test",
     "testall": "npm test -- --all",
     "genall": "npm run generate-specs -- --all",
