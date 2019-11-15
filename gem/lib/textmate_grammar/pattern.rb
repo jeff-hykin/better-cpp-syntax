@@ -529,7 +529,7 @@ class PatternBase
         to_tag == other.to_tag
     end
 
-    # (see eql?)
+    # (see #eql?)
     def ==(other)
         eql? other
     end
@@ -742,6 +742,32 @@ class PatternBase
         end
         # rubocop:enable Metrics/LineLength
         self_regex
+    end
+
+    #
+    # Scrambles references of self
+    # This method provides a way to rename all references
+    # both actual references and references to references will be scrambled in
+    # some one to one mapping, all references that were unique before remain unique
+    #
+    # This must be idempotent, calling this repeatedly must have references be as if it
+    # was called only once, even if the pattern is cloned between calls
+    #  this is because it may be called a different number of times depending on the nest
+    #  level of the patterns
+    #
+    # @return [void] nothing
+    #
+    def self_scramble_references
+        scramble = lambda do |name|
+            return name if name.start_with?("__scrambled__")
+
+            "__scrambled__" + name
+        end
+
+        tag_as = @arguments[:tag_as]
+        reference = @arguments[:reference]
+        @arguments[:tag_as] = scramble.call(tag_as) if tag_as.is_a? String
+        @arguments[:reference] = scramble.call(reference) if reference.is_a? String
     end
 
     #

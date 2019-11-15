@@ -15,7 +15,6 @@ class FixRepeatedTagAs < GrammarTransform
         return false unless pattern.is_a? PatternBase
 
         pattern.each do |s|
-            puts s.arguments[:tag_as] if s.arguments[:tag_as]
             return true if s.arguments[:tag_as]
         end
 
@@ -25,7 +24,7 @@ class FixRepeatedTagAs < GrammarTransform
     #
     # fixes tag_as when it is inside a quantifier
     # see https://github.com/jeff-hykin/cpp-textmate-grammar/issues/339#issuecomment-543285390
-    # for an explination of why and how
+    # for an explanation of why and how
     #
     def pre_transform(pattern, options)
         return pattern.map { |v| pre_transform(v, options) } if pattern.is_a? Array
@@ -33,22 +32,44 @@ class FixRepeatedTagAs < GrammarTransform
         return pattern if pattern.is_a? PatternRange
 
         pattern.map do |pat|
-            next pat unless pattern.respond_to? :self_capture_group_rematch
+            next pat unless pat.respond_to? :self_capture_group_rematch
             next pat unless pat.self_capture_group_rematch
-            next pat unless tag_as?(pat)
+            next pat unless tag_as?(pat.match)
 
             unless pat.arguments[:includes].nil? || pat.arguments[:includes].empty?
                 raise "Cannot transform a Repeated pattern that has non empty includes"
             end
 
-            pat.arguments[:includes] = pat.match
+            pat.arguments[:includes] = [pat.match.__deep_clone__]
             pat.match.map! do |pm|
                 pm.arguments.delete(:tag_as)
                 pm.arguments.delete(:includes)
-                # TODO: scramble references
+                next unless options[:preserve_references?] || pm.arguments[:preserve_references?]
+
+                pm.self_scramble_references
             end
         end
     end
+
+    #
+    # Contributes the option :preserve_references?
+    #
+    # :preserve_references? disables the scrambling of references
+    #
+    # @return (see GrammarPlugin.options)
+    #
+    def self.options
+        [:preserve_references?]
+    end
+
+    #
+    # Displays the state of the options
+    #
+    # @return (see GrammarPlugin.display_options)
+    #
+    def self.display_options(indent, options)
+        ",\n#{indent}preserve_references?: #{options[:preserve_references?]}"
+    end
 end
 
-Grammar.register_transform(AddEnding.new, 99)
+Grammar.register_transform(FixRepeatedTagAs.new, 99)

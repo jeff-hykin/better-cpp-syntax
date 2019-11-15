@@ -182,6 +182,23 @@ class RepeatablePattern < PatternBase
         output
         # rubocop:enable Metrics/LineLength
     end
+
+    #
+    # Does this pattern potentially rematch any capture groups
+    #
+    # @note this is used by FixRepeatedTagAs to modify patterns
+    # The answer of true is a safe, but expensive to runtime, default
+    #
+    # @return [Boolean] True if this pattern potentially rematches capture groups
+    #
+    def self_capture_group_rematch
+        # N or more
+        return true if @at_most.nil? && !@at_least.nil?
+        # up to N
+        return true if !@at_most.nil? && @at_most > 1
+
+        false
+    end
 end
 
 # An optional pattern

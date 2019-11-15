@@ -137,6 +137,21 @@ class BackReferencePattern < PatternBase
     def single_entity?
         true
     end
+
+    # (see PatternBase#self_scramble_references)
+    def self_scramble_references
+        scramble = lambda do |name|
+            return name if name.start_with?("__scrambled__")
+
+            "__scrambled__" + name
+        end
+
+        key = @arguments[:subroutine_key]
+        scrambled = scramble.call(key)
+
+        @match = @match.sub(key, scrambled)
+        @arguments[:subroutine_key] = scrambled
+    end
 end
 
 class PatternBase
@@ -186,6 +201,30 @@ class SubroutinePattern < PatternBase
     # (see PatternBase#single_entity?)
     # @return [true]
     def single_entity?
+        true
+    end
+
+    # (see PatternBase#self_scramble_references)
+    def self_scramble_references
+        scramble = lambda do |name|
+            return name if name.start_with?("__scrambled__")
+
+            "__scrambled__" + name
+        end
+
+        key = @arguments[:subroutine_key]
+        scrambled = scramble.call(key)
+
+        @match = @match.sub(key, scrambled)
+        @arguments[:subroutine_key] = scrambled
+    end
+
+    #
+    # SubroutinePattern can cause its capture groups to be rematched
+    #
+    # @return [true] rematching is possible
+    #
+    def self_capture_group_rematch
         true
     end
 end
