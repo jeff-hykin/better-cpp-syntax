@@ -236,6 +236,16 @@ def doxygen
         match: Pattern.new(
             match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/param/),
             tag_as: "storage.type.class.doxygen",
+        ).maybe(
+            Pattern.new(/\[/).oneOrMoreOf(
+                match: maybe(/,/).then(/(?:in|out)/).maybe(@spaces),
+                includes: [
+                    Pattern.new(
+                        match: /in|out/,
+                        tag_as: "keyword.other.parameter.direction.$match"
+                    )
+                ]
+            ).then(/\]/)
         ).then(@spaces).then(
             match: /\b\w+\b/,
             tag_as:"variable.parameter"

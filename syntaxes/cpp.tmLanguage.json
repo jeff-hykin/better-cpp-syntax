@@ -1227,12 +1227,20 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 "2": {
+                  "patterns": [
+                    {
+                      "match": "in|out",
+                      "name": "keyword.other.parameter.direction.$0.cpp"
+                    }
+                  ]
+                },
+                "3": {
                   "name": "variable.parameter.cpp"
                 }
               }
@@ -1305,12 +1313,20 @@
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 {
-                  "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
                   "captures": {
                     "1": {
                       "name": "storage.type.class.doxygen.cpp"
                     },
                     "2": {
+                      "patterns": [
+                        {
+                          "match": "in|out",
+                          "name": "keyword.other.parameter.direction.$0.cpp"
+                        }
+                      ]
+                    },
+                    "3": {
                       "name": "variable.parameter.cpp"
                     }
                   }
@@ -1396,12 +1412,20 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 "2": {
+                  "patterns": [
+                    {
+                      "match": "in|out",
+                      "name": "keyword.other.parameter.direction.$0.cpp"
+                    }
+                  ]
+                },
+                "3": {
                   "name": "variable.parameter.cpp"
                 }
               }

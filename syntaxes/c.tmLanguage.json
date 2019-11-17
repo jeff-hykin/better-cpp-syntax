@@ -692,12 +692,20 @@
               "name": "storage.type.class.doxygen.c"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.c"
                 },
                 "2": {
+                  "patterns": [
+                    {
+                      "match": "in|out",
+                      "name": "keyword.other.parameter.direction.$0.c"
+                    }
+                  ]
+                },
+                "3": {
                   "name": "variable.parameter.c"
                 }
               }
@@ -770,12 +778,20 @@
                   "name": "storage.type.class.doxygen.c"
                 },
                 {
-                  "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
                   "captures": {
                     "1": {
                       "name": "storage.type.class.doxygen.c"
                     },
                     "2": {
+                      "patterns": [
+                        {
+                          "match": "in|out",
+                          "name": "keyword.other.parameter.direction.$0.c"
+                        }
+                      ]
+                    },
+                    "3": {
                       "name": "variable.parameter.c"
                     }
                   }
@@ -861,12 +877,20 @@
               "name": "storage.type.class.doxygen.c"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.c"
                 },
                 "2": {
+                  "patterns": [
+                    {
+                      "match": "in|out",
+                      "name": "keyword.other.parameter.direction.$0.c"
+                    }
+                  ]
+                },
+                "3": {
                   "name": "variable.parameter.c"
                 }
               }

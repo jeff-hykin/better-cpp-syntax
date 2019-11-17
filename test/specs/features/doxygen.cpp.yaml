@@ -41,10 +41,62 @@
     - punctuation.definition.comment.documentation
 - source: ' ... text ...'
 - source: /////////////////////////////////////////////////
-  scopesBegin:
+  scopes:
     - punctuation.definition.comment.documentation
-- source: //!
   scopesEnd:
+    - comment.line.double-slash.documentation
+- source: /**
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' * '
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: p0
+  scopes:
+    - variable.parameter
+- source: ' is the first p.'
+- source: ' * '
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: '['
+- source: in
+  scopes:
+    - keyword.other.parameter.direction.in
+- source: '] '
+- source: p0
+  scopes:
+    - variable.parameter
+- source: ' is an input parameter'
+- source: ' * '
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: '['
+- source: in
+  scopes:
+    - keyword.other.parameter.direction.in
+- source: ','
+- source: out
+  scopes:
+    - keyword.other.parameter.direction.out
+- source: '] '
+- source: io
+  scopes:
+    - variable.parameter
+- source: ' is an in-out paramater'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: //!
+  scopesBegin:
+    - comment.line.double-slash.documentation
+  scopes:
     - punctuation.definition.comment.documentation
 - source: ' Brief description, which is'
 - source: //!
@@ -90,12 +142,12 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: /**
+- source: ' /**'
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: ' *  ... text'
+- source: '                                                *  ... text'
 - source: '***********************************************/'
   scopes:
     - punctuation.definition.comment.end.documentation
@@ -242,28 +294,69 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: /**
+- source: ' /**'
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: ' * A brief history of Doxygen-style banner comments.'
-- source: ' *'
-- source: ' * This is a Doxygen-style C-style "banner" comment. It starts with a "normal"'
-- source: ' * comment and is then converted to a "special" comment block near the end of'
-- source: ' * the first line. It is written this way to be more "visible" to developers'
-- source: ' * who are reading the source code.'
-- source: ' * This style of commenting behaves poorly with clang-format.'
-- source: ' *'
-- source: ' * '
+- source: '                                                                               * A brief'
+- source: '                                                                               *history of'
+- source: '                                                                               *Doxygen-style'
+- source: '                                                                               *banner'
+- source: '                                                                               *comments.'
+- source: '                                                                               *'
+- source: '                                                                               * This is a'
+- source: '                                                                               *Doxygen-style'
+- source: '                                                                               *C-style'
+- source: '                                                                               *"banner"'
+- source: '                                                                               *comment.'
+- source: '                                                                               *It starts'
+- source: '                                                                               *with a'
+- source: '                                                                               *"normal"'
+- source: '                                                                               * comment'
+- source: '                                                                               *and is'
+- source: '                                                                               *then'
+- source: '                                                                               *converted'
+- source: '                                                                               *to a'
+- source: '                                                                               *"special"'
+- source: '                                                                               *comment'
+- source: '                                                                               *block near'
+- source: '                                                                               *the end of'
+- source: '                                                                               * the first'
+- source: '                                                                               *line. It'
+- source: '                                                                               *is written'
+- source: '                                                                               *this way'
+- source: '                                                                               *to be more'
+- source: '                                                                               *"visible"'
+- source: '                                                                               *to'
+- source: '                                                                               *developers'
+- source: '                                                                               * who are'
+- source: '                                                                               *reading'
+- source: '                                                                               *the source'
+- source: '                                                                               *code. This'
+- source: '                                                                               *style of'
+- source: '                                                                               *commenting'
+- source: '                                                                               *behaves'
+- source: '                                                                               *poorly'
+- source: '                                                                               *with'
+- source: '                                                                               *clang-format.'
+- source: '                                                                               *'
+- source: '                                                                               * '
 - source: '@param'
   scopes:
     - storage.type.class.doxygen
-- source: theory
-  scopes:
-    - variable.parameter
-- source: ' Even if there is only one possible unified theory. it is just a'
-- source: ' *               set of rules and equations.'
+- source: '                                                                               *theory'
+- source: '                                                                               *Even if'
+- source: '                                                                               *there is'
+- source: '                                                                               *only one'
+- source: '                                                                               *possible'
+- source: '                                                                               *unified'
+- source: '                                                                               *theory. it'
+- source: '                                                                               *is just a'
+- source: '                                                                               *               set'
+- source: '                                                                               *of rules'
+- source: '                                                                               *and'
+- source: '                                                                               *equations.'
 - source: >-
     ******************************************************************************/
   scopes:
@@ -312,7 +405,7 @@
     - comment.line.double-slash.documentation
   scopes:
     - punctuation.definition.comment.documentation
-- source: '  A test class. '
+- source: '  A test class.'
   scopesEnd:
     - comment.line.double-slash.documentation
 - source: /*!
@@ -357,7 +450,7 @@
 - source: ' An enum.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
@@ -454,7 +547,7 @@
 - source: ' Enum pointer.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '         /*!'
+- source: "\t    /*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
@@ -468,7 +561,7 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: enumPtr
+- source: ' enumPtr'
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -480,7 +573,7 @@
 - source: ' Enum variable.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '         /*!'
+- source: "\t    /*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
@@ -491,7 +584,7 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '         enumVar'
+- source: "\t    enumVar"
   scopesEnd:
     - meta.tail.enum
 - source: ;
@@ -507,12 +600,12 @@
 - source: ' A constructor.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: '      A more elaborate description of the constructor.'
+- source: "\t  A more elaborate description of the constructor."
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation
@@ -545,12 +638,12 @@
 - source: ' A destructor.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: '      A more elaborate description of the destructor.'
+- source: "\t  A more elaborate description of the destructor."
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation
@@ -584,7 +677,7 @@
 - source: ' A normal member taking two arguments and returning an integer value.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
@@ -677,7 +770,7 @@
 - source: ' A pure virtual member.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
@@ -769,12 +862,12 @@
 - source: ' A public variable.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: '      Details.'
+- source: "\t  Details."
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation
@@ -796,12 +889,12 @@
 - source: ' A function variable.'
   scopesEnd:
     - comment.line.double-slash.documentation
-- source: '    /*!'
+- source: "\t/*!"
   scopesBegin:
     - comment.block.documentation
   scopes:
     - punctuation.definition.comment.begin.documentation
-- source: '      Details.'
+- source: "\t  Details."
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation

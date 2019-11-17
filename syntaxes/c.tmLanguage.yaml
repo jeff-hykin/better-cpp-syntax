@@ -391,11 +391,15 @@ repository:
         name: storage.type.class.doxygen.c
       - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.c
-      - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
         captures:
           '1':
             name: storage.type.class.doxygen.c
           '2':
+            patterns:
+            - match: in|out
+              name: keyword.other.parameter.direction.$0.c
+          '3':
             name: variable.parameter.c
       - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.c
@@ -433,11 +437,15 @@ repository:
             name: storage.type.class.doxygen.c
           - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
             name: storage.type.class.doxygen.c
-          - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+          - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
             captures:
               '1':
                 name: storage.type.class.doxygen.c
               '2':
+                patterns:
+                - match: in|out
+                  name: keyword.other.parameter.direction.$0.c
+              '3':
                 name: variable.parameter.c
           - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
             name: storage.type.class.doxygen.c
@@ -482,11 +490,15 @@ repository:
         name: storage.type.class.doxygen.c
       - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.c
-      - match: "((?<=[\\s*!\\/])[\\\\@]param)\\s+(\\b\\w+\\b)"
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
         captures:
           '1':
             name: storage.type.class.doxygen.c
           '2':
+            patterns:
+            - match: in|out
+              name: keyword.other.parameter.direction.$0.c
+          '3':
             name: variable.parameter.c
       - match: "(?<=[\\s*!\\/])[\\\\@](?:arg|attention|author|authors|brief|bug|copyright|date|deprecated|details|exception|invariant|li|note|par|paragraph|param|post|pre|remark|remarks|result|return|returns|retval|sa|see|short|since|test|throw|todo|tparam|version|warning|xrefitem)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.c
