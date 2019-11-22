@@ -101,6 +101,18 @@
   scopes:
     - variable.parameter
 - source: ' is a param with a space'
+- source: ' * '
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: '['
+- source: out
+  scopes:
+    - keyword.other.parameter.direction.out
+- source: '] '
+- source: dest
+  scopes:
+    - variable.parameter
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation

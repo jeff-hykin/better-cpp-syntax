@@ -238,7 +238,7 @@ def doxygen
             tag_as: "storage.type.class.doxygen",
         ).maybe(
             Pattern.new(/\s*\[/).oneOrMoreOf(
-                match: maybe(/,/).then(/(?:in|out)/).maybe(@spaces),
+                match: maybe(/,/).maybe(@spaces).then(/(?:in|out)/).maybe(@spaces),
                 includes: [
                     Pattern.new(
                         match: /in|out/,
