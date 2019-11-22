@@ -647,7 +647,7 @@ repository:
         name: storage.type.class.doxygen.cpp
       - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.cpp
-      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
         captures:
           '1':
             name: storage.type.class.doxygen.cpp
@@ -693,7 +693,7 @@ repository:
             name: storage.type.class.doxygen.cpp
           - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
             name: storage.type.class.doxygen.cpp
-          - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
+          - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
             captures:
               '1':
                 name: storage.type.class.doxygen.cpp
@@ -746,7 +746,7 @@ repository:
         name: storage.type.class.doxygen.cpp
       - match: "(?<=[\\s*!\\/])[\\\\@](?:addindex|addtogroup|category|class|defgroup|diafile|dotfile|elseif|fn|headerfile|if|ifnot|image|ingroup|interface|line|mainpage|mscfile|name|overload|page|property|protocol|section|skip|skipline|snippet|snippetdoc|snippetlineno|struct|subpage|subsection|subsubsection|typedef|union|until|vhdlflow|weakgroup)\\b(?:\\{[^}]*\\})?"
         name: storage.type.class.doxygen.cpp
-      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
+      - match: "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)"
         captures:
           '1':
             name: storage.type.class.doxygen.cpp

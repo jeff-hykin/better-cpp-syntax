@@ -1227,7 +1227,7 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"
@@ -1313,7 +1313,7 @@
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 {
-                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
                   "captures": {
                     "1": {
                       "name": "storage.type.class.doxygen.cpp"
@@ -1412,7 +1412,7 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"

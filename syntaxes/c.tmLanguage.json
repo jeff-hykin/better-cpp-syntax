@@ -692,7 +692,7 @@
               "name": "storage.type.class.doxygen.c"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.c"
@@ -778,7 +778,7 @@
                   "name": "storage.type.class.doxygen.c"
                 },
                 {
-                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
                   "captures": {
                     "1": {
                       "name": "storage.type.class.doxygen.c"
@@ -877,7 +877,7 @@
               "name": "storage.type.class.doxygen.c"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:in|out)\\s*)+)\\])?\\s+(\\b\\w+\\b)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.c"

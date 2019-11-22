@@ -237,7 +237,7 @@ def doxygen
             match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/param/),
             tag_as: "storage.type.class.doxygen",
         ).maybe(
-            Pattern.new(/\[/).oneOrMoreOf(
+            Pattern.new(/\s*\[/).oneOrMoreOf(
                 match: maybe(/,/).then(/(?:in|out)/).maybe(@spaces),
                 includes: [
                     Pattern.new(
