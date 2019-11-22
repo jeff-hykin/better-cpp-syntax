@@ -3008,7 +3008,7 @@ repository:
       '10':
         name: punctuation.separator.label.cpp
   lambdas:
-    begin: ((?:(?<=[^\s]|^)(?<![\w\]\)\[\*&">])|(?<=\Wreturn|^return))\s*(\[(?!\[))((?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?)(\](?!\[)))
+    begin: ((?:(?<=[^\s]|^)(?<![\w\]\)\[\*&">])|(?<=\Wreturn|^return))\s*(\[(?!(?:\[|\s*(?:-|\+)?\d)))((?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?)(\](?!\[)))
     beginCaptures:
       '2':
         name: punctuation.definition.capture.begin.lambda.cpp

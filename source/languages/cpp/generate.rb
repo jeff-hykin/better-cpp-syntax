@@ -2008,7 +2008,7 @@ grammar = Grammar.new(
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: /\[/.lookAheadToAvoid(/\[/),
+                        match: /\[/.lookAheadToAvoid(/\[/.or(/\s*(?:-|\+)?\d/)),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
                         match: /(?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?/,

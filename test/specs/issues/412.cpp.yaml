@@ -1,0 +1,65 @@
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: int
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' a'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' foo'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '10'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' bar'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
