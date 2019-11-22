@@ -106,7 +106,7 @@
     }
   ],
   "repository": {
-    "access_control_keywords": {
+    "macro_access_control_keywords": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(((?:(?:private)|(?:protected)|(?:public)))(?:(?:\\s)+)?(:))",
       "captures": {
         "1": {
@@ -153,9 +153,9 @@
         }
       }
     },
-    "alignas_attribute": {
+    "macro_alignas_attribute": {
       "begin": "alignas\\(",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.attribute.begin.cpp"
@@ -219,9 +219,9 @@
         }
       ]
     },
-    "alignas_operator": {
+    "macro_alignas_operator": {
       "begin": "((?<!\\w)alignas(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.alignas.cpp"
@@ -267,9 +267,9 @@
         }
       ]
     },
-    "alignof_operator": {
+    "macro_alignof_operator": {
       "begin": "((?<!\\w)alignof(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.alignof.cpp"
@@ -315,9 +315,9 @@
         }
       ]
     },
-    "assembly": {
+    "macro_assembly": {
       "begin": "(\\b(?:__asm__|asm)\\b)(?:(?:\\s)+)?((?:volatile)?)(?:(?:\\s)+)?(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "storage.type.asm.cpp"
@@ -409,11 +409,11 @@
         }
       ]
     },
-    "assignment_operator": {
+    "macro_assignment_operator": {
       "match": "\\=",
       "name": "keyword.operator.assignment.cpp"
     },
-    "attributes_context": {
+    "macro_attributes_context": {
       "patterns": [
         {
           "include": "#cpp_attributes"
@@ -429,13 +429,13 @@
         }
       ]
     },
-    "backslash_escapes": {
+    "macro_backslash_escapes": {
       "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
       "name": "constant.character.escape"
     },
-    "block": {
+    "macro_block": {
       "begin": "{",
-      "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+      "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.block.begin.bracket.curly.cpp"
@@ -453,9 +453,9 @@
         }
       ]
     },
-    "block_comment": {
+    "macro_block_comment": {
       "begin": "\\s*+(\\/\\*)",
-      "end": "\\*\\/",
+      "end": "\\*\\/|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.begin.cpp"
@@ -468,9 +468,9 @@
       },
       "name": "comment.block.cpp"
     },
-    "builtin_storage_type_initilizer": {
+    "macro_builtin_storage_type_initilizer": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:auto)|(?:void)|(?:char)|(?:short)|(?:int)|(?:signed)|(?:unsigned)|(?:long)|(?:float)|(?:double)|(?:bool)|(?:wchar_t))(?!\\w))|((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:u_char)|(?:u_short)|(?:u_int)|(?:u_long)|(?:ushort)|(?:uint)|(?:u_quad_t)|(?:quad_t)|(?:qaddr_t)|(?:caddr_t)|(?:daddr_t)|(?:div_t)|(?:dev_t)|(?:fixpt_t)|(?:blkcnt_t)|(?:blksize_t)|(?:gid_t)|(?:in_addr_t)|(?:in_port_t)|(?:ino_t)|(?:key_t)|(?:mode_t)|(?:nlink_t)|(?:id_t)|(?:pid_t)|(?:off_t)|(?:segsz_t)|(?:swblk_t)|(?:uid_t)|(?:id_t)|(?:clock_t)|(?:size_t)|(?:ssize_t)|(?:time_t)|(?:useconds_t)|(?:suseconds_t)|(?:int8_t)|(?:int16_t)|(?:int32_t)|(?:int64_t)|(?:uint8_t)|(?:uint16_t)|(?:uint32_t)|(?:uint64_t)|(?:int_least8_t)|(?:int_least16_t)|(?:int_least32_t)|(?:int_least64_t)|(?:uint_least8_t)|(?:uint_least16_t)|(?:uint_least32_t)|(?:uint_least64_t)|(?:int_fast8_t)|(?:int_fast16_t)|(?:int_fast32_t)|(?:int_fast64_t)|(?:uint_fast8_t)|(?:uint_fast16_t)|(?:uint_fast32_t)|(?:uint_fast64_t)|(?:intptr_t)|(?:uintptr_t)|(?:intmax_t)|(?:intmax_t)|(?:uintmax_t)|(?:uintmax_t))(?!\\w)))|((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w)))|((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -649,9 +649,9 @@
         }
       ]
     },
-    "case_statement": {
+    "macro_case_statement": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)case(?!\\w))",
-      "end": ":",
+      "end": ":|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -697,9 +697,9 @@
         }
       ]
     },
-    "class_block": {
+    "macro_class_block": {
       "begin": "((?<!\\w)class(?!\\w))(?:(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(DLLEXPORT)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(final)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(:)([^{]*+))?",
-      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.class.cpp"
@@ -1000,7 +1000,7 @@
         }
       ]
     },
-    "class_declare": {
+    "macro_class_declare": {
       "match": "(class)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\b(?!final\\W|final\\$|override\\W|override\\$)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\S)(?![:{])",
       "captures": {
         "1": {
@@ -1227,15 +1227,15 @@
         }
       }
     },
-    "comma": {
+    "macro_comma": {
       "match": ",",
       "name": "punctuation.separator.delimiter.comma.cpp"
     },
-    "comma_in_template_argument": {
+    "macro_comma_in_template_argument": {
       "match": ",",
       "name": "punctuation.separator.delimiter.comma.template.argument.cpp"
     },
-    "comments": {
+    "macro_comments": {
       "patterns": [
         {
           "match": "^(?:(?:\\s)+)?+(\\/\\/[!\\/]+)(.*)",
@@ -1412,7 +1412,7 @@
         },
         {
           "begin": "(?:(?:\\s)+)?+\\/\\*[!*]+(?:(?:(?:\\n)|$)|(?=\\s))",
-          "end": "[!*]*\\*\\/",
+          "end": "[!*]*\\*\\/|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.begin.documentation.cpp"
@@ -1513,9 +1513,9 @@
         }
       ]
     },
-    "constructor_inline": {
+    "macro_constructor_inline": {
       "begin": "^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)(?=\\())",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.special.constructor.cpp"
@@ -1832,9 +1832,9 @@
         }
       ]
     },
-    "constructor_root": {
+    "macro_constructor_root": {
       "begin": "\\s*+((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<12>?)++>)(?:(?:\\s)+)?)?::)*)(((?>(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))::((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\14((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\())",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.special.constructor.cpp"
@@ -2209,7 +2209,7 @@
         }
       ]
     },
-    "control_flow_keywords": {
+    "macro_control_flow_keywords": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:throw)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default))(?!\\w))",
       "captures": {
         "1": {
@@ -2251,9 +2251,9 @@
         }
       }
     },
-    "cpp_attributes": {
+    "macro_cpp_attributes": {
       "begin": "\\[\\[",
-      "end": "\\]\\]",
+      "end": "\\]\\]|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.attribute.begin.cpp"
@@ -2317,9 +2317,9 @@
         }
       ]
     },
-    "curly_initializer": {
+    "macro_curly_initializer": {
       "begin": "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(::))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\{)",
-      "end": "\\}",
+      "end": "\\}|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "meta.qualified_type.cpp",
@@ -2553,9 +2553,9 @@
         }
       ]
     },
-    "decltype": {
+    "macro_decltype": {
       "begin": "((?<!\\w)decltype(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp"
@@ -2601,9 +2601,9 @@
         }
       ]
     },
-    "decltype_specifier": {
+    "macro_decltype_specifier": {
       "begin": "((?<!\\w)decltype(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.other.decltype.cpp storage.type.decltype.cpp"
@@ -2649,9 +2649,9 @@
         }
       ]
     },
-    "default_statement": {
+    "macro_default_statement": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)default(?!\\w))",
-      "end": ":",
+      "end": ":|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -2697,9 +2697,9 @@
         }
       ]
     },
-    "destructor_inline": {
+    "macro_destructor_inline": {
       "begin": "^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*)(~(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)(?=\\())",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.special.member.destructor.cpp"
@@ -2932,9 +2932,9 @@
         }
       ]
     },
-    "destructor_root": {
+    "macro_destructor_root": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<12>?)++>)(?:(?:\\s)+)?)?::)*)(((?>(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))::((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))~\\14((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\())",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.special.member.destructor.cpp"
@@ -3225,9 +3225,9 @@
         }
       ]
     },
-    "diagnostic": {
+    "macro_diagnostic": {
       "begin": "(^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?((?:error|warning)))\\b(?:(?:\\s)+)?",
-      "end": "(?<!\\\\)(?=\\n)",
+      "end": "(?<!\\\\)(?=\\n)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.directive.diagnostic.$7.cpp"
@@ -3326,7 +3326,7 @@
         }
       ]
     },
-    "emacs_file_banner": {
+    "macro_emacs_file_banner": {
       "match": "(?:(^(?:(?:\\s)+)?((\\/\\/)(?:(?:\\s)+)?((?:[#;\\/=*C~]+)++(?![#;\\/=*C~]))(?:(?:\\s)+)?.+(?:(?:\\s)+)?\\4(?:(?:\\s)+)?(?:\\n|$)))|(^(?:(?:\\s)+)?((\\/\\*)(?:(?:\\s)+)?((?:[#;\\/=*C~]+)++(?![#;\\/=*C~]))(?:(?:\\s)+)?.+(?:(?:\\s)+)?\\8(?:(?:\\s)+)?\\*\\/)))",
       "captures": {
         "1": {
@@ -3355,13 +3355,13 @@
         }
       }
     },
-    "empty_square_brackets": {
+    "macro_empty_square_brackets": {
       "name": "storage.modifier.array.bracket.square",
       "match": "(?<!delete)\\[(?:(?:\\s)+)?\\]"
     },
-    "enum_block": {
+    "macro_enum_block": {
       "begin": "((?<!\\w)enum(?!\\w))(?:(?:\\s)+(class|struct))?(?:(?:(?:\\s)+|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:(?:\\s)+)?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:(?:(?:\\s)+)?(:)(?:(?:\\s)+)?(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<12>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<12>?)++>)(?:(?:\\s)+)?)?(::))?(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))?",
-      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.enum.cpp"
@@ -3500,7 +3500,7 @@
         }
       ]
     },
-    "enum_declare": {
+    "macro_enum_declare": {
       "match": "(enum)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\b(?!final\\W|final\\$|override\\W|override\\$)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\S)(?![:{])",
       "captures": {
         "1": {
@@ -3727,7 +3727,7 @@
         }
       }
     },
-    "enumerator_list": {
+    "macro_enumerator_list": {
       "match": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(?:\\s)+)?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?(?:(?:\\s)+)?(?:(\\=)(?:(?:\\s)+)?(.+?)(?:(?:\\s)+)?)?(?:(?:((?:[,;](?!')|\\n))|(?=\\}[^']))|(?=(?:\\/\\/|\\/\\*)))",
       "captures": {
         "1": {
@@ -3766,7 +3766,7 @@
       },
       "name": "meta.enum.definition.cpp"
     },
-    "evaluation_context": {
+    "macro_evaluation_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -3851,7 +3851,7 @@
         }
       ]
     },
-    "ever_present_context": {
+    "macro_ever_present_context": {
       "patterns": [
         {
           "include": "#pragma_mark"
@@ -3894,7 +3894,7 @@
         }
       ]
     },
-    "exception_keywords": {
+    "macro_exception_keywords": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:throw)|(?:try)|(?:catch))(?!\\w))",
       "captures": {
         "1": {
@@ -3936,9 +3936,9 @@
         }
       }
     },
-    "extern_block": {
+    "macro_extern_block": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(extern)(?=\\s*\\\")",
-      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.extern.cpp"
@@ -4035,7 +4035,7 @@
         }
       ]
     },
-    "function_body_context": {
+    "macro_function_body_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -4108,9 +4108,9 @@
         }
       ]
     },
-    "function_call": {
+    "macro_function_call": {
       "begin": "((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<11>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?<!\\Wnot|^not|\\Wcompl|^compl|\\Wsizeof|^sizeof|\\Wnew|^new|\\Wdelete|^delete|\\Wnot_eq|^not_eq|\\Wbitand|^bitand|\\Wxor|^xor|\\Wbitor|^bitor|\\Wand|^and|\\Wor|^or|\\Wthrow|^throw|\\Wand_eq|^and_eq|\\Wxor_eq|^xor_eq|\\Wor_eq|^or_eq|\\Walignof|^alignof|\\Walignas|^alignas|\\Wtypeid|^typeid|\\Wnoexcept|^noexcept|\\Wnoexcept|^noexcept|\\Wstatic_cast|^static_cast|\\Wdynamic_cast|^dynamic_cast|\\Wconst_cast|^const_cast|\\Wreinterpret_cast|^reinterpret_cast|\\Wwhile|^while|\\Wfor|^for|\\Wdo|^do|\\Wif|^if|\\Welse|^else|\\Wgoto|^goto|\\Wswitch|^switch|\\Wtry|^try|\\Wcatch|^catch|\\Wreturn|^return|\\Wbreak|^break|\\Wcase|^case|\\Wcontinue|^continue|\\Wdefault|^default|\\Wauto|^auto|\\Wvoid|^void|\\Wchar|^char|\\Wshort|^short|\\Wint|^int|\\Wsigned|^signed|\\Wunsigned|^unsigned|\\Wlong|^long|\\Wfloat|^float|\\Wdouble|^double|\\Wbool|^bool|\\Wwchar_t|^wchar_t|\\Wu_char|^u_char|\\Wu_short|^u_short|\\Wu_int|^u_int|\\Wu_long|^u_long|\\Wushort|^ushort|\\Wuint|^uint|\\Wu_quad_t|^u_quad_t|\\Wquad_t|^quad_t|\\Wqaddr_t|^qaddr_t|\\Wcaddr_t|^caddr_t|\\Wdaddr_t|^daddr_t|\\Wdiv_t|^div_t|\\Wdev_t|^dev_t|\\Wfixpt_t|^fixpt_t|\\Wblkcnt_t|^blkcnt_t|\\Wblksize_t|^blksize_t|\\Wgid_t|^gid_t|\\Win_addr_t|^in_addr_t|\\Win_port_t|^in_port_t|\\Wino_t|^ino_t|\\Wkey_t|^key_t|\\Wmode_t|^mode_t|\\Wnlink_t|^nlink_t|\\Wid_t|^id_t|\\Wpid_t|^pid_t|\\Woff_t|^off_t|\\Wsegsz_t|^segsz_t|\\Wswblk_t|^swblk_t|\\Wuid_t|^uid_t|\\Wid_t|^id_t|\\Wclock_t|^clock_t|\\Wsize_t|^size_t|\\Wssize_t|^ssize_t|\\Wtime_t|^time_t|\\Wuseconds_t|^useconds_t|\\Wsuseconds_t|^suseconds_t|\\Wint8_t|^int8_t|\\Wint16_t|^int16_t|\\Wint32_t|^int32_t|\\Wint64_t|^int64_t|\\Wuint8_t|^uint8_t|\\Wuint16_t|^uint16_t|\\Wuint32_t|^uint32_t|\\Wuint64_t|^uint64_t|\\Wint_least8_t|^int_least8_t|\\Wint_least16_t|^int_least16_t|\\Wint_least32_t|^int_least32_t|\\Wint_least64_t|^int_least64_t|\\Wuint_least8_t|^uint_least8_t|\\Wuint_least16_t|^uint_least16_t|\\Wuint_least32_t|^uint_least32_t|\\Wuint_least64_t|^uint_least64_t|\\Wint_fast8_t|^int_fast8_t|\\Wint_fast16_t|^int_fast16_t|\\Wint_fast32_t|^int_fast32_t|\\Wint_fast64_t|^int_fast64_t|\\Wuint_fast8_t|^uint_fast8_t|\\Wuint_fast16_t|^uint_fast16_t|\\Wuint_fast32_t|^uint_fast32_t|\\Wuint_fast64_t|^uint_fast64_t|\\Wintptr_t|^intptr_t|\\Wuintptr_t|^uintptr_t|\\Wintmax_t|^intmax_t|\\Wintmax_t|^intmax_t|\\Wuintmax_t|^uintmax_t|\\Wuintmax_t|^uintmax_t|\\WNULL|^NULL|\\Wtrue|^true|\\Wfalse|^false|\\Wnullptr|^nullptr|\\Wclass|^class|\\Wstruct|^struct|\\Wunion|^union|\\Wenum|^enum|\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern|\\Winline|^inline|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wfriend|^friend|\\Wexplicit|^explicit|\\Wvirtual|^virtual|\\Wvolatile|^volatile|\\Wconst|^const|\\Wnoexcept|^noexcept|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wconstexpr|^constexpr|\\Wconsteval|^consteval|\\Wprivate|^private|\\Wprotected|^protected|\\Wpublic|^public|\\Wthis|^this|\\Wtemplate|^template|\\Wnamespace|^namespace|\\Wusing|^using|\\Woperator|^operator|\\Wtypedef|^typedef|\\Wdecltype|^decltype|\\Wtypename|^typename|\\Wasm|^asm|\\W__asm__|^__asm__|\\Wconcept|^concept|\\Wrequires|^requires|\\Wexport|^export|\\Wthread_local|^thread_local|\\Watomic_cancel|^atomic_cancel|\\Watomic_commit|^atomic_commit|\\Watomic_noexcept|^atomic_noexcept|\\Wco_await|^co_await|\\Wco_return|^co_return|\\Wco_yield|^co_yield|\\Wimport|^import|\\Wmodule|^module|\\Wreflexpr|^reflexpr|\\Wsynchronized|^synchronized)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(((?<!<)<(?!<)(?:[^<>]*+\\g<11>?)++>)(?:(?:\\s)+)?)?(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -4185,9 +4185,9 @@
         }
       ]
     },
-    "function_definition": {
+    "macro_function_definition": {
       "begin": "(?:(?:^|\\G|(?<=;|\\}))|(?<=>))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:((?<!\\w)template(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?:((?<!\\w)(?:(?:(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual))|(?:(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)))(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<65>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<65>?)++>)(?:(?:\\s)+)?)?(::))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<65>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<65>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(?<!\\Wnot|^not|\\Wcompl|^compl|\\Wsizeof|^sizeof|\\Wnew|^new|\\Wdelete|^delete|\\Wnot_eq|^not_eq|\\Wbitand|^bitand|\\Wxor|^xor|\\Wbitor|^bitor|\\Wand|^and|\\Wor|^or|\\Wthrow|^throw|\\Wand_eq|^and_eq|\\Wxor_eq|^xor_eq|\\Wor_eq|^or_eq|\\Walignof|^alignof|\\Walignas|^alignas|\\Wtypeid|^typeid|\\Wnoexcept|^noexcept|\\Wnoexcept|^noexcept|\\Wstatic_cast|^static_cast|\\Wdynamic_cast|^dynamic_cast|\\Wconst_cast|^const_cast|\\Wreinterpret_cast|^reinterpret_cast|\\Wwhile|^while|\\Wfor|^for|\\Wdo|^do|\\Wif|^if|\\Welse|^else|\\Wgoto|^goto|\\Wswitch|^switch|\\Wtry|^try|\\Wcatch|^catch|\\Wreturn|^return|\\Wbreak|^break|\\Wcase|^case|\\Wcontinue|^continue|\\Wdefault|^default|\\Wauto|^auto|\\Wvoid|^void|\\Wchar|^char|\\Wshort|^short|\\Wint|^int|\\Wsigned|^signed|\\Wunsigned|^unsigned|\\Wlong|^long|\\Wfloat|^float|\\Wdouble|^double|\\Wbool|^bool|\\Wwchar_t|^wchar_t|\\Wu_char|^u_char|\\Wu_short|^u_short|\\Wu_int|^u_int|\\Wu_long|^u_long|\\Wushort|^ushort|\\Wuint|^uint|\\Wu_quad_t|^u_quad_t|\\Wquad_t|^quad_t|\\Wqaddr_t|^qaddr_t|\\Wcaddr_t|^caddr_t|\\Wdaddr_t|^daddr_t|\\Wdiv_t|^div_t|\\Wdev_t|^dev_t|\\Wfixpt_t|^fixpt_t|\\Wblkcnt_t|^blkcnt_t|\\Wblksize_t|^blksize_t|\\Wgid_t|^gid_t|\\Win_addr_t|^in_addr_t|\\Win_port_t|^in_port_t|\\Wino_t|^ino_t|\\Wkey_t|^key_t|\\Wmode_t|^mode_t|\\Wnlink_t|^nlink_t|\\Wid_t|^id_t|\\Wpid_t|^pid_t|\\Woff_t|^off_t|\\Wsegsz_t|^segsz_t|\\Wswblk_t|^swblk_t|\\Wuid_t|^uid_t|\\Wid_t|^id_t|\\Wclock_t|^clock_t|\\Wsize_t|^size_t|\\Wssize_t|^ssize_t|\\Wtime_t|^time_t|\\Wuseconds_t|^useconds_t|\\Wsuseconds_t|^suseconds_t|\\Wint8_t|^int8_t|\\Wint16_t|^int16_t|\\Wint32_t|^int32_t|\\Wint64_t|^int64_t|\\Wuint8_t|^uint8_t|\\Wuint16_t|^uint16_t|\\Wuint32_t|^uint32_t|\\Wuint64_t|^uint64_t|\\Wint_least8_t|^int_least8_t|\\Wint_least16_t|^int_least16_t|\\Wint_least32_t|^int_least32_t|\\Wint_least64_t|^int_least64_t|\\Wuint_least8_t|^uint_least8_t|\\Wuint_least16_t|^uint_least16_t|\\Wuint_least32_t|^uint_least32_t|\\Wuint_least64_t|^uint_least64_t|\\Wint_fast8_t|^int_fast8_t|\\Wint_fast16_t|^int_fast16_t|\\Wint_fast32_t|^int_fast32_t|\\Wint_fast64_t|^int_fast64_t|\\Wuint_fast8_t|^uint_fast8_t|\\Wuint_fast16_t|^uint_fast16_t|\\Wuint_fast32_t|^uint_fast32_t|\\Wuint_fast64_t|^uint_fast64_t|\\Wintptr_t|^intptr_t|\\Wuintptr_t|^uintptr_t|\\Wintmax_t|^intmax_t|\\Wintmax_t|^intmax_t|\\Wuintmax_t|^uintmax_t|\\Wuintmax_t|^uintmax_t|\\WNULL|^NULL|\\Wtrue|^true|\\Wfalse|^false|\\Wnullptr|^nullptr|\\Wclass|^class|\\Wstruct|^struct|\\Wunion|^union|\\Wenum|^enum|\\Wconst|^const|\\Wstatic|^static|\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wextern|^extern|\\Winline|^inline|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wfriend|^friend|\\Wexplicit|^explicit|\\Wvirtual|^virtual|\\Wvolatile|^volatile|\\Wconst|^const|\\Wnoexcept|^noexcept|\\Wconstexpr|^constexpr|\\Wmutable|^mutable|\\Wconstexpr|^constexpr|\\Wconsteval|^consteval|\\Wprivate|^private|\\Wprotected|^protected|\\Wpublic|^public|\\Wthis|^this|\\Wtemplate|^template|\\Wnamespace|^namespace|\\Wusing|^using|\\Woperator|^operator|\\Wtypedef|^typedef|\\Wdecltype|^decltype|\\Wtypename|^typename|\\Wasm|^asm|\\W__asm__|^__asm__|\\Wconcept|^concept|\\Wrequires|^requires|\\Wexport|^export|\\Wthread_local|^thread_local|\\Watomic_cancel|^atomic_cancel|\\Watomic_commit|^atomic_commit|\\Watomic_noexcept|^atomic_noexcept|\\Wco_await|^co_await|\\Wco_return|^co_return|\\Wco_yield|^co_yield|\\Wimport|^import|\\Wmodule|^module|\\Wreflexpr|^reflexpr|\\Wsynchronized|^synchronized)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\()",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.cpp"
@@ -4767,7 +4767,7 @@
         }
       ]
     },
-    "function_parameter_context": {
+    "macro_function_parameter_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -4780,9 +4780,9 @@
         }
       ]
     },
-    "function_pointer": {
+    "macro_function_pointer": {
       "begin": "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(::))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()(\\*)(?:(?:\\s)+)?((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?)(?:(?:\\s)+)?(?:(\\[)(\\w*)(\\])(?:(?:\\s)+)?)*(\\))(?:(?:\\s)+)?(\\()",
-      "end": "(\\))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=[{=,);]|\\n)(?!\\()",
+      "end": "(\\))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=[{=,);]|\\n)(?!\\()|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "meta.qualified_type.cpp",
@@ -5155,9 +5155,9 @@
         }
       ]
     },
-    "function_pointer_parameter": {
+    "macro_function_pointer_parameter": {
       "begin": "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(::))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<25>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()(\\*)(?:(?:\\s)+)?((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?)(?:(?:\\s)+)?(?:(\\[)(\\w*)(\\])(?:(?:\\s)+)?)*(\\))(?:(?:\\s)+)?(\\()",
-      "end": "(\\))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=[{=,);]|\\n)(?!\\()",
+      "end": "(\\))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=[{=,);]|\\n)(?!\\()|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "meta.qualified_type.cpp",
@@ -5530,13 +5530,13 @@
         }
       ]
     },
-    "functional_specifiers_pre_parameters": {
+    "macro_functional_specifiers_pre_parameters": {
       "match": "(?<!\\w)(?:(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual))(?!\\w)",
       "name": "storage.modifier.specifier.functional.pre-parameters.$0.cpp"
     },
-    "gcc_attributes": {
+    "macro_gcc_attributes": {
       "begin": "__attribute(?:__)?\\(\\(",
-      "end": "\\)\\)",
+      "end": "\\)\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.attribute.begin.cpp"
@@ -5600,7 +5600,7 @@
         }
       ]
     },
-    "goto_statement": {
+    "macro_goto_statement": {
       "match": "((?<!\\w)goto(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)",
       "captures": {
         "1": {
@@ -5645,10 +5645,10 @@
         }
       }
     },
-    "identifier": {
+    "macro_identifier": {
       "match": "(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*"
     },
-    "include": {
+    "macro_include": {
       "match": "^((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((#)(?:(?:\\s)+)?((?:(?:include|include_next)|import))\\b)(?:(?:\\s)+)?(?:(?:(?:((<)[^>]*(>?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:\\n)|$)|(?=\\/\\/)))|((\\\")[^\\\"]*((?:\\\")?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:\\n)|$)|(?=\\/\\/))))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:\\n)|$)|(?=\\/\\/))))|((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:\\n)|$)|(?=\\/\\/)))",
       "captures": {
         "1": {
@@ -5851,7 +5851,7 @@
       },
       "name": "meta.preprocessor.include.cpp"
     },
-    "inheritance_context": {
+    "macro_inheritance_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -6101,7 +6101,7 @@
         }
       ]
     },
-    "inline_comment": {
+    "macro_inline_comment": {
       "match": "(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/))",
       "captures": {
         "1": {
@@ -6124,11 +6124,11 @@
         }
       }
     },
-    "invalid_comment_end": {
+    "macro_invalid_comment_end": {
       "match": "\\*\\/",
       "name": "invalid.illegal.unexpected.punctuation.definition.comment.end.cpp"
     },
-    "label": {
+    "macro_label": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))\\b(?<!case|default)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(:)",
       "captures": {
         "1": {
@@ -6207,9 +6207,9 @@
         }
       }
     },
-    "lambdas": {
+    "macro_lambdas": {
       "begin": "(?:(?<=[^\\s]|^)(?<![\\w\\]\\)\\[\\*&\">])|(?<=\\Wreturn|^return))(?:(?:\\s)+)?(\\[(?!\\[))((?:[^\\]\\[]*\\[.*?\\](?!\\s*\\[)[^\\]\\[]*?)*[^\\]\\[]*?)(\\](?!\\[))",
-      "end": "(?<=})",
+      "end": "(?<=})|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.capture.begin.lambda.cpp"
@@ -6328,13 +6328,13 @@
         }
       ]
     },
-    "language_constants": {
+    "macro_language_constants": {
       "match": "(?<!\\w)(?:(?:NULL)|(?:true)|(?:false)|(?:nullptr))(?!\\w)",
       "name": "constant.language.$0.cpp"
     },
-    "line": {
+    "macro_line": {
       "begin": "^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?line\\b",
-      "end": "(?<!\\\\)(?=\\n)",
+      "end": "(?<!\\\\)(?=\\n)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "keyword.control.directive.line.cpp"
@@ -6383,9 +6383,9 @@
         }
       ]
     },
-    "line_comment": {
+    "macro_line_comment": {
       "begin": "\\s*+(\\/\\/)",
-      "end": "(?<=\\n)(?<!\\\\\\n)",
+      "end": "(?<=\\n)(?<!\\\\\\n)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.comment.cpp"
@@ -6400,13 +6400,13 @@
         }
       ]
     },
-    "line_continuation_character": {
+    "macro_line_continuation_character": {
       "match": "\\\\\\n",
       "name": "constant.character.escape.line-continuation.cpp"
     },
-    "macro": {
+    "macro_macro": {
       "begin": "(^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?define\\b)(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))",
-      "end": "(?<!\\\\)(?=\\n)",
+      "end": "(?<!\\\\)(?=\\n)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.directive.define.cpp"
@@ -6487,22 +6487,22 @@
         }
       ]
     },
-    "macro_argument": {
+    "macro_macro_argument": {
       "match": "##?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
       "name": "variable.other.macro.argument.cpp"
     },
-    "macro_context": {
+    "macro_macro_context": {
       "patterns": [
         {
           "include": "source.cpp.embedded.macro"
         }
       ]
     },
-    "macro_name": {
+    "macro_macro_name": {
       "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
       "name": "entity.name.function.preprocessor.cpp"
     },
-    "member_access": {
+    "macro_member_access": {
       "match": "(?:((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*|(?<=\\]|\\)))(?:(?:\\s)+)?))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?:(?:\\s)+)?(?:(?:\\.\\*|\\.)|(?:->\\*|->))(?:(?:\\s)+)?)*)(?:(?:\\s)+)?(\\b(?!auto[^Pattern.new(\n  match: \\/\\w\\/,\n)]|void[^Pattern.new(\n  match: \\/\\w\\/,\n)]|char[^Pattern.new(\n  match: \\/\\w\\/,\n)]|short[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int[^Pattern.new(\n  match: \\/\\w\\/,\n)]|signed[^Pattern.new(\n  match: \\/\\w\\/,\n)]|unsigned[^Pattern.new(\n  match: \\/\\w\\/,\n)]|long[^Pattern.new(\n  match: \\/\\w\\/,\n)]|float[^Pattern.new(\n  match: \\/\\w\\/,\n)]|double[^Pattern.new(\n  match: \\/\\w\\/,\n)]|bool[^Pattern.new(\n  match: \\/\\w\\/,\n)]|wchar_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|u_char[^Pattern.new(\n  match: \\/\\w\\/,\n)]|u_short[^Pattern.new(\n  match: \\/\\w\\/,\n)]|u_int[^Pattern.new(\n  match: \\/\\w\\/,\n)]|u_long[^Pattern.new(\n  match: \\/\\w\\/,\n)]|ushort[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint[^Pattern.new(\n  match: \\/\\w\\/,\n)]|u_quad_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|quad_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|qaddr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|caddr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|daddr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|div_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|dev_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|fixpt_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|blkcnt_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|blksize_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|gid_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|in_addr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|in_port_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|ino_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|key_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|mode_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|nlink_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|id_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|pid_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|off_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|segsz_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|swblk_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uid_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|id_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|clock_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|size_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|ssize_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|time_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|useconds_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|suseconds_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_least8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_least16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_least32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_least64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_least8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_least16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_least32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_least64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_fast8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_fast16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_fast32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|int_fast64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_fast8_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_fast16_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_fast32_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uint_fast64_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|intptr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uintptr_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|intmax_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|intmax_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uintmax_t[^Pattern.new(\n  match: \\/\\w\\/,\n)]|uintmax_t[^Pattern.new(\n  match: \\/\\w\\/,\n)])(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\b(?!\\())",
       "captures": {
         "1": {
@@ -6650,7 +6650,7 @@
         }
       }
     },
-    "memory_operators": {
+    "macro_memory_operators": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(delete)(?:(?:\\s)+)?(\\[\\])|(delete))|(new))(?!\\w))",
       "captures": {
         "1": {
@@ -6704,9 +6704,9 @@
         }
       }
     },
-    "method_access": {
+    "macro_method_access": {
       "begin": "(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)this(?!\\w))|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*|(?<=\\]|\\)))(?:(?:\\s)+)?))(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?:(?:\\s)+)?(?:(?:\\.\\*|\\.)|(?:->\\*|->))(?:(?:\\s)+)?)*)(?:(?:\\s)+)?(~?(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(?:\\s)+)?(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -6857,13 +6857,13 @@
         }
       ]
     },
-    "misc_storage_modifiers": {
+    "macro_misc_storage_modifiers": {
       "match": "\\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\\b",
       "name": "storage.modifier.$0.cpp"
     },
-    "ms_attributes": {
+    "macro_ms_attributes": {
       "begin": "__declspec\\(",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.attribute.begin.cpp"
@@ -6927,7 +6927,7 @@
         }
       ]
     },
-    "namespace_alias": {
+    "macro_namespace_alias": {
       "match": "(?<!\\w)(namespace)(?:\\s)+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(?:\\s)+)?(\\=)(?:(?:\\s)+)?(((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<8>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(?:\\s)+)?(?:(;)|\\n))",
       "captures": {
         "1": {
@@ -6980,9 +6980,9 @@
       },
       "name": "meta.declaration.namespace.alias.cpp"
     },
-    "namespace_block": {
+    "macro_namespace_block": {
       "begin": "((?<!\\w)namespace(?!\\w))",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.namespace.cpp"
@@ -7082,9 +7082,9 @@
         }
       ]
     },
-    "noexcept_operator": {
+    "macro_noexcept_operator": {
       "begin": "((?<!\\w)noexcept(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.noexcept.cpp"
@@ -7130,7 +7130,7 @@
         }
       ]
     },
-    "non_primitive_types": {
+    "macro_non_primitive_types": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:u_char)|(?:u_short)|(?:u_int)|(?:u_long)|(?:ushort)|(?:uint)|(?:u_quad_t)|(?:quad_t)|(?:qaddr_t)|(?:caddr_t)|(?:daddr_t)|(?:div_t)|(?:dev_t)|(?:fixpt_t)|(?:blkcnt_t)|(?:blksize_t)|(?:gid_t)|(?:in_addr_t)|(?:in_port_t)|(?:ino_t)|(?:key_t)|(?:mode_t)|(?:nlink_t)|(?:id_t)|(?:pid_t)|(?:off_t)|(?:segsz_t)|(?:swblk_t)|(?:uid_t)|(?:id_t)|(?:clock_t)|(?:size_t)|(?:ssize_t)|(?:time_t)|(?:useconds_t)|(?:suseconds_t)|(?:int8_t)|(?:int16_t)|(?:int32_t)|(?:int64_t)|(?:uint8_t)|(?:uint16_t)|(?:uint32_t)|(?:uint64_t)|(?:int_least8_t)|(?:int_least16_t)|(?:int_least32_t)|(?:int_least64_t)|(?:uint_least8_t)|(?:uint_least16_t)|(?:uint_least32_t)|(?:uint_least64_t)|(?:int_fast8_t)|(?:int_fast16_t)|(?:int_fast32_t)|(?:int_fast64_t)|(?:uint_fast8_t)|(?:uint_fast16_t)|(?:uint_fast32_t)|(?:uint_fast64_t)|(?:intptr_t)|(?:uintptr_t)|(?:intmax_t)|(?:intmax_t)|(?:uintmax_t)|(?:uintmax_t))(?!\\w))",
       "captures": {
         "1": {
@@ -7172,7 +7172,7 @@
         }
       }
     },
-    "number_literal": {
+    "macro_number_literal": {
       "match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])*",
       "captures": {
         "0": {
@@ -7447,9 +7447,9 @@
         }
       }
     },
-    "operator_overload": {
+    "macro_operator_overload": {
       "begin": "(?:(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<62>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<62>?)++>)(?:(?:\\s)+)?)?(::))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<62>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall)?)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<62>?)++>)(?:(?:\\s)+)?)?::)*)(operator)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<62>?)++>)(?:(?:\\s)+)?)?::)*)(?:(?:((?:(?:\\+\\+)|(?:\\-\\-)|(?:\\(\\))|(?:\\[\\])|(?:\\->)|(?:\\+\\+)|(?:\\-\\-)|(?:\\+)|(?:\\-)|!|~|(?:\\*)|&|(?:new)|(?:new\\[\\])|(?:delete)|(?:delete\\[\\])|(?:\\->\\*)|(?:\\*)|(?:\\/)|%|(?:\\+)|(?:\\-)|(?:<<)|(?:>>)|(?:<=>)|<|(?:<=)|>|(?:>=)|(?:==)|(?:!=)|&|(?:\\^)|(?:\\|)|(?:&&)|(?:\\|\\|)|=|(?:\\+=)|(?:\\-=)|(?:\\*=)|(?:\\/=)|(?:%=)|(?:<<=)|(?:>>=)|(?:&=)|(?:\\^=)|(?:\\|=)|,))|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)(((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:\\[\\])?)))|(\"\")((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\<|\\()",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.function.definition.special.operator-overload.cpp"
@@ -8186,11 +8186,11 @@
         }
       ]
     },
-    "operators": {
+    "macro_operators": {
       "patterns": [
         {
           "begin": "((?<!\\w)sizeof(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp"
@@ -8238,7 +8238,7 @@
         },
         {
           "begin": "((?<!\\w)alignof(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.alignof.cpp"
@@ -8286,7 +8286,7 @@
         },
         {
           "begin": "((?<!\\w)alignas(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.alignas.cpp"
@@ -8334,7 +8334,7 @@
         },
         {
           "begin": "((?<!\\w)typeid(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.typeid.cpp"
@@ -8382,7 +8382,7 @@
         },
         {
           "begin": "((?<!\\w)noexcept(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.noexcept.cpp"
@@ -8430,7 +8430,7 @@
         },
         {
           "begin": "(\\bsizeof\\.\\.\\.)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-          "end": "\\)",
+          "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.variadic.cpp"
@@ -8520,7 +8520,7 @@
         }
       ]
     },
-    "over_qualified_types": {
+    "macro_over_qualified_types": {
       "patterns": [
         {
           "match": "(struct)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:\\[((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\]((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?=,|\\)|\\n)",
@@ -9840,9 +9840,9 @@
         }
       ]
     },
-    "parameter": {
+    "macro_parameter": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\w)",
-      "end": "(?:(?=\\))|(,))",
+      "end": "(?:(?=\\))|(,))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -10337,7 +10337,7 @@
         }
       ]
     },
-    "parameter_class": {
+    "macro_parameter_class": {
       "match": "(class)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:\\[((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\]((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?=,|\\)|\\n)",
       "captures": {
         "1": {
@@ -10666,7 +10666,7 @@
         }
       }
     },
-    "parameter_enum": {
+    "macro_parameter_enum": {
       "match": "(enum)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:\\[((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\]((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?=,|\\)|\\n)",
       "captures": {
         "1": {
@@ -10995,9 +10995,9 @@
         }
       }
     },
-    "parameter_or_maybe_value": {
+    "macro_parameter_or_maybe_value": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\w)",
-      "end": "(?:(?=\\))|(,))",
+      "end": "(?:(?=\\))|(,))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -11503,7 +11503,7 @@
         }
       ]
     },
-    "parameter_struct": {
+    "macro_parameter_struct": {
       "match": "(struct)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:\\[((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\]((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?=,|\\)|\\n)",
       "captures": {
         "1": {
@@ -11832,7 +11832,7 @@
         }
       }
     },
-    "parameter_union": {
+    "macro_parameter_union": {
       "match": "(union)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:\\[((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\]((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?=,|\\)|\\n)",
       "captures": {
         "1": {
@@ -12161,9 +12161,9 @@
         }
       }
     },
-    "parentheses": {
+    "macro_parentheses": {
       "begin": "\\(",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.parens.begin.bracket.round.cpp"
@@ -12188,7 +12188,7 @@
         }
       ]
     },
-    "posix_reserved_types": {
+    "macro_posix_reserved_types": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)[a-zA-Z_](?:\\w)*_t(?!\\w))",
       "captures": {
         "1": {
@@ -12230,9 +12230,9 @@
         }
       }
     },
-    "pragma": {
+    "macro_pragma": {
       "begin": "^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?pragma\\b",
-      "end": "(?<!\\\\)(?=\\n)",
+      "end": "(?<!\\\\)(?=\\n)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "keyword.control.directive.pragma.cpp"
@@ -12288,7 +12288,7 @@
         }
       ]
     },
-    "pragma_mark": {
+    "macro_pragma_mark": {
       "match": "(^((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?pragma(?:\\s)+mark)(?:\\s)+(.*)",
       "captures": {
         "1": {
@@ -12337,7 +12337,7 @@
       },
       "name": "meta.preprocessor.pragma.cpp"
     },
-    "predefined_macros": {
+    "macro_predefined_macros": {
       "patterns": [
         {
           "match": "\\b(__cplusplus|__DATE__|__FILE__|__LINE__|__STDC__|__STDC_HOSTED__|__STDC_NO_COMPLEX__|__STDC_VERSION__|__STDCPP_THREADS__|__TIME__|NDEBUG|__OBJC__|__ASSEMBLER__|__ATOM__|__AVX__|__AVX2__|_CHAR_UNSIGNED|__CLR_VER|_CONTROL_FLOW_GUARD|__COUNTER__|__cplusplus_cli|__cplusplus_winrt|_CPPRTTI|_CPPUNWIND|_DEBUG|_DLL|__FUNCDNAME__|__FUNCSIG__|__FUNCTION__|_INTEGRAL_MAX_BITS|__INTELLISENSE__|_ISO_VOLATILE|_KERNEL_MODE|_M_AMD64|_M_ARM|_M_ARM_ARMV7VE|_M_ARM_FP|_M_ARM64|_M_CEE|_M_CEE_PURE|_M_CEE_SAFE|_M_FP_EXCEPT|_M_FP_FAST|_M_FP_PRECISE|_M_FP_STRICT|_M_IX86|_M_IX86_FP|_M_X64|_MANAGED|_MSC_BUILD|_MSC_EXTENSIONS|_MSC_FULL_VER|_MSC_VER|_MSVC_LANG|__MSVC_RUNTIME_CHECKS|_MT|_NATIVE_WCHAR_T_DEFINED|_OPENMP|_PREFAST|__TIMESTAMP__|_VC_NO_DEFAULTLIB|_WCHAR_T_DEFINED|_WIN32|_WIN64|_WINRT_DLL|_ATL_VER|_MFC_VER|__GFORTRAN__|__GNUC__|__GNUC_MINOR__|__GNUC_PATCHLEVEL__|__GNUG__|__STRICT_ANSI__|__BASE_FILE__|__INCLUDE_LEVEL__|__ELF__|__VERSION__|__OPTIMIZE__|__OPTIMIZE_SIZE__|__NO_INLINE__|__GNUC_STDC_INLINE__|__CHAR_UNSIGNED__|__WCHAR_UNSIGNED__|__REGISTER_PREFIX__|__REGISTER_PREFIX__|__SIZE_TYPE__|__PTRDIFF_TYPE__|__WCHAR_TYPE__|__WINT_TYPE__|__INTMAX_TYPE__|__UINTMAX_TYPE__|__SIG_ATOMIC_TYPE__|__INT8_TYPE__|__INT16_TYPE__|__INT32_TYPE__|__INT64_TYPE__|__UINT8_TYPE__|__UINT16_TYPE__|__UINT32_TYPE__|__UINT64_TYPE__|__INT_LEAST8_TYPE__|__INT_LEAST16_TYPE__|__INT_LEAST32_TYPE__|__INT_LEAST64_TYPE__|__UINT_LEAST8_TYPE__|__UINT_LEAST16_TYPE__|__UINT_LEAST32_TYPE__|__UINT_LEAST64_TYPE__|__INT_FAST8_TYPE__|__INT_FAST16_TYPE__|__INT_FAST32_TYPE__|__INT_FAST64_TYPE__|__UINT_FAST8_TYPE__|__UINT_FAST16_TYPE__|__UINT_FAST32_TYPE__|__UINT_FAST64_TYPE__|__INTPTR_TYPE__|__UINTPTR_TYPE__|__CHAR_BIT__|__SCHAR_MAX__|__WCHAR_MAX__|__SHRT_MAX__|__INT_MAX__|__LONG_MAX__|__LONG_LONG_MAX__|__WINT_MAX__|__SIZE_MAX__|__PTRDIFF_MAX__|__INTMAX_MAX__|__UINTMAX_MAX__|__SIG_ATOMIC_MAX__|__INT8_MAX__|__INT16_MAX__|__INT32_MAX__|__INT64_MAX__|__UINT8_MAX__|__UINT16_MAX__|__UINT32_MAX__|__UINT64_MAX__|__INT_LEAST8_MAX__|__INT_LEAST16_MAX__|__INT_LEAST32_MAX__|__INT_LEAST64_MAX__|__UINT_LEAST8_MAX__|__UINT_LEAST16_MAX__|__UINT_LEAST32_MAX__|__UINT_LEAST64_MAX__|__INT_FAST8_MAX__|__INT_FAST16_MAX__|__INT_FAST32_MAX__|__INT_FAST64_MAX__|__UINT_FAST8_MAX__|__UINT_FAST16_MAX__|__UINT_FAST32_MAX__|__UINT_FAST64_MAX__|__INTPTR_MAX__|__UINTPTR_MAX__|__WCHAR_MIN__|__WINT_MIN__|__SIG_ATOMIC_MIN__|__SCHAR_WIDTH__|__SHRT_WIDTH__|__INT_WIDTH__|__LONG_WIDTH__|__LONG_LONG_WIDTH__|__PTRDIFF_WIDTH__|__SIG_ATOMIC_WIDTH__|__SIZE_WIDTH__|__WCHAR_WIDTH__|__WINT_WIDTH__|__INT_LEAST8_WIDTH__|__INT_LEAST16_WIDTH__|__INT_LEAST32_WIDTH__|__INT_LEAST64_WIDTH__|__INT_FAST8_WIDTH__|__INT_FAST16_WIDTH__|__INT_FAST32_WIDTH__|__INT_FAST64_WIDTH__|__INTPTR_WIDTH__|__INTMAX_WIDTH__|__SIZEOF_INT__|__SIZEOF_LONG__|__SIZEOF_LONG_LONG__|__SIZEOF_SHORT__|__SIZEOF_POINTER__|__SIZEOF_FLOAT__|__SIZEOF_DOUBLE__|__SIZEOF_LONG_DOUBLE__|__SIZEOF_SIZE_T__|__SIZEOF_WCHAR_T__|__SIZEOF_WINT_T__|__SIZEOF_PTRDIFF_T__|__BYTE_ORDER__|__ORDER_LITTLE_ENDIAN__|__ORDER_BIG_ENDIAN__|__ORDER_PDP_ENDIAN__|__FLOAT_WORD_ORDER__|__DEPRECATED|__EXCEPTIONS|__GXX_RTTI|__USING_SJLJ_EXCEPTIONS__|__GXX_EXPERIMENTAL_CXX0X__|__GXX_WEAK__|__NEXT_RUNTIME__|__LP64__|_LP64|__SSP__|__SSP_ALL__|__SSP_STRONG__|__SSP_EXPLICIT__|__SANITIZE_ADDRESS__|__SANITIZE_THREAD__|__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1|__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2|__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4|__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8|__GCC_HAVE_SYNC_COMPARE_AND_SWAP_16|__HAVE_SPECULATION_SAFE_VALUE|__GCC_HAVE_DWARF2_CFI_ASM|__FP_FAST_FMA|__FP_FAST_FMAF|__FP_FAST_FMAL|__FP_FAST_FMAF16|__FP_FAST_FMAF32|__FP_FAST_FMAF64|__FP_FAST_FMAF128|__FP_FAST_FMAF32X|__FP_FAST_FMAF64X|__FP_FAST_FMAF128X|__GCC_IEC_559|__GCC_IEC_559_COMPLEX|__NO_MATH_ERRNO__|__has_builtin|__has_feature|__has_extension|__has_cpp_attribute|__has_c_attribute|__has_attribute|__has_declspec_attribute|__is_identifier|__has_include|__has_include_next|__has_warning|__BASE_FILE__|__FILE_NAME__|__clang__|__clang_major__|__clang_minor__|__clang_patchlevel__|__clang_version__|__fp16|_Float16)\\b",
@@ -12353,7 +12353,7 @@
         }
       ]
     },
-    "preprocessor_conditional_context": {
+    "macro_preprocessor_conditional_context": {
       "patterns": [
         {
           "include": "#preprocessor_conditional_defined"
@@ -12384,9 +12384,9 @@
         }
       ]
     },
-    "preprocessor_conditional_defined": {
+    "macro_preprocessor_conditional_defined": {
       "begin": "((?<!\\w)defined(?!\\w))(\\()",
-      "end": "(?:\\)|(?<!\\\\)(?=\\n))",
+      "end": "(?:\\)|(?<!\\\\)(?=\\n))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.control.directive.conditional.defined.cpp"
@@ -12406,9 +12406,9 @@
         }
       ]
     },
-    "preprocessor_conditional_parentheses": {
+    "macro_preprocessor_conditional_parentheses": {
       "begin": "\\(",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.parens.begin.bracket.round.cpp"
@@ -12421,9 +12421,9 @@
       },
       "name": "meta.parens.preprocessor.conditional.cpp"
     },
-    "preprocessor_conditional_range": {
+    "macro_preprocessor_conditional_range": {
       "begin": "^((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?((?:(?:ifndef|ifdef)|if))",
-      "end": "^(?!\\s*+#\\s*(?:else|endif))",
+      "end": "^(?!\\s*+#\\s*(?:else|endif))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "keyword.control.directive.conditional.$6.cpp"
@@ -12481,7 +12481,7 @@
         }
       ]
     },
-    "preprocessor_conditional_standalone": {
+    "macro_preprocessor_conditional_standalone": {
       "match": "^((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?((?<!\\w)(?:endif|else|elif)(?!\\w))",
       "captures": {
         "1": {
@@ -12524,7 +12524,7 @@
       },
       "name": "keyword.control.directive.$4.cpp"
     },
-    "preprocessor_context": {
+    "macro_preprocessor_context": {
       "patterns": [
         {
           "include": "#pragma_mark"
@@ -12561,7 +12561,7 @@
         }
       ]
     },
-    "primitive_types": {
+    "macro_primitive_types": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:auto)|(?:void)|(?:char)|(?:short)|(?:int)|(?:signed)|(?:unsigned)|(?:long)|(?:float)|(?:double)|(?:bool)|(?:wchar_t))(?!\\w))",
       "captures": {
         "1": {
@@ -12603,7 +12603,7 @@
         }
       }
     },
-    "pthread_types": {
+    "macro_pthread_types": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t(?!\\w))",
       "captures": {
         "1": {
@@ -12645,7 +12645,7 @@
         }
       }
     },
-    "qualified_type": {
+    "macro_qualified_type": {
       "match": "\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<18>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<18>?)++>)(?:(?:\\s)+)?)?(::))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<18>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.])",
       "captures": {
         "0": {
@@ -12870,7 +12870,7 @@
       },
       "name": "meta.qualified_type.cpp"
     },
-    "qualifiers_and_specifiers_post_parameters": {
+    "macro_qualifiers_and_specifiers_post_parameters": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept))(?!\\w)(?=\\s*(?:(?:\\{|;)|[\\n\\r])))",
       "captures": {
         "1": {
@@ -12912,7 +12912,7 @@
         }
       }
     },
-    "scope_resolution": {
+    "macro_scope_resolution": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -12946,7 +12946,7 @@
         }
       }
     },
-    "scope_resolution_function_call": {
+    "macro_scope_resolution_function_call": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -12980,7 +12980,7 @@
         }
       }
     },
-    "scope_resolution_function_call_inner_generated": {
+    "macro_scope_resolution_function_call_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13032,7 +13032,7 @@
         }
       }
     },
-    "scope_resolution_function_definition": {
+    "macro_scope_resolution_function_definition": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13066,7 +13066,7 @@
         }
       }
     },
-    "scope_resolution_function_definition_inner_generated": {
+    "macro_scope_resolution_function_definition_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13118,7 +13118,7 @@
         }
       }
     },
-    "scope_resolution_function_definition_operator_overload": {
+    "macro_scope_resolution_function_definition_operator_overload": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13152,7 +13152,7 @@
         }
       }
     },
-    "scope_resolution_function_definition_operator_overload_inner_generated": {
+    "macro_scope_resolution_function_definition_operator_overload_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13204,7 +13204,7 @@
         }
       }
     },
-    "scope_resolution_inner_generated": {
+    "macro_scope_resolution_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13256,7 +13256,7 @@
         }
       }
     },
-    "scope_resolution_namespace_alias": {
+    "macro_scope_resolution_namespace_alias": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13290,7 +13290,7 @@
         }
       }
     },
-    "scope_resolution_namespace_alias_inner_generated": {
+    "macro_scope_resolution_namespace_alias_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13342,7 +13342,7 @@
         }
       }
     },
-    "scope_resolution_namespace_block": {
+    "macro_scope_resolution_namespace_block": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13376,7 +13376,7 @@
         }
       }
     },
-    "scope_resolution_namespace_block_inner_generated": {
+    "macro_scope_resolution_namespace_block_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13428,7 +13428,7 @@
         }
       }
     },
-    "scope_resolution_namespace_using": {
+    "macro_scope_resolution_namespace_using": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13462,7 +13462,7 @@
         }
       }
     },
-    "scope_resolution_namespace_using_inner_generated": {
+    "macro_scope_resolution_namespace_using_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13514,7 +13514,7 @@
         }
       }
     },
-    "scope_resolution_parameter": {
+    "macro_scope_resolution_parameter": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13548,7 +13548,7 @@
         }
       }
     },
-    "scope_resolution_parameter_inner_generated": {
+    "macro_scope_resolution_parameter_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13600,7 +13600,7 @@
         }
       }
     },
-    "scope_resolution_template_call": {
+    "macro_scope_resolution_template_call": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13634,7 +13634,7 @@
         }
       }
     },
-    "scope_resolution_template_call_inner_generated": {
+    "macro_scope_resolution_template_call_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13686,7 +13686,7 @@
         }
       }
     },
-    "scope_resolution_template_definition": {
+    "macro_scope_resolution_template_definition": {
       "match": "(::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<3>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+",
       "captures": {
         "0": {
@@ -13720,7 +13720,7 @@
         }
       }
     },
-    "scope_resolution_template_definition_inner_generated": {
+    "macro_scope_resolution_template_definition_inner_generated": {
       "match": "((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<7>?)++>)(?:(?:\\s)+)?)?(::)",
       "captures": {
         "1": {
@@ -13772,11 +13772,11 @@
         }
       }
     },
-    "semicolon": {
+    "macro_semicolon": {
       "match": ";",
       "name": "punctuation.terminator.statement.cpp"
     },
-    "simple_type": {
+    "macro_simple_type": {
       "match": "(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<19>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<19>?)++>)(?:(?:\\s)+)?)?(::))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<19>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?",
       "captures": {
         "1": {
@@ -14118,7 +14118,7 @@
         }
       }
     },
-    "single_line_macro": {
+    "macro_single_line_macro": {
       "match": "^((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))#define.*(?<![\\\\])(?:(?:\\n)|$)",
       "captures": {
         "0": {
@@ -14167,9 +14167,9 @@
         }
       }
     },
-    "sizeof_operator": {
+    "macro_sizeof_operator": {
       "begin": "((?<!\\w)sizeof(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.cpp"
@@ -14215,9 +14215,9 @@
         }
       ]
     },
-    "sizeof_variadic_operator": {
+    "macro_sizeof_variadic_operator": {
       "begin": "(\\bsizeof\\.\\.\\.)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.sizeof.variadic.cpp"
@@ -14263,7 +14263,7 @@
         }
       ]
     },
-    "square_brackets": {
+    "macro_square_brackets": {
       "name": "meta.bracket.square.access",
       "begin": "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
       "beginCaptures": {
@@ -14286,7 +14286,7 @@
         }
       ]
     },
-    "standard_declares": {
+    "macro_standard_declares": {
       "patterns": [
         {
           "match": "(struct)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\b(?!final\\W|final\\$|override\\W|override\\$)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\S)(?![:{])",
@@ -15198,9 +15198,9 @@
         }
       ]
     },
-    "static_assert": {
+    "macro_static_assert": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)static_assert|_Static_assert(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -15287,7 +15287,7 @@
         }
       ]
     },
-    "std_space": {
+    "macro_std_space": {
       "match": "(?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))",
       "captures": {
         "0": {
@@ -15326,7 +15326,7 @@
         }
       }
     },
-    "storage_specifiers": {
+    "macro_storage_specifiers": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern))(?!\\w))",
       "captures": {
         "1": {
@@ -15368,7 +15368,7 @@
         }
       }
     },
-    "storage_types": {
+    "macro_storage_types": {
       "patterns": [
         {
           "include": "#storage_specifiers"
@@ -15393,11 +15393,11 @@
         }
       ]
     },
-    "string_context": {
+    "macro_string_context": {
       "patterns": [
         {
           "begin": "((?:u|u8|U|L)?)\"",
-          "end": "\"",
+          "end": "\"|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -15436,7 +15436,7 @@
         },
         {
           "begin": "(?<![0-9A-Fa-f])((?:u|u8|U|L)?)'",
-          "end": "'",
+          "end": "'|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -15462,7 +15462,7 @@
         },
         {
           "begin": "((?:[uUL]8?)?R)\\\"(?:(?:_r|re)|regex)\\(",
-          "end": "\\)(?:(?:_r|re)|regex)\\\"",
+          "end": "\\)(?:(?:_r|re)|regex)\\\"|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -15485,7 +15485,7 @@
         },
         {
           "begin": "((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL)|d[dm]l)\\(",
-          "end": "\\)(?:[pP]?(?:sql|SQL)|d[dm]l)\\\"",
+          "end": "\\)(?:[pP]?(?:sql|SQL)|d[dm]l)\\\"|(?-mix:(?=(?<!\\\\)\\n))",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -15532,7 +15532,7 @@
         }
       ]
     },
-    "string_escapes_context_c": {
+    "macro_string_escapes_context_c": {
       "patterns": [
         {
           "match": "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2} |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )",
@@ -15548,9 +15548,9 @@
         }
       ]
     },
-    "struct_block": {
+    "macro_struct_block": {
       "begin": "((?<!\\w)struct(?!\\w))(?:(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(DLLEXPORT)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(final)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(:)([^{]*+))?",
-      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.struct.cpp"
@@ -15851,7 +15851,7 @@
         }
       ]
     },
-    "struct_declare": {
+    "macro_struct_declare": {
       "match": "(struct)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\b(?!final\\W|final\\$|override\\W|override\\$)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\S)(?![:{])",
       "captures": {
         "1": {
@@ -16078,9 +16078,9 @@
         }
       }
     },
-    "switch_conditional_parentheses": {
+    "macro_switch_conditional_parentheses": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "patterns": [
@@ -16126,9 +16126,9 @@
         }
       ]
     },
-    "switch_statement": {
+    "macro_switch_statement": {
       "begin": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)switch(?!\\w))",
-      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))",
+      "end": "(?:(?<=\\}|%>|\\?\\?>)|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.switch.cpp"
@@ -16228,7 +16228,7 @@
         }
       ]
     },
-    "template_argument_defaulted": {
+    "macro_template_argument_defaulted": {
       "match": "(?<=<|,)(?:(?:\\s)+)?((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?:\\s)+)*)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(?:\\s)+)?([=])",
       "captures": {
         "1": {
@@ -16242,7 +16242,7 @@
         }
       }
     },
-    "template_call_context": {
+    "macro_template_call_context": {
       "patterns": [
         {
           "include": "#ever_present_context"
@@ -16276,7 +16276,7 @@
         }
       ]
     },
-    "template_call_innards": {
+    "macro_template_call_innards": {
       "match": "((?<!<)<(?!<)(?:[^<>]*+\\g<1>?)++>)(?:(?:\\s)+)?",
       "captures": {
         "0": {
@@ -16289,9 +16289,9 @@
       },
       "name": "meta.template.call.cpp"
     },
-    "template_call_range": {
+    "macro_template_call_range": {
       "begin": "<",
-      "end": ">",
+      "end": ">|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.angle-brackets.begin.template.call.cpp"
@@ -16309,9 +16309,9 @@
         }
       ]
     },
-    "template_definition": {
+    "macro_template_definition": {
       "begin": "(?<!\\w)(template)(?:(?:\\s)+)?(<)",
-      "end": ">",
+      "end": ">|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "storage.type.template.cpp"
@@ -16351,7 +16351,7 @@
         }
       ]
     },
-    "template_definition_argument": {
+    "macro_template_definition_argument": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|((?:(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?:\\s)+)+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))|((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(?:\\s)+)?(\\.\\.\\.)(?:(?:\\s)+)?((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))(?:(?:\\s)+)?(?:(,)|(?=>|$))",
       "captures": {
         "1": {
@@ -16416,7 +16416,7 @@
         }
       }
     },
-    "template_definition_context": {
+    "macro_template_definition_context": {
       "patterns": [
         {
           "include": "#scope_resolution_template_definition_inner_generated"
@@ -16435,7 +16435,7 @@
         }
       ]
     },
-    "template_isolated_definition": {
+    "macro_template_isolated_definition": {
       "match": "(?<!\\w)(template)(?:(?:\\s)+)?(<)(.*)(>(?:(?:\\s)+)?$)",
       "captures": {
         "1": {
@@ -16457,9 +16457,9 @@
         }
       }
     },
-    "ternary_operator": {
+    "macro_ternary_operator": {
       "begin": "\\?",
-      "end": ":",
+      "end": ":|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "keyword.operator.ternary.cpp"
@@ -16554,7 +16554,7 @@
         }
       ]
     },
-    "the_this_keyword": {
+    "macro_the_this_keyword": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)this(?!\\w))",
       "captures": {
         "1": {
@@ -16596,7 +16596,7 @@
         }
       }
     },
-    "type_alias": {
+    "macro_type_alias": {
       "match": "(using)(?:(?:\\s)+)?(?!namespace)(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?(::))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))(?:(?:\\s)+)?(\\=)(?:(?:\\s)+)?((?:typename)?)(?:(?:\\s)+)?((?:(?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))(?<!\\w)(?:(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern))(?!\\w)(?:\\s)+)+)?(?:(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?(::))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<43>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))|(.*(?<!;)))(?:(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?:(\\[)(\\w*)(\\])(?:(?:\\s)+)?)?(?:(?:\\s)+)?(?:(;)|\\n)",
       "captures": {
         "1": {
@@ -17254,7 +17254,7 @@
       },
       "name": "meta.declaration.type.alias.cpp"
     },
-    "type_casting_operators": {
+    "macro_type_casting_operators": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast))(?!\\w))",
       "captures": {
         "1": {
@@ -17296,9 +17296,9 @@
         }
       }
     },
-    "typedef_class": {
+    "macro_typedef_class": {
       "begin": "((?<!\\w)typedef(?!\\w))(?:(?:\\s)+)?(?=(?<!\\w)class(?!\\w))",
-      "end": "(?<=;)",
+      "end": "(?<=;)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.typedef.cpp"
@@ -17738,9 +17738,9 @@
         }
       ]
     },
-    "typedef_function_pointer": {
+    "macro_typedef_function_pointer": {
       "begin": "((?<!\\w)typedef(?!\\w))(?:(?:\\s)+)?(?=.*\\(\\*\\s*(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*\\))",
-      "end": "(?<=;)",
+      "end": "(?<=;)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.typedef.cpp"
@@ -18126,7 +18126,7 @@
         }
       ]
     },
-    "typedef_keyword": {
+    "macro_typedef_keyword": {
       "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)typedef(?!\\w))",
       "captures": {
         "1": {
@@ -18168,9 +18168,9 @@
         }
       }
     },
-    "typedef_struct": {
+    "macro_typedef_struct": {
       "begin": "((?<!\\w)typedef(?!\\w))(?:(?:\\s)+)?(?=(?<!\\w)struct(?!\\w))",
-      "end": "(?<=;)",
+      "end": "(?<=;)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.typedef.cpp"
@@ -18610,9 +18610,9 @@
         }
       ]
     },
-    "typedef_union": {
+    "macro_typedef_union": {
       "begin": "((?<!\\w)typedef(?!\\w))(?:(?:\\s)+)?(?=(?<!\\w)union(?!\\w))",
-      "end": "(?<=;)",
+      "end": "(?<=;)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.typedef.cpp"
@@ -19052,9 +19052,9 @@
         }
       ]
     },
-    "typeid_operator": {
+    "macro_typeid_operator": {
       "begin": "((?<!\\w)typeid(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\()",
-      "end": "\\)",
+      "end": "\\)|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.operator.functionlike.cpp keyword.operator.typeid.cpp"
@@ -19100,7 +19100,7 @@
         }
       ]
     },
-    "typename": {
+    "macro_typename": {
       "match": "(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?<!\\w)typename(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:(?:(?:short)|(?:signed)|(?:unsigned)|(?:long))|(?:(?:class)|(?:struct)|(?:union)|(?:enum)))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:((::)?((?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(?:((?<!<)<(?!<)(?:[^<>]*+\\g<24>?)++>)(?:(?:\\s)+)?)?::)*)\\s*+)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<24>?)++>)(?:(?:\\s)+)?)?(::))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?!(?:(?:not)|(?:compl)|(?:sizeof)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:throw)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:alignof)|(?:alignas)|(?:typeid)|(?:noexcept)|(?:noexcept)|(?:static_cast)|(?:dynamic_cast)|(?:const_cast)|(?:reinterpret_cast)|(?:while)|(?:for)|(?:do)|(?:if)|(?:else)|(?:goto)|(?:switch)|(?:try)|(?:catch)|(?:return)|(?:break)|(?:case)|(?:continue)|(?:default)|(?:NULL)|(?:true)|(?:false)|(?:nullptr)|(?:const)|(?:static)|(?:volatile)|(?:register)|(?:restrict)|(?:extern)|(?:inline)|(?:constexpr)|(?:mutable)|(?:friend)|(?:explicit)|(?:virtual)|(?:final)|(?:override)|(?:volatile)|(?:const)|(?:noexcept)|(?:constexpr)|(?:mutable)|(?:constexpr)|(?:consteval)|(?:private)|(?:protected)|(?:public)|(?:if)|(?:elif)|(?:else)|(?:endif)|(?:ifdef)|(?:ifndef)|(?:define)|(?:undef)|(?:include)|(?:line)|(?:error)|(?:warning)|(?:pragma)|(?:_Pragma)|(?:defined)|(?:__has_include)|(?:__has_cpp_attribute)|(?:this)|(?:template)|(?:namespace)|(?:using)|(?:operator)|(?:typedef)|(?:decltype)|(?:typename)|(?:asm)|(?:__asm__)|(?:concept)|(?:requires)|(?:export)|(?:thread_local)|(?:atomic_cancel)|(?:atomic_commit)|(?:atomic_noexcept)|(?:co_await)|(?:co_return)|(?:co_yield)|(?:import)|(?:module)|(?:reflexpr)|(?:synchronized)|(?:audit)|(?:axiom)|(?:transaction_safe)|(?:transaction_safe_dynamic))\\b)((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)\\b(((?<!<)<(?!<)(?:[^<>]*+\\g<24>?)++>)(?:(?:\\s)+)?)?(?![\\w<:.]))",
       "captures": {
         "1": {
@@ -19402,7 +19402,7 @@
         }
       }
     },
-    "undef": {
+    "macro_undef": {
       "match": "(^((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?undef\\b)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))",
       "captures": {
         "1": {
@@ -19485,9 +19485,9 @@
       },
       "name": "meta.preprocessor.undef.cpp"
     },
-    "union_block": {
+    "macro_union_block": {
       "begin": "((?<!\\w)union(?!\\w))(?:(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))|((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\))))|(?={))(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(DLLEXPORT)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\(\\(.*?\\)\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?:(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))?)(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(final)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))?(?:((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(:)([^{]*+))?",
-      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))",
+      "end": "(?:(?:(?<=\\}|%>|\\?\\?>)(?:(?:\\s)+)?(;)|(;))|(?=[;>\\[\\]=]))|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "0": {
           "name": "meta.head.union.cpp"
@@ -19788,7 +19788,7 @@
         }
       ]
     },
-    "union_declare": {
+    "macro_union_declare": {
       "match": "(union)((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))?(?:(?:&|(?:\\*))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))*(?:&|(?:\\*)))?((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))\\b(?!final\\W|final\\$|override\\W|override\\$)((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=\\S)(?![:{])",
       "captures": {
         "1": {
@@ -20015,7 +20015,7 @@
         }
       }
     },
-    "using_name": {
+    "macro_using_name": {
       "match": "(using)(?:\\s)+(?!namespace\\b)",
       "captures": {
         "1": {
@@ -20023,9 +20023,9 @@
         }
       }
     },
-    "using_namespace": {
+    "macro_using_namespace": {
       "begin": "(?<!\\w)(using)(?:\\s)+(namespace)(?:\\s)+((::)?(?:(?!\\b(?:not|compl|sizeof|new|delete|not_eq|bitand|xor|bitor|and|or|throw|and_eq|xor_eq|or_eq|alignof|alignas|typeid|noexcept|noexcept|static_cast|dynamic_cast|const_cast|reinterpret_cast|while|for|do|if|else|goto|switch|try|catch|return|break|case|continue|default|class|struct|union|enum|const|static|volatile|register|restrict|extern|inline|constexpr|mutable|friend|explicit|virtual|volatile|const|noexcept|constexpr|mutable|constexpr|consteval|private|protected|public|if|elif|else|endif|ifdef|ifndef|define|undef|include|line|error|warning|pragma|_Pragma|defined|__has_include|__has_cpp_attribute|this|template|namespace|using|operator|typedef|decltype|typename|asm|__asm__|concept|requires|export|thread_local|atomic_cancel|atomic_commit|atomic_noexcept|co_await|co_return|co_yield|import|module|reflexpr|synchronized)\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\s*+(((?<!<)<(?!<)(?:[^<>]*+\\g<6>?)++>)(?:(?:\\s)+)?)?::)*\\s*+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?=;|\\n)",
-      "end": ";",
+      "end": ";|(?-mix:(?=(?<!\\\\)\\n))",
       "beginCaptures": {
         "1": {
           "name": "keyword.other.using.directive.cpp"
@@ -20064,11 +20064,11 @@
       },
       "name": "meta.using-namespace.cpp"
     },
-    "vararg_ellipses": {
+    "macro_vararg_ellipses": {
       "match": "(?<!\\.)\\.\\.\\.(?!\\.)",
       "name": "punctuation.vararg-ellipses.cpp"
     },
-    "wordlike_operators": {
+    "macro_wordlike_operators": {
       "patterns": [
         {
           "match": "(?<!\\w)(?:(?:not)|(?:compl)|(?:new)|(?:delete)|(?:not_eq)|(?:bitand)|(?:xor)|(?:bitor)|(?:and)|(?:or)|(?:and_eq)|(?:xor_eq)|(?:or_eq)|(?:noexcept))(?!\\w)",

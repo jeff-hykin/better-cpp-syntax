@@ -43,6 +43,9 @@ grammar = Grammar.new(
     ],
 )
 
+# Add bailout
+# Grammar.register_transform(BailoutTransform.new("macro", /(?<!\\)\n/))
+
 #
 # Utils
 #
