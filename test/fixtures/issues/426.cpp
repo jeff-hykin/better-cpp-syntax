@@ -1,0 +1,1 @@
+json_safe_sprintf(msg3, "\":[", atol(row[8]) /*current car id*/, atoi(row[10]) /*ta driver version*/, atol(row[13]) /*exchange_member_id*/, tmp_line2, atol(row[16]) /*group_id*/, row[1] /*login*/, atof(row[17]));
