@@ -2000,18 +2000,41 @@ grammar = Grammar.new(
 #
 # Lambdas
 #
+    only_balanced_square_bracke = Pattern.new(
+        should_fully_match: [ "[]", "[testing, testing]", "[testing[], testing]" ],
+        should_not_fully_match: [ "testing[]" ],
+        reference: "square_brackets",
+        match: Pattern.new(
+            lookBehindToAvoid(/\[/).then(
+                /\[/
+            ).lookAheadToAvoid(/\[/).oneOrMoreOf(
+                dont_back_track?: true,
+                match: Pattern.new(
+                    zeroOrMoreOf(
+                        match: /[^\[\]]/,
+                        dont_back_track?: true,
+                    ).maybe(
+                        recursivelyMatch("square_brackets")
+                    )
+                ),
+            ).then(/\]/)
+        )
+    )
     array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
     grammar[:lambdas] = lambdas = PatternRange.new(
         start_pattern: Pattern.new(
-                should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
+                should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324 + blah[39430]], b, c ]" ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
                         match: /\[/.lookAheadToAvoid(/\[| *+"| *+\d/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     ).then(
-                        match: /(?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?/,
+                        match: zeroOrMoreOf(
+                            match: /[^\[\]]/.or(only_balanced_square_bracke),
+                            dont_back_track?: true,
+                        ),
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail

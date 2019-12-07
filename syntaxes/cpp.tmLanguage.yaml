@@ -3009,7 +3009,7 @@ repository:
         name: punctuation.separator.label.cpp
   lambdas:
     begin: ((?:(?<=[^\s]|^)(?<![\w\]\)\[\*&">])|(?<=\Wreturn|^return))\s*(\[(?!\[|
-      *+"| *+\d))((?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?)(\](?!\[)))
+      *+"| *+\d))((?>(?:[^\[\]]|((?<!\[)\[(?!\[)(?>(?:(?>[^\[\]]*)\g<4>?)+)\]))*))(\](?!\[)))
     beginCaptures:
       '2':
         name: punctuation.definition.capture.begin.lambda.cpp
@@ -3039,7 +3039,7 @@ repository:
             '7':
               name: keyword.operator.assignment.cpp
         - include: "#evaluation_context"
-      '4':
+      '5':
         name: punctuation.definition.capture.end.lambda.cpp
     end: "(?<=})"
     patterns:
