@@ -2105,7 +2105,7 @@
       ]
     },
     "control_flow_keywords": {
-      "match": "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)(?:continue|default|switch|return|break|throw|catch|while|case|goto|else|try|for|do|if)(?!\\w))",
+      "match": "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)(?:continue|default|switch|return|break|throw|catch|while|case|goto|else|try|for|do|if|co_await|co_yield|co_return)(?!\\w))",
       "captures": {
         "1": {
           "patterns": [
