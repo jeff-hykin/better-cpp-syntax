@@ -2341,7 +2341,7 @@ grammar = Grammar.new(
 #
 # Misc
 #
-    grammar[:assembly] = assembly_pattern()
+    grammar[:assembly] = assembly_pattern(std_space, identifier)
     grammar[:backslash_escapes] = backslash_escapes()
 #
 # Misc Legacy
