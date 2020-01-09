@@ -231,40 +231,55 @@
 - source: '        :'
 - source: '            "memory", "q0", "q1", "q2", "q3", "q4", "q5", "q6", "q7"'
 - source: '    );'
-- source: '    int test = 0;'
-- source: '    printf'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' test '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopes:
+    - entity.name.function.call
 - source: (
-  scopesBegin:
-    - meta.function.definition.parameters.lambda
   scopes:
-    - punctuation.definition.parameters.begin.lambda
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '"'
-- source: test
   scopesBegin:
-    - meta.parameter
+    - string.quoted.double
   scopes:
-    - entity.name.type.parameter
-- source: ' %'
-- source: d
+    - punctuation.definition.string.begin
+- source: 'test '
+- source: '%d'
   scopes:
-    - entity.name.type.parameter
-- source: \
-- source: 'n'
+    - constant.other.placeholder
+- source: \n
   scopes:
-    - entity.name.type.parameter
+    - constant.character.escape
 - source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '0'
-  scopesEnd:
-    - meta.parameter
+  scopes:
+    - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.definition.parameters.end.lambda
-  scopesEnd:
-    - meta.function.definition.parameters.lambda
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: '}'
 - source: int
   scopes:

@@ -2053,12 +2053,12 @@ grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: /\]/.lookAheadToAvoid(/\[/),
+                        match: /\]/.lookAheadToAvoid(std_space.then(/[\[\];]/)),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
             ),
         end_pattern: Pattern.new(
-                match: lookBehindFor(/}/),
+                match: lookBehindFor(/[;}]/),
             ),
         includes: [
             # check for parameters first
