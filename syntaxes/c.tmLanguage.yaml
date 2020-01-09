@@ -1585,53 +1585,116 @@ repository:
     - match: "(?-mix:\\b(enum|struct|union)\\b)"
       name: storage.type.$1.c
     - name: meta.asm.c
-      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
+      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)"
       beginCaptures:
         '1':
           name: storage.type.asm.c
         '2':
           name: storage.modifier.c
-        '3':
-          name: punctuation.section.parens.begin.bracket.round.assembly.c
-      end: "(\\))"
-      endCaptures:
-        '1':
-          name: punctuation.section.parens.end.bracket.round.assembly.c
+      end: "(?!\\G)"
       patterns:
-      - name: string.quoted.double.c
-        contentName: meta.embedded.assembly.c
-        begin: (R?)(")
-        beginCaptures:
+      - match: "(?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$)"
+        captures:
           '1':
-            name: meta.encoding.c
+            patterns:
+            - include: "#inline_comment"
           '2':
-            name: punctuation.definition.string.begin.assembly.c
-        end: (")
-        endCaptures:
-          '1':
-            name: punctuation.definition.string.end.assembly.c
-        patterns:
-        - include: source.asm
-        - include: source.x86
-        - include: source.x86_64
-        - include: source.arm
-        - include: "#backslash_escapes"
-        - include: "#string_escaped_char"
-        - match: "(?=not)possible"
-      - begin: "(\\()"
+            name: comment.block.c punctuation.definition.comment.begin.c
+          '3':
+            name: comment.block.c
+          '4':
+            patterns:
+            - match: "\\*\\/"
+              name: comment.block.c punctuation.definition.comment.end.c
+            - match: "\\*"
+              name: comment.block.c
+      - include: "#comments_context"
+      - include: "#comments"
+      - begin: "(((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\()"
         beginCaptures:
           '1':
-            name: punctuation.section.parens.begin.bracket.round.assembly.inner.c
+            name: punctuation.section.parens.begin.bracket.round.assembly.c
+          '2':
+            patterns:
+            - include: "#inline_comment"
+          '3':
+            name: comment.block.c punctuation.definition.comment.begin.c
+          '4':
+            name: comment.block.c
+          '5':
+            patterns:
+            - match: "\\*\\/"
+              name: comment.block.c punctuation.definition.comment.end.c
+            - match: "\\*"
+              name: comment.block.c
         end: "(\\))"
         endCaptures:
           '1':
-            name: punctuation.section.parens.end.bracket.round.assembly.inner.c
+            name: punctuation.section.parens.end.bracket.round.assembly.c
         patterns:
-        - include: "#evaluation_context"
-      - match: ":"
-        name: punctuation.separator.delimiter.colon.assembly.c
-      - include: "#comments_context"
-      - include: "#comments"
+        - name: string.quoted.double.c
+          contentName: meta.embedded.assembly.c
+          begin: (R?)(")
+          beginCaptures:
+            '1':
+              name: meta.encoding.c
+            '2':
+              name: punctuation.definition.string.begin.assembly.c
+          end: (")
+          endCaptures:
+            '1':
+              name: punctuation.definition.string.end.assembly.c
+          patterns:
+          - include: source.asm
+          - include: source.x86
+          - include: source.x86_64
+          - include: source.arm
+          - include: "#backslash_escapes"
+          - include: "#string_escaped_char"
+        - begin: "(\\()"
+          beginCaptures:
+            '1':
+              name: punctuation.section.parens.begin.bracket.round.assembly.inner.c
+          end: "(\\))"
+          endCaptures:
+            '1':
+              name: punctuation.section.parens.end.bracket.round.assembly.inner.c
+          patterns:
+          - include: "#evaluation_context"
+        - match: "\\[((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))([a-zA-Z_]\\w*)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\]"
+          captures:
+            '1':
+              patterns:
+              - include: "#inline_comment"
+            '2':
+              name: comment.block.c punctuation.definition.comment.begin.c
+            '3':
+              name: comment.block.c
+            '4':
+              patterns:
+              - match: "\\*\\/"
+                name: comment.block.c punctuation.definition.comment.end.c
+              - match: "\\*"
+                name: comment.block.c
+            '5':
+              name: variable.other.asm.label.c
+            '6':
+              patterns:
+              - include: "#inline_comment"
+            '7':
+              name: comment.block.c punctuation.definition.comment.begin.c
+            '8':
+              name: comment.block.c
+            '9':
+              patterns:
+              - match: "\\*\\/"
+                name: comment.block.c punctuation.definition.comment.end.c
+              - match: "\\*"
+                name: comment.block.c
+        - match: ":"
+          name: punctuation.separator.delimiter.colon.assembly.c
+        - include: "#comments_context"
+        - include: "#comments"
   string_escaped_char:
     patterns:
     - match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}

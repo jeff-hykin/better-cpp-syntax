@@ -301,95 +301,219 @@
     },
     "assembly": {
       "name": "meta.asm.cpp",
-      "begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()",
+      "begin": "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)",
       "beginCaptures": {
         "1": {
           "name": "storage.type.asm.cpp"
         },
         "2": {
           "name": "storage.modifier.cpp"
-        },
-        "3": {
-          "name": "punctuation.section.parens.begin.bracket.round.assembly.cpp"
         }
       },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parens.end.bracket.round.assembly.cpp"
-        }
-      },
+      "end": "(?!\\G)",
       "patterns": [
         {
-          "name": "string.quoted.double.cpp",
-          "contentName": "meta.embedded.assembly.cpp",
-          "begin": "(R?)(\")",
-          "beginCaptures": {
+          "match": "(?:^)((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))(?:\\n|$)",
+          "captures": {
             "1": {
-              "name": "meta.encoding.cpp"
+              "patterns": [
+                {
+                  "include": "#inline_comment"
+                }
+              ]
             },
             "2": {
-              "name": "punctuation.definition.string.begin.assembly.cpp"
-            }
-          },
-          "end": "(\")",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.assembly.cpp"
-            }
-          },
-          "patterns": [
-            {
-              "include": "source.asm"
+              "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
             },
-            {
-              "include": "source.x86"
+            "3": {
+              "name": "comment.block.cpp"
             },
-            {
-              "include": "source.x86_64"
-            },
-            {
-              "include": "source.arm"
-            },
-            {
-              "include": "#backslash_escapes"
-            },
-            {
-              "include": "#string_escaped_char"
-            },
-            {
-              "match": "(?=not)possible"
+            "4": {
+              "patterns": [
+                {
+                  "match": "\\*\\/",
+                  "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                {
+                  "match": "\\*",
+                  "name": "comment.block.cpp"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.parens.begin.bracket.round.assembly.inner.cpp"
-            }
-          },
-          "end": "(\\))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.parens.end.bracket.round.assembly.inner.cpp"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#evaluation_context"
-            }
-          ]
-        },
-        {
-          "match": ":",
-          "name": "punctuation.separator.delimiter.colon.assembly.cpp"
+          }
         },
         {
           "include": "#comments_context"
         },
         {
           "include": "#comments"
+        },
+        {
+          "begin": "(((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.begin.bracket.round.assembly.cpp"
+            },
+            "2": {
+              "patterns": [
+                {
+                  "include": "#inline_comment"
+                }
+              ]
+            },
+            "3": {
+              "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+            },
+            "4": {
+              "name": "comment.block.cpp"
+            },
+            "5": {
+              "patterns": [
+                {
+                  "match": "\\*\\/",
+                  "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                },
+                {
+                  "match": "\\*",
+                  "name": "comment.block.cpp"
+                }
+              ]
+            }
+          },
+          "end": "(\\))",
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.parens.end.bracket.round.assembly.cpp"
+            }
+          },
+          "patterns": [
+            {
+              "name": "string.quoted.double.cpp",
+              "contentName": "meta.embedded.assembly.cpp",
+              "begin": "(R?)(\")",
+              "beginCaptures": {
+                "1": {
+                  "name": "meta.encoding.cpp"
+                },
+                "2": {
+                  "name": "punctuation.definition.string.begin.assembly.cpp"
+                }
+              },
+              "end": "(\")",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.string.end.assembly.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "source.asm"
+                },
+                {
+                  "include": "source.x86"
+                },
+                {
+                  "include": "source.x86_64"
+                },
+                {
+                  "include": "source.arm"
+                },
+                {
+                  "include": "#backslash_escapes"
+                },
+                {
+                  "include": "#string_escaped_char"
+                }
+              ]
+            },
+            {
+              "begin": "(\\()",
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.begin.bracket.round.assembly.inner.cpp"
+                }
+              },
+              "end": "(\\))",
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.section.parens.end.bracket.round.assembly.inner.cpp"
+                }
+              },
+              "patterns": [
+                {
+                  "include": "#evaluation_context"
+                }
+              ]
+            },
+            {
+              "match": "\\[((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))\\]",
+              "captures": {
+                "1": {
+                  "patterns": [
+                    {
+                      "include": "#inline_comment"
+                    }
+                  ]
+                },
+                "2": {
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "3": {
+                  "name": "comment.block.cpp"
+                },
+                "4": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                },
+                "5": {
+                  "name": "variable.other.asm.label.cpp"
+                },
+                "6": {
+                  "patterns": [
+                    {
+                      "include": "#inline_comment"
+                    }
+                  ]
+                },
+                "7": {
+                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
+                },
+                "8": {
+                  "name": "comment.block.cpp"
+                },
+                "9": {
+                  "patterns": [
+                    {
+                      "match": "\\*\\/",
+                      "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
+                    },
+                    {
+                      "match": "\\*",
+                      "name": "comment.block.cpp"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "match": ":",
+              "name": "punctuation.separator.delimiter.colon.assembly.cpp"
+            },
+            {
+              "include": "#comments_context"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
         }
       ]
     },
