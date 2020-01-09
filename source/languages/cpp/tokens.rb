@@ -102,6 +102,9 @@ tokens = [
     { representation: "case"                 , name: "case"                           , isControlFlow: true,                                           },
     { representation: "continue"             , name: "continue"                       , isControlFlow: true,                                           },
     { representation: "default"              , name: "default"                        , isControlFlow: true,                                           },
+    { representation: "co_await"             , name: "co_await"                       , isControlFlow: true,                                           },
+    { representation: "co_yield"             , name: "co_yield"                       , isControlFlow: true,                                           },
+    { representation: "co_return"            , name: "co_return"                      , isControlFlow: true,                                           },
     # primitive type keywords
     # https://en.cppreference.com/w/cpp/language/types
     { representation: "auto"                 , name: "auto"                           , isPrimitive: true, isType: true},
