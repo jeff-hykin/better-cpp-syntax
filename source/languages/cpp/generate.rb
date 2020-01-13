@@ -2227,14 +2227,6 @@ grammar = Grammar.new(
                         std_space.then(
                             match: /:/,
                             tag_as: "punctuation.separator.colon.inheritance"
-                        # the following may seem redundant (removing it shouldn't change anything)
-                        # this is because the follow are matched by what is inside of this Range
-                        # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
-                        # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
-                        ).zeroOrMoreOf(
-                            match: /[^{]/,
-                            dont_back_track?: true,
-                            includes: [ :inheritance_context ]
                         )
                     ),
                 ),
