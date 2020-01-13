@@ -2199,7 +2199,6 @@ grammar = Grammar.new(
             tag_as: "meta.block.#{name}",
             name: name,
             start_pattern: Pattern.new(
-                    should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
                     should_not_fully_match: ["#{name} foo {","#{name} foo{"],
                     should_partial_match: ["#{name} foo f;", "#{name} st s;"],
                     match: Pattern.new(
