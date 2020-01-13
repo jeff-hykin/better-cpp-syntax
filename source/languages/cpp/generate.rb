@@ -726,21 +726,24 @@ grammar = Grammar.new(
     #   some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
     # this is actually what is happening: (recursion)
     some_number_of_angle_brackets = Pattern.new(
-        should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>" ],
+        should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>", "<'<'>", "<\">\">" ],
         should_not_fully_match: [ "testing<>" ],
         reference: "angle_brackets",
         match: Pattern.new(
             lookBehindToAvoid(/</).then(
                 /</
             ).lookAheadToAvoid(/</).oneOrMoreOf(
-                dont_back_track?: true,
                 match: Pattern.new(
                     zeroOrMoreOf(
-                        match: /[^<>]/,
+                        match: /[^'"<>]/,
                         dont_back_track?: true,
-                    ).maybe(
-                        recursivelyMatch("angle_brackets")
+                    ).or(
+                        match: /"/.then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/)
+                    ).or(
+                        match: /'/.then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/)
                     )
+                ).maybe(
+                    recursivelyMatch("angle_brackets")
                 ),
             ).then(/>/)
         )
