@@ -184,7 +184,7 @@ grammar = Grammar.new(
             :typedef_class,
             :typedef_struct,
             :typedef_union,
-            :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
+            :misc_keywords,               # eventuall remove this in favor of finding a complete statements
             :standard_declares, # struct/enum/union/class
             :class_block,
             :struct_block,
@@ -502,9 +502,13 @@ grammar = Grammar.new(
             tag_as: "keyword.control.exception.$match"
         )
     )
-    grammar[:typedef_keyword] = Pattern.new(
+    # 
+    # misc keywords
+    # 
+    # these are keywords that SHOULD get there own patterns, but the work has not yet been put in for them
+    grammar[:misc_keywords] = Pattern.new(
         std_space.then(
-            match: variableBounds[ /typedef/ ],
+            match: variableBounds[ @cpp_tokens.that(:isCurrentlyAMiscKeyword) ],
             tag_as: "keyword.other.$match"
         )
     )
@@ -2367,10 +2371,6 @@ grammar = Grammar.new(
             name: "storage.modifier.array.bracket.square",
             match: /#{lookBehindToAvoid(/delete/)}\\[\\s*\\]/
         }
-    grammar[:misc_storage_modifiers] = Pattern.new(
-            match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
-            tag_as: "storage.modifier.$match"
-        )
     grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",

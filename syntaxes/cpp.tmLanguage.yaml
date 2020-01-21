@@ -31,7 +31,7 @@ patterns:
 - include: "#typedef_class"
 - include: "#typedef_struct"
 - include: "#typedef_union"
-- include: "#typedef_keyword"
+- include: "#misc_keywords"
 - include: "#standard_declares"
 - include: "#class_block"
 - include: "#struct_block"
@@ -1166,7 +1166,7 @@ repository:
       patterns:
       - include: "$self"
   control_flow_keywords:
-    match: "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)(?:co_return|co_yield|co_await|continue|default|switch|return|catch|while|throw|break|case|goto|else|for|try|if|do)(?!\\w))"
+    match: "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)(?:co_return|co_yield|co_await|continue|default|return|switch|catch|while|throw|break|else|case|goto|for|try|if|do)(?!\\w))"
     captures:
       '1':
         patterns:
@@ -2050,7 +2050,7 @@ repository:
     - include: "#typedef_class"
     - include: "#typedef_struct"
     - include: "#typedef_union"
-    - include: "#typedef_keyword"
+    - include: "#misc_keywords"
     - include: "#standard_declares"
     - include: "#class_block"
     - include: "#struct_block"
@@ -3413,9 +3413,24 @@ repository:
         name: punctuation.section.arguments.end.bracket.round.function.member.cpp
     patterns:
     - include: "#evaluation_context"
-  misc_storage_modifiers:
-    match: "\\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\\b"
-    name: storage.modifier.$0.cpp
+  misc_keywords:
+    match: "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)(?:requires|typedef|concept|export|module)(?!\\w))"
+    captures:
+      '1':
+        patterns:
+        - include: "#inline_comment"
+      '2':
+        name: comment.block.cpp punctuation.definition.comment.begin.cpp
+      '3':
+        name: comment.block.cpp
+      '4':
+        patterns:
+        - match: "\\*\\/"
+          name: comment.block.cpp punctuation.definition.comment.end.cpp
+        - match: "\\*"
+          name: comment.block.cpp
+      '5':
+        name: keyword.other.$5.cpp
   module_import:
     match: (?:^)((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))((import))\s*(?:(?:(?:((<)[^>]*(>?)((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))(?:(?:\n|$)|(?=\/\/)))|((\")[^\"]*(\"?)((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))(?:(?:\n|$)|(?=\/\/))))|(((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*(?:\.(?:[a-zA-Z_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\u[0-9a-fA-F]{4}|\\U[0-9a-fA-F]{8}))*)*((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))(?:(?:\n|$)|(?=(?:\/\/|;)))))|((?>(?:(?:(?>(?<!\s)\s+)|(\/\*)((?>(?:[^\*]|(?>\*+)[^\/])*)((?>\*+)\/)))+|(?:(?:(?:(?:\b|(?<=\W))|(?=\W))|\A)|\Z))))(?:(?:\n|$)|(?=(?:\/\/|;))))\s*(;?)
     captures:
@@ -7608,24 +7623,6 @@ repository:
             name: comment.block.cpp
       patterns:
       - include: "#function_parameter_context"
-  typedef_keyword:
-    match: "((?>(?:(?:(?>(?<!\\s)\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z))))((?<!\\w)typedef(?!\\w))"
-    captures:
-      '1':
-        patterns:
-        - include: "#inline_comment"
-      '2':
-        name: comment.block.cpp punctuation.definition.comment.begin.cpp
-      '3':
-        name: comment.block.cpp
-      '4':
-        patterns:
-        - match: "\\*\\/"
-          name: comment.block.cpp punctuation.definition.comment.end.cpp
-        - match: "\\*"
-          name: comment.block.cpp
-      '5':
-        name: keyword.other.$5.cpp
   typedef_struct:
     begin: "((?<!\\w)typedef(?!\\w))\\s*(?=(?<!\\w)struct(?!\\w))"
     beginCaptures:
