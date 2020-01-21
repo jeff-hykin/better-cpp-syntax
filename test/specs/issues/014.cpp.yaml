@@ -1,51 +1,5 @@
-- source: class
-  scopesBegin:
-    - meta.block.class
-    - meta.head.class
-  scopes:
-    - storage.type.class
-- source: B
-  scopes:
-    - entity.name.type.class
-- source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
-    - meta.head.class
-- source: '}'
-  scopes:
-    - meta.body.class
-    - punctuation.section.block.end.bracket.curly.class
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: class
-  scopesBegin:
-    - meta.head.class
-  scopes:
-    - storage.type.class
-- source: A
-  scopes:
-    - entity.name.type.class
-- source: ':'
-  scopes:
-    - punctuation.separator.colon.inheritance
-- source: public
-  scopes:
-    - storage.type.modifier.access.public
-- source: B
-  scopes:
-    - meta.qualified_type
-    - entity.name.type
-- source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
-    - meta.head.class
-- source: '}'
-  scopes:
-    - meta.body.class
-    - punctuation.section.block.end.bracket.curly.class
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
+- source: class B
+- source: '{};'
+- source: 'class A : '
+- source: '  public B'
+- source: '{};'

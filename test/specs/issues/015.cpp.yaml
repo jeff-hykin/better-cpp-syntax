@@ -1,31 +1,4 @@
-- source: class
-  scopesBegin:
-    - meta.block.class
-    - meta.head.class
-  scopes:
-    - storage.type.class
-- source: C
-  scopes:
-    - entity.name.type.class
+- source: class C
 - source: '{'
-  scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
-    - meta.head.class
-- source: 'public '
-  scopesBegin:
-    - meta.body.class
-    - storage.type.modifier.access.control.public
-- source: ':'
-  scopes:
-    - punctuation.separator.colon.access.control
-  scopesEnd:
-    - storage.type.modifier.access.control.public
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly.class
-  scopesEnd:
-    - meta.body.class
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
+- source: '  public :'
+- source: '};'
