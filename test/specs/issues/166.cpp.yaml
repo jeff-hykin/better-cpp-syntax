@@ -10,8 +10,6 @@
 - source: ':'
   scopes:
     - punctuation.separator.colon.inheritance
-  scopesEnd:
-    - meta.head.class
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -34,8 +32,9 @@
     - meta.qualified_type
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: /*
   scopesBegin:
     - meta.body.class
@@ -67,8 +66,6 @@
 - source: ':'
   scopes:
     - punctuation.separator.colon.inheritance
-  scopesEnd:
-    - meta.head.class
 - source: virtual
   scopes:
     - storage.type.modifier.virtual
@@ -91,8 +88,9 @@
     - meta.qualified_type
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: /*
   scopesBegin:
     - meta.body.class
