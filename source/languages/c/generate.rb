@@ -937,7 +937,7 @@ c_grammar.addToRepository({
                 match: /\b(enum|struct|union)\b/,
                 name: "storage.type.$1.c"
             },
-            assembly_pattern().to_tag,
+            assembly_pattern(std_space, variable_name_without_bounds).to_tag,
         ]
     },
     "vararg_ellipses" => {

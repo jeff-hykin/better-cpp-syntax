@@ -160,8 +160,6 @@
 - source: ':'
   scopes:
     - punctuation.separator.colon.inheritance
-  scopesEnd:
-    - meta.head.class
 - source: public
   scopes:
     - storage.type.modifier.access.public
@@ -187,8 +185,9 @@
     - meta.template.call
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: ThisTest
   scopesBegin:
     - meta.body.class

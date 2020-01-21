@@ -3,9 +3,16 @@ name: Run Tests
 on:
   push:
     paths:
-      - "**.rb"
-      - "**.js"
-      - package.json
+    - '**.rb'
+    - '**.js'
+    - package.json
+    - 'test/**'
+  pull_request:
+    paths:
+    - '**.rb'
+    - '**.js'
+    - package.json
+    - 'test/**'
 
 jobs:
   build:

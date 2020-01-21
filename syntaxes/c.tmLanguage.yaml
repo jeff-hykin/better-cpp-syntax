@@ -262,7 +262,7 @@ repository:
     patterns:
     - include: "#function-call-innards"
   backslash_escapes:
-    match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
+    match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3][0-7]{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
       |\nu[a-fA-F0-9]{,4} |\nU[a-fA-F0-9]{,8} )"
     name: constant.character.escape.c
   block:
@@ -660,7 +660,7 @@ repository:
         '1':
           name: constant.character.escape.line-continuation.c
   member_access:
-    match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:atomic_uint_least64_t|atomic_uint_least16_t|atomic_uint_least32_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_fast64_t|atomic_uint_fast32_t|atomic_int_least64_t|atomic_int_least32_t|pthread_rwlockattr_t|atomic_uint_fast16_t|pthread_mutexattr_t|atomic_int_fast16_t|atomic_uint_fast8_t|atomic_int_fast64_t|atomic_int_least8_t|atomic_int_fast32_t|atomic_int_fast8_t|pthread_condattr_t|atomic_uintptr_t|atomic_ptrdiff_t|pthread_rwlock_t|atomic_uintmax_t|pthread_mutex_t|atomic_intmax_t|atomic_intptr_t|atomic_char32_t|atomic_char16_t|pthread_attr_t|atomic_wchar_t|uint_least64_t|uint_least32_t|uint_least16_t|pthread_cond_t|pthread_once_t|uint_fast64_t|uint_fast16_t|atomic_size_t|uint_least8_t|int_least64_t|int_least32_t|int_least16_t|pthread_key_t|atomic_ullong|atomic_ushort|uint_fast32_t|atomic_schar|atomic_short|uint_fast8_t|int_fast64_t|int_fast32_t|int_fast16_t|atomic_ulong|atomic_llong|int_least8_t|atomic_uchar|memory_order|suseconds_t|int_fast8_t|atomic_bool|atomic_char|atomic_uint|atomic_long|atomic_int|useconds_t|_Imaginary|uintptr_t|pthread_t|in_addr_t|blksize_t|in_port_t|uintmax_t|uintmax_t|blkcnt_t|uint16_t|unsigned|_Complex|uint32_t|intptr_t|intmax_t|intmax_t|uint64_t|u_quad_t|int64_t|int32_t|ssize_t|caddr_t|clock_t|uint8_t|u_short|swblk_t|segsz_t|int16_t|fixpt_t|daddr_t|nlink_t|qaddr_t|size_t|time_t|mode_t|signed|quad_t|ushort|u_long|u_char|double|int8_t|ino_t|uid_t|pid_t|_Bool|float|dev_t|div_t|short|gid_t|off_t|u_int|key_t|id_t|uint|long|void|char|bool|id_t|int)\\b)[a-zA-Z_]\\w*\\b(?!\\())"
+    match: "((?:[a-zA-Z_]\\w*|(?<=\\]|\\)))\\s*)(?:((?:\\.\\*|\\.))|((?:->\\*|->)))((?:[a-zA-Z_]\\w*\\s*(?:(?:(?:\\.\\*|\\.))|(?:(?:->\\*|->)))\\s*)*)\\s*(\\b(?!(?:atomic_uint_least64_t|atomic_uint_least16_t|atomic_uint_least32_t|atomic_uint_least8_t|atomic_int_least16_t|atomic_uint_fast64_t|atomic_uint_fast32_t|atomic_int_least64_t|atomic_int_least32_t|pthread_rwlockattr_t|atomic_uint_fast16_t|pthread_mutexattr_t|atomic_int_fast16_t|atomic_uint_fast8_t|atomic_int_fast64_t|atomic_int_least8_t|atomic_int_fast32_t|atomic_int_fast8_t|pthread_condattr_t|atomic_uintptr_t|atomic_ptrdiff_t|pthread_rwlock_t|atomic_uintmax_t|pthread_mutex_t|atomic_intmax_t|atomic_intptr_t|atomic_char32_t|atomic_char16_t|pthread_attr_t|atomic_wchar_t|uint_least64_t|uint_least32_t|uint_least16_t|pthread_cond_t|pthread_once_t|uint_fast64_t|uint_fast16_t|atomic_size_t|uint_least8_t|int_least64_t|int_least32_t|int_least16_t|pthread_key_t|atomic_ullong|atomic_ushort|uint_fast32_t|atomic_schar|atomic_short|uint_fast8_t|int_fast64_t|int_fast32_t|int_fast16_t|atomic_ulong|atomic_llong|int_least8_t|atomic_uchar|memory_order|suseconds_t|int_fast8_t|atomic_bool|atomic_char|atomic_uint|atomic_long|atomic_int|useconds_t|_Imaginary|blksize_t|pthread_t|in_addr_t|uintptr_t|in_port_t|uintmax_t|uintmax_t|blkcnt_t|uint16_t|unsigned|_Complex|uint32_t|intptr_t|intmax_t|intmax_t|uint64_t|u_quad_t|int64_t|int32_t|ssize_t|caddr_t|clock_t|uint8_t|u_short|swblk_t|segsz_t|int16_t|fixpt_t|daddr_t|nlink_t|qaddr_t|size_t|time_t|mode_t|signed|quad_t|ushort|u_long|u_char|double|int8_t|ino_t|uid_t|pid_t|_Bool|float|dev_t|div_t|short|gid_t|off_t|u_int|key_t|id_t|uint|long|void|char|bool|id_t|int)\\b)[a-zA-Z_]\\w*\\b(?!\\())"
     captures:
       '1':
         name: variable.other.object.access.c
@@ -1585,53 +1585,116 @@ repository:
     - match: "(?-mix:\\b(enum|struct|union)\\b)"
       name: storage.type.$1.c
     - name: meta.asm.c
-      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)\\s*(\\()"
+      begin: "(\\b(?:__asm__|asm)\\b)\\s*((?:volatile)?)"
       beginCaptures:
         '1':
           name: storage.type.asm.c
         '2':
           name: storage.modifier.c
-        '3':
-          name: punctuation.section.parens.begin.bracket.round.assembly.c
-      end: "(\\))"
-      endCaptures:
-        '1':
-          name: punctuation.section.parens.end.bracket.round.assembly.c
+      end: "(?!\\G)"
       patterns:
-      - name: string.quoted.double.c
-        contentName: meta.embedded.assembly.c
-        begin: (R?)(")
-        beginCaptures:
+      - match: "(?:^)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))(?:\\n|$)"
+        captures:
           '1':
-            name: meta.encoding.c
+            patterns:
+            - include: "#inline_comment"
           '2':
-            name: punctuation.definition.string.begin.assembly.c
-        end: (")
-        endCaptures:
-          '1':
-            name: punctuation.definition.string.end.assembly.c
-        patterns:
-        - include: source.asm
-        - include: source.x86
-        - include: source.x86_64
-        - include: source.arm
-        - include: "#backslash_escapes"
-        - include: "#string_escaped_char"
-        - match: "(?=not)possible"
-      - begin: "(\\()"
+            name: comment.block.c punctuation.definition.comment.begin.c
+          '3':
+            name: comment.block.c
+          '4':
+            patterns:
+            - match: "\\*\\/"
+              name: comment.block.c punctuation.definition.comment.end.c
+            - match: "\\*"
+              name: comment.block.c
+      - include: "#comments_context"
+      - include: "#comments"
+      - begin: "(((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\()"
         beginCaptures:
           '1':
-            name: punctuation.section.parens.begin.bracket.round.assembly.inner.c
+            name: punctuation.section.parens.begin.bracket.round.assembly.c
+          '2':
+            patterns:
+            - include: "#inline_comment"
+          '3':
+            name: comment.block.c punctuation.definition.comment.begin.c
+          '4':
+            name: comment.block.c
+          '5':
+            patterns:
+            - match: "\\*\\/"
+              name: comment.block.c punctuation.definition.comment.end.c
+            - match: "\\*"
+              name: comment.block.c
         end: "(\\))"
         endCaptures:
           '1':
-            name: punctuation.section.parens.end.bracket.round.assembly.inner.c
+            name: punctuation.section.parens.end.bracket.round.assembly.c
         patterns:
-        - include: "#evaluation_context"
-      - match: ":"
-        name: punctuation.separator.delimiter.colon.assembly.c
-      - include: "#comments_context"
-      - include: "#comments"
+        - name: string.quoted.double.c
+          contentName: meta.embedded.assembly.c
+          begin: (R?)(")
+          beginCaptures:
+            '1':
+              name: meta.encoding.c
+            '2':
+              name: punctuation.definition.string.begin.assembly.c
+          end: (")
+          endCaptures:
+            '1':
+              name: punctuation.definition.string.end.assembly.c
+          patterns:
+          - include: source.asm
+          - include: source.x86
+          - include: source.x86_64
+          - include: source.arm
+          - include: "#backslash_escapes"
+          - include: "#string_escaped_char"
+        - begin: "(\\()"
+          beginCaptures:
+            '1':
+              name: punctuation.section.parens.begin.bracket.round.assembly.inner.c
+          end: "(\\))"
+          endCaptures:
+            '1':
+              name: punctuation.section.parens.end.bracket.round.assembly.inner.c
+          patterns:
+          - include: "#evaluation_context"
+        - match: "\\[((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))([a-zA-Z_]\\w*)((?:(?:(?>\\s+)|(\\/\\*)((?>(?:[^\\*]|(?>\\*+)[^\\/])*)((?>\\*+)\\/)))+?|(?:(?:(?:(?:\\b|(?<=\\W))|(?=\\W))|\\A)|\\Z)))\\]"
+          captures:
+            '1':
+              patterns:
+              - include: "#inline_comment"
+            '2':
+              name: comment.block.c punctuation.definition.comment.begin.c
+            '3':
+              name: comment.block.c
+            '4':
+              patterns:
+              - match: "\\*\\/"
+                name: comment.block.c punctuation.definition.comment.end.c
+              - match: "\\*"
+                name: comment.block.c
+            '5':
+              name: variable.other.asm.label.c
+            '6':
+              patterns:
+              - include: "#inline_comment"
+            '7':
+              name: comment.block.c punctuation.definition.comment.begin.c
+            '8':
+              name: comment.block.c
+            '9':
+              patterns:
+              - match: "\\*\\/"
+                name: comment.block.c punctuation.definition.comment.end.c
+              - match: "\\*"
+                name: comment.block.c
+        - match: ":"
+          name: punctuation.separator.delimiter.colon.assembly.c
+        - include: "#comments_context"
+        - include: "#comments"
   string_escaped_char:
     patterns:
     - match: "(?x)\\\\ (\n\\\\\t\t\t |\n[abefnprtv'\"?]   |\n[0-3]\\d{,2}\t |\n[4-7]\\d?\t\t|\nx[a-fA-F0-9]{,2}
