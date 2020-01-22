@@ -6,8 +6,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "bundle exec ruby scripts/generate.rb",
-    "build-gem": "gem build gem/textmate_grammar.gemspec",
     "perfall": "bundle exec ruby scripts/perf_all.rb",
+    "build-gem": "gem build gem/textmate_grammar.gemspec",
+    "postinstall": "bundle install",
     "prelint": "npm run build",
     "lint": "bundle exec ruby scripts/lint.rb",
     "pretest": "npm run build",

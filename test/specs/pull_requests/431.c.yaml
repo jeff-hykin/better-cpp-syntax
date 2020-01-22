@@ -1,0 +1,34 @@
+- source: const
+  scopes:
+    - storage.modifier
+- source: char
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'octal_escape_test '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: a
+- source: \001
+  scopesBegin:
+    - constant.character.escape
+- source: \077
+- source: \018
+  scopesEnd:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -456,14 +456,14 @@ class PatternBase
         test_fully_regex = wrap_with_anchors(copy).to_r
 
         warn = lambda do |symbol|
-            puts <<-HEREDOC.remove_indent
-
-                When testing the pattern #{test_regex.inspect}. The unit test for #{symbol} failed.
-                The unit test has the following patterns:
-                #{@arguments[symbol].to_yaml}
-                The Failing pattern is below:
-                #{self}
-            HEREDOC
+            puts [
+                "",
+                "When testing the pattern #{test_regex.inspect}. The unit test for #{symbol} failed.",
+                "The unit test has the following patterns:",
+                "#{@arguments[symbol].to_yaml}",
+                "The Failing pattern is below:",
+                "#{self}",
+            ].join("\n")
         end
         if @arguments[:should_fully_match].is_a? Array
             unless @arguments[:should_fully_match].all? { |test| test =~ test_fully_regex }

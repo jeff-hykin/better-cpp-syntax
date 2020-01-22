@@ -10,6 +10,7 @@ PathFor = {
     generic_readme:  File.join(__dir__, "generic_readme.md"                                                               ),
     readme:          File.join(__dir__, "README.md"                                                                       ),
     repo_helper:     File.join(__dir__, "source"             , "repo_specific_helpers.rb"                                 ),
+    source:          File.join(__dir__, "source"                                                                          ),
     textmate_tools:  File.join(__dir__, "source"             , "textmate_tools.rb"                                        ),
     svg_helper:      File.join(__dir__, "scripts"            , "helpers"              , "convert_svgs.js"                 ),
     languages:       File.join(__dir__, "source"             , "languages"                                                ),

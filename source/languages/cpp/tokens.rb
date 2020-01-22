@@ -40,6 +40,8 @@ tokens = [
     { representation: "%"                    , name: "modulus"                        , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  5   , evaledLeftToRight: true, isInFixOperator:   true },
     { representation: "+"                    , name: "addition"                       , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  6   , evaledLeftToRight: true, isInFixOperator:   true },
     { representation: "-"                    , name: "subtraction"                    , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  6   , evaledLeftToRight: true, isInFixOperator:   true },
+    { representation: "<<="                  , name: "bitwise-shift-left-assignment"  , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.6 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
+    { representation: ">>="                  , name: "bitwise-shift-right-assignment" , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.6 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
     { representation: "<<"                   , name: "bitwise-shift-left"             , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  7   , evaledLeftToRight: true, isInFixOperator:   true },
     { representation: ">>"                   , name: "bitwise-shift-right"            , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  7   , evaledLeftToRight: true, isInFixOperator:   true },
     { representation: "<=>"                  , name: "three-way-compare"              , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence:  8   , evaledLeftToRight: true, isInFixOperator:   true , isComparisonOperator: true},
@@ -68,8 +70,6 @@ tokens = [
     { representation: "*="                   , name: "multiplication-assignment"      , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.5 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
     { representation: "/="                   , name: "division-assignment"            , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.5 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
     { representation: "%="                   , name: "modulus-assignment"             , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.5 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
-    { representation: "<<="                  , name: "bitwise-shift-left-assignment"  , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.6 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
-    { representation: ">>="                  , name: "bitwise-shift-right-assignment" , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.6 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
     { representation: "&="                   , name: "bitwise-and-assignment"         , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.7 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
     { representation: "and_eq"               , name: "bitwise-and-assignment-word"    , isOperator: true,                                      isBinaryOperator:  true, presedence: 16.7 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true , isOperatorAlias: true},
     { representation: "^="                   , name: "bitwise-xor-assignment"         , isOperator: true, canAppearAfterOperatorKeyword: true, isBinaryOperator:  true, presedence: 16.7 , evaledRightToLeft: true, isInFixOperator:   true , isAssignmentOperator: true },
@@ -102,6 +102,9 @@ tokens = [
     { representation: "case"                 , name: "case"                           , isControlFlow: true,                                           },
     { representation: "continue"             , name: "continue"                       , isControlFlow: true,                                           },
     { representation: "default"              , name: "default"                        , isControlFlow: true,                                           },
+    { representation: "co_await"             , name: "co_await"                       , isControlFlow: true,                                           },
+    { representation: "co_yield"             , name: "co_yield"                       , isControlFlow: true,                                           },
+    { representation: "co_return"            , name: "co_return"                      , isControlFlow: true,                                           },
     # primitive type keywords
     # https://en.cppreference.com/w/cpp/language/types
     { representation: "auto"                 , name: "auto"                           , isPrimitive: true, isType: true},
@@ -251,16 +254,16 @@ tokens = [
     { representation: "using"           , name: "using"         },
     { representation: "operator"        , name: "operator"      },
     # 
-    { representation: "typedef"         , name: "typedef"       },
+    { representation: "typedef"         , name: "typedef"       , isCurrentlyAMiscKeyword: true },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
-    { representation: "concept"                    , name: "concept"                    },
-    { representation: "requires"                   , name: "requires"                   },
-    { representation: "export"                     , name: "export"                     },
+    { representation: "concept"                    , name: "concept"                    , isCurrentlyAMiscKeyword: true },
+    { representation: "requires"                   , name: "requires"                   , isCurrentlyAMiscKeyword: true },
+    { representation: "export"                     , name: "export"                     , isCurrentlyAMiscKeyword: true },
     { representation: "thread_local"               , name: "thread_local"               },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },
@@ -269,7 +272,7 @@ tokens = [
     { representation: "co_return"                  , name: "co_return"                  },
     { representation: "co_yield"                   , name: "co_yield"                   },
     { representation: "import"                     , name: "import"                     },
-    { representation: "module"                     , name: "module"                     },
+    { representation: "module"                     , name: "module"                     , isCurrentlyAMiscKeyword: true },
     { representation: "reflexpr"                   , name: "reflexpr"                   },
     { representation: "synchronized"               , name: "synchronized"               },
     # 

@@ -8,10 +8,130 @@
 - source: 'Rule::Rule(const Rule &other) : blank_(Blank{}), type(BlankType) {'
 - source: '    *this = other;'
 - source: '}'
-- source: 'static void destroy_value(Rule *rule) {'
-- source: '    switch (rule->type) {'
-- source: '        case Rule::BlankType: return rule->blank.~Blank();'
-- source: '    }'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
+- source: static
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - storage.modifier.static
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: destroy_value
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Rule
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: rule
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: switch
+  scopesBegin:
+    - meta.body.function.definition
+    - meta.block.switch
+    - meta.head.switch
+  scopes:
+    - keyword.control.switch
+- source: (
+  scopesBegin:
+    - meta.conditional.switch
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.conditional.switch
+- source: rule
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: type
+  scopes:
+    - variable.other.property
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.conditional.switch
+  scopesEnd:
+    - meta.conditional.switch
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.switch
+  scopesEnd:
+    - meta.head.switch
+- source: case
+  scopesBegin:
+    - meta.body.switch
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: Rule
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: BlankType
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: return
+  scopes:
+    - keyword.control.return
+- source: rule
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: blank
+  scopes:
+    - variable.other.object.property
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: ~Blank
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: '}'
 - source: 'Rule &Rule::operator=(const Rule &other) {'
 - source: '    destroy_value(this);'

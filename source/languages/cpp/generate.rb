@@ -14,6 +14,20 @@ require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
+# 
+# TODO: remove me this is a temp change that should be corrected after this merge is over
+# 
+class Regexp
+    for each in [ "or", "then", "maybe", "zeroOrMoreOf", "oneOrMoreOf", "lookAheadFor", "lookAheadToAvoid", "lookBehindFor", "lookBehindToAvoid", ]
+        eval <<-HEREDOC
+            def #{each}(*args)
+                return Pattern.new(match: self,).#{each}(*args)
+            end
+        HEREDOC
+    end
+end
+
+
 # todo
     # add specificity to the ternary operator
     # add specificity to the misc_storage_modifiers
@@ -192,7 +206,7 @@ grammar = Grammar.new(
             :typedef_class,
             :typedef_struct,
             :typedef_union,
-            :typedef_keyword,               # eventuall remove this in favor of finding a complete statements
+            :misc_keywords,               # eventuall remove this in favor of finding a complete statements
             :standard_declares, # struct/enum/union/class
             :class_block,
             :struct_block,
@@ -510,9 +524,13 @@ grammar = Grammar.new(
             tag_as: "keyword.control.exception.$match"
         )
     )
-    grammar[:typedef_keyword] = Pattern.new(
+    # 
+    # misc keywords
+    # 
+    # these are keywords that SHOULD get there own patterns, but the work has not yet been put in for them
+    grammar[:misc_keywords] = Pattern.new(
         std_space.then(
-            match: variableBounds[ /typedef/ ],
+            match: variableBounds[ @cpp_tokens.that(:isCurrentlyAMiscKeyword) ],
             tag_as: "keyword.other.$match"
         )
     )
@@ -734,21 +752,24 @@ grammar = Grammar.new(
     #   some_number_of_angle_brackets = oneOrMoreOf(no_anglebrackets_at_all.or(balanced_brackets))
     # this is actually what is happening: (recursion)
     some_number_of_angle_brackets = Pattern.new(
-        should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>" ],
+        should_fully_match: [ "<>", "<testing, testing>", "<testing<>, testing>", "<'<'>", "<\">\">" ],
         should_not_fully_match: [ "testing<>" ],
         reference: "angle_brackets",
         match: Pattern.new(
             lookBehindToAvoid(/</).then(
                 /</
             ).lookAheadToAvoid(/</).oneOrMoreOf(
-                dont_back_track?: true,
                 match: Pattern.new(
                     zeroOrMoreOf(
-                        match: /[^<>]/,
+                        match: /[^'"<>]/,
                         dont_back_track?: true,
-                    ).maybe(
-                        recursivelyMatch("angle_brackets")
+                    ).or(
+                        match: /"/.then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/)
+                    ).or(
+                        match: /'/.then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/)
                     )
+                ).maybe(
+                    recursivelyMatch("angle_brackets")
                 ),
             ).then(/>/)
         )
@@ -1096,10 +1117,13 @@ grammar = Grammar.new(
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).zeroOrMoreOf(
-                Pattern.new(
-                    match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
-                    tag_as: "storage.modifier.$match"
-                ).then(std_space)
+                match: storage_modifiers = Pattern.new(
+                    Pattern.new(
+                        match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
+                        tag_as: "storage.modifier.$match"
+                    ).then(std_space)
+                ),
+                includes: [storage_modifiers],
             ).then(
                     grammar[:simple_type].then(std_space).then(
                     optional_calling_convention
@@ -2003,18 +2027,50 @@ grammar = Grammar.new(
 #
 # Lambdas
 #
+    only_balanced_square_bracke = Pattern.new(
+        should_fully_match: [ "[]", "[testing, testing]", "[testing[], testing]" ],
+        should_not_fully_match: [ "testing[]" ],
+        reference: "square_brackets",
+        match: Pattern.new(
+            lookBehindToAvoid(/\[/).then(
+                /\[/
+            ).lookAheadToAvoid(/\[/).oneOrMoreOf(
+                dont_back_track?: true,
+                match: Pattern.new(
+                    zeroOrMoreOf(
+                        match: /[^\[\]]/,
+                        dont_back_track?: true,
+                    ).maybe(
+                        recursivelyMatch("square_brackets")
+                    )
+                ),
+            ).then(/\]/)
+        )
+    )
     array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
     grammar[:lambdas] = lambdas = PatternRange.new(
         start_pattern: Pattern.new(
-                should_fully_match: [ "[]", "[=]", "[&]", "[x,y,x]", "[x, y, &z, w = 1 + 1]", "[ a = blah[1324], b, c ]" ],
+                should_fully_match: [
+                    "[]",
+                    "[=]",
+                    "[&]",
+                    "[x,y,x]",
+                    "[x, y, &z, w = 1 + 1]",
+                    "[ a = blah[1324 + blah[39430]], b, c ]" 
+                ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
-                match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: Pattern.new(/\[/).lookAheadToAvoid(/\[/),
+                match: Pattern.new(
+                    match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                        match: /\[/.lookAheadToAvoid(/\[| *+"| *+\d/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
-                    ).then(
-                        match: /(?:[^\]\[]*\[.*?\](?!\s*\[)[^\]\[]*?)*[^\]\[]*?/,
+                    )
+                ).then(
+                        match: zeroOrMoreOf(
+                            match: /[^\[\]]/.or(only_balanced_square_bracke),
+                            dont_back_track?: true,
+                        ),
                         tag_as: "meta.lambda.capture",
                         # the zeroOrMoreOf() is for other []'s that are inside of the lambda capture
                         # this pattern is still imperfect: if someone had a string literal with ['s in it, it could fail
@@ -2033,12 +2089,12 @@ grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: Pattern.new(/\]/).lookAheadToAvoid(/\[/),
+                        match: /\]/.lookAheadToAvoid(std_space.then(/[\[\];]/)),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
             ),
         end_pattern: Pattern.new(
-                match: lookBehindFor(/}/),
+                match: lookBehindFor(/[;}]/),
             ),
         includes: [
             # check for parameters first
@@ -2064,7 +2120,7 @@ grammar = Grammar.new(
                 match: /->/,
                 tag_as: "punctuation.definition.lambda.return-type"
             ).maybe(
-                match: Pattern.new(/.+?/).lookAheadFor(/\{|$/),
+                match: /.+?/.lookAheadFor(/\{|$/),
                 tag_as: "storage.type.return-type.lambda"
             ),
             # then find the body
@@ -2081,7 +2137,7 @@ grammar = Grammar.new(
                 includes: [ :$initial_context ]
             ),
         ]
-        )
+    )
 #
 # Classes, structs, unions, enums
 #
@@ -2179,7 +2235,6 @@ grammar = Grammar.new(
             tag_as: "meta.block.#{name}",
             name: name,
             start_pattern: Pattern.new(
-                    should_fully_match: ["#{name} foo: bar", "#{name} foo: public baz"],
                     should_not_fully_match: ["#{name} foo {","#{name} foo{"],
                     should_partial_match: ["#{name} foo f;", "#{name} st s;"],
                     match: Pattern.new(
@@ -2207,14 +2262,6 @@ grammar = Grammar.new(
                         std_space.then(
                             match: /:/,
                             tag_as: "punctuation.separator.colon.inheritance"
-                        # the following may seem redundant (removing it shouldn't change anything)
-                        # this is because the follow are matched by what is inside of this Range
-                        # However its preferable to match things here, in the Start (using a pattern), over matching it inside of the range
-                        # this is because the start pattern typically fails safely (is limited to 1 line), while typically Ranges fail dangerously (can match the whole document)
-                        ).zeroOrMoreOf(
-                            match: /[^{]/,
-                            dont_back_track?: true,
-                            includes: [ :inheritance_context ]
                         )
                     ),
                 ),
@@ -2270,7 +2317,7 @@ grammar = Grammar.new(
         Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
             match: Pattern.new(
-                match: /#{name}/,
+                match: variableBounds[/#{name}/],
                 tag_as: "storage.type.#{name}.declare",
             ).then(std_space).then(
                 match: variable_name,
@@ -2321,42 +2368,38 @@ grammar = Grammar.new(
 #
 # Misc
 #
-    grammar[:assembly] = assembly_pattern()
+    grammar[:assembly] = assembly_pattern(std_space, identifier)
     grammar[:backslash_escapes] = backslash_escapes()
 #
 # Misc Legacy
 #
     grammar[:square_brackets] = LegacyPattern.new({
-            name: "meta.bracket.square.access",
-            begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
-            beginCaptures: {
-                "1" => {
-                    name: "variable.other.object"
-                },
-                "2" => {
-                    name: "punctuation.definition.begin.bracket.square"
-                }
+        name: "meta.bracket.square.access",
+        begin: "([a-zA-Z_][a-zA-Z_0-9]*|(?<=[\\]\\)]))?(\\[)(?!\\])",
+        beginCaptures: {
+            "1" => {
+                name: "variable.other.object"
             },
-            end: "\\]",
-            endCaptures: {
-                "0" => {
-                    name: "punctuation.definition.end.bracket.square"
-                }
-            },
-            patterns: [
-                {
-                    include: "#evaluation_context"
-                }
-            ]
-        })
+            "2" => {
+                name: "punctuation.definition.begin.bracket.square"
+            }
+        },
+        end: "\\]",
+        endCaptures: {
+            "0" => {
+                name: "punctuation.definition.end.bracket.square"
+            }
+        },
+        patterns: [
+            {
+                include: "#evaluation_context"
+            }
+        ]
+    })
     grammar[:empty_square_brackets] = LegacyPattern.new ({
-            name: "storage.modifier.array.bracket.square",
-            match: lookBehindToAvoid("delete").then("[").maybe(@spaces).then("]").evaluate,
-        })
-    grammar[:misc_storage_modifiers] = Pattern.new(
-            match: /\b(?:export|mutable|typename|thread_local|register|restrict|static|volatile|inline)\b/,
-            tag_as: "storage.modifier.$match"
-        )
+        name: "storage.modifier.array.bracket.square",
+        match: lookBehindToAvoid("delete").then("[").maybe(@spaces).then("]").evaluate,
+    })
     grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",

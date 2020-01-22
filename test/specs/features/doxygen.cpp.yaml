@@ -106,12 +106,97 @@
 - source: '    int testMe(int a,const char *s);'
 - source: '    //! A pure virtual member.'
 - source: '    /*!'
-- source: '      \sa testMe()'
-- source: '      \param c1 the first argument.'
-- source: '      \param c2 the second argument.'
-- source: '    */'
-- source: '    virtual void testMeToo(char c1,char c2) = 0;'
-- source: '    //! A public variable.'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: \sa
+  scopes:
+    - storage.type.class.doxygen
+- source: ' testMe()'
+- source: \param
+  scopes:
+    - storage.type.class.doxygen
+- source: c1
+  scopes:
+    - variable.parameter
+- source: ' the first argument.'
+- source: \param
+  scopes:
+    - storage.type.class.doxygen
+- source: c2
+  scopes:
+    - variable.parameter
+- source: ' the second argument.'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: virtual
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - storage.modifier.virtual
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: testMeToo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: char
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: c1
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: c2
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //!
+  scopesBegin:
+    - comment.line.double-slash.documentation
+  scopes:
+    - punctuation.definition.comment.documentation
+- source: ' A public variable.'
+  scopesEnd:
+    - comment.line.double-slash.documentation
 - source: '    /*!'
 - source: '      Details.'
 - source: '    */'

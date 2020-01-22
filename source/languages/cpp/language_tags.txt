@@ -75,7 +75,6 @@ invalid.illegal.delimiter-too-long.cpp
 invalid.illegal.reference-type.cpp
 invalid.illegal.unexpected.punctuation.definition.comment.end.cpp
 invalid.illegal.unknown-escape.cpp
-invalid.unknown.documentation.command.cpp
 keyword.control.$5.cpp
 keyword.control.case.cpp
 keyword.control.default.cpp
@@ -85,6 +84,7 @@ keyword.control.directive.conditional.$7.cpp
 keyword.control.directive.conditional.defined.cpp
 keyword.control.directive.define.cpp
 keyword.control.directive.diagnostic.$7.cpp
+keyword.control.directive.import.cpp
 keyword.control.directive.line.cpp
 keyword.control.directive.pragma.cpp
 keyword.control.directive.pragma.pragma-mark.cpp
@@ -211,6 +211,7 @@ meta.parens.cpp
 meta.parens.preprocessor.conditional.cpp
 meta.preprocessor.conditional.cpp
 meta.preprocessor.diagnostic.$reference(directive).cpp
+meta.preprocessor.import.cpp
 meta.preprocessor.include.cpp
 meta.preprocessor.line.cpp
 meta.preprocessor.macro.cpp
@@ -373,8 +374,7 @@ punctuation.terminator.statement.cpp
 punctuation.vararg-ellipses.cpp
 punctuation.vararg-ellipses.template.definition.cpp
 punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
-storage.modifier.$0.cpp
-storage.modifier.$11.cpp
+storage.modifier.$1.cpp
 storage.modifier.array.bracket.square.cpp
 storage.modifier.cpp
 storage.modifier.inline.cpp
@@ -433,6 +433,7 @@ support.type.built-in.posix-reserved.pthread.cpp
 support.type.posix-reserved.cpp
 support.type.posix-reserved.pthread.cpp
 variable.language.this.cpp
+variable.other.asm.label.cpp
 variable.other.definition.pointer.function.cpp
 variable.other.enummember.cpp
 variable.other.macro.argument.cpp

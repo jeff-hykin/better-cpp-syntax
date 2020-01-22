@@ -120,7 +120,10 @@ class TokenHelper
             end
             output
         end
-        return matches
+        # sort from longest to shortest
+        matches.sort do |token1, token2|
+            token2[:representation].length - token1[:representation].length
+        end
     end
 
     def representationsThat(*adjectives)
