@@ -24386,11 +24386,22 @@
   scopes:
     - punctuation.definition.comment
 - source: ' this will match:'
+  scopesEnd:
+    - comment.line.double-slash
 - source: //
+  scopesBegin:
+    - meta.toc-list.banner.double-slash
+    - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
-- source: ' *spaces(or nothing)*   *a negative symbol(or nothing)*   *9 digits or less*    *spaces(or nothing)*'
+- source: '*'
+  scopes:
+    - meta.banner.character
+- source: >-
+    spaces(or nothing)*   *a negative symbol(or nothing)*   *9 digits or
+    less*    *spaces(or nothing)*
   scopesEnd:
+    - meta.toc-list.banner.double-slash
     - comment.line.double-slash
 - source: '                    regex'
 - source: is_it_an_int
@@ -24622,11 +24633,22 @@
   scopes:
     - punctuation.definition.comment
 - source: ' this will match:'
+  scopesEnd:
+    - comment.line.double-slash
 - source: //
+  scopesBegin:
+    - meta.toc-list.banner.double-slash
+    - comment.line.double-slash
   scopes:
     - punctuation.definition.comment
-- source: ' *spaces(or nothing)*   *a negative symbol(or nothing)*   *9 digits or less*    *spaces(or nothing)*'
+- source: '*'
+  scopes:
+    - meta.banner.character
+- source: >-
+    spaces(or nothing)*   *a negative symbol(or nothing)*   *9 digits or
+    less*    *spaces(or nothing)*
   scopesEnd:
+    - meta.toc-list.banner.double-slash
     - comment.line.double-slash
 - source: '                    regex'
 - source: is_it_a_number

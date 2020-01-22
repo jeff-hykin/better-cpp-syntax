@@ -5,33 +5,33 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: import
-  scopesBegin:
-    - meta.preprocessor.import
-  scopes:
-    - keyword.control.directive.import
+- source: 'import '
 - source: <
-  scopesBegin:
-    - string.quoted.other.lt-gt.include
   scopes:
-    - punctuation.definition.string.begin
+    - keyword.operator.comparison
 - source: vector
 - source: '>'
   scopes:
-    - punctuation.definition.string.end
-  scopesEnd:
-    - string.quoted.other.lt-gt.include
-- source: import
+    - keyword.operator.comparison
+- source: 'import '
+- source: some
   scopes:
-    - keyword.control.directive.import
-- source: some.other.module
+    - variable.other.object.access
+- source: .
   scopes:
-    - entity.name.other.preprocessor.macro.include
+    - punctuation.separator.dot-access
+- source: other
+  scopes:
+    - variable.other.object.property
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: module
+  scopes:
+    - variable.other.property
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.preprocessor.import
 - source: export
   scopes:
     - keyword.other.export
