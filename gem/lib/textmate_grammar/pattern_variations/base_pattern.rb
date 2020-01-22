@@ -1,12 +1,5 @@
 # frozen_string_literal: true
 
-require 'deep_clone'
-require 'yaml'
-require 'textmate_grammar/grammar_plugin'
-require 'textmate_grammar/util'
-require 'textmate_grammar/regex_operator'
-require 'textmate_grammar/regex_operators/concat'
-
 #
 # Provides a base class to simplify the writing of complex regular expressions rules
 # This class completely handles capture numbers and provides convenience methods for
@@ -872,5 +865,3 @@ class PatternBase
         # no capture groups present, purposely do nothing
     end
 end
-
-Dir[File.join(__dir__, 'sub_patterns', '*.rb')].each { |file| require file }

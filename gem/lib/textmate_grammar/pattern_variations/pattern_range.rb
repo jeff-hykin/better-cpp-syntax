@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "./base_pattern.rb"
+
 #
 # Provides the ability to create begin/end and begin/while rules
 #

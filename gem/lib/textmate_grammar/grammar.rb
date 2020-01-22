@@ -5,7 +5,7 @@ require 'json'
 require 'pp'
 require 'pathname'
 
-require_relative 'pattern'
+require_relative 'import_patterns'
 
 #
 # Represents a Textmate Grammar
