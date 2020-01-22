@@ -1,14 +1,97 @@
-- source: // .h file with C++ syntax highlighting
-- source: '#ifdef USE_IN_HLSL'
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' .h file with C++ syntax highlighting'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: USE_IN_HLSL
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
 - source: cbuffer  testCB
-- source: '#else'
-- source: struct testCB
-- source: '#endif   // <= this #endif is highlighted white although its valid'
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: testCB
+  scopes:
+    - entity.name.type.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' <= this #endif is highlighted white although its valid'
+  scopesEnd:
+    - comment.line.double-slash
 - source: '{'
-- source: '  float Brightness;'
-- source: '  // ...'
-- source: '};'
-- source: >-
-    // the .h file with this struct definition can be used in HLSL and in C++
-    code 
-- source: // this way
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: float
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' Brightness'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' ...'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' the .h file with this struct definition can be used in HLSL and in C++ code '
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' this way'

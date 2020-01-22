@@ -1,9 +1,170 @@
-- source: '#include <string>'
-- source: 'class Example {'
-- source: '    Example &operator++();'
-- source: '    operator int();'
-- source: '    operator std::string &();'
-- source: '};'
-- source: 'int main() {'
-- source: '    return 0;'
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: Example
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: Example
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: ++
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: int
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.head.function.definition.special.operator-overload
+    - keyword.other.operator.overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: string
+  scopes:
+    - meta.head.function.definition.special.operator-overload
+    - entity.name.operator.type
+- source: '&'
+  scopes:
+    - entity.name.operator.type.reference
+- source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

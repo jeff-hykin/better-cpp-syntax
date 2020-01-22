@@ -1,1 +1,11 @@
-- source: typedef foo int;
+- source: typedef
+  scopes:
+    - keyword.other.typedef
+- source: ' foo'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

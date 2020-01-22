@@ -1,11 +1,218 @@
-- source: '#include <vector>'
-- source: '#include <string>'
-- source: '#include <memory>'
-- source: class cc;
-- source: int func()
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: vector
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: memory
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: cc
+  scopes:
+    - entity.name.type.class
+  scopesEnd:
+    - meta.head.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
 - source: '{'
-- source: '  auto a = [](std::vector<std::shared_ptr<cc>> c)'
-- source: '    {'
-- source: '    };'
-- source: '  using namespace std::literals;'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: auto
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' a '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: std
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: vector
+  scopes:
+    - entity.name.type.parameter
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: shared_ptr
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: cc
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: c
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopesBegin:
+    - meta.using-namespace
+  scopes:
+    - keyword.other.using.directive
+- source: namespace
+  scopes:
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
+- source: std
+  scopes:
+    - entity.name.scope-resolution.namespace.using
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.using
+- source: literals
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.using-namespace
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

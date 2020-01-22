@@ -98,5 +98,16 @@
   scopes:
     - punctuation.definition.comment.begin
 - source: '        snip'
-- source: '        */'
-- source: '};'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

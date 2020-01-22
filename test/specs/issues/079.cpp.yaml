@@ -1,4 +1,170 @@
-- source: 'template class MyStack<int, 6>;'
-- source: 'template MyStack<int, 6>::MyStack( void );'
-- source: 'extern template class MyStack<int, 6>;'
-- source: 'extern template MyStack<int, 6>::MyStack( void );'
+- source: 'template '
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: MyStack
+  scopes:
+    - entity.name.type.class
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.head.class
+    - meta.template.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: template
+- source: MyStack
+  scopes:
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: MyStack
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: ' template '
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: MyStack
+  scopes:
+    - entity.name.type.class
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.head.class
+    - meta.template.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: ' template'
+- source: MyStack
+  scopes:
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: MyStack
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

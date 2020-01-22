@@ -1,13 +1,357 @@
-- source: 'class Vector {'
-- source: 'private:'
-- source: '    double* elem;           // elem points to an array of sz doubles'
-- source: '    int sz;'
-- source: 'public:'
-- source: '    Vector(int s) :elem{new double[s]}, sz{s}       // constructor: acquires resources'
-- source: '    {'
-- source: '        for (int i = 0; i != s; ++i) elem[i] = 0;   // initialize elements'
-- source: '    }'
-- source: '    ~Vector() { delete[] elem; }                    // destructor: release resources'
-- source: '    double& operator[](int i);'
-- source: '    int size() const;'
-- source: '};'
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: Vector
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: private
+  scopesBegin:
+    - meta.body.class
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' elem'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' elem points to an array of sz doubles'
+  scopesEnd:
+    - comment.line.double-slash
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' sz'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: public
+  scopesBegin:
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: Vector
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: s
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: elem
+  scopes:
+    - entity.name.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: new
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: s
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.parameter.initialization
+    - meta.bracket.square.access
+- source: '}'
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: sz
+  scopes:
+    - entity.name.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: s
+  scopes:
+    - meta.parameter.initialization
+- source: '}'
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' constructor: acquires resources'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: for
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' i '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' i '
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: ' s'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: i
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: elem
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: i
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' initialize elements'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
+- source: ~Vector
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
+- source: delete
+  scopesBegin:
+    - meta.body.function.definition.special.member.destructor
+    - keyword.operator.wordlike
+  scopes:
+    - keyword.operator.delete.array
+- source: '[]'
+  scopes:
+    - keyword.operator.delete.array.bracket
+  scopesEnd:
+    - keyword.operator.wordlike
+- source: ' elem'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.body.function.definition.special.member.destructor
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' destructor: release resources'
+  scopesEnd:
+    - comment.line.double-slash
+- source: double
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '[]'
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: i
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: size
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

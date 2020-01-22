@@ -1,41 +1,790 @@
-- source: '#pragma once'
-- source: '#include <type_traits>'
-- source: '#define IsPointDef(...) \'
-- source: '    template<> \'
-- source: '    struct IsPoint<__VA_ARGS__> \'
-- source: '        {\'
-- source: '        static const bool isPoint = true;\'
-- source: '                }'
-- source: '#define ArrayBasedPointDef(T) \'
-- source: '    IsPointDef(T); \'
-- source: '    template<> \'
-- source: '    struct IsArrayBasedPoint<T>:public std::true_type \'
-- source: '        {};'
-- source: '#define XYBasedPointDef(T) \'
-- source: '    IsPointDef(T); \'
-- source: '    template<> \'
-- source: '    struct IsXYBasedPoint<T>:public std::true_type \'
-- source: '{};'
-- source: '#define TypeTAndUIsPoint \'
-- source: '    template<typename T, typename U, class = typename std::enable_if<IsPoint<T>::isPoint>::type, class = typename std::enable_if<IsPoint<U>::isPoint>::type>'
-- source: namespace Navigation
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.pragma
+    - keyword.control.directive.pragma
+  scopes:
+    - punctuation.definition.directive
+- source: pragma
+  scopesEnd:
+    - keyword.control.directive.pragma
+- source: once
+  scopes:
+    - entity.other.attribute-name.pragma.preprocessor
+  scopesEnd:
+    - meta.preprocessor.pragma
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: type_traits
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: IsPointDef
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses.variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsPoint
+  scopes:
+    - entity.name.type.struct
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: __VA_ARGS__
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '{'
-- source: '    namespace Utils'
-- source: '    {'
-- source: '        template<typename T>'
-- source: '        struct IsPoint'
-- source: '        {'
-- source: '            static const bool isPoint = false;'
-- source: '        };'
-- source: '        template<typename T>'
-- source: '        struct IsArrayBasedPoint'
-- source: '        {'
-- source: '            static const bool value = false;'
-- source: '        };'
-- source: '        template<typename T>'
-- source: '        struct IsXYBasedPoint'
-- source: '        {'
-- source: '            static const bool value = false;'
-- source: '        };'
-- source: '    }'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: \
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - constant.character.escape.line-continuation
+- source: static
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' isPoint '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.block.struct
+    - meta.body.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: ArrayBasedPointDef
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: T
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: IsPointDef
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: T
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsArrayBasedPoint
+  scopes:
+    - entity.name.type.struct
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: ':'
+- source: public
+  scopes:
+    - storage.type.modifier.access.public
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: XYBasedPointDef
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: T
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: IsPointDef
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: T
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsXYBasedPoint
+  scopes:
+    - entity.name.type.struct
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: ':'
+- source: public
+  scopes:
+    - storage.type.modifier.access.public
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: true_type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: TypeTAndUIsPoint
+  scopes:
+    - entity.name.function.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: U
+  scopes:
+    - entity.name.type.template
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: class
+  scopes:
+    - entity.name.type.template
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: typename
+  scopes:
+    - storage.modifier
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: enable_if
+  scopes:
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: IsPoint
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: isPoint
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: class
+  scopes:
+    - entity.name.type.template
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: typename
+  scopes:
+    - storage.modifier
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: enable_if
+  scopes:
+    - entity.name.scope-resolution
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: IsPoint
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: U
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: isPoint
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: type
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.template.definition
+    - meta.qualified_type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: Navigation
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: namespace
+  scopesBegin:
+    - meta.body.namespace
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: Utils
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: template
+  scopesBegin:
+    - meta.body.namespace
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsPoint
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: static
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' isPoint '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsArrayBasedPoint
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: static
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' value '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: IsXYBasedPoint
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: static
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' value '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace

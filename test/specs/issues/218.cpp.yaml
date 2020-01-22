@@ -108,50 +108,105 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: '{'
-- source: '  a a;'
-- source: '  a(a, a,'
-- source: '                                 a,'
-- source: '                                 a,'
-- source: '                                 a,'
-- source: '                                 a,'
-- source: '                                 a,'
-- source: '                                 a,'
-- source: '                                 a);'
-- source: '  a->a(&a);'
-- source: '  for (auto a : a) {'
-- source: '    auto &a = a.a;'
-- source: '    auto a = a.a;'
-- source: '    if (a && a) {'
-- source: '      switch (a) {'
-- source: '        case a:'
-- source: '          a->a(a->a());'
-- source: '          break;'
-- source: '        case a:'
-- source: '          a->a(a->a());'
-- source: '          break;'
-- source: '        case a:'
-- source: '          a->a(a->a());'
-- source: '          break;'
-- source: '        case a:'
-- source: '          a->a(a->a());'
-- source: '          break;'
-- source: '      }  '
-- source: '    }'
-- source: '    a(a, a,'
-- source: '                                   a,'
-- source: '                                   a,'
-- source: '                                   a,'
-- source: '                                   a,'
-- source: '                                   a,'
-- source: '                                   a,'
-- source: '                                   a);'
-- source: '  } '
-- source: '}  '
-- source: static void a(
-- source: '                      a                    a,'
-- source: '                      a           a,'
-- source: '                      a a,'
-- source: '                      a                                 a)'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '  a a'
+  scopesBegin:
+    - meta.body.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: a
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: a
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '                                 a'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: a
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: a
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' a '
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.range-based
+- source: ' a'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: '{'
   scopesBegin:
     - meta.block
@@ -809,3 +864,5 @@
   scopesEnd:
     - meta.block
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
