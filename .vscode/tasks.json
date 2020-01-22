@@ -15,7 +15,7 @@
         {
             "label": "build_active_file",
             "type": "shell",
-            "command": "ruby ${file}"
+            "command": "bundle exec ruby ${file}"
         }
     ]
 }
