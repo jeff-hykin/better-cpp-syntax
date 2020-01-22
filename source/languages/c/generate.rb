@@ -1,3 +1,5 @@
+exit
+require 'textmate_grammar'
 require_relative '../../../paths'
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
@@ -5,8 +7,6 @@ require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative source_dir + 'shared_patterns/assembly.rb'
-require_relative source_dir + 'shared_patterns/inline_comment'
-require_relative source_dir + 'shared_patterns/std_space.rb'
 require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 
@@ -30,9 +30,11 @@ c_grammar = Grammar.new(
 )
 
 $grammar = c_grammar
-c_grammar[:inline_comment] = inline_comment
-def std_space() generateStdSpace($grammar[:inline_comment]) end
-
+# c_grammar[:inline_comment] = inline_comment
+c_grammar.import(File.join(__dir__,"../../shared_patterns/inline_comment.rb"))
+c_grammar.import(File.join(__dir__,"../../shared_patterns/std_space.rb"))
+puts "c_grammar[:inline_comment] is: #{c_grammar[:inline_comment]} "
+std_space = c_grammar[:std_space]
 #
 # import from C++
 #
@@ -69,7 +71,7 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+    variable_name_without_bounds = /[a-zA-Z_]/.zeroOrMoreOf(@standard_character)
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
@@ -114,7 +116,7 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
             match: arrow_operator,
             tag_as: "punctuation.separator.pointer-access"
         )
-    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
+    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
     partial_member = Pattern.new(
@@ -539,6 +541,7 @@ c_grammar[:comments] = [
     )
 
 ]
+c_grammar[:assembly] = assembly_pattern(std_space, variable_name_without_bounds)
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {
@@ -937,7 +940,9 @@ c_grammar.addToRepository({
                 match: /\b(enum|struct|union)\b/,
                 name: "storage.type.$1.c"
             },
-            assembly_pattern(std_space, variable_name_without_bounds).to_tag,
+            {
+                include: "#assembly"
+            }
         ]
     },
     "vararg_ellipses" => {

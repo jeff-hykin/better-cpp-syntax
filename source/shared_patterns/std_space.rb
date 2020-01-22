@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'textmate_grammar'
 
 g = Grammar.new_exportable_grammar
 g.exports = [:std_space]
