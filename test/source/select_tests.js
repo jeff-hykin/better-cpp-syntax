@@ -33,7 +33,7 @@ module.exports = function(yargs) {
         return defaultTest;
     }
     return test => {
-        const ext = path.extname(test.fixture).slice(1);
+        const ext = path.extname(test.fixturePath).slice(1);
         return defaultTest(test) && fileExt.includes(ext);
     };
 };

@@ -29,7 +29,7 @@ async function runReport(yargs) {
     let files = yargs.fixtures;
     if (files.length === 0) {
         // use text fixtures instead
-        files = require("../get_tests")(yargs).map(test => test.fixture);
+        files = require("../get_tests")(yargs).map(test => test.fixturePath);
     } else {
         files = _.flatten(files.map(file => glob.sync(file)));
     }
