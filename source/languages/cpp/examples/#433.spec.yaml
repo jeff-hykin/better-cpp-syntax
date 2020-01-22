@@ -1,0 +1,314 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: test
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: asm
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - meta.asm
+    - storage.type.asm
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: ':'
+  scopesBegin:
+    - punctuation.separator.colon.range-based
+- source: ':'
+- source: ':'
+  scopesEnd:
+    - punctuation.separator.colon.range-based
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: test
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: __asm__
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - meta.asm
+    - storage.type.asm
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' load palettes'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'ld2 {v4.16b, v5.16b}, [%[curpal0]]'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+- source: '"'
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'ld2 {v6.16b, v7.16b}, [%[curpal1]]'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.range-based
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: prevTileLo
+  scopes:
+    - meta.lambda.capture
+    - variable.parameter.capture
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: ' "+w" '
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: prevTile
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: .
+- source: val
+  scopes:
+    - variable.parameter
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.array
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
+  scopesEnd:
+    - meta.parameter
+    - meta.bracket.square.array
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: ', [prevTileHi] "+w" '
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: prevTile
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: .
+- source: val
+  scopes:
+    - variable.parameter
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.array
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
+  scopesEnd:
+    - meta.parameter
+    - meta.bracket.square.array
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '        :'
+- source: '            [curpal0] "r" '
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: curpal0
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: ', [curpal1] "r" '
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: curpal1
+  scopes:
+    - meta.parameter
+    - entity.name.type.parameter
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '        :'
+- source: '            "memory", "q0", "q1", "q2", "q3", "q4", "q5", "q6", "q7"'
+- source: '    );'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' test '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: printf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'test '
+- source: '%d'
+  scopes:
+    - constant.other.placeholder
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' argc'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' argv[]'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '{'
+- source: '}'

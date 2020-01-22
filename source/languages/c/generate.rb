@@ -1,3 +1,5 @@
+exit
+require 'textmate_grammar'
 require_relative '../../../paths'
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'
@@ -5,8 +7,6 @@ require_relative source_dir + 'repo_specific_helpers.rb'
 require_relative source_dir + 'shared_patterns/numeric.rb'
 require_relative source_dir + 'shared_patterns/predefined_macros.rb'
 require_relative source_dir + 'shared_patterns/assembly.rb'
-require_relative source_dir + 'shared_patterns/inline_comment'
-require_relative source_dir + 'shared_patterns/std_space.rb'
 require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 
@@ -30,9 +30,11 @@ c_grammar = Grammar.new(
 )
 
 $grammar = c_grammar
-c_grammar[:inline_comment] = inline_comment
-def std_space() generateStdSpace($grammar[:inline_comment]) end
-
+# c_grammar[:inline_comment] = inline_comment
+c_grammar.import(File.join(__dir__,"../../shared_patterns/inline_comment.rb"))
+c_grammar.import(File.join(__dir__,"../../shared_patterns/std_space.rb"))
+puts "c_grammar[:inline_comment] is: #{c_grammar[:inline_comment]} "
+std_space = c_grammar[:std_space]
 #
 # import from C++
 #
@@ -69,7 +71,7 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = /[a-zA-Z_]#{@standard_character.without_default_mode_modifiers}*/
+    variable_name_without_bounds = /[a-zA-Z_]/.zeroOrMoreOf(@standard_character)
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
 
@@ -94,9 +96,9 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
     array_brackets = /\[\]/.maybe(@spaces)
     comma_or_closing_paraenthese = /,/.or(/\)/)
     stuff_after_a_parameter = maybe(@spaces).lookAheadFor(maybe(array_brackets).then(comma_or_closing_paraenthese))
-    probably_a_parameter_1_group = newPattern(
+    probably_a_parameter_1_group = Pattern.new(
         match: look_behind_for_type.then(
-            newPattern(
+            Pattern.new(
                 match: variable_name_without_bounds,
                 tag_as: "variable.parameter.probably"
             )).then(stuff_after_a_parameter),
@@ -107,17 +109,17 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
 #
     dot_operator = /\.\*/.or(/\./)
     arrow_operator = /->\*/.or(/->/)
-    member_operator = newPattern(
+    member_operator = Pattern.new(
             match: dot_operator,
             tag_as: "punctuation.separator.dot-access"
         ).or(
             match: arrow_operator,
             tag_as: "punctuation.separator.pointer-access"
         )
-    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.without_numbered_capture_groups).maybe(@spaces)
+    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
-    partial_member = newPattern(
+    partial_member = Pattern.new(
             match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
             tag_as: "variable.other.object.access",
         ).then(
@@ -133,7 +135,7 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
             includes: member_context
         ).maybe(@spaces)
     # access to attribute
-    c_grammar[:member_access] =  member_access = newPattern(
+    c_grammar[:member_access] =  member_access = Pattern.new(
         match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(@c_tokens.that(:isType).then(@word_boundary)).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.member"
@@ -149,7 +151,7 @@ def std_space() generateStdSpace($grammar[:inline_comment]) end
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
             ),
-        end_pattern: newPattern(
+        end_pattern: Pattern.new(
                 match: /\)/,
                 tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
             ),
@@ -170,7 +172,7 @@ c_grammar[:$initial_context] = [
         name: "keyword.control.c"
     },
     "#storage_types",
-    newPattern(
+    Pattern.new(
         match: /typedef/,
         tag_as: "keyword.other.typedef",
     ),
@@ -200,13 +202,13 @@ c_grammar[:$initial_context] = [
     PatternRange.new(
         tag_as: "meta.preprocessor.macro",
         start_pattern: std_space.then(
-            match: newPattern(match: /#/, tag_as:"punctuation.definition.directive")
+            match: Pattern.new(match: /#/, tag_as:"punctuation.definition.directive")
                 .maybe(@spaces).then(/define\b/),
             tag_as: "keyword.control.directive.define"
         ).then(@spaces).then(
             match: variable_name,
             tag_as: "entity.name.function.preprocessor"
-        ).maybe(newPattern(
+        ).maybe(Pattern.new(
             match: /\(/,
             tag_as: "punctuation.definition.parameters.begin",
         ).then(
@@ -216,11 +218,11 @@ c_grammar[:$initial_context] = [
                     match: variable_name,
                     tag_as: "variable.parameter.preprocessor"
                 ).maybe(@spaces),
-                newPattern(
+                Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.parameters"
                 ),
-                newPattern(
+                Pattern.new(
                     match: /\.\.\./,
                     tag_as: "ellipses punctuation.vararg-ellipses.variable.parameter.preprocessor"
                 )
@@ -539,6 +541,7 @@ c_grammar[:comments] = [
     )
 
 ]
+c_grammar[:assembly] = assembly_pattern(std_space, variable_name_without_bounds)
 c_grammar.addToRepository({
     "probably_a_parameter" => probably_a_parameter_1_group.to_tag,
     "access-method" => {
@@ -830,11 +833,11 @@ c_grammar.addToRepository({
                 name: "keyword.operator.c"
             },
             PatternRange.new(
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /\?/,
                     tag_as: "keyword.operator.ternary",
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     match: /:/,
                     tag_as: "keyword.operator.ternary",
                 ),
@@ -937,7 +940,9 @@ c_grammar.addToRepository({
                 match: /\b(enum|struct|union)\b/,
                 name: "storage.type.$1.c"
             },
-            assembly_pattern().to_tag,
+            {
+                include: "#assembly"
+            }
         ]
     },
     "vararg_ellipses" => {

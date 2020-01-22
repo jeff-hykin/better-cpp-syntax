@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+source "http://rubygems.org"
+
+ruby ">=2.5.0"
+
+gem "textmate_grammar", :path => File.expand_path(__dir__)
+
+gem 'deep_clone'
+gem 'logging'
+
+gem 'plist', :require => false
+
+group :test do
+    gem 'minitest'
+    gem 'rake'
+    gem 'simplecov'
+    gem 'simplecov-lcov'
+end
+
+group :development do
+    gem 'rubocop'
+    gem 'solargraph'
+    gem 'yard'
+end

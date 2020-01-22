@@ -11,18 +11,13 @@ const pathFor = require("./paths");
  */
 module.exports = (yargs, testFilter = _each => true) =>
     pathFor.eachFixture
-        .map(fixture => {
-            console.log(fixture);
-            let specPath = fixture.replace(pathFor.fixtures, pathFor.specDir);
+        .map(fixturePath => {
+            let specPath = fixturePath.replace(/\.[^.]+/, ".spec.yaml")
             return {
-                fixture,
+                fixturePath,
                 spec: {
-                    json: `${specPath}.json`,
-                    yaml: `${specPath}.yaml`,
-                    // use json if yaml doesn't exist
-                    default: fs.existsSync(`${specPath}.yaml`)
-                        ? `${specPath}.yaml`
-                        : `${specPath}.yaml`
+                    yaml: specPath,
+                    default: specPath
                 }
             };
         })
@@ -31,6 +26,6 @@ module.exports = (yargs, testFilter = _each => true) =>
                 testFilter(test) &&
                 (yargs.fixtures.length == 0 ||
                     yargs.fixtures.includes(
-                        path.relative(pathFor.fixtures, test.fixture)
+                        path.relative(pathFor.fixtures, test.fixturePath)
                     ))
         );

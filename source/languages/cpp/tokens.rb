@@ -102,6 +102,9 @@ tokens = [
     { representation: "case"                 , name: "case"                           , isControlFlow: true,                                           },
     { representation: "continue"             , name: "continue"                       , isControlFlow: true,                                           },
     { representation: "default"              , name: "default"                        , isControlFlow: true,                                           },
+    { representation: "co_await"             , name: "co_await"                       , isControlFlow: true,                                           },
+    { representation: "co_yield"             , name: "co_yield"                       , isControlFlow: true,                                           },
+    { representation: "co_return"            , name: "co_return"                      , isControlFlow: true,                                           },
     # primitive type keywords
     # https://en.cppreference.com/w/cpp/language/types
     { representation: "auto"                 , name: "auto"                           , isPrimitive: true, isType: true},
@@ -251,16 +254,16 @@ tokens = [
     { representation: "using"           , name: "using"         },
     { representation: "operator"        , name: "operator"      },
     # 
-    { representation: "typedef"         , name: "typedef"       },
+    { representation: "typedef"         , name: "typedef"       , isCurrentlyAMiscKeyword: true },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
-    { representation: "concept"                    , name: "concept"                    },
-    { representation: "requires"                   , name: "requires"                   },
-    { representation: "export"                     , name: "export"                     },
+    { representation: "concept"                    , name: "concept"                    , isCurrentlyAMiscKeyword: true },
+    { representation: "requires"                   , name: "requires"                   , isCurrentlyAMiscKeyword: true },
+    { representation: "export"                     , name: "export"                     , isCurrentlyAMiscKeyword: true },
     { representation: "thread_local"               , name: "thread_local"               },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },
@@ -269,7 +272,7 @@ tokens = [
     { representation: "co_return"                  , name: "co_return"                  },
     { representation: "co_yield"                   , name: "co_yield"                   },
     { representation: "import"                     , name: "import"                     },
-    { representation: "module"                     , name: "module"                     },
+    { representation: "module"                     , name: "module"                     , isCurrentlyAMiscKeyword: true },
     { representation: "reflexpr"                   , name: "reflexpr"                   },
     { representation: "synchronized"               , name: "synchronized"               },
     # 

@@ -17,16 +17,16 @@ async function runTests(yargs) {
     for (const test of tests) {
         console.group(
             "running test for",
-            path.relative(pathFor.fixtures, test.fixture)
+            path.relative(pathFor.fixtures, test.fixturePath)
         );
         const fixture = fs
-            .readFileSync(test.fixture)
+            .readFileSync(test.fixturePath)
             .toString()
             .split("\n");
         const spec = fs.readFileSync(test.spec.default);
         const result = await runTest(
             registry,
-            path.relative(pathFor.fixtures, test.fixture),
+            path.relative(pathFor.fixtures, test.fixturePath),
             fixture,
             yaml.safeLoad(spec, { filename: test.spec.default, json: true }),
             yargs.showFailureOnly

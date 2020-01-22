@@ -9,25 +9,25 @@ const pathFor = require("../paths");
 
 async function generateSpecs(yargs) {
     const tests = require("../get_tests")(yargs, test => {
-        const result =
-            (!fs.existsSync(test.spec.yaml) &&
-                !fs.existsSync(test.spec.json)) ||
-            yargs.all ||
-            yargs.fixtures.length !== 0;
+        const result = 
+            !fs.existsSync(test.spec.yaml)
+            || yargs.all
+            || yargs.fixtures.length !== 0;
         return result;
     });
 
     for (const test of tests) {
+        const fixturePath = test.fixturePath
         console.log(
             "generating spec for",
-            path.relative(pathFor.fixtures, test.fixture)
+            path.relative(pathFor.fixtures, fixturePath)
         );
-        const fixture = fs
-            .readFileSync(test.fixture)
+        const fixtureLines = fs
+            .readFileSync(fixturePath)
             .toString()
             .split("\n");
-
-        const spec = await generateSpec(test.fixture, fixture);
+    
+        const spec = await generateSpec(fixturePath, fixtureLines);
         fs.writeFileSync(
             test.spec.yaml,
             yaml.dump(JSON.parse(JSON.stringify(spec)), {

@@ -15,7 +15,7 @@ def predefinedMacros()
         "__OBJC__",
         "__ASSEMBLER__",
     ]
-    
+
     msvc = [
         "__ATOM__",
         "__AVX__",
@@ -72,7 +72,7 @@ def predefinedMacros()
         "_ATL_VER",
         "_MFC_VER",
     ]
-    
+
     gcc = [
         #counter already added
         "__GFORTRAN__",
@@ -242,7 +242,7 @@ def predefinedMacros()
         "__GCC_IEC_559_COMPLEX",
         "__NO_MATH_ERRNO__",
     ]
-    
+
     clang = [
         "__has_builtin",
         "__has_feature",
@@ -269,13 +269,13 @@ def predefinedMacros()
     macros = cpp + msvc + gcc + clang
     macros = [
         Pattern.new(
-            match: /\b/.then(
+            match: Pattern.new(/\b/).then(
                 match: /#{macros.join "|"}/,
                 tag_as: "entity.name.other.preprocessor.macro.predefined.$match"
             ).then(/\b/)
         ),
         Pattern.new(
-            match: /\b__/.then(
+            match: Pattern.new(/\b__/).then(
                 match: /[A-Z_]+/,
                 reference: "name",
             ).then(/__\b/),

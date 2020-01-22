@@ -1,0 +1,68 @@
+require:
+    - ./rubocop/avoid_return_from_block.rb
+AllCops:
+    TargetRubyVersion: 2.5
+Layout/IndentationWidth:
+    Width: 4
+Layout/SpaceAroundOperators:
+    Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+    Enabled: false
+Layout/TrailingBlankLines:
+    # Enabled: true
+    Enabled: false
+
+Metrics/AbcSize:
+    Max: 100
+Metrics/ClassLength:
+    Enabled: false
+Metrics/CyclomaticComplexity:
+    Max: 30
+Metrics/LineLength:
+    Max: 100
+Metrics/MethodLength:
+    Enabled: false
+Metrics/PerceivedComplexity:
+    Max: 20
+
+Naming/MethodName:
+    Enabled: false
+
+Style/AsciiComments:
+    AllowedChars:
+        - ✓
+Style/AndOr:
+    Enabled: false
+    # Enabled: true
+Style/ClassVars:
+    Enabled: false
+Style/CommentAnnotation:
+    Keywords:
+        - TODO
+        - FIXME
+Style/Documentation:
+    Enabled: false
+Style/HashSyntax:
+    EnforcedStyle: no_mixed_keys
+Style/Not:
+    Enabled: false
+    # Enabled: true
+Style/NumericPredicate:
+    EnforcedStyle: comparison
+Style/PreferredHashMethods:
+    EnforcedStyle: verbose
+Style/StringLiterals:
+    # EnforcedStyle: double_quotes
+    Enabled: false
+Style/SymbolArray:
+    EnforcedStyle: brackets
+Style/TernaryParentheses:
+    EnforcedStyle: require_parentheses_when_complex
+Style/TrailingCommaInArguments:
+    EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+    EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+    EnforcedStyleForMultiline: consistent_comma
+Style/WordArray:
+    EnforcedStyle: brackets

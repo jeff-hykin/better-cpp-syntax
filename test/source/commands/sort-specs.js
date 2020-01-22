@@ -20,7 +20,7 @@ async function sortSpecs(yargs) {
     for (const test of tests) {
         console.log(
             "sorting spec for",
-            path.relative(pathFor.fixtures, test.fixture)
+            path.relative(pathFor.fixtures, test.fixturePath)
         );
 
         const spec = fs.readFileSync(test.spec.default);
