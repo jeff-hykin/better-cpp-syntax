@@ -1,0 +1,1886 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.pragma
+    - keyword.control.directive.pragma
+  scopes:
+    - punctuation.definition.directive
+- source: pragma
+  scopesEnd:
+    - keyword.control.directive.pragma
+- source: once
+  scopes:
+    - entity.other.attribute-name.pragma.preprocessor
+  scopesEnd:
+    - meta.preprocessor.pragma
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: reproc++/arguments.hpp
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: reproc++/environment.hpp
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: reproc++/export.hpp
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: reproc++/input.hpp
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: chrono
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: cstdint
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: memory
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: system_error
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: utility
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Forward declare `reproc_t` so we don''t have to include reproc.h in the'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' header.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: reproc_t
+  scopes:
+    - entity.name.type.struct
+  scopesEnd:
+    - meta.head.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: /*!
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' The `reproc` namespace wraps all reproc++ declarations. `process` wraps'
+- source: reproc's API inside a C++ class. To avoid exposing reproc's API when using
+- source: 'reproc++ all structs, enums and constants of reproc have a replacement in'
+- source: >-
+    reproc++. Only differences in behaviour compared to reproc are documented.
+    Refer
+- source: 'to reproc.h and the examples for general information on how to use reproc. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: reproc
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: /*!
+  scopesBegin:
+    - meta.body.namespace
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Conversion from reproc `errno` constants to `std::errc` constants:'
+- source: 'https://en.cppreference.com/w/cpp/error/errc '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: 'error '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: errc
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: signal
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: REPROCXX_EXPORT
+  scopesBegin:
+    - meta.body.namespace
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' kill'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: REPROCXX_EXPORT
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' terminate'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
+- source: /*!
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Timeout values are passed as `reproc::milliseconds` instead of `int` in'
+- source: 'reproc++. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: milliseconds
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: chrono
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: duration
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: milli
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: REPROCXX_EXPORT
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' milliseconds infinite'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: REPROCXX_EXPORT
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' milliseconds deadline'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: REPROCXX_EXPORT
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' milliseconds nonblocking'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopesBegin:
+    - meta.block.enum
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: class
+  scopes:
+    - storage.type.enum.enum-key.class
+- source: redirect
+  scopes:
+    - entity.name.type.enum
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: pipe
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: inherit
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: discard
+  scopes:
+    - variable.other.enummember
+  scopesEnd:
+    - meta.enum.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopesBegin:
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: class
+  scopes:
+    - storage.type.enum.enum-key.class
+- source: stop
+  scopes:
+    - entity.name.type.enum
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: noop
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: wait
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: terminate
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: kill
+  scopes:
+    - variable.other.enummember
+  scopesEnd:
+    - meta.enum.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.enum
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: stop_action
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '  stop action'
+  scopesBegin:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  milliseconds timeout'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopesBegin:
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: stop_actions
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '  stop_action first'
+  scopesBegin:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  stop_action second'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  stop_action third'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopesBegin:
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: options
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '  /*!'
+  scopesBegin:
+    - meta.body.struct
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Implicitly converts from any STL container of string pairs to the'
+- source: '  environment format expected by `reproc_start`. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: class
+  scopes:
+    - storage.type.class.declare
+- source: environment
+  scopes:
+    - entity.name.type.class
+- source: environment
+  scopes:
+    - variable.other.object.declare
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'working_directory '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: nullptr
+  scopes:
+    - constant.language.nullptr
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '    redirect in'
+  scopesBegin:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    redirect out'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    redirect err'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: 'redirect '
+  scopesBegin:
+    - meta.tail.struct
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.tail.struct
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: struct
+  scopes:
+    - storage.type.struct.declare
+- source: stop_actions
+  scopes:
+    - entity.name.type.struct
+- source: stop
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: reproc
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'milliseconds timeout '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: reproc
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: milliseconds
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: reproc
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'milliseconds deadline '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: reproc
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: milliseconds
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' inherit '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' discard '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Implicitly converts from string literals to the pointer size pair expected'
+- source: '  by `reproc_start`. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: class
+  scopes:
+    - storage.type.class.declare
+- source: input
+  scopes:
+    - entity.name.type.class
+- source: input
+  scopes:
+    - variable.other.object.declare
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: enum
+  scopesBegin:
+    - meta.block.enum
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: class
+  scopes:
+    - storage.type.enum.enum-key.class
+- source: stream
+  scopes:
+    - entity.name.type.enum
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: in
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: out
+  scopes:
+    - variable.other.enummember
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: err
+  scopes:
+    - variable.other.enummember
+  scopesEnd:
+    - meta.enum.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.enum
+- source: /*!
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Improves on reproc''s API by adding RAII and changing the API of some'
+- source: 'functions to be more idiomatic C++. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: class
+  scopesBegin:
+    - meta.block.class
+    - meta.head.class
+  scopes:
+    - storage.type.class
+- source: process
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: public
+  scopesBegin:
+    - meta.body.class
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: REPROCXX_EXPORT
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: process
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  REPROCXX_EXPORT '
+- source: '~'
+  scopes:
+    - keyword.operator
+- source: process
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Enforce unique ownership of child processes.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: REPROCXX_EXPORT
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: process
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: process
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
+    - storage.modifier.reference
+- source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  REPROCXX_EXPORT'
+- source: process
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: =
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: process
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
+    - storage.modifier.reference
+- source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' `reproc_start` but implicitly converts from STL containers to the'
+- source: '  arguments format expected by `reproc_start`. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: start
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' arguments '
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: arguments
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' options '
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: 'options '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' {}'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Sets the `fork` option in `reproc_options` and calls `start`. Returns'
+- source: '  `true` in the child process and `false` in the parent process. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: fork
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: options
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: options
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' {}'
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' `reproc_poll` but returns a pair of (stream, error). '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: stream
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: poll
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: stream set
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' `reproc_read` but returns a pair of (bytes read, error). '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: read
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: stream
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: stream
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: uint8_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: buffer
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: size
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' reproc_write` but returns a pair of (bytes_written, error). '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: write
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: uint8_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: buffer
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: size
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: close
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: stream stream
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' `reproc_wait` but returns a pair of (status, error). '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: wait
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: milliseconds
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: timeout
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: terminate
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: kill
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '  /*!'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' `reproc_stop` but returns a pair of (status, error). '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: '  REPROCXX_EXPORT'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: error_code
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: stop
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: stop_actions
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: stop
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: private
+  scopesBegin:
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: unique_ptr
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: reproc_t
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: reproc_t
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+  scopesEnd:
+    - meta.parameter
+- source: )>
+- source: process_
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: ;
+- source: '};'
+- source: namespace
+  scopesBegin:
+    - entity.name.type.parameter
+- source: event
+  scopesEnd:
+    - entity.name.type.parameter
+- source: ' {'
+- source: enum
+  scopes:
+    - storage.type.enum
+- source: type
+  scopes:
+    - entity.name.type.parameter
+- source: ' {'
+- source: in
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: out
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: err
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: exit
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: timeout
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '4'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'struct source {'
+- source: '  process process'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
