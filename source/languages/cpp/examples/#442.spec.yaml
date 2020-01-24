@@ -1757,31 +1757,62 @@
     - storage.modifier.pointer
   scopesEnd:
     - meta.parameter
-- source: )>
-- source: process_
-  scopesBegin:
-    - meta.parameter
+- source: )
   scopes:
-    - entity.name.type.parameter
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' process_'
 - source: ;
-- source: '};'
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
 - source: namespace
   scopesBegin:
-    - entity.name.type.parameter
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
 - source: event
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
-    - entity.name.type.parameter
-- source: ' {'
+    - meta.head.namespace
 - source: enum
+  scopesBegin:
+    - meta.body.namespace
+    - meta.block.enum
+    - meta.head.enum
   scopes:
     - storage.type.enum
 - source: type
   scopes:
-    - entity.name.type.parameter
-- source: ' {'
-- source: in
+    - entity.name.type.enum
+- source: '{'
   scopes:
-    - variable.parameter
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: in
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -1799,7 +1830,7 @@
     - punctuation.separator.delimiter.comma
 - source: out
   scopes:
-    - variable.parameter
+    - variable.other.enummember
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -1817,7 +1848,7 @@
     - punctuation.separator.delimiter.comma
 - source: err
   scopes:
-    - variable.parameter
+    - variable.other.enummember
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -1835,7 +1866,7 @@
     - punctuation.separator.delimiter.comma
 - source: exit
   scopes:
-    - variable.parameter
+    - variable.other.enummember
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -1853,7 +1884,7 @@
     - punctuation.separator.delimiter.comma
 - source: timeout
   scopes:
-    - variable.parameter
+    - variable.other.enummember
 - source: =
   scopes:
     - keyword.operator.assignment
@@ -1866,21 +1897,57 @@
 - source: '4'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.enum.definition
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: 'struct source {'
+  scopesEnd:
+    - meta.block.enum
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+    - meta.head.struct
+  scopes:
+    - storage.type.struct
+- source: source
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '  process process'
+  scopesBegin:
+    - meta.body.struct
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '}'
-- source: ;
   scopes:
-    - punctuation.terminator.statement
-- source: '}'
+    - punctuation.section.block.end.bracket.curly.namespace
