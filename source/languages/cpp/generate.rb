@@ -1637,7 +1637,7 @@ grammar = Grammar.new(
 #
 # function pointer
 #
-    after_declaration = std_space.lookAheadFor(/[{=,);]|\n/).lookAheadToAvoid(/\(/)
+    after_declaration = std_space.lookAheadFor(/[{=,);>]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
             start_pattern: grammar[:simple_type].then(std_space).then(
