@@ -913,8 +913,16 @@ c_grammar.addToRepository({
     "string_placeholder" => {
         patterns: [
             {
-                match: "(?x) %\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
-                name: "constant.other.placeholder.c"
+                # %
+                # (\d+\$)?                             # field (argument #)
+                # [#0\- +']*                           # flags
+                # [,;:_]?                              # separator character (AltiVec)
+                # ((-?\d+)|\*(-?\d+\$)?)?              # minimum field width
+                # (\.((-?\d+)|\*(-?\d+\$)?)?)?         # precision
+                # (hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier
+                # [diouxXDOUeEfFgGaACcSspn%]           # conversion type
+                match: "(?x) (?!%')(?!%\")%\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
+                name: "constant.other.placeholder1.c"
             },
             {
                 match: "(%)(?!\"\\s*(PRI|SCN))",
