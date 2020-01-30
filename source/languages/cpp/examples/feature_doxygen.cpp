@@ -19,6 +19,10 @@
 /// ... text ...
 /////////////////////////////////////////////////
 
+/// @throw std::runtime_error On error.
+/// @throws std::runtime_error On error.
+void test();
+
 /**
  * @param p0 is the first p.
  * @param[in] p0 is an input parameter
