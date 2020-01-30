@@ -6,28 +6,28 @@ on:
     - '**.rb'
     - '**.js'
     - package.json
-    - 'test/**'
+    - 'source/*/examples/*.*'
   pull_request:
     paths:
     - '**.rb'
     - '**.js'
     - package.json
-    - 'test/**'
+    - 'source/*/examples/*.*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup Node.js for use with actions
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
       - name: Setup Ruby for use with actions
-        uses: actions/setup-ruby@v1.0.0
+      - uses: eregon/use-ruby-action@v1
         with:
-          ruby-version: 2.5.x
+          ruby-version: 2.6
       - name: test
         run: |
           gem install bundler
