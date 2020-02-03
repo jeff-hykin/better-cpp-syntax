@@ -225,6 +225,7 @@ def doxygen
         "since",
         "test",
         "throw",
+        "throws",
         "todo",
         "tparam",
         "version",
@@ -303,7 +304,7 @@ def doxygen
         match: /\b[A-Z]+:/.or(/@[a-z_]+:/),
         tag_as: "storage.type.class.gtkdoc",
     )
-    
+
     line_comment = PatternRange.new(
         tag_as: "comment.line.double-slash.documentation",
         start_pattern: Pattern.new(

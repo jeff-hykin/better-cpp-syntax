@@ -41,10 +41,48 @@
     - punctuation.definition.comment.documentation
 - source: ' ... text ...'
 - source: /////////////////////////////////////////////////
+  scopesBegin:
+    - punctuation.definition.comment.documentation
+- source: ///
+  scopesEnd:
+    - punctuation.definition.comment.documentation
+- source: '@throw'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' std::runtime_error On error.'
+- source: ///
   scopes:
     - punctuation.definition.comment.documentation
+- source: '@throws'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' std::runtime_error On error.'
   scopesEnd:
     - comment.line.double-slash.documentation
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: test
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: /**
   scopesBegin:
     - comment.block.documentation
