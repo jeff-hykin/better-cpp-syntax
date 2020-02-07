@@ -2,13 +2,18 @@
   "name": "better-cpp-syntax",
   "displayName": "Better C++ Syntax",
   "description": "The bleeding edge of C-like syntaxes",
-  "version": "1.14.22",
+  "version": "1.14.23",
   "icon": "icon.png",
   "scripts": {
     "build": "ruby scripts/generate.rb",
     "perfall": "ruby scripts/perf_all.rb",
     "prelint": "npm run build",
     "lint": "ruby scripts/lint.rb",
+    
+    
+    
+    
+    
     "pretest": "npm run build",
     "test": "node test/source/commands/test.js",
     "genall": "npm run generate-specs -- --generate-all",
