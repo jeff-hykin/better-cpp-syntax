@@ -6,7 +6,7 @@
 #
 
 class StandardNaming < GrammarLinter
-    # This is a summerization of the rules on the sublime text website for scope name
+    # This is a summarization of the rules on the sublime text website for scope name
     # process:
     # 1. start at root
     # 2. for each component in name
@@ -19,7 +19,7 @@ class StandardNaming < GrammarLinter
     # to ease parsing, there should only every be one valid path
     # if "a" exists, dont add "a.b" to the same key
 
-    # @return [Hash] a summerixation of expected names
+    # @return [Hash] a summarization of expected names
     EXPECTED_NAMES = {
         "comment" => {
             "line" => true,
@@ -40,18 +40,16 @@ class StandardNaming < GrammarLinter
                 "trait" => true,
                 "interface" => true,
                 "impl" => true,
-                "type" => {
-                    "class" => false,
-                    "struct" => false,
-                    "*" => true,
-                }.freeze,
+                "type" => true,
                 "function" => true,
                 "namespace" => true,
                 "constant" => true,
                 "label" => true,
                 "section" => true,
+                "scope-resolution" => true,
                 "tag" => true,
                 "attribute-name" => true,
+                "other" => true,
             }.freeze,
             "other" => true,
         }.freeze,
@@ -74,6 +72,7 @@ class StandardNaming < GrammarLinter
             }.freeze,
             "bold" => true,
             "italic" => true,
+            "inline" => true,
             "underline" => true,
             "inserted" => true,
             "deleted" => true,
@@ -85,17 +84,24 @@ class StandardNaming < GrammarLinter
             "other" => true,
         }.freeze,
         "meta" => {
+            "asm" => true,
             "class" => true,
             "struct" => true,
             "enum" => true,
             "union" => true,
             "trait" => true,
             "interface" => true,
+            "declaration" => true,
             "impl" => true,
+            "initialization" => true,
             "type" => true,
+            "qualified_type" => true,
             "function" => true,
+            "parameter" => true,
             "namespace" => true,
+            "using-namespace" => true,
             "preprocessor" => true,
+            "conditional" => true,
             "annotation" => true,
             "path" => true,
             "function-call" => true,
@@ -105,11 +111,13 @@ class StandardNaming < GrammarLinter
             "parens" => true,
             "brackets" => true,
             "generic" => true,
+            "template" => true,
             "tag" => true,
             "paragraph" => true,
             "string" => true,
             "interpolation" => true,
             "toc-list" => true,
+            "banner" => true,
         }.freeze,
         "punctuation" => {
             "definition" => true,
@@ -117,6 +125,7 @@ class StandardNaming < GrammarLinter
             "terminator" => true,
             "accessor" => true,
             "section" => true,
+            "vararg-ellipses" => true,
         }.freeze,
         "source" => true,
         "storage" => {
@@ -146,6 +155,7 @@ class StandardNaming < GrammarLinter
             "language" => true,
             "function" => true,
             "annotation" => true,
+            "parameter" => true,
         }.freeze,
     }.freeze
 
