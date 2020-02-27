@@ -13349,7 +13349,6 @@
     - meta.body.function.definition
 - source: '[['
   scopesBegin:
-    - meta.qualified_type
     - support.other.attribute
   scopes:
     - punctuation.section.attribute.begin
@@ -13363,10 +13362,9 @@
     - support.other.attribute
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-  scopesEnd:
-    - meta.qualified_type
 - source: empty
   scopesBegin:
     - meta.head.function.definition

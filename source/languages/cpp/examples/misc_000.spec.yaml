@@ -9837,7 +9837,6 @@
 - source: '[['
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
     - support.other.attribute
   scopes:
     - punctuation.section.attribute.begin
@@ -9851,10 +9850,9 @@
     - support.other.attribute
 - source: void
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-  scopesEnd:
-    - meta.qualified_type
 - source: func2
   scopesBegin:
     - meta.head.function.definition

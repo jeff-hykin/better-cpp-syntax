@@ -14,9 +14,9 @@ require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
 require_relative './raw_strings.rb'
 
-# 
+#
 # TODO: remove me this is a temp change that should be corrected after this merge is over
-# 
+#
 class Regexp
     for each in [ "or", "then", "maybe", "zeroOrMoreOf", "oneOrMoreOf", "lookAheadFor", "lookAheadToAvoid", "lookBehindFor", "lookBehindToAvoid", ]
         eval <<-HEREDOC
@@ -82,7 +82,7 @@ grammar = Grammar.new(
             match: /,/,
             tag_as: "punctuation.separator.delimiter.comma"
         )
-    possible_begining_of_statement = Pattern.new(/^|\G/).or(lookBehindFor(/;|\}/))
+    possible_beginning_of_statement = Pattern.new(/^|\G/).or(lookBehindFor(/;|\}/))
     grammar[:assignment_operator] = assignment_operator = Pattern.new(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
@@ -457,7 +457,20 @@ grammar = Grammar.new(
     grammar[:pthread_types] = pthread_types = Pattern.new(
         std_space.then(
             tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
-            match: variableBounds[ /pthread_attr_t|pthread_cond_t|pthread_condattr_t|pthread_mutex_t|pthread_mutexattr_t|pthread_once_t|pthread_rwlock_t|pthread_rwlockattr_t|pthread_t|pthread_key_t/ ],
+            match: variableBounds[
+                oneOf([
+                    /pthread_t/,
+                    /pthread_attr_t/,
+                    /pthread_cond_t/,
+                    /pthread_condattr_t/,
+                    /pthread_mutex_t/,
+                    /pthread_mutexattr_t/,
+                    /pthread_once_t/,
+                    /pthread_rwlock_t/,
+                    /pthread_rwlockattr_t/,
+                    /pthread_key_t/,
+                ])
+            ],
         )
     )
     grammar[:posix_reserved_types] = posix_reserved_types = Pattern.new(
@@ -524,9 +537,9 @@ grammar = Grammar.new(
             tag_as: "keyword.control.exception.$match"
         )
     )
-    # 
+    #
     # misc keywords
-    # 
+    #
     # these are keywords that SHOULD get there own patterns, but the work has not yet been put in for them
     grammar[:misc_keywords] = Pattern.new(
         std_space.then(
@@ -1109,14 +1122,14 @@ grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: Pattern.new(
-            possible_begining_of_statement.or(lookBehindFor(/>/)).then(
+            possible_beginning_of_statement.or(lookBehindFor(/>/)).then(
                 std_space
             ).maybe(
                 Pattern.new(
                     match: variableBounds[/template/],
                     tag_as: "storage.type.template",
                 ).then(std_space)
-            ).zeroOrMoreOf(
+            ).maybe(inline_attribute).zeroOrMoreOf(
                 match: storage_modifiers = Pattern.new(
                     Pattern.new(
                         match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
@@ -2057,7 +2070,7 @@ grammar = Grammar.new(
                     "[&]",
                     "[x,y,x]",
                     "[x, y, &z, w = 1 + 1]",
-                    "[ a = blah[1324 + blah[39430]], b, c ]" 
+                    "[ a = blah[1324 + blah[39430]], b, c ]"
                 ],
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
