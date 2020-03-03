@@ -1203,7 +1203,7 @@ grammar = Grammar.new(
                     tag_as: "entity.name.operator",
                 # type
                 ).or(
-                    match: variableBounds[identifier].then(
+                    match: maybe(declaration_storage_specifiers).then(qualified_type.reTag(keep: false)).then(
                         # possible pointer/reference variation
                         maybe(ref_deref[pointer_tag:"entity.name.operator.type.pointer", reference_tag:"entity.name.operator.type.reference"])
                     ).then(std_space).maybe(
