@@ -58,7 +58,7 @@ std_space = c_grammar[:std_space]
             :$initial_context,
             :block_innards
         ]
-    c_grammar[:evalutation_context] = evalutation_context = [
+    c_grammar[:evaluation_context] = evaluation_context = [
         "#function-call-innards",
         "$base"
     ]
@@ -841,7 +841,7 @@ c_grammar.addToRepository({
                     match: /:/,
                     tag_as: "keyword.operator.ternary",
                 ),
-                includes: [ *evalutation_context ]
+                includes: [ *evaluation_context ]
             ).to_tag,
         ]
     },
