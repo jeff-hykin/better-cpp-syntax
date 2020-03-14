@@ -81,6 +81,13 @@ class PatternRange < PatternBase
             arguments[:includes] = arguments[:includes].flatten
         end
 
+        #canonize end_pattern_last
+        arguments[:end_pattern_last] = arguments[:apply_end_pattern_last] if arguments[:apply_end_pattern_last]
+        arguments[:end_pattern_last] = arguments[:applyEndPatternLast] if arguments[:applyEndPatternLast]
+
+        arguments.delete(:apply_end_pattern_last)
+        arguments.delete(:applyEndPatternLast)
+
         @arguments = arguments
     end
 
@@ -153,6 +160,9 @@ class PatternRange < PatternBase
             output[:patterns] = convert_includes_to_patterns([@arguments[:includes]])
         end
 
+        # end_pattern_last
+        output["applyEndPatternLast"] = 1 if @arguments[:end_pattern_last]
+
         output
     end
 
@@ -174,6 +184,7 @@ class PatternRange < PatternBase
             output += ",\n  #{tag}: \"" + @arguments[tag] + "\"" if @arguments[tag].is_a? String
         end
         output += ",\n  includes: " + @arguments[:includes].to_s if @arguments[:includes]
+        output += ",\n  end_pattern_last: " + @arguments[:end_pattern_last] if @arguments[:end_pattern_last]
         output += ",\n)"
 
         output
