@@ -254,22 +254,30 @@ class Grammar
     #
     # @return [Hash] the generated grammar
     #
-    def generate(inherit_or_embedded = :embedded)
+    def generate(options)
+        default = {
+            inherit_or_embedded: :embedded,
+            should_lint: true,
+        }
+        options = default.merge(options)
+        
         repo = @repository.__deep_clone__
         repo = run_pre_transform_stage(repo, :before_pre_linter)
 
-        @@linters.each do |linter|
-            repo.each do |_, potential_pattern|
-                [potential_pattern].flatten.each do |each_potential_pattern|
-                    raise "linting failed, see above error" unless linter.pre_lint(
-                        each_potential_pattern,
-                        filter_options(
-                            linter,
+        if options[:should_lint]
+            @@linters.each do |linter|
+                repo.each do |_, potential_pattern|
+                    [potential_pattern].flatten.each do |each_potential_pattern|
+                        raise "linting failed, see above error" unless linter.pre_lint(
                             each_potential_pattern,
-                            grammar: self,
-                            repository: repo,
-                        ),
-                    )
+                            filter_options(
+                                linter,
+                                each_potential_pattern,
+                                grammar: self,
+                                repository: repo,
+                            ),
+                        )
+                    end
                 end
             end
         end
@@ -278,7 +286,7 @@ class Grammar
 
         convert_initial_context = lambda do |potential_pattern|
             if potential_pattern == :$initial_context
-                return (inherit_or_embedded == :embedded) ? :$self : :$base
+                return (options[:inherit_or_embedded] == :embedded) ? :$self : :$base
             end
 
             if potential_pattern.is_a? Array
@@ -402,10 +410,11 @@ class Grammar
             syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
             syntax_dir: File.join(options[:dir], "syntaxes"),
             tag_dir: File.join(options[:dir], "language_tags"),
+            should_lint: true,
         }
-
         options = default.merge(options)
-        output = generate(options[:inherit_or_embedded])
+        
+        output = generate(options)
 
         if [:json, :vscode].include? options[:syntax_format]
             file_name = File.join(
