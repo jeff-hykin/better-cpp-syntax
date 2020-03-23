@@ -68,6 +68,7 @@ grammar = Grammar.new(
     grammar.import(File.join(__dir__, "./lib/preprocessor"))
     inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
+    basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
     universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
@@ -271,7 +272,6 @@ grammar = Grammar.new(
             :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
             :storage_types,
-            :misc_storage_modifiers,                    # TODO: this pattern needs to be removed
             # misc
             :lambdas,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
@@ -315,10 +315,8 @@ grammar = Grammar.new(
         ]
     grammar[:storage_types] = [
             :storage_specifiers,
-            :primitive_types,
-            :non_primitive_types,
             :pthread_types,
-            :posix_reserved_types,
+            :inline_builtin_storage_type,
             :decltype,
             :typename,
         ]
@@ -434,18 +432,26 @@ grammar = Grammar.new(
 #
 # Built-In Types
 #
-    look_behind_for_type = lookBehindFor(/\w |\*\/|[&*>\]\)]|\.\.\./).maybe(@spaces)
-    grammar[:primitive_types] = Pattern.new(
-        std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isPrimitive) ],
-            tag_as: "storage.type.primitive storage.type.built-in.primitive"
-        )
-    )
-    grammar[:non_primitive_types] = Pattern.new(
-        std_space.then(
-            match: variableBounds[@cpp_tokens.that(not(:isPrimitive), :isType)],
-            tag_as: "storage.type storage.type.built-in"
-        )
+    grammar[:inline_builtin_storage_type] = inline_builtin_storage_type = Pattern.new(
+        basic_space.then(
+            Pattern.new(
+                # primitive builtins
+                match: @cpp_tokens.that(:isPrimitive),
+                tag_as: "storage.type.primitive storage.type.built-in.primitive",
+            ).or(
+                # non-primitive builtins
+                match: @cpp_tokens.that(not(:isPrimitive), :isType),
+                tag_as: "storage.type storage.type.built-in",
+            ).or(
+                # pthread
+                match: @cpp_support_tokens.that(:isPthreadType),
+                tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
+            ).or(
+                # posix support type
+                match: Pattern.new(/[a-zA-Z_]/).zeroOrMoreOf(@standard_character).then(/_t/) ,
+                tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved",
+            )
+        ).lookAheadToAvoid(@standard_character)
     )
     grammar[:decltype] = functionCallGenerator[
         repository_name: "decltype_specifier",
@@ -454,42 +460,6 @@ grammar = Grammar.new(
         tag_content_as: "arguments.decltype",
         tag_parenthese_as: "decltype"
     ]
-    grammar[:pthread_types] = pthread_types = Pattern.new(
-        std_space.then(
-            tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
-            match: variableBounds[
-                oneOf([
-                    /pthread_t/,
-                    /pthread_attr_t/,
-                    /pthread_cond_t/,
-                    /pthread_condattr_t/,
-                    /pthread_mutex_t/,
-                    /pthread_mutexattr_t/,
-                    /pthread_once_t/,
-                    /pthread_rwlock_t/,
-                    /pthread_rwlockattr_t/,
-                    /pthread_key_t/,
-                ])
-            ],
-        )
-    )
-    grammar[:posix_reserved_types] = posix_reserved_types = Pattern.new(
-        std_space.then(
-            match: variableBounds[  Pattern.new(/[a-zA-Z_]/).zeroOrMoreOf(@standard_character).then(/_t/)  ],
-            tag_as: "support.type.posix-reserved support.type.built-in.posix-reserved"
-        )
-    )
-    inline_builtin_storage_type = std_space.then(
-        Pattern.new(
-            grammar[:primitive_types]
-        ).or(
-            grammar[:non_primitive_types]
-        ).or(
-            grammar[:pthread_types]
-        ).or(
-            grammar[:posix_reserved_types]
-        )
-    )
 
 #
 # Keywords and Keyword-ish things
@@ -1329,7 +1299,7 @@ grammar = Grammar.new(
     )
     grammar[:builtin_storage_type_initilizer] =  PatternRange.new(
         start_pattern: Pattern.new(
-            inline_builtin_storage_type.then(std_space).then(
+            inline_builtin_storage_type.then(basic_space).then(
                 match: /\(/,
                 tag_as: "punctuation.section.arguments.begin.bracket.round.initializer"
             )

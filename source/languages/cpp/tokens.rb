@@ -186,6 +186,7 @@ tokens = [
     { representation: "intmax_t"             , name: "intmax_t"             , isType: true },
     { representation: "uintmax_t"            , name: "uintmax_t"            , isType: true },
     { representation: "uintmax_t"            , name: "uintmax_t"            , isType: true },
+    { representation: "uintmax_t"            , name: "uintmax_t"            , isType: true },
     # literals
     { representation: "NULL"                 , name: "NULL"             , isLiteral: true },
     { representation: "true"                 , name: "true"             , isLiteral: true },
@@ -303,7 +304,7 @@ end
 
 
 
-support_tokens = [
+@cpp_support_tokens = TokenHelper.new [
     # io stream
     { representation: "cin"                        , name: "cin"                        , belongsToIostream: true , isVariable: true},
     { representation: "wcin"                       , name: "wcin"                       , belongsToIostream: true , isVariable: true},
@@ -320,7 +321,17 @@ support_tokens = [
     { representation: "FILE"                       , name: "FILE"                       , belongsToStdio: true , isType: true},
     { representation: "fpos_t"                     , name: "fpos_t"                     , belongsToStdio: true , isType: true},
     { representation: "size_t"                     , name: "size_t"                     , belongsToStdio: true , isType: true},
+    
+    # pthread types
+    # TODO: I'm not sure if pthread is actually a support type or if it is part of the language spec, I'd assume support
+    { representation: "pthread_t"            , name: "pthread_t"            , isType: true , isPthreadType: true },
+    { representation: "pthread_attr_t"       , name: "pthread_attr_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_cond_t"       , name: "pthread_cond_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_condattr_t"   , name: "pthread_condattr_t"   , isType: true , isPthreadType: true },
+    { representation: "pthread_mutex_t"      , name: "pthread_mutex_t"      , isType: true , isPthreadType: true },
+    { representation: "pthread_mutexattr_t"  , name: "pthread_mutexattr_t"  , isType: true , isPthreadType: true },
+    { representation: "pthread_once_t"       , name: "pthread_once_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_rwlock_t"     , name: "pthread_rwlock_t"     , isType: true , isPthreadType: true },
+    { representation: "pthread_rwlockattr_t" , name: "pthread_rwlockattr_t" , isType: true , isPthreadType: true },
+    { representation: "pthread_key_t"        , name: "pthread_key_t"        , isType: true , isPthreadType: true },
 ]
-
-
-@cpp_support = TokenHelper.new support_tokens

@@ -1609,14 +1609,18 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
+  scopesBegin:
+    - meta.parens
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.initializer
+    - punctuation.section.parens.begin.bracket.round
 - source: '5'
   scopes:
     - constant.numeric.decimal
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.initializer
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement

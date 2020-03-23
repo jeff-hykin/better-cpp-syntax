@@ -127,37 +127,42 @@
     - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ' (n'
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
+- source: 'n'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly.inner
+- source: ':'
+  scopes:
+    - punctuation.separator.delimiter.colon.assembly
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin.assembly
+- source: '0'
+  scopes:
+    - meta.embedded.assembly
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end.assembly
+  scopesEnd:
+    - string.quoted.double
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
+- source: 'n'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.assembly.inner
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly
   scopesEnd:
     - meta.function-call
     - meta.asm
-- source: '         : '
-- source: '"'
-  scopesBegin:
-    - string.quoted.double
-  scopes:
-    - punctuation.definition.string.begin
-- source: '0'
-- source: '"'
-  scopes:
-    - punctuation.definition.string.end
-  scopesEnd:
-    - string.quoted.double
-- source: (
-  scopesBegin:
-    - meta.parens.block
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: 'n'
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens.block
-- source: )
 - source: ;
   scopes:
     - punctuation.terminator.statement
