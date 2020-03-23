@@ -768,7 +768,7 @@ grammar = Grammar.new(
     grammar[:template_call_innards] = template_call = Pattern.new(
         tag_as: 'meta.template.call',
         # to match the characters in the middle of a template call
-        match: some_number_of_angle_brackets.maybe(@spaces),
+        match: some_number_of_angle_brackets.zeroOrMoreOf(match: /\s/, dont_back_track?: true),
         includes: [ :template_call_range ]
     )
     grammar[:template_call_range] = PatternRange.new(
@@ -885,7 +885,7 @@ grammar = Grammar.new(
 #
     one_scope_resolution = Pattern.new(
         Pattern.new(
-            match: variable_name_without_bounds,
+            match: variable_name,
             word_cannot_be_any_of: @cpp_tokens.representationsThat(
                 :isWord,
                 not(:isType),
@@ -896,10 +896,18 @@ grammar = Grammar.new(
         ).then(/\s*+/).maybe(
             template_call
         ).then(/::/)
-    )
+    )    
     inline_scope_resolution = ->(tag_extension) do
         Pattern.new(
-            match: zeroOrMoreOf(one_scope_resolution),
+            match: Pattern.new(
+                maybe(
+                    match: /::/,
+                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
+                ).zeroOrMoreOf(
+                    match: one_scope_resolution,
+                    dont_back_track?: true
+                )
+            ),
             includes: [
                 Pattern.new(
                     match: /::/,
@@ -934,8 +942,15 @@ grammar = Grammar.new(
         grammar[hidden_grammar_name] = Pattern.new(
             should_fully_match: ["name::", "name::name2::name3::"],
             match: grammar[grammar_name].then(
-                    match: variable_name_without_bounds,
-                    tag_as: "entity.name.scope-resolution"+tag_extension
+                    tag_as: "entity.name.scope-resolution"+tag_extension,
+                    match: variable_name,
+                    word_cannot_be_any_of: @cpp_tokens.representationsThat(
+                        :isWord,
+                        not(:isType),
+                        not(:isVariable),
+                        not(:isValidFunctionName),
+                        not(:isLiteral)
+                    ),
                 ).then(/\s*+/).maybe(
                     template_call
                 ).then(tagged_scope_operator),
@@ -1003,14 +1018,14 @@ grammar = Grammar.new(
             ).then(std_space).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
             ).maybe(
-                scope_resolution
+                inline_scope_resolution[".type"]
             ).then(std_space).then(
                 lookAheadToAvoid(non_type_keywords.then(@word_boundary))
             ).then(
                 match: identifier,
                 tag_as: "entity.name.type",
             ).then(@word_boundary).maybe(
-                template_call
+                some_number_of_angle_brackets
             ).lookAheadToAvoid(/[\w<:.]/),
         includes: [
             Pattern.new(

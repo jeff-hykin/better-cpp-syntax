@@ -216,35 +216,30 @@
   scopesEnd:
     - meta.block.struct
 - source: Thing4
-  scopesBegin:
-    - meta.function.definition.special.member.destructor
   scopes:
-    - entity.name.type.destructor
+    - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.destructor
-- source: ~Thing4
+    - punctuation.separator.scope-resolution
+- source: '~'
   scopes:
-    - entity.name.function.definition.special.member.destructor
+    - keyword.operator
+- source: Thing4
+  scopes:
+    - entity.name.function.call
 - source: (
-  scopesBegin:
-    - meta.head.function.definition.special.member.destructor
   scopes:
-    - >-
-      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '{'
-  scopes:
-    - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
-  scopesEnd:
-    - meta.head.function.definition.special.member.destructor
-- source: itng
   scopesBegin:
-    - meta.body.function.definition.special.member.destructor
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: itng
   scopes:
     - entity.name.function.call
 - source: (
@@ -255,44 +250,35 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '}'
   scopes:
-    - >-
-      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.function.definition.special.member.destructor
-    - meta.body.function.definition.special.member.destructor
+    - meta.block
 - source: Thing4
-  scopesBegin:
-    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.type.constructor
+    - entity.name.scope-resolution.function.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.constructor
+    - punctuation.separator.scope-resolution.function.call
 - source: Thing4
   scopes:
-    - entity.name.function.definition.special.constructor
+    - entity.name.function.call
 - source: (
-  scopesBegin:
-    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.constructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.constructor
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '{'
+  scopesBegin:
+    - meta.block
   scopes:
-    - >-
-      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
-  scopesEnd:
-    - meta.head.function.definition.special.constructor
+    - punctuation.section.block.begin.bracket.curly
 - source: '}'
   scopes:
-    - meta.body.function.definition.special.constructor
-    - >-
-      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.function.definition.special.constructor
+    - meta.block
 - source: struct
   scopesBegin:
     - meta.block.struct
