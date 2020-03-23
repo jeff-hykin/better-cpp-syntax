@@ -31,6 +31,12 @@ void test();
  * @param[ out] dest
  */
 
+/**
+ * @startuml
+ * Alice -> Bob : Hello
+ * @enduml
+ */
+
 
 //! Brief description, which is
 //! really a detailed description since it spans multiple lines.

@@ -154,6 +154,21 @@
 - source: '*/'
   scopes:
     - punctuation.definition.comment.end.documentation
+- source: /**
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' * '
+- source: '@startuml'
+  scopes:
+    - storage.type.class.doxygen
+- source: ' * Alice -> Bob : Hello'
+- source: ' * '
+- source: '@enduml'
+  scopes:
+    - storage.type.class.doxygen
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
 - source: //!

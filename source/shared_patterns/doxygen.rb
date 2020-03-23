@@ -284,8 +284,7 @@ def doxygen
     with_end_blocks = [
         *block_commands,
         *block_commands.map do |block|
-            block.gsub!("start", "")
-            "end" + block
+            "end" + block.gsub("start", "")
         end,
     ]
 
