@@ -900,11 +900,8 @@ grammar = Grammar.new(
     inline_scope_resolution = ->(tag_extension) do
         Pattern.new(
             match: Pattern.new(
-                maybe(
-                    match: /::/,
-                    tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
-                ).zeroOrMoreOf(
-                    match: one_scope_resolution,
+                maybe(/::/).zeroOrMoreOf(
+                    match: one_scope_resolution.reTag(keep: false),
                     dont_back_track?: true
                 )
             ),
@@ -933,7 +930,7 @@ grammar = Grammar.new(
         grammar[grammar_name] = Pattern.new(
             # find the whole scope resolution
             should_fully_match: [ "name::name2::name3::" ],
-            match: maybe(tagged_scope_operator).zeroOrMoreOf(one_scope_resolution).then(/\s*+/),
+            match: maybe(tagged_scope_operator).zeroOrMoreOf(one_scope_resolution.reTag(keep: false)).then(/\s*+/),
             includes: [
                     # then tag every `name::` seperately
                     hidden_grammar_name,
@@ -1013,7 +1010,8 @@ grammar = Grammar.new(
         should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
-        match: leading_space.maybe(
+        match: Pattern.new(
+            leading_space.maybe(
                 inline_attribute
             ).then(std_space).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
@@ -1022,12 +1020,13 @@ grammar = Grammar.new(
             ).then(std_space).then(
                 lookAheadToAvoid(non_type_keywords.then(@word_boundary))
             ).then(
-                match: identifier,
-                tag_as: "entity.name.type",
+                identifier,
             ).then(@word_boundary).maybe(
                 some_number_of_angle_brackets
-            ).lookAheadToAvoid(/[\w<:.]/),
+            ).lookAheadToAvoid(/[\w<:.]/)
+        ).reTag(keep: false),
         includes: [
+            scope_operator,
             Pattern.new(
                 match: variableBounds[ @cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"

@@ -169,16 +169,14 @@
   scopesEnd:
     - meta.block.class
 - source: template
-  scopes:
-    - entity.name.scope-resolution
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -251,16 +249,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopes:
-    - entity.name.scope-resolution
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -333,16 +329,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopes:
-    - entity.name.scope-resolution
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -418,16 +412,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
-  scopes:
-    - entity.name.scope-resolution
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: std
-  scopesBegin:
-    - meta.function.definition.special.operator-overload
-    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -503,9 +495,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -517,16 +514,24 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: istream
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -535,18 +540,28 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: istream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' is'
+    - storage.modifier.reference
+- source: is
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' cow_string'
+- source: cow_string
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' str'
+    - storage.modifier.reference
+- source: str
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -554,17 +569,30 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' delim'
+- source: delim
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -576,16 +604,24 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: wistream
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -594,18 +630,28 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: wistream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' is'
+    - storage.modifier.reference
+- source: is
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' cow_wstring'
+- source: cow_wstring
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' str'
+    - storage.modifier.reference
+- source: str
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -613,17 +659,30 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' delim'
+- source: delim
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -635,16 +694,24 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: istream
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -653,28 +720,49 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: istream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' is'
+    - storage.modifier.reference
+- source: is
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' cow_string'
+- source: cow_string
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' str'
+    - storage.modifier.reference
+- source: str
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopesBegin:
+    - meta.function.definition
   scopes:
-    - entity.name.scope-resolution
+    - meta.head.function.definition
+    - storage.type.template
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -686,16 +774,24 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: wistream
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '&'
   scopes:
-    - keyword.operator
+    - storage.modifier.reference
 - source: getline
+  scopesBegin:
+    - meta.head.function.definition
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round
 - source: '::'
+  scopesBegin:
+    - meta.function.definition.parameters
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -704,21 +800,37 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: wistream
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' is'
+    - storage.modifier.reference
+- source: is
+  scopes:
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' cow_wstring'
+- source: cow_wstring
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator
-- source: ' str'
+    - storage.modifier.reference
+- source: str
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
 - source: ;
   scopes:
     - punctuation.terminator.statement
