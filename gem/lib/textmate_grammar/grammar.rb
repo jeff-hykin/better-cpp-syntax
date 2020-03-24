@@ -163,8 +163,13 @@ class Grammar
     # @return [void] nothing
     #
     def import(path_or_export)
+        relative_path = File.dirname(caller_locations[0].to_s.sub(/(.*?):[\w\W]*/, "\\1"))
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
+            # allow for relative paths
+            if not Pathname.new(path_or_export).absolute?
+                path_or_export = File.join(relative_path, path_or_export)
+            end
             require path_or_export
             resolved = File.expand_path resolve_require(path_or_export)
 
