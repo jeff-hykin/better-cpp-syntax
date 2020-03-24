@@ -163,7 +163,10 @@ class Grammar
     # @return [void] nothing
     #
     def import(path_or_export)
-        relative_path = File.dirname(caller_locations[0].to_s.sub(/(.*?):[\w\W]*/, "\\1"))
+        relative_path = File.dirname(caller_locations[0].path)
+        if not Pathname.new(relative_path).absolute?
+            relative_path = File.join(Dir.pwd,relative_path)
+        end
         export = path_or_export
         unless path_or_export.is_a? ExportableGrammar
             # allow for relative paths
