@@ -400,6 +400,8 @@ class Grammar
     #   (:json) The format to generate the syntax file in
     # @option options :syntax_name [String] ("#{@name}.tmLanguage") the name of the syntax
     #   file to generate without the extension
+    # @option options :tag_name [String] ("#{@name}-scopes.txt") the name of the tag list
+    #   file to generate without the extension
     #
     # @note all keys except :dir is optional
     # @note :dir is optional if both :tag_dir and :syntax_dir are specified
@@ -417,6 +419,7 @@ class Grammar
             syntax_format: :json,
             syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
             syntax_dir: File.join(options[:dir], "syntaxes"),
+            tag_name: "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
             tag_dir: File.join(options[:dir], "language_tags"),
             should_lint: true,
         }
@@ -451,7 +454,7 @@ class Grammar
 
         file_name = File.join(
             options[:tag_dir],
-            "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            options[:tag_name],
         )
         new_file = File.open(file_name, "w")
         new_file.write(get_tags(output).to_a.sort.join("\n"))
