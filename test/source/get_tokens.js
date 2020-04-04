@@ -56,6 +56,10 @@ module.exports = async function (
         const grammar = await registry.loadGrammar(
             `source.${languageExtensionFor(fixturePath)}`
         );
+        if (grammar == null) {
+            // If the main grammar is missing, (usually markdown) just pass the test
+            return true;
+        }
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {
@@ -87,11 +91,7 @@ module.exports = async function (
         }
     } catch (e) {
         console.error(e);
-        // if there is an exception, that is not caused by the grammar being missing
-        // then the test failed
-        if (grammar !== null) {
-            returnValue = false;
-        }
+        returnValue = false;
     }
     if (displayedAtLeastOnce) {
         console.log(chalk.redBright("   Failed"));
