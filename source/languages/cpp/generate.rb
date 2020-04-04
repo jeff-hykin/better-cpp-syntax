@@ -1031,7 +1031,6 @@ grammar = Grammar.new(
                 tag_as: "storage.type.$match"
             ),
             :attributes_context,
-            :function_type,
             :storage_types,
             :number_literal,
             :string_context,
