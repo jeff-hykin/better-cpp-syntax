@@ -15,7 +15,7 @@ for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
     extensionsFor[langExtension] = syntax["fileTypes"] || [];
 }
 
-let languageExtensionFor = fixturePath => {
+let languageExtensionFor = (fixturePath) => {
     let fixtureExtension = path.extname(fixturePath).replace(/\./, "");
     let matchingLanguageExtension = null;
     // find which lang the extension belongs to
@@ -42,7 +42,7 @@ let languageExtensionFor = fixturePath => {
  * @param {boolean} showFailureOnly
  * @param {(line: string, token: vsctm.IToken) => boolean} process
  */
-module.exports = async function(
+module.exports = async function (
     registry,
     fixturePath,
     fixture,
@@ -87,7 +87,11 @@ module.exports = async function(
         }
     } catch (e) {
         console.error(e);
-        returnValue = false;
+        // if there is an exception, that is not caused by the grammar being missing
+        // then the test failed
+        if (grammar !== null) {
+            returnValue = false;
+        }
     }
     if (displayedAtLeastOnce) {
         console.log(chalk.redBright("   Failed"));
