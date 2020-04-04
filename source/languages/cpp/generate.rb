@@ -315,7 +315,6 @@ grammar = Grammar.new(
         ]
     grammar[:storage_types] = [
             :storage_specifiers,
-            :pthread_types,
             :inline_builtin_storage_type,
             :decltype,
             :typename,
