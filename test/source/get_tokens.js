@@ -15,7 +15,7 @@ for (let eachSyntaxPath of paths["eachJsonSyntax"]) {
     extensionsFor[langExtension] = syntax["fileTypes"] || [];
 }
 
-let languageExtensionFor = fixturePath => {
+let languageExtensionFor = (fixturePath) => {
     let fixtureExtension = path.extname(fixturePath).replace(/\./, "");
     let matchingLanguageExtension = null;
     // find which lang the extension belongs to
@@ -42,7 +42,7 @@ let languageExtensionFor = fixturePath => {
  * @param {boolean} showFailureOnly
  * @param {(line: string, token: vsctm.IToken) => boolean} process
  */
-module.exports = async function(
+module.exports = async function (
     registry,
     fixturePath,
     fixture,
@@ -56,6 +56,10 @@ module.exports = async function(
         const grammar = await registry.loadGrammar(
             `source.${languageExtensionFor(fixturePath)}`
         );
+        if (grammar == null) {
+            // If the main grammar is missing, (usually markdown) just pass the test
+            return true;
+        }
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {

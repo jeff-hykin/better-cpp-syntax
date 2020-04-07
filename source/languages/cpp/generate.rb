@@ -63,9 +63,9 @@ grammar = Grammar.new(
 #
 # Utils
 #
-    grammar.import(File.join(__dir__, "./lib/inline_comment"))
-    grammar.import(File.join(__dir__, "./lib/std_space"))
-    grammar.import(File.join(__dir__, "./lib/preprocessor"))
+    grammar.import("./lib/inline_comment")
+    grammar.import("./lib/std_space")
+    grammar.import("./lib/preprocessor")
     inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
     basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
@@ -315,7 +315,6 @@ grammar = Grammar.new(
         ]
     grammar[:storage_types] = [
             :storage_specifiers,
-            :pthread_types,
             :inline_builtin_storage_type,
             :decltype,
             :typename,
@@ -1032,7 +1031,6 @@ grammar = Grammar.new(
                 tag_as: "storage.type.$match"
             ),
             :attributes_context,
-            :function_type,
             :storage_types,
             :number_literal,
             :string_context,
@@ -2564,7 +2562,7 @@ if $PROGRAM_NAME == __FILE__
     # this file is imported by the c grammar, dont generate if it was not directly called
     grammar.save_to(
         syntax_dir: PathFor[:syntaxes],
-        tag_dir: File.dirname(PathFor[:languageTag]["cpp"])
+        tag_dir: File.dirname(PathFor[:languageTag]["cpp"]),
     )
     # create a duplicate grammar with all pattern ranges bailed-out
     system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")

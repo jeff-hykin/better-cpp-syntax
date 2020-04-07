@@ -65,6 +65,40 @@ class Grammar
         end
         grammar
     end
+    
+    #
+    # Import a grammar partial
+    #
+    # @note the import is "dynamic", changes made to the grammar partial after the import
+    #   wil be reflected in the parent grammar
+    #
+    # @param [String, ExportableGrammar] path_or_export the grammar partial or the file
+    #   in which the grammar partial is declared
+    #
+    # @return [ExportableGrammar]
+    #
+    def self.import(path_or_export)
+        export = path_or_export
+        unless path_or_export.is_a? ExportableGrammar
+            # allow for relative paths
+            if not Pathname.new(path_or_export).absolute?
+                relative_path = File.dirname(caller_locations[0].path)
+                if not Pathname.new(relative_path).absolute?
+                    relative_path = File.join(Dir.pwd,relative_path)
+                end
+                path_or_export = File.join(relative_path, path_or_export)
+            end
+            require path_or_export
+            resolved = File.expand_path resolve_require(path_or_export)
+
+            export = @@export_grammars.dig(resolved, :grammar)
+            unless export.is_a? ExportableGrammar
+                raise "#{path_or_export} does not create a Exportable Grammar"
+            end
+        end
+
+        return export.export
+    end
 
     #
     # Create a new Grammar
@@ -163,18 +197,19 @@ class Grammar
     # @return [void] nothing
     #
     def import(path_or_export)
-        export = path_or_export
+        
         unless path_or_export.is_a? ExportableGrammar
-            require path_or_export
-            resolved = File.expand_path resolve_require(path_or_export)
-
-            export = @@export_grammars.dig(resolved, :grammar)
-            unless export.is_a? ExportableGrammar
-                raise "#{path_or_export} does not create a Exportable Grammar"
+            relative_path = File.dirname(caller_locations[0].path)
+            if not Pathname.new(relative_path).absolute?
+                relative_path = File.join(Dir.pwd,relative_path)
+            end
+            # allow for relative paths
+            if not Pathname.new(path_or_export).absolute?
+                path_or_export = File.join(relative_path, path_or_export)
             end
         end
 
-        export = export.export
+        export = Grammar.import(path_or_export)
         export.parent_grammar = self
 
         # import the repository
@@ -383,18 +418,20 @@ class Grammar
     # @param [Hash] options options to save_to
     # @option options :inherit_or_embedded (:embedded) see #generate
     # @option options :generate_tags [Boolean] (true) generate a list of all +:tag_as+s
-    # @option options :dir [String] the location to generate the files
-    # @option options :tag_dir [String] (File.join(options[:dir],"language_tags")) the
+    # @option options :directory [String] the location to generate the files
+    # @option options :tag_dir [String] (File.join(options[:directory],"language_tags")) the
     #   directory to generate language tags in
-    # @option options :syntax_dir [String] (File.join(options[:dir],"syntaxes")) the
+    # @option options :syntax_dir [String] (File.join(options[:directory],"syntaxes")) the
     #   directory to generate the syntax file in
     # @option options :syntax_format [:json,:vscode,:plist,:textmate,:tm_language,:xml]
     #   (:json) The format to generate the syntax file in
     # @option options :syntax_name [String] ("#{@name}.tmLanguage") the name of the syntax
     #   file to generate without the extension
+    # @option options :tag_name [String] ("#{@name}-scopes.txt") the name of the tag list
+    #   file to generate without the extension
     #
-    # @note all keys except :dir is optional
-    # @note :dir is optional if both :tag_dir and :syntax_dir are specified
+    # @note all keys except :directory is optional
+    # @note :directory is optional if both :tag_dir and :syntax_dir are specified
     # @note currently :vscode is an alias for :json
     # @note currently :textmate, :tm_language, and :xml are aliases for :plist
     # @note later the aliased :syntax_type choices may enable compatibility features
@@ -402,14 +439,25 @@ class Grammar
     # @return [void] nothing
     #
     def save_to(options)
-        options[:dir] ||= "."
+        options[:directory] ||= "."
+        
+        # make the path absolute 
+        absolute_path_from_caller = File.dirname(caller_locations[0].path)
+        if not Pathname.new(absolute_path_from_caller).absolute?
+            absolute_path_from_caller = File.join(Dir.pwd,absolute_path_from_caller)
+        end
+        if not Pathname.new(options[:directory]).absolute?
+            options[:directory] = File.join(absolute_path_from_caller, options[:directory])
+        end
+        
         default = {
             inherit_or_embedded: :embedded,
             generate_tags: true,
             syntax_format: :json,
             syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
-            syntax_dir: File.join(options[:dir], "syntaxes"),
-            tag_dir: File.join(options[:dir], "language_tags"),
+            syntax_dir: options[:directory],
+            tag_name: "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            tag_dir: options[:directory],
             should_lint: true,
         }
         options = default.merge(options)
@@ -443,7 +491,7 @@ class Grammar
 
         file_name = File.join(
             options[:tag_dir],
-            "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            options[:tag_name],
         )
         new_file = File.open(file_name, "w")
         new_file.write(get_tags(output).to_a.sort.join("\n"))
