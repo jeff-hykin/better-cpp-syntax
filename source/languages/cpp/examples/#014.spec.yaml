@@ -1,17 +1,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: B
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -20,14 +19,15 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopesBegin:
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: A
   scopes:
     - entity.name.type.class
 - source: ':'
+  scopesBegin:
+    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public

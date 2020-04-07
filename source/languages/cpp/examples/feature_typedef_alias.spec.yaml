@@ -4,17 +4,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: foo
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '}'
   scopes:
     - meta.body.struct
@@ -34,17 +33,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: bar
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -64,17 +62,16 @@
 - source: union
   scopesBegin:
     - meta.block.union
-    - meta.head.union
   scopes:
+    - meta.head.union
     - storage.type.union
 - source: foobar
   scopes:
     - entity.name.type.union
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.union
-  scopesEnd:
     - meta.head.union
+    - punctuation.section.block.begin.bracket.curly.union
 - source: '}'
   scopes:
     - meta.body.union
@@ -94,17 +91,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: _OVERLAPPED
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '}'
   scopes:
     - meta.body.struct

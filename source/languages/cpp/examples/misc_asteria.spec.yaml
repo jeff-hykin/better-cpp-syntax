@@ -139,17 +139,16 @@
   scopesBegin:
     - meta.body.namespace
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: Line_Reader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: private
   scopesBegin:
     - meta.body.class
@@ -1866,17 +1865,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: Tack
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: private
   scopesBegin:
     - meta.body.class
@@ -3911,17 +3909,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Prefix_Comparator
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: template
   scopesBegin:
     - meta.body.struct
@@ -4942,17 +4939,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Keyword_Element
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: char
   scopesBegin:
     - meta.body.struct
@@ -7115,17 +7111,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Punctuator_Element
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: char
   scopesBegin:
     - meta.body.struct

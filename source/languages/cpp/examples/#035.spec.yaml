@@ -37,17 +37,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: test
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: template
   scopesBegin:
     - meta.body.struct
@@ -151,18 +150,16 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopesBegin:
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: test2
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: bool
   scopesBegin:
     - meta.body.struct
@@ -230,17 +227,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: test2
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
     - meta.body.class

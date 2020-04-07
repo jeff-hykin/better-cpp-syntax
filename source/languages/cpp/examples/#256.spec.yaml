@@ -1,17 +1,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: basic_string
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: basic_string
   scopesBegin:
     - meta.body.class

@@ -1,17 +1,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: foo
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: int
   scopesBegin:
     - meta.body.struct
@@ -163,17 +162,16 @@
 - source: union
   scopesBegin:
     - meta.block.union
-    - meta.head.union
   scopes:
+    - meta.head.union
     - storage.type.union
 - source: baz
   scopes:
     - entity.name.type.union
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.union
-  scopesEnd:
     - meta.head.union
+    - punctuation.section.block.begin.bracket.curly.union
 - source: int
   scopesBegin:
     - meta.body.union

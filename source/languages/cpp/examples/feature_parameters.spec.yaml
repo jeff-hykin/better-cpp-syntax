@@ -1608,17 +1608,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: GameState
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -1631,17 +1630,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Node
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '}'
   scopes:
     - meta.body.struct

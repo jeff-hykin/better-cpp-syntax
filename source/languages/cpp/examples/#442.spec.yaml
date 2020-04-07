@@ -200,14 +200,12 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: reproc_t
   scopes:
     - entity.name.type.struct
-  scopesEnd:
-    - meta.head.struct
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -539,17 +537,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: stop_action
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '  stop action'
   scopesBegin:
     - meta.body.struct
@@ -569,18 +566,16 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopesBegin:
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: stop_actions
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '  stop_action first'
   scopesBegin:
     - meta.body.struct
@@ -604,18 +599,16 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopesBegin:
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: options
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '  /*!'
   scopesBegin:
     - meta.body.struct
@@ -928,17 +921,16 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: process
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.class
-  scopesEnd:
     - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
 - source: public
   scopesBegin:
     - meta.body.class
@@ -1912,17 +1904,16 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: source
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: '  process process'
   scopesBegin:
     - meta.body.struct

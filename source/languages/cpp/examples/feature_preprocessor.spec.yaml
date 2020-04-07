@@ -134,8 +134,8 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: Stuff
   scopes:
@@ -143,7 +143,6 @@
   scopesEnd:
     - meta.preprocessor.macro
     - meta.block.class
-    - meta.head.class
 - source: '#'
   scopesBegin:
     - keyword.control.directive.conditional.ifdef
@@ -383,15 +382,14 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Stuff
   scopes:
     - entity.name.type.struct
   scopesEnd:
     - meta.block.struct
-    - meta.head.struct
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -406,13 +404,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: Stuff
   scopes:
     - entity.name.type.struct
 - source: \
+  scopesBegin:
+    - meta.head.struct
   scopes:
     - constant.character.escape.line-continuation
 - source: '{'
@@ -451,17 +451,16 @@
   scopesBegin:
     - meta.body.namespace
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: bar
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - punctuation.section.block.begin.bracket.curly.struct
-  scopesEnd:
     - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
 - source: \
   scopesBegin:
     - meta.body.struct
@@ -588,14 +587,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: IsPoint
   scopes:
     - entity.name.type.struct
 - source: <
   scopesBegin:
+    - meta.head.struct
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -708,14 +708,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: IsArrayBasedPoint
   scopes:
     - entity.name.type.struct
 - source: <
   scopesBegin:
+    - meta.head.struct
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call

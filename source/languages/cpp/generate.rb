@@ -2224,7 +2224,7 @@ grammar = Grammar.new(
         ),
     ]
     final_modifier = Pattern.new(
-        match: /final/,
+        match: variableBounds[/final/],
         tag_as: "storage.type.modifier.final",
     )
     generateClassOrStructBlockFinder = ->(name, tail_includes = [:$initial_context]) do
@@ -2239,26 +2239,48 @@ grammar = Grammar.new(
                         match: variableBounds[ /#{name}/ ],
                         tag_as: "storage.type.$match",
                     ).then(
-                        std_space.or(
-                            inline_attribute
-                        ).or(
-                            lookAheadFor(/{/)
-                        )
-                    ).maybe(
-                        # normally macros like this wouldn't be supported, but I imagine this one is fairly common
-                        std_space.then(match: /DLLEXPORT/, tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT").then(std_space)
-                    ).maybe(inline_attribute).then(std_space).maybe(
-                        match: variable_name,
-                        tag_as: "entity.name.type.$reference(storage_type)",
-                    ).maybe(
-                        std_space.then(final_modifier).then(std_space)
-                    ).maybe(
-                        #
-                        # inheritance
-                        #
-                        std_space.then(
-                            match: /:/,
-                            tag_as: "punctuation.separator.colon.inheritance"
+                        std_space
+                    ).then(
+                        lookAheadFor(/{/).or(
+                            maybe(
+                                inline_attribute.then(std_space)
+                            ).maybe(
+                                zeroOrMoreOf(
+                                    match: variable_name.then(std_space),
+                                    dont_back_track?: true,
+                                    includes: [
+                                        # needs std_space so that it can beat-out the class/struct name (below)
+                                        final_modifier.then(std_space),
+                                        # the last word is assumed to be the class/stuct name
+                                        Pattern.new(
+                                            Pattern.new(
+                                                match: variable_name,
+                                                tag_as: "entity.name.type.#{name}",
+                                            ).then(std_space).maybe(
+                                                final_modifier.then(std_space)
+                                            ).lookAheadFor(/:|{|$/)
+                                        ),
+                                        # a known macro
+                                        Pattern.new(
+                                            match: /DLLEXPORT/,
+                                            tag_as: "entity.name.other.preprocessor.macro.predefined.DLLEXPORT",
+                                        ),
+                                        # this is for the use of unknown macros (cannot contain arguments)
+                                        Pattern.new(
+                                            match: identifier,
+                                            tag_as: "entity.name.other.preprocessor.macro.predefined.probably.$match",
+                                        ),
+                                    ]
+                                )
+                            ).maybe(
+                                #
+                                # inheritance
+                                #
+                                std_space.then(
+                                    match: /:/,
+                                    tag_as: "punctuation.separator.colon.inheritance"
+                                )
+                            )
                         )
                     ),
                 ),
@@ -2326,7 +2348,7 @@ grammar = Grammar.new(
             ).then(
                 match: variable_name,
                 tag_as: "variable.other.object.declare",
-            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{]/)
+            ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{a-zA-Z]/)
         )
     end
     grammar[:standard_declares] = [

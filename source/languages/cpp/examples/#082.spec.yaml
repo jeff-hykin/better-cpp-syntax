@@ -1,14 +1,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: copy_storage_helper
   scopes:
     - entity.name.type.struct
 - source: <
   scopesBegin:
+    - meta.head.struct
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -360,14 +361,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: copy_storage_helper
   scopes:
     - entity.name.type.struct
 - source: <
   scopesBegin:
+    - meta.head.struct
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call

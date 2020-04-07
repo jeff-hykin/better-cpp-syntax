@@ -30,14 +30,15 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-    - meta.head.struct
   scopes:
+    - meta.head.struct
     - storage.type.struct
 - source: testCB
   scopes:
     - entity.name.type.struct
 - source: '#'
   scopesBegin:
+    - meta.head.struct
     - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive

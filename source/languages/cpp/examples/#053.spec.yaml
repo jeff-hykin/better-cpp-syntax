@@ -1,13 +1,15 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: foo
   scopes:
     - entity.name.type.class
 - source: ':'
+  scopesBegin:
+    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: 'bar '
@@ -24,14 +26,15 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopesBegin:
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: foo
   scopes:
     - entity.name.type.class
 - source: ':'
+  scopesBegin:
+    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public

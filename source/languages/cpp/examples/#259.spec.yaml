@@ -60,14 +60,12 @@
 - source: class
   scopesBegin:
     - meta.block.class
-    - meta.head.class
   scopes:
+    - meta.head.class
     - storage.type.class
 - source: cc
   scopes:
     - entity.name.type.class
-  scopesEnd:
-    - meta.head.class
 - source: ;
   scopes:
     - punctuation.terminator.statement
