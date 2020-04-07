@@ -1,16 +1,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Vector
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: private
   scopesBegin:
     - meta.body.class

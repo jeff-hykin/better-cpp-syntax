@@ -2389,16 +2389,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Errors
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '                string info'
   scopesBegin:
     - meta.body.struct
@@ -2790,16 +2791,17 @@
 - source: union
   scopesBegin:
     - meta.block.union
-  scopes:
     - meta.head.union
+  scopes:
     - storage.type.union
 - source: storage
   scopes:
     - entity.name.type.union
 - source: '{'
   scopes:
-    - meta.head.union
     - punctuation.section.block.begin.bracket.curly.union
+  scopesEnd:
+    - meta.head.union
 - source: storage
   scopesBegin:
     - meta.body.union
@@ -26956,16 +26958,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: TaskClass
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: //
   scopesBegin:
     - meta.body.class
@@ -28142,16 +28145,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Task
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: //
   scopesBegin:
     - meta.body.class
@@ -29923,16 +29927,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: LockManagerClass
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: public
   scopesBegin:
     - meta.body.class
@@ -39459,12 +39464,14 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Item
   scopes:
     - entity.name.type.class
+  scopesEnd:
+    - meta.head.class
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -39500,16 +39507,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: List
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: //
   scopesBegin:
     - meta.body.class
@@ -45574,16 +45582,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Item
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: //
   scopesBegin:
     - meta.body.class
@@ -47765,13 +47774,16 @@
 - source: operator
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: string
   scopes:
-    - entity.name.operator.type
+    - meta.qualified_type
+    - entity.name.type
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -47803,14 +47815,17 @@
   scopesEnd:
     - meta.body.function.definition.special.operator-overload
 - source: operator
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: double
   scopes:
-    - entity.name.operator.type
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -61755,15 +61770,13 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: __PutLinesOutputFixerStreamClass
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public

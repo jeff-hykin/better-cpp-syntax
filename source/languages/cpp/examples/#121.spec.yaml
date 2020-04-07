@@ -12,15 +12,13 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ChildClass
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -58,8 +56,8 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: DLLEXPORT
   scopes:
@@ -68,8 +66,6 @@
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -92,15 +88,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ChildClass
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: /*
@@ -151,11 +146,11 @@
   scopesEnd:
     - support.other.attribute
 - source: ChildClass
+  scopesBegin:
+    - meta.head.class
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public

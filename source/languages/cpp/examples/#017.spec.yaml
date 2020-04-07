@@ -1,16 +1,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: LineReader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -19,16 +20,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line_Reader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -37,16 +40,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line\u00b7Reader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -55,16 +60,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line\U0002070EReader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -269,16 +276,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: LineReader
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '}'
   scopes:
     - meta.body.struct
@@ -287,16 +295,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Line_Reader
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '}'
   scopes:
     - meta.body.struct
@@ -305,16 +315,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Line\u00b7Reader
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '}'
   scopes:
     - meta.body.struct
@@ -323,16 +335,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Line\U0002070EReader
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: '}'
   scopes:
     - meta.body.struct

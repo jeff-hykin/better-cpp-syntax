@@ -1,16 +1,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing1
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: Thing1
   scopesBegin:
     - meta.body.struct
@@ -47,16 +48,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing2
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: explicit
   scopesBegin:
     - meta.body.struct
@@ -97,16 +100,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing3
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: virtual
   scopesBegin:
     - meta.body.struct
@@ -148,16 +153,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing4
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: Thing4
   scopesBegin:
     - meta.body.struct
@@ -275,16 +282,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing5
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: Thing5
   scopesBegin:
     - meta.body.struct
@@ -346,16 +354,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing6
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: Thing6
   scopesBegin:
     - meta.body.struct

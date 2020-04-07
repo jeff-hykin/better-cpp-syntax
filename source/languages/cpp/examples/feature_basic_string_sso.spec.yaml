@@ -305,16 +305,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: __long_layout
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: "\t\t\t\tCharT "
   scopesBegin:
     - meta.body.class
@@ -456,16 +457,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: basic_string
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: public
   scopesBegin:
     - meta.body.class
@@ -1304,16 +1306,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: _long
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: "\t\t\tCharT "
   scopesBegin:
     - meta.body.struct
@@ -1349,16 +1352,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: _short
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: "\t\t\tCharT "
   scopesBegin:
     - meta.body.struct
@@ -1437,16 +1442,17 @@
 - source: union
   scopesBegin:
     - meta.block.union
-  scopes:
     - meta.head.union
+  scopes:
     - storage.type.union
 - source: _rep
   scopes:
     - entity.name.type.union
 - source: '{'
   scopes:
-    - meta.head.union
     - punctuation.section.block.begin.bracket.curly.union
+  scopesEnd:
+    - meta.head.union
 - source: "\t\t\t_long _l"
   scopesBegin:
     - meta.body.union
@@ -12531,9 +12537,9 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: basic_string_view
   scopesBegin:
-    - meta.head.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
-    - entity.name.operator.type
+    - entity.name.type
 - source: <
   scopesBegin:
     - meta.template.call
@@ -12554,8 +12560,11 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
+    - meta.qualified_type
     - meta.template.call
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload

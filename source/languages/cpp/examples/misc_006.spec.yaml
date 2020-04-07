@@ -3706,11 +3706,12 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.operator-overload
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: (
   scopesBegin:
     - meta.head.function.definition.special.operator-overload
-  scopes:
-    - entity.name.operator.type
-- source: (
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -3739,13 +3740,17 @@
 - source: operator
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: double
   scopes:
-    - entity.name.operator.type
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -4206,15 +4211,14 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: test
   scopes:
     - entity.name.type.struct
 - source: '#'
   scopesBegin:
-    - meta.head.struct
     - keyword.control.directive.endif
   scopes:
     - punctuation.definition.directive
@@ -4385,16 +4389,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: test2
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: //
   scopesBegin:
     - meta.body.struct
@@ -4500,16 +4506,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: test3
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: //
   scopesBegin:
     - meta.body.struct
@@ -4615,16 +4623,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
-  scopes:
+  scopesBegin:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: test2
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: bool
   scopesBegin:
     - meta.body.struct
@@ -4692,16 +4702,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: test2
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -5340,16 +5351,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Thing
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: public
   scopesBegin:
     - meta.body.class
@@ -5436,16 +5448,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: Thing2
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: public
   scopesBegin:
     - meta.body.struct
@@ -5532,16 +5545,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: A
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: void
   scopesBegin:
     - meta.body.class
@@ -5576,16 +5590,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: A
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: void
   scopesBegin:
     - meta.body.class
@@ -5620,16 +5636,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: A
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: void
   scopesBegin:
     - meta.body.class
@@ -5664,16 +5682,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: A
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: void
   scopesBegin:
     - meta.body.class
@@ -5708,16 +5728,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ClassA
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -5726,8 +5748,9 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ClassE
   scopes:
@@ -5736,8 +5759,6 @@
   scopes:
     - storage.type.modifier.final
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -5780,16 +5801,17 @@
   scopesBegin:
     - meta.body.namespace
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ClassF
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -5798,16 +5820,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ClassG
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -5826,15 +5850,13 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: ClassH
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -5887,15 +5909,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: foo
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: 'bar '
@@ -5912,15 +5933,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: foo
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -5947,15 +5967,14 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: copy_storage_helper
   scopes:
     - entity.name.type.struct
 - source: <
   scopesBegin:
-    - meta.head.struct
     - meta.template.call
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -6442,15 +6461,13 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: foo
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: private
@@ -6560,15 +6577,13 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: thing
   scopes:
     - entity.name.type.struct
 - source: ':'
-  scopesBegin:
-    - meta.head.struct
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -6605,15 +6620,13 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: thing
   scopes:
     - entity.name.type.class
 - source: ':'
-  scopesBegin:
-    - meta.head.class
   scopes:
     - punctuation.separator.colon.inheritance
 - source: public
@@ -9890,16 +9903,17 @@
 - source: struct
   scopesBegin:
     - meta.block.struct
-  scopes:
     - meta.head.struct
+  scopes:
     - storage.type.struct
 - source: st
   scopes:
     - entity.name.type.struct
 - source: '{'
   scopes:
-    - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
 - source: //
   scopesBegin:
     - meta.body.struct
@@ -9954,16 +9968,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: LineReader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -9972,16 +9987,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line_Reader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -9990,16 +10007,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line\u00b7Reader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class
@@ -10008,16 +10027,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: class
-  scopes:
+  scopesBegin:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Line\U0002070EReader
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: '}'
   scopes:
     - meta.body.class

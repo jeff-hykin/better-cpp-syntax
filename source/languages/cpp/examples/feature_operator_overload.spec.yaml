@@ -401,9 +401,9 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: basic_string_view
   scopesBegin:
-    - meta.head.function.definition.special.operator-overload
+    - meta.qualified_type
   scopes:
-    - entity.name.operator.type
+    - entity.name.type
 - source: <
   scopesBegin:
     - meta.template.call
@@ -424,8 +424,11 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
+    - meta.qualified_type
     - meta.template.call
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -473,11 +476,12 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.operator-overload
 - source: basic_string_view
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: (
   scopesBegin:
     - meta.head.function.definition.special.operator-overload
-  scopes:
-    - entity.name.operator.type
-- source: (
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -532,11 +536,12 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.operator-overload
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: (
   scopesBegin:
     - meta.head.function.definition.special.operator-overload
-  scopes:
-    - entity.name.operator.type
-- source: (
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -558,14 +563,17 @@
     - >-
       punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
 - source: operator
-  scopesBegin:
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: double
   scopes:
-    - entity.name.operator.type
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload

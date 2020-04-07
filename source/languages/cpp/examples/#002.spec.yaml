@@ -22,16 +22,17 @@
 - source: class
   scopesBegin:
     - meta.block.class
-  scopes:
     - meta.head.class
+  scopes:
     - storage.type.class
 - source: Example
   scopes:
     - entity.name.type.class
 - source: '{'
   scopes:
-    - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
 - source: Example
   scopesBegin:
     - meta.body.class
@@ -66,13 +67,17 @@
 - source: operator
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.head.function.definition.special.operator-overload
   scopes:
+    - meta.head.function.definition.special.operator-overload
     - keyword.other.operator.overload
 - source: int
   scopes:
-    - entity.name.operator.type
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
   scopes:
     - >-
       punctuation.section.parameters.begin.bracket.round.special.operator-overload
@@ -100,8 +105,8 @@
     - punctuation.separator.scope-resolution.operator-overload
 - source: string
   scopes:
-    - meta.head.function.definition.special.operator-overload
-    - entity.name.operator.type
+    - meta.qualified_type
+    - entity.name.type
 - source: '&'
   scopes:
     - entity.name.operator.type.reference
