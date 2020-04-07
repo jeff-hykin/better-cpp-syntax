@@ -1185,15 +1185,30 @@ grammar = Grammar.new(
                     tag_as: "entity.name.operator",
                 # type
                 ).or(
-                    match: variableBounds[identifier].then(
-                        # possible pointer/reference variation
-                        maybe(ref_deref[pointer_tag:"entity.name.operator.type.pointer", reference_tag:"entity.name.operator.type.reference"])
-                    ).then(std_space).maybe(
-                        # possible array variation
-                        match: /\[\]/,
-                        tag_as: "entity.name.operator.type.array"
-                    ),
                     tag_as: "entity.name.operator.type",
+                    match: Pattern.new(
+                        zeroOrMoreOf(
+                            match: variableBounds[@cpp_tokens.that(:isStorageSpecifier)].then(std_space),
+                            includes: [
+                                Pattern.new(
+                                    match: @cpp_tokens.that(:isStorageSpecifier),
+                                    tag_as: "entity.name.operator.type.modifier"
+                                )
+                            ]
+                        ).then(
+                            qualified_type
+                        ).maybe(
+                            # possible pointer/reference variation
+                            ref_deref[
+                                pointer_tag:"entity.name.operator.type.pointer",
+                                reference_tag:"entity.name.operator.type.reference"
+                            ]
+                        ).then(std_space).maybe(
+                            # possible array variation
+                            match: /\[\]/,
+                            tag_as: "entity.name.operator.type.array"
+                        ),
+                    )
                 # custom literal
                 ).or(
                     # see https://en.cppreference.com/w/cpp/language/user_literal
@@ -1800,7 +1815,7 @@ grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         Pattern.new(
-                            match: @cpp_tokens.that(:isStorageSpecifier),
+                            match: variableBounds[@cpp_tokens.that(:isStorageSpecifier)],
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
                     ),
