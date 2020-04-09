@@ -697,8 +697,8 @@ grammar = Grammar.new(
 
     cpp_attribute_start = Pattern.new(/\[\[/)
     cpp_attribute_end   = Pattern.new(/\]\]/)
-    gcc_attribute_start = Pattern.new(/__attribute(?:__)?\(\(/)
-    gcc_attribute_end   = Pattern.new(/\)\)/)
+    gcc_attribute_start = Pattern.new(/__attribute(?:__)?\s*\(\s*\(/)
+    gcc_attribute_end   = Pattern.new(/\)\s*\)/)
     ms_attribute_start  = Pattern.new(/__declspec\(/)
     ms_attribute_end    = Pattern.new(/\)/)
     alignas_start       = Pattern.new(/alignas\(/)
