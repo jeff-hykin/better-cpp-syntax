@@ -46,8 +46,10 @@ def getRawStringPatterns()
     )
     regex = generateTaggedRawString("regex", Pattern.new(/_r/).or(/re/).or(/regex/), "source.regexp.python")
     sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql")
+    glsl = generateTaggedRawString("glsl", Pattern.new(/glsl/).or(/GLSL/), "source.glsl")
     return [
         regex,
+        glsl,
         sql,
         default,
     ]
