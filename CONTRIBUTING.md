@@ -22,7 +22,7 @@ You can probably look at the code `source/languages/cpp/generate.rb` to get a ge
 ## If you already know about Textmate Grammars 
 Here's a small conversion guide. You don't need capture groups anymore, for a single pattern rule:
 - captures are replaced with tagging sub expressions (see readable regex tutorial further down)
-- scope name `$0` becomes `$match` and `$N` becomes `$reference(name)` (search code for definitions of )
+- scope name `$0` becomes `$match` and `$N` becomes `$reference(name)` (search code for examples)
 - `"captures": {"0": {"patterns": [...]}}` is just `includes:`
 
 For begin/end rules:
