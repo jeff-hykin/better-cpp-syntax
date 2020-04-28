@@ -7,15 +7,20 @@ const fs = require("fs");
 const yaml = require("js-yaml");
 
 const pathFor = require("../paths");
+const allTests = require("../get_tests")
 
 async function sortSpecs(yargs) {
-    const tests = require("../get_tests")(yargs, test => {
-        const result =
-            fs.existsSync(test.spec.yaml) ||
-            fs.existsSync(test.spec.json) ||
-            yargs.fixtures.length !== 0;
-        return result;
-    });
+    let tests = allTests.filter(
+                    eachTest=>
+                    (
+                          fs.existsSync(test.spec.yaml)
+                       || fs.existsSync(test.spec.json)
+                       || yargs.fixtures.length !== 0
+                    ) && (
+                           yargs.fixtures.length == 0
+                        || yargs.fixtures.includes( path.relative(pathFor.fixtures, eachTest.fixturePath) )
+                    )
+                )
 
     for (const test of tests) {
         console.log(
