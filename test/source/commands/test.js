@@ -6,12 +6,53 @@ const yaml = require("js-yaml");
 const runTest = require("../test_runner");
 const pathFor = require("../paths");
 
+const allTests = require("../get_tests")
+
+const defaultTestFilter = test =>
+    fs.existsSync(test.spec.yaml) || fs.existsSync(test.spec.json);
+
+const testFilterSelection = (yargs) => {
+    if (yargs.fixtures.length !== 0 || yargs.all) {
+        return defaultTestFilter;
+    }
+    const status = execSync("git status --porcelain").toString();
+    if (status.trim() == "") {
+        // git is clean do all tests
+        return defaultTestFilter;
+    }
+    let fileExt = [];
+    for (const line of status.split("\n")) {
+        const match = / M (syntaxes\/.+\.tmLanguage.json)/.exec(line);
+        if (match) {
+            fileExt = fileExt.concat(
+                JSON.parse(
+                    fs
+                        .readFileSync(path.join(pathFor.root, match[1]))
+                        .toString()
+                )["fileTypes"]
+            );
+        }
+    }
+    if (fileExt.length === 0) {
+        return defaultTestFilter;
+    }
+    return test => {
+        const ext = path.extname(test.fixturePath).slice(1);
+        return defaultTestFilter(test) && fileExt.includes(ext);
+    };
+};
+
 async function runTests(yargs) {
     const registry = require("../registry").default;
-    const tests = require("../get_tests")(
-        yargs,
-        require("../select_tests")(yargs)
-    );
+    let whichTestFilter = testFilterSelection(yargs)
+    let tests = allTests.filter(
+                eachTest=>
+                    whichTestFilter(eachTest)
+                    && (
+                           yargs.fixtures.length == 0
+                        || yargs.fixtures.includes( path.relative(pathFor.fixtures, eachTest.fixturePath) )
+                    )
+            )
 
     let totalResult = true;
     for (const test of tests) {
