@@ -21,7 +21,7 @@ int main()
 
     auto const regexExpression
     {R"re(
-        (((?:[uUL]8?)?R)\\\"(?:(?:_r|re)|regex)\\()
+        ((?:[uUL]8?)?R)\\\"(?:(?:_r|re)|regex)\\()
     )re"};
 
     return 0;

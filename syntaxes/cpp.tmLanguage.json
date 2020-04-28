@@ -2206,7 +2206,7 @@
       ]
     },
     "control_flow_keywords": {
-      "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:co_return)|(?:co_yield)|(?:co_await)|(?:continue)|(?:default)|(?:switch)|(?:return)|(?:catch)|(?:while)|(?:throw)|(?:break)|(?:case)|(?:goto)|(?:else)|(?:for)|(?:try)|(?:if)|(?:do))(?!\\w))",
+      "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:co_return)|(?:co_yield)|(?:co_await)|(?:continue)|(?:default)|(?:return)|(?:switch)|(?:catch)|(?:while)|(?:throw)|(?:break)|(?:else)|(?:case)|(?:goto)|(?:for)|(?:try)|(?:if)|(?:do))(?!\\w))",
       "captures": {
         "1": {
           "patterns": [
@@ -15256,7 +15256,7 @@
               "name": "punctuation.definition.string.end.cpp"
             }
           },
-          "name": "string.quoted.double.raw.glsl.cpp",
+          "name": "meta.string.quoted.double.raw.glsl.cpp",
           "patterns": [
             {
               "include": "source.glsl"
@@ -15279,7 +15279,7 @@
               "name": "punctuation.definition.string.end.cpp"
             }
           },
-          "name": "string.quoted.double.raw.sql.cpp",
+          "name": "meta.string.quoted.double.raw.sql.cpp",
           "patterns": [
             {
               "include": "source.sql"

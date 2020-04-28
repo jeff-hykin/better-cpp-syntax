@@ -1,4 +1,8 @@
-def generateTaggedRawString(name, tag_pattern, inner_pattern)
+def generateTaggedRawString(name, tag_pattern, inner_pattern, tag_as_meta:false)
+    # tag as meta is used when the contents of the raw string probably shouldn't be colored as a string
+    # (because they're part of another language or syntax)
+    meta = ""
+    meta = "meta." if tag_as_meta
     return PatternRange.new(
         start_pattern: Pattern.new(
             match: Pattern.new(
@@ -11,7 +15,7 @@ def generateTaggedRawString(name, tag_pattern, inner_pattern)
             match: Pattern.new(")").then(tag_pattern).then(/\"/),
             tag_as: "punctuation.definition.string.end"
         ),
-        tag_as: "string.quoted.double.raw.#{name}",
+        tag_as: meta+"string.quoted.double.raw.#{name}",
         includes: [
             inner_pattern,
         ]
@@ -45,8 +49,8 @@ def getRawStringPatterns()
         name: "string.quoted.double.raw"
     )
     regex = generateTaggedRawString("regex", Pattern.new(/_r/).or(/re/).or(/regex/), "source.regexp.python")
-    sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql")
-    glsl = generateTaggedRawString("glsl", Pattern.new(/glsl/).or(/GLSL/), "source.glsl")
+    sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql", tag_as_meta: true)
+    glsl = generateTaggedRawString("glsl", Pattern.new(/glsl/).or(/GLSL/), "source.glsl", tag_as_meta: true)
     return [
         regex,
         glsl,
