@@ -39,9 +39,9 @@ identifier = grammar[:identifier]
 
 # specification source https://gcc.gnu.org/onlinedocs/cpp/
 
-# 
+#
 # helpers
-# 
+#
     directive_start = Pattern.new(
         @start_of_line.then(std_space).then(
             match: /#/,
@@ -54,9 +54,9 @@ identifier = grammar[:identifier]
         tag_as: "entity.name.function.preprocessor",
     )
     grammar[:preprocessor_number_literal] = numeric_constant(allow_user_defined_literals: false).reTag(append:"preprocessor")
-# 
+#
 # #pragma
-# 
+#
     grammar[:pragma_mark] = Pattern.new(
         tag_as: "meta.preprocessor.pragma",
         match: Pattern.new(
@@ -80,7 +80,7 @@ identifier = grammar[:identifier]
         end_pattern: non_escaped_newline,
         includes: [
             :comments,
-            :string_context_c,
+            :string_context,
             Pattern.new(
                 match: /[a-zA-Z_$][\w\-$]*/,
                 tag_as: "entity.other.attribute-name.pragma.preprocessor",
@@ -89,9 +89,9 @@ identifier = grammar[:identifier]
             :line_continuation_character,
         ]
     )
-# 
+#
 # #include
-# 
+#
     include_partial = Pattern.new(
         Pattern.new(
             # system header [cpp.include]/2
@@ -154,9 +154,9 @@ identifier = grammar[:identifier]
             tag_as: "punctuation.terminator.statement",
         ),
     )
-# 
+#
 # #line
-# 
+#
     grammar[:line] = PatternRange.new(
         tag_as: "meta.preprocessor.line",
         start_pattern: Pattern.new(
@@ -165,14 +165,14 @@ identifier = grammar[:identifier]
         ),
         end_pattern: non_escaped_newline,
         includes: [
-            :string_context_c,
+            :string_context,
             :preprocessor_number_literal,
             :line_continuation_character,
         ]
     )
-# 
+#
 # diagnostic (#error, #warning)
-# 
+#
     grammar[:diagnostic] = PatternRange.new(
         tag_as: "meta.preprocessor.diagnostic.$reference(directive)",
         start_pattern: Pattern.new(
@@ -232,9 +232,9 @@ identifier = grammar[:identifier]
             )
         ]
     )
-# 
+#
 # #undef
-# 
+#
     grammar[:undef] = Pattern.new(
         tag_as: "meta.preprocessor.undef",
         match: Pattern.new(
@@ -244,9 +244,9 @@ identifier = grammar[:identifier]
             ).then(std_space).then(macro_name)
         ),
     )
-# 
+#
 # #define
-# 
+#
     grammar[:single_line_macro] = Pattern.new(
         should_fully_match: ['#define EXTERN_C extern "C"'],
         match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
@@ -306,20 +306,20 @@ identifier = grammar[:identifier]
             :macro_context,
             :macro_argument,
         ]
-        
+
     )
-# 
+#
 # arguments
-# 
+#
     grammar[:macro_argument] = Pattern.new(
         match: /##?/.then(identifier).lookAheadToAvoid(@standard_character),
         tag_as: "variable.other.macro.argument"
     )
-# 
+#
 # *conditionals*
-# 
+#
     # this range only ends with #else and #endif and that decision is very intentional
-    # by doing this the syntax safely closes double-starts or double-closes 
+    # by doing this the syntax safely closes double-starts or double-closes
     # (the if-true being case 1, and the if-false being case 2)
     # by only leaving one of the cases open (one of them has to be syntaxtically valid) this allows the grammar to parse the rest of it normally
     # there's more complexity behind this, but thats the general idea. See the github preprocessor conditional issues for full details
@@ -349,7 +349,7 @@ identifier = grammar[:identifier]
         :preprocessor_conditional_defined,
         :comments,
         :language_constants,
-        :string_context_c,
+        :string_context,
         :preprocessor_number_literal,
         :operators,
         :predefined_macros,
