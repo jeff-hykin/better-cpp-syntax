@@ -1,4 +1,3 @@
-exit
 require 'textmate_grammar'
 require_relative '../../../paths'
 source_dir = "../../"
@@ -84,7 +83,7 @@ std_space = c_grammar[:std_space]
     function_definition = PatternRange.new(
         tag_as: "meta.function",
         start_pattern: avoid_invalid_function_names.then(look_ahead_for_function_name),
-        end_pattern: lookBehindFor(/\)/),
+        end_pattern: lookAheadToAvoid(/\G/).lookBehindFor(/\)/),
         includes: [ "#function-innards" ]
         )
 
