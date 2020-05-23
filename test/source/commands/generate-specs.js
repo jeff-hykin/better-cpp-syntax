@@ -7,14 +7,25 @@ const yaml = require("js-yaml");
 const generateSpec = require("../generate_spec");
 const pathFor = require("../paths");
 
+const allTests = require("../get_tests")
+
 async function generateSpecs(yargs) {
-    const tests = require("../get_tests")(yargs, test => {
-        const result = 
-            !fs.existsSync(test.spec.yaml)
-            || yargs.all
-            || yargs.fixtures.length !== 0;
-        return result;
-    });
+    // either get all tests, or only the ones that are mentioned
+    if (yargs.all) {
+        // dont filter any test
+        testFilter = eachTest => true
+    } else {
+        // only pick files that match one of the user-provided arguments
+        testFilter = eachTest => {
+            for (const arg of yargs.fixtures) {
+                if (eachTest.fixturePath.match(arg)) {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+    let tests = allTests.filter(testFilter)
 
     for (const test of tests) {
         const fixturePath = test.fixturePath

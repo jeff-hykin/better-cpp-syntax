@@ -13,6 +13,8 @@ const {
     currentActiveFixture
 } = require("../symbols");
 
+const allTests = require("../get_tests")
+
 // get all reporters
 let reporters = {};
 for (const each of glob.sync(`${__dirname}/../report/reporters/*.js`)) {
@@ -29,7 +31,13 @@ async function runReport(yargs) {
     let files = yargs.fixtures;
     if (files.length === 0) {
         // use text fixtures instead
-        files = require("../get_tests")(yargs).map(test => test.fixturePath);
+        files = allTests.filter(
+                    eachTest=>
+                           yargs.fixtures.length == 0 
+                        || yargs.fixtures.includes( path.relative(pathFor.fixtures, eachTest.fixturePath) )
+                ).map(
+                    test => test.fixturePath
+                );
     } else {
         files = _.flatten(files.map(file => glob.sync(file)));
     }

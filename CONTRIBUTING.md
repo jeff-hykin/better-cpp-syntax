@@ -6,13 +6,23 @@
 4. Run `npm install`
 5. Run `npm test` to make sure everything is working
 6. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
-7. Then, in that new window, open up a C++ file, and any changes made to the project will show up in the syntax of that file.
-8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop up.
+7. Then, in the new window created by the debugger, open up a C++ file, and your changes to the project will show up in the syntax of that file.
+8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop-up to get the new changes.
 
-## Mapping textmate grammar constructs to readable grammars
-For a single pattern rule:
-- captures are replaced with tagging sub expressions (see readable regex tutorial later)
-- in scope name `$0` becomes `$match` and `$N` becomes `$reference(name)`
+
+## Adding a feature
+If you believe you've successfully made a change. Create a `your_feature.cpp` file in the `source/languages/cpp/examples`. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better). Then use `npm run gen -- source/languages/cpp/examples/your_feature.cpp` to generate a test for your feature.
+
+Once that is ready, please make a pull request agaist `Multi/pull-requests` rather than master.
+
+# How things work
+
+You can probably look at the code `source/languages/cpp/generate.rb` to get a general understanding of how things work. The main features are `Pattern.new` and `PatternRange.new`.
+
+## If you already know about Textmate Grammars 
+Here's a small conversion guide. You don't need capture groups anymore, for a single pattern rule:
+- captures are replaced with tagging sub expressions (see readable regex tutorial further down)
+- scope name `$0` becomes `$match` and `$N` becomes `$reference(name)` (search code for examples)
 - `"captures": {"0": {"patterns": [...]}}` is just `includes:`
 
 For begin/end rules:
@@ -25,18 +35,18 @@ For begin/end rules:
 For both single pattern and begin/end rules:
 - `name:` is renamed to `tag_as:`
 - use ruby symbols `:repository_name:` instead of `"#repository_name` in `includes:`
-- to add a rule to the repository use `cpp_grammar[:repository_name] = newPattern(...)`
+- to add a rule to the repository use `cpp_grammar[:repository_name] = Pattern.new(...)`
 
 ## Readable Regex Guide
-the following helpers exist to create a more readable regex syntax
-- `newPattern(*attributes)` or `.then(*attributes)` create a new "shy" group
-  - example: `newPattern(/foo/)` => `/(?:foo)/
+Regex is pretty hard to read, so this repo uses a library to help.
+- `Pattern.new(*attributes)` or `.then(*attributes)` creates a new "shy" group
+  - example: `Pattern.new(/foo/)` => `/(?:foo)/
 - `.or(*attributes)` adds an alternation (`|`)
   - example: `/foo/.or(/bar/)` => `/foo|(?:bar)/`
   - please note you may need more shy groups depending on order
     `/foo/.or(/bar/).maybe(@spaces)` becomes (simplified) `/foo|bar\s*/` not `/(?:foo|bar)\s*/` for that you need
     
-    `newPattern(/foo/.or(/bar/)).maybe(@spaces)`
+    `Pattern.new(/foo/.or(/bar/)).maybe(@spaces)`
 - `maybe(*attributes)` or `.maybe(*attributes)` causes the pattern to match zero or one times (`?`)
   - example `maybe(/foo/)` => `/(?:foo)?/`
 - `zeroOrMoreTimes(*attributes)` or `.zeroOrMoreTimes(*attributes)` causes the pattern to be matched zero or more times (`*`)
@@ -52,7 +62,7 @@ the following helpers exist to create a more readable regex syntax
 - `lookAheadToAvoid(regex)` or `.lookAheadToAvoid(regex)` add a negative lookahead
   - example `lookAheadToAvoid(/foo/)` => `/(?!foo)/
 - `backreference(reference)` or `.backreference(reference)` adds a backreference
-  - example `newPattern(match: /foo|bar/, reference: "foobar").backreference("foobar")` => `/(foo|bar)\1/`
+  - example `Pattern.new(match: /foo|bar/, reference: "foobar").backreference("foobar")` => `/(foo|bar)\1/`
 
 helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provide more info, or a variable that is either of those.
 

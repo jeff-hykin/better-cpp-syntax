@@ -2564,9 +2564,9 @@ if $PROGRAM_NAME == __FILE__
         syntax_dir: PathFor[:syntaxes],
         tag_dir: File.dirname(PathFor[:languageTag]["cpp"]),
     )
-    # create a duplicate grammar with all pattern ranges bailed-out
-    system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
 end
+# create a duplicate grammar with all pattern ranges bailed-out
+system "node", PathFor[:macro_generator]["cpp"], File.join(PathFor[:syntaxes], "cpp.tmLanguage.json"), File.join(PathFor[:syntaxes], "cpp.embedded.macro.tmLanguage.json")
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = grammar
