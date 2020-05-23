@@ -9,9 +9,7 @@ const pathFor = require("./paths");
  * @param {(test: Test) => boolean} predicate
  * @returns {Test[]}
  */
-module.exports = (yargs, testFilter = _each => true) =>
-    pathFor.eachFixture
-        .map(fixturePath => {
+module.exports = pathFor.eachFixture.map(fixturePath => {
             let specPath = fixturePath.replace(/\.[^.]+/, ".spec.yaml")
             return {
                 fixturePath,
@@ -21,11 +19,3 @@ module.exports = (yargs, testFilter = _each => true) =>
                 }
             };
         })
-        .filter(
-            test =>
-                testFilter(test) &&
-                (yargs.fixtures.length == 0 ||
-                    yargs.fixtures.includes(
-                        path.relative(pathFor.fixtures, test.fixturePath)
-                    ))
-        );
