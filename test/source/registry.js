@@ -4,10 +4,11 @@ const glob = require("glob");
 const vsctm = require("vscode-textmate");
 const rewriteGrammar = require("./report/rewrite_grammar");
 const pathFor = require("./paths");
+const decorator = require("./report/oniguruma_decorator");
 
 function getRegistry(getOnigLib) {
     return new vsctm.Registry({
-        loadGrammar: sourceName => {
+        loadGrammar: (sourceName) => {
             if (sourceName == null) {
                 console.error(
                     `I can't find the language for ${fixtureExtension}`
@@ -24,7 +25,7 @@ function getRegistry(getOnigLib) {
                         "source.asm",
                         "source.x86",
                         "source.x86_64",
-                        "source.arm"
+                        "source.arm",
                     ].includes(sourceName)
                 ) {
                     console.error(
@@ -41,11 +42,11 @@ function getRegistry(getOnigLib) {
                 )
             );
         },
-        getOnigLib
+        getOnigLib,
     });
 }
 
 module.exports = {
-    getRegistry,
-    default: getRegistry(undefined)
+    report: getRegistry(decorator.getOniguruma()),
+    default: getRegistry(decorator.getDefaultOniguruma()),
 };

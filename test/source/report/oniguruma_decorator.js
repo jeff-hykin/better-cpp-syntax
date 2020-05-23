@@ -2,47 +2,48 @@
 const onigLibs = require("vscode-textmate");
 const OnigScanner = require("./onig_scanner");
 const recorder = require("./recorder");
+const fs = require("fs");
+const path = require("path");
 
-// from vscode-textmate src/onigLibs.ts
-let onigurumaLib = null;
-function getOniguruma() {
-    if (!onigurumaLib) {
-        let getOnigModule = (function() {
-            var onigurumaModule = null;
-            return function() {
-                if (!onigurumaModule) {
-                    onigurumaModule = require("oniguruma");
-                }
-                return onigurumaModule;
+// from vscode-textmate src/tests/onigLibs.ts
+let vscodeOnigurumaLib = null;
+function getVSCodeOniguruma() {
+    if (!vscodeOnigurumaLib) {
+        let vscodeOnigurumaModule = require("vscode-oniguruma");
+        // load wasm file from node_modules
+        const wasm = fs.readFileSync(
+            path.join(
+                __dirname,
+                "../../..",
+                "node_modules",
+                "vscode-oniguruma/release/onig.wasm"
+            )
+        ).buffer;
+        vscodeOnigurumaLib = vscodeOnigurumaModule.loadWasm(wasm).then(() => {
+            return {
+                createOnigScanner(patterns) {
+                    return new vscodeOnigurumaModule.OnigScanner(patterns);
+                },
+                createOnigString(s) {
+                    return new vscodeOnigurumaModule.OnigString(s);
+                },
             };
-        })();
-        onigurumaLib = Promise.resolve({
-            createOnigScanner(patterns) {
-                let onigurumaModule = getOnigModule();
-                return new onigurumaModule.OnigScanner(patterns);
-            },
-            createOnigString(s) {
-                let onigurumaModule = getOnigModule();
-                let string = new onigurumaModule.OnigString(s);
-                string.content = s;
-                return string;
-            }
         });
     }
-    return onigurumaLib;
+    return vscodeOnigurumaLib;
 }
 
 module.exports = {
     /**
      * @returns {onigLibs.Thenable<onigLibs.IOnigLib>}
      */
-    getOniguruma: async function() {
-        const oniguruma = await getOniguruma();
+    getOniguruma: async function () {
+        const oniguruma = await getVSCodeOniguruma();
         return {
             /**
              * @param {string[]} patterns
              */
-            createOnigScanner: patterns => {
+            createOnigScanner: (patterns) => {
                 if (patterns.length === 0) {
                     return new OnigScanner(patterns, undefined);
                 }
@@ -58,9 +59,13 @@ module.exports = {
             /**
              * @param {string} s
              */
-            createOnigString: s => {
+            createOnigString: (s) => {
                 return oniguruma.createOnigString(s);
-            }
+            },
         };
-    }
+    },
+
+    getDefaultOniguruma: async function () {
+        return await getVSCodeOniguruma();
+    },
 };
