@@ -17,7 +17,7 @@ class OneOfPattern < PatternBase
             return
         end
         unless patterns.is_a? Array
-            puts <<-HEREDOC.remove_indent
+            raise <<-HEREDOC.remove_indent
                 oneOf() expects an array of patterns, the provided argument is not an array.
                 The arguments to oneOf is below
                 #{patterns}
