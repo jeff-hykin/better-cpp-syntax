@@ -115,7 +115,6 @@ class PatternBase
     #
     def map(map_includes = false, &block)
         # FIXME: get rid of the map_inlcudes argument
-        puts "base_pattern: __deep_clone__.recursively_transform(map_includes, &block).freeze"
         __deep_clone__.recursively_transform(&block).freeze
     end
 
@@ -189,7 +188,6 @@ class PatternBase
     # @return [PatternBase] a copy of self with transformed tag_as
     #
     def transform_tag_as(&block)
-        puts "base_pattern: __deep_clone__.recursively_transform(&block).freeze"
         __deep_clone__.recursively_transform do |each_pattern_like|
             each_pattern_like.arguments[:tag_as] = block.call(each_pattern_like.arguments[:tag_as]) if each_pattern_like.arguments[:tag_as]
             next unless each_pattern_like.arguments[:includes].is_a?(Array)
@@ -246,7 +244,6 @@ class PatternBase
     def initialize(*arguments)
         # if its a deep clone, just make the object and be done
         if arguments[1] == :deep_clone
-            puts "initialize :deep_clone self.inspect is: #{self.inspect} "
             return self
         end
         
@@ -649,7 +646,6 @@ class PatternBase
     # create a copy of this pattern that contains no groups
     # @return [PatternBase]
     def groupless
-        puts "base_pattern: groupless __deep_clone__"
         __deep_clone__.recursively_transform do |s|
             s.arguments.delete(:tag_as)
             s.arguments.delete(:adjectives)
@@ -872,7 +868,6 @@ class PatternBase
     # @return [PatternBase] a copy of self
     #
     def __deep_clone__
-        puts "base_pattern: __deep_clone__"
         # create the empty clone 
         clone = self.class.new(nil, :deep_clone)
         # then assign all the recursively cloned data to it
@@ -889,7 +884,6 @@ class PatternBase
     # @return [PatternBase] a copy of self
     #
     def clone_without_next
-        puts "base_pattern: clone_without_next"
         # create the empty clone 
         clone = self.class.new(nil, :deep_clone)
         # then assign all the recursively cloned data to it
