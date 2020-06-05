@@ -195,9 +195,9 @@ class PatternRange < PatternBase
     #
     def recursive_pattern_chain
         pattern_aggregation = []
-        pattern_aggregation.push(@start_pattern),
+        pattern_aggregation.push(@start_pattern)
         pattern_aggregation += @start_pattern.recursive_pattern_chain if @start_pattern.is_a?(PatternBase)
-        pattern_aggregation.push(@stop_pattern),
+        pattern_aggregation.push(@stop_pattern)
         pattern_aggregation += @stop_pattern.recursive_pattern_chain if @start_pattern.is_a?(PatternBase)
         return pattern_aggregation
     end
