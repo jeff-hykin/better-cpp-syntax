@@ -452,8 +452,8 @@ class PatternBase
         output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
         output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s if @arguments[:should_partially_match]
         output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s if @arguments[:should_not_partially_match]
-
-        output += ",\n#{indent}  includes: " + @arguments[:includes].to_s if @arguments[:includes]
+        # FIXME: if a sub-pattern includes a direct link to this `self`, it will still cause an infinite recursion (probably)
+        output += ",\n#{indent}  includes: " + @arguments[:includes].select{|each|each!=self}.to_s if @arguments[:includes]
         # add any linter/transform configurations
         plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
         # subclass, ending and recursive

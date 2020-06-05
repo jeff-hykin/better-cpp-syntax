@@ -183,7 +183,8 @@ class PatternRange < PatternBase
 
             output += ",\n  #{tag}: \"" + @arguments[tag] + "\"" if @arguments[tag].is_a? String
         end
-        output += ",\n  includes: " + @arguments[:includes].to_s if @arguments[:includes]
+        # FIXME: if a sub-pattern includes a direct link to this `self`, it will still cause an infinite recursion (probably)
+        output += ",\n  includes: " + @arguments[:includes].select{|each|each!=self}.to_s if @arguments[:includes]
         output += ",\n  end_pattern_last: #{@arguments[:end_pattern_last]}"  if @arguments[:end_pattern_last]
         output += ",\n)"
 
