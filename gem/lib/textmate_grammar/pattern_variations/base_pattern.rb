@@ -28,7 +28,7 @@ class PatternBase
             :reference,
             :includes,
         ]
-        puts @match.class unless @arguments.is_a? Hash
+        puts @arguments[:match].class unless @arguments.is_a? Hash
 
         !(@arguments.keys & capturing_attributes).empty?
     end
@@ -93,11 +93,11 @@ class PatternBase
     def recursive_pattern_chain
         pattern_aggregation = []
         # add the current one, and all its nested patterns
-        if @match.is_a? PatternBase
+        if @arguments[:match].is_a? PatternBase
             # add the match itself
-            pattern_aggregation.push(@match) 
+            pattern_aggregation.push(@arguments[:match]) 
             # concat any sub values
-            pattern_aggregation += @match.recursive_pattern_chain
+            pattern_aggregation += @arguments[:match].recursive_pattern_chain
         end
         # repeat for everything else in the linked list chain
         if @next_pattern.is_a? PatternBase
@@ -119,11 +119,11 @@ class PatternBase
         # add all the includes from self 
         aggregation_of_includes += @arguments[:includes] if @arguments[:includes].is_a?(Array)
         # add the includes from one-down recursively, and all its nested patterns
-        if @match.is_a? PatternBase
+        if @arguments[:match].is_a? PatternBase
             # add includes of the match itself
-            aggregation_of_includes += @match.arguments[:includes] if @match.arguments[:includes].is_a?(Array)
+            aggregation_of_includes += @arguments[:match].arguments[:includes] if @arguments[:match].arguments[:includes].is_a?(Array)
             # concat any sub values
-            aggregation_of_includes += @match.recursive_includes
+            aggregation_of_includes += @arguments[:match].recursive_includes
         end
         # repeat for everything else in the linked list chain
         if @next_pattern.is_a? PatternBase
@@ -154,12 +154,12 @@ class PatternBase
     #
     def map!(map_includes = false, &block)
         yield self
-        if @match.is_a? PatternBase
-            if @match.frozen?
-                puts "frozen @match"
-                puts @match.inspect
+        if @arguments[:match].is_a? PatternBase
+            if @arguments[:match].frozen?
+                puts "frozen @arguments[:match]"
+                puts @arguments[:match].inspect
             end
-            @match = @match.map!(map_includes, &block)
+            @arguments[:match] = @arguments[:match].map!(map_includes, &block)
         end
         if @next_pattern.is_a? PatternBase
             if @next_pattern.frozen?
@@ -191,7 +191,7 @@ class PatternBase
     #
     def each(each_includes = false, &block)
         yield self
-        @match.each(each_includes, &block) if @match.is_a? PatternBase
+        @arguments[:match].each(each_includes, &block) if @arguments[:match].is_a? PatternBase
         @next_pattern.each(each_includes, &block) if @next_pattern.is_a? PatternBase
 
         return unless each_includes
@@ -306,8 +306,7 @@ class PatternBase
     def initialize(*arguments)
         if arguments.length > 1 && arguments[1] == :deep_clone
             @arguments = arguments[0]
-            @match = @arguments[:match]
-            @arguments.delete(:match)
+            @arguments[:match] = @arguments[:match]
             @original_arguments = arguments[2]
             @next_pattern = nil
             return
@@ -324,15 +323,16 @@ class PatternBase
         @next_pattern = nil
         arg1 = arguments[0]
         arg1 = {match: arg1} unless arg1.is_a? Hash
+        @arguments = arg1
         @original_arguments = arg1.clone
         if arg1[:match].is_a? String
             arg1[:match] = Regexp.escape(arg1[:match]).gsub("/", "\\/")
-            @match = arg1[:match]
+            @arguments[:match] = arg1[:match]
         elsif arg1[:match].is_a? Regexp
             raise_if_regex_has_capture_group arg1[:match]
-            @match = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
+            @arguments[:match] = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
         elsif arg1[:match].is_a? PatternBase
-            @match = arg1[:match]
+            @arguments[:match] = arg1[:match]
         else
             puts <<~HEREDOC
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
@@ -345,8 +345,7 @@ class PatternBase
             arg1[:includes] = [arg1[:includes]] unless arg1[:includes].is_a? Array
             arg1[:includes] = arg1[:includes].flatten
         end
-        arg1.delete(:match)
-        @arguments = arg1
+        
     end
 
     # attempts to provide a memorable name for a pattern
@@ -476,7 +475,7 @@ class PatternBase
         ]
 
         # run related unit tests
-        pass << @match.run_tests if @match.is_a? PatternBase
+        pass << @arguments[:match].run_tests if @arguments[:match].is_a? PatternBase
         pass << @next_pattern.run_tests if @next_pattern.is_a? PatternBase
         if @arguments[:includes].is_a? Array
             @arguments[:includes]&.each { |inc| pass << inc.run_tests if inc.is_a? PatternBase }
@@ -564,7 +563,7 @@ class PatternBase
         # TODO: find a better hash code
         # PatternBase.new("abc") == PatternBase.new(PatternBase.new("abc"))
         # but PatternBase.new("abc").hash != PatternBase.new(PatternBase.new("abc")).hash
-        @match.hash
+        @arguments[:match].hash
     end
 
     #
@@ -603,16 +602,16 @@ class PatternBase
     # other methods added by subclasses
 
     #
-    # evaluates @match
+    # evaluates @arguments[:match]
     # @note optionally override when inheriting
     # @note by default this optionally adds a capture group
     #
     # @param [Hash] groups group attributes
     #
-    # @return [String] the result of evaluating @match
+    # @return [String] the result of evaluating @arguments[:match]
     #
     def do_evaluate_self(groups)
-        match = @match
+        match = @arguments[:match]
         match = match.evaluate(groups) if match.is_a? PatternBase
         add_capture_group_if_needed(match)
     end
@@ -719,8 +718,8 @@ class PatternBase
     def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
         groups = do_collect_self_groups(next_group)
         next_group += groups.length
-        if @match.is_a? PatternBase
-            new_groups = @match.collect_group_attributes(next_group)
+        if @arguments[:match].is_a? PatternBase
+            new_groups = @arguments[:match].collect_group_attributes(next_group)
             groups.concat(new_groups)
             next_group += new_groups.length
         end
@@ -750,7 +749,7 @@ class PatternBase
     # @return [String] A representation of the pattern
     #
     def inspect
-        super.split(" ")[0] + " match:" + @match.inspect + ">"
+        super.split(" ")[0] + " match:" + @arguments[:match].inspect + ">"
     end
 
     #
@@ -896,9 +895,7 @@ class PatternBase
     # @return [PatternBase] a copy of self
     #
     def __deep_clone_self__
-        options = @arguments.__deep_clone__
-        options[:match] = @match.__deep_clone__
-        self.class.new(options, :deep_clone, @original_arguments)
+        self.class.new(@arguments.__deep_clone__, :deep_clone, @original_arguments)
     end
 
     #
@@ -912,7 +909,7 @@ class PatternBase
     def raise_if_regex_has_capture_group(regex, check = 1)
         # this will throw a RegexpError if there are no capturing groups
         _ignore = with_no_warnings { /#{regex}#{"\\" + check.to_s}/ }
-        # at this point @match contains a capture group, complain
+        # at this point @arguments[:match] contains a capture group, complain
         raise <<~HEREDOC
 
             There is a pattern that is being constructed from a regular expression

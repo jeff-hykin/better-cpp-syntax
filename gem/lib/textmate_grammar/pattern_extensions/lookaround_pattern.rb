@@ -8,8 +8,8 @@
 class LookAroundPattern < PatternBase
     # (see PatternBase#do_evaluate_self)
     def do_evaluate_self(groups)
-        self_regex = @match
-        self_regex = @match.evaluate(groups) if @match.is_a? PatternBase
+        self_regex = @arguments[:match]
+        self_regex = @arguments[:match].evaluate(groups) if @arguments[:match].is_a? PatternBase
 
         case @arguments[:type]
         when :lookAheadFor      then self_regex = "(?=#{self_regex})"

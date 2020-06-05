@@ -26,7 +26,7 @@ class PatternRange < PatternBase
     #
     def initialize(arguments)
         @original_arguments = arguments
-        @match = nil
+        @arguments = { match: nil }
         @next_pattern = nil
 
         raise "PatternRange.new() expects a hash" unless arguments.is_a? Hash

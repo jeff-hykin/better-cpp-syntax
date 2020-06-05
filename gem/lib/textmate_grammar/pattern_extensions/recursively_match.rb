@@ -43,7 +43,7 @@ class RecursivelyMatchPattern < PatternBase
         key = @arguments[:subroutine_key]
         scrambled = scramble.call(key)
 
-        @match = @match.sub(key, scrambled)
+        @arguments[:match] = @arguments[:match].sub(key, scrambled)
         @arguments[:subroutine_key] = scrambled
     end
 

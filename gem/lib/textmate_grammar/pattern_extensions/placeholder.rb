@@ -25,7 +25,7 @@ class PlaceholderPattern < PatternBase
 
     # (see PatternBase#to_s)
     def to_s(depth = 0, top_level = true)
-        return super unless @match == "placeholder"
+        return super unless @arguments[:match] == "placeholder"
 
         output = top_level ? "placeholder(" : ".placeholder("
         output += ":#{@arguments[:placeholder]})"
@@ -36,7 +36,7 @@ class PlaceholderPattern < PatternBase
     # (see PatternBase#to_tag)
     # @note this raises a runtime error if the pattern has not been resolved
     def to_tag
-        if @match.is_a?(String) && @match.start_with?("placeholder")
+        if @arguments[:match].is_a?(String) && @arguments[:match].start_with?("placeholder")
             placeholder = @arguments[:placeholder]
             raise "Attempting to create a tag from an unresolved placeholder `:#{placeholder}'"
         end
@@ -47,7 +47,7 @@ class PlaceholderPattern < PatternBase
     # (see PatternBase#evaluate)
     # @note this raises a runtime error if the pattern has not been resolved
     def evaluate(groups = nil)
-        if @match.is_a?(String) && @match.start_with?("placeholder")
+        if @arguments[:match].is_a?(String) && @arguments[:match].start_with?("placeholder")
             raise "Attempting to evaluate an unresolved placeholder `:#{@arguments[:placeholder]}'"
         end
 
@@ -66,7 +66,7 @@ class PlaceholderPattern < PatternBase
             raise ":#{@arguments[:placeholder]} is not a pattern and cannot be substituted"
         end
 
-        @match = repository[@arguments[:placeholder]].__deep_clone__
+        @arguments[:match] = repository[@arguments[:placeholder]].__deep_clone__
         self
         # repository[@arguments[:placeholder]].resolve(repository)
     end
