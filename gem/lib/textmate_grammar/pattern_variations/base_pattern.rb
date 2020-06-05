@@ -91,22 +91,22 @@ class PatternBase
     # @return [Arrary]
     #
     def recursive_pattern_chain
-        chain = []
+        pattern_aggregation = []
         # add the current one, and all its nested patterns
         if @match.is_a? PatternBase
             # add the match itself
-            chain.push(@match) 
+            pattern_aggregation.push(@match) 
             # concat any sub values
-            chain += @match.recursive_pattern_chain
+            pattern_aggregation += @match.recursive_pattern_chain
         end
         # repeat for everything else in the linked list chain
         if @next_pattern.is_a? PatternBase
             # add the next
-            chain.push(@next_pattern)
+            pattern_aggregation.push(@next_pattern)
             # recursively concat its contents
-            chain += @next_pattern.recursive_pattern_chain 
+            pattern_aggregation += @next_pattern.recursive_pattern_chain 
         end
-        return chain
+        return pattern_aggregation
     end
 
 

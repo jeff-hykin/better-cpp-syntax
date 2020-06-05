@@ -28,7 +28,7 @@ class OneOfPattern < PatternBase
             patterns: patterns.map do |pattern|
                 next pattern if pattern.is_a? PatternBase
 
-                PatternBase.new(pattern)
+                PatternBase.new(pattern) # why? -Jeff
             end
         )
     end
@@ -63,8 +63,20 @@ class OneOfPattern < PatternBase
     def single_entity?
         true
     end
-
-    # (see PatternBase#map!)
+    
+    # (see PatternBase#recursive_pattern_chain)
+    def recursive_pattern_chain
+        pattern_aggregation = super()
+        # add the @arguments[:patterns] (recursively) to the front
+        front_pattern_aggregation = []
+        for each in @arguments[:patterns]
+            front_pattern_aggregation.push(each)
+            front_pattern_aggregation += each.recursive_pattern_chain if each.is_a?(PatternBase)
+        end 
+        pattern_aggregation = front_pattern_aggregation + pattern_aggregation
+        return pattern_aggregation
+    end
+    
     def map!(map_includes = false, &block)
         @arguments[:patterns].map! { |p| p.map!(map_includes, &block) }
         @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
