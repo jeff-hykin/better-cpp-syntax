@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative "./base_pattern"
+
+require_relative "./base_pattern.rb"
 
 #
 # Provides the ability to create begin/end and begin/while rules
@@ -183,21 +184,21 @@ class PatternRange < PatternBase
             output += ",\n  #{tag}: \"" + @arguments[tag] + "\"" if @arguments[tag].is_a? String
         end
         output += ",\n  includes: " + @arguments[:includes].to_s if @arguments[:includes]
-        output += ",\n  end_pattern_last: " + @arguments[:end_pattern_last] if @arguments[:end_pattern_last]
+        output += ",\n  end_pattern_last: #{@arguments[:end_pattern_last]}"  if @arguments[:end_pattern_last]
         output += ",\n)"
 
         output
     end
 
     #
-    # (see PatternBase#recursively_transform)
+    # (see PatternBase#map!)
     #
-    def recursively_transform(&block)
+    def map!(map_includes = false, &block)
         yield self
 
-        @start_pattern.recursively_transform(&block)
-        @stop_pattern.recursively_transform(&block)
-        map_includes!(&block)
+        @start_pattern.map!(map_includes, &block)
+        @stop_pattern.map!(map_includes, &block)
+        map_includes!(&block) if map_includes
 
         self
     end
@@ -208,10 +209,10 @@ class PatternRange < PatternBase
     def transform_includes(&block)
         copy = __deep_clone__
         copy.arguments[:includes].map!(&block) if copy.arguments[:includes].is_a? Array
-        copy.recursively_transform do |each_pattern_like|
-            each_pattern_like.arguments[:includes].map!(&block) if each_pattern_like.arguments[:includes].is_a? Array
-        end
-        copy.freeze
+
+        copy.map!(true) do |s|
+            s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
+        end.freeze
     end
 
     #

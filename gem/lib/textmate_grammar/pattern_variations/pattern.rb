@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative "./repeatable_pattern"
+
+require_relative "./repeatable_pattern.rb"
 
 #
 # Pattern is a class alias for RepeatablePattern

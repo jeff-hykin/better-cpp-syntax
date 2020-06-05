@@ -100,66 +100,11 @@ class Grammar
         
         # convert all adjectives into inclusion checks
         regex_content.gsub!(/\s+/," ")
-        regex_content.gsub!(/[a-zA-Z0-9_]+/, 'pattern.adjectives.include?(:\0)')
+        regex_content.gsub!(/[a-zA-Z0-9_]+/, 'pattern.arguments[:adjectives].include?(:\0)')
         # convert it into a proc
         return ->(pattern) do
-            eval(regex_content) if pattern.is_a?(PatternBase) && pattern.adjectives.is_a?(Array)
+            puts "regex_content is: #{regex_content} "
+            eval(regex_content) if pattern.is_a?(PatternBase) && pattern.arguments[:adjectives].is_a?(Array)
         end
     end
 end
-
-
-# class TokenHelper
-#     attr_accessor :tokens
-#     def initialize(tokens, for_each_token:nil)
-#         @tokens = tokens
-#         if for_each_token != nil
-#             for each in @tokens
-#                 for_each_token[each]
-#             end
-#         end
-#     end
-
-
-#     def tokensThat(*adjectives)
-#         matches = @tokens.select do |each_token|
-#             output = true
-#             for each_adjective in adjectives
-#                 # make sure to fail on negated symbols
-#                 if each_adjective.is_a? NegatedSymbol
-#                     if each_token[each_adjective.to_sym] == true
-#                         output = false
-#                         break
-#                     end
-#                 elsif each_token[each_adjective] != true
-#                     output = false
-#                     break
-#                 end
-#             end
-#             output
-#         end
-#         # sort from longest to shortest
-#         matches.sort do |token1, token2|
-#             token2[:representation].length - token1[:representation].length
-#         end
-#     end
-
-#     def representationsThat(*adjectives)
-#         matches = self.tokensThat(*adjectives)
-#         return matches.map do |each| each[:representation] end
-#     end
-
-#     def lookBehindToAvoidWordsThat(*adjectives)
-#         array_of_invalid_names = self.representationsThat(*adjectives)
-#         return Pattern.new(/\b/).lookBehindToAvoid(/#{array_of_invalid_names.map { |each| '\W'+each+'|^'+each } .join('|')}/)
-#     end
-
-#     def lookAheadToAvoidWordsThat(*adjectives)
-#         array_of_invalid_names = self.representationsThat(*adjectives)
-#         return Pattern.new(/\b/).lookAheadToAvoid(/#{array_of_invalid_names.map { |each| each+'\W|'+each+'\$' } .join('|')}/)
-#     end
-
-#     def that(*adjectives)
-#         return oneOf(representationsThat(*adjectives))
-#     end
-# end

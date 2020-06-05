@@ -53,6 +53,23 @@ class PlaceholderPattern < PatternBase
 
         super(groups)
     end
+
+    #
+    # Resolves the placeholder
+    #
+    # @param [Hash] repository the repository to use to resolve the placeholder
+    #
+    # @return [self]
+    #
+    def resolve!(repository)
+        unless repository[@arguments[:placeholder]].is_a? PatternBase
+            raise ":#{@arguments[:placeholder]} is not a pattern and cannot be substituted"
+        end
+
+        @match = repository[@arguments[:placeholder]].__deep_clone__
+        self
+        # repository[@arguments[:placeholder]].resolve(repository)
+    end
 end
 
 class PatternBase
@@ -65,6 +82,17 @@ class PatternBase
     #
     def placeholder(placeholder)
         insert(PlaceholderPattern.new(placeholder))
+    end
+
+    #
+    # Resolves any placeholder patterns
+    #
+    # @param [Hash] repository the repository to resolve patterns with
+    #
+    # @return [PatternBase] a copy of self with placeholders resolved
+    #
+    def resolve(repository)
+        __deep_clone__.map!(true) { |s| s.resolve!(repository) if s.respond_to? :resolve! }.freeze
     end
 end
 

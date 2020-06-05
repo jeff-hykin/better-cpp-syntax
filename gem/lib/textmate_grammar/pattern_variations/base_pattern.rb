@@ -55,16 +55,9 @@ class PatternBase
     # @see insert
     #
     def insert!(pattern)
-        # start at this(self) pattern
-        current = self
-        # go down the chain as far as possible
-        while current.next_pattern
-            current = current.next_pattern 
-        end
-        # we are now at the last pattern in the chain
-        last_pattern = current
-        # insert the pattern at the very end
-        last_pattern.next_pattern = pattern
+        last = self
+        last = last.next_pattern while last.next_pattern
+        last.next_pattern = pattern
         self
     end
 
@@ -76,7 +69,7 @@ class PatternBase
     # @return [PatternBase] a copy of self with pattern appended
     #
     def insert(pattern)
-        new_pattern = self.__deep_clone__
+        new_pattern = __deep_clone__
         new_pattern.insert!(pattern).freeze
     end
 
@@ -100,22 +93,33 @@ class PatternBase
     #
     # @return [self]
     #
-    def recursively_transform(&block)
+    def map!(map_includes = false, &block)
         yield self
-        @match.recursively_transform(&block) if @match.is_a? PatternBase
-        @next_pattern.recursively_transform(&block) if @next_pattern.is_a? PatternBase
-        map_includes!(&block)
+        if @match.is_a? PatternBase
+            if @match.frozen?
+                puts "frozen @match"
+                puts @match.inspect
+            end
+            @match = @match.map!(map_includes, &block)
+        end
+        if @next_pattern.is_a? PatternBase
+            if @next_pattern.frozen?
+                puts "frozen @next_pattern"
+                puts @next_pattern.inspect
+            end
+            @next_pattern = @next_pattern.map!(map_includes, &block)
+        end
+        map_includes!(&block) if map_includes
         self
     end
 
     #
-    # (see #recursively_transform)
+    # (see #map!)
     #
     # @return [PatternBase] a transformed copy of self
     #
     def map(map_includes = false, &block)
-        # FIXME: get rid of the map_inlcudes argument
-        __deep_clone__.recursively_transform(&block).freeze
+        __deep_clone__.map!(map_includes, &block).freeze
     end
 
     #
@@ -144,7 +148,7 @@ class PatternBase
     #
     # Uses a block to transform all Patterns in all includes
     # @api private
-    # @note only for use by recursively_transform
+    # @note only for use by map!
     #
     # @yield [self] invokes the block with the includes for modification
     #
@@ -153,17 +157,17 @@ class PatternBase
     def map_includes!(&block)
         return unless @arguments[:includes].is_a? Array
 
-        @arguments[:includes].recursively_transform do |each_pattern_like|
-            if each_pattern_like.is_a? PatternBase
-                if each_pattern_like.frozen?
+        @arguments[:includes].map! do |s|
+            if s.is_a? PatternBase
+                if s.frozen?
                     puts "frozen s"
-                    puts each_pattern_like.inspect
+                    puts s.inspect
                 end
             end
 
-            next each_pattern_like.recursively_transform(&block) if each_pattern_like.is_a? PatternBase
+            next s.map!(true, &block) if s.is_a? PatternBase
 
-            next each_pattern_like
+            next s
         end
     end
 
@@ -188,14 +192,14 @@ class PatternBase
     # @return [PatternBase] a copy of self with transformed tag_as
     #
     def transform_tag_as(&block)
-        __deep_clone__.recursively_transform do |each_pattern_like|
-            each_pattern_like.arguments[:tag_as] = block.call(each_pattern_like.arguments[:tag_as]) if each_pattern_like.arguments[:tag_as]
-            next unless each_pattern_like.arguments[:includes].is_a?(Array)
+        __deep_clone__.map! do |s|
+            s.arguments[:tag_as] = block.call(s.arguments[:tag_as]) if s.arguments[:tag_as]
+            next unless s.arguments[:includes].is_a?(Array)
 
-            each_pattern_like.arguments[:includes].map! do |each_included_pattern_like|
-                each_included_pattern_like.transform_tag_as(&block) if each_included_pattern_like.is_a? PatternBase
-                
-                each_included_pattern_like
+            s.arguments[:includes].map! do |i|
+                next i unless i.is_a? PatternBase
+
+                i.transform_tag_as(&block)
             end
         end.freeze
     end
@@ -210,7 +214,6 @@ class PatternBase
     #   @param opts [Hash] options
     #   @option opts [PatternBase, Regexp, String] :match the pattern to match
     #   @option opts [String] :tag_as what to tag this pattern as
-    #   @option opts [Array<Symbol>] :adjectives list of groups this pattern belongs to
     #   @option opts [Array<PatternBase, Symbol>] :includes pattern includes
     #   @option opts [String] :reference a name for this pattern can be referred to in
     #       earlier or later parts of the pattern list, or in tag_as
@@ -242,90 +245,49 @@ class PatternBase
     #       able to accept this form
     #
     def initialize(*arguments)
-        # if its a deep clone, just make the object and be done
-        if arguments[1] == :deep_clone
-            return self
+        if arguments.length > 1 && arguments[1] == :deep_clone
+            @arguments = arguments[0]
+            @match = @arguments[:match]
+            @arguments.delete(:match)
+            @original_arguments = arguments[2]
+            @next_pattern = nil
+            return
         end
-        
-        #
-        # input validation
-        #
-        if arguments.length > 1 && arguments[1] != :deep_clone
+
+        if arguments.length > 1
             # PatternBase was likely constructed like `PatternBase.new(/foo/, option: bar)`
             puts "PatternBase#new() expects a single Regexp, String, or Hash"
             puts "PatternBase#new() was provided with multiple arguments"
             puts "arguments:"
             puts arguments
             raise "See error above"
-        # single arg is a hash, with invalid match
-        elsif arguments[0].is_a?(Hash)
-            match = arguments[0][:match]
-            if !(match.is_a?(String) || match.is_a?(Regexp) || match.is_a?(PatternBase))
-                raise <<-HEREDOC.remove_indent
-                    
-                    
-                    The { match: } part when PatternBase#new() was not a Regexp, String, or Hash
-                    instead it was a { match: #{match.class} }
-                    with a value of: #{match.inspect}
-                    This is not something the library can match
-                HEREDOC
-            end
-        # single arg is not a hash, still with invalid match 
-        elsif !(arguments[0].is_a?(String) || arguments[0].is_a?(Regexp) || arguments[0].is_a?(PatternBase))
-            raise <<-HEREDOC.remove_indent
-                
-                
-                The first argument of PatternBase#new() expects a Regexp, String, Hash, or another Pattern
-                Instead of any of those, the first argument was a #{arguments[0].class}
-                With a value of: #{arguments[0].inspect}
-            HEREDOC
         end
-        
-        #
-        # process argument structure
-        #
-        # standarize the original_arguments to always be a hash before saving it
-        if arguments[0].is_a?(Hash)
-            args_as_hash = arguments[0]
+        @next_pattern = nil
+        arg1 = arguments[0]
+        arg1 = {match: arg1} unless arg1.is_a? Hash
+        @original_arguments = arg1.clone
+        if arg1[:match].is_a? String
+            arg1[:match] = Regexp.escape(arg1[:match]).gsub("/", "\\/")
+            @match = arg1[:match]
+        elsif arg1[:match].is_a? Regexp
+            raise_if_regex_has_capture_group arg1[:match]
+            @match = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
+        elsif arg1[:match].is_a? PatternBase
+            @match = arg1[:match]
         else
-            args_as_hash = {match: arguments[0]}
-        end
-        @original_arguments = args_as_hash.clone
-        
-        # 
-        # process the "match" key
-        #
-        @match = args_as_hash[:match]
-        args_as_hash.delete(:match)
-        case @match
-        when String # if string, just convert to an escaped-regex string
-            @match = Regexp.escape(@match).gsub("/", "\\/")
-        when Regexp # if regex, validate it, then assign it
-            raise_if_regex_has_capture_group(@match)
-            @match = @match.inspect[1..-2] # convert to string and remove the slashes
-        when PatternBase # if is a Pattern (or inherits from Pattern) leave it as is
-            # do nothing (intentionally)
-        else
-            raise <<-HEREDOC.remove_indent
-                Pattern.new() must be constructed with a match: that is a String, Regexp, or Pattern
+            puts <<-HEREDOC.remove_indent
+                Pattern.new() must be constructed with a String, Regexp, or Pattern
                 Provided arguments: #{@original_arguments}
             HEREDOC
+            raise "See error above"
         end
-        
-        #
-        # process the "includes" key
-        #
-        # ensure that :includes is either nil or a flat array
-        args_as_hash[:includes] = [args_as_hash[:includes]].flatten unless args_as_hash[:includes] == nil
-        
-        
-        @next_pattern = nil
-        
-        @arguments = args_as_hash
-    end
-    
-    def adjectives
-        @arguments[:adjectives]
+        # ensure that includes is either nil or a flat array
+        if arg1[:includes]
+            arg1[:includes] = [arg1[:includes]] unless arg1[:includes].is_a? Array
+            arg1[:includes] = arg1[:includes].flatten
+        end
+        arg1.delete(:match)
+        @arguments = arg1
     end
 
     # attempts to provide a memorable name for a pattern
@@ -427,7 +389,6 @@ class PatternBase
         output += "\n#{indent}  match: " + regex_as_string.lstrip
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
-        output += ",\n#{indent}  adjectives: #{@arguments[:adjectives].inspect}" if @arguments[:adjectives]
         # unit tests
         output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s if @arguments[:should_fully_match]
         output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
@@ -483,7 +444,7 @@ class PatternBase
             :should_not_partially_match,
         ].any? { |k| @arguments.include? k }
 
-        copy = clone_without_next
+        copy = __deep_clone_self__
         test_regex = copy.to_r
         test_fully_regex = wrap_with_anchors(copy).to_r
 
@@ -646,9 +607,8 @@ class PatternBase
     # create a copy of this pattern that contains no groups
     # @return [PatternBase]
     def groupless
-        __deep_clone__.recursively_transform do |s|
+        __deep_clone__.map! do |s|
             s.arguments.delete(:tag_as)
-            s.arguments.delete(:adjectives)
             s.arguments.delete(:reference)
             s.arguments.delete(:includes)
             raise "unable to remove capture" if s.needs_to_capture?
@@ -668,7 +628,7 @@ class PatternBase
     # @return [PatternBase] a copy of self retagged
     #
     def reTag(args)
-        __deep_clone__.recursively_transform do |s|
+        __deep_clone__.map! do |s|
             # tags are keep unless `all: false` or `keep: false`, and append is not a string
             discard_tag = (args[:all] == false || args[:keep] == false)
             discard_tag = false if args[:append].is_a? String
@@ -868,14 +828,7 @@ class PatternBase
     # @return [PatternBase] a copy of self
     #
     def __deep_clone__
-        # create the empty clone 
-        clone = self.class.new(nil, :deep_clone)
-        # then assign all the recursively cloned data to it
-        clone.match              = @match.__deep_clone__
-        clone.arguments          = @arguments.__deep_clone__
-        clone.next_pattern       = @next_pattern.__deep_clone__
-        clone.original_arguments = @original_arguments.__deep_clone__
-        clone
+        __deep_clone_self__.insert! @next_pattern.__deep_clone__
     end
 
     #
@@ -883,15 +836,10 @@ class PatternBase
     #
     # @return [PatternBase] a copy of self
     #
-    def clone_without_next
-        # create the empty clone 
-        clone = self.class.new(nil, :deep_clone)
-        # then assign all the recursively cloned data to it
-        clone.match              = @match.__deep_clone__
-        clone.arguments          = @arguments.__deep_clone__
-        clone.next_pattern       = nil
-        clone.original_arguments = @original_arguments.__deep_clone__
-        clone
+    def __deep_clone_self__
+        options = @arguments.__deep_clone__
+        options[:match] = @match.__deep_clone__
+        self.class.new(options, :deep_clone, @original_arguments)
     end
 
     #

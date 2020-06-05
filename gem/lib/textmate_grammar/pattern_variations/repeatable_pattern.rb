@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require_relative "./base_pattern"
+
+require_relative "./base_pattern.rb"
 
 #
 # RepeatablePattern provides quantifiers for patterns
@@ -12,11 +13,10 @@ class RepeatablePattern < PatternBase
     # (see PatternBase#initialize)
     def initialize(*arguments)
         super(*arguments)
-        
+
         @at_least = nil
         @at_most = nil
-        
-        process_quantifiers_from_arguments if arguments[1] != :deep_clone
+        process_quantifiers_from_arguments
     end
 
     #
@@ -200,13 +200,5 @@ class RepeatablePattern < PatternBase
         return true if !@at_most.nil? && @at_most > 1
 
         false
-    end
-    
-    
-    def __deep_clone__()
-        copy = super()
-        copy.at_least = @at_least
-        copy.at_most = @at_most
-        copy
     end
 end

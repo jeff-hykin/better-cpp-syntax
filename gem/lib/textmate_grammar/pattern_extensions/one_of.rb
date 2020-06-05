@@ -64,13 +64,11 @@ class OneOfPattern < PatternBase
         true
     end
 
-    # (see PatternBase#recursively_transform)
-    def recursively_transform(&block)
-        @arguments[:patterns].map! do |each_pattern_like|
-            each_pattern_like.recursively_transform(&block)
-        end
-        @next_pattern.recursively_transform(&block) if @next_pattern.is_a? PatternBase
-        map_includes!(&block)
+    # (see PatternBase#map!)
+    def map!(map_includes = false, &block)
+        @arguments[:patterns].map! { |p| p.map!(map_includes, &block) }
+        @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
+        map_includes!(&block) if map_includes
         self
     end
 

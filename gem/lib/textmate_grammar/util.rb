@@ -110,7 +110,7 @@ end
 #
 # @return [PatternBase,Symbol,Array<PatternBase,Symbol>] the fixed value
 #
-def standardize_value(value)
+def fixup_value(value)
     is_array = value.is_a? Array
     # ensure array is flat and only contains patterns or symbols
     value = [value].flatten.map do |v|
@@ -134,7 +134,7 @@ def standardize_value(value)
             ]
             v = LegacyPattern.new(v) unless (v.keys.map(&:to_sym) & legacy_keys).empty?
         end
-        
+
         v = Pattern.new(v) unless v.is_a? PatternBase
         v
     end
