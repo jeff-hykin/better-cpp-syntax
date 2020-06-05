@@ -57,7 +57,7 @@ class PatternTest < MiniTest::Test
             at_most: 5.times,
             should_not_fully_match: ["abc"],
         ).to_s
-        result = <<-HEREDOC.remove_indent.rstrip
+        result = <<~HEREDOC.rstrip
         Pattern.new(
           match: oneOrMoreOf(
               match: lookAround(

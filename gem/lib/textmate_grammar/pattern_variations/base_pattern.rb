@@ -144,7 +144,7 @@ class PatternBase
             s.each(true, &block)
         end
     end
-
+    
     #
     # Uses a block to transform all Patterns in all includes
     # @api private
@@ -275,7 +275,7 @@ class PatternBase
         elsif arg1[:match].is_a? PatternBase
             @match = arg1[:match]
         else
-            puts <<-HEREDOC.remove_indent
+            puts <<~HEREDOC
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
                 Provided arguments: #{@original_arguments}
             HEREDOC
@@ -854,7 +854,7 @@ class PatternBase
         # this will throw a RegexpError if there are no capturing groups
         _ignore = with_no_warnings { /#{regex}#{"\\" + check.to_s}/ }
         # at this point @match contains a capture group, complain
-        raise <<-HEREDOC.remove_indent
+        raise <<~HEREDOC
 
             There is a pattern that is being constructed from a regular expression
             with a capturing group. This is not allowed, as the group cannot be tracked

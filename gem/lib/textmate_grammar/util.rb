@@ -13,20 +13,6 @@ ensure
     $VERBOSE = old_verbose
 end
 
-# Add remove indent to the String class
-class String
-    # a helper for writing multi-line strings for error messages
-    # example usage
-    #     puts <<-HEREDOC.remove_indent
-    #     This command does such and such.
-    #         this part is extra indented
-    #     HEREDOC
-    # @return [String]
-    def remove_indent
-        gsub(/^[ \t]{#{match(/^[ \t]*/)[0].length}}/, '')
-    end
-end
-
 #
 # Provides to_s
 #

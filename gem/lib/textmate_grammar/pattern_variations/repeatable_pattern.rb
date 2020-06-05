@@ -63,7 +63,7 @@ class RepeatablePattern < PatternBase
         # if a quantifying value was set and quantifying is not allowed, raise an error
         # telling the user that its not allowed
         elsif !(at_most.nil? && at_least.nil?)
-            raise <<-HEREDOC.remove_indent
+            raise <<~HEREDOC
 
                 Inside of the #{name} pattern, there are some quantity arguments like:
                     :at_least

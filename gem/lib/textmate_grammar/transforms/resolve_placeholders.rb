@@ -29,7 +29,7 @@ class ResolvePlaceholders < GrammarTransform
                     qualifying_patterns << each_value if arguments[:pattern_filter][each_value]
                 end
                 if qualifying_patterns.size == 0
-                    raise <<-HEREDOC.remove_indent
+                    raise <<~HEREDOC
                         
                         
                         When creating a token filter #{arguments[:pattern_filter]}
@@ -97,7 +97,7 @@ Grammar.register_transform(ResolvePlaceholders.new, 0)
 #                     qualifying_patterns << each_value if arguments[:pattern_filter][each_value]
 #                 end
 #                 if qualifying_patterns.size == 0
-#                     raise <<-HEREDOC.remove_indent
+#                     raise <<~HEREDOC
                         
                         
 #                         When creating a token filter #{arguments[:pattern_filter]}
