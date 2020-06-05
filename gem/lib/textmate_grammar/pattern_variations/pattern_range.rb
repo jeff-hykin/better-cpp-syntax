@@ -201,6 +201,18 @@ class PatternRange < PatternBase
         pattern_aggregation += @stop_pattern.recursive_pattern_chain if @start_pattern.is_a?(PatternBase)
         return pattern_aggregation
     end
+    
+    #
+    # (see PatternBase#recursive_includes)
+    #
+    def recursive_includes
+        aggregation_of_includes = []
+        # add all the includes from self 
+        aggregation_of_includes += @arguments[:includes] if @arguments[:includes].is_a?(Array)
+        aggregation_of_includes += @start_pattern.recursive_includes if @start_pattern.is_a?(PatternBase)
+        aggregation_of_includes += @stop_pattern.recursive_includes if @stop_pattern.is_a?(PatternBase)
+        return aggregation_of_includes
+    end
 
     #
     # (see PatternBase#map!)

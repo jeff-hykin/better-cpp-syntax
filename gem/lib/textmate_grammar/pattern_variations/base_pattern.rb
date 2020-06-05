@@ -86,9 +86,9 @@ class PatternBase
     end
     
     #
-    # Recursively returns every pattern (excluding those in the includes)
+    # Recursively returns every direct pattern (patterns not in includes)
     #
-    # @return [Arrary]
+    # @return [Array]
     #
     def recursive_pattern_chain
         pattern_aggregation = []
@@ -109,6 +109,31 @@ class PatternBase
         return pattern_aggregation
     end
 
+    #
+    # Recursively returns every included element
+    #
+    # @return [Array]
+    #
+    def recursive_includes
+        aggregation_of_includes = []
+        # add all the includes from self 
+        aggregation_of_includes += @arguments[:includes] if @arguments[:includes].is_a?(Array)
+        # add the includes from one-down recursively, and all its nested patterns
+        if @match.is_a? PatternBase
+            # add includes of the match itself
+            aggregation_of_includes += @match.arguments[:includes] if @match.arguments[:includes].is_a?(Array)
+            # concat any sub values
+            aggregation_of_includes += @match.recursive_includes
+        end
+        # repeat for everything else in the linked list chain
+        if @next_pattern.is_a? PatternBase
+            # add the next
+            aggregation_of_includes += @next_pattern.arguments[:includes] if @next_pattern.arguments[:includes].is_a?(Array)
+            # recursively concat its contents
+            aggregation_of_includes += @next_pattern.recursive_includes 
+        end
+        return aggregation_of_includes
+    end
 
     #
     # Uses a block to transform all Patterns in the list

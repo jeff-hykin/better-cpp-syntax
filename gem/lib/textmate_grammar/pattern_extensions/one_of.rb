@@ -77,6 +77,21 @@ class OneOfPattern < PatternBase
         return pattern_aggregation
     end
     
+    # (see PatternBase#recursive_includes)
+    def recursive_includes
+        aggregation_of_includes = super()
+        # add the @arguments[:patterns] (recursively) to the front
+        front_include_aggregation = []
+        for each in @arguments[:patterns]
+            if each.is_a?(PatternBase)
+                front_include_aggregation += each.arguments[:includes] if each.arguments[:includes].is_a?(Array)
+                front_include_aggregation += each.recursive_includes
+            end
+        end 
+        aggregation_of_includes = front_include_aggregation + aggregation_of_includes
+        return aggregation_of_includes
+    end
+    
     def map!(map_includes = false, &block)
         @arguments[:patterns].map! { |p| p.map!(map_includes, &block) }
         @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
