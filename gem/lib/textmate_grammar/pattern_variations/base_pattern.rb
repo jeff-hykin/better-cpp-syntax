@@ -84,6 +84,31 @@ class PatternBase
         regex_as_string = "(#{regex_as_string})" if needs_to_capture?
         regex_as_string
     end
+    
+    #
+    # Recursively returns every pattern (excluding those in the includes)
+    #
+    # @return [Arrary]
+    #
+    def recursive_pattern_chain
+        chain = []
+        # add the current one, and all its nested patterns
+        if @match.is_a? PatternBase
+            # add the match itself
+            chain.push(@match) 
+            # concat any sub values
+            chain += @match.recursive_pattern_chain
+        end
+        # repeat for everything else in the linked list chain
+        if @next_pattern.is_a? PatternBase
+            # add the next
+            chain.push(@next_pattern)
+            # recursively concat its contents
+            chain += @next_pattern.recursive_pattern_chain 
+        end
+        return chain
+    end
+
 
     #
     # Uses a block to transform all Patterns in the list
