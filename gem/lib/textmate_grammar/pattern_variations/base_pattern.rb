@@ -110,7 +110,7 @@ class PatternBase
     end
 
     #
-    # Recursively returns every included element
+    # Recursively returns every :include element
     #
     # @return [Array]
     #
@@ -135,6 +135,15 @@ class PatternBase
         return aggregation_of_includes
     end
 
+    #
+    # Recursively returns every pattern inside the given one
+    #
+    # @return [Array]
+    #
+    def recursive_sub_patterns
+        self.recursive_pattern_chain + self.recursive_includes
+    end
+    
     #
     # Uses a block to transform all Patterns in the list
     #
