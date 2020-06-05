@@ -1,6 +1,5 @@
 # frozen_string_literal: true
-
-require_relative "./base_pattern.rb"
+require_relative "./base_pattern"
 
 #
 # Provides the ability to create begin/end and begin/while rules
@@ -191,14 +190,14 @@ class PatternRange < PatternBase
     end
 
     #
-    # (see PatternBase#map!)
+    # (see PatternBase#recursively_transform)
     #
-    def map!(map_includes = false, &block)
+    def recursively_transform(&block)
         yield self
 
-        @start_pattern.map!(map_includes, &block)
-        @stop_pattern.map!(map_includes, &block)
-        map_includes!(&block) if map_includes
+        @start_pattern.recursively_transform(&block)
+        @stop_pattern.recursively_transform(&block)
+        map_includes!(&block)
 
         self
     end
@@ -209,10 +208,10 @@ class PatternRange < PatternBase
     def transform_includes(&block)
         copy = __deep_clone__
         copy.arguments[:includes].map!(&block) if copy.arguments[:includes].is_a? Array
-
-        copy.map!(true) do |s|
-            s.arguments[:includes].map!(&block) if s.arguments[:includes].is_a? Array
-        end.freeze
+        copy.recursively_transform do |each_pattern_like|
+            each_pattern_like.arguments[:includes].map!(&block) if each_pattern_like.arguments[:includes].is_a? Array
+        end
+        copy.freeze
     end
 
     #

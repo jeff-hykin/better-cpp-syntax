@@ -142,12 +142,17 @@ class Grammar
     #
     # Access a pattern in the grammar
     #
-    # @param [Symbol] key The key the pattern is stored in
+    # @param [Symbol, Regexp] key The key the pattern is stored in,
+    #   or Regex that uses then token matching syntax (see Grammar#tokenMatching).
     #
     # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] The stored pattern
     #
     def [](key)
-        @repository.fetch(key, PlaceholderPattern.new(key))
+        if key.is_a?(Regexp)
+            tokenMatching(key) # see tokens.rb
+        else
+            @repository.fetch(key, PlaceholderPattern.new(key))
+        end
     end
 
     #
@@ -181,7 +186,7 @@ class Grammar
         end
 
         # add it to the repository
-        @repository[key] = fixup_value(value)
+        @repository[key] = standardize_value(value)
         @repository[key]
     end
 
@@ -532,6 +537,9 @@ class ExportableGrammar < Grammar
     # @return [Grammar]
     #
     attr_accessor :parent_grammar
+    
+    # @return [String, Nil] a path of the file that contained the export (if a path existed)
+    attr_accessor :grammar_source
 
     #
     # Initialize a new Exportable Grammar
@@ -539,23 +547,23 @@ class ExportableGrammar < Grammar
     #
     def initialize
         # skip: initialize, new, and new_exportable_grammar
-        location = caller_locations(3, 1).first
+        @grammar_source = caller_locations(3, 1).first
         # and the first 5 bytes of the hash to get the seed
         # will not be unique if multiple exportable grammars are created in the same file
         # Don't do that
-        @seed = Digest::MD5.hexdigest(File.basename(location.path))[0..10]
+        @seed = Digest::MD5.hexdigest(File.basename(@grammar_source.path))[0..10]
         super(
             name: "export",
             scope_name: "export"
         )
 
-        if @@export_grammars[location.path].is_a? Hash
-            return if @@export_grammars[location.path][:line] == location.lineno
+        if @@export_grammars[@grammar_source.path].is_a? Hash
+            return if @@export_grammars[@grammar_source.path][:line] == @grammar_source.lineno
 
-            raise "Only one export grammar is allowed per file"
+            raise "\n\nError from: #{@grammar_source}\nOnly one export grammar is allowed per file"
         end
-        @@export_grammars[location.path] = {
-            line: location.lineno,
+        @@export_grammars[@grammar_source.path] = {
+            line: @grammar_source.lineno,
             grammar: self,
         }
 
@@ -603,9 +611,9 @@ class ExportableGrammar < Grammar
         @repository.transform_values! { |v| fixupValue(v) }
         # ensure the grammar does not refer to a symbol not in repository or external_repos
         # ensure the grammar has all keys named in exports
-        exports.each do |key|
+        exports and exports.each do |key|
             unless @repository.has_key? key
-                raise "#{key} is exported but is missing in the repository"
+                raise "\n\nError from: #{@grammar_source.path}\n#{key} is exported but is missing in the repository"
             end
         end
         self
@@ -614,7 +622,6 @@ class ExportableGrammar < Grammar
     private
 
     def fixupValue(value)
-        # TDOD: rename this function it is too similar to fixup_value
         if value.is_a? Symbol
             return value if [:$initial_context, :$base, :$self].include? value
 

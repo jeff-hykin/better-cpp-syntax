@@ -39,9 +39,9 @@ class LegacyPattern < PatternBase
     end
 
     #
-    # (see PatternBase#map!)
+    # (see PatternBase#recursively_transform)
     #
-    def map!(*)
+    def recursively_transform(*)
         self
     end
 

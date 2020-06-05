@@ -41,7 +41,7 @@ class FixRepeatedTagAs < GrammarTransform
             end
 
             pat.arguments[:includes] = [pat.match.__deep_clone__]
-            pat.match.map! do |pm|
+            pat.match.recursively_transform do |pm|
                 pm.arguments.delete(:tag_as)
                 pm.arguments.delete(:includes)
                 next unless options[:preserve_references?] || pm.arguments[:preserve_references?]
