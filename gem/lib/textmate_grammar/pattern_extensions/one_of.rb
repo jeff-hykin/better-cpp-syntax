@@ -28,7 +28,7 @@ class OneOfPattern < PatternBase
             patterns: patterns.map do |pattern|
                 next pattern if pattern.is_a? PatternBase
 
-                PatternBase.new(pattern) # why? -Jeff
+                PatternBase.new(pattern)
             end
         )
     end
