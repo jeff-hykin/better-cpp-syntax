@@ -2,21 +2,21 @@ require_relative "./pattern_variations/base_pattern"
 require_relative "./pattern_extensions/placeholder"
 
 # Take advantage of the placeholder system since this is just a dynamic form of a placeholder
-class TokenPattern < PatternBase
+class TokenCollectorPattern < PatternBase
 end
 
 class Grammar
     #
-    # convert a regex value into a proc filter used to select patterns
+    # Aggregates certain tokens together using a syntax-in-string as a query
     #
-    # @param [Regexp] argument A value that uses the tokenParsing syntax (explained below)
+    # @param [String] argument A value that uses the tokenParsing syntax (explained below)
     #
     # @note The syntax for tokenParsing is simple, there are:
     #  - `adjectives` ex: isAClass
-    #  - the `not` operator ex: !isAClass
-    #  - the `or` operator ex: isAClass || isAPrimitive
-    #  - the `and` operator ex: isAClass && isAPrimitive
-    #  - paraentheses ex: (!isAClass) && isAPrimitive
+    #  - the `not` operator ex: !aFunc
+    #  - the `or` operator ex: aClass || aPrimitive
+    #  - the `and` operator ex: aClass && aPrimitive
+    #  - paraentheses ex: (!aFunc) && aPrimitive
     #  _ 
     #  anything matching /[a-zA-Z0-9_]+/ is considered an "adjective"
     #  whitespace, including newlines, are removed/ignored
@@ -25,12 +25,12 @@ class Grammar
     #  using only an adjective, ex: /isAClass/ means to only include
     #  Patterns that have that adjective in their adjective list
     #
-    # @return [TokenPattern]
+    # @return [TokenCollectorPattern]
     #
     def tokensThatAre(token_pattern)
         # create the normal pattern that will act as a placeholder until the very end
-        token_pattern = TokenPattern.new({
-            match: /(?#tokens)/,
+        token_pattern = TokenCollectorPattern.new({
+            match: /(?#token_collection)/,
             pattern_filter: parseTokenSyntax(token_pattern),
         })
         # tell it what it needs to select-later
@@ -44,10 +44,10 @@ class Grammar
     #
     # @note The syntax for tokenParsing is simple, there are:
     #  - `adjectives` ex: isAClass
-    #  - the `not` operator ex: !isAClass
-    #  - the `or` operator ex: isAClass || isAPrimitive
-    #  - the `and` operator ex: isAClass && isAPrimitive
-    #  - paraentheses ex: (!isAClass) && isAPrimitive
+    #  - the `not` operator ex: !aFunc
+    #  - the `or` operator ex: aClass || aPrimitive
+    #  - the `and` operator ex: aClass && aPrimitive
+    #  - paraentheses ex: (!aFunc) && aPrimitive
     #  _ 
     #  anything matching /[a-zA-Z0-9_]+/ is considered an "adjective"
     #  whitespace, including newlines, are removed/ignored
@@ -62,32 +62,39 @@ class Grammar
     #
 
     def parseTokenSyntax(argument)
-        # validate input type
-        if !argument.is_a?(Regexp)
+        #
+        # check input
+        #
+        case argument
+        when Regexp
+            # just remove the //'s from the string
+            string_content = argument.inspect[1...-1]
+        when String
+            # do nothing (no special processing)
+        else 
             raise <<~HEREDOC
                 
                 
-                Trying to call parseTokenSyntax() but the argument isn't Regexp its #{argument.class}
+                Trying to call parseTokenSyntax() but the argument isn't a String or Regexp its #{argument.class}
                 value: #{argument}
             HEREDOC
         end
-        # just remove the //'s from the string
-        regex_content = argument.inspect[1...-1]
+        
         
         # remove all invalid characters, make sure length didn't change
-        invalid_characters_removed = regex_content.gsub(/[^a-zA-Z0-9_&|\(\)! \n]/, "")
-        if invalid_characters_removed.length != regex_content.length
+        invalid_characters_removed = string_content.gsub(/[^a-zA-Z0-9_&|\(\)! \n]/, "")
+        if invalid_characters_removed.length != string_content.length
             raise <<~HEREDOC
                 
                 
                 It appears the tokenSyntax #{argument.inspect} contains some invalid characters
-                with invalid characters: #{regex_content.inspect}
+                with invalid characters: #{string_content.inspect}
                 without invalid characters: #{invalid_characters_removed.inspect}
             HEREDOC
         end
         
         # find broken syntax
-        if regex_content =~ /[a-zA-Z0-9_]+\s+[a-zA-Z0-9_]+/
+        if string_content =~ /[a-zA-Z0-9_]+\s+[a-zA-Z0-9_]+/
             raise <<~HEREDOC
                 
                 Inside a tokenSyntax: #{argument.inspect}
@@ -99,12 +106,11 @@ class Grammar
         end
         
         # convert all adjectives into inclusion checks
-        regex_content.gsub!(/\s+/," ")
-        regex_content.gsub!(/[a-zA-Z0-9_]+/, 'pattern.arguments[:adjectives].include?(:\0)')
+        string_content.gsub!(/\s+/," ")
+        string_content.gsub!(/[a-zA-Z0-9_]+/, 'pattern.arguments[:adjectives].include?(:\0)')
         # convert it into a proc
         return ->(pattern) do
-            puts "regex_content is: #{regex_content} "
-            eval(regex_content) if pattern.is_a?(PatternBase) && pattern.arguments[:adjectives].is_a?(Array)
+            eval(string_content) if pattern.is_a?(PatternBase) && pattern.arguments[:adjectives].is_a?(Array)
         end
     end
 end

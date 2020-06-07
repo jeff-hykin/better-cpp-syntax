@@ -22,7 +22,7 @@ class ResolvePlaceholders < GrammarTransform
             #
             # token pattern
             #
-            elsif each_pattern_like.is_a?(TokenPattern)
+            elsif each_pattern_like.is_a?(TokenCollectorPattern)
                 qualifying_patterns = []
                 for each_key, each_value in repository
                     next unless each_value.is_a?(PatternBase)
