@@ -138,6 +138,19 @@ class Grammar
         puts "Warning: grammar scope name should start with `source.' or `text.'"
         puts "Examples: source.cpp text.html text.html.markdown source.js.regexp"
     end
+    
+    #
+    # Add multiple repository patterns at one time
+    #
+    # @param [Hash] keys A hash, keys=repository names, values=patterns
+    #
+    # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] The stored pattern
+    #
+    def add(keys)
+        for each_key, each_value in keys
+            self[each_key] = each_value
+        end
+    end
 
     #
     # Access a pattern in the grammar
