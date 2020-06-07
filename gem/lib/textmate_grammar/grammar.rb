@@ -147,11 +147,7 @@ class Grammar
     # @return [PatternBase, Symbol, Array<PatternBase, Symbol>] The stored pattern
     #
     def [](key)
-        if key.is_a?(Regexp)
-            tokenMatching(key) # see tokens.rb
-        else
-            @repository.fetch(key, PlaceholderPattern.new(key))
-        end
+        @repository.fetch(key, PlaceholderPattern.new(key))
     end
 
     #

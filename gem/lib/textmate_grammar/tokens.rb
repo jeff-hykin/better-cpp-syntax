@@ -27,7 +27,7 @@ class Grammar
     #
     # @return [TokenPattern]
     #
-    def tokenMatching(token_pattern)
+    def tokensThatAre(token_pattern)
         # create the normal pattern that will act as a placeholder until the very end
         token_pattern = TokenPattern.new({
             match: /(?#tokens)/,
