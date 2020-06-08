@@ -25,8 +25,9 @@ class ResolvePlaceholders < GrammarTransform
             elsif each_pattern_like.is_a?(TokenCollectorPattern)
                 qualifying_patterns = []
                 for each_key, each_value in repository
-                    next unless each_value.is_a?(PatternBase)
-                    qualifying_patterns << each_value if arguments[:pattern_filter][each_value]
+                    if each_value.is_a?(TokenPattern) && arguments[:pattern_filter][each_value]
+                        qualifying_patterns << each_value
+                    end
                 end
                 if qualifying_patterns.size == 0
                     raise <<~HEREDOC
