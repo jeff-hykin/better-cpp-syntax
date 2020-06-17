@@ -314,11 +314,11 @@ class PatternBase
 
         if arguments.length > 1
             # PatternBase was likely constructed like `PatternBase.new(/foo/, option: bar)`
-            puts "PatternBase#new() expects a single Regexp, String, or Hash"
-            puts "PatternBase#new() was provided with multiple arguments"
-            puts "arguments:"
-            puts arguments
-            raise "See error above"
+            raise <<~HEREDOC
+                PatternBase#new() expects a single Regexp, String, or Hash
+                PatternBase#new() was provided with multiple arguments
+                arguments: #{arguments}
+            HEREDOC
         end
         @next_pattern = nil
         arg1 = arguments[0]
@@ -334,11 +334,10 @@ class PatternBase
         elsif arg1[:match].is_a? PatternBase
             @arguments[:match] = arg1[:match]
         else
-            puts <<~HEREDOC
+            raise <<~HEREDOC
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
                 Provided arguments: #{@original_arguments}
             HEREDOC
-            raise "See error above"
         end
         # ensure that includes is either nil or a flat array
         if arg1[:includes]

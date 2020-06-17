@@ -582,8 +582,7 @@ class ExportableGrammar < Grammar
     #
     def []=(key, value)
         if key.to_s == "$initial_context"
-            puts "ExportGrammar cannot store to $initial_context"
-            raise "See error above"
+            raise "ExportGrammar cannot store to $initial_context"
         end
         super(key, value)
 
