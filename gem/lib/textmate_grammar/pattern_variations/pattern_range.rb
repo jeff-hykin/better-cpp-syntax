@@ -152,8 +152,8 @@ class PatternRange < PatternBase
         output[:name] = @arguments[:tag_as] unless @arguments[:tag_as].nil?
         output[:contentName] = @arguments[:tag_content_as] unless @arguments[:tag_content_as].nil?
 
-        output["begin"]   = output["begin"][1..-2]   if @start_pattern.optimize_outer_group?
-        output[match_key] = output[match_key][1..-2] if @stop_pattern.optimize_outer_group?
+        output["begin"]   = output["begin"][1..-2]   if @start_pattern.should_optimize_outer_group?
+        output[match_key] = output[match_key][1..-2] if @stop_pattern.should_optimize_outer_group?
 
         
         # ensure includes are a flat array (length>0) or nil

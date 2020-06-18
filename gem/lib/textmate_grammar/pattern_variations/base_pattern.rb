@@ -47,7 +47,7 @@ class PatternBase
     #
     # @return [Boolean] can this capture become capture group 0
     #
-    def optimize_outer_group?
+    def should_optimize_outer_group?
         needs_to_capture? and @next_pattern.nil?
     end
 
@@ -435,7 +435,7 @@ class PatternBase
         }
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
-        if optimize_outer_group?
+        if should_optimize_outer_group?
             # optimize captures by removing outermost
             output[:match] = output[:match][1..-2]
             output[:name] = output[:captures]["0"][:name]
@@ -782,7 +782,7 @@ class PatternBase
     #
     # @return [Array<Hash>] group attributes
     #
-    def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
+    def collect_group_attributes(next_group = should_optimize_outer_group? ? 0 : 1)
         groups = do_collect_self_groups(next_group)
         next_group += groups.length
         if @arguments[:match].is_a? PatternBase
