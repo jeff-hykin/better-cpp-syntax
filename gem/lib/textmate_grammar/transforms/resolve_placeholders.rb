@@ -30,12 +30,31 @@ class ResolvePlaceholders < GrammarTransform
                     end
                 end
                 if qualifying_patterns.size == 0
+                    # check and see if it was included in some pattern somewhere
+                    bad_matches = []
+                    for each in Grammar.all_patterns
+                        if arguments[:pattern_filter][each]
+                            bad_matches << each_value
+                        end
+                    end
+                    
                     raise <<~HEREDOC
                         
                         
-                        When creating a collector filter #{arguments[:pattern_filter]}
-                        all the patterns that are in the grammar repository were searched
-                        but none of thier adjective lists matched the collector filter
+                        When using the selector: #{arguments[:selector]}
+                        After looking at all patterns stored in the grammar repository
+                        (e.g. grammar[:something] = Pattern.new())
+                        None of their adjective lists matched the collector filter
+                        #{<<~HEREDOC if bad_matches.length > 0
+                            
+                            It appears the selector DOES match some patterns
+                            But those patterns are not in the grammar repo
+                            If you want to match those patterns, add them to the grammar repo
+                            ex:
+                                grammar = Grammar.new()
+                                grammar[:nameOfPattern] = ThatPattern
+                        HEREDOC
+                        }
                     HEREDOC
                 end
                 

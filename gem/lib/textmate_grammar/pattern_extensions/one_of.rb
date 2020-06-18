@@ -33,8 +33,8 @@ class OneOfPattern < PatternBase
         )
     end
 
-    # (see PatternBase#do_evaluate_self)
-    def do_evaluate_self(groups)
+    # (see PatternBase#generate_self_regex_string)
+    def generate_self_regex_string(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.evaluate(groups)
             next regex if pattern.single_entity?

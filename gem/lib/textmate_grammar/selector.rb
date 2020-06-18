@@ -35,6 +35,7 @@ class Grammar
         collector_pattern = PatternCollector.new({
             match: /(?#pattern_collector)/,
             pattern_filter: parseSelectorSyntax(selector),
+            selector: selector,
         })
         # tell it what it needs to select-later
         return collector_pattern

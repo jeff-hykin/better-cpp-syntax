@@ -11,8 +11,8 @@ class ConcatOperator < RegexOperator
         @association = :left
     end
 
-    # (see RegexOperator#do_evaluate_self)
-    def do_evaluate_self(arr_left, arr_right)
+    # (see RegexOperator#generate_self_regex_string)
+    def generate_self_regex_string(arr_left, arr_right)
         left = fold_left(arr_left)
         right = fold_right(arr_right)
 

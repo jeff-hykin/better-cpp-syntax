@@ -26,8 +26,8 @@ class OrPattern < PatternBase
         raise "evaluate is not implemented for OrPattern"
     end
 
-    # (see PatternBase#do_get_to_s_name)
-    def do_get_to_s_name(top_level)
+    # (see PatternBase#begining_of_to_s)
+    def begining_of_to_s(top_level)
         top_level ? "or(" : ".or("
     end
 

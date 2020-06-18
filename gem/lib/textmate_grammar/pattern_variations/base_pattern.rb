@@ -47,7 +47,7 @@ class PatternBase
     #
     # @return [Boolean] can this capture become capture group 0
     #
-    def optimize_outer_group?
+    def should_optimize_outer_group?
         needs_to_capture? and @next_pattern.nil?
     end
 
@@ -160,20 +160,9 @@ class PatternBase
     #
     def map!(map_includes = false, &block)
         yield self
-        if @arguments[:match].is_a? PatternBase
-            if @arguments[:match].frozen?
-                puts "frozen @arguments[:match]"
-                puts @arguments[:match].inspect
-            end
-            @arguments[:match] = @arguments[:match].map!(map_includes, &block)
-        end
-        if @next_pattern.is_a? PatternBase
-            if @next_pattern.frozen?
-                puts "frozen @next_pattern"
-                puts @next_pattern.inspect
-            end
-            @next_pattern = @next_pattern.map!(map_includes, &block)
-        end
+        @arguments[:match].map!(map_includes, &block) if @arguments[:match].is_a? PatternBase
+        @arguments[:dont_match].map!(map_includes, &block) if @arguments[:dont_match].is_a? PatternBase
+        @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
         map_includes!(&block) if map_includes
         self
     end
@@ -328,6 +317,9 @@ class PatternBase
                 arguments: #{constructor_args}
             HEREDOC
         end
+        # keep a record of all patterns for helpful debugging messages
+        Grammar.all_patterns.push(self)
+        
         @arguments = {}
         if constructor_args[0].is_a?(Hash)
             @arguments = constructor_args[0]
@@ -432,7 +424,7 @@ class PatternBase
         }
 
         output[:captures] = convert_group_attributes_to_captures(collect_group_attributes)
-        if optimize_outer_group?
+        if should_optimize_outer_group?
             # optimize captures by removing outermost
             output[:match] = output[:match][1..-2]
             output[:name] = output[:captures]["0"][:name]
@@ -461,7 +453,7 @@ class PatternBase
         pat = self
         while pat.is_a? PatternBase
             evaluate_array << pat.evaluate_operator
-            evaluate_array << pat.do_evaluate_self(groups)
+            evaluate_array << pat.generate_self_regex_string(groups)
             pat = pat.next_pattern
         end
 
@@ -506,7 +498,7 @@ class PatternBase
             when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
             end
         indent = "  " * depth
-        output = indent + do_get_to_s_name(top_level)
+        output = indent + begining_of_to_s(top_level)
         # basic pattern information
         output += "\n#{indent}  match: " + regex_as_string.lstrip
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
@@ -521,7 +513,7 @@ class PatternBase
         # add any linter/transform configurations
         plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
         # subclass, ending and recursive
-        output += do_add_attributes(indent)
+        output += middle_of_to_s(indent)
         output += ",\n#{indent})"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         output
@@ -666,7 +658,7 @@ class PatternBase
     # other methods added by subclasses
 
     #
-    # evaluates @arguments[:match]
+    # evaluates @arguments[:match], self meaning .next_pattern's are not included
     # @note optionally override when inheriting
     # @note by default this optionally adds a capture group
     #
@@ -674,7 +666,7 @@ class PatternBase
     #
     # @return [String] the result of evaluating @arguments[:match]
     #
-    def do_evaluate_self(groups)
+    def generate_self_regex_string(groups)
         match = @arguments[:match]
         match = match.evaluate(groups) if match.is_a? PatternBase
         add_capture_group_if_needed(match)
@@ -699,7 +691,7 @@ class PatternBase
     #
     # @return [String] the attributes to add
     #
-    def do_add_attributes(indent) # rubocop:disable Lint/UnusedMethodArgument
+    def middle_of_to_s(indent) # rubocop:disable Lint/UnusedMethodArgument
         ""
     end
 
@@ -712,7 +704,7 @@ class PatternBase
     #
     # @return [String] the name of the method
     #
-    def do_get_to_s_name(top_level)
+    def begining_of_to_s(top_level)
         top_level ? "Pattern.new(" : ".then("
     end
 
@@ -779,7 +771,7 @@ class PatternBase
     #
     # @return [Array<Hash>] group attributes
     #
-    def collect_group_attributes(next_group = optimize_outer_group? ? 0 : 1)
+    def collect_group_attributes(next_group = should_optimize_outer_group? ? 0 : 1)
         groups = do_collect_self_groups(next_group)
         next_group += groups.length
         if @arguments[:match].is_a? PatternBase

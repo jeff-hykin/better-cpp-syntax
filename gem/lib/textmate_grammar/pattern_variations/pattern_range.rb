@@ -25,6 +25,9 @@ class PatternRange < PatternBase
     # @note exactly one of :end_pattern or :while_pattern is required
     #
     def initialize(arguments)
+        # keep a record of all patterns for helpful debugging messages
+        Grammar.all_patterns.push(self)
+        
         @original_arguments = arguments
         @arguments = { match: nil }
         @next_pattern = nil
@@ -121,7 +124,7 @@ class PatternRange < PatternBase
     #
     # @return [void]
     #
-    def do_evaluate_self(*_ignored)
+    def generate_self_regex_string(*_ignored)
         raise "PatternRange cannot be used as a part of a Pattern"
     end
 
@@ -149,8 +152,8 @@ class PatternRange < PatternBase
         output[:name] = @arguments[:tag_as] unless @arguments[:tag_as].nil?
         output[:contentName] = @arguments[:tag_content_as] unless @arguments[:tag_content_as].nil?
 
-        output["begin"]   = output["begin"][1..-2]   if @start_pattern.optimize_outer_group?
-        output[match_key] = output[match_key][1..-2] if @stop_pattern.optimize_outer_group?
+        output["begin"]   = output["begin"][1..-2]   if @start_pattern.should_optimize_outer_group?
+        output[match_key] = output[match_key][1..-2] if @stop_pattern.should_optimize_outer_group?
 
         
         # ensure includes are a flat array (length>0) or nil
