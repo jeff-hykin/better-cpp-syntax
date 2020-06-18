@@ -106,6 +106,702 @@
     }
   ],
   "repository": {
+    "_NULL": {
+      "match": "(?<!\\w)NULL(?!\\w)"
+    },
+    "___asm__": {
+      "match": "(?<!\\w)__asm__(?!\\w)"
+    },
+    "___has_cpp_attribute": {
+      "match": "(?<!\\w)__has_cpp_attribute(?!\\w)"
+    },
+    "___has_include": {
+      "match": "(?<!\\w)__has_include(?!\\w)"
+    },
+    "_addition": {
+      "match": "\\+"
+    },
+    "_addition_assignment": {
+      "match": "\\+="
+    },
+    "_alignas": {
+      "match": "(?<!\\w)alignas(?!\\w)"
+    },
+    "_alignof": {
+      "match": "(?<!\\w)alignof(?!\\w)"
+    },
+    "_asm": {
+      "match": "(?<!\\w)asm(?!\\w)"
+    },
+    "_atomic_cancel": {
+      "match": "(?<!\\w)atomic_cancel(?!\\w)"
+    },
+    "_atomic_commit": {
+      "match": "(?<!\\w)atomic_commit(?!\\w)"
+    },
+    "_atomic_noexcept": {
+      "match": "(?<!\\w)atomic_noexcept(?!\\w)"
+    },
+    "_audit": {
+      "match": "(?<!\\w)audit(?!\\w)"
+    },
+    "_auto": {
+      "match": "(?<!\\w)auto(?!\\w)"
+    },
+    "_axiom": {
+      "match": "(?<!\\w)axiom(?!\\w)"
+    },
+    "_bitwise_and": {
+      "match": "&"
+    },
+    "_bitwise_and_assignment": {
+      "match": "&="
+    },
+    "_bitwise_and_assignment_word": {
+      "match": "(?<!\\w)and_eq(?!\\w)"
+    },
+    "_bitwise_and_word": {
+      "match": "(?<!\\w)bitand(?!\\w)"
+    },
+    "_bitwise_not": {
+      "match": "~"
+    },
+    "_bitwise_not_word": {
+      "match": "(?<!\\w)compl(?!\\w)"
+    },
+    "_bitwise_or": {
+      "match": "\\|"
+    },
+    "_bitwise_or_assignment": {
+      "match": "\\|="
+    },
+    "_bitwise_or_assignment_word": {
+      "match": "(?<!\\w)or_eq(?!\\w)"
+    },
+    "_bitwise_or_word": {
+      "match": "(?<!\\w)bitor(?!\\w)"
+    },
+    "_bitwise_shift_left": {
+      "match": "<<"
+    },
+    "_bitwise_shift_left_assignment": {
+      "match": "<<="
+    },
+    "_bitwise_shift_right": {
+      "match": ">>"
+    },
+    "_bitwise_shift_right_assignment": {
+      "match": ">>="
+    },
+    "_bitwise_xor": {
+      "match": "\\^"
+    },
+    "_bitwise_xor_assignment": {
+      "match": "\\^="
+    },
+    "_bitwise_xor_assignment_word": {
+      "match": "(?<!\\w)xor_eq(?!\\w)"
+    },
+    "_bitwise_xor_word": {
+      "match": "(?<!\\w)xor(?!\\w)"
+    },
+    "_blkcnt_t": {
+      "match": "(?<!\\w)blkcnt_t(?!\\w)"
+    },
+    "_blksize_t": {
+      "match": "(?<!\\w)blksize_t(?!\\w)"
+    },
+    "_bool": {
+      "match": "(?<!\\w)bool(?!\\w)"
+    },
+    "_break": {
+      "match": "(?<!\\w)break(?!\\w)"
+    },
+    "_caddr_t": {
+      "match": "(?<!\\w)caddr_t(?!\\w)"
+    },
+    "_case": {
+      "match": "(?<!\\w)case(?!\\w)"
+    },
+    "_catch": {
+      "match": "(?<!\\w)catch(?!\\w)"
+    },
+    "_char": {
+      "match": "(?<!\\w)char(?!\\w)"
+    },
+    "_class": {
+      "match": "(?<!\\w)class(?!\\w)"
+    },
+    "_clock_t": {
+      "match": "(?<!\\w)clock_t(?!\\w)"
+    },
+    "_co_await": {
+      "match": "(?<!\\w)co_await(?!\\w)"
+    },
+    "_co_return": {
+      "match": "(?<!\\w)co_return(?!\\w)"
+    },
+    "_co_yield": {
+      "match": "(?<!\\w)co_yield(?!\\w)"
+    },
+    "_comma": {
+      "match": ","
+    },
+    "_concept": {
+      "match": "(?<!\\w)concept(?!\\w)"
+    },
+    "_const": {
+      "match": "(?<!\\w)const(?!\\w)"
+    },
+    "_const_cast": {
+      "match": "(?<!\\w)const_cast(?!\\w)"
+    },
+    "_consteval": {
+      "match": "(?<!\\w)consteval(?!\\w)"
+    },
+    "_constexpr": {
+      "match": "(?<!\\w)constexpr(?!\\w)"
+    },
+    "_continue": {
+      "match": "(?<!\\w)continue(?!\\w)"
+    },
+    "_daddr_t": {
+      "match": "(?<!\\w)daddr_t(?!\\w)"
+    },
+    "_decltype": {
+      "match": "(?<!\\w)decltype(?!\\w)"
+    },
+    "_default": {
+      "match": "(?<!\\w)default(?!\\w)"
+    },
+    "_define": {
+      "match": "(?<!\\w)define(?!\\w)"
+    },
+    "_defined": {
+      "match": "(?<!\\w)defined(?!\\w)"
+    },
+    "_delete": {
+      "match": "(?<!\\w)delete(?!\\w)"
+    },
+    "_delete_array": {
+      "match": "delete\\[\\]"
+    },
+    "_dereference": {
+      "match": "\\*"
+    },
+    "_dev_t": {
+      "match": "(?<!\\w)dev_t(?!\\w)"
+    },
+    "_direct_assignment": {
+      "match": "="
+    },
+    "_div_t": {
+      "match": "(?<!\\w)div_t(?!\\w)"
+    },
+    "_division": {
+      "match": "\\/"
+    },
+    "_division_assignment": {
+      "match": "\\/="
+    },
+    "_do": {
+      "match": "(?<!\\w)do(?!\\w)"
+    },
+    "_double": {
+      "match": "(?<!\\w)double(?!\\w)"
+    },
+    "_dynamic_cast": {
+      "match": "(?<!\\w)dynamic_cast(?!\\w)"
+    },
+    "_elif": {
+      "match": "(?<!\\w)elif(?!\\w)"
+    },
+    "_else": {
+      "match": "(?<!\\w)else(?!\\w)"
+    },
+    "_endif": {
+      "match": "(?<!\\w)endif(?!\\w)"
+    },
+    "_enum": {
+      "match": "(?<!\\w)enum(?!\\w)"
+    },
+    "_equal_to": {
+      "match": "=="
+    },
+    "_error": {
+      "match": "(?<!\\w)error(?!\\w)"
+    },
+    "_explicit": {
+      "match": "(?<!\\w)explicit(?!\\w)"
+    },
+    "_export": {
+      "match": "(?<!\\w)export(?!\\w)"
+    },
+    "_extern": {
+      "match": "(?<!\\w)extern(?!\\w)"
+    },
+    "_false": {
+      "match": "(?<!\\w)false(?!\\w)"
+    },
+    "_final": {
+      "match": "(?<!\\w)final(?!\\w)"
+    },
+    "_fixpt_t": {
+      "match": "(?<!\\w)fixpt_t(?!\\w)"
+    },
+    "_float": {
+      "match": "(?<!\\w)float(?!\\w)"
+    },
+    "_for": {
+      "match": "(?<!\\w)for(?!\\w)"
+    },
+    "_friend": {
+      "match": "(?<!\\w)friend(?!\\w)"
+    },
+    "_function_call": {
+      "match": "\\(\\)"
+    },
+    "_gid_t": {
+      "match": "(?<!\\w)gid_t(?!\\w)"
+    },
+    "_goto": {
+      "match": "(?<!\\w)goto(?!\\w)"
+    },
+    "_greater_than": {
+      "match": ">"
+    },
+    "_greater_than_or_equal_to": {
+      "match": ">="
+    },
+    "_id_t": {
+      "match": "(?<!\\w)id_t(?!\\w)"
+    },
+    "_if": {
+      "match": "(?<!\\w)if(?!\\w)"
+    },
+    "_ifdef": {
+      "match": "(?<!\\w)ifdef(?!\\w)"
+    },
+    "_ifndef": {
+      "match": "(?<!\\w)ifndef(?!\\w)"
+    },
+    "_import": {
+      "match": "(?<!\\w)import(?!\\w)"
+    },
+    "_in_addr_t": {
+      "match": "(?<!\\w)in_addr_t(?!\\w)"
+    },
+    "_in_port_t": {
+      "match": "(?<!\\w)in_port_t(?!\\w)"
+    },
+    "_include": {
+      "match": "(?<!\\w)include(?!\\w)"
+    },
+    "_inline": {
+      "match": "(?<!\\w)inline(?!\\w)"
+    },
+    "_ino_t": {
+      "match": "(?<!\\w)ino_t(?!\\w)"
+    },
+    "_int": {
+      "match": "(?<!\\w)int(?!\\w)"
+    },
+    "_int16_t": {
+      "match": "(?<!\\w)int16_t(?!\\w)"
+    },
+    "_int32_t": {
+      "match": "(?<!\\w)int32_t(?!\\w)"
+    },
+    "_int64_t": {
+      "match": "(?<!\\w)int64_t(?!\\w)"
+    },
+    "_int8_t": {
+      "match": "(?<!\\w)int8_t(?!\\w)"
+    },
+    "_int_fast16_t": {
+      "match": "(?<!\\w)int_fast16_t(?!\\w)"
+    },
+    "_int_fast32_t": {
+      "match": "(?<!\\w)int_fast32_t(?!\\w)"
+    },
+    "_int_fast64_t": {
+      "match": "(?<!\\w)int_fast64_t(?!\\w)"
+    },
+    "_int_fast8_t": {
+      "match": "(?<!\\w)int_fast8_t(?!\\w)"
+    },
+    "_int_least16_t": {
+      "match": "(?<!\\w)int_least16_t(?!\\w)"
+    },
+    "_int_least32_t": {
+      "match": "(?<!\\w)int_least32_t(?!\\w)"
+    },
+    "_int_least64_t": {
+      "match": "(?<!\\w)int_least64_t(?!\\w)"
+    },
+    "_int_least8_t": {
+      "match": "(?<!\\w)int_least8_t(?!\\w)"
+    },
+    "_intmax_t": {
+      "match": "(?<!\\w)intmax_t(?!\\w)"
+    },
+    "_intptr_t": {
+      "match": "(?<!\\w)intptr_t(?!\\w)"
+    },
+    "_key_t": {
+      "match": "(?<!\\w)key_t(?!\\w)"
+    },
+    "_less_than": {
+      "match": "<"
+    },
+    "_less_than_or_equal_to": {
+      "match": "<="
+    },
+    "_line": {
+      "match": "(?<!\\w)line(?!\\w)"
+    },
+    "_logic_not": {
+      "match": "!"
+    },
+    "_logic_not_word": {
+      "match": "(?<!\\w)not(?!\\w)"
+    },
+    "_logical_and": {
+      "match": "&&"
+    },
+    "_logical_and_word": {
+      "match": "(?<!\\w)and(?!\\w)"
+    },
+    "_logical_or": {
+      "match": "\\|\\|"
+    },
+    "_logical_or_word": {
+      "match": "(?<!\\w)or(?!\\w)"
+    },
+    "_long": {
+      "match": "(?<!\\w)long(?!\\w)"
+    },
+    "_minus": {
+      "match": "\\-"
+    },
+    "_mode_t": {
+      "match": "(?<!\\w)mode_t(?!\\w)"
+    },
+    "_module": {
+      "match": "(?<!\\w)module(?!\\w)"
+    },
+    "_modulus": {
+      "match": "%"
+    },
+    "_modulus_assignment": {
+      "match": "%="
+    },
+    "_multiplication": {
+      "match": "\\*"
+    },
+    "_multiplication_assignment": {
+      "match": "\\*="
+    },
+    "_mutable": {
+      "match": "(?<!\\w)mutable(?!\\w)"
+    },
+    "_namespace": {
+      "match": "(?<!\\w)namespace(?!\\w)"
+    },
+    "_new": {
+      "match": "(?<!\\w)new(?!\\w)"
+    },
+    "_new_array": {
+      "match": "new\\[\\]"
+    },
+    "_nlink_t": {
+      "match": "(?<!\\w)nlink_t(?!\\w)"
+    },
+    "_noexcept": {
+      "match": "(?<!\\w)noexcept(?!\\w)"
+    },
+    "_not_equal_to": {
+      "match": "!="
+    },
+    "_not_equal_to_word": {
+      "match": "(?<!\\w)not_eq(?!\\w)"
+    },
+    "_nullptr": {
+      "match": "(?<!\\w)nullptr(?!\\w)"
+    },
+    "_object_accessor": {
+      "match": "\\."
+    },
+    "_object_accessor_dereference": {
+      "match": "\\.\\*"
+    },
+    "_off_t": {
+      "match": "(?<!\\w)off_t(?!\\w)"
+    },
+    "_operator": {
+      "match": "(?<!\\w)operator(?!\\w)"
+    },
+    "_override": {
+      "match": "(?<!\\w)override(?!\\w)"
+    },
+    "_pid_t": {
+      "match": "(?<!\\w)pid_t(?!\\w)"
+    },
+    "_plus": {
+      "match": "\\+"
+    },
+    "_pointer_accessor": {
+      "match": "\\->"
+    },
+    "_pointer_accessor_dereference": {
+      "match": "\\->\\*"
+    },
+    "_post_decrement": {
+      "match": "\\-\\-"
+    },
+    "_post_increment": {
+      "match": "\\+\\+"
+    },
+    "_pragma": {
+      "match": "(?<!\\w)_Pragma(?!\\w)"
+    },
+    "_pre_decrement": {
+      "match": "\\-\\-"
+    },
+    "_pre_increment": {
+      "match": "\\+\\+"
+    },
+    "_private": {
+      "match": "(?<!\\w)private(?!\\w)"
+    },
+    "_protected": {
+      "match": "(?<!\\w)protected(?!\\w)"
+    },
+    "_public": {
+      "match": "(?<!\\w)public(?!\\w)"
+    },
+    "_qaddr_t": {
+      "match": "(?<!\\w)qaddr_t(?!\\w)"
+    },
+    "_quad_t": {
+      "match": "(?<!\\w)quad_t(?!\\w)"
+    },
+    "_reference": {
+      "match": "&"
+    },
+    "_reflexpr": {
+      "match": "(?<!\\w)reflexpr(?!\\w)"
+    },
+    "_register": {
+      "match": "(?<!\\w)register(?!\\w)"
+    },
+    "_reinterpret_cast": {
+      "match": "(?<!\\w)reinterpret_cast(?!\\w)"
+    },
+    "_requires": {
+      "match": "(?<!\\w)requires(?!\\w)"
+    },
+    "_restrict": {
+      "match": "(?<!\\w)restrict(?!\\w)"
+    },
+    "_return": {
+      "match": "(?<!\\w)return(?!\\w)"
+    },
+    "_scope_resolution": {
+      "match": "::"
+    },
+    "_segsz_t": {
+      "match": "(?<!\\w)segsz_t(?!\\w)"
+    },
+    "_short": {
+      "match": "(?<!\\w)short(?!\\w)"
+    },
+    "_signed": {
+      "match": "(?<!\\w)signed(?!\\w)"
+    },
+    "_size_t": {
+      "match": "(?<!\\w)size_t(?!\\w)"
+    },
+    "_sizeof": {
+      "match": "(?<!\\w)sizeof(?!\\w)"
+    },
+    "_ssize_t": {
+      "match": "(?<!\\w)ssize_t(?!\\w)"
+    },
+    "_static": {
+      "match": "(?<!\\w)static(?!\\w)"
+    },
+    "_static_cast": {
+      "match": "(?<!\\w)static_cast(?!\\w)"
+    },
+    "_struct": {
+      "match": "(?<!\\w)struct(?!\\w)"
+    },
+    "_subscript": {
+      "match": "\\[\\]"
+    },
+    "_subtraction": {
+      "match": "\\-"
+    },
+    "_subtraction_assignment": {
+      "match": "\\-="
+    },
+    "_suseconds_t": {
+      "match": "(?<!\\w)suseconds_t(?!\\w)"
+    },
+    "_swblk_t": {
+      "match": "(?<!\\w)swblk_t(?!\\w)"
+    },
+    "_switch": {
+      "match": "(?<!\\w)switch(?!\\w)"
+    },
+    "_synchronized": {
+      "match": "(?<!\\w)synchronized(?!\\w)"
+    },
+    "_template": {
+      "match": "(?<!\\w)template(?!\\w)"
+    },
+    "_ternary_conditional": {
+      "match": "\\?:"
+    },
+    "_this": {
+      "match": "(?<!\\w)this(?!\\w)"
+    },
+    "_thread_local": {
+      "match": "(?<!\\w)thread_local(?!\\w)"
+    },
+    "_three_way_compare": {
+      "match": "<=>"
+    },
+    "_throw": {
+      "match": "(?<!\\w)throw(?!\\w)"
+    },
+    "_time_t": {
+      "match": "(?<!\\w)time_t(?!\\w)"
+    },
+    "_transaction_safe": {
+      "match": "(?<!\\w)transaction_safe(?!\\w)"
+    },
+    "_transaction_safe_dynamic": {
+      "match": "(?<!\\w)transaction_safe_dynamic(?!\\w)"
+    },
+    "_true": {
+      "match": "(?<!\\w)true(?!\\w)"
+    },
+    "_try": {
+      "match": "(?<!\\w)try(?!\\w)"
+    },
+    "_typedef": {
+      "match": "(?<!\\w)typedef(?!\\w)"
+    },
+    "_typeid": {
+      "match": "(?<!\\w)typeid(?!\\w)"
+    },
+    "_typename": {
+      "match": "(?<!\\w)typename(?!\\w)"
+    },
+    "_u_char": {
+      "match": "(?<!\\w)u_char(?!\\w)"
+    },
+    "_u_int": {
+      "match": "(?<!\\w)u_int(?!\\w)"
+    },
+    "_u_long": {
+      "match": "(?<!\\w)u_long(?!\\w)"
+    },
+    "_u_quad_t": {
+      "match": "(?<!\\w)u_quad_t(?!\\w)"
+    },
+    "_u_short": {
+      "match": "(?<!\\w)u_short(?!\\w)"
+    },
+    "_uid_t": {
+      "match": "(?<!\\w)uid_t(?!\\w)"
+    },
+    "_uint": {
+      "match": "(?<!\\w)uint(?!\\w)"
+    },
+    "_uint16_t": {
+      "match": "(?<!\\w)uint16_t(?!\\w)"
+    },
+    "_uint32_t": {
+      "match": "(?<!\\w)uint32_t(?!\\w)"
+    },
+    "_uint64_t": {
+      "match": "(?<!\\w)uint64_t(?!\\w)"
+    },
+    "_uint8_t": {
+      "match": "(?<!\\w)uint8_t(?!\\w)"
+    },
+    "_uint_fast16_t": {
+      "match": "(?<!\\w)uint_fast16_t(?!\\w)"
+    },
+    "_uint_fast32_t": {
+      "match": "(?<!\\w)uint_fast32_t(?!\\w)"
+    },
+    "_uint_fast64_t": {
+      "match": "(?<!\\w)uint_fast64_t(?!\\w)"
+    },
+    "_uint_fast8_t": {
+      "match": "(?<!\\w)uint_fast8_t(?!\\w)"
+    },
+    "_uint_least16_t": {
+      "match": "(?<!\\w)uint_least16_t(?!\\w)"
+    },
+    "_uint_least32_t": {
+      "match": "(?<!\\w)uint_least32_t(?!\\w)"
+    },
+    "_uint_least64_t": {
+      "match": "(?<!\\w)uint_least64_t(?!\\w)"
+    },
+    "_uint_least8_t": {
+      "match": "(?<!\\w)uint_least8_t(?!\\w)"
+    },
+    "_uintmax_t": {
+      "match": "(?<!\\w)uintmax_t(?!\\w)"
+    },
+    "_uintptr_t": {
+      "match": "(?<!\\w)uintptr_t(?!\\w)"
+    },
+    "_undef": {
+      "match": "(?<!\\w)undef(?!\\w)"
+    },
+    "_union": {
+      "match": "(?<!\\w)union(?!\\w)"
+    },
+    "_unsigned": {
+      "match": "(?<!\\w)unsigned(?!\\w)"
+    },
+    "_useconds_t": {
+      "match": "(?<!\\w)useconds_t(?!\\w)"
+    },
+    "_ushort": {
+      "match": "(?<!\\w)ushort(?!\\w)"
+    },
+    "_using": {
+      "match": "(?<!\\w)using(?!\\w)"
+    },
+    "_variadic_sizeof": {
+      "match": "sizeof\\.\\.\\."
+    },
+    "_virtual": {
+      "match": "(?<!\\w)virtual(?!\\w)"
+    },
+    "_void": {
+      "match": "(?<!\\w)void(?!\\w)"
+    },
+    "_volatile": {
+      "match": "(?<!\\w)volatile(?!\\w)"
+    },
+    "_warning": {
+      "match": "(?<!\\w)warning(?!\\w)"
+    },
+    "_wchar_t": {
+      "match": "(?<!\\w)wchar_t(?!\\w)"
+    },
+    "_while": {
+      "match": "(?<!\\w)while(?!\\w)"
+    },
     "access_control_keywords": {
       "match": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(((?:(?:protected)|(?:private)|(?:public)))(?:(?:\\s)+)?(:))",
       "captures": {

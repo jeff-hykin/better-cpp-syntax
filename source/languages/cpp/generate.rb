@@ -56,7 +56,9 @@ grammar = Grammar.new(
         "see https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master",
     ],
 )
+@generate_tokens[grammar]
 
+puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
 # Add bailout
 # Grammar.register_transform(BailoutTransform.new("macro", /(?<!\\)\n/))
 
@@ -518,7 +520,7 @@ grammar = Grammar.new(
     )
     grammar[:the_this_keyword] = the_this_keyword = Pattern.new(
         std_space.then(
-            match: variableBounds[ /this/ ],
+            keyword: "this",
             tag_as: "variable.language.this"
         )
     )

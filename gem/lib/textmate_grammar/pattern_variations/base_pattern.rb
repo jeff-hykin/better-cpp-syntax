@@ -490,17 +490,21 @@ class PatternBase
 
         plugins = Grammar.plugins
         plugins.reject! { |p| (@original_arguments.keys & p.class.options).empty? }
-
+        
         regex_as_string =
-            case @original_arguments[:match]
+            case @original_arguments[:match] 
             when PatternBase then @original_arguments[:match].to_s(depth + 2, true)
             when Regexp then @original_arguments[:match].inspect
-            when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
+            when String then ("/" + Regexp.escape(@original_arguments[:match]) + "/").lstrip
             end
         indent = "  " * depth
         output = indent + begining_of_to_s(top_level)
         # basic pattern information
-        output += "\n#{indent}  match: " + regex_as_string.lstrip
+        if @arguments[:keyword]
+            output += "\n#{indent}  keyword: " + @arguments[:keyword]
+        else
+            output += "\n#{indent}  match: " + regex_as_string
+        end
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
         output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
         # unit tests
