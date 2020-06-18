@@ -379,6 +379,37 @@ class PatternBase
         # ensure includes are a flat array (length>0) or nil
         @arguments[:includes] = [@arguments[:includes]].flatten.compact
         @arguments[:includes] = nil if @arguments[:includes].empty?
+        
+        #
+        # process adjectives
+        #
+        if @arguments[:adjectives]
+            for each in @arguments[:adjectives]
+                if not each.is_a?(Symbol)
+                    raise <<~HEREDOC
+                        
+                        
+                        When creating a Pattern
+                        The set of adjectives is: #{@arguments[:adjectives].inspect}
+                        This one: #{each.inspect} isn't a Symbol
+                        All of the adjectives need to be a symbol for it to work correctly with the system
+                    HEREDOC
+                end
+                if not (each.to_s =~ /[a-zA-Z0-9_]/)
+                    raise <<~HEREDOC
+                        
+                        
+                        When creating a Pattern
+                        The set of adjectives is: #{@arguments[:adjectives].inspect}
+                        And this adjective: #{each.inspect}
+                        uses something other than letters, numbers, and underscores
+                        which sadly doesn't work with this system due to other constraints
+                        
+                        Please change it to only use letters numbers and underscores
+                    HEREDOC
+                end
+            end
+        end
     end
 
     # attempts to provide a memorable name for a pattern

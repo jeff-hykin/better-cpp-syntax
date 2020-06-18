@@ -20,12 +20,12 @@ class ResolvePlaceholders < GrammarTransform
 
                 each_pattern_like.arguments[:match] = repository[arguments[:placeholder]].__deep_clone__
             #
-            # token pattern
+            # Collector pattern
             #
-            elsif each_pattern_like.is_a?(TokenCollectorPattern)
+            elsif each_pattern_like.is_a?(PatternCollector)
                 qualifying_patterns = []
                 for each_key, each_value in repository
-                    if each_value.is_a?(TokenPattern) && arguments[:pattern_filter][each_value]
+                    if arguments[:pattern_filter][each_value]
                         qualifying_patterns << each_value
                     end
                 end
@@ -33,9 +33,9 @@ class ResolvePlaceholders < GrammarTransform
                     raise <<~HEREDOC
                         
                         
-                        When creating a token filter #{arguments[:pattern_filter]}
+                        When creating a collector filter #{arguments[:pattern_filter]}
                         all the patterns that are in the grammar repository were searched
-                        but none of thier adjective lists matched the token filter
+                        but none of thier adjective lists matched the collector filter
                     HEREDOC
                 end
                 

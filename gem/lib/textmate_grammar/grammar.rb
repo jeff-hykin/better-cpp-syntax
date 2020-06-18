@@ -182,17 +182,21 @@ class Grammar
         unless key.is_a? Symbol
             raise "Use symbols not strings" unless key.is_a? Symbol
         end
-
+        
         if key.to_s.start_with?("$") && !([:$initial_context, :$base, :$self].include? key)
-            puts "#{key} is not a valid repository name"
-            puts "repository names starting with $ are reserved"
-            raise "See above error"
+            raise <<~HEREDOC
+                
+                #{key} is not a valid repository name
+                repository names starting with $ are reserved
+            HEREDOC
         end
 
         if key.to_s == "repository"
-            puts "#{key} is not a valid repository name"
-            puts "the name 'repository' is a reserved name"
-            raise "See above error"
+            raise <<~HEREDOC
+                
+                #{key} is not a valid repository name
+                the name 'repository' is the only reserved name
+            HEREDOC
         end
 
         # add it to the repository
@@ -497,9 +501,11 @@ class Grammar
             out_file.write(Plist::Emit.dump(output))
             out_file.close
         else
-            puts "unexpected syntax format #{options[:syntax_format]}"
-            puts "expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]"
-            raise "see above error"
+            raise <<~HEREDOC
+                
+                unexpected syntax format #{options[:syntax_format]}
+                expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]
+            HEREDOC
         end
 
         return unless options[:generate_tags]
