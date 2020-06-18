@@ -160,20 +160,8 @@ class PatternBase
     #
     def map!(map_includes = false, &block)
         yield self
-        if @arguments[:match].is_a? PatternBase
-            if @arguments[:match].frozen?
-                puts "frozen @arguments[:match]"
-                puts @arguments[:match].inspect
-            end
-            @arguments[:match] = @arguments[:match].map!(map_includes, &block)
-        end
-        if @next_pattern.is_a? PatternBase
-            if @next_pattern.frozen?
-                puts "frozen @next_pattern"
-                puts @next_pattern.inspect
-            end
-            @next_pattern = @next_pattern.map!(map_includes, &block)
-        end
+        @arguments[:match].map!(map_includes, &block) if @arguments[:match].is_a? PatternBase
+        @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
         map_includes!(&block) if map_includes
         self
     end
