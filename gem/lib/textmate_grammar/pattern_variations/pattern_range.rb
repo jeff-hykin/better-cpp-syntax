@@ -75,12 +75,10 @@ class PatternRange < PatternBase
         arguments.delete(:end_pattern)
         arguments.delete(:while_pattern)
 
-        # ensure that includes is either nil or a flat array
-        if arguments[:includes]
-            arguments[:includes] = [arguments[:includes]] unless arguments[:includes].is_a? Array
-            arguments[:includes] = arguments[:includes].flatten
-        end
-
+        # ensure includes are a flat array (length>0) or nil
+        arguments[:includes] = [arguments[:includes]].flatten.compact
+        arguments[:includes] = nil if arguments[:includes].empty?
+        
         #canonize end_pattern_last
         arguments[:end_pattern_last] = arguments[:apply_end_pattern_last] if arguments[:apply_end_pattern_last]
         arguments[:end_pattern_last] = arguments[:applyEndPatternLast] if arguments[:applyEndPatternLast]
@@ -154,11 +152,11 @@ class PatternRange < PatternBase
         output["begin"]   = output["begin"][1..-2]   if @start_pattern.optimize_outer_group?
         output[match_key] = output[match_key][1..-2] if @stop_pattern.optimize_outer_group?
 
-        if @arguments[:includes].is_a? Array
-            output[:patterns] = convert_includes_to_patterns(@arguments[:includes])
-        elsif !@arguments[:includes].nil?
-            output[:patterns] = convert_includes_to_patterns([@arguments[:includes]])
-        end
+        
+        # ensure includes are a flat array (length>0) or nil
+        @arguments[:includes] = [@arguments[:includes]].flatten.compact
+        @arguments[:includes] = nil if @arguments[:includes].empty?
+        output[:patterns] = convert_includes_to_patterns(@arguments[:includes]) unless @arguments[:includes].nil?
 
         # end_pattern_last
         output["applyEndPatternLast"] = 1 if @arguments[:end_pattern_last]
