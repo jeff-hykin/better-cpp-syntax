@@ -328,6 +328,9 @@ class PatternBase
                 arguments: #{constructor_args}
             HEREDOC
         end
+        # keep a record of all patterns for helpful debugging messages
+        Grammar.all_patterns.push(self)
+        
         @arguments = {}
         if constructor_args[0].is_a?(Hash)
             @arguments = constructor_args[0]

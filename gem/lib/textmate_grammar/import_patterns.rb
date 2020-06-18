@@ -6,7 +6,7 @@ require 'textmate_grammar/grammar_plugin'
 require 'textmate_grammar/util'
 require 'textmate_grammar/regex_operator'
 require 'textmate_grammar/regex_operators/concat'
-require 'textmate_grammar/tokens'
+require 'textmate_grammar/selector'
 
 # import Pattern, LegacyPattern, and PatternRange
 Dir[File.join(__dir__, 'pattern_variations', '*.rb')].each { |file| require file }

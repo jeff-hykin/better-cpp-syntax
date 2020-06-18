@@ -533,6 +533,12 @@ class Grammar
     rescue StandardError
         ""
     end
+    
+    # NOTE: this is only used to provide debugging help
+    @@all_patterns = []
+    def self.all_patterns
+        @@all_patterns
+    end
 end
 
 #

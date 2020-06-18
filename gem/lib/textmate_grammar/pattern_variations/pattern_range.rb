@@ -25,6 +25,9 @@ class PatternRange < PatternBase
     # @note exactly one of :end_pattern or :while_pattern is required
     #
     def initialize(arguments)
+        # keep a record of all patterns for helpful debugging messages
+        Grammar.all_patterns.push(self)
+        
         @original_arguments = arguments
         @arguments = { match: nil }
         @next_pattern = nil
