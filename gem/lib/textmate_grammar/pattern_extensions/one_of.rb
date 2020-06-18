@@ -37,8 +37,9 @@ class OneOfPattern < PatternBase
     def generate_self_regex_string(groups)
         patterns_strings = @arguments[:patterns].map do |pattern|
             regex = pattern.evaluate(groups)
-            next regex if pattern.single_entity?
-
+            # if it is known to be a single entity, then no need to wrap it
+            next regex if pattern.single_entity? || regex.to_s =~ /^[\w\s]*$/
+            
             "(?:#{regex})"
         end
 
