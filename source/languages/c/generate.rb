@@ -32,7 +32,6 @@ $grammar = c_grammar
 # c_grammar[:inline_comment] = inline_comment
 c_grammar.import(File.join(__dir__,"../../shared_patterns/inline_comment.rb"))
 c_grammar.import(File.join(__dir__,"../../shared_patterns/std_space.rb"))
-puts "c_grammar[:inline_comment] is: #{c_grammar[:inline_comment]} "
 std_space = c_grammar[:std_space]
 #
 # import from C++
