@@ -58,7 +58,6 @@ grammar = Grammar.new(
 )
 @generate_tokens[grammar]
 
-puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
 # Add bailout
 # Grammar.register_transform(BailoutTransform.new("macro", /(?<!\\)\n/))
 
@@ -68,15 +67,12 @@ puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
     grammar.import("./lib/inline_comment")
     grammar.import("./lib/std_space")
     grammar.import("./lib/preprocessor")
-    inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
     basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
     universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
     identifier                   = grammar[:identifier] = first_character.then(zeroOrMoreOf(subsequent_character))
-    preprocessor                 = grammar[:preprocessor_context]
-    leading_space                = Pattern.new(/\s*+/)
     grammar[:semicolon] = @semicolon = Pattern.new(
             match: /;/,
             tag_as: "punctuation.terminator.statement",
@@ -186,7 +182,7 @@ puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
 #
 #
     grammar[:ever_present_context] = [
-            *preprocessor,
+            *grammar[:preprocessor_context],
             :comments,
             :line_continuation_character,
         ]
@@ -1012,7 +1008,7 @@ puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
         match: Pattern.new(
-            leading_space.maybe(
+            basic_space.maybe(
                 inline_attribute
             ).then(std_space).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
@@ -1437,7 +1433,7 @@ puts "grammar[:_sizeof] is: #{grammar[:_sizeof]} "
         )
     ]
     grammar[:constructor_root] = constructor[
-        leading_space.then(optional_calling_convention).then(
+        basic_space.then(optional_calling_convention).then(
             inline_scope_resolution[".constructor"]
         ).then(
             match: Pattern.new(
