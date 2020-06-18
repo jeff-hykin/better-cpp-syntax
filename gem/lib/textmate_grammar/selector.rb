@@ -110,6 +110,14 @@ class Grammar
                 My guess is that it was half-edited
                 or an accidental space was added
             HEREDOC
+        elsif string_content =~ /([^:]|\A)\b\w+/
+            raise <<~HEREDOC
+                
+                Inside a selector: #{selector.inspect}
+                this part of the syntax is invalid: #{$&.inspect}
+                My guess is that one of the adjectives doesn't 
+                have a colon infront of it
+            HEREDOC
         end
         
         # convert all adjectives into inclusion checks
