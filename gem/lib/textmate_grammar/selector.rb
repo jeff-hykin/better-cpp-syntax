@@ -113,8 +113,8 @@ class Grammar
         end
         
         # convert all adjectives into inclusion checks
-        string_content.gsub!(/\s+/," ")
-        string_content.gsub!(/:[a-zA-Z0-9_]+/, 'pattern.arguments[:adjectives].include?(\0)')
+        string_content = string_content.gsub(/\s+/," ")
+        string_content = string_content.gsub(/:[a-zA-Z0-9_]+/, 'pattern.arguments[:adjectives].include?(\0)')
         # convert it into a proc
         return ->(pattern) do
             eval(string_content) if pattern.is_a?(PatternBase) && pattern.arguments[:adjectives].is_a?(Array)

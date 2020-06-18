@@ -422,9 +422,9 @@ grammar = Grammar.new(
 # Constants
 #
     grammar[:language_constants] = Pattern.new(
-        match: variableBounds[@cpp_tokens.that(:isLiteral)],
+        match: grammar.patternsThatAre(%(:literal)),
         tag_as: "constant.language.$match"
-        )
+    )
 
 #
 # Built-In Types

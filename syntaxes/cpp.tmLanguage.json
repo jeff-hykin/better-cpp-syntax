@@ -7227,7 +7227,7 @@
       ]
     },
     "language_constants": {
-      "match": "(?<!\\w)(?:(?:nullptr)|(?:false)|(?:NULL)|(?:true))(?!\\w)",
+      "match": "(?:(?:(?<!\\w)NULL(?!\\w))|(?:(?<!\\w)true(?!\\w))|(?:(?<!\\w)false(?!\\w))|(?:(?<!\\w)nullptr(?!\\w)))",
       "name": "constant.language.$0.cpp"
     },
     "line": {
