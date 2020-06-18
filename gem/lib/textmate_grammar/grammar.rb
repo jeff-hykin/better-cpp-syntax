@@ -469,13 +469,14 @@ class Grammar
             options[:directory] = File.join(absolute_path_from_caller, options[:directory])
         end
         
+        grammar_default_name = @scope_name.split('.').drop(1).join('.')
         default = {
             inherit_or_embedded: :embedded,
             generate_tags: true,
             syntax_format: :json,
-            syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
+            syntax_name: nil,
             syntax_dir: options[:directory],
-            tag_name: "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            tag_name: "#{grammar_default_name}-scopes.txt",
             tag_dir: options[:directory],
             should_lint: true,
         }
@@ -484,6 +485,9 @@ class Grammar
         output = generate(options)
 
         if [:json, :vscode].include? options[:syntax_format]
+            if options[:syntax_name].nil?
+                options[:syntax_name] = "#{grammar_default_name}.tmLanguage.json"
+            end
             file_name = File.join(
                 options[:syntax_dir],
                 "#{options[:syntax_name]}",
@@ -493,6 +497,15 @@ class Grammar
             out_file.close
         elsif [:plist, :textmate, :tm_language, :xml].include? options[:syntax_format]
             require 'plist'
+            if options[:syntax_name].nil?
+                case options[:syntax_format]
+                when :plist
+                    options[:syntax_name] = "#{grammar_default_name}.tmLanguage.plist"
+                else
+                    # TODO: not sure if this is the best ending or not -Jeff
+                    options[:syntax_name] = "#{grammar_default_name}.tmLanguage.xml"
+                end
+            end
             file_name = File.join(
                 options[:syntax_dir],
                 options[:syntax_name],
