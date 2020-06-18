@@ -198,7 +198,10 @@ class Grammar
                 the name 'repository' is the only reserved name
             HEREDOC
         end
-
+        if @repository.keys.include? key
+            STDERR.puts "\nWarning: the #{key} pattern is getting overridden on the grammar\n"
+        end
+        
         # add it to the repository
         @repository[key] = fixup_value(value)
         @repository[key]
