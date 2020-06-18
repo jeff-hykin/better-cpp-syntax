@@ -58,9 +58,18 @@ class ResolvePlaceholders < GrammarTransform
                     HEREDOC
                 end
                 
-                
-                # change this pattern right before the grammar is generated
-                each_pattern_like.arguments[:match] = oneOf(qualifying_patterns)
+                # lookAhead/behind optimization
+                # if all of them are keyword patterns then extract out the keywords and only put lookAhead/lookBehinds at the ends
+                if qualifying_patterns.all? { |each| each.arguments[:keyword] != nil }
+                    keywords = qualifying_patterns.map{ |each| each.arguments[:keyword] }
+                    # put longest words in the front to prevent match errors
+                    keywords.sort_by!(&:length).reverse!
+                    each_pattern_like.arguments[:match] = lookBehindToAvoid(/\w/).then(/(?:#{keywords.join("|")})/).lookAheadToAvoid(/\w/)
+                # the normal/safe method
+                else
+                    # change the match pattern right before the grammar is generated
+                    each_pattern_like.arguments[:match] = oneOf(qualifying_patterns)
+                end
             end
             each_pattern_like
         end
