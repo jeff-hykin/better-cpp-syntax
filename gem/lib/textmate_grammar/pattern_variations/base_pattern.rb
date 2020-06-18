@@ -278,6 +278,7 @@ class PatternBase
     # @overload initialize(opts)
     #   @param opts [Hash] options
     #   @option opts [PatternBase, Regexp, String] :match the pattern to match
+    #   @option opts [String] :keyword an alpha-numeric word to match that will have \b bounds
     #   @option opts [String] :tag_as what to tag this pattern as
     #   @option opts [Array<PatternBase, Symbol>] :includes pattern includes
     #   @option opts [String] :reference a name for this pattern can be referred to in
@@ -311,7 +312,7 @@ class PatternBase
     #
     def initialize(*constructor_args)
         # 
-        # Handle input
+        # Handle args
         # 
         if constructor_args[1] == :deep_clone
             @arguments = constructor_args[0]
@@ -334,6 +335,24 @@ class PatternBase
             @arguments[:match] = constructor_args[0] 
         end
         @original_arguments = @arguments.clone
+        
+        #
+        # process the :keyword
+        #
+        case @arguments[:keyword]
+        when nil
+            # no error, do nothing
+        when String
+            # convert it to having word 
+            @arguments[:match] = /(?<!\w)#{@arguments[:keyword]}(?!\w)/
+        else
+            raise <<~HEREDOC
+                
+                In Pattern.new()
+                If the :keyword is going to be used it must be a String
+                Instead it was: #{@arguments[:keyword].inspect}
+            HEREDOC
+        end
         
         #
         # process the :match 
