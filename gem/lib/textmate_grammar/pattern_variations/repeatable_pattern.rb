@@ -6,6 +6,9 @@ require_relative "./base_pattern.rb"
 # RepeatablePattern provides quantifiers for patterns
 #
 class RepeatablePattern < PatternBase
+    # this is used for preventing naming collisions with named capture groups
+    @@dont_match_incrementor = rand(10000)
+    
     # @return [Integer,nil] the minimum amount that can be matched
     attr_accessor :at_least
     # @return [Integer,nil] the maximum amount that can be matched
@@ -153,10 +156,29 @@ class RepeatablePattern < PatternBase
         end
         match
     end
-
+    
     # (see PatternBase#generate_self_regex_string)
     def generate_self_regex_string(groups)
-        add_capture_group_if_needed(add_quantifier_options_to(@arguments[:match], groups))
+        match = add_capture_group_if_needed(add_quantifier_options_to(@arguments[:match], groups))
+        
+        #
+        # check the dont_match
+        #
+        return match if @arguments[:dont_match].nil?
+        # else
+        dont_match = @arguments[:dont_match]
+        # convert it to a pattern, then into a regex string
+        dont_match = Pattern.new(dont_match).groupless.evaluate(groups)
+        
+        @@dont_match_incrementor += 1
+        group_name = "__exception_group_#{@@dont_match_incrementor}__"
+        
+        # this is complicated regex (atomic groups, conditionals, named capture groups, positive lookbehinds)
+        # look at the "How does it work?" part of this post: https://stackoverflow.com/questions/6953324/regex-exception/62437637#62437637
+        # FIXME: not sure why I have to wrap this in a group (something is removing the top level ()'s elsewhere) --Jeff
+        regex_pattern = /((?>(?<#{group_name}>#{dont_match})|(?:#{match}))(?(<#{group_name}>)0(?<=1)|))/
+        regex_string = regex_pattern.inspect[1..-2]
+        return regex_string
     end
 
     # controls weather @arguments[:at_most] et. al. set @at_most et. al.

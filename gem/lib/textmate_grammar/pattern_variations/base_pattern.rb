@@ -161,6 +161,7 @@ class PatternBase
     def map!(map_includes = false, &block)
         yield self
         @arguments[:match].map!(map_includes, &block) if @arguments[:match].is_a? PatternBase
+        @arguments[:dont_match].map!(map_includes, &block) if @arguments[:dont_match].is_a? PatternBase
         @next_pattern.map!(map_includes, &block) if @next_pattern.is_a? PatternBase
         map_includes!(&block) if map_includes
         self
