@@ -464,7 +464,7 @@ class PatternBase
         pat = self
         while pat.is_a? PatternBase
             evaluate_array << pat.evaluate_operator
-            evaluate_array << pat.do_evaluate_self(groups)
+            evaluate_array << pat.generate_self_regex_string(groups)
             pat = pat.next_pattern
         end
 
@@ -677,7 +677,7 @@ class PatternBase
     #
     # @return [String] the result of evaluating @arguments[:match]
     #
-    def do_evaluate_self(groups)
+    def generate_self_regex_string(groups)
         match = @arguments[:match]
         match = match.evaluate(groups) if match.is_a? PatternBase
         add_capture_group_if_needed(match)

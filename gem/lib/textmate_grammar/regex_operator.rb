@@ -34,7 +34,7 @@ end
 
 #
 # RegexOperator is used to provide complicated combining behavior that is not possible
-# to implement in PatternBase#do_evaluate_self
+# to implement in PatternBase#generate_self_regex_string
 #
 # Each PatternBase when evaluated produces a RegexOperator and a regexstring
 # RegexOperator::evaluate takes that array and produces a single regexstring
@@ -80,7 +80,7 @@ class RegexOperator
 
                 split = [elems[0], elems[1][1..-1]]
             end
-            arr = op.do_evaluate_self(split[0], split[1])
+            arr = op.generate_self_regex_string(split[0], split[1])
         end
         if arr.length != 1
             raise "\nevaluate did not result in a length of 1"
@@ -102,7 +102,7 @@ class RegexOperator
     # @note arr_left and arr_right contain the entire parse array use {#fold_left} and
     #  {#fold_right} to collect only the portions that this operator is responsible for
     #
-    def do_evaluate_self(arr_left, arr_right) # rubocop:disable Lint/UnusedMethodArgument
+    def generate_self_regex_string(arr_left, arr_right) # rubocop:disable Lint/UnusedMethodArgument
         raise NotImplementedError
     end
 

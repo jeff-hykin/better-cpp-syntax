@@ -154,8 +154,8 @@ class RepeatablePattern < PatternBase
         match
     end
 
-    # (see PatternBase#do_evaluate_self)
-    def do_evaluate_self(groups)
+    # (see PatternBase#generate_self_regex_string)
+    def generate_self_regex_string(groups)
         add_capture_group_if_needed(add_quantifier_options_to(@arguments[:match], groups))
     end
 

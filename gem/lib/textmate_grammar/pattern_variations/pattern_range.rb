@@ -124,7 +124,7 @@ class PatternRange < PatternBase
     #
     # @return [void]
     #
-    def do_evaluate_self(*_ignored)
+    def generate_self_regex_string(*_ignored)
         raise "PatternRange cannot be used as a part of a Pattern"
     end
 

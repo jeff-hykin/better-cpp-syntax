@@ -6,8 +6,8 @@
 # depending on the type
 #
 class LookAroundPattern < PatternBase
-    # (see PatternBase#do_evaluate_self)
-    def do_evaluate_self(groups)
+    # (see PatternBase#generate_self_regex_string)
+    def generate_self_regex_string(groups)
         self_regex = @arguments[:match]
         self_regex = @arguments[:match].evaluate(groups) if @arguments[:match].is_a? PatternBase
 
