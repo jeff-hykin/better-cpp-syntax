@@ -3240,10 +3240,7 @@
                   "name": "punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp"
                 }
               },
-              "contentName": "meta.function.definition.parameters.special.member.destructor",
-              "patterns": [
-
-              ]
+              "contentName": "meta.function.definition.parameters.special.member.destructor"
             },
             {
               "include": "$self"
@@ -3532,10 +3529,7 @@
                   "name": "punctuation.section.parameters.end.bracket.round.special.member.destructor.cpp"
                 }
               },
-              "contentName": "meta.function.definition.parameters.special.member.destructor",
-              "patterns": [
-
-              ]
+              "contentName": "meta.function.definition.parameters.special.member.destructor"
             },
             {
               "include": "$self"
@@ -15094,9 +15088,6 @@
         }
       ],
       "applyEndPatternLast": 1
-    },
-    "testing": {
-      "match": "hi"
     },
     "the_this_keyword": {
       "match": "((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)this(?!\\w))",

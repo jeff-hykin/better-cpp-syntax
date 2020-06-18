@@ -13,8 +13,7 @@ class FlatIncludes < GrammarLinter
         return true unless pattern.is_a? PatternBase
         return true if pattern.arguments[:includes].nil?
 
-        if pattern.arguments[:includes].is_a?(Array) &&
-           pattern.arguments[:includes].none? { |v| v.is_a? Array }
+        if pattern.arguments[:includes].is_a?(Array) && pattern.arguments[:includes].none? { |v| v.is_a? Array }
             flat = true
             pattern.arguments[:includes].map do |s|
                 flat = false unless pre_lint(s, options)

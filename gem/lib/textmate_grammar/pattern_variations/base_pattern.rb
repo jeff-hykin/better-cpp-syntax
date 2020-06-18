@@ -29,8 +29,14 @@ class PatternBase
             :includes,
         ]
         puts @arguments[:match].class unless @arguments.is_a? Hash
-
-        !(@arguments.keys & capturing_attributes).empty?
+        used_keys = @arguments.keys.clone
+        
+        # empty includes don't count
+        if @arguments[:includes].nil? || @arguments[:includes].empty?
+            used_keys.delete(:includes)
+        end
+        
+        return !(used_keys & capturing_attributes).empty?
     end
 
     #
@@ -303,48 +309,57 @@ class PatternBase
     #   @note this should only be called by __deep_clone__, however subclasses must be
     #       able to accept this form
     #
-    def initialize(*arguments)
-        if arguments.length > 1 && arguments[1] == :deep_clone
-            @arguments = arguments[0]
+    def initialize(*constructor_args)
+        # 
+        # Handle input
+        # 
+        if constructor_args[1] == :deep_clone
+            @arguments = constructor_args[0]
             @arguments[:match] = @arguments[:match]
-            @original_arguments = arguments[2]
+            @original_arguments = constructor_args[2]
             @next_pattern = nil
             return
-        end
-
-        if arguments.length > 1
+        elsif constructor_args.length > 1
             # PatternBase was likely constructed like `PatternBase.new(/foo/, option: bar)`
             raise <<~HEREDOC
                 PatternBase#new() expects a single Regexp, String, or Hash
                 PatternBase#new() was provided with multiple arguments
-                arguments: #{arguments}
+                arguments: #{constructor_args}
             HEREDOC
         end
-        @next_pattern = nil
-        arg1 = arguments[0]
-        arg1 = {match: arg1} unless arg1.is_a? Hash
-        @arguments = arg1
-        @original_arguments = arg1.clone
-        if arg1[:match].is_a? String
-            arg1[:match] = Regexp.escape(arg1[:match]).gsub("/", "\\/")
-            @arguments[:match] = arg1[:match]
-        elsif arg1[:match].is_a? Regexp
-            raise_if_regex_has_capture_group arg1[:match]
-            @arguments[:match] = arg1[:match].inspect[1..-2] # convert to string and remove the slashes
-        elsif arg1[:match].is_a? PatternBase
-            @arguments[:match] = arg1[:match]
+        @arguments = {}
+        if constructor_args[0].is_a?(Hash)
+            @arguments = constructor_args[0]
+        else
+            @arguments[:match] = constructor_args[0] 
+        end
+        @original_arguments = @arguments.clone
+        
+        #
+        # process the :match 
+        #
+        case @arguments[:match]
+        when String
+            @arguments[:match] = Regexp.escape(@arguments[:match]).gsub("/", "\\/")
+        when Regexp
+            raise_if_regex_has_capture_group(@arguments[:match])
+            # convert to string and remove the slashes
+            @arguments[:match] = @arguments[:match].inspect[1..-2]
+        when PatternBase
+            # do nothing 
         else
             raise <<~HEREDOC
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
                 Provided arguments: #{@original_arguments}
             HEREDOC
         end
-        # ensure that includes is either nil or a flat array
-        if arg1[:includes]
-            arg1[:includes] = [arg1[:includes]] unless arg1[:includes].is_a? Array
-            arg1[:includes] = arg1[:includes].flatten
-        end
         
+        #
+        # process the :includes
+        #
+        # ensure includes are a flat array (length>0) or nil
+        @arguments[:includes] = [@arguments[:includes]].flatten.compact
+        @arguments[:includes] = nil if @arguments[:includes].empty?
     end
 
     # attempts to provide a memorable name for a pattern
