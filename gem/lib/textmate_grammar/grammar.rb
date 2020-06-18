@@ -480,7 +480,7 @@ class Grammar
         if [:json, :vscode].include? options[:syntax_format]
             file_name = File.join(
                 options[:syntax_dir],
-                "#{options[:syntax_name]}.json",
+                "#{options[:syntax_name]}",
             )
             out_file = File.open(file_name, "w")
             out_file.write(JSON.pretty_generate(output))
