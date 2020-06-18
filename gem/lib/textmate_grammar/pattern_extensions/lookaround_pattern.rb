@@ -25,13 +25,13 @@ class LookAroundPattern < PatternBase
         self_regex
     end
 
-    # (see PatternBase#do_get_to_s_name)
-    def do_get_to_s_name(top_level)
+    # (see PatternBase#begining_of_to_s)
+    def begining_of_to_s(top_level)
         top_level ? "lookAround(" : ".lookAround("
     end
 
-    # (see PatternBase#do_add_attributes)
-    def do_add_attributes(indent)
+    # (see PatternBase#middle_of_to_s)
+    def middle_of_to_s(indent)
         ",\n#{indent}  type: :#{@arguments[:type]}"
     end
 

@@ -509,7 +509,7 @@ class PatternBase
             when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
             end
         indent = "  " * depth
-        output = indent + do_get_to_s_name(top_level)
+        output = indent + begining_of_to_s(top_level)
         # basic pattern information
         output += "\n#{indent}  match: " + regex_as_string.lstrip
         output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
@@ -524,7 +524,7 @@ class PatternBase
         # add any linter/transform configurations
         plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
         # subclass, ending and recursive
-        output += do_add_attributes(indent)
+        output += middle_of_to_s(indent)
         output += ",\n#{indent})"
         output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
         output
@@ -702,7 +702,7 @@ class PatternBase
     #
     # @return [String] the attributes to add
     #
-    def do_add_attributes(indent) # rubocop:disable Lint/UnusedMethodArgument
+    def middle_of_to_s(indent) # rubocop:disable Lint/UnusedMethodArgument
         ""
     end
 
@@ -715,7 +715,7 @@ class PatternBase
     #
     # @return [String] the name of the method
     #
-    def do_get_to_s_name(top_level)
+    def begining_of_to_s(top_level)
         top_level ? "Pattern.new(" : ".then("
     end
 

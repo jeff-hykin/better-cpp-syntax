@@ -69,9 +69,9 @@ class RepeatablePattern < PatternBase
                     :at_least
                     :at_most
                     or :how_many_times?
-                These are not allowed in this kind of #{do_get_to_s_name}) pattern
+                These are not allowed in this kind of #{begining_of_to_s}) pattern
                 If you did this intentionally please wrap it inside of a Pattern.new()
-                ex: #{do_get_to_s_name} Pattern.new( *your_arguments* ) )
+                ex: #{begining_of_to_s} Pattern.new( *your_arguments* ) )
             HEREDOC
         end
 
@@ -168,9 +168,9 @@ class RepeatablePattern < PatternBase
     end
 
     #
-    # (see PatternBase#do_add_attributes)
+    # (see PatternBase#middle_of_to_s)
     #
-    def do_add_attributes(indent)
+    def middle_of_to_s(indent)
         # rubocop:disable Metrics/LineLength
         output = ""
         # special #then arguments

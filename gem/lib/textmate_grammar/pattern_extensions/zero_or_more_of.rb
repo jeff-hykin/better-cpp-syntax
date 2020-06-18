@@ -25,8 +25,8 @@ class ZeroOrMoreOfPattern < RepeatablePattern
         false
     end
 
-    # (see PatternBase#do_get_to_s_name)
-    def do_get_to_s_name(top_level)
+    # (see PatternBase#begining_of_to_s)
+    def begining_of_to_s(top_level)
         top_level ? "zeroOrMoreOf(" : ".zeroOrMoreOf("
     end
 end
