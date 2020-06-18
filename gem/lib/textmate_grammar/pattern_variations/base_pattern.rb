@@ -669,7 +669,7 @@ class PatternBase
     # other methods added by subclasses
 
     #
-    # evaluates @arguments[:match]
+    # evaluates @arguments[:match], self meaning .next_pattern's are not included
     # @note optionally override when inheriting
     # @note by default this optionally adds a capture group
     #
