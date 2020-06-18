@@ -83,8 +83,7 @@ class RegexOperator
             arr = op.do_evaluate_self(split[0], split[1])
         end
         if arr.length != 1
-            puts "evaluate did not result in a length of 1"
-            raise "see above error"
+            raise "\nevaluate did not result in a length of 1"
         end
 
         arr.first
@@ -146,8 +145,7 @@ class RegexOperator
         end).reverse
 
         if fold.empty? || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
-            puts "fold_left generated an invalid fold expression"
-            raise "see above error"
+            raise "\nfold_left generated an invalid fold expression"
         end
 
         # [0..-(fold.length+1)] peels the elements that are a part of fold off the end
@@ -173,8 +171,7 @@ class RegexOperator
         end
 
         if fold.empty? || !fold[0].is_a?(String) || !fold[-1].is_a?(String)
-            puts "fold_right generated an invalid fold expression"
-            raise "see above error"
+            raise "\nfold_right generated an invalid fold expression"
         end
 
         [RegexOperator.evaluate(fold), arr[(fold.length)..-1]]

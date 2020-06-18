@@ -116,10 +116,12 @@ class Grammar
     def initialize(keys)
         required_keys = [:name, :scope_name]
         unless required_keys & keys.keys == required_keys
-            puts "Missing one or more of the required grammar keys"
-            puts "Missing: #{required_keys - (required_keys & keys.keys)}"
-            puts "The required grammar keys are: #{required_keys}"
-            raise "See above error"
+            raise <<~HEREDOC
+            
+                Missing one or more of the required grammar keys
+                Missing: #{required_keys - (required_keys & keys.keys)}
+                The required grammar keys are: #{required_keys}
+            HEREDOC
         end
 
         @name = keys[:name]
