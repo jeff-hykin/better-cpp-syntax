@@ -176,8 +176,11 @@ class RepeatablePattern < PatternBase
         # this is complicated regex (atomic groups, conditionals, named capture groups, positive lookbehinds)
         # look at the "How does it work?" part of this post: https://stackoverflow.com/questions/6953324/regex-exception/62437637#62437637
         # FIXME: not sure why I have to wrap this in a group (something is removing the top level ()'s elsewhere) --Jeff
-        regex_pattern = /((?>(?<#{group_name}>#{dont_match})|(?:#{match}))(?(<#{group_name}>)0(?<=1)|))/
-        regex_string = regex_pattern.inspect[1..-2]
+        regex_string = nil
+        with_no_warnings do
+            regex_pattern = /((?>(?<#{group_name}>#{dont_match})|(?:#{match}))(?(<#{group_name}>)0(?<=1)|))/
+            regex_string = regex_pattern.inspect[1..-2]
+        end
         return regex_string
     end
 
