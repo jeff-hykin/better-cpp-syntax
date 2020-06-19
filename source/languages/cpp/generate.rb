@@ -422,7 +422,7 @@ grammar = Grammar.new(
 # Constants
 #
     grammar[:language_constants] = Pattern.new(
-        match: grammar.patternsThatAre(%(:literal)),
+        match: grammar.patternsThat(%(:literal)),
         tag_as: "constant.language.$match"
     )
 
@@ -433,15 +433,15 @@ grammar = Grammar.new(
         basic_space.then(
             Pattern.new(
                 # primitive builtins
-                match: grammar.patternsThatAre(%(:primitive)),
+                match: grammar.patternsThat(%(:arePrimitive)),
                 tag_as: "storage.type.primitive storage.type.built-in.primitive",
             ).or(
                 # non-primitive builtins
-                match: grammar.patternsThatAre(%( :aType && !:primitive)),
+                match: grammar.patternsThat(%( :areAType && !:arePrimitive)),
                 tag_as: "storage.type storage.type.built-in",
             ).or(
                 # pthread
-                match: grammar.patternsThatAre(%( :aPthreadType )),
+                match: grammar.patternsThat(%( :arePthreadType )),
                 tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
             ).or(
                 # posix support type
@@ -463,14 +463,14 @@ grammar = Grammar.new(
 #
     grammar[:using_name] = Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
     grammar[:functional_specifiers_pre_parameters] = Pattern.new(
-        match: grammar.patternsThatAre(%(:aFunctionSpecifier)),
+        match: grammar.patternsThat(%(:areFunctionSpecifiers)),
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
         std_space.then(
             tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
             match: Pattern.new(
-                variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(
+                grammar.keywordsThat(%(:canAppearAfterParametersBeforeBody)).lookAheadFor(
                     Pattern.new(/\s*/).then(
                         Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
                     )
@@ -1423,7 +1423,7 @@ grammar = Grammar.new(
         # find the begining of the line
         Pattern.new(/^/).then(std_space).zeroOrMoreOf(
             should_fully_match: ["constexpr", "explicit", "explicit constexpr"],
-            match: grammar.patternsThatAre( %(:aFunctionSpecifier) ).then(std_space),
+            match: grammar.patternsThat( %(:areFunctionSpecifiers) ).then(std_space),
             includes: [
                 :functional_specifiers_pre_parameters
             ]
@@ -1500,7 +1500,7 @@ grammar = Grammar.new(
         Pattern.new(
             # find the begining of the line
             Pattern.new(/^/).then(std_space).then(optional_calling_convention).zeroOrMoreOf(
-                match:  grammar.patternsThatAre( %(:aFunctionSpecifier) ).then(std_space),
+                match:  grammar.patternsThat( %(:areFunctionSpecifiers) ).then(std_space),
                 includes: [
                     :functional_specifiers_pre_parameters
                 ]
@@ -1550,11 +1550,11 @@ grammar = Grammar.new(
     operators = []
     grammar[:wordlike_operators] = [
         Pattern.new(
-            match: grammar.keywordsThatAre( %(:anOperator && !:aTypeCastingOperator && !:controlFlow && !:functionLike ) ),
+            match: grammar.keywordsThat( %(:areAnOperator && !:areATypeCastingOperator && !:controlFlow && !:areFunctionLike ) ),
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
-    for name in grammar.listKeywordsThatAre(%(:functionLike && !:aSpecifier))
+    for name in grammar.listkeywordsThat(%(:areFunctionLike && !:areASpecifier))
         operators.push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
@@ -1697,7 +1697,7 @@ grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         Pattern.new(
-                            match: grammar.patternsThatAre(%(:aStorageSpecifier)),
+                            match: grammar.patternsThat(%(:areAStorageSpecifier)),
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
                     ),
@@ -1709,7 +1709,7 @@ grammar = Grammar.new(
                         inline_builtin_storage_type
                     ).or(
                         match: variableBounds[identifier],
-                        dont_match: grammar.patternsThatAre(%(:aStorageSpecifier)),
+                        dont_match: grammar.patternsThat(%(:areAStorageSpecifier)),
                         tag_as: "entity.name.type.parameter",
                     )
                 ).then(std_space).lookAheadFor(/,|\)|=/),
@@ -1719,7 +1719,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: grammar.patternsThatAre(%(:aTypeCreator)),
+                match: grammar.patternsThat(%(:areATypeCreator)),
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment

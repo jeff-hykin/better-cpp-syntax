@@ -30,7 +30,7 @@ class Grammar
     #
     # @return [PatternCollector]
     #
-    def patternsThatAre(selector)
+    def patternsThat(selector)
         # create the normal pattern that will act as a placeholder until the very end
         collector_pattern = PatternCollector.new({
             match: /(?#pattern_collector)/,
@@ -65,7 +65,7 @@ class Grammar
     #
     # @return [PatternCollector]
     #
-    def keywordsThatAre(selector)
+    def keywordsThat(selector)
         # create the normal pattern that will act as a placeholder until the very end
         collector_pattern = PatternCollector.new({
             match: /(?#pattern_collector)/,
@@ -102,7 +102,7 @@ class Grammar
     #
     # @return [Array<String>]
     #
-    def listKeywordsThatAre(selector)
+    def listkeywordsThat(selector)
         output = []
         pattern_filter = parseSelectorSyntax(selector)
         for each_key, each_value in @repository
