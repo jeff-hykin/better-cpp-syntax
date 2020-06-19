@@ -53,7 +53,8 @@ module.exports = {
                 )[1];
                 return new OnigScanner(
                     patterns,
-                    recorder.getRecorder(scopeName)
+                    recorder.getRecorder(scopeName),
+                    oniguruma.createOnigScanner
                 );
             },
             /**

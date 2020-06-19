@@ -2,19 +2,17 @@
 // determine which pattern actually matched.
 // it also double checks with an actual onigScanner
 const vsctm = require("vscode-textmate");
-const oniguruma = require("oniguruma");
 const { performance } = require("perf_hooks");
+const assert = require("assert").strict;
 const _ = require("lodash");
 
 module.exports = class OnigScanner {
     /**
      * @param {string[]} patterns
      */
-    constructor(patterns, recorder) {
-        this.onigScanner = new oniguruma.OnigScanner(patterns);
-        this.regexps = patterns.map(
-            pattern => new oniguruma.OnigRegExp(pattern)
-        );
+    constructor(patterns, recorder, createScanner) {
+        this.scanner = createScanner(patterns);
+        this.regexps = patterns.map((pattern) => createScanner([pattern]));
         this.patterns = patterns;
         this.recorder = recorder;
     }
@@ -32,7 +30,7 @@ module.exports = class OnigScanner {
         // construct a list of result objects
         for (const [index, value] of this.regexps.entries()) {
             const startTime = performance.now();
-            const match = value.searchSync(string.toString(), startPosition);
+            const match = value.findNextMatchSync(string, startPosition);
             const endTime = performance.now();
             try {
                 results.push({
@@ -41,12 +39,15 @@ module.exports = class OnigScanner {
                     line: this.patterns[index].match(
                         /^\(\?#(source\..+:\d+)\)/
                     )[1],
-                    chosen: false // chosen is calculated after the fact
+                    chosen: false, // chosen is calculated after the fact
+                    start:
+                        (match && match.captureIndices[0].start) ||
+                        Number.MAX_SAFE_INTEGER,
                 });
             } catch (e) {
                 console.log(this.patterns[index]);
             }
-            if (match && match[0].start == startPosition) {
+            if (match && match.captureIndices[0].start == startPosition) {
                 break;
             }
         }
@@ -62,7 +63,7 @@ module.exports = class OnigScanner {
             if (result.match) {
                 if (
                     chosenResult.match === null ||
-                    result.match[0].start < chosenResult.match[0].start
+                    result.start < chosenResult.start
                 ) {
                     chosenResult = result;
                 }
@@ -84,10 +85,31 @@ module.exports = class OnigScanner {
         if (chosenResult.match === null) {
             return null;
         }
-        return {
+        let calculated = {
             index: _.findIndex(results, "chosen"),
-            captureIndices: chosenResult.match,
-            scanner: this
+            captureIndices: chosenResult.match.captureIndices,
+            scanner: this,
         };
+
+        let checkForValidity = false;
+        // double check with an actual OnigScanner
+        // is slow
+        if (checkForValidity) {
+            const compareSelf = {
+                index: _.findIndex(results, "chosen"),
+                captureIndices: chosenResult.match.captureIndices,
+            };
+
+            const compareOther = this.scanner.findNextMatchSync(
+                string,
+                startPosition
+            );
+
+            delete compareOther["scanner"];
+
+            assert.deepStrictEqual(compareSelf, compareOther);
+        }
+
+        return calculated;
     }
 };

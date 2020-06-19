@@ -5,12 +5,11 @@ const _ = require("lodash");
 const { performance } = require("perf_hooks");
 
 const getTokens = require("../get_tokens");
-const { getOniguruma } = require("../report/oniguruma_decorator");
-const { getRegistry } = require("../registry");
+const { report: registry } = require("../registry");
 const recorder = require("../report/recorder");
 const {
     performanceForEachFixture,
-    currentActiveFixture
+    currentActiveFixture,
 } = require("../symbols");
 
 // get all reporters
@@ -21,7 +20,6 @@ for (const each of glob.sync(`${__dirname}/../report/reporters/*.js`)) {
 }
 
 async function runReport(yargs) {
-    const registry = getRegistry(getOniguruma);
     // load the one mentioned in the commandline
     recorder.loadReporter(reporters[yargs.reporter]);
 
@@ -29,21 +27,25 @@ async function runReport(yargs) {
     let files = yargs.fixtures;
     if (files.length === 0) {
         // use text fixtures instead
-        files = require("../get_tests")(yargs).map(test => test.fixturePath);
+        files = require("../get_tests")(yargs).map((test) => test.fixturePath);
     } else {
-        files = _.flatten(files.map(file => glob.sync(file)));
+        files = _.flatten(files.map((file) => glob.sync(file)));
     }
 
     global[performanceForEachFixture] = {};
     for (const eachFile of files) {
         console.log(eachFile);
         global[currentActiveFixture] = eachFile;
-        const fixture = fs
-            .readFileSync(eachFile)
-            .toString()
-            .split("\n");
+        const fixture = fs.readFileSync(eachFile).toString().split("\n");
         let startTime = performance.now();
-        await getTokens(registry, eachFile, fixture, false, true, () => true);
+        await getTokens(
+            registry,
+            eachFile,
+            fixture,
+            false,
+            process.stdout.isTTY,
+            () => true
+        );
         let endTime = performance.now();
         console.log("total time: %dms", endTime - startTime);
     }
@@ -54,21 +56,22 @@ async function runReport(yargs) {
 module.exports = {
     command: "report <reporter> [fixtures..]",
     desc: "Runs <reporter> and reports the collected information.",
-    builder: yargs => {
+    builder: (yargs) => {
         yargs
             .positional("reporter", {
                 choices: Object.keys(reporters),
-                describe: "the reporter to run"
+                describe: "the reporter to run",
             })
             .positional("fixtures", {
                 default: [],
-                describe: "the fixtures to use"
+                describe: "the fixtures to use",
             })
             .option("perf-limit", {
                 default: 20,
                 type: "number",
-                describe: "limit the number of perf report lines (0 to disable)"
+                describe:
+                    "limit the number of perf report lines (0 to disable)",
             });
     },
-    handler: yargs => runReport(yargs)
+    handler: (yargs) => runReport(yargs),
 };
