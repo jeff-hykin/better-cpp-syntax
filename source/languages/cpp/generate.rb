@@ -414,9 +414,8 @@ grammar = Grammar.new(
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    variable_name_without_bounds = identifier
     # word bounds are inefficient, but they are accurate
-    variable_name = variableBounds[variable_name_without_bounds]
+    variable_name = variableBounds[identifier]
 
 #
 # Constants
@@ -825,10 +824,10 @@ grammar = Grammar.new(
         )
     grammar[:template_argument_defaulted] = Pattern.new(
         match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                match: zeroOrMoreOf(identifier.then(@spaces)),
                 tag_as: "storage.type.template",
             ).then(
-                match: variable_name_without_bounds,
+                match: identifier,
                 tag_as: "entity.name.type.template"
             ).maybe(@spaces).then(
                 match: /[=]/,
@@ -839,32 +838,32 @@ grammar = Grammar.new(
         # case 1: only one word
         std_space.then(
             Pattern.new(
-                match: variable_name_without_bounds,
+                match: identifier,
                 tag_as: "storage.type.template.argument.$match",
             # case 2: normal situation (ex: "typename T")
             ).or(
                 Pattern.new(
-                    match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
+                    match: oneOrMoreOf(identifier.then(@spaces)),
                     includes: [
                         Pattern.new(
-                            match: variable_name_without_bounds,
+                            match: identifier,
                             tag_as: "storage.type.template.argument.$match",
                         )
                     ],
                 ).then(
-                    match: variable_name_without_bounds,
+                    match: identifier,
                     tag_as: "entity.name.type.template",
                 )
             # case 3: ellipses (ex: "typename... Args")
             ).or(
                 Pattern.new(
-                    match: variable_name_without_bounds,
+                    match: identifier,
                     tag_as: "storage.type.template",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
                     tag_as: "punctuation.vararg-ellipses.template.definition",
                 ).maybe(@spaces).then(
-                    match: variable_name_without_bounds,
+                    match: identifier,
                     tag_as: "entity.name.type.template"
                 )
             ).maybe(@spaces).then(
@@ -1096,7 +1095,7 @@ grammar = Grammar.new(
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
-    look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
+    look_ahead_for_function_name = lookAheadFor(identifier.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
 
     grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
@@ -1123,7 +1122,7 @@ grammar = Grammar.new(
                 ).then(
                     grammar[:scope_resolution_function_definition]
                 ).then(
-                    match: variable_name_without_bounds,
+                    match: identifier,
                     tag_as: "entity.name.function.definition"
                 ).then(
                     avoid_invalid_function_names
@@ -1270,7 +1269,7 @@ grammar = Grammar.new(
         start_pattern: Pattern.new(
                 grammar[:scope_resolution_function_call]
             ).then(
-                match: variable_name_without_bounds,
+                match: identifier,
                 tag_as: "entity.name.function.call"
             ).then(
                 avoid_invalid_function_names
@@ -1889,13 +1888,13 @@ grammar = Grammar.new(
             match: arrow_operator,
             tag_as: "punctuation.separator.pointer-access"
         )
-    subsequent_object_with_operator = variable_name_without_bounds.maybe(@spaces).then(member_operator.groupless).maybe(@spaces)
+    subsequent_object_with_operator = identifier.maybe(@spaces).then(member_operator.groupless).maybe(@spaces)
     # TODO: the member_access and method_access can probably be simplified considerably
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
     generatePartialMemberFinder = ->(tag_name) do
         the_this_keyword.or(
             Pattern.new(
-                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
+                match: identifier.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
                 tag_as: tag_name,
             )
         ).then(
@@ -1924,7 +1923,7 @@ grammar = Grammar.new(
     lookahead_friedly_types_pattern = /#{type_represenetations.map { |each| each+"[^#{@standard_character}]" } .join('|')}/
     grammar[:member_access] = member_access = Pattern.new(
         match: member_start.then(
-                match: @word_boundary.lookAheadToAvoid(lookahead_friedly_types_pattern).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
+                match: @word_boundary.lookAheadToAvoid(lookahead_friedly_types_pattern).then(identifier).then(@word_boundary).lookAheadToAvoid(/\(/),
                 tag_as: "variable.other.property"
             )
         )
@@ -1932,7 +1931,7 @@ grammar = Grammar.new(
     grammar[:method_access] = method_access = PatternRange.new(
         start_pattern: member_start.then(
                 # the ~ is for destructors
-                match: maybe(/~/).then(variable_name_without_bounds),
+                match: maybe(/~/).then(identifier),
                 tag_as: "entity.name.function.member"
             ).maybe(@spaces).then(
                 match: /\(/,
