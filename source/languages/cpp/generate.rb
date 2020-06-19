@@ -463,7 +463,7 @@ grammar = Grammar.new(
 #
     grammar[:using_name] = Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
     grammar[:functional_specifiers_pre_parameters] = Pattern.new(
-        match: grammar.patternsThat(%(:areFunctionSpecifiers)),
+        match: grammar.patternsThat(%(:areAFunctionSpecifier)),
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
@@ -480,7 +480,7 @@ grammar = Grammar.new(
     )
     grammar[:storage_specifiers] = storage_specifier = Pattern.new(
         std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
+            match: grammar.patternsThat(%(:areAStorageSpecifier)),
             tag_as: "storage.modifier.specifier.$match"
         )
     )
@@ -1112,7 +1112,7 @@ grammar = Grammar.new(
             ).maybe(inline_attribute).zeroOrMoreOf(
                 match: storage_modifiers = Pattern.new(
                     Pattern.new(
-                        match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],
+                        match: grammar.keywordsThat(%(:areAFunctionSpecifier)).or(grammar.keywordsThat(%(:areAStorageSpecifier))),
                         tag_as: "storage.modifier.$match"
                     ).then(std_space)
                 ),
@@ -1423,7 +1423,7 @@ grammar = Grammar.new(
         # find the begining of the line
         Pattern.new(/^/).then(std_space).zeroOrMoreOf(
             should_fully_match: ["constexpr", "explicit", "explicit constexpr"],
-            match: grammar.patternsThat( %(:areFunctionSpecifiers) ).then(std_space),
+            match: grammar.patternsThat( %(:areAFunctionSpecifier) ).then(std_space),
             includes: [
                 :functional_specifiers_pre_parameters
             ]
@@ -1500,7 +1500,7 @@ grammar = Grammar.new(
         Pattern.new(
             # find the begining of the line
             Pattern.new(/^/).then(std_space).then(optional_calling_convention).zeroOrMoreOf(
-                match:  grammar.patternsThat( %(:areFunctionSpecifiers) ).then(std_space),
+                match:  grammar.patternsThat( %(:areAFunctionSpecifier) ).then(std_space),
                 includes: [
                     :functional_specifiers_pre_parameters
                 ]
@@ -1550,7 +1550,7 @@ grammar = Grammar.new(
     operators = []
     grammar[:wordlike_operators] = [
         Pattern.new(
-            match: grammar.keywordsThat( %(:areAnOperator && !:areATypeCastingOperator && !:controlFlow && !:areFunctionLike ) ),
+            match: grammar.keywordsThat(%(:areAnOperator && !:areATypeCastingOperator && !:controlFlow && !:areFunctionLike )),
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
@@ -1794,7 +1794,7 @@ grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         Pattern.new(
-                            match: @cpp_tokens.that(:isStorageSpecifier),
+                            match: grammar.patternsThat(%(:areAStorageSpecifier)),
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
                     ),
@@ -1818,7 +1818,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: grammar.keywordsThat(%(:areATypeCreator)),
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment

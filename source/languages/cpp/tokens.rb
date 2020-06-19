@@ -193,13 +193,13 @@ require_relative '../../textmate_tools.rb'
     grammar[ :_restrict         ] = Pattern.new( keyword: "restrict"                    , adjectives: [ :areASpecifier, :areAStorageSpecifier ] )
     grammar[ :_extern           ] = Pattern.new( keyword: "extern"                      , adjectives: [ :areASpecifier, :areAStorageSpecifier, :classSpecifier ] )
     # function specifiers/qualifiers
-    grammar[ :_inline           ] = Pattern.new( keyword: "inline"                      , adjectives: [ :areASpecifier , :areFunctionSpecifiers] )
+    grammar[ :_inline           ] = Pattern.new( keyword: "inline"                      , adjectives: [ :areASpecifier , :areAFunctionSpecifier] )
     # if statement specifiers see https://en.cppreference.com/w/cpp/language/if
-    grammar[ :_constexpr        ] = Pattern.new( keyword: "constexpr"                   , adjectives: [ :areASpecifier , :areFunctionSpecifiers, :ifStatementSpecifier, :lambdaSpecifier] )
-    grammar[ :_mutable          ] = Pattern.new( keyword: "mutable"                     , adjectives: [ :areASpecifier , :areFunctionSpecifiers,                        :lambdaSpecifier] )
-    grammar[ :_friend           ] = Pattern.new( keyword: "friend"                      , adjectives: [ :areASpecifier , :areFunctionSpecifiers] )
-    grammar[ :_explicit         ] = Pattern.new( keyword: "explicit"                    , adjectives: [ :areASpecifier , :areFunctionSpecifiers] )
-    grammar[ :_virtual          ] = Pattern.new( keyword: "virtual"                     , adjectives: [ :areASpecifier , :areFunctionSpecifiers, :inheritanceSpecifier ] )
+    grammar[ :_constexpr        ] = Pattern.new( keyword: "constexpr"                   , adjectives: [ :areASpecifier , :areAFunctionSpecifier, :ifStatementSpecifier, :lambdaSpecifier] )
+    grammar[ :_mutable          ] = Pattern.new( keyword: "mutable"                     , adjectives: [ :areASpecifier , :areAFunctionSpecifier,                        :lambdaSpecifier] )
+    grammar[ :_friend           ] = Pattern.new( keyword: "friend"                      , adjectives: [ :areASpecifier , :areAFunctionSpecifier] )
+    grammar[ :_explicit         ] = Pattern.new( keyword: "explicit"                    , adjectives: [ :areASpecifier , :areAFunctionSpecifier] )
+    grammar[ :_virtual          ] = Pattern.new( keyword: "virtual"                     , adjectives: [ :areASpecifier , :areAFunctionSpecifier, :inheritanceSpecifier ] )
     grammar[ :_final            ] = Pattern.new( keyword: "final"                       , adjectives: [ :functionQualifier, :canAppearAfterParametersBeforeBody , :validFunctionName, :classInheritenceSpecifier] )
     grammar[ :_override         ] = Pattern.new( keyword: "override"                    , adjectives: [ :functionQualifier, :canAppearAfterParametersBeforeBody , :validFunctionName, :classInheritenceSpecifier] )
     # lambda specifiers
