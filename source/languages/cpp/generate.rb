@@ -433,15 +433,15 @@ grammar = Grammar.new(
         basic_space.then(
             Pattern.new(
                 # primitive builtins
-                match: @cpp_tokens.that(:isPrimitive),
+                match: grammar.patternsThatAre(%(:primitive)),
                 tag_as: "storage.type.primitive storage.type.built-in.primitive",
             ).or(
                 # non-primitive builtins
-                match: @cpp_tokens.that(not(:isPrimitive), :isType),
+                match: grammar.patternsThatAre(%( :aType && !:primitive)),
                 tag_as: "storage.type storage.type.built-in",
             ).or(
                 # pthread
-                match: @cpp_support_tokens.that(:isPthreadType),
+                match: grammar.patternsThatAre(%( :aPthreadType )),
                 tag_as: "support.type.posix-reserved.pthread support.type.built-in.posix-reserved.pthread",
             ).or(
                 # posix support type
@@ -463,7 +463,7 @@ grammar = Grammar.new(
 #
     grammar[:using_name] = Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).lookAheadToAvoid(/namespace\b/)
     grammar[:functional_specifiers_pre_parameters] = Pattern.new(
-        match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
+        match: grammar.patternsThatAre(%(:aFunctionSpecifier)),
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
@@ -1423,7 +1423,7 @@ grammar = Grammar.new(
         # find the begining of the line
         Pattern.new(/^/).then(std_space).zeroOrMoreOf(
             should_fully_match: ["constexpr", "explicit", "explicit constexpr"],
-            match:  @cpp_tokens.that(:isFunctionSpecifier).then(std_space),
+            match: grammar.patternsThatAre( %(:aFunctionSpecifier) ).then(std_space),
             includes: [
                 :functional_specifiers_pre_parameters
             ]
@@ -1500,7 +1500,7 @@ grammar = Grammar.new(
         Pattern.new(
             # find the begining of the line
             Pattern.new(/^/).then(std_space).then(optional_calling_convention).zeroOrMoreOf(
-                match:  @cpp_tokens.that(:isFunctionSpecifier).then(std_space),
+                match:  grammar.patternsThatAre( %(:aFunctionSpecifier) ).then(std_space),
                 includes: [
                     :functional_specifiers_pre_parameters
                 ]
@@ -1547,17 +1547,17 @@ grammar = Grammar.new(
 #
 # Operators
 #
-    grammar[:operators] = []
+    operators = []
     grammar[:wordlike_operators] = [
         Pattern.new(
-            match: variableBounds[ @cpp_tokens.that(:isOperator, :isWord, not(:isTypeCastingOperator), not(:isControlFlow), not(:isFunctionLike)) ],
+            match: grammar.keywordsThatAre( %(:anOperator && !:aTypeCastingOperator && !:controlFlow && !:functionLike ) ),
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
     array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
-        grammar[:operators].push(functionCallGenerator[
+        operators.push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
             tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
@@ -1566,7 +1566,7 @@ grammar = Grammar.new(
         ])
     end
     # edgecase for `sizeof...`
-    grammar[:operators].push(functionCallGenerator[
+    operators.push(functionCallGenerator[
         repository_name: "sizeof_variadic_operator",
         match_name: /\bsizeof\.\.\./,
         tag_name_as: "keyword.operator.functionlike keyword.operator.sizeof.variadic",
@@ -1587,7 +1587,7 @@ grammar = Grammar.new(
         includes: grammar[:evaluation_context]
     )
 
-    grammar[:operators] += [
+    operators += [
         Pattern.new(
             match: /--/,
             tag_as: "keyword.operator.decrement"
@@ -1627,6 +1627,7 @@ grammar = Grammar.new(
         ),
         :ternary_operator,
     ]
+    grammar[:operators] = operators
 #
 # function pointer
 #
