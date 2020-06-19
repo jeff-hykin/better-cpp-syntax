@@ -6,7 +6,7 @@ const rewriteGrammar = require("./report/rewrite_grammar");
 const pathFor = require("./paths");
 const decorator = require("./report/oniguruma_decorator");
 
-function getRegistry(getOnigLib) {
+function getRegistry(onigLib) {
     return new vsctm.Registry({
         loadGrammar: (sourceName) => {
             if (sourceName == null) {
@@ -42,7 +42,7 @@ function getRegistry(getOnigLib) {
                 )
             );
         },
-        getOnigLib,
+        onigLib,
     });
 }
 

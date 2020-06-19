@@ -19,7 +19,7 @@ function getVSCodeOniguruma() {
                 "vscode-oniguruma/release/onig.wasm"
             )
         ).buffer;
-        vscodeOnigurumaLib = vscodeOnigurumaModule.loadWasm(wasm).then(() => {
+        vscodeOnigurumaLib = vscodeOnigurumaModule.loadWASM(wasm).then(() => {
             return {
                 createOnigScanner(patterns) {
                     return new vscodeOnigurumaModule.OnigScanner(patterns);
