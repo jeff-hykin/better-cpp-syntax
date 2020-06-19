@@ -334,14 +334,14 @@ class PatternBase
         case @arguments[:keyword]
         when nil
             # no error, do nothing
-        when String
+        when String, Regexp, PatternBase
             # convert it to having word 
-            @arguments[:match] = /(?<!\w)#{@arguments[:keyword]}(?!\w)/
+            @arguments[:match] = PatternBase.new(/(?<!\w)/).then(@arguments[:keyword]).then(/(?!\w)/)
         else
             raise <<~HEREDOC
                 
                 In Pattern.new()
-                If the :keyword is going to be used it must be a String
+                If the :keyword is going to be used it must be a String, Regexp, or Pattern
                 Instead it was: #{@arguments[:keyword].inspect}
             HEREDOC
         end

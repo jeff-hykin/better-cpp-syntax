@@ -205,9 +205,9 @@ require_relative '../../textmate_tools.rb'
     # lambda specifiers
     grammar[ :_consteval          ] = Pattern.new( keyword: "consteval"                     , adjectives: [ :lambdaSpecifier ] )
     # accessor
-    grammar[ :_private             ] = Pattern.new( keyword: "private"                      , adjectives: [ :accessSpecifier, :inheritanceSpecifier ] )
-    grammar[ :_protected           ] = Pattern.new( keyword: "protected"                    , adjectives: [ :accessSpecifier, :inheritanceSpecifier ] )
-    grammar[ :_public              ] = Pattern.new( keyword: "public"                       , adjectives: [ :accessSpecifier, :inheritanceSpecifier ] )
+    grammar[ :_private             ] = Pattern.new( keyword: "private"                      , adjectives: [ :isAnAccessSpecifier, :inheritanceSpecifier ] )
+    grammar[ :_protected           ] = Pattern.new( keyword: "protected"                    , adjectives: [ :isAnAccessSpecifier, :inheritanceSpecifier ] )
+    grammar[ :_public              ] = Pattern.new( keyword: "public"                       , adjectives: [ :isAnAccessSpecifier, :inheritanceSpecifier ] )
     # pre processor directives
     grammar[ :_preprocessor_if                     ] = Pattern.new( keyword: "if"                           , adjectives: [ :preprocessorDirective ] )
     grammar[ :_preprocessor_elif                   ] = Pattern.new( keyword: "elif"                         , adjectives: [ :preprocessorDirective ] )

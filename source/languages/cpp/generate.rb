@@ -414,8 +414,6 @@ grammar = Grammar.new(
     variableBounds = ->(regex_pattern) do
         lookBehindToAvoid(@standard_character).then(regex_pattern).lookAheadToAvoid(@standard_character)
     end
-    # word bounds are inefficient, but they are accurate
-    variable_name = variableBounds[identifier]
 
 #
 # Constants
@@ -567,7 +565,7 @@ grammar = Grammar.new(
 #
     grammar[:goto_statement] = Pattern.new(
         Pattern.new(
-            match: variableBounds[/goto/],
+            keyword: /goto/,
             tag_as: "keyword.control.goto",
         ).then(std_space).then(
             match: identifier,
@@ -577,7 +575,7 @@ grammar = Grammar.new(
     grammar[:label] = Pattern.new(
             std_space.then(
                 tag_as: "entity.name.label",
-                match: variableBounds[identifier],
+                keyword: identifier,
             ).then(@word_boundary).lookBehindToAvoid(/case|default/).then(
                 std_space
             ).then(
@@ -589,7 +587,7 @@ grammar = Grammar.new(
             tag_as: "meta.conditional.case",
             start_pattern: Pattern.new(
                 std_space.then(
-                    match: variableBounds[ /default/ ],
+                    keyword: /default/,
                     tag_as: "keyword.control.default"
                 )
             ),
@@ -604,7 +602,7 @@ grammar = Grammar.new(
             tag_as: "meta.conditional.case",
             start_pattern: Pattern.new(
                 std_space.then(
-                    match: variableBounds[ /case/ ],
+                    keyword: /case/,
                     tag_as: "keyword.control.case"
                 )
             ),
@@ -635,7 +633,7 @@ grammar = Grammar.new(
             tag_as: "meta.block.switch",
             start_pattern: Pattern.new(
                 std_space.then(
-                    match: variableBounds[/switch/],
+                    keyword: /switch/,
                     tag_as: "keyword.control.switch"
                 )
             ),
@@ -677,16 +675,18 @@ grammar = Grammar.new(
                     ],
                 ),
                 Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
-                    match: variable_name,
+                    keyword: identifier,
                     tag_as: "entity.name.namespace",
                 ),
                 Pattern.new(match: /,/, tag_as: "punctuation.separator.attribute"),
                 Pattern.new(match: /:/, tag_as: "punctuation.accessor.attribute"),
                 Pattern.new(
-                    match: variable_name.lookAheadFor(/::/),
-                    tag_as: "entity.name.namespace"
+                    Pattern.new(
+                        keyword: identifier,
+                        tag_as: "entity.name.namespace"
+                    ).lookAheadFor(/::/)
                 ),
-                Pattern.new(match: variable_name, tag_as: "entity.other.attribute.$match"),
+                Pattern.new(keyword: identifier, tag_as: "entity.other.attribute.$match"),
                 :number_literal,
             ]
         )
@@ -881,7 +881,7 @@ grammar = Grammar.new(
 #
     one_scope_resolution = Pattern.new(
         Pattern.new(
-            match: variable_name,
+            keyword: identifier,
             word_cannot_be_any_of: @cpp_tokens.representationsThat(
                 :isWord,
                 not(:isType),
@@ -907,7 +907,7 @@ grammar = Grammar.new(
                     tag_as: "punctuation.separator.namespace.access punctuation.separator.scope-resolution"+tag_extension
                 ),
                 Pattern.new(
-                    match: variableBounds[identifier],
+                    keyword: identifier,
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ),
                 :template_call_range
@@ -936,7 +936,7 @@ grammar = Grammar.new(
             should_fully_match: ["name::", "name::name2::name3::"],
             match: grammar[grammar_name].then(
                     tag_as: "entity.name.scope-resolution"+tag_extension,
-                    match: variable_name,
+                    keyword: identifier,
                     word_cannot_be_any_of: @cpp_tokens.representationsThat(
                         :isWord,
                         not(:isType),
@@ -1076,7 +1076,7 @@ grammar = Grammar.new(
         should_fully_match: ["typename Alloc::select_on_container_copy_construction"],
         should_not_partial_match: ["this_typename_is_valid"],
         match: Pattern.new(
-            match: std_space.then(variableBounds[/typename/]),
+            match: std_space.then(keyword: /typename/),
             tag_as: "storage.modifier"
         ).then(std_space).then(qualified_type)
     )
@@ -1105,7 +1105,7 @@ grammar = Grammar.new(
                 std_space
             ).maybe(
                 Pattern.new(
-                    match: variableBounds[/template/],
+                    keyword: /template/,
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).maybe(inline_attribute).zeroOrMoreOf(
@@ -1182,7 +1182,7 @@ grammar = Grammar.new(
                     tag_as: "entity.name.operator",
                 # type
                 ).or(
-                    match: variableBounds[identifier].then(
+                    match: Pattern.new(keyword: identifier).then(
                         # possible pointer/reference variation
                         maybe(ref_deref[pointer_tag:"entity.name.operator.type.pointer", reference_tag:"entity.name.operator.type.reference"])
                     ).then(std_space).maybe(
@@ -1198,7 +1198,7 @@ grammar = Grammar.new(
                         match: /""/,
                         tag_as: "entity.name.operator.custom-literal",
                     ).then(std_space).then(
-                        match: variableBounds[identifier],
+                        keyword: identifier,
                         tag_as: "entity.name.operator.custom-literal",
                     )
                 )
@@ -1237,7 +1237,7 @@ grammar = Grammar.new(
     grammar[:static_assert] = PatternRange.new(
         start_pattern: Pattern.new(
             std_space.then(
-                match: variableBounds[/static_assert|_Static_assert/],
+                keyword: /static_assert|_Static_assert/,
                 tag_as: "keyword.other.static_assert",
             ).then(std_space).then(
                 match: /\(/,
@@ -1356,7 +1356,7 @@ grammar = Grammar.new(
                             tag_content_as: "meta.parameter.initialization",
                             start_pattern: Pattern.new(
                                 Pattern.new(
-                                    match: variableBounds[identifier],
+                                    keyword: identifier,
                                     tag_as: "entity.name.function.call.initializer",
                                 ).maybe(
                                     template_call,
@@ -1375,7 +1375,7 @@ grammar = Grammar.new(
                             tag_content_as: "meta.parameter.initialization",
                             start_pattern: Pattern.new(
                                 Pattern.new(
-                                    match: variableBounds[identifier],
+                                    keyword: identifier,
                                     tag_as: "entity.name.function.call.initializer",
                                 ).then(
                                     match: /\{/,
@@ -1428,8 +1428,8 @@ grammar = Grammar.new(
             ]
         ).then(optional_calling_convention).then(
             tag_as: "entity.name.function.constructor entity.name.function.definition.special.constructor",
-            match: variableBounds[identifier].lookAheadFor(/\(/)
-        )
+            keyword: identifier,
+        ).lookAheadFor(/\(/)
     ]
     grammar[:constructor_root] = constructor[
         basic_space.then(optional_calling_convention).then(
@@ -1437,7 +1437,7 @@ grammar = Grammar.new(
         ).then(
             match: Pattern.new(
                 Pattern.new(
-                    match: variableBounds[identifier],
+                    keyword: identifier,
                     reference: "class_name",
                     dont_back_track?: true
                 ).then(std_space).then(
@@ -1505,7 +1505,7 @@ grammar = Grammar.new(
                 ]
             ).then(
                 tag_as: "entity.name.function.destructor entity.name.function.definition.special.member.destructor",
-                match: Pattern.new(/~/).then(variableBounds[identifier].lookAheadFor(/\(/))
+                match: Pattern.new(/~/).then(keyword: identifier).lookAheadFor(/\(/)
             )
         )
     ]
@@ -1515,9 +1515,9 @@ grammar = Grammar.new(
         ).then(
             match: Pattern.new(
                 Pattern.new(
-                        match: variableBounds[identifier],
-                        reference: "class_name",
-                        dont_back_track?: true
+                    keyword: identifier,
+                    reference: "class_name",
+                    dont_back_track?: true
                 ).then(std_space).then(
                     /::/
                 ).then(std_space).then(/~/).matchResultOf(
@@ -1665,7 +1665,7 @@ grammar = Grammar.new(
     grammar[:function_pointer_parameter] = functionPointerGenerator["variable.parameter.pointer.function"]
     grammar[:typedef_function_pointer] = PatternRange.new(
         start_pattern: Pattern.new(
-            match: variableBounds[/typedef/],
+            keyword: /typedef/,
             tag_as: "keyword.other.typedef"
         ).maybe(@spaces).lookAheadFor(Pattern.new(/.*\(\*\s*/).then(identifier).then(/\s*\)/)),
         end_pattern: lookBehindFor(/;/),
@@ -1707,7 +1707,7 @@ grammar = Grammar.new(
                     Pattern.new(
                         inline_builtin_storage_type
                     ).or(
-                        match: variableBounds[identifier],
+                        keyword: identifier,
                         dont_match: grammar.patternsThat(%(:areAStorageSpecifier)),
                         tag_as: "entity.name.type.parameter",
                     )
@@ -1805,7 +1805,7 @@ grammar = Grammar.new(
                     Pattern.new(
                         inline_builtin_storage_type
                     ).or(
-                        match: variableBounds[identifier],
+                        keyword: identifier,
                         dont_match: grammar.patternsThat(%(:areAStorageSpecifier)),
                         tag_as: "entity.name.type.parameter",
                     )
@@ -1958,7 +1958,7 @@ grammar = Grammar.new(
             ).then(@spaces).maybe(
                 grammar[:scope_resolution_namespace_using]
             ).then(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "entity.name.namespace"
             ).lookAheadFor(
                 /;|\n/
@@ -1973,12 +1973,12 @@ grammar = Grammar.new(
                     match: /namespace/,
                     tag_as: "keyword.other.namespace.alias storage.type.namespace.alias"
                 ).then(@spaces).then(
-                    match: variable_name,
+                    keyword: identifier,
                     tag_as: "entity.name.namespace.alias",
                 ).maybe(@spaces).then(assignment_operator).maybe(@spaces).then(
                     tag_as: "meta.declaration.namespace.alias.value",
                     match: grammar[:scope_resolution_namespace_alias].maybe(@spaces).then(
-                            match: variable_name,
+                            keyword: identifier,
                             tag_as: "entity.name.namespace",
                     ).maybe(@spaces).then(
                         @semicolon.or(/\n/)
@@ -1990,14 +1990,14 @@ grammar = Grammar.new(
         tag_as: "meta.block.namespace",
         needs_semicolon: false,
         start_pattern: Pattern.new(
-                match: variableBounds[/namespace/],
+                keyword: /namespace/,
                 tag_as: "keyword.other.namespace.definition storage.type.namespace.definition"
             ),
         head_includes: [
             :ever_present_context,
             :attributes_context,
             grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
-                    match: variable_name,
+                    keyword: identifier,
                     tag_as: "entity.name.namespace",
                 ).maybe(@spaces).maybe(
                     Pattern.new(
@@ -2132,7 +2132,7 @@ grammar = Grammar.new(
         tag_as: "meta.enum.definition",
         match: Pattern.new(
             Pattern.new(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "variable.other.enummember",
             ).maybe(@spaces).maybe(
                 inline_attribute
@@ -2165,7 +2165,7 @@ grammar = Grammar.new(
             name: "enum",
             tag_as: "meta.block.enum",
             start_pattern: Pattern.new(
-                    match: variableBounds[ /enum/ ],
+                    keyword: /enum/,
                     tag_as: "storage.type.enum"
                 ).maybe(
                     @spaces.then(
@@ -2174,7 +2174,7 @@ grammar = Grammar.new(
                         tag_as: "storage.type.enum.enum-key.$match",
                     )
                 ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
-                    match: variable_name,
+                    keyword: identifier,
                     tag_as: "entity.name.type.enum",
                 ).maybe(
                     maybe(@spaces).then(
@@ -2183,7 +2183,7 @@ grammar = Grammar.new(
                     ).maybe(@spaces).maybe(
                         scope_resolution
                     ).maybe(@spaces).then(
-                        match: variable_name,
+                        keyword: identifier,
                         tag_as: "storage.type.integral.$match",
                     )
             ),
@@ -2206,7 +2206,7 @@ grammar = Grammar.new(
             tag_as: "storage.type.modifier.access.$match",
         ),
         Pattern.new(
-            match: variableBounds[ /virtual/ ],
+            keyword: /virtual/,
             tag_as: "storage.type.modifier.virtual",
         ),
         lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
@@ -2214,7 +2214,7 @@ grammar = Grammar.new(
         ),
     ]
     final_modifier = Pattern.new(
-        match: variableBounds[/final/],
+        keyword: /final/,
         tag_as: "storage.type.modifier.final",
     )
     generateClassOrStructBlockFinder = ->(name, tail_includes = [:$initial_context]) do
@@ -2226,7 +2226,7 @@ grammar = Grammar.new(
                     should_partial_match: ["#{name} foo f;", "#{name} st s;"],
                     match: Pattern.new(
                         reference: "storage_type",
-                        match: variableBounds[ /#{name}/ ],
+                        keyword: /#{name}/,
                         tag_as: "storage.type.$match",
                     ).then(
                         std_space
@@ -2236,7 +2236,7 @@ grammar = Grammar.new(
                                 inline_attribute.then(std_space)
                             ).maybe(
                                 zeroOrMoreOf(
-                                    match: variable_name.then(std_space),
+                                    match: Pattern.new(keyword: identifier).then(std_space),
                                     dont_back_track?: true,
                                     includes: [
                                         # needs std_space so that it can beat-out the class/struct name (below)
@@ -2244,7 +2244,7 @@ grammar = Grammar.new(
                                         # the last word is assumed to be the class/stuct name
                                         Pattern.new(
                                             Pattern.new(
-                                                match: variable_name,
+                                                keyword: identifier,
                                                 tag_as: "entity.name.type.#{name}",
                                             ).then(std_space).maybe(
                                                 final_modifier.then(std_space)
@@ -2303,14 +2303,14 @@ grammar = Grammar.new(
     generateTypedefClassOrStructBlockFinder = ->(name) do
         return PatternRange.new(
             start_pattern: Pattern.new(
-                match: variableBounds[/typedef/],
+                keyword: /typedef/,
                 tag_as: "keyword.other.typedef"
             ).maybe(@spaces).lookAheadFor(variableBounds[/#{name}/]),
             end_pattern: lookBehindFor(/;/),
             includes: [
                 generateClassOrStructBlockFinder[name, [
                     maybe(ref_deref[]).then(std_space).then(
-                        match: variable_name,
+                        keyword: identifier,
                         tag_as: "entity.name.type.alias"
                     ),
                     /,/,
@@ -2326,17 +2326,17 @@ grammar = Grammar.new(
         Pattern.new(
             should_partial_match: [ "#{name} crypto_aead *tfm = crypto_aead_reqtfm(req);", "#{name} aegis_block blocks[AEGIS128L_STATE_BLOCKS];" ],
             match: Pattern.new(
-                match: variableBounds[/#{name}/],
+                keyword: /#{name}/,
                 tag_as: "storage.type.#{name}.declare",
             ).then(std_space).then(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "entity.name.type.#{name}",
             ).maybe(
                 ref_deref[]
             ).then(std_space).then(
                 @cpp_tokens.lookAheadToAvoidWordsThat(:isClassInheritenceSpecifier)
             ).then(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "variable.other.object.declare",
             ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{a-zA-Z]/)
         )
@@ -2354,13 +2354,13 @@ grammar = Grammar.new(
                 match: /#{name}/,
                 tag_as: "storage.type.#{name}.parameter",
             ).then(std_space).then(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "entity.name.type.#{name}.parameter",
             ).then(std_space).maybe(
                 ref_deref[].then(std_space)
             # this is a maybe because its possible to have a type declare without an actual parameter
             ).maybe(
-                match: variable_name,
+                keyword: identifier,
                 tag_as: "variable.other.object.declare",
             ).then(std_space).maybe(
                 Pattern.new(/\[/).then(std_space).then(/\]/).then(std_space),
