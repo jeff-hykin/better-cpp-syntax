@@ -361,7 +361,10 @@
     "_nlink_t": {
       "match": "(?<!\\w)nlink_t(?!\\w)"
     },
-    "_noexcept": {
+    "_noexcept1": {
+      "match": "(?<!\\w)noexcept(?!\\w)"
+    },
+    "_noexcept2": {
       "match": "(?<!\\w)noexcept(?!\\w)"
     },
     "_not_equal_to_word": {
@@ -11135,7 +11138,7 @@
           "include": "#vararg_ellipses"
         },
         {
-          "match": "((?:((?:volatile|register|restrict|static|extern|const))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))+)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:\\s)*+(?<!\\w)(?:(?:(?:((?<!\\w)(?:unsigned|wchar_t|signed|double|float|short|auto|void|long|char|bool|int)(?!\\w))|((?<!\\w)(?:uint_least32_t|uint_least16_t|uint_least64_t|int_least16_t|int_least32_t|uint_fast32_t|uint_fast16_t|uint_least8_t|int_least64_t|uint_fast64_t|int_least8_t|uint_fast8_t|int_fast32_t|int_fast16_t|int_fast64_t|suseconds_t|int_fast8_t|useconds_t|in_port_t|uintmax_t|uintptr_t|blksize_t|in_addr_t|blkcnt_t|u_quad_t|intmax_t|uint16_t|uint64_t|uint32_t|intptr_t|uint8_t|int32_t|int16_t|ssize_t|clock_t|swblk_t|segsz_t|nlink_t|fixpt_t|daddr_t|caddr_t|qaddr_t|u_short|int64_t|time_t|u_long|int8_t|quad_t|mode_t|size_t|u_char|ushort|uid_t|gid_t|dev_t|div_t|u_int|off_t|pid_t|key_t|ino_t|id_t|uint)(?!\\w)))|((?<!\\w)(?:pthread_rwlockattr_t|pthread_mutexattr_t|pthread_condattr_t|pthread_rwlock_t|pthread_mutex_t|pthread_cond_t|pthread_once_t|pthread_attr_t|pthread_key_t|pthread_t)(?!\\w)))|([a-zA-Z_](?:\\w)*_t))(?!\\w)|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\b\\b(?<!\\Wvolatile|^volatile|\\Wregister|^register|\\Wrestrict|^restrict|\\Wstatic|^static|\\Wextern|^extern|\\Wconst|^const)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=,|\\)|=)",
+          "match": "((?:((?<!\\w)(?:restrict|register|volatile|extern|static|const)(?!\\w))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z))))+)((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?:(?:\\s)*+(?<!\\w)(?:(?:(?:((?<!\\w)(?:unsigned|wchar_t|signed|double|float|short|auto|void|long|char|bool|int)(?!\\w))|((?<!\\w)(?:uint_least32_t|uint_least16_t|uint_least64_t|int_least16_t|int_least32_t|uint_fast32_t|uint_fast16_t|uint_least8_t|int_least64_t|uint_fast64_t|int_least8_t|uint_fast8_t|int_fast32_t|int_fast16_t|int_fast64_t|suseconds_t|int_fast8_t|useconds_t|in_port_t|uintmax_t|uintptr_t|blksize_t|in_addr_t|blkcnt_t|u_quad_t|intmax_t|uint16_t|uint64_t|uint32_t|intptr_t|uint8_t|int32_t|int16_t|ssize_t|clock_t|swblk_t|segsz_t|nlink_t|fixpt_t|daddr_t|caddr_t|qaddr_t|u_short|int64_t|time_t|u_long|int8_t|quad_t|mode_t|size_t|u_char|ushort|uid_t|gid_t|dev_t|div_t|u_int|off_t|pid_t|key_t|ino_t|id_t|uint)(?!\\w)))|((?<!\\w)(?:pthread_rwlockattr_t|pthread_mutexattr_t|pthread_condattr_t|pthread_rwlock_t|pthread_mutex_t|pthread_cond_t|pthread_once_t|pthread_attr_t|pthread_key_t|pthread_t)(?!\\w)))|([a-zA-Z_](?:\\w)*_t))(?!\\w)|((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))((?:(?:(?:(?>(?:\\s)+)|(\\/\\*)((?:[^\\*]|(?:\\*)++[^\\/])*+((?:\\*)++\\/)))+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))(?=,|\\)|=)",
           "captures": {
             "1": {
               "patterns": [
@@ -11249,7 +11252,7 @@
           "include": "#scope_resolution_parameter_inner_generated"
         },
         {
-          "match": "(?:struct|class|union|enum)",
+          "match": "(?<!\\w)(?:struct|union|class|enum)(?!\\w)",
           "name": "storage.type.$0.cpp"
         },
         {

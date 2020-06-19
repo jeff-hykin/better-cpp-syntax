@@ -1554,9 +1554,7 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
-    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
-    for each in array_of_function_like_operators
-        name = each[:name]
+    for name in grammar.listKeywordsThatAre(%(:functionLike && !:aSpecifier))
         operators.push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
@@ -1699,7 +1697,7 @@ grammar = Grammar.new(
                     match: oneOrMoreOf(
                         # a specifier
                         Pattern.new(
-                            match: @cpp_tokens.that(:isStorageSpecifier),
+                            match: grammar.patternsThatAre(%(:aStorageSpecifier)),
                             tag_as: "storage.modifier.specifier.parameter",
                         ).then(std_space)
                     ),
@@ -1710,11 +1708,8 @@ grammar = Grammar.new(
                     Pattern.new(
                         inline_builtin_storage_type
                     ).or(
-                        match: variableBounds[identifier].then(
-                                @word_boundary
-                            ).then(
-                                @cpp_tokens.lookBehindToAvoidWordsThat(:isStorageSpecifier)
-                            ),
+                        match: variableBounds[identifier],
+                        dont_match: grammar.patternsThatAre(%(:aStorageSpecifier)),
                         tag_as: "entity.name.type.parameter",
                     )
                 ).then(std_space).lookAheadFor(/,|\)|=/),
@@ -1724,7 +1719,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: grammar.patternsThatAre(%(:aTypeCreator)),
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment

@@ -73,7 +73,8 @@ require_relative '../../textmate_tools.rb'
     grammar[ :_alignof                        ] = Pattern.new( keyword: "alignof"                     , adjectives: [ :anOperator,                                                                                                           :functionLike ] )
     grammar[ :_alignas                        ] = Pattern.new( keyword: "alignas"                     , adjectives: [ :anOperator,                                                                                                           :functionLike ] )
     grammar[ :_typeid                         ] = Pattern.new( keyword: "typeid"                      , adjectives: [ :anOperator,                                                                                                           :functionLike ] )
-    grammar[ :_noexcept                       ] = Pattern.new( keyword: "noexcept"                    , adjectives: [ :anOperator,  :functionLike, :aSpecifier , :canAppearAfterParametersBeforeBody ] )
+    grammar[ :_noexcept1                      ] = Pattern.new( keyword: "noexcept"                    , adjectives: [ :anOperator,  :functionLike, :aSpecifier , :canAppearAfterParametersBeforeBody ] )
+    grammar[ :_noexcept2                      ] = Pattern.new( keyword: "noexcept"                    , adjectives: [ :anOperator,  :functionLike, ] )
     grammar[ :_static_cast                    ] = Pattern.new( keyword: "static_cast"                 , adjectives: [ :anOperator , :aTypeCastingOperator] )
     grammar[ :_dynamic_cast                   ] = Pattern.new( keyword: "dynamic_cast"                , adjectives: [ :anOperator , :aTypeCastingOperator] )
     grammar[ :_const_cast                     ] = Pattern.new( keyword: "const_cast"                  , adjectives: [ :anOperator , :aTypeCastingOperator] )
@@ -185,12 +186,12 @@ require_relative '../../textmate_tools.rb'
     grammar[ :_union           ] = Pattern.new( keyword: "union"                       , adjectives: [ :aTypeCreator] )
     grammar[ :_enum            ] = Pattern.new( keyword: "enum"                        , adjectives: [ :aTypeCreator] )
     # storage specifiers https://en.cppreference.com/w/cpp/language/declarations 
-    grammar[ :_const            ] = Pattern.new( keyword: "const"                       , adjectives: [ :aSpecifier, :storageSpecifier, :functionQualifier, :canAppearAfterParametersBeforeBody ] )
-    grammar[ :_static           ] = Pattern.new( keyword: "static"                      , adjectives: [ :aSpecifier, :storageSpecifier ] )
-    grammar[ :_volatile         ] = Pattern.new( keyword: "volatile"                    , adjectives: [ :aSpecifier, :storageSpecifier, :functionQualifier, :canAppearAfterParametersBeforeBody  ] )
-    grammar[ :_register         ] = Pattern.new( keyword: "register"                    , adjectives: [ :aSpecifier, :storageSpecifier ] )
-    grammar[ :_restrict         ] = Pattern.new( keyword: "restrict"                    , adjectives: [ :aSpecifier, :storageSpecifier ] )
-    grammar[ :_extern           ] = Pattern.new( keyword: "extern"                      , adjectives: [ :aSpecifier, :storageSpecifier, :classSpecifier ] )
+    grammar[ :_const            ] = Pattern.new( keyword: "const"                       , adjectives: [ :aSpecifier, :aStorageSpecifier, :functionQualifier, :canAppearAfterParametersBeforeBody ] )
+    grammar[ :_static           ] = Pattern.new( keyword: "static"                      , adjectives: [ :aSpecifier, :aStorageSpecifier ] )
+    grammar[ :_volatile         ] = Pattern.new( keyword: "volatile"                    , adjectives: [ :aSpecifier, :aStorageSpecifier, :functionQualifier, :canAppearAfterParametersBeforeBody  ] )
+    grammar[ :_register         ] = Pattern.new( keyword: "register"                    , adjectives: [ :aSpecifier, :aStorageSpecifier ] )
+    grammar[ :_restrict         ] = Pattern.new( keyword: "restrict"                    , adjectives: [ :aSpecifier, :aStorageSpecifier ] )
+    grammar[ :_extern           ] = Pattern.new( keyword: "extern"                      , adjectives: [ :aSpecifier, :aStorageSpecifier, :classSpecifier ] )
     # function specifiers/qualifiers
     grammar[ :_inline           ] = Pattern.new( keyword: "inline"                      , adjectives: [ :aSpecifier , :aFunctionSpecifier] )
     # if statement specifiers see https://en.cppreference.com/w/cpp/language/if
