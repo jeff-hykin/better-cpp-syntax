@@ -40,6 +40,42 @@ class Grammar
         # tell it what it needs to select-later
         return collector_pattern
     end
+
+    #
+    # Aggregates certain patterns together based on their adjectives
+    #
+    # @param [String] selector A string using the selector syntax (explained below)
+    #                          But only returns patterns that are keywords
+    #
+    # @note The syntax for selection-building is simple.
+    #  1. You can use adjectives such as :aClass or :aPrimitive
+    #     anything matching /:[a-zA-Z0-9_]+/ is considered an "adjective"
+    #  2. You can use three operators as follows  &&  ||  !
+    #     they are the same as the ruby operators
+    #  3. You can use paraentheses
+    #  4. Whitespace, including newlines, are removed/ignored
+    #     all other characters are invalid 
+    #  _
+    #  Here are some examples:
+    #     ":aPrimitive"                             # finds any pattern with the :aPrimitive adjective
+    #     ":aClass && :aPrimitive"                  # finds any pattern that is both :aClass and :aPrimitive
+    #     ":aClass && !:aPrimitive"                 # finds any pattern whose adjectives include :aClass but don't include :aPrimitive
+    #     ":aClass && !(:aPrimitive || aFunction)"  
+    #     "!aFunction && :aValue"
+    #
+    # @return [PatternCollector]
+    #
+    def keywordsThatAre(selector)
+        # create the normal pattern that will act as a placeholder until the very end
+        collector_pattern = PatternCollector.new({
+            match: /(?#pattern_collector)/,
+            pattern_filter: parseSelectorSyntax(selector),
+            selector: selector,
+            keywords_only: true,
+        })
+        # tell it what it needs to select-later
+        return collector_pattern
+    end
     
     #
     # convert a regex value into a proc filter used to select patterns

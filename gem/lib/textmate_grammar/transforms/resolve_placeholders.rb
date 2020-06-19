@@ -26,7 +26,7 @@ class ResolvePlaceholders < GrammarTransform
                 qualifying_patterns = []
                 for each_key, each_value in repository
                     if arguments[:pattern_filter][each_value]
-                        qualifying_patterns << each_value
+                        qualifying_patterns << each_value if arguments[:keywords_only]==false || each_value.arguments[:keyword] != nil
                     end
                 end
                 if qualifying_patterns.size == 0
