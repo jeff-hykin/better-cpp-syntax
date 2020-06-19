@@ -913,6 +913,7 @@ class PatternBase
                 reference_group = groups.detect do |group|
                     group[:reference] == Regexp.last_match(1)
                 end
+                # TODO add a better error message here when it fails to find the reference
                 "$" + reference_group[:group].to_s
             end
         end
