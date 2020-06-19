@@ -1770,7 +1770,8 @@ grammar = Grammar.new(
             ),
             # # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
             Pattern.new(
-                match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
+                match: identifier,
+                dont_match: grammar.keywordsThat(%(:areATypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
             :template_call_range,
@@ -1805,11 +1806,8 @@ grammar = Grammar.new(
                     Pattern.new(
                         inline_builtin_storage_type
                     ).or(
-                        match: variableBounds[identifier].then(
-                                @word_boundary
-                            ).then(
-                                @cpp_tokens.lookBehindToAvoidWordsThat(:isStorageSpecifier)
-                            ),
+                        match: variableBounds[identifier],
+                        dont_match: grammar.patternsThat(%(:areAStorageSpecifier)),
                         tag_as: "entity.name.type.parameter",
                     )
                 ).then(std_space).lookAheadFor(/,|\)|=/),
@@ -1869,7 +1867,8 @@ grammar = Grammar.new(
             ),
             # any words that are not storage types/modifiers, scope resolutions, or parameters are assumed to be user-defined types
             Pattern.new(
-                match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
+                match: identifier,
+                dont_match: grammar.keywordsThat(%(:areATypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
             :template_call_range,
