@@ -102,7 +102,7 @@ class Grammar
     #
     # @return [Array<String>]
     #
-    def listkeywordsThat(selector)
+    def listKeywordsThat(selector)
         output = []
         pattern_filter = parseSelectorSyntax(selector)
         for each_key, each_value in @repository

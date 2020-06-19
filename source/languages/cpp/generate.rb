@@ -1554,7 +1554,7 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
-    for name in grammar.listkeywordsThat(%(:areFunctionLike && !:areASpecifier))
+    for name in grammar.listKeywordsThat(%(:areFunctionLike && !:areASpecifier))
         operators.push(functionCallGenerator[
             repository_name: "#{name}_operator",
             match_name: variableBounds[/#{name}/],
