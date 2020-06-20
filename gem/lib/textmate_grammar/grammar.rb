@@ -502,11 +502,10 @@ class Grammar
             require 'plist'
             if options[:syntax_name].nil?
                 case options[:syntax_format]
-                when :plist
-                    options[:syntax_name] = "#{grammar_default_name}.tmLanguage.plist"
-                else
-                    # TODO: not sure if this is the best ending or not -Jeff
+                when :xml
                     options[:syntax_name] = "#{grammar_default_name}.tmLanguage.xml"
+                else
+                    options[:syntax_name] = "#{grammar_default_name}.tmLanguage"
                 end
             end
             file_name = File.join(
