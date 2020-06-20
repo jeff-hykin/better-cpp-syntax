@@ -176,6 +176,9 @@ class RepeatablePattern < PatternBase
         # this is complicated regex (atomic groups, conditionals, named capture groups, positive lookbehinds)
         # look at the "How does it work?" part of this post: https://stackoverflow.com/questions/6953324/regex-exception/62437637#62437637
         # FIXME: not sure why I have to wrap this in a group (something is removing the top level ()'s elsewhere) --Jeff
+        # update: this is probably because of `single_entity?` so TODO: update single entity based on :dont_match
+        #         fixing this properly will probably fix some of the problems related to using 
+        #         :dont_match on the `one_scope_resolution` pattern
         regex_string = nil
         with_no_warnings do
             regex_pattern = /((?>(?<#{group_name}>#{dont_match})|(?:#{match}))(?(<#{group_name}>)0(?<=1)|))/
