@@ -110,6 +110,7 @@ class Grammar
                 output << each_value.arguments[:keyword] if each_value.arguments[:keyword] != nil
             end
         end
+        output.sort_by!(&:length).reverse!
         return output
     end
     
