@@ -501,7 +501,7 @@ class PatternBase
         output = indent + begining_of_to_s(top_level)
         # basic pattern information
         if @arguments[:keyword]
-            output += "\n#{indent}  keyword: " + @arguments[:keyword]
+            output += "\n#{indent}  keyword: #{@arguments[:keyword]}"
         else
             output += "\n#{indent}  match: " + regex_as_string
         end
