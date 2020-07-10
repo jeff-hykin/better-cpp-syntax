@@ -12,7 +12,7 @@ require_relative PathFor[:sharedPattern]["std_space"]
 require_relative PathFor[:sharedPattern]["backslash_escapes"]
 require_relative PathFor[:sharedPattern]["doxygen"]
 require_relative './tokens.rb'
-require_relative './raw_strings.rb'
+require_relative './lib/raw_strings.rb'
 
 #
 # TODO: remove me this is a temp change that should be corrected after this merge is over
