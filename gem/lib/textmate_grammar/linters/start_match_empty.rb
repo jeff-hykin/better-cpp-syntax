@@ -13,7 +13,9 @@ class StartMatchEmpty < GrammarLinter
         return true unless pattern.is_a? PatternRange
 
         regexp = with_no_warnings do
-            Regexp.new(pattern.start_pattern.evaluate.gsub("\\G", '\uFFFF'))
+            # FIXME: /(?<blah_group>)()\g<1>/ throws a "numbered backref/call is not allowed. (use name)" error
+            substitute = pattern.start_pattern.evaluate.gsub("\\G", '\uFFFF')
+            Regexp.new(substitute)
         end
         if "" =~ regexp and !options[:zeroLengthStart?]
             puts "Warning: #{pattern.start_pattern.evaluate}"

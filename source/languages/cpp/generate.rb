@@ -486,7 +486,7 @@ grammar = Grammar.new(
             tag_as: "storage.type.modifier.access.control.$reference(access_specifier)",
             match: Pattern.new(
                 Pattern.new(
-                    match: @cpp_tokens.that(:isAccessSpecifier),
+                    match: grammar.keywordsThat(%(:isAnAccessSpecifier)),
                     reference: "access_specifier"
                 ).maybe(@spaces).then(
                     match: /:/,
@@ -497,7 +497,7 @@ grammar = Grammar.new(
     )
     grammar[:exception_keywords] = Pattern.new(
         std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isExceptionRelated) ],
+            match: grammar.keywordsThat(%(:areExceptionRelated)),
             tag_as: "keyword.control.exception.$match"
         )
     )
@@ -507,7 +507,7 @@ grammar = Grammar.new(
     # these are keywords that SHOULD get there own patterns, but the work has not yet been put in for them
     grammar[:misc_keywords] = Pattern.new(
         std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isCurrentlyAMiscKeyword) ],
+            match: grammar.keywordsThat(%(:areCurrentlyAMiscKeyword)),
             tag_as: "keyword.other.$match"
         )
     )
@@ -520,7 +520,7 @@ grammar = Grammar.new(
     # TODO: enhance casting operators to include <>'s
     grammar[:type_casting_operators] = Pattern.new(
         std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isTypeCastingOperator) ],
+            match: grammar.keywordsThat(%(:areATypeCastingOperator)),
             tag_as: "keyword.operator.wordlike keyword.operator.cast.$match"
         )
     )
@@ -550,7 +550,7 @@ grammar = Grammar.new(
     )
     grammar[:control_flow_keywords] = control_flow_keywords = Pattern.new(
         std_space.then(
-            match: variableBounds[ @cpp_tokens.that(:isControlFlow) ],
+            match: grammar.keywordsThat(%(:controlFlow)),
             tag_as: "keyword.control.$match"
         )
     )
@@ -879,16 +879,12 @@ grammar = Grammar.new(
 #
 # Scope resolution
 #
+    # FIXME somehow dont_match is breaking something here
+    pattern = grammar.keywordsThat(%(:areTokens && !:areAType && !:areAVariable && !:isValidFunctionName))
     one_scope_resolution = Pattern.new(
         Pattern.new(
             keyword: identifier,
-            word_cannot_be_any_of: @cpp_tokens.representationsThat(
-                :isWord,
-                not(:isType),
-                not(:isVariable),
-                not(:isValidFunctionName),
-                not(:isLiteral)
-            )
+            dont_match: Pattern.new(/\bBLAHHH\b/),
         ).then(/\s*+/).maybe(
             template_call
         ).then(/::/)
@@ -2202,15 +2198,16 @@ grammar = Grammar.new(
             tag_as: "punctuation.separator.delimiter.comma.inheritance"
         ),
         Pattern.new(
-            match: variableBounds[ @cpp_tokens.that(:isAccessSpecifier) ],
+            match: grammar.keywordsThat(%(:isAnAccessSpecifier)),
             tag_as: "storage.type.modifier.access.$match",
         ),
         Pattern.new(
             keyword: /virtual/,
             tag_as: "storage.type.modifier.virtual",
         ),
-        lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).lookAheadToAvoid(@cpp_tokens.that(:isAccessSpecifier).or(/virtual/)).then(
-            qualified_type
+        lookBehindFor(can_come_before_a_inherited_class_regex).maybe(@spaces).then(
+            match: qualified_type,
+            dont_match: grammar.keywordsThat(%(:isAnAccessSpecifier)).or(keyword: /virtual/),
         ),
     ]
     final_modifier = Pattern.new(
@@ -2334,9 +2331,8 @@ grammar = Grammar.new(
             ).maybe(
                 ref_deref[]
             ).then(std_space).then(
-                @cpp_tokens.lookAheadToAvoidWordsThat(:isClassInheritenceSpecifier)
-            ).then(
                 keyword: identifier,
+                # dont_match: grammar.keywordsThat(%(:areAClassInheritenceSpecifier)),
                 tag_as: "variable.other.object.declare",
             ).then(std_space).lookAheadFor(/\S/).lookAheadToAvoid(/[:{a-zA-Z]/)
         )

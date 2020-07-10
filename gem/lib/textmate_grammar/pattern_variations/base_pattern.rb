@@ -361,7 +361,7 @@ class PatternBase
         else
             raise <<~HEREDOC
                 Pattern.new() must be constructed with a String, Regexp, or Pattern
-                Provided arguments: #{@original_arguments}
+                Provided arguments: #{@original_arguments.to_yaml}
             HEREDOC
         end
         
