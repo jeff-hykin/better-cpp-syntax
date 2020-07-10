@@ -4,6 +4,7 @@ require 'digest/sha1'
 require 'json'
 require 'pp'
 require 'pathname'
+require 'set'
 
 require_relative 'import_patterns'
 
@@ -21,6 +22,7 @@ class Grammar
     attr_accessor :repository
     attr_accessor :name
     attr_accessor :scope_name
+    attr_accessor :pattern_processing
 
     #
     # Create a new Exportable Grammar (Grammar Partial)
@@ -65,7 +67,7 @@ class Grammar
         end
         grammar
     end
-    
+
     #
     # Import a grammar partial
     #
@@ -117,7 +119,7 @@ class Grammar
         required_keys = [:name, :scope_name]
         unless required_keys & keys.keys == required_keys
             raise <<~HEREDOC
-            
+
                 Missing one or more of the required grammar keys
                 Missing: #{required_keys - (required_keys & keys.keys)}
                 The required grammar keys are: #{required_keys}
@@ -127,6 +129,7 @@ class Grammar
         @name = keys[:name]
         @scope_name = keys[:scope_name]
         @repository = {}
+        @pattern_processing = nil
 
         keys.delete :name
         keys.delete :scope_name
@@ -140,7 +143,7 @@ class Grammar
         puts "Warning: grammar scope name should start with `source.' or `text.'"
         puts "Examples: source.cpp text.html text.html.markdown source.js.regexp"
     end
-    
+
     #
     # Add multiple repository patterns at one time
     #
@@ -182,10 +185,10 @@ class Grammar
         unless key.is_a? Symbol
             raise "Use symbols not strings" unless key.is_a? Symbol
         end
-        
+
         if key.to_s.start_with?("$") && !([:$initial_context, :$base, :$self].include? key)
             raise <<~HEREDOC
-                
+
                 #{key} is not a valid repository name
                 repository names starting with $ are reserved
             HEREDOC
@@ -193,7 +196,7 @@ class Grammar
 
         if key.to_s == "repository"
             raise <<~HEREDOC
-                
+
                 #{key} is not a valid repository name
                 the name 'repository' is the only reserved name
             HEREDOC
@@ -201,7 +204,7 @@ class Grammar
         if @repository.keys.include? key
             STDERR.puts "\nWarning: the #{key} pattern is getting overridden on the grammar\n"
         end
-        
+
         # add it to the repository
         @repository[key] = fixup_value(value)
         @repository[key]
@@ -219,7 +222,7 @@ class Grammar
     # @return [void] nothing
     #
     def import(path_or_export)
-        
+
         unless path_or_export.is_a? ExportableGrammar
             relative_path = File.dirname(caller_locations[0].path)
             if not Pathname.new(relative_path).absolute?
@@ -258,6 +261,7 @@ class Grammar
                 repository = repository.transform_values do |potential_pattern|
                     if potential_pattern.is_a? Array
                         potential_pattern.map do |each|
+                            @pattern_processing = each
                             transform.pre_transform(
                                 each,
                                 filter_options(
@@ -267,8 +271,10 @@ class Grammar
                                     repository: repository,
                                 ),
                             )
+                            @pattern_processing = nil
                         end
                     else
+                        @pattern_processing = potential_pattern
                         transform.pre_transform(
                             potential_pattern,
                             filter_options(
@@ -278,6 +284,7 @@ class Grammar
                                 repository: repository,
                             ),
                         )
+                        @pattern_processing = nil
                     end
                 end
             end
@@ -317,7 +324,7 @@ class Grammar
             should_lint: true,
         }
         options = default.merge(options)
-        
+
         repo = @repository.__deep_clone__
         repo = run_pre_transform_stage(repo, :before_pre_linter)
 
@@ -462,8 +469,8 @@ class Grammar
     #
     def save_to(options)
         options[:directory] ||= "."
-        
-        # make the path absolute 
+
+        # make the path absolute
         absolute_path_from_caller = File.dirname(caller_locations[0].path)
         if not Pathname.new(absolute_path_from_caller).absolute?
             absolute_path_from_caller = File.join(Dir.pwd,absolute_path_from_caller)
@@ -471,7 +478,7 @@ class Grammar
         if not Pathname.new(options[:directory]).absolute?
             options[:directory] = File.join(absolute_path_from_caller, options[:directory])
         end
-        
+
         grammar_default_name = @scope_name.split('.').drop(1).join('.')
         default = {
             inherit_or_embedded: :embedded,
@@ -484,7 +491,7 @@ class Grammar
             should_lint: true,
         }
         options = default.merge(options)
-        
+
         output = generate(options)
 
         if [:json, :vscode].include? options[:syntax_format]
@@ -517,7 +524,7 @@ class Grammar
             out_file.close
         else
             raise <<~HEREDOC
-                
+
                 unexpected syntax format #{options[:syntax_format]}
                 expected one of [:json, :vscode, :plist, :textmate, :tm_language, :xml]
             HEREDOC
@@ -548,7 +555,7 @@ class Grammar
     rescue StandardError
         ""
     end
-    
+
     # NOTE: this is only used to provide debugging help
     @@all_patterns = []
     def self.all_patterns
