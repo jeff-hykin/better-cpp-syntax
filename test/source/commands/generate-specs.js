@@ -7,28 +7,28 @@ const yaml = require("js-yaml");
 const generateSpec = require("../generate_spec");
 const pathFor = require("../paths");
 
-const allTests = require("../get_tests")
+const allTests = require("../get_tests");
 
 async function generateSpecs(yargs) {
     // either get all tests, or only the ones that are mentioned
     if (yargs.all) {
         // dont filter any test
-        testFilter = eachTest => true
+        testFilter = (_) => true;
     } else {
         // only pick files that match one of the user-provided arguments
-        testFilter = eachTest => {
+        testFilter = (eachTest) => {
             for (const arg of yargs.fixtures) {
                 if (eachTest.fixturePath.match(arg)) {
-                    return true
+                    return true;
                 }
             }
-            return false
-        }
+            return false;
+        };
     }
-    let tests = allTests.filter(testFilter)
+    let tests = allTests.filter(testFilter);
 
     for (const test of tests) {
-        const fixturePath = test.fixturePath
+        const fixturePath = test.fixturePath;
         console.log(
             "generating spec for",
             path.relative(pathFor.fixtures, fixturePath)
@@ -37,12 +37,12 @@ async function generateSpecs(yargs) {
             .readFileSync(fixturePath)
             .toString()
             .split("\n");
-    
+
         const spec = await generateSpec(fixturePath, fixtureLines);
         fs.writeFileSync(
             test.spec.yaml,
             yaml.dump(JSON.parse(JSON.stringify(spec)), {
-                sortKeys: keyCompare
+                sortKeys: keyCompare,
             })
         );
     }
@@ -56,11 +56,11 @@ function keyCompare(key1, key2) {
 module.exports = {
     command: "generate-specs [fixtures..]",
     desc: "(re)generate spec files",
-    builder: yargs => {
+    builder: (yargs) => {
         yargs.positional("fixtures", {
             default: [],
-            describe: "the fixtures to use"
+            describe: "the fixtures to use",
         });
     },
-    handler: yargs => generateSpecs(yargs)
+    handler: (yargs) => generateSpecs(yargs),
 };

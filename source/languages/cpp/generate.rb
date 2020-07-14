@@ -895,7 +895,7 @@ grammar = Grammar.new(
         ).then(/\s*+/).maybe(
             template_call
         ).then(/::/)
-    )    
+    )
     inline_scope_resolution = ->(tag_extension) do
         Pattern.new(
             match: Pattern.new(
@@ -1413,6 +1413,11 @@ grammar = Grammar.new(
                         :evaluation_context,
                     ]
                 ),
+                #final & override
+                oneOrMoreOf(Pattern.new(
+                    match: oneOf(["final", "override"]),
+                    tag_as: "keyword.operator.$match",
+                )),
                 # initial context is here for things like noexcept()
                 # TODO: fix this pattern an make it more strict
                 :$initial_context
@@ -1490,6 +1495,11 @@ grammar = Grammar.new(
                     # destructors cant have arguments
                     includes: []
                 ),
+                #final & override
+                oneOrMoreOf(Pattern.new(
+                    match: oneOf(["final", "override"]),
+                    tag_as: "keyword.operator.wordlike keyword.operator.$match",
+                )),
                 # initial context is here for things like noexcept()
                 # TODO: fix this pattern an make it more strict
                 :$initial_context

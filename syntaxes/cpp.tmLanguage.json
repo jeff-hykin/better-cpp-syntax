@@ -1792,6 +1792,14 @@
               ]
             },
             {
+              "match": "((?:(?:final)|(?:override)))+",
+              "captures": {
+                "1": {
+                  "name": "keyword.operator.$1.cpp"
+                }
+              }
+            },
+            {
               "include": "$self"
             }
           ]
@@ -2166,6 +2174,14 @@
                   "include": "#evaluation_context"
                 }
               ]
+            },
+            {
+              "match": "((?:(?:final)|(?:override)))+",
+              "captures": {
+                "1": {
+                  "name": "keyword.operator.$1.cpp"
+                }
+              }
             },
             {
               "include": "$self"
@@ -3363,6 +3379,14 @@
               ]
             },
             {
+              "match": "((?:(?:final)|(?:override)))+",
+              "captures": {
+                "1": {
+                  "name": "keyword.operator.wordlike.cpp keyword.operator.$1.cpp"
+                }
+              }
+            },
+            {
               "include": "$self"
             }
           ]
@@ -3653,6 +3677,14 @@
               "patterns": [
 
               ]
+            },
+            {
+              "match": "((?:(?:final)|(?:override)))+",
+              "captures": {
+                "1": {
+                  "name": "keyword.operator.wordlike.cpp keyword.operator.$1.cpp"
+                }
+              }
             },
             {
               "include": "$self"
