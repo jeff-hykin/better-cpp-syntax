@@ -331,7 +331,7 @@ class PatternBase
     #
     # @return [String] the complete pattern
     #
-    def evaluate(groups = nil)
+    def evaluate(groups = nil, fixup_refereces: false)
         top_level = groups.nil?
         groups = collect_group_attributes if top_level
         evaluate_array = ['']
@@ -342,9 +342,9 @@ class PatternBase
             evaluate_array << pat.do_evaluate_self(groups)
             pat = pat.next_pattern
         end
-
+        
         self_evaluate = RegexOperator.evaluate(evaluate_array)
-        self_evaluate = fixup_regex_references(groups, self_evaluate) if top_level
+        self_evaluate = fixup_regex_references(groups, self_evaluate) if top_level || fixup_refereces
         self_evaluate
     end
 

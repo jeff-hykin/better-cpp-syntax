@@ -143,7 +143,7 @@ class PatternRange < PatternBase
             "begin" => @start_pattern.evaluate,
             # this is supposed to be start_groups as back references in end and while
             # refer to the start pattern
-            match_key => @stop_pattern.evaluate(start_groups),
+            match_key => @stop_pattern.evaluate(start_groups, fixup_refereces: true),
             "beginCaptures" => convert_group_attributes_to_captures(start_groups),
             capture_key => convert_group_attributes_to_captures(stop_groups),
         }
