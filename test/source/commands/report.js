@@ -5,7 +5,7 @@ const _ = require("lodash");
 const { performance } = require("perf_hooks");
 
 const getTokens = require("../get_tokens");
-const { getOniguruma } = require("../report/oniguruma_decorator");
+const onigLib = require("../report/onigLib");
 const { getRegistry } = require("../registry");
 const recorder = require("../report/recorder");
 const {
@@ -23,7 +23,7 @@ for (const each of glob.sync(`${__dirname}/../report/reporters/*.js`)) {
 }
 
 async function runReport(yargs) {
-    const registry = getRegistry(getOniguruma);
+    const registry = getRegistry(async()=>onigLib);
     // load the one mentioned in the commandline
     recorder.loadReporter(reporters[yargs.reporter]);
 
