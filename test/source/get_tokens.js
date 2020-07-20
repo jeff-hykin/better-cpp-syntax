@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const vsctm = require("vscode-textmate");
 const paths = require("./paths");
 const fs = require("fs");
-
+const onigLib = require("./report/onigLib")
 const node_process = require("process");
 
 // retrive all the filetypes from the syntax
@@ -60,6 +60,8 @@ module.exports = async function (
             // If the main grammar is missing, (usually markdown) just pass the test
             return true;
         }
+        // set the onigLib cause apparently its null sometimes
+        grammar._onigLib = onigLib
         let ruleStack = null;
         let lineNumber = 1;
         for (const line of fixture) {

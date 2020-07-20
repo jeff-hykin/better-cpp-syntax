@@ -22,26 +22,25 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: asm
-  scopes:
+  scopesBegin:
     - meta.asm
+  scopes:
     - storage.type.asm
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly
 - source: ':'
   scopesBegin:
-    - punctuation.range-based
+    - punctuation.separator.delimiter.colon.assembly
 - source: ':'
 - source: ':'
   scopesEnd:
-    - punctuation.range-based
+    - punctuation.separator.delimiter.colon.assembly
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
+    - punctuation.section.parens.end.bracket.round.assembly
   scopesEnd:
-    - meta.parens.block
+    - meta.asm
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -74,14 +73,13 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: __asm__
-  scopes:
+  scopesBegin:
     - meta.asm
+  scopes:
     - storage.type.asm
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -94,64 +92,58 @@
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
-- source: 'ld2 {v4.16b, v5.16b}, ['
-- source: '%'
-  scopes:
-    - invalid.illegal.placeholder
-- source: '[curpal0]]'
+    - punctuation.definition.string.begin.assembly
+- source: 'ld2 {v4.16b, v5.16b}, [%[curpal0]]'
+  scopesBegin:
+    - meta.embedded.assembly
 - source: \n
   scopes:
     - constant.character.escape
+  scopesEnd:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.begin
-- source: 'ld2 {v6.16b, v7.16b}, ['
-- source: '%'
-  scopes:
-    - invalid.illegal.placeholder
-- source: '[curpal1]]'
+    - punctuation.definition.string.begin.assembly
+- source: 'ld2 {v6.16b, v7.16b}, [%[curpal1]]'
+  scopesBegin:
+    - meta.embedded.assembly
 - source: \n
   scopes:
     - constant.character.escape
+  scopesEnd:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: ':'
   scopes:
-    - punctuation.range-based
+    - punctuation.separator.delimiter.colon.assembly
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
-  scopes:
-    - punctuation.definition.begin.bracket.square
 - source: prevTileLo
-- source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - variable.other.asm.label
+- source: ']'
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: +w
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: prevTile
   scopes:
     - variable.other.object.access
@@ -176,39 +168,29 @@
     - meta.bracket.square.access
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens.block
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+    - punctuation.section.parens.end.bracket.round.assembly.inner
+- source: ', '
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
-  scopes:
-    - punctuation.definition.begin.bracket.square
 - source: prevTileHi
-- source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - variable.other.asm.label
+- source: ']'
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: +w
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: prevTile
   scopes:
     - variable.other.object.access
@@ -233,212 +215,194 @@
     - meta.bracket.square.access
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens.block
+    - punctuation.section.parens.end.bracket.round.assembly.inner
 - source: ':'
   scopes:
-    - punctuation.range-based
+    - punctuation.separator.delimiter.colon.assembly
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
-  scopes:
-    - punctuation.definition.begin.bracket.square
 - source: curpal0
-- source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - variable.other.asm.label
+- source: ']'
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: r
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: curpal0
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens.block
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+    - punctuation.section.parens.end.bracket.round.assembly.inner
+- source: ', '
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
-  scopes:
-    - punctuation.definition.begin.bracket.square
 - source: curpal1
-- source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - variable.other.asm.label
+- source: ']'
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: r
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: (
-  scopesBegin:
-    - meta.parens.block
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: curpal1
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens.block
+    - punctuation.section.parens.end.bracket.round.assembly.inner
 - source: ':'
   scopes:
-    - punctuation.range-based
+    - punctuation.separator.delimiter.colon.assembly
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: memory
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q0
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q1
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q2
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q3
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q4
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q5
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q6
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
-- source: ','
-  scopes:
-    - punctuation.separator.delimiter
+- source: ', '
 - source: '"'
   scopesBegin:
     - string.quoted.double
   scopes:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.begin.assembly
 - source: q7
+  scopes:
+    - meta.embedded.assembly
 - source: '"'
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.end.assembly
   scopesEnd:
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
+    - punctuation.section.parens.end.bracket.round.assembly
   scopesEnd:
-    - meta.parens.block
+    - meta.asm
 - source: ;
   scopes:
     - punctuation.terminator.statement
