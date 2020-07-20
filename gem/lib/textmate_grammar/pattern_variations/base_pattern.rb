@@ -373,36 +373,39 @@ class PatternBase
         # TODO: make this method easier to understand
 
         # rubocop:disable Metrics/LineLength
+        begin
+            plugins = Grammar.plugins
+            plugins.reject! { |p| (@original_arguments.keys & p.class.options).empty? }
 
-        plugins = Grammar.plugins
-        plugins.reject! { |p| (@original_arguments.keys & p.class.options).empty? }
+            regex_as_string =
+                case @original_arguments[:match]
+                when PatternBase then @original_arguments[:match].to_s(depth + 2, true)
+                when Regexp then @original_arguments[:match].inspect
+                when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
+                end
+            indent = "  " * depth
+            output = indent + do_get_to_s_name(top_level)
+            # basic pattern information
+            output += "\n#{indent}  match: " + regex_as_string.lstrip
+            output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
+            output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
+            # unit tests
+            output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s if @arguments[:should_fully_match]
+            output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
+            output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s if @arguments[:should_partially_match]
+            output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s if @arguments[:should_not_partially_match]
 
-        regex_as_string =
-            case @original_arguments[:match]
-            when PatternBase then @original_arguments[:match].to_s(depth + 2, true)
-            when Regexp then @original_arguments[:match].inspect
-            when String then "/" + Regexp.escape(@original_arguments[:match]) + "/"
-            end
-        indent = "  " * depth
-        output = indent + do_get_to_s_name(top_level)
-        # basic pattern information
-        output += "\n#{indent}  match: " + regex_as_string.lstrip
-        output += ",\n#{indent}  tag_as: \"" + @arguments[:tag_as] + '"' if @arguments[:tag_as]
-        output += ",\n#{indent}  reference: \"" + @arguments[:reference] + '"' if @arguments[:reference]
-        # unit tests
-        output += ",\n#{indent}  should_fully_match: " + @arguments[:should_fully_match].to_s if @arguments[:should_fully_match]
-        output += ",\n#{indent}  should_not_fully_match: " + @arguments[:should_not_fully_match].to_s if @arguments[:should_not_fully_match]
-        output += ",\n#{indent}  should_partially_match: " + @arguments[:should_partially_match].to_s if @arguments[:should_partially_match]
-        output += ",\n#{indent}  should_not_partially_match: " + @arguments[:should_not_partially_match].to_s if @arguments[:should_not_partially_match]
-
-        output += ",\n#{indent}  includes: " + @arguments[:includes].to_s if @arguments[:includes]
-        # add any linter/transform configurations
-        plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
-        # subclass, ending and recursive
-        output += do_add_attributes(indent)
-        output += ",\n#{indent})"
-        output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
-        output
+            output += ",\n#{indent}  includes: " + @arguments[:includes].to_s if @arguments[:includes]
+            # add any linter/transform configurations
+            plugins.each { |p| output += p.display_options(indent + "  ", @original_arguments) }
+            # subclass, ending and recursive
+            output += do_add_attributes(indent)
+            output += ",\n#{indent})"
+            output += @next_pattern.to_s(depth, false).lstrip if @next_pattern
+            output
+        rescue
+            return @original_arguments.to_s
+        end
         # rubocop:enable Metrics/LineLength
     end
 
