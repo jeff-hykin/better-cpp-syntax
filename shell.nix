@@ -12,12 +12,6 @@ in
         
         # inside that shell, make sure to use these packages
         buildInputs = [
-            # for python and venv, uncomment the following
-                # normalPackages.cmake
-                # normalPackages.python37
-                # normalPackages.python37Packages.setuptools
-                # normalPackages.python37Packages.pip
-                # normalPackages.python37Packages.virtualenv
             # basic commandline tools
             normalPackages.ripgrep
             normalPackages.which
