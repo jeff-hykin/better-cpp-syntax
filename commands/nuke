@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# summary
+#   this is a nuclear cleaning option 
+#   - if its not part of the git repo
+#   - and it will take a long time (>1min) to get the data back
+#   => this command should get rid of it
+#   useful when you're trying to reset a project back to 0 when debugging
+
+# clean all the small things
+./commands/clean
+
+# add big things to clean here
+# ex:
+#   rm -rfv "node_modules/"
+#   rm -rfv ".venv/"
+#   rm -rfv "MNIST_dataset/"
