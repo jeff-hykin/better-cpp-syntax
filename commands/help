@@ -4,24 +4,12 @@ echo "
   Help (press q to exit, scroll with mouse or arrow keys)
 ========================================================================
 
-main.py -
-    test this by running
-        python source/_tests/test_main.py
-    
-    main.py imports all the other sections, and combines them together.
-    Running main.py directly (instead of test_main.py)
-    will probably result in errors, because you're probably
-    not on the TX2 with a live video feed (which is what main.py is 
-    designed to run on).
-
-everything else -
-    All the other sections/folders (aiming, modeling, tracking, etc)
-    should have their own tests inside their folder.
-
-    Basiclly every section should have code wrapped up inside functions
-    that can be individually tested. Then main.py will import those 
-    functions and combine them so that (in theory) everything works.
-    
-See the README.md for more detail (probably)
+This command should explain the structure of the project
+    - how to find the source code of some feature 
+    - what to expect when running tests
+    - resolving common errors
+    - metion API/documentation
+    - references to readme and other files
+    - etc
 
 " | less
