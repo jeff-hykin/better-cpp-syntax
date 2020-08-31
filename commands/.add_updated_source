@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+echo "Enter the name you want to use for the updated source"
+echo "(typically nix-YYYY-MM-DD such as nix-2020-8-1)"
+echo "(spaces not allowed, but - and _ are allowed)"
+read name
+
+# create the updated nixpkgs
+echo "Adding New Package..."
+niv add NixOS/nixpkgs --name "$name" -b nixpkgs-unstable --sources-file ./settings/nix/sources.json 1>/dev/null && echo "
+    In your ./settings/nix/shell.nix there should be a line simlar to:
+        normalPackages = import sources.nixpkgs {};
+    
+    Under that line you can now add something like:
+        freshPackages = import sources.$name {};
+
+"

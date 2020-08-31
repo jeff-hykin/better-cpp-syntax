@@ -26,6 +26,8 @@ in
             normalPackages.tree
             normalPackages.less
             normalPackages.niv
+            normalPackages.cacert # needed for niv
+            normalPackages.nix    # needed for niv
             # 
             # how to add packages?
             # 
