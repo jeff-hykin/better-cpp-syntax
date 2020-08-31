@@ -13,7 +13,7 @@ function git_delete_changes {
 
 function git_sync { # git push && git pull
     args="$@"
-    if [[ $a = "" ]]; then
+    if [[ $args = "" ]]; then
         git add -A && git commit -m "-";git pull --no-edit;git push
     else
         git add -A && git commit -m "$args";git pull --no-edit;git push
