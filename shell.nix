@@ -25,15 +25,19 @@ in
             # 
             # how to add packages?
             # 
+            # to browse all sub-packages run (and then open packages.txt):
+            #     nix-env -f 'https://git.io/Jf0cc' -qaP > packages.txt
+            # 
             # to find package verisons use:
             #     nix-env -qP --available PACKAGE_NAME_HERE | cat
             # ex:
-            #     nix-env -qP --available opencv
+            #     nix-env -qP --available opencv 
+            # 
             # to add those specific versions find the nixpkgs.STUFF 
             # and add it here^ as normalPackages.STUFF
-            # ex find:
+            # ex one of the results of searching for opencv is:
             #     nixpkgs.python38Packages.opencv3  opencv-3.4.8
-            # ex add:
+            # ex add it, you'd put this in the list above:
             #     normalPackages.python38Packages.opencv3
             # 
             # NOTE: some things (like setuptools) just don't show up in the 
