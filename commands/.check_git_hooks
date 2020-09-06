@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-for dir in ./settings/git_hooks/*
+for dir in ./settings/git/hooks/*
 do
     git_file=".git/hooks/$(basename $dir)"
     # ensure all the git hook files exist
@@ -7,7 +7,7 @@ do
     # make sure each calls the hooks
     cat $git_file | grep "#START: xd-nix-hooks (don't delete)"  &>/dev/null || echo "
         #START: xd-nix-hooks (don't delete)
-        for hook in './settings/git_hooks/$(basename $dir)'
+        for hook in './settings/git/hooks/$(basename $dir)/'*
         do
             source \$hook
         done
