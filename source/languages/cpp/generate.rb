@@ -1155,6 +1155,15 @@ grammar = Grammar.new(
                     :evaluation_context,
                 ]
             ),
+            # arrow return type
+            Pattern.new(
+                lookBehindFor(/^|\)/).maybe(@spaces).then(
+                    match: /->/,
+                    tag_as: "punctuation.definition.function.return-type"
+                ).then(std_space).then(
+                    qualified_type
+                ),
+            ),
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
