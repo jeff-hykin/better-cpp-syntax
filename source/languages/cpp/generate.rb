@@ -2294,7 +2294,7 @@ grammar = Grammar.new(
                                 # inheritance
                                 #
                                 std_space.then(
-                                    match: /:/,
+                                    match: /:/.lookAheadToAvoid(/:/),
                                     tag_as: "punctuation.separator.colon.inheritance"
                                 )
                             )
