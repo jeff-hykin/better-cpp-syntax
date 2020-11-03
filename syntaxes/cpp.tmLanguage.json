@@ -2222,7 +2222,7 @@
       ]
     },
     "control_flow_keywords": {
-      "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:co_return)|(?:co_yield)|(?:co_await)|(?:continue)|(?:default)|(?:switch)|(?:return)|(?:catch)|(?:while)|(?:throw)|(?:break)|(?:case)|(?:goto)|(?:else)|(?:for)|(?:try)|(?:if)|(?:do))(?!\\w))",
+      "match": "((?:((?:(?>(?:\\s)+)|\\/\\*(?:[^\\*]|(?:\\*)++[^\\/])*+(?:\\*)++\\/)+)|(?:\\b)|(?=\\W)|(?<=\\W)|(?:\\A)|(?:\\Z)))((?<!\\w)(?:(?:co_return)|(?:co_yield)|(?:co_await)|(?:continue)|(?:default)|(?:return)|(?:switch)|(?:catch)|(?:while)|(?:throw)|(?:break)|(?:else)|(?:case)|(?:goto)|(?:for)|(?:try)|(?:if)|(?:do))(?!\\w))",
       "captures": {
         "1": {
           "patterns": [
@@ -7166,36 +7166,35 @@
       "name": "meta.preprocessor.macro.cpp",
       "patterns": [
         {
-          "begin": "\\G(?:(?:\\s)+)?(\\()",
-          "end": "\\)",
-          "beginCaptures": {
+          "match": "\\G(?:(?:\\s)+)?(\\()([^\\(]*)(\\))",
+          "captures": {
             "1": {
               "name": "punctuation.definition.parameters.begin.preprocessor.cpp"
-            }
-          },
-          "endCaptures": {
-            "0": {
+            },
+            "2": {
+              "patterns": [
+                {
+                  "match": "(?<=[(,])(?:(?:\\s)+)?((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(?:\\s)+)?",
+                  "captures": {
+                    "1": {
+                      "name": "variable.parameter.preprocessor.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": ",",
+                  "name": "punctuation.separator.parameters.cpp"
+                },
+                {
+                  "match": "\\.\\.\\.",
+                  "name": "punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp"
+                }
+              ]
+            },
+            "3": {
               "name": "punctuation.definition.parameters.end.preprocessor.cpp"
             }
-          },
-          "patterns": [
-            {
-              "match": "(?<=[(,])(?:(?:\\s)+)?((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)(?:(?:\\s)+)?",
-              "captures": {
-                "1": {
-                  "name": "variable.parameter.preprocessor.cpp"
-                }
-              }
-            },
-            {
-              "match": ",",
-              "name": "punctuation.separator.parameters.cpp"
-            },
-            {
-              "match": "\\.\\.\\.",
-              "name": "punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp"
-            }
-          ]
+          }
         },
         {
           "include": "#macro_context"

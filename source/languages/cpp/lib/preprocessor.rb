@@ -270,37 +270,36 @@ identifier = grammar[:identifier]
         end_pattern: non_escaped_newline,
         includes: [
             # the parameters
-            PatternRange.new(
-                start_pattern: Pattern.new(
-                    # find the name of the function
-                    /\G/.maybe(@spaces).then(
-                        match: /\(/,
-                        tag_as: "punctuation.definition.parameters.begin.preprocessor",
-                    )
-                ),
-                end_pattern: Pattern.new(
+            Pattern.new(
+                # find the name of the function
+                /\G/.maybe(@spaces).then(
+                    match: /\(/,
+                    tag_as: "punctuation.definition.parameters.begin.preprocessor",
+                ).then(
+                    match: zeroOrMoreOf(/[^\(]/),
+                    includes: [
+                        # a parameter
+                        Pattern.new(
+                            lookBehindFor(/[(,]/).maybe(@spaces).then(
+                                    match: identifier,
+                                    tag_as: "variable.parameter.preprocessor"
+                            ).maybe(@spaces)
+                        ),
+                        # commas
+                        Pattern.new(
+                            match: /,/,
+                            tag_as: "punctuation.separator.parameters"
+                        ),
+                        # ellipses
+                        Pattern.new(
+                            match: /\.\.\./,
+                            tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
+                        )
+                    ]
+                ).then(
                     match: /\)/,
                     tag_as: "punctuation.definition.parameters.end.preprocessor"
-                ),
-                includes: [
-                    # a parameter
-                    Pattern.new(
-                        lookBehindFor(/[(,]/).maybe(@spaces).then(
-                                match: identifier,
-                                tag_as: "variable.parameter.preprocessor"
-                        ).maybe(@spaces)
-                    ),
-                    # commas
-                    Pattern.new(
-                        match: /,/,
-                        tag_as: "punctuation.separator.parameters"
-                    ),
-                    # ellipses
-                    Pattern.new(
-                        match: /\.\.\./,
-                        tag_as: "punctuation.vararg-ellipses.variable.parameter.preprocessor"
-                    )
-                ]
+                )
             ),
             # everything after the parameters
             :macro_context,
