@@ -102,12 +102,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+    - override
 - source: override
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.override
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+    - override
 - source: '{'
   scopes:
     - >-

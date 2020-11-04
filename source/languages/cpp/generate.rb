@@ -472,7 +472,7 @@ grammar = Grammar.new(
         std_space.then(
             tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
             match: Pattern.new(
-                variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ].lookAheadFor(
+                oneOrMoreOf(std_space.then(variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ])).lookAheadFor(
                     Pattern.new(/\s*/).then(
                         Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
                     )

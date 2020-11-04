@@ -12429,11 +12429,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12483,11 +12485,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12563,11 +12567,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - >-
@@ -12712,11 +12718,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12760,11 +12768,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12865,11 +12875,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12925,11 +12937,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13039,11 +13053,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13096,11 +13112,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13219,11 +13237,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13288,11 +13308,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13371,14 +13393,15 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
   scopesEnd:
     - meta.function.definition
     - meta.head.function.definition
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13400,11 +13423,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13448,11 +13473,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition

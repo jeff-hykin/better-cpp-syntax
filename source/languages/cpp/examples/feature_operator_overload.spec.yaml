@@ -433,11 +433,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - >-
@@ -485,11 +487,13 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
-  scopes:
-    - storage.modifier.specifier.const
+  scopesBegin:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: noexcept
-  scopes:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
+  scopesEnd:
+    - storage.modifier.specifier.functional.post-parameters.const
+    - noexcept
 - source: '{'
   scopes:
     - >-
