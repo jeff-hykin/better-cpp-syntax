@@ -2472,10 +2472,10 @@ grammar = Grammar.new(
                         match: Pattern.new(/\\x/).zeroOrMoreOf(/0/).then(
                             match: /[0-9a-fA-F]/,
                             how_many_times?: 2.times,
-                        ),
+                        ).lookAheadToAvoid(/[0-9a-fA-F]/),
                         tag_as: "constant.character.escape",
                     ).or(
-                        match: Pattern.new(/\\x/).or(/\\x[0-9a-fA-F]*/),
+                        match: Pattern.new(/\\x[0-9a-fA-F]*/).or(/\\x/),
                         tag_as: "invalid.illegal.unknown-escape",
                     ),
                     :string_escapes_context_c
