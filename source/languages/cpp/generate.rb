@@ -2468,12 +2468,15 @@ grammar = Grammar.new(
                         tag_as: "constant.character.escape",
                     ),
                     # hex escapes
-                    Pattern.new(
-                        match: Pattern.new("\\x").then(
+                    hex_pattern = Pattern.new(
+                        match: Pattern.new(/\\x/).zeroOrMoreOf(/0/).then(
                             match: /[0-9a-fA-F]/,
                             how_many_times?: 2.times,
                         ),
                         tag_as: "constant.character.escape",
+                    ).or(
+                        match: Pattern.new(/\\x/).or(/\\x[0-9a-fA-F]*/),
+                        tag_as: "invalid.illegal.unknown-escape",
                     ),
                     :string_escapes_context_c
                 ]
@@ -2482,14 +2485,17 @@ grammar = Grammar.new(
                 tag_as: "string.quoted.single",
                 start_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.begin",
-                    match: lookBehindToAvoid(/[0-9A-Fa-f]/).maybe(match: /u|u8|U|L/, tag_as: "meta.encoding")
-                        .then(/'/),
+                    match: lookBehindToAvoid(/[0-9A-Fa-f]/).maybe(
+                        match: /u|u8|U|L/,
+                        tag_as: "meta.encoding"
+                    ).then(/'/),
                 ),
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /'/,
                 ),
                 includes: [
+                    hex_pattern,
                     :string_escapes_context_c,
                     :line_continuation_character,
                 ]

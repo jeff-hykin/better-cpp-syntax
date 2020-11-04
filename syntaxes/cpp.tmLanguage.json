@@ -15413,8 +15413,15 @@
               "name": "constant.character.escape.cpp"
             },
             {
-              "match": "\\\\x[0-9a-fA-F]{2}",
-              "name": "constant.character.escape.cpp"
+              "match": "(?:(\\\\x0*[0-9a-fA-F]{2})|((?:\\\\x|\\\\x[0-9a-fA-F]*)))",
+              "captures": {
+                "1": {
+                  "name": "constant.character.escape.cpp"
+                },
+                "2": {
+                  "name": "invalid.illegal.unknown-escape.cpp"
+                }
+              }
             },
             {
               "include": "#string_escapes_context_c"
@@ -15439,6 +15446,17 @@
           },
           "name": "string.quoted.single.cpp",
           "patterns": [
+            {
+              "match": "(?:(\\\\x0*[0-9a-fA-F]{2})|((?:\\\\x|\\\\x[0-9a-fA-F]*)))",
+              "captures": {
+                "1": {
+                  "name": "constant.character.escape.cpp"
+                },
+                "2": {
+                  "name": "invalid.illegal.unknown-escape.cpp"
+                }
+              }
+            },
             {
               "include": "#string_escapes_context_c"
             },
