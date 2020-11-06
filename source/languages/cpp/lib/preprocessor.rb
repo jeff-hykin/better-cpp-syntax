@@ -249,7 +249,8 @@ identifier = grammar[:identifier]
 #
     grammar[:single_line_macro] = Pattern.new(
         should_fully_match: ['#define EXTERN_C extern "C"'],
-        match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
+        should_not_partial_match: ['#define test /* partial comment'],
+        match: /^/.then(std_space).then(/#define/).oneOrMoreOf(oneOf([/[^\/]+/, /\/(?:[^*]|$)/])).lookBehindToAvoid(/[\\]/).then(@end_of_line),
         includes: [
             :macro,
             :comments,
