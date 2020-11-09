@@ -23,3 +23,6 @@ rm -rfv node_modules
 
 # all the virtual env pip modules (several minutes to rebuild these)
 rm -rfv .venv
+
+# the mac library cache for mac
+rm -rfv ./Library/Caches/pip
