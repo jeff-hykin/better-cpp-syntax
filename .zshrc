@@ -84,6 +84,8 @@ else
 
     autoload bashcompinit
     bashcompinit
+    
+    unalias -m '*' # remove all default aliases
 fi
 
 # 
