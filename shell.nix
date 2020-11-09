@@ -65,6 +65,9 @@ in
                 fi
             done
             
+            mkdir .cache/
+            ln -s "$HOME/.cache/nix" "./.cache/nix"
+            
             # so make the home folder the same as the project folder
             export HOME="$(pwd)"
             # make it explicit which nixpkgs we're using
