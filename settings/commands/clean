@@ -12,6 +12,8 @@
 #   
 #   this can be useful for fixing corrupted setups
 
+unlink ./.cache/nix
+
 # the usual things
 rm -rfv ./settings/.cache **/*.cleanable **/*.cleanable.*
 
