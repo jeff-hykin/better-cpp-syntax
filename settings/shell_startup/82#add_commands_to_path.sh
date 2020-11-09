@@ -1,8 +1,8 @@
 # add commands to path
-PATH="$PWD/commands:$PATH"
+PATH="$PWD/settings/commands:$PATH"
 
 # if theres a help command
-if [[ -f "./commands/help" ]]; then
+if [[ -f "./settings/commands/help" ]]; then
     # override the default bash "help"
-    alias help="./commands/help" 
+    alias help="./settings/commands/help" 
 fi

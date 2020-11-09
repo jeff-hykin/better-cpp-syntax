@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-echo "project commands:"
-
-# list the files in the commands folder
-ls -1 --color ./commands | sed 's/^/    /'
-
-# list other project-specific commands (npm run, make, etc)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-for dir in ./settings/git/hooks/*
+for dir in ./settings/git_hooks/*
 do
     git_file=".git/hooks/$(basename $dir)"
     # ensure all the git hook files exist

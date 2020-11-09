@@ -1,3 +1,3 @@
 echo ""
 echo ""
-./commands/commands
+./settings/commands/commands
