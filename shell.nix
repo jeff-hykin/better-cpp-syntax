@@ -65,8 +65,8 @@ in
                 fi
             done
             
-            mkdir .cache/
-            ln -s "$HOME/.cache/nix" "./.cache/nix"
+            mkdir -p .cache/
+            ln -s "$HOME/.cache/nix" "./.cache/" &>/dev/null
             
             # so make the home folder the same as the project folder
             export HOME="$(pwd)"
