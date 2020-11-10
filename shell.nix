@@ -42,12 +42,16 @@ let
             })
         ) packageJson.nix.packages;
     };
+    
+    packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
+        definitions.mainPackages.darwin.ps # the ps command
+    ];
 # using those definitions
 in
     # create a shell
     definitions.mainPackages.mkShell {
         # inside that shell, make sure to use these packages
-        buildInputs = builtins.map (each: each.source) definitions.packagesWithSources;
+        buildInputs = packagesForMacOnly ++ builtins.map (each: each.source) definitions.packagesWithSources;
         
         # run some bash code before starting up the shell
         shellHook = ''
