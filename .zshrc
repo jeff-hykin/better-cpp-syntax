@@ -40,6 +40,7 @@ else
     # import paths from nix
     # 
     zsh_syntax_highlighting__path="$(nix_path_for zsh-syntax-highlighting)"
+    zsh_auto_suggest__path="$(nix_path_for zsh-autosuggestions)"
     spaceship_prompt__path="$(nix_path_for spaceship-prompt)"
     oh_my_zsh__path="$(nix_path_for oh-my-zsh)"
     zsh__path="$(nix_path_for zsh)"
@@ -73,6 +74,10 @@ else
     export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$zsh_syntax_highlighting__path/share/zsh-syntax-highlighting/highlighters"
     source "$ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR/../zsh-syntax-highlighting.zsh"
     
+    # 
+    # enable auto suggestions
+    # 
+    source "$zsh_auto_suggest__path/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
     
     # Set Spaceship ZSH as a prompt
     autoload -U promptinit; promptinit
