@@ -1,0 +1,1 @@
+inject_into_path "man"

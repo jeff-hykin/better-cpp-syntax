@@ -45,7 +45,13 @@ let
     
     # TODO: add support for package.json to have nested packages
     nestedPackages = [
-        definitions.mainPackages.unixtools.arp
+        # definitions.mainPackages.unixtools.arp      # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # definitions.mainPackages.unixtools.ifconfig # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # definitions.mainPackages.unixtools.netstat  # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # definitions.mainPackages.unixtools.ping     # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # definitions.mainPackages.unixtools.route    # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # definitions.mainPackages.unixtools.logger # fail on macos
+        # definitions.mainPackages.unixtools.wall   # fail on macos
         definitions.mainPackages.unixtools.col
         definitions.mainPackages.unixtools.column
         definitions.mainPackages.unixtools.fdisk
@@ -55,22 +61,16 @@ let
         definitions.mainPackages.unixtools.getopt
         definitions.mainPackages.unixtools.hexdump
         definitions.mainPackages.unixtools.hostname
-        definitions.mainPackages.unixtools.ifconfig
         definitions.mainPackages.unixtools.killall
         definitions.mainPackages.unixtools.locale
-        definitions.mainPackages.unixtools.logger
         definitions.mainPackages.unixtools.more
         definitions.mainPackages.unixtools.mount
-        definitions.mainPackages.unixtools.netstat
-        definitions.mainPackages.unixtools.ping
         definitions.mainPackages.unixtools.ps
         definitions.mainPackages.unixtools.quota
-        definitions.mainPackages.unixtools.route
         definitions.mainPackages.unixtools.script
         definitions.mainPackages.unixtools.sysctl
         definitions.mainPackages.unixtools.top
         definitions.mainPackages.unixtools.umount
-        definitions.mainPackages.unixtools.wall
         definitions.mainPackages.unixtools.whereis
         definitions.mainPackages.unixtools.write
         definitions.mainPackages.unixtools.xxd
@@ -78,7 +78,6 @@ let
     
     # TODO: add support for OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
-        definitions.mainPackages.darwin.ps # the ps command
     ];
 # using those definitions
 in
