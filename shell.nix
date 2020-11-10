@@ -43,6 +43,40 @@ let
         ) packageJson.nix.packages;
     };
     
+    # TODO: add support for package.json to have nested packages
+    nestedPackages = [
+        definitions.mainPackages.unixtools.arp
+        definitions.mainPackages.unixtools.col
+        definitions.mainPackages.unixtools.column
+        definitions.mainPackages.unixtools.fdisk
+        definitions.mainPackages.unixtools.fsck
+        definitions.mainPackages.unixtools.getconf
+        definitions.mainPackages.unixtools.getent
+        definitions.mainPackages.unixtools.getopt
+        definitions.mainPackages.unixtools.hexdump
+        definitions.mainPackages.unixtools.hostname
+        definitions.mainPackages.unixtools.ifconfig
+        definitions.mainPackages.unixtools.killall
+        definitions.mainPackages.unixtools.locale
+        definitions.mainPackages.unixtools.logger
+        definitions.mainPackages.unixtools.more
+        definitions.mainPackages.unixtools.mount
+        definitions.mainPackages.unixtools.netstat
+        definitions.mainPackages.unixtools.ping
+        definitions.mainPackages.unixtools.ps
+        definitions.mainPackages.unixtools.quota
+        definitions.mainPackages.unixtools.route
+        definitions.mainPackages.unixtools.script
+        definitions.mainPackages.unixtools.sysctl
+        definitions.mainPackages.unixtools.top
+        definitions.mainPackages.unixtools.umount
+        definitions.mainPackages.unixtools.wall
+        definitions.mainPackages.unixtools.whereis
+        definitions.mainPackages.unixtools.write
+        definitions.mainPackages.unixtools.xxd
+    ];
+    
+    # TODO: add support for OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
         definitions.mainPackages.darwin.ps # the ps command
     ];
@@ -51,7 +85,7 @@ in
     # create a shell
     definitions.mainPackages.mkShell {
         # inside that shell, make sure to use these packages
-        buildInputs = packagesForMacOnly ++ builtins.map (each: each.source) definitions.packagesWithSources;
+        buildInputs = nestedPackages ++ packagesForMacOnly ++ builtins.map (each: each.source) definitions.packagesWithSources;
         
         # run some bash code before starting up the shell
         shellHook = ''
