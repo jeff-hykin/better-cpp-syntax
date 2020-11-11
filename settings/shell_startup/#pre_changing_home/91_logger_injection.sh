@@ -1,1 +1,1 @@
-inject_into_path "man"
+inject_into_path "logger"
