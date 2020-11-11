@@ -25,8 +25,10 @@ let
             config = packageJson.nix.config;
         };
         # 
-        # reorganize the list of packages into a list like:
-        #    [ { name: "blah", commitHash:"blah", source: (*an object*) }, ... ]
+        # reorganize the list of packages from:
+        #    [ { load: "blah", from:"blah-hash" }, ... ]
+        # into a list like:
+        #    [ { name: "blah", commitHash:"blah-hash", source: (*an object*) }, ... ]
         # 
         packagesWithSources = builtins.map (
             each: ({
@@ -43,13 +45,16 @@ let
         ) packageJson.nix.packages;
     };
     
-    # TODO: add support for package.json to have nested packages
+    # TODO: add support for the package.json to have nested packages
     nestedPackages = [
-        # definitions.mainPackages.unixtools.arp      # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
-        # definitions.mainPackages.unixtools.ifconfig # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
-        # definitions.mainPackages.unixtools.netstat  # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
-        # definitions.mainPackages.unixtools.ping     # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
-        # definitions.mainPackages.unixtools.route    # commented out because of security flaws in openssl-1.0.2u, TODO: make a fixed version with overrides
+        # 
+        # this is just a list of all of the standard unix tools
+        # 
+        definitions.mainPackages.unixtools.arp         # depends on openssl_1_0_2     
+        definitions.mainPackages.unixtools.ifconfig    # depends on openssl_1_0_2         
+        definitions.mainPackages.unixtools.netstat     # depends on openssl_1_0_2         
+        definitions.mainPackages.unixtools.ping        # depends on openssl_1_0_2     
+        definitions.mainPackages.unixtools.route       # depends on openssl_1_0_2         
         # definitions.mainPackages.unixtools.logger # fail on macos
         # definitions.mainPackages.unixtools.wall   # fail on macos
         definitions.mainPackages.unixtools.col
@@ -76,8 +81,13 @@ let
         definitions.mainPackages.unixtools.xxd
     ];
     
-    # TODO: add support for OS-specific packages (if statement inside package inclusion)
+    # TODO: add support for the package.json to have OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
+        # python and venv
+        definitions.mainPackages.python37
+        definitions.mainPackages.python37Packages.setuptools
+        definitions.mainPackages.python37Packages.pip
+        definitions.mainPackages.python37Packages.virtualenv
     ];
 # using those definitions
 in
