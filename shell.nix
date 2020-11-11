@@ -14,9 +14,9 @@
 let        
     definitions = rec {
         # 
-        # load the package.json cause were going to extract basically everything from there
+        # load the info.json cause were going to extract basically everything from there
         # 
-        packageJson = builtins.fromJSON (builtins.readFile ./package.json);
+        packageJson = builtins.fromJSON (builtins.readFile ./settings/info.json);
         # 
         # load the store with all the packages, and load it with the config
         # 
@@ -45,7 +45,7 @@ let
         ) packageJson.nix.packages;
     };
     
-    # TODO: add support for the package.json to have nested packages
+    # TODO: add support for the info.json to have nested packages
     nestedPackages = [
         # 
         # this is just a list of all of the standard unix tools
@@ -81,7 +81,7 @@ let
         definitions.mainPackages.unixtools.xxd
     ];
     
-    # TODO: add support for the package.json to have OS-specific packages (if statement inside package inclusion)
+    # TODO: add support for the info.json to have OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
         # python and venv
         definitions.mainPackages.python37
