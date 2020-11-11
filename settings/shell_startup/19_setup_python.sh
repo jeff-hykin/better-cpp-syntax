@@ -45,6 +45,7 @@ else
     then
         echo "it looks like pip3 still isn't installed."
         echo "I'll let the rest of the project load but it will likely be broken"
+        sleep 5
     else
         
         # 
@@ -69,6 +70,7 @@ else
         then
             echo "it looks like python3 still isn't installed."
             echo "I'll let the rest of the project load but it will likely be broken"
+            sleep 5
         # if python3 exists
         else
         
