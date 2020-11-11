@@ -1,22 +1,25 @@
 # 
-# My own
+# Custom
 # 
+\.idea
 *.nosync*
 
 #
 # home folder files
 #
-.zsh_history
 .bash_history
+.zsh_history
 .zcompdump*
-.gitconfig
-.local
-.cache
 .nix-defexpr
 .nix-profile
-.npmrc
-Library/Caches/pip/
 .lesshst
+.npmrc
+.gitconfig
+.local/
+.cache/
+Library/Caches/
+# dont remove this next one unless you want passwords to be public
+Library/Keychains/
 
 # 
 # Linux
