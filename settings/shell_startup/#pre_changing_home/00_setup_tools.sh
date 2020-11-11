@@ -13,7 +13,7 @@ $1" >> .gitignore
 }
 
 function inject_into_path {
-    system_path="$(which "$1")"
+    system_path="$(which "$1" 2>/dev/null)"
     # make sure its a file
     if [[ -f "$system_path" ]]; then
         mkdir -p ./settings/path_injection.nosync

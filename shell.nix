@@ -98,8 +98,9 @@ in
         
         # run some bash code before starting up the shell
         shellHook = ''
+        export new_home="settings/home"
         # we don't want to give nix or other apps our home folder
-        if [[ "$HOME" != "$(pwd)" ]] 
+        if [[ "$HOME" != "$(pwd)/$new_home" ]] 
         then
             #
             # find and run all the startup scripts in alphabetical order
@@ -107,16 +108,16 @@ in
             for file in ./settings/shell_startup/#pre_changing_home/*
             do
                 # make sure its a file
-                if [[ -f $file ]]; then
-                    source $file
+                if [[ -f "$file" ]]; then
+                    source "$file"
                 fi
             done
             
-            mkdir -p .cache/
-            ln -s "$HOME/.cache/nix" "./.cache/" &>/dev/null
+            mkdir -p "$new_home/.cache/"
+            ln -s "$HOME/.cache/nix" "$new_home/.cache/" &>/dev/null
             
             # so make the home folder the same as the project folder
-            export HOME="$(pwd)"
+            export HOME="$(pwd)/$new_home"
             # make it explicit which nixpkgs we're using
             export NIX_PATH="nixpkgs=${definitions.mainRepo}:."
             
