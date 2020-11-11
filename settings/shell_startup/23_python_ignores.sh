@@ -7,5 +7,5 @@ $1" >> .gitignore
 }
 
 add_to_gitignore ".venv"
-# for some reason python creates this on Mac OS
-add_to_gitignore "Library/Caches/pip/*"
+# python creates a cache here on MacOS
+add_to_gitignore "Library/Caches"
