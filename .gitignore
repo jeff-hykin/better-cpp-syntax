@@ -4,23 +4,6 @@
 \.idea
 *.nosync*
 
-#
-# home folder files
-#
-.bash_history
-.zsh_history
-.zcompdump*
-.nix-defexpr
-.nix-profile
-.lesshst
-.npmrc
-.gitconfig
-.local
-.cache
-Library/Caches
-# dont remove this next one unless you want passwords to be public
-Library/Keychains
-
 # 
 # Linux
 # 
@@ -422,12 +405,20 @@ dmypy.json
 # Ruby
 # 
 *.gem
+.gnupg
+.gnupg_pre_2.1
+.ipython
+.irb_history
+.jupyter
+.keras
+.luarocks
 *.rbc
 /.config
 /coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/
+.mongorc.js
 /spec/examples.txt
 /test/tmp/
 /test/version_tmp/
@@ -466,13 +457,21 @@ build-iPhoneSimulator/
 /vendor/bundle
 /lib/bundler/man/
 
-# for a library or gem, you might want to ignore these files since the code is
+# for a library or gem
+.gnupg
+.gnupg_pre_2.1
+.ipython
+.irb_history
+.jupyter
+.keras
+.luarocks
 # intended to run in multiple environments; otherwise, check them in:
 # Gemfile.lock
 # .ruby-version
 # .ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.mongorc.js, you might want to ignore these files since the code is
 .rvmrc
 
 # 
@@ -590,3 +589,24 @@ dkms.conf
 
 # Executables
 *.out
+
+#
+# home folder files
+#
+settings/home/*
+!settings/home/.zshrc
+# dont remove these next one unless you want passwords to be public
+# these are redundant, but kept as a fail-safe
+settings/home/Library/Keychains
+settings/home/.gnupg
+settings/home/.gnupg_pre_2.1
+settings/home/.npmrc
+settings/home/.vsce
+settings/home/.gitconfig
+settings/home/.mongorc.js
+settings/home/.ungitrc
+settings/home/.vuerc
+
+# this next line was auto-added, and may be very important (passwords/auth etc)
+# comment it out if dont want it to be ignored (and you know what you're doing)
+Library/Caches

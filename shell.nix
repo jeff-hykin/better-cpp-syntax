@@ -14,9 +14,9 @@
 let        
     definitions = rec {
         # 
-        # load the package.json cause were going to extract basically everything from there
+        # load the info.json cause were going to extract basically everything from there
         # 
-        packageJson = builtins.fromJSON (builtins.readFile ./package.json);
+        packageJson = builtins.fromJSON (builtins.readFile ./settings/info.json);
         # 
         # load the store with all the packages, and load it with the config
         # 
@@ -45,7 +45,7 @@ let
         ) packageJson.nix.packages;
     };
     
-    # TODO: add support for the package.json to have nested packages
+    # TODO: add support for the info.json to have nested packages
     nestedPackages = [
         # 
         # this is just a list of all of the standard unix tools
@@ -81,7 +81,7 @@ let
         definitions.mainPackages.unixtools.xxd
     ];
     
-    # TODO: add support for the package.json to have OS-specific packages (if statement inside package inclusion)
+    # TODO: add support for the info.json to have OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
         # python and venv
         definitions.mainPackages.python37
@@ -98,8 +98,9 @@ in
         
         # run some bash code before starting up the shell
         shellHook = ''
+        export new_home="settings/home"
         # we don't want to give nix or other apps our home folder
-        if [[ "$HOME" != "$(pwd)" ]] 
+        if [[ "$HOME" != "$(pwd)/$new_home" ]] 
         then
             #
             # find and run all the startup scripts in alphabetical order
@@ -107,16 +108,16 @@ in
             for file in ./settings/shell_startup/#pre_changing_home/*
             do
                 # make sure its a file
-                if [[ -f $file ]]; then
-                    source $file
+                if [[ -f "$file" ]]; then
+                    source "$file"
                 fi
             done
             
-            mkdir -p .cache/
-            ln -s "$HOME/.cache/nix" "./.cache/" &>/dev/null
+            mkdir -p "$new_home/.cache/"
+            ln -s "$HOME/.cache/nix" "$new_home/.cache/" &>/dev/null
             
             # so make the home folder the same as the project folder
-            export HOME="$(pwd)"
+            export HOME="$(pwd)/$new_home"
             # make it explicit which nixpkgs we're using
             export NIX_PATH="nixpkgs=${definitions.mainRepo}:."
             

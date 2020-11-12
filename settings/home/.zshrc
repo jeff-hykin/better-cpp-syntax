@@ -25,11 +25,11 @@ else
                                     builtins.import (
                                         builtins.fetchTarball {url="https://github.com/NixOS/nixpkgs/archive/${each.from}.tar.gz";}
                                     ) {
-                                        config = (builtins.fromJSON (builtins.readFile ./package.json)).nix.config;
+                                        config = (builtins.fromJSON (builtins.readFile ./settings/info.json)).nix.config;
                                     }
                                 );
                             })
-                        ) (builtins.fromJSON (builtins.readFile ./package.json)).nix.packages
+                        ) (builtins.fromJSON (builtins.readFile ./settings/info.json)).nix.packages
                     )
                 ) 0
             ).source
