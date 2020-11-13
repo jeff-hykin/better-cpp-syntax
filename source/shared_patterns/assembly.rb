@@ -16,7 +16,6 @@ def assembly_pattern(std_space, identifier)
             # blank line
             Pattern.new(@start_of_line.then(std_space).then(@end_of_line)),
             # comments
-            :comments_context,
             :comments,
             # outer most parens
             PatternRange.new(
@@ -74,7 +73,6 @@ def assembly_pattern(std_space, identifier)
                         match: /:/,
                         tag_as: "punctuation.separator.delimiter.colon.assembly",
                     ),
-                    :comments_context,
                     :comments,
                 ],
             ),
