@@ -12,7 +12,7 @@
 #   
 #   this can be useful for fixing corrupted setups
 
-unlink ./.cache/nix
+unlink ./settings/home/.cache/nix
 
 # the usual things
 rm -rfv ./settings/.cache **/*.cleanable **/*.cleanable.*

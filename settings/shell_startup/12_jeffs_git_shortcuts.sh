@@ -43,6 +43,7 @@ function git_new_branch {
 # 
 alias gs="git status"
 alias gp="git_sync"
+alias gm="git merge"
 alias gfpull="git_force_pull"
 alias gfpush="git_force_push"
 alias gc="git checkout"
