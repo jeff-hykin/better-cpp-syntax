@@ -2,4 +2,4 @@
 
 add_to_gitignore ".venv"
 # python creates a cache here on MacOS
-add_to_gitignore "Library/Caches"
+add_to_gitignore "settings/home/Library/Caches"

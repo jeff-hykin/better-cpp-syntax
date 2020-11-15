@@ -597,6 +597,7 @@ settings/home/*
 !settings/home/.zshrc
 # dont remove these next one unless you want passwords to be public
 # these are redundant, but kept as a fail-safe
+settings/home/Library/Caches
 settings/home/Library/Keychains
 settings/home/.gnupg
 settings/home/.gnupg_pre_2.1
@@ -606,7 +607,3 @@ settings/home/.gitconfig
 settings/home/.mongorc.js
 settings/home/.ungitrc
 settings/home/.vuerc
-
-# this next line was auto-added, and may be very important (passwords/auth etc)
-# comment it out if dont want it to be ignored (and you know what you're doing)
-Library/Caches
