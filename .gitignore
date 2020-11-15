@@ -593,11 +593,11 @@ dkms.conf
 #
 # home folder files
 #
-settings/home/*
 !settings/home/.zshrc
+settings/home/*
+settings/home/Library/Caches
 # dont remove these next one unless you want passwords to be public
 # these are redundant, but kept as a fail-safe
-settings/home/Library/Caches
 settings/home/Library/Keychains
 settings/home/.gnupg
 settings/home/.gnupg_pre_2.1
