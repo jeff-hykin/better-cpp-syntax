@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo Running pip install check
+
+# ensure that the requirements.txt, and ./settings/.cache/.nosync.pip_modules.hash files exits
+if ! [[ -f "./requirements.txt" ]]; then
+    python3 -m pip freeze > requirements.txt
+fi
+if ! [[ -f "./settings/.cache/.nosync.pip_modules.hash" ]]; then
+    # make sure the folder exists
+    mkdir -p ./settings/.cache/
+    touch "./settings/.cache/.nosync.pip_modules.hash"
+fi
+
+# check if need to do pip install using that hash
+old_pip_modules_hash="$(cat ./settings/.cache/.nosync.pip_modules.hash)"
+new_pip_modules_hash="$(cat requirements.txt | md5sum)"
+if [[ "$old_pip_modules_hash" != "$new_pip_modules_hash" ]]; then
+    # only save the hash if the install is successful
+    python3 -m pip --disable-pip-version-check install -r requirements.txt && echo "$new_pip_modules_hash" > "./settings/.cache/.nosync.pip_modules.hash"
+else
+    echo "I see a cached pip check, so the pip install check seems to be good"
+fi

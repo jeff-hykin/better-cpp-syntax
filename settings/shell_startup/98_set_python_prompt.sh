@@ -1,0 +1,1 @@
+SPACESHIP_VENV_SYMBOL="🐍$(python -V | sed -E 's/Python//g' )"
