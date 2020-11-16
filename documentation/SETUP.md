@@ -1,6 +1,11 @@
 # How to setup the managed environment
 
-Note: you can also use the manual setup listed at the bottom, the managed environment is just a reliable way to run the code.
+<br>
+
+**NOTE** : You can also use the manual setup listed at the bottom. <br>
+The managed environment is just a more reliable way.<br>
+(if you already have nix, it's pretty much 100% automated)
+
 
 ### For Windows
 
