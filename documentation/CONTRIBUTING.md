@@ -1,6 +1,6 @@
 ## How do I setup the project?
 
-See the SETUP.md here!
+See the full [SETUP.md guide here](https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/documentation/SETUP.md)!
 
 ## Adding a feature
 If you believe you've successfully made a change. Create a `your_feature.cpp` file in the `source/languages/cpp/examples`. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better). Then use `npm run gen -- source/languages/cpp/examples/your_feature.cpp` to generate a test for your feature.

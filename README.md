@@ -60,7 +60,7 @@ It adds:
 - Many other features
 
 ## Contributing
-If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
+If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at [CONTRIBUTING.md](https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/documentation/CONTRIBUTING.md) to get a better idea of how code works.
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
@@ -70,7 +70,7 @@ Planned future fixes/featues:
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
-I love regular expressions, and I plan on actively maintaining this.
+This repo will be actively maintained and accepts PR's.
 
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
