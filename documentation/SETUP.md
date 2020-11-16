@@ -1,6 +1,6 @@
-# How to setup the managed enviornment
+# How to setup the managed environment
 
-(note: you don't have to use the managed enviornment, it just means less install/setup errors)
+Note: you can also use the manual setup listed at the bottom, the managed environment is just a reliable way to run the code.
 
 ### For Windows
 
@@ -29,9 +29,18 @@
     * `git clone https://github.com/jeff-hykin/cpp-textmate-grammar`
     * `cd cpp-textmate-grammar`
 * Actually run some code
-    * run `nix-shell` to get into the project enviornment
+    * run `nix-shell` to get into the project environment
         * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `ruby`, all modules, etc
     * run `commands` to see all of the project commands
 
-## Manual project setup
-* see the CONTRUBUTING.md
+
+# Manual project setup
+
+1. Make sure you have ruby, node and npm installed.
+2. Make sure you have the ruby bundler `gem install bundler`
+3. Clone or fork the repo.
+4. Run `npm install`
+5. Run `npm test` to make sure everything is working
+6. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
+7. Then, in the new window created by the debugger, open up a C++ file, and your changes to the project will show up in the syntax of that file.
+8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop-up to get the new changes.

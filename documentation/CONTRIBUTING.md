@@ -1,14 +1,6 @@
 ## How do I setup the project?
 
-1. Make sure you have ruby, node and npm installed.
-2. Make sure you have the ruby bundler `gem install bundler`
-3. Clone or fork the repo.
-4. Run `npm install`
-5. Run `npm test` to make sure everything is working
-6. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
-7. Then, in the new window created by the debugger, open up a C++ file, and your changes to the project will show up in the syntax of that file.
-8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop-up to get the new changes.
-
+See the SETUP.md here!
 
 ## Adding a feature
 If you believe you've successfully made a change. Create a `your_feature.cpp` file in the `source/languages/cpp/examples`. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better). Then use `npm run gen -- source/languages/cpp/examples/your_feature.cpp` to generate a test for your feature.

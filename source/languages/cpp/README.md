@@ -27,7 +27,7 @@ Before                     | After
 ## What is different from atom/language-c?
 It fixes:
 - The issue of single quotes inside #error and #warning being highlighted when then shouldn't be 
-- The issue of initilization functions only highlighting the first paraenthese
+- The issue of initilization functions only highlighting the first parenthese
 - The bug that treats the 'and' and 'or' operator as functions (instead of operators) when they are followed by ()'s
 - Old C99 function highlighting that broke the standard function highlighting
 - The failure of highlighting for the semicolon after namespaces
