@@ -103,7 +103,7 @@ in
         if [[ "$HOME" != "$(pwd)/$new_home" ]] 
         then
             #
-            # find and run all the startup scripts in alphabetical order
+            # find and run all the pre_changing_home scripts in alphabetical order
             #
             for file in ./settings/shell_startup/#pre_changing_home/*
             do
@@ -121,9 +121,16 @@ in
             # make it explicit which nixpkgs we're using
             export NIX_PATH="nixpkgs=${definitions.mainRepo}:."
             
-            # start zsh
-            nix-shell --pure --command zsh
-            exit
+            # 
+            # find and run all the startup scripts in alphabetical order
+            # 
+            for file in ./settings/shell_startup/*
+            do
+                # make sure its a file
+                if [[ -f $file ]]; then
+                    source $file
+                fi
+            done
         fi
         '';
     }

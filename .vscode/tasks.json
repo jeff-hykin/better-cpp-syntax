@@ -15,7 +15,7 @@
         {
             "label": "build_active_file",
             "type": "shell",
-            "command": "bundle exec ruby ${file} || nix-shell --run \"bundle exec ruby ${file}\""
+            "command": "bundle exec ruby ${file} || nix-shell ./run.nix --run \"bundle exec ruby ${file}\""
         }
     ]
 }

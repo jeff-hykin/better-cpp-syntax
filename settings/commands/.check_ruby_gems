@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 echo Running ruby package check
 
+function install_bundler {
+    gem install bundler || sudo gem install bundler
+}
+
 # ensure that the Gemfile, and ./settings/.cache/.nosync.gemfile.hash files exits
 if ! [[ -f "./Gemfile" ]]; then
-    gem install bundler || sudo gem install bundler
+    install_bundler
 fi
 if ! [[ -f "./settings/.cache/.nosync.gemfile.hash" ]]; then
     # make sure the folder exists
@@ -15,7 +19,7 @@ fi
 old_hash="$(cat ./settings/.cache/.nosync.gemfile.hash)"
 new_hash="$(cat Gemfile | md5sum)"
 if [[ "$old_hash" != "$new_hash" ]]; then
-    gem install bundler || sudo gem install bundler
+    install_bundler
     # only save the hash if the install is successful
     bundle install && echo "$new_hash" > "./settings/.cache/.nosync.gemfile.hash"
 else
