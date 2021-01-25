@@ -1,0 +1,1 @@
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(nix_path_for openssl)"
