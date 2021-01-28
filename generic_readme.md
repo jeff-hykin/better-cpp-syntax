@@ -4,6 +4,7 @@ This enables your theme to better color your code. There are "textmate scopes" t
 NOTE: The default VS Code theme does not color much. Use a theme like one of the following to benefit from the changes:
 - [Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme)
 - [Noctis](https://marketplace.visualstudio.com/items?itemName=liviuschera.noctis)
+- [Kary Pro Colors](https://marketplace.visualstudio.com/items?itemName=karyfoundation.theme-karyfoundation-themes)
 - [XD Theme](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.xd-theme)
 - [One Monokai Theme](https://marketplace.visualstudio.com/items?itemName=azemoh.one-monokai)
 - [Winteriscoming](https://marketplace.visualstudio.com/items?itemName=johnpapa.winteriscoming)
