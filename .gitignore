@@ -54,7 +54,7 @@ Temporary Items
 # 
 
 # visual studio projects
-*.cache
+*.cache/*
 
 # Windows thumbnail cache files
 Thumbs.db
@@ -254,7 +254,7 @@ typings/
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
-.cache
+.cache/*
 
 # next.js build output
 .next
@@ -322,7 +322,7 @@ htmlcov/
 .nox/
 .coverage
 .coverage.*
-.cache
+.cache/*
 nosetests.xml
 coverage.xml
 *.cover
@@ -593,6 +593,14 @@ dkms.conf
 #
 # home folder files
 #
+# ignore files in folder foo
+settings/path_injection/*
+# but keep the folder
+!settings/path_injection/.keep
+# ignore files in folder foo
+settings/.cache/*
+# but keep the folder
+!settings/.cache/.keep
 !settings/home/.zshrc
 settings/home/*
 settings/home/Library/Caches
