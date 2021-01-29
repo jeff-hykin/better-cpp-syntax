@@ -40,8 +40,8 @@ The managed environment is very reliable way to setup.<br>
 
 # Manual project setup
 
-1. Install node
-2. Install python3
-3. Install the python modules with `pip3 install -r requirements.txt`
-4. Install the node modules with `npm install`
-5. Run the script `settings/commands/commands` to see avalible commands
+- Install node and npm
+- Run `npm install`
+- Install python3
+- Install the python modules with `python3 -m pip install -r ./settings/requirements/pip.txt`
+- Run the script `./settings/commands/commands` to see avalible commands
