@@ -36,12 +36,3 @@ The managed environment is very reliable way to setup.<br>
     * run `nix-shell` to get into the project environment
         * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `python`, `ruby`, all modules for them, etc
     * run `commands` to see all of the project commands
-
-
-# Manual project setup
-
-1. Install node
-2. Install python3
-3. Install the python modules with `pip3 install -r requirements.txt`
-4. Install the node modules with `npm install`
-5. Run the script `settings/commands/commands` to see avalible commands

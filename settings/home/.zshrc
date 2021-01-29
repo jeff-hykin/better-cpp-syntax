@@ -5,8 +5,8 @@ DISABLE_UPDATE_PROMPT="true"
 
 # load custom user settings
 # if user just wants to add something (like an export) and not replace everything
-# they should use ./settings/shell_startup/.nosync.exports.sh 
-CUSTOM_USER_SETTINGS="./.nosync.zshrc"
+# they should use ./settings/shell_startup/.dont-sync.exports.sh 
+CUSTOM_USER_SETTINGS="./.dont-sync.zshrc"
 if [[ -f "$CUSTOM_USER_SETTINGS" ]]; then
     source "$CUSTOM_USER_SETTINGS"
 #
@@ -48,7 +48,7 @@ else
     # 
     # set fpath for zsh
     # 
-    local_zsh="$PWD/settings/zsh.nosync/site-functions/"
+    local_zsh="$PWD/settings/zsh.dont-sync/site-functions/"
     mkdir -p "$local_zsh"
     # export fpath=""
     export fpath=("$local_zsh")
@@ -105,7 +105,7 @@ fi
 for file in ./settings/shell_startup/*
 do
     # make sure its a file
-    if [[ -f $file ]]; then
-        source $file
+    if [[ -f "$file" ]]; then
+        source "$file"
     fi
 done
