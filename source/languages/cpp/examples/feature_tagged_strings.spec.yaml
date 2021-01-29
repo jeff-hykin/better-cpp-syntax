@@ -1,0 +1,78 @@
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' re_pattern '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: R
+  scopesBegin:
+    - string.quoted.double.raw
+    - punctuation.definition.string.begin
+  scopes:
+    - meta.encoding
+- source: '"_r('
+  scopesEnd:
+    - punctuation.definition.string.begin
+- source: '[0-9''"\+]+'
+- source: )_r"
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.raw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' re_pattern '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: R
+  scopesBegin:
+    - string.quoted.double.raw
+    - punctuation.definition.string.begin
+  scopes:
+    - meta.encoding
+- source: '"re('
+  scopesEnd:
+    - punctuation.definition.string.begin
+- source: '[0-9''"\+]+'
+- source: )re"
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.raw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' re_pattern '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: R
+  scopesBegin:
+    - string.quoted.double.raw
+    - punctuation.definition.string.begin
+  scopes:
+    - meta.encoding
+- source: '"regex('
+  scopesEnd:
+    - punctuation.definition.string.begin
+- source: '[0-9''"\+]+'
+- source: )regex"
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.raw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

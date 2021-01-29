@@ -1,0 +1,100 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: sample.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.double.include
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: void
+  scopesBegin:
+    - meta.body.namespace
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: failedToLoadCriticalData
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: string
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: what
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: bool
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: throwExcp
+  scopes:
+    - variable.parameter
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: 'false'
+  scopes:
+    - constant.language.false
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace

@@ -1,0 +1,23 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: hello
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: hello
+  scopes:
+    - entity.name.function.preprocessor

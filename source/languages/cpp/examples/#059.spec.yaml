@@ -1,0 +1,157 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: function
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: auto
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' postWakeup '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: wpi
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: uv
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: Async
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: Create
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: loop
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    m_postMessageWakeup'
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' postWakeup'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: postWakeup
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: wakeup
+  scopes:
+    - variable.other.object.property
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: connect
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: this
+  scopes:
+    - meta.lambda.capture
+    - variable.language.this
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' pipe '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: m_pipe
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: lock
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.function.definition.body.lambda
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

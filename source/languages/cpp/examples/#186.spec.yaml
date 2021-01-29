@@ -1,0 +1,90 @@
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'g '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: new
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.new
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: pair
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: 'n'
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive

@@ -1,0 +1,310 @@
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: 'Type '
+- source: foo
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Type
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Type
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: foo
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: 'Type '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' value'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: 'Type foo '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' value'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Type
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' value'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: bar
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: Type
+  scopesBegin:
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: foo
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition.parameters
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: Type
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' value'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

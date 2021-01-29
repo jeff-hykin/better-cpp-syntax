@@ -1,0 +1,94 @@
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' foo '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: bar
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: union
+  scopes:
+    - storage.type.union
+- source: ' baz '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: quz
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

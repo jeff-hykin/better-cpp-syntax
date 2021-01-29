@@ -1,0 +1,63 @@
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' bar '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '28'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: d4
+  scopes:
+    - constant.numeric.hexadecimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '96'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '75'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 4c
+  scopes:
+    - constant.numeric.hexadecimal
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

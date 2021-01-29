@@ -1,0 +1,240 @@
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' A'
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: abc
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' A'
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: abc
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' A '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: abc
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' A'
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: abc
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopes:
+    - storage.type.enum
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: union
+  scopes:
+    - storage.type.union
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopes:
+    - storage.type.enum
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: union
+  scopes:
+    - storage.type.union
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -1,0 +1,126 @@
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: switch
+  scopesBegin:
+    - meta.block.switch
+    - meta.head.switch
+  scopes:
+    - keyword.control.switch
+- source: (
+  scopesBegin:
+    - meta.conditional.switch
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.conditional.switch
+- source: a
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.conditional.switch
+  scopesEnd:
+    - meta.conditional.switch
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.switch
+  scopesEnd:
+    - meta.head.switch
+- source: case
+  scopesBegin:
+    - meta.body.switch
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ' FOO'
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: FileAccessControl
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: UserFlashAddess
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ' BAR'
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: FileAccessControl
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: UserFlashAddess
+  scopes:
+    - variable.other.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.switch
+  scopesEnd:
+    - meta.block.switch
+    - meta.body.switch
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

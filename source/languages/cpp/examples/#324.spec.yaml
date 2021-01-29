@@ -1,0 +1,262 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: HARVEST_REQUEST_PARAM_APPEND
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: string
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: key
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: value
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: edited
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: ampersand
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: do
+  scopes:
+    - keyword.control.do
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: edited
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: ampersand
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: g_string_append_printf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: string
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '&'
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: =
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#key'
+  scopes:
+    - variable.other.macro.argument
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#value'
+  scopes:
+    - variable.other.macro.argument
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: else
+  scopes:
+    - keyword.control.else
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: "\t\t\t\tampersand "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' TRUE'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: g_string_append_printf
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: string
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: =
+- source: '%s'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#key'
+  scopes:
+    - variable.other.macro.argument
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#value'
+  scopes:
+    - variable.other.macro.argument
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: while
+  scopes:
+    - keyword.control.while
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round

@@ -1,0 +1,268 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: class
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.class.declare
+- source: var
+  scopes:
+    - entity.name.type.class
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: class
+  scopes:
+    - storage.type.class.parameter
+- source: var
+  scopes:
+    - entity.name.type.class.parameter
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: struct
+  scopes:
+    - storage.type.struct.declare
+- source: var
+  scopes:
+    - entity.name.type.struct
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct.parameter
+- source: var
+  scopes:
+    - entity.name.type.struct.parameter
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: enum
+  scopes:
+    - storage.type.enum.declare
+- source: var
+  scopes:
+    - entity.name.type.enum
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: enum
+  scopes:
+    - storage.type.enum.parameter
+- source: var
+  scopes:
+    - entity.name.type.enum.parameter
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: union
+  scopes:
+    - storage.type.union.declare
+- source: var
+  scopes:
+    - entity.name.type.union
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: thing
+  scopes:
+    - variable.other.object.declare
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: union
+  scopes:
+    - storage.type.union.parameter
+- source: var
+  scopes:
+    - entity.name.type.union.parameter
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: func
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

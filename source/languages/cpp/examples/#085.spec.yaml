@@ -1,0 +1,113 @@
+- source: extern
+  scopesBegin:
+    - meta.block.extern
+    - meta.head.extern
+  scopes:
+    - storage.type.extern
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: C
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.extern
+  scopesEnd:
+    - meta.head.extern
+- source: //
+  scopesBegin:
+    - meta.body.extern
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' this one is okay'
+  scopesEnd:
+    - comment.line.double-slash
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: inBlock
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.extern
+  scopesEnd:
+    - meta.body.extern
+- source: extern
+  scopesBegin:
+    - meta.tail.extern
+    - meta.block.extern
+    - meta.head.extern
+  scopes:
+    - storage.type.extern
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: C
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: inBlock
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' this one is not'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.extern
+  scopesEnd:
+    - meta.head.extern
+- source: '}'
+  scopes:
+    - meta.body.extern
+    - punctuation.section.block.end.bracket.curly.extern

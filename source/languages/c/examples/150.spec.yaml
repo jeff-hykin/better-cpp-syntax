@@ -1,0 +1,49 @@
+- source: enum
+  scopes:
+    - storage.type.enum
+- source: ' enum1'
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' comment'
+  scopesEnd:
+    - comment.line.double-slash
+- source: "\tdefinition "
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' block comment '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' definition3'
+- source: "\tdefinition"
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' definition2 '
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' comment'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

@@ -1,0 +1,12 @@
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: string
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift

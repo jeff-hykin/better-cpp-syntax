@@ -3,8 +3,9 @@
 <br>
 
 **NOTE** : You can also use the manual setup listed at the bottom. <br>
-The managed environment is very reliable way to setup.<br>
-(and if you already have nix, it's pretty much 100% automated)
+The managed environment is just a more reliable way.<br>
+(if you already have nix, it's pretty much 100% automated)
+
 
 ### For Windows
 
@@ -34,14 +35,16 @@ The managed environment is very reliable way to setup.<br>
     * `cd cpp-textmate-grammar`
 * Actually run some code
     * run `nix-shell` to get into the project environment
-        * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `python`, `ruby`, all modules for them, etc
+        * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `ruby`, all modules, etc
     * run `commands` to see all of the project commands
 
 
 # Manual project setup
-
-- Install node and npm
-- Run `npm install`
-- Install python3
-- Install the python modules with `python3 -m pip install -r ./settings/requirements/pip.txt`
-- Run the script `./settings/commands/commands` to see avalible commands
+1. Make sure you have ruby, node and npm installed.
+2. Make sure you have the ruby bundler `gem install bundler`
+3. Clone or fork the repo.
+4. Run `npm install`
+5. Run `npm test` to make sure everything is working
+6. Then inside VS Code, open the `source/languages/cpp/generate.rb` file and start the debugger (F5 for windows / Mac OS / Linux)
+7. Then, in the new window created by the debugger, open up a C++ file, and your changes to the project will show up in the syntax of that file.
+8. Every time you make a change inside a `generate.rb`, just press the refresh button on the debugger pop-up to get the new changes.

@@ -1,0 +1,43 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '""'
+  scopesBegin:
+    - entity.name.operator.custom-literal
+- source: _km
+  scopesEnd:
+    - entity.name.operator.custom-literal
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: long
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: double
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

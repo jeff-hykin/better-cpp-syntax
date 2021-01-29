@@ -1,0 +1,108 @@
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: FillStats
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: 'Stats '
+- source: aStats
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: FillStats
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '    Stats aStats'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: FillStats
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '    Stats aStats'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: FillStats
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: FillStats
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '    Stats aStats'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
+            "preLaunchTask": "build_active_file"
+        },
+        {
+            "name": "Launch And Build All",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
+            "preLaunchTask": "build"
+        }
+    ]
+}

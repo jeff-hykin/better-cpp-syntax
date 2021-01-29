@@ -1,0 +1,92 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: TEST
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: name
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: _ts
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: test
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: name
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: '&'
+  scopes:
+    - meta.lambda.capture
+    - keyword.operator
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: ' bool'
+  scopes:
+    - storage.type.return-type.lambda
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: ASSERT
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: expected
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: actual
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor

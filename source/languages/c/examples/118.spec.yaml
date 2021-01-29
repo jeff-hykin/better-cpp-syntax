@@ -1,0 +1,67 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: glib-object.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: tllt-cp-cooking-details-dto.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.double.include
+- source: G_DEFINE_TYPE
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: TlltCpCookingDetailsDto
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' tllt_cp_cooking_details_dto'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' G_TYPE_OBJECT'
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -1,0 +1,7795 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' from https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/crypto/aegis128l-aesni-glue.c'
+  scopesEnd:
+    - comment.line.double-slash
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' * The AEGIS-128L Authenticated-Encryption Algorithm'
+- source: ' *   Glue for AES-NI + SSE2 implementation'
+- source: ' *'
+- source: ' * Copyright (c) 2017-2018 Ondrej Mosnacek <omosnacek@gmail.com>'
+- source: ' * Copyright (C) 2017-2018 Red Hat, Inc. All rights reserved.'
+- source: ' *'
+- source: ' * This program is free software; you can redistribute it and/or modify it'
+- source: ' * under the terms of the GNU General Public License as published by the Free'
+- source: ' * Software Foundation; either version 2 of the License, or (at your option)'
+- source: ' * any later version.'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: crypto/cryptd.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: crypto/internal/aead.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: crypto/internal/skcipher.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: crypto/scatterwalk.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: linux/module.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: asm/fpu/api.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: asm/cpu_device_id.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_BLOCK_ALIGN
+  scopes:
+    - entity.name.function.preprocessor
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_BLOCK_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '32'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_NONCE_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_STATE_BLOCKS
+  scopes:
+    - entity.name.function.preprocessor
+- source: '8'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_KEY_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_MIN_AUTH_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '8'
+  scopes:
+    - constant.numeric.decimal
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: AEGIS128L_MAX_AUTH_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_init
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: key
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: iv
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_ad
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: length
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: data
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_enc
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: length
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_dec
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: length
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_enc_tail
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: length
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_dec_tail
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: length
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'asmlinkage '
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_final
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: tag_xor
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: cryptlen
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: assoclen
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\tu8 "
+- source: bytes
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: AEGIS128L_BLOCK_SIZE
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: __aligned
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: AEGIS128L_BLOCK_ALIGN
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_state '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block '
+- source: blocks
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: AEGIS128L_STATE_BLOCKS
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block key'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_crypt_ops '
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: skcipher_walk_init
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' skcipher_walk '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' atomic'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: crypt_blocks
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' length'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: crypt_tail
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' length'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: src
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: dst
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_process_ad
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_state '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' scatterlist '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: sg_src
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: assoclen
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' scatter_walk walk'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block buf'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' pos '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_start
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' sg_src'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: while
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'assoclen '
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' size '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: scatterwalk_clamp
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' assoclen'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' left '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' size'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'mapped '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: scatterwalk_map
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier
+- source: ' u8 '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'src '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: const
+  scopes:
+    - storage.modifier
+- source: ' u8 '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: mapped
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'pos '
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' size '
+- source: '>='
+  scopes:
+    - keyword.operator.comparison
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'pos '
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' fill '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_BLOCK_SIZE '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' pos'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: memcpy
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: buf
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' pos'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' src'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' fill'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_ad
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t\t\t\t\t  AEGIS128L_BLOCK_SIZE"
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: buf
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\t\t\tpos "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\t\t\tleft "
+- source: '-='
+  scopes:
+    - keyword.operator.assignment.compound
+- source: ' fill'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\t\t\tsrc "
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: ' fill'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: crypto_aegis128l_aesni_ad
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' left'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' src'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\t\tsrc "
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: ' left '
+- source: '&'
+  scopesBegin:
+    - keyword.operator
+- source: '~'
+  scopesEnd:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'AEGIS128L_BLOCK_SIZE '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\t\tleft "
+- source: '&='
+  scopes:
+    - keyword.operator.assignment.compound.bitwise
+- source: ' AEGIS128L_BLOCK_SIZE '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: memcpy
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: buf
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' pos'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' src'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' left'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\tpos "
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: ' left'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\t\tassoclen "
+- source: '-='
+  scopes:
+    - keyword.operator.assignment.compound
+- source: ' size'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_unmap
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: mapped
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_advance
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' size'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_done
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' assoclen'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'pos '
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: memset
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: buf
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' pos'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' AEGIS128L_BLOCK_SIZE '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' pos'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_ad
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: buf
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopesBegin:
+    - punctuation.section.block.end.bracket.curly
+- source: '}'
+  scopesEnd:
+    - meta.block
+    - punctuation.section.block.end.bracket.curly
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_process_crypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_state '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: state
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' skcipher_walk '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: walk
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_crypt_ops '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ops
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: while
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: nbytes
+  scopes:
+    - variable.other.member
+- source: '>='
+  scopes:
+    - keyword.operator.comparison
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: ops
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: crypt_blocks
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: state
+  scopesBegin:
+    - meta.function-call.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: round_down
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: nbytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t\t\t\t    AEGIS128L_BLOCK_SIZE"
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: src
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: virt
+  scopes:
+    - variable.other.member
+- source: .
+- source: addr
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: dst
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: virt
+  scopes:
+    - variable.other.member
+- source: .
+- source: addr
+  scopes:
+    - variable.other.member
+  scopesEnd:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: skcipher_walk_done
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: nbytes
+  scopes:
+    - variable.other.member
+- source: '%'
+  scopes:
+    - keyword.operator
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: nbytes
+  scopes:
+    - variable.other.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: ops
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: crypt_tail
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: state
+  scopesBegin:
+    - meta.function-call.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: nbytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: src
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: virt
+  scopes:
+    - variable.other.member
+- source: .
+- source: addr
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: walk
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: dst
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: virt
+  scopes:
+    - variable.other.member
+- source: .
+- source: addr
+  scopes:
+    - variable.other.member
+  scopesEnd:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: skcipher_walk_done
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopesBegin:
+    - punctuation.section.block.end.bracket.curly
+- source: '}'
+  scopesEnd:
+    - meta.block
+    - punctuation.section.block.end.bracket.curly
+- source: static
+  scopes:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: crypto_aegis128l_aesni_ctx
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\tu8 "
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\tctx "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: PTR_ALIGN
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: ctx
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: __alignof__
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx'
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round
+- source: )
+  scopesEnd:
+    - meta.function-call
+    - punctuation.section.arguments.end.bracket.round
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ctx
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_setkey
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: ' u8 '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: key
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: keylen
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aegis128l_aesni_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'keylen '
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: ' AEGIS128L_KEY_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: crypto_aead_set_flags
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' CRYPTO_TFM_RES_BAD_KEY_LEN'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: EINVAL
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: memcpy
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: ctx
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: key
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' key'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' AEGIS128L_KEY_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_setauthsize
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: tfm
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: authsize
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'authsize '
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' AEGIS128L_MAX_AUTH_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: return
+  scopes:
+    - keyword.control
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: EINVAL
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'authsize '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: ' AEGIS128L_MIN_AUTH_SIZE'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: return
+  scopes:
+    - keyword.control
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: EINVAL
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_crypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: tag_xor
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: cryptlen
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_crypt_ops '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ops
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_reqtfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aegis128l_aesni_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' skcipher_walk walk'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_state state'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ops
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: skcipher_walk_init
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: '&'
+  scopesBegin:
+    - meta.function-call.member
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' req'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 'true'
+  scopes:
+    - constant.language
+  scopesEnd:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: kernel_fpu_begin
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_init
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ctx
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: key
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: iv
+  scopes:
+    - variable.other.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_process_ad
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: src
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: assoclen
+  scopes:
+    - variable.other.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_process_crypt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: walk
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' ops'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_final
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: state
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' tag_xor'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: assoclen
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' cryptlen'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: kernel_fpu_end
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_encrypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: static
+  scopesBegin:
+    - storage.modifier
+- source: const
+  scopesEnd:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_crypt_ops OPS '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t.skcipher_walk_init "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' skcipher_walk_aead_encrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.crypt_blocks "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_enc'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.crypt_tail "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_enc_tail'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_reqtfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block tag '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' authsize '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_authsize
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' cryptlen '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: cryptlen
+  scopes:
+    - variable.other.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_crypt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: tag
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' cryptlen'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: OPS
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_map_and_copy
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tag
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: dst
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: assoclen
+  scopes:
+    - variable.other.member
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' cryptlen'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' authsize'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_decrypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: static
+  scopesBegin:
+    - storage.modifier
+- source: const
+  scopesEnd:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block zeros '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: static
+  scopesBegin:
+    - storage.modifier
+- source: const
+  scopesEnd:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_crypt_ops OPS '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t.skcipher_walk_init "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' skcipher_walk_aead_decrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.crypt_blocks "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_dec'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.crypt_tail "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_dec_tail'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_reqtfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_block tag'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' authsize '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_authsize
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: ' cryptlen '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: cryptlen
+  scopes:
+    - variable.other.member
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' authsize'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: scatterwalk_map_and_copy
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tag
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: src
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: req
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: assoclen
+  scopes:
+    - variable.other.member
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' cryptlen'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' authsize'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aegis128l_aesni_crypt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: tag
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' cryptlen'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: OPS
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_memneq
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: tag
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: zeros
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: bytes
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' authsize'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '?'
+  scopes:
+    - keyword.operator.ternary
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: 'EBADMSG '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_init_tfm
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: crypto_aegis128l_aesni_exit_tfm
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_setkey
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: const
+  scopes:
+    - storage.modifier
+- source: ' u8 '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: key
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: keylen
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'cryptd_tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ctx
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_aead_setkey
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: base
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' key'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' keylen'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_setauthsize
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopesBegin:
+    - storage.type.built-in.primitive
+- source: int
+  scopesEnd:
+    - storage.type.built-in.primitive
+- source: authsize
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'cryptd_tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ctx
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_aead_setauthsize
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: base
+  scopes:
+    - variable.other.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' authsize'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_encrypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'aead '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_reqtfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'cryptd_tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ctx
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\taead "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: base
+  scopes:
+    - variable.other.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: irq_fpu_usable
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '&&'
+  scopes:
+    - keyword.operator.logical
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: in_atomic
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '||'
+  scopesBegin:
+    - keyword.operator.logical
+- source: '!'
+  scopesEnd:
+    - keyword.operator.logical
+- source: cryptd_aead_queued
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: "\t\taead "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: cryptd_aead_child
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: aead_request_set_tfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' aead'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_aead_encrypt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_decrypt
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_request '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: req
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'aead '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_reqtfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'cryptd_tfm '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ctx
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\taead "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: base
+  scopes:
+    - variable.other.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: irq_fpu_usable
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '&&'
+  scopes:
+    - keyword.operator.logical
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: in_atomic
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '||'
+  scopesBegin:
+    - keyword.operator.logical
+- source: '!'
+  scopesEnd:
+    - keyword.operator.logical
+- source: cryptd_aead_queued
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: "\t\taead "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: cryptd_aead_child
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: aead_request_set_tfm
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' aead'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_aead_decrypt
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: req
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_init_tfm
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: "\tcryptd_tfm "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: cryptd_alloc_aead
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: __aegis128l-aesni
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' CRYPTO_ALG_INTERNAL'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t\t       CRYPTO_ALG_INTERNAL"
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: IS_ERR
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: return
+  scopes:
+    - keyword.control
+- source: PTR_ERR
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: cryptd_tfm
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_tfm'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: crypto_aead_set_reqsize
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: crypto_aead_reqsize
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: cryptd_tfm
+  scopes:
+    - variable.other.object.access
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: base
+  scopes:
+    - variable.other.member
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round
+- source: )
+  scopesEnd:
+    - meta.function-call
+    - punctuation.section.arguments.end.bracket.round
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: cryptd_aegis128l_aesni_exit_tfm
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' crypto_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: aead
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopesBegin:
+    - keyword.operator
+- source: '*'
+  scopesEnd:
+    - keyword.operator
+- source: 'ctx '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: crypto_aead_ctx
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: aead
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cryptd_free_aead
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ctx
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aead_alg crypto_aegis128l_aesni_alg'
+- source: '[]'
+  scopes:
+    - storage.modifier.array.bracket.square
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+    - punctuation.section.block.begin.bracket.curly
+- source: '{'
+  scopesEnd:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t.setkey "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_setkey'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.setauthsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_setauthsize'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.encrypt "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_encrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.decrypt "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_decrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.init "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_init_tfm'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.exit "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' crypto_aegis128l_aesni_exit_tfm'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.ivsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_NONCE_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.maxauthsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_MAX_AUTH_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.chunksize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.base "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t\t.cra_flags "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' CRYPTO_ALG_INTERNAL'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_blocksize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_ctxsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: sizeof
+  scopes:
+    - keyword.operator.sizeof
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: +
+  scopes:
+    - keyword.operator
+- source: __alignof__
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' aegis_ctx'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_alignmask "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_name "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: __aegis128l
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_driver_name "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: __aegis128l-aesni
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_module "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' THIS_MODULE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '}'
+  scopesBegin:
+    - punctuation.section.block.end.bracket.curly
+- source: '}'
+  scopesEnd:
+    - punctuation.section.block.end.bracket.curly
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t.setkey "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_setkey'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.setauthsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_setauthsize'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.encrypt "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_encrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.decrypt "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_decrypt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.init "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_init_tfm'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.exit "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cryptd_aegis128l_aesni_exit_tfm'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.ivsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_NONCE_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.maxauthsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_MAX_AUTH_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.chunksize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' AEGIS128L_BLOCK_SIZE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t.base "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: "\t\t\t.cra_flags "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' CRYPTO_ALG_ASYNC'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_blocksize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_ctxsize "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: sizeof
+  scopes:
+    - keyword.operator.sizeof
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: struct
+  scopes:
+    - storage.type.struct
+- source: ' cryptd_aead '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_alignmask "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_priority "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '400'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_name "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: aegis128l
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_driver_name "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: aegis128l-aesni
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: "\t\t\t.cra_module "
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' THIS_MODULE'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '}'
+  scopesBegin:
+    - punctuation.section.block.end.bracket.curly
+- source: '}'
+- source: '}'
+  scopesEnd:
+    - meta.block
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: static
+  scopes:
+    - storage.modifier
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' __init '
+- source: crypto_aegis128l_aesni_module_init
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: boot_cpu_has
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: X86_FEATURE_XMM2
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '||'
+  scopesBegin:
+    - keyword.operator.logical
+- source: '!'
+  scopesEnd:
+    - keyword.operator.logical
+- source: boot_cpu_has
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: X86_FEATURE_AES
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: '||'
+  scopesBegin:
+    - keyword.operator.logical
+- source: '!'
+  scopesEnd:
+    - keyword.operator.logical
+- source: cpu_has_xfeatures
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: XFEATURE_MASK_SSE
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 'NULL'
+  scopes:
+    - constant.language
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: return
+  scopes:
+    - keyword.control
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ENODEV
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control
+- source: crypto_register_aeads
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: crypto_aegis128l_aesni_alg
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ARRAY_SIZE
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: crypto_aegis128l_aesni_alg
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round
+- source: )
+  scopesEnd:
+    - meta.function-call
+    - punctuation.section.arguments.end.bracket.round
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: static
+  scopes:
+    - storage.modifier
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' __exit '
+- source: crypto_aegis128l_aesni_module_exit
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: crypto_unregister_aeads
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: crypto_aegis128l_aesni_alg
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ARRAY_SIZE
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: crypto_aegis128l_aesni_alg
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round
+- source: )
+  scopesEnd:
+    - meta.function-call
+    - punctuation.section.arguments.end.bracket.round
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: switch
+  scopesBegin:
+    - meta.block.switch
+    - meta.head.switch
+  scopes:
+    - keyword.control.switch
+- source: (
+  scopesBegin:
+    - meta.conditional.switch
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.conditional.switch
+- source: next
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.conditional.switch
+  scopesEnd:
+    - meta.conditional.switch
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.switch
+  scopesEnd:
+    - meta.head.switch
+- source: case
+  scopesBegin:
+    - meta.body.switch
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \'
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+- source: case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \"
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+- source: case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \\
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+- source: case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: '?'
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: next
+  scopes:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: a
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \a
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: b
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \b
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: f
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \f
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'n'
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: r
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \r
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: t
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \t
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: v
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \v
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: '0'
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \0
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: Z
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \x1A
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: e
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: ''''
+  scopesBegin:
+    - meta.function-call.member
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: \x1B
+  scopes:
+    - constant.character.escape
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function-call.member
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: U
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '            xcnt '
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' 6: "\U123456"'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Fallthrough.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: u
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '            xcnt '
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' 4: "\u1234"'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Fallthrough.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: case
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.case
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: x
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case
+  scopesEnd:
+    - meta.conditional.case
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '            xcnt '
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' 2: "\x12"'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' Read hex digits.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'qavail '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: ' xcnt '
+- source: +
+  scopes:
+    - keyword.operator
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '                throw '
+- source: do_make_parser_error
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: reader
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: reader
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: size_avail
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' Parser_Error::code_escape_sequence_incomplete'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: char32_t
+  scopes:
+    - support.type.posix-reserved
+- source: ' cpnt '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'auto i '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' tlen'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' i '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: ' tlen '
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' xcnt'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: i
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: static
+  scopes:
+    - storage.modifier
+- source: ' constexpr '
+- source: char
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' s_digits'
+- source: '[]'
+  scopes:
+    - storage.modifier.array.bracket.square
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 00112233445566778899AaBbCcDdEeFf
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '                auto dptr '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' std::char_traits'
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: char
+  scopes:
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '::find'
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: s_digits
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '32'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: bptr
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: i
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: dptr
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '                throw '
+- source: do_make_parser_error
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: reader
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' i '
+- source: +
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' Parser_Error::code_escape_sequence_invalid_hex'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: '                auto dvalue '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' static_cast'
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: char32_t
+  scopes:
+    - support.type.posix-reserved
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'dptr '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' s_digits'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: /
+  scopes:
+    - keyword.operator
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '                cpnt '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' cpnt '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' dvalue'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'next '
+- source: ==
+  scopes:
+    - keyword.operator.comparison
+- source: ''''
+  scopesBegin:
+    - string.quoted.single
+  scopes:
+    - punctuation.definition.string.begin
+- source: x
+- source: ''''
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.single
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Write the character verbatim.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: static_cast
+  scopesBegin:
+    - meta.function-call.member
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: char
+  scopes:
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: cpnt
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Write a Unicode code point.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: D800
+  scopes:
+    - constant.numeric.hexadecimal
+- source: <=
+  scopes:
+    - keyword.operator.comparison
+- source: ' cpnt'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '&&'
+  scopes:
+    - keyword.operator.logical
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'cpnt '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: E000
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '||'
+  scopes:
+    - keyword.operator.logical
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '110000'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: <=
+  scopes:
+    - keyword.operator.comparison
+- source: ' cpnt'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Code point value is reserved or too large.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '                throw '
+- source: do_make_parser_error
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: reader
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' tlen '
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' xcnt'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' Parser_Error::code_escape_utf_code_point_invalid'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Encode it.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '            auto encode_one '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: unsigned
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' shift'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: unsigned
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' mask'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: value
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: static_cast
+  scopesBegin:
+    - meta.function-call.member
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: char
+  scopes:
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: (
+  scopesBegin:
+    - punctuation.section.parens.begin.bracket.round
+- source: (
+  scopesEnd:
+    - punctuation.section.parens.begin.bracket.round
+- source: '~'
+  scopes:
+    - keyword.operator
+- source: 'mask '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '|'
+  scopes:
+    - keyword.operator
+- source: (
+  scopesBegin:
+    - punctuation.section.parens.begin.bracket.round
+- source: (
+  scopesEnd:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'cpnt '
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: ' shift'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: ' mask'
+- source: )
+  scopesBegin:
+    - punctuation.section.parens.end.bracket.round
+- source: )
+  scopesEnd:
+    - meta.function-call.member
+    - punctuation.section.parens.end.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'cpnt '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '80'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: FF
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'cpnt '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '800'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 1F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'cpnt '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '10000'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '12'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 0F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '18'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '07'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '12'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '6'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: encode_one
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 3F
+  scopes:
+    - constant.numeric.hexadecimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: break
+  scopes:
+    - keyword.control
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: default
+  scopesBegin:
+    - meta.conditional.case
+  scopes:
+    - keyword.control.default
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.case.default
+  scopesEnd:
+    - meta.conditional.case
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.switch
+  scopesEnd:
+    - meta.block.switch
+    - meta.body.switch
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: module_init
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: crypto_aegis128l_aesni_module_init
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: module_exit
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: crypto_aegis128l_aesni_module_exit
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: MODULE_LICENSE
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: GPL
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: MODULE_AUTHOR
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Ondrej Mosnacek <omosnacek@gmail.com>
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: MODULE_DESCRIPTION
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: AEGIS-128L AEAD algorithm -- AESNI+SSE2 implementation
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: MODULE_ALIAS_CRYPTO
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: aegis128l
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: MODULE_ALIAS_CRYPTO
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: aegis128l-aesni
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

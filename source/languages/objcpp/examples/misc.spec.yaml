@@ -1,0 +1,1112 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' As of Xcode 9.2, optional is still under experimental'
+  scopesEnd:
+    - comment.line.double-slash
+- source: using
+  scopes:
+    - keyword.control
+- source: 'std::'
+  scopesBegin:
+    - punctuation.separator.namespace.access
+  scopes:
+    - entity.scope
+- source: experimental
+  scopes:
+    - entity.scope.name
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+  scopesEnd:
+    - punctuation.separator.namespace.access
+- source: optional
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Use CFStringRef instead of NSString*, otherwise disable ARC'
+  scopesEnd:
+    - comment.line.double-slash
+- source: optional
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: CFStringRef
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: optionalString
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: val
+  scopes:
+    - variable.parameter.probably
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '    optional'
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: CFStringRef
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' myOptString'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: val
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Cast to corresponding CoreFoundation object'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '        myOptString '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: CFStringRef
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: String
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: ' myOptString'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: int
+  scopes:
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.function
+    - meta.function.definition.parameters
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function
+    - meta.function.definition.parameters
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '    __block '
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' status'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: dispatch_group_t
+  scopes:
+    - support.type.posix-reserved
+- source: ' syncGroup '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: dispatch_group_create
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: dispatch_group_enter
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: syncGroup
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: 'asyncCallWithReply:'
+- source: ^
+  scopes:
+    - keyword.operator
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: bool
+  scopes:
+    - storage.type.built-in.primitive
+- source: ' success'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '        status '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: ' success'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: dispatch_group_leave
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: syncGroup
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' set maximum wait time, here we are setting it to 1 second'
+  scopesEnd:
+    - comment.line.double-slash
+- source: dispatch_time_t
+  scopes:
+    - support.type.posix-reserved
+- source: ' waitTime '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: dispatch_time
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: DISPATCH_TIME_NOW
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int64_t
+  scopes:
+    - storage.type.built-in
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'NSEC_PER_SEC '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: dispatch_group_wait
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: syncGroup
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: ' waitTime'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: ==
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' we got a reply before timeout'
+  scopesEnd:
+    - comment.line.double-slash
+- source: return
+  scopes:
+    - keyword.control
+- source: ' status'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: else
+  scopes:
+    - keyword.control
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' took too long to reply'
+  scopesEnd:
+    - comment.line.double-slash
+- source: return
+  scopes:
+    - keyword.control
+- source: 'false'
+  scopes:
+    - constant.language
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' value_or() performs nil coalescing, returning the value passed to it if the optional is empty'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '    auto str '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: optionalString
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: 'false'
+  scopes:
+    - constant.language
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: value_or
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: CFSTR
+  scopesBegin:
+    - meta.function-call.member
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Empty
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Cast back to NSString* and print using NSLog()'
+  scopesEnd:
+    - comment.line.double-slash
+- source: NSLog
+  scopes:
+    - support.function.cocoa
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '%@'
+  scopes:
+    - constant.other.placeholder
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '__bridge '
+- source: NSString
+  scopes:
+    - support.class.cocoa
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: str
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' prints "Empty"'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '    auto vector '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopesBegin:
+    - punctuation.separator.namespace.access
+  scopes:
+    - entity.scope.name
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+  scopesEnd:
+    - punctuation.separator.namespace.access
+- source: vector
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: NSString
+  scopes:
+    - support.class.cocoa
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Apple
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Atom
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Atari
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' True'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'std::all_of'
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cbegin
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cend
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '[]'
+  scopes:
+    - storage.modifier.array.bracket.square
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: NSString
+  scopes:
+    - support.class.cocoa
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' str'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: 'str hasPrefix:'
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: A
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: std
+  scopesBegin:
+    - punctuation.separator.namespace.access
+  scopes:
+    - entity.scope.name
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+  scopesEnd:
+    - punctuation.separator.namespace.access
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: All strings begin with A
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' True'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'std::any_of'
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cbegin
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cend
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '[]'
+  scopes:
+    - storage.modifier.array.bracket.square
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: NSString
+  scopes:
+    - support.class.cocoa
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' str'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: 'str hasPrefix:'
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: A
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: std
+  scopesBegin:
+    - punctuation.separator.namespace.access
+  scopes:
+    - entity.scope.name
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+  scopesEnd:
+    - punctuation.separator.namespace.access
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: At least one string begins with A
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' False'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control
+- source: (
+  scopesBegin:
+    - meta.parens.block
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'std::none_of'
+  scopesBegin:
+    - meta.function-call
+  scopes:
+    - entity.name.function
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cbegin
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: vector
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: cend
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter
+- source: '[]'
+  scopes:
+    - storage.modifier.array.bracket.square
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: NSString
+  scopes:
+    - support.class.cocoa
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' str'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: 'str hasPrefix:'
+- source: '@"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: A
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round
+  scopesEnd:
+    - meta.function-call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens.block
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: std
+  scopesBegin:
+    - punctuation.separator.namespace.access
+  scopes:
+    - entity.scope.name
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+  scopesEnd:
+    - punctuation.separator.namespace.access
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: None of the strings begin with A
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+- source: return
+  scopes:
+    - keyword.control
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

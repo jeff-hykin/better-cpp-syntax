@@ -1,0 +1,12 @@
+void LineReader();
+void Line_Reader();
+void Line\u00b7Reader();
+void Line\U0002070EReader();
+struct LineReader{};
+struct Line_Reader{};
+struct Line\u00b7Reader{};
+struct Line\U0002070EReader{};
+enum LineReader{};
+enum Line_Reader{};
+enum Line\u00b7Reader{};
+enum Line\U0002070EReader{};

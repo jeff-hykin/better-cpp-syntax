@@ -1,0 +1,104 @@
+- source: namespace
+  scopesBegin:
+    - meta.declaration.namespace.alias
+  scopes:
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
+- source: foo
+  scopes:
+    - entity.name.namespace.alias
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: bar
+  scopesBegin:
+    - meta.declaration.namespace.alias.value
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.namespace.alias.value
+- source: namespace
+  scopes:
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
+- source: fs
+  scopes:
+    - entity.name.namespace.alias
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: boost
+  scopes:
+    - entity.name.scope-resolution.namespace.alias
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.alias
+- source: filesystem
+  scopesBegin:
+    - meta.declaration.namespace.alias.value
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.namespace.alias.value
+- source: namespace
+  scopes:
+    - keyword.other.namespace.alias
+    - storage.type.namespace.alias
+- source: std
+  scopes:
+    - entity.name.namespace.alias
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '::'
+- source: std
+  scopesBegin:
+    - meta.declaration.namespace.alias.value
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.namespace.alias
+    - meta.declaration.namespace.alias.value
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: foo
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: '}'
+  scopes:
+    - meta.body.namespace
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+- source: using
+  scopesBegin:
+    - meta.using-namespace
+  scopes:
+    - keyword.other.using.directive
+- source: namespace
+  scopes:
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
+- source: std
+  scopes:
+    - entity.name.namespace

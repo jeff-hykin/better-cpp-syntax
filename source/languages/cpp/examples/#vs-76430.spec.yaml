@@ -1,0 +1,237 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: std
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: typeid
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
+- source: T
+  scopes:
+    - meta.arguments.operator.typeid
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: name
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: ' valueT '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: EXTERN_C
+  scopes:
+    - entity.name.function.preprocessor
+- source: extern
+  scopesBegin:
+    - meta.block.extern
+    - meta.head.extern
+  scopes:
+    - storage.type.extern
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: C
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.macro
+    - meta.block.extern
+    - meta.head.extern
+    - string.quoted.double
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: func
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: std
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: typeid
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.typeid
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.typeid
+- source: T
+  scopes:
+    - meta.arguments.operator.typeid
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.typeid
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: name
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: ' valueT '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
