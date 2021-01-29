@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# main inputs
+name_of_check="ruby gems"
+file_to_watch="./settings/requirements/Gemfile"
+hash_check_name="ruby_gems"
+function failed_check_command {
+    cd ./settings/requirements && bundix -l && cd -
+}
+function generate_file_command {
+    # what to do when package.json file doesn't exist
+    echo 'source "http://rubygems.org"
+gem "bundler"
+' > "$file_to_watch"
+}
+
+echo "Running $name_of_check check"
+
+# ensure that the source file and hash file exist
+if ! [[ -f "./$file_to_watch" ]]; then
+    generate_file_command
+fi
+location_of_hash="./settings/.cache/.$hash_check_name.cleanable.hash"
+if ! [[ -f "$location_of_hash" ]]; then
+    # make sure the folder exists
+    mkdir -p "$(dirname "$location_of_hash")"
+    touch "$location_of_hash"
+fi
+
+# check if need to do install using that hash
+old_hash="$(cat "$location_of_hash")"
+new_hash="$(cat "$file_to_watch" | md5sum)"
+if [[ "$old_hash" != "$new_hash" ]]; then
+    failed_check_command && echo "$new_hash" > "$location_of_hash"
+else
+    echo "I see a cached $name_of_check check => assuming packages are installed"
+fi
