@@ -35,7 +35,7 @@ function git_force_pull {
 }
 
 function git_new_branch {
-    git branch -m master "$@" && git push origin -u "$@" 
+    git checkout master && git checkout -b "$@" && git push --set-upstream origin "$@"
 }
 
 # 

@@ -110,15 +110,13 @@ let
         ];
     };
     
-    subDepedencies = [] ++ majorCustomDependencies.ruby ++ [];
+    subDepedencies = [] ++ majorCustomDependencies.ruby;
     
     # TODO: add support for the info.json to have OS-specific packages (if statement inside package inclusion)
     packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) (
         majorCustomDependencies.python ++ [
         
     ]);
-    
-    
     
 # using those definitions
 in
