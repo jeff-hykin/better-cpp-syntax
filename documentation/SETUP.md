@@ -41,5 +41,5 @@ The managed environment is very reliable way to setup.<br>
 # Manual project setup
 
 - Install python3
-- Install the python modules with `python3 -m pip install -r ./settings/requirements/pip.txt`
+- Install the python modules with `python3 -m pip install -r ./settings/requirements/requirements.txt`
 - Run the script `./settings/commands/commands` to see avalible commands

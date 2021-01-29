@@ -2,7 +2,7 @@
 
 # main inputs
 name_of_check="pip modules"
-file_to_watch="./settings/requirements/pip.txt"
+file_to_watch="./settings/requirements/requirements.txt"
 hash_check_name="pip_modules"
 function failed_check_command {
     # what to do when pip modules haven't been installed yet
