@@ -105,7 +105,7 @@ fi
 for file in ./settings/shell_startup/*
 do
     # make sure its a file
-    if [[ -f $file ]]; then
-        source $file
+    if [[ -f "$file" ]]; then
+        source "$file"
     fi
 done
