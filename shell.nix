@@ -44,7 +44,7 @@ let
             })
         ) packageJson.nix.packages;
     };
-    
+  
     # TODO: add support for the info.json to have nested packages
     nestedPackages = [
         # 
@@ -81,20 +81,29 @@ let
         definitions.mainPackages.unixtools.xxd
     ];
     
+    majorCustomDependencies = rec {
+        python = [
+            definitions.mainPackages.python37
+            definitions.mainPackages.python37Packages.setuptools
+            definitions.mainPackages.python37Packages.pip
+            definitions.mainPackages.python37Packages.virtualenv
+        ];
+    };
+    
+    subDepedencies = [];
+    
     # TODO: add support for the info.json to have OS-specific packages (if statement inside package inclusion)
-    packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
-        # python and venv
-        definitions.mainPackages.python37
-        definitions.mainPackages.python37Packages.setuptools
-        definitions.mainPackages.python37Packages.pip
-        definitions.mainPackages.python37Packages.virtualenv
-    ];
+    packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) (
+        majorCustomDependencies.python ++ [
+        
+    ]);
+    
 # using those definitions
 in
     # create a shell
     definitions.mainPackages.mkShell {
         # inside that shell, make sure to use these packages
-        buildInputs = nestedPackages ++ packagesForMacOnly ++ builtins.map (each: each.source) definitions.packagesWithSources;
+        buildInputs = subDepedencies ++ nestedPackages ++ packagesForMacOnly ++ builtins.map (each: each.source) definitions.packagesWithSources;
         
         # run some bash code before starting up the shell
         shellHook = ''
