@@ -16,6 +16,3 @@ unlink ./settings/home/.cache/nix
 
 # the usual things
 rm -rfv ./settings/.cache **/*.cleanable **/*.cleanable.*
-
-# python cache at any level (half second to rebuild these)
-rm -rf **/__pycache__
