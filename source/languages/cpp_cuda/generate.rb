@@ -35,7 +35,7 @@ end
     # switch to punctuation.accessor from punctuation.seperator.dot-access
 
 grammar = Grammar.new(
-    name: "C++",
+    name: "C++ CUDA",
     scope_name: "source.cpp",
     fileTypes: [
 		"cc",
@@ -2583,17 +2583,18 @@ grammar = Grammar.new(
 #
 # Save
 #
-name = "cpp"
+name = "cpp_cuda"
 if $PROGRAM_NAME == __FILE__
     # this file is imported by the c grammar, dont generate if it was not directly called
     grammar.save_to(
         syntax_name: name,
         syntax_dir: PathFor[:syntaxes],
         tag_dir: File.dirname(PathFor[:languageTag][name]),
+        tag_name: name+"_scopes.txt",
     )
 end
 # create a duplicate grammar with all pattern ranges bailed-out
-system "node", PathFor[:macro_generator][name], File.join(PathFor[:syntaxes], name+".tmLanguage.json"), File.join(PathFor[:syntaxes], name+".embedded.macro.tmLanguage.json")
+# system "node", PathFor[:macro_generator][name], File.join(PathFor[:syntaxes], name+".tmLanguage.json"), File.join(PathFor[:syntaxes], name+".embedded.macro.tmLanguage.json")
 # TODO, upgrade the code so this is not necessary
 # for exporting to C
 @cpp_grammar = grammar
