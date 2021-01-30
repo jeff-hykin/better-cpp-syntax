@@ -6,6 +6,7 @@ file_to_watch="./Gemfile"
 hash_check_name="ruby_gems"
 function failed_check_command {
     bundix -l
+    bundler install
 }
 function generate_file_command {
     # what to do when package.json file doesn't exist
