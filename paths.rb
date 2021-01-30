@@ -7,7 +7,7 @@ PathFor = {
     root:           __dir__,
     package_json:    File.join(__dir__, "package.json"                                                                    ),
     temp_readme:     File.join(__dir__, "temp_readme.md"                                                                  ),
-    generic_readme:  File.join(__dir__, "generic_readme.md"                                                               ),
+    generic_readme:  File.join(__dir__, "README.md"                                                                       ),
     readme:          File.join(__dir__, "README.md"                                                                       ),
     repo_helper:     File.join(__dir__, "source"             , "repo_specific_helpers.rb"                                 ),
     source:          File.join(__dir__, "source"                                                                          ),
