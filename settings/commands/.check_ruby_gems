@@ -2,10 +2,10 @@
 
 # main inputs
 name_of_check="ruby gems"
-file_to_watch="./settings/requirements/Gemfile"
+file_to_watch="./Gemfile"
 hash_check_name="ruby_gems"
 function failed_check_command {
-    cd ./settings/requirements && bundix -l && cd -
+    bundix -l
 }
 function generate_file_command {
     # what to do when package.json file doesn't exist
