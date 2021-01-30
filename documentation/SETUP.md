@@ -31,7 +31,7 @@ The managed environment is just a more reliable way.<br>
     * (if you don't have git just run `nix-env -i git`)
 * Clone/Open the project
     * `cd wherever-you-want-to-save-this-project`<br>
-    * `git clone https://github.com/jeff-hykin/cpp-textmate-grammar`
+    * `git clone https://github.com/jeff-hykin/better-cpp-syntax`
     * `cd cpp-textmate-grammar`
 * Actually run some code
     * run `nix-shell` to get into the project environment

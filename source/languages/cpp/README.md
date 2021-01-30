@@ -64,7 +64,7 @@ Planned future fixes/featues:
 - Better support for dereferenced/pointer tagging
 
 ## What if I see a highlighting bug?
-Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
+Let me know! Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
 I love regular expressions, and I plan on actively maintaining this.
 
 ## Did you write all of this youself?

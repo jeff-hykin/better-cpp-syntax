@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
     s.summary = 'A library to generate textmate grammars'
     s.authors = ["Jeff Hykin", "Matthew Fosdick"]
     s.files = Dir["{lib}/**/*.rb", "LICENSE", "*.md"]
-    s.homepage = 'https://github.com/jeff-hykin/cpp-textmate-grammar'
+    s.homepage = 'https://github.com/jeff-hykin/better-cpp-syntax'
     s.license = 'MIT'
 
     s.required_ruby_version = '>=2.5.0'
