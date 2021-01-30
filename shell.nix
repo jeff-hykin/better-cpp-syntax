@@ -99,7 +99,7 @@ let
             (definitions.mainPackages.bundlerEnv {
                 name = "gems";
                 ruby = definitions.mainPackages.ruby;
-                gemdir = ./settings/requirements;
+                gemdir = ./.;
             })
         ];
         python = [
