@@ -60,6 +60,13 @@ It adds:
 - Many other features
 
 ## Contributing
+A Haiku for this repository
+```
+Syntax highlighting
+You might think it is working
+It’s actually not
+```
+
 If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at [CONTRIBUTING.md](https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/documentation/CONTRIBUTING.md) to get a better idea of how code works.
 
 Planned future fixes/featues:
