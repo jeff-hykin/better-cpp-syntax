@@ -16,3 +16,4 @@ unlink ./settings/home/.cache/nix
 
 # the usual things
 rm -rfv ./settings/.cache **/*.cleanable **/*.cleanable.*
+mkdir -p ./settings/.cache && touch ./settings/.cache/.keep # restore the keep file

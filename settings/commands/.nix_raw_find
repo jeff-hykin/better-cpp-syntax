@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+find -L /run /nix -iname $@
