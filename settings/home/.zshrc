@@ -13,6 +13,11 @@ if [[ -f "$CUSTOM_USER_SETTINGS" ]]; then
 # if no custom user settings, then use epic defaults 👌
 # 
 else
+    if [[ -z "$PROJECT_FOLDER" ]]
+    then
+        echo PROJECT_FOLDER is empty
+        export PROJECT_FOLDER="$PWD"
+    fi
     function nix_path_for {
         nix-instantiate --eval -E  '"${
             (
@@ -25,11 +30,11 @@ else
                                     builtins.import (
                                         builtins.fetchTarball {url="https://github.com/NixOS/nixpkgs/archive/${each.from}.tar.gz";}
                                     ) {
-                                        config = (builtins.fromJSON (builtins.readFile ./settings/info.json)).nix.config;
+                                        config = (builtins.fromJSON (builtins.readFile "'"$PROJECT_FOLDER"'/settings/requirements/simple_nix.json")).nix.config;
                                     }
                                 );
                             })
-                        ) (builtins.fromJSON (builtins.readFile ./settings/info.json)).nix.packages
+                        ) (builtins.fromJSON (builtins.readFile "'"$PROJECT_FOLDER"'/settings/requirements/simple_nix.json")).nix.packages
                     )
                 ) 0
             ).source
