@@ -14,9 +14,9 @@
 let        
     definitions = rec {
         # 
-        # load the info.json cause were going to extract basically everything from there
+        # load the simple_nix.json cause were going to extract basically everything from there
         # 
-        packageJson = builtins.fromJSON (builtins.readFile ./settings/info.json);
+        packageJson = builtins.fromJSON (builtins.readFile ./simple_nix.json);
         # 
         # load the store with all the packages, and load it with the config
         # 
@@ -45,7 +45,7 @@ let
         ) packageJson.nix.packages;
     };
   
-    # TODO: add support for the info.json to have nested packages
+    # TODO: add support for the simple_nix.json to have nested packages
     nestedPackages = [
         # 
         # this is just a list of all of the standard unix tools
@@ -82,21 +82,14 @@ let
     ];
     
     majorCustomDependencies = rec {
-        python = [
-            definitions.mainPackages.python37
-            definitions.mainPackages.python37Packages.setuptools
-            definitions.mainPackages.python37Packages.pip
-            definitions.mainPackages.python37Packages.virtualenv
-        ];
     };
     
     subDepedencies = [];
     
-    # TODO: add support for the info.json to have OS-specific packages (if statement inside package inclusion)
-    packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) (
-        majorCustomDependencies.python ++ [
+    # TODO: add support for the simple_nix.json to have OS-specific packages (if statement inside package inclusion)
+    packagesForMacOnly = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
         
-    ]);
+    ];
     
 # using those definitions
 in
@@ -107,32 +100,29 @@ in
         
         # run some bash code before starting up the shell
         shellHook = ''
-        export new_home="settings/home"
+        export PROJECT_HOME="settings/home"
+        export PROJECT_FOLDER="$PWD"
         # we don't want to give nix or other apps our home folder
-        if [[ "$HOME" != "$(pwd)/$new_home" ]] 
+        if [[ "$HOME" != "$(pwd)/$PROJECT_HOME" ]] 
         then
             #
             # find and run all the startup scripts in alphabetical order
             #
-            for file in ./settings/shell_startup/#pre_changing_home/*
-            do
-                # make sure its a file
-                if [[ -f "$file" ]]; then
-                    source "$file"
-                fi
-            done
+            # for file in ./settings/shell_startup/#pre_changing_home/*
+            # do
+            #    # make sure its a file
+            #    if [[ -f "$file" ]]; then
+            #        source "$file"
+            #    fi
+            # done
             
-            mkdir -p "$new_home/.cache/"
-            ln -s "$HOME/.cache/nix" "$new_home/.cache/" &>/dev/null
+            mkdir -p "$PROJECT_HOME/.cache/"
+            ln -s "$HOME/.cache/nix" "$PROJECT_HOME/.cache/" &>/dev/null
             
             # so make the home folder the same as the project folder
-            export HOME="$(pwd)/$new_home"
+            export HOME="$(pwd)/$PROJECT_HOME"
             # make it explicit which nixpkgs we're using
             export NIX_PATH="nixpkgs=${definitions.mainRepo}:."
-            
-            # start zsh
-            nix-shell --pure --command zsh
-            exit
         fi
         '';
     }

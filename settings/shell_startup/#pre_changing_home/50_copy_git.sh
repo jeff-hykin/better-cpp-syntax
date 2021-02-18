@@ -1,6 +1,6 @@
 # copy in gitconfig before changing home var 
-cp "$HOME/.gitconfig" "$new_home/.gitconfig" 2>/dev/null
+cp "$HOME/.gitconfig" "$PROJECT_HOME/.gitconfig" 2>/dev/null
 
 # make sure the user has this in their gitignore 
 # (the config could contain passwords/keys)
-add_to_gitignore "$new_home/.gitconfig"
+add_to_gitignore "$PROJECT_HOME/.gitconfig"
