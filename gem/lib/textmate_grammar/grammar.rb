@@ -460,7 +460,7 @@ class Grammar
             syntax_format: :json,
             syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
             syntax_dir: options[:directory],
-            tag_name: "#{@scope_name.split('.').drop(1).join('.')}-scopes.txt",
+            tag_name: "#{@scope_name.split('.').drop(1).join('.')}_scopes.txt",
             tag_dir: options[:directory],
             should_lint: true,
         }
