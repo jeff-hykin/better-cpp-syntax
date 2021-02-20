@@ -6,14 +6,14 @@
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            // "preLaunchTask": "build_active_file"
+            "preLaunchTask": "build"
         },
         {
-            "name": "Launch And Build All",
+            "name": "Launch & Build Open File",
             "type": "extensionHost",
             "request": "launch",
             "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-            // "preLaunchTask": "build"
+            "preLaunchTask": "build_active_file"
         }
     ]
 }

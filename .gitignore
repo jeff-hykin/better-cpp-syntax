@@ -605,9 +605,10 @@ settings/path_injection/*
 # ignore files in folder foo
 settings/.cache/*
 # but keep the folder
+settings/home/*
 !settings/.cache/.keep
 !settings/home/.zshrc
-settings/home/*
+!settings/home/.zshenv
 settings/home/Library/Caches
 # dont remove these next one unless you want passwords to be public
 # these are redundant, but kept as a fail-safe
