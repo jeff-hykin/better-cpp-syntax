@@ -4,10 +4,13 @@
         "config": {
             "allowUnfree": true,
             "permittedInsecurePackages": [
-                "openssl-1.0.2u"
             ]
         },
         "packages": [
+            {
+                "load": "nodejs",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
             {
                 "load": "zsh",
                 "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
@@ -58,6 +61,10 @@
             },
             {
                 "load": "tree",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "curl",
                 "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
             },
             {
