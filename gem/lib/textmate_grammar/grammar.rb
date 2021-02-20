@@ -458,7 +458,7 @@ class Grammar
             inherit_or_embedded: :embedded,
             generate_tags: true,
             syntax_format: :json,
-            syntax_name: "#{@scope_name.split('.').drop(1).join('.')}.tmLanguage",
+            syntax_name: "#{@scope_name.split('.').drop(1).join('.')}",
             syntax_dir: options[:directory],
             tag_name: "#{@scope_name.split('.').drop(1).join('.')}_scopes.txt",
             tag_dir: options[:directory],
@@ -471,7 +471,7 @@ class Grammar
         if [:json, :vscode].include? options[:syntax_format]
             file_name = File.join(
                 options[:syntax_dir],
-                "#{options[:syntax_name]}.json",
+                "#{options[:syntax_name]}.tmLanguage.json",
             )
             out_file = File.open(file_name, "w")
             out_file.write(JSON.pretty_generate(output))
