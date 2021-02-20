@@ -34,7 +34,7 @@ The managed environment is just a more reliable way.<br>
     * `git clone https://github.com/jeff-hykin/better-cpp-syntax`
     * `cd cpp-textmate-grammar`
 * Actually run some code
-    * run `nix-shell` to get into the project environment
+    * run `./shell` to get into the project environment
         * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `ruby`, all modules, etc
     * run `commands` to see all of the project commands
 
