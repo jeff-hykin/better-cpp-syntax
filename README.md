@@ -9,7 +9,7 @@
 You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
 
 # What does this do?
-This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
+This will get you the bleeding-edge syntax highlighting for C, C++, Objective-C, and Objective-C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code started using it as the official source for C and C++ highlighting.
 
 NOTE: The default VS Code theme does not color much. Use a theme like one of the following to benefit from the changes:
 - [Material Theme](https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme)
@@ -21,7 +21,7 @@ NOTE: The default VS Code theme does not color much. Use a theme like one of the
 - [Syntax Highlight Theme](https://marketplace.visualstudio.com/items?itemName=peaceshi.syntax-highlight)
 
 ## How do I use it?
-Just install the VS Code extension and the changes will automatically be applied to all relevent files.
+Just install the VS Code extension and the changes will automatically be applied to all relevant files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
 
@@ -32,8 +32,8 @@ Before                     | After
 
 ## What is different from atom/language-c?
 It fixes:
-- The issue of single quotes inside #error and #warning being highlighted when then shouldn't be 
-- The issue of initilization functions only highlighting the first parenthese
+- The issue of single quotes inside #error and #warning being highlighted when they shouldn't be 
+- The issue of initialization functions only highlighting the first parenthese
 - The bug that treats the 'and' and 'or' operator as functions (instead of operators) when they are followed by ()'s
 - Old C99 function highlighting that broke the standard function highlighting
 - The failure of highlighting for the semicolon after namespaces
@@ -69,7 +69,7 @@ It’s actually not
 
 If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at [CONTRIBUTING.md](https://github.com/jeff-hykin/cpp-textmate-grammar/blob/master/documentation/CONTRIBUTING.md) to get a better idea of how code works.
 
-Planned future fixes/featues:
+Planned future fixes/features:
 - Add tagging for type-casting statements
 - Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
@@ -79,7 +79,7 @@ Planned future fixes/featues:
 Let me know! Post an issue on https://github.com/jeff-hykin/cpp-textmate-grammar
 This repo will be actively maintained and accepts PR's.
 
-## Did you write all of this youself?
+## Did you write all of this yourself?
 The original JSON was taken from https://github.com/atom/language-c
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
 <br>@matter123 has written basically every pull request, from simple bugfixes up to the entire textmate testing suite
