@@ -172,7 +172,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    __block '
+- source: __block
+  scopes:
+    - storage.modifier.objc
 - source: bool
   scopes:
     - storage.type.built-in.primitive
