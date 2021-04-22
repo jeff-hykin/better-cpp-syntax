@@ -7005,7 +7005,7 @@
           "name": "meta.property-with-attributes.objcpp",
           "patterns": [
             {
-              "match": "\\b(getter|setter|readonly|readwrite|assign|retain|copy|nonatomic|atomic|strong|weak|nonnull|nullable|null_resettable|class|direct)\\b",
+              "match": "\\b(getter|setter|readonly|readwrite|assign|retain|copy|nonatomic|atomic|strong|weak|nonnull|nullable|null_resettable|null_unspecified|class|direct)\\b",
               "name": "keyword.other.property.attribute.objcpp"
             }
           ]
@@ -7055,7 +7055,7 @@
       ]
     },
     "protocol_type_qualifier": {
-      "match": "\\b(in|out|inout|oneway|bycopy|byref|nonnull|nullable|_Nonnull|_Nullable)\\b",
+      "match": "\\b(in|out|inout|oneway|bycopy|byref|nonnull|nullable|_Nonnull|_Nullable|_Null_unspecified)\\b",
       "name": "storage.modifier.protocol.objcpp"
     },
     "special_variables": {
