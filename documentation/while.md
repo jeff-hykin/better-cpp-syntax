@@ -6,10 +6,10 @@ The "while" key can be used inside of a pattern range (something that normally w
 ### The good part
 The "while" key is stronger than the "end" pattern, as soon as the while is over, it stops and most importantly, it cuts off any ranges that are still open. This is incredibly important because almost nothing else in textmate does this, and it is useful for stopping broken syntax.
 
-I believe it was designed to match things like the python intentation-based block.
+I believe it was designed to match things like the python indentation-based block.
 
 ### The bad part(s)
 However, there are some caveats.
-1. The "while" pattern is line-based, not charater-based. If you match a single character on a line, then the whole line is considered to be inside the pattern-range
+1. The "while" pattern is line-based, not character-based. If you match a single character on a line, then the whole line is considered to be inside the pattern-range
 2. On each line, nothing will start being matched until the while pattern has been fully matched
 3. Once the while pattern matches, everything after the while pattern will be tagged using the patterns inside of the pattern-range
