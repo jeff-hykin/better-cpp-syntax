@@ -5,7 +5,7 @@ See the full [SETUP.md guide here](https://github.com/jeff-hykin/cpp-textmate-gr
 ## Adding a feature
 If you believe you've successfully made a change. Create a `your_feature.cpp` file in the `source/languages/cpp/examples`. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better). Then use `npm run gen -- source/languages/cpp/examples/your_feature.cpp` to generate a test for your feature.
 
-Once that is ready, please make a pull request agaist `Multi/pull-requests` rather than master.
+Once that is ready, please make a pull request against `Multi/pull-requests` rather than master.
 
 # How things work
 
