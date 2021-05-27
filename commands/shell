@@ -1,0 +1,43 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -i bash -p bash_5 -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/046f8835dcb9082beb75bb471c28c832e1b067b6.tar.gz
+
+# if no arguments (just starting the shell) give the welcome message
+export PROJECTR_ARGS="$@"
+# the comments above^ are special
+#   they tell the system to process this using nix-shell
+#   specifically using the exact version of bash to use
+
+#
+# find and run all the startup scripts in alphabetical order
+#
+for file in "$PROJECTR_FOLDER/settings/setup_automatically/#pre_changing_home/"*
+do
+    # make sure its a file
+    if [[ -f "$file" ]]; then
+        source "$file"
+    fi
+done
+
+# create a dummy home folder to prevent any problems when starting up
+__dummy_home="$PWD/settings/.cache/home/"
+rm -rf "$__dummy_home" > /dev/null
+mkdir -p "$__dummy_home/.cache/"
+# connect the nix cache to prevent duplicates
+# check if file exists
+if ! [ -d "$__dummy_home/.cache/nix" ]
+then
+    ln -s "$HOME/.cache/nix" "$__dummy_home/.cache/nix" 
+fi
+
+# if there are arguments, treat it as a run command
+if [[ -n "$PROJECTR_ARGS" ]]
+then
+    # FIXME: I think the single quotes need to be escaped from the arguments
+    # run single command
+    HOME="$__dummy_home" nix-shell --pure --run "zsh -c '$PROJECTR_ARGS'" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
+else
+    echo "=============================="
+    echo " Setting up your Environment!"
+    echo "=============================="
+    HOME="$__dummy_home" nix-shell --pure --command "zsh" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
+fi

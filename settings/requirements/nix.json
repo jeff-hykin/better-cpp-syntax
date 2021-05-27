@@ -1,0 +1,109 @@
+{
+    "nix": {
+        "mainRepo": "a332da8588aeea4feb9359d23f58d95520899e3c",
+        "config": {
+            "allowUnfree": true,
+            "permittedInsecurePackages": [
+                "openssl-1.0.2u"
+            ]
+        },
+        "packages": [
+            {
+                "load": "ncurses",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "openssh",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "sd",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "dua",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "tealdeer",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "ytop",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "exa",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "zsh",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "zsh-syntax-highlighting",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "oh-my-zsh",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "zsh-autosuggestions",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "spaceship-prompt",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "nnn",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "man",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "coreutils",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "ripgrep",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "which",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "git",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "colorls",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "tree",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "less",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "nano",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "findutils",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            },
+            {
+                "load": "nix",
+                "from": "a332da8588aeea4feb9359d23f58d95520899e3c"
+            }
+        ]
+    }
+}

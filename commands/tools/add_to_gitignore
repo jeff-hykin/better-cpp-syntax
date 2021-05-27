@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+function escape_grep_regex() {
+    sed 's/[][\.|$(){}?+*^]/\\&/g' <<< "$*"
+}
+
+function add_to_gitignore {
+    if [[ -z "$PROJECTR_FOLDER" ]]
+    then
+        PROJECTR_FOLDER="$PWD"
+    fi
+    local ignore_file="$PROJECTR_FOLDER/.gitignore"
+    # check if file exists
+    if ! [[ -f ".gitignore" ]]
+    then
+        if [[ -d ".git" ]]
+        then
+            # fallback to the exclude file
+            ignore_file="$PROJECTR_FOLDER/.git/info/exclude"
+        fi
+    fi
+    mkdir -p "$(dirname "$ignore_file")"
+    touch "$ignore_file"
+    
+    local argument_was_added="false"
+    local added_at_least_one_thing="true"
+    for arg in "$@"
+    do
+        local path_to_ignore="$(realpath "$arg" --relative-to="$PROJECTR_FOLDER" --canonicalize-missing --no-symlinks)"
+        local escaped_name="$(escape_grep_regex "$path_to_ignore")"
+        # if it wasn't in the ignore already
+        grep -E -- "$escaped_name$" "$ignore_file" &>/dev/null || {
+            # if this is the first one that wasn't in the git ignore
+            if [[ "$argument_was_added" = "false" ]]
+            then
+                argument_was_added="true"
+                printf "\n# these lines were auto-added and may be very important (passwords/auth etc)\n" >> "$ignore_file"
+                printf "# comment it out if you know what you're doing and dont want it to be ignored\n" >> "$ignore_file"
+                printf "# [start auto-ignore]\n" >> "$ignore_file"
+            fi
+            argument_was_added="true"
+            printf "$path_to_ignore\n" >> "$ignore_file"
+        }
+        
+    done
+    # if an argument was added, add a concluding comment
+    if [[ "$argument_was_added" = "true" ]]
+    then
+        printf "# [end auto-ignore]\n" >> "$ignore_file"
+    fi
+}
+add_to_gitignore "$@"

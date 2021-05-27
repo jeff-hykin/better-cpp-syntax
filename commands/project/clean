@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# summary
+#   this just removes all of the can-be deleted files
+#   can be useful for fixing corrupted setups
+
+
+# shortcut for deleting things
+del () {
+    if [ -f "$1" ]
+    then
+        rm -fv "$1"
+    else
+        rm -rfv "$1"
+    fi
+}
+
+# detach this (behaves like unlink)
+del "$PROJECTR_FOLDER/home/.cache/nix"
+
+# the usual things
+__temp_var_cache_folder="$PROJECTR_FOLDER/settings/.cache"
+del "$__temp_var_cache_folder"
+for item in $(find "$PROJECTR_FOLDER" ! -path . -iregex '.*\.cleanable(\..*)?')
+do
+    del "$item"
+done
+# restore the keep file
+mkdir -p "$__temp_var_cache_folder" && touch "$__temp_var_cache_folder/.keep"
+
+# remove git's hooks
+if [[ -d "$PROJECTR_FOLDER/.git/hooks" ]]
+then
+    for file in $(find "$PROJECTR_FOLDER/.git/hooks")
+    do
+        # check if file exists
+        if [ -f "$file" ]
+        then
+            rm -fv "$file"
+        fi
+    done
+fi
