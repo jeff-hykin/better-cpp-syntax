@@ -32,3 +32,6 @@ if [[ -d "$PROJECTR_FOLDER" ]]
 then
     del "$PROJECTR_HOME/Library/Caches"
 fi
+
+# delete venv
+del "$PROJECTR_FOLDER/.venv"
