@@ -33,5 +33,8 @@ then
     del "$PROJECTR_HOME/Library/Caches"
 fi
 
-# delete venv
+# for python
 del "$PROJECTR_FOLDER/.venv"
+
+# for node
+del "$PROJECTR_FOLDER/node_modules"
