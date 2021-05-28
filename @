@@ -14,8 +14,8 @@ source ./settings/project.config.sh
 # 
 if [[ "$#" = "0" ]]
 then
-    # list the available commands
-    "$PROJECTR_COMMANDS_FOLDER/project/commands"
+    # start the shell
+    "$PROJECTR_COMMANDS_FOLDER/shell"
 # 
 # otherwise run the respective project command
 # 
