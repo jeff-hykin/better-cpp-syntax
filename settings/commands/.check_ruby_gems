@@ -2,7 +2,7 @@
 echo Running ruby package check
 
 function install_bundler {
-    gem install bundler || sudo gem install bundler
+    gem install bundler 2>/dev/null
 }
 
 # ensure that the Gemfile, and ./settings/.cache/.nosync.gemfile.hash files exits
