@@ -72,29 +72,29 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: 'AVCaptureDeviceDiscoverySession '
 - source: '        discoverySessionWithDeviceTypes:@'
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: AVCaptureDeviceTypeBuiltInWideAngleCamera
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: '        mediaType:AVMediaTypeVideo '
 - source: '        position:AVCaptureDevicePositionUnspecified'
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -130,29 +130,35 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: NSMutableArray
   scopes:
     - support.class.cocoa
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
-- source: ' init'
+    - meta.bracketed
+- source: init
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -168,7 +174,10 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: 'device in '
+- source: 'device '
+- source: in
+  scopes:
+    - keyword.other.in
 - source: session
   scopes:
     - variable.other.object.access
@@ -216,10 +225,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 's stringByAppendingFormat:'
+    - punctuation.section.scope.begin
+- source: 's '
+- source: stringByAppendingFormat
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '@"'
   scopesBegin:
     - string.quoted.double
@@ -245,20 +263,14 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter
-- source: device
-  scopes:
-    - variable.other.object.access
-- source: .
-  scopes:
-    - punctuation.separator.dot-access
-- source: uniqueID
-  scopes:
-    - variable.other.member
+- source: ' device.uniqueID'
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -268,10 +280,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 's stringByAppendingFormat:'
+    - punctuation.section.scope.begin
+- source: 's '
+- source: stringByAppendingFormat
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '@"'
   scopesBegin:
     - string.quoted.double
@@ -297,15 +318,7 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter
-- source: device
-  scopes:
-    - variable.other.object.access
-- source: .
-  scopes:
-    - punctuation.separator.dot-access
-- source: position
-  scopes:
-    - variable.other.member
+- source: ' device.position '
 - source: ==
   scopes:
     - keyword.operator.comparison
@@ -337,12 +350,13 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.function-call
     - string.quoted.double
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -352,10 +366,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 's stringByAppendingFormat:'
+    - punctuation.section.scope.begin
+- source: 's '
+- source: stringByAppendingFormat
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '@"'
   scopesBegin:
     - string.quoted.double
@@ -373,12 +396,13 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.function-call
     - string.quoted.double
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -388,10 +412,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 's stringByAppendingFormat:'
+    - punctuation.section.scope.begin
+- source: 's '
+- source: stringByAppendingFormat
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '@"'
   scopesBegin:
     - string.quoted.double
@@ -409,12 +442,13 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.function-call
     - string.quoted.double
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -424,10 +458,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 's stringByAppendingString:'
+    - punctuation.section.scope.begin
+- source: 's '
+- source: stringByAppendingString
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '@"'
   scopesBegin:
     - string.quoted.double
@@ -438,26 +481,39 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.function-call
     - string.quoted.double
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'lst addObject:s'
+    - punctuation.section.scope.begin
+- source: 'lst '
+- source: addObject
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: s
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -260,21 +260,37 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    self '
+- source: self
+  scopes:
+    - variable.language
 - source: =
   scopes:
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'super initWithFrame:frame'
+    - punctuation.section.scope.begin
+- source: super
+  scopes:
+    - variable.language
+- source: initWithFrame
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: frame
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -286,7 +302,9 @@
     - meta.parens.block
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'self '
+- source: self
+  scopes:
+    - variable.language
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -303,19 +321,40 @@
     - punctuation.section.block.begin.bracket.curly
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self setupWithEffect:BBCyclingLabelTransitionEffectDefault'
-- source: '                  andDuration:'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: setupWithEffect
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: BBCyclingLabelTransitionEffectDefault
+- source: andDuration
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
 - source: kBBCyclingLabelDefaultTransitionDuration
   scopes:
     - constant.other.variable.mac-classic
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -325,7 +364,9 @@
 - source: return
   scopes:
     - keyword.control
-- source: ' self'
+- source: self
+  scopes:
+    - variable.language
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -382,21 +423,37 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    self '
+- source: self
+  scopes:
+    - variable.language
 - source: =
   scopes:
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'super initWithCoder:coder'
+    - punctuation.section.scope.begin
+- source: super
+  scopes:
+    - variable.language
+- source: initWithCoder
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: coder
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -408,7 +465,9 @@
     - meta.parens.block
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'self '
+- source: self
+  scopes:
+    - variable.language
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -425,19 +484,40 @@
     - punctuation.section.block.begin.bracket.curly
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self setupWithEffect:BBCyclingLabelTransitionEffectDefault'
-- source: '                  andDuration:'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: setupWithEffect
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: BBCyclingLabelTransitionEffectDefault
+- source: andDuration
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
 - source: kBBCyclingLabelDefaultTransitionDuration
   scopes:
     - constant.other.variable.mac-classic
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -447,7 +527,9 @@
 - source: return
   scopes:
     - keyword.control
-- source: ' self'
+- source: self
+  scopes:
+    - variable.language
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -522,21 +604,37 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    self '
+- source: self
+  scopes:
+    - variable.language
 - source: =
   scopes:
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'super initWithFrame:frame'
+    - punctuation.section.scope.begin
+- source: super
+  scopes:
+    - variable.language
+- source: initWithFrame
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: frame
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -548,7 +646,9 @@
     - meta.parens.block
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'self '
+- source: self
+  scopes:
+    - variable.language
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -565,19 +665,40 @@
     - punctuation.section.block.begin.bracket.curly
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self setupWithEffect:transitionEffect'
-- source: '                  andDuration:'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: setupWithEffect
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: transitionEffect
+- source: andDuration
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
 - source: kBBCyclingLabelDefaultTransitionDuration
   scopes:
     - constant.other.variable.mac-classic
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -587,7 +708,9 @@
 - source: return
   scopes:
     - keyword.control
-- source: ' self'
+- source: self
+  scopes:
+    - variable.language
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -667,15 +790,21 @@
     - punctuation.terminator.statement
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: self prepareTransitionBlocks
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: prepareTransitionBlocks
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -782,18 +911,40 @@
     - punctuation.section.block.begin.bracket.curly
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self setText:text animated:'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: setText
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: 'text '
+- source: animated
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
 - source: 'YES'
   scopes:
     - constant.language
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -906,7 +1057,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1042,7 +1197,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1178,7 +1337,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1312,7 +1475,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1446,7 +1613,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1580,7 +1751,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1714,7 +1889,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1848,7 +2027,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1982,7 +2165,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2112,7 +2299,11 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: ' label in _labels'
+- source: ' label '
+- source: in
+  scopes:
+    - keyword.other.in
+- source: ' _labels'
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2242,15 +2433,21 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: self nextLabelIndex
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: nextLabelIndex
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2264,15 +2461,27 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: '_labels objectAtIndex:nextLabelIndex'
+    - punctuation.section.scope.begin
+- source: '_labels '
+- source: objectAtIndex
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: nextLabelIndex
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2322,15 +2531,29 @@
     - comment.line.double-slash
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self resetLabel:nextLabel'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: resetLabel
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: nextLabel
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2760,17 +2983,45 @@
     - comment.line.double-slash
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: >-
-    UIView animateWithDuration:_transitionDuration animations:changeBlock
-    completion:completionBlock
+    - punctuation.section.scope.begin
+- source: 'UIView '
+- source: animateWithDuration
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: '_transitionDuration '
+- source: animations
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
+- source: 'changeBlock '
+- source: completion
+  scopesBegin:
+    - support.function.any-method.name-of-parameter
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method.name-of-parameter
+- source: completionBlock
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2934,18 +3185,29 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: NSMutableArray
   scopes:
     - support.class.cocoa
-- source: ' arrayWithCapacity:size'
+- source: arrayWithCapacity
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: size
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3000,49 +3262,72 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.section.scope.begin
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: UILabel alloc
+    - punctuation.section.scope.begin
+- source: 'UILabel '
+- source: alloc
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
-- source: ' initWithFrame:'
+    - meta.bracketed
+- source: initWithFrame
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: self
   scopes:
-    - variable.other.object.access
-- source: .
-  scopes:
-    - punctuation.separator.dot-access
-- source: bounds
-  scopes:
-    - variable.other.member
+    - variable.language
+- source: .bounds
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'self addSubview:label'
+    - punctuation.section.scope.begin
+- source: self
+  scopes:
+    - variable.language
+- source: addSubview
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: label
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3060,15 +3345,19 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: UIColor clearColor
+    - punctuation.section.scope.begin
+- source: 'UIColor '
+- source: clearColor
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3110,15 +3399,27 @@
     - punctuation.terminator.statement
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'labels addObject:label'
+    - punctuation.section.scope.begin
+- source: 'labels '
+- source: addObject
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
+- source: label
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3141,18 +3442,29 @@
     - keyword.operator.assignment
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: 'labels objectAtIndex:'
+    - punctuation.section.scope.begin
+- source: 'labels '
+- source: objectAtIndex
+  scopesBegin:
+    - meta.function-call
+    - support.function.any-method
+- source: ':'
+  scopes:
+    - punctuation.separator.arguments
+  scopesEnd:
+    - support.function.any-method
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.function-call
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -4269,15 +4581,19 @@
     - keyword.operator
 - source: '['
   scopesBegin:
-    - meta.bracket.square.access
+    - meta.bracketed
   scopes:
-    - punctuation.definition.begin.bracket.square
-- source: _labels count
+    - punctuation.section.scope.begin
+- source: '_labels '
+- source: count
+  scopes:
+    - meta.function-call
+    - support.function.any-method
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
+    - punctuation.section.scope.end
   scopesEnd:
-    - meta.bracket.square.access
+    - meta.bracketed
 - source: ;
   scopes:
     - punctuation.terminator.statement
