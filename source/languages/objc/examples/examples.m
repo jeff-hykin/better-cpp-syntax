@@ -1,3 +1,4 @@
+@implementation CameraManager
 - (nonnull NSArray<NSString *> *)getCameras {
     // get list of regular cameras
     AVCaptureDeviceDiscoverySession *session = [AVCaptureDeviceDiscoverySession 
@@ -19,3 +20,4 @@
 
     return lst;
 }
+@end

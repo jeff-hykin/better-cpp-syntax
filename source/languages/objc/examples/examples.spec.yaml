@@ -1,36 +1,54 @@
-- source: '-'
+- source: '@'
+  scopesBegin:
+    - meta.implementation
+    - storage.type
   scopes:
-    - keyword.operator
+    - punctuation.definition.storage.type
+- source: implementation
+  scopesEnd:
+    - storage.type
+- source: CameraManager
+  scopes:
+    - entity.name.type
+- source: '- '
+  scopesBegin:
+    - meta.scope.implementation
+    - meta.function-with-body
+    - meta.function
 - source: (
   scopesBegin:
-    - meta.parens
+    - meta.return-type
   scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: 'nonnull '
+    - punctuation.definition.type.begin
+- source: nonnull
+  scopes:
+    - storage.modifier.protocol
 - source: NSArray
   scopes:
     - support.class.cocoa
 - source: <
+  scopesBegin:
+    - meta.protocol-list
   scopes:
-    - keyword.operator.comparison
-- source: NSString
-  scopes:
-    - support.class.cocoa
-- source: '*'
-  scopes:
-    - keyword.operator
+    - punctuation.section.scope.begin
+- source: NSString *
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.scope.end
+  scopesEnd:
+    - meta.protocol-list
 - source: '*'
   scopes:
     - keyword.operator
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
+    - punctuation.definition.type.end
+- source: getCameras
+  scopes:
+    - entity.name.function
   scopesEnd:
-    - meta.parens
-- source: 'getCameras '
+    - meta.function
+    - meta.return-type
 - source: '{'
   scopesBegin:
     - meta.block
@@ -456,3 +474,13 @@
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.scope.implementation
+    - meta.function-with-body
+    - meta.block
+- source: '@'
+  scopesBegin:
+    - storage.type
+  scopes:
+    - punctuation.definition.storage.type
+- source: end

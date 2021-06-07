@@ -321,7 +321,7 @@
           "name": "keyword.other.typedef.objc"
         },
         {
-          "match": "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
+          "match": "\\b(const|extern|register|restrict|static|volatile|inline|__block)\\b",
           "name": "storage.modifier.objc"
         },
         {
@@ -3539,7 +3539,7 @@
           "name": "meta.property-with-attributes.objc",
           "patterns": [
             {
-              "match": "\\b(getter|setter|readonly|readwrite|assign|retain|copy|nonatomic|strong|weak)\\b",
+              "match": "\\b(getter|setter|readonly|readwrite|assign|retain|copy|nonatomic|atomic|strong|weak|nonnull|nullable|null_resettable|null_unspecified|class|direct)\\b",
               "name": "keyword.other.property.attribute.objc"
             }
           ]
@@ -3589,7 +3589,7 @@
       ]
     },
     "protocol_type_qualifier": {
-      "match": "\\b(in|out|inout|oneway|bycopy|byref)\\b",
+      "match": "\\b(in|out|inout|oneway|bycopy|byref|nonnull|nullable|_Nonnull|_Nullable|_Null_unspecified)\\b",
       "name": "storage.modifier.protocol.objc"
     },
     "special_variables": {
