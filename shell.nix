@@ -85,6 +85,7 @@ in
     definitions.mainPackages.mkShell {
         # inside that shell, make sure to use these packages
         buildInputs = nestedPackages ++ [
+            definitions.mainPackages.openssl_1_1
             definitions.mainPackages.python37
             definitions.mainPackages.python37Packages.setuptools
             definitions.mainPackages.python37Packages.pip
