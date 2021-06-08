@@ -108,7 +108,7 @@ let
             definitions.mainPackages.cmake
         ];
         linuxOnlyShellCode = if !definitions.mainPackages.stdenv.isLinux then "" else ''
-            if [[ "$OSTYPE" == "linux-gnu" ]] 
+            if [ "$OSTYPE" = "linux-gnu" ]
             then
                 # example:
                 # export CUDA_PATH="${definitions.mainPackages.cudatoolkit}"
@@ -154,7 +154,7 @@ in
         source "$PWD/settings/project.config.sh"
         
         # we don't want to give nix or other apps our home folder
-        if [[ "$HOME" != "$PROJECTR_HOME" ]] 
+        if ! [ "$HOME" = "$PROJECTR_HOME" ]
         then
             mkdir -p "$PROJECTR_HOME/.cache/"
             ln -s "$HOME/.cache/nix" "$PROJECTR_HOME/.cache/" &>/dev/null
