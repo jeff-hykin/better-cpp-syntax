@@ -120,6 +120,25 @@ let
         # Mac Only
         # 
         macOnlyPackages = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
+            # build tools are because of node-gyp
+            (
+                import (builtins.fetchGit {
+                    # Descriptive name to make the store path easier to identify                
+                    name = "old-revision-for-xcode";
+                    url = "https://github.com/NixOS/nixpkgs/";
+                    ref = "refs/heads/nixpkgs-unstable";
+                    rev = "c92ca95afb5043bc6faa0d526460584eccff2277";
+                }) {}
+            ).xcode-install
+            (
+                import (builtins.fetchGit {
+                    # Descriptive name to make the store path easier to identify                
+                    name = "old-revision-for-xcode";
+                    url = "https://github.com/NixOS/nixpkgs/";
+                    ref = "refs/heads/nixpkgs-unstable";
+                    rev = "c92ca95afb5043bc6faa0d526460584eccff2277";
+                }) {}
+            ).xcodebuild
         ];
         macOnlyNativePackages = [] ++ definitions.mainPackages.lib.optionals (definitions.mainPackages.stdenv.isDarwin) [
         ];
