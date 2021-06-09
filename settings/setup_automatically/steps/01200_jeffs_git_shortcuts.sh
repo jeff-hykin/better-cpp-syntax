@@ -1,4 +1,32 @@
 # version 2.0 is at least the minimum (may have a higher minimum)
+# sed, grep, bash/zsh required
+
+git_checkout () {
+    # 
+    # if its a branch, then use switch
+    # 
+    __temp_var__branches="$(git branch -a | sed -e 's/remotes\/origin\/HEAD .*//' | sed -e 's/remotes\/origin\//origin /')"
+    printf '%s' "$__temp_var__branches" | grep "$1" 2>/dev/null 1>/dev/null && {
+        unset __temp_var__branches
+        git switch "$@"
+        return 
+    }
+    printf '%s' "$__temp_var__branches" | grep "$2" 2>/dev/null 1>/dev/null && {
+        unset __temp_var__branches
+        git switch "$@"
+        return
+    }
+    unset __temp_var__branches
+    # 
+    # otherwise use checkout
+    # 
+    git checkout "$@"
+    return
+}
+
+git_commit_hashes () {
+    git log --reflog --oneline | sed -e 's/ .*//'
+}
 
 git_log () {
     git log --oneline
@@ -18,7 +46,7 @@ git_sync () { # git push && git pull
         args="-"
     fi
     # https://stackoverflow.com/questions/3745135/push-git-commits-tags-simultaneously
-    git add -A; git commit -m "$args"; git pull --no-edit; git submodule update --init --recursive && git push
+    git add -A; git commit -m "$args"; git pull --no-edit; git submodule update --init --recursive --progress && git push
 }
 
 git_force_push () {
@@ -73,7 +101,7 @@ git_current_branch_name () {
 
 git_new_branch () {
     branch_name="$1"
-    git checkout "$(git_current_branch_name)" && git checkout -b "$branch_name" && git push --set-upstream origin "$branch_name"
+    git switch "$(git_current_branch_name)" && git checkout -b "$branch_name" && git push --set-upstream origin "$branch_name"
 }
 
 git_delete_branch () {
@@ -83,6 +111,46 @@ git_delete_branch () {
 
 git_delete_local_branch () {
     git branch -D $@
+}
+
+absolute_path () {
+    echo "$(builtin cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+}
+
+git_folder_as_new_branch () {
+    new_branch_name="$1"
+    target_folder="$2"
+    if ! [ -d ".git" ]
+    then
+        echo "need to be in the same directory as the .git folder"
+        exit 1
+    fi
+    
+    if ! [ -d "$target_folder" ]
+    then
+        echo "second argument needs to be a folder that you want to be a branch"
+        exit 1
+    fi
+    target_folder="$(absolute_path "$target_folder")"
+    
+    # create an empty branch (actually quite a tricky task)
+    mkdir -p ./.cache/tmp/brancher
+    cp -r ".git" "./.cache/tmp/brancher/.git"
+    touch "./.cache/tmp/brancher/.keep"
+    cd "./.cache/tmp/brancher/"
+    git checkout --orphan "$new_branch_name"
+    git add -A
+    git commit -m "init"
+    git push --set-upstream origin "$new_branch_name"
+    # copy all the files
+    cp -R "$target_folder"/. .
+    # now add and push
+    git add -A
+    git commit -m "first real branch commit"
+    git push
+    cd ../../..
+    git fetch origin "$new_branch_name"
+    rm -rf "./.cache/tmp"
 }
 
 git_add_external_branch () {
@@ -101,6 +169,93 @@ git_add_external_branch () {
     git fetch "@$__temp_var__name_for_repo" "$__temp_var__branch_of_repo"
     git checkout -b "@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" "remotes/@$__temp_var__name_for_repo/$__temp_var__branch_of_repo"
     echo "new branch is named: @$__temp_var__name_for_repo/$__temp_var__branch_of_repo"
+}
+
+git_steal_external_branch () {
+    # example:
+    #     git_steal_external_branch "slowfast" 'https://github.com/facebookresearch/SlowFast.git' 'master'
+    #     git checkout 'slowfast/master'
+    __temp_var__name_for_repo="$1"
+    __temp_var__url_for_repo="$2"
+    __temp_var__branch_of_repo="$3"
+    if [[ -z "$__temp_var__branch_of_repo" ]]
+    then
+        __temp_var__branch_of_repo="master"
+    fi
+    
+    __temp_var__new_branch_name="$__temp_var__name_for_repo/$__temp_var__branch_of_repo"
+    
+    # 
+    # create the local/origin one
+    # 
+    echo "create an empty local branch" && \
+    git checkout --orphan "$__temp_var__new_branch_name" && \
+    echo "ignoring any files from other branches" && \
+    echo "making initial commit, otherwise things break" && \
+    git reset && \
+    touch .keep && \
+    git add .keep && \
+    git commit -m 'init' && \
+    echo "creating upstream branch" && \
+    git push --set-upstream origin "$__temp_var__new_branch_name"
+    # 
+    # create the external one with @
+    # 
+    echo "pulling in the external data" && \
+    git remote add "@$__temp_var__name_for_repo" "$__temp_var__url_for_repo" && \
+    git fetch "@$__temp_var__name_for_repo" "$__temp_var__branch_of_repo" && \
+    git checkout -b "@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" "remotes/@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" && \
+    echo "merging external branch with local branch" && \
+    git switch "$__temp_var__new_branch_name" && \
+    git merge --allow-unrelated-histories --no-edit heads/"@$__temp_var__new_branch_name" && \
+    git push  && \
+    git status && \
+    echo "you're now on branch: $__temp_var__new_branch_name" && \
+    echo "" && \
+    echo "you probably want to add all the untracked^ files to the .gitignore file"
+}
+
+git_steal_into_submodule () {
+    # example:
+    #     git_steal_into_submodule "slowfast" 'https://github.com/facebookresearch/SlowFast.git' 'master'  ./submodules/slow_fast
+    #     git checkout '@slowfast/master'
+    __temp_var__name_for_repo="$1"
+    __temp_var__url_for_repo="$2"
+    __temp_var__branch_of_repo="$3"
+    __temp_var__path_to_submodule="$4"
+    if [[ -z "$__temp_var__branch_of_repo" ]]
+    then
+        __temp_var__branch_of_repo="master"
+    fi
+    __temp_var__branch_to_go_back_to="$(git_current_branch_name)"
+    
+    # FIXME: follow the git_steal_external_branch pattern
+    
+    # echo "#" && \
+    # echo "# adding remote as ""@$__temp_var__name_for_repo" && \
+    # echo "#" && \
+    # git remote add "@$__temp_var__name_for_repo" "$__temp_var__url_for_repo" && \
+    # echo "#" && \
+    # echo "# fetching that branch" && \
+    # echo "#" && \
+    # git fetch "@$__temp_var__name_for_repo" "$__temp_var__branch_of_repo" && \
+    # echo "#" && \
+    # echo "# creating our branch: ""@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" && \
+    # echo "#" && \
+    # git checkout -b "@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" "remotes/@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" && \
+    # git push --set-upstream origin "@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" --force && \
+    # echo "#" && \
+    # echo "# uploading their commits: ""@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" && \
+    # echo "#" && \
+    # git push && \
+    # echo "#" && \
+    # echo "# switching back to original branch: $__temp_var__branch_to_go_back_to" && \
+    # echo "#" && \
+    # git checkout "$__temp_var__branch_to_go_back_to" && \
+    # echo "#" && \
+    # echo "# adding submodule: $__temp_var__path_to_submodule" && \
+    # echo "#" && \
+    # git submodule add -b "@$__temp_var__name_for_repo/$__temp_var__branch_of_repo" -- "$(git config --get remote.origin.url)" "$__temp_var__path_to_submodule"
 }
 
 # 
@@ -244,7 +399,7 @@ alias gp="git_sync"
 alias gm="git merge"
 alias gfpull="git_force_pull"
 alias gfpush="git_force_push"
-alias gc="git checkout"
+alias gc="git_checkout"
 alias gb="git branch -a"
 alias gnb="git_new_branch"
 alias gd="git_delete_changes"
