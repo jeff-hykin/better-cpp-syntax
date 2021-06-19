@@ -289,10 +289,10 @@
       "name": "support.constant.cocoa.objcpp"
     },
     {
-      "include": "#c_lang"
+      "include": "#bracketed_content"
     },
     {
-      "include": "#bracketed_content"
+      "include": "#c_lang"
     }
   ],
   "repository": {
@@ -325,6 +325,10 @@
           "name": "keyword.other.typedef.objcpp"
         },
         {
+          "match": "\\bin\\b",
+          "name": "keyword.other.in.objcpp"
+        },
+        {
           "match": "\\b(const|extern|register|restrict|static|volatile|inline|__block)\\b",
           "name": "storage.modifier.objcpp"
         },
@@ -352,6 +356,9 @@
         },
         {
           "include": "#strings"
+        },
+        {
+          "include": "#special_variables"
         },
         {
           "begin": "(?x)\n^\\s* ((\\#)\\s*define) \\s+\t# define\n((?<id>[a-zA-Z_$][\\w$]*))\t  # macro name\n(?:\n  (\\()\n\t(\n\t  \\s* \\g<id> \\s*\t\t # first argument\n\t  ((,) \\s* \\g<id> \\s*)*  # additional arguments\n\t  (?:\\.\\.\\.)?\t\t\t# varargs ellipsis?\n\t)\n  (\\))\n)?",
@@ -6643,9 +6650,6 @@
         },
         {
           "include": "#property_directive"
-        },
-        {
-          "include": "#special_variables"
         },
         {
           "include": "#method_super"

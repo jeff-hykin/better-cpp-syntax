@@ -150,7 +150,10 @@
 - source: '*'
   scopes:
     - keyword.operator
-- source: 'device in '
+- source: 'device '
+- source: in
+  scopes:
+    - keyword.other.in
 - source: session
   scopes:
     - variable.other.object.access
