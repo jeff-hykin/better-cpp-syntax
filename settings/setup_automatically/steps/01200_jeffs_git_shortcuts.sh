@@ -70,14 +70,16 @@ git_delete_changes () {
     git submodule update --init --recursive # https://stackoverflow.com/questions/7882603/how-to-revert-a-git-submodule-pointer-to-the-commit-stored-in-the-containing-rep
     # unstage everything
     git reset --
-    $result="$(git stash save --keep-index --include-untracked)"
+    __temp_var__result="$(git stash save --keep-index --include-untracked)"
+    
     # stash everything and delete stash
-    if [[ $result == "No local changes to save" ]] 
+    if [[ "$__temp_var__result" == "No local changes to save" ]] 
     then
-        echo no changes to delete
+        echo "no changes to delete (just FYI)"
     else
         git stash drop
     fi
+    unset __temp_var__result
 }
 
 git_keep_mine () {
@@ -105,12 +107,12 @@ git_new_branch () {
 }
 
 git_delete_branch () {
-    git push origin --delete $@
-    git branch -D $@
+    git push origin --delete "$@"
+    git branch -D "$@"
 }
 
 git_delete_local_branch () {
-    git branch -D $@
+    git branch -D "$@"
 }
 
 absolute_path () {
