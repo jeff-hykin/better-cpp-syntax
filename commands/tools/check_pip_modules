@@ -36,7 +36,7 @@ then
     __temp_var__hash_check_name="pip_poetry_modules"
     failed_check_command () {
         # what to do when node modules haven't been installed yet
-        python -m pip --disable-pip-version-check install -r "$__temp_var__file_to_watch"
+        poetry install
         # if successful
         if [ $? -eq 0 ] 
         then
