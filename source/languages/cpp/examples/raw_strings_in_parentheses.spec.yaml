@@ -1,0 +1,109 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: S
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: int
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' x '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: f
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: R
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - string.quoted.double.raw
+    - punctuation.definition.string.begin
+  scopes:
+    - meta.encoding
+- source: '"('
+  scopesEnd:
+    - punctuation.definition.string.begin
+- source: some raw string literal
+- source: )"
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - string.quoted.double.raw
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' y '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '100'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' z '
+- source: =
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: hello
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
