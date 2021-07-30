@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-source ./settings/project.config.sh
+source ./settings/projectr_core.sh
 
 # 
 # summary
 # 
 #     this file is used to run commands
-#     it loads the PROJECTR env variables first (./settings/project.config.sh)
+#     it loads the PROJECTR env variables first (./settings/projectr_core.sh)
 #     then in looks inside the commands folder for commands to run
 #     (unlike the underscore, this does not load the manual environment)
 

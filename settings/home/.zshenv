@@ -16,7 +16,7 @@ else
     # this shouldnt ever happen, but just encase
     if [[ -z "$PROJECTR_FOLDER" ]]
     then
-        source ./settings/project.config.sh
+        source ./settings/projectr_core.sh
     fi
     
     function nix_path_for {

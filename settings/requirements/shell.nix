@@ -151,7 +151,7 @@ in
         ${linuxOnlyShellCode}
         ${macOnlyShellCode}
         
-        source "$PWD/settings/project.config.sh"
+        source "$PWD/settings/projectr_core.sh"
         
         # we don't want to give nix or other apps our home folder
         if ! [ "$HOME" = "$PROJECTR_HOME" ]

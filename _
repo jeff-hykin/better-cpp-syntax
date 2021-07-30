@@ -4,14 +4,14 @@
 # summary
 # 
 #     this file is used to run project commands
-#     it loads the PROJECTR env variables first (./settings/project.config.sh)
+#     it loads the PROJECTR env variables first (./settings/projectr_core.sh)
 #     it then loads the manual project environment
 #     this means your external environment needs to be setup correctly for this to work
 #     use ./@ shell to automatically setup an external environment
 # 
 #     then this executable looks inside the commands folder -> project folder for commands to run
 
-source ./settings/project.config.sh
+source ./settings/projectr_core.sh
 
 # 
 # no args
