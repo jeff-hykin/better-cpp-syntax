@@ -61,6 +61,15 @@ let
         '';
     }) else emptyOptions;
     
+    # 
+    # Ruby specific
+    # 
+    rubyGems = (main.packages.bundlerEnv {
+        name = "gems";
+        ruby = main.packages.ruby;
+        gemdir = ../../..;
+    });
+    
 # using the above definitions
 in
     # 
@@ -68,7 +77,7 @@ in
     # 
     main.packages.mkShell {
         # inside that shell, make sure to use these packages
-        buildInputs =  main.project.buildInputs ++ macOnly.buildInputs ++ linuxOnly.buildInputs;
+        buildInputs =  main.project.buildInputs ++ macOnly.buildInputs ++ linuxOnly.buildInputs ++ [];
         
         nativeBuildInputs =  main.project.nativeBuildInputs ++ macOnly.nativeBuildInputs ++ linuxOnly.nativeBuildInputs;
         
