@@ -10,7 +10,7 @@ export PROJECTR_ARGS="$@"
 #
 # find and run all the startup scripts in alphabetical order
 #
-for file in "$PROJECTR_FOLDER/settings/setup_automatically/#pre_changing_home/"*
+for file in "$PROJECTR_FOLDER/settings/automatic_setup_prep/"*
 do
     # make sure its a file
     if [[ -f "$file" ]]; then
