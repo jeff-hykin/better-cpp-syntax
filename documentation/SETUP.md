@@ -1,7 +1,6 @@
 # Setup
 
-
-TLDR: install `nix`, run `./_ shell`, and everything will be auto installed
+TLDR: install `nix`, run `commands/start`, and everything will be auto installed
 <br>
 
 ### For Windows
@@ -33,6 +32,6 @@ TLDR: install `nix`, run `./_ shell`, and everything will be auto installed
     * `git clone https://github.com/*this-repo-url*`
     * `cd *this-repo*`
 * Actually run some code
-    * run `./@ shell` to get into the project environment
+    * run `commands/start` to get into the project environment
         * Note: this will almost certainly take a while the first time because it will auto-install exact versions of everything: `node`, `python`, `ruby`, all modules for them, etc
     * run `project commands` to list the project commands
