@@ -3,11 +3,11 @@
 # config
 # 
 # if the project config exists
-rm -f "$PROJECTR_FOLDER/settings/git/config"
+rm -f "$__DIR__/config"
 if [[ -f "$PROJECTR_FOLDER/.git/config" ]]
 then
-    mkdir -p "$PROJECTR_FOLDER/settings/git"
-    ln -s "../../.git/config" "$PROJECTR_FOLDER/settings/git/config"
+    mkdir -p "$__DIR__"
+    ln -s "../../../.git/config" "$__DIR__/config"
 fi
 
 # if there's no pull setting, then add it to the project
@@ -18,16 +18,16 @@ git config pull.rebase &>/dev/null || git config pull.ff &>/dev/null || git conf
 # 
 mkdir -p "$PROJECTR_FOLDER/.git/info/"
 # check if file exists
-if [[ -f "$PROJECTR_FOLDER/settings/git/exclude.ignore" ]]
+if [[ -f "$__DIR__/exclude.ignore" ]]
 then
     rm -f "$PROJECTR_FOLDER/.git/info/exclude"
-    ln "$PROJECTR_FOLDER/settings/git/exclude.ignore" "$PROJECTR_FOLDER/.git/info/exclude"
+    ln "$__DIR__/exclude.ignore" "$PROJECTR_FOLDER/.git/info/exclude"
 fi
 
 # 
 # hooks
 #
-__temp_var_githooks_folder="$PROJECTR_FOLDER/settings/git/hooks"
+__temp_var_githooks_folder="$__DIR__/hooks"
 # if the folder exists
 if [[ -d "$__temp_var_githooks_folder" ]]
 then
@@ -39,15 +39,15 @@ then
         touch "$git_file"
         # make sure each calls the hooks # FIXME: some single quotes in $dir probably need to be escaped here
         cat "$git_file" | grep "#START: projectr hooks" &>/dev/null || echo "
+        #START: projectr hooks (don't delete unless you understand)
         if [ -n "'"$PROJECTR_FOLDER"'" ]
         then
-            #START: projectr hooks (don't delete unless you understand)
             absolute_path () {
                 "'
                 echo "$(builtin cd "$(dirname "$1")"; pwd)/$(basename "$1")"
                 '"
             }
-            for hook in "'$'"(find "'"$PROJECTR_FOLDER"'"'/settings/git/hooks/$(basename "$dir")/' -maxdepth 1)
+            for hook in "'$'"(find "'"$PROJECTR_FOLDER"'"'/settings/extensions/git/hooks/$(basename "$dir")/' -maxdepth 1)
             do
                 # check if file exists
                 if [ -f "'"$hook"'" ]
@@ -57,11 +57,10 @@ then
                     "'"'"\$hook"'"'" || echo "'"'"problem running: \$hook"'"'"
                 fi
             done
-            #END: projectr hooks (don't delete unless you understand)
         fi
+        #END: projectr hooks (don't delete unless you understand)
         " >> "$git_file"
         # ensure its executable
         chmod ugo+x "$git_file" &>/dev/null || sudo chmod ugo+x "$git_file"
     done
 fi
-

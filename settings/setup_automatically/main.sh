@@ -11,6 +11,10 @@ for file in "$PROJECTR_FOLDER/settings/setup_automatically/steps/"*
 do
     # make sure its a file
     if [[ -f "$file" ]]; then
+        if [ "$DEBUG_PROJECTR" = "true" ]
+        then
+            echo "loading: $file"
+        fi
         source "$file"
     fi
 done
