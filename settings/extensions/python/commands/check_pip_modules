@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+
+# if not in the standard env, try to make it work anyways
+if [ -z "$PROJECTR_FOLDER" ]
+then
+    # check if file exists (standard project vars)
+    if [ -f "$PWD/settings/project.config.sh" ]
+    then
+        source "$PWD/settings/project.config.sh"
+    fi
+    # check if file exists (custom project settings)
+    if [ -f "$PWD/settings/setup_manually/main.sh" ]
+    then
+        source "$PWD/settings/setup_manually/main.sh"
+    fi
+fi
+
+
+# 
+# check for python-poetry first
+# 
+__temp_var__should_use_poetry="false"
+if [ -f "$PROJECTR_FOLDER/pyproject.toml" ]
+then
+    # if poetry exists
+    if [ -n "$(command -v "poetry")" ]
+    then
+        __temp_var__should_use_poetry="true"
+    fi
+fi
+if [ "$__temp_var__should_use_poetry" = "true" ]
+then
+    # main inputs
+    __temp_var__command_name="tools/python/check_pip_modules"
+    __temp_var__file_to_watch="$PROJECTR_FOLDER/pyproject.toml"
+    __temp_var__hash_check_name="pip_poetry_modules"
+    failed_check_command () {
+        # what to do when node modules haven't been installed yet
+        poetry install
+        # if successful
+        if [ $? -eq 0 ] 
+        then
+            echo "[$__temp_var__command_name] Check finished (dependencies installed)"
+        # if failed
+        else
+            echo "[$__temp_var__command_name] Check failed: issues with install"
+        fi
+    }
+
+    # ensure that the source file and hash file exist
+    echo 
+    echo "[$__temp_var__command_name] Checking"
+    if [ -f "$__temp_var__file_to_watch" ]; then
+        # 
+        # create check file
+        # 
+        __temp_var__location_of_hash="$PROJECTR_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
+        if ! [ -f "$__temp_var__location_of_hash" ]; then
+            # make sure the folder exists
+            mkdir -p "$(dirname "$__temp_var__location_of_hash")"
+            touch "$__temp_var__location_of_hash"
+        fi
+        
+        # 
+        # compare check files
+        # 
+        __temp_var__old_hash="$(cat "$__temp_var__location_of_hash")"
+        __temp_var__new_hash="$(cat "$__temp_var__file_to_watch" | md5sum)"
+        # if something changed since last time; install!
+        if [ "$__temp_var__old_hash" != "$__temp_var__new_hash" ]; then
+            echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
+            failed_check_command
+        else
+            echo "[$__temp_var__command_name] Check Passed => assuming packages are installed"
+        fi
+        
+        unset __temp_var__location_of_hash
+        unset __temp_var__old_hash
+        unset __temp_var__new_hash
+    else
+        echo "[$__temp_var__command_name] Check Passed (but only because no dependency file was found)"
+    fi
+    unset __temp_var__command_name
+    unset __temp_var__file_to_watch
+    unset __temp_var__hash_check_name
+# 
+# if no poetry then use normal python install
+# 
+else
+    
+    # main inputs
+    __temp_var__command_name="tools/python/check_pip_modules"
+    __temp_var__file_to_watch="$PROJECTR_FOLDER/requirements.txt"
+    __temp_var__hash_check_name="pip_modules"
+    failed_check_command () {
+        # what to do when node modules haven't been installed yet
+        python -m pip --disable-pip-version-check install -r "$__temp_var__file_to_watch"
+        # if successful
+        if [ $? -eq 0 ] 
+        then
+            echo "[$__temp_var__command_name] Check finished (dependencies installed)"
+        # if failed
+        else
+            echo "[$__temp_var__command_name] Check failed: issues with install"
+        fi
+    }
+
+    # ensure that the source file and hash file exist
+    echo 
+    echo "[$__temp_var__command_name] Checking"
+    if [ -f "$__temp_var__file_to_watch" ]; then
+        # 
+        # create check file
+        # 
+        __temp_var__location_of_hash="$PROJECTR_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
+        if ! [ -f "$__temp_var__location_of_hash" ]; then
+            # make sure the folder exists
+            mkdir -p "$(dirname "$__temp_var__location_of_hash")"
+            touch "$__temp_var__location_of_hash"
+        fi
+        
+        # 
+        # compare check files
+        # 
+        __temp_var__old_hash="$(cat "$__temp_var__location_of_hash")"
+        __temp_var__new_hash="$(cat "$__temp_var__file_to_watch" | md5sum)"
+        # if something changed since last time; install!
+        if [ "$__temp_var__old_hash" != "$__temp_var__new_hash" ]; then
+            echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
+            failed_check_command
+        else
+            echo "[$__temp_var__command_name] Check Passed => assuming packages are installed"
+        fi
+        
+        unset __temp_var__location_of_hash
+        unset __temp_var__old_hash
+        unset __temp_var__new_hash
+    else
+        echo "[$__temp_var__command_name] Check Passed (but only because no dependency file was found)"
+    fi
+    unset __temp_var__command_name
+    unset __temp_var__file_to_watch
+    unset __temp_var__hash_check_name
+fi

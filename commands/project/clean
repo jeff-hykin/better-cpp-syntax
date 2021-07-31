@@ -4,45 +4,15 @@
 #   this just removes all of the can-be deleted files
 #   can be useful for fixing corrupted setups
 
+mkdir -p "$PROJECTR_FOLDER/settings/when_cleaning"
 
-# shortcut for deleting things
-del () {
-    if [ -f "$1" ]
+# this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+for_each_item_in="$PROJECTR_FOLDER/settings/when_cleaning"
+[ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+do
+    # check if file exists
+    if [ -f "$each" ]
     then
-        rm -fv "$1"
-    else
-        rm -rfv "$1"
+        source "$each"
     fi
-}
-
-# detach this (behaves like unlink)
-del "$PROJECTR_FOLDER/home/.cache/nix"
-
-# the usual things
-__temp_var_cache_folder="$PROJECTR_FOLDER/settings/.cache"
-del "$__temp_var_cache_folder"
-for item in $(find "$PROJECTR_FOLDER" ! -path . -iregex '.*\.cleanable(\..*)?')
-do
-    del "$item"
-done
-# restore the keep file
-mkdir -p "$__temp_var_cache_folder" && touch "$__temp_var_cache_folder/.keep"
-
-# remove git's hooks
-if [[ -d "$PROJECTR_FOLDER/.git/hooks" ]]
-then
-    for file in $(find "$PROJECTR_FOLDER/.git/hooks")
-    do
-        # check if file exists
-        if [ -f "$file" ]
-        then
-            rm -fv "$file"
-        fi
-    done
-fi
-
-# delete all the __pycache__'s
-for item in $(find "$PROJECTR_FOLDER" ! -path . -iregex '__pycache__')
-do
-    del "$item"
-done
+done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"

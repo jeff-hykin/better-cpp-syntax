@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+if [ -f "$1" ]
+then
+    rm -fv "$1"
+else
+    rm -rfv "$1"
+fi

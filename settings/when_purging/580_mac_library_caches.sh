@@ -1,0 +1,1 @@
+../extensions/os_mac/when_purging.sh

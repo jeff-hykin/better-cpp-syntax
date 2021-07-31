@@ -10,16 +10,20 @@ export PROJECTR_ARGS="$@"
 #
 # find and run all the startup scripts in alphabetical order
 #
-for file in "$PROJECTR_FOLDER/settings/setup_automatically/#pre_changing_home/"*
+for file in "$PROJECTR_FOLDER/settings/automatic_setup_prep/"*
 do
     # make sure its a file
-    if [[ -f "$file" ]]; then
+    if [ -f "$file" ]; then
+        if [ "$DEBUG_PROJECTR" = "true" ]
+        then
+            echo "loading: $file"
+        fi
         source "$file"
     fi
 done
 
 # create a dummy home folder to prevent any problems when starting up
-__dummy_home="$PWD/settings/.cache/home/"
+__dummy_home="$PROJECTR_FOLDER/settings/.cache/home/"
 rm -rf "$__dummy_home" > /dev/null
 mkdir -p "$__dummy_home/.cache/"
 # connect the nix cache to prevent duplicates
