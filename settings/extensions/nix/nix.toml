@@ -1,0 +1,232 @@
+# 
+# how to add packages?
+# 
+    # you can search for them here: https://search.nixos.org/packages
+    #
+    # if you find a package like: nixpkg.python38Packages.setuptools
+    # then add a section like this:
+    #    [[packages]]
+    #    load = [ "python38Packages", "setuptools",]
+    # 
+    # if you need a specific version 
+    # search for the package (e.g. "setuptools") on here: https://lazamar.co.uk/nix-versions/
+    # each version will have a long hash like "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
+    # (which is a commit on the nixpkg repo)
+    # once you copy the hash, you can add the package below like
+    # 
+    #    [[packages]]
+    #    load = [ "python38Packages", "setuptools",]
+    #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+    
+
+[[packages]]
+load = [ "poetry",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "setuptools",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "pip",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "virtualenv",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "wheel",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "ncurses",]
+
+[[packages]]
+load = [ "openssh",]
+
+[[packages]]
+load = [ "sd",]
+
+[[packages]]
+load = [ "dua",]
+
+[[packages]]
+load = [ "tealdeer",]
+
+[[packages]]
+load = [ "ytop",]
+from = "a332da8588aeea4feb9359d23f58d95520899e3c"
+
+[[packages]]
+load = [ "exa",]
+
+[[packages]]
+load = [ "zsh",]
+
+[[packages]]
+load = [ "zsh-syntax-highlighting",]
+
+[[packages]]
+load = [ "oh-my-zsh",]
+
+[[packages]]
+load = [ "zsh-autosuggestions",]
+
+[[packages]]
+load = [ "spaceship-prompt",]
+
+[[packages]]
+load = [ "nnn",]
+
+[[packages]]
+load = [ "pkgconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "libconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "cmake",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "libGLU",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "cudatoolkit",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "linuxPackages", "nvidia_x11",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "stdenv", "cc",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "man",]
+
+[[packages]]
+load = [ "coreutils",]
+
+[[packages]]
+load = [ "ripgrep",]
+
+[[packages]]
+load = [ "which",]
+
+[[packages]]
+load = [ "git",]
+
+[[packages]]
+load = [ "colorls",]
+
+[[packages]]
+load = [ "tree",]
+
+[[packages]]
+load = [ "less",]
+
+[[packages]]
+load = [ "nano",]
+
+[[packages]]
+load = [ "findutils",]
+
+[[packages]]
+load = [ "unixtools", "arp",]
+
+[[packages]]
+load = [ "unixtools", "ifconfig",]
+
+[[packages]]
+load = [ "unixtools", "netstat",]
+
+[[packages]]
+load = [ "unixtools", "ping",]
+
+[[packages]]
+load = [ "unixtools", "route",]
+
+[[packages]]
+load = [ "unixtools", "col",]
+
+[[packages]]
+load = [ "unixtools", "column",]
+
+[[packages]]
+load = [ "unixtools", "fdisk",]
+
+[[packages]]
+load = [ "unixtools", "fsck",]
+
+[[packages]]
+load = [ "unixtools", "getconf",]
+
+[[packages]]
+load = [ "unixtools", "getent",]
+
+[[packages]]
+load = [ "unixtools", "getopt",]
+
+[[packages]]
+load = [ "unixtools", "hexdump",]
+
+[[packages]]
+load = [ "unixtools", "hostname",]
+
+[[packages]]
+load = [ "unixtools", "killall",]
+
+[[packages]]
+load = [ "unixtools", "locale",]
+
+[[packages]]
+load = [ "unixtools", "more",]
+
+[[packages]]
+load = [ "unixtools", "mount",]
+
+[[packages]]
+load = [ "unixtools", "ps",]
+
+[[packages]]
+load = [ "unixtools", "quota",]
+
+[[packages]]
+load = [ "unixtools", "script",]
+
+[[packages]]
+load = [ "unixtools", "sysctl",]
+
+[[packages]]
+load = [ "unixtools", "top",]
+
+[[packages]]
+load = [ "unixtools", "umount",]
+
+[[packages]]
+load = [ "unixtools", "whereis",]
+
+[[packages]]
+load = [ "unixtools", "write",]
+
+[[packages]]
+load = [ "unixtools", "xxd",]
+
+[[packages]]
+load = [ "jq",]
+
+[[packages]]
+load = [ "nix",]
