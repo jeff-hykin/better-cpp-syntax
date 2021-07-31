@@ -1,12 +1,47 @@
 # 
 # NOTE: I wouldn't recommend adding new variables (or anything) here
 # 
-# (but the existing vars can be changed)
+# (but the existing vars can be changed, and you can add custom logic with settings/extensions/YOUR_THING/#initialize.sh)
 
 
-# TODO: in the future have a mechanism for walking up the current path to find the nearest parent project structure
-# (instead of using PWD)
-export PROJECTR_FOLDER="$PWD"
+# 
+# find this file
+# 
+path_to_file=""
+file_name="settings/projectr_core"
+folder_to_look_in="$PWD"
+while :
+do
+    # check if file exists
+    if [ -f "$folder_to_look_in/$file_name" ]
+    then
+        path_to_file="$folder_to_look_in/$file_name"
+        break
+    else
+        if [ "$folder_to_look_in" = "/" ]
+        then
+            break
+        else
+            folder_to_look_in="$(dirname "$folder_to_look_in")"
+        fi
+    fi
+done
+if [ -z "$path_to_file" ]
+then
+    #
+    # what to do if file never found
+    #
+    echo "Im a script running with a pwd of:$PWD"
+    echo "Im looking for settings/projectr_core in a parent folder"
+    echo "Im exiting now because I wasnt able to find it"
+    echo "thats all the information I have"
+    exit
+fi
+
+# 
+# set main vars
+# 
+export PROJECTR_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 export PROJECTR_HOME="$PROJECTR_FOLDER/settings/home/"
 export PROJECTR_COMMANDS_FOLDER="$PROJECTR_FOLDER/commands/"
 export DEBUG_PROJECTR="false"
