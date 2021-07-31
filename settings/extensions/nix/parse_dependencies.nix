@@ -232,8 +232,40 @@
                 buildInputs = buildInputs;
                 nativeBuildInputs = nativeBuildInputs;
                 protectHomeShellCode = ''
-                    # FIXME: have this search for the projectr_core instead of assuming it is relative to $PWD
-                    source "$PWD/settings/projectr_core"
+                    # 
+                    # find the projectr_core
+                    # 
+                    path_to_projectr_core=""
+                    file_name="settings/projectr_core"
+                    folder_to_look_in="$PWD"
+                    while :
+                    do
+                        # check if file exists
+                        if [ -f "$folder_to_look_in/$file_name" ]
+                        then
+                            path_to_projectr_core="$folder_to_look_in/$file_name"
+                            break
+                        else
+                            if [ "$folder_to_look_in" = "/" ]
+                            then
+                                break
+                            else
+                                folder_to_look_in="$(dirname "$folder_to_look_in")"
+                            fi
+                        fi
+                    done
+                    if [ -z "$path_to_projectr_core" ]
+                    then
+                        #
+                        # what to do if file never found
+                        #
+                        echo "Im part of parse_dependencies.nix, a script running with a pwd of:$PWD"
+                        echo "Im looking for settings/projectr_core in a parent folder"
+                        echo "Im exiting now because I wasnt able to find it"
+                        echo "thats all the information I have"
+                        exit
+                    fi
+                    source "$path_to_projectr_core"
                     
                     # ensure that the folder exists
                     mkdir -p "$(dirname "$__PROJECTR_NIX_PATH_EXPORT_FILE")"

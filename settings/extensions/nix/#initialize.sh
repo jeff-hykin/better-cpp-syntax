@@ -31,3 +31,12 @@ rm -f "$PROJECTR_FOLDER/commands/tools/nix" 2>/dev/null
 rm -rf "$PROJECTR_FOLDER/commands/tools/nix" 2>/dev/null
 # syslink local tools
 ln -s "../../settings/extensions/nix/commands" "$PROJECTR_FOLDER/commands/tools/nix"
+
+# 
+# connect when_cleaning
+# 
+# unlink existing
+rm -f "$PROJECTR_FOLDER/settings/when_cleaning/450_nix.sh" 2>/dev/null
+rm -rf "$PROJECTR_FOLDER/settings/when_cleaning/450_nix.sh" 2>/dev/null
+# syslink when_cleaning
+ln -s "../extensions/nix/when_cleaning.sh" "$PROJECTR_FOLDER/settings/when_cleaning/450_nix.sh"

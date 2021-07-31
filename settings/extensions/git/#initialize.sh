@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
+
+# 
+# connect when_cleaning
+# 
+# unlink existing
+rm -f "$PROJECTR_FOLDER/settings/when_cleaning/500_git.sh" 2>/dev/null
+rm -rf "$PROJECTR_FOLDER/settings/when_cleaning/500_git.sh" 2>/dev/null
+# syslink when_cleaning
+ln -s "../extensions/git/when_cleaning.sh" "$PROJECTR_FOLDER/settings/when_cleaning/500_git.sh"
+
 # 
 # config
 # 

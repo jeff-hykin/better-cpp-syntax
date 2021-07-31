@@ -13,7 +13,11 @@ export PROJECTR_ARGS="$@"
 for file in "$PROJECTR_FOLDER/settings/automatic_setup_prep/"*
 do
     # make sure its a file
-    if [[ -f "$file" ]]; then
+    if [ -f "$file" ]; then
+        if [ "$DEBUG_PROJECTR" = "true" ]
+        then
+            echo "loading: $file"
+        fi
         source "$file"
     fi
 done

@@ -47,4 +47,4 @@ then
 fi
 
 # run the automatic non-zsh-specific setup
-source "$PROJECTR_COMMANDS_FOLDER/#trigger/automatic_setup"
+source "$PROJECTR_COMMANDS_FOLDER/tools/automatic_setup"
