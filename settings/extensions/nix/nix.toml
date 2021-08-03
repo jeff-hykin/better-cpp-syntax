@@ -17,7 +17,25 @@
     #    [[packages]]
     #    load = [ "python38Packages", "setuptools",]
     #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
-    
+
+# 
+# Complex packages
+# 
+    # things such as platform-specific packages,
+    # loading from a git repository,
+    # or if you find an online solution that involves native build inputs
+    # you can use the following advanced format
+    # 
+    #    [[packages]]
+    #    load = [ "nixGLNvidia",]
+    #    onlyIf = [ [ "stdenv", "isLinux",],] # for MacOS use: onlyIf = [ [ "stdenv", "isDarwin",],]
+    #    # see https://discourse.nixos.org/t/opencv-with-cuda-in-nix-shell/7358/5
+    #    from = { fetchGit = { url = "https://github.com/guibou/nixGL", rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e" }, }
+    # 
+    # in general when looking at online forms, look at the shell.nix file
+    # specifically look at the `# create a shell` and `main.packages.mkShell` part
+    # and know that seeing `pkgs` online translates to `main.packages` inside the shell.nix file
+
 
 # 
 # Python
