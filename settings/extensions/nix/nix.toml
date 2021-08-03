@@ -18,9 +18,34 @@
     #    load = [ "python38Packages", "setuptools",]
     #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 
+# 
+# Node.js
+# 
+[[packages]]
+# uncomment one of groups to pick your version
+
+# version 16.2.0
+# load = [ "nodejs",]
+# from = "141439f6f11537ee349a58aaf97a5a5fc072365c" 
+
+# version 15.14.0
+# load = [ "nodejs",]
+# from = "c92ca95afb5043bc6faa0d526460584eccff2277" 
+
+# version 14.17.1
+load = [ "nodejs",]
+from = "860b56be91fb874d48e23a950815969a7b832fbc" 
+
+# version 12.22.1
+# load = [ "nodejs-12_x",]
+# from = "860b56be91fb874d48e23a950815969a7b832fbc" 
+
+# version 10.24.0
+# load = [ "nodejs-10_x",] 
+# from = "a765beccb52f30a30fee313fbae483693ffe200d" 
 
 # 
-# Python
+# Python (because node-gyp depends on python)
 # 
 
 [[packages]]
