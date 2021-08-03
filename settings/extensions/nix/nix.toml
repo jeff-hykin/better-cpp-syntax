@@ -19,9 +19,9 @@
     #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
     
 
-[[packages]]
-load = [ "poetry",]
-from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+# 
+# Python
+# 
 
 [[packages]]
 load = [ "python38",]
@@ -44,11 +44,119 @@ load = [ "python38Packages", "wheel",]
 from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 
 [[packages]]
+load = [ "poetry",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+# 
+# 
+# 
+# Need-to-build-from-source tools
+#
+# 
+# 
+# Note: most projects need these, 
+# and if you need them for one project nix has a shared-memory
+# so needing them for one project is the same as needing them for 
+# all your projects
+# comment these out in a situation such as deploying a project 
+# to a minimal server that doesn't need C/C++ build tools
+
+# 
+# Linux
+# 
+[[packages]]
+load = [ "pkgconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "libconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "cmake",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "stdenv", "cc",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+# 
+# Mac
+# 
+[[packages]]
+load = [ "xcbuild",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "xcodebuild",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "libobjc", ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "CoreServices" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "CoreFoundation" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Foundation" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "AVKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "AppKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+# 
+# both often need
+# 
+[[packages]]
+load = [ "gcc",]
+
+[[packages]]
+load = [ "libkrb5",]
+
+# 
+# 
+# common dependencies
+# 
+# 
+
+[[packages]]
 load = [ "ncurses",]
 
 [[packages]]
 load = [ "openssh",]
 
+# 
+# 
+# fancy command line tools
+# 
+# 
 [[packages]]
 load = [ "sd",]
 
@@ -84,35 +192,13 @@ load = [ "spaceship-prompt",]
 load = [ "nnn",]
 
 [[packages]]
-load = [ "pkgconfig",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "jq",]
 
-[[packages]]
-load = [ "libconfig",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "cmake",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "libGLU",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "cudatoolkit",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "linuxPackages", "nvidia_x11",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "stdenv", "cc",]
-onlyIf = [ [ "stdenv", "isLinux",],]
+#
+#
+# Basic Commandline tools
+#
+#
 
 [[packages]]
 load = [ "man",]
@@ -224,9 +310,6 @@ load = [ "unixtools", "write",]
 
 [[packages]]
 load = [ "unixtools", "xxd",]
-
-[[packages]]
-load = [ "jq",]
 
 [[packages]]
 load = [ "nix",]
