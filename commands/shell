@@ -42,8 +42,5 @@ then
     # run single command
     HOME="$__dummy_home" nix-shell --pure --run "zsh -c '$PROJECTR_ARGS'" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
 else
-    echo "=============================="
-    echo " Setting up your Environment!"
-    echo "=============================="
     HOME="$__dummy_home" nix-shell --pure --command "zsh" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
 fi
