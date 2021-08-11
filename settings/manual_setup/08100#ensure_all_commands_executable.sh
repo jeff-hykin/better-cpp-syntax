@@ -29,6 +29,7 @@ do
                 do
                     if [[ "$argument_combination" = "$each" ]]
                     then
+                        echo '"'"'$each in arg combo'"'"'" is $each"
                         # if its a folder, then we need to go deeper
                         if [[ -d "$each" ]]
                         then
@@ -36,10 +37,11 @@ do
                             argument_combination="$argument_combination/$1"
                             
                             # if there is no next argument
+                            echo '"'"'next argument $1'"'"'" is $1"
                             if [[ -z "$1" ]]
                             then
-                                printf "\nThat is a sub folder, not a command\nValid sub-options are\n" 1>&2
-                                ls -1 --color -F "$each" | sed '"'"'s/^/    /'"'"' 1>&2
+                                printf "\nThat is a sub folder, not a command\nValid sub-commands are\n" 1>&2
+                                ls -1FL --color "$each" | sed '"'"'s/^/    /'"'"' 1>&2
                                 return 1 # error, no command
                             fi
                             
@@ -54,9 +56,14 @@ do
                     fi
                 done
             done
-            printf "\nI could not find that sub command\n" 1>&2
-            printf "Valid options are:\n" 1>&2
-            ls -1 --color -F "$search_path" | sed '"'"'s/^/    /'"'"' 1>&2
+            # if an option was given
+            if ! [ -z "$each" ]
+            then
+                echo "$each"
+                printf "\nI could not find that sub-command ($(basename "$each"))\n" 1>&2
+            fi
+            printf "Valid next-arguments would be:\n" 1>&2
+            ls -1FL --color "$search_path" | sed '"'"'s/^/    /'"'"' 1>&2
             return 1 # error, no command
         }
         ' > /dev/null
