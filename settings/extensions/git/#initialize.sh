@@ -46,6 +46,7 @@ then
     do
         git_file="$PROJECTR_FOLDER/.git/hooks/$(basename "$dir")"
         # ensure all the git hook files exist
+        mkdir -p "$(dirname "$git_file")"
         touch "$git_file"
         # make sure each calls the hooks # FIXME: some single quotes in $dir probably need to be escaped here
         cat "$git_file" | grep "#START: projectr hooks" &>/dev/null || echo "
