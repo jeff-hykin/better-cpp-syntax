@@ -17,7 +17,125 @@
     #    [[packages]]
     #    load = [ "python38Packages", "setuptools",]
     #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
-    
+
+# 
+# Complex packages
+# 
+    # things such as platform-specific packages,
+    # loading from a git repository,
+    # or if you find an online solution that involves native build inputs
+    # you can use the following advanced format
+    # 
+    #    [[packages]]
+    #    load = [ "nixGLNvidia",]
+    #    onlyIf = [ [ "stdenv", "isLinux",],] # for MacOS use: onlyIf = [ [ "stdenv", "isDarwin",],]
+    #    # see https://discourse.nixos.org/t/opencv-with-cuda-in-nix-shell/7358/5
+    #    from = { fetchGit = { url = "https://github.com/guibou/nixGL", rev = "7d6bc1b21316bab6cf4a6520c2639a11c25a220e" }, }
+    # 
+    # in general when looking at online forms, look at the shell.nix file
+    # specifically look at the `# create a shell` and `main.packages.mkShell` part
+    # and know that seeing `pkgs` online translates to `main.packages` inside the shell.nix file
+
+
+# 
+# 
+# 
+# Need-to-build-from-source tools
+#
+# 
+# 
+# Note: most projects need these, 
+# and if you need them for one project nix has a shared-memory
+# so needing them for one project is the same as needing them for 
+# all your projects
+# comment these out in a situation such as deploying a project 
+# to a minimal server that doesn't need C/C++ build tools
+
+# 
+# Linux
+# 
+[[packages]]
+load = [ "pkgconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "libconfig",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "cmake",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+[[packages]]
+load = [ "stdenv", "cc",]
+onlyIf = [ [ "stdenv", "isLinux",],]
+
+# 
+# Mac
+# 
+[[packages]]
+load = [ "xcbuild",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "xcodebuild",]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "libobjc", ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "CoreServices" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "CoreFoundation" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Foundation" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "AVKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "AppKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+# 
+# both often need
+# 
+[[packages]]
+load = [ "gcc",]
+
+[[packages]]
+load = [ "libkrb5",]
+
+# 
+# 
+# common dependencies
+# 
+# 
+
 [[packages]]
 load = [ "ruby", "devEnv" ]
 
@@ -54,6 +172,11 @@ load = [ "ncurses",]
 [[packages]]
 load = [ "openssh",]
 
+# 
+# 
+# fancy command line tools
+# 
+# 
 [[packages]]
 load = [ "sd",]
 
@@ -89,35 +212,13 @@ load = [ "spaceship-prompt",]
 load = [ "nnn",]
 
 [[packages]]
-load = [ "pkgconfig",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "jq",]
 
-[[packages]]
-load = [ "libconfig",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "cmake",]
-asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "libGLU",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "cudatoolkit",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "linuxPackages", "nvidia_x11",]
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "stdenv", "cc",]
-onlyIf = [ [ "stdenv", "isLinux",],]
+#
+#
+# Basic Commandline tools
+#
+#
 
 [[packages]]
 load = [ "man",]
@@ -229,9 +330,6 @@ load = [ "unixtools", "write",]
 
 [[packages]]
 load = [ "unixtools", "xxd",]
-
-[[packages]]
-load = [ "jq",]
 
 [[packages]]
 load = [ "nix",]

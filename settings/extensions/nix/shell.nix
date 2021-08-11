@@ -37,12 +37,8 @@ let
         shellCode = ''
             if [[ "$OSTYPE" == "linux-gnu" ]] 
             then
-                export CUDA_PATH="${main.packages.cudatoolkit}"
-                export EXTRA_LDFLAGS="-L/lib -L${main.packages.linuxPackages.nvidia_x11}/lib"
-                export EXTRA_CCFLAGS="-I/usr/include"
-                export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.linuxPackages.nvidia_x11}/lib:${main.packages.ncurses5}/lib:/run/opengl-driver/lib"
-                export LD_LIBRARY_PATH="$(${main.packages.nixGLNvidia}/bin/nixGLNvidia printenv LD_LIBRARY_PATH):$LD_LIBRARY_PATH"
-                export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
+                true # add important (LD_LIBRARY_PATH, PATH, etc) nix-Linux code here
+                export EXTRA_CCFLAGS="$EXTRA_CCFLAGS:-I/usr/include"
             fi
         '';
     }) else emptyOptions;
@@ -57,6 +53,7 @@ let
             if [[ "$OSTYPE" = "darwin"* ]] 
             then
                 true # add important nix-MacOS code here
+                export EXTRA_CCFLAGS="$EXTRA_CCFLAGS:-I/usr/include:${main.packages.darwin.apple_sdk.frameworks.CoreServices}/Library/Frameworks/CoreServices.framework/Headers/"
             fi
         '';
     }) else emptyOptions;
@@ -88,5 +85,8 @@ in
             ${macOnly.shellCode}
             ${main.project.protectHomeShellCode}
             
+            # provide access to ncurses for nice terminal interactions
+            export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.ncurses}/lib"
+            export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
         '';
     }
