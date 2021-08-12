@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-    echo "project commands:"
-    tree "$PROJECTR_COMMANDS_FOLDER/project" -C --dirsfirst -A -F --noreport | sed 's/^/    /' | sed "1d"
+    echo "commands:"
+    echo "    project"
+    tree "$PROJECTR_COMMANDS_FOLDER/project" -C --dirsfirst -A -F --noreport | sed 's/^/        /' | sed -E 's/(\*|@)$/ /' | sed "1d"
     echo 
     node -e 'try { Object.keys(require(process.env.PROJECTR_FOLDER+"/package.json").scripts).forEach(each=>console.log(`    npm run ${each}`))}catch(e){}'
     echo 
     echo "examples:"
     echo "    project clean"
-    echo "    _ clean"
+    echo "    project commands"
     echo "    npm run test"
     
