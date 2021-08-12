@@ -38,7 +38,7 @@ do
                             if [[ -z "$1" ]]
                             then
                                 printf "\nThat is a sub folder, not a command\nValid sub-commands are\n" 1>&2
-                                ls -1FL --color "$each" | sed '"'"'s/^/    /'"'"' | sed -E '"'"'s/(\*|@)$/ /'"'"' 1>&2
+                                ls -1FL --group-directories-first --color "$each" | sed '"'"'s/^/    /'"'"' | sed -E '"'"'s/(\*|@)$/ /'"'"' 1>&2
                                 return 1 # error, no command
                             fi
                             
@@ -59,7 +59,7 @@ do
                 printf "\nI could not find that sub-command ($(basename "$argument_combination"))\n" 1>&2
             fi
             printf "Valid alternatives would be:\n" 1>&2
-            ls -1FL --color "$search_path" | sed '"'"'s/^/    /'"'"' | sed -E '"'"'s/(\*|@)$/ /'"'"' 1>&2
+            ls -1FL --group-directories-first --color "$search_path" | sed '"'"'s/^/    /'"'"' | sed -E '"'"'s/(\*|@)$/ /'"'"' 1>&2
             return 1 # error, no command
         }
         ' > /dev/null
