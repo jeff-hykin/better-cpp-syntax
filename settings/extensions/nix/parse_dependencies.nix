@@ -15,11 +15,14 @@
         ({})
     );
     main = (frozenStd.lib.mergeAttrs
-        (builtins) # <- for import, fetchTarball, etc 
         (frozenStd.lib.mergeAttrs
-            ({ stdenv = frozenStd.stdenv; })
-            (frozenStd.lib) # <- for mergeAttrs, optionals, getAttrFromPath, etc 
+            (frozenStd.buildPackages) # <- for fetchFromGitHub, installShellFiles, getAttrFromPath, etc 
+            (frozenStd.lib.mergeAttrs
+                ({ stdenv = frozenStd.stdenv; })
+                (frozenStd.lib) # <- for mergeAttrs, optionals, getAttrFromPath, etc 
+            )
         )
+        (builtins) # <- for import, fetchTarball, etc 
     );
     # 
     # pull info from the config files
