@@ -20,6 +20,9 @@ then
     ln -s "../../../.git/config" "$__DIR__/config"
 fi
 
+# always pay attention to case
+git config core.ignorecase false
+
 # if there's no pull setting, then add it to the project
 git config pull.rebase &>/dev/null || git config pull.ff &>/dev/null || git config --add pull.rebase false &>/dev/null
 
