@@ -200,6 +200,7 @@ tokens = [
     # storage specifiers https://en.cppreference.com/w/cpp/language/declarations 
     { representation: "const"                , name: "const"            , isSpecifier: true, isStorageSpecifier: true },
     { representation: "static"               , name: "static"           , isSpecifier: true, isStorageSpecifier: true },
+    { representation: "thread_local"         , name: "thread_local"     , isSpecifier: true, isStorageSpecifier: true },
     { representation: "volatile"             , name: "volatile"         , isSpecifier: true, isStorageSpecifier: true },
     { representation: "register"             , name: "register"         , isSpecifier: true, isStorageSpecifier: true },
     { representation: "restrict"             , name: "restrict"         , isSpecifier: true, isStorageSpecifier: true },
@@ -265,7 +266,6 @@ tokens = [
     { representation: "concept"                    , name: "concept"                    , isCurrentlyAMiscKeyword: true },
     { representation: "requires"                   , name: "requires"                   , isCurrentlyAMiscKeyword: true },
     { representation: "export"                     , name: "export"                     , isCurrentlyAMiscKeyword: true },
-    { representation: "thread_local"               , name: "thread_local"               },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },
     { representation: "atomic_noexcept"            , name: "atomic_noexcept"            },
