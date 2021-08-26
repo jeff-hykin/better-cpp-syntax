@@ -1,2 +1,1 @@
-# add this project folder to the python path
-export PYTHONPATH="$PYTHONPATH:$PWD"
+../extensions/python/commands/add_project_to_pythonpath
