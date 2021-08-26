@@ -1,6 +1,8 @@
-# Setup
+# Basic Auto Setup (Prefered way)
 
-TLDR: install `nix`, run `commands/start`, and everything will be auto installed
+TLDR:
+- install nix
+- run `commands/start` (uses nix to install everything else)
 <br>
 
 ### For Windows
