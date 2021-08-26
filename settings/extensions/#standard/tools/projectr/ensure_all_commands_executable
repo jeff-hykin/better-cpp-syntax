@@ -79,7 +79,6 @@ do
                 do
                     if [[ "$argument_combination" = "$each" ]]
                     then
-                        echo '"'"'$each in arg combo'"'"'" is $each"
                         # if its a folder, then we need to go deeper
                         if [[ -d "$each" ]]
                         then
@@ -87,7 +86,6 @@ do
                             argument_combination="$argument_combination/$1"
                             
                             # if there is no next argument
-                            echo '"'"'next argument $1'"'"'" is $1"
                             if [[ -z "$1" ]]
                             then
                                 printf "\nThat is a sub folder, not a command\nValid sub-commands are\n" 1>&2
