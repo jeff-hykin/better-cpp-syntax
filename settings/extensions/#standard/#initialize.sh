@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-__temp_var__this_extension="#standard"
-
 # create extension-linker as a helper
 link_extension_file__to__() {
     local_file="$1"
@@ -25,14 +23,10 @@ link_extension_file__to__() {
     rm -rf "$__temp_var__target_full_path" 2>/dev/null
     # make sure parent folder exists
     mkdir -p "$(dirname "$__temp_var__target_full_path")"
-    if [ -n "$$__temp_var__this_extension" ]
-    then
-        # link the file (relative link, which it what makes it complicated)
-        final_path="$(realpath "$PROJECTR_FOLDER/settings/" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/extensions/$__temp_var__this_extension/$local_file"
-        ln -s "$(realpath "$PROJECTR_FOLDER/settings/" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/extensions/$__temp_var__this_extension/$local_file" "$__temp_var__target_full_path"
-    else
-        echo 'An extension forgot to set $__temp_var__this_extension, and therefore I dont know which extension is doing it. (its calling link_extension_file__to__ '"'$1' '$2' )"
-    fi
+    # link the file (relative link, which it what makes it complicated)
+    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_PROJECTR_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
+    ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
+    unset __temp_var__path_from_target_to_local_file
     
     unset __temp_var__target_folder
     unset local_file
@@ -98,6 +92,3 @@ done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTE
 
 
 
-
-
-unset __temp_var__this_extension

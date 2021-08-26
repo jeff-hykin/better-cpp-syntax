@@ -62,8 +62,8 @@ then
                 echo "loading: $each/#initialize.sh"
             fi
             # tell the scripts what file they're inside of
-            export __FILE__="$each/#initialize.sh"
-            export __DIR__="$each"
+            export __THIS_PROJECTR_EXTENSION_FILEPATH__="$each/#initialize.sh"
+            export __THIS_PROJECTR_EXTENSION_FOLDERPATH__="$each"
             source "$each/#initialize.sh"
         fi
     done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
