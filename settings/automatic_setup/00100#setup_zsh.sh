@@ -10,7 +10,7 @@ zsh__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" zsh)"
 # 
 # set fpath for zsh
 # 
-local_zsh="$PWD/settings/.cache/zsh.dont-sync/site-functions/"
+local_zsh="$PROJECTR_FOLDER/settings/.cache/zsh.dont-sync/site-functions/"
 mkdir -p "$local_zsh"
 
 export fpath=("$local_zsh")
