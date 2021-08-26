@@ -40,7 +40,7 @@ link_extension_file__to__() {
 # 
 link_extension_file__to__ "commands/setup_venv" "automatic_setup/01900_setup_python_venv.sh"
 link_extension_file__to__ "commands/add_project_to_pythonpath" "automatic_setup/02200_setup_pythonpath.sh"
-link_extension_file__to__ "commands/check_pip_modules" "automatic_setup/02100_check_pip_modules.sh"
+link_extension_file__to__ "commands/ensure_pip_modules" "automatic_setup/02100_ensure_pip_modules.sh"
 link_extension_file__to__ "commands/refresh_ignores" "automatic_setup/02400_python_ignores.sh"
 
 
