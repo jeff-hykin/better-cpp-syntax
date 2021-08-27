@@ -47,6 +47,7 @@ fi
 if [ "$OSTYPE" = "linux-gnu" ] 
 then
     sudo apt-get update 2>/dev/null
+    curl -L https://nixos.org/nix/install | bash
 fi
 
 # manually update the environment
