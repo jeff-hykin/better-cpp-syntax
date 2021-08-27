@@ -3,7 +3,6 @@
 : MacOS ;
 :       ;
 if [[ "$OSTYPE" = "darwin"* ]]; then;
-    echo "looks like you're on MacOS";
     full_version="$(sw_vers -productVersion)";
     major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')";
     minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')";
@@ -11,16 +10,13 @@ if [[ "$OSTYPE" = "darwin"* ]]; then;
     : Big Sur or Newer;
     :                 ;
     if [ "$major_version" = "11" ]; then;
-        echo "looks like you're on Big Sur";
         sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
     elif [ "$major_version" -eq "10" ]; then;
         : Catalina ;
         if [ "$minor_version" = "15" ]; then;
-            echo "looks like you're on Catalina";
             sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
         : 'Mojave, High Siera, Siera, and maybe older versions (Yosemite, Mavericks)' ;
         else;
-            echo "looks like you're on Mojave, High Siera, Siera, or older";
             curl -L https://nixos.org/nix/install | sh -s -- --daemon;
         fi;
     else;
@@ -34,14 +30,16 @@ fi;
 : Linux ;
 :       ;
 if [ "$OSTYPE" = "linux-gnu" ]; then;
-    echo "looks like you're on Linux";
-    sudo apt-get update 2>/dev/null;
-    curl -L https://nixos.org/nix/install | bash;
+    curl -L https://nixos.org/nix/install | sh -s -- --daemon;
 fi;
 
 : manually update the environment ;
-source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then;
+    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+fi;
+if [ -f "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh" ]; then;
+    . "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh"
+fi;
 export PATH="$PATH:/nix/var/nix/profiles/default/bin/";
-echo "";
-echo "If there were no errors above, nix should now be installed!";
+echo "If you want additional information about installing nix see: https://nixos.org/manual/nix/stable/#chap-installation";
 echo ""
