@@ -1,60 +1,50 @@
-setopt interactivecomments
+: 'have to use the : (the do-nothing command) for comments because this script gets crushed into one line';
+:       ;
+: MacOS ;
+:       ;
+if [[ "$OSTYPE" = "darwin"* ]]; then;
+    full_version="$(sw_vers -productVersion)";
+    major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')";
+    minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')";
+    :                 ; 
+    : Big Sur or Newer;
+    :                 ;
+    if [ "$major_version" = "11" ]; then;
+        if [ "$minor_version" = "1" ]; then;
+            sudo diskutil apfs addVolume disk1 APFS 'Nix Store' -mountpoint /nix;
+            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
+        else;
+            echo "This version of MacOS: $(sw_vers -productVersion) is newer than 11.1";
+            echo "We'll try running the 11.1 installer since this script was written when 11.1 was the latest";
+            sudo diskutil apfs addVolume disk1 APFS 'Nix Store' -mountpoint /nix;
+            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
+        fi;
+    elif [ "$major_version" -eq "10" ]; then;
+        : Catalina ;
+        if [ "$minor_version" = "15" ]; then;
+            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
+        : 'Mojave, High Siera, Siera, and maybe older versions (Yosemite, Mavericks)' ;
+        else;
+            curl -L https://nixos.org/nix/install | bash;
+        fi;
+    else;
+        echo 'We tried to get you MacOS version by running `sw_vers -productVersion`';
+        echo '(which returns '"$full_version"')';
+        echo "Either 1. that value is empty 2. You're on an insanely old version 3. You're on a version way way in the future from when this script was made";
+    fi;
+fi;
 
-# ^for zsh
+:       ;
+: Linux ;
+:       ;
+if [ "$OSTYPE" = "linux-gnu" ]; then;
+    sudo apt-get update 2>/dev/null;
+    curl -L https://nixos.org/nix/install | bash;
+fi;
 
-# 
-# if MacOS
-# 
-if [[ "$OSTYPE" = "darwin"* ]] 
-then
-    full_version="$(sw_vers -productVersion)"
-    major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')"
-    minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')"
-    # 
-    # Big Sur or Newer
-    # 
-    if [ "$major_version" = "11" ]
-    then
-        if [ "$minor_version" = "1" ]
-        then
-            sudo diskutil apfs addVolume disk1 APFS 'Nix Store' -mountpoint /nix
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
-        else
-            echo "This version of MacOS: $(sw_vers -productVersion) is newer than 11.1"
-            echo "We'll try running the 11.1 installer since this script was written when 11.1 was the latest"
-            sudo diskutil apfs addVolume disk1 APFS 'Nix Store' -mountpoint /nix
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
-        fi
-    elif [ "$major_version" -eq "10" ]
-    then
-        # Catalina
-        if [ "$minor_version" = "15" ]
-        then
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
-        # Mojave, High Siera, Siera, and maybe older versions (Yosemite, Mavericks)
-        else
-            curl -L https://nixos.org/nix/install | bash
-        fi
-    else
-        
-        echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
-        echo '(which returns '"$full_version"')'
-        echo "Either 1. that value is empty 2. You're on an insanely old version 3. You're on a version way way in the future from when this script was made"
-    fi
-fi
-
-# 
-# Linux
-# 
-if [ "$OSTYPE" = "linux-gnu" ] 
-then
-    sudo apt-get update 2>/dev/null
-    curl -L https://nixos.org/nix/install | bash
-fi
-
-# manually update the environment
-source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-export PATH="$PATH:/nix/var/nix/profiles/default/bin/nix"
-echo ""
-echo "If there were no errors above, nix should now be installed!"
+: manually update the environment ;
+source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+export PATH="$PATH:/nix/var/nix/profiles/default/bin/nix";
+echo "";
+echo "If there were no errors above, nix should now be installed!";
 echo ""
