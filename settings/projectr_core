@@ -68,3 +68,5 @@ then
         fi
     done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
 fi
+# reset basic init
+PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT=""
