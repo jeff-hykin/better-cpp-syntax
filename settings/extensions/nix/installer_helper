@@ -26,6 +26,7 @@ if [[ "$OSTYPE" = "darwin"* ]]; then;
             sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
         : 'Mojave, High Siera, Siera, and maybe older versions (Yosemite, Mavericks)' ;
         else;
+            sudo chown -R "$(whoami)" /nix;
             curl -L https://nixos.org/nix/install | bash;
         fi;
     else;
