@@ -53,3 +53,6 @@ fi
 # manually update the environment
 source "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 export PATH="$PATH:/nix/var/nix/profiles/default/bin/nix"
+echo ""
+echo "If there were no errors above, nix should now be installed!"
+echo ""
