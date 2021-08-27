@@ -56,7 +56,6 @@ then
 # otherwise run the respective project command
 # 
 else
-    source "$PROJECTR_COMMANDS_FOLDER/manual_setup"
     # enable globbing
     shopt -s globstar &>/dev/null
     shopt -s dotglob &>/dev/null
