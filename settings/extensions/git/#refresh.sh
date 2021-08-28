@@ -42,7 +42,7 @@ link_extension_file__to__ "during_clean.sh" "during_clean/500_git.sh"
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "during_start_prep/05100_copy_git_config.sh"
+link_extension_file__to__ "during_start_prep.sh" "during_start_prep/051_000_copy_git_config.sh"
 
 # 
 # connect commands

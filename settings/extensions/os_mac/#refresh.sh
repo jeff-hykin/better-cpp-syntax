@@ -40,4 +40,4 @@ link_extension_file__to__ "during_purge.sh" "during_purge/580_mac_library_caches
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "during_start_prep/04900_link_keychain.sh"
+link_extension_file__to__ "during_start_prep.sh" "during_start_prep/049_000_link_keychain.sh"
