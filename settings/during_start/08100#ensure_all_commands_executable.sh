@@ -1,1 +1,1 @@
-../extensions/#standard/tools/projectr/ensure_all_commands_executable
+../extensions/#standard/commands/tools/projectr/ensure_all_commands_executable

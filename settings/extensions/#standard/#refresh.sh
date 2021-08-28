@@ -42,15 +42,15 @@ mkdir -p "$PROJECTR_FOLDER/settings/during_clean/"
 # 
 # connect during_start/during_manual_setup
 # 
-link_extension_file__to__ "tools/projectr/ensure_all_commands_executable" "during_start/08100#ensure_all_commands_executable.sh"
-link_extension_file__to__ "tools/projectr/ensure_all_commands_executable" "during_manual_setup/08100#ensure_all_commands_executable.sh"
+link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_start/08100#ensure_all_commands_executable.sh"
+link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_manual_setup/08100#ensure_all_commands_executable.sh"
 
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands/tools/projectr" "$PROJECTR_COMMANDS_FOLDER/tools/projectr"
-link_extension_file__to__ "commands/tools/string"   "$PROJECTR_COMMANDS_FOLDER/tools/string"
-link_extension_file__to__ "commands/tools/file_system"   "$PROJECTR_COMMANDS_FOLDER/tools/file_system"
+link_extension_file__to__ "commands/tools/projectr"    "$PROJECTR_COMMANDS_FOLDER/tools/projectr"
+link_extension_file__to__ "commands/tools/string"      "$PROJECTR_COMMANDS_FOLDER/tools/string"
+link_extension_file__to__ "commands/tools/file_system" "$PROJECTR_COMMANDS_FOLDER/tools/file_system"
 
 # 
 # flush broken symlinks (for when extensions are changed/removed)

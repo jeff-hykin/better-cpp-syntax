@@ -10,7 +10,7 @@ zsh__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" zsh)"
 # 
 # set fpath for zsh
 # 
-local_zsh="$PROJECTR_FOLDER/settings/.cache/zsh.dont-sync/site-functions/"
+local_zsh="$PROJECTR_FOLDER/settings/.cache/zsh.do_not_sync/site-functions/"
 mkdir -p "$local_zsh"
 
 export fpath=("$local_zsh")
@@ -28,18 +28,18 @@ ZSH_THEME="robbyrussell" # default
 ln -fs "$spaceship_prompt__path/lib/spaceship-prompt/spaceship.zsh" "$local_zsh"prompt_spaceship_setup
 
 export ZSH="$oh_my_zsh__path/share/oh-my-zsh"
-source "$ZSH/oh-my-zsh.sh"
+. "$ZSH/oh-my-zsh.sh"
 
 # 
 # enable syntax highlighing
 # 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$zsh_syntax_highlighting__path/share/zsh-syntax-highlighting/highlighters"
-source "$ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR/../zsh-syntax-highlighting.zsh"
+. "$ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR/../zsh-syntax-highlighting.zsh"
 
 # 
 # enable auto suggestions
 # 
-source "$zsh_auto_suggest__path/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+. "$zsh_auto_suggest__path/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 SPACESHIP_CHAR_SYMBOL="∫ " # ☣ ⁂ ⌘ ∴ ∮ ֎ Ͽ ♫ ⛬ ⚿ ♦ ♢ ⛶ ✾ ❒ ⟩ ⟡ ⟜ ⟦ ⦊ ⦒ ⪢ ⪾ ∫ ∬ ∭
 SPACESHIP_VENV_SYMBOL="🐍$(python -V 2>&1 | sed -E 's/Python//g' )"

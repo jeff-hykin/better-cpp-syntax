@@ -1,7 +1,7 @@
 export __PROJECTR_NIX_SETTINGS_PATH="$PROJECTR_FOLDER/settings/extensions/nix/settings.toml"
 export __PROJECTR_NIX_MAIN_CODE_PATH="$PROJECTR_FOLDER/settings/extensions/nix/parse_dependencies.nix"
 export __PROJECTR_NIX_PACKAGES_FILE_PATH="$PROJECTR_FOLDER/settings/requirements/nix.toml"
-export __PROJECTR_NIX_PATH_EXPORT_FILE="$PROJECTR_FOLDER/settings/.cache/dependency_paths.dont-sync.json"
+export __PROJECTR_NIX_PATH_EXPORT_FILE="$PROJECTR_FOLDER/settings/.cache/dependency_paths.do_not_sync.json"
 export __PROJECTR_NIX_COMMANDS="$PROJECTR_FOLDER/settings/extensions/nix/commands"
 
 # 

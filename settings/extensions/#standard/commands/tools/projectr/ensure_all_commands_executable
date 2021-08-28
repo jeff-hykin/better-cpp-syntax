@@ -40,7 +40,7 @@ then
     fi
     export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
     # run the basic init of projectr to get the PROJECTR_FOLDER/PROJECTR_COMMANDS_FOLDER/PROJECTR_HOME etc
-    source "$path_to_file"
+    . "$path_to_file"
 fi
 
 # 
