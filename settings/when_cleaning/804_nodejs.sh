@@ -1,1 +1,0 @@
-../extensions/nodejs/when_cleaning.sh

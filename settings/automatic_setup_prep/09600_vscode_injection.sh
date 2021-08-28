@@ -1,1 +1,0 @@
-which code &>/dev/null && inject_into_path "code"
