@@ -54,6 +54,6 @@ link_extension_file__to__ "nix.toml" "requirements/nix.toml"
 link_extension_file__to__ "commands" "$PROJECTR_COMMANDS_FOLDER/tools/nix"
 
 # 
-# connect when_cleaning
+# connect during_clean
 # 
-link_extension_file__to__ "when_cleaning.sh" "when_cleaning/450_nix.sh"
+link_extension_file__to__ "during_clean.sh" "during_clean/450_nix.sh"

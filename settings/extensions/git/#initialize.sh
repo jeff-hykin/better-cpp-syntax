@@ -35,14 +35,14 @@ link_extension_file__to__() {
 }
 
 # 
-# connect during_cleaning
+# connect during_clean
 # 
-link_extension_file__to__ "during_clean.sh" "when_cleaning/500_git.sh"
+link_extension_file__to__ "during_clean.sh" "during_clean/500_git.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "automatic_setup_prep/05100_copy_git_config.sh"
+link_extension_file__to__ "during_start_prep.sh" "during_start_prep/05100_copy_git_config.sh"
 
 # 
 # connect commands

@@ -1,6 +1,6 @@
 # 
 # if you want to customize things,
-# change settings/automatic_setup/00100#setup_zsh.sh instead of editing this file
+# change settings/during_start/00100#setup_zsh.sh instead of editing this file
 # 
 
 # don't let zsh update itself without telling all the other packages 
@@ -48,4 +48,4 @@ then
 fi
 
 # run the automatic non-zsh-specific setup
-. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/automatic_setup"
+. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_start"

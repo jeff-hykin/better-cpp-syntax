@@ -7,6 +7,11 @@
 #   => this command should get rid of it
 #   useful when you're trying to reset a project back to 0 when debugging
 
+# if you want to add something
+#     edit the settings/during_purge/ 
+#     (add your own file to that folder like 001_clean_mything.sh)
+
+# get user confirmation
 read -p "Are you sure? (y/n)" -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -15,18 +20,8 @@ then
     exit 0
 fi
 
-# clean all the small things
+# clean all the small things first
 "$PROJECTR_COMMANDS_FOLDER/project/clean"
 
-mkdir -p "$PROJECTR_FOLDER/settings/when_purging"
-
-# this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-for_each_item_in="$PROJECTR_FOLDER/settings/when_purging"
-[ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
-do
-    # check if file exists
-    if [ -f "$each" ]
-    then
-        source "$each"
-    fi
-done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+# source all the file in settings/during_purge/ in alphabetical order
+. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_purge"

@@ -33,11 +33,11 @@ link_extension_file__to__() {
 }
 
 # 
-# connect when_purging
+# connect during_purge
 # 
-link_extension_file__to__ "when_purging.sh" "when_purging/580_mac_library_caches.sh"
+link_extension_file__to__ "during_purge.sh" "during_purge/580_mac_library_caches.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "automatic_setup_prep/04900_link_keychain.sh"
+link_extension_file__to__ "during_start_prep.sh" "during_start_prep/04900_link_keychain.sh"
