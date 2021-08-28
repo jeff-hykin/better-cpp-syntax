@@ -16,11 +16,11 @@ for_each_item_in="$PROJECTR_FOLDER/settings/automatic_setup_prep"
 do
     # make sure its a each
     if [ -f "$each" ]; then
-        if [ "$DEBUG_PROJECTR" = "true" ]
+        if [ "$PROJECTR_DEBUG" = "true" ]
         then
             echo "loading: $each"
         fi
-        source "$each"
+        . "$each"
     fi
 done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
 

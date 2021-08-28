@@ -34,9 +34,8 @@ link_extension_file__to__() {
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
-    unset __temp_var__target_folder
     unset local_file
-    unset automatic_setup_name
+    unset target_file
 }
 
 # 

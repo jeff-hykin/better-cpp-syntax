@@ -30,15 +30,24 @@ link_extension_file__to__() {
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
-    unset __temp_var__target_folder
     unset local_file
-    unset automatic_setup_name
+    unset target_file
 }
 
 # 
-# connect when_cleaning
+# connect during_cleaning
 # 
-link_extension_file__to__ "when_cleaning.sh" "when_cleaning/500_git.sh"
+link_extension_file__to__ "during_clean.sh" "when_cleaning/500_git.sh"
+
+# 
+# connect during_start_prep
+# 
+link_extension_file__to__ "during_start_prep.sh" "automatic_setup_prep/05100_copy_git_config.sh"
+
+# 
+# connect commands
+# 
+link_extension_file__to__ "commands" "$PROJECTR_COMMANDS_FOLDER/tools/git"
 
 # 
 # config

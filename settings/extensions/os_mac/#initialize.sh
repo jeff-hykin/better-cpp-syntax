@@ -28,12 +28,16 @@ link_extension_file__to__() {
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
-    unset __temp_var__target_folder
     unset local_file
-    unset automatic_setup_name
+    unset target_file
 }
 
 # 
 # connect when_purging
 # 
 link_extension_file__to__ "when_purging.sh" "when_purging/580_mac_library_caches.sh"
+
+# 
+# connect during_start_prep
+# 
+link_extension_file__to__ "during_start_prep.sh" "automatic_setup_prep/04900_link_keychain.sh"

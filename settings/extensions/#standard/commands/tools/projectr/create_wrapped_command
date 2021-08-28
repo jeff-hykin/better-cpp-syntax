@@ -86,7 +86,8 @@ read -r -d '' __temp_var__part1 <<'HEREDOC_NAME'
             echo "thats all the information I have"
             exit
         fi
-        source "$path_to_file"
+        export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
+        . "$path_to_file"
     fi
 
 

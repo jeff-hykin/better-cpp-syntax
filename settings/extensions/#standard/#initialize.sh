@@ -28,9 +28,8 @@ link_extension_file__to__() {
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
-    unset __temp_var__target_folder
     unset local_file
-    unset automatic_setup_name
+    unset target_file
 }
 
 # 
@@ -49,8 +48,9 @@ link_extension_file__to__ "tools/projectr/ensure_all_commands_executable" "manua
 # 
 # connect commands
 # 
-link_extension_file__to__ "tools/projectr" "$PROJECTR_COMMANDS_FOLDER/tools/projectr"
-link_extension_file__to__ "tools/string"   "$PROJECTR_COMMANDS_FOLDER/tools/string"
+link_extension_file__to__ "commands/tools/projectr" "$PROJECTR_COMMANDS_FOLDER/tools/projectr"
+link_extension_file__to__ "commands/tools/string"   "$PROJECTR_COMMANDS_FOLDER/tools/string"
+link_extension_file__to__ "commands/tools/file_system"   "$PROJECTR_COMMANDS_FOLDER/tools/file_system"
 
 # 
 # flush broken symlinks (for when extensions are changed/removed)

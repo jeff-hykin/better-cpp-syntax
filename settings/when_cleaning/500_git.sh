@@ -1,1 +1,1 @@
-../extensions/git/when_cleaning.sh
+../extensions/git/during_clean.sh

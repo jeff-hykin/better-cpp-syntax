@@ -153,3 +153,29 @@ __temp_set_exa_colors () {
     "
 }
 __temp_set_exa_colors # done with a to () prevent large namespace pollution
+
+
+ll () {
+    # if exa is not available, start going with backup plans
+    if ! command -v "exa" &> /dev/null
+    then
+        # if mac
+        if [[ "$OSTYPE" == "darwin"* ]] 
+        then
+            # make use of BSD version
+            if ! command -v "gls" &> /dev/null
+            then
+                ls -lAFG "$@"
+            # if gnu-ls is available, use it
+            else
+                gls -lAF --group-directories-first --color "$@"
+            fi
+        # if not mac
+        else
+            ls -lAF --group-directories-first --color "$@"
+        fi
+    else
+        # | tac # <- is for getting folders at the bottom
+        exa --color=always -lF --sort extension --group-directories-first --git --all  "$@" | tac
+    fi
+}
