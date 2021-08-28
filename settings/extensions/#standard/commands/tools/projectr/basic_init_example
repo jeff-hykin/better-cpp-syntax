@@ -1,18 +1,13 @@
-# 
-# if you want to customize things,
-# change settings/during_start/00100#setup_zsh.sh instead of editing this file
-# 
-
-# don't let zsh update itself without telling all the other packages 
-# instead use nix to update zsh
-DISABLE_AUTO_UPDATE="true"
-DISABLE_UPDATE_PROMPT="true"
+#!/usr/bin/env bash
 
 # 
-# this shouldnt ever happen (PROJECTR undefined), but just encase
+# ensure PROJECTR_FOLDER exists
 # 
-if [[ -z "$PROJECTR_FOLDER" ]]
+if [ -z "$PROJECTR_FOLDER" ]
 then
+    # 
+    # find projectr_core
+    # 
     path_to_file=""
     file_name="settings/projectr_core"
     folder_to_look_in="$PWD"
@@ -43,9 +38,13 @@ then
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+    export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
+    # run the basic init of projectr to get the PROJECTR_FOLDER/PROJECTR_COMMANDS_FOLDER/PROJECTR_HOME etc
     . "$path_to_file"
 fi
 
-# run the automatic non-zsh-specific setup
-. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_start"
+# 
+# 
+# [ actual program code here ]
+# 
+# 
