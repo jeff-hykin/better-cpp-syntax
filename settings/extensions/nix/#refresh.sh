@@ -57,3 +57,8 @@ link_extension_file__to__ "commands" "$PROJECTR_COMMANDS_FOLDER/tools/nix"
 # connect during_clean
 # 
 link_extension_file__to__ "during_clean.sh" "during_clean/450_nix.sh"
+
+# 
+# connect during_start
+# 
+link_extension_file__to__ "during_start.sh" "during_start/010_000__ssl_fix__.sh"

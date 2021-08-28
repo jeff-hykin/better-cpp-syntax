@@ -1,17 +1,6 @@
 # create the "commands" command if it doesnt exist
-if ! [[ -f "$PROJECTR_COMMANDS_FOLDER/project/commands" ]]; then
-    mkdir -p "$PROJECTR_COMMANDS_FOLDER/project"
-    echo '#!/usr/bin/env bash
-    echo "project commands:"
-    tree "$PROJECTR_COMMANDS_FOLDER/project" -C --dirsfirst -A -F --noreport | sed '"'"'s/^/    /'"'"' | sed "1d"
-    echo 
-    echo "examples:"
-    echo "    project clean"
-    echo "    _ clean"
-    ' > "$PROJECTR_COMMANDS_FOLDER/project/commands"
-fi
-
 commands () {
+    # todo: ask if they want to see project commands or all commands
     question="are you sure you want to show all commands? [y/n]";answer=''
     while true; do
         echo "$question"; read response

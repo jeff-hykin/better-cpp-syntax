@@ -42,12 +42,19 @@ mkdir -p "$PROJECTR_FOLDER/settings/during_clean/"
 # 
 # connect during_start/during_manual_setup
 # 
-link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_start/08100#ensure_all_commands_executable.sh"
-link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_manual_setup/08100#ensure_all_commands_executable.sh"
+link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_start/081_000__ensure_all_commands_executable__.sh"
+link_extension_file__to__ "commands/tools/projectr/ensure_all_commands_executable" "during_manual_setup/081_000__ensure_all_commands_executable__.sh"
 
 # 
 # connect commands
 # 
+# ensure commands folder exists
+if ! [[ -d "$PROJECTR_COMMANDS_FOLDER" ]]; then
+    # remove a potenial file
+    rm -f "$PROJECTR_COMMANDS_FOLDER"
+    # make the folder
+    mkdir -p "$PROJECTR_COMMANDS_FOLDER"
+fi
 link_extension_file__to__ "commands/tools/projectr"    "$PROJECTR_COMMANDS_FOLDER/tools/projectr"
 link_extension_file__to__ "commands/tools/string"      "$PROJECTR_COMMANDS_FOLDER/tools/string"
 link_extension_file__to__ "commands/tools/file_system" "$PROJECTR_COMMANDS_FOLDER/tools/file_system"

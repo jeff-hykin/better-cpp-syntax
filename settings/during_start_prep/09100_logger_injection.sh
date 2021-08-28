@@ -1,1 +1,1 @@
-inject_into_path "logger"
+"$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/inject_into_path" "logger"
