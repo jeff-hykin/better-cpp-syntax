@@ -1,7 +1,7 @@
 if [ -d "$PROJECTR_FOLDER" ]
 then
     # delete venv
-    "$PROJECTR_COMMANDS_FOLDER/tools/remove" "$PROJECTR_FOLDER/.venv"
+    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_FOLDER/.venv"
     
     # if poetry exists
     if [ -n "$(command -v "poetry")" ]

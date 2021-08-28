@@ -30,35 +30,34 @@ link_extension_file__to__() {
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
-    unset __temp_var__target_folder
     unset local_file
-    unset automatic_setup_name
+    unset target_file
 }
 
 # 
-# connect automatic_setup
+# connect during_start
 # 
-link_extension_file__to__ "commands/setup_venv" "automatic_setup/01900_setup_python_venv.sh"
-link_extension_file__to__ "commands/add_project_to_pythonpath" "automatic_setup/02200_setup_pythonpath.sh"
-link_extension_file__to__ "commands/ensure_pip_modules" "automatic_setup/02100_ensure_pip_modules.sh"
-link_extension_file__to__ "commands/refresh_ignores" "automatic_setup/02400_python_ignores.sh"
+link_extension_file__to__ "commands/setup_venv" "during_start/019_000_setup_python_venv.sh"
+link_extension_file__to__ "commands/add_project_to_pythonpath" "during_start/022_000_setup_pythonpath.sh"
+link_extension_file__to__ "commands/ensure_pip_modules" "during_start/021_000_ensure_pip_modules.sh"
+link_extension_file__to__ "commands/refresh_ignores" "during_start/024_000_python_ignores.sh"
 
 
 # 
-# connect manual_setup
+# connect during_manual_setup
 # 
-link_extension_file__to__ "commands/add_project_to_pythonpath" "automatic_setup/02200_setup_pythonpath.sh"
-link_extension_file__to__ "commands/refresh_ignores" "automatic_setup/02400_python_ignores.sh"
+link_extension_file__to__ "commands/add_project_to_pythonpath" "during_manual_setup/022_000_setup_pythonpath.sh"
+link_extension_file__to__ "commands/refresh_ignores" "during_manual_setup/024_000_python_ignores.sh"
 
 # 
-# connect when_cleaning
+# connect during_clean
 # 
-link_extension_file__to__ "when_cleaning.sh" "when_cleaning/801_python.sh"
+link_extension_file__to__ "during_clean.sh" "during_clean/801_python.sh"
 
 # 
-# connect when_purging
+# connect during_purge
 # 
-link_extension_file__to__ "when_purging.sh" "when_purging/802_remove_venv.sh"
+link_extension_file__to__ "during_purge.sh" "during_purge/802_remove_venv.sh"
 
 # 
 # connect commands

@@ -1,1 +1,1 @@
-../extensions/python/when_cleaning.sh
+../extensions/python/during_clean.sh
