@@ -268,7 +268,8 @@
                         echo "thats all the information I have"
                         exit
                     fi
-                    source "$path_to_projectr_core"
+                    export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+                    . "$path_to_projectr_core"
                     
                     # ensure that the folder exists
                     mkdir -p "$(dirname "$__PROJECTR_NIX_PATH_EXPORT_FILE")"

@@ -3,11 +3,8 @@
 # 
 # summary
 # 
-#     this file is used to run commands
-#     it loads the PROJECTR env variables first (./settings/projectr_core)
-#     then in looks inside the commands folder for commands to run
-#     no arguments will start the automatic environment
-#     providing an argument (ex: clean) will run whatever is under commands/project/ (ex: commands/project/clean)
+#     with no arguments, this simply starts the shell
+#     with an argument, it refreshes the project connections, then runs `$commands_folder/project/$the_arguments`
 
 # 
 # find the projectr_core
@@ -42,7 +39,8 @@ then
     echo "thats all the information I have"
     exit
 fi
-source "$path_to_projectr_core"
+export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+. "$path_to_projectr_core"
 
 
 # 

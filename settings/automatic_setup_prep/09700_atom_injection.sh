@@ -1,1 +1,0 @@
-which atom &>/dev/null && inject_into_path "atom"

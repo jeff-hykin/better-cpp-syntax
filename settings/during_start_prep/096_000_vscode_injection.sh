@@ -1,0 +1,1 @@
+which code &>/dev/null && "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/inject_into_path" "code"

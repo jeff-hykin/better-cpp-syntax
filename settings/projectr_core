@@ -1,7 +1,7 @@
 # 
 # NOTE: I wouldn't recommend adding new variables (or anything) here
 # 
-# (but the existing vars can be changed, and you can add custom logic with settings/extensions/YOUR_THING/#initialize.sh)
+# (but the existing vars can be changed, and you can add custom logic with settings/extensions/YOUR_THING/#refresh.sh)
 
 
 # 
@@ -44,29 +44,69 @@ fi
 export PROJECTR_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 export PROJECTR_HOME="$PROJECTR_FOLDER/settings/home/"
 export PROJECTR_COMMANDS_FOLDER="$PROJECTR_FOLDER/commands/"
-export DEBUG_PROJECTR="false"
+export PROJECTR_DEBUG="false"
 
 # 
-# run the setup for each of the extensions (if the flag it not set)
+# run the refresh for each of the extensions (if the flag it not set)
 # 
 if ! [ "$PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT" = "true" ]
 then
-    # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-    for_each_item_in="$PROJECTR_FOLDER/settings/extensions"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
-    do
-        # check if file exists
-        if [ -f "$each/#initialize.sh" ]
+    # 
+    # check that realpath exists and works
+    # 
+    __temp_var__realpath_works=""
+    # if realpath exists
+    if [ -n "$(command -v "realpath")" ]
+    then
+        __temp_var__test_output="$(realpath "/Blah/blahBlahBlah/aFolder/projectr/settings/extensions/#standard" --relative-to="/Blah/blahBlahBlah/aFolder/projectr/commands//tools" --canonicalize-missing)"
+        if [ "$__temp_var__test_output" = '../../settings/extensions/#standard' ]
         then
-            if [ "$DEBUG_PROJECTR" = "true" ]
-            then
-                echo "loading: $each/#initialize.sh"
-            fi
-            # tell the scripts what file they're inside of
-            export __THIS_PROJECTR_EXTENSION_FILEPATH__="$each/#initialize.sh"
-            export __THIS_PROJECTR_EXTENSION_FOLDERPATH__="$each"
-            source "$each/#initialize.sh"
+            __temp_var__realpath_works="true"
         fi
-    done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+        unset __temp_var__test_output
+    fi
+    if [ "$__temp_var__realpath_works" = "true" ]
+    then
+        . "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_refresh"
+        # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+        for_each_item_in="$PROJECTR_FOLDER/settings/extensions"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+        do
+            __temp_var__file_path="$each/#refresh.sh"
+            # check if file exists
+            if [ -f "$__temp_var__file_path" ]
+            then
+                if [ "$PROJECTR_DEBUG" = "true" ]
+                then
+                    echo "loading: $__temp_var__file_path"
+                fi
+                # tell the scripts what file they're inside of
+                export __THIS_PROJECTR_EXTENSION_FILEPATH__="$__temp_var__file_path"
+                export __THIS_PROJECTR_EXTENSION_FOLDERPATH__="$each"
+                . "$__temp_var__file_path"
+            fi
+            unset __temp_var__file_path
+        done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+    else
+        echo 'Warning: skipping during_refresh'
+        echo '    It looks like either you dont have a `realpath` command or the realpath'
+        echo '    you do have doesnt support --relative-to= and/or --canonicalize-missing'
+        echo '    this `'"$(which realpath)"'` is what I get after running `which realpath`'
+        echo "    because realpath isn't working, I will be skipping the during_refresh/ "
+    fi
+    unset __temp_var__realpath_works
+    
+    # 
+    # run manual setup by default
+    # 
+    if ! [ "$PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP" = "true" ]
+    then
+        # 
+        # find and run all the manual setup scripts in alphabetical order
+        #
+        . "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_manual_setup"
+    fi
 fi
-# reset basic init
-PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT=""
+# reset flags
+export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT=""
+export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP=""
+unset __temp_var__should_run_during_manual_setup
