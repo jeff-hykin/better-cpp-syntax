@@ -18,8 +18,7 @@ done
 # find and run all the startup scripts in alphabetical order
 #
 # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-if [ "$PROJECTR_DEBUG" = "true" ]
-then
+if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "triggering: $(basename "$which_folder")"
 fi
 mkdir -p "$which_folder"
@@ -29,10 +28,13 @@ do
     # check if file exists
     if [ -f "$each" ]
     then
-        if [ "$PROJECTR_DEBUG" = "true" ]
+        if [ "$FORNIX_DEBUG" = "true" ]
         then
             echo "    loading: $each"
         fi
         . "$each" "$@"
     fi
 done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "finished triggering: $(basename "$which_folder")"
+fi

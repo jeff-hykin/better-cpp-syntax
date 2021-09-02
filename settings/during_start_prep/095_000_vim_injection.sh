@@ -1,1 +1,1 @@
-which vim &>/dev/null && "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/inject_into_path" "vim"
+which vim &>/dev/null && "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/inject_into_path" "vim"

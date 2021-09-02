@@ -7,17 +7,17 @@
 #     with an argument, it refreshes the project connections, then runs `$commands_folder/project/$the_arguments`
 
 # 
-# find the projectr_core
+# find the fornix_core
 # 
-path_to_projectr_core=""
-file_name="settings/projectr_core"
+path_to_fornix_core=""
+file_name="settings/fornix_core"
 folder_to_look_in="$PWD"
 while :
 do
     # check if file exists
     if [ -f "$folder_to_look_in/$file_name" ]
     then
-        path_to_projectr_core="$folder_to_look_in/$file_name"
+        path_to_fornix_core="$folder_to_look_in/$file_name"
         break
     else
         if [ "$folder_to_look_in" = "/" ]
@@ -28,76 +28,25 @@ do
         fi
     fi
 done
-if [ -z "$path_to_projectr_core" ]
+if [ -z "$path_to_fornix_core" ]
 then
     #
     # what to do if file never found
     #
     echo "Im a script running with a pwd of:$PWD"
-    echo "Im looking for settings/projectr_core in a parent folder"
+    echo "Im looking for settings/fornix_core in a parent folder"
     echo "Im exiting now because I wasnt able to find it"
     echo "thats all the information I have"
     exit
 fi
-export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
-. "$path_to_projectr_core"
+export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
+. "$path_to_fornix_core"
 
-
-# 
-# if given no args
-# 
-if [[ "$#" = "0" ]]
-then
-    # start the shell
-    "$PROJECTR_COMMANDS_FOLDER/shell"
-# 
-# otherwise run the respective project command
-# 
-else
-    # enable globbing
-    shopt -s globstar &>/dev/null
-    shopt -s dotglob &>/dev/null
-    
-    # 
-    # recursively drill down
-    # 
-    search_path="$PROJECTR_COMMANDS_FOLDER/project"
-    argument_combination="$search_path/$1"
-    while [[ -n "$@" ]]
-    do
-        # pop the first argument off
-        shift 1
-        for each in "$search_path/"**/*
-        do
-            if [[ "$argument_combination" = "$each" ]]
-            then
-                # if its a folder, then we need to go deeper
-                if [[ -d "$each" ]]
-                then
-                    search_path="$each"
-                    argument_combination="$argument_combination/$1"
-                    
-                    # if there is no next argument
-                    if [[ -z "$1" ]]
-                    then
-                        printf "\nThat is a sub folder, not a command\nValid sub-options are\n" 1>&2
-                        ls -1FL --group-directories-first --color "$each" | sed 's/^/    /' | sed -E 's/(\*|@)$/ /' 1>&2
-                        exit 1 # error, no command
-                    fi
-                    
-                    break
-                # if its a file, run it with the remaining arguments
-                elif [[ -f "$each" ]]
-                then
-                    "$each" "$@"
-                    # make exit status identical to executed program
-                    exit $?
-                fi
-            fi
-        done
-    done
-    printf "\nI could not find that project command\n" 1>&2
-    printf "Valid next-arguments would be:\n" 1>&2
-    ls -1FL --group-directories-first --color "$search_path" | sed 's/^/    /' | sed -E 's/(\*|@)$/ /' 1>&2
-    exit 1 # error, no command
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "starting: $FORNIX_COMMANDS_FOLDER"start
+fi
+# just start the shell with no arguments (arguments might be supported in the future)
+"$FORNIX_COMMANDS_FOLDER/shell"
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "finished: $FORNIX_COMMANDS_FOLDER"start
 fi

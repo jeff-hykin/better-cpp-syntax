@@ -9,12 +9,12 @@ DISABLE_AUTO_UPDATE="true"
 DISABLE_UPDATE_PROMPT="true"
 
 # 
-# this shouldnt ever happen (PROJECTR undefined), but just encase
+# this shouldnt ever happen (FORNIX undefined), but just encase
 # 
-if [[ -z "$PROJECTR_FOLDER" ]]
+if [[ -z "$FORNIX_FOLDER" ]]
 then
     path_to_file=""
-    file_name="settings/projectr_core"
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
@@ -38,14 +38,14 @@ then
         # what to do if file never found
         #
         echo "Im a script running with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
     . "$path_to_file"
 fi
 
 # run the automatic non-zsh-specific setup
-. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_start"
+. "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_start"

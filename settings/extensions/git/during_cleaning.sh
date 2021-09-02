@@ -1,7 +1,7 @@
 # remove git's hooks
-if [[ -d "$PROJECTR_FOLDER/.git/hooks" ]]
+if [[ -d "$FORNIX_FOLDER/.git/hooks" ]]
 then
-    for file in $(find "$PROJECTR_FOLDER/.git/hooks")
+    for file in $(find "$FORNIX_FOLDER/.git/hooks")
     do
         # check if file exists
         if [ -f "$file" ]
