@@ -44,10 +44,10 @@ link_extension_file__to__ "commands/refresh_ignores" "during_start/024_000_pytho
 
 
 # 
-# connect during_manual_setup
+# connect during_manual_start
 # 
-link_extension_file__to__ "commands/add_project_to_pythonpath" "during_manual_setup/022_000_setup_pythonpath.sh"
-link_extension_file__to__ "commands/refresh_ignores" "during_manual_setup/024_000_python_ignores.sh"
+link_extension_file__to__ "commands/add_project_to_pythonpath" "during_manual_start/022_000_setup_pythonpath.sh"
+link_extension_file__to__ "commands/refresh_ignores" "during_manual_start/024_000_python_ignores.sh"
 
 # 
 # connect during_clean
