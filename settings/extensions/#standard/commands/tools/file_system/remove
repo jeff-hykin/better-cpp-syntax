@@ -5,7 +5,7 @@ function escape_sed_regex() {
 
 if [ -f "$1" ]
 then
-    rm -fv "$1" | sed -e 's/^removed (directory )?'"'$(escape_sed_regex "$PROJECTR_FOLDER")"'/removed ./'
+    rm -fv "$1" | sed -e 's/^removed (directory )?'"'$(escape_sed_regex "$FORNIX_FOLDER")"'/removed ./'
 else
-    rm -rfv "$1" | sed 's/^removed (directory )?'"'$(escape_sed_regex "$PROJECTR_FOLDER")"'/removed ./'
+    rm -rfv "$1" | sed 's/^removed (directory )?'"'$(escape_sed_regex "$FORNIX_FOLDER")"'/removed ./'
 fi

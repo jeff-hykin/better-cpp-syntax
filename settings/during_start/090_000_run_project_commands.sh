@@ -1,7 +1,7 @@
 # check if file exists
-if [ -f "$PROJECTR_COMMANDS_FOLDER/project/commands" ]
+if [ -f "$FORNIX_COMMANDS_FOLDER/project/commands" ]
 then
     echo ""
     echo ""
-    "$PROJECTR_COMMANDS_FOLDER/project/commands"
+    "$FORNIX_COMMANDS_FOLDER/project/commands"
 fi

@@ -8,7 +8,7 @@
 # find this file
 # 
 path_to_file=""
-file_name="settings/projectr_core"
+file_name="settings/fornix_core"
 folder_to_look_in="$PWD"
 while :
 do
@@ -32,7 +32,7 @@ then
     # what to do if file never found
     #
     echo "Im a script running with a pwd of:$PWD"
-    echo "Im looking for settings/projectr_core in a parent folder"
+    echo "Im looking for settings/fornix_core in a parent folder"
     echo "Im exiting now because I wasnt able to find it"
     echo "thats all the information I have"
     exit
@@ -41,15 +41,15 @@ fi
 # 
 # set main vars
 # 
-export PROJECTR_FOLDER="$(dirname "$(dirname "$path_to_file")")"
-export PROJECTR_HOME="$PROJECTR_FOLDER/settings/home/"
-export PROJECTR_COMMANDS_FOLDER="$PROJECTR_FOLDER/commands/"
-export PROJECTR_DEBUG="false"
+export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
+export FORNIX_HOME="$FORNIX_FOLDER/settings/home/"
+export FORNIX_COMMANDS_FOLDER="$FORNIX_FOLDER/commands/"
+export FORNIX_DEBUG="false"
 
 # 
 # run the refresh for each of the extensions (if the flag it not set)
 # 
-if ! [ "$PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT" = "true" ]
+if ! [ "$FORNIX_NEXT_RUN_ONLY_DO_BASIC_INIT" = "true" ]
 then
     # 
     # check that realpath exists and works
@@ -58,7 +58,7 @@ then
     # if realpath exists
     if [ -n "$(command -v "realpath")" ]
     then
-        __temp_var__test_output="$(realpath "/Blah/blahBlahBlah/aFolder/projectr/settings/extensions/#standard" --relative-to="/Blah/blahBlahBlah/aFolder/projectr/commands//tools" --canonicalize-missing)"
+        __temp_var__test_output="$(realpath "/Blah/blahBlahBlah/aFolder/fornix/settings/extensions/#standard" --relative-to="/Blah/blahBlahBlah/aFolder/fornix/commands//tools" --canonicalize-missing)"
         if [ "$__temp_var__test_output" = '../../settings/extensions/#standard' ]
         then
             __temp_var__realpath_works="true"
@@ -67,21 +67,21 @@ then
     fi
     if [ "$__temp_var__realpath_works" = "true" ]
     then
-        . "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_refresh"
+        . "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_refresh"
         # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-        for_each_item_in="$PROJECTR_FOLDER/settings/extensions"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+        for_each_item_in="$FORNIX_FOLDER/settings/extensions"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path . -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
         do
             __temp_var__file_path="$each/#refresh.sh"
             # check if file exists
             if [ -f "$__temp_var__file_path" ]
             then
-                if [ "$PROJECTR_DEBUG" = "true" ]
+                if [ "$FORNIX_DEBUG" = "true" ]
                 then
                     echo "loading: $__temp_var__file_path"
                 fi
                 # tell the scripts what file they're inside of
-                export __THIS_PROJECTR_EXTENSION_FILEPATH__="$__temp_var__file_path"
-                export __THIS_PROJECTR_EXTENSION_FOLDERPATH__="$each"
+                export __THIS_FORNIX_EXTENSION_FILEPATH__="$__temp_var__file_path"
+                export __THIS_FORNIX_EXTENSION_FOLDERPATH__="$each"
                 . "$__temp_var__file_path"
             fi
             unset __temp_var__file_path
@@ -98,15 +98,15 @@ then
     # 
     # run manual setup by default
     # 
-    if ! [ "$PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP" = "true" ]
+    if ! [ "$FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP" = "true" ]
     then
         # 
         # find and run all the manual setup scripts in alphabetical order
         #
-        . "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_manual_setup"
+        . "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_manual_setup"
     fi
 fi
 # reset flags
-export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT=""
-export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP=""
+export FORNIX_NEXT_RUN_ONLY_DO_BASIC_INIT=""
+export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP=""
 unset __temp_var__should_run_during_manual_setup

@@ -13,19 +13,19 @@
 #         then exits the shell
 
 # 
-# find the projectr_core
+# find the fornix_core
 # 
-if [ -z "$PROJECTR_FOLDER" ]
+if [ -z "$FORNIX_FOLDER" ]
 then
-    path_to_projectr_core=""
-    file_name="settings/projectr_core"
+    path_to_fornix_core=""
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
         # check if file exists
         if [ -f "$folder_to_look_in/$file_name" ]
         then
-            path_to_projectr_core="$folder_to_look_in/$file_name"
+            path_to_fornix_core="$folder_to_look_in/$file_name"
             break
         else
             if [ "$folder_to_look_in" = "/" ]
@@ -36,33 +36,33 @@ then
             fi
         fi
     done
-    if [ -z "$path_to_projectr_core" ]
+    if [ -z "$path_to_fornix_core" ]
     then
         #
         # what to do if file never found
         #
         echo "Im a script running with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
-    . "$path_to_projectr_core"
+    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+    . "$path_to_fornix_core"
 fi
 
 # if no arguments (just starting the shell) give the welcome message
-export PROJECTR_ARGS="$@"
+export FORNIX_ARGS="$@"
 
 #
 # find and run all the startup scripts in alphabetical order
 #
 
 # source all the file in settings/during_clean/ in alphabetical order
-. "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/trigger" "$PROJECTR_FOLDER/settings/during_start_prep"
+. "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_start_prep"
 
 # create a dummy home folder to prevent any problems when starting up
-__dummy_home="$PROJECTR_FOLDER/settings/.cache/home/"
+__dummy_home="$FORNIX_FOLDER/settings/.cache/home/"
 rm -rf "$__dummy_home" > /dev/null
 mkdir -p "$__dummy_home/.cache/"
 # connect the nix cache to prevent duplicates
@@ -73,11 +73,11 @@ then
 fi
 
 # if there are arguments, treat it as a run command
-if [[ -n "$PROJECTR_ARGS" ]]
+if [[ -n "$FORNIX_ARGS" ]]
 then
     # FIXME: I think the single quotes need to be escaped from the arguments
     # run single command
-    HOME="$__dummy_home" nix-shell --pure --run "zsh -c '$PROJECTR_ARGS'" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
+    HOME="$__dummy_home" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$FORNIX_FOLDER/settings/requirements/shell.nix"
 else
-    HOME="$__dummy_home" nix-shell --pure --command "zsh" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
+    HOME="$__dummy_home" nix-shell --pure --command "zsh" "$FORNIX_FOLDER/settings/requirements/shell.nix"
 fi

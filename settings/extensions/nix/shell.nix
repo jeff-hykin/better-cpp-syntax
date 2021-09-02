@@ -17,7 +17,7 @@ let
     # 
     main = (builtins.import
         (builtins.getEnv
-            ("__PROJECTR_NIX_MAIN_CODE_PATH")
+            ("__FORNIX_NIX_MAIN_CODE_PATH")
         )
     );
     

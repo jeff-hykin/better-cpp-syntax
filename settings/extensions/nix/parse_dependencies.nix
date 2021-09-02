@@ -30,7 +30,7 @@
     nixSettings = (main.fromTOML
         (main.readFile 
             (main.getEnv
-                "__PROJECTR_NIX_SETTINGS_PATH"
+                "__FORNIX_NIX_SETTINGS_PATH"
             )
         )
     );
@@ -40,7 +40,7 @@
     packageToml = (main.fromTOML
         (main.readFile
             (main.getEnv 
-                ("__PROJECTR_NIX_PACKAGES_FILE_PATH")
+                ("__FORNIX_NIX_PACKAGES_FILE_PATH")
             )
         )
     );
@@ -236,17 +236,17 @@
                 nativeBuildInputs = nativeBuildInputs;
                 protectHomeShellCode = ''
                     # 
-                    # find the projectr_core
+                    # find the fornix_core
                     # 
-                    path_to_projectr_core=""
-                    file_name="settings/projectr_core"
+                    path_to_fornix_core=""
+                    file_name="settings/fornix_core"
                     folder_to_look_in="$PWD"
                     while :
                     do
                         # check if file exists
                         if [ -f "$folder_to_look_in/$file_name" ]
                         then
-                            path_to_projectr_core="$folder_to_look_in/$file_name"
+                            path_to_fornix_core="$folder_to_look_in/$file_name"
                             break
                         else
                             if [ "$folder_to_look_in" = "/" ]
@@ -257,34 +257,34 @@
                             fi
                         fi
                     done
-                    if [ -z "$path_to_projectr_core" ]
+                    if [ -z "$path_to_fornix_core" ]
                     then
                         #
                         # what to do if file never found
                         #
                         echo "Im part of parse_dependencies.nix, a script running with a pwd of:$PWD"
-                        echo "Im looking for settings/projectr_core in a parent folder"
+                        echo "Im looking for settings/fornix_core in a parent folder"
                         echo "Im exiting now because I wasnt able to find it"
                         echo "thats all the information I have"
                         exit
                     fi
-                    export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
-                    . "$path_to_projectr_core"
+                    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+                    . "$path_to_fornix_core"
                     
                     # ensure that the folder exists
-                    mkdir -p "$(dirname "$__PROJECTR_NIX_PATH_EXPORT_FILE")"
-                    echo ${main.escapeShellArg (packagePathsAsJson)} > "$__PROJECTR_NIX_PATH_EXPORT_FILE"
+                    mkdir -p "$(dirname "$__FORNIX_NIX_PATH_EXPORT_FILE")"
+                    echo ${main.escapeShellArg (packagePathsAsJson)} > "$__FORNIX_NIX_PATH_EXPORT_FILE"
                     
-                    if [ -n "$PROJECTR_HOME" ]
+                    if [ -n "$FORNIX_HOME" ]
                     then
                         # we don't want to give nix or other apps our home folder
-                        if [[ "$HOME" != "$PROJECTR_HOME" ]] 
+                        if [[ "$HOME" != "$FORNIX_HOME" ]] 
                         then
-                            mkdir -p "$PROJECTR_HOME/.cache/"
-                            ln -s "$HOME/.cache/nix" "$PROJECTR_HOME/.cache/" &>/dev/null
+                            mkdir -p "$FORNIX_HOME/.cache/"
+                            ln -s "$HOME/.cache/nix" "$FORNIX_HOME/.cache/" &>/dev/null
                             
                             # so make the home folder the same as the project folder
-                            export HOME="$PROJECTR_HOME"
+                            export HOME="$FORNIX_HOME"
                             # make it explicit which nixpkgs we're using
                             export NIX_PATH="nixpkgs=${mainRepo}:."
                         fi

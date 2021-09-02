@@ -7,17 +7,17 @@
 #     with an argument, it refreshes the project connections, then runs `$commands_folder/project/$the_arguments`
 
 # 
-# find the projectr_core
+# find the fornix_core
 # 
-path_to_projectr_core=""
-file_name="settings/projectr_core"
+path_to_fornix_core=""
+file_name="settings/fornix_core"
 folder_to_look_in="$PWD"
 while :
 do
     # check if file exists
     if [ -f "$folder_to_look_in/$file_name" ]
     then
-        path_to_projectr_core="$folder_to_look_in/$file_name"
+        path_to_fornix_core="$folder_to_look_in/$file_name"
         break
     else
         if [ "$folder_to_look_in" = "/" ]
@@ -28,19 +28,19 @@ do
         fi
     fi
 done
-if [ -z "$path_to_projectr_core" ]
+if [ -z "$path_to_fornix_core" ]
 then
     #
     # what to do if file never found
     #
     echo "Im a script running with a pwd of:$PWD"
-    echo "Im looking for settings/projectr_core in a parent folder"
+    echo "Im looking for settings/fornix_core in a parent folder"
     echo "Im exiting now because I wasnt able to find it"
     echo "thats all the information I have"
     exit
 fi
-export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
-. "$path_to_projectr_core"
+export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+. "$path_to_fornix_core"
 
 
 # 
@@ -49,7 +49,7 @@ export PROJECTR_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
 if [[ "$#" = "0" ]]
 then
     # start the shell
-    "$PROJECTR_COMMANDS_FOLDER/shell"
+    "$FORNIX_COMMANDS_FOLDER/shell"
 # 
 # otherwise run the respective project command
 # 
@@ -61,7 +61,7 @@ else
     # 
     # recursively drill down
     # 
-    search_path="$PROJECTR_COMMANDS_FOLDER/project"
+    search_path="$FORNIX_COMMANDS_FOLDER/project"
     argument_combination="$search_path/$1"
     while [[ -n "$@" ]]
     do

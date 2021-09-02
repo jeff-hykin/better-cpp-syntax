@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # 
-# ensure PROJECTR_FOLDER exists
+# ensure FORNIX_FOLDER exists
 # 
-if [ -z "$PROJECTR_FOLDER" ]
+if [ -z "$FORNIX_FOLDER" ]
 then
     # 
-    # find projectr_core
+    # find fornix_core
     # 
     path_to_file=""
-    file_name="settings/projectr_core"
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
@@ -33,13 +33,13 @@ then
         # what to do if file never found
         #
         echo "Im a script running with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
-    # run the basic init of projectr to get the PROJECTR_FOLDER/PROJECTR_COMMANDS_FOLDER/PROJECTR_HOME etc
+    export FORNIX_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
+    # run the basic init of fornix to get the FORNIX_FOLDER/FORNIX_COMMANDS_FOLDER/FORNIX_HOME etc
     . "$path_to_file"
 fi
 
