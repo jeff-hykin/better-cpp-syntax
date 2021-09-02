@@ -1,5 +1,5 @@
 # if no arguments (just starting up the shell)
-if [ -z "$PROJECTR_ARGS" ]
+if [ -z "$FORNIX_ARGS" ]
 then
     echo "=============================="
     echo " Setting up your Environment!"

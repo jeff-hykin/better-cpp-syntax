@@ -1,16 +1,16 @@
 # 
 # import paths from nix
 # 
-zsh_syntax_highlighting__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" zsh-syntax-highlighting)"
-zsh_auto_suggest__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" zsh-autosuggestions)"
-spaceship_prompt__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" spaceship-prompt)"
-oh_my_zsh__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" oh-my-zsh)"
-zsh__path="$("$__PROJECTR_NIX_COMMANDS/package_path_for" zsh)"
+zsh_syntax_highlighting__path="$("$__FORNIX_NIX_COMMANDS/package_path_for" zsh-syntax-highlighting)"
+zsh_auto_suggest__path="$("$__FORNIX_NIX_COMMANDS/package_path_for" zsh-autosuggestions)"
+spaceship_prompt__path="$("$__FORNIX_NIX_COMMANDS/package_path_for" spaceship-prompt)"
+oh_my_zsh__path="$("$__FORNIX_NIX_COMMANDS/package_path_for" oh-my-zsh)"
+zsh__path="$("$__FORNIX_NIX_COMMANDS/package_path_for" zsh)"
 
 # 
 # set fpath for zsh
 # 
-local_zsh="$PROJECTR_FOLDER/settings/.cache/zsh.do_not_sync/site-functions/"
+local_zsh="$FORNIX_FOLDER/settings/.cache/zsh.do_not_sync/site-functions/"
 mkdir -p "$local_zsh"
 
 export fpath=("$local_zsh")

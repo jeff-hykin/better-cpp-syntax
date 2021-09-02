@@ -1,1 +1,0 @@
-../extensions/#standard/commands/tools/projectr/ensure_all_commands_executable

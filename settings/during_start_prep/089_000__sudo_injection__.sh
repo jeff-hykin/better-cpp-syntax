@@ -1,1 +1,1 @@
-"$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/projectr/inject_into_path" "sudo"
+"$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/inject_into_path" "sudo"

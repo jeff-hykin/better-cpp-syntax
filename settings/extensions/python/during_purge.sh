@@ -1,7 +1,7 @@
-if [ -d "$PROJECTR_FOLDER" ]
+if [ -d "$FORNIX_FOLDER" ]
 then
     # delete venv
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_FOLDER/.venv"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_FOLDER/.venv"
     
     # if poetry exists
     if [ -n "$(command -v "poetry")" ]

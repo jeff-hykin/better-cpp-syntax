@@ -1,7 +1,7 @@
 # TMPDIR fixes a pip issue
 export TMPDIR="$HOME/tmp.cleanable"
 mkdir -p "$TMPDIR"
-export VIRTUAL_ENV="$PROJECTR_FOLDER/.venv"
+export VIRTUAL_ENV="$FORNIX_FOLDER/.venv"
 export PATH="$VIRTUAL_ENV/bin:$PATH"
 if ! [ -d "$VIRTUAL_ENV" ]
 then

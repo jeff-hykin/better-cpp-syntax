@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 # 
-# find projectr if needed
+# find fornix if needed
 # 
-if ! [ -d "$PROJECTR_FOLDER" ]
+if ! [ -d "$FORNIX_FOLDER" ]
 then
     path_to_file=""
-    file_name="settings/projectr_core"
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
@@ -31,18 +31,18 @@ then
         #
         echo "Im a script (create_manual_command)"
         echo "with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_FOLDER="$(dirname "$(dirname "$path_to_file")")"
+    export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 fi
 
 # 
 # ensure folder exists
 # 
-mkdir -p "$PROJECTR_FOLDER/wrapped_commands"
+mkdir -p "$FORNIX_FOLDER/wrapped_commands"
 
 # 
 # start creating the command
@@ -52,12 +52,12 @@ escaped_name_of_executable="$(printf '%s' "'$(printf '%s' "$name_of_executable" 
 read -r -d '' __temp_var__part1 <<'HEREDOC_NAME'
 
     # 
-    # if projectr isnt defined, then find it
+    # if fornix isnt defined, then find it
     # 
-    if [ -z "$PROJECTR_FOLDER" ]
+    if [ -z "$FORNIX_FOLDER" ]
     then
         path_to_file=""
-        file_name="settings/projectr_core"
+        file_name="settings/fornix_core"
         folder_to_look_in="$PWD"
         while :
         do
@@ -81,12 +81,12 @@ read -r -d '' __temp_var__part1 <<'HEREDOC_NAME'
             # what to do if file never found
             #
             echo "Im a script running with a pwd of:$PWD"
-            echo "Im looking for settings/projectr_core in a parent folder"
+            echo "Im looking for settings/fornix_core in a parent folder"
             echo "Im exiting now because I wasnt able to find it"
             echo "thats all the information I have"
             exit
         fi
-        export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
+        export FORNIX_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
         . "$path_to_file"
     fi
 
@@ -119,25 +119,25 @@ read -r -d '' __temp_var__part3 <<'HEREDOC_NAME'
     #
     # run the command, inside nix-shell, inside zsh
     #
-    HOME="$PROJECTR_HOME" nix-shell --pure --run "zsh -c $zsh_arg" "$PROJECTR_FOLDER/settings/requirements/shell.nix"
+    HOME="$FORNIX_HOME" nix-shell --pure --run "zsh -c $zsh_arg" "$FORNIX_FOLDER/settings/requirements/shell.nix"
 HEREDOC_NAME
 
 # 
 # create the command
 # 
-mkdir -p "$PROJECTR_FOLDER/wrapped_commands"
+mkdir -p "$FORNIX_FOLDER/wrapped_commands"
 echo "#!/usr/bin/env bash
     $__temp_var__part1
     $__temp_var__part2
     $__temp_var__part3
-" > "$PROJECTR_FOLDER/wrapped_commands/$name_of_executable"
+" > "$FORNIX_FOLDER/wrapped_commands/$name_of_executable"
 # make it executable
-chmod ugo+x "$PROJECTR_FOLDER/wrapped_commands/$name_of_executable" &>/dev/null || sudo chmod ugo+x "$PROJECTR_FOLDER/wrapped_commands/$name_of_executable"
+chmod ugo+x "$FORNIX_FOLDER/wrapped_commands/$name_of_executable" &>/dev/null || sudo chmod ugo+x "$FORNIX_FOLDER/wrapped_commands/$name_of_executable"
 
 echo "command created: ./wrapped_commands/$name_of_executable"
 echo "make sure to run the following at least once per session:"
-__projectr_folder_escaped="$(printf '%s' "'$(printf '%s' "$PROJECTR_FOLDER" | sed 's/'"'"'/'"'"'"'"'"'"'"'"'/')'")"
-echo "    export PATH=$__projectr_folder_escaped\"/wrapped_commands:\$PATH\""
+__fornix_folder_escaped="$(printf '%s' "'$(printf '%s' "$FORNIX_FOLDER" | sed 's/'"'"'/'"'"'"'"'"'"'"'"'/')'")"
+echo "    export PATH=$__fornix_folder_escaped\"/wrapped_commands:\$PATH\""
 
 unset __temp_var__part1
 unset __temp_var__part2

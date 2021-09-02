@@ -10,9 +10,9 @@ function inject_into_path {
     fi
     # make sure its a file
     if [[ -f "$system_path" ]]; then
-        mkdir -p "$PROJECTR_FOLDER/settings/.cache/path_injection"
+        mkdir -p "$FORNIX_FOLDER/settings/.cache/path_injection"
         # put it in the injections, and use the real home variable
-        local new_executable="$PROJECTR_FOLDER/settings/.cache/path_injection/$(basename "$system_path")"
+        local new_executable="$FORNIX_FOLDER/settings/.cache/path_injection/$(basename "$system_path")"
         echo "#!/usr/bin/env bash
         HOME='$HOME' '$system_path' "'"$@"' > "$new_executable"
         # make sure we can execute it

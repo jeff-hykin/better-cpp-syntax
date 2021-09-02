@@ -1,5 +1,5 @@
 # the mac library cache
-if [ -d "$PROJECTR_FOLDER" ]
+if [ -d "$FORNIX_FOLDER" ]
 then
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_HOME/Library/Caches"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/Library/Caches"
 fi
