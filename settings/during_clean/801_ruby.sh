@@ -1,1 +1,1 @@
-../extensions/ruby/when_cleaning.sh
+../extensions/ruby/during_clean.sh

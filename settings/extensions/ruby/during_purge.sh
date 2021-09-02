@@ -1,4 +1,4 @@
-if [ -d "$PROJECTR_FOLDER" ]
+if [ -d "$FORNIX_FOLDER" ]
 then
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$HOME/gems.do_not_sync/"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$HOME/gems.do_not_sync/"
 fi

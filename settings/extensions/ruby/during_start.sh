@@ -1,3 +1,3 @@
 export GEM_HOME="$HOME/gems.do_not_sync/"
 mkdir "$GEM_HOME" &>/dev/null
-"$PROJECTR_COMMANDS_FOLDER/tools/ruby/check_gem_modules"
+"$FORNIX_COMMANDS_FOLDER/tools/ruby/check_gem_modules"

@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # 
-# ensure PROJECTR_FOLDER exists
+# ensure FORNIX_FOLDER exists
 # 
-if [ -z "$PROJECTR_FOLDER" ]
+if [ -z "$FORNIX_FOLDER" ]
 then
     # 
-    # find projectr_core
+    # find fornix_core
     # 
     path_to_file=""
-    file_name="settings/projectr_core"
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
@@ -33,20 +33,20 @@ then
         # what to do if file never found
         #
         echo "Im a script running with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
-    # run the basic init of projectr to get the PROJECTR_FOLDER/PROJECTR_COMMANDS_FOLDER/PROJECTR_HOME etc
+    export FORNIX_NEXT_RUN_ONLY_DO_BASIC_INIT="true"
+    # run the basic init of fornix to get the FORNIX_FOLDER/FORNIX_COMMANDS_FOLDER/FORNIX_HOME etc
     . "$path_to_file"
 fi
 
 
 # main inputs
 __temp_var__command_name="tools/ruby/check_gem_modules"
-__temp_var__file_to_watch="$PROJECTR_FOLDER/Gemfile"
+__temp_var__file_to_watch="$FORNIX_FOLDER/Gemfile"
 __temp_var__hash_check_name="ruby_gems"
 failed_check_command () {
     # what to do when node modules haven't been installed yet
@@ -69,7 +69,7 @@ if [ -f "$__temp_var__file_to_watch" ]; then
     # 
     # create check file
     # 
-    __temp_var__location_of_hash="$PROJECTR_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
+    __temp_var__location_of_hash="$FORNIX_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
     if ! [ -f "$__temp_var__location_of_hash" ]; then
         # make sure the folder exists
         mkdir -p "$(dirname "$__temp_var__location_of_hash")"
