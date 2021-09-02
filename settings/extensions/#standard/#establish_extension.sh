@@ -40,10 +40,10 @@ mkdir -p "$FORNIX_FOLDER/settings/during_purge/"
 mkdir -p "$FORNIX_FOLDER/settings/during_clean/"
 
 # 
-# connect during_start/during_manual_setup
+# connect during_start/during_manual_start
 # 
 link_extension_file__to__ "commands/tools/fornix/ensure_all_commands_executable" "during_start/081_000__ensure_all_commands_executable__.sh"
-link_extension_file__to__ "commands/tools/fornix/ensure_all_commands_executable" "during_manual_setup/081_000__ensure_all_commands_executable__.sh"
+link_extension_file__to__ "commands/tools/fornix/ensure_all_commands_executable" "during_manual_start/081_000__ensure_all_commands_executable__.sh"
 
 # 
 # connect commands
@@ -77,7 +77,7 @@ do
     rm -f "$each" 2>/dev/null
 done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
 
-for_each_item_in="$FORNIX_FOLDER/during_manual_setup"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -xtype l -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+for_each_item_in="$FORNIX_FOLDER/during_manual_start"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -xtype l -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
 do
     rm -f "$each" 2>/dev/null
 done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"

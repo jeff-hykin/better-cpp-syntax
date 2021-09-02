@@ -47,11 +47,11 @@
     # 
     # load the store with all the packages, and load it with the config
     # 
-    mainRepo = (main.fetchTarball
-        ({url="https://github.com/NixOS/nixpkgs/archive/${nixSettings.mainRepo}.tar.gz";})
+    defaultFrom = (main.fetchTarball
+        ({url="https://github.com/NixOS/nixpkgs/archive/${nixSettings.defaultFrom}.tar.gz";})
     );
     mainPackages = (main.import
-        (mainRepo)
+        (defaultFrom)
         ({ config = nixSettings.config;})
     );
     packagesForThisMachine = (main.filter
@@ -229,7 +229,7 @@
     return = (main.mergeAttrs
         (main)
         ({
-            nixPath = "${mainRepo}";
+            nixPath = "${defaultFrom}";
             packages = packages;
             project = {
                 buildInputs = buildInputs;
@@ -268,7 +268,7 @@
                         echo "thats all the information I have"
                         exit
                     fi
-                    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+                    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
                     . "$path_to_fornix_core"
                     
                     # ensure that the folder exists
@@ -278,15 +278,18 @@
                     if [ -n "$FORNIX_HOME" ]
                     then
                         # we don't want to give nix or other apps our home folder
-                        if [[ "$HOME" != "$FORNIX_HOME" ]] 
+                        if ! [ "$HOME" = "$FORNIX_HOME" ]
                         then
+                            if [ "$FORNIX_DEBUG" = "true" ]; then
+                                echo "replacing: HOME with FORNIX_HOME"
+                            fi
                             mkdir -p "$FORNIX_HOME/.cache/"
                             ln -s "$HOME/.cache/nix" "$FORNIX_HOME/.cache/" &>/dev/null
                             
                             # so make the home folder the same as the project folder
                             export HOME="$FORNIX_HOME"
                             # make it explicit which nixpkgs we're using
-                            export NIX_PATH="nixpkgs=${mainRepo}:."
+                            export NIX_PATH="nixpkgs=${defaultFrom}:."
                         fi
                     fi
                 '';

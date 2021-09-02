@@ -47,8 +47,11 @@ then
         echo "thats all the information I have"
         exit
     fi
-    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
     . "$path_to_fornix_core"
+fi
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "starting: $FORNIX_COMMANDS_FOLDER"shell
 fi
 
 # if no arguments (just starting the shell) give the welcome message
@@ -62,22 +65,37 @@ export FORNIX_ARGS="$@"
 . "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_start_prep"
 
 # create a dummy home folder to prevent any problems when starting up
-__dummy_home="$FORNIX_FOLDER/settings/.cache/home/"
-rm -rf "$__dummy_home" > /dev/null
-mkdir -p "$__dummy_home/.cache/"
+__temp_var__cache_folder="$FORNIX_FOLDER/settings/.cache"
+__temp_home="$__temp_var__cache_folder/home/"
+rm -rf "$__temp_home" > /dev/null
+mkdir -p "$__temp_home/.cache/"
 # connect the nix cache to prevent duplicates
 # check if file exists
-if ! [ -d "$__dummy_home/.cache/nix" ]
+if ! [ -d "$__temp_home/.cache/nix" ]
 then
-    ln -s "$HOME/.cache/nix" "$__dummy_home/.cache/nix" 
+    ln -s "$HOME/.cache/nix" "$__temp_home/.cache/nix" 
 fi
 
 # if there are arguments, treat it as a run command
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "switching from Bash to Zsh"
+    echo "changing HOME to temp folder for nix-shell"
+fi
+__temp_var__nix_shell_file="$FORNIX_FOLDER/settings/extensions/nix/shell.nix"
 if [[ -n "$FORNIX_ARGS" ]]
 then
-    # FIXME: I think the single quotes need to be escaped from the arguments
+    # FIXME: I think the single quotes need to be escaped from the arguments (need to iterate over them, escape each one with single quotes)
     # run single command
-    HOME="$__dummy_home" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$FORNIX_FOLDER/settings/requirements/shell.nix"
+    HOME="$__temp_home" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$__temp_var__nix_shell_file"
 else
-    HOME="$__dummy_home" nix-shell --pure --command "zsh" "$FORNIX_FOLDER/settings/requirements/shell.nix"
+    HOME="$__temp_home" nix-shell --pure --command "zsh" "$__temp_var__nix_shell_file"
 fi
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "exited the nix-shell environment"
+    echo "(Tools/Commands mentioned in 'settings/extensions/nix/nix.toml' are no longer available/installed)"
+    echo ""
+    echo "switched from Zsh back to Bash"
+    echo "finished: $FORNIX_COMMANDS_FOLDER"shell
+fi
+unset __temp_var__nix_shell_file
+unset __temp_var__cache_folder

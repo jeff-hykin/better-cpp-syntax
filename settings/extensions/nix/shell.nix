@@ -71,13 +71,21 @@ in
         
         # run some bash code before starting up the shell
         shellHook = ''
-            
+            ${main.project.protectHomeShellCode}
+            if [ "$FORNIX_DEBUG" = "true" ]; then
+                echo "starting: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
+            fi
             ${linuxOnly.shellCode}
             ${macOnly.shellCode}
-            ${main.project.protectHomeShellCode}
             
             # provide access to ncurses for nice terminal interactions
             export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.ncurses}/lib"
             export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
+            
+            if [ "$FORNIX_DEBUG" = "true" ]; then
+                echo "finished: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
+                echo ""
+                echo "Tools/Commands mentioned in 'settings/extensions/nix/nix.toml' are now available/installed"
+            fi
         '';
     }

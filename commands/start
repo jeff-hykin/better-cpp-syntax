@@ -39,65 +39,14 @@ then
     echo "thats all the information I have"
     exit
 fi
-export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
 . "$path_to_fornix_core"
 
-
-# 
-# if given no args
-# 
-if [[ "$#" = "0" ]]
-then
-    # start the shell
-    "$FORNIX_COMMANDS_FOLDER/shell"
-# 
-# otherwise run the respective project command
-# 
-else
-    # enable globbing
-    shopt -s globstar &>/dev/null
-    shopt -s dotglob &>/dev/null
-    
-    # 
-    # recursively drill down
-    # 
-    search_path="$FORNIX_COMMANDS_FOLDER/project"
-    argument_combination="$search_path/$1"
-    while [[ -n "$@" ]]
-    do
-        # pop the first argument off
-        shift 1
-        for each in "$search_path/"**/*
-        do
-            if [[ "$argument_combination" = "$each" ]]
-            then
-                # if its a folder, then we need to go deeper
-                if [[ -d "$each" ]]
-                then
-                    search_path="$each"
-                    argument_combination="$argument_combination/$1"
-                    
-                    # if there is no next argument
-                    if [[ -z "$1" ]]
-                    then
-                        printf "\nThat is a sub folder, not a command\nValid sub-options are\n" 1>&2
-                        ls -1FL --group-directories-first --color "$each" | sed 's/^/    /' | sed -E 's/(\*|@)$/ /' 1>&2
-                        exit 1 # error, no command
-                    fi
-                    
-                    break
-                # if its a file, run it with the remaining arguments
-                elif [[ -f "$each" ]]
-                then
-                    "$each" "$@"
-                    # make exit status identical to executed program
-                    exit $?
-                fi
-            fi
-        done
-    done
-    printf "\nI could not find that project command\n" 1>&2
-    printf "Valid next-arguments would be:\n" 1>&2
-    ls -1FL --group-directories-first --color "$search_path" | sed 's/^/    /' | sed -E 's/(\*|@)$/ /' 1>&2
-    exit 1 # error, no command
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "starting: $FORNIX_COMMANDS_FOLDER"start
+fi
+# just start the shell with no arguments (arguments might be supported in the future)
+"$FORNIX_COMMANDS_FOLDER/shell"
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "finished: $FORNIX_COMMANDS_FOLDER"start
 fi

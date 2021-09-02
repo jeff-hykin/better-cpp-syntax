@@ -43,7 +43,7 @@ then
         echo "thats all the information I have"
         exit
     fi
-    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_SETUP="true"
+    export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
     . "$path_to_file"
 fi
 
