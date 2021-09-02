@@ -1,9 +1,9 @@
-if [ -d "$PROJECTR_FOLDER" ]
+if [ -d "$FORNIX_FOLDER" ]
 then
     # delete node_modules
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_FOLDER/node_modules"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_FOLDER/node_modules"
     # .npm 
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_HOME/.npm"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.npm"
     # npmrc
-    "$PROJECTR_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$PROJECTR_HOME/.npmrc"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.npmrc"
 fi

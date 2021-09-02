@@ -14,7 +14,7 @@ link_extension_file__to__() {
     esac
     if ! [ "$__temp_var__is_absolute_path" = "true" ]
     then
-        __temp_var__target_full_path="$PROJECTR_FOLDER/settings/$target_file"
+        __temp_var__target_full_path="$FORNIX_FOLDER/settings/$target_file"
     else
         __temp_var__target_full_path="$target_file"
     fi
@@ -26,7 +26,7 @@ link_extension_file__to__() {
     # make sure parent folder exists
     mkdir -p "$(dirname "$__temp_var__target_full_path")"
     # link the file (relative link, which it what makes it complicated)
-    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_PROJECTR_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
+    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_FORNIX_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
     ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
     unset __temp_var__path_from_target_to_local_file
     
@@ -47,4 +47,4 @@ link_extension_file__to__ "during_purge.sh" "during_purge/805_remove_node_module
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands" "$PROJECTR_COMMANDS_FOLDER/tools/nodejs"
+link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/nodejs"

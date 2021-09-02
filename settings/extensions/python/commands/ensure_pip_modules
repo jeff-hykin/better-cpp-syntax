@@ -2,13 +2,13 @@
 
 
 # if not in the standard env, try to make it work anyways
-if [ -z "$PROJECTR_FOLDER" ]
+if [ -z "$FORNIX_FOLDER" ]
 then
     # 
-    # find PROJECTR_FOLDER by walking up the directories
+    # find FORNIX_FOLDER by walking up the directories
     # 
     path_to_file=""
-    file_name="settings/projectr_core"
+    file_name="settings/fornix_core"
     folder_to_look_in="$PWD"
     while :
     do
@@ -32,12 +32,12 @@ then
         # what to do if file never found
         #
         echo "Im a script running with a pwd of:$PWD"
-        echo "Im looking for settings/projectr_core in a parent folder"
+        echo "Im looking for settings/fornix_core in a parent folder"
         echo "Im exiting now because I wasnt able to find it"
         echo "thats all the information I have"
         exit
     fi
-    export PROJECTR_FOLDER="$(dirname "$(dirname "$path_to_file")")"
+    export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 fi
 
 
@@ -45,7 +45,7 @@ fi
 # check for python-poetry first
 # 
 __temp_var__should_use_poetry="false"
-if [ -f "$PROJECTR_FOLDER/pyproject.toml" ]
+if [ -f "$FORNIX_FOLDER/pyproject.toml" ]
 then
     # if poetry exists
     if [ -n "$(command -v "poetry")" ]
@@ -57,7 +57,7 @@ if [ "$__temp_var__should_use_poetry" = "true" ]
 then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
-    __temp_var__file_to_watch="$PROJECTR_FOLDER/pyproject.toml"
+    __temp_var__file_to_watch="$FORNIX_FOLDER/pyproject.toml"
     __temp_var__hash_check_name="pip_poetry_modules"
     failed_check_command () {
         # what to do when node modules haven't been installed yet
@@ -79,7 +79,7 @@ then
         # 
         # create check file
         # 
-        __temp_var__location_of_hash="$PROJECTR_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
+        __temp_var__location_of_hash="$FORNIX_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
         if ! [ -f "$__temp_var__location_of_hash" ]; then
             # make sure the folder exists
             mkdir -p "$(dirname "$__temp_var__location_of_hash")"
@@ -115,7 +115,7 @@ else
     
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
-    __temp_var__file_to_watch="$PROJECTR_FOLDER/requirements.txt"
+    __temp_var__file_to_watch="$FORNIX_FOLDER/requirements.txt"
     __temp_var__hash_check_name="pip_modules"
     failed_check_command () {
         # what to do when node modules haven't been installed yet
@@ -137,7 +137,7 @@ else
         # 
         # create check file
         # 
-        __temp_var__location_of_hash="$PROJECTR_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
+        __temp_var__location_of_hash="$FORNIX_FOLDER/settings/.cache/.$__temp_var__hash_check_name.cleanable.hash"
         if ! [ -f "$__temp_var__location_of_hash" ]; then
             # make sure the folder exists
             mkdir -p "$(dirname "$__temp_var__location_of_hash")"

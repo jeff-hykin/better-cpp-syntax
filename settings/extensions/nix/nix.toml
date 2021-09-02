@@ -37,6 +37,8 @@
     # and know that seeing `pkgs` online translates to `main.packages` inside the shell.nix file
 
 
+# [[ you can add tools for your project right here or at the bottom ]]
+
 # 
 # Node.js
 # 
@@ -89,6 +91,22 @@ from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 [[packages]]
 load = [ "poetry",]
 from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+# 
+# for .so errors on linux with opencv+ffmpeg
+# 
+
+[[packages]]
+onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "glib",]
+asNativeBuildInput = true
+from = "528d35bec0cb976a06cc0e8487c6e5136400b16b"
+
+[[packages]]
+onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "libglvnd",]
+asNativeBuildInput = true
+from = "559cf76fa3642106d9f23c9e845baf4d354be682"
 
 # 
 # 
