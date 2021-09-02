@@ -32,6 +32,9 @@ link_extension_file__to__() {
     unset target_file
 }
 
+# default to allowing unfree
+export NIXPKGS_ALLOW_UNFREE=1
+
 # 
 # connect during_purge
 # 
