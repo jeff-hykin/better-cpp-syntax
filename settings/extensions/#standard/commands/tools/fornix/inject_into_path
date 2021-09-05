@@ -13,8 +13,11 @@ function inject_into_path {
         mkdir -p "$FORNIX_FOLDER/settings/.cache/path_injection"
         # put it in the injections, and use the real home variable
         local new_executable="$FORNIX_FOLDER/settings/.cache/path_injection/$(basename "$system_path")"
+        local current_home="$("$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/string/escape_shell_argument" "$HOME")"
+        local current_path="$("$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/string/escape_shell_argument" "$PATH")"
+        local escaped_system_path="$("$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/string/escape_shell_argument" "$system_path")"
         echo "#!/usr/bin/env bash
-        HOME='$HOME' '$system_path' "'"$@"' > "$new_executable"
+        HOME=$current_home PATH=$current_path $escaped_system_path "'"$@"' > "$new_executable"
         # make sure we can execute it
         chmod u+wrx "$new_executable"
     else 

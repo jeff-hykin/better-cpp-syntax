@@ -1,11 +1,11 @@
-# Quick things
+# Quick Start
 
 
 ### How do I start the project?
 
-Open a terminal/console app
-Type/Run `cd file_path/to/this/project` [ press enter ]
-Run `commands/start`
+Open a terminal/console app <br>
+Type/Run `cd file_path/to/this/project` [ press enter ] <br>
+Run `commands/start` <br>
 
 ### How do I stop the project?
 
@@ -19,7 +19,7 @@ For simple commands
 3. Rename the file to something like `commands/project/hello_world`
 4. Add some bash code, ex: `echo "hello world"`
 5. Start (or exit and restart) the project environment `commands/start`
-6. Run `project hello_world`, and your code will execute!
+6. Run `project hello_world`, and volia you're running your custom command!
 
 Tip1: If you move your file from `commands/project/hello_world` to just `commands/hello_world` then inside the terminal you can simply run `hello_world`
 
@@ -28,7 +28,7 @@ Tip2: Most of the commands use bash, but they don't have to! For example, if the
 ### How do I add a tool? (like git or python)
 
 - First search for the name of your tool on [here](https://search.nixos.org/packages)
-    - For example, searching `python`, you should results like  `pythonFull`, `python39`, `python37`, etc
+    - For example, searching `python`, you should see results like  `pythonFull`, `python39`, `python37`, etc
     - Sometimes you will see a name with a dot, like `unixtools.ps` or `python39Packages.opencv4`
 - Open the `settings/requirements/nix.toml` file in the project
     - go to the very bottom, add some newlines
@@ -39,7 +39,9 @@ Tip2: Most of the commands use bash, but they don't have to! For example, if the
     - `[[packages]]`
     - `load = [ "unixtools", "ps", ]`
 - Then start (or exit and restart) your environment! (`commands/start`)
-- Now the exact version of that tool will be available in your project
+- Now the exact version of that tool will be available (ex: `python --version` should print out python 3.9)
+
+# Main Features
 
 #### What if I need a really specific version?
 
@@ -47,7 +49,7 @@ Tip2: Most of the commands use bash, but they don't have to! For example, if the
 - 1. Still start [here](https://search.nixos.org/packages)
 - 2. But now you want to look for the "casual" package name <img src="/documentation/images/package_name.png" alt="example showing the name: instead of the blue name">
 - 3. Now go to this other (community-maintained) [website](https://lazamar.co.uk/nix-versions/)
-- 4. Search using that "casual" package name, and you should see something like this. <img src="/documentation/images/package_versions.png" alt="example search results displayed as a table">
+- 4. On that other site, search using that "casual" package name, and you should see something like this. <img src="/documentation/images/package_versions.png" alt="example search results displayed as a table">
 - 5. Find your version (ex: `3.7.0rc1`) then click the blue revision number next to it. You should see something like this: <img src="/documentation/images/package_from_example.png" alt="description">
 - 6. Now, open up your `settings/requirements/nix.toml`
     - Scroll to the bottom and add some newlines
@@ -59,9 +61,9 @@ Tip2: Most of the commands use bash, but they don't have to! For example, if the
 Note: actually all of the packages secretly have a `from = ` attribute! They simply default to using the `defaultFrom =` one inside of the `settings/extensions/nix/settings.toml` file.
 
 
-### How do setup ENV varibles for my project?
+### How can I auto-setup ENV variables?
 
-Note: You can actually setup way more than just env variables, you can start virtual environments, check that modules have been installed, make sure certain folders exist, add your own functions/aliases you can even `cd` into folders (and the environment will start in that folder). The sky is the limit.
+Note: You can actually setup way more than just env variables, you can start virtual environments, check that modules have been installed, make sure certain folders exist, add your own functions/aliases you can even `cd` into folders (and the environment will start in that folder). The sky is the limit. And by sky I mean zsh.
 
 TLDR: add a bash script to `settings/during_start`
 
@@ -74,11 +76,13 @@ Full instructions:
     - Whatever number you pick, make sure it is unique
     - Note: If you have a huge project and run out of digits, extend all numbers. For example `082_000_` would become `082_000_000_`. (This will be automated in future versions of Fornix)
 4. Write some zsh (e.g. basically bash) code
-    - Don't use `.` as a path. Instead use `$FORNIX_FOLDER` which will be the root path of the project
+    - Don't use `.` as a path. Instead use `$FORNIX_FOLDER` which will be the root path of your project
     - ENV var example: `export PYTHON_PATH="$FORNIX_FOLDER/main:$PYTHON_PATH"`
     - Note: the `$HOME` variable will not be your home folder! it will be the `$FORNIX_HOME` (which is inside the project). 
-        - Why??? Because Fornix was designed to solve the "Well... it works on my machine" `¯\_(ツ)_/¯` problem. Many tools (like git, and npm, and python) secretly use, create, and change all kinds of stuff in your home folder. And your home folder is almost certainly not the same as your friends home folder, meaning "Well... it works on my machine"-problems happen all the time. Having a project home folder means the project commands behave consistently, regardless of what you put in your personal home folder.
-        - "But I neeeeed my real $HOME var!" Not to worry! Take a look at "How do I add external stuff?". This is where the `settings/during_start_prep/` folder comes into play. Your actual home variable will become easier to access in future versions of Fornix.
+        - Why??? 
+            - Fornix was designed to solve the "Well... it works on my machine" `¯\_(ツ)_/¯` problem. Many tools (like git, and npm, and python) secretly use, create, and change all kinds of stuff in your home folder. And your home folder is almost certainly not the same as your friend's home folder, meaning "Well... it works on my machine"-problems happen all the time. By making tools think your home is inside the project, we can make them behave consistently, regardless of what you put in your personal home folder.
+        - "But I neeeeed my real $HOME var!"
+            - Not to worry! Take a look at "How do I add external stuff?". This is where the `settings/during_start_prep/` folder comes into play. Your actual home variable will become easier to access in future versions of Fornix.
 
 ### What should I NOT change?
 
