@@ -71,3 +71,9 @@ relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_purge.sh"
 # connect commands
 # 
 relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/python"
+
+# 
+# connect git hooks
+# 
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/ensure_pip_modules" "$FORNIX_FOLDER/settings/extensions/git/hooks/post-update/901_check_pip_modules"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/ensure_pip_modules" "$FORNIX_FOLDER/settings/extensions/git/hooks/post-merge/901_check_pip_modules"
