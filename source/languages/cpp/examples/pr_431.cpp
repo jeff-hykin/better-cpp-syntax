@@ -1,1 +1,0 @@
-const char *octal_escape_test = "a\001\077\018";

@@ -1,1 +1,0 @@
-#define IS_UPGRADE_ADDR(addr) (/*((addr) >= UPGRADE_BASE_ADDR) && */(addr) < UPGRADE_BASE_ADDR + UPGRADE_SPACE_SIZE)
