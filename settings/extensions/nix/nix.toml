@@ -40,6 +40,75 @@
 # [[ you can add tools for your project right here or at the bottom ]]
 
 # 
+# Node.js
+# 
+# uncomment one of groups to pick your version
+[[packages]]
+# version 16.2.0
+# load = [ "nodejs",]
+# from = "141439f6f11537ee349a58aaf97a5a5fc072365c" 
+
+# version 15.14.0
+# load = [ "nodejs-15_x",]
+# from = "c92ca95afb5043bc6faa0d526460584eccff2277" 
+
+# version 14.17.1
+load = [ "nodejs",]
+from = "860b56be91fb874d48e23a950815969a7b832fbc" 
+
+# version 12.22.1
+# load = [ "nodejs-12_x",]
+# from = "860b56be91fb874d48e23a950815969a7b832fbc" 
+
+# version 10.24.0
+# load = [ "nodejs-10_x",] 
+# from = "a765beccb52f30a30fee313fbae483693ffe200d" 
+
+# 
+# Python (because node-gyp depends on python)
+# 
+
+[[packages]]
+load = [ "python38",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "setuptools",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "pip",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "virtualenv",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "python38Packages", "wheel",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+[[packages]]
+load = [ "poetry",]
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+
+# 
+# for .so errors on linux with opencv+ffmpeg
+# 
+
+[[packages]]
+onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "glib",]
+asNativeBuildInput = true
+from = "528d35bec0cb976a06cc0e8487c6e5136400b16b"
+
+[[packages]]
+onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "libglvnd",]
+asNativeBuildInput = true
+from = "559cf76fa3642106d9f23c9e845baf4d354be682"
+
+# 
 # 
 # 
 # Need-to-build-from-source tools
