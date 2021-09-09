@@ -3,51 +3,59 @@
 # 
 # this is just a helper (common to most all extensions)
 # 
-link_extension_file__to__() {
-    local_file="$1"
-    target_file="$2"
+relative_link__file_to__() {
+    existing_filepath="$1"
+    target_filepath="$2"
     
-    # check for absolute path, if not absolute make it relative to project/settings
-    case "$target_file" in
-        /*) __temp_var__is_absolute_path="true" ;;
-        *) : ;;
+    # 
+    # make existing_filepath absolute
+    # 
+    case "$existing_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) existing_filepath="$FORNIX_FOLDER/$existing_filepath" ;;
     esac
-    if ! [ "$__temp_var__is_absolute_path" = "true" ]
-    then
-        __temp_var__target_full_path="$FORNIX_FOLDER/settings/$target_file"
-    else
-        __temp_var__target_full_path="$target_file"
-    fi
-    unset __temp_var__is_absolute_path
+    
+    # 
+    # make target_filepath absolute
+    # 
+    case "$target_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) target_filepath="$FORNIX_FOLDER/$target_filepath" ;;
+    esac
     
     # remove existing things in the way
-    rm -f "$__temp_var__target_full_path" 2>/dev/null
-    rm -rf "$__temp_var__target_full_path" 2>/dev/null
+    rm -f "$target_filepath" 2>/dev/null
+    rm -rf "$target_filepath" 2>/dev/null
     # make sure parent folder exists
-    mkdir -p "$(dirname "$__temp_var__target_full_path")"
-    # link the file (relative link, which it what makes it complicated)
-    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_FORNIX_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
-    ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
-    unset __temp_var__path_from_target_to_local_file
-    
-    unset local_file
-    unset target_file
+    mkdir -p "$(dirname "$target_filepath")"
+    __temp_var__relative_part="$(realpath "$(dirname "$existing_filepath")" --relative-to="$(dirname "$target_filepath")" --canonicalize-missing)"
+    __temp_var__relative_path="$__temp_var__relative_part/$(basename "$existing_filepath")"
+    # link using the relative path
+    ln -s "$__temp_var__relative_path" "$target_filepath"
+    unset __temp_var__relative_path
+    unset __temp_var__relative_part
+    unset existing_filepath
+    unset target_filepath
 }
 
 # 
 # connect during_clean
 # 
-link_extension_file__to__ "during_clean.sh" "during_clean/500_git.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_clean.sh" "$FORNIX_FOLDER/settings/during_clean/500_git.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "during_start_prep/051_000_copy_git_config.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start_prep.sh" "$FORNIX_FOLDER/settings/during_start_prep/051_000_copy_git_config.sh"
 
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/git"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/git"
 
 # 
 # config

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # this was copy-pasted from: https://gist.github.com/benmccallum/28e4f216d9d72f5965133e6c43aaff6e
 
