@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'textmate_grammar'
+require 'ruby_grammar_builder'
 
 g = Grammar.new_exportable_grammar
 g.exports = [:inline_comment]

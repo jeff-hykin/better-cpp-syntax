@@ -1,1 +1,0 @@
-which vim &>/dev/null && inject_into_path "vim"

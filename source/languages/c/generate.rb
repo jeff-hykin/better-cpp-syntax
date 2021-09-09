@@ -1,4 +1,4 @@
-require 'textmate_grammar'
+require 'ruby_grammar_builder'
 require_relative '../../../paths'
 source_dir = "../../"
 require_relative source_dir + 'textmate_tools.rb'

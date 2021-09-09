@@ -21,4 +21,4 @@ Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
 This extension is part of a family of extensions for providing better syntax. If you'd like to help improve the syntax, take a look at source/languages and look at the generate.rb files. Also make sure to take a look at CONTRIBUTING.md to get a better idea of how code works.
 
 # Setup A Fork
-Everything is detailed in the `documentation/SETUP.md`!
+Everything is detailed in the `documentation/setup.md`!
