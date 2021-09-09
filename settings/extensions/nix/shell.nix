@@ -74,7 +74,7 @@ in
     # 
     main.packages.mkShell {
         # inside that shell, make sure to use these packages
-        buildInputs =  main.project.buildInputs ++ macOnly.buildInputs ++ linuxOnly.buildInputs ++ [rubyGems];
+        buildInputs = main.project.buildInputs ++ macOnly.buildInputs ++ linuxOnly.buildInputs ++ [ rubyGems (main.lowPrio rubyGems.wrappedRuby) ];
         
         nativeBuildInputs =  main.project.nativeBuildInputs ++ macOnly.nativeBuildInputs ++ linuxOnly.nativeBuildInputs;
         

@@ -50,9 +50,9 @@ link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/ruby"
 # 
 # connect during_start
 # 
-link_extension_file__to__ "during_start" "during_start/033_000_ruby.sh"
+link_extension_file__to__ "during_start.sh" "during_start/033_000_ruby.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep" "during_start_prep/034_000_ruby.sh"
+link_extension_file__to__ "during_start_prep.sh" "during_start_prep/034_000_ruby.sh"
