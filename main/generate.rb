@@ -268,6 +268,7 @@ grammar = Grammar.new(
         ]
     grammar[:function_parameter_context] = [
             :ever_present_context, # comments and macros
+            :string_context,
             :parameter,
             :comma,
         ]
