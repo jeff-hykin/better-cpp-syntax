@@ -9,13 +9,15 @@
     };
     version = "0.0.1";
   };
-  textmate_grammar = {
+  ruby_grammar_builder = {
+    dependencies = ["deep_clone"];
     groups = ["default"];
     platforms = [];
     source = {
-      path = ./gem;
-      type = "path";
+      remotes = ["http://rubygems.org"];
+      sha256 = "1m1ynjjcv7kf8414qnq5am3k6f1kajc76gbrwrxyhyc31j0n7sag";
+      type = "gem";
     };
-    version = "0.0.0";
+    version = "0.0.4";
   };
 }

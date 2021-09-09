@@ -1,1 +1,1 @@
-../extensions/ruby/during_start
+../extensions/ruby/during_start.sh

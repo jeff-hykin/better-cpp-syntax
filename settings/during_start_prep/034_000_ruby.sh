@@ -1,1 +1,1 @@
-../extensions/ruby/during_start_prep
+../extensions/ruby/during_start_prep.sh
