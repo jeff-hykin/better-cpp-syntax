@@ -68,7 +68,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -159,7 +159,7 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'N'
@@ -217,7 +217,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -257,7 +257,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' i'

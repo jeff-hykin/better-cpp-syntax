@@ -7,7 +7,7 @@
 - source: foo
   scopes:
     - entity.name.namespace.alias
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bar
@@ -27,7 +27,7 @@
 - source: fs
   scopes:
     - entity.name.namespace.alias
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: boost
@@ -54,7 +54,7 @@
 - source: std
   scopes:
     - entity.name.namespace.alias
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '::'

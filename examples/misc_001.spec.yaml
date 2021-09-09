@@ -172,7 +172,7 @@
 - source: this
   scopes:
     - variable.language.this
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' other'
@@ -335,7 +335,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -387,7 +387,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '    type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: other

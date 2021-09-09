@@ -63,7 +63,7 @@
 - source: U
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -183,7 +183,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: delete

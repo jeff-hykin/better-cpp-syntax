@@ -70,7 +70,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' n '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: func
@@ -122,7 +122,7 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin.assembly
-- source: =r
+- source: '=r'
   scopes:
     - meta.embedded.assembly
 - source: '"'

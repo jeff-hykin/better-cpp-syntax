@@ -148,7 +148,7 @@
 - source: '{._s '
   scopesBegin:
     - meta.parameter.initialization
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' {{}'
@@ -198,7 +198,7 @@
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
 - source: "\t    class "
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -307,7 +307,7 @@
 - source: alloc
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Allocator
@@ -360,7 +360,7 @@
   scopes:
     - keyword.operator
 - source: 'buf '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: _New_allocate
@@ -389,7 +389,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' s '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'

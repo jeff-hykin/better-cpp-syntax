@@ -220,7 +220,7 @@
   scopes:
     - keyword.operator
 - source: 'a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: a
@@ -240,7 +240,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: a
@@ -637,7 +637,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '  a a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'

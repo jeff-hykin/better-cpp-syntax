@@ -128,7 +128,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Start_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -142,7 +142,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' End_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
   scopesEnd:
@@ -168,7 +168,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Start_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
   scopesEnd:
@@ -192,7 +192,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' End_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '#'
@@ -222,7 +222,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' Start_Value'
@@ -555,7 +555,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -627,7 +627,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itemIndex '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' r'
@@ -639,7 +639,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itemRelativeRank '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' s'
@@ -651,7 +651,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' totalNumberOfItems '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' n'
@@ -663,7 +663,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' nextItemIndex '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' itemIndex '
@@ -681,7 +681,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' numberOfRemainingItems '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' totalNumberOfItems '
@@ -697,7 +697,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' probabilityOfBeingBetterThanCurrentItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -723,7 +723,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' numberOfSeenItemsThatAreBetterThanCurrentItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' itemRelativeRank '
@@ -741,7 +741,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' expectedAverageRank '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' numberOfRemainingItems '
@@ -773,7 +773,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'expectedAverageRank '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -790,7 +790,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '        expectedAverageRank '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -809,7 +809,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' expectedValue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -906,7 +906,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itemIndex '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' r'
@@ -918,7 +918,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itemRelativeRank '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' s'
@@ -930,7 +930,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' totalNumberOfItems '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' n'
@@ -942,7 +942,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' nextItemIndex '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' itemIndex '
@@ -960,7 +960,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -970,7 +970,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' estimatedValueOfAccepting '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -980,7 +980,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' estimatedValueOfRejecting '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -990,7 +990,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' sum '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -1031,7 +1031,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '        output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -1146,7 +1146,7 @@
   scopesEnd:
     - meta.block
 - source: '    estimatedValueOfAccepting '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: U
@@ -1183,7 +1183,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'itemIndex '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' totalNumberOfItems'
@@ -1206,7 +1206,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '        output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' estimatedValueOfAccepting'
@@ -1234,7 +1234,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '    sum '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -1271,7 +1271,7 @@
     - punctuation.terminator.statement
 - source: '    EndLoop'
 - source: '    estimatedValueOfRejecting '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' sum'
@@ -1291,7 +1291,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '    output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -1355,7 +1355,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output'
@@ -1495,7 +1495,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' row '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber'
@@ -1518,7 +1518,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' cell '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber'
@@ -1552,7 +1552,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'

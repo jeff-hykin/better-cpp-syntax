@@ -73,7 +73,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '10'
@@ -228,7 +228,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' fn_ptr2'
@@ -303,7 +303,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' fn_ptr'
@@ -494,7 +494,7 @@
 - source: name
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a'
@@ -539,7 +539,7 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a '
@@ -737,7 +737,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' fn_ptr2'
@@ -812,7 +812,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.function.pointer
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' fn_ptr'
@@ -1003,7 +1003,7 @@
 - source: name
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a'
@@ -1048,7 +1048,7 @@
     - meta.parameter
   scopes:
     - entity.name.type.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a '
@@ -2125,7 +2125,7 @@
 - source: throwExcp
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -2191,7 +2191,7 @@
 - source: throwExcp
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'

@@ -1126,7 +1126,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -1169,7 +1169,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -1190,7 +1190,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -1211,7 +1211,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -1597,7 +1597,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: new
@@ -1704,7 +1704,7 @@
   scopes:
     - keyword.operator
 - source: 'array '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: new
@@ -4249,7 +4249,7 @@
 - source: U
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -4303,7 +4303,7 @@
 - source: 'N'
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -4418,7 +4418,7 @@
 - source: U
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -4533,7 +4533,7 @@
 - source: U
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -4648,7 +4648,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: delete
@@ -4840,7 +4840,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' used '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -4873,7 +4873,7 @@
   scopes:
     - meta.qualified_type
     - entity.name.type
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: decltype
@@ -5022,7 +5022,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '            used '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -5176,7 +5176,7 @@
 - source: 'N'
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -5388,7 +5388,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -5484,7 +5484,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -6792,7 +6792,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '['
@@ -7022,7 +7022,7 @@
     - meta.lambda.capture
   scopes:
     - variable.parameter.capture
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stuff
@@ -7146,7 +7146,7 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: =
+- source: '='
   scopes:
     - meta.lambda.capture
     - keyword.operator.assignment
@@ -7172,7 +7172,7 @@
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
-- source: =
+- source: '='
   scopes:
     - meta.lambda.capture
     - keyword.operator.assignment
@@ -7213,7 +7213,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: thing
@@ -7249,7 +7249,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: thing
@@ -7538,7 +7538,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '5'
@@ -7580,7 +7580,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '5'
@@ -7619,7 +7619,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' a '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -8716,7 +8716,7 @@
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ' cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -8738,7 +8738,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' tlen'
@@ -8782,7 +8782,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_digits[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -8804,7 +8804,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -8942,7 +8942,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -8994,7 +8994,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' cpnt '
@@ -9025,7 +9025,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -9274,7 +9274,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' encode_one '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '['

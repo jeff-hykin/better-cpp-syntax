@@ -2320,7 +2320,7 @@
     - support.type.posix-reserved.pthread
     - support.type.built-in.posix-reserved.pthread
 - source: ' mutex_for_output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' PTHREAD_MUTEX_INITIALIZER'
@@ -2369,7 +2369,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Debugging '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -2439,7 +2439,7 @@
 - source: ' info '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_error'
@@ -2715,7 +2715,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' COUNTER '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -2981,7 +2981,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' used '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -3014,7 +3014,7 @@
   scopes:
     - meta.qualified_type
     - entity.name.type
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: decltype
@@ -3163,7 +3163,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    used '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -3309,7 +3309,7 @@
 - source: 'N'
   scopes:
     - entity.name.type.template
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -3635,7 +3635,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -3847,7 +3847,7 @@
 - source: '                        input_ '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -4142,7 +4142,7 @@
   scopes:
     - keyword.operator.comparison
 - source: ' vec3 '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' vec1'
@@ -4367,7 +4367,7 @@
   scopes:
     - keyword.operator.comparison
 - source: ' vec2 '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' vec1'
@@ -4523,7 +4523,7 @@
   scopes:
     - keyword.operator.comparison
 - source: ' vec2 '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' vec1'
@@ -5090,7 +5090,7 @@
 - source: second
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' second_value'
@@ -5106,7 +5106,7 @@
 - source: first
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' first_value'
@@ -5322,7 +5322,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: pair_holder
@@ -5445,7 +5445,7 @@
   scopes:
     - storage.modifier.specifier.const
 - source: ' INDENT_SIZE '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '4'
@@ -5459,7 +5459,7 @@
   scopes:
     - storage.modifier.specifier.const
 - source: ' INDENT      '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: string
@@ -5572,7 +5572,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' INDENT'
@@ -5622,7 +5622,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'a_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -5649,7 +5649,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                    output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -5685,7 +5685,7 @@
   scopes:
     - keyword.control.else
 - source: '                                output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -5751,7 +5751,7 @@
 - source: '                    string output '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: StreamAsString
@@ -5826,7 +5826,7 @@
 - source: '                string output '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: StreamAsString
@@ -5924,7 +5924,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' local_debug '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -5977,7 +5977,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string unindented_stuff '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -6481,7 +6481,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string next_line '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: EverythingUpTo
@@ -7070,7 +7070,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' seconds       '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: end_time
@@ -7102,7 +7102,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' micro_seconds '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: end_time
@@ -7485,7 +7485,7 @@
     - storage.type
     - storage.type.built-in
 - source: '     now '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: time
@@ -7539,7 +7539,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    tstruct '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '*'
@@ -7723,7 +7723,7 @@
 - source: always_discard
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -7781,7 +7781,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        streamsize num_of_chars_discarded '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -8027,7 +8027,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                num_of_chars_discarded '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_stream
@@ -8624,7 +8624,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_of_places     '
@@ -8644,7 +8644,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -8821,7 +8821,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input_string '
@@ -8855,7 +8855,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -8891,7 +8891,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachChar '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -9101,7 +9101,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        string output_str '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: output
@@ -9901,7 +9901,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_string
@@ -9935,7 +9935,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -10197,7 +10197,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output '
@@ -10217,7 +10217,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'char_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' end_symbol'
@@ -10332,7 +10332,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output '
@@ -10352,7 +10352,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'char_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' end_symbol'
@@ -10442,7 +10442,7 @@
   scopes:
     - keyword.operator
 - source: ' conv_my_str '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_string
@@ -10818,7 +10818,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -10947,7 +10947,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -11072,7 +11072,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -11133,7 +11133,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -11175,7 +11175,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -11236,7 +11236,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -11285,7 +11285,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' swap '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' start'
@@ -11293,7 +11293,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' finish'
@@ -11301,7 +11301,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' swap'
@@ -11509,7 +11509,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -11788,7 +11788,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -11898,7 +11898,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' oldstring'
@@ -12514,7 +12514,7 @@
 - source: junk
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ''''
@@ -12562,7 +12562,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -12604,7 +12604,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' num_front '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '-'
@@ -12643,7 +12643,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' junk'
@@ -12667,7 +12667,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' num_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input
@@ -12715,7 +12715,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' junk'
@@ -12819,7 +12819,7 @@
 - source: '                    string output '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -13014,7 +13014,7 @@
 - source: '                    string output '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -13035,7 +13035,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_of_char_to_ignore '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -13148,7 +13148,7 @@
   scopesEnd:
     - meta.block
 - source: '                    output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input
@@ -13307,7 +13307,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    input '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Strip
@@ -13332,7 +13332,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' char_index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '-'
@@ -13349,7 +13349,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' chunk_index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -13363,7 +13363,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' prev_char_was_splitter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -13417,7 +13417,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' current_character '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input
@@ -13448,7 +13448,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'current_character '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' splitter'
@@ -13526,7 +13526,7 @@
   scopesEnd:
     - meta.block
 - source: '                                    prev_char_was_splitter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -13555,7 +13555,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                    prev_char_was_splitter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -13713,7 +13713,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -13755,7 +13755,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string base '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream2
@@ -13781,7 +13781,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -13887,7 +13887,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -14027,7 +14027,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -14069,7 +14069,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string base '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream2
@@ -14095,7 +14095,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -14195,7 +14195,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -14340,7 +14340,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -14381,7 +14381,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14487,7 +14487,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -14625,7 +14625,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -14776,7 +14776,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -14887,7 +14887,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -14999,7 +14999,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string target '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stream1
@@ -15122,7 +15122,7 @@
 - source: )
   scopesEnd:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -15215,7 +15215,7 @@
 - source: '                    string input_as_string '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: to_string
@@ -15321,7 +15321,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        regex is_not_obnoxious '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: regex
@@ -15443,7 +15443,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' space_counter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -15457,7 +15457,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' newline_counter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -15517,7 +15517,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15641,7 +15641,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                            space_counter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -15680,7 +15680,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15813,7 +15813,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                            newline_counter '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -15852,7 +15852,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15908,7 +15908,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15962,7 +15962,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -16016,7 +16016,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -16070,7 +16070,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -16124,7 +16124,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -16242,7 +16242,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string output_str '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: output
@@ -16328,7 +16328,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input '
@@ -16362,7 +16362,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -16398,7 +16398,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachChar '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -16634,7 +16634,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' test_val'
@@ -16739,7 +16739,7 @@
 - source: ignore_characters
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -16764,7 +16764,7 @@
 - source: encapsulate_characters
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -16829,7 +16829,7 @@
 - source: encapsulating_pairs
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -16898,7 +16898,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -16916,7 +16916,7 @@
   scopes:
     - keyword.operator.comparison
 - source: ' char_context_stack '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -16943,7 +16943,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string previous_char_as_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -16994,7 +16994,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            string context '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '*'
@@ -17051,7 +17051,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'context '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -17241,7 +17241,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' is_first_arg '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -17250,7 +17250,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'previous_char_as_string '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -17284,7 +17284,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' is_new_arg '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: not
@@ -17885,7 +17885,7 @@
   scopes:
     - punctuation.separator.label
 - source: '                            previous_char_as_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AsString
@@ -17915,7 +17915,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                    content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: content
@@ -18436,7 +18436,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' lower'
@@ -18516,7 +18516,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' lower'
@@ -19350,7 +19350,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -19383,7 +19383,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -19434,7 +19434,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -19457,7 +19457,7 @@
   scopesEnd:
     - meta.parens
 - source: '                                input '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -19478,7 +19478,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -19501,7 +19501,7 @@
   scopesEnd:
     - meta.parens
 - source: '                                input '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -19779,7 +19779,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            input_char '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ''''
@@ -19887,7 +19887,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string char_content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -19920,7 +19920,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'char_content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -19985,7 +19985,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '2'
@@ -20025,7 +20025,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -20047,7 +20047,7 @@
   scopesEnd:
     - meta.parens
 - source: '                                        input_char '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: char_content
@@ -20434,7 +20434,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -20467,7 +20467,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -20974,7 +20974,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -21007,7 +21007,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -21522,7 +21522,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -21555,7 +21555,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -22011,7 +22011,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -22044,7 +22044,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -22174,7 +22174,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            input '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: content
@@ -22750,7 +22750,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -22783,7 +22783,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -23177,7 +23177,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -23202,7 +23202,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: content
@@ -23354,7 +23354,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        string name '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: EverythingUpTo
@@ -23395,7 +23395,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        name '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: name
@@ -23628,7 +23628,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'input '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'true'
@@ -23640,7 +23640,7 @@
   scopesEnd:
     - meta.parens
 - source: '                            output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -23661,7 +23661,7 @@
   scopes:
     - keyword.control.else
 - source: '                            output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -24299,7 +24299,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string Answer '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -24430,7 +24430,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string answer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -24476,7 +24476,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                        answer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Ask
@@ -24689,7 +24689,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string answer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -24735,7 +24735,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                        answer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Ask
@@ -24910,7 +24910,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' integer_             '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AskForAnInt
@@ -24927,7 +24927,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        string internal_question '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -25092,7 +25092,7 @@
   scopesEnd:
     - meta.block
 - source: '                            integer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AskForAnInt
@@ -25185,7 +25185,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_             '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AskForANumber
@@ -25202,7 +25202,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        string internal_question '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -25367,7 +25367,7 @@
   scopesEnd:
     - meta.block
 - source: '                            number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AskForANumber
@@ -25465,7 +25465,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                            string answer_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Ask
@@ -25495,7 +25495,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25513,7 +25513,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25531,7 +25531,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25549,7 +25549,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25609,7 +25609,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25627,7 +25627,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25645,7 +25645,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25663,7 +25663,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' answer_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -25840,7 +25840,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                string file_name '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Ask
@@ -25991,7 +25991,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                string name_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: AskForAFileName
@@ -26847,7 +26847,7 @@
   scopes:
     - keyword.operator
 - source: ' func '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '*'
@@ -27192,7 +27192,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' use_lambda '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -27206,7 +27206,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' has_been_waited_on '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -27373,7 +27373,7 @@
 - source: '                                use_lambda '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -27383,7 +27383,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                lambda_thread_function '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_function'
@@ -27391,7 +27391,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                arguments '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_arguments'
@@ -27463,7 +27463,7 @@
 - source: '                                thread_function '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_function'
@@ -27544,7 +27544,7 @@
 - source: '                                thread_function '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_function'
@@ -27552,7 +27552,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                arguments '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ANY_INPUT_TYPE
@@ -27614,7 +27614,7 @@
 - source: attributes
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'NULL'
@@ -27649,7 +27649,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'has_been_waited_on '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'false'
@@ -27769,7 +27769,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                has_been_waited_on '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -27779,7 +27779,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                functional_wrapper '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: function
@@ -27874,7 +27874,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                                output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: lambda_thread_function
@@ -27904,7 +27904,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                                output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: thread_function
@@ -27926,7 +27926,7 @@
   scopesEnd:
     - meta.block
 - source: '                                        has_been_waited_on '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -28063,7 +28063,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                has_been_waited_on '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -28241,7 +28241,7 @@
   scopes:
     - keyword.operator
 - source: ' ptr_to_original '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: nullptr
@@ -28382,7 +28382,7 @@
 - source: '                                ptr_to_original '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a_task_ptr'
@@ -28421,7 +28421,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: links_to
@@ -28471,7 +28471,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -28514,7 +28514,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                thread '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: a_task_ptr
@@ -28590,7 +28590,7 @@
 - source: '                                ptr_to_original '
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: obj
@@ -28606,7 +28606,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                thread '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: obj
@@ -28659,7 +28659,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: links_to
@@ -28709,7 +28709,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -28837,7 +28837,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -28943,7 +28943,7 @@
 - source: '                                ptr_to_original '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' a_pointer'
@@ -28971,7 +28971,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                thread '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '&'
@@ -29033,7 +29033,7 @@
 - source: attributes
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'NULL'
@@ -29061,7 +29061,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ptr_to_original '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: nullptr
@@ -29285,7 +29285,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -29322,7 +29322,7 @@
 - source: '                                ptr_to_original '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: obj
@@ -29338,7 +29338,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                thread '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: obj
@@ -29391,7 +29391,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: links_to
@@ -29441,7 +29441,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -29864,7 +29864,7 @@
   scopes:
     - keyword.operator
 - source: ' _Nullable output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'NULL'
@@ -30055,7 +30055,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: map_of_locks
@@ -30105,7 +30105,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' PTHREAD_MUTEX_INITIALIZER'
@@ -30239,7 +30239,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: map_of_locks
@@ -30612,7 +30612,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' local_debug '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -30771,7 +30771,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -30886,7 +30886,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string all_members_str '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: all_members
@@ -31045,7 +31045,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' local_debug '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -31063,7 +31063,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                    input_vector '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -31168,7 +31168,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                    string vector_content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -31283,7 +31283,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'vector_content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -31334,7 +31334,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' vector_content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -31580,7 +31580,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -32058,7 +32058,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' test_val'
@@ -32188,7 +32188,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input_vector '
@@ -32222,7 +32222,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -32258,7 +32258,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -32295,7 +32295,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' test_val '
@@ -32439,7 +32439,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input_vector '
@@ -32473,7 +32473,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -32509,7 +32509,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -32551,7 +32551,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' test_val'
@@ -32697,7 +32697,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' element_number '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: IndexOf__In__Vector
@@ -32860,7 +32860,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input_vector '
@@ -32894,7 +32894,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -32930,7 +32930,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -32967,7 +32967,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' test_val '
@@ -33125,7 +33125,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'input_vector '
@@ -33159,7 +33159,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -33195,7 +33195,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -33413,7 +33413,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' largest_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -33450,7 +33450,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                            largest_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: each
@@ -33563,7 +33563,7 @@
   scopes:
     - keyword.operator
 - source: ' new_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: new
@@ -33705,7 +33705,7 @@
   scopesEnd:
     - keyword.operator
 - source: ' output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: new
@@ -33946,7 +33946,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34007,7 +34007,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34049,7 +34049,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34110,7 +34110,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34159,7 +34159,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' swap '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' start'
@@ -34167,7 +34167,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' finish'
@@ -34175,7 +34175,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        finish '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' swap'
@@ -34200,7 +34200,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' start'
@@ -34563,7 +34563,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34624,7 +34624,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        start '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34682,7 +34682,7 @@
   scopesEnd:
     - meta.parens
 - source: '                        count '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -34720,7 +34720,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -34791,7 +34791,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -34876,7 +34876,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' start '
@@ -35350,7 +35350,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -35418,7 +35418,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -35548,7 +35548,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: base
@@ -35610,7 +35610,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -35769,7 +35769,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -35837,7 +35837,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' target'
@@ -36141,7 +36141,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' local_debug '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -36378,7 +36378,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        string all_members_str '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: all_members
@@ -36636,7 +36636,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -36669,7 +36669,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -37019,7 +37019,7 @@
 - source: first
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' datamember1'
@@ -37035,7 +37035,7 @@
 - source: second
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' datamember2'
@@ -37566,7 +37566,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -37599,7 +37599,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -37814,7 +37814,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -38005,7 +38005,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: data_member
@@ -38064,7 +38064,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                        input_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' data_member_holder'
@@ -38230,7 +38230,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: input_map
@@ -38429,7 +38429,7 @@
 - source: second
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' value'
@@ -38628,7 +38628,7 @@
 - source: second
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' value'
@@ -39313,7 +39313,7 @@
   scopes:
     - keyword.operator
 - source: ' demangled '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: abi
@@ -40008,7 +40008,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'names '
@@ -40042,7 +40042,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -40078,7 +40078,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -40100,7 +40100,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' name '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: names
@@ -40302,7 +40302,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -40342,7 +40342,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -40768,7 +40768,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                ITEM input_as_item '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ITEM
@@ -41432,7 +41432,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' largest_size '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -41512,7 +41512,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                            largest_size '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: each
@@ -41621,7 +41621,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -41658,7 +41658,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' first_few '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -41720,7 +41720,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            string output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -41746,7 +41746,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  first_few     '
@@ -41766,7 +41766,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -41798,7 +41798,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -41934,7 +41934,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' is_in_bounds '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: abs
@@ -41983,7 +41983,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' is_negative  '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' position      '
@@ -42299,7 +42299,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' missing_items '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' position '
@@ -42334,7 +42334,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  missing_items     '
@@ -42354,7 +42354,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -42616,7 +42616,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                    string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -42649,7 +42649,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -43173,7 +43173,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' index_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: IndexOf__In__Vector
@@ -43420,7 +43420,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -43471,7 +43471,7 @@
 - source: '                        vector_ '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -43497,7 +43497,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'assignment_data '
@@ -43531,7 +43531,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -43567,7 +43567,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -43679,7 +43679,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -43730,7 +43730,7 @@
 - source: '                        vector_ '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' assignment_data'
@@ -44449,7 +44449,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_
@@ -44495,7 +44495,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -44531,7 +44531,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -44951,7 +44951,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_
@@ -44997,7 +44997,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -45033,7 +45033,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' EachItem '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' LoopNumber '
@@ -45643,7 +45643,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: ' data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -45661,7 +45661,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -45706,7 +45706,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: ' data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  input_string   '
@@ -45714,7 +45714,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -45755,7 +45755,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: ' data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  input_string   '
@@ -45763,7 +45763,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -45843,7 +45843,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_method
@@ -45865,7 +45865,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -45954,7 +45954,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: EverythingUpTo
@@ -45987,7 +45987,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: type
@@ -46044,7 +46044,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -46069,7 +46069,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: content
@@ -46118,7 +46118,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' content'
@@ -46134,7 +46134,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'type '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -46152,7 +46152,7 @@
   scopes:
     - keyword.operator.logical
 - source: ' type '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -46172,7 +46172,7 @@
   scopesEnd:
     - meta.parens
 - source: '                                    type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -46321,7 +46321,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: stold
@@ -46535,7 +46535,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                                    string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: Input_Unindent
@@ -46568,7 +46568,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'content '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -46956,7 +46956,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -46993,7 +46993,7 @@
 - source: ' data '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_item
@@ -47015,7 +47015,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_item
@@ -47066,7 +47066,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47110,7 +47110,7 @@
 - source: ' data '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_string              '
@@ -47118,7 +47118,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47165,7 +47165,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47199,7 +47199,7 @@
 - source: ' data '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_string              '
@@ -47207,7 +47207,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47254,7 +47254,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47289,7 +47289,7 @@
 - source: ' data '
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: to_string
@@ -47306,7 +47306,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: ' type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47353,7 +47353,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47423,7 +47423,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_method
@@ -47445,7 +47445,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47492,7 +47492,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47562,7 +47562,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: input_method
@@ -47584,7 +47584,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47653,7 +47653,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -47696,7 +47696,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            data '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: data_stream
@@ -47718,7 +47718,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                            type '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -47837,7 +47837,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' type '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -48607,7 +48607,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -48691,7 +48691,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -49020,7 +49020,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -49167,7 +49167,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -49392,7 +49392,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -49624,7 +49624,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -49855,7 +49855,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50061,7 +50061,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50286,7 +50286,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50509,7 +50509,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50731,7 +50731,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50930,7 +50930,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -50962,7 +50962,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -51219,7 +51219,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -51442,7 +51442,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -51665,7 +51665,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -51888,7 +51888,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -52110,7 +52110,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -52142,7 +52142,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -52489,7 +52489,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -52599,7 +52599,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -52628,7 +52628,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stoi
@@ -52667,7 +52667,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -52764,7 +52764,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -52784,7 +52784,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -52816,7 +52816,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -52989,7 +52989,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -53018,7 +53018,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -53058,7 +53058,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -53155,7 +53155,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -53175,7 +53175,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -53207,7 +53207,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -53330,7 +53330,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -53492,7 +53492,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -53521,7 +53521,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -53561,7 +53561,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -53658,7 +53658,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -53678,7 +53678,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -53710,7 +53710,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -53833,7 +53833,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -54091,7 +54091,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -54120,7 +54120,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -54160,7 +54160,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -54257,7 +54257,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -54277,7 +54277,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -54309,7 +54309,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -54432,7 +54432,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -54594,7 +54594,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -54623,7 +54623,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -54663,7 +54663,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -54760,7 +54760,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -54780,7 +54780,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -54812,7 +54812,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -54935,7 +54935,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55096,7 +55096,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55174,7 +55174,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55203,7 +55203,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' number_ '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: stoi
@@ -55242,7 +55242,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' number_ '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -55339,7 +55339,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '  number_     '
@@ -55359,7 +55359,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -55391,7 +55391,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '                                        output_string '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' output_string '
@@ -55664,7 +55664,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55696,7 +55696,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55804,7 +55804,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55836,7 +55836,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55944,7 +55944,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -55976,7 +55976,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -56386,7 +56386,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -56419,7 +56419,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ' the_input '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -56661,7 +56661,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -56859,7 +56859,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -57057,7 +57057,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -57113,7 +57113,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -57244,7 +57244,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -57479,7 +57479,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -57814,7 +57814,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -57870,7 +57870,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -58001,7 +58001,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -58236,7 +58236,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -58571,7 +58571,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -58627,7 +58627,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -58758,7 +58758,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -58993,7 +58993,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -59327,7 +59327,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -59359,7 +59359,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -59700,7 +59700,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -59907,7 +59907,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60114,7 +60114,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60321,7 +60321,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60526,7 +60526,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60731,7 +60731,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60935,7 +60935,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -60967,7 +60967,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '"'
@@ -61346,7 +61346,7 @@
 - source: '                            Item holder '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' value'
@@ -61514,7 +61514,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '    string __OUTPUT_INDENT '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -61535,7 +61535,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' __INCREASE_INDENT '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -61590,7 +61590,7 @@
   scopes:
     - entity.name.function.preprocessor
 - source: '          __INCREASE_INDENT '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -61672,7 +61672,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: ' __OUTPUT_INDENT '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: __OUTPUT_INDENT
@@ -61800,7 +61800,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' length_of_last_line '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -61814,7 +61814,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dont_go_up_a_line '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -61824,7 +61824,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string what_was_just_output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -61841,7 +61841,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                    string content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -62131,7 +62131,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' charaters_till_newline '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -62150,7 +62150,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' Max_Value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: what_was_just_output
@@ -62184,7 +62184,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' LoopNumber'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -62369,7 +62369,7 @@
 - source: '                        length_of_last_line '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -62379,7 +62379,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        dont_go_up_a_line '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -62389,7 +62389,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        what_was_just_output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -62500,7 +62500,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -62573,7 +62573,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                __INCREASE_INDENT '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -62583,7 +62583,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                                dont_go_up_a_line '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -62682,7 +62682,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -62804,7 +62804,7 @@
 - source: '                        what_was_just_output '
   scopesBegin:
     - meta.body.function.definition
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' content'
@@ -62812,7 +62812,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                        content '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' input_'
@@ -62958,7 +62958,7 @@
   scopes:
     - keyword.operator
 - source: 'o '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '&'
@@ -63028,7 +63028,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '                    string content_being_output '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: converter_to_string
@@ -63109,7 +63109,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'each_char '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -63241,7 +63241,7 @@
   scopes:
     - keyword.operator
 - source: 'o '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '&'
@@ -63405,7 +63405,7 @@
   scopes:
     - keyword.operator
 - source: 'o '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '&'
@@ -63475,7 +63475,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'Debugging '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'true'
@@ -63520,7 +63520,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: '__INCREASE_INDENT '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'true'
@@ -63915,7 +63915,7 @@
   scopes:
     - keyword.operator
 - source: 'o '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '&'
@@ -63960,7 +63960,7 @@
   scopes:
     - keyword.operator
 - source: 'o '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '&'
@@ -63986,7 +63986,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'Debugging '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'true'

@@ -93,7 +93,7 @@
 - source: '    container'
   scopesBegin:
     - meta.body.function.definition.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: new
@@ -224,7 +224,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itr'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -273,7 +273,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: container
@@ -376,7 +376,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' itr'
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -425,7 +425,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: container

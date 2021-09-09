@@ -397,7 +397,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.constructor
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: delete
@@ -423,7 +423,7 @@
     - meta.head.function.definition.special.operator-overload
   scopes:
     - keyword.other.operator.overload
-- source: =
+- source: '='
   scopes:
     - entity.name.operator
 - source: (
@@ -448,7 +448,7 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: delete
@@ -713,7 +713,7 @@
 - source: m_offset
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -759,7 +759,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' ich '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: this
@@ -807,7 +807,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ich '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: std
@@ -940,7 +940,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ich '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -1408,7 +1408,7 @@
 - source: add
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -1682,7 +1682,7 @@
 - source: xoffset
   scopes:
     - variable.parameter
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -1713,7 +1713,7 @@
 - source: m_offset
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' xoffset'
@@ -2378,7 +2378,7 @@
 - source: m_line
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -2408,7 +2408,7 @@
 - source: m_offset
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -2438,7 +2438,7 @@
 - source: m_length
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' xlength'
@@ -2499,7 +2499,7 @@
 - source: m_line
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -2588,7 +2588,7 @@
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ' cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -2807,7 +2807,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' u8len '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -3088,7 +3088,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -3124,7 +3124,7 @@
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ' next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -3267,7 +3267,7 @@
   scopesEnd:
     - meta.block
 - source: '          cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -3469,7 +3469,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' mlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -4571,7 +4571,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_name_chars[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -4593,7 +4593,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -4687,7 +4687,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: nullptr
@@ -4730,7 +4730,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' eptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' bptr '
@@ -4760,7 +4760,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -4892,7 +4892,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -5045,7 +5045,7 @@
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: ' s_keywords[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -6286,7 +6286,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' range '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -6417,7 +6417,7 @@
 - source: first
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: range
@@ -6469,7 +6469,7 @@
   scopes:
     - keyword.operator
 - source: ' cur '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: range
@@ -6558,7 +6558,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' tlen'
@@ -6631,7 +6631,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -6668,7 +6668,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_keyword xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -6782,7 +6782,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_identifier xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -6945,7 +6945,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_punct_chars[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -6967,7 +6967,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -7098,7 +7098,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: nullptr
@@ -7217,7 +7217,7 @@
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: ' s_punctuators[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -8355,7 +8355,7 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: =
+- source: '='
 - source: '"'
   scopes:
     - punctuation.definition.string.end
@@ -8390,7 +8390,7 @@
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
-- source: ==
+- source: '=='
 - source: '"'
   scopes:
     - punctuation.definition.string.end
@@ -8747,7 +8747,7 @@
 - source: \?
   scopes:
     - constant.character.escape
-- source: =
+- source: '='
 - source: '"'
   scopes:
     - punctuation.definition.string.end
@@ -9280,7 +9280,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' range '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -9411,7 +9411,7 @@
 - source: first
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: range
@@ -9455,7 +9455,7 @@
   scopes:
     - keyword.operator
 - source: ' cur '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: range
@@ -9491,7 +9491,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -9646,7 +9646,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -9683,7 +9683,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_punctuator xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -9964,7 +9964,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -10057,7 +10057,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' tlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '1'
@@ -10126,7 +10126,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' qavail '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -10160,7 +10160,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'qavail '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -10231,7 +10231,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -10267,7 +10267,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' head'
@@ -10457,7 +10457,7 @@
   scopesEnd:
     - meta.block
 - source: '            next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -10489,7 +10489,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' xcnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -11560,7 +11560,7 @@
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ' cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -11582,7 +11582,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' tlen'
@@ -11626,7 +11626,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_digits[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -11648,7 +11648,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -11786,7 +11786,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -11838,7 +11838,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '                  cpnt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' cpnt '
@@ -11869,7 +11869,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -12118,7 +12118,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' encode_one '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '['
@@ -12723,7 +12723,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -12918,7 +12918,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          tlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -12973,7 +12973,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_string_literal xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -13190,7 +13190,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' qstok '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -13633,7 +13633,7 @@
   scopes:
     - keyword.operator
 - source: ' pt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: seq
@@ -13738,7 +13738,7 @@
   scopes:
     - keyword.operator
 - source: ' alt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: pt
@@ -13790,7 +13790,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' mergeable '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: rocket
@@ -13969,7 +13969,7 @@
   scopes:
     - keyword.operator
 - source: ' alt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: pt
@@ -14021,7 +14021,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' mergeable '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: rocket
@@ -14482,7 +14482,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_digits[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -14504,7 +14504,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -14598,7 +14598,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: nullptr
@@ -14633,7 +14633,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' eptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' bptr '
@@ -14687,7 +14687,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' radix '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '10'
@@ -14708,7 +14708,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' int_begin '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14718,7 +14718,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' int_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14739,7 +14739,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' frac_begin '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14749,7 +14749,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' frac_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14763,7 +14763,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' exp_base '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14777,7 +14777,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' exp_sign '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -14798,7 +14798,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' exp_begin '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14808,7 +14808,7 @@
   scopes:
     - punctuation.separator.delimiter.comma
 - source: ' exp_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -14847,7 +14847,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -14876,7 +14876,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -14964,7 +14964,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '            radix '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '2'
@@ -15028,7 +15028,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '            radix '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '16'
@@ -15069,7 +15069,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' max_digits '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -15126,7 +15126,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -15199,7 +15199,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ch '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15284,7 +15284,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '        int_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -15335,7 +15335,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'int_end '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' int_begin'
@@ -15394,7 +15394,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '        frac_begin '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' int_end'
@@ -15402,7 +15402,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '        frac_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' frac_begin'
@@ -15414,7 +15414,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -15443,7 +15443,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15475,7 +15475,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -15548,7 +15548,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ch '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -15633,7 +15633,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          frac_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -15684,7 +15684,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'frac_end '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' frac_begin'
@@ -15748,7 +15748,7 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '        exp_begin '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' frac_end'
@@ -15756,7 +15756,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '        exp_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' exp_begin'
@@ -15764,7 +15764,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '        next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -15846,7 +15846,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '          exp_base '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '10'
@@ -15907,7 +15907,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '          exp_base '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '2'
@@ -15961,7 +15961,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '          next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: bptr
@@ -16026,7 +16026,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '            exp_sign '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'false'
@@ -16070,7 +16070,7 @@
   scopesEnd:
     - meta.conditional.case
 - source: '            exp_sign '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -16099,7 +16099,7 @@
     - meta.block.switch
     - meta.body.switch
 - source: '          tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -16172,7 +16172,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'ch '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -16259,7 +16259,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          exp_end '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -16310,7 +16310,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'exp_end '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' exp_begin'
@@ -16388,7 +16388,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' s_suffix_chars[] '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '"'
@@ -16406,7 +16406,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '        tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -16542,7 +16542,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tlen '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -16656,7 +16656,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' exp '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -16678,7 +16678,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' exp_begin'
@@ -16712,7 +16712,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -16819,7 +16819,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -16875,7 +16875,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bound '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -16962,7 +16962,7 @@
   scopesEnd:
     - meta.block
 - source: '          exp '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' exp '
@@ -17004,7 +17004,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '          exp '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '-'
@@ -17048,7 +17048,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'frac_begin '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' int_end'
@@ -17160,7 +17160,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -17182,7 +17182,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' int_begin'
@@ -17216,7 +17216,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -17321,7 +17321,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -17391,7 +17391,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' bound '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -17527,7 +17527,7 @@
   scopesEnd:
     - meta.block
 - source: '            value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' value '
@@ -17617,7 +17617,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -17660,7 +17660,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' bound '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -17836,7 +17836,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' qstok '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: do_check_mergeability
@@ -17868,7 +17868,7 @@
     - storage.type
     - storage.type.built-in
 - source: ' smask '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -17919,7 +17919,7 @@
 - source: punct
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: Token
@@ -17970,7 +17970,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'value '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: (
@@ -18015,7 +18015,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'smask '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -18173,7 +18173,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '            qstok '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: nullptr
@@ -18221,7 +18221,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_integer_literal xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -18359,7 +18359,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -18373,7 +18373,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' zero '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'true'
@@ -18395,7 +18395,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' int_begin'
@@ -18429,7 +18429,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -18534,7 +18534,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -18586,7 +18586,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' value '
@@ -18627,7 +18627,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' frac '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '0'
@@ -18649,7 +18649,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' i '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' frac_end '
@@ -18695,7 +18695,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -18800,7 +18800,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' dvalue '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: static_cast
@@ -18852,7 +18852,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          frac '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -18915,7 +18915,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'exp_base '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' FLT_RADIX'
@@ -18930,7 +18930,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '          value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -18995,7 +18995,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'exp_base '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '2'
@@ -19012,7 +19012,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '          value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -19064,7 +19064,7 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: '          value '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' value '
@@ -19113,7 +19113,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' fpc '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -19145,7 +19145,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'fpc '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' FP_INFINITE'
@@ -19209,7 +19209,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'fpc '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' FP_ZERO'
@@ -19284,7 +19284,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' qstok '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: do_check_mergeability
@@ -19309,7 +19309,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' fmask '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: (
@@ -19360,7 +19360,7 @@
 - source: punct
   scopes:
     - variable.other.property
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: Token
@@ -19495,7 +19495,7 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          qstok '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: nullptr
@@ -19543,7 +19543,7 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: 'S_real_literal xtoken '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -19748,7 +19748,7 @@
 - source: m_stor
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: nullptr
@@ -19888,7 +19888,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '1'
@@ -20015,7 +20015,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: '0'
@@ -20262,7 +20262,7 @@
     - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.bracket.square.access
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: '{'
@@ -20308,7 +20308,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' bptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -20334,7 +20334,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' eptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: ' bptr '
@@ -20364,7 +20364,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' tptr '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
@@ -20414,7 +20414,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'tptr '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ' eptr'
@@ -20594,7 +20594,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' head '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -20756,7 +20756,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'head '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -20785,7 +20785,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' next '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: reader
@@ -20818,7 +20818,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -20903,7 +20903,7 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: 'next '
-- source: ==
+- source: '=='
   scopes:
     - keyword.operator.comparison
 - source: ''''
@@ -21002,7 +21002,7 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ' token_got '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: do_accept_identifier_or_keyword
@@ -21479,7 +21479,7 @@
 - source: m_stor
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: rocket
@@ -21775,7 +21775,7 @@
 - source: m_stor
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: rocket
@@ -21856,7 +21856,7 @@
 - source: m_stor
   scopes:
     - variable.other.property
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: nullptr
@@ -22673,7 +22673,7 @@
   scopes:
     - keyword.operator
 - source: ' alt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: this
@@ -23055,7 +23055,7 @@
   scopes:
     - keyword.operator
 - source: ' alt '
-- source: =
+- source: '='
   scopes:
     - keyword.operator.assignment
 - source: this
