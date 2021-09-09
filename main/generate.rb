@@ -2,7 +2,6 @@
 require 'ruby_grammar_builder'
 
 require_relative '../paths'
-require_relative './tokens.rb'
 require_relative PathFor[:pattern]["numeric"]
 require_relative PathFor[:pattern]["trigraph_support"]
 require_relative PathFor[:pattern]["predefined_macros"]
@@ -11,28 +10,14 @@ require_relative PathFor[:pattern]["inline_comment"]
 require_relative PathFor[:pattern]["std_space"]
 require_relative PathFor[:pattern]["backslash_escapes"]
 require_relative PathFor[:pattern]["doxygen"]
+require_relative './tokens.rb'
 require_relative PathFor[:pattern]["raw_strings"]
 
-#
-# TODO: remove me this is a temp change that should be corrected after this merge is over
-#
-class Regexp
-    for each in [ "or", "then", "maybe", "zeroOrMoreOf", "oneOrMoreOf", "lookAheadFor", "lookAheadToAvoid", "lookBehindFor", "lookBehindToAvoid", ]
-        eval <<-HEREDOC
-            def #{each}(*args)
-                return Pattern.new(match: self,).#{each}(*args)
-            end
-        HEREDOC
-    end
-end
-
-
-# todo
-    # add specificity to the ternary operator
-    # add specificity to the misc_storage_modifiers
-    # consider adding storage.type to user defined types
-    # switch to punctuation.accessor from punctuation.seperator.dot-access
-
+# 
+# 
+# create grammar!
+# 
+# 
 grammar = Grammar.new(
     name: "C++",
     scope_name: "source.cpp",
@@ -56,15 +41,14 @@ grammar = Grammar.new(
     ],
 )
 
-# Add bailout
-# Grammar.register_transform(BailoutTransform.new("macro", /(?<!\\)\n/))
-
+# 
 #
-# Utils
+# Setup Utils (things used by many other patterns)
 #
-    grammar.import(PathFor[:patterns][:inline_comment])
-    grammar.import(PathFor[:patterns][:std_space])
-    grammar.import(PathFor[:patterns][:preprocessor])
+# 
+    grammar.import(PathFor[:pattern]["inline_comment"])
+    grammar.import(PathFor[:pattern]["std_space"])
+    grammar.import(PathFor[:pattern]["preprocessor"])
     inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
     basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
@@ -407,6 +391,7 @@ grammar = Grammar.new(
 #
 # Numbers
 #
+# 
     grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
@@ -745,9 +730,9 @@ grammar = Grammar.new(
                         match: /[^'"<>]/,
                         dont_back_track?: true,
                     ).or(
-                        match: /"/.then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/)
+                        match: Pattern.new(/"/).then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/)
                     ).or(
-                        match: /'/.then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/)
+                        match: Pattern.new(/'/).then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/)
                     )
                 ).maybe(
                     recursivelyMatch("angle_brackets")
@@ -2076,12 +2061,12 @@ grammar = Grammar.new(
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: Pattern.new(
                     match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: /\[/.lookAheadToAvoid(/\[| *+"| *+\d/),
+                        match: Pattern.new(/\[/).lookAheadToAvoid(/\[| *+"| *+\d/),
                         tag_as: "punctuation.definition.capture.begin.lambda",
                     )
                 ).then(
                         match: zeroOrMoreOf(
-                            match: /[^\[\]]/.or(only_balanced_square_bracke),
+                            match: Pattern.new(/[^\[\]]/).or(only_balanced_square_bracke),
                             dont_back_track?: true,
                         ),
                         tag_as: "meta.lambda.capture",
@@ -2102,7 +2087,7 @@ grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: /\]/.lookAheadToAvoid(std_space.then(/[\[\];]/)),
+                        match: Pattern.new(/\]/).lookAheadToAvoid(std_space.then(/[\[\];]/)),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
             ),
@@ -2133,7 +2118,7 @@ grammar = Grammar.new(
                 match: /->/,
                 tag_as: "punctuation.definition.lambda.return-type"
             ).maybe(
-                match: /.+?/.lookAheadFor(/\{|$/),
+                match: Pattern.new(/.+?/).lookAheadFor(/\{|$/),
                 tag_as: "storage.type.return-type.lambda"
             ),
             # then find the body
@@ -2293,7 +2278,7 @@ grammar = Grammar.new(
                                 # inheritance
                                 #
                                 std_space.then(
-                                    match: /:/.lookAheadToAvoid(/:/),
+                                    match: Pattern.new(/:/).lookAheadToAvoid(/:/),
                                     tag_as: "punctuation.separator.colon.inheritance"
                                 )
                             )

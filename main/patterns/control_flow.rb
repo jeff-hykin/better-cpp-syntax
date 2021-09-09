@@ -1,13 +1,13 @@
 def c_style_control(keyword:"", primary_inlcudes:[],  parentheses_include:[], body_includes:[], secondary_includes:[])
     PatternRange.new(
-        start_pattern: newPattern(
+        start_pattern: Pattern.new(
             /\s*+/.then(
                 match: lookBehindToAvoid(@standard_character).then(/#{keyword}/).lookAheadToAvoid(@standard_character),
                 tag_as: "keyword.control.#{keyword}"
             ).then(/\s*+/)
         ),
-        end_pattern: newPattern(
-            match: newPattern(
+        end_pattern: Pattern.new(
+            match: Pattern.new(
                 match: /;/,
                 tag_as: "punctuation.terminator.statement"
             ).or(
@@ -19,11 +19,11 @@ def c_style_control(keyword:"", primary_inlcudes:[],  parentheses_include:[], bo
             *primary_inlcudes,
             PatternRange.new(
                 tag_content_as: "meta.control.evaluation",
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /\(/,
                     tag_as: "punctuation.section.parens.control",
                 ),
-                end_pattern: newPattern(
+                end_pattern: Pattern.new(
                     match: /\)/,
                     tag_as: "punctuation.section.parens.control",
                 ),
@@ -31,7 +31,7 @@ def c_style_control(keyword:"", primary_inlcudes:[],  parentheses_include:[], bo
             ),
             PatternRange.new(
                 tag_content_as: "meta.control.body",
-                start_pattern: newPattern(
+                start_pattern: Pattern.new(
                     match: /\{/,
                     tag_as: "punctuation.section.block.control"
                 ),

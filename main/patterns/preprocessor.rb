@@ -115,11 +115,27 @@ identifier = grammar[:identifier]
             tag_as: "string.quoted.double.include"
         ).or(
             # macro includes [cpp.include]/4
-            match: std_space.then(identifier).zeroOrMoreOf(/\./.then(identifier)).then(std_space).then(@end_of_line.or(lookAheadFor(/\/\//.or(/;/)))),
+            match: std_space.then(
+                    identifier
+                ).zeroOrMoreOf(
+                    Pattern.new(/\./).then(identifier)
+                ).then(std_space).then(
+                    @end_of_line.or(
+                        lookAheadFor(
+                            Pattern.new(/\/\//).or(
+                                /;/
+                            )
+                        )
+                    )
+                ),
             tag_as: "entity.name.other.preprocessor.macro.include"
         ).or(
             # correctly color a lone `#include`
-            match: std_space.then(@end_of_line.or(lookAheadFor(/\/\//.or(/;/)))),
+            match: std_space.then(
+                @end_of_line.or(
+                    lookAheadFor(Pattern.new(/\/\//).or(/;/))
+                )
+            ),
         )
     )
     grammar[:include] = Pattern.new(
@@ -132,7 +148,7 @@ identifier = grammar[:identifier]
                     match: /#/,
                     tag_as: "punctuation.definition.directive"
                 ).maybe(@spaces).then(
-                    match: /include/.or(/include_next/),
+                    match: Pattern.new(/include/).or(/include_next/),
                     reference: "include_type"
                 ).then(@word_boundary)
             ),
@@ -179,7 +195,7 @@ identifier = grammar[:identifier]
             Pattern.new(
                 tag_as: "keyword.control.directive.diagnostic.$reference(directive)",
                 match: directive_start.then(
-                    match: /error/.or(/warning/),
+                    match: Pattern.new(/error/).or(/warning/),
                     reference: "directive"
                 )
             ).then(@word_boundary).maybe(@spaces)
@@ -249,7 +265,7 @@ identifier = grammar[:identifier]
 #
     grammar[:single_line_macro] = Pattern.new(
         should_fully_match: ['#define EXTERN_C extern "C"'],
-        match: /^/.then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
+        match: Pattern.new(/^/).then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
         includes: [
             :macro,
             :comments,
@@ -272,7 +288,7 @@ identifier = grammar[:identifier]
             # the parameters
             Pattern.new(
                 # find the name of the function
-                /\G/.maybe(@spaces).then(
+                Pattern.new(/\G/).maybe(@spaces).then(
                     match: /\(/,
                     tag_as: "punctuation.definition.parameters.begin.preprocessor",
                 ).then(
@@ -311,7 +327,7 @@ identifier = grammar[:identifier]
 # arguments
 #
     grammar[:macro_argument] = Pattern.new(
-        match: /##?/.then(identifier).lookAheadToAvoid(@standard_character),
+        match: Pattern.new(/##?/).then(identifier).lookAheadToAvoid(@standard_character),
         tag_as: "variable.other.macro.argument"
     )
 #
@@ -326,7 +342,7 @@ identifier = grammar[:identifier]
         start_pattern: Pattern.new(
             tag_as: "keyword.control.directive.conditional.$reference(conditional_name)",
             match: directive_start.then(
-                match: /ifndef/.or(/ifdef/).or(/if/),
+                match: Pattern.new(/ifndef/).or(/ifdef/).or(/if/),
                 reference: "conditional_name",
             )
         ),
@@ -336,7 +352,7 @@ identifier = grammar[:identifier]
             PatternRange.new(
                 # start at the begining
                 tag_as: "meta.preprocessor.conditional",
-                start_pattern: /\G/.lookBehindFor(/ifndef|ifdef|if/),
+                start_pattern: Pattern.new(/\G/).lookBehindFor(/ifndef|ifdef|if/),
                 zeroLengthStart?: true,
                 end_pattern: non_escaped_newline,
                 includes: [ :preprocessor_conditional_context ],
@@ -366,7 +382,7 @@ identifier = grammar[:identifier]
             )
         ),
         end_pattern: Pattern.new(
-            match: /\)/.or(non_escaped_newline),
+            match: Pattern.new(/\)/).or(non_escaped_newline),
             tag_as: "punctuation.section.parens.control.defined"
         ),
         includes: [
@@ -408,7 +424,3 @@ grammar[:preprocessor_context] = [
     :preprocessor_conditional_standalone,
     :macro_argument,
 ]
-
-
-
-

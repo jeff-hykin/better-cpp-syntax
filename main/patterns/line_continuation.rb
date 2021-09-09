@@ -1,5 +1,5 @@
 def line_continuation()
-    newPattern(
+    Pattern.new(
         match: /\\/.lookAheadFor(/\n/),
         tag_as: "constant.character.escape.line-continuation"
     )

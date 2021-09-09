@@ -1,4 +1,4 @@
-require_relative './textmate_tools.rb'
+require_relative PathFor[:textmate_tools]
 
 # 
 # C++ specific tokens
