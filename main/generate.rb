@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 require 'ruby_grammar_builder'
+require 'walk_up'
 
-require_relative '../paths'
+require_relative walk_up_until("paths.rb")
 require_relative PathFor[:pattern]["numeric"]
 require_relative PathFor[:pattern]["trigraph_support"]
 require_relative PathFor[:pattern]["predefined_macros"]

@@ -1,4 +1,6 @@
-require_relative '../../../../paths'
+require "walk_up"
+
+require_relative walk_up_until("paths.rb")
 require_relative PathFor[:textmate_tools]
 
 # the tag_as for commands makes no sense but it is what jsdoc commands are tagged as
