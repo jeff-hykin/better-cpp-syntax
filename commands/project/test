@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 npx textmate-tester \
-    --textmateExtension cpp \
-    --syntax "$FORNIX_FOLDER/syntaxes/cpp.tmLanguage.json" \
+    --textmateExtension YOUR_LANG_EXTENSION_HERE \
+    --syntax "$FORNIX_FOLDER/syntaxes/YOUR_LANG_EXTENSION_HERE.tmLanguage.json" \
     --examples "$FORNIX_FOLDER/examples/" \
-    --supportSyntaxes '{ "source.cpp.embedded.macro": "'"$FORNIX_FOLDER"'/syntaxes/cpp.embedded.macro.tmLanguage.json" }' \
     generate-specs --all

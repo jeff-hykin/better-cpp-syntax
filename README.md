@@ -1,5 +1,5 @@
-For this template
-- replace `YOUR_LANGUAGE`, `YOUR_LANG_EXTENSION_HERE`
+After cloning this template
+- replace `YOUR_NAME`, `YOUR_USERNAME`, `YOUR_LANGUAGE`, `YOUR_LANG_EXTENSION_HERE`
 
 ### Like this extension?
 You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
