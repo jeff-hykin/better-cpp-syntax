@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 require 'ruby_grammar_builder'
 
-g = Grammar.new_exportable_grammar
-g.exports = [:std_space]
-g.external_repos = [:inline_comment]
+export = Grammar.new_exportable_grammar
+export.external_repos = [:inline_comment]
+export.exports = [:std_space]
 
-g[:std_space] = Pattern.new(
+export[:std_space] = Pattern.new(
     # NOTE: this pattern can match 0-spaces so long as its still a word boundary
     # this is the intention since things like `int/*comment*/a = 10` are valid in c++
     # this space pattern will match inline /**/ comments that do not contain newlines
@@ -17,7 +17,7 @@ g[:std_space] = Pattern.new(
             match: Pattern.new(
                 match: @spaces,
                 dont_back_track?: true,
-            ).or(g[:inline_comment])
+            ).or(export[:inline_comment])
         ),
         /\b/,
         lookAheadFor(/\W/),

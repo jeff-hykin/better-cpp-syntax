@@ -6,12 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "./shell npm run build"
-        },
-        {
-            "label": "build_active_file",
-            "type": "shell",
-            "command": "./shell bundle exec ruby \"${file}\""
+            "command": "./commands/project/build"
         }
     ]
 }

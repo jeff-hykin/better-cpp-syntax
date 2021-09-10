@@ -7,12 +7,10 @@ require_relative PathFor[:pattern]["numeric"]
 require_relative PathFor[:pattern]["trigraph_support"]
 require_relative PathFor[:pattern]["predefined_macros"]
 require_relative PathFor[:pattern]["assembly"]
-require_relative PathFor[:pattern]["inline_comment"]
 require_relative PathFor[:pattern]["std_space"]
 require_relative PathFor[:pattern]["backslash_escapes"]
-require_relative PathFor[:pattern]["doxygen"]
-require_relative './tokens.rb'
 require_relative PathFor[:pattern]["raw_strings"]
+require_relative './tokens.rb'
 
 # 
 # 
@@ -47,17 +45,14 @@ grammar = Grammar.new(
 # Setup Utils (things used by many other patterns)
 #
 # 
-    grammar.import(PathFor[:pattern]["inline_comment"])
+    grammar.import(PathFor[:pattern]["comments"])
     grammar.import(PathFor[:pattern]["std_space"])
-    grammar.import(PathFor[:pattern]["preprocessor"])
-    inline_comment               = grammar[:inline_comment]
     std_space                    = grammar[:std_space]
     basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
     universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
     identifier                   = grammar[:identifier] = first_character.then(zeroOrMoreOf(subsequent_character))
-    preprocessor                 = grammar[:preprocessor_context]
     leading_space                = Pattern.new(/\s*+/)
     grammar[:semicolon] = @semicolon = Pattern.new(
             match: /;/,
@@ -167,8 +162,9 @@ grammar = Grammar.new(
 # Contexts
 #
 #
+    grammar.import(PathFor[:pattern]["preprocessor"])
     grammar[:ever_present_context] = [
-            *preprocessor,
+            *grammar[:preprocessor_context],
             :comments,
             :line_continuation_character,
         ]
@@ -304,91 +300,6 @@ grammar = Grammar.new(
             :decltype,
             :typename,
         ]
-#
-# Comments
-#
-    grammar[:block_comment] = PatternRange.new(
-        tag_as: "comment.block",
-        start_pattern: Pattern.new(
-            Pattern.new(/\s*+/).then(
-                match: /\/\*/,
-                tag_as: "punctuation.definition.comment.begin"
-            )
-        ),
-        end_pattern: Pattern.new(
-            match: /\*\//,
-            tag_as: "punctuation.definition.comment.end"
-        )
-    )
-    grammar[:line_comment] = PatternRange.new(
-        tag_as: "comment.line.double-slash",
-        start_pattern: Pattern.new(/\s*+/).then(
-            match: /\/\//,
-            tag_as: "punctuation.definition.comment"
-        ),
-        # a newline that doesnt have a line continuation
-        end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
-        includes: [ :line_continuation_character ]
-    )
-    grammar[:emacs_file_banner] = Pattern.new(
-        #
-        # file banner
-        # this matches emacs style file banners ex: /* = foo.c = */
-        # a file banner is a <comment start> <some spaces> <banner start> <some spaces>
-        # <comment contents> <banner end> <some spaces> <comment end>
-        # single line
-        Pattern.new(
-            should_fully_match: ["// ### test.c ###", "//=test.c - test util ="],
-            should_not_partial_match: ["// ### test.c #=#", "//=test.c - test util ~~~"],
-            match: Pattern.new(/^/).maybe(@spaces).then(
-                match: Pattern.new(
-                    match: /\/\//,
-                    tag_as: "punctuation.definition.comment"
-                ).maybe(
-                    match: @spaces,
-                ).then(
-                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-                    tag_as: "meta.banner.character",
-                    reference: "banner_part"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part")
-                .maybe(@spaces).then(/(?:\n|$)/),
-                tag_as: "comment.line.double-slash",
-            ),
-            # tag is a legacy name
-            tag_as: "meta.toc-list.banner.double-slash",
-        ).or(
-            # should_fully_match: ["/* ### test.c ###*/", "/*=test.c - test util =*/"],
-            # should_not_partial_match: ["/* ### test.c #=# */", "/*=test.c - test util ~~~*/"],
-            match: Pattern.new(/^/).maybe(@spaces).then(
-                match: Pattern.new(
-                    match: /\/\*/,
-                    tag_as: "punctuation.definition.comment"
-                ).maybe(
-                    match: @spaces,
-                    quantity_preference: :as_few_as_possible
-                ).then(
-                    match: oneOrMoreOf(match: /[#;\/=*C~]+/, dont_back_track?: true).lookAheadToAvoid(/[#;\/=*C~]/),
-                    tag_as: "meta.banner.character",
-                    reference: "banner_part2"
-                ).maybe(@spaces).then(/.+/).maybe(@spaces).matchResultOf("banner_part2")
-                .maybe(@spaces).then(/\*\//),
-                tag_as: "comment.line.banner",
-            ),
-            # tag is a legacy name
-            tag_as: "meta.toc-list.banner.block",
-        )
-    )
-    grammar[:invalid_comment_end] = Pattern.new(
-        match: /\*\//,
-        tag_as: "invalid.illegal.unexpected.punctuation.definition.comment.end"
-    )
-    grammar[:comments] = [
-        *doxygen(),
-        :emacs_file_banner,
-        :block_comment,
-        :line_comment,
-        :invalid_comment_end,
-    ]
 #
 #
 # Numbers

@@ -1,44 +1,141 @@
 ## How do I setup the project?
 
-See the full [SETUP.md guide here](https://github.com/jeff-hykin/better-cpp-syntax/blob/master/documentation/SETUP.md)!
+Take a look at `documentation/setup.md` for details on installing dependencies and such.
 
-## Adding a feature
-If you believe you've successfully made a change. Create a `your_feature.cpp` file in the `source/languages/cpp/examples`. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better). Then use `npm run gen -- source/languages/cpp/examples/your_feature.cpp` to generate a test for your feature.
+## Adding a Feature
 
-Once that is ready, please make a pull request agaist `Multi/pull-requests` rather than master.
+If you believe you've successfully made a change.
+- Create a `your_feature.cpp` file in the `examples/` folder. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better).
+- Then use `project test` to generate specs for all the examples.
+- If there were no side effects, then `your_feature.spec.yaml` should be the only new/changed file. However, if there were side effects then some of the other `.spec.yaml` files will be changed. Sometimes those side effects are good, sometimes they're irrelevent, and often times they're a regression. 
+- Once that is ready, make a pull request!
 
 # How things work
 
-You can probably look at the code `source/languages/cpp/generate.rb` to get a general understanding of how things work. The main features are `Pattern.new` and `PatternRange.new`.
+- Everything really begins in `main/main.rb`
+- The TLDR is
+    - we create a grammar object
+    - we create patterns using `Pattern.new` and `PatternRange.new`
+    - we decide which patterns "go first" by putting them in the `grammar[:$initial_context]`
+    - then we compile the grammar to a .tmLanguage.json file 
+- Sadly the C++ is a bit of spaghetti, due in large part to the language complexity
 
 ## If you already know about Textmate Grammars 
-Here's a small conversion guide. You don't need capture groups anymore, for a single pattern rule:
-- captures are replaced with tagging sub expressions (see readable regex tutorial further down)
-- scope name `$0` becomes `$match` and `$N` becomes `$reference(name)` (search code for examples)
-- `"captures": {"0": {"patterns": [...]}}` is just `includes:`
 
-For begin/end rules:
-- `contentName:` is renamed to `tag_content_as:`
-- `begin:` is renamed to `start_pattern:`
-- `end:` is renamed to `end_pattern:`
-- `beginCaptures` and `endCaptures` are replaced with tagged sub-expressions on `start_pattern` and `end_pattern` respectively
-- `patterns:` is renamed to `includes`
+(So if you're like one of the 200 people on earth that have used textmate grammars)
 
-For both single pattern and begin/end rules:
-- `name:` is renamed to `tag_as:`
-- use ruby symbols `:repository_name:` instead of `"#repository_name` in `includes:`
-- to add a rule to the repository use `cpp_grammar[:repository_name] = Pattern.new(...)`
+Something like this in a tmLanguage.json file
+
+```json
+{
+    "match": "blah/blah/blah",
+    "name": "punctuation.separator.attribute.cpp",
+    "patterns": [
+        {
+          "include": "#evaluation_context"
+        },
+        {
+          "include": "#c_conditional_context"
+        }
+    ]
+}
+```
+
+Becomes this inside main.rb
+
+```ruby
+Pattern.new(
+    match: /blah\/blah\/blah/,
+    tag_as: "punctuation.separator.attribute",
+    includes: [
+        :evaluation_context,
+        :c_conditional_context,
+    ],
+)
+```
+
+And things like this
+
+```json
+{
+    "begin": "\\[\\[",
+    "end": "\\]\\]",
+    "beginCaptures": {
+        "0": {
+            "name": "punctuation.section.attribute.begin.cpp"
+        }
+    },
+    "endCaptures": {
+        "0": {
+            "name": "punctuation.section.attribute.end.cpp"
+        }
+    },
+    "name": "support.other.attribute.cpp",
+    "patterns": [
+        {
+            "include": "#attributes_context"
+        },
+    ]
+}
+```
+
+Become this
+
+```ruby
+PatternRange.new(
+    start_pattern: Pattern.new(
+            match: /\[\[/,
+            tag_as: "punctuation.section.attribute.begin"
+        ),
+    end_pattern: Pattern.new(
+            match: /\]\]/,
+            tag_as: "punctuation.section.attribute.end",
+        ),
+    tag_as: "support.other.attribute",
+    # tag_content_as: "support.other.attribute", # <- alternative that doesnt double-tag the start/end
+    includes: [
+        :attributes_context,
+    ]
+)
+```
+
+To add something to the repository just do 
+
+```ruby
+grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
+```
+
+Where this gets really powerful is that you can nest/reuse patterns.
+
+```
+smalltalk = Pattern.new(
+    match: /blah\/blah\/blah/,
+    tag_as: "punctuation.separator.attribute",
+    includes: [
+        :evaluation_context,
+        :c_conditional_context,
+    ],
+)
+quote = Pattern.new(
+    match: /"/,
+    tag_as: "quote",
+)
+
+phrase = Pattern.new(
+    match: Pattern.new(/the man said: /).then(quote).then(smalltalk).then(quote),
+    tag_as: "other.phrase",
+)
+```
 
 ## Readable Regex Guide
+
 Regex is pretty hard to read, so this repo uses a library to help.
 - `Pattern.new(*attributes)` or `.then(*attributes)` creates a new "shy" group
   - example: `Pattern.new(/foo/)` => `/(?:foo)/
 - `.or(*attributes)` adds an alternation (`|`)
-  - example: `/foo/.or(/bar/)` => `/foo|(?:bar)/`
+  - example: `Pattern.new(/foo/).or(/bar/)` => `/foo|(?:bar)/`
   - please note you may need more shy groups depending on order
-    `/foo/.or(/bar/).maybe(@spaces)` becomes (simplified) `/foo|bar\s*/` not `/(?:foo|bar)\s*/` for that you need
-    
-    `Pattern.new(/foo/.or(/bar/)).maybe(@spaces)`
+    `Pattern.new(/foo/).or(/bar/).maybe(@spaces)` becomes (simplified) `/(?:foo|bar)\s*/`
 - `maybe(*attributes)` or `.maybe(*attributes)` causes the pattern to match zero or one times (`?`)
   - example `maybe(/foo/)` => `/(?:foo)?/`
 - `zeroOrMoreTimes(*attributes)` or `.zeroOrMoreTimes(*attributes)` causes the pattern to be matched zero or more times (`*`)

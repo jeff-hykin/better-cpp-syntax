@@ -55,7 +55,7 @@ It adds:
 - Many other features
 
 ## Contributing
-If you'd like to help improve the syntax, take a look at `source/languages` and look at the `generate.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
+If you'd like to help improve the syntax, take a look at `source/languages` and look at the `main.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
