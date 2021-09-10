@@ -55,7 +55,7 @@ It adds:
 - Many other features
 
 ## Contributing
-If you'd like to help improve the syntax, take a look at `source/languages` and look at the `main.rb` files. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
+If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
@@ -65,7 +65,7 @@ Planned future fixes/featues:
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
-I love regular expressions, and I plan on actively maintaining this.
+I love regular expressions, and PR's are always welcome.
 
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
