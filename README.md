@@ -5,7 +5,7 @@ After cloning this template
 You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
 
 # What does this do?
-This will get you the bleeding-edge syntax highlighting for YOUR_LANGUAGE. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
+This will get you the bleeding-edge syntax highlighting for YOUR_LANGUAGE. Which means your theme will be able to color your code better.
 
 NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (installed by default) or use a theme like one of the following to benefit from the changes:
 - [XD Theme](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.xd-theme)
