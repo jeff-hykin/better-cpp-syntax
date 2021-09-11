@@ -77,6 +77,6 @@ I love regular expressions, and PR's are always welcome.
 ## Did you write all of this youself?
 The original JSON was taken from https://github.com/atom/language-c
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
-<br>@matter123 has written basically every pull request, from simple bugfixes up to the entire textmate testing suite
+<br>@matter123 has written basically every major pull request, from simple bugfixes up to the entire textmate testing suite
 <br>Thanks @matter123!
 <br>The rest of the ruby is authored by @jeff-hykin
