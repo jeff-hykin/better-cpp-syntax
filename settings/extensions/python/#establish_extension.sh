@@ -3,63 +3,77 @@
 # 
 # this is just a helper (common to most all extensions)
 # 
-link_extension_file__to__() {
-    local_file="$1"
-    target_file="$2"
+relative_link__file_to__() {
+    existing_filepath="$1"
+    target_filepath="$2"
     
-    # check for absolute path, if not absolute make it relative to project/settings
-    case "$target_file" in
-        /*) __temp_var__is_absolute_path="true" ;;
-        *) : ;;
+    # 
+    # make existing_filepath absolute
+    # 
+    case "$existing_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) existing_filepath="$FORNIX_FOLDER/$existing_filepath" ;;
     esac
-    if ! [ "$__temp_var__is_absolute_path" = "true" ]
-    then
-        __temp_var__target_full_path="$FORNIX_FOLDER/settings/$target_file"
-    else
-        __temp_var__target_full_path="$target_file"
-    fi
-    unset __temp_var__is_absolute_path
+    
+    # 
+    # make target_filepath absolute
+    # 
+    case "$target_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) target_filepath="$FORNIX_FOLDER/$target_filepath" ;;
+    esac
     
     # remove existing things in the way
-    rm -f "$__temp_var__target_full_path" 2>/dev/null
-    rm -rf "$__temp_var__target_full_path" 2>/dev/null
+    rm -f "$target_filepath" 2>/dev/null
+    rm -rf "$target_filepath" 2>/dev/null
     # make sure parent folder exists
-    mkdir -p "$(dirname "$__temp_var__target_full_path")"
-    # link the file (relative link, which it what makes it complicated)
-    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_FORNIX_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
-    ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
-    unset __temp_var__path_from_target_to_local_file
-    
-    unset local_file
-    unset target_file
+    mkdir -p "$(dirname "$target_filepath")"
+    __temp_var__relative_part="$(realpath "$(dirname "$existing_filepath")" --relative-to="$(dirname "$target_filepath")" --canonicalize-missing)"
+    __temp_var__relative_path="$__temp_var__relative_part/$(basename "$existing_filepath")"
+    # link using the relative path
+    ln -s "$__temp_var__relative_path" "$target_filepath"
+    unset __temp_var__relative_path
+    unset __temp_var__relative_part
+    unset existing_filepath
+    unset target_filepath
 }
 
 # 
 # connect during_start
 # 
-link_extension_file__to__ "commands/setup_venv" "during_start/019_000_setup_python_venv.sh"
-link_extension_file__to__ "commands/add_project_to_pythonpath" "during_start/022_000_setup_pythonpath.sh"
-link_extension_file__to__ "commands/ensure_pip_modules" "during_start/021_000_ensure_pip_modules.sh"
-link_extension_file__to__ "commands/refresh_ignores" "during_start/024_000_python_ignores.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/setup_venv"                "$FORNIX_FOLDER/settings/during_start/019_000_setup_python_venv.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/add_project_to_pythonpath" "$FORNIX_FOLDER/settings/during_start/022_000_setup_pythonpath.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/ensure_pip_modules"        "$FORNIX_FOLDER/settings/during_start/021_000_ensure_pip_modules.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/refresh_ignores"           "$FORNIX_FOLDER/settings/during_start/024_000_python_ignores.sh"
 
 
 # 
 # connect during_manual_start
 # 
-link_extension_file__to__ "commands/add_project_to_pythonpath" "during_manual_start/022_000_setup_pythonpath.sh"
-link_extension_file__to__ "commands/refresh_ignores" "during_manual_start/024_000_python_ignores.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/add_project_to_pythonpath" "$FORNIX_FOLDER/settings/during_manual_start/022_000_setup_pythonpath.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/refresh_ignores"           "$FORNIX_FOLDER/settings/during_manual_start/024_000_python_ignores.sh"
 
 # 
 # connect during_clean
 # 
-link_extension_file__to__ "during_clean.sh" "during_clean/801_python.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_clean.sh" "$FORNIX_FOLDER/settings/during_clean/801_python.sh"
 
 # 
 # connect during_purge
 # 
-link_extension_file__to__ "during_purge.sh" "during_purge/802_remove_venv.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_purge.sh" "$FORNIX_FOLDER/settings/during_purge/802_remove_venv.sh"
 
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/python"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/python"
+
+# 
+# connect git hooks
+# 
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/ensure_pip_modules" "$FORNIX_FOLDER/settings/extensions/git/hooks/post-update/901_check_pip_modules"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/ensure_pip_modules" "$FORNIX_FOLDER/settings/extensions/git/hooks/post-merge/901_check_pip_modules"
