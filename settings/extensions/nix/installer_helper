@@ -30,7 +30,13 @@ fi
 : Linux ;
 :       ;
 if [ "$OSTYPE" = "linux-gnu" ]; then
-    curl -L https://nixos.org/nix/install | sh -s -- --daemon;
+    has_systemd="$(pidof systemd && echo "true" || echo "false")"
+    if [ "$has_systemd" = "$true" ]
+    then
+        curl -L https://nixos.org/nix/install | sh -s -- --daemon;
+    else
+        curl -L https://nixos.org/nix/install | sh -s;
+    fi
 fi
 
 : manually update the environment ;
