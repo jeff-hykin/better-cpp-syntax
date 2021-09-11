@@ -3,5 +3,5 @@
 npx textmate-tester \
     --textmateExtension YOUR_LANG_EXTENSION_HERE \
     --syntax "$FORNIX_FOLDER/syntaxes/YOUR_LANG_EXTENSION_HERE.tmLanguage.json" \
-    --examples "$FORNIX_FOLDER/examples/" \
+    --examples "$FORNIX_FOLDER/language_examples/" \
     generate-specs --all
