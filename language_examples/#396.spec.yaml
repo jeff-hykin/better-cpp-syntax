@@ -1,0 +1,177 @@
+- source: module
+  scopes:
+    - keyword.other.module
+- source: ' example'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: 'import '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: vector
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: 'import '
+- source: some
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: other
+  scopes:
+    - variable.other.object.property
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: module
+  scopes:
+    - variable.other.property
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: export
+  scopes:
+    - keyword.other.export
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: From
+  scopes:
+    - entity.name.type.template
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: To
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: concept
+  scopes:
+    - keyword.other.concept
+- source: ' convertible_to '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: is_convertible_v
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: From
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' To'
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: and
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.and
+- source: requires
+  scopes:
+    - keyword.other.requires
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: From
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '&'
+  scopes:
+    - keyword.operator
+- source: f
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: static_cast
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.cast.static_cast
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: To
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: f
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

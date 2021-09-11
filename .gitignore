@@ -1,6 +1,9 @@
 # 
 # Custom
 # 
+\.idea
+**/*.dont-sync
+**/*.dont-sync.*
 
 
 # 
@@ -429,6 +432,7 @@ dmypy.json
 #/pkg/
 /spec/reports/
 .mongorc.js
+/spec/examples.txt
 #/spec/examples.txt
 /test/tmp/
 /test/version_tmp/
@@ -603,6 +607,10 @@ dkms.conf
 #
 # home folder files
 #
+# ignore files in folder foo
+settings/path_injection/*
+# but keep the folder
+!settings/path_injection/.keep
 # ignore files in folder foo
 settings/.cache/*
 # but keep the folder

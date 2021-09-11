@@ -1,0 +1,1446 @@
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: DOCTEST_CLANG
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: __has_warning
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.other.preprocessor.macro.predefined.__has_warning
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_HAS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: __has_warning
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: x
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' __has_warning'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: __has_feature
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.other.preprocessor.macro.predefined.__has_feature
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_HAS_FEATURE
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: __has_feature
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: x
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' __has_feature'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '#x'
+  scopes:
+    - variable.other.macro.argument
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: clang diagnostic push
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: clang diagnostic ignored w
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: clang diagnostic pop
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: DOCTEST_CLANG_SUPPRESS_WARNING
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: w
+  scopes:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - entity.name.type.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.elif
+  scopes:
+    - punctuation.definition.directive
+- source: elif
+  scopesEnd:
+    - keyword.control.directive.elif
+- source: ' DOCTEST_GCC'
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '#x'
+  scopes:
+    - variable.other.macro.argument
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: DOCTEST_GCC
+  scopesBegin:
+    - meta.preprocessor.conditional
+  scopes:
+    - entity.name.function.preprocessor
+- source: '>='
+  scopes:
+    - keyword.operator.comparison
+- source: DOCTEST_COMPILER
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+- source: '4'
+  scopes:
+    - constant.numeric.decimal
+- source: ', '
+- source: '7'
+  scopes:
+    - constant.numeric.decimal
+- source: ', '
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopesEnd:
+    - meta.preprocessor.conditional
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: GCC diagnostic push
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' GCC 4.7+'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' GCC 4.7+'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: GCC diagnostic ignored w
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: DOCTEST_GCC
+  scopesBegin:
+    - meta.preprocessor.conditional
+  scopes:
+    - entity.name.function.preprocessor
+- source: '>='
+  scopes:
+    - keyword.operator.comparison
+- source: DOCTEST_COMPILER
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+- source: '4'
+  scopes:
+    - constant.numeric.decimal
+- source: ', '
+- source: '7'
+  scopes:
+    - constant.numeric.decimal
+- source: ', '
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopesEnd:
+    - meta.preprocessor.conditional
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: _Pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: GCC diagnostic pop
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' GCC 4.7+'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' GCC 4.7+'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: DOCTEST_GCC_SUPPRESS_WARNING
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: w
+  scopes:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - entity.name.type.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.preprocessor.macro
+    - meta.function.definition
+    - meta.head.function.definition
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.elif
+  scopes:
+    - punctuation.definition.directive
+- source: elif
+  scopesEnd:
+    - keyword.control.directive.elif
+- source: ' DOCTEST_MSVC'
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: __pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: warning
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: push
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: __pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: warning
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: 'disable : w'
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: __pragma
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: warning
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: pop
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: DOCTEST_MSVC_SUPPRESS_WARNING
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: w
+  scopes:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - entity.name.type.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_PRAGMA_TO_STR
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: x
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_POP
+  scopes:
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: w
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' different compilers - warning suppression macros'

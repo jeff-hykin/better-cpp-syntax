@@ -1,0 +1,1622 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: vector
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: iostream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: math.h
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: map
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: //
+  scopesEnd:
+    - punctuation.definition.comment
+- source: ' helpers'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: using
+  scopesBegin:
+    - meta.using-namespace
+  scopes:
+    - keyword.other.using.directive
+- source: namespace
+  scopes:
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
+- source: std
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.using-namespace
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: Loop_
+  scopes:
+    - entity.name.function.preprocessor
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' Start_Value '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' End_Value '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: LoopFrom_
+  scopes:
+    - entity.name.function.preprocessor
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' Start_Value '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: _To_
+  scopes:
+    - entity.name.function.preprocessor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' End_Value '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: _Times
+  scopes:
+    - entity.name.function.preprocessor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' LoopNumber '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' Start_Value'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' LoopNumber '
+- source: <=
+  scopes:
+    - keyword.operator.comparison
+- source: ' End_Value '
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' LoopNumber'
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopes:
+    - meta.block
+    - punctuation.section.block.begin.bracket.curly
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: Loop
+  scopes:
+    - entity.name.function.preprocessor
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: while
+  scopes:
+    - keyword.control.while
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopes:
+    - meta.block
+    - punctuation.section.block.begin.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: EndLoop
+  scopes:
+    - entity.name.function.preprocessor
+- source: '         }}'
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: Pair
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: a
+  scopes:
+    - variable.parameter.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.parameters
+- source: b
+  scopes:
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: pair
+  scopes:
+    - entity.name.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: decltype
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: a
+  scopes:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: decltype
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: b
+  scopes:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: a
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: b
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: bool
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: EndOfStream
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: istream
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: input_stream
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: if
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: input_stream
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: eof
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: return
+  scopes:
+    - keyword.control.return
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: //
+  scopesEnd:
+    - punctuation.definition.comment
+- source: ' actual code'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: MAX_N_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: '1000'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: short
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' n'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' a cache of outputs (dynamic programming)'
+  scopesEnd:
+    - comment.line.double-slash
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: cache
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: MAX_N_SIZE
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: MAX_N_SIZE
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: U
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: r
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: s
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: double
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' itemIndex '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' r'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' itemRelativeRank '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' s'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' totalNumberOfItems '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' n'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' nextItemIndex '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' itemIndex '
+- source: +
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' numberOfRemainingItems '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' totalNumberOfItems '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' itemIndex'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' probabilityOfBeingBetterThanCurrentItem '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'itemRelativeRank '
+- source: /
+  scopes:
+    - keyword.operator
+- source: ' nextItemIndex'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' numberOfSeenItemsThatAreBetterThanCurrentItem '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' itemRelativeRank '
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' expectedAverageRank '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' numberOfRemainingItems '
+- source: '*'
+  scopes:
+    - keyword.operator
+- source: ' probabilityOfBeingBetterThanCurrentItem '
+- source: +
+  scopes:
+    - keyword.operator
+- source: ' numberOfSeenItemsThatAreBetterThanCurrentItem'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' edge case of starting item'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'expectedAverageRank '
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '        expectedAverageRank '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' expectedValue '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'totalNumberOfItems '
+- source: +
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: ' expectedAverageRank'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: ' expectedValue'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: double
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: V
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: r
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: s
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: //
+  scopesBegin:
+    - meta.body.function.definition
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' definitions'
+  scopesEnd:
+    - comment.line.double-slash
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' itemIndex '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' r'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' itemRelativeRank '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' s'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' totalNumberOfItems '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' n'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' nextItemIndex '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' itemIndex '
+- source: +
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' output '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' estimatedValueOfAccepting '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' estimatedValueOfRejecting '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' sum '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' out of bounds = no reward'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'itemIndex '
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' totalNumberOfItems'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '        output '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: goto
+  scopes:
+    - keyword.control.goto
+- source: ' output'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' if the value was cached'
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: cache
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: r
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: s
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' return the cached solution'
+  scopesEnd:
+    - comment.line.double-slash
+- source: return
+  scopes:
+    - keyword.control.return
+- source: cache
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: r
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: s
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: '    estimatedValueOfAccepting '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: U
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: r
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' s'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' last item '
+  scopesEnd:
+    - comment.line.double-slash
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'itemIndex '
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: ' totalNumberOfItems'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' must pick the last item'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '        output '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' estimatedValueOfAccepting'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: goto
+  scopes:
+    - keyword.control.goto
+- source: ' output'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' if there is a choice (if there are more items)'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '    sum '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    LoopFrom_ '
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ' _To_ nextItemIndex _Times'
+- source: '        sum '
+- source: +=
+  scopes:
+    - keyword.operator.assignment.compound
+- source: V
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: nextItemIndex
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' LoopNumber'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '    EndLoop'
+- source: '    estimatedValueOfRejecting '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' sum'
+- source: /
+  scopes:
+    - keyword.operator
+- source: nextItemIndex
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' return whichever is bigger'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '    output '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'estimatedValueOfRejecting '
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' estimatedValueOfAccepting'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '?'
+  scopes:
+    - keyword.operator.ternary
+- source: ' estimatedValueOfRejecting '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary
+- source: ' estimatedValueOfAccepting'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: output
+  scopes:
+    - entity.name.label
+- source: ':'
+  scopes:
+    - punctuation.separator.label
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' cache the solution'
+  scopesEnd:
+    - comment.line.double-slash
+- source: cache
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: r
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: s
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' output'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: ' output'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: auto
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: argc
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: argv
+  scopes:
+    - variable.parameter
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.array
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - meta.bracket.square.array
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '->'
+  scopes:
+    - punctuation.definition.function.return-type
+- source: int
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: while
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.while
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: not
+  scopes:
+    - keyword.operator.wordlike
+    - keyword.operator.not
+- source: cin
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: eof
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' reset the cache'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '        LoopFrom_ '
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ' _To_ MAX_N_SIZE _Times'
+- source: short
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' row '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' LoopNumber'
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '            LoopFrom_ '
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ' _To_ MAX_N_SIZE _Times'
+- source: short
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' cell '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' LoopNumber'
+- source: '-'
+  scopes:
+    - keyword.operator
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cache
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: row
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: cell
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '            EndLoop'
+- source: '        EndLoop'
+- source: '        cin '
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: ' n'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '        cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: V
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

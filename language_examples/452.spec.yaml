@@ -1,0 +1,39 @@
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.initializer
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.initializer
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: pthread_threadid_np
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: pthread_tfoo
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

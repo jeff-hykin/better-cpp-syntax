@@ -1,0 +1,148 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: A
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: template
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Nested
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: B
+  scopes:
+    - entity.name.type.struct
+- source: ':'
+  scopesBegin:
+    - meta.head.struct
+  scopes:
+    - punctuation.separator.colon.inheritance
+- source: 'T::template Nested'
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.head.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' <--'
+  scopesEnd:
+    - comment.line.double-slash
+- source: B
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: A
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: ' b'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -1,11 +1,17 @@
 {
-    "name": "better-YOUR_LANG_EXTENSION_HERE-syntax",
-    "displayName": "Better YOUR_LANGUAGE Syntax",
-    "description": "",
-    "version": "0.0.1",
+    "name": "better-cpp-syntax",
+    "displayName": "Better C++ Syntax",
+    "description": "The bleeding edge of C-like syntaxes",
+    "version": "1.15.7",
     "icon": "icon.png",
     "scripts": {},
     "keywords": [
+        "C++",
+        "cpp",
+        "c",
+        "objective-c",
+        "objective-cpp",
+        "objective-c++",
         "syntax",
         "textmate",
         "highlighting",
@@ -16,16 +22,26 @@
         "vscode": "^1.0.0"
     },
     "author": {
-        "name": "YOUR_NAME"
+        "name": "Jeff Hykin"
     },
-    "publisher": "YOUR_USERNAME",
+    "publisher": "jeff-hykin",
     "contributes": {
         "grammars": [
             {
-                "language": "YOUR_LANG_EXTENSION_HERE",
-                "scopeName": "source.YOUR_LANG_EXTENSION_HERE",
-                "path": "./syntaxes/YOUR_LANG_EXTENSION_HERE.tmLanguage.json",
+                "language": "cpp",
+                "scopeName": "source.cpp.embedded.macro",
+                "path": "./syntaxes/cpp.embedded.macro.tmLanguage.json",
                 "embeddedLanguages": {
+                    "meta.embedded.assembly.cpp": "asm"
+                }
+            },
+            {
+                "language": "cpp",
+                "scopeName": "source.cpp",
+                "path": "./syntaxes/cpp.tmLanguage.json",
+                "embeddedLanguages": {
+                    "meta.embedded.assembly.cpp": "asm",
+                    "meta.preprocessor.macro.contents": "cpp"
                 }
             }
         ]
@@ -39,5 +55,6 @@
         "textmate-bailout": "^1.1.0",
         "vsce": "^1.99.0",
         "textmate-tester": "^1.1.0"
-    }
+    },
+    "dependencies": {}
 }

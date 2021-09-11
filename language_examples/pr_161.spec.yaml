@@ -1,0 +1,314 @@
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: A
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: C
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: C
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: A
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: using
+  scopesBegin:
+    - meta.body.struct
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: A
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: C
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: C
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: void
+  scopesBegin:
+    - meta.tail.struct
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: using
+  scopesBegin:
+    - meta.body.function.definition
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: A
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: B
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: std
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: C
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: C
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: decltype
+  scopesBegin:
+    - meta.declaration.type.alias.value.unknown
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: 'a '
+  scopesBegin:
+    - meta.arguments.decltype
+- source: '?'
+  scopes:
+    - keyword.operator.ternary
+- source: ' b '
+- source: ':'
+  scopes:
+    - keyword.operator.ternary
+- source: ' c'
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+  scopesEnd:
+    - meta.declaration.type.alias.value.unknown
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

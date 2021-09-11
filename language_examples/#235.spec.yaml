@@ -1,0 +1,16 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: a
+  scopes:
+    - entity.name.function.preprocessor
+- source: ' a                                     '
+- source: \
+  scopes:
+    - constant.character.escape.line-continuation

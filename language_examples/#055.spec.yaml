@@ -1,0 +1,89 @@
+- source: enum
+  scopesBegin:
+    - meta.block.enum
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: foo
+  scopes:
+    - entity.name.type.enum
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.type-specifier
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: int8_t
+  scopes:
+    - storage.type.integral.int8_t
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: '}'
+  scopes:
+    - meta.body.enum
+    - punctuation.section.block.end.bracket.curly.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.enum
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: enum
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.enum
+- source: foo
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: bar
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: baz
+  scopes:
+    - entity.name.type.parameter
+- source: quix
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

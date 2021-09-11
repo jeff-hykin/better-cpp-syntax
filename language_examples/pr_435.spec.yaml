@@ -1,0 +1,314 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' example coroutine syntax from cppreference.com'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' https://en.cppreference.com/w/cpp/language/coroutines'
+  scopesEnd:
+    - comment.line.double-slash
+- source: task
+  scopesBegin:
+    - meta.function.definition
+    - meta.qualified_type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: tcp_echo_server
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: char
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: data
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1024'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: ;
+  scopesBegin:
+    - punctuation.terminator.statement
+- source: ;
+  scopesEnd:
+    - punctuation.terminator.statement
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: ' n '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: co_await
+  scopes:
+    - keyword.control.co_await
+- source: socket
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: async_read_some
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: buffer
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: data
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: co_await
+  scopes:
+    - keyword.control.co_await
+- source: async_write
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: socket
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: buffer
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: data
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' n'
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: generator
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: iota
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: 'n'
+  scopes:
+    - variable.parameter
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: while
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.while
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: co_yield
+  scopes:
+    - keyword.control.co_yield
+- source: ' n'
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: lazy
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: f
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: co_return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.co_return
+- source: '7'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

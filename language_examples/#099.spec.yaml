@@ -1,0 +1,8 @@
+- source: pthread_rwlockattr_t
+  scopes:
+    - support.type.posix-reserved.pthread
+    - support.type.built-in.posix-reserved.pthread
+- source: ' thing'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

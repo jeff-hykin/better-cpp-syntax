@@ -1,0 +1,64 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' invalid literals'
+  scopesEnd:
+    - comment.line.double-slash
+- source: 1Ex
+  scopesBegin:
+    - invalid.illegal.constant.numeric
+- source: 0xe+foo
+- source: 0x1Px
+- source: 0xAB.cdpfl
+- source: 0x12345'luyards
+- source: 0.'123
+- source: 0'.123
+- source: 1E'1
+- source: 1'E1
+  scopesEnd:
+    - invalid.illegal.constant.numeric
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' odd valid literals'
+  scopesEnd:
+    - comment.line.double-slash
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: '12345'
+  scopes:
+    - constant.numeric.hexadecimal
+- source: luyards
+  scopes:
+    - keyword.other.unit.user-defined
+- source: '0'
+  scopes:
+    - keyword.other.unit.octal
+- source: ''''
+  scopesBegin:
+    - constant.numeric.octal
+  scopes:
+    - punctuation.separator.constant.numeric
+- source: '12345'
+  scopesEnd:
+    - constant.numeric.octal
+- source: 0x
+  scopes:
+    - keyword.other.unit.hexadecimal
+- source: 1E
+  scopes:
+    - constant.numeric.hexadecimal
+- source: x
+  scopes:
+    - keyword.other.unit.user-defined
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: Px
+  scopes:
+    - keyword.other.unit.user-defined

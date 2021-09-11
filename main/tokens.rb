@@ -1,11 +1,13 @@
-require "walk_up"
-require_relative walk_up_until("paths.rb")
 require_relative PathFor[:textmate_tools]
 
 # 
-# Create tokens
-#
-# (these are from C++)
+# C++ specific tokens
+# 
+    # TODO: 
+        # finish the specifiers https://en.cppreference.com/w/cpp/language/declarations 
+        # https://en.cppreference.com/w/cpp/language/declarations
+        # look at https://en.cppreference.com/w/cpp/language/function to implement better member function syntax
+
 tokens = [
     # operators
     { representation: "::"                   , name: "scope-resolution"               , isOperator: true,                                      isBinaryOperator:  true, presedence:  1   , evaledLeftToRight: true, isInFixOperator:   true },
@@ -281,8 +283,9 @@ tokens = [
     { representation: "transaction_safe_dynamic"   , name: "transaction_safe_dynamic"   , isSpecialIdentifier: true , isValidFunctionName: true},
 ]
 
-# automatically add some adjectives (functional adjectives)
-@tokens = TokenHelper.new tokens, for_each_token: ->(each) do 
+
+
+@cpp_tokens = TokenHelper.new tokens, for_each_token: ->(each) do 
     # isSymbol, isWordish
     if each[:representation] =~ /[a-zA-Z0-9_]/
         each[:isWordish] = true
@@ -298,3 +301,37 @@ tokens = [
         each[:isPossibleStorageSpecifier] = true
     end
 end
+
+
+
+@cpp_support_tokens = TokenHelper.new [
+    # io stream
+    { representation: "cin"                        , name: "cin"                        , belongsToIostream: true , isVariable: true},
+    { representation: "wcin"                       , name: "wcin"                       , belongsToIostream: true , isVariable: true},
+    { representation: "cout"                       , name: "cout"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wcout"                      , name: "wcout"                      , belongsToIostream: true , isVariable: true},
+    { representation: "cerr"                       , name: "cerr"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wcerr"                      , name: "wcerr"                      , belongsToIostream: true , isVariable: true},
+    { representation: "clog"                       , name: "clog"                       , belongsToIostream: true , isVariable: true},
+    { representation: "wclog"                      , name: "wclog"                      , belongsToIostream: true , isVariable: true},
+    # stdio
+    { representation: "stderr"                     , name: "stderr"                     , belongsToStdio: true , isVariable: true},
+    { representation: "stdin"                      , name: "stdin"                      , belongsToStdio: true , isVariable: true},
+    { representation: "stdout"                     , name: "stdout"                     , belongsToStdio: true , isVariable: true},
+    { representation: "FILE"                       , name: "FILE"                       , belongsToStdio: true , isType: true},
+    { representation: "fpos_t"                     , name: "fpos_t"                     , belongsToStdio: true , isType: true},
+    { representation: "size_t"                     , name: "size_t"                     , belongsToStdio: true , isType: true},
+    
+    # pthread types
+    # TODO: I'm not sure if pthread is actually a support type or if it is part of the language spec, I'd assume support
+    { representation: "pthread_t"            , name: "pthread_t"            , isType: true , isPthreadType: true },
+    { representation: "pthread_attr_t"       , name: "pthread_attr_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_cond_t"       , name: "pthread_cond_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_condattr_t"   , name: "pthread_condattr_t"   , isType: true , isPthreadType: true },
+    { representation: "pthread_mutex_t"      , name: "pthread_mutex_t"      , isType: true , isPthreadType: true },
+    { representation: "pthread_mutexattr_t"  , name: "pthread_mutexattr_t"  , isType: true , isPthreadType: true },
+    { representation: "pthread_once_t"       , name: "pthread_once_t"       , isType: true , isPthreadType: true },
+    { representation: "pthread_rwlock_t"     , name: "pthread_rwlock_t"     , isType: true , isPthreadType: true },
+    { representation: "pthread_rwlockattr_t" , name: "pthread_rwlockattr_t" , isType: true , isPthreadType: true },
+    { representation: "pthread_key_t"        , name: "pthread_key_t"        , isType: true , isPthreadType: true },
+]

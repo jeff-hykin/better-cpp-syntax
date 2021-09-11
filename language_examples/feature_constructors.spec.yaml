@@ -1,0 +1,418 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing1
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: Thing1
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing2
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: explicit
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: Thing2
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing3
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: virtual
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.member.destructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.virtual
+- source: ~Thing3
+  scopesBegin:
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.member.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing4
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: Thing4
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ~Thing4
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: Thing4
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: '~'
+  scopes:
+    - keyword.operator
+- source: Thing4
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: itng
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: Thing4
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: Thing4
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing5
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: Thing5
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ~Thing5
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.constructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: Thing6
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: Thing6
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: delete
+  scopes:
+    - keyword.other.delete.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ~Thing6
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: delete
+  scopes:
+    - keyword.other.delete.constructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
