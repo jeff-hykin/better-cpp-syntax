@@ -56,3 +56,8 @@ relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_purge.sh"
 # connect commands
 # 
 relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/nodejs"
+
+# 
+# connect pnpm store since its content-addressed storage
+# 
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start_prep.sh" "$FORNIX_FOLDER/settings/during_start_prep/032_000_link_pnpm_store.sh"
