@@ -1,0 +1,81 @@
+<html>
+
+<!-- 
+    
+    change the YOUR_LANGUAGE near the bottom
+    then open this in a browser and screenshot the result
+    
+ -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        :root {
+            --square-size: 500px;
+            --circle-size: 80%;
+            --text-size: 10rem;
+        }
+        
+        .image-container {
+            background-size: cover;
+            background-image: linear-gradient(to bottom right, limegreen, #38d7ff);
+            position: relative;
+            min-height: var(--square-size);
+            max-height: var(--square-size);
+            width: var(--square-size);
+            min-width: var(--square-size);
+            max-width: var(--square-size);
+            padding: 10px;
+            margin: auto;
+            margin-top: 20%;
+            margin-bottom: 20%;
+            border-radius: 100vh;
+            display: flex;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+        }
+
+        .text {
+            background-color: white;
+            color: black;
+            font-size: var(--text-size);
+            font-weight: bold;
+            margin: 0 auto;
+            padding: 8px;
+            width: var(--circle-size);
+            height: var(--circle-size);
+            text-align: center;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            align-content: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            border-radius: 50vh;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="image-container">
+        <div class="text">YOUR_LANGUAGE</div>
+    </div>
+
+
+
+</body>
+
+</html>

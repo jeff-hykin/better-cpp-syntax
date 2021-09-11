@@ -1,0 +1,19 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    deep_clone (0.0.1)
+    ruby_grammar_builder (0.0.4)
+      deep_clone (~> 0.0.1, >= 0.0.1)
+    walk_up (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler
+  deep_clone
+  ruby_grammar_builder (= 0.0.4)
+  walk_up (>= 1.0.1)
+
+BUNDLED WITH
+   2.1.4

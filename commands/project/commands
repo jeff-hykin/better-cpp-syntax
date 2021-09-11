@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+    echo "commands:"
+    echo "    project"
+    tree "$FORNIX_COMMANDS_FOLDER/project" -C --dirsfirst -A -F --noreport | sed 's/^/        /' | sed -E 's/(\*|@)$/ /' | sed "1d"
+    echo 
+    echo "examples:"
+    echo "    project build"
+    echo "    project test"

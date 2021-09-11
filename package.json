@@ -1,0 +1,43 @@
+{
+    "name": "better-YOUR_LANG_EXTENSION_HERE-syntax",
+    "displayName": "Better YOUR_LANGUAGE Syntax",
+    "description": "",
+    "version": "0.0.1",
+    "icon": "icon.png",
+    "scripts": {},
+    "keywords": [
+        "syntax",
+        "textmate",
+        "highlighting",
+        "coloring",
+        "color"
+    ],
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "author": {
+        "name": "YOUR_NAME"
+    },
+    "publisher": "YOUR_USERNAME",
+    "contributes": {
+        "grammars": [
+            {
+                "language": "YOUR_LANG_EXTENSION_HERE",
+                "scopeName": "source.YOUR_LANG_EXTENSION_HERE",
+                "path": "./syntaxes/YOUR_LANG_EXTENSION_HERE.tmLanguage.json",
+                "embeddedLanguages": {
+                }
+            }
+        ]
+    },
+    "devDependencies": {
+        "chalk": "^2.4.2",
+        "dictionary-en-us": "^2.1.1",
+        "lodash": "^4.17.19",
+        "nspell": "^2.1.2",
+        "oniguruma": "^7.2.0",
+        "textmate-bailout": "^1.1.0",
+        "vsce": "^1.99.0",
+        "textmate-tester": "^1.1.0"
+    }
+}
