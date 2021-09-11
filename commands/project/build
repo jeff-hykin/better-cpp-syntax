@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-ruby "$FORNIX_FOLDER/main/main.rb"
+ruby "$FORNIX_FOLDER/main/main.rb" && echo "
+(Dont worry about the 'this is not supported') messages"
