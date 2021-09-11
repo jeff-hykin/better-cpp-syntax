@@ -1,0 +1,76 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: thread
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: static
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.modifier.specifier.static
+- source: thread_local
+  scopes:
+    - storage.modifier.specifier.thread_local
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' bar '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: ' bar'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
