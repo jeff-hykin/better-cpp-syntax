@@ -64,6 +64,11 @@ from = "860b56be91fb874d48e23a950815969a7b832fbc"
 # load = [ "nodejs-10_x",] 
 # from = "a765beccb52f30a30fee313fbae483693ffe200d" 
 
+[[packages]]
+load = [ "nodePackages", "pnpm", ]
+from = "860b56be91fb874d48e23a950815969a7b832fbc"
+
+
 # 
 # Python (because node-gyp depends on python)
 # 
