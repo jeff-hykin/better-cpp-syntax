@@ -1,2 +1,0 @@
- #define hello
-#define hello

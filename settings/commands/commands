@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-echo "All Commands:"
-ls -1 --color ./settings/commands | sed 's/^/    /'
-node -e 'try { Object.keys(require("./package.json").scripts).forEach(each=>console.log(`    npm run ${each}`))}catch(e){}'  
-echo ""
-echo "Main Commands:"
-echo "    npm run build"
-echo "    npm run genall"
-echo "    commands (shows all the commands)"

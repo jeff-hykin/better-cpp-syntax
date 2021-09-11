@@ -1,1 +1,0 @@
-COMM_Bool GetThing();

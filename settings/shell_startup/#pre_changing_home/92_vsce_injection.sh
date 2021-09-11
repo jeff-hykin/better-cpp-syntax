@@ -1,1 +1,0 @@
-which vsce &>/dev/null && inject_into_path "vsce"

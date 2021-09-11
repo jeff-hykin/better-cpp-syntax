@@ -1,3 +1,0 @@
-void function() {
-    decltype(int);
-}

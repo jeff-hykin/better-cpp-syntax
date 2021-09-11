@@ -1,1 +1,0 @@
-bool aaaa(const char */* comment */ some_var) { return true; }
