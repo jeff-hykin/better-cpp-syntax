@@ -62,7 +62,7 @@ It adds:
 - Many other features
 
 ## Contributing
-If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `CONTRIBUTING.md` to get a better idea of how code works.
+If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `documentation/CONTRIBUTING.md` to get a better idea of how code works.
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
