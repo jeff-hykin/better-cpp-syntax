@@ -3,6 +3,6 @@
 npx textmate-tester \
     --textmateExtension cpp \
     --syntax "$FORNIX_FOLDER/syntaxes/cpp.tmLanguage.json" \
-    --examples "$FORNIX_FOLDER/examples/" \
+    --examples "$FORNIX_FOLDER/language_examples/" \
     --supportSyntaxes '{ "source.cpp.embedded.macro": "'"$FORNIX_FOLDER"'/syntaxes/cpp.embedded.macro.tmLanguage.json" }' \
     generate-specs --all
