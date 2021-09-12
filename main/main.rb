@@ -497,8 +497,7 @@ grammar = Grammar.new(
                 match: /:/,
                 tag_as: "punctuation.separator.colon.case.default"
             ),
-            # TODO: eventually remove the c_conditional_context
-            includes: [:evaluation_context, :c_conditional_context]
+            includes: [:evaluation_context,]
         )
     grammar[:case_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
@@ -512,8 +511,7 @@ grammar = Grammar.new(
                 match: /:/,
                 tag_as: "punctuation.separator.colon.case"
             ),
-            # TODO: eventually remove the c_conditional_context
-            includes: [:evaluation_context, :c_conditional_context]
+            includes: [:evaluation_context,]
         )
     grammar[:switch_conditional_parentheses] = PatternRange.new(
             tag_as: "meta.conditional.switch",
@@ -527,7 +525,6 @@ grammar = Grammar.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
-            # TODO: eventually remove the c_conditional_context
             includes: [ :evaluation_context, :c_conditional_context ]
         )
     grammar[:switch_statement] = generateBlockFinder(
@@ -547,7 +544,6 @@ grammar = Grammar.new(
                 :default_statement,
                 :case_statement,
                 :$initial_context,
-                :block_innards # this is just for C support, it should be removed in the future
             ],
             needs_semicolon: false,
         )

@@ -661,9 +661,6 @@
       "patterns": [
         {
           "include": "#evaluation_context"
-        },
-        {
-          "include": "#c_conditional_context"
         }
       ]
     },
@@ -3169,9 +3166,6 @@
       "patterns": [
         {
           "include": "#evaluation_context"
-        },
-        {
-          "include": "#c_conditional_context"
         }
       ]
     },
@@ -16270,9 +16264,6 @@
             },
             {
               "include": "$self"
-            },
-            {
-              "include": "#block_innards"
             }
           ]
         },
