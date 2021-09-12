@@ -18,11 +18,11 @@ If you believe you've successfully made a change.
     - we create patterns using `Pattern.new` and `PatternRange.new`
     - we decide which patterns "go first" by putting them in the `grammar[:$initial_context]`
     - then we compile the grammar to a .tmLanguage.json file 
-- Sadly the C++ is a bit of spaghetti, due in large part to the language complexity
+- Sadly the C++ repo is a bit of spaghetti, due in large part to the language complexity
 
 ## If you already know about Textmate Grammars 
 
-(So if you're like one of the 200 people on earth that have used textmate grammars)
+(So if you happen to be one of the approximately 200 people on earth that have used textmate grammars)
 Something like this in a tmLanguage.json file
 
 ```json
@@ -33,9 +33,6 @@ Something like this in a tmLanguage.json file
         {
           "include": "#evaluation_context"
         },
-        {
-          "include": "#c_conditional_context"
-        }
     ]
 }
 ```
@@ -48,7 +45,6 @@ Pattern.new(
     tag_as: "punctuation.separator.attribute",
     includes: [
         :evaluation_context,
-        :c_conditional_context,
     ],
 )
 ```
@@ -98,7 +94,7 @@ PatternRange.new(
 )
 ```
 
-To add something to the repository just do 
+To add something to the grammar's repository just do 
 
 ```ruby
 grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
@@ -106,13 +102,12 @@ grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
 
 Where this gets really powerful is that you can nest/reuse patterns.
 
-```
+```ruby
 smalltalk = Pattern.new(
     match: /blah\/blah\/blah/,
     tag_as: "punctuation.separator.attribute",
     includes: [
         :evaluation_context,
-        :c_conditional_context,
     ],
 )
 quote = Pattern.new(
@@ -152,7 +147,7 @@ Regex is pretty hard to read, so this repo uses a library to help.
 - `backreference(reference)` or `.backreference(reference)` adds a backreference
   - example `Pattern.new(match: /foo|bar/, reference: "foobar").backreference("foobar")` => `/(foo|bar)\1/`
 
-helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provide more info, or a variable that is either of those.
+helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provides more info, or a variable that is either of those.
 
 the hash provided to the helper patterns can have the following keys:
   - `match:` the regular expression that should be matched
