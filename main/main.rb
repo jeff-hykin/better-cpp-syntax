@@ -525,7 +525,7 @@ grammar = Grammar.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
-            includes: [ :evaluation_context, :c_conditional_context ]
+            includes: [ :evaluation_context, ]
         )
     grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
