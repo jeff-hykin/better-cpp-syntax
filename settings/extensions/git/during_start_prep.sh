@@ -1,6 +1,6 @@
 # copy in gitconfig before changing home var 
 # check if file exists
-if [ -f ""$HOME/.gitconfig"" ]
+if [ -f "$HOME/.gitconfig" ]
 then
     cp "$HOME/.gitconfig" "$FORNIX_HOME/.gitconfig" 2>/dev/null
 fi
