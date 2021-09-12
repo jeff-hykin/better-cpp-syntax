@@ -1,45 +1,308 @@
-: 'have to use the : (the do-nothing command) for comments because this script gets crushed into one line';
-:       ;
-: MacOS ;
-:       ;
-if [[ "$OSTYPE" = "darwin"* ]]; then;
-    full_version="$(sw_vers -productVersion)";
-    major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')";
-    minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')";
-    :                 ; 
-    : Big Sur or Newer;
-    :                 ;
-    if [ "$major_version" = "11" ]; then;
-        sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
-    elif [ "$major_version" -eq "10" ]; then;
-        : Catalina ;
-        if [ "$minor_version" = "15" ]; then;
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;
-        : 'Mojave, High Siera, Siera, and maybe older versions (Yosemite, Mavericks)' ;
-        else;
-            curl -L https://nixos.org/nix/install | sh -s -- --daemon;
-        fi;
-    else;
-        echo 'We tried to get you MacOS version by running `sw_vers -productVersion`';
-        echo '(which returns '"$full_version"')';
-        echo "Either 1. that value is empty 2. You're on an insanely old version 3. You're on a version way way in the future from when this script was made";
-    fi;
-fi;
+{ # <- Prevent execution if this script was only partially downloaded
 
-:       ;
-: Linux ;
-:       ;
-if [ "$OSTYPE" = "linux-gnu" ]; then;
-    curl -L https://nixos.org/nix/install | sh -s -- --daemon;
-fi;
+# dependencies (some depend on the OS): command, uname, echo, sed, sh, curl, sw_vers, pidof, whoami, mktemp, rm, basename, xz, mkdir, tar
 
-: manually update the environment ;
-if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]; then;
-    . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
-fi;
-if [ -f "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh" ]; then;
-    . "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh"
-fi;
-export PATH="$PATH:/nix/var/nix/profiles/default/bin/";
-echo "If you want additional information about installing nix see: https://nixos.org/manual/nix/stable/#chap-installation";
-echo ""
+# if nix doesnt exist
+if [ -z "$(command -v "nix")" ]
+then
+    #       
+    # MacOS 
+    #
+    if [ "$(uname)" = "Darwin" ]
+    then
+        debugging_info="$debugging_info$newline""I think you have a Mac because "'"$OSTYPE" = "darwin"*'" came back true"
+        full_version="$(sw_vers -productVersion)"
+        major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')"
+        minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')"
+        #                  
+        # Big Sur or Newer
+        #                 
+        if [ "$major_version" = "11" ]; then
+            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+        #                  
+        # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
+        #                 
+        elif [ "$major_version" -eq "10" ]; then
+            # Catalina
+            if [ "$minor_version" = "15" ]; then
+                sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+            # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
+            else
+                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+            fi
+        else
+            echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
+            echo '(which returns '"$full_version"')'
+            echo "Either 1. that value is empty 2. You're on an insanely old version 3. You're on a version way way in the future from when this script was made"
+        fi
+    # assuming Linux/POSIX if not on MacOS
+    else
+        # if curl doesnt exist, try to make it exist
+        if [ -z "$(command -v "curl")" ]
+        then
+            # if apt-get exists
+            if [ -n "$(command -v "apt-get")" ]
+            then
+                sudo apt-get update && sudo apt-get install curl
+            else
+                echo "it looks like you don't have curl, please install curl then re-run this script" 1>&2
+                echo "alternatively, to get nix, manually run the commands inside https://nixos.org/nix/install" 1>&2
+            fi
+        fi
+        
+        # if now curl exists
+        if [ -n "$(command -v "curl")" ]
+        then
+            # check if systemd exists
+            if pidof systemd
+            then
+                # multi-user install if systemd exists
+                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+            else
+                # single-user install if systemd exists
+                curl -L https://nixos.org/nix/install | sh -s
+            fi
+        fi
+    fi
+fi
+
+# if nix was not installed
+if ! [ -d "/nix/store" ]
+then
+    echo "" 1>&2
+    echo "Looks like there was a problem installing nix :/" 1>&2
+    echo "Hopefully there are error messages above" 1>&2
+    echo "If you want additional information about installing nix see: https://nixos.org/manual/nix/stable/#chap-installation" 1>&2
+# if nix was installed (hopefully successfully)
+else
+    # 
+    # manually update the shell environment 
+    # 
+    if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
+    then
+        . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+    fi
+    if [ -f "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh" ]
+    then
+        . "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh"
+    fi
+    export PATH="$PATH:/nix/var/nix/profiles/default/bin/"
+    
+    # if nix-env doesnt exist
+    if [ -z "$(command -v "nix-env")" ] || [ -z "$(command -v "nix-shell")" ]
+    then
+        echo "I dont see the nix-env or nix-shell command" 1>&2
+        echo "You might need to try closing/reopening your terminal and running this command again" 1>&2
+        echo "If you already did that, and you're still getting this message" 1>&2
+        echo "then you might need to uninstall and reinstall nix" 1>&2
+        echo "more instructions here: https://nixos.org/manual/nix/stable/#sect-single-user-installation" 1>&2
+    else
+        # 
+        # get git
+        # 
+        if [ -z "$(command -v "git")" ]
+        then
+            nix-env -i git
+        fi
+        
+        # 
+        # interactive setup
+        # 
+        # if git exists
+        # if inside a git repo
+        if [ -d "$PWD/.git" ]
+        then
+            echo "one moment please ..."
+            # run everything in a nix shell for reliability
+            nix-shell --quiet --packages bash git --run '
+                echo "It looks like you are inside an existing project"
+                # ask about mixing in another repository
+                question="Do you want to combine (mixin) another repository into this project? [y/n]";answer=""
+                while true; do
+                    echo "$question"; read response
+                    case "$response" in
+                        [Yy]* ) answer='yes'; break;;
+                        [Nn]* ) answer='no'; break;;
+                        * ) echo "Please answer yes or no";;
+                    esac
+                done
+                if [ "$answer" = "yes" ]
+                then
+                    # 
+                    # get repo URL
+                    # 
+                    repo_url="$([ -n "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
+                    echo "what the URL to repo would you like to mixin?"
+                    echo "(press enter to go with the default: $repo_url)"
+                    read answer
+                    if [ -n "$answer" ]
+                    then
+                        repo_url="$answer"
+                    fi
+                    
+                    # 
+                    # get branch
+                    # 
+                    branch_name="$([ -n "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
+                    echo "which branch would you like to mixin?"
+                    echo "(press enter to go with the default: $branch_name)"
+                    read answer
+                    if [ -n "$answer" ]
+                    then
+                        branch_name="$answer"
+                    fi
+                    
+                    # 
+                    # get mixin name
+                    # 
+                    name_for_upstream="@mixin"
+                    echo "inside this project what should we call this mixin source?"
+                    echo "(press enter to go with the default: $name_for_upstream)"
+                    read answer
+                    if [ -n "$answer" ]
+                    then
+                        name_for_upstream="$answer"
+                    fi
+                    
+                    # 
+                    # perform the mixin
+                    # 
+                    # clear out anything that used to be there
+                    git remote remove "$name_for_upstream" 2>/dev/null 1>/dev/null
+                    # add it as a remote and start merging
+                    git remote add "$name_for_upstream" "$repo_url" && \
+                        git fetch "$name_for_upstream" "$branch_name" && \
+                        git pull --allow-unrelated-histories "$name_for_upstream" "$branch" && \
+                        git submodule update --init --recursive
+                    
+                    # if failed
+                    if [ "$?" != "0" ]
+                    then
+                        echo "looks like git could not add that mixin"
+                        echo "make sure the URL and branch name are correct"
+                        echo "if they are correct, then hopefully there is error output above that"
+                        echo "will give you a better idea as to why git could not get the repo"
+                    else
+                        # check for conflicts
+                        if [ -n "$(git status | grep "You have unmerged paths.")" ]
+                        then
+                            echo ""
+                            echo "Looks like you have a merge conflict (no big deal)"
+                            echo "Get the merge finished, and the mixin will be complete!"
+                            echo "Not sure how to resolve a merge conflict?"
+                            echo "     how to resolve merge conflicts in VS Code: https://www.youtube.com/watch?v=QmKdodJU-js"
+                            echo "     how to resolve merge conflicts in command line: https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git"
+                        else
+                            echo ""
+                            echo "Looks like the mixin was successful!"
+                            echo "You can probably use `commands/start` to get into the project env now"
+                        fi
+                    fi
+                fi
+            '
+        # 
+        # setup or copy
+        # 
+        else
+            echo ""
+            echo ""
+            echo ""
+            echo "You're currently inside of:"
+            echo "    $PWD"
+            echo ""
+            echo "I'm going create a project folder inside this folder, okay?"
+            echo "(press enter to continue, Ctrl+C to cancel)"
+            read answer
+            
+            # 
+            # get repo URL
+            # 
+            repo_url="$([ -n "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
+            echo "What is the URL of the repository?"
+            echo "(press enter to go with the default: $repo_url)"
+            read answer
+            if [ -n "$answer" ]
+            then
+                repo_url="$answer"
+            fi
+            
+            # 
+            # get branch
+            # 
+            branch_name="$([ -n "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
+            echo "Which branch would you like to get?"
+            echo "(press enter to go with the default: $branch_name)"
+            read answer
+            if [ -n "$answer" ]
+            then
+                branch_name="$answer"
+            fi
+            
+            # 
+            # setup or copy
+            # 
+            newline='
+'
+            echo "Last question"
+            question="Do you want to setup or copy?${newline}    1) copy (when using a template or forking someones repo)${newline}    2) setup (your repo or your team's repo)";answer=''
+            while true; do
+                echo "$question"; read response
+                case "$response" in
+                    [1]* ) answer='copy'; break;;
+                    [2]* ) answer='setup'; break;;
+                    "copy" ) answer='copy'; break;;
+                    "setup" ) answer='setup'; break;;
+                    * ) echo "${newline}${newline}Please answer with a 1 or 2${newline}${newline}";;
+                esac
+            done
+            
+            folder_name="$(basename "$repo_url")"
+            # if setup
+            if [ "$answer" = "setup" ]
+            then
+                echo ""
+                echo "Setting up the '$branch_name' brach of $repo_url"
+                echo ""
+                git clone --branch "$branch_name" "$repo_url" "$folder_name" && \
+                    cd "$folder_name" && {
+                        # check if file exists
+                        if [ -f "./commands/start" ]
+                        then
+                            commands/start
+                        fi
+                    }
+            # if copy
+            else
+                if [ -e "$folder_name" ]
+                then
+                    echo "I was going to create the project in $folder_name"
+                    echo "but it looks like something named $folder_name"
+                    echo "already exists. Please move or delete it the re-run the command"
+                else
+                    echo ""
+                    echo "Creating new empty repository"
+                    echo ""
+                    mkdir -p "$folder_name"
+                    cd "$folder_name"
+                    git init && \
+                        echo "Copying the '$branch_name' branch of $repo_url" && \
+                        git pull "$repo_url" "$branch_name" && {
+                            echo "Project copied"
+                            # check if file exists
+                            if [ -f "./commands/start" ]
+                            then
+                                echo ""
+                                echo "Press enter to setup the project"
+                                read REPLY
+                                commands/start
+                            fi
+                        }
+                fi
+            fi
+            
+        fi
+    fi
+    
+fi
+
+} # end: <- Prevent execution if this script was only partially downloaded
