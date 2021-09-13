@@ -144,6 +144,7 @@ then
         printf '%s' "$FORNIX_FOLDER/.git/objects" > "$HOME/.cache/git_alternate_object_directories/$file_name"
         rm -f "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
         rm -rf "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
+        mkdir -p "$FORNIX_HOME/.cache/"
         ln -s "$HOME/.cache/git_alternate_object_directories" "$FORNIX_HOME/.cache/git_alternate_object_directories"
     fi
     
