@@ -65,15 +65,13 @@ export FORNIX_ARGS="$@"
 . "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/fornix/trigger" "$FORNIX_FOLDER/settings/during_start_prep"
 
 # create a dummy home folder to prevent any problems when starting up
-__temp_var__cache_folder="$FORNIX_FOLDER/settings/.cache"
-__temp_home="$__temp_var__cache_folder/home/"
-rm -rf "$__temp_home" > /dev/null
-mkdir -p "$__temp_home/.cache/"
+mkdir -p "$FORNIX_HOME/.cache/"
 # connect the nix cache to prevent duplicates
-# check if file exists
-if ! [ -d "$__temp_home/.cache/nix" ]
+rm -rf "$FORNIX_HOME/.cache/nix" 2>/dev/null
+rm -f "$FORNIX_HOME/.cache/nix" 2>/dev/null
+if [ -d "$HOME/.cache/nix/" ]
 then
-    ln -s "$HOME/.cache/nix/" "$__temp_home/.cache/nix" 
+    ln -s "$HOME/.cache/nix/" "$FORNIX_HOME/.cache/nix"
 fi
 
 # if there are arguments, treat it as a run command
@@ -86,9 +84,9 @@ if [[ -n "$FORNIX_ARGS" ]]
 then
     # FIXME: I think the single quotes need to be escaped from the arguments (need to iterate over them, escape each one with single quotes)
     # run single command
-    HOME="$__temp_home" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$__temp_var__nix_shell_file"
+    HOME="$FORNIX_HOME" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$__temp_var__nix_shell_file"
 else
-    HOME="$__temp_home" nix-shell --pure --command "zsh" "$__temp_var__nix_shell_file"
+    HOME="$FORNIX_HOME" nix-shell --pure --command "zsh" "$__temp_var__nix_shell_file"
 fi
 if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "exited the nix-shell environment"
