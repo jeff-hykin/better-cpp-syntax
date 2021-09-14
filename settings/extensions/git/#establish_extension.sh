@@ -150,7 +150,7 @@ then
         rm -f "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
         rm -rf "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
         mkdir -p "$FORNIX_HOME/.cache/"
-        ln -s "$HOME/.cache/git_alternate_object_directories" "$FORNIX_HOME/.cache/git_alternate_object_directories"
+        ln -s "$HOME/.cache/git_alternate_object_directories/" "$FORNIX_HOME/.cache/git_alternate_object_directories"
     fi
     
     # 
@@ -158,17 +158,20 @@ then
     # 
     if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
     then
-        # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-        for_each_item_in="$FORNIX_HOME/.cache/git_alternate_object_directories"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (cd "$for_each_item_in"; find "." -maxdepth 1 ! -path "." -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
-        do
-            each="$for_each_item_in/$each"
-            if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
-            then
-                GIT_ALTERNATE_OBJECT_DIRECTORIES="$(cat "$each")"
-            else
-                GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$(cat "$each")"
-            fi
-        done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+        if [ -d "$FORNIX_HOME/.cache/git_alternate_object_directories" ]
+        then
+            # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+            for_each_item_in="$FORNIX_HOME/.cache/git_alternate_object_directories"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (cd "$for_each_item_in" && find "." -maxdepth 1 ! -path "." -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+            do
+                each="$for_each_item_in/$each"
+                if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
+                then
+                    GIT_ALTERNATE_OBJECT_DIRECTORIES="$(cat "$each")"
+                else
+                    GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$(cat "$each")"
+                fi
+            done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+        fi
     fi
     # export it
     export GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES"
