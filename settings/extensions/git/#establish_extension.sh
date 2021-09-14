@@ -164,11 +164,18 @@ then
             for_each_item_in="$FORNIX_HOME/.cache/git_alternate_object_directories"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (cd "$for_each_item_in" && find "." -maxdepth 1 ! -path "." -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
             do
                 each="$for_each_item_in/$each"
-                if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
+                each_dir="$(cat "$each")"
+                # delete any invalid entries (happens when repos get moved or deleted)
+                if ! [ -d "$each_dir" ]
                 then
-                    GIT_ALTERNATE_OBJECT_DIRECTORIES="$(cat "$each")"
+                    rm -f "$each" 2>/dev/null
                 else
-                    GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$(cat "$each")"
+                    if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
+                    then
+                        GIT_ALTERNATE_OBJECT_DIRECTORIES="$each_dir"
+                    else
+                        GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$each_dir"
+                    fi
                 fi
             done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
         fi
