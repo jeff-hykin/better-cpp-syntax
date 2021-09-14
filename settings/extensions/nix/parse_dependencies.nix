@@ -284,7 +284,7 @@
                                 echo "replacing: HOME with FORNIX_HOME"
                             fi
                             mkdir -p "$FORNIX_HOME/.cache/"
-                            ln -s "$HOME/.cache/nix" "$FORNIX_HOME/.cache/" &>/dev/null
+                            ln -s "$HOME/.cache/nix/" "$FORNIX_HOME/.cache/" &>/dev/null
                             
                             # so make the home folder the same as the project folder
                             export HOME="$FORNIX_HOME"
