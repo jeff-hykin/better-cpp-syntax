@@ -1,9 +1,18 @@
 #!/usr/bin/env bash
     echo "commands:"
-    echo "    project"
-    tree "$FORNIX_COMMANDS_FOLDER/project" -C --dirsfirst -A -F --noreport | sed 's/^/        /' | sed -E 's/(\*|@)$/ /' | sed "1d"
+    # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+    for_each_item_in="$FORNIX_COMMANDS_FOLDER"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path "$for_each_item_in" -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+    do
+        # only skip the tools directory because it has wayyyy too much stuff in it
+        if [ -d "$each" ] && [ "$(basename "$each")" != "tools" ]
+        then
+            echo "    $(basename "$each")"
+            tree "$each" -C --dirsfirst -A -F --noreport | sed 's/^/     /' | sed -E 's/(\*|@)$/ /' | sed "1d"
+        fi
+    done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
     echo 
     echo "examples:"
+    echo "    run server"
     echo "    project clean"
     echo "    project commands"
     
