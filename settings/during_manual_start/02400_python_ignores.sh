@@ -1,1 +1,0 @@
-../extensions/python/commands/refresh_ignores
