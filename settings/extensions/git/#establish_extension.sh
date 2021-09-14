@@ -156,7 +156,6 @@ then
         rm -rf "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
         mkdir -p "$FORNIX_HOME/.cache/"
         ln -s "$HOME/.cache/git_alternate_object_directories/" "$FORNIX_HOME/.cache/git_alternate_object_directories"
-        exit
     fi
     
     # 
