@@ -58,11 +58,6 @@ relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_clean.sh"
 relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start_prep.sh" "$FORNIX_FOLDER/settings/during_start_prep/051_000_copy_git_config.sh"
 
 # 
-# connect during_start
-# 
-relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start.sh" "$FORNIX_FOLDER/settings/during_start/051_000_git_setup_subrepo_tool.sh"
-
-# 
 # connect commands
 # 
 relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/git"
