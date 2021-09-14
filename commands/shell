@@ -73,7 +73,7 @@ mkdir -p "$__temp_home/.cache/"
 # check if file exists
 if ! [ -d "$__temp_home/.cache/nix" ]
 then
-    ln -s "$HOME/.cache/nix" "$__temp_home/.cache/nix" 
+    ln -s "$HOME/.cache/nix/" "$__temp_home/.cache/nix" 
 fi
 
 # if there are arguments, treat it as a run command
