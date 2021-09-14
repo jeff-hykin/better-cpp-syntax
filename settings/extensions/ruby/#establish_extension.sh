@@ -33,7 +33,12 @@ relative_link__file_to__() {
     __temp_var__relative_part="$(realpath "$(dirname "$existing_filepath")" --relative-to="$(dirname "$target_filepath")" --canonicalize-missing)"
     __temp_var__relative_path="$__temp_var__relative_part/$(basename "$existing_filepath")"
     # link using the relative path
-    ln -s "$__temp_var__relative_path" "$target_filepath"
+    if [ -d "$existing_filepath" ]
+    then
+        ln -s "$__temp_var__relative_path/" "$target_filepath"
+    else
+        ln -s "$__temp_var__relative_path" "$target_filepath"
+    fi
     unset __temp_var__relative_path
     unset __temp_var__relative_part
     unset existing_filepath
