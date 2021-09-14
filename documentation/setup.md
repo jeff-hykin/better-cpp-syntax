@@ -1,8 +1,9 @@
 # Auto Setup
 
 TLDR:
-- install nix
-- run `commands/start` (which uses nix to install everything)
+- pick where to save the project
+- run a script 
+- done
 - \* some extra work if you have Windows
 
 
@@ -49,6 +50,7 @@ Altertive instructions if GUI is needed (matplotlib, tkinter, qt, etc)
         - `commands/start`
         - (That comand should explain everything else about the project)
 
-* After the intial setup, run the following to get back into the project environment
-    - `cd wherever-you-just-cloned-the-repository`
-    - `commands/start`
+
+After you've finished working and close the terminal, you can always return to project environment by doing
+- `cd wherever-you-put-the-project`
+- `commands/start`
