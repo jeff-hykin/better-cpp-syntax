@@ -50,7 +50,6 @@ Altertive instructions if GUI is needed (matplotlib, tkinter, qt, etc)
         - `commands/start`
         - (That comand should explain everything else about the project)
 
-
 After you've finished working and close the terminal, you can always return to project environment by doing
 - `cd wherever-you-put-the-project`
 - `commands/start`

@@ -48,9 +48,9 @@ relative_link__file_to__() {
 # 
 # connect during_purge
 # 
-link_extension_file__to__ "during_purge.sh" "during_purge/580_mac_library_caches.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_purge.sh" "$FORNIX_FOLDER/settings/during_purge/580_mac_library_caches.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "during_start_prep/049_000_link_keychain.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start_prep.sh" "$FORNIX_FOLDER/settings/during_start_prep/049_000_link_keychain.sh"

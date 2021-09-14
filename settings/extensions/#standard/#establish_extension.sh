@@ -58,8 +58,8 @@ mkdir -p "$FORNIX_FOLDER/settings/during_clean/"
 # 
 # connect during_start/during_manual_start
 # 
-link_extension_file__to__ "commands/tools/fornix/ensure_all_commands_executable" "during_start/081_000__ensure_all_commands_executable__.sh"
-link_extension_file__to__ "commands/tools/fornix/ensure_all_commands_executable" "during_manual_start/081_000__ensure_all_commands_executable__.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/tools/fornix/ensure_all_commands_executable" "$FORNIX_FOLDER/settings/during_start/081_000__ensure_all_commands_executable__.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/tools/fornix/ensure_all_commands_executable" "$FORNIX_FOLDER/settings/during_manual_start/081_000__ensure_all_commands_executable__.sh"
 
 # 
 # connect commands
@@ -71,9 +71,9 @@ if ! [[ -d "$FORNIX_COMMANDS_FOLDER" ]]; then
     # make the folder
     mkdir -p "$FORNIX_COMMANDS_FOLDER"
 fi
-link_extension_file__to__ "commands/tools/fornix"    "$FORNIX_COMMANDS_FOLDER/tools/fornix"
-link_extension_file__to__ "commands/tools/string"      "$FORNIX_COMMANDS_FOLDER/tools/string"
-link_extension_file__to__ "commands/tools/file_system" "$FORNIX_COMMANDS_FOLDER/tools/file_system"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/tools/fornix"      "$FORNIX_COMMANDS_FOLDER/tools/fornix"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/tools/string"      "$FORNIX_COMMANDS_FOLDER/tools/string"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands/tools/file_system" "$FORNIX_COMMANDS_FOLDER/tools/file_system"
 
 # 
 # flush broken symlinks (for when extensions are changed/removed)

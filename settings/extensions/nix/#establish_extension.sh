@@ -54,24 +54,24 @@ relative_link__file_to__() {
 # 
 # connect shell.nix
 # 
-link_extension_file__to__ "shell.nix" "requirements/shell.nix"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/shell.nix" "$FORNIX_FOLDER/settings/requirements/shell.nix"
 
 # 
 # connect nix.toml
 # 
-link_extension_file__to__ "nix.toml" "requirements/nix.toml"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/nix.toml" "$FORNIX_FOLDER/settings/requirements/nix.toml"
 
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/nix"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/nix"
 
 # 
 # connect during_clean
 # 
-link_extension_file__to__ "during_clean.sh" "during_clean/450_nix.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_clean.sh" "$FORNIX_FOLDER/settings/during_clean/450_nix.sh"
 
 # 
 # connect during_start
 # 
-link_extension_file__to__ "during_start.sh" "during_start/010_000__ssl_fix__.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start.sh" "$FORNIX_FOLDER/settings/during_start/010_000__ssl_fix__.sh"
