@@ -14,7 +14,6 @@
     node -e 'try { Object.keys(require(process.env.FORNIX_FOLDER+"/package.json").scripts).forEach(each=>console.log(`    npm run ${each}`))}catch(e){}'
     echo 
     echo "examples:"
-    echo "    run server"
     echo "    project clean"
     echo "    project commands"
     echo "    npm run test"
