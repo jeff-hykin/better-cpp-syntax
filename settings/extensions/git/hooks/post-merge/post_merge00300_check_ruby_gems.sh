@@ -1,1 +1,0 @@
-"$FORNIX_COMMANDS_FOLDER/tools/ruby/check_gem_modules"

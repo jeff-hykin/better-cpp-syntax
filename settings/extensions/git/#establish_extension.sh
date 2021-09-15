@@ -3,51 +3,64 @@
 # 
 # this is just a helper (common to most all extensions)
 # 
-link_extension_file__to__() {
-    local_file="$1"
-    target_file="$2"
+relative_link__file_to__() {
+    existing_filepath="$1"
+    target_filepath="$2"
     
-    # check for absolute path, if not absolute make it relative to project/settings
-    case "$target_file" in
-        /*) __temp_var__is_absolute_path="true" ;;
-        *) : ;;
+    # 
+    # make existing_filepath absolute
+    # 
+    case "$existing_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) existing_filepath="$FORNIX_FOLDER/$existing_filepath" ;;
     esac
-    if ! [ "$__temp_var__is_absolute_path" = "true" ]
-    then
-        __temp_var__target_full_path="$FORNIX_FOLDER/settings/$target_file"
-    else
-        __temp_var__target_full_path="$target_file"
-    fi
-    unset __temp_var__is_absolute_path
+    
+    # 
+    # make target_filepath absolute
+    # 
+    case "$target_filepath" in
+        # if absolute
+        /*) : ;;
+        # if relative
+        *) target_filepath="$FORNIX_FOLDER/$target_filepath" ;;
+    esac
     
     # remove existing things in the way
-    rm -f "$__temp_var__target_full_path" 2>/dev/null
-    rm -rf "$__temp_var__target_full_path" 2>/dev/null
+    rm -f "$target_filepath" 2>/dev/null
+    rm -rf "$target_filepath" 2>/dev/null
     # make sure parent folder exists
-    mkdir -p "$(dirname "$__temp_var__target_full_path")"
-    # link the file (relative link, which it what makes it complicated)
-    __temp_var__path_from_target_to_local_file="$(realpath "$__THIS_FORNIX_EXTENSION_FOLDERPATH__" --relative-to="$(dirname "$__temp_var__target_full_path")" --canonicalize-missing)/$local_file"
-    ln -s "$__temp_var__path_from_target_to_local_file" "$__temp_var__target_full_path"
-    unset __temp_var__path_from_target_to_local_file
-    
-    unset local_file
-    unset target_file
+    mkdir -p "$(dirname "$target_filepath")"
+    __temp_var__relative_part="$(realpath "$(dirname "$existing_filepath")" --relative-to="$(dirname "$target_filepath")" --canonicalize-missing)"
+    __temp_var__relative_path="$__temp_var__relative_part/$(basename "$existing_filepath")"
+    # link using the relative path
+    if [ -d "$existing_filepath" ]
+    then
+        ln -s "$__temp_var__relative_path/" "$target_filepath"
+    else
+        ln -s "$__temp_var__relative_path" "$target_filepath"
+    fi
+    unset __temp_var__relative_path
+    unset __temp_var__relative_part
+    unset existing_filepath
+    unset target_filepath
 }
 
 # 
 # connect during_clean
 # 
-link_extension_file__to__ "during_clean.sh" "during_clean/500_git.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_clean.sh" "$FORNIX_FOLDER/settings/during_clean/500_git.sh"
 
 # 
 # connect during_start_prep
 # 
-link_extension_file__to__ "during_start_prep.sh" "during_start_prep/051_000_copy_git_config.sh"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/during_start_prep.sh" "$FORNIX_FOLDER/settings/during_start_prep/051_000_copy_git_config.sh"
 
 # 
 # connect commands
 # 
-link_extension_file__to__ "commands" "$FORNIX_COMMANDS_FOLDER/tools/git"
+relative_link__file_to__ "$__THIS_FORNIX_EXTENSION_FOLDERPATH__/commands" "$FORNIX_COMMANDS_FOLDER/tools/git"
 
 # 
 # config
@@ -136,7 +149,8 @@ then
         printf '%s' "$FORNIX_FOLDER/.git/objects" > "$HOME/.cache/git_alternate_object_directories/$file_name"
         rm -f "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
         rm -rf "$FORNIX_HOME/.cache/git_alternate_object_directories" 2>/dev/null
-        ln -s "$HOME/.cache/git_alternate_object_directories" "$FORNIX_HOME/.cache/git_alternate_object_directories"
+        mkdir -p "$FORNIX_HOME/.cache/"
+        ln -s "$HOME/.cache/git_alternate_object_directories/" "$FORNIX_HOME/.cache/git_alternate_object_directories"
     fi
     
     # 
@@ -144,11 +158,27 @@ then
     # 
     if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
     then
-        # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
-        for_each_item_in="$FORNIX_HOME/.cache/git_alternate_object_directories"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (find "$for_each_item_in" -maxdepth 1 ! -path "$for_each_item_in" -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
-        do
-            GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$each"
-        done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+        if [ -d "$FORNIX_HOME/.cache/git_alternate_object_directories" ]
+        then
+            # this loop is so stupidly complicated because of many inherent-to-shell reasons, for example: https://stackoverflow.com/questions/13726764/while-loop-subshell-dilemma-in-bash
+            for_each_item_in="$FORNIX_HOME/.cache/git_alternate_object_directories"; [ -z "$__NESTED_WHILE_COUNTER" ] && __NESTED_WHILE_COUNTER=0;__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER + 1))"; trap 'rm -rf "$__temp_var__temp_folder"' EXIT; __temp_var__temp_folder="$(mktemp -d)"; mkfifo "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER"; (cd "$for_each_item_in" && find "." -maxdepth 1 ! -path "." -print0 2>/dev/null | sort -z > "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER" &); while read -d $'\0' each
+            do
+                each="$for_each_item_in/$each"
+                each_dir="$(cat "$each")"
+                # delete any invalid entries (happens when repos get moved or deleted)
+                if ! [ -d "$each_dir" ]
+                then
+                    rm -f "$each" 2>/dev/null
+                else
+                    if [ -z "$GIT_ALTERNATE_OBJECT_DIRECTORIES" ]
+                    then
+                        GIT_ALTERNATE_OBJECT_DIRECTORIES="$each_dir"
+                    else
+                        GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES:$each_dir"
+                    fi
+                fi
+            done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
+        fi
     fi
     # export it
     export GIT_ALTERNATE_OBJECT_DIRECTORIES="$GIT_ALTERNATE_OBJECT_DIRECTORIES"
