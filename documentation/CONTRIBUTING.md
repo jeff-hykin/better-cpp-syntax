@@ -103,16 +103,17 @@ grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
 Where this gets really powerful is that you can nest/reuse patterns.
 
 ```ruby
+quote = Pattern.new(
+    match: /"/,
+    tag_as: "quote",
+)
+
 smalltalk = Pattern.new(
     match: /blah\/blah\/blah/,
     tag_as: "punctuation.separator.attribute",
     includes: [
         :evaluation_context,
     ],
-)
-quote = Pattern.new(
-    match: /"/,
-    tag_as: "quote",
 )
 
 phrase = Pattern.new(
@@ -156,7 +157,6 @@ the hash provided to the helper patterns can have the following keys:
   - `comment:` unused, use regular ruby comments
   - `should_partial_match`, `should_not_partial_match`, `should_fully_match`, and `should_not_fully_match` see unit testing
 
-look{Ahead,Behind}{ToAvoid,For} helpers only accept regular expressions use `.without_numbered_capture_groups` to convert a pattern to a regular expression
 
 ### PatternRange
 `PatternRange.new` is used to create a begin/end pattern rule.
