@@ -145,8 +145,7 @@ else
                     echo "$light_green"
                     echo "What is the URL of the repository?"
                     cyan="\e[0;36m"
-                    echo "$cyan"
-                    echo "(press enter to go with the default: $repo)"
+                    echo "${cyan}(press enter to go with the default: $repo)"
                     color_reset="\e[0m"
                     echo "$color_reset"
                     read answer
@@ -166,8 +165,7 @@ else
                     echo "$light_green"
                     echo "Which branch would you like to get?"
                     cyan="\e[0;36m"
-                    echo "$cyan"
-                    echo "(press enter to go with the default: $branch)"
+                    echo "${cyan}(press enter to go with the default: $branch)"
                     color_reset="\e[0m"
                     echo "$color_reset"
                     read answer
@@ -185,8 +183,7 @@ else
                 echo "$light_green"
                 echo "inside this project what should we call this mixin source?"
                 cyan="\e[0;36m"
-                echo "$cyan"
-                echo "(press enter to go with the default: $name_for_upstream)"
+                echo "${cyan}(press enter to go with the default: $name_for_upstream)"
                 color_reset="\e[0m"
                 echo "$color_reset"
                 read answer
@@ -238,7 +235,11 @@ else
                     else
                         echo ""
                         echo "Looks like the mixin was successful!"
-                        echo "You can probably use `commands/start` to get into the project env now"
+                        # check if file exists
+                        if [ -f "./commands/start" ]
+                        then
+                            echo 'You can run `commands/start` to get into the project environment now'
+                        fi
                     fi
                 fi
             fi
@@ -276,8 +277,7 @@ else
                 echo "$light_green"
                 echo "What is the URL of the repository?"
                 cyan="\e[0;36m"
-                echo "$cyan"
-                echo "(press enter to go with the default: $repo)"
+                echo "${cyan}(press enter to go with the default: $repo)"
                 color_reset="\e[0m"
                 echo "$color_reset"
                 read answer
@@ -297,8 +297,7 @@ else
                 echo "$light_green"
                 echo "Which branch would you like to get?"
                 cyan="\e[0;36m"
-                echo "$cyan"
-                echo "(press enter to go with the default: $branch)"
+                echo "${cyan}(press enter to go with the default: $branch)"
                 color_reset="\e[0m"
                 echo "$color_reset"
                 read answer
