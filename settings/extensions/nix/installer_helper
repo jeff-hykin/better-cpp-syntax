@@ -125,15 +125,15 @@ else
             export repo
             export branch
             # run everything in a nix shell for reliability
-            nix-shell --quiet --packages bash git --run '
+            nix-shell --quiet --packages bash git --run ' bash -c '"'"'
                 echo "It looks like you are inside an existing project"
                 # ask about mixing in another repository
                 question="Do you want to combine (mixin) another repository into this project? [y/n]";answer=""
                 while true; do
                     echo "$question"; read response
                     case "$response" in
-                        [Yy]* ) answer='yes'; break;;
-                        [Nn]* ) answer='no'; break;;
+                        [Yy]* ) answer="yes"; break;;
+                        [Nn]* ) answer="no"; break;;
                         * ) echo "Please answer yes or no";;
                     esac
                 done
@@ -243,7 +243,7 @@ else
                         fi
                     fi
                 fi
-            '
+            '"'"''
         # 
         # setup or copy
         # 
