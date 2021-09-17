@@ -117,7 +117,13 @@ else
         # if inside a git repo
         if [ -d "$PWD/.git" ]
         then
+            blue="\e[0;94m"
+            echo "$blue"
             echo "one moment please ..."
+            color_reset="\e[0m"
+            echo "$color_reset"
+            export repo
+            export branch
             # run everything in a nix shell for reliability
             nix-shell --quiet --packages bash git --run '
                 echo "It looks like you are inside an existing project"
