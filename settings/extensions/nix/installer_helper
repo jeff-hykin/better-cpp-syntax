@@ -131,7 +131,7 @@ else
                     # 
                     # get repo URL
                     # 
-                    repo_url="$([ -n "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
+                    repo_url="$([ -z "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
                     echo "what the URL to repo would you like to mixin?"
                     echo "(press enter to go with the default: $repo_url)"
                     read answer
@@ -143,7 +143,7 @@ else
                     # 
                     # get branch
                     # 
-                    branch_name="$([ -n "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
+                    branch_name="$([ -z "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
                     echo "which branch would you like to mixin?"
                     echo "(press enter to go with the default: $branch_name)"
                     read answer
@@ -217,7 +217,7 @@ else
             # 
             # get repo URL
             # 
-            repo_url="$([ -n "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
+            repo_url="$([ -z "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
             echo "What is the URL of the repository?"
             echo "(press enter to go with the default: $repo_url)"
             read answer
@@ -229,7 +229,7 @@ else
             # 
             # get branch
             # 
-            branch_name="$([ -n "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
+            branch_name="$([ -z "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
             echo "Which branch would you like to get?"
             echo "(press enter to go with the default: $branch_name)"
             read answer
