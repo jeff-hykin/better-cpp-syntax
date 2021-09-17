@@ -128,28 +128,31 @@ else
                 done
                 if [ "$answer" = "yes" ]
                 then
-                    # 
-                    # get repo URL
-                    # 
-                    repo_url="$([ -z "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
-                    echo "what the URL to repo would you like to mixin?"
-                    echo "(press enter to go with the default: $repo_url)"
-                    read answer
-                    if [ -n "$answer" ]
+                    if [ -z "$repo" ]
                     then
-                        repo_url="$answer"
+                        repo="https://github.com/jeff-hykin/fornix"
+                        echo "What is the URL of the repository?"
+                        echo "(press enter to go with the default: $repo)"
+                        read answer
+                        if [ -n "$answer" ]
+                        then
+                            repo="$answer"
+                        fi
                     fi
                     
                     # 
                     # get branch
                     # 
-                    branch_name="$([ -z "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
-                    echo "which branch would you like to mixin?"
-                    echo "(press enter to go with the default: $branch_name)"
-                    read answer
-                    if [ -n "$answer" ]
+                    if [ -z "$branch" ]
                     then
-                        branch_name="$answer"
+                        branch="master"
+                        echo "Which branch would you like to get?"
+                        echo "(press enter to go with the default: $branch)"
+                        read answer
+                        if [ -n "$answer" ]
+                        then
+                            branch="$answer"
+                        fi
                     fi
                     
                     # 
@@ -170,8 +173,8 @@ else
                     # clear out anything that used to be there
                     git remote remove "$name_for_upstream" 2>/dev/null 1>/dev/null
                     # add it as a remote and start merging
-                    git remote add "$name_for_upstream" "$repo_url" && \
-                        git fetch "$name_for_upstream" "$branch_name" && \
+                    git remote add "$name_for_upstream" "$repo" && \
+                        git fetch "$name_for_upstream" "$branch" && \
                         git pull --allow-unrelated-histories "$name_for_upstream" "$branch" && \
                         git submodule update --init --recursive
                     
@@ -217,25 +220,31 @@ else
             # 
             # get repo URL
             # 
-            repo_url="$([ -z "$1" ] && printf '%s' "$1" || printf '%s' "https://github.com/jeff-hykin/fornix" )"
-            echo "What is the URL of the repository?"
-            echo "(press enter to go with the default: $repo_url)"
-            read answer
-            if [ -n "$answer" ]
+            if [ -z "$repo" ]
             then
-                repo_url="$answer"
+                repo="https://github.com/jeff-hykin/fornix"
+                echo "What is the URL of the repository?"
+                echo "(press enter to go with the default: $repo)"
+                read answer
+                if [ -n "$answer" ]
+                then
+                    repo="$answer"
+                fi
             fi
             
             # 
             # get branch
             # 
-            branch_name="$([ -z "$2" ] && printf '%s' "$2" || printf '%s' "master" )"
-            echo "Which branch would you like to get?"
-            echo "(press enter to go with the default: $branch_name)"
-            read answer
-            if [ -n "$answer" ]
+            if [ -z "$branch" ]
             then
-                branch_name="$answer"
+                branch="master"
+                echo "Which branch would you like to get?"
+                echo "(press enter to go with the default: $branch)"
+                read answer
+                if [ -n "$answer" ]
+                then
+                    branch="$answer"
+                fi
             fi
             
             # 
@@ -256,14 +265,14 @@ else
                 esac
             done
             
-            folder_name="$(basename "$repo_url")"
+            folder_name="$(basename "$repo")"
             # if setup
             if [ "$answer" = "setup" ]
             then
                 echo ""
-                echo "Setting up the '$branch_name' brach of $repo_url"
+                echo "Setting up the '$branch' brach of $repo"
                 echo ""
-                git clone --branch "$branch_name" "$repo_url" "$folder_name" && \
+                git clone --branch "$branch" "$repo" "$folder_name" && \
                     cd "$folder_name" && {
                         # check if file exists
                         if [ -f "./commands/start" ]
@@ -285,8 +294,8 @@ else
                     mkdir -p "$folder_name"
                     cd "$folder_name"
                     git init && \
-                        echo "Copying the '$branch_name' branch of $repo_url" && \
-                        git pull "$repo_url" "$branch_name" && {
+                        echo "Copying the '$branch' branch of $repo" && \
+                        git pull "$repo" "$branch" && {
                             echo "Project copied"
                             # check if file exists
                             if [ -f "./commands/start" ]
