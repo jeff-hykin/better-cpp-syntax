@@ -69,6 +69,18 @@ then
     # 
     # check that realpath exists and works
     # 
+    
+    # if realpath doesnt exist, try to install it with nix-env
+    if [ -z "$(command -v "realpath")" ]
+    then
+        # if nix-env exists
+        if [ -n "$(command -v "nix-env")" ]
+        then
+            # this is the 21.05 release
+            nix-env -i coreutils -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/7e9b0dff974c89e070da1ad85713ff3c20b0ca97.tar.gz
+        fi
+    fi
+    
     __temp_var__realpath_works=""
     # if realpath exists
     if [ -n "$(command -v "realpath")" ]
