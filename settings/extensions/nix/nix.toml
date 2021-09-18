@@ -47,11 +47,8 @@
 # 
 # 
 # Note: most projects need these, 
-# and if you need them for one project nix has a shared-memory
-# so needing them for one project is the same as needing them for 
-# all your projects
-# comment these out in a situation such as deploying a project 
-# to a minimal server that doesn't need C/C++ build tools
+# and if you need them for one project nix has a shared-memory across projects
+# comment these out in a situation such as deploying a project to a minimal server
 
 # 
 # Linux
@@ -257,6 +254,9 @@ load = [ "zip",]
 
 [[packages]]
 load = [ "findutils",]
+
+[[packages]]
+load = [ "curl",]
 
 [[packages]]
 load = [ "unixtools", "arp",]
