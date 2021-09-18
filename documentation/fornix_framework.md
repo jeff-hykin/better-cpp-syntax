@@ -30,14 +30,12 @@ Tip2: Most of the commands use bash, but they don't have to! For example, if the
 - First search for the name of your tool on [here](https://search.nixos.org/packages)
     - For example, searching `python`, you should see results like  `pythonFull`, `python39`, `python37`, etc
     - Sometimes you will see a name with a dot, like `unixtools.ps` or `python39Packages.opencv4`
-- Open the `settings/requirements/nix.toml` file in the project
+- Open the `settings/requirements/system_tools.toml` file in the project
     - go to the very bottom, add some newlines
-    - if we wanted to add `python39` we would put
-    - `[[packages]]`
-    - `load = [ "python39",]`
-    - if the name has a dot in it (ex: `unixtools.ps`) we would do
-    - `[[packages]]`
-    - `load = [ "unixtools", "ps", ]`
+    - if we wanted to add `python39` we would put:
+        - `[[packages]]`<br>`load = [ "python39",]`
+    - if the name has a dot in it (ex: `python39Packages.opencv4`) we would do:
+        - `[[packages]]`<br>`load = [ "unixtools", "ps", ]`
 - Then start (or exit and restart) your environment! (`commands/start`)
 - Now the exact version of that tool will be available (ex: `python --version` should print out python 3.9)
 

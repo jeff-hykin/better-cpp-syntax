@@ -2,9 +2,82 @@
 
 # dependencies (some depend on the OS): command, uname, echo, sed, sh, curl, sw_vers, pidof, whoami, mktemp, rm, basename, xz, mkdir, tar
 
+# setup some helpers
+newline='
+'
+light_yellow="\e[0;1;33m"
+light_purple="\e[0;1;35m"
+light_green="\e[0;1;32m"
+light_red="\e[0;1;31m"
+cyan="\e[0;36m"
+color_reset="\e[0m"
+
+# saftey/cleanup
+# if trap exists
+if [ -n "$(command -v "trap")" ]
+then
+    trap 'unset repo; unset branch; unset mixin_remote_name; return 0' INT TERM
+fi
+        
 # if nix doesnt exist
 if [ -z "$(command -v "nix")" ]
 then
+    # check for root
+    if [ "$(whoami)" = "root" ]
+    then
+        echo "$light_yellow"
+        echo "looks like you're logged in as root"
+        echo "sadly nix can't install on the root user"
+        echo "please use a regular user, then re-run this script"
+        echo "$color_reset"
+        # if users exists
+        if [ -n "$(command -v "users")" ]
+        then
+            if [ -n "$(users)" ] && [ "$(users)" != "root" ]
+            then
+                echo "the available users are:"
+                users
+                echo 
+                echo "you should be able to run ${cyan}su ${light_yellow}USER_NAME${color_reset}"
+                echo "to login as one of those users"
+            else
+                echo ""
+                echo "it looks like this system doesn't have any regular users"
+                
+                # if useradd exists
+                if [ -n "$(command -v "useradd")" ]
+                then
+                    question="do you want me to make a regular user for you? [y/n]";answer=''
+                    while true; do
+                        echo "$question"; read response
+                        case "$response" in
+                            [Yy]* ) answer='yes'; break;;
+                            [Nn]* ) answer='no'; break;;
+                            * ) echo "Please answer yes or no.";;
+                        esac
+                    done
+                    
+                    if [ "$answer" = 'yes' ]; then
+                        echo "${light_purple}Enter a username:${color_reset}"
+                        read username
+                        if sudo useradd --create-home "$username" --password "password" --groups sudo && sudo passwd "$username"
+                        then
+                            echo ""
+                            echo "user created successfully"
+                            echo "run ${cyan}sudo passwd '${light_yellow}YOUR_PASSWORD${cyan}'${color_reset} to set the password"
+                        else
+                            echo ""
+                            echo "Sorry, there was an error when creating the user"
+                            echo "I used this command: ${cyan}sudo useradd --create-home "'"'"$username"'"'" --password 'password' --groups sudo${color_reset}"
+                        fi
+                    else
+                        echo "Okay"
+                    fi
+                fi
+                
+            fi
+        fi
+    fi
     #       
     # MacOS 
     #
@@ -91,10 +164,8 @@ else
     # if nix-env doesnt exist
     if [ -z "$(command -v "nix-env")" ] || [ -z "$(command -v "nix-shell")" ]
     then
-        light_yellow="\e[0;1;33m"
         echo "$light_yellow"
         echo "Small issue:"
-        color_reset="\e[0m"
         echo "$color_reset"
         echo "    I dont see the nix-env or nix-shell command" 1>&2
         echo "    You might need to try closing/reopening your terminal and running this command again" 1>&2
@@ -117,16 +188,14 @@ else
         # if inside a git repo
         if [ -d "$PWD/.git" ]
         then
+            [ -n "$(command -v "clear")" ] && clear
             blue="\e[0;94m"
             echo "$blue"
             echo "one moment please ..."
-            color_reset="\e[0m"
             echo "$color_reset"
             # run everything in a nix shell for reliability
-            echo "It looks like you are inside an existing project"
+            echo "It looks like you are inside an existing project: ($PWD)"
             # ask about mixing in another repository
-            light_green="\e[0;1;32m"
-            color_reset="\e[0m"
             question="${light_green}Do you want to combine (mixin) another repository into this project? [y/n]${color_reset}";answer=""
             while true; do
                 echo "$question"; read response
@@ -136,17 +205,24 @@ else
                     * ) echo "Please answer yes or no";;
                 esac
             done
+            echo ""
+            if [ "$answer" = "no" ]
+            then
+                echo "okay"
+                # check if file exists
+                if [ -f "./commands/start" ]
+                then
+                    echo "You can run ${cyan}commands/start${color_reset} to get into the current project environment"
+                fi
+            fi
             if [ "$answer" = "yes" ]
             then
                 if [ -z "$repo" ]
                 then
                     repo="https://github.com/jeff-hykin/fornix"
-                    light_green="\e[0;1;32m"
                     echo "$light_green"
                     echo "What is the URL of the repository?"
-                    cyan="\e[0;36m"
                     echo "${cyan}(press enter to go with the default: $repo)"
-                    color_reset="\e[0m"
                     echo "$color_reset"
                     read answer
                     if [ -n "$answer" ]
@@ -161,12 +237,9 @@ else
                 if [ -z "$branch" ]
                 then
                     branch="master"
-                    light_green="\e[0;1;32m"
                     echo "$light_green"
                     echo "Which branch would you like to get?"
-                    cyan="\e[0;36m"
                     echo "${cyan}(press enter to go with the default: $branch)"
-                    color_reset="\e[0m"
                     echo "$color_reset"
                     read answer
                     if [ -n "$answer" ]
@@ -178,67 +251,72 @@ else
                 # 
                 # get mixin name
                 # 
-                name_for_upstream="@mixin"
-                light_green="\e[0;1;32m"
-                echo "$light_green"
-                echo "inside this project what should we call this mixin source?"
-                cyan="\e[0;36m"
-                echo "${cyan}(press enter to go with the default: $name_for_upstream)"
-                color_reset="\e[0m"
-                echo "$color_reset"
-                read answer
-                if [ -n "$answer" ]
+                if [ -z "$mixin_remote_name" ]
                 then
-                    name_for_upstream="$answer"
+                    mixin_remote_name="@mixin"
+                    echo ""
+                    echo "(advanced: press enter to skip)"
+                    echo "    When mixing-in another repo, a remote source is added to git"
+                    echo "    If you want the git remote to be called something other than $mixin_remote_name"
+                    echo "    enter the name now (if not, press enter to continue)"
+                    echo "$color_reset"
+                    read answer
+                    if [ -n "$answer" ]
+                    then
+                        mixin_remote_name="$answer"
+                    fi
+                    [ -n "$(command -v "clear")" ] && clear
                 fi
                 
                 # 
                 # perform the mixin
                 # 
                 # clear out anything that used to be there
-                git remote remove "$name_for_upstream" 2>/dev/null 1>/dev/null
+                git remote remove "$mixin_remote_name" 2>/dev/null 1>/dev/null
                 # add it as a remote and start merging
-                git remote add "$name_for_upstream" "$repo" && \
-                    git fetch "$name_for_upstream" "$branch" && \
-                    git pull --allow-unrelated-histories "$name_for_upstream" "$branch" && \
+                git remote add "$mixin_remote_name" "$repo" && \
+                    git fetch "$mixin_remote_name" "$branch" && \
+                    git pull --allow-unrelated-histories "$mixin_remote_name" "$branch" && \
                     git submodule update --init --recursive
                 
                 # if failed
                 if [ "$?" != "0" ]
                 then
-                    light_red="\e[0;1;31m"
                     echo "$light_red"
                     echo "There was a problem :/"
+                    echo "$color_reset"
                     echo "    looks like git could not add that mixin"
                     echo "    make sure the URL and branch name are correct"
                     echo "    if they are correct, then hopefully there is error output above that"
                     echo "    will give you a better idea as to why git could not get the repo"
+                    echo '    here is the command that had an error:
+        git remote add '"'"$mixin_remote_name'"' '"'"$repo'"' && \
+            git fetch '"'"$mixin_remote_name'"' '"'"$branch'"' && \
+            git pull --allow-unrelated-histories '"'"$mixin_remote_name'"' '"'"$branch'"' && \
+            git submodule update --init --recursive
+                    '
                 else
                     # check for conflicts
                     if [ -n "$(git status | grep "You have unmerged paths.")" ]
                     then
                         echo ""
-                        light_yellow="\e[0;1;33m"
                         echo "$light_yellow"
                         echo "Looks like you have a merge conflict"
-                        color_reset="\e[0m"
                         echo "$color_reset"
                         echo "(no big deal)"
                         echo "Get the merge finished, and the mixin will be complete!"
-                        light_purple="\e[0;1;35m"
                         echo "$light_purple"
                         echo "Not sure how to resolve a merge conflict?"
-                        color_reset="\e[0m"
                         echo "$color_reset"
                         echo "     how to resolve merge conflicts in VS Code: https://www.youtube.com/watch?v=QmKdodJU-js"
                         echo "     how to resolve merge conflicts in command line: https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git"
                     else
                         echo ""
-                        echo "Looks like the mixin was successful!"
+                        echo "${light_green}Looks like the mixin was successful!${color_reset}"
                         # check if file exists
                         if [ -f "./commands/start" ]
                         then
-                            echo 'You can run `commands/start` to get into the project environment now'
+                            echo "You can run ${cyan}commands/start${color_reset} to get into the project environment now"
                         fi
                     fi
                 fi
@@ -250,22 +328,17 @@ else
             echo ""
             echo ""
             echo ""
-            light_purple="\e[0;1;35m"
+            [ -n "$(command -v "clear")" ] && clear
             echo "$light_purple"
-            echo "You're currently inside of:"
-            color_reset="\e[0m"
+            echo "You're currently in this folder:"
             echo "$color_reset"
             echo "    $PWD"
-            echo ""
-            light_green="\e[0;1;32m"
             echo "$light_green"
-            echo "I'm going create a project folder inside this folder, okay?"
-            cyan="\e[0;36m"
-            echo "$cyan"
-            echo "(press enter to continue, Ctrl+C to cancel)"
-            color_reset="\e[0m"
+            echo "I'm going to download the project here, okay?"
+            echo "$cyan(press enter to continue, Ctrl+C to cancel)"
             echo "$color_reset"
             read answer
+            [ -n "$(command -v "clear")" ] && clear
             
             # 
             # get repo URL
@@ -273,12 +346,9 @@ else
             if [ -z "$repo" ]
             then
                 repo="https://github.com/jeff-hykin/fornix"
-                light_green="\e[0;1;32m"
                 echo "$light_green"
                 echo "What is the URL of the repository?"
-                cyan="\e[0;36m"
                 echo "${cyan}(press enter to go with the default: $repo)"
-                color_reset="\e[0m"
                 echo "$color_reset"
                 read answer
                 if [ -n "$answer" ]
@@ -293,12 +363,9 @@ else
             if [ -z "$branch" ]
             then
                 branch="master"
-                light_green="\e[0;1;32m"
                 echo "$light_green"
                 echo "Which branch would you like to get?"
-                cyan="\e[0;36m"
                 echo "${cyan}(press enter to go with the default: $branch)"
-                color_reset="\e[0m"
                 echo "$color_reset"
                 read answer
                 if [ -n "$answer" ]
@@ -310,16 +377,13 @@ else
             # 
             # setup or copy
             # 
-            newline='
-'
-            light_yellow="\e[0;1;33m"
             echo "Last question"
-            question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) copy (when using a template or forking someones repo)${newline}    2) setup (your repo or your team's repo)";answer=''
+            question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) if you (or your team) made this => setup${newline}    2) if the URL is a template => copy";answer=''
             while true; do
                 echo "$question"; read response
                 case "$response" in
-                    [1]* ) answer='copy'; break;;
-                    [2]* ) answer='setup'; break;;
+                    [1]* ) answer='setup'; break;;
+                    [2]* ) answer='copy'; break;;
                     "copy" ) answer='copy'; break;;
                     "setup" ) answer='setup'; break;;
                     * ) echo "${newline}${newline}${light_yellow}Please answer with a 1 or 2${color_reset}${newline}${newline}";;
@@ -327,59 +391,71 @@ else
             done
             
             folder_name="$(basename "$repo")"
-            # if setup
-            if [ "$answer" = "setup" ]
+            if [ -e "$folder_name" ]
             then
-                light_green="\e[0;1;32m"
-                echo "$light_green"
-                echo "# "
-                echo "# Setting up the '$branch' brach of $repo"
-                echo "# "
-                color_reset="\e[0m"
+                echo "$light_red"
+                echo "Small problem:"
                 echo "$color_reset"
-                git clone --branch "$branch" "$repo" "$folder_name" && \
-                    cd "$folder_name" && {
+                echo "    I was going to create the project in $folder_name"
+                echo "    but it looks like something named $folder_name"
+                echo "    already exists. Please move or delete it the re-run the command"
+            else
+                # if setup
+                if [ "$answer" = "setup" ]
+                then
+                    echo "$light_green"
+                    echo "# "
+                    echo "# Setting up the '$branch' brach of $repo"
+                    echo "# "
+                    echo "$color_reset"
+                    if git clone --branch "$branch" "$repo" "$folder_name" && cd "$folder_name"
+                    then
                         # check if file exists
                         if [ -f "./commands/start" ]
                         then
+                            echo ""
+                            echo "Great! looks like it worked"
+                            echo "${light_green}Any time you want to enter your project environment run these two commands"
+                            echo "${cyan}"
+                            echo "    cd $(printf '%s' "'$(printf '%s' "$PWD" | sed 's/'"'"'/'"'"'"'"'"'"'"'"'/g')'")"
+                            echo "    commands/start"
+                            echo "${color_reset}"
+                            echo "Press enter to start the project"
+                            read REPLY
                             commands/start
                         fi
-                    }
-            # if copy
-            else
-                if [ -e "$folder_name" ]
-                then
-                    red="\e[0;31m"
-                    echo "$red"
-                    echo "Small problem:"
-                    color_reset="\e[0m"
-                    echo "$color_reset"
-                    echo "    I was going to create the project in $folder_name"
-                    echo "    but it looks like something named $folder_name"
-                    echo "    already exists. Please move or delete it the re-run the command"
+                    else
+                        echo
+                        echo "it looks like there was an error when trying to get the repo"
+                        echo "here's the command I ran that caused an error"
+                        echo "    ${cyan}"'git clone --branch "'"$branch"'" "'"$repo"'" "'"$folder_name"'" && cd "'"$folder_name"'"'"${color_reset}"
+                    fi
+                # if copy
                 else
-                    light_green="\e[0;1;32m"
                     echo "$light_green"
                     echo "# "
                     echo "# Creating new empty repository"
                     echo "# "
-                    color_reset="\e[0m"
                     echo "$color_reset"
                     mkdir -p "$folder_name"
                     cd "$folder_name"
                     git init && \
-                        echo "$light_green#$newline# Copying the '$branch' branch of $repo${newline}#${color_reset}" && \
+                        echo "$newline$light_green#$newline# Copying the '$branch' branch of $repo${newline}#${color_reset}" && \
                         git pull "$repo" "$branch" && {
-                            light_purple="\e[0;1;35m"
                             echo "$light_purple"
                             echo "Project copied"
-                            color_reset="\e[0m"
                             echo "$color_reset"
                             # check if file exists
                             if [ -f "./commands/start" ]
                             then
                                 echo ""
-                                echo "Press enter to setup the project"
+                                echo "Great! looks like it worked"
+                                echo "${light_green}Any time you want to enter your project environment run these two commands"
+                                echo "${cyan}"
+                                echo "    cd $(printf '%s' "'$(printf '%s' "$PWD" | sed 's/'"'"'/'"'"'"'"'"'"'"'"'/g')'")"
+                                echo "    commands/start"
+                                echo "${color_reset}"
+                                echo "Press enter to start the project"
                                 read REPLY
                                 commands/start
                             fi
@@ -391,5 +467,8 @@ else
     fi
     
 fi
+
+# cleanup the variables
+unset repo; unset branch; unset mixin_remote_name;
 
 } # end: <- Prevent execution if this script was only partially downloaded
