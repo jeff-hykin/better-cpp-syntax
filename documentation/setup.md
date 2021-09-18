@@ -11,7 +11,7 @@
 
 - Mac/Linux users
     - open up your terminal/console app
-    - use `cd` to get to the folder where you want this project ([tutorial on how to use cd here](https://github.com/jeff-hykin/fornix/blob/master/documentation/images/cd_tutorial.png))
+    - use `cd` to get to the folder where you want this project ([tutorial on how to use cd here](https://github.com/jeff-hykin/fornix/blob/b6fd3313beda4f80b7051211cb790a4f34da590a/documentation/images/cd_tutorial.gif))
     - (If you get errors on the next step -> keep reading)
     - Type this inside your terminal/console <br>`eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`<br>[press enter]
     - Possible errors:
