@@ -44,16 +44,7 @@ fi
 # 
 # check for python-poetry first
 # 
-__temp_var__should_use_poetry="false"
-if [ -f "$FORNIX_FOLDER/pyproject.toml" ]
-then
-    # if poetry exists
-    if [ -n "$(command -v "poetry")" ]
-    then
-        __temp_var__should_use_poetry="true"
-    fi
-fi
-if [ "$__temp_var__should_use_poetry" = "true" ]
+if [ -f "$FORNIX_FOLDER/pyproject.toml" ] && [ -n "$(command -v "poetry")" ]
 then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
@@ -108,11 +99,13 @@ then
     unset __temp_var__command_name
     unset __temp_var__file_to_watch
     unset __temp_var__hash_check_name
+fi
+
 # 
-# if no poetry then use normal python install
+# check for requirements.txt
 # 
-else
-    
+if [ -f "$FORNIX_FOLDER/requirements.txt" ]
+then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
     __temp_var__file_to_watch="$FORNIX_FOLDER/requirements.txt"
