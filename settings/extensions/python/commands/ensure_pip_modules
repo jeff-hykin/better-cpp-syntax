@@ -105,6 +105,7 @@ fi
 # check for requirements.txt
 # 
 if [ -f "$FORNIX_FOLDER/requirements.txt" ]
+then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
     __temp_var__file_to_watch="$FORNIX_FOLDER/requirements.txt"
