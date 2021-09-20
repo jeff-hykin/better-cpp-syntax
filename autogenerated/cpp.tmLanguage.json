@@ -9173,14 +9173,14 @@
         },
         {
           "match": "&|\\||\\^|~",
-          "name": "keyword.operator.cpp"
+          "name": "keyword.operator.bitwise.cpp"
         },
         {
           "include": "#assignment_operator"
         },
         {
           "match": "%|\\*|\\/|-|\\+",
-          "name": "keyword.operator.cpp"
+          "name": "keyword.operator.arithmetic.cpp"
         },
         {
           "include": "#ternary_operator"

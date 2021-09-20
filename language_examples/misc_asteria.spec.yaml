@@ -1275,7 +1275,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -1360,7 +1360,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -2450,7 +2450,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -2513,7 +2513,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -2608,7 +2608,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -2841,7 +2841,7 @@
     - constant.numeric.decimal
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -2864,7 +2864,7 @@
     - meta.parens
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -3145,7 +3145,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -3240,7 +3240,7 @@
 - source: ' i '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3289,7 +3289,7 @@
     - meta.parens
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -3298,7 +3298,7 @@
 - source: 'next '
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -3503,7 +3503,7 @@
     - constant.numeric.decimal
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -3526,7 +3526,7 @@
     - meta.parens
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -3549,7 +3549,7 @@
     - meta.parens
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -4736,7 +4736,7 @@
 - source: ' bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: reader
   scopes:
     - variable.other.object.access
@@ -4790,7 +4790,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -4924,7 +4924,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -6467,7 +6467,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' cur '
 - source: '='
   scopes:
@@ -9453,7 +9453,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' cur '
 - source: '='
   scopes:
@@ -9474,7 +9474,7 @@
     - punctuation.definition.begin.bracket.square
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -10146,7 +10146,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' tlen'
 - source: ;
   scopes:
@@ -11491,7 +11491,7 @@
 - source: ' xcnt '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -11596,7 +11596,7 @@
 - source: ' tlen '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' xcnt'
 - source: ;
   scopes:
@@ -11755,7 +11755,7 @@
 - source: ' i '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -11816,7 +11816,7 @@
 - source: 'dptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' s_digits'
 - source: )
   scopes:
@@ -11825,7 +11825,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -11844,13 +11844,13 @@
 - source: ' cpnt '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '16'
   scopes:
     - constant.numeric.decimal
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -12081,7 +12081,7 @@
 - source: ' tlen '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' xcnt'
 - source: ','
   scopes:
@@ -12127,7 +12127,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -12205,7 +12205,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: '~'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: 'mask '
 - source: '<<'
   scopes:
@@ -12220,7 +12220,7 @@
     - meta.parens
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -12243,7 +12243,7 @@
     - meta.parens
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' mask'
 - source: )
   scopes:
@@ -12765,7 +12765,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12789,7 +12789,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12897,7 +12897,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12907,7 +12907,7 @@
 - source: ' tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12950,7 +12950,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -13325,7 +13325,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: qstok
   scopes:
     - variable.other.object.access
@@ -13631,7 +13631,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' pt '
 - source: '='
   scopes:
@@ -13736,7 +13736,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' alt '
 - source: '='
   scopes:
@@ -13967,7 +13967,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' alt '
 - source: '='
   scopes:
@@ -14639,7 +14639,7 @@
 - source: ' bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: reader
   scopes:
     - variable.other.object.access
@@ -14890,7 +14890,7 @@
 - source: 'int_begin '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -15101,7 +15101,7 @@
 - source: 'radix '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -15145,7 +15145,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' int_begin'
 - source: ','
   scopes:
@@ -15160,7 +15160,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -15316,7 +15316,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -15494,7 +15494,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' frac_begin'
 - source: ','
   scopes:
@@ -15509,7 +15509,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -15665,7 +15665,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -16118,7 +16118,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' exp_begin'
 - source: ','
   scopes:
@@ -16133,7 +16133,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -16291,7 +16291,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -16425,7 +16425,7 @@
 - source: 'bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' exp_end'
 - source: ','
   scopes:
@@ -16440,7 +16440,7 @@
 - source: '&'
   scopes:
     - meta.lambda.capture
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ']'
   scopes:
     - punctuation.definition.capture.end.lambda
@@ -16574,7 +16574,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -16849,7 +16849,7 @@
 - source: 'dptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' s_digits'
 - source: )
   scopes:
@@ -16858,7 +16858,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -16886,7 +16886,7 @@
 - source: 'INT_MAX '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: )
   scopes:
@@ -16895,7 +16895,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '10'
   scopes:
     - constant.numeric.decimal
@@ -16968,13 +16968,13 @@
 - source: ' exp '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '10'
   scopes:
     - constant.numeric.decimal
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -17009,7 +17009,7 @@
     - keyword.operator.assignment
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: exp
 - source: ;
   scopes:
@@ -17358,7 +17358,7 @@
 - source: 'dptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' s_digits'
 - source: )
   scopes:
@@ -17367,7 +17367,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -17429,7 +17429,7 @@
     - meta.parens
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: )
   scopes:
@@ -17438,7 +17438,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: static_cast
   scopes:
     - keyword.operator.wordlike
@@ -17533,7 +17533,7 @@
 - source: ' value '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: static_cast
   scopes:
     - keyword.operator.wordlike
@@ -17561,7 +17561,7 @@
     - meta.parens
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -17693,7 +17693,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: static_cast
   scopes:
     - keyword.operator.wordlike
@@ -18120,7 +18120,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: qstok
   scopes:
     - variable.other.object.access
@@ -18263,7 +18263,7 @@
 - source: 'value '
 - source: ^
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' smask'
 - source: )
   scopes:
@@ -18272,7 +18272,7 @@
     - meta.parens
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' smask'
 - source: )
   scopes:
@@ -18564,7 +18564,7 @@
 - source: 'dptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' s_digits'
 - source: )
   scopes:
@@ -18573,7 +18573,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -18592,11 +18592,11 @@
 - source: ' value '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' radix '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -18655,7 +18655,7 @@
 - source: ' frac_end '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -18665,7 +18665,7 @@
 - source: ' i '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -18830,7 +18830,7 @@
 - source: 'dptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' s_digits'
 - source: )
   scopes:
@@ -18839,7 +18839,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -18863,7 +18863,7 @@
 - source: 'frac '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' dvalue'
 - source: )
   scopes:
@@ -18872,7 +18872,7 @@
     - meta.parens
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' radix'
 - source: ;
   scopes:
@@ -19070,7 +19070,7 @@
 - source: ' value '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -19381,7 +19381,7 @@
     - keyword.operator.ternary
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -19442,7 +19442,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: qstok
   scopes:
     - variable.other.object.access
@@ -20340,7 +20340,7 @@
 - source: ' bptr '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: reader
   scopes:
     - variable.other.object.access
@@ -20395,7 +20395,7 @@
 - source: ' s_bcomm_term '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -20557,7 +20557,7 @@
 - source: 'tptr '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' bptr'
 - source: )
   scopes:
@@ -21528,7 +21528,7 @@
 - source: Parser_Error
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' err'
 - source: )
   scopes:
@@ -22671,7 +22671,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' alt '
 - source: '='
   scopes:
@@ -22767,7 +22767,7 @@
     - keyword.control.return
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -23053,7 +23053,7 @@
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' alt '
 - source: '='
   scopes:

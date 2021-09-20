@@ -31,7 +31,7 @@
     - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: arg0
 - source: ','
   scopes:
@@ -107,7 +107,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: t
 - source: )
   scopes:

@@ -643,7 +643,7 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'working_directory '
 - source: '='
   scopes:
@@ -966,7 +966,7 @@
 - source: '  REPROCXX_EXPORT '
 - source: '~'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: process
   scopes:
     - entity.name.function.call
@@ -1119,7 +1119,7 @@
 - source: ' arguments '
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: arguments
 - source: ','
   scopes:
@@ -1130,7 +1130,7 @@
 - source: ' options '
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: 'options '
 - source: '='
   scopes:

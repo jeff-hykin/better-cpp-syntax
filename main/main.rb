@@ -1532,12 +1532,12 @@ grammar = Grammar.new(
         ),
         Pattern.new(
             match: /&|\||\^|~/,
-            tag_as: "keyword.operator"
+            tag_as: "keyword.operator.bitwise"
         ),
         :assignment_operator,
         Pattern.new(
             match: /%|\*|\/|-|\+/,
-            tag_as: "keyword.operator"
+            tag_as: "keyword.operator.arithmetic"
         ),
         :ternary_operator,
     ]

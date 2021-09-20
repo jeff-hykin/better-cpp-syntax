@@ -236,7 +236,7 @@
 - source: itr
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'n'
 - source: <
   scopes:
@@ -287,7 +287,7 @@
 - source: itr
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'n'
 - source: ']'
   scopes:
@@ -307,7 +307,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -388,7 +388,7 @@
 - source: itr
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'n'
 - source: <
   scopes:
@@ -439,7 +439,7 @@
 - source: itr
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'n'
 - source: ']'
   scopes:
@@ -459,7 +459,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -484,7 +484,7 @@
 - source: '  T '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: container
 - source: ;
   scopes:

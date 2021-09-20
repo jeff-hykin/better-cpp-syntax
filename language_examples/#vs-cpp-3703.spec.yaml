@@ -58,7 +58,7 @@
     - string.quoted.single
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ''''
   scopesBegin:
     - string.quoted.single
@@ -72,7 +72,7 @@
     - string.quoted.single
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ''''
   scopesBegin:
     - string.quoted.single
@@ -88,7 +88,7 @@
     - string.quoted.single
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ''''
   scopesBegin:
     - string.quoted.single
@@ -147,7 +147,7 @@
     - string.quoted.single
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: u8
   scopesBegin:
     - string.quoted.single
@@ -165,7 +165,7 @@
     - string.quoted.single
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: u8
   scopesBegin:
     - string.quoted.single
@@ -185,7 +185,7 @@
     - string.quoted.single
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: u8
   scopesBegin:
     - string.quoted.single

@@ -141,7 +141,7 @@
     - meta.qualified_type
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -258,7 +258,7 @@
     - meta.qualified_type
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
