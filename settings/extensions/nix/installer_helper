@@ -419,8 +419,8 @@ else
                 echo "$light_red"
                 echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
                 echo "|                                                                                               |" 1>&2
-                echo "|    - I was going to create the project in '$folder_name'                                      |" 1>&2
-                echo "|      But it looks like something named $folder_name already exists                            |" 1>&2
+                echo "|    - I was going to create the project in '$folder_name'                                       " 1>&2
+                echo "|      But it looks like something named $folder_name already exists                             " 1>&2
                 echo "|    - Please move or delete it the re-run the command you just ran                             |" 1>&2
                 echo "|                                                                                               |" 1>&2
                 echo "|-----------------------------------------------------------------------------------------------|" 1>&2
