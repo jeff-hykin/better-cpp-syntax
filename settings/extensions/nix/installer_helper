@@ -142,10 +142,16 @@ fi
 # if nix was not installed
 if ! [ -d "/nix/store" ]
 then
-    echo "" 1>&2
-    echo "Looks like there was a problem installing nix :/" 1>&2
-    echo "Hopefully there are error messages above" 1>&2
-    echo "If you want additional information about installing nix see: https://nixos.org/manual/nix/stable/#chap-installation" 1>&2
+    echo "$light_yellow"
+    echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+    echo "|                                                                                               |" 1>&2
+    echo "|    Looks like there was a problem installing nix :/                                           |" 1>&2
+    echo "|    Hopefully there are error messages above                                                   |" 1>&2
+    echo "|    If you want additional information about installing nix see:                               |" 1>&2
+    echo "|         https://nixos.org/manual/nix/stable/#chap-installation                                |" 1>&2
+    echo "|                                                                                               |" 1>&2
+    echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+    echo ""
 # if nix was installed (hopefully successfully)
 else
     # 
@@ -155,9 +161,9 @@ else
     then
         . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
     fi
-    if [ -f "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh" ]
+    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
     then
-        . "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh"
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
     fi
     export PATH="$PATH:/nix/var/nix/profiles/default/bin/"
     
@@ -165,13 +171,18 @@ else
     if [ -z "$(command -v "nix-env")" ] || [ -z "$(command -v "nix-shell")" ]
     then
         echo "$light_yellow"
-        echo "Small issue:"
-        echo "$color_reset"
-        echo "    I dont see the nix-env or nix-shell command" 1>&2
-        echo "    You might need to try closing/reopening your terminal and running this command again" 1>&2
-        echo "    If you already did that, and you're still getting this message" 1>&2
-        echo "    then you might need to uninstall and reinstall nix" 1>&2
-        echo "    more instructions here: https://nixos.org/manual/nix/stable/#sect-single-user-installation" 1>&2
+        echo "|-- Action Needed ------------------------------------------------------------------------------| $color_reset" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|    - Try closing/reopening your terminal and running this command again                       |" 1>&2
+        echo "|      (I dont see the nix-env and nix-shell command)                                           |" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|    - If you already did that, and you're still getting this message                           |" 1>&2
+        echo "|      then you might need to uninstall and reinstall nix                                       |" 1>&2
+        echo "|      instructions here:                                                                       |" 1>&2
+        echo "|         https://nixos.org/manual/nix/stable/#sect-single-user-installation                    |" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+        echo ""
     else
         # 
         # get git
@@ -283,41 +294,53 @@ else
                 if [ "$?" != "0" ]
                 then
                     echo "$light_red"
-                    echo "There was a problem :/"
-                    echo "$color_reset"
-                    echo "    looks like git could not add that mixin"
-                    echo "    make sure the URL and branch name are correct"
-                    echo "    if they are correct, then hopefully there is error output above that"
-                    echo "    will give you a better idea as to why git could not get the repo"
-                    echo '    here is the command that had an error:
-        git remote add '"'"$mixin_remote_name'"' '"'"$repo'"' && \
-            git fetch '"'"$mixin_remote_name'"' '"'"$branch'"' && \
-            git pull --allow-unrelated-histories '"'"$mixin_remote_name'"' '"'"$branch'"' && \
-            git submodule update --init --recursive
-                    '
+                    echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                    echo "|                                                                                               |" 1>&2
+                    echo "|    looks like git could not add that mixin :/                                                 |" 1>&2
+                    echo "|    - Make sure the URL and branch name are correct                                            |" 1>&2
+                    echo "|      (if they are correct, hopefully there is error output above that gives a better idea as) |" 1>&2
+                    echo "|      (to why git could not get the repo)                                                      |" 1>&2
+                    echo "|    - Here is the command that had an error:                                                   |" 1>&2
+                    echo "|          git remote add '$mixin_remote_name' '$repo' && \                                      " 1>&2
+                    echo "|             git fetch '$mixin_remote_name' '$branch' && \                                      " 1>&2
+                    echo "|             git pull --allow-unrelated-histories '$mixin_remote_name' '$branch' && \           " 1>&2
+                    echo "|             git submodule update --init --recursive                                            " 1>&2
+                    echo "|                                                                                               |" 1>&2
+                    echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                    echo ""
                 else
                     # check for conflicts
                     if [ -n "$(git status | grep "You have unmerged paths.")" ]
                     then
-                        echo ""
                         echo "$light_yellow"
-                        echo "Looks like you have a merge conflict"
-                        echo "$color_reset"
-                        echo "(no big deal)"
-                        echo "Get the merge finished, and the mixin will be complete!"
-                        echo "$light_purple"
-                        echo "Not sure how to resolve a merge conflict?"
-                        echo "$color_reset"
-                        echo "     how to resolve merge conflicts in VS Code: https://www.youtube.com/watch?v=QmKdodJU-js"
-                        echo "     how to resolve merge conflicts in command line: https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git"
-                    else
+                        echo "|-- Action Needed ------------------------------------------------------------------------------| $color_reset" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    Looks like you have a merge conflict (no big deal)                                         |" 1>&2
+                        echo "|    - Get the merge finished, and the mixin will be complete!                                  |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    Not sure how to resolve a merge conflict?                                                  |" 1>&2
+                        echo "|    - How to resolve merge conflicts in VS Code:                                               |" 1>&2
+                        echo "|          https://www.youtube.com/watch?v=QmKdodJU-js                                          |" 1>&2
+                        echo "|    - How to resolve merge conflicts in command line:                                          |" 1>&2
+                        echo "|          https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git                      |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
                         echo ""
-                        echo "${light_green}Looks like the mixin was successful!${color_reset}"
+                    else
+                        echo "$light_yellow"
+                        echo "|-- Success! -----------------------------------------------------------------------------------| $color_reset" 
+                        echo "|                                                                                               |" 
+                        echo "|    - Looks like the mixin was successful!                                                     |" 
+                        echo "|                                                                                               |" 
+                        
                         # check if file exists
                         if [ -f "./commands/start" ]
                         then
-                            echo "You can run ${cyan}commands/start${color_reset} to get into the project environment now"
+                            echo "|   You can run ${cyan}commands/start${color_reset} to get into the project environment now                          |" 
+                            echo "|                                                                                               |" 
                         fi
+                        echo "|-----------------------------------------------------------------------------------------------|" 
+                        echo ""
                     fi
                 fi
             fi
@@ -394,11 +417,14 @@ else
             if [ -e "$folder_name" ]
             then
                 echo "$light_red"
-                echo "Small problem:"
-                echo "$color_reset"
-                echo "    I was going to create the project in $folder_name"
-                echo "    but it looks like something named $folder_name"
-                echo "    already exists. Please move or delete it the re-run the command"
+                echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                echo "|                                                                                               |" 1>&2
+                echo "|    - I was going to create the project in '$folder_name'                                      |" 1>&2
+                echo "|      But it looks like something named $folder_name already exists                            |" 1>&2
+                echo "|    - Please move or delete it the re-run the command you just ran                             |" 1>&2
+                echo "|                                                                                               |" 1>&2
+                echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                echo ""
             else
                 # if setup
                 if [ "$answer" = "setup" ]
