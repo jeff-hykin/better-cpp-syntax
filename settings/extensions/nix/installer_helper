@@ -451,10 +451,16 @@ else
                             commands/start
                         fi
                     else
-                        echo
-                        echo "it looks like there was an error when trying to get the repo"
-                        echo "here's the command I ran that caused an error"
-                        echo "    ${cyan}"'git clone --branch "'"$branch"'" "'"$repo"'" "'"$folder_name"'" && cd "'"$folder_name"'"'"${color_reset}"
+                        echo "$light_red"
+                        echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    - it looks like there was an error when trying to get the repo                             |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    - here's the command I ran that caused an error                                            |" 1>&2
+                        echo "|   ${cyan}git clone --branch '$branch' '$repo' '$folder_name' && cd '$folder_name'${color_reset}" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                        echo ""
                     fi
                 # if copy
                 else
