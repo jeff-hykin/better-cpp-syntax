@@ -16,12 +16,19 @@ color_reset="\e[0m";color_reset=""
 # if trap exists
 if [ -n "$(command -v "trap")" ]
 then
-    trap 'unset repo; unset branch; unset mixin_remote_name; return 0' INT TERM
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return 0' INT TERM
 fi
         
 # if nix doesnt exist
 if [ -z "$(command -v "nix")" ]
 then
+    echo "|------------------------------------------------------|" 1>&2
+    echo "|                                                      |" 1>&2
+    echo "|    I'll try to install nix for you                   |" 1>&2
+    echo "|    (since I don't see nix yet)                       |" 1>&2
+    echo "|                                                      |" 1>&2
+    echo "|------------------------------------------------------|" 1>&2
+    echo ""
     # check for root
     if [ "$(whoami)" = "root" ]
     then
@@ -399,19 +406,23 @@ else
             
             # 
             # setup or copy
-            # 
-            echo "Last question"
-            question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) if you (or your team) made this => setup${newline}    2) if the URL is a template => copy";answer=''
-            while true; do
-                echo "$question"; read response
-                case "$response" in
-                    [1]* ) answer='setup'; break;;
-                    [2]* ) answer='copy'; break;;
-                    "copy" ) answer='copy'; break;;
-                    "setup" ) answer='setup'; break;;
-                    * ) echo "${newline}${newline}${light_yellow}Please answer with a 1 or 2${color_reset}${newline}${newline}";;
-                esac
-            done
+            #
+            if [ -z "$setup_or_copy" ]
+            then
+                echo "Last question"
+                question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) if you (or your team) made this => setup${newline}    2) if the URL is a template => copy";answer=''
+                while true; do
+                    echo "$question"; read response
+                    case "$response" in
+                        [1]* ) answer='setup'; break;;
+                        [2]* ) answer='copy'; break;;
+                        "copy" ) answer='copy'; break;;
+                        "setup" ) answer='setup'; break;;
+                        * ) echo "${newline}${newline}${light_yellow}Please answer with a 1 or 2${color_reset}${newline}${newline}";;
+                    esac
+                done
+                setup_or_copy="$answer"
+            fi
             
             folder_name="$(basename "$repo")"
             if [ -e "$folder_name" ]
@@ -448,6 +459,7 @@ else
                             echo "${color_reset}"
                             echo "Press enter to start the project"
                             read REPLY
+                            echo "[starting project setup...]"
                             commands/start
                         fi
                     else
@@ -489,6 +501,7 @@ else
                                 echo "${color_reset}"
                                 echo "Press enter to start the project"
                                 read REPLY
+                                echo "[starting project setup...]"
                                 commands/start
                             fi
                         }
