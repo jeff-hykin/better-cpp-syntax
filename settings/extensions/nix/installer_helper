@@ -9,6 +9,7 @@ light_yellow="\e[0;1;33m";light_yellow=""
 light_purple="\e[0;1;35m";light_purple=""
 light_green="\e[0;1;32m";light_green=""
 light_red="\e[0;1;31m";light_red=""
+blue="\e[0;94m"; blue=""
 cyan="\e[0;36m";cyan=""
 color_reset="\e[0m";color_reset=""
 
@@ -207,7 +208,6 @@ else
         if [ -d "$PWD/.git" ]
         then
             [ -n "$(command -v "clear")" ] && clear
-            blue="\e[0;94m"
             echo "$blue"
             echo "one moment please ..."
             echo "$color_reset"
