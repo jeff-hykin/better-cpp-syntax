@@ -2271,7 +2271,7 @@ grammar = Grammar.new(
         Pattern.new(
             should_partial_match: [ "#{name} skcipher_walk *walk," ],
             match: Pattern.new(
-                match: /#{name}/,
+                match: /\b#{name}/,
                 tag_as: "storage.type.#{name}.parameter",
             ).then(std_space).then(
                 match: variable_name,
