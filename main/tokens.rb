@@ -208,6 +208,7 @@ tokens = [
     # function specifiers/qualifiers
     { representation: "inline"               , name: "inline"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "consteval"            , name: "consteval"        , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
