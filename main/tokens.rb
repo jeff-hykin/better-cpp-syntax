@@ -259,6 +259,7 @@ tokens = [
     # 
     { representation: "typedef"         , name: "typedef"       , isCurrentlyAMiscKeyword: true },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
+    { representation: "constinit"       , name: "constinit"     , isSpecifier: true , isCurrentlyAMiscKeyword: true},
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
