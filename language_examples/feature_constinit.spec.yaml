@@ -1,0 +1,88 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' ITNOA'
+  scopesEnd:
+    - comment.line.double-slash
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: constinit
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.other.constinit
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' c '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: f
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: 'true'
+  scopes:
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: extern
+  scopes:
+    - storage.modifier.specifier.extern
+- source: thread_local
+  scopes:
+    - storage.modifier.specifier.thread_local
+- source: constinit
+  scopes:
+    - keyword.other.constinit
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' x'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
