@@ -90,11 +90,13 @@ then
                         if [ "$answer" = 'yes' ]; then
                             echo "${light_purple}Enter a username:${color_reset}"
                             read username
-                            if sudo useradd --create-home "$username" --password "password" --groups sudo && sudo passwd "$username"
+                            if sudo useradd --create-home "$username" --password "password" --groups sudo
                             then
                                 echo ""
                                 echo "user created successfully"
-                                echo "run ${cyan}sudo passwd '${light_yellow}YOUR_PASSWORD${cyan}'${color_reset} to set the password"
+                                echo "run:"
+                                echo "    ${cyan}sudo passwd "$username"${color_reset}"
+                                echo "to set the password"
                             else
                                 echo ""
                                 echo "Sorry, there was an error when creating the user"
