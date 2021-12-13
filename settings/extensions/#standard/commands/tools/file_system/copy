@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+thing_that_exists="$1"
+thing_that_doesnt="$2"
+
+if ! [ -e "$thing_that_exists" ]
+then
+    echo "tried to copy '$thing_that_exists' but it doesn't seem to exist" 1>&2
+else
+    if [ -d "$thing_that_exists" ]
+    then
+        # clear the way
+        rm -f "$thing_that_doesnt" 2>/dev/null
+        rm -rf "$thing_that_doesnt" 2>/dev/null
+        # copy the folder
+        cp -r "$thing_that_exists" "$thing_that_doesnt"
+    else
+        # clear the way
+        rm -f "$thing_that_doesnt" 2>/dev/null
+        rm -rf "$thing_that_doesnt" 2>/dev/null
+        # copy the file
+        cp "$thing_that_exists" "$thing_that_doesnt"
+    fi
+fi
