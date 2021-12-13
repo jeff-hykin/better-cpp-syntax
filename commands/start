@@ -3,6 +3,7 @@
 # 
 # summary
 # 
+#     find fornix, make sure nix exists
 #     with no arguments, this simply starts the shell
 #     with an argument, it refreshes the project connections, then runs `$commands_folder/project/$the_arguments`
 
@@ -45,6 +46,9 @@ export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
 if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "starting: $FORNIX_COMMANDS_FOLDER"start
 fi
+
+. "$FORNIX_FOLDER/settings/extensions/nix/commands/ensure_nix_installed"
+
 # just start the shell with no arguments (arguments might be supported in the future)
 "$FORNIX_COMMANDS_FOLDER/shell"
 if [ "$FORNIX_DEBUG" = "true" ]; then
