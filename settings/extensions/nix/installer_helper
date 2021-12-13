@@ -68,11 +68,13 @@ then
                     if [ "$answer" = 'yes' ]; then
                         echo "${light_purple}Enter a username:${color_reset}"
                         read username
-                        if sudo useradd --create-home "$username" --password "password" --groups sudo && sudo passwd "$username"
+                        if sudo useradd --create-home "$username" --password "password" --groups sudo
                         then
                             echo ""
                             echo "user created successfully"
-                            echo "run ${cyan}sudo passwd '${light_yellow}YOUR_PASSWORD${cyan}'${color_reset} to set the password"
+                            echo "run:"
+                            echo "    ${cyan}sudo passwd "$username"${color_reset}"
+                            echo "to set the password"
                         else
                             echo ""
                             echo "Sorry, there was an error when creating the user"
@@ -99,17 +101,17 @@ then
         # Big Sur or Newer
         #                 
         if [ "$major_version" = "11" ]; then
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+            sh <(curl -Lk https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
         #                  
         # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
         #                 
         elif [ "$major_version" -eq "10" ]; then
             # Catalina
             if [ "$minor_version" = "15" ]; then
-                sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+                sh <(curl -Lk https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
             # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
             else
-                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+                curl -Lk https://nixos.org/nix/install | sh -s -- --daemon
             fi
         else
             echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
@@ -138,10 +140,10 @@ then
             if pidof systemd
             then
                 # multi-user install if systemd exists
-                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+                curl -Lk https://nixos.org/nix/install | sh -s -- --daemon
             else
                 # single-user install if systemd exists
-                curl -L https://nixos.org/nix/install | sh -s
+                curl -Lk https://nixos.org/nix/install | sh -s
             fi
         fi
     fi
