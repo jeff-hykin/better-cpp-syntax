@@ -7,35 +7,33 @@ then
     # 
     if [ "$(uname)" = "Darwin" ] 
     then
-        # make the real home folder if it doesn't exist
-        if ! [ -d "$HOME/Library/Caches/tealdeer" ]
-        then
-            rm -f "$HOME/Library/Caches/tealdeer" 2>/dev/null
-            mkdir -p "$HOME/Library/Caches/tealdeer"
-        fi
-        
-        # link the real home folder to the project 
-        if [ -d "$HOME/Library/Caches/tealdeer" ]
-        then
-            rm -rf "$FORNIX_HOME/Library/Caches/tealdeer" 2>/dev/null
-            ln -sf "$HOME/Library/Caches/tealdeer" "$FORNIX_HOME/Library/Caches/tealdeer"
-        fi
+        __temp_var__main="$HOME/Library/Caches/tealdeer"
+        __temp_var__project="$FORNIX_HOME/Library/Caches/tealdeer"
     # 
     # Linux
     # 
     else
-        # make the real home folder if it doesn't exist
-        if ! [ -d "$HOME/.cache/tldr" ]
-        then
-            rm -f "$HOME/.cache/tldr" 2>/dev/null
-            mkdir -p "$HOME/.cache/tldr"
-        fi
-        
-        # link the real home folder to the project 
-        if [ -d "$HOME/.cache/tldr" ]
-        then
-            rm -rf "$FORNIX_HOME/.cache/tldr" 2>/dev/null
-            ln -sf "$HOME/.cache/tldr" "$FORNIX_HOME/.cache/tldr"
-        fi
+        __temp_var__main="$HOME/.cache/tldr"
+        __temp_var__project="$FORNIX_HOME/.cache/tldr"
     fi
+    
+    # make the real home folder if it doesn't exist
+    if ! [ -d "$__temp_var__main" ]
+    then
+        # remove if corrupted
+        rm -f "$__temp_var__main" 2>/dev/null
+        # make sure its a folder
+        mkdir -p "$__temp_var__main"
+    fi
+    
+    # remove whatever project one might be in the way
+    rm -rf "$__temp_var__project" 2>/dev/null
+    # ensure parent folders exist (*could fail if part of the path is a file)
+    mkdir -p "$(dirname "$__temp_var__project")"
+    # create link
+    ln -sf "$__temp_var__main" "$__temp_var__project"
+    
+    # clean up
+    unset __temp_var__project
+    unset __temp_var__main
 fi
