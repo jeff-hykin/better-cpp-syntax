@@ -1,40 +1,41 @@
 # connect the tealdeer cache to prevent wasted duplicates
 
-# 
-# MacOS
-# 
-if [ "$(uname)" = "Darwin" ] 
+if ! [ "$HOME" = "$FORNIX_HOME" ]
 then
-    # make the real home folder if it doesn't exist
-    if ! [ -d "$HOME/Library/Caches/tealdeer" ]
+    # 
+    # MacOS
+    # 
+    if [ "$(uname)" = "Darwin" ] 
     then
-        mkdir -p "$HOME/Library/Caches/tealdeer"
-    fi
-    
-    # link the real home folder to the project 
-    if [ -d "$HOME/Library/Caches/tealdeer" ]
-    then
-        if ! [ -d "$FORNIX_HOME/Library/Caches/tealdeer" ]
+        # make the real home folder if it doesn't exist
+        if ! [ -d "$HOME/Library/Caches/tealdeer" ]
         then
-            ln -s "$HOME/Library/Caches/tealdeer" "$FORNIX_HOME/Library/Caches/tealdeer"
+            rm -f "$HOME/Library/Caches/tealdeer" 2>/dev/null
+            mkdir -p "$HOME/Library/Caches/tealdeer"
         fi
-    fi
-# 
-# Linux
-# 
-else
-    # make the real home folder if it doesn't exist
-    if ! [ -d "$HOME/.cache/tldr" ]
-    then
-        mkdir -p "$HOME/.cache/tldr"
-    fi
-    
-    # link the real home folder to the project 
-    if [ -d "$HOME/.cache/tldr" ]
-    then
-        if ! [ -d "$FORNIX_HOME/.cache/tldr" ]
+        
+        # link the real home folder to the project 
+        if [ -d "$HOME/Library/Caches/tealdeer" ]
         then
-            ln -s "$HOME/.cache/tldr" "$FORNIX_HOME/.cache/tldr"
+            rm -rf "$FORNIX_HOME/Library/Caches/tealdeer" 2>/dev/null
+            ln -sf "$HOME/Library/Caches/tealdeer" "$FORNIX_HOME/Library/Caches/tealdeer"
+        fi
+    # 
+    # Linux
+    # 
+    else
+        # make the real home folder if it doesn't exist
+        if ! [ -d "$HOME/.cache/tldr" ]
+        then
+            rm -f "$HOME/.cache/tldr" 2>/dev/null
+            mkdir -p "$HOME/.cache/tldr"
+        fi
+        
+        # link the real home folder to the project 
+        if [ -d "$HOME/.cache/tldr" ]
+        then
+            rm -rf "$FORNIX_HOME/.cache/tldr" 2>/dev/null
+            ln -sf "$HOME/.cache/tldr" "$FORNIX_HOME/.cache/tldr"
         fi
     fi
 fi
