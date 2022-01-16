@@ -101,17 +101,17 @@ then
         # Big Sur or Newer
         #                 
         if [ "$major_version" = "11" ]; then
-            sh <(curl -Lk https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+            sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
         #                  
         # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
         #                 
         elif [ "$major_version" -eq "10" ]; then
             # Catalina
             if [ "$minor_version" = "15" ]; then
-                sh <(curl -Lk https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+                sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
             # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
             else
-                curl -Lk https://nixos.org/nix/install | sh -s -- --daemon
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             fi
         else
             echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
@@ -129,7 +129,7 @@ then
                 sudo apt-get update && sudo apt-get install curl
             else
                 echo "it looks like you don't have curl, please install curl then re-run this script" 1>&2
-                echo "alternatively, to get nix, manually run the commands inside https://nixos.org/nix/install" 1>&2
+                echo "alternatively, to get nix, manually run the commands inside https://releases.nixos.org/nix/nix-2.3.7/install" 1>&2
             fi
         fi
         
@@ -140,10 +140,10 @@ then
             if pidof systemd
             then
                 # multi-user install if systemd exists
-                curl -Lk https://nixos.org/nix/install | sh -s -- --daemon
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             else
                 # single-user install if systemd exists
-                curl -Lk https://nixos.org/nix/install | sh -s
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
             fi
         fi
     fi
