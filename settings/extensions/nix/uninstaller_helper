@@ -1,0 +1,91 @@
+delete_user () {
+    user="$1"
+    # logs them out by locking the account
+    sudo passwd -l "$user" 2>/dev/null
+    # kill all their processes
+    sudo pkill -KILL -u "$user" 2>/dev/null
+    # kill all their cron jobs
+    sudo crontab -r -u "$user" 2>/dev/null
+    # kill all their print jobs
+    if [ -n "$(command -v "lprm")" ]
+    then
+        lprm -U "$user" 2>/dev/null
+    fi
+    # actually remove the user
+    sudo deluser --remove-home "$user" 2>/dev/null # debian
+    sudo userdel --remove "$user" 2>/dev/null # non-debian
+}
+
+remove_service () {
+    service="$1"
+    sudo systemctl stop "$service"
+    sudo systemctl disable "$service"
+    sudo rm -f /etc/systemd/system/"$service"
+    sudo rm -f /etc/systemd/system/"$service" # and symlinks that might be related
+    sudo rm -f /usr/lib/systemd/system/"$service" 
+    sudo rm -f /usr/lib/systemd/system/"$service" # and symlinks that might be related
+    sudo systemctl daemon-reload
+    sudo systemctl reset-failed
+}
+
+# stop the daemon
+remove_service nix-daemon.service
+remove_service nix-daemon.socket
+
+# remove the users
+delete_user nixbld1
+delete_user nixbld2
+delete_user nixbld3
+delete_user nixbld4
+delete_user nixbld5
+delete_user nixbld6
+delete_user nixbld7
+delete_user nixbld8
+delete_user nixbld9
+delete_user nixbld10
+delete_user nixbld11
+delete_user nixbld12
+delete_user nixbld13
+delete_user nixbld14
+delete_user nixbld15
+delete_user nixbld16
+delete_user nixbld17
+delete_user nixbld18
+delete_user nixbld19
+delete_user nixbld20
+delete_user nixbld21
+delete_user nixbld22
+delete_user nixbld23
+delete_user nixbld24
+delete_user nixbld25
+delete_user nixbld26
+delete_user nixbld27
+delete_user nixbld28
+delete_user nixbld29
+delete_user nixbld30
+delete_user nixbld31
+delete_user nixbld32
+
+# remove the group
+sudo groupdel nixbld 2>/dev/null
+
+# remove all the files
+sudo rm -rf /etc/nix /nix /var/root/.nix-profile /var/root/.nix-defexpr /var/root/.nix-channels "$HOME"/.nix-profile "$HOME"/.nix-defexpr "$HOME"/.nix-channels
+
+# restore the shell files
+if [ -f "/etc/bashrc.backup-before-nix" ]
+then
+    sudo mv /etc/bashrc.backup-before-nix /etc/bashrc
+fi
+if [ -f "/etc/profile.d/nix.sh.backup-before-nix" ]
+then
+    sudo mv /etc/profile.d/nix.sh.backup-before-nix /etc/profile.d/nix.sh
+fi
+if [ -f "/etc/zshrc.backup-before-nix" ]
+then
+    sudo mv /etc/zshrc.backup-before-nix /etc/zshrc
+fi
+if [ -f "/etc/bash.bashrc.backup-before-nix" ]
+then
+    sudo mv /etc/bash.bashrc.backup-before-nix /etc/bash.bashrc
+fi
