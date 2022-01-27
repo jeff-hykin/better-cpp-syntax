@@ -448,7 +448,7 @@ else
                 echo ""
             else
                 # if setup
-                if [ "$answer" = "setup" ]
+                if [ "$setup_or_copy" = "setup" ]
                 then
                     echo "$light_green"
                     echo "# "
