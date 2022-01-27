@@ -47,6 +47,13 @@ if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "starting: $FORNIX_COMMANDS_FOLDER"start
 fi
 
+# fix the windows WSL mkfifo problem
+if [ -d "/mnt/c" ]
+then
+    echo "Asking Windows to enable file metadata (to avoid permission errors)"
+    sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
+fi
+
 . "$FORNIX_FOLDER/settings/extensions/nix/commands/ensure_nix_installed"
 
 # just start the shell with no arguments (arguments might be supported in the future)

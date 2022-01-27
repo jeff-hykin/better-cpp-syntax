@@ -86,6 +86,10 @@ then
                 fi
                 
             fi
+            echo ""
+            echo "login as the non-root user (${cyan}su USERNAME${color_reset})"
+            echo "then re-run this command"
+            exit
         fi
     fi
     #       
@@ -111,7 +115,9 @@ then
                 sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
             # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
             else
-                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                # the single-user install seems to have fewer install issues
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             fi
         else
             echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
@@ -139,10 +145,12 @@ then
             # check if systemd exists
             if pidof systemd
             then
-                # multi-user install if systemd exists
-                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                # the single-user install seems to have fewer install issues
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                # # multi-user install if systemd exists
+                # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             else
-                # single-user install if systemd exists
+                # single-user install if systemd does not exist
                 curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
             fi
         fi
@@ -440,7 +448,7 @@ else
                 echo ""
             else
                 # if setup
-                if [ "$answer" = "setup" ]
+                if [ "$setup_or_copy" = "setup" ]
                 then
                     echo "$light_green"
                     echo "# "
