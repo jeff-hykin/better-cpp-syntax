@@ -17,7 +17,7 @@ color_reset="\e[0m";color_reset=""
 # if trap exists
 if [ -n "$(command -v "trap")" ]
 then
-    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return 0' INT TERM
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; exit 0' INT TERM
 fi
         
 # if nix doesnt exist
@@ -208,6 +208,32 @@ else
         if [ -z "$(command -v "git")" ]
         then
             nix-env -i git
+        fi
+        # git email
+        if ! git config --global user.email
+        then
+            echo "git needs an email (doesnt have to be valid), what email should I tell git?"
+            read answer
+            # if no answer
+            if [ -z "$answer" ]
+            then
+                git config --global user.email "change@this.com"
+            else
+                git config --global user.email "$answer"
+            fi
+        fi
+        # git name
+        if ! git config --global user.name
+        then
+            echo "git needs an name (doesnt have to be a real name), what name should I tell git?"
+            read answer
+            # if no answer
+            if [ -z "$answer" ]
+            then
+                git config --global user.name "MrCHANGE ME"
+            else
+                git config --global user.name "$answer"
+            fi
         fi
         
         # 
