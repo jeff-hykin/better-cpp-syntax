@@ -1,0 +1,173 @@
+#!/usr/bin/env bash
+
+if [ "$FORNIX_DEBUG" = "true" ]; then
+    echo "starting ensure_nix_installed"
+fi
+
+# setup some helpers
+newline='
+'
+light_yellow="\e[0;1;33m";light_yellow=""
+light_purple="\e[0;1;35m";light_purple=""
+light_green="\e[0;1;32m";light_green=""
+light_red="\e[0;1;31m";light_red=""
+blue="\e[0;94m"; blue=""
+cyan="\e[0;36m";cyan=""
+color_reset="\e[0m";color_reset=""
+
+# saftey/cleanup
+# if trap exists
+if [ -n "$(command -v "trap")" ]
+then
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return 0' INT TERM
+fi
+
+# 
+# if nix doesnt exist
+# 
+if [ -z "$(command -v "nix")" ]
+then
+    # 
+    # try sourcing some files, then check avail if nix is available
+    # 
+    if [ -f "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" ]
+    then
+        . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
+    fi
+    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
+    then
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+    fi
+    export PATH="$PATH:/nix/var/nix/profiles/default/bin/"
+    
+    # 
+    # if nix STILL doesnt exist
+    # 
+    if [ -z "$(command -v "nix")" ]
+    then
+        echo "|------------------------------------------------------|" 1>&2
+        echo "|                                                      |" 1>&2
+        echo "|    I'll try to install nix for you                   |" 1>&2
+        echo "|    (since I don't see nix yet)                       |" 1>&2
+        echo "|                                                      |" 1>&2
+        echo "|------------------------------------------------------|" 1>&2
+        echo ""
+        # check for root
+        if [ "$(whoami)" = "root" ]
+        then
+            echo "$light_yellow"
+            echo "looks like you're logged in as root"
+            echo "sadly nix can't install on the root user"
+            echo "please use a regular user, then re-run this script"
+            echo "$color_reset"
+            # if users exists
+            if [ -n "$(command -v "users")" ]
+            then
+                if [ -n "$(users)" ] && [ "$(users)" != "root" ]
+                then
+                    echo "the available users are:"
+                    users
+                    echo 
+                    echo "you should be able to run ${cyan}su ${light_yellow}USER_NAME${color_reset}"
+                    echo "to login as one of those users"
+                else
+                    echo ""
+                    echo "it looks like this system doesn't have any regular users"
+                    
+                    # if useradd exists
+                    if [ -n "$(command -v "useradd")" ]
+                    then
+                        question="do you want me to make a regular user for you? [y/n]";answer=''
+                        while true; do
+                            echo "$question"; read response
+                            case "$response" in
+                                [Yy]* ) answer='yes'; break;;
+                                [Nn]* ) answer='no'; break;;
+                                * ) echo "Please answer yes or no.";;
+                            esac
+                        done
+                        
+                        if [ "$answer" = 'yes' ]; then
+                            echo "${light_purple}Enter a username:${color_reset}"
+                            read username
+                            if sudo useradd --create-home "$username" --password "password" --groups sudo
+                            then
+                                echo ""
+                                echo "user created successfully"
+                                echo "run:"
+                                echo "    ${cyan}sudo passwd "$username"${color_reset}"
+                                echo "to set the password"
+                            else
+                                echo ""
+                                echo "Sorry, there was an error when creating the user"
+                                echo "I used this command: ${cyan}sudo useradd --create-home "'"'"$username"'"'" --password 'password' --groups sudo${color_reset}"
+                            fi
+                        else
+                            echo "Okay"
+                        fi
+                    fi
+                    
+                fi
+            fi
+        fi
+        #       
+        # MacOS 
+        #
+        if [ "$(uname)" = "Darwin" ]
+        then
+            debugging_info="$debugging_info$newline""I think you have a Mac because "'"$OSTYPE" = "darwin"*'" came back true"
+            full_version="$(sw_vers -productVersion)"
+            major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')"
+            minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')"
+            #                  
+            # Big Sur or Newer
+            #                 
+            if [ "$major_version" = "11" ]; then
+                sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
+            #                  
+            # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
+            #                 
+            elif [ "$major_version" -eq "10" ]; then
+                # Catalina
+                if [ "$minor_version" = "15" ]; then
+                    sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
+                # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
+                else
+                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                fi
+            else
+                echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
+                echo '(which returns '"$full_version"')'
+                echo "Either 1. that value is empty 2. You're on an insanely old version 3. You're on a version way way in the future from when this script was made"
+            fi
+        # assuming Linux/POSIX if not on MacOS
+        else
+            # if curl doesnt exist, try to make it exist
+            if [ -z "$(command -v "curl")" ]
+            then
+                # if apt-get exists
+                if [ -n "$(command -v "apt-get")" ]
+                then
+                    sudo apt-get update && sudo apt-get install curl
+                else
+                    echo "it looks like you don't have curl, please install curl then re-run this script" 1>&2
+                    echo "alternatively, to get nix, manually run the commands inside https://releases.nixos.org/nix/nix-2.3.7/install" 1>&2
+                fi
+            fi
+            
+            # if now curl exists
+            if [ -n "$(command -v "curl")" ]
+            then
+                # check if systemd exists
+                if pidof systemd
+                then
+                    # multi-user install if systemd exists
+                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                else
+                    # single-user install if systemd exists
+                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                fi
+            fi
+        fi
+    fi
+fi

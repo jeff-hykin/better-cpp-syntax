@@ -5,23 +5,31 @@
 # setup some helpers
 newline='
 '
-light_yellow="\e[0;1;33m"
-light_purple="\e[0;1;35m"
-light_green="\e[0;1;32m"
-light_red="\e[0;1;31m"
-cyan="\e[0;36m"
-color_reset="\e[0m"
+light_yellow="\e[0;1;33m";light_yellow=""
+light_purple="\e[0;1;35m";light_purple=""
+light_green="\e[0;1;32m";light_green=""
+light_red="\e[0;1;31m";light_red=""
+blue="\e[0;94m"; blue=""
+cyan="\e[0;36m";cyan=""
+color_reset="\e[0m";color_reset=""
 
 # saftey/cleanup
 # if trap exists
 if [ -n "$(command -v "trap")" ]
 then
-    trap 'unset repo; unset branch; unset mixin_remote_name; return 0' INT TERM
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; exit 0' INT TERM
 fi
         
 # if nix doesnt exist
 if [ -z "$(command -v "nix")" ]
 then
+    echo "|------------------------------------------------------|" 1>&2
+    echo "|                                                      |" 1>&2
+    echo "|    I'll try to install nix for you                   |" 1>&2
+    echo "|    (since I don't see nix yet)                       |" 1>&2
+    echo "|                                                      |" 1>&2
+    echo "|------------------------------------------------------|" 1>&2
+    echo ""
     # check for root
     if [ "$(whoami)" = "root" ]
     then
@@ -60,11 +68,13 @@ then
                     if [ "$answer" = 'yes' ]; then
                         echo "${light_purple}Enter a username:${color_reset}"
                         read username
-                        if sudo useradd --create-home "$username" --password "password" --groups sudo && sudo passwd "$username"
+                        if sudo useradd --create-home "$username" --password "password" --groups sudo
                         then
                             echo ""
                             echo "user created successfully"
-                            echo "run ${cyan}sudo passwd '${light_yellow}YOUR_PASSWORD${cyan}'${color_reset} to set the password"
+                            echo "run:"
+                            echo "    ${cyan}sudo passwd "$username"${color_reset}"
+                            echo "to set the password"
                         else
                             echo ""
                             echo "Sorry, there was an error when creating the user"
@@ -76,6 +86,10 @@ then
                 fi
                 
             fi
+            echo ""
+            echo "login as the non-root user (${cyan}su USERNAME${color_reset})"
+            echo "then re-run this command"
+            exit
         fi
     fi
     #       
@@ -91,17 +105,19 @@ then
         # Big Sur or Newer
         #                 
         if [ "$major_version" = "11" ]; then
-            sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+            sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
         #                  
         # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
         #                 
         elif [ "$major_version" -eq "10" ]; then
             # Catalina
             if [ "$minor_version" = "15" ]; then
-                sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
+                sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
             # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
             else
-                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+                # the single-user install seems to have fewer install issues
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             fi
         else
             echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
@@ -119,7 +135,7 @@ then
                 sudo apt-get update && sudo apt-get install curl
             else
                 echo "it looks like you don't have curl, please install curl then re-run this script" 1>&2
-                echo "alternatively, to get nix, manually run the commands inside https://nixos.org/nix/install" 1>&2
+                echo "alternatively, to get nix, manually run the commands inside https://releases.nixos.org/nix/nix-2.3.7/install" 1>&2
             fi
         fi
         
@@ -129,11 +145,13 @@ then
             # check if systemd exists
             if pidof systemd
             then
-                # multi-user install if systemd exists
-                curl -L https://nixos.org/nix/install | sh -s -- --daemon
+                # the single-user install seems to have fewer install issues
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                # # multi-user install if systemd exists
+                # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
             else
-                # single-user install if systemd exists
-                curl -L https://nixos.org/nix/install | sh -s
+                # single-user install if systemd does not exist
+                curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
             fi
         fi
     fi
@@ -142,10 +160,16 @@ fi
 # if nix was not installed
 if ! [ -d "/nix/store" ]
 then
-    echo "" 1>&2
-    echo "Looks like there was a problem installing nix :/" 1>&2
-    echo "Hopefully there are error messages above" 1>&2
-    echo "If you want additional information about installing nix see: https://nixos.org/manual/nix/stable/#chap-installation" 1>&2
+    echo "$light_yellow"
+    echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+    echo "|                                                                                               |" 1>&2
+    echo "|    Looks like there was a problem installing nix :/                                           |" 1>&2
+    echo "|    Hopefully there are error messages above                                                   |" 1>&2
+    echo "|    If you want additional information about installing nix see:                               |" 1>&2
+    echo "|         https://nixos.org/manual/nix/stable/#chap-installation                                |" 1>&2
+    echo "|                                                                                               |" 1>&2
+    echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+    echo ""
 # if nix was installed (hopefully successfully)
 else
     # 
@@ -155,9 +179,9 @@ else
     then
         . "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
     fi
-    if [ -f "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh" ]
+    if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]
     then
-        . "/Users/$(whoami)/.nix-profile/etc/profile.d/nix.sh"
+        . "$HOME/.nix-profile/etc/profile.d/nix.sh"
     fi
     export PATH="$PATH:/nix/var/nix/profiles/default/bin/"
     
@@ -165,13 +189,18 @@ else
     if [ -z "$(command -v "nix-env")" ] || [ -z "$(command -v "nix-shell")" ]
     then
         echo "$light_yellow"
-        echo "Small issue:"
-        echo "$color_reset"
-        echo "    I dont see the nix-env or nix-shell command" 1>&2
-        echo "    You might need to try closing/reopening your terminal and running this command again" 1>&2
-        echo "    If you already did that, and you're still getting this message" 1>&2
-        echo "    then you might need to uninstall and reinstall nix" 1>&2
-        echo "    more instructions here: https://nixos.org/manual/nix/stable/#sect-single-user-installation" 1>&2
+        echo "|-- Action Needed ------------------------------------------------------------------------------| $color_reset" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|    - Try closing/reopening your terminal and running this command again                       |" 1>&2
+        echo "|      (I dont see the nix-env and nix-shell command)                                           |" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|    - If you already did that, and you're still getting this message                           |" 1>&2
+        echo "|      then you might need to uninstall and reinstall nix                                       |" 1>&2
+        echo "|      instructions here:                                                                       |" 1>&2
+        echo "|         https://nixos.org/manual/nix/stable/#sect-single-user-installation                    |" 1>&2
+        echo "|                                                                                               |" 1>&2
+        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+        echo ""
     else
         # 
         # get git
@@ -179,6 +208,32 @@ else
         if [ -z "$(command -v "git")" ]
         then
             nix-env -i git
+        fi
+        # git email
+        if ! git config --global user.email
+        then
+            echo "git needs an email (doesnt have to be valid), what email should I tell git?"
+            read answer
+            # if no answer
+            if [ -z "$answer" ]
+            then
+                git config --global user.email "change@this.com"
+            else
+                git config --global user.email "$answer"
+            fi
+        fi
+        # git name
+        if ! git config --global user.name
+        then
+            echo "git needs an name (doesnt have to be a real name), what name should I tell git?"
+            read answer
+            # if no answer
+            if [ -z "$answer" ]
+            then
+                git config --global user.name "MrCHANGE ME"
+            else
+                git config --global user.name "$answer"
+            fi
         fi
         
         # 
@@ -189,7 +244,6 @@ else
         if [ -d "$PWD/.git" ]
         then
             [ -n "$(command -v "clear")" ] && clear
-            blue="\e[0;94m"
             echo "$blue"
             echo "one moment please ..."
             echo "$color_reset"
@@ -283,41 +337,53 @@ else
                 if [ "$?" != "0" ]
                 then
                     echo "$light_red"
-                    echo "There was a problem :/"
-                    echo "$color_reset"
-                    echo "    looks like git could not add that mixin"
-                    echo "    make sure the URL and branch name are correct"
-                    echo "    if they are correct, then hopefully there is error output above that"
-                    echo "    will give you a better idea as to why git could not get the repo"
-                    echo '    here is the command that had an error:
-        git remote add '"'"$mixin_remote_name'"' '"'"$repo'"' && \
-            git fetch '"'"$mixin_remote_name'"' '"'"$branch'"' && \
-            git pull --allow-unrelated-histories '"'"$mixin_remote_name'"' '"'"$branch'"' && \
-            git submodule update --init --recursive
-                    '
+                    echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                    echo "|                                                                                               |" 1>&2
+                    echo "|    looks like git could not add that mixin :/                                                 |" 1>&2
+                    echo "|    - Make sure the URL and branch name are correct                                            |" 1>&2
+                    echo "|      (if they are correct, hopefully there is error output above that gives a better idea as) |" 1>&2
+                    echo "|      (to why git could not get the repo)                                                      |" 1>&2
+                    echo "|    - Here is the command that had an error:                                                   |" 1>&2
+                    echo "|          git remote add '$mixin_remote_name' '$repo' && \                                      " 1>&2
+                    echo "|             git fetch '$mixin_remote_name' '$branch' && \                                      " 1>&2
+                    echo "|             git pull --allow-unrelated-histories '$mixin_remote_name' '$branch' && \           " 1>&2
+                    echo "|             git submodule update --init --recursive                                            " 1>&2
+                    echo "|                                                                                               |" 1>&2
+                    echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                    echo ""
                 else
                     # check for conflicts
                     if [ -n "$(git status | grep "You have unmerged paths.")" ]
                     then
-                        echo ""
                         echo "$light_yellow"
-                        echo "Looks like you have a merge conflict"
-                        echo "$color_reset"
-                        echo "(no big deal)"
-                        echo "Get the merge finished, and the mixin will be complete!"
-                        echo "$light_purple"
-                        echo "Not sure how to resolve a merge conflict?"
-                        echo "$color_reset"
-                        echo "     how to resolve merge conflicts in VS Code: https://www.youtube.com/watch?v=QmKdodJU-js"
-                        echo "     how to resolve merge conflicts in command line: https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git"
-                    else
+                        echo "|-- Action Needed ------------------------------------------------------------------------------| $color_reset" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    Looks like you have a merge conflict (no big deal)                                         |" 1>&2
+                        echo "|    - Get the merge finished, and the mixin will be complete!                                  |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    Not sure how to resolve a merge conflict?                                                  |" 1>&2
+                        echo "|    - How to resolve merge conflicts in VS Code:                                               |" 1>&2
+                        echo "|          https://www.youtube.com/watch?v=QmKdodJU-js                                          |" 1>&2
+                        echo "|    - How to resolve merge conflicts in command line:                                          |" 1>&2
+                        echo "|          https://phoenixnap.com/kb/how-to-resolve-merge-conflicts-in-git                      |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
                         echo ""
-                        echo "${light_green}Looks like the mixin was successful!${color_reset}"
+                    else
+                        echo "$light_yellow"
+                        echo "|-- Success! -----------------------------------------------------------------------------------| $color_reset" 
+                        echo "|                                                                                               |" 
+                        echo "|    - Looks like the mixin was successful!                                                     |" 
+                        echo "|                                                                                               |" 
+                        
                         # check if file exists
                         if [ -f "./commands/start" ]
                         then
-                            echo "You can run ${cyan}commands/start${color_reset} to get into the project environment now"
+                            echo "|   You can run ${cyan}commands/start${color_reset} to get into the project environment now                          |" 
+                            echo "|                                                                                               |" 
                         fi
+                        echo "|-----------------------------------------------------------------------------------------------|" 
+                        echo ""
                     fi
                 fi
             fi
@@ -376,32 +442,39 @@ else
             
             # 
             # setup or copy
-            # 
-            echo "Last question"
-            question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) if you (or your team) made this => setup${newline}    2) if the URL is a template => copy";answer=''
-            while true; do
-                echo "$question"; read response
-                case "$response" in
-                    [1]* ) answer='setup'; break;;
-                    [2]* ) answer='copy'; break;;
-                    "copy" ) answer='copy'; break;;
-                    "setup" ) answer='setup'; break;;
-                    * ) echo "${newline}${newline}${light_yellow}Please answer with a 1 or 2${color_reset}${newline}${newline}";;
-                esac
-            done
+            #
+            if [ -z "$setup_or_copy" ]
+            then
+                echo "Last question"
+                question="$light_green""Do you want to setup or copy?${newline}$color_reset    1) if you (or your team) made this => setup${newline}    2) if the URL is a template => copy";answer=''
+                while true; do
+                    echo "$question"; read response
+                    case "$response" in
+                        [1]* ) answer='setup'; break;;
+                        [2]* ) answer='copy'; break;;
+                        "copy" ) answer='copy'; break;;
+                        "setup" ) answer='setup'; break;;
+                        * ) echo "${newline}${newline}${light_yellow}Please answer with a 1 or 2${color_reset}${newline}${newline}";;
+                    esac
+                done
+                setup_or_copy="$answer"
+            fi
             
             folder_name="$(basename "$repo")"
             if [ -e "$folder_name" ]
             then
                 echo "$light_red"
-                echo "Small problem:"
-                echo "$color_reset"
-                echo "    I was going to create the project in $folder_name"
-                echo "    but it looks like something named $folder_name"
-                echo "    already exists. Please move or delete it the re-run the command"
+                echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                echo "|                                                                                               |" 1>&2
+                echo "|    - I was going to create the project in '$folder_name'                                       " 1>&2
+                echo "|      But it looks like something named $folder_name already exists                             " 1>&2
+                echo "|    - Please move or delete it the re-run the command you just ran                             |" 1>&2
+                echo "|                                                                                               |" 1>&2
+                echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                echo ""
             else
                 # if setup
-                if [ "$answer" = "setup" ]
+                if [ "$setup_or_copy" = "setup" ]
                 then
                     echo "$light_green"
                     echo "# "
@@ -422,13 +495,20 @@ else
                             echo "${color_reset}"
                             echo "Press enter to start the project"
                             read REPLY
+                            echo "[starting project setup...]"
                             commands/start
                         fi
                     else
-                        echo
-                        echo "it looks like there was an error when trying to get the repo"
-                        echo "here's the command I ran that caused an error"
-                        echo "    ${cyan}"'git clone --branch "'"$branch"'" "'"$repo"'" "'"$folder_name"'" && cd "'"$folder_name"'"'"${color_reset}"
+                        echo "$light_red"
+                        echo "|-- Problem ------------------------------------------------------------------------------------| $color_reset" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    - it looks like there was an error when trying to get the repo                             |" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|    - here's the command I ran that caused an error                                            |" 1>&2
+                        echo "|   ${cyan}git clone --branch '$branch' '$repo' '$folder_name' && cd '$folder_name'${color_reset}" 1>&2
+                        echo "|                                                                                               |" 1>&2
+                        echo "|-----------------------------------------------------------------------------------------------|" 1>&2
+                        echo ""
                     fi
                 # if copy
                 else
@@ -457,6 +537,7 @@ else
                                 echo "${color_reset}"
                                 echo "Press enter to start the project"
                                 read REPLY
+                                echo "[starting project setup...]"
                                 commands/start
                             fi
                         }

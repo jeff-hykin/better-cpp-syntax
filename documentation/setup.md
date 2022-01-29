@@ -5,7 +5,7 @@
 - (Don't git clone)
 - Run this: `repo=https://github.com/jeff-hykin/better-cpp-syntax eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`
 - If you're on Windows, run it inside WSL (Ubuntu 20.04 preferably)
-- If you're a responsible human being and therefore don't want run a sketchy internet script, props to you 👍. Take a look at the explaination below and you'll be able to run the commands yourself.
+- If you're a responsible human being and therefore don't want run a sketchy internet script, props to you 👍. Take a look at the explaination at the bottom and you'll be able to run the commands yourself.
 
 ### If the above instructions didn't make sense
 
