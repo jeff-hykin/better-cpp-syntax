@@ -51,7 +51,7 @@
     - punctuation.separator.scope-resolution
 - source: '~'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: foo
   scopes:
     - entity.name.function.call
@@ -80,7 +80,7 @@
     - punctuation.separator.scope-resolution
 - source: '~'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: bar
   scopes:
     - entity.name.function.call

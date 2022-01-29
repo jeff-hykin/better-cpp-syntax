@@ -192,7 +192,7 @@
 - source: 'N '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -280,7 +280,7 @@
 - source: 'perm '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -290,13 +290,13 @@
 - source: ' perm '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' N'
 - source: ','
   scopes:

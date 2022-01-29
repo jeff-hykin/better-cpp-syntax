@@ -320,7 +320,7 @@
     - meta.body.class
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: d
 - source: ;
   scopes:
@@ -369,7 +369,7 @@
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: sizeof
   scopes:
     - keyword.operator.functionlike
@@ -385,7 +385,7 @@
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -932,7 +932,7 @@
     - keyword.operator.assignment
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1278,7 +1278,7 @@
 - source: 'digits '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1294,7 +1294,7 @@
     - meta.parens
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1319,7 +1319,7 @@
     - meta.body.struct
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: data
 - source: ;
   scopes:
@@ -1597,7 +1597,7 @@
     - variable.other.property
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -1647,7 +1647,7 @@
 - source: 'digits '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -2227,7 +2227,7 @@
     - variable.other.property
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ' _size_mask'
 - source: ;
   scopes:
@@ -2298,7 +2298,7 @@
 - source: ' _SSO_Cap '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' remain'
 - source: ;
   scopes:
@@ -2397,7 +2397,7 @@
 - source: ' size '
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -2406,7 +2406,7 @@
 - source: '_size_mask '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -2512,7 +2512,7 @@
 - source: ' _SSO_Cap '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' size'
 - source: ;
   scopes:
@@ -2802,7 +2802,7 @@
 - source: ' count '
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: '15'
   scopes:
     - constant.numeric.decimal
@@ -2989,7 +2989,7 @@
 - source: ' capacity '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3006,7 +3006,7 @@
 - source: "\t\t\t\t    count "
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -3015,7 +3015,7 @@
 - source: '_size_mask '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3107,7 +3107,7 @@
 - source: ' _SSO_Cap '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' count'
 - source: ;
   scopes:
@@ -3258,7 +3258,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3387,7 +3387,7 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3408,7 +3408,7 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3727,7 +3727,7 @@
 - source: ' new_cap '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3770,7 +3770,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -3857,7 +3857,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -3866,7 +3866,7 @@
 - source: '_size_mask '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -4055,7 +4055,7 @@
 - source: 'size '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -4091,7 +4091,7 @@
 - source: 'size '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -4161,7 +4161,7 @@
 - source: ' old_cap '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -4181,7 +4181,7 @@
     - meta.parens
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: (
   scopesBegin:
     - meta.parens
@@ -4190,7 +4190,7 @@
 - source: 'old_cap '
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -4398,11 +4398,11 @@
 - source: 'buf '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: ','
   scopes:
@@ -4410,7 +4410,7 @@
 - source: ' buf '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ','
   scopes:
@@ -4426,7 +4426,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: )
   scopes:
@@ -4489,7 +4489,7 @@
     - punctuation.separator.delimiter.comma
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -4533,7 +4533,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: )
   scopes:
@@ -4776,7 +4776,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: )
   scopes:
@@ -4843,7 +4843,7 @@
 - source: ' new_cap '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -4944,7 +4944,7 @@
     - punctuation.separator.delimiter.comma
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -4995,11 +4995,11 @@
 - source: 'new_buf '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: ','
   scopes:
@@ -5007,7 +5007,7 @@
 - source: ' old_buf '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ','
   scopes:
@@ -5023,7 +5023,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: )
   scopes:
@@ -5108,11 +5108,11 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance '
 - source: '|'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: (
   scopesBegin:
     - meta.parens
@@ -5121,7 +5121,7 @@
 - source: '_size_mask '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -5335,7 +5335,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance '
 - source: '>'
   scopes:
@@ -5859,7 +5859,7 @@
     - meta.body.function.definition.special.constructor
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -6131,7 +6131,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ;
   scopes:
@@ -6172,7 +6172,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ','
   scopes:
@@ -6329,7 +6329,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ','
   scopes:
@@ -6377,7 +6377,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' pos'
 - source: ','
   scopes:
@@ -6795,10 +6795,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -6991,7 +6991,7 @@
 - source: "\t\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -7047,14 +7047,14 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -7213,7 +7213,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -7410,7 +7410,7 @@
 - source: "\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -7717,7 +7717,7 @@
 - source: "\t\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -7812,7 +7812,7 @@
     - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: other
 - source: ','
   scopes:
@@ -8093,7 +8093,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -8116,10 +8116,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -8341,7 +8341,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -8372,10 +8372,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -8633,7 +8633,7 @@
     - keyword.operator.comparison
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: str
 - source: )
   scopes:
@@ -8650,7 +8650,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -8807,7 +8807,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -8931,7 +8931,7 @@
     - keyword.operator.comparison
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: other
 - source: )
   scopes:
@@ -8948,7 +8948,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -9119,7 +9119,7 @@
     - punctuation.separator.delimiter.comma
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: other
 - source: ','
   scopes:
@@ -9172,7 +9172,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -9346,7 +9346,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -9416,7 +9416,7 @@
 - source: "\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -9527,7 +9527,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -9606,7 +9606,7 @@
     - meta.body.function.definition.special.operator-overload
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -9814,7 +9814,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -9884,7 +9884,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -9938,7 +9938,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -9951,7 +9951,7 @@
     - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -9967,10 +9967,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -10080,7 +10080,7 @@
 - source: "\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -10199,7 +10199,7 @@
 - source: "\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -10353,7 +10353,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -10413,7 +10413,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -10629,7 +10629,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -10729,7 +10729,7 @@
 - source: ' s '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' count'
 - source: )
   scopes:
@@ -10901,10 +10901,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -11066,7 +11066,7 @@
 - source: "\t\t\t\tCharT "
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: 'buf '
 - source: '='
   scopes:
@@ -11122,14 +11122,14 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -11175,7 +11175,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -11233,7 +11233,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -11258,7 +11258,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -11328,7 +11328,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -11351,10 +11351,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -11501,7 +11501,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -11532,10 +11532,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -12272,7 +12272,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12342,7 +12342,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -12841,7 +12841,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -12903,7 +12903,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -12965,7 +12965,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -13200,7 +13200,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -13271,7 +13271,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -13342,7 +13342,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __size
   scopes:
     - entity.name.function.call
@@ -13493,7 +13493,7 @@
 - source: ' _size_mask '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '2'
   scopes:
     - constant.numeric.decimal
@@ -13923,7 +13923,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -14032,7 +14032,7 @@
 - source: ' s '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' distance'
 - source: )
   scopes:
@@ -14045,7 +14045,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -14135,7 +14135,7 @@
 - source: ' s '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' count'
 - source: )
   scopes:
@@ -14148,7 +14148,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -14266,7 +14266,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -14390,7 +14390,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' index_str'
 - source: )
   scopes:
@@ -14425,7 +14425,7 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' index_str'
 - source: ','
   scopes:
@@ -14447,11 +14447,11 @@
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' index_str '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' count'
 - source: )
   scopes:
@@ -14464,7 +14464,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -14531,7 +14531,7 @@
 - source: 'pos '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __data
   scopes:
     - entity.name.function.call
@@ -14626,7 +14626,7 @@
 - source: 'pos '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __data
   scopes:
     - entity.name.function.call
@@ -14730,10 +14730,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -14871,7 +14871,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: )
   scopes:
@@ -14915,7 +14915,7 @@
 - source: ' pos '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __data
   scopes:
     - entity.name.function.call
@@ -14961,7 +14961,7 @@
     - keyword.operator.assignment
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: first
 - source: ;
   scopes:
@@ -15054,7 +15054,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -15139,7 +15139,7 @@
 - source: 'pos '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: __data
   scopes:
     - entity.name.function.call
@@ -15196,7 +15196,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -15265,7 +15265,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -15318,7 +15318,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -15331,7 +15331,7 @@
     - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -15355,10 +15355,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -15549,7 +15549,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -15602,7 +15602,7 @@
     - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -15615,7 +15615,7 @@
     - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -15639,10 +15639,10 @@
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '*'
   scopesEnd:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.begin.template.call
@@ -15912,7 +15912,7 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' index'
 - source: )
   scopes:
@@ -15950,7 +15950,7 @@
     - keyword.control.return
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this

@@ -669,7 +669,7 @@
 - source: ' itemIndex '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -687,7 +687,7 @@
 - source: ' totalNumberOfItems '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' itemIndex'
 - source: ;
   scopes:
@@ -708,7 +708,7 @@
 - source: 'itemRelativeRank '
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' nextItemIndex'
 - source: )
   scopes:
@@ -729,7 +729,7 @@
 - source: ' itemRelativeRank '
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -747,11 +747,11 @@
 - source: ' numberOfRemainingItems '
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' probabilityOfBeingBetterThanCurrentItem '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' numberOfSeenItemsThatAreBetterThanCurrentItem'
 - source: ;
   scopes:
@@ -820,7 +820,7 @@
 - source: 'totalNumberOfItems '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -831,7 +831,7 @@
     - meta.parens
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: ' expectedAverageRank'
 - source: ;
   scopes:
@@ -948,7 +948,7 @@
 - source: ' itemIndex '
 - source: +
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1277,7 +1277,7 @@
 - source: ' sum'
 - source: /
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: nextItemIndex
 - source: ;
   scopes:
@@ -1501,7 +1501,7 @@
 - source: ' LoopNumber'
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1524,7 +1524,7 @@
 - source: ' LoopNumber'
 - source: '-'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: '1'
   scopes:
     - constant.numeric.decimal

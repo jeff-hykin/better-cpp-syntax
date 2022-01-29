@@ -132,7 +132,7 @@
 - source: ' Rule '
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: other
 - source: )
   scopes:
@@ -168,7 +168,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: '*'
   scopes:
-    - keyword.operator
+    - keyword.operator.arithmetic
 - source: this
   scopes:
     - variable.language.this
@@ -447,7 +447,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: blank_
 - source: )
   scopes:
@@ -503,7 +503,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: '&'
   scopes:
-    - keyword.operator
+    - keyword.operator.bitwise
 - source: charater_set_
 - source: )
   scopes:

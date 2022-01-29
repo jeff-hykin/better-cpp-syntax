@@ -208,6 +208,7 @@ tokens = [
     # function specifiers/qualifiers
     { representation: "inline"               , name: "inline"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "constexpr"            , name: "constexpr"        , isSpecifier: true , isFunctionSpecifier: true},
+    { representation: "consteval"            , name: "consteval"        , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "mutable"              , name: "mutable"          , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "friend"               , name: "friend"           , isSpecifier: true , isFunctionSpecifier: true},
     { representation: "explicit"             , name: "explicit"         , isSpecifier: true , isFunctionSpecifier: true},
@@ -258,6 +259,7 @@ tokens = [
     # 
     { representation: "typedef"         , name: "typedef"       , isCurrentlyAMiscKeyword: true },
     { representation: "decltype"        , name: "decltype"      , isSpecifier: true,  isFunctionLike: true },
+    { representation: "constinit"       , name: "constinit"     , isSpecifier: true , isCurrentlyAMiscKeyword: true},
     { representation: "typename"        , name: "typename"      },
     # 
     { representation: "asm"                        , name: "asm"                        },
@@ -295,6 +297,10 @@ tokens = [
     # isWord
     if each[:representation] =~ /\A[a-zA-Z_][a-zA-Z0-9_]*\z/
         each[:isWord] = true
+    end
+    # isBitwise
+    if each[:name] =~ /\bbitwise\b/
+        each[:isBitwise] = true
     end
     
     if each[:isTypeSpecifier] or each[:isStorageSpecifier]

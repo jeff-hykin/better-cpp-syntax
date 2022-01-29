@@ -25,7 +25,7 @@
         "name": "Jeff Hykin"
     },
     "publisher": "jeff-hykin",
-        "categories": [
+    "categories": [
         "Programming Languages"
     ],
     "repository": {
@@ -60,8 +60,10 @@
         "nspell": "^2.1.2",
         "oniguruma": "^7.2.0",
         "textmate-bailout": "^1.1.0",
-        "vsce": "^1.99.0",
-        "textmate-tester": "^1.1.0"
+        "textmate-tester": "^1.1.0",
+        "vsce": "^1.99.0"
     },
-    "dependencies": {}
+    "dependencies": {
+        "yargs": "^17.1.1"
+    }
 }
