@@ -1,0 +1,2082 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: subsystems/chassis/chassis.hpp
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: functional
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: src
+  scopes:
+    - entity.name.scope-resolution.namespace.block
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.block
+- source: Chassis
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: template
+  scopesBegin:
+    - meta.body.namespace
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.start.template.definition
+- source: class
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses.template.definition
+- source: Args
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: ForChassisMotors
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: void
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.initializer
+- source: DJIMotor
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: func
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.initializer
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: Args...
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: Args
+  scopes:
+    - entity.name.type.parameter
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses
+- source: args
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: for
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' i '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' i '
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: ' DRIVEN_WHEEL_COUNT'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ' i'
+- source: ++
+  scopes:
+    - keyword.operator.increment
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: i
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '->*'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: func
+  scopes:
+    - variable.other.property
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: args...
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: SWERVE
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: i
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '->*'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: func
+  scopes:
+    - variable.other.property
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: args...
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: tap
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: Drivers
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' drivers'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: '    :'
+- source: ChassisSubsystemInterface
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: TARGET_SENTRY
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: railWheel
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' RAIL_WHEEL_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Rail Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: leftBackWheel
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' LEFT_BACK_WHEEL_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Left Back Wheel Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: leftFrontWheel
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' LEFT_FRONT_WHEEL_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Left Front Wheel Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: rightFrontWheel
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' RIGHT_FRONT_WHEEL_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Right Front Wheel Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: rightBackWheel
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' RIGHT_BACK_WHEEL_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Right Back Wheel Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: SWERVE
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: leftBackYaw
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' LEFT_BACK_YAW_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Left Back Yaw Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: leftFrontYaw
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' LEFT_FRONT_YAW_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Left Front Yaw Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: rightFrontYaw
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' RIGHT_FRONT_YAW_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Right Front Yaw Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: rightBackYaw
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: drivers
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' RIGHT_BACK_YAW_ID'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: ' CHAS_BUS'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Right Back Ya.0w Motor
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+- source: '#'
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: targetRPMs
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: Matrix
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: DRIVEN_WHEEL_COUNT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: MOTORS_PER_WHEEL
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: zeroMatrix
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: motors
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: Matrix
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: <
+  scopesBegin:
+    - meta.template.call
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: DJIMotor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: DRIVEN_WHEEL_COUNT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: MOTORS_PER_WHEEL
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+    - meta.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: zeroMatrix
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: wheelLocationMatrix
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: //
+  scopes:
+    - comment.line.double-slash
+    - punctuation.definition.comment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: TARGET_SENTRY
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: RAIL
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: railWheel
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.else
+  scopes:
+    - punctuation.definition.directive
+- source: else
+  scopesEnd:
+    - keyword.control.directive.else
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' NON SWERVE ROBOTS'
+  scopesEnd:
+    - comment.line.double-slash
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: LB
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: leftBackWheel
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: LF
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: leftFrontWheel
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: RF
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: rightFrontWheel
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: RB
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: rightBackWheel
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' WHEELBASE_WIDTH '
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' WHEELBASE_LENGTH'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'WHEELBASE_WIDTH '
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' WHEELBASE_LENGTH'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' WHEELBASE_WIDTH '
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' WHEELBASE_LENGTH'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: .
+  scopes:
+    - constant.numeric.decimal.point
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: f
+  scopes:
+    - keyword.other.unit.suffix.floating-point
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wheelLocationMatrix
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'WHEELBASE_WIDTH '
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' WHEELBASE_LENGTH'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: SWERVE
+  scopesBegin:
+    - meta.preprocessor.conditional
+  scopes:
+    - entity.name.function.preprocessor
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' SWERVE ROBOTS'
+  scopesEnd:
+    - meta.preprocessor.conditional
+    - comment.line.double-slash
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: LB
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: leftBackYaw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: LF
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: leftFrontYaw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: RF
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: rightFrontYaw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: motors
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: RB
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: rightBackYaw
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+- source: '#'
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '}'
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: initialize
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: ForChassisMotors
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: DJIMotor
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: initialize
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: refresh
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: //
+  scopesBegin:
+    - meta.body.function.definition
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' update motor rpm based on the robot type?'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: calculateMecanum
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: float
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: calculateSwerve
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: float
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: float
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+- source: void
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ChassisSubsystem
+  scopes:
+    - entity.name.scope-resolution.function.definition
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.definition
+- source: calculateRail
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: float
+  scopes:
+    - meta.function.definition.parameters
+    - meta.parameter
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+- source: '}'
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' namespace src::Chassis'

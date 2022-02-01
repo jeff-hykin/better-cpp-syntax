@@ -364,6 +364,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
   scopesBegin:
     - meta.function.definition
@@ -386,11 +388,9 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
 - source: '#'
   scopesBegin:
+    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -884,6 +884,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: DOCTEST_GCC_SUPPRESS_WARNING_PUSH
   scopesBegin:
     - meta.function.definition
@@ -906,10 +908,6 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.preprocessor.macro
-    - meta.function.definition
-    - meta.head.function.definition
 - source: '#'
   scopesBegin:
     - keyword.control.directive.elif
@@ -1166,6 +1164,8 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: DOCTEST_MSVC_SUPPRESS_WARNING_PUSH
   scopesBegin:
     - meta.function.definition
@@ -1188,11 +1188,9 @@
 - source: )
   scopes:
     - punctuation.section.parameters.end.bracket.round
-  scopesEnd:
-    - meta.function.definition
-    - meta.head.function.definition
 - source: '#'
   scopesBegin:
+    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive

@@ -48,7 +48,7 @@ identifier = grammar[:identifier]
             tag_as: "punctuation.definition.directive",
         ).maybe(@spaces)
     )
-    non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(/\n/)
+    non_escaped_newline = lookBehindToAvoid(/\\/).lookAheadFor(/\n?$/)
     grammar[:macro_name] = macro_name = Pattern.new(
         match: wordBounds(identifier),
         tag_as: "entity.name.function.preprocessor",
