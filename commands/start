@@ -47,11 +47,154 @@ if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "starting: $FORNIX_COMMANDS_FOLDER"start
 fi
 
+# 
 # fix the windows WSL mkfifo problem
+# 
 if [ -d "/mnt/c" ]
 then
-    echo "Asking Windows to enable file metadata (to avoid permission errors)"
-    sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
+    # create some helpers
+    move_out_of_the_way () {
+        if [[ -e "$1" ]]
+        then
+            # if something is in the way, move it out of the way
+            # (recursively)
+            if [[ -e "$1.old" ]]
+            then
+                move_out_of_the_way "$1.old"
+            fi
+            
+            # now that anything that would be in the way has been moved
+            mv "$1" "$1.old"
+        fi
+    }
+    prev_command_successful () {
+        return $?
+    }
+    
+    # 
+    # check for mounting with metadata
+    # 
+    
+    # check if metadata enabled already
+    if ! mount -l | grep 'C: on /mnt/c' | grep 'metadata' &>/dev/null
+    then
+        echo '__________________________________________________________________________________'
+        echo '|                                                                                |'
+        echo '|  Howdy!                                                                        |'
+        echo '|                                                                                |'
+        echo '|  Looks like there`s a metadata hiccup/problem. It seems you`re using WSL       |'
+        echo '|  Sadly, for some reason, WSL doesn`t (by default) support many features of the |'
+        echo '|  linux file system. And For some reason, adding that support requires          |'
+        echo '|  re-mounting the C drive (within WSL) with metadata enabled.                   |'
+        echo '|                                                                                |'
+        echo '|  I`ll run the command automatically, but if you don`t want to put              |'
+        echo '|  your password in, cancel this (CTRL+C) and run the following yourself:        |'
+        echo '|                                                                                |'
+        echo '|      { cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata }  |'
+        echo '|                                                                                |'
+        echo '|  Then re-run this script                                                       |'
+        echo '|  You can read more about this problem here if you like:                         |'
+        echo '|  https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/      |'
+        echo '|                                                                                |'
+        echo '----------------------------------------------------------------------------------'
+        echo
+        echo "Continue?"; read _
+        # this means we need to unmount and remount with metadata enabled
+        { cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata }
+        # the cd command will be undone/ignored externally because its in a subshell (the {}'s)
+    fi
+    
+    # if project is inside the windows C drive
+    if [[ "$FORNIX_FOLDER" == "/mnt/c"* ]]; then
+        echo '__________________________________________________________________________________'
+        echo '|                                                                                |'
+        echo '|  Howdy!                                                                        |'
+        echo '|                                                                                |'
+        echo '|  Looks like your project is saved in the windows file system                   |'
+        echo '|  (instead of the Linux/WSL file system)                                        |'
+        echo '|                                                                                |'
+        echo '|  This is a bit of a problem since the file systems of                          |'
+        echo '|  Linux/Mac/Android/ChromeBook/OpenBSD/etc have many features                   |'
+        echo '|  that the windows file system does not have.                                   |'
+        echo '|                                                                                |'
+        echo '|  Would it be okay if I move this project?                                      |'
+        echo '|      I`ll create a shortcut to it so you can still find it.                    |'
+        echo '|      https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/  |'
+        echo '|                                                                                |'
+        echo '----------------------------------------------------------------------------------'
+        echo
+        question="[y/n]: ";answer=''
+        while true; do
+            echo "$question"; read response
+            case "$response" in
+                [Yy]* ) answer='yes'; break;;
+                [Nn]* ) answer='no'; break;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+        if [ "$answer" = 'no' ]; then
+            echo '
+            
+            okay, in that case just re-run this command whenever
+            you have moved the project to the linux file system
+                
+                if you`re confused about what that^ means
+                take a look at the "fornix_framework.md" file inside
+                of the "documentation" folder (inside of this project folder)
+            '
+            exit
+        else
+            # 
+            # where to move project
+            # 
+            new_project_location="$HOME/repos/$(basename "$FORNIX_FOLDER")"
+            while true; do
+                question="Is it okay if I move the project to '$new_project_location'? [y/n]";answer=''
+                while true; do
+                    echo "$question"; read response
+                    case "$response" in
+                        [Yy]* ) answer='yes'; break;;
+                        [Nn]* ) answer='no'; break;;
+                        * ) echo "Please answer yes or no.";;
+                    esac
+                done
+                if [ "$answer" = 'no' ]; then
+                    echo ""
+                    echo "Where would you like to put it?"
+                    echo "(press enter when done typing the path):"
+                    echo ""
+                    read new_project_location
+                else
+                    break
+                fi
+            done
+            
+            # 
+            # move the project
+            # 
+            
+            # if something is in the way, move it out of the way
+            if [ -e "$new_project_location" ]
+            then
+                move_out_of_the_way "$new_project_location"
+            fi
+            
+            # make sure the parent folder exists
+            mkdir -p "$(dirname "$new_project_location")"
+            
+            # move the project itself
+            prev_command_successful && mv "$FORNIX_FOLDER" "$new_project_location"
+            
+            # create a shortcut to the project
+            prev_command_successful && ln -s "$new_project_location" "$FORNIX_FOLDER"
+            
+            # cd and start the project
+            prev_command_successful && cd "$new_project_location" && "$new_project_location/commands/start"
+            # note: commands/start is needed in the above command so the FORNIX_FOLDER and other checks/setup can be redone
+            # so just exit right after because this script has become just a wrapper at this point
+            exit $?
+        fi
+    fi
 fi
 
 . "$FORNIX_FOLDER/settings/extensions/nix/commands/ensure_nix_installed"

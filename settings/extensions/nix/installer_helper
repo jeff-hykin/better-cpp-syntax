@@ -39,12 +39,13 @@ then
         echo "please use a regular user, then re-run this script"
         echo "$color_reset"
         # if users exists
-        if [ -n "$(command -v "users")" ]
+        if [ -n "$(command -v "getent")" ] && [ -n "$(command -v "cut")" ]
         then
-            if [ -n "$(users)" ] && [ "$(users)" != "root" ]
+            users="$(getent passwd {1000..6000} | cut -d: -f1)"
+            if [ -n "$users" ] && [ "$users" != "root" ]
             then
                 echo "the available users are:"
-                users
+                echo "$users"
                 echo 
                 echo "you should be able to run ${cyan}su ${light_yellow}USER_NAME${color_reset}"
                 echo "to login as one of those users"
