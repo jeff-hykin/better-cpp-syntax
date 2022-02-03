@@ -90,17 +90,21 @@ then
         echo '|  I`ll run the command automatically, but if you don`t want to put              |'
         echo '|  your password in, cancel this (CTRL+C) and run the following yourself:        |'
         echo '|                                                                                |'
-        echo '|      { cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata }  |'
+        echo '      {                                                                           '
+        echo '          cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata    '
+        echo '      }                                                                           '
         echo '|                                                                                |'
         echo '|  Then re-run this script                                                       |'
-        echo '|  You can read more about this problem here if you like:                         |'
+        echo '|  You can read more about this problem here if you like:                        |'
         echo '|  https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/      |'
         echo '|                                                                                |'
         echo '----------------------------------------------------------------------------------'
         echo
         echo "Continue?"; read _
         # this means we need to unmount and remount with metadata enabled
-        { cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata }
+        {
+            cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
+        }
         # the cd command will be undone/ignored externally because its in a subshell (the {}'s)
     fi
     
