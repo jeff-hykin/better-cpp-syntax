@@ -61,12 +61,13 @@ then
             echo "please use a regular user, then re-run this script"
             echo "$color_reset"
             # if users exists
-            if [ -n "$(command -v "users")" ]
+            if [ -n "$(command -v "getent")" ] && [ -n "$(command -v "cut")" ]
             then
-                if [ -n "$(users)" ] && [ "$(users)" != "root" ]
+                users="$(getent passwd {1000..6000} | cut -d: -f1)"
+                if [ -n "$users" ] && [ "$users" != "root" ]
                 then
                     echo "the available users are:"
-                    users
+                    echo "$users"
                     echo 
                     echo "you should be able to run ${cyan}su ${light_yellow}USER_NAME${color_reset}"
                     echo "to login as one of those users"
@@ -108,6 +109,10 @@ then
                     fi
                     
                 fi
+                echo ""
+                echo "login as the non-root user (${cyan}su USERNAME${color_reset})"
+                echo "then re-run this command"
+                exit
             fi
         fi
         #       
@@ -133,7 +138,9 @@ then
                     sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
                 # Mojave, High Siera, Siera, and might work on even older versions (Yosemite, Mavericks)
                 else
-                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                    # the single-user install seems to have fewer install issues
+                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                    # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
                 fi
             else
                 echo 'We tried to get you MacOS version by running `sw_vers -productVersion`'
@@ -161,10 +168,12 @@ then
                 # check if systemd exists
                 if pidof systemd
                 then
-                    # multi-user install if systemd exists
-                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
+                    # the single-user install seems to have fewer install issues
+                    curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
+                    # # multi-user install if systemd exists
+                    # curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s -- --daemon
                 else
-                    # single-user install if systemd exists
+                    # single-user install if systemd does not exist
                     curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install | sh -s
                 fi
             fi
