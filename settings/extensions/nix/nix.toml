@@ -116,6 +116,11 @@ asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
 [[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "WebKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
 load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
 asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
