@@ -12,9 +12,9 @@
     </li>
     <li>
         <p>
-            Considering live code sharing? You should see <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">Duckly!</a>
+            Doing/wanting live code sharing? You should see <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">Duckly!</a>
             <br>
-            The cross-editor live sharing tool that Better C++ is proud to be <b>sponsored</b> by.
+            The cross-editor free-to-use live sharing tool that Better C++ is proud to be <b>sponsored</b> by.
             <br> 
             <br> 
             <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">
