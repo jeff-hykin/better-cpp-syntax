@@ -6,7 +6,7 @@
 </p>
 
 ### Like this extension?
-- Do Live Code Sharing? Check out [Duckly](https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming)! Not only does it work cross-editors (live Intellij <-> PyCharm <-> VS Code) but this C++ extension is proudly sponsored by Duckly.
+- Do ive Code Sharing? Check out [Duckly](https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming)! Not only does it work cross-editors (live Intellij <-> PyCharm <-> VS Code) but this C++ extension is proudly sponsored by Duckly.
 - You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
 
 # What does this do?
@@ -67,9 +67,10 @@ If you'd like to help improve the syntax, take a look at `main/main.rb`. And mak
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
-- Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
 - Better support for dereferenced/pointer tagging
+- Full C++ 2020 support (module imports, arrow return types, etc)
+- Improving template types
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
