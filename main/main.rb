@@ -1013,7 +1013,7 @@ grammar = Grammar.new(
                 ),
                 includes: [storage_modifiers],
             ).then(
-                    grammar[:simple_type].then(std_space).then(
+                grammar[:simple_type].then(std_space).then(
                     optional_calling_convention
                 ).then(
                     grammar[:scope_resolution_function_definition]
