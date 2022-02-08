@@ -66,9 +66,10 @@ If you'd like to help improve the syntax, take a look at `main/main.rb`. And mak
 
 Planned future fixes/featues:
 - Add tagging for type-casting statements
-- Add tagging for template-usage (rather than only template definition)
 - Add tagging for custom types words
 - Better support for dereferenced/pointer tagging
+- Full C++ 2020 support (module imports, arrow return types, etc)
+- Improving template types
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
