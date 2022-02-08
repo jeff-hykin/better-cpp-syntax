@@ -6,10 +6,29 @@
 </p>
 
 ### Like this extension?
-- Do Live Code Sharing? Check out [Duckly](https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming)! Not only does it work cross-editors (live Intellij <-> PyCharm <-> VS Code) but this C++ extension is proudly sponsored by Duckly.
-- You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
+<ul>
+    <li>
+        You'll probably like this as well: <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax">My "Better Syntax" Megapack</a>
+    </li>
+    <li>
+        <p>
+            Considering live code sharing? You should see <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">Duckly!</a>
+            <br>
+            The cross-editor live sharing tool that Better C++ is proud to be <b>sponsored</b> by.
+            <br> 
+            <br> 
+            <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">
+                <img height=30 src=https://user-images.githubusercontent.com/17692058/153001309-5df811b3-4b77-454e-940a-24d7afb61b5e.png >
+                <img height=30 src=https://user-images.githubusercontent.com/17692058/153003440-560e999a-4bd8-42a4-8b95-4c9e02c0af89.svg >
+                <img src="https://vsmarketplacebadge.apphb.com/rating-star/gitduck.code-streaming.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
+            </a>
+        </p>
+    </li>
+</ol>
 
-# What does this do?
+<br> 
+
+# What does this extension do?
 This will get you the bleeding-edge syntax highlighting for C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
 NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (installed by default) or use a theme like one of the following to benefit from the changes:
@@ -26,6 +45,7 @@ NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (
 ## How do I use it?
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
+![duckly](https://user-images.githubusercontent.com/17692058/152999597-55b1902a-d98d-40f8-b0d6-4e468230cc18.png)
 
 # Before and After (Material Theme)
 Before                     | After 
