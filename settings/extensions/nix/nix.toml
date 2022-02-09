@@ -185,6 +185,11 @@ asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
 [[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "WebKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
 load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
 asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
@@ -380,6 +385,13 @@ load = [ "unixtools", "write",]
 
 [[packages]]
 load = [ "unixtools", "xxd",]
+
+# 
+# core
+# 
+[[packages]]
+load = [ "deno",]
+from = "c82b46413401efa740a0b994f52e9903a4f6dcd5"
 
 [[packages]]
 load = [ "nix",]
