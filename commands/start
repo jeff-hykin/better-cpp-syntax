@@ -75,39 +75,6 @@ then
     # check for mounting with metadata
     # 
     
-    # check if metadata enabled already
-    if ! mount -l | grep 'C: on /mnt/c' | grep 'metadata' &>/dev/null
-    then
-        echo '__________________________________________________________________________________'
-        echo '|                                                                                |'
-        echo '|  Howdy!                                                                        |'
-        echo '|                                                                                |'
-        echo '|  Looks like there`s a metadata hiccup/problem. It seems you`re using WSL       |'
-        echo '|  Sadly, for some reason, WSL doesn`t (by default) support many features of the |'
-        echo '|  linux file system. And For some reason, adding that support requires          |'
-        echo '|  re-mounting the C drive (within WSL) with metadata enabled.                   |'
-        echo '|                                                                                |'
-        echo '|  I`ll run the command automatically, but if you don`t want to put              |'
-        echo '|  your password in, cancel this (CTRL+C) and run the following yourself:        |'
-        echo '|                                                                                |'
-        echo '      {                                                                           '
-        echo '          cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata    '
-        echo '      }                                                                           '
-        echo '|                                                                                |'
-        echo '|  Then re-run this script                                                       |'
-        echo '|  You can read more about this problem here if you like:                        |'
-        echo '|  https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/      |'
-        echo '|                                                                                |'
-        echo '----------------------------------------------------------------------------------'
-        echo
-        echo "Continue?"; read _
-        # this means we need to unmount and remount with metadata enabled
-        {
-            cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
-        }
-        # the cd command will be undone/ignored externally because its in a subshell (the {}'s)
-    fi
-    
     # if project is inside the windows C drive
     if [[ "$FORNIX_FOLDER" == "/mnt/c"* ]]; then
         echo '__________________________________________________________________________________'
@@ -198,6 +165,39 @@ then
             # so just exit right after because this script has become just a wrapper at this point
             exit $?
         fi
+    fi
+    
+    # check if metadata enabled already
+    if ! mount -l | grep 'C: on /mnt/c' | grep 'metadata' &>/dev/null
+    then
+        echo '__________________________________________________________________________________'
+        echo '|                                                                                |'
+        echo '|  Howdy!                                                                        |'
+        echo '|                                                                                |'
+        echo '|  Looks like there`s a metadata hiccup/problem. It seems you`re using WSL       |'
+        echo '|  Sadly, for some reason, WSL doesn`t (by default) support many features of the |'
+        echo '|  linux file system. And For some reason, adding that support requires          |'
+        echo '|  re-mounting the C drive (within WSL) with metadata enabled.                   |'
+        echo '|                                                                                |'
+        echo '|  I`ll run the command automatically, but if you don`t want to put              |'
+        echo '|  your password in, cancel this (CTRL+C) and run the following yourself:        |'
+        echo '|                                                                                |'
+        echo '      {                                                                           '
+        echo '          cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata    '
+        echo '      }                                                                           '
+        echo '|                                                                                |'
+        echo '|  Then re-run this script                                                       |'
+        echo '|  You can read more about this problem here if you like:                        |'
+        echo '|  https://devblogs.microsoft.com/commandline/chmod-chown-wsl-improvements/      |'
+        echo '|                                                                                |'
+        echo '----------------------------------------------------------------------------------'
+        echo
+        echo "Continue?"; read _
+        # this means we need to unmount and remount with metadata enabled
+        {
+            cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
+        }
+        # the cd command will be undone/ignored externally because its in a subshell (the {}'s)
     fi
 fi
 
