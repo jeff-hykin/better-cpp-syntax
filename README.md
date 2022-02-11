@@ -21,9 +21,11 @@
                 </a>
             </th>
             <th>
-                Easy pair programming with any IDE. Duckly enables you to talk, share your code in real-time, server and terminal with people using different IDEs.
-                <br>
-                <a href="https://bit.ly/3BdYRfu">Try it out for free</a>
+                <p align="left">
+                    Easy pair programming with any IDE. Duckly enables you to talk, share your code in real-time, server and terminal with people using different IDEs.
+                    <br>
+                    <a href="https://bit.ly/3BdYRfu">Try it out for free</a>
+                </p>
             </th>
         </tr>
     </thead>
