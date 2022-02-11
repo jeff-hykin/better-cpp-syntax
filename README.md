@@ -5,26 +5,11 @@
             src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" /></a>
 </p>
 
-### Like this extension?
-<ul>
-    <li>
-        You'll probably like this as well: <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax">My "Better Syntax" Megapack</a>
-    </li>
-    <li>
-        <p>
-            Doing/wanting live code sharing? You should see <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">Duckly!</a>
-            <br>
-            The cross-editor free-to-use live sharing tool that Better C++ is proud to be <b>sponsored</b> by.
-            <br> 
-            <br> 
-            <a href="https://marketplace.visualstudio.com/items?itemName=gitduck.code-streaming">
-                <img height=30 src=https://user-images.githubusercontent.com/17692058/153001309-5df811b3-4b77-454e-940a-24d7afb61b5e.png >
-                <img height=30 src=https://user-images.githubusercontent.com/17692058/153003440-560e999a-4bd8-42a4-8b95-4c9e02c0af89.svg >
-                <img src="https://vsmarketplacebadge.apphb.com/rating-star/gitduck.code-streaming.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
-            </a>
-        </p>
-    </li>
-</ol>
+# Sponsors
+
+<img src=https://storage.googleapis.com/gitduck/img/duckly-sponsor-vsc-opt.png >
+Easy pair programming with any IDE. Duckly enables you to talk, share your code in real-time, server and terminal with people using different IDEs.
+<a href="https://bit.ly/3BdYRfu">Try it out for free.</a>
 
 <br> 
 
@@ -80,6 +65,13 @@ It adds:
 - Highlighting of templated function calls `aFunction<int>(arguments)`
 - Additional specificity for many existing tags
 - Many other features
+
+### Like this extension?
+<ul>
+    <li>
+        You'll probably like this as well: <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax">My "Better Syntax" Megapack</a>
+    </li>
+</ol>
 
 ## Contributing
 If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `documentation/CONTRIBUTING.md` to get a better idea of how the code works.
