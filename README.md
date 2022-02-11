@@ -1,14 +1,22 @@
 <p align="center">
-        <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax"><img
-            src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" /></a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax"><img
-            src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" /></a>
+    <img height="130" alt="Screen Shot 2022-02-11 at 12 01 19 PM" src="https://user-images.githubusercontent.com/17692058/153645502-f106a481-faaf-450f-9f5e-10da3981d8dc.png">
+</p>
+<p align="center">
+    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
+        <img src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" />
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
+        <img src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
+    </a>
 </p>
 
-### Like this extension?
-You'll probably like this as well: [The Better Syntax Megapack](https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax)
+# Sponsors
 
-# What does this do?
+<a href="https://bit.ly/3BdYRfu">
+    <img src=https://user-images.githubusercontent.com/17692058/153651656-2607a088-4b85-4729-9118-fe721246eb27.svg >
+</a>
+
+# What does this extension do?
 This will get you the bleeding-edge syntax highlighting for C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
 
 NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (installed by default) or use a theme like one of the following to benefit from the changes:
@@ -26,10 +34,8 @@ NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (
 Just install the VS Code extension and the changes will automatically be applied to all relevent files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-# Before and After (Material Theme)
-Before                     | After 
-:-------------------------:|:-------------------------:
-![material_before](https://user-images.githubusercontent.com/17692058/59826753-83abd080-92fc-11e9-9dfb-d891da55cd13.png) | ![material_after](https://user-images.githubusercontent.com/17692058/59826766-8ad2de80-92fc-11e9-9bd6-3496ed5c917b.png)
+# Comparision (Material Theme)
+<img width="2794" alt="compare" src="https://user-images.githubusercontent.com/17692058/153653793-3685ffd5-cf96-43c3-a883-da79ba33d037.png">
 
 
 ## What is different from atom/language-c?
@@ -60,6 +66,13 @@ It adds:
 - Highlighting of templated function calls `aFunction<int>(arguments)`
 - Additional specificity for many existing tags
 - Many other features
+
+### Like this extension?
+<ul>
+    <li>
+        You'll probably like this as well: <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-syntax">My "Better Syntax" Megapack</a>
+    </li>
+</ul>
 
 ## Contributing
 If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `documentation/CONTRIBUTING.md` to get a better idea of how the code works.
