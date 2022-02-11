@@ -1,8 +1,13 @@
 <p align="center">
-        <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax"><img
-            src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" /></a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax"><img
-            src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" /></a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
+        Better C++ Syntax
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
+        <img src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" />
+    </a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
+        <img src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
+    </a>
 </p>
 
 # Sponsors
