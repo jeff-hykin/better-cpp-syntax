@@ -1,5 +1,5 @@
 <p align="center">
-    <img height="130" alt="Screen Shot 2022-02-11 at 12 01 19 PM" src="https://user-images.githubusercontent.com/17692058/153645502-f106a481-faaf-450f-9f5e-10da3981d8dc.png">
+    <img height="90" alt="Screen Shot 2022-02-11 at 12 01 19 PM" src="https://user-images.githubusercontent.com/17692058/153645502-f106a481-faaf-450f-9f5e-10da3981d8dc.png">
 </p>
 <p align="center">
     <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
@@ -12,9 +12,26 @@
 
 # Sponsors
 
-<a href="https://bit.ly/3BdYRfu">
-    <img src=https://user-images.githubusercontent.com/17692058/153651656-2607a088-4b85-4729-9118-fe721246eb27.svg >
-</a>
+<table>
+    <thead>
+        <tr>
+            <th>
+                <a href="https://bit.ly/3BdYRfu">
+                    <img src=https://storage.googleapis.com/gitduck/img/duckly-sponsor-vsc-opt.png >
+                </a>
+            </th>
+            <th>
+                Easy pair programming with any IDE. Duckly enables you to talk, share your code in real-time, server and terminal with people using different IDEs.
+                <br>
+                <a href="https://bit.ly/3BdYRfu">Try it out for free</a>
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<!-- <img src=https://user-images.githubusercontent.com/17692058/153651656-2607a088-4b85-4729-9118-fe721246eb27.svg > -->
+
+<br>
 
 # What does this extension do?
 This will get you the bleeding-edge syntax highlighting for C++. Which means your theme will be able to color your code better. This used to be a fix, but then VS Code starting using it as the official source for C and C++ highlighting.
