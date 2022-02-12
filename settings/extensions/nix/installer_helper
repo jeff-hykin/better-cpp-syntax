@@ -100,13 +100,18 @@ then
     then
         debugging_info="$debugging_info$newline""I think you have a Mac because "'"$OSTYPE" = "darwin"*'" came back true"
         full_version="$(sw_vers -productVersion)"
-        major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+\.[0-9]+/\1/g')"
-        minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)\.[0-9]+/\1/g')"
+        major_version="$(echo "$full_version" | sed -E 's/([0-9]+)\.[0-9]+(\.[0-9]+)?/\1/g')"
+        minor_version="$(echo "$full_version" | sed -E 's/[0-9]+\.([0-9]+)(\.[0-9]+)?/\1/g')"
         #                  
         # Big Sur or Newer
         #                 
-        if [ "$major_version" = "11" ]; then
-            sh <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
+        if [ "$major_version" = "11" ] || \
+            [ "$major_version" = "12" ] || \
+            [ "$major_version" = "13" ] || \
+            [ "$major_version" = "14" ] || \
+            [ "$major_version" = "15" ]
+        then
+            bash <(curl -Lk https://releases.nixos.org/nix/nix-2.3.7/install) --darwin-use-unencrypted-nix-store-volume
         #                  
         # Older than Big Sur (Catalina, Mojave, High Siera, Siera, etc)
         #                 
