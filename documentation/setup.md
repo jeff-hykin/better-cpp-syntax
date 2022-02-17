@@ -3,7 +3,7 @@
 ### If you're an Experienced/Senior Dev
 
 - (Don't git clone)
-- Run this: `eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`
+- Run this: `setup_or_copy=setup eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`
 - If you're on Windows, run it inside WSL (Ubuntu 20.04 preferably)
 - If you're a responsible human being and therefore don't want run a sketchy internet script, props to you 👍. Take a look at the explaination at the bottom and you'll be able to run the commands yourself.
 
@@ -20,8 +20,8 @@
 - Windows users
     - Get [WSL](https://youtu.be/av0UQy6g2FA?t=91) (Windows Subsystem for Linux) or [WSL2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10)<br>
         - If you're not familiar with WSL, I'd recommend [watching a quick thing on it like this one](https://youtu.be/av0UQy6g2FA?t=91)
-        - Ubuntu 18.04 for WSL is preferred (same as in that linked video), but Ubuntu 20.04 or similar should work.
-        - [WSL2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10) (just released August 2020) is needed if you want to use your GPU.<br>
+        - Ubuntu 20.04 for WSL is preferred (same as in that linked video), but Ubuntu 21.04 or similar should work.
+        - [WSL2](https://www.omgubuntu.co.uk/how-to-install-wsl2-on-windows-10) (released August 2020) is needed if you want to use your GPU.<br>
     - Once WSL is installed (and you have a terminal logged into WSL) follow the Mac/Linux instructions.
     - (tip: when accessing WSL, you probably want to use the VS Code terminal, or the [open source windows terminal](https://github.com/microsoft/terminal) instead of CMD)
 
