@@ -84,9 +84,9 @@ if [[ -n "$FORNIX_ARGS" ]]
 then
     # FIXME: I think the single quotes need to be escaped from the arguments (need to iterate over them, escape each one with single quotes)
     # run single command
-    HOME="$FORNIX_HOME" nix-shell --pure --run "zsh -c '$FORNIX_ARGS'" "$__temp_var__nix_shell_file"
+    HOME="$FORNIX_HOME" nix-shell --pure --show-trace --run "zsh -c '$FORNIX_ARGS'" "$__temp_var__nix_shell_file"
 else
-    HOME="$FORNIX_HOME" nix-shell --pure --command "zsh" "$__temp_var__nix_shell_file"
+    HOME="$FORNIX_HOME" nix-shell --pure --show-trace --command "zsh" "$__temp_var__nix_shell_file"
 fi
 if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "exited the nix-shell environment"
