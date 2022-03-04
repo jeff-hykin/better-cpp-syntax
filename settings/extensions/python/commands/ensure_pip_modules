@@ -51,6 +51,10 @@ then
     __temp_var__file_to_watch="$FORNIX_FOLDER/pyproject.toml"
     __temp_var__hash_check_name="pip_poetry_modules"
     failed_check_command () {
+        # for newer versions of poetry tell them to use the existing virtual env
+        poetry config virtualenvs.path --unset 2>/dev/null
+        poetry config virtualenvs.in-project true 2>/dev/null
+
         # what to do when node modules haven't been installed yet
         poetry install
         # if successful
