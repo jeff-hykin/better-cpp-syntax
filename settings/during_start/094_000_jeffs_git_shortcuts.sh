@@ -94,6 +94,34 @@ git_keep_theirs () { # git keep theirs
     git commit -m "_Accepting all incoming changes $@"
 }
 
+git_add_upstream () {
+    remote_name="$1"
+    remote_url="$2"
+    if [ -z "$remote_name" ]
+    then
+        echo "what should the upstream source be called?"
+        read remote_name
+    fi
+    if [ -z "$remote_url" ]
+    then
+        echo "what is the url to the upstream source?"
+        read remote_url
+    fi
+    
+    git remote add "$remote_name" "$remote_url"
+}
+
+git_change_origin () {
+    remote_url="$1"
+    if [ -z "$remote_url" ]
+    then
+        echo "what is the url to the upstream source?"
+        read remote_url
+    fi
+    # change origin
+    git remote set-url "origin" "$remote_url"
+}
+
 # 
 # Branch
 # 
