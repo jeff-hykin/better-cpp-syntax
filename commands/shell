@@ -79,6 +79,7 @@ if [ "$FORNIX_DEBUG" = "true" ]; then
     echo "switching from Bash to Zsh"
     echo "changing HOME to temp folder for nix-shell"
 fi
+export TMPDIR="/tmp" # fixes some build problems (workaround for a bug in Nix)
 __temp_var__nix_shell_file="$FORNIX_FOLDER/settings/extensions/nix/shell.nix"
 if [[ -n "$FORNIX_ARGS" ]]
 then
