@@ -21,16 +21,11 @@ let
         )
     );
     
-    salt = (builtins.import
-        (./nixpkgs/salt.nix)
-        main
-    );
-    
     # just a helper
     emptyOptions = ({
         buildInputs = [];
         nativeBuildInputs = [];
-        shellCode = "";
+        shellHook = "";
     });
     
     # 
@@ -39,7 +34,7 @@ let
     linuxOnly = if main.stdenv.isLinux then ({
         buildInputs = [];
         nativeBuildInputs = [];
-        shellCode = ''
+        shellHook = ''
             if [[ "$OSTYPE" == "linux-gnu" ]] 
             then
                 true # add important (LD_LIBRARY_PATH, PATH, etc) nix-Linux code here
@@ -54,7 +49,7 @@ let
     macOnly = if main.stdenv.isDarwin then ({
         buildInputs = [];
         nativeBuildInputs = [];
-        shellCode = ''
+        shellHook = ''
             if [[ "$OSTYPE" = "darwin"* ]] 
             then
                 true # add important nix-MacOS code here
@@ -63,48 +58,43 @@ let
         '';
     }) else emptyOptions;
     
-    # 
-    # Ruby specific
-    # 
-    rubyGems = (main.packages.bundlerEnv {
-        name = "gems";
-        ruby = main.packages.ruby;
-        gemdir = ../../..;
-    });
-    
 # using the above definitions
 in
     # 
     # create a shell
     # 
-    main.packages.mkShell {
-        # inside that shell, make sure to use these packages
-        buildInputs = main.project.buildInputs ++ macOnly.buildInputs ++ linuxOnly.buildInputs ++ [
-            salt
-            (rubyGems
-                (main.lowPrio rubyGems.wrappedRuby)
-            )
-        ];
-        
-        nativeBuildInputs =  main.project.nativeBuildInputs ++ macOnly.nativeBuildInputs ++ linuxOnly.nativeBuildInputs;
-        
-        # run some bash code before starting up the shell
-        shellHook = ''
-            ${main.project.protectHomeShellCode}
-            if [ "$FORNIX_DEBUG" = "true" ]; then
-                echo "starting: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
-            fi
-            ${linuxOnly.shellCode}
-            ${macOnly.shellCode}
-            
-            # provide access to ncurses for nice terminal interactions
-            export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.ncurses5}/lib"
-            export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
-            
-            if [ "$FORNIX_DEBUG" = "true" ]; then
-                echo "finished: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
-                echo ""
-                echo "Tools/Commands mentioned in 'settings/extensions/nix/nix.toml' are now available/installed"
-            fi
-        '';
-    }
+    (main.packages.mkShell
+        (main.mergeMixins
+            [
+                main.project
+                linuxOnly
+                macOnly
+                (main.importMixin 
+                    "salt.nix"
+                )
+                (main.importMixin 
+                    "ruby.nix"
+                )
+                # an "inline" mixin (this is what each mixin looks like)
+                ({
+                    # inside that shell, make sure to use these packages
+                    buildInputs = [];
+                    
+                    nativeBuildInputs = [];
+                    
+                    # run some bash code before starting up the shell
+                    shellHook = ''
+                        # provide access to ncurses for nice terminal interactions
+                        export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.ncurses5}/lib"
+                        export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
+                        
+                        if [ "$FORNIX_DEBUG" = "true" ]; then
+                            echo "finished: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
+                            echo ""
+                            echo "Tools/Commands mentioned in 'settings/extensions/nix/nix.toml' are now available/installed"
+                        fi
+                    '';
+                })
+            ]
+        )
+    )
