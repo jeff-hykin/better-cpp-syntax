@@ -182,9 +182,7 @@ then
         echo '|  I`ll run the command automatically, but if you don`t want to put              |'
         echo '|  your password in, cancel this (CTRL+C) and run the following yourself:        |'
         echo '|                                                                                |'
-        echo '      {                                                                           '
-        echo '          cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata    '
-        echo '      }                                                                           '
+        echo '      cd ; sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata; cd - '
         echo '|                                                                                |'
         echo '|  Then re-run this script                                                       |'
         echo '|  You can read more about this problem here if you like:                        |'
@@ -193,9 +191,10 @@ then
         echo '----------------------------------------------------------------------------------'
         echo
         echo "Continue?"; read _
+        pwd_before="$PWD"
         # this means we need to unmount and remount with metadata enabled
         cd && sudo umount /mnt/c && sudo mount -t drvfs C: /mnt/c -o metadata
-        cd -
+        cd "$pwd_before"
     fi
 fi
 
