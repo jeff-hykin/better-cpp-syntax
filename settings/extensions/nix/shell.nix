@@ -25,7 +25,7 @@ let
     emptyOptions = ({
         buildInputs = [];
         nativeBuildInputs = [];
-        ShellHook = "";
+        shellHook = "";
     });
     
     # 
@@ -34,7 +34,7 @@ let
     linuxOnly = if main.stdenv.isLinux then ({
         buildInputs = [];
         nativeBuildInputs = [];
-        ShellHook = ''
+        shellHook = ''
             if [[ "$OSTYPE" == "linux-gnu" ]] 
             then
                 true # add important (LD_LIBRARY_PATH, PATH, etc) nix-Linux code here
@@ -49,7 +49,7 @@ let
     macOnly = if main.stdenv.isDarwin then ({
         buildInputs = [];
         nativeBuildInputs = [];
-        ShellHook = ''
+        shellHook = ''
             if [[ "$OSTYPE" = "darwin"* ]] 
             then
                 true # add important nix-MacOS code here
