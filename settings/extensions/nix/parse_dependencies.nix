@@ -24,6 +24,9 @@
         )
         (builtins) # <- for import, fetchTarball, etc 
     );
+    pathToThisFile = (main.getEnv 
+        ("__FORNIX_NIX_MAIN_CODE_PATH")
+    );
     # 
     # pull info from the config files
     # 
@@ -231,6 +234,56 @@
         ({
             nixPath = "${defaultFrom}";
             packages = packages;
+            importMixin = (
+                fileName : (builtins.import
+                    (builtins.toPath
+                        "${pathToThisFile}/../mixins/${fileName}"
+                    )
+                    ({
+                        main = return;
+                    })
+                )
+            );
+            mergeMixins = (
+                mixins : (
+                    # this combines them into one big map ({}), which is done for any env vars they set
+                    (main.foldl'
+                        (curr: next: curr // next)
+                        {}
+                        mixins
+                    )
+                    
+                    //
+                    
+                    # here's how all the normal attributes are merged
+                    {
+                        buildInputs = (main.concatLists
+                            (main.map
+                                (
+                                    each: (  { buildInputs=[]; }   //   each  ).buildInputs
+                                )
+                                mixins
+                            )
+                        );
+                        nativeBuildInputs = (main.concatLists
+                            (main.map
+                                (
+                                    each: (  { nativeBuildInputs=[]; }   //   each  ).nativeBuildInputs
+                                )
+                                mixins
+                            )
+                        );
+                        shellHook = (main.concatStringsSep "\n"
+                            (main.map
+                                (
+                                    each: (  { shellHook=""; }   //   each  ).shellHook
+                                )
+                                mixins
+                            )
+                        );
+                    }
+                )
+            );
             project = {
                 buildInputs = buildInputs;
                 nativeBuildInputs = nativeBuildInputs;
@@ -270,6 +323,10 @@
                     fi
                     export FORNIX_NEXT_RUN_DONT_DO_MANUAL_START="true"
                     . "$path_to_fornix_core"
+                    
+                    if [ "$FORNIX_DEBUG" = "true" ]; then
+                        echo "starting: 'shellHook' inside the 'settings/extensions/nix/parse_dependencies.nix' file"
+                    fi
                     
                     # ensure that the folder exists
                     mkdir -p "$(dirname "$__FORNIX_NIX_PATH_EXPORT_FILE")"
