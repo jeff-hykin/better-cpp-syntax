@@ -194,6 +194,11 @@ load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
 asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Security" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
 # 
 # both often need
 # 
@@ -221,6 +226,9 @@ load = [ "openssh",]
 # 
 # 
 [[packages]]
+load = [ "fd",]
+
+[[packages]]
 load = [ "sd",]
 
 [[packages]]
@@ -230,8 +238,7 @@ load = [ "dua",]
 load = [ "tealdeer",]
 
 [[packages]]
-load = [ "ytop",]
-from = "a332da8588aeea4feb9359d23f58d95520899e3c"
+load = [ "bottom",]
 
 [[packages]]
 load = [ "exa",]
