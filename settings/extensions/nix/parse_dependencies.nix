@@ -240,7 +240,7 @@
                         "${pathToThisFile}/../mixins/${fileName}"
                     )
                     ({
-                        main = main;
+                        main = return;
                     })
                 )
             );
