@@ -7,7 +7,7 @@
         if [ -d "$each" ] && [ "$(basename "$each")" != "tools" ]
         then
             echo "    $(basename "$each")"
-            tree "$each" -C --dirsfirst -A -F --noreport | sed 's/^/     /' | sed -E 's/(\*|@)$/ /' | sed "1d"
+            tree "$each" -C --dirsfirst -A -F --noreport | sed 's/^/     /' | sed -E 's/(\*|@)$/ /' | sed -E 's/->.+/ /' | sed "1d"
         fi
     done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
     echo 
