@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 gc python            && gm master && gp && \
-gc python_package    && gm master && gp && \
-gc node              && gm master && gp && \
+gc python_package    && gm python && gp && \
+gc python_notebook   && gm python && gp && \
+gc node              && gm python && gp && \
 gc quik_github_pages && gm master && gp && \
 gc npm_package       && gm master && gp && \
 gc deno_package      && gm master && gp && \
@@ -10,8 +11,8 @@ gc electron          && gm master && gp && \
 gc prolog            && gm master && gp && \
 gc ruby              && gm master && gp && \
 gc rust              && gm master && gp && \
-gc rust_druid        && gm master && gp && \
-gc rust_tauri        && gm master && gp && \
+gc rust_druid        && gm rust   && gp && \
+gc rust_tauri        && gm rust   && gp && \
 gc textmate          && gm master && gp && \
 gc crystal           && gm master && gp && \
 gc master
