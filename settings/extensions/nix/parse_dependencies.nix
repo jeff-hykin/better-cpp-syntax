@@ -287,7 +287,7 @@
             project = {
                 buildInputs = buildInputs;
                 nativeBuildInputs = nativeBuildInputs;
-                protectHomeShellCode = ''
+                shellHook = ''
                     # 
                     # find the fornix_core
                     # 
