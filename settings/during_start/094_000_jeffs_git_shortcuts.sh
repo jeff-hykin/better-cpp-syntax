@@ -29,7 +29,7 @@ git_commit_hashes () {
 }
 
 git_log () {
-    git log --oneline
+    git log --first-parent --date=short --pretty=format:"%Cblue%ad %H%Cgreen %s"
 }
 
 git_current_commit_hash () {
