@@ -11,12 +11,16 @@ git_checkout () {
         git switch "$@"
         return 
     }
-    printf '%s' "$__temp_var__branches" | grep "$2" 2>/dev/null 1>/dev/null && {
+    # if second arg exists
+    if [ -n "$2" ]
+    then
+        printf '%s' "$__temp_var__branches" | grep "$2" 2>/dev/null 1>/dev/null && {
+            unset __temp_var__branches
+            git switch "$@"
+            return
+        }
         unset __temp_var__branches
-        git switch "$@"
-        return
-    }
-    unset __temp_var__branches
+    fi
     # 
     # otherwise use checkout
     # 
