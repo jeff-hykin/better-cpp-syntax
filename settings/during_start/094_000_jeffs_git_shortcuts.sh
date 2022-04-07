@@ -11,12 +11,16 @@ git_checkout () {
         git switch "$@"
         return 
     }
-    printf '%s' "$__temp_var__branches" | grep "$2" 2>/dev/null 1>/dev/null && {
+    # if second arg exists
+    if [ -n "$2" ]
+    then
+        printf '%s' "$__temp_var__branches" | grep "$2" 2>/dev/null 1>/dev/null && {
+            unset __temp_var__branches
+            git switch "$@"
+            return
+        }
         unset __temp_var__branches
-        git switch "$@"
-        return
-    }
-    unset __temp_var__branches
+    fi
     # 
     # otherwise use checkout
     # 
@@ -29,7 +33,7 @@ git_commit_hashes () {
 }
 
 git_log () {
-    git log --oneline
+    git log --first-parent --date=short --pretty=format:"%Cblue%ad %H%Cgreen %s"
 }
 
 git_current_commit_hash () {
@@ -434,5 +438,7 @@ alias gb="git branch -a"
 alias gnb="git_new_branch"
 alias gd="git_delete_changes"
 alias gcp="git add -A;git stash"
+alias gct="git add -A;git stash"
 alias gpst="git stash pop;git add -A"
 alias gundo="git reset --soft HEAD~1"
+alias gurl="git_url_of_origin"
