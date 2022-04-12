@@ -33,12 +33,32 @@ git_commit_hashes () {
 }
 
 git_log () {
-    git log --first-parent --date=short --pretty=format:"%Cblue%ad %H%Cgreen %s"
+    git log --first-parent --date=short --pretty=format:"%Cblue%ad %h%Cgreen %s %Creset%d"
 }
 
 git_current_commit_hash () {
     # https://stackoverflow.com/questions/949314/how-to-retrieve-the-hash-for-the-current-commit-in-git
     git rev-parse HEAD
+}
+
+git_oldest_commit_hash () {
+    git log --reverse --oneline | head -n1 | sed -e 's/ .*//' 
+}
+
+git_squash_all () {
+    git reset --soft $(git_oldest_commit_hash)
+}
+
+git_squash_to () {
+    commit_hash="$1"
+    commit_message="$2"
+    git reset --soft "$commit_hash" && git add -A && git commit -m "$commit_message" && echo "squash complete"
+}
+
+git_squash () {
+    args="$@"
+    git reset --soft HEAD~2 && git add -A && git commit -m "$args" && echo "squash complete"
+    git_log | head -n5
 }
 
 # 
