@@ -43,7 +43,7 @@ async function getAllPackageInfo(hash) {
     try {
         return JSON.parse(jsonString)
     } catch (error) {
-        console.debug(`path is:`,path)
+        console.log(`path is:`,path)
         throw Error(error)
     }
 }
@@ -61,10 +61,9 @@ function convertPackageInfo(attrName, packageInfo) {
         shortDescription: "",
         longDescription: "",
         versionString: "",
-        attributeName: attrName.split("."),
         homepage: "",
         license: "", // full name
-        semver: [],
+        versionNumberList: [],
         unfree: false,
         insecure: false,
         broken: false,
@@ -92,12 +91,12 @@ function convertPackageInfo(attrName, packageInfo) {
         return null
     }
 
-    const semverMatch = output.versionString.match(/((?:\d+)\.(?:\d+)(?:\.(?:\d+))*)(.+)/)
-    if (semverMatch) {
-        output.semver = semverMatch[1].split(".").map(each=>each-0)
-        const tagIfAny = semverMatch[2]
+    const versionNumberListMatch = output.versionString.match(/((?:\d+)\.(?:\d+)(?:\.(?:\d+))*)(.+)?/)
+    if (versionNumberListMatch) {
+        output.versionNumberList = versionNumberListMatch[1].split(".").map(each=>each-0)
+        const tagIfAny = versionNumberListMatch[2]
         if (tagIfAny) {
-            output.semver.push(tagIfAny)
+            output.versionNumberList.push(tagIfAny)
         }
     }
     
@@ -178,7 +177,7 @@ const hashJsonPrimitive = (value) => JSON.stringify(value).split("").reduce(
 )
 
 const allPackages = {}
-async function asyncAddPackageInfo(packageInfo, commitHash) {
+async function asyncAddPackageInfo(packageInfo, source) {
     let packageInfoCopy = {...packageInfo}
     packageInfoCopy.sources = []
     const hashValue = hashJsonPrimitive(packageInfoCopy)
@@ -186,10 +185,14 @@ async function asyncAddPackageInfo(packageInfo, commitHash) {
     const filePath = `./scan/packages/${packageInfo.name}/${hashValue}.json`
     const info = await FileSystem.info(filePath)
     if (info.isFile) {
+        let stringOutput
         try {
-            packageInfo = JSON.parse(await FileSystem.read(filePath))
+            stringOutput = await FileSystem.read(filePath)
+            packageInfo = JSON.parse(stringOutput)
         } catch (error) {
-            console.warn(error)
+            // console.debug(`    problem with ${info.path}`,)
+            // console.debug(`    stringOutput is:`,stringOutput)
+            // console.warn(error)
         }
     }
     
@@ -200,9 +203,16 @@ async function asyncAddPackageInfo(packageInfo, commitHash) {
     
     // create hash if needed
     allPackages[packageInfo.name][hashValue] = packageInfo
+    
     // add source
-    allPackages[packageInfo.name][hashValue].sources.push({ git: `https://github.com/NixOS/nixpkgs.git`, commit: commitHash })
+    const sources = allPackages[packageInfo.name][hashValue].sources
+    const sourceHashes = new Set(sources.map(each=>hashJsonPrimitive(each)))
+    const thisHash = hashJsonPrimitive(source)
+    if (!sourceHashes.has(thisHash)) {
+        allPackages[packageInfo.name][hashValue].sources.push(source)
+    }
 
+    await FileSystem.remove(filePath)
     await FileSystem.write({
         path: filePath,
         data: JSON.stringify(allPackages[packageInfo.name][hashValue]),
@@ -211,7 +221,7 @@ async function asyncAddPackageInfo(packageInfo, commitHash) {
 
 const pathToAllCommits = `./scan/allCommits.txt`
 async function getPathToAllCommitHashes() {
-    console.debug(`writing commits to:`, pathToAllCommits)
+    console.log(`writing commits to:`, pathToAllCommits)
     await run`git log --first-parent --date=short --pretty=format:%H ${Stdout(Overwrite(pathToAllCommits))}`
     return pathToAllCommits
 }
@@ -241,7 +251,7 @@ async function* iterateAllCommitHashes() {
         // otherwise do it
         yield each
         // save that it was done
-        await FileSystem.write({ path: progressFile, data: JSON.stringify(progress), })
+        await FileSystem.write({ path: progressFile, data: JSON.stringify(progress,0,4), })
     }
 }
 
@@ -251,7 +261,7 @@ async function* iterateAllCommitHashes() {
 // 
 const concurrentSize = 30
 for await (const commitHash of iterateAllCommitHashes()) {
-    console.debug(`commitHash is:`,commitHash)
+    console.log(`commitHash is:`,commitHash)
     try {
         console.log(`    getting all package info`)
         const allPackages = await getAllPackageInfo(commitHash)
@@ -267,7 +277,19 @@ for await (const commitHash of iterateAllCommitHashes()) {
                 console.log(`    ${`${loopNumber}`.padStart(attributesNumberLength)}/${entries.length}: ${Math.round((loopNumber/entries.length)*100)}%`)
             }
             const packageFixedInfo = convertPackageInfo(attrName, packageInfo)
-            waitingGroup.push(asyncAddPackageInfo(packageFixedInfo, commitHash))
+
+            waitingGroup.push(
+                asyncAddPackageInfo(
+                    packageFixedInfo,
+                    {
+                        git: `https://github.com/NixOS/nixpkgs.git`,
+                        commit: commitHash,
+                        attributePath: attrName.split("."),
+                        position: typeof packageInfo.meta.position == 'string' ? packageInfo.meta.position.replace(/\/nix\/store.+\/nixpkgs\//,"") : null,
+                        // path: packageInfo.meta.position.replace(/\/nix\/store.+\/nixpkgs\/(.+)(:\d+)?$/,"$1"),
+                    }
+                )
+            )
             if (waitingGroup.length > concurrentSize) {
                 await Promise.all(waitingGroup)
                 waitingGroup.splice(0,Infinity)
