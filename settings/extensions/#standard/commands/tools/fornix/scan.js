@@ -1,8 +1,8 @@
 #!/usr/bin/env -S deno run --allow-all
 
-const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.21/main/run.js`)
-const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.21/main/file_system.js`)
-const { Console } = await import(`https://deno.land/x/quickr@0.3.21/main/console.js`)
+const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.22/main/run.js`)
+const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.22/main/file_system.js`)
+const { Console, yellow } = await import(`https://deno.land/x/quickr@0.3.22/main/console.js`)
 
 
 Console.env.NIXPKGS_ALLOW_BROKEN = "1"
@@ -26,31 +26,50 @@ function* binaryListOrder(aList, ) {
     }
 }
 
+const allPackgeInfoPath = `./scan/allPackageInfo/`
 async function getAllPackageInfo(hash) {
-    const jsonString = await run`nix-env -qa --json -I ${`https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz`} ${Stdout(returnAsString)}`
-    return JSON.parse(jsonString)
+    const path = `${allPackgeInfoPath}/${hash}.json`
+    let jsonString = await FileSystem.read(path)
+    let output
+    try {
+        output = JSON.parse(jsonString)
+    } catch (error) {
+        
+    }
+    if (jsonString == null || output == null) {
+        await run`nix-env -qa --json -I ${`https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz`} ${Stdout(Overwrite(path))}`
+        jsonString = await FileSystem.read(path)
+    }
+    try {
+        return JSON.parse(jsonString)
+    } catch (error) {
+        console.debug(`path is:`,path)
+        throw Error(error)
+    }
 }
 
 // for single package
 async function getPackageJsonFor(packageAttrPath, hash) {
-    const jsonString = await run`nix-env -qaA ${packageAttrPath} --json -I https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz ${Stdout(returnAsString)}`
+    // nix-env -qaA nixpkgs.python --json -I https://github.com/NixOS/nixpkgs/archive/6c36c4ca061f0c85eed3c96c0b3ecc7901f57bb3.tar.gz
+    const jsonString = await run`nix-env -qaA ${packageAttrPath} --json -I ${`https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz`} ${Stdout(returnAsString)}`
     return JSON.parse(jsonString)[packageAttrPath]
 }
 
 function convertPackageInfo(attrName, packageInfo) {
     const output = {
         name: "",
-        description: "",
+        shortDescription: "",
+        longDescription: "",
         versionString: "",
+        attributeName: attrName.split("."),
         homepage: "",
         license: "", // full name
         semver: [],
         unfree: false,
         insecure: false,
         broken: false,
-        platforms: [],
-        attributeName: attrName.split("."),
         sources: [],
+        platforms: [],
     }
     
     if (packageInfo.pname) {
@@ -82,9 +101,7 @@ function convertPackageInfo(attrName, packageInfo) {
         }
     }
     
-    
-    output.license = packageInfo.license.fullName
-
+    output.license = packageInfo.meta.license
     output.shortDescription = packageInfo.meta.description
     output.longDescription  = packageInfo.meta.longDescription
     output.homepage         = packageInfo.meta.homepage
@@ -92,7 +109,7 @@ function convertPackageInfo(attrName, packageInfo) {
     output.insecure         = packageInfo.meta.insecure
     output.broken           = packageInfo.meta.broken
     output.platforms        = packageInfo.meta.platforms
-
+    
     return output
     // "nixpkgs.python310": {
     //     "name": "python3-3.10.2",
@@ -162,15 +179,15 @@ const hashJsonPrimitive = (value) => JSON.stringify(value).split("").reduce(
 
 const allPackages = {}
 async function asyncAddPackageInfo(packageInfo, commitHash) {
-    packageInfoCopy = {...packageInfo}
+    let packageInfoCopy = {...packageInfo}
     packageInfoCopy.sources = []
     const hashValue = hashJsonPrimitive(packageInfoCopy)
     // import data based on hash
-    const filePath = `./packages/${packageInfo.name}/${hashValue}.json`
+    const filePath = `./scan/packages/${packageInfo.name}/${hashValue}.json`
     const info = await FileSystem.info(filePath)
     if (info.isFile) {
         try {
-            packageInfo = JSON.stringify(await FileSystem.read(filePath))
+            packageInfo = JSON.parse(await FileSystem.read(filePath))
         } catch (error) {
             console.warn(error)
         }
@@ -184,7 +201,7 @@ async function asyncAddPackageInfo(packageInfo, commitHash) {
     // create hash if needed
     allPackages[packageInfo.name][hashValue] = packageInfo
     // add source
-    allPackages[packageInfo.name][hashValue].sources.push(`https://github.com/NixOS/nixpkgs/tree/${commitHash}`)
+    allPackages[packageInfo.name][hashValue].sources.push({ git: `https://github.com/NixOS/nixpkgs.git`, commit: commitHash })
 
     await FileSystem.write({
         path: filePath,
@@ -201,9 +218,10 @@ async function getPathToAllCommitHashes() {
 
 const progressFile = `./scan/progress.json`
 const commitsFile = `./scan/allCommits.json`
+let progress
 async function* iterateAllCommitHashes() {
     console.log(`reading in progress file`)
-    let progress = JSON.parse(`${await FileSystem.read(progressFile)}`)
+    progress = JSON.parse(`${await FileSystem.read(progressFile)}`)
     let allCommits
     if (progress == null) {
         progress = {
@@ -217,12 +235,12 @@ async function* iterateAllCommitHashes() {
     for (const each of binaryListOrder(allCommits)) {
         // Skip! (to resume progress)
         if (progress.completedHashes.includes(each)) {
+            console.log(`    skipping ${each}`)
             continue
         }
         // otherwise do it
         yield each
         // save that it was done
-        progress.completedHashes.push(each)
         await FileSystem.write({ path: progressFile, data: JSON.stringify(progress), })
     }
 }
@@ -235,16 +253,27 @@ const concurrentSize = 30
 for await (const commitHash of iterateAllCommitHashes()) {
     console.debug(`commitHash is:`,commitHash)
     try {
+        console.log(`    getting all package info`)
         const allPackages = await getAllPackageInfo(commitHash)
+        console.log(`    getting package info retrieved`)
         const waitingGroup = []
-        for (const [attrName, packageInfo] of Object.entries(allPackages)) {
-            console.log(`    attrName: ${attrName}`)
-            waitingGroup.push(asyncAddPackageInfo(packageInfo, commitHash))
+        const entries = Object.entries(allPackages)
+        const numberOfAttributes = entries.length
+        const attributesNumberLength = `${numberOfAttributes}`.length
+        let loopNumber = 0
+        for (const [attrName, packageInfo] of entries) {
+            loopNumber += 1
+            if (loopNumber % 500 == 0) {
+                console.log(`    ${`${loopNumber}`.padStart(attributesNumberLength)}/${entries.length}: ${Math.round((loopNumber/entries.length)*100)}%`)
+            }
+            const packageFixedInfo = convertPackageInfo(attrName, packageInfo)
+            waitingGroup.push(asyncAddPackageInfo(packageFixedInfo, commitHash))
             if (waitingGroup.length > concurrentSize) {
-                await Promise.allSettled(waitingGroup)
-                waitingGroup = []
+                await Promise.all(waitingGroup)
+                waitingGroup.splice(0,Infinity)
             }
         }
+        progress.completedHashes.push(commitHash)
     } catch (error) {
         console.warn(`issue on commit: ${commitHash}, `, error)
     }
