@@ -1,8 +1,8 @@
 #!/usr/bin/env -S deno run --allow-all
 
-const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.22/main/run.js`)
-const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.22/main/file_system.js`)
-const { Console, yellow } = await import(`https://deno.land/x/quickr@0.3.22/main/console.js`)
+const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.23/main/run.js`)
+const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.23/main/file_system.js`)
+const { Console, yellow } = await import(`https://deno.land/x/quickr@0.3.23/main/console.js`)
 
 
 Console.env.NIXPKGS_ALLOW_BROKEN = "1"
@@ -57,57 +57,61 @@ async function getPackageJsonFor(packageAttrPath, hash) {
 
 function convertPackageInfo(attrName, packageInfo) {
     const output = {
-        name: "",
-        shortDescription: "",
-        longDescription: "",
-        versionString: "",
-        homepage: "",
-        license: "", // full name
-        versionNumberList: [],
-        unfree: false,
-        insecure: false,
-        broken: false,
-        sources: [],
-        platforms: [],
+        frozen: {
+            name: "",
+            shortDescription: "",
+            longDescription: "",
+            versionString: "",
+            homepage: "",
+            license: "",
+            versionNumberList: [],
+            unfree: false,
+            platforms: [],
+        },
+        flexible: {
+            insecure: false,
+            broken: false,
+            sources: [],
+        }
     }
     
     if (packageInfo.pname) {
-        output.name = packageInfo.pname
+        output.frozen.name = packageInfo.pname
     } else if (packageInfo.name && packageInfo.version) {
-        output.name = packageInfo.name.slice(0,packageInfo.version.length+1)
+        output.frozen.name = packageInfo.name.slice(0,packageInfo.version.length+1)
     } else if (packageInfo.name) {
-        output.name = packageInfo.name.replace(/-.*/, "")
+        output.frozen.name = packageInfo.name.replace(/-.*/, "")
     } else {
         return null
     }
     
     if (packageInfo.version) {
-        output.versionString = packageInfo.version
+        output.frozen.versionString = packageInfo.version
     } else if (packageInfo.name && packageInfo.pname) {
-        output.versionString = packageInfo.name.slice(packageInfo.pname+1)
+        output.frozen.versionString = packageInfo.name.slice(packageInfo.pname+1)
     } else if (packageInfo.name) {
-        output.versionString = packageInfo.name.replace(/.+?-/, "")
+        output.frozen.versionString = packageInfo.name.replace(/.+?-/, "")
     } else {
         return null
     }
 
-    const versionNumberListMatch = output.versionString.match(/((?:\d+)\.(?:\d+)(?:\.(?:\d+))*)(.+)?/)
+    const versionNumberListMatch = output.frozen.versionString.match(/((?:\d+)\.(?:\d+)(?:\.(?:\d+))*)(.+)?/)
     if (versionNumberListMatch) {
-        output.versionNumberList = versionNumberListMatch[1].split(".").map(each=>each-0)
+        output.frozen.versionNumberList = versionNumberListMatch[1].split(".").map(each=>each-0)
         const tagIfAny = versionNumberListMatch[2]
         if (tagIfAny) {
-            output.versionNumberList.push(tagIfAny)
+            output.frozen.versionNumberList.push(tagIfAny)
         }
     }
     
-    output.license = packageInfo.meta.license
-    output.shortDescription = packageInfo.meta.description
-    output.longDescription  = packageInfo.meta.longDescription
-    output.homepage         = packageInfo.meta.homepage
-    output.unfree           = packageInfo.meta.unfree
-    output.insecure         = packageInfo.meta.insecure
-    output.broken           = packageInfo.meta.broken
-    output.platforms        = packageInfo.meta.platforms
+    output.frozen.license = packageInfo.meta.license
+    output.frozen.shortDescription = packageInfo.meta.description
+    output.frozen.longDescription  = packageInfo.meta.longDescription
+    output.frozen.homepage         = packageInfo.meta.homepage
+    output.frozen.unfree           = packageInfo.meta.unfree
+    output.frozen.platforms        = packageInfo.meta.platforms
+    output.flexible.insecure         = packageInfo.meta.insecure
+    output.flexible.broken           = packageInfo.meta.broken
     
     return output
     // "nixpkgs.python310": {
@@ -171,51 +175,49 @@ function convertPackageInfo(attrName, packageInfo) {
     // }
 }
 
-const hashJsonPrimitive = (value) => JSON.stringify(value).split("").reduce(
-    (hashCode, currentVal) => (hashCode = currentVal.charCodeAt(0) + (hashCode << 6) + (hashCode << 16) - hashCode),
-    0
-)
+import { createHash } from "https://deno.land/std@0.139.0/hash/mod.ts"
+const hashJsonPrimitive = (value) => createHash("md5").update(JSON.stringify(value)).toString()
 
 const allPackages = {}
-async function asyncAddPackageInfo(packageInfo, source) {
-    let packageInfoCopy = {...packageInfo}
-    packageInfoCopy.sources = []
-    const hashValue = hashJsonPrimitive(packageInfoCopy)
-    // import data based on hash
-    const filePath = `./scan/packages/${packageInfo.name}/${hashValue}.json`
-    const info = await FileSystem.info(filePath)
-    if (info.isFile) {
-        let stringOutput
+async function asyncAddPackageInfo(newPackageInfo, source) {
+    const packageName = newPackageInfo.frozen.name
+    const hashValue = hashJsonPrimitive(newPackageInfo.frozen)
+    const filePath = `./scan/packages/${packageName}/${hashValue}.json`
+    let stringOutput = await FileSystem.read(filePath)
+    if (packageName == 'git') { console.debug(`${source.attributePath}: newPackageInfo is:`,newPackageInfo) }
+    
+    // create package if doesn't exist
+    if (allPackages[packageName] == null) {
+        allPackages[packageName] = {}
+    }
+
+    if (packageName == 'git') { console.debug(`${source.attributePath}: allPackages[packageName][hashValue]: `, allPackages[packageName][hashValue]) }
+    // if it doesnt exist, try to get it from a file
+    if (allPackages[packageName][hashValue] == null) {
         try {
-            stringOutput = await FileSystem.read(filePath)
-            packageInfo = JSON.parse(stringOutput)
+            allPackages[packageName][hashValue] = JSON.parse(stringOutput)
         } catch (error) {
-            // console.debug(`    problem with ${info.path}`,)
-            // console.debug(`    stringOutput is:`,stringOutput)
-            // console.warn(error)
+            console.debug(`    problem with ${filePath}`,)
+            console.debug(`    stringOutput is:`,stringOutput)
+            console.warn(error)
+        }
+        if (allPackages[packageName][hashValue] == null) {
+            allPackages[packageName][hashValue] = {...newPackageInfo}
         }
     }
     
-    // create package if doesn't exist
-    if (!(packageInfo.name in allPackages)) {
-        allPackages[packageInfo.name] = {}
-    }
-    
-    // create hash if needed
-    allPackages[packageInfo.name][hashValue] = packageInfo
-    
     // add source
-    const sources = allPackages[packageInfo.name][hashValue].sources
+    const sources = allPackages[packageName][hashValue].flexible.sources
     const sourceHashes = new Set(sources.map(each=>hashJsonPrimitive(each)))
     const thisHash = hashJsonPrimitive(source)
     if (!sourceHashes.has(thisHash)) {
-        allPackages[packageInfo.name][hashValue].sources.push(source)
+        allPackages[packageName][hashValue].flexible.sources.push(source)
     }
+    if (packageName == 'git') { console.debug(`${source.attributePath}: allPackages[packageName][hashValue] is:`, allPackages[packageName][hashValue]) }
 
-    await FileSystem.remove(filePath)
     await FileSystem.write({
         path: filePath,
-        data: JSON.stringify(allPackages[packageInfo.name][hashValue]),
+        data: JSON.stringify(allPackages[packageName][hashValue]),
     })
 }
 
@@ -274,7 +276,7 @@ for await (const commitHash of iterateAllCommitHashes()) {
         for (const [attrName, packageInfo] of entries) {
             loopNumber += 1
             if (loopNumber % 500 == 0) {
-                console.log(`    ${`${loopNumber}`.padStart(attributesNumberLength)}/${entries.length}: ${Math.round((loopNumber/entries.length)*100)}%`)
+                console.log(`    ${`${loopNumber}`.padStart(attributesNumberLength)}/${entries.length}: ${  `${ Math.round((loopNumber/entries.length)*100)}`  }%`)
             }
             const packageFixedInfo = convertPackageInfo(attrName, packageInfo)
 
