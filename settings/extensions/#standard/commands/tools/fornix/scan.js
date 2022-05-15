@@ -26,12 +26,13 @@ function* binaryListOrder(aList, ) {
     }
 }
 
-function getAllPackageInfo(hash) {
-    const jsonString = await run`nix-env -qa --json -I https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz ${Stdout(returnAsString)}`
+async function getAllPackageInfo(hash) {
+    const jsonString = await run`nix-env -qa --json -I ${`https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz`} ${Stdout(returnAsString)}`
     return JSON.parse(jsonString)
 }
 
-function getPackageJsonFor(packageAttrPath, hash) {
+// for single package
+async function getPackageJsonFor(packageAttrPath, hash) {
     const jsonString = await run`nix-env -qaA ${packageAttrPath} --json -I https://github.com/NixOS/nixpkgs/archive/${hash}.tar.gz ${Stdout(returnAsString)}`
     return JSON.parse(jsonString)[packageAttrPath]
 }
@@ -191,23 +192,53 @@ async function asyncAddPackageInfo(packageInfo, commitHash) {
     })
 }
 
-function listAllCommitHashes() {
-    const stringOutput = await run`git log --first-parent --date=short --pretty=format:%H ${Stdout(returnAsString)}`
-    return stringOutput.split("\n")
+const pathToAllCommits = `./scan/allCommits.txt`
+async function getPathToAllCommitHashes() {
+    console.debug(`writing commits to:`, pathToAllCommits)
+    await run`git log --first-parent --date=short --pretty=format:%H ${Stdout(Overwrite(pathToAllCommits))}`
+    return pathToAllCommits
 }
 
+const progressFile = `./scan/progress.json`
+const commitsFile = `./scan/allCommits.json`
+async function* iterateAllCommitHashes() {
+    console.log(`reading in progress file`)
+    let progress = JSON.parse(`${await FileSystem.read(progressFile)}`)
+    let allCommits
+    if (progress == null) {
+        progress = {
+            completedHashes: [],
+        }
+    }
+    if (allCommits == null) {
+        allCommits = (await FileSystem.read(await getPathToAllCommitHashes())).split("\n")
+    }
 
+    for (const each of binaryListOrder(allCommits)) {
+        // Skip! (to resume progress)
+        if (progress.completedHashes.includes(each)) {
+            continue
+        }
+        // otherwise do it
+        yield each
+        // save that it was done
+        progress.completedHashes.push(each)
+        await FileSystem.write({ path: progressFile, data: JSON.stringify(progress), })
+    }
+}
 
 
 // 
 // main algo
 // 
 const concurrentSize = 30
-for (const commitHash of binaryListOrder(listAllCommitHashes())) {
+for await (const commitHash of iterateAllCommitHashes()) {
+    console.debug(`commitHash is:`,commitHash)
     try {
-        const allPackages = getAllPackageInfo(commitHash)
+        const allPackages = await getAllPackageInfo(commitHash)
         const waitingGroup = []
         for (const [attrName, packageInfo] of Object.entries(allPackages)) {
+            console.log(`    attrName: ${attrName}`)
             waitingGroup.push(asyncAddPackageInfo(packageInfo, commitHash))
             if (waitingGroup.length > concurrentSize) {
                 await Promise.allSettled(waitingGroup)
@@ -215,6 +246,6 @@ for (const commitHash of binaryListOrder(listAllCommitHashes())) {
             }
         }
     } catch (error) {
-        console.warn(`on commit: ${commitHash}, `, error)
+        console.warn(`issue on commit: ${commitHash}, `, error)
     }
 }
