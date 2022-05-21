@@ -10,7 +10,7 @@
     # 
     frozenStd = (builtins.import 
         (builtins.fetchTarball
-            ({url="https://github.com/NixOS/nixpkgs/archive/8917ffe7232e1e9db23ec9405248fd1944d0b36f.tar.gz";})
+            ({url="https://github.com/NixOS/nixpkgs/archive/a7ecde854aee5c4c7cd6177f54a99d2c1ff28a31.tar.gz";})
         )
         ({})
     );
@@ -24,17 +24,13 @@
         )
         (builtins) # <- for import, fetchTarball, etc 
     );
-    pathToThisFile = (main.getEnv 
-        ("__FORNIX_NIX_MAIN_CODE_PATH")
-    );
+    pathToThisFile = ./parse_dependencies.nix;
     # 
     # pull info from the config files
     # 
     nixSettings = (main.fromTOML
         (main.readFile 
-            (main.getEnv
-                "__FORNIX_NIX_SETTINGS_PATH"
-            )
+            ./settings.toml
         )
     );
     # 
@@ -42,9 +38,7 @@
     # 
     packageToml = (main.fromTOML
         (main.readFile
-            (main.getEnv 
-                ("__FORNIX_NIX_PACKAGES_FILE_PATH")
-            )
+            ./nix.toml
         )
     );
     # 
