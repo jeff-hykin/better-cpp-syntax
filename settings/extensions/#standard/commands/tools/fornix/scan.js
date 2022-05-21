@@ -1,11 +1,12 @@
 #!/usr/bin/env -S deno run --allow-all
 
-const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.23/main/run.js`)
-const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.23/main/file_system.js`)
-const { Console, yellow } = await import(`https://deno.land/x/quickr@0.3.23/main/console.js`)
+const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.24/main/run.js`)
+const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.24/main/file_system.js`)
+const { Console, yellow } = await import(`https://deno.land/x/quickr@0.3.24/main/console.js`)
 
 
 Console.env.NIXPKGS_ALLOW_BROKEN = "1"
+Console.env.NIXPKGS_ALLOW_UNFREE = "1"
 
 // increases resolution over time
 function* binaryListOrder(aList, ) {
@@ -65,13 +66,16 @@ function convertPackageInfo(attrName, packageInfo) {
             homepage: "",
             license: "",
             versionNumberList: [],
-            unfree: false,
-            platforms: [],
+            // would like:
+            //     bin outputs
+            //     dependencies
         },
         flexible: {
+            unfree: false,
             insecure: false,
             broken: false,
             sources: [],
+            platforms: [],
         }
     }
     
@@ -109,7 +113,7 @@ function convertPackageInfo(attrName, packageInfo) {
     output.frozen.longDescription  = packageInfo.meta.longDescription
     output.frozen.homepage         = packageInfo.meta.homepage
     output.frozen.unfree           = packageInfo.meta.unfree
-    output.frozen.platforms        = packageInfo.meta.platforms
+    output.flexible.platforms        = packageInfo.meta.platforms
     output.flexible.insecure         = packageInfo.meta.insecure
     output.flexible.broken           = packageInfo.meta.broken
     
@@ -184,22 +188,22 @@ async function asyncAddPackageInfo(newPackageInfo, source) {
     const hashValue = hashJsonPrimitive(newPackageInfo.frozen)
     const filePath = `./scan/packages/${packageName}/${hashValue}.json`
     let stringOutput = await FileSystem.read(filePath)
-    if (packageName == 'git') { console.debug(`${source.attributePath}: newPackageInfo is:`,newPackageInfo) }
     
     // create package if doesn't exist
     if (allPackages[packageName] == null) {
         allPackages[packageName] = {}
     }
 
-    if (packageName == 'git') { console.debug(`${source.attributePath}: allPackages[packageName][hashValue]: `, allPackages[packageName][hashValue]) }
     // if it doesnt exist, try to get it from a file
     if (allPackages[packageName][hashValue] == null) {
-        try {
-            allPackages[packageName][hashValue] = JSON.parse(stringOutput)
-        } catch (error) {
-            console.debug(`    problem with ${filePath}`,)
-            console.debug(`    stringOutput is:`,stringOutput)
-            console.warn(error)
+        if (stringOutput) {
+            try {
+                allPackages[packageName][hashValue] = JSON.parse(stringOutput)
+            } catch (error) {
+                console.debug(`    problem with ${filePath}`,)
+                console.debug(`    stringOutput is:`,stringOutput)
+                console.warn(error)
+            }
         }
         if (allPackages[packageName][hashValue] == null) {
             allPackages[packageName][hashValue] = {...newPackageInfo}
@@ -213,7 +217,6 @@ async function asyncAddPackageInfo(newPackageInfo, source) {
     if (!sourceHashes.has(thisHash)) {
         allPackages[packageName][hashValue].flexible.sources.push(source)
     }
-    if (packageName == 'git') { console.debug(`${source.attributePath}: allPackages[packageName][hashValue] is:`, allPackages[packageName][hashValue]) }
 
     await FileSystem.write({
         path: filePath,
@@ -224,27 +227,27 @@ async function asyncAddPackageInfo(newPackageInfo, source) {
 const pathToAllCommits = `./scan/allCommits.txt`
 async function getPathToAllCommitHashes() {
     console.log(`writing commits to:`, pathToAllCommits)
-    await run`git log --first-parent --date=short --pretty=format:%H ${Stdout(Overwrite(pathToAllCommits))}`
+    await run`git log --first-parent --date=short --pretty=format:%H#%ad ${Stdout(Overwrite(pathToAllCommits))}`
     return pathToAllCommits
 }
 
 const progressFile = `./scan/progress.json`
 const commitsFile = `./scan/allCommits.json`
 let progress
+let commitToDate = {}
 async function* iterateAllCommitHashes() {
     console.log(`reading in progress file`)
     progress = JSON.parse(`${await FileSystem.read(progressFile)}`)
-    let allCommits
     if (progress == null) {
         progress = {
             completedHashes: [],
         }
     }
-    if (allCommits == null) {
-        allCommits = (await FileSystem.read(await getPathToAllCommitHashes())).split("\n")
-    }
+    let allCommitsAndDates = (await FileSystem.read(await getPathToAllCommitHashes())).split("\n")
+    commitToDate = Object.fromEntries(allCommitsAndDates.map(each=>each.split(/#/)))
+    
 
-    for (const each of binaryListOrder(allCommits)) {
+    for (const each of binaryListOrder(Object.keys(commitToDate))) {
         // Skip! (to resume progress)
         if (progress.completedHashes.includes(each)) {
             console.log(`    skipping ${each}`)
@@ -288,6 +291,7 @@ for await (const commitHash of iterateAllCommitHashes()) {
                         commit: commitHash,
                         attributePath: attrName.split("."),
                         position: typeof packageInfo.meta.position == 'string' ? packageInfo.meta.position.replace(/\/nix\/store.+\/nixpkgs\//,"") : null,
+                        date: commitToDate[commitHash],
                         // path: packageInfo.meta.position.replace(/\/nix\/store.+\/nixpkgs\/(.+)(:\d+)?$/,"$1"),
                     }
                 )
