@@ -20,6 +20,7 @@ let
             ("__FORNIX_NIX_MAIN_CODE_PATH")
         )
     );
+    snowball = import (builtins.fetchurl "https://raw.githubusercontent.com/jeff-hykin/snowball/29a4cb39d8db70f9b6d13f52b3a37a03aae48819/snowball.nix");
     
     # just a helper
     emptyOptions = ({
@@ -129,9 +130,7 @@ in
                 main.project
                 linuxOnly
                 macOnly
-                (main.importMixin 
-                    "salt.nix"
-                )
+                (snowball "https://raw.githubusercontent.com/jeff-hykin/snowball/3df028e5d9e92dbe077ce34f6907da852e61895a/").nixShell
                 # an "inline" mixin (this is what each mixin looks like)
                 ({
                     # inside that shell, make sure to use these packages
