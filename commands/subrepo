@@ -1,0 +1,11 @@
+#!/usr/bin/env -S deno run --allow-all
+import { FileSystem } from "https://deno.land/x/quickr@0.3.20/main/file_system.js"
+import { run, Stderr, Stdout } from "https://deno.land/x/quickr@0.3.20/main/run.js"
+
+// go to project root
+FileSystem.cwd = await FileSystem.walkUpUntil(".git/")
+
+await run`git add -A`
+await run`git commit -m -`
+const { exitCode } = await run("git", "subrepo", ...Deno.args)
+Deno.exit(exitCode)
