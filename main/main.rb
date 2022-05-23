@@ -1840,7 +1840,7 @@ grammar = Grammar.new(
         ).maybe(@spaces)
     # access to attribute
     type_represenetations = @cpp_tokens.representationsThat(:isType)
-    lookahead_friedly_types_pattern = /#{type_represenetations.map { |each| each+"[^#{@standard_character}]" } .join('|')}/
+    lookahead_friedly_types_pattern = /#{type_represenetations.map { |each| each+"[^\\w]" } .join('|')}/
     grammar[:member_access] = member_access = Pattern.new(
         match: member_start.then(
                 match: @word_boundary.lookAheadToAvoid(lookahead_friedly_types_pattern).then(variable_name_without_bounds).then(@word_boundary).lookAheadToAvoid(/\(/),
