@@ -185,12 +185,27 @@ asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
 [[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "AVFoundation" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
 load = [ "darwin", "apple_sdk", "frameworks", "AppKit" ]
 asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
 [[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "WebKit" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
 load = [ "darwin", "apple_sdk", "frameworks", "Accounts" ]
+asNativeBuildInput = true
+onlyIf = [ [ "stdenv", "isDarwin",],]
+
+[[packages]]
+load = [ "darwin", "apple_sdk", "frameworks", "Security" ]
 asNativeBuildInput = true
 onlyIf = [ [ "stdenv", "isDarwin",],]
 
@@ -241,7 +256,7 @@ load = [ "bundix",  ]
 load = [ "gnumake",  ]
 
 [[packages]]
-load = [ "ncurses",]
+load = [ "ncurses5",]
 
 [[packages]]
 load = [ "openssh",]
@@ -252,6 +267,9 @@ load = [ "openssh",]
 # 
 # 
 [[packages]]
+load = [ "fd",]
+
+[[packages]]
 load = [ "sd",]
 
 [[packages]]
@@ -261,8 +279,7 @@ load = [ "dua",]
 load = [ "tealdeer",]
 
 [[packages]]
-load = [ "ytop",]
-from = "a332da8588aeea4feb9359d23f58d95520899e3c"
+load = [ "bottom",]
 
 [[packages]]
 load = [ "exa",]
@@ -332,6 +349,9 @@ load = [ "zip",]
 
 [[packages]]
 load = [ "findutils",]
+
+[[packages]]
+load = [ "wget",]
 
 [[packages]]
 load = [ "curl",]
@@ -416,6 +436,13 @@ load = [ "unixtools", "write",]
 
 [[packages]]
 load = [ "unixtools", "xxd",]
+
+# 
+# core
+# 
+[[packages]]
+load = [ "deno",]
+from = "c82b46413401efa740a0b994f52e9903a4f6dcd5"
 
 [[packages]]
 load = [ "nix",]

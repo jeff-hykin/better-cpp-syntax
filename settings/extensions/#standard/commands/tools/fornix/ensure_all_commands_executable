@@ -48,9 +48,7 @@ fi
 # actual program
 # 
 # 
-
-# make sure commands are executable
-chmod -R ugo+x "$FORNIX_COMMANDS_FOLDER" &>/dev/null || sudo chmod -R ugo+x "$FORNIX_COMMANDS_FOLDER" &>/dev/null
+"$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/add_execute_permission" "$FORNIX_COMMANDS_FOLDER"
 
 # 
 # create aliases for all of the folders to allow recursive execution

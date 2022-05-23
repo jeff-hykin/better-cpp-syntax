@@ -1,16 +1,21 @@
-#!/usr/bin/env bash
+#!/usr/bin/env -S deno run --allow-all
+const { run, Timeout, Env, Cwd, Stdin, Stdout, Stderr, Out, Overwrite, AppendTo, zipInto, mergeInto, returnAsString, } = await import(`https://deno.land/x/quickr@0.3.20/main/run.js`)
+const { FileSystem } = await import(`https://deno.land/x/quickr@0.3.20/main/file_system.js`)
 
-# if its a file
-if [[ -f "$1" ]]; then
-    chmod ugo+x "$1" &>/dev/null || sudo chmod ugo+x "$1"
-fi
+// 
+// args
+// 
+let [ fileOrFolderPath ] = Deno.args
 
-# if its a directory
-if [[ -f "$1" ]]; then
-    chmod -R ugo+r "$1" &>/dev/null || sudo chmod -R ugo+x "$1"
-fi
-
-# fail if the file/directory doesnt exist
-if ! [[ -e "$1" ]]; then
-    return 0
-fi
+// 
+// run
+// 
+await FileSystem.addPermissions({
+    path: fileOrFolderPath,
+    recursively: true,
+    permissions: {
+        owner: {
+            canExecute: true,
+        },
+    }
+})
