@@ -54,7 +54,7 @@
 
 # version 14.17.1
 load = [ "nodejs",]
-from = "860b56be91fb874d48e23a950815969a7b832fbc" 
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
 
 # version 12.22.1
 # load = [ "nodejs-12_x",]
@@ -66,7 +66,7 @@ from = "860b56be91fb874d48e23a950815969a7b832fbc"
 
 [[packages]]
 load = [ "nodePackages", "pnpm", ]
-from = "860b56be91fb874d48e23a950815969a7b832fbc"
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 
 
 # 
@@ -105,13 +105,19 @@ from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 onlyIf = [ [ "stdenv", "isLinux",],]
 load = [ "glib",]
 asNativeBuildInput = true
-from = "528d35bec0cb976a06cc0e8487c6e5136400b16b"
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
+
+[[packages]]
+onlyIf = [ [ "stdenv", "isLinux",],]
+load = [ "glibc",]
+asNativeBuildInput = true
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
 
 [[packages]]
 onlyIf = [ [ "stdenv", "isLinux",],]
 load = [ "libglvnd",]
 asNativeBuildInput = true
-from = "559cf76fa3642106d9f23c9e845baf4d354be682"
+from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
 
 # 
 # 
