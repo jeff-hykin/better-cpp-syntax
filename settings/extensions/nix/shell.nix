@@ -130,7 +130,7 @@ in
                 main.project
                 linuxOnly
                 macOnly
-                (snowball "https://raw.githubusercontent.com/jeff-hykin/snowball/3df028e5d9e92dbe077ce34f6907da852e61895a/").nixShell
+                # (snowball "https://raw.githubusercontent.com/jeff-hykin/snowball/3df028e5d9e92dbe077ce34f6907da852e61895a/").nixShell
                 # an "inline" mixin (this is what each mixin looks like)
                 ({
                     # inside that shell, make sure to use these packages
@@ -139,10 +139,10 @@ in
                     nativeBuildInputs = [];
                     
                     # run some bash code before starting up the shell
+                    # export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
                     shellHook = ''
                         # provide access to ncurses for nice terminal interactions
                         export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${main.packages.ncurses5}/lib"
-                        export LD_LIBRARY_PATH="${main.makeLibraryPath [ main.packages.glib ] }:$LD_LIBRARY_PATH"
                         
                         if [ "$FORNIX_DEBUG" = "true" ]; then
                             echo "finished: 'shellHook' inside the 'settings/extensions/nix/shell.nix' file"
