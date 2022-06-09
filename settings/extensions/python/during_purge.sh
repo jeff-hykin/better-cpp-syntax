@@ -12,6 +12,7 @@ then
     
     # all the home folder junk from python and common pip modules
     "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.cache/pip"
+    "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.cache/pypoetry/"
     "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.local/share/virtualenv"
     "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.config/pypoetry"
     "$FORNIX_FOLDER/settings/extensions/#standard/commands/tools/file_system/remove" "$FORNIX_HOME/.config/matplotlib"
