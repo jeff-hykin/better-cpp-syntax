@@ -5,6 +5,7 @@ __temp_var__certs_file="$FORNIX_FOLDER/settings/extensions/nix/cacert.pem"
 if [ -f "$__temp_var__certs_file" ]
 then
     export SSL_CERT_FILE="$__temp_var__certs_file"
+    export NIX_SSL_CERT_FILE="$SSL_CERT_FILE"
     # for some reason git needs its own var 
     export GIT_SSL_CAINFO="$SSL_CERT_FILE"
     export CURL_CA_BUNDLE="$SSL_CERT_FILE"
