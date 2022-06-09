@@ -2,16 +2,12 @@
     "name": "better-cpp-syntax",
     "displayName": "Better C++ Syntax",
     "description": "The bleeding edge of the C++ syntax",
-    "version": "1.15.14",
+    "version": "1.15.15",
     "icon": "icon.png",
     "scripts": {},
     "keywords": [
         "C++",
         "cpp",
-        "c",
-        "objective-c",
-        "objective-cpp",
-        "objective-c++",
         "syntax",
         "textmate",
         "highlighting",
@@ -60,10 +56,10 @@
         "nspell": "^2.1.2",
         "oniguruma": "^7.2.0",
         "textmate-bailout": "^1.1.0",
-        "textmate-tester": "^1.1.0",
+        "textmate-tester": "^1.1.2",
+        "yargs": "^17.1.1",
         "vsce": "^1.99.0"
     },
     "dependencies": {
-        "yargs": "^17.1.1"
     }
 }

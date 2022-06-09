@@ -97,27 +97,6 @@ from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 load = [ "poetry",]
 from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
 
-# 
-# for .so errors on linux with opencv+ffmpeg
-# 
-
-[[packages]]
-onlyIf = [ [ "stdenv", "isLinux",],]
-load = [ "glib",]
-asNativeBuildInput = true
-from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
-
-[[packages]]
-onlyIf = [ [ "stdenv", "isLinux",],]
-load = [ "glibc",]
-asNativeBuildInput = true
-from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
-
-[[packages]]
-onlyIf = [ [ "stdenv", "isLinux",],]
-load = [ "libglvnd",]
-asNativeBuildInput = true
-from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
 
 # 
 # 
