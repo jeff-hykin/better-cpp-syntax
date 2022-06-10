@@ -76,6 +76,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: arg1
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -84,6 +86,8 @@
 - source: arg2
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
@@ -103,6 +107,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: arg1
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -111,6 +117,8 @@
 - source: arg2
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
@@ -561,6 +569,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: ...
   scopes:
+    - meta.function.preprocessor.parameters
     - punctuation.vararg-ellipses.variable.parameter.preprocessor
 - source: )
   scopes:
@@ -669,6 +678,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: T
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:

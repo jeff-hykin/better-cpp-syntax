@@ -292,6 +292,7 @@ identifier = grammar[:identifier]
                     match: /\(/,
                     tag_as: "punctuation.definition.parameters.begin.preprocessor",
                 ).then(
+                    tag_as: "meta.function.preprocessor.parameters",
                     match: zeroOrMoreOf(/[^\(]/),
                     includes: [
                         # a parameter

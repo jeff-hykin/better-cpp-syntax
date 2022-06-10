@@ -50,6 +50,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: ...
   scopes:
+    - meta.function.preprocessor.parameters
     - punctuation.vararg-ellipses.variable.parameter.preprocessor
 - source: )
   scopes:
@@ -158,6 +159,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: T
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -279,6 +281,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: T
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:

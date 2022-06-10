@@ -15,6 +15,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: name
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -79,6 +80,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: expected
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -87,6 +90,8 @@
 - source: actual
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor

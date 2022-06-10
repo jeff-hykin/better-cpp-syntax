@@ -14,6 +14,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: string
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -40,6 +42,8 @@
 - source: ampersand
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor

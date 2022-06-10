@@ -24099,6 +24099,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -29624,6 +29625,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: FUNC
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -29632,6 +29635,8 @@
 - source: ARG
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
@@ -30374,6 +30379,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:
@@ -30436,6 +30442,7 @@
     - punctuation.definition.parameters.begin.preprocessor
 - source: ARGS
   scopes:
+    - meta.function.preprocessor.parameters
     - variable.parameter.preprocessor
 - source: )
   scopes:

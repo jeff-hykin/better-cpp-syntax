@@ -315,6 +315,8 @@
   scopes:
     - punctuation.definition.parameters.begin.preprocessor
 - source: a
+  scopesBegin:
+    - meta.function.preprocessor.parameters
   scopes:
     - variable.parameter.preprocessor
 - source: ','
@@ -323,6 +325,8 @@
 - source: b
   scopes:
     - variable.parameter.preprocessor
+  scopesEnd:
+    - meta.function.preprocessor.parameters
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
