@@ -20,6 +20,11 @@ export.exports = [
 ]
 # (other :patterns can be created and used, but they will be namespace-randomized to keep them from ever conflicting/overwriting external patterns)
 
+non_escaped_newline = lookBehindToAvoid(/\\/).oneOf([
+    lookAheadFor(/\n/),
+    lookBehindFor(/^\n|[^\\]\n/).lookAheadFor(/$/),
+])
+
 export[:line_comment] = PatternRange.new(
     tag_as: "comment.line.double-slash",
     start_pattern: Pattern.new(/\s*+/).then(
@@ -27,7 +32,7 @@ export[:line_comment] = PatternRange.new(
         tag_as: "punctuation.definition.comment"
     ),
     # a newline that doesnt have a line continuation
-    end_pattern: lookBehindFor(/\n/).lookBehindToAvoid(/\\\n/),
+    end_pattern: non_escaped_newline,
     includes: [ :line_continuation_character ]
 )
 

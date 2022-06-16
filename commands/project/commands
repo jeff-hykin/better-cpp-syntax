@@ -12,6 +12,6 @@
     done < "$__temp_var__temp_folder/pipe_for_while_$__NESTED_WHILE_COUNTER";__NESTED_WHILE_COUNTER="$((__NESTED_WHILE_COUNTER - 1))"
     echo 
     echo "examples:"
-    echo "    run server"
     echo "    project build"
     echo "    project test"
+    echo "    project purge"

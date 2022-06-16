@@ -58,8 +58,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: template
   scopesBegin:
     - meta.template.definition
@@ -140,11 +138,10 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
+    - meta.block.struct
     - meta.body.struct
 - source: '#'
   scopesBegin:
-    - meta.tail.struct
-    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -167,8 +164,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: IsPointDef
   scopes:
     - entity.name.function.call
@@ -179,13 +174,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-  scopesEnd:
-    - meta.tail.struct
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block.struct
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -266,7 +257,6 @@
     - meta.block.struct
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -289,8 +279,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: IsPointDef
   scopes:
     - entity.name.function.call
@@ -384,7 +372,6 @@
     - meta.block.struct
 - source: '#'
   scopesBegin:
-    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -397,8 +384,6 @@
 - source: \
   scopes:
     - constant.character.escape.line-continuation
-  scopesEnd:
-    - meta.preprocessor.macro
 - source: template
   scopes:
     - storage.type.template
@@ -570,6 +555,8 @@
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.preprocessor.macro
 - source: namespace
   scopesBegin:
     - meta.block.namespace
