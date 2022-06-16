@@ -1836,7 +1836,7 @@ grammar = Grammar.new(
             :method_access,
         ]
     member_start = partial_member.then(
-            match: zeroOrMoreOf(subsequent_object_with_operator),
+            match: zeroOrMoreOf(subsequent_object_with_operator.groupless),
             includes: member_context
         ).maybe(@spaces)
     # access to attribute
@@ -1850,19 +1850,19 @@ grammar = Grammar.new(
         )
     # access to method
     grammar[:method_access] = method_access = PatternRange.new(
-        start_pattern: member_start.then(
-                # the ~ is for destructors
-                match: maybe(/~/).then(variable_name_without_bounds),
-                tag_as: "entity.name.function.member"
-            ).maybe(@spaces).then(
-                match: /\(/,
-                tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
-            ),
-        end_pattern: Pattern.new(
-                match: /\)/,
-                tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
-            ),
-        includes: [:evaluation_context],
+            start_pattern: member_start.then(
+                    # the ~ is for destructors
+                    match: maybe(/~/).then(variable_name_without_bounds),
+                    tag_as: "entity.name.function.member"
+                ).maybe(@spaces).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.arguments.begin.bracket.round.function.member"
+                ),
+            end_pattern: Pattern.new(
+                    match: /\)/,
+                    tag_as: "punctuation.section.arguments.end.bracket.round.function.member"
+                ),
+            includes: [:evaluation_context],
         )
 #
 # Namespace
