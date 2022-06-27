@@ -266,7 +266,6 @@ grammar = Grammar.new(
         ]
     grammar[:function_parameter_context] = [
             :ever_present_context, # comments and macros
-            :string_context,
             :parameter,
             :comma,
         ]
@@ -1704,6 +1703,7 @@ grammar = Grammar.new(
         end_pattern: parameter_ending,
         includes: [
             :ever_present_context, #macros and comments
+            :string_context,
             :function_pointer_parameter,
             :decltype,
             :vararg_ellipses,
