@@ -12,11 +12,11 @@ require_relative PathFor[:pattern]["backslash_escapes"]
 require_relative PathFor[:pattern]["raw_strings"]
 require_relative './tokens.rb'
 
-# 
-# 
+#
+#
 # create grammar!
-# 
-# 
+#
+#
 # grammar = Grammar.fromTmLanguage("./original.tmLanguage.json")
 grammar = Grammar.new(
     name: "C++",
@@ -41,11 +41,11 @@ grammar = Grammar.new(
     ],
 )
 
-# 
+#
 #
 # Setup Utils (things used by many other patterns)
 #
-# 
+#
     grammar.import(PathFor[:pattern]["comments"])
     grammar.import(PathFor[:pattern]["std_space"])
     std_space                    = grammar[:std_space]
@@ -305,7 +305,7 @@ grammar = Grammar.new(
 #
 # Numbers
 #
-# 
+#
     grammar[:number_literal] = numeric_constant(allow_user_defined_literals: true)
 #
 # Variable
@@ -467,12 +467,15 @@ grammar = Grammar.new(
 # Control flow
 #
     grammar[:goto_statement] = Pattern.new(
-        Pattern.new(
-            match: variableBounds[/goto/],
-            tag_as: "keyword.control.goto",
-        ).then(std_space).then(
-            match: identifier,
-            tag_as: "entity.name.label.call"
+        should_fully_match: [ "goto label", "  goto label" ],
+        match: std_space.then(
+            Pattern.new(
+                match: variableBounds[/goto/],
+                tag_as: "keyword.control.goto",
+            ).then(std_space).then(
+                match: identifier,
+                tag_as: "entity.name.label.call"
+            )
         )
     )
     grammar[:label] = Pattern.new(

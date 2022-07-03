@@ -17194,7 +17194,9 @@
 - source: goto
   scopes:
     - keyword.control.goto
-- source: ' SKIP_CHAR'
+- source: SKIP_CHAR
+  scopes:
+    - entity.name.label.call
 - source: ;
   scopes:
     - punctuation.terminator.statement

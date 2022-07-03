@@ -1,0 +1,63 @@
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: fun1
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: goto
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.goto
+- source: foo
+  scopes:
+    - entity.name.label.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: goto
+  scopes:
+    - keyword.control.goto
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' with inline comment '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: foo
+  scopes:
+    - entity.name.label.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: foo
+  scopes:
+    - entity.name.label
+- source: ':'
+  scopes:
+    - punctuation.separator.label
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
