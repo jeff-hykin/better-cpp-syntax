@@ -997,21 +997,23 @@ grammar = Grammar.new(
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
 
-    deleted_or_defaulted_function = [
-        # for operator() or function() = delete ;
-        # https://en.cppreference.com/w/cpp/language/function#Deleted_functions
-        # or operator[=/<=>]() = default ;
-        # https://en.cppreference.com/w/cpp/language/member_functions#Special_member_functions
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.function",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.function",
+    deleted_or_defaulted_function = -> (subtypes: ["function"]) do
+        [
+            # for operator() or function() = delete ;
+            # https://en.cppreference.com/w/cpp/language/function#Deleted_functions
+            # or operator[=/<=>]() = default ;
+            # https://en.cppreference.com/w/cpp/language/member_functions#Special_member_functions
+            assignment_operator.then(std_space).then(
+                Pattern.new(
+                    match: /default/,
+                    tag_as: subtypes.map { |subtype| "keyword.other.default.#{subtype}" }.join(' '),
+                ).or(
+                    match: /delete/,
+                    tag_as: subtypes.map { |subtype| "keyword.other.delete.#{subtype}" }.join(' '),
+                )
             )
-        )
-    ]
+        ]
+    end
 
     grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
@@ -1151,7 +1153,7 @@ grammar = Grammar.new(
                 ]
             ),
             :qualifiers_and_specifiers_post_parameters,
-            deleted_or_defaulted_function,
+            deleted_or_defaulted_function[],
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -1248,18 +1250,7 @@ grammar = Grammar.new(
 #
 # Constructor / Destructor
 #
-    deleted_or_defaulted_constructor = [
-        # for class_name() = delete ; and class_name() = default ;
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.function keyword.other.default.constructor",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.function keyword.other.delete.constructor",
-            )
-        )
-    ]
+    deleted_or_defaulted_constructor = deleted_or_defaulted_function[subtypes: ["constructor", "function"]]
     # see https://en.cppreference.com/w/cpp/language/default_constructor
     constructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1397,18 +1388,7 @@ grammar = Grammar.new(
         )
     ]
 
-    deleted_or_defaulted_destructor = [
-        # for ~class_name() = delete ; or ~class_name() = default ;
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.function keyword.other.default.destructor keyword.other.default.constructor",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.function keyword.other.delete.destructor keyword.other.delete.constructor",
-            )
-        )
-    ]
+    deleted_or_defaulted_destructor = deleted_or_defaulted_function[subtypes: ["destructor", "constructor", "function"]]
     # see https://en.cppreference.com/w/cpp/language/destructor
     destructor = ->(start_pattern) do
         generateBlockFinder(
