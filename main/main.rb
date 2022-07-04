@@ -997,6 +997,19 @@ grammar = Grammar.new(
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
 
+    deleted_and_default_constructor = [
+        # for class_name() = delete ; and class_name() = default ;
+        assignment_operator.then(std_space).then(
+            Pattern.new(
+                match: /default/,
+                tag_as: "keyword.other.default.constructor",
+            ).or(
+                match: /delete/,
+                tag_as: "keyword.other.delete.constructor",
+            )
+        )
+    ]
+
     grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
         tag_as:"meta.function.definition",
@@ -1135,6 +1148,7 @@ grammar = Grammar.new(
                 ]
             ),
             :qualifiers_and_specifiers_post_parameters,
+            deleted_and_default_constructor,
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -1231,18 +1245,6 @@ grammar = Grammar.new(
 #
 # Constructor / Destructor
 #
-    deleted_and_default_constructor = [
-        # for class_name() = delete ; and class_name() = default ;
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.constructor",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.constructor",
-            )
-        )
-    ]
     # see https://en.cppreference.com/w/cpp/language/default_constructor
     constructor = ->(start_pattern) do
         generateBlockFinder(

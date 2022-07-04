@@ -188,8 +188,7 @@
     - keyword.operator.assignment
 - source: delete
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.delete
+    - keyword.other.delete.constructor
   scopesEnd:
     - meta.function.definition.special.operator-overload
     - meta.head.function.definition.special.operator-overload
