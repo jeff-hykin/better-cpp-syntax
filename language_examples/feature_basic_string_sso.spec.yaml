@@ -5696,7 +5696,9 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
+  scopes:
+    - storage.type.template.argument.class
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6534,7 +6536,9 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
+  scopes:
+    - storage.type.template.argument.class
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -723,16 +723,14 @@ grammar = Grammar.new(
         ]
         )
     grammar[:template_argument_defaulted] = Pattern.new(
+        should_partial_match: ["<typename T = void>", "< class T=void>", "<int  =0>"],
         match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: zeroOrMoreOf(variable_name_without_bounds),
-                tag_as: "storage.type.template.argument.$match",
-            ).then(@spaces).then(
                 match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template"
-            ).maybe(@spaces).then(
-                match: /[=]/,
-                tag_as: "keyword.operator.assignment"
-            )
+                tag_as: "storage.type.template.argument.$match",
+            ).then(@spaces).maybe(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template"
+            ).maybe(@spaces).then(assignment_operator)
         )
     grammar[:template_definition_argument] = Pattern.new(
         # case 1: only one word
