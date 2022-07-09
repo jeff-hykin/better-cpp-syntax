@@ -732,9 +732,11 @@ grammar = Grammar.new(
                     tag_as: "entity.name.type.template"
             ).maybe(@spaces).then(assignment_operator)
         )
-    grammar[:template_definition_argument] = Pattern.new(
-        # case 1: only one word
-        std_space.then(
+    grammar[:template_definition_argument] = std_space.then(
+        Pattern.new(
+            should_fully_match: ["typename", "typename T", "typename... T"],
+            match:
+            # case 1: only one word
             Pattern.new(
                 match: variable_name_without_bounds,
                 tag_as: "storage.type.template.argument.$match",
