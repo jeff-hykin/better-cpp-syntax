@@ -715,7 +715,7 @@ grammar = Grammar.new(
                     ),
                 end_pattern: Pattern.new(
                         match: />/,
-                        tag_as: "punctuation.section.angle-brackets.begin.template.call"
+                        tag_as: "punctuation.section.angle-brackets.end.template.call"
                     ),
                 includes: [:template_call_context]
             ),
