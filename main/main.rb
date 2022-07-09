@@ -758,7 +758,7 @@ grammar = Grammar.new(
             ).or(
                 Pattern.new(
                     match: variable_name_without_bounds,
-                    tag_as: "storage.type.template",
+                    tag_as: "storage.type.template.argument.$match",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
                     tag_as: "punctuation.vararg-ellipses.template.definition",
