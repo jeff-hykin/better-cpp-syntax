@@ -4,11 +4,11 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'bool '
+- source: bool
   scopesBegin:
     - meta.template.definition
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.bool
 - source: check
   scopes:
     - entity.name.type.template
@@ -124,9 +124,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'class '
+- source: class
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: B
   scopes:
     - entity.name.type.template
@@ -139,9 +139,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'typename '
+- source: typename
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.typename
 - source: D
   scopes:
     - entity.name.type.template

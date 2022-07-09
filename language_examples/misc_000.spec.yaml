@@ -4242,11 +4242,11 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
   scopesBegin:
     - meta.template.definition
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -4298,9 +4298,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template
@@ -4413,9 +4413,9 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -4528,9 +4528,9 @@
 - source: <
   scopes:
     - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+- source: class
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -5171,9 +5171,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template

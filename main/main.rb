@@ -724,9 +724,9 @@ grammar = Grammar.new(
         )
     grammar[:template_argument_defaulted] = Pattern.new(
         match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                tag_as: "storage.type.template",
-            ).then(
+                match: zeroOrMoreOf(variable_name_without_bounds),
+                tag_as: "storage.type.template.argument.$match",
+            ).then(@spaces).then(
                 match: variable_name_without_bounds,
                 tag_as: "entity.name.type.template"
             ).maybe(@spaces).then(

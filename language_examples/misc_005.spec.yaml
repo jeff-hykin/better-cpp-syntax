@@ -3303,9 +3303,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template
