@@ -734,7 +734,10 @@ grammar = Grammar.new(
         )
     grammar[:template_definition_argument] = std_space.then(
         Pattern.new(
-            should_fully_match: ["typename", "typename T", "typename... T", "template <typename> class T"],
+            should_fully_match: [
+                "typename", "typename T", "typename... T", "template <typename> class T",
+                "class T = A", "template <typename> typename T = X"
+            ],
             match:
             # case 1: only one word
             Pattern.new(
@@ -788,7 +791,9 @@ grammar = Grammar.new(
                         tag_as: "entity.name.type.template",
                     )
                 )
-            ).maybe(@spaces).then(
+            ).maybe(@spaces).maybe(
+                assignment_operator.maybe(@spaces).then(variable_name_without_bounds)
+            ).then(
                 Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.delimiter.comma.template.argument",

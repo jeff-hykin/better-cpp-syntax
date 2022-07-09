@@ -133,9 +133,7 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: C
-  scopes:
-    - storage.type.template.argument.C
+- source: ' C'
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
@@ -148,9 +146,7 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: E
-  scopes:
-    - storage.type.template.argument.E
+- source: ' E'
   scopesEnd:
     - meta.template.definition
 - source: '>'
