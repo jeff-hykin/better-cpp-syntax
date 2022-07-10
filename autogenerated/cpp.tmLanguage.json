@@ -16547,7 +16547,7 @@
       ]
     },
     "template_isolated_definition": {
-      "match": "(?<!\\w)(template)(?:(?:\\s)+)?(<)(.*)(>(?:(?:\\s)+)?$)",
+      "match": "(?<!\\w)(template)(?:(?:\\s)+)?(<)(.*)(>)(?:(?:\\s)+)?$",
       "captures": {
         "1": {
           "name": "storage.type.template.cpp"

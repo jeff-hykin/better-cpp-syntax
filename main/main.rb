@@ -693,9 +693,9 @@ grammar = Grammar.new(
                 tag_as: "meta.template.definition",
                 includes: [:template_definition_context],
             ).then(
-                match: Pattern.new(/>/).maybe(@spaces).then(/$/),
+                match: Pattern.new(/>/),
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
-            ),
+            ).maybe(@spaces).then(/$/),
         )
     grammar[:template_definition] = PatternRange.new(
         tag_as: 'meta.template.definition',
@@ -721,16 +721,6 @@ grammar = Grammar.new(
             ),
             :template_definition_context,
         ]
-        )
-    grammar[:template_argument_defaulted] = Pattern.new(
-        should_partial_match: ["<typename T = void>", "< class T=void>", "<int  =0>"],
-        match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: variable_name_without_bounds,
-                tag_as: "storage.type.template.argument.$match",
-            ).then(@spaces).maybe(
-                    match: variable_name_without_bounds,
-                    tag_as: "entity.name.type.template"
-            ).maybe(@spaces).then(assignment_operator)
         )
     grammar[:template_definition_argument] = std_space.then(
         Pattern.new(
@@ -802,6 +792,16 @@ grammar = Grammar.new(
                 )
             )
         )
+    )
+    grammar[:template_argument_defaulted] = Pattern.new(
+        should_partial_match: ["<typename T = void>", "< class T=void>", "<int  =0>"],
+        match: lookBehindFor(/<|,/).maybe(@spaces).then(
+            match: variable_name_without_bounds,
+            tag_as: "storage.type.template.argument.$match",
+        ).then(@spaces).maybe(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+        ).maybe(@spaces).then(assignment_operator)
     )
 #
 # Scope resolution
