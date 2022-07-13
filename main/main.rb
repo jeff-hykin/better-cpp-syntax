@@ -367,16 +367,20 @@ grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
-        std_space.then(
-            tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-            match: Pattern.new(
-                oneOrMoreOf(std_space.then(variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ])).lookAheadFor(
-                    Pattern.new(/\s*/).then(
-                        Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
-                    )
-                )
+        should_partially_match: ["final override;", "const noexcept {"],
+        match: oneOrMoreOf(std_space.then(
+            Pattern.new(
+                should_fully_match: ["override", "final", "const", "noexcept"],
+                should_not_fully_match: ["const noexcept"],
+                should_not_partial_match: ["return"],
+                tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
+                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ]
             )
-        ),
+        )).lookAheadFor(
+            Pattern.new(/\s*/).then(
+                Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
+            )
+        )
     )
     grammar[:storage_specifiers] = storage_specifier = Pattern.new(
         std_space.then(
