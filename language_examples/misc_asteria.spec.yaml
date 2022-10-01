@@ -403,6 +403,7 @@
 - source: delete
   scopes:
     - keyword.other.delete.constructor
+    - keyword.other.delete.function
   scopesEnd:
     - meta.function.definition.special.constructor
     - meta.head.function.definition.special.constructor
@@ -453,8 +454,7 @@
     - keyword.operator.assignment
 - source: delete
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.delete
+    - keyword.other.delete.function
   scopesEnd:
     - meta.function.definition.special.operator-overload
     - meta.head.function.definition.special.operator-overload

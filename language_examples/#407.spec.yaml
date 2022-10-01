@@ -1,0 +1,204 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: unique_dynarray
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: unique_dynarray
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: unique_dynarray
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: delete
+  scopes:
+    - keyword.other.delete.constructor
+    - keyword.other.delete.function
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unique_dynarray
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '='
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: unique_dynarray
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: delete
+  scopes:
+    - keyword.other.delete.function
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unique_dynarray
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: unique_dynarray
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+    - storage.modifier.reference
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.constructor
+    - keyword.other.default.function
+  scopesEnd:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: unique_dynarray
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '='
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: unique_dynarray
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+    - storage.modifier.reference
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.function
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
