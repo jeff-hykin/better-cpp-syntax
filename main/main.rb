@@ -688,7 +688,7 @@ grammar = Grammar.new(
             tag_as: "storage.type.template"
         ).maybe(@spaces).then(
             match: /</,
-            tag_as: "punctuation.section.angle-brackets.start.template.definition"
+            tag_as: "punctuation.section.angle-brackets.begin.template.definition"
         )
     # a template definition that is by itself on a line (this is ideal)
     grammar[:template_isolated_definition] = Pattern.new(
