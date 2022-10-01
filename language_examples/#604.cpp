@@ -7,3 +7,7 @@ auto compare =
     {
         return a.raw < b.raw;
     };
+    */
+    {
+        return a.raw < b.raw;
+    };

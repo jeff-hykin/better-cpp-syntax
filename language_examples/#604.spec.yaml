@@ -56,10 +56,30 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' auto /* broken! */ /*'
+- source: auto
   scopes:
     - storage.type.return-type.lambda
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' broken! '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+- source: /*
+  scopes:
+    - punctuation.definition.comment.begin
 - source: '    // broken'
+- source: '    {'
+- source: '        return a.raw < b.raw;'
+- source: '    };'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda

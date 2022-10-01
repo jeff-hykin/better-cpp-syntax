@@ -2027,12 +2027,21 @@ grammar = Grammar.new(
                 tag_as: "storage.modifier.lambda.$match"
             ),
             # check for the -> syntax
-            Pattern.new(
-                match: /->/,
-                tag_as: "punctuation.definition.lambda.return-type"
-            ).maybe(
-                match: Pattern.new(/.+?/).lookAheadFor(/\{|$/),
-                tag_as: "storage.type.return-type.lambda"
+            PatternRange.new(
+                start_pattern: Pattern.new(
+                        match: /->/,
+                        tag_as: "punctuation.definition.lambda.return-type"
+                    ),
+                end_pattern: Pattern.new(
+                        match: lookAheadFor(/\{/),
+                    ),
+                includes: [
+                    :comments,
+                    Pattern.new(
+                        tag_as: "storage.type.return-type.lambda",
+                        match: /\S+/,
+                    ),
+                ],
             ),
             # then find the body
             PatternRange.new(
