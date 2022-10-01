@@ -1023,6 +1023,24 @@ grammar = Grammar.new(
         ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
+    
+    deleted_and_defaulted_keyword = -> (subtags: []) do
+        # highest priority tag needs to be at the back (But its easier for humans to thing first==most-important)
+        subtags = subtags.reverse
+        # for operator() or function() = delete ;
+        # https://en.cppreference.com/w/cpp/language/function#Deleted_functions
+        # or operator[=/<=>]() = default ;
+        # https://en.cppreference.com/w/cpp/language/member_functions#Special_member_functions
+        assignment_operator.then(std_space).then(
+            Pattern.new(
+                match: /default/,
+                tag_as: subtags.map { |subtag| "keyword.other.default.#{subtag}" }.join(' '),
+            ).or(
+                match: /delete/,
+                tag_as: subtags.map { |subtag| "keyword.other.delete.#{subtag}" }.join(' '),
+            )
+        )
+    end
 
     grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
@@ -1162,6 +1180,7 @@ grammar = Grammar.new(
                 ]
             ),
             :qualifiers_and_specifiers_post_parameters,
+            deleted_and_defaulted_keyword[subtags: ["function"]],
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -1258,18 +1277,6 @@ grammar = Grammar.new(
 #
 # Constructor / Destructor
 #
-    deleted_and_default_constructor = [
-        # for class_name() = delete ; and class_name() = default ;
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.constructor",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.constructor",
-            )
-        )
-    ]
     # see https://en.cppreference.com/w/cpp/language/default_constructor
     constructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1278,7 +1285,7 @@ grammar = Grammar.new(
             start_pattern: start_pattern,
             head_includes:[
                 :ever_present_context, # comments and macros
-                deleted_and_default_constructor,
+                deleted_and_defaulted_keyword[subtags: ["constructor", "function"]],
                 :functional_specifiers_pre_parameters,
                 # ini context
                 PatternRange.new(
@@ -1406,6 +1413,7 @@ grammar = Grammar.new(
             ]
         )
     ]
+
     # see https://en.cppreference.com/w/cpp/language/destructor
     destructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1414,7 +1422,7 @@ grammar = Grammar.new(
             start_pattern: start_pattern,
             head_includes:[
                 :ever_present_context, # comments and macros
-                deleted_and_default_constructor,
+                deleted_and_defaulted_keyword[subtags: [ "destructor", "constructor", "function", ]],
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.member.destructor",
                     start_pattern: Pattern.new(
@@ -2054,12 +2062,21 @@ grammar = Grammar.new(
                 tag_as: "storage.modifier.lambda.$match"
             ),
             # check for the -> syntax
-            Pattern.new(
-                match: /->/,
-                tag_as: "punctuation.definition.lambda.return-type"
-            ).maybe(
-                match: Pattern.new(/.+?/).lookAheadFor(/\{|$/),
-                tag_as: "storage.type.return-type.lambda"
+            PatternRange.new(
+                start_pattern: Pattern.new(
+                        match: /->/,
+                        tag_as: "punctuation.definition.lambda.return-type"
+                    ),
+                end_pattern: Pattern.new(
+                        match: lookAheadFor(/\{/),
+                    ),
+                includes: [
+                    :comments,
+                    Pattern.new(
+                        tag_as: "storage.type.return-type.lambda",
+                        match: /\S+/,
+                    ),
+                ],
             ),
             # then find the body
             PatternRange.new(
