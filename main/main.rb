@@ -693,9 +693,9 @@ grammar = Grammar.new(
                 tag_as: "meta.template.definition",
                 includes: [:template_definition_context],
             ).then(
-                match: Pattern.new(/>/).maybe(@spaces).then(/$/),
+                match: Pattern.new(/>/),
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
-            ),
+            ).maybe(@spaces).then(/$/),
         )
     grammar[:template_definition] = PatternRange.new(
         tag_as: 'meta.template.definition',
@@ -715,33 +715,26 @@ grammar = Grammar.new(
                     ),
                 end_pattern: Pattern.new(
                         match: />/,
-                        tag_as: "punctuation.section.angle-brackets.begin.template.call"
+                        tag_as: "punctuation.section.angle-brackets.end.template.call"
                     ),
                 includes: [:template_call_context]
             ),
             :template_definition_context,
         ]
         )
-    grammar[:template_argument_defaulted] = Pattern.new(
-        match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                tag_as: "storage.type.template",
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template"
-            ).maybe(@spaces).then(
-                match: /[=]/,
-                tag_as: "keyword.operator.assignment"
-            )
-        )
-    grammar[:template_definition_argument] = Pattern.new(
-        # case 1: only one word
-        std_space.then(
+    grammar[:template_definition_argument] = std_space.then(
+        Pattern.new(
+            should_fully_match: [
+                "typename", "typename T", "typename... T", "template <typename> class T",
+                "class T = A", "template <typename> typename T = X"
+            ],
+            match:
+            # case 1: only one word
             Pattern.new(
                 match: variable_name_without_bounds,
                 tag_as: "storage.type.template.argument.$match",
-            # case 2: normal situation (ex: "typename T")
             ).or(
+                # case 2: normal situation (ex: "typename T")
                 Pattern.new(
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
                     includes: [
@@ -754,11 +747,11 @@ grammar = Grammar.new(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template",
                 )
-            # case 3: ellipses (ex: "typename... Args")
             ).or(
+                # case 3: ellipses (ex: "typename... Args")
                 Pattern.new(
                     match: variable_name_without_bounds,
-                    tag_as: "storage.type.template",
+                    tag_as: "storage.type.template.argument.$match",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
                     tag_as: "punctuation.vararg-ellipses.template.definition",
@@ -766,7 +759,31 @@ grammar = Grammar.new(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
                 )
-            ).maybe(@spaces).then(
+            ).or(
+                # case 4: template template parameter
+                Pattern.new(
+                    template_start
+                ).maybe(@spaces).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "storage.type.template.argument.$match",
+                ).maybe(@spaces).maybe(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template",
+                ).maybe(@spaces).then(
+                    match: />/,
+                    tag_as: "punctuation.section.angle-brackets.end.template.definition"
+                ).maybe(@spaces).then(
+                    match: /class|typename/,
+                    tag_as: "storage.type.template.argument.$match"
+                ).maybe(
+                    Pattern.new(@spaces).then(
+                        match: variable_name_without_bounds,
+                        tag_as: "entity.name.type.template",
+                    )
+                )
+            ).maybe(@spaces).maybe(
+                assignment_operator.maybe(@spaces).then(variable_name_without_bounds)
+            ).then(
                 Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.delimiter.comma.template.argument",
@@ -775,6 +792,16 @@ grammar = Grammar.new(
                 )
             )
         )
+    )
+    grammar[:template_argument_defaulted] = Pattern.new(
+        should_partial_match: ["<typename T = void>", "< class T=void>", "<int  =0>"],
+        match: lookBehindFor(/<|,/).maybe(@spaces).then(
+            match: variable_name_without_bounds,
+            tag_as: "storage.type.template.argument.$match",
+        ).then(@spaces).maybe(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+        ).maybe(@spaces).then(assignment_operator)
     )
 #
 # Scope resolution
