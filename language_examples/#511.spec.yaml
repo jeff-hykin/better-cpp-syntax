@@ -34,13 +34,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: override
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.override
-    - final
 - source: final
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.override
-    - final
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.final
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition

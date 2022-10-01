@@ -2886,7 +2886,7 @@
     - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.typename
 - source: ...
   scopes:
     - punctuation.vararg-ellipses.template.definition
@@ -3207,7 +3207,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -3303,9 +3303,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template
@@ -27837,7 +27837,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' void* '
+- source: void*
   scopes:
     - storage.type.return-type.lambda
 - source: '{'

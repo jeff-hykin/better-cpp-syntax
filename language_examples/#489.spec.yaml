@@ -39,7 +39,9 @@
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -102,13 +104,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.noexcept
-    - override
 - source: override
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
-    - override
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '{'
   scopes:
     - >-
@@ -192,7 +192,9 @@
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -269,7 +271,9 @@
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -340,7 +344,9 @@
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -411,7 +417,9 @@
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor

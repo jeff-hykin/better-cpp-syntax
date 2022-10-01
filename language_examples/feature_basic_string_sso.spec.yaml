@@ -5698,7 +5698,7 @@
     - punctuation.section.angle-brackets.begin.template.definition
 - source: class
   scopes:
-    - entity.name.type.template
+    - storage.type.template.argument.class
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5759,7 +5759,7 @@
     - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
@@ -6538,7 +6538,7 @@
     - punctuation.section.angle-brackets.begin.template.definition
 - source: class
   scopes:
-    - entity.name.type.template
+    - storage.type.template.argument.class
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6599,7 +6599,7 @@
     - support.type.built-in.posix-reserved
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
@@ -6801,7 +6801,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -8122,7 +8122,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -8378,7 +8378,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9973,7 +9973,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10907,7 +10907,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11357,7 +11357,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11538,7 +11538,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12429,13 +12429,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12485,13 +12483,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12567,13 +12563,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.operator-overload
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - >-
@@ -12718,13 +12712,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12768,13 +12760,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12875,13 +12865,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -12937,13 +12925,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13053,13 +13039,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13112,13 +13096,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13237,13 +13219,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13308,13 +13288,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13393,15 +13371,14 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
   scopesEnd:
     - meta.function.definition
     - meta.head.function.definition
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13423,13 +13400,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -13473,13 +13448,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round
 - source: const
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
 - source: noexcept
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.const
-    - noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.function.definition
@@ -14736,7 +14709,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15361,7 +15334,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15645,7 +15618,7 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '='
   scopes:
     - keyword.operator.assignment

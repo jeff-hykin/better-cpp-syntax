@@ -50,17 +50,17 @@ NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (
 - [Default Theme Enhanced](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes)
 
 ## How do I use it?
-Just install the VS Code extension and the changes will automatically be applied to all relevent files.
+Just install the VS Code extension and the changes will automatically be applied to all relevant files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
-# Comparision (Material Theme)
+# Comparison (Material Theme)
 <img width="2794" alt="compare" src="https://user-images.githubusercontent.com/17692058/153653793-3685ffd5-cf96-43c3-a883-da79ba33d037.png">
 
 
 ## What is different from atom/language-c?
 It fixes:
 - The issue of single quotes inside #error and #warning being highlighted when then shouldn't be 
-- The issue of initilization functions only highlighting the first parenthese
+- The issue of initialization functions only highlighting the first parenthesis
 - The bug that treats the 'and' and 'or' operator as functions (instead of operators) when they are followed by ()'s
 - Old C99 function highlighting that broke the standard function highlighting
 - The failure of highlighting for the semicolon after namespaces
@@ -96,18 +96,18 @@ It adds:
 ## Contributing
 If you'd like to help improve the syntax, take a look at `main/main.rb`. And make sure to take a look at `documentation/CONTRIBUTING.md` to get a better idea of how the code works.
 
-Planned future fixes/featues:
+Planned future fixes/features:
 - Add tagging for type-casting statements
 - Add tagging for custom types words
 - Better support for dereferenced/pointer tagging
-- Full C++ 2020 support (module imports, arrow return types, etc)
+- Full C++ 2020 support (module imports, arrow return types, etc.)
 - Improving template types
 
 ## What if I see a highlighting bug?
 Let me know! Post an issue on https://github.com/jeff-hykin/better-cpp-syntax
 I love regular expressions, and PR's are always welcome.
 
-## Did you write all of this youself?
+## Did you write all of this yourself?
 The original JSON was taken from https://github.com/atom/language-c
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
 <br>@matter123 has written basically every major pull request, from simple bugfixes up to the entire textmate testing suite

@@ -367,16 +367,20 @@ grammar = Grammar.new(
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
     grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
-        std_space.then(
-            tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-            match: Pattern.new(
-                oneOrMoreOf(std_space.then(variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ])).lookAheadFor(
-                    Pattern.new(/\s*/).then(
-                        Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
-                    )
-                )
+        should_partially_match: ["final override;", "const noexcept {"],
+        match: oneOrMoreOf(std_space.then(
+            Pattern.new(
+                should_fully_match: ["override", "final", "const", "noexcept"],
+                should_not_fully_match: ["const noexcept"],
+                should_not_partial_match: ["return"],
+                tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
+                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ]
             )
-        ),
+        )).lookAheadFor(
+            Pattern.new(/\s*/).then(
+                Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
+            )
+        )
     )
     grammar[:storage_specifiers] = storage_specifier = Pattern.new(
         std_space.then(
@@ -693,9 +697,9 @@ grammar = Grammar.new(
                 tag_as: "meta.template.definition",
                 includes: [:template_definition_context],
             ).then(
-                match: Pattern.new(/>/).maybe(@spaces).then(/$/),
+                match: Pattern.new(/>/),
                 tag_as: "punctuation.section.angle-brackets.end.template.definition"
-            ),
+            ).maybe(@spaces).then(/$/),
         )
     grammar[:template_definition] = PatternRange.new(
         tag_as: 'meta.template.definition',
@@ -715,33 +719,26 @@ grammar = Grammar.new(
                     ),
                 end_pattern: Pattern.new(
                         match: />/,
-                        tag_as: "punctuation.section.angle-brackets.begin.template.call"
+                        tag_as: "punctuation.section.angle-brackets.end.template.call"
                     ),
                 includes: [:template_call_context]
             ),
             :template_definition_context,
         ]
         )
-    grammar[:template_argument_defaulted] = Pattern.new(
-        match: lookBehindFor(/<|,/).maybe(@spaces).then(
-                match: zeroOrMoreOf(variable_name_without_bounds.then(@spaces)),
-                tag_as: "storage.type.template",
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.type.template"
-            ).maybe(@spaces).then(
-                match: /[=]/,
-                tag_as: "keyword.operator.assignment"
-            )
-        )
-    grammar[:template_definition_argument] = Pattern.new(
-        # case 1: only one word
-        std_space.then(
+    grammar[:template_definition_argument] = std_space.then(
+        Pattern.new(
+            should_fully_match: [
+                "typename", "typename T", "typename... T", "template <typename> class T",
+                "class T = A", "template <typename> typename T = X"
+            ],
+            match:
+            # case 1: only one word
             Pattern.new(
                 match: variable_name_without_bounds,
                 tag_as: "storage.type.template.argument.$match",
-            # case 2: normal situation (ex: "typename T")
             ).or(
+                # case 2: normal situation (ex: "typename T")
                 Pattern.new(
                     match: oneOrMoreOf(variable_name_without_bounds.then(@spaces)),
                     includes: [
@@ -754,11 +751,11 @@ grammar = Grammar.new(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template",
                 )
-            # case 3: ellipses (ex: "typename... Args")
             ).or(
+                # case 3: ellipses (ex: "typename... Args")
                 Pattern.new(
                     match: variable_name_without_bounds,
-                    tag_as: "storage.type.template",
+                    tag_as: "storage.type.template.argument.$match",
                 ).maybe(@spaces).then(
                     match: /\.\.\./,
                     tag_as: "punctuation.vararg-ellipses.template.definition",
@@ -766,7 +763,31 @@ grammar = Grammar.new(
                     match: variable_name_without_bounds,
                     tag_as: "entity.name.type.template"
                 )
-            ).maybe(@spaces).then(
+            ).or(
+                # case 4: template template parameter
+                Pattern.new(
+                    template_start
+                ).maybe(@spaces).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "storage.type.template.argument.$match",
+                ).maybe(@spaces).maybe(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.type.template",
+                ).maybe(@spaces).then(
+                    match: />/,
+                    tag_as: "punctuation.section.angle-brackets.end.template.definition"
+                ).maybe(@spaces).then(
+                    match: /class|typename/,
+                    tag_as: "storage.type.template.argument.$match"
+                ).maybe(
+                    Pattern.new(@spaces).then(
+                        match: variable_name_without_bounds,
+                        tag_as: "entity.name.type.template",
+                    )
+                )
+            ).maybe(@spaces).maybe(
+                assignment_operator.maybe(@spaces).then(variable_name_without_bounds)
+            ).then(
                 Pattern.new(
                     match: /,/,
                     tag_as: "punctuation.separator.delimiter.comma.template.argument",
@@ -775,6 +796,16 @@ grammar = Grammar.new(
                 )
             )
         )
+    )
+    grammar[:template_argument_defaulted] = Pattern.new(
+        should_partial_match: ["<typename T = void>", "< class T=void>", "<int  =0>"],
+        match: lookBehindFor(/<|,/).maybe(@spaces).then(
+            match: variable_name_without_bounds,
+            tag_as: "storage.type.template.argument.$match",
+        ).then(@spaces).maybe(
+                match: variable_name_without_bounds,
+                tag_as: "entity.name.type.template"
+        ).maybe(@spaces).then(assignment_operator)
     )
 #
 # Scope resolution
@@ -996,6 +1027,24 @@ grammar = Grammar.new(
         ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
+    
+    deleted_and_defaulted_keyword = -> (subtags: []) do
+        # highest priority tag needs to be at the back (But its easier for humans to thing first==most-important)
+        subtags = subtags.reverse
+        # for operator() or function() = delete ;
+        # https://en.cppreference.com/w/cpp/language/function#Deleted_functions
+        # or operator[=/<=>]() = default ;
+        # https://en.cppreference.com/w/cpp/language/member_functions#Special_member_functions
+        assignment_operator.then(std_space).then(
+            Pattern.new(
+                match: /default/,
+                tag_as: subtags.map { |subtag| "keyword.other.default.#{subtag}" }.join(' '),
+            ).or(
+                match: /delete/,
+                tag_as: subtags.map { |subtag| "keyword.other.delete.#{subtag}" }.join(' '),
+            )
+        )
+    end
 
     grammar[:function_definition] = generateBlockFinder(
         name:"function.definition",
@@ -1135,6 +1184,7 @@ grammar = Grammar.new(
                 ]
             ),
             :qualifiers_and_specifiers_post_parameters,
+            deleted_and_defaulted_keyword[subtags: ["function"]],
             # initial context is here for things like noexcept()
             # TODO: fix this pattern an make it more strict
             :$initial_context
@@ -1231,18 +1281,6 @@ grammar = Grammar.new(
 #
 # Constructor / Destructor
 #
-    deleted_and_default_constructor = [
-        # for class_name() = delete ; and class_name() = default ;
-        assignment_operator.then(std_space).then(
-            Pattern.new(
-                match: /default/,
-                tag_as: "keyword.other.default.constructor",
-            ).or(
-                match: /delete/,
-                tag_as: "keyword.other.delete.constructor",
-            )
-        )
-    ]
     # see https://en.cppreference.com/w/cpp/language/default_constructor
     constructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1251,7 +1289,7 @@ grammar = Grammar.new(
             start_pattern: start_pattern,
             head_includes:[
                 :ever_present_context, # comments and macros
-                deleted_and_default_constructor,
+                deleted_and_defaulted_keyword[subtags: ["constructor", "function"]],
                 :functional_specifiers_pre_parameters,
                 # ini context
                 PatternRange.new(
@@ -1379,6 +1417,7 @@ grammar = Grammar.new(
             ]
         )
     ]
+
     # see https://en.cppreference.com/w/cpp/language/destructor
     destructor = ->(start_pattern) do
         generateBlockFinder(
@@ -1387,7 +1426,7 @@ grammar = Grammar.new(
             start_pattern: start_pattern,
             head_includes:[
                 :ever_present_context, # comments and macros
-                deleted_and_default_constructor,
+                deleted_and_defaulted_keyword[subtags: [ "destructor", "constructor", "function", ]],
                 PatternRange.new(
                     tag_content_as: "meta.function.definition.parameters.special.member.destructor",
                     start_pattern: Pattern.new(
@@ -2027,12 +2066,21 @@ grammar = Grammar.new(
                 tag_as: "storage.modifier.lambda.$match"
             ),
             # check for the -> syntax
-            Pattern.new(
-                match: /->/,
-                tag_as: "punctuation.definition.lambda.return-type"
-            ).maybe(
-                match: Pattern.new(/.+?/).lookAheadFor(/\{|$/),
-                tag_as: "storage.type.return-type.lambda"
+            PatternRange.new(
+                start_pattern: Pattern.new(
+                        match: /->/,
+                        tag_as: "punctuation.definition.lambda.return-type"
+                    ),
+                end_pattern: Pattern.new(
+                        match: lookAheadFor(/\{/),
+                    ),
+                includes: [
+                    :comments,
+                    Pattern.new(
+                        tag_as: "storage.type.return-type.lambda",
+                        match: /\S+/,
+                    ),
+                ],
             ),
             # then find the body
             PatternRange.new(
