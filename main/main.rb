@@ -940,17 +940,32 @@ grammar = Grammar.new(
     non_type_keywords = @cpp_tokens.that(:isWord, not(:isType), not(:isTypeCreator))
     builtin_type_creators_and_specifiers = @cpp_tokens.that(:isTypeSpecifier).or(@cpp_tokens.that(:isTypeCreator))
     grammar[:qualified_type] = qualified_type = Pattern.new(
-        should_fully_match: [ "void", "A","A::B","A::B<C>::D<E>", "unsigned char","long long int", "unsigned short int","struct a", "void", "iterator", "original", "bore"],
+        should_fully_match: [
+            "void",
+            "A",
+            "A::B",
+            "A::B<C>::D<E>",
+            "unsigned char",
+            "long long int",
+            "unsigned short int",
+            "struct a",
+            "void",
+            "iterator",
+            "original",
+            "bore"
+        ],
         should_not_partial_match: ["return", "static const"],
         tag_as: "meta.qualified_type",
         match: Pattern.new(
             leading_space.maybe(
                 inline_attribute
-            ).then(std_space).zeroOrMoreOf(
+            ).then(
+                std_space
+            ).zeroOrMoreOf(
                 builtin_type_creators_and_specifiers.then(std_space)
             ).maybe(
-                inline_scope_resolution[".type"]
-            ).then(std_space).then(
+                inline_scope_resolution[".type"].then(std_space)
+            ).then(
                 lookAheadToAvoid(non_type_keywords.then(@word_boundary))
             ).then(
                 identifier,
@@ -1056,14 +1071,15 @@ grammar = Grammar.new(
         name:"function.definition",
         tag_as:"meta.function.definition",
         start_pattern: Pattern.new(
-            possible_beginning_of_statement.or(lookBehindFor(/>/)).then(
-                std_space
+            possible_beginning_of_statement.or(lookBehindFor(/>|\*\//)).then(
+                /\s*+/, #std_space
             ).maybe(
                 Pattern.new(
                     match: variableBounds[/template/],
                     tag_as: "storage.type.template",
                 ).then(std_space)
             ).maybe(inline_attribute).zeroOrMoreOf(
+                dont_back_track: true,
                 match: storage_modifiers = Pattern.new(
                     Pattern.new(
                         match: variableBounds[@cpp_tokens.that(:isFunctionSpecifier).or(@cpp_tokens.that(:isStorageSpecifier))],

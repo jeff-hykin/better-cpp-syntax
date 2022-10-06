@@ -11,17 +11,16 @@ export[:std_space] = Pattern.new(
     # this space pattern will match inline /**/ comments that do not contain newlines
     # >0 length match
     match: oneOf([
-        Pattern.new(
-            at_least: 1.times,
-            quantity_preference: :as_few_as_possible,
-            match: Pattern.new(
-                match: @spaces,
-                dont_back_track?: true,
-            ).or(export[:inline_comment])
+        oneOrMoreOf(
+            Pattern.new(/\s*+/).then( 
+                export[:inline_comment]
+            ).then(/\s*+/)
         ),
-        /\b/,
-        lookAheadFor(/\W/),
+        Pattern.new(/\s++/),
         lookBehindFor(/\W/),
+        lookAheadFor(/\W/),
+        /^/,
+        /\n?$/,
         @start_of_document,
         @end_of_document,
     ]),
