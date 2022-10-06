@@ -43,6 +43,7 @@
 - source: ' with inline comment '
 - source: '*/'
   scopes:
+    - comment.block
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
