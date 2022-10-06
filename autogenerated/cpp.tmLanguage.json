@@ -4677,9 +4677,6 @@
           "include": "#ever_present_context"
         },
         {
-          "include": "#string_context"
-        },
-        {
           "include": "#parameter"
         },
         {
@@ -8892,6 +8889,9 @@
       "patterns": [
         {
           "include": "#ever_present_context"
+        },
+        {
+          "include": "#string_context"
         },
         {
           "include": "#function_pointer_parameter"
