@@ -374,11 +374,17 @@ grammar = Grammar.new(
                 should_not_fully_match: ["const noexcept"],
                 should_not_partial_match: ["return"],
                 tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ]
+                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ],
             )
         )).lookAheadFor(
             Pattern.new(/\s*/).then(
-                Pattern.new(/\{/).or(/;/).or(/[\n\r]/)
+                oneOf([
+                    "{",
+                    ";",
+                    "\n",
+                    "\r",
+                    "=", # for = delete; or = default;
+                ])
             )
         )
     )
@@ -1358,10 +1364,7 @@ grammar = Grammar.new(
                     ]
                 ),
                 #final & override
-                oneOrMoreOf(Pattern.new(
-                    match: oneOf(["final", "override"]),
-                    tag_as: "keyword.operator.$match",
-                )),
+                :qualifiers_and_specifiers_post_parameters,
                 # initial context is here for things like noexcept()
                 # TODO: fix this pattern an make it more strict
                 :$initial_context
@@ -1440,11 +1443,7 @@ grammar = Grammar.new(
                     # destructors cant have arguments
                     includes: []
                 ),
-                #final & override
-                oneOrMoreOf(Pattern.new(
-                    match: oneOf(["final", "override"]),
-                    tag_as: "keyword.operator.wordlike keyword.operator.$match",
-                )),
+                :qualifiers_and_specifiers_post_parameters,
                 # initial context is here for things like noexcept()
                 # TODO: fix this pattern an make it more strict
                 :$initial_context

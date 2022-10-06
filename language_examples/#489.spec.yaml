@@ -32,8 +32,7 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -178,15 +177,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
-    - keyword.operator.wordlike
   scopes:
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: override
   scopes:
-    - keyword.operator.override
-  scopesEnd:
-    - keyword.operator.wordlike
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -257,15 +252,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
-    - keyword.operator.wordlike
   scopes:
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: final
   scopes:
-    - keyword.operator.final
-  scopesEnd:
-    - keyword.operator.wordlike
+    - storage.modifier.specifier.functional.post-parameters.final
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -337,8 +328,7 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: override
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.override
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -410,8 +400,7 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: final
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.final
+    - storage.modifier.specifier.functional.post-parameters.final
 - source: '='
   scopes:
     - keyword.operator.assignment
