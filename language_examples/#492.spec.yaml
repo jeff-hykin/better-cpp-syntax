@@ -1,0 +1,208 @@
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: class
+  scopes:
+    - storage.type.template.argument.class
+- source: TT
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: a
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: b
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: class
+  scopes:
+    - storage.type.template.argument.class
+- source: TT
+  scopes:
+    - entity.name.type.template
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: ' int'
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: c
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: template
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopes:
+    - storage.type.template.argument.typename
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: class
+  scopes:
+    - storage.type.template.argument.class
+- source: TT
+  scopes:
+    - entity.name.type.template
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+  scopesEnd:
+    - meta.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: d
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

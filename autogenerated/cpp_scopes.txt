@@ -96,7 +96,6 @@ keyword.control.exception.$3.cpp
 keyword.control.goto.cpp
 keyword.control.switch.cpp
 keyword.operator.$0.cpp
-keyword.operator.$1.cpp
 keyword.operator.alignas.cpp
 keyword.operator.alignof.cpp
 keyword.operator.arithmetic.cpp
@@ -128,7 +127,11 @@ keyword.operator.wordlike.cpp
 keyword.other.$3.cpp
 keyword.other.decltype.cpp
 keyword.other.default.constructor.cpp
+keyword.other.default.destructor.cpp
+keyword.other.default.function.cpp
 keyword.other.delete.constructor.cpp
+keyword.other.delete.destructor.cpp
+keyword.other.delete.function.cpp
 keyword.other.namespace.alias.cpp
 keyword.other.namespace.definition.cpp
 keyword.other.namespace.directive.cpp
@@ -275,9 +278,9 @@ punctuation.definition.string.end
 punctuation.definition.string.end.assembly.cpp
 punctuation.definition.string.end.cpp
 punctuation.section.angle-brackets.begin.template.call.cpp
+punctuation.section.angle-brackets.begin.template.definition.cpp
 punctuation.section.angle-brackets.end.template.call.cpp
 punctuation.section.angle-brackets.end.template.definition.cpp
-punctuation.section.angle-brackets.start.template.definition.cpp
 punctuation.section.arguments.begin.bracket.curly.initializer.cpp
 punctuation.section.arguments.begin.bracket.round.decltype.cpp
 punctuation.section.arguments.begin.bracket.round.function.call.cpp
@@ -391,7 +394,7 @@ punctuation.vararg-ellipses.cpp
 punctuation.vararg-ellipses.template.definition.cpp
 punctuation.vararg-ellipses.variable.parameter.preprocessor.cpp
 storage.modifier.$1.cpp
-storage.modifier.$12.cpp
+storage.modifier.$8.cpp
 storage.modifier.array.bracket.square
 storage.modifier.cpp
 storage.modifier.inline.cpp
@@ -399,7 +402,7 @@ storage.modifier.lambda.$0.cpp
 storage.modifier.pointer.cpp
 storage.modifier.reference.cpp
 storage.modifier.specifier.$3.cpp
-storage.modifier.specifier.functional.post-parameters.$3.cpp
+storage.modifier.specifier.functional.post-parameters.$5.cpp
 storage.modifier.specifier.functional.pre-parameters.$0.cpp
 storage.modifier.specifier.parameter.cpp
 storage.type.$0.cpp
@@ -432,7 +435,11 @@ storage.type.return-type.lambda.cpp
 storage.type.struct.declare.cpp
 storage.type.struct.parameter.cpp
 storage.type.template.argument.$0.cpp
+storage.type.template.argument.$1.cpp
+storage.type.template.argument.$11.cpp
+storage.type.template.argument.$14.cpp
 storage.type.template.argument.$3.cpp
+storage.type.template.argument.$6.cpp
 storage.type.template.cpp
 storage.type.union.declare.cpp
 storage.type.union.parameter.cpp

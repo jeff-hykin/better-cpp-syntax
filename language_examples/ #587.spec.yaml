@@ -1,0 +1,110 @@
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: Base
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: virtual
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.virtual
+- source: ~Base
+  scopesBegin:
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.function
+    - keyword.other.default.constructor
+    - keyword.other.default.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: class
+  scopesBegin:
+    - meta.tail.class
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: Derived
+  scopes:
+    - entity.name.type.class
+- source: ':'
+  scopesBegin:
+    - meta.head.class
+  scopes:
+    - punctuation.separator.colon.inheritance
+- source: Base
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.class
+  scopesEnd:
+    - meta.head.class
+- source: ~Derived
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: override
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.override
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: default
+  scopes:
+    - keyword.other.default.function
+    - keyword.other.default.constructor
+    - keyword.other.default.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class

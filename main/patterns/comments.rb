@@ -40,45 +40,31 @@ export[:line_comment] = PatternRange.new(
 # same as block_comment, but uses Pattern so it can be used inside other patterns
 # 
 export[:inline_comment] = Pattern.new(
-    match: "/*",
-    tag_as: "comment.block punctuation.definition.comment.begin",
-).then(
-    # this pattern is complicated because its optimized to never backtrack
+    should_fully_match: [ "/* thing */", "/* thing *******/", "/* */", "/**/", "/***/" ],
     match: Pattern.new(
-        tag_as: "comment.block",
-        should_fully_match: [ "thing ****/", "/* thing */", "/* thing *******/" ],
-        match: zeroOrMoreOf(
-            dont_back_track?: true,
-            match: Pattern.new(
-                Pattern.new(
-                    /[^\*]/
-                ).or(
-                    oneOrMoreOf(
-                        match: "*",
-                        dont_back_track?: true,
-                    ).then(/[^\/]/) # any character that is not a /
-                )
-            ),
+        Pattern.new(
+            match: "/*",
+            tag_as: "comment.block punctuation.definition.comment.begin",
         ).then(
-            should_fully_match: [ "*/", "*******/" ],
+            # this pattern is complicated because its optimized to never backtrack
             match: Pattern.new(
-                oneOrMoreOf(
-                    match: "*",
+                tag_as: "comment.block",
+                match: zeroOrMoreOf(
                     dont_back_track?: true,
-                ).then("/")
-            ),
-            includes: [
-                Pattern.new(
+                    match: Pattern.new(
+                        Pattern.new(
+                            /[^\*]++/
+                        ).or(
+                            Pattern.new(/\*+/).lookAheadToAvoid(/\//)
+                        )
+                    ),
+                ).then(
                     match: "*/",
-                    tag_as: "comment.block punctuation.definition.comment.end"
-                ),
-                Pattern.new(
-                    match: "*",
-                    tag_as: "comment.block"
-                ),
-            ]
+                    tag_as: "comment.block punctuation.definition.comment.end",
+                )
+            )
         )
-    )
+    )    
 )
 
 # 

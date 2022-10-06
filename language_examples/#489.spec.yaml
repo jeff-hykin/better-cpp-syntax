@@ -32,14 +32,15 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -102,13 +103,11 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
+  scopes:
     - storage.modifier.specifier.functional.post-parameters.noexcept
-    - override
 - source: override
-  scopesEnd:
-    - storage.modifier.specifier.functional.post-parameters.noexcept
-    - override
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '{'
   scopes:
     - >-
@@ -178,21 +177,19 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
-    - keyword.operator.wordlike
   scopes:
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: override
   scopes:
-    - keyword.operator.override
-  scopesEnd:
-    - keyword.operator.wordlike
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -255,21 +252,19 @@
   scopes:
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: noexcept
-  scopesBegin:
-    - keyword.operator.wordlike
   scopes:
-    - keyword.operator.noexcept
+    - storage.modifier.specifier.functional.post-parameters.noexcept
 - source: final
   scopes:
-    - keyword.operator.final
-  scopesEnd:
-    - keyword.operator.wordlike
+    - storage.modifier.specifier.functional.post-parameters.final
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -333,14 +328,15 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: override
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.override
+    - storage.modifier.specifier.functional.post-parameters.override
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor
@@ -404,14 +400,15 @@
     - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: final
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.final
+    - storage.modifier.specifier.functional.post-parameters.final
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: default
   scopes:
+    - keyword.other.default.function
     - keyword.other.default.constructor
+    - keyword.other.default.destructor
   scopesEnd:
     - meta.function.definition.special.member.destructor
     - meta.head.function.definition.special.member.destructor

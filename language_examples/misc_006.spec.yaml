@@ -1939,7 +1939,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: typename
   scopes:
     - storage.type.template.argument.typename
@@ -4178,7 +4178,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: class
   scopesBegin:
     - meta.template.definition
@@ -4241,12 +4241,12 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: class
   scopesBegin:
     - meta.template.definition
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -4286,7 +4286,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: typename
   scopesBegin:
     - meta.template.definition
@@ -4298,9 +4298,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template
@@ -4327,7 +4327,7 @@
     - entity.name.type.template
   scopesEnd:
     - meta.template.definition
-- source: '> '
+- source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
 - source: bool
@@ -4412,10 +4412,10 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: class
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -4439,7 +4439,7 @@
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
@@ -4527,10 +4527,10 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
-- source: 'class '
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: class
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.class
 - source: U
   scopes:
     - entity.name.type.template
@@ -4554,7 +4554,7 @@
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - punctuation.section.angle-brackets.begin.template.call
+    - punctuation.section.angle-brackets.end.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
@@ -4654,8 +4654,7 @@
     - keyword.operator.assignment
 - source: delete
   scopes:
-    - keyword.operator.wordlike
-    - keyword.operator.delete
+    - keyword.other.delete.function
   scopesEnd:
     - meta.function.definition.special.operator-overload
     - meta.head.function.definition.special.operator-overload
@@ -4717,7 +4716,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: int
   scopesBegin:
     - meta.template.definition
@@ -4746,7 +4745,7 @@
     - punctuation.separator.delimiter.comma.template.argument
 - source: typename
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.typename
 - source: ...
   scopes:
     - punctuation.vararg-ellipses.template.definition
@@ -5075,7 +5074,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -5159,7 +5158,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: typename
   scopesBegin:
     - meta.template.definition
@@ -5171,9 +5170,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
-- source: 'int '
+- source: int
   scopes:
-    - storage.type.template
+    - storage.type.template.argument.int
 - source: 'N'
   scopes:
     - entity.name.type.template
@@ -6669,7 +6668,7 @@
     - storage.type.template
 - source: <
   scopes:
-    - punctuation.section.angle-brackets.start.template.definition
+    - punctuation.section.angle-brackets.begin.template.definition
 - source: class
   scopesBegin:
     - meta.template.definition
@@ -6857,7 +6856,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -6934,7 +6933,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -7157,7 +7156,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' int '
+- source: int
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -7310,7 +7309,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -7447,7 +7446,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' Ret '
+- source: Ret
   scopes:
     - storage.type.return-type.lambda
 - source: '{'
@@ -7491,7 +7490,7 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: ' int '
+- source: int
   scopes:
     - storage.type.return-type.lambda
 - source: '{'

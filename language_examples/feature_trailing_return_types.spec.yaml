@@ -1047,7 +1047,9 @@
 - source: goto
   scopes:
     - keyword.control.goto
-- source: ' output'
+- source: output
+  scopes:
+    - entity.name.label.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1220,7 +1222,9 @@
 - source: goto
   scopes:
     - keyword.control.goto
-- source: ' output'
+- source: output
+  scopes:
+    - entity.name.label.call
 - source: ;
   scopes:
     - punctuation.terminator.statement

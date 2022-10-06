@@ -1,0 +1,36 @@
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' OK:'
+  scopesEnd:
+    - comment.line.double-slash
+- source: /*********************
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' DATA ************************'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Crash:'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '  /*********************'
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' DATA '
+- source: '*************************/'
+  scopes:
+    - punctuation.definition.comment.end.documentation

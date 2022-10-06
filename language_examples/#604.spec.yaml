@@ -1,0 +1,122 @@
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' compare '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: const
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: QualifiedName
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: a
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: QualifiedName
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: b
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: auto
+  scopes:
+    - storage.type.return-type.lambda
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' broken! '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+- source: /*
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '    // broken'
+- source: '    {'
+- source: '        return a.raw < b.raw;'
+- source: '    };'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: a
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: raw
+  scopes:
+    - variable.other.property
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: b
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: raw
+  scopes:
+    - variable.other.property
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

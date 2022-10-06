@@ -30,3 +30,85 @@
 - source: '"'
   scopes:
     - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' string '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: a string; buggy ***************
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: DEBUG_UART_PORT
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: print
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: F
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: \r
+  scopes:
+    - constant.character.escape
+- source: '******************* Program Info *******************'
+- source: \r
+  scopesBegin:
+    - constant.character.escape
+- source: \n
+  scopesEnd:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
