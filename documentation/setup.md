@@ -51,7 +51,7 @@ Altertive instructions if GUI is needed (matplotlib, tkinter, qt, etc)
 
 ### What is that `eval` command doing?
 
-1. Installing nix [manual install instructions here](https://nixos.org/guides/install-nix.html)
+1. Installing nix [manual install instructions here](https://nixos.org/download.html)
 2. Installing `git` (using nix) if you don't already have git
 3. It clones the repository
 4. It `cd`'s inside of the repo
