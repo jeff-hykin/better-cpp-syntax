@@ -70,7 +70,6 @@ in
                 main.project
                 linuxOnly
                 macOnly
-                (snowball "https://raw.githubusercontent.com/jeff-hykin/snowball/3df028e5d9e92dbe077ce34f6907da852e61895a/").nixShell
                 # an "inline" mixin (this is what each mixin looks like)
                 ({
                     # inside that shell, make sure to use these packages
