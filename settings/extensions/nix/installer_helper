@@ -8,6 +8,41 @@ then
     trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return; exit 0' INT TERM
 fi
 
+
+# 
+# make sure xcode tools are installed on MacOS
+# 
+if [ "$(uname)" = "Darwin" ]
+then
+    # if non-interactive, then install without prompting
+    if [ -z "$PS1" ]; then
+        xcode-select -p &> /dev/null
+        if [ $? -ne 0 ]; then
+            echo "Command Line Tools for Xcode not found. Installing from softwareupdate…"
+            # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
+            echo 
+            echo "This is probably going to take 5-30min to install" 
+            touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+            PROD=$(softwareupdate -l | grep "\*.*Command Line" | tail -n 1 | sed 's/^[^C]* //')
+            softwareupdate -i "$PROD" --verbose;
+        else
+            echo "Command Line Tools for Xcode have been installed."
+        fi
+    # use prompt so the user sees a time estimate and progress
+    else
+        check=$((xcode-\select --install) 2>&1)
+        echo $check
+        str="xcode-select: note: install requested for command line developer tools"
+        while [[ "$check" == "$str" ]];
+        do
+           xcode-select --install
+           echo "waiting for xcode command line tools to be installed"
+           sleep 10
+        done
+    fi
+    echo "passed xcode tools installed"
+fi
+
 # TODO: add a check/option for a corrupted nix install
 
 if ! [ -d "/nix/store" ]
