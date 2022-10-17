@@ -16,7 +16,7 @@
     # 
     #    [[packages]]
     #    load = [ "python38Packages", "setuptools",]
-    #    from = "c92ca95afb5043bc6faa0d526460584eccff2277"
+    #   
 
 # 
 # Complex packages
@@ -50,11 +50,10 @@
 
 # version 15.14.0
 # load = [ "nodejs-15_x",]
-# from = "c92ca95afb5043bc6faa0d526460584eccff2277" 
+# 
 
 # version 14.17.1
-load = [ "nodejs",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277" 
+load = [ "nodejs",] 
 
 # version 12.22.1
 # load = [ "nodejs-12_x",]
@@ -66,7 +65,6 @@ from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "nodePackages", "pnpm", ]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 
 # 
@@ -75,27 +73,21 @@ from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "python38",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "python38Packages", "setuptools",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "python38Packages", "pip",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "python38Packages", "virtualenv",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "python38Packages", "wheel",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 [[packages]]
 load = [ "poetry",]
-from = "c92ca95afb5043bc6faa0d526460584eccff2277"
 
 
 # 
