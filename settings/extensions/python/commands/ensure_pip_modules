@@ -42,21 +42,17 @@ fi
 
 
 # 
-# check for python-poetry first
+# check for requirements.txt
 # 
-if [ -f "$FORNIX_FOLDER/pyproject.toml" ] && [ -n "$(command -v "poetry")" ]
+if [ -f "$FORNIX_FOLDER/requirements.txt" ]
 then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
-    __temp_var__file_to_watch="$FORNIX_FOLDER/pyproject.toml"
-    __temp_var__hash_check_name="pip_poetry_modules"
+    __temp_var__file_to_watch="$FORNIX_FOLDER/requirements.txt"
+    __temp_var__hash_check_name="pip_modules"
     failed_check_command () {
-        # for newer versions of poetry tell them to use the existing virtual env
-        poetry config virtualenvs.path --unset 2>/dev/null
-        poetry config virtualenvs.in-project true 2>/dev/null
-
         # what to do when node modules haven't been installed yet
-        poetry install
+        python -m pip --disable-pip-version-check install -r "$__temp_var__file_to_watch"
         # if successful
         if [ $? -eq 0 ] 
         then
@@ -107,17 +103,21 @@ then
 fi
 
 # 
-# check for requirements.txt
+# check for python-poetry
 # 
-if [ -f "$FORNIX_FOLDER/requirements.txt" ]
+if [ -f "$FORNIX_FOLDER/pyproject.toml" ] && [ -n "$(command -v "poetry")" ]
 then
     # main inputs
     __temp_var__command_name="tools/python/check_pip_modules"
-    __temp_var__file_to_watch="$FORNIX_FOLDER/requirements.txt"
-    __temp_var__hash_check_name="pip_modules"
+    __temp_var__file_to_watch="$FORNIX_FOLDER/pyproject.toml"
+    __temp_var__hash_check_name="pip_poetry_modules"
     failed_check_command () {
+        # for newer versions of poetry tell them to use the existing virtual env
+        poetry config virtualenvs.path --unset 2>/dev/null
+        poetry config virtualenvs.in-project true 2>/dev/null
+
         # what to do when node modules haven't been installed yet
-        python -m pip --disable-pip-version-check install -r "$__temp_var__file_to_watch"
+        poetry install
         # if successful
         if [ $? -eq 0 ] 
         then
