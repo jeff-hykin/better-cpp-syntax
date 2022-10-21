@@ -170,3 +170,6 @@ then
     unset __temp_var__file_to_watch
     unset __temp_var__hash_check_name
 fi
+
+# fix for https://askubuntu.com/questions/441744/pressing-enter-produces-m-instead-of-a-newline
+stty sane
