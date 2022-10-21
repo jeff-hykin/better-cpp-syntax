@@ -40,9 +40,14 @@ then
     export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 fi
 
+echo '(which python): '"$(which python)"
+# if poetry not installed, install it
+if ! python -c "import poetry" 2>/dev/null; then
+    python -m pip --disable-pip-version-check install poetry==1.2.1 || python -m pip --disable-pip-version-check install poetry
+fi
 
 # 
-# check for python-poetry first
+# check for python-poetry
 # 
 if [ -f "$FORNIX_FOLDER/pyproject.toml" ] && [ -n "$(command -v "poetry")" ]
 then
