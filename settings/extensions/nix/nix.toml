@@ -43,9 +43,6 @@
 # Python
 # 
 [[packages]]
-load = [ "poetry",]
-
-[[packages]]
 load = [ "python38",]
 
 [[packages]]
@@ -59,6 +56,16 @@ load = [ "python38Packages", "virtualenv",]
 
 [[packages]]
 load = [ "python38Packages", "wheel",]
+
+[[packages]]
+load = [ "cmake",]
+
+[[packages]]
+load = [ "pkg-config",]
+
+[[packages]]
+load = [ "libffi",]
+
 
 # 
 # for .so errors on linux with opencv+ffmpeg
