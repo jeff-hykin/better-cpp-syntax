@@ -70,7 +70,6 @@ load = [ "nodePackages", "pnpm", ]
 # 
 # Python (because node-gyp depends on python)
 # 
-
 [[packages]]
 load = [ "python38",]
 
@@ -87,7 +86,14 @@ load = [ "python38Packages", "virtualenv",]
 load = [ "python38Packages", "wheel",]
 
 [[packages]]
-load = [ "poetry",]
+load = [ "cmake",]
+
+[[packages]]
+load = [ "pkg-config",]
+
+[[packages]]
+load = [ "libffi",]
+
 
 
 # 
