@@ -1000,8 +1000,11 @@ grammar = Grammar.new(
         match: Pattern.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
-            ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
-                qualified_type
+            ).then(@spaces).lookAheadToAvoid(/namespace/).then(
+                Pattern.new(
+                    match: identifier,
+                    tag_as: "entity.name.type",
+                ),
             ).maybe(@spaces).then(
                 assignment_operator
             ).maybe(@spaces).maybe(
@@ -1047,7 +1050,7 @@ grammar = Grammar.new(
         ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
-    
+
     deleted_and_defaulted_keyword = -> (subtags: []) do
         # highest priority tag needs to be at the back (But its easier for humans to thing first==most-important)
         subtags = subtags.reverse
