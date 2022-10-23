@@ -1005,6 +1005,8 @@ grammar = Grammar.new(
                     match: identifier,
                     tag_as: "entity.name.type",
                 ),
+            ).maybe(@spaces).maybe(
+                inline_attribute
             ).maybe(@spaces).then(
                 assignment_operator
             ).maybe(@spaces).maybe(
