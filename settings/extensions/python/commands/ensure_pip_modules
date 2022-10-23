@@ -40,7 +40,6 @@ then
     export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 fi
 
-echo '(which python): '"$(which python)"
 # if poetry not installed, install it
 if ! python -c "import poetry" 2>/dev/null; then
     python -m pip --disable-pip-version-check install poetry==1.2.1 || python -m pip --disable-pip-version-check install poetry
@@ -171,3 +170,6 @@ then
     unset __temp_var__file_to_watch
     unset __temp_var__hash_check_name
 fi
+
+# fix for https://askubuntu.com/questions/441744/pressing-enter-produces-m-instead-of-a-newline
+stty sane
