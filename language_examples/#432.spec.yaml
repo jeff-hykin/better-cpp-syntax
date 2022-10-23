@@ -98,9 +98,15 @@
   scopesEnd:
     - meta.block.struct
 - source: extern
+  scopesBegin:
+    - meta.template.explicit-instantiation
   scopes:
     - storage.modifier.specifier.extern
-- source: ' template '
+- source: template
+  scopes:
+    - storage.type.template
+  scopesEnd:
+    - meta.template.explicit-instantiation
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -135,6 +141,9 @@
   scopes:
     - storage.modifier.specifier.extern
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -165,7 +174,10 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.struct
-- source: 'template '
+- source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: struct
   scopesBegin:
     - meta.block.struct
@@ -197,6 +209,9 @@
   scopesEnd:
     - meta.block.struct
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: struct
   scopesBegin:
     - meta.block.struct
