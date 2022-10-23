@@ -40,9 +40,13 @@ then
     export FORNIX_FOLDER="$(dirname "$(dirname "$path_to_file")")"
 fi
 
+# if poetry not installed, install it
+if ! python -c "import poetry" 2>/dev/null; then
+    python -m pip --disable-pip-version-check install poetry==1.2.1 || python -m pip --disable-pip-version-check install poetry
+fi
 
 # 
-# check for python-poetry first
+# check for python-poetry
 # 
 if [ -f "$FORNIX_FOLDER/pyproject.toml" ] && [ -n "$(command -v "poetry")" ]
 then
@@ -51,15 +55,21 @@ then
     __temp_var__file_to_watch="$FORNIX_FOLDER/pyproject.toml"
     __temp_var__hash_check_name="pip_poetry_modules"
     failed_check_command () {
+        # for newer versions of poetry tell them to use the existing virtual env
+        poetry config virtualenvs.path --unset 2>/dev/null
+        poetry config virtualenvs.in-project true 2>/dev/null
+
         # what to do when node modules haven't been installed yet
         poetry install
         # if successful
         if [ $? -eq 0 ] 
         then
             echo "[$__temp_var__command_name] Check finished (dependencies installed)"
+            return 0
         # if failed
         else
             echo "[$__temp_var__command_name] Check failed: issues with install"
+            return 1
         fi
     }
 
@@ -84,8 +94,7 @@ then
         __temp_var__new_hash="$(cat "$__temp_var__file_to_watch" | md5sum)"
         # if something changed since last time; install!
         if [ "$__temp_var__old_hash" != "$__temp_var__new_hash" ]; then
-            echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
-            failed_check_command
+            failed_check_command && echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
         else
             echo "[$__temp_var__command_name] Check Passed => assuming packages are installed"
         fi
@@ -117,9 +126,11 @@ then
         if [ $? -eq 0 ] 
         then
             echo "[$__temp_var__command_name] Check finished (dependencies installed)"
+            return 0
         # if failed
         else
             echo "[$__temp_var__command_name] Check failed: issues with install"
+            return 1
         fi
     }
 
@@ -144,8 +155,7 @@ then
         __temp_var__new_hash="$(cat "$__temp_var__file_to_watch" | md5sum)"
         # if something changed since last time; install!
         if [ "$__temp_var__old_hash" != "$__temp_var__new_hash" ]; then
-            echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
-            failed_check_command
+            failed_check_command && echo "$__temp_var__new_hash" > "$__temp_var__location_of_hash"
         else
             echo "[$__temp_var__command_name] Check Passed => assuming packages are installed"
         fi
@@ -160,3 +170,6 @@ then
     unset __temp_var__file_to_watch
     unset __temp_var__hash_check_name
 fi
+
+# fix for https://askubuntu.com/questions/441744/pressing-enter-produces-m-instead-of-a-newline
+stty sane
