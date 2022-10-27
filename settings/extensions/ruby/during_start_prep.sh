@@ -4,5 +4,5 @@ mkdir "$GEM_HOME" &>/dev/null
 if [ -n "$(command -v "nix-shell")" ]
 then
     # create the bundix file
-    HOME="$FORNIX_HOME" nix-shell --run "bundix -l" -p bundix -I "nixpkgs=https://github.com/NixOS/nixpkgs/archive/046f8835dcb9082beb75bb471c28c832e1b067b6.tar.gz"
+    HOME="$FORNIX_HOME" nix-shell --run "bundix -l" -p bundix -I "nixpkgs=https://github.com/NixOS/nixpkgs/archive/ce6aa13369b667ac2542593170993504932eb836.tar.gz"
 fi
