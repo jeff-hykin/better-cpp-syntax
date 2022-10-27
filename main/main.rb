@@ -1019,8 +1019,13 @@ grammar = Grammar.new(
         match: Pattern.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
-            ).maybe(@spaces).lookAheadToAvoid(/namespace/).then(
-                qualified_type
+            ).then(@spaces).lookAheadToAvoid(/namespace/).then(
+                Pattern.new(
+                    match: identifier,
+                    tag_as: "entity.name.type",
+                ),
+            ).maybe(@spaces).maybe(
+                inline_attribute
             ).maybe(@spaces).then(
                 assignment_operator
             ).maybe(@spaces).maybe(
