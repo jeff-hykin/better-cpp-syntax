@@ -196,6 +196,7 @@ grammar = Grammar.new(
             :enum_block,
             :template_isolated_definition,  # TODO: template definitions should be mixed into the seperate definitions (class/struct/function, etc)
             :template_definition,
+            :template_explicit_instantiation,
             :access_control_keywords,       # TODO: these should only be allowed inside of class/struct (maybe namespace?) blocks
             :block,                         # TODO: after all function definition patterns are fixed, remove this from here and put it in the function definition context
             # statements
@@ -217,6 +218,7 @@ grammar = Grammar.new(
             :operator_overload,
             :template_isolated_definition,
             :template_definition,
+            :template_explicit_instantiation,
             # this shouldn't be in $initial_context (it will eventually be removed), and it shouldn't really be in function body either
             :evaluation_context,
         ) + [
@@ -812,6 +814,23 @@ grammar = Grammar.new(
                 tag_as: "entity.name.type.template"
         ).maybe(@spaces).then(assignment_operator)
     )
+
+#
+# Explicit template instantiation
+#
+    grammar[:template_explicit_instantiation] = Pattern.new(
+        tag_as: "meta.template.explicit-instantiation",
+        match: lookBehindToAvoid(@standard_character).maybe(
+            Pattern.new(
+                match: /extern/,
+                tag_as: "storage.modifier.specifier.extern",
+            ).then(@spaces)
+        ).then(
+            match: /template/,
+            tag_as: "storage.type.template"
+        ).then(@spaces)
+    )
+
 #
 # Scope resolution
 #

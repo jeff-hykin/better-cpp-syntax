@@ -46,9 +46,12 @@
     - punctuation.section.block.begin.bracket.curly.namespace
   scopesEnd:
     - meta.head.namespace
-- source: 'template '
+- source: template
   scopesBegin:
     - meta.body.namespace
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: class
   scopesBegin:
     - meta.block.class
@@ -79,7 +82,10 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.class
-- source: 'template '
+- source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: class
   scopesBegin:
     - meta.block.class
@@ -110,7 +116,10 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.class
-- source: 'template '
+- source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: class
   scopesBegin:
     - meta.block.class
@@ -141,7 +150,10 @@
     - punctuation.terminator.statement
   scopesEnd:
     - meta.block.class
-- source: 'template '
+- source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: class
   scopesBegin:
     - meta.block.class
@@ -173,6 +185,9 @@
   scopesEnd:
     - meta.block.class
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: '::'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -253,6 +268,9 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: '::'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -333,6 +351,9 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: '::'
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -416,6 +437,9 @@
   scopes:
     - punctuation.terminator.statement
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: '::'
   scopesBegin:
     - meta.function.definition.special.operator-overload

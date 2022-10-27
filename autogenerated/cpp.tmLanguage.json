@@ -87,6 +87,9 @@
       "include": "#template_definition"
     },
     {
+      "include": "#template_explicit_instantiation"
+    },
+    {
       "include": "#access_control_keywords"
     },
     {
@@ -13796,6 +13799,18 @@
           "include": "#evaluation_context"
         }
       ]
+    },
+    "template_explicit_instantiation": {
+      "match": "(?<!\\w)(?:(extern)(?:\\s)+)?(template)(?:\\s)+",
+      "captures": {
+        "1": {
+          "name": "storage.modifier.specifier.extern.cpp"
+        },
+        "2": {
+          "name": "storage.type.template.cpp"
+        }
+      },
+      "name": "meta.template.explicit-instantiation.cpp"
     },
     "template_isolated_definition": {
       "match": "(?<!\\w)(template)(?:(?:\\s)+)?(<)(.*)(>)(?:(?:\\s)+)?$",
