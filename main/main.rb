@@ -1015,7 +1015,7 @@ grammar = Grammar.new(
     grammar[:type_alias] = Pattern.new(
         tag_as: "meta.declaration.type.alias",
         should_fully_match: ["using A = B;", "using _Sat = std::allocator_traits<Allocator>;","using const_pointer_t = const uint8_t *\n","using T = typename std::iterator_traits<InputIt>::value_type;", "using pcb = details::pointer_control_block<Y, default_delete<Y>>;"],
-        should_not_partial_match: ["using namespace std;","using std::swap;", "using B::B;"],
+        should_not_partial_match: ["using namespace std;","using std::swap;", "using B::B;", "usingA = B;"],
         match: Pattern.new(
                 match:/using/,
                 tag_as: "keyword.other.using.directive",
