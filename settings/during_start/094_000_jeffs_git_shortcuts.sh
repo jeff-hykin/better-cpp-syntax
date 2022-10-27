@@ -28,6 +28,13 @@ git_checkout () {
     return
 }
 
+git_checkout_pr () {
+    pr_number="$1"
+    git_delete_branch '@__temp__/pull_request'
+    git fetch origin "pull/$pr_number/head:@__temp__/pull_request"
+    git checkout '@__temp__/pull_request'
+}
+
 git_commit_hashes () {
     git log --reflog --oneline | sed -e 's/ .*//'
 }
