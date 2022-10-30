@@ -18,7 +18,7 @@ color_reset="\e[0m";       color_reset=""
 # if trap exists
 if [ -n "$(command -v "trap")" ]
 then
-    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return; return 0' INT TERM
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return 0' INT TERM
 fi
 
 nix_version="2.9.2"
