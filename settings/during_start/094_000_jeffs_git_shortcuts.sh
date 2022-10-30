@@ -392,7 +392,12 @@ git_delete_large_file () {
         exit 0
     fi
     
-    git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch '$filepath'" HEAD
+    oldest_commit_with_file="$(git log --all --pretty=format:%H -- "$filepath" | tail -n 1)"
+    
+    echo "$oldest_commit_with_file"
+    
+    rm -rf .git/refs/original/
+    FILTER_BRANCH_SQUELCH_WARNING=1 git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch '$filepath'" "$oldest_commit_with_file"..HEAD
     echo 
     echo "Now you need to destroy everyone else's progress by force pushing if you want remote to have the fix"
     echo 
