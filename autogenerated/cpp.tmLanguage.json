@@ -12839,7 +12839,7 @@
       "patterns": [
         {
           "begin": "((?:u|u8|U|L)?)\"",
-          "end": "(\")((?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)?",
+          "end": "(\")(?:((?:[a-zA-Z]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|(_(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))?",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -12853,7 +12853,10 @@
               "name": "punctuation.definition.string.end.cpp"
             },
             "2": {
-              "name": "keyword.other.suffix.literal.string.cpp"
+              "name": "keyword.other.suffix.literal.user-defined.reserved.string.cpp"
+            },
+            "3": {
+              "name": "keyword.other.suffix.literal.user-defined.string.cpp"
             }
           },
           "name": "string.quoted.double.cpp",

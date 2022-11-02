@@ -2407,8 +2407,11 @@ grammar = Grammar.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /"/,
                 ).maybe(Pattern.new(
-                    tag_as: "keyword.other.suffix.literal.string",
-                    match: identifier
+                    tag_as: "keyword.other.suffix.literal.user-defined.reserved.string",
+                    match: Pattern.new(/[a-zA-Z]/).or(universal_character).then(zeroOrMoreOf(subsequent_character))
+                ).or(
+                    tag_as: "keyword.other.suffix.literal.user-defined.string",
+                    match: Pattern.new(/_/).then(zeroOrMoreOf(subsequent_character))
                 )),
                 includes: [
                     # universal characters \u00AF, \U0001234F
