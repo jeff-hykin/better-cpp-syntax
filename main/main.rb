@@ -2462,7 +2462,16 @@ grammar = Grammar.new(
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /'/,
-                ),
+                ).maybe(Pattern.new(
+                    should_fully_match: ["s", "sv", "reserved", "abc123"],
+                    should_not_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
+                    tag_as: "keyword.other.suffix.literal.user-defined.reserved.char",
+                    match: Pattern.new(/[a-zA-Z]/).or(universal_character).then(zeroOrMoreOf(subsequent_character))
+                ).or(Pattern.new(
+                    should_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
+                    tag_as: "keyword.other.suffix.literal.user-defined.char",
+                    match: Pattern.new(/_/).then(zeroOrMoreOf(subsequent_character))
+                ))),
                 includes: [
                     hex_pattern,
                     :string_escapes_context_c,

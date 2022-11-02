@@ -12891,7 +12891,7 @@
         },
         {
           "begin": "(?<![0-9A-Fa-f])((?:u|u8|U|L)?)'",
-          "end": "'",
+          "end": "(')(?:((?:[a-zA-Z]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|(_(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))?",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.cpp"
@@ -12901,8 +12901,14 @@
             }
           },
           "endCaptures": {
-            "0": {
+            "1": {
               "name": "punctuation.definition.string.end.cpp"
+            },
+            "2": {
+              "name": "keyword.other.suffix.literal.user-defined.reserved.char.cpp"
+            },
+            "3": {
+              "name": "keyword.other.suffix.literal.user-defined.char.cpp"
             }
           },
           "name": "string.quoted.single.cpp",
