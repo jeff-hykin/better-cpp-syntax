@@ -1,0 +1,150 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string_view
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: using
+  scopesBegin:
+    - meta.using-namespace
+  scopes:
+    - keyword.other.using.directive
+- source: namespace
+  scopes:
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
+- source: std
+  scopes:
+    - entity.name.scope-resolution.namespace.using
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.using
+- source: literals
+  scopes:
+    - entity.name.scope-resolution.namespace.using
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.using
+- source: string_view_literals
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: using
+  scopes:
+    - keyword.other.using.directive
+- source: namespace
+  scopes:
+    - keyword.other.namespace.directive
+    - storage.type.namespace.directive
+- source: std
+  scopes:
+    - entity.name.scope-resolution.namespace.using
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.using
+- source: literals
+  scopes:
+    - entity.name.scope-resolution.namespace.using
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.using
+- source: string_literals
+  scopes:
+    - entity.name.namespace
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.using-namespace
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' view '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Hello
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: sv
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' owned '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Hello
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: s
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
