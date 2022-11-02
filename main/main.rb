@@ -2407,12 +2407,15 @@ grammar = Grammar.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /"/,
                 ).maybe(Pattern.new(
+                    should_fully_match: ["s", "sv", "reserved", "abc123"],
+                    should_not_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
                     tag_as: "keyword.other.suffix.literal.user-defined.reserved.string",
                     match: Pattern.new(/[a-zA-Z]/).or(universal_character).then(zeroOrMoreOf(subsequent_character))
-                ).or(
+                ).or(Pattern.new(
+                    should_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
                     tag_as: "keyword.other.suffix.literal.user-defined.string",
                     match: Pattern.new(/_/).then(zeroOrMoreOf(subsequent_character))
-                )),
+                ))),
                 includes: [
                     # universal characters \u00AF, \U0001234F
                     Pattern.new(
