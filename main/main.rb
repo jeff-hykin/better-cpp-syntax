@@ -1047,7 +1047,7 @@ grammar = Grammar.new(
         ).then(std_space)
     avoid_invalid_function_names = @cpp_tokens.lookBehindToAvoidWordsThat(:isWord,  not(:isPreprocessorDirective), not(:isValidFunctionName))
     look_ahead_for_function_name = lookAheadFor(variable_name_without_bounds.maybe(@spaces).maybe(inline_attribute).maybe(@spaces).then(/\(/))
-    
+
     deleted_and_defaulted_keyword = -> (subtags: []) do
         # highest priority tag needs to be at the back (But its easier for humans to thing first==most-important)
         subtags = subtags.reverse
@@ -2406,7 +2406,10 @@ grammar = Grammar.new(
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /"/,
-                ),
+                ).maybe(Pattern.new(
+                    tag_as: "keyword.other.suffix.literal.string",
+                    match: identifier
+                )),
                 includes: [
                     # universal characters \u00AF, \U0001234F
                     Pattern.new(

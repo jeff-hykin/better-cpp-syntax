@@ -116,9 +116,11 @@
 - source: '"'
   scopes:
     - punctuation.definition.string.end
+- source: sv
+  scopes:
+    - keyword.other.suffix.literal.string
   scopesEnd:
     - string.quoted.double
-- source: sv
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -142,9 +144,11 @@
 - source: '"'
   scopes:
     - punctuation.definition.string.end
+- source: s
+  scopes:
+    - keyword.other.suffix.literal.string
   scopesEnd:
     - string.quoted.double
-- source: s
 - source: ;
   scopes:
     - punctuation.terminator.statement
