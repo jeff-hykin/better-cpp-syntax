@@ -17,6 +17,7 @@ static Wrapper<std::wstring> operator""_wrap(const wchar_t* s, std::size_t n) {
   return {{s, n}};
 }
 const auto wide_string = L"ws"_wrap;
+const auto raw_wide_string = LR"--(rws)--"_wrap;
 
 static Wrapper<char> operator""_wrap(char c) {
   return {c};

@@ -363,6 +363,36 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ' raw_wide_string '
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: LR
+  scopesBegin:
+    - string.quoted.double.raw
+    - punctuation.definition.string.begin
+  scopes:
+    - meta.encoding
+- source: '"--('
+  scopesEnd:
+    - punctuation.definition.string.begin
+- source: rws
+- source: )--"
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.raw
+- source: _wrap
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
 - source: static
   scopes:
     - storage.modifier.specifier.static
