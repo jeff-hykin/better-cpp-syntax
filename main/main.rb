@@ -2467,7 +2467,7 @@ grammar = Grammar.new(
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /'/,
-                ).maybe(getLiteralSuffixPattern["char"]),
+                ).maybe(getLiteralSuffixPattern["character"]),
                 includes: [
                     hex_pattern,
                     :string_escapes_context_c,
