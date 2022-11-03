@@ -387,9 +387,11 @@
 - source: )--"
   scopes:
     - punctuation.definition.string.end
+- source: _wrap
+  scopes:
+    - keyword.other.suffix.literal.user-defined.string
   scopesEnd:
     - string.quoted.double.raw
-- source: _wrap
 - source: ;
   scopes:
     - punctuation.terminator.statement
