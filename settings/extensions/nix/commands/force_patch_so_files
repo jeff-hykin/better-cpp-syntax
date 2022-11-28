@@ -158,6 +158,7 @@ if (!OperatingSystem.commonChecks.isWindows) {
             // brew install chrpath
             // nixi patchelf
             // nixi binutils
+        // dyld_info -dependents "file"
         
     }
 } else {
