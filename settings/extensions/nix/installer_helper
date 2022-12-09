@@ -6,7 +6,7 @@
 # setup some helpers
 newline='
 '
-light_yellow="\e[0;1;33m"; light_yellow="" # colors are disabled. If there was a way to detect WSL, they would only need to be disabled for WSL
+light_yellow="\e[0;1;33m"; light_yellow="" # colors are disabled. If there was a way to detect WSL (or specifically CMD), they would only need to be disabled for CMD and Powershell (powershell the app not the shell)
 light_purple="\e[0;1;35m"; light_purple=""
 light_green="\e[0;1;32m";  light_green=""
 light_red="\e[0;1;31m";    light_red=""
@@ -18,7 +18,7 @@ color_reset="\e[0m";       color_reset=""
 # if trap exists
 if [ -n "$(command -v "trap")" ]
 then
-    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return; return 0' INT TERM
+    trap 'unset repo; unset branch; unset setup_or_copy; unset mixin_remote_name; return 0' INT TERM
 fi
 
 nix_version="2.9.2"
