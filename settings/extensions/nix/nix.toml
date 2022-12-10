@@ -10,13 +10,13 @@
     # 
     # if you need a specific version 
     # search for the package (e.g. "setuptools") on here: https://lazamar.co.uk/nix-versions/
-    # each version will have a long hash like "3f50332bc4913a56ad216ca01f5d0bd24277a6b2" 
+    # each version will have a long hash like "c92ca95afb5043bc6faa0d526460584eccff2277" 
     # (which is a commit on the nixpkg repo)
     # once you copy the hash, you can add the package below like
     # 
     #    [[packages]]
     #    load = [ "python38Packages", "setuptools",]
-    #    from = "3f50332bc4913a56ad216ca01f5d0bd24277a6b2"
+    #   
 
 # 
 # Complex packages
@@ -44,30 +44,7 @@
 # 
 # uncomment one of groups to pick your version
 [[packages]]
-# version 16.2.0
-# load = [ "nodejs",]
-# from = "141439f6f11537ee349a58aaf97a5a5fc072365c" 
-
-# version 15.14.0
-# load = [ "nodejs-15_x",]
-# from = "c92ca95afb5043bc6faa0d526460584eccff2277" 
-
-# version 14.17.1
-load = [ "nodejs",]
-from = "860b56be91fb874d48e23a950815969a7b832fbc" 
-
-# version 12.22.1
-# load = [ "nodejs-12_x",]
-# from = "860b56be91fb874d48e23a950815969a7b832fbc" 
-
-# version 10.24.0
-# load = [ "nodejs-10_x",] 
-# from = "a765beccb52f30a30fee313fbae483693ffe200d" 
-
-# [[packages]]
-# load = [ "nodePackages", "pnpm", ]
-# from = "860b56be91fb874d48e23a950815969a7b832fbc"
-
+load = [ "nodejs",] 
 
 # 
 # Python (because node-gyp depends on python)
@@ -86,6 +63,9 @@ load = [ "python38Packages", "virtualenv",]
 
 [[packages]]
 load = [ "python38Packages", "wheel",]
+
+[[packages]]
+load = [ "python2",]
 
 [[packages]]
 load = [ "cmake",]
@@ -125,10 +105,6 @@ onlyIf = [ [ "stdenv", "isLinux",],]
 [[packages]]
 load = [ "cmake",]
 asNativeBuildInput = true
-onlyIf = [ [ "stdenv", "isLinux",],]
-
-[[packages]]
-load = [ "stdenv", "cc",]
 onlyIf = [ [ "stdenv", "isLinux",],]
 
 # 
