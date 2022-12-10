@@ -257,13 +257,19 @@
   scopesEnd:
     - comment.block.documentation
 - source: using
+  scopesBegin:
+    - meta.declaration.type.alias
   scopes:
     - keyword.other.using.directive
-- source: 'error '
+- source: error
+  scopes:
+    - entity.name.type
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -271,9 +277,15 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: errc
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: ;
   scopes:
     - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
 - source: namespace
   scopesBegin:
     - meta.block.namespace
@@ -346,7 +358,6 @@
     - keyword.other.using.directive
 - source: milliseconds
   scopes:
-    - meta.qualified_type
     - entity.name.type
 - source: '='
   scopes:

@@ -109,7 +109,8 @@ I love regular expressions, and PR's are always welcome.
 
 ## Did you write all of this yourself?
 The original JSON was taken from https://github.com/atom/language-c
+<br>@matter123 wrote every massive pull request, from simple bugfixes up to the entire textmate testing suite
+<br>@j-cortial has fixed many lingering bugs
 <br>The #error fix was taken from fnadeau's pull request here: https://github.com/atom/language-c/pull/251
-<br>@matter123 has written basically every major pull request, from simple bugfixes up to the entire textmate testing suite
-<br>Thanks @matter123!
+<br>Thank you @matter123, @j-cortial, and @fnadeau!
 <br>The rest of the ruby is authored by @jeff-hykin

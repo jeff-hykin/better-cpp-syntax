@@ -1,4 +1,7 @@
-- source: 'template '
+- source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: class
   scopesBegin:
     - meta.block.class
@@ -36,9 +39,12 @@
   scopesEnd:
     - meta.block.class
 - source: template
+  scopes:
+    - meta.template.explicit-instantiation
+    - storage.type.template
 - source: MyStack
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.function.call
 - source: <
   scopesBegin:
     - meta.template.call
@@ -64,7 +70,7 @@
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.function.call
 - source: MyStack
   scopes:
     - entity.name.function.call
@@ -82,9 +88,15 @@
   scopes:
     - punctuation.terminator.statement
 - source: extern
+  scopesBegin:
+    - meta.template.explicit-instantiation
   scopes:
     - storage.modifier.specifier.extern
-- source: ' template '
+- source: template
+  scopes:
+    - storage.type.template
+  scopesEnd:
+    - meta.template.explicit-instantiation
 - source: class
   scopesBegin:
     - meta.block.class
@@ -122,12 +134,18 @@
   scopesEnd:
     - meta.block.class
 - source: extern
+  scopesBegin:
+    - meta.template.explicit-instantiation
   scopes:
     - storage.modifier.specifier.extern
-- source: ' template'
+- source: template
+  scopes:
+    - storage.type.template
+  scopesEnd:
+    - meta.template.explicit-instantiation
 - source: MyStack
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.function.call
 - source: <
   scopesBegin:
     - meta.template.call
@@ -153,7 +171,7 @@
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.function.call
 - source: MyStack
   scopes:
     - entity.name.function.call
