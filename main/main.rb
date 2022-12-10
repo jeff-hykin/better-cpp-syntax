@@ -2420,6 +2420,20 @@ grammar = Grammar.new(
         name: "storage.modifier.array.bracket.square",
         match: lookBehindToAvoid("delete").then("[").maybe(@spaces).then("]").evaluate,
     })
+
+    getLiteralSuffixPattern = -> (name) do
+        Pattern.new(
+            should_fully_match: ["s", "sv", "reserved", "abc123"],
+            should_not_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
+            tag_as: "keyword.other.suffix.literal.user-defined.reserved.#{name}",
+            match: Pattern.new(/[a-zA-Z]/).or(universal_character).then(zeroOrMoreOf(subsequent_character))
+        ).or(Pattern.new(
+            should_fully_match: ["_s", "_sv", "_reserved", "_abc123"],
+            tag_as: "keyword.other.suffix.literal.user-defined.#{name}",
+            match: Pattern.new(/_/).then(zeroOrMoreOf(subsequent_character))
+        ))
+    end
+
     grammar[:string_context] = [
             PatternRange.new(
                 tag_as: "string.quoted.double",
@@ -2430,7 +2444,7 @@ grammar = Grammar.new(
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /"/,
-                ),
+                ).maybe(getLiteralSuffixPattern["string"]),
                 includes: [
                     # universal characters \u00AF, \U0001234F
                     Pattern.new(
@@ -2477,7 +2491,7 @@ grammar = Grammar.new(
                 end_pattern: Pattern.new(
                     tag_as: "punctuation.definition.string.end",
                     match: /'/,
-                ),
+                ).maybe(getLiteralSuffixPattern["character"]),
                 includes: [
                     hex_pattern,
                     :string_escapes_context_c,
