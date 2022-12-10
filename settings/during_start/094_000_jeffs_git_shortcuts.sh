@@ -30,6 +30,11 @@ git_checkout () {
 
 git_checkout_pr () {
     pr_number="$1"
+    if [ -z "$pr_number" ]
+    then
+        echo "whats the PR number?"
+        read pr_number
+    fi
     git_delete_branch '@__temp__/pull_request'
     git fetch origin "pull/$pr_number/head:@__temp__/pull_request"
     git checkout '@__temp__/pull_request'
