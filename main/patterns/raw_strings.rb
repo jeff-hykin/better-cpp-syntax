@@ -37,14 +37,20 @@ def getRawStringPatterns()
                 name: "invalid.illegal.delimiter-too-long"
             }
         },
-        end: "\\)\\2(\\3)\"",
+        end: "(\\)\\2(\\3)\")(?:((?:[a-zA-Z]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|(_(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))?",
         endCaptures: {
-            "0" => {
+            "1" => {
                 name: "punctuation.definition.string.end"
             },
-            "1" => {
+            "2" => {
                 name: "invalid.illegal.delimiter-too-long"
-            }
+            },
+            "3" => {
+                name: "keyword.other.suffix.literal.user-defined.reserved.string.cpp"
+            },
+            "4" => {
+                name: "keyword.other.suffix.literal.user-defined.string.cpp"
+            },
         },
         name: "string.quoted.double.raw"
     )
