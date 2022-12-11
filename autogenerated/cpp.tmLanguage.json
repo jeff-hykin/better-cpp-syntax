@@ -10774,23 +10774,10 @@
       },
       "endCaptures": {
       },
+      "contentName": "meta.preprocessor.conditional",
       "patterns": [
         {
-          "begin": "\\G(?<=ifndef|ifdef|if)",
-          "end": "(?<!\\\\)(?:(?=\\n)|(?<=^\\n|[^\\\\]\\n)(?=$))",
-          "beginCaptures": {
-          },
-          "endCaptures": {
-          },
-          "name": "meta.preprocessor.conditional.cpp",
-          "patterns": [
-            {
-              "include": "#preprocessor_conditional_context"
-            }
-          ]
-        },
-        {
-          "include": "$self"
+          "include": "#preprocessor_conditional_context"
         }
       ]
     },

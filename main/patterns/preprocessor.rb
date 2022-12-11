@@ -338,22 +338,20 @@ identifier = grammar[:identifier]
 #
 # *conditionals*
 #
-    # this range only ends with #else and #endif and that decision is very intentional
+    # right now there are no real ranges for conditionals
+    # however, if in the future they are to be added, it would probably be done with a while_pattern:
+    # the range would end on #else and #endif (not #elif)
         # imagine everything inbetween "#if" and "#else" being deleted; the remaining syntax would be valid
         # (when there is no #else imagine everything between "#if" and "#endif" being deleted)
     # by doing this the syntax safely closes double-starts or double-closes for nested preprocessor steps
     # (the if-true being case 1, and the if-false being case 2)
     # by only leaving one of the cases open (one of them has to be syntaxtically valid) this allows the grammar to parse the rest of it normally
-    # there's more complexity behind this, but thats the general idea. See the github preprocessor conditional issues for full details
-    else_or_end = Pattern.new(
-        tag_as: "keyword.control.directive.$reference(conditional_name)",
-        match: directive_start.then(
-            match: wordBounds(/(?:endif|else)/),
-            reference: "conditional_name"
-        )
-    )
+    # there's more complexity because of nested conditionals
+    # but for now the current approach is to just treat #if as a standalone pattern
+    
+    # range accounts for newline-escaped multi-line conditionals
     grammar[:preprocessor_conditional_range] = PatternRange.new(
-        # tag_as: "meta.preprocessor",
+        tag_content_as: "meta.preprocessor.conditional",
         start_pattern: Pattern.new(
             tag_as: "keyword.control.directive.conditional.$reference(conditional_name)",
             match: directive_start.then(
@@ -361,18 +359,9 @@ identifier = grammar[:identifier]
                 reference: "conditional_name",
             )
         ),
-        end_pattern: non_escaped_newline, #else_or_end,
+        end_pattern: non_escaped_newline,
         includes: [
-            # the first line (the conditional line)
-            PatternRange.new(
-                # start at the begining
-                tag_as: "meta.preprocessor.conditional",
-                start_pattern: Pattern.new(/\G/).lookBehindFor(/ifndef|ifdef|if/),
-                zeroLengthStart?: true,
-                end_pattern: non_escaped_newline,
-                includes: [ :preprocessor_conditional_context ],
-            ),
-            :$initial_context,
+            :preprocessor_conditional_context
         ]
     )
     grammar[:preprocessor_conditional_context] = [
