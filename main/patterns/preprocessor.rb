@@ -205,6 +205,7 @@ identifier = grammar[:identifier]
         ),
         end_pattern: non_escaped_newline,
         includes: [
+            :comments,
             # double quotes
             PatternRange.new(
                 tag_as: "string.quoted.double",

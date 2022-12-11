@@ -3234,6 +3234,9 @@
       "name": "meta.preprocessor.diagnostic.$reference(directive).cpp",
       "patterns": [
         {
+          "include": "#comments"
+        },
+        {
           "begin": "\"",
           "end": "(?:(\")|(?<!\\\\)(?:(?=\\n)|(?<=^\\n|[^\\\\]\\n)(?=$)))",
           "beginCaptures": {

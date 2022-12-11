@@ -1,0 +1,73 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.diagnostic.$reference(directive)
+    - keyword.control.directive.diagnostic.warning
+  scopes:
+    - punctuation.definition.directive
+- source: warning
+  scopesEnd:
+    - keyword.control.directive.diagnostic.warning
+- source: b
+  scopesBegin:
+    - string.unquoted
+- source: ar
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Coloration of comment is as expected'
+  scopesEnd:
+    - string.unquoted
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.diagnostic.warning
+  scopes:
+    - punctuation.definition.directive
+- source: warning
+  scopesEnd:
+    - keyword.control.directive.diagnostic.warning
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Coloration of comment is NOT as expected'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.diagnostic.error
+  scopes:
+    - punctuation.definition.directive
+- source: error
+  scopesEnd:
+    - keyword.control.directive.diagnostic.error
+- source: f
+  scopesBegin:
+    - string.unquoted
+- source: oo
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Coloration of comment is as expected'
+  scopesEnd:
+    - string.unquoted
+    - comment.line.double-slash
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.diagnostic.error
+  scopes:
+    - punctuation.definition.directive
+- source: error
+  scopesEnd:
+    - keyword.control.directive.diagnostic.error
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Coloration of comment is NOT as expected'
