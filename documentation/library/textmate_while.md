@@ -10,6 +10,6 @@ I believe it was designed to match things like the python intentation-based bloc
 
 ### The bad part(s)
 However, there are some caveats.
-1. The "while" pattern is line-based, not charater-based. If you match a single character on a line, then the whole line is considered to be inside the pattern-range
+1. The "while" pattern is line-based, not character-based. If you match a single character on a line, then the whole line is considered to be inside the pattern-range
 2. On each line, nothing will start being matched until the while pattern has been fully matched
 3. Once the while pattern matches, everything after the while pattern will be tagged using the patterns inside of the pattern-range

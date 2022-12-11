@@ -106,7 +106,7 @@ grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
 
 Where this gets really powerful is that you can nest/reuse patterns.
 
-```
+```ruby
 smalltalk = Pattern.new(
     match: /blah\/blah\/blah/,
     tag_as: "punctuation.separator.attribute",
@@ -165,6 +165,28 @@ look{Ahead,Behind}{ToAvoid,For} helpers only accept regular expressions use `.wi
 
 ### PatternRange
 `PatternRange.new` is used to create a begin/end pattern rule.
+
+```ruby
+# All available arguments (can't all be used at same time)
+PatternRange.new(
+    # typical aguments
+    tag_as:  "",
+    start_pattern: Pattern.new(),
+    end_pattern:  Pattern.new(),
+    includes: [],
+    
+    # unit testing arguments
+    should_partial_match: [],
+    should_not_partial_match: [],
+    should_fully_match: [],
+    should_not_fully_match: [],
+    
+    # advanced options
+    tag_contents_as: "",
+    while_pattern: Pattern.new(), # replaces "end_pattern" but the underlying behavior is strange, see: https://github.com/jeff-hykin/fornix/blob/877b89c5d4b2e51c6bf6bd019d3b34b04aaabe72/documentation/library/textmate_while.md#L1
+    apply_end_pattern_last: false, # boolean, see https://www.apeth.com/nonblog/stories/textmatebundle.html
+)
+```
 
 ## Testing
 ### Unit Testing
