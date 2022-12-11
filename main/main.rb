@@ -648,19 +648,18 @@ grammar = Grammar.new(
         match: Pattern.new(
             lookBehindToAvoid(/</).then(
                 /</
-            ).lookAheadToAvoid(/</).oneOrMoreOf(
-                match: Pattern.new(
-                    zeroOrMoreOf(
-                        match: /[^'"<>]/,
+            ).lookAheadToAvoid(/</).zeroOrMoreOf(
+                oneOf([
+                    grammar[:inline_comment],
+                    Pattern.new(/"/).then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/),
+                    Pattern.new(/'/).then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/),
+                    recursivelyMatch("angle_brackets"),
+                    oneOrMoreOf(
+                        # match: /[^'"<]/,
+                        match: /[^'"<>\/]|\/[^*]/,
                         dont_back_track?: true,
-                    ).or(
-                        match: Pattern.new(/"/).then(Pattern.new(zeroOrMoreOf(match: /[^"]/).or(/\\"/))).then(/"/)
-                    ).or(
-                        match: Pattern.new(/'/).then(Pattern.new(zeroOrMoreOf(match: /[^']/).or(/\\'/))).then(/'/)
-                    )
-                ).maybe(
-                    recursivelyMatch("angle_brackets")
-                ),
+                    ),
+                ])
             ).then(/>/)
         )
     )
