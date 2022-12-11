@@ -1,0 +1,58 @@
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: DIRECTIVE
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' <- the scope of this bracket is only "source.cpp"'

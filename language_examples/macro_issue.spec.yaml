@@ -320,8 +320,6 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.endif
@@ -332,16 +330,15 @@
     - keyword.control.directive.endif
 - source: '}'
   scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
     - meta.function.definition
     - meta.body.function.definition
-- source: '}'
-  scopes:
-    - punctuation.section.block.end.bracket.curly.namespace
-  scopesEnd:
-    - meta.block.namespace
-    - meta.body.namespace
 - source: ChassisSubsystem
   scopes:
     - entity.name.scope-resolution.function.call
@@ -979,8 +976,6 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.else
@@ -1816,6 +1811,10 @@
   scopesEnd:
     - keyword.control.directive.endif
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: void
   scopesBegin:
     - meta.function.definition
@@ -2071,6 +2070,11 @@
   scopesEnd:
     - meta.function.definition
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -495,7 +495,7 @@
     },
     "block": {
       "begin": "{",
-      "end": "}|(?=\\s*#\\s*(?:elif|else|endif)\\b)",
+      "end": "}",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.block.begin.bracket.curly.cpp"
@@ -10745,7 +10745,7 @@
     },
     "preprocessor_conditional_range": {
       "begin": "^((?:(?:(?:\\s*+(\\/\\*)((?:[^\\*]++|\\*+(?!\\/))*+(\\*\\/))\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|(?:\\A)|(?:\\Z)))(#)(?:(?:\\s)+)?((?:(?:ifndef|ifdef)|if))",
-      "end": "^(?!\\s*+#\\s*(?:else|endif))",
+      "end": "(?<!\\\\)(?:(?=\\n)|(?<=^\\n|[^\\\\]\\n)(?=$))",
       "beginCaptures": {
         "0": {
           "name": "keyword.control.directive.conditional.$6.cpp"

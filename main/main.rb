@@ -2512,7 +2512,7 @@ grammar = Grammar.new(
             tag_as: "punctuation.section.block.begin.bracket.curly"
         ),
         end_pattern: Pattern.new(
-            match: /}|(?=\s*#\s*(?:elif|else|endif)\b)/,
+            match: /}/,
             tag_as: "punctuation.section.block.end.bracket.curly"
         ),
         includes: [:function_body_context]

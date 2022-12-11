@@ -6243,8 +6243,6 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.endif
@@ -6742,10 +6740,9 @@
     - meta.block
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.function.definition
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.function.definition
-    - meta.body.function.definition
+    - meta.block
 - source: Token
   scopes:
     - entity.name.scope-resolution
@@ -6836,13 +6833,10 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.namespace
+    - punctuation.section.block.end.bracket.curly.function.definition
   scopesEnd:
-    - meta.block.namespace
-    - meta.body.namespace
+    - meta.body.function.definition
 - source: bool
-  scopesBegin:
-    - meta.function.definition
   scopes:
     - meta.qualified_type
     - storage.type.primitive
@@ -19011,8 +19005,6 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.endif
@@ -19023,10 +19015,9 @@
     - keyword.control.directive.endif
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly.function.definition
+    - punctuation.section.block.end.bracket.curly
   scopesEnd:
-    - meta.function.definition
-    - meta.body.function.definition
+    - meta.block
 - source: else
   scopes:
     - keyword.control.else
@@ -19604,11 +19595,16 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: '}'
+  scopes:
     - punctuation.section.block.end.bracket.curly.namespace
   scopesEnd:
     - meta.block.namespace
     - meta.body.namespace
-- source: '    }'
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -23233,6 +23229,11 @@
     - meta.function.definition
     - meta.body.function.definition
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
 - source: //
   scopesBegin:
     - comment.line.double-slash

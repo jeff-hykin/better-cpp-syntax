@@ -179,10 +179,6 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-  scopesEnd:
-    - meta.block
-    - meta.block
-    - meta.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.elif
@@ -222,7 +218,11 @@
 - source: endif
   scopesEnd:
     - keyword.control.directive.endif
-- source: '        }'
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: return
   scopes:
     - keyword.control.return
@@ -230,7 +230,11 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    }'
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: return
   scopes:
     - keyword.control.return
@@ -260,4 +264,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
 - source: END_API_FUNC
