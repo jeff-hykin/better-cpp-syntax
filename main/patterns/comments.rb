@@ -142,7 +142,6 @@ export[:invalid_comment_end] = Pattern.new(
 require_relative PathFor[:pattern]["doxygen"]
 
 export[:comments] = [
-    *doxygen(),
     :emacs_file_banner,
     :block_comment,
     :line_comment,

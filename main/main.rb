@@ -67,7 +67,7 @@ grammar = Grammar.new(
     grammar[:assignment_operator] = assignment_operator = Pattern.new(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
-        )
+    )
     array_brackets = Pattern.new(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square"
@@ -318,14 +318,20 @@ grammar = Grammar.new(
     variable_name_without_bounds = identifier
     # word bounds are inefficient, but they are accurate
     variable_name = variableBounds[variable_name_without_bounds]
-
+    
+    # now import doxygen
+    require_relative PathFor[:pattern]["doxygen"]
+    grammar[:comments] = [
+        *doxygen(variable_name),
+        *grammar[:comments]
+    ]
 #
 # Constants
 #
     grammar[:language_constants] = Pattern.new(
         match: variableBounds[@cpp_tokens.that(:isLiteral)],
         tag_as: "constant.language.$match"
-        )
+    )
 
 #
 # Built-In Types

@@ -1084,7 +1084,7 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?(?:\\s)+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?((?:\\s)+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(,)(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))*)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"
@@ -1098,6 +1098,24 @@
                   ]
                 },
                 "3": {
+                  "patterns": [
+                    {
+                      "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+                      "name": "variable.parameter.cpp"
+                    },
+                    {
+                      "match": ",",
+                      "name": "punctuation.cpp"
+                    }
+                  ]
+                },
+                "4": {
+                  "name": "variable.parameter.cpp"
+                },
+                "5": {
+                  "name": "punctuation.cpp"
+                },
+                "6": {
                   "name": "variable.parameter.cpp"
                 }
               }
@@ -1170,7 +1188,7 @@
                   "name": "storage.type.class.doxygen.cpp"
                 },
                 {
-                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?(?:\\s)+(\\b\\w+\\b)",
+                  "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?((?:\\s)+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(,)(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))*)",
                   "captures": {
                     "1": {
                       "name": "storage.type.class.doxygen.cpp"
@@ -1184,6 +1202,24 @@
                       ]
                     },
                     "3": {
+                      "patterns": [
+                        {
+                          "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+                          "name": "variable.parameter.cpp"
+                        },
+                        {
+                          "match": ",",
+                          "name": "punctuation.cpp"
+                        }
+                      ]
+                    },
+                    "4": {
+                      "name": "variable.parameter.cpp"
+                    },
+                    "5": {
+                      "name": "punctuation.cpp"
+                    },
+                    "6": {
                       "name": "variable.parameter.cpp"
                     }
                   }
@@ -1269,7 +1305,7 @@
               "name": "storage.type.class.doxygen.cpp"
             },
             {
-              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?(?:\\s)+(\\b\\w+\\b)",
+              "match": "((?<=[\\s*!\\/])[\\\\@]param)(?:\\s*\\[((?:,?(?:(?:\\s)+)?(?:in|out)(?:(?:\\s)+)?)+)\\])?((?:\\s)+((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))(?:(,)(?:(?:\\s)+)?((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)))*)",
               "captures": {
                 "1": {
                   "name": "storage.type.class.doxygen.cpp"
@@ -1283,6 +1319,24 @@
                   ]
                 },
                 "3": {
+                  "patterns": [
+                    {
+                      "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
+                      "name": "variable.parameter.cpp"
+                    },
+                    {
+                      "match": ",",
+                      "name": "punctuation.cpp"
+                    }
+                  ]
+                },
+                "4": {
+                  "name": "variable.parameter.cpp"
+                },
+                "5": {
+                  "name": "punctuation.cpp"
+                },
+                "6": {
                   "name": "variable.parameter.cpp"
                 }
               }

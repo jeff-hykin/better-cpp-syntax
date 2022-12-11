@@ -1,0 +1,101 @@
+- source: /**
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' Sets the position.'
+- source: ' *  '
+- source: '@param'
+  scopes:
+    - storage.type.class.doxygen
+- source: x
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation
+- source: 'y'
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation
+- source: z
+  scopes:
+    - variable.parameter
+- source: ' Coordinates of the position in 3D space.'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: setPosition
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: double
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: x
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: 'y'
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: z
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: double
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: t
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '}'
+  scopes:
+    - meta.body.function.definition
+    - punctuation.section.block.end.bracket.curly.function.definition

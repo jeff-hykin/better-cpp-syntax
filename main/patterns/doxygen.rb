@@ -1,4 +1,4 @@
-def doxygen
+def doxygen(variable_name)
     command_grammars = []
     # these commands are broken up by what part of the text they capture
     # - standalone: nothing
@@ -51,15 +51,6 @@ def doxygen
         "---",
     ]
 
-    command_grammars << Pattern.new(
-        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(
-            Pattern.new(/(?:#{standalone_command.map{|pat| Regexp.escape pat}.join("|")})/)
-        ).then(/\b/).maybe(/\{[^}]*\}/),
-        # this tag_as makes no sense but it is what jsdoc commands are tagged as
-        # (storage.type.class)
-        tag_as: "storage.type.class.doxygen",
-    )
-
     word_commands = [
         "a",
         "anchor",
@@ -98,7 +89,116 @@ def doxygen
         "relatesalso",
         "verbinclude",
     ]
-
+    
+    line_commands = [
+        "addindex",
+        "addtogroup",
+        "category",
+        "class",
+        "defgroup",
+        "diafile",
+        "dotfile",
+        "elseif",
+        "fn",
+        "headerfile",
+        "if",
+        "ifnot",
+        "image",
+        "ingroup",
+        "interface",
+        "line",
+        "mainpage",
+        "mscfile",
+        "name",
+        "overload",
+        "page",
+        "property",
+        "protocol",
+        "section",
+        "skip",
+        "skipline",
+        "snippet",
+        "snippetdoc",
+        "snippetlineno",
+        "struct",
+        "subpage",
+        "subsection",
+        "subsubsection",
+        "typedef",
+        "union",
+        "until",
+        "vhdlflow",
+        "weakgroup",
+    ]
+    
+    block_commands = [
+        "code",
+        "cond",
+        "docbookonly",
+        "dot",
+        "htmlonly",
+        "internal",
+        "latexonly",
+        "link",
+        "manonly",
+        "msc",
+        "parblock",
+        "rtfonly",
+        "secreflist",
+        "startuml",
+        "verbatim",
+        "xmlonly",
+    ]
+    
+    paragraph_commands = [
+        "arg",
+        "attention",
+        "author",
+        "authors",
+        "brief",
+        "bug",
+        "copyright",
+        "date",
+        "deprecated",
+        "details",
+        "exception",
+        "invariant",
+        "li",
+        "note",
+        "par",
+        "paragraph",
+        "param",
+        "post",
+        "pre",
+        "remark",
+        "remarks",
+        "result",
+        "return",
+        "returns",
+        "retval",
+        "sa",
+        "see",
+        "short",
+        "since",
+        "test",
+        "throw",
+        "throws",
+        "todo",
+        "tparam",
+        "version",
+        "warning",
+        "xrefitem",
+    ]
+    
+    command_grammars << Pattern.new(
+        match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(
+            Pattern.new(/(?:#{standalone_command.map{|pat| Regexp.escape pat}.join("|")})/)
+        ).then(/\b/).maybe(/\{[^}]*\}/),
+        # this tag_as makes no sense but it is what jsdoc commands are tagged as
+        # (storage.type.class)
+        tag_as: "storage.type.class.doxygen",
+    )
+    
     # italics
     command_grammars << Pattern.new(
         match: Pattern.new(
@@ -142,46 +242,6 @@ def doxygen
         tag_as: "storage.type.class.doxygen",
     )
 
-    line_commands = [
-        "addindex",
-        "addtogroup",
-        "category",
-        "class",
-        "defgroup",
-        "diafile",
-        "dotfile",
-        "elseif",
-        "fn",
-        "headerfile",
-        "if",
-        "ifnot",
-        "image",
-        "ingroup",
-        "interface",
-        "line",
-        "mainpage",
-        "mscfile",
-        "name",
-        "overload",
-        "page",
-        "property",
-        "protocol",
-        "section",
-        "skip",
-        "skipline",
-        "snippet",
-        "snippetdoc",
-        "snippetlineno",
-        "struct",
-        "subpage",
-        "subsection",
-        "subsubsection",
-        "typedef",
-        "union",
-        "until",
-        "vhdlflow",
-        "weakgroup",
-    ]
 
     # TODO: make this consume and possibly reprocess the next line
     command_grammars << Pattern.new(
@@ -193,48 +253,16 @@ def doxygen
         tag_as: "storage.type.class.doxygen",
     )
 
-    paragraph_commands = [
-        "arg",
-        "attention",
-        "author",
-        "authors",
-        "brief",
-        "bug",
-        "copyright",
-        "date",
-        "deprecated",
-        "details",
-        "exception",
-        "invariant",
-        "li",
-        "note",
-        "par",
-        "paragraph",
-        "param",
-        "post",
-        "pre",
-        "remark",
-        "remarks",
-        "result",
-        "return",
-        "returns",
-        "retval",
-        "sa",
-        "see",
-        "short",
-        "since",
-        "test",
-        "throw",
-        "throws",
-        "todo",
-        "tparam",
-        "version",
-        "warning",
-        "xrefitem",
-    ]
-
+    parameter = Pattern.new(
+        match: variable_name,
+        tag_as:"variable.parameter"
+    )
+    comma = Pattern.new(
+        match:",",
+        tag_as: "punctuation",
+    )
     command_grammars << Pattern.new(
-        match: Pattern.new(
+        Pattern.new(
             match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(/param/),
             tag_as: "storage.type.class.doxygen",
         ).maybe(
@@ -247,11 +275,21 @@ def doxygen
                     )
                 ]
             ).then(/\]/)
-        ).then(@spaces).then(
-            match: /\b\w+\b/,
-            tag_as:"variable.parameter"
-        )
+        ).then(
+            match: Pattern.new(
+                @spaces.then(
+                    parameter
+                ).zeroOrMoreOf(
+                    comma.maybe(@spaces).then(parameter)
+                ),
+            ),
+            includes: [
+                parameter,
+                comma,
+            ]
+        ),
     )
+    
     # TODO: make this consume and possibly reprocess the next paragraph
     command_grammars << Pattern.new(
         match: lookBehindFor(/[\s*!\/]/).then(/[\\@]/).then(
@@ -261,25 +299,6 @@ def doxygen
         # (storage.type.class)
         tag_as: "storage.type.class.doxygen",
     )
-
-    block_commands = [
-        "code",
-        "cond",
-        "docbookonly",
-        "dot",
-        "htmlonly",
-        "internal",
-        "latexonly",
-        "link",
-        "manonly",
-        "msc",
-        "parblock",
-        "rtfonly",
-        "secreflist",
-        "startuml",
-        "verbatim",
-        "xmlonly",
-    ]
 
     with_end_blocks = [
         *block_commands,
@@ -346,6 +365,5 @@ def doxygen
         ],
     )
 
-
-    [line_comment, single_line_block_comment, block_comment]
+    return [line_comment, single_line_block_comment, block_comment]
 end
