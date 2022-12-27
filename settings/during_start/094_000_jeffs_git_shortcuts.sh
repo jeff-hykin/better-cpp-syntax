@@ -458,6 +458,25 @@ git_url_of_origin () {
     git config --get remote.origin.url
 }
 
+git_squash_to () {
+    commit_hash="$1"
+    commit_message="$2"
+    git reset --soft "$commit_hash" && git add -A && git commit -m "$commit_message" && echo "squash complete"
+}
+
+git_delete_submodule () {
+    path="$1"
+    if ! [ -d "$path" ]
+    then
+        echo "I don't see that folder/path. So this method might not work perfectly"
+        echo "press enter to continue, ctrl+C to cancel"
+        read A
+    fi
+    git submodule deinit -f "$path"
+    rm -rf ".git/modules/$path"
+    git rm -f "$path"
+}
+
 # self submodule
 # git submodule add -b jirl --name "jirl" -- https://github.com/jeff-hykin/model_racer.git ./source/jirl
 
