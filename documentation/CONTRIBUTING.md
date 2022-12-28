@@ -138,19 +138,24 @@ Regex is pretty hard to read, so this repo uses a library to help.
 - `maybe(*attributes)` or `.maybe(*attributes)` causes the pattern to match zero or one times (`?`)
   - example `maybe(/foo/)` => `/(?:foo)?/`
 - `zeroOrMoreTimes(*attributes)` or `.zeroOrMoreTimes(*attributes)` causes the pattern to be matched zero or more times (`*`)
-  - example `zeroOrMoreTimes(/foo/)` => `/(?:foo)*/
+  - example `zeroOrMoreTimes(/foo/)` => `/(?:foo)*/`
 - `oneOrMoreTimes(*attributes)` or `.oneOrMoreTimes(*attributes)` causes the pattern to be matched one or more times (`+`)
-  - example `oneOrMoreTimes(/foo/)` => `/(?:foo)+/
+  - example `oneOrMoreTimes(/foo/)` => `/(?:foo)+/`
 - `lookBehindFor(regex)` or `.lookBehindFor(regex)` add a positive lookbehind
-  - example `lookBehindFor(/foo/)` => `/(?<=foo)/
+  - example `lookBehindFor(/foo/)` => `/(?<=foo)/`
 - `lookBehindToAvoid(regex)` or `.lookBehindToAvoid(regex)` add a negative lookbehind
-  - example `lookBehindToAvoid(/foo/)` => `/(?<!foo)/
+  - example `lookBehindToAvoid(/foo/)` => `/(?<!foo)/`
 - `lookAheadFor(regex)` or `.lookAheadFor(regex)` add a positive lookahead
-  - example `lookAheadFor(/foo/)` => `/(?=foo)/
+  - example `lookAheadFor(/foo/)` => `/(?=foo)/`
 - `lookAheadToAvoid(regex)` or `.lookAheadToAvoid(regex)` add a negative lookahead
-  - example `lookAheadToAvoid(/foo/)` => `/(?!foo)/
-- `backreference(reference)` or `.backreference(reference)` adds a backreference
-  - example `Pattern.new(match: /foo|bar/, reference: "foobar").backreference("foobar")` => `/(foo|bar)\1/`
+  - example `lookAheadToAvoid(/foo/)` => `/(?!foo)/`
+- `recursivelyMatch(reference)` or `.recursivelyMatch(reference)` adds a regex subexpression
+  - for example here's a pattern that would match `()`, `(())`, `((()))`, etc
+  - `Pattern.new(match: Pattern.new( "(" ).recursivelyMatch("foobar").or("").then( ")" ), reference: "foobar")`
+  - as normal ruby-regex it would look like: `/(\(\g<1>\))/`
+- `matchResultOf(reference)` or `.matchResultOf(reference)` adds a backreference
+  - example `Pattern.new(match: /foo|bar/, reference: "foobar").matchResultOf("foobar")` => `/(foo|bar)\1/`
+  - matches: `foofoo` and `barbar` but not `foobar`
 
 helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provide more info, or a variable that is either of those.
 
