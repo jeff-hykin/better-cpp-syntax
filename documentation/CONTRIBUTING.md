@@ -5,7 +5,7 @@ Take a look at `documentation/setup.md` for details on installing dependencies a
 ## Adding a Feature
 
 If you believe you've successfully made a change.
-- Create a `your_feature.YOUR_LANG_EXTENSION_HERE` file in the `language_examples/` folder. Once it is created, add code to it that demonstrates your feature (more demonstration the better).
+- Create a `your_feature.cpp` file in the `language_examples/` folder. Once it is created, add C++ code to it that demonstrates your feature (more demonstration the better).
 - Then use `project test` to generate specs for all the examples.
 - If there were no side effects, then `your_feature.spec.yaml` should be the only new/changed file. However, if there were side effects then some of the other `.spec.yaml` files will be changed. Sometimes those side effects are good, sometimes they're irrelevent, and often times they're a regression. 
 - Once that is ready, make a pull request!
@@ -18,24 +18,21 @@ If you believe you've successfully made a change.
     - we create patterns using `Pattern.new` and `PatternRange.new`
     - we decide which patterns "go first" by putting them in the `grammar[:$initial_context]`
     - then we compile the grammar to a .tmLanguage.json file 
+- Sadly the C++ repo is a bit of spaghetti, due in large part to the language complexity
 
 ## If you already know about Textmate Grammars 
 
-(So if you're like one of the 200 people on earth that have used textmate grammars)
-<br>
+(So if you happen to be one of the approximately 200 people on earth that have used textmate grammars)
 Something like this in a tmLanguage.json file
 
 ```json
 {
     "match": "blah/blah/blah",
-    "name": "punctuation.separator.attribute.YOUR_LANG_EXTENSION_HERE",
+    "name": "punctuation.separator.attribute.cpp",
     "patterns": [
         {
           "include": "#evaluation_context"
         },
-        {
-          "include": "#c_conditional_context"
-        }
     ]
 }
 ```
@@ -48,7 +45,6 @@ Pattern.new(
     tag_as: "punctuation.separator.attribute",
     includes: [
         :evaluation_context,
-        :c_conditional_context,
     ],
 )
 ```
@@ -61,15 +57,15 @@ And things like this
     "end": "\\]\\]",
     "beginCaptures": {
         "0": {
-            "name": "punctuation.section.attribute.begin.YOUR_LANG_EXTENSION_HERE"
+            "name": "punctuation.section.attribute.begin.cpp"
         }
     },
     "endCaptures": {
         "0": {
-            "name": "punctuation.section.attribute.end.YOUR_LANG_EXTENSION_HERE"
+            "name": "punctuation.section.attribute.end.cpp"
         }
     },
-    "name": "support.other.attribute.YOUR_LANG_EXTENSION_HERE",
+    "name": "support.other.attribute.cpp",
     "patterns": [
         {
             "include": "#attributes_context"
@@ -98,7 +94,7 @@ PatternRange.new(
 )
 ```
 
-To add something to the repository just do 
+To add something to the grammar's repository just do 
 
 ```ruby
 grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
@@ -107,17 +103,17 @@ grammar[:the_pattern_name] = Pattern.new(/blahblahblah/)
 Where this gets really powerful is that you can nest/reuse patterns.
 
 ```ruby
+quote = Pattern.new(
+    match: /"/,
+    tag_as: "punctuation",
+)
+
 smalltalk = Pattern.new(
     match: /blah\/blah\/blah/,
     tag_as: "punctuation.separator.attribute",
     includes: [
         :evaluation_context,
-        :c_conditional_context,
     ],
-)
-quote = Pattern.new(
-    match: /"/,
-    tag_as: "quote",
 )
 
 phrase = Pattern.new(
@@ -157,7 +153,7 @@ Regex is pretty hard to read, so this repo uses a library to help.
   - example `Pattern.new(match: /foo|bar/, reference: "foobar").matchResultOf("foobar")` => `/(foo|bar)\1/`
   - matches: `foofoo` and `barbar` but not `foobar`
 
-helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provide more info, or a variable that is either of those.
+helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provides more info, or a variable that is either of those.
 
 the hash provided to the helper patterns can have the following keys:
   - `match:` the regular expression that should be matched
@@ -166,7 +162,6 @@ the hash provided to the helper patterns can have the following keys:
   - `comment:` unused, use regular ruby comments
   - `should_partial_match`, `should_not_partial_match`, `should_fully_match`, and `should_not_fully_match` see unit testing
 
-look{Ahead,Behind}{ToAvoid,For} helpers only accept regular expressions use `.without_numbered_capture_groups` to convert a pattern to a regular expression
 
 ### PatternRange
 `PatternRange.new` is used to create a begin/end pattern rule.
