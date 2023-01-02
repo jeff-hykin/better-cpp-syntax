@@ -45,7 +45,7 @@ git_commit_hashes () {
 }
 
 git_log () {
-    git log --first-parent --date=short --pretty=format:"%Cblue%ad %h%Cgreen %s %Creset%d"
+    git --no-pager log --reverse --first-parent --date=short --pretty=format:"%Cblue%ad %h%Cgreen %s %Creset%d" "$@"
 }
 
 git_current_commit_hash () {
@@ -70,7 +70,7 @@ git_squash_to () {
 git_squash () {
     args="$@"
     git reset --soft HEAD~2 && git add -A && git commit -m "$args" && echo "squash complete"
-    git_log | head -n5
+    git_log | tail -n5
 }
 
 # 
