@@ -1,0 +1,299 @@
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: ClassA
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: '}'
+  scopes:
+    - meta.body.class
+    - punctuation.section.block.end.bracket.curly.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: StructA
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: ClassA
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: FunctionOne
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_one
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_two
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_three
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - storage.modifier.const
+- source: ClassA
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: FunctionTwo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: StructA
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: struct_one
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: StructA
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: struct_two
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_one
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_two
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: number_three
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ClassA
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: FunctionThree
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: StructA
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: ' struct_one'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: ' StructA'
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: ' struct_two'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: ' number_one'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: ' number_two'
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: ' number_three'
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
