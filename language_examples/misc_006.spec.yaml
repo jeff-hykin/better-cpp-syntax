@@ -88,6 +88,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: '0'
   scopes:
@@ -103,6 +104,7 @@
     - constant.numeric.decimal.point
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: '0'
   scopes:
@@ -112,6 +114,7 @@
     - constant.numeric.decimal.point
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: '0'
   scopes:
@@ -121,12 +124,14 @@
     - constant.numeric.decimal.point
 - source: LL
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '4897430'
   scopes:
     - constant.numeric.decimal
 - source: la
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '32094'
   scopes:
@@ -139,12 +144,14 @@
     - constant.numeric.decimal
 - source: a
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '4897430'
   scopes:
     - constant.numeric.decimal
 - source: LL
   scopes:
+    - keyword.other.suffix.literal.built-in.integer
     - keyword.other.unit.suffix.integer
 - source: '32094'
   scopes:
@@ -157,6 +164,7 @@
     - constant.numeric.decimal
 - source: F
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: '32094'
   scopes:
@@ -169,6 +177,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: '1'
   scopesBegin:
@@ -270,6 +279,7 @@
     - constant.numeric.exponent.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.integer
     - keyword.other.unit.suffix.integer
 - source: '1'
   scopes:
@@ -537,6 +547,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -556,6 +567,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: l
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -565,6 +577,7 @@
     - constant.numeric.hexadecimal
 - source: LL
   scopes:
+    - keyword.other.suffix.literal.built-in.integer
     - keyword.other.unit.suffix.integer
 - source: 0x
   scopes:
@@ -634,6 +647,7 @@
     - constant.numeric.hexadecimal
 - source: LL
   scopes:
+    - keyword.other.suffix.literal.built-in.integer
     - keyword.other.unit.suffix.integer
 - source: //
   scopesBegin:
@@ -661,6 +675,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: F
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -680,6 +695,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -727,6 +743,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -746,6 +763,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -826,6 +844,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -848,6 +867,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
@@ -920,6 +940,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: //
   scopesBegin:
@@ -934,6 +955,7 @@
     - constant.numeric.decimal
 - source: ms
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: 0x
   scopes:
@@ -943,6 +965,7 @@
     - constant.numeric.hexadecimal
 - source: mm
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: 0x
   scopes:
@@ -958,6 +981,7 @@
     - constant.numeric.hexadecimal
 - source: mm
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: 0x
   scopes:
@@ -967,18 +991,21 @@
     - constant.numeric.hexadecimal
 - source: yards
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '20'
   scopes:
     - constant.numeric.decimal
 - source: ounces
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '2000'
   scopes:
     - constant.numeric.decimal
 - source: miles
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: L
   scopesBegin:
@@ -1032,6 +1059,7 @@
     - constant.numeric.hexadecimal
 - source: luyards
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '0'
   scopes:
@@ -1052,12 +1080,14 @@
     - constant.numeric.hexadecimal
 - source: x
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: Px
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: //
   scopesBegin:

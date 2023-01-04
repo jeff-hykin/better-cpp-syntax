@@ -43,6 +43,7 @@
     - constant.numeric.decimal
 - source: ms
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '1'
   scopesBegin:
@@ -76,6 +77,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0b
   scopes:
@@ -107,6 +109,7 @@
     - constant.numeric.exponent.hexadecimal
 - source: L
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: 0x
   scopes:
