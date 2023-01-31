@@ -2056,11 +2056,12 @@ grammar = Grammar.new(
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: Pattern.new(
-                    match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: Pattern.new(/\[/).lookAheadToAvoid(/\[| *+"| *+\d/),
-                        tag_as: "punctuation.definition.capture.begin.lambda",
-                    )
-                ).then(
+                    Pattern.new(
+                        match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                            match: Pattern.new(/\[/).lookAheadToAvoid(/\[| *+"| *+\d/),
+                            tag_as: "punctuation.definition.capture.begin.lambda",
+                        )
+                    ).then(
                         match: zeroOrMoreOf(
                             match: Pattern.new(/[^\[\]]/).or(only_balanced_square_bracke),
                             dont_back_track?: true,
@@ -2083,9 +2084,10 @@ grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: Pattern.new(/\]/).lookAheadToAvoid(std_space.then(/[\[\];]/)),
+                        match: Pattern.new(/\]/).lookAheadToAvoid(std_space.then(/[\[\];=]/)),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
+                )
             ),
         end_pattern: Pattern.new(
                 match: lookBehindFor(/[;}]/),
