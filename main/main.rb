@@ -1070,7 +1070,7 @@ grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
-    optional_calling_convention = std_space.maybe(
+    optional_calling_convention = maybe(
             match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
@@ -1172,7 +1172,7 @@ grammar = Grammar.new(
         tag_as:"meta.function.definition.special.operator-overload",
         start_pattern: Pattern.new(
             # find the return type (if there is one)
-            maybe(grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
+            std_space.maybe(grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
                 std_space
             ).then(
                 inline_scope_resolution[".operator"]
@@ -1511,7 +1511,7 @@ grammar = Grammar.new(
         )
     ]
     grammar[:destructor_root] = destructor[
-        optional_calling_convention.then(
+        std_space.then(optional_calling_convention).then(
             inline_scope_resolution[".destructor"]
         ).then(
             match: Pattern.new(
