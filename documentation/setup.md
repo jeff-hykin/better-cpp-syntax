@@ -3,7 +3,7 @@
 ### If you're an Experienced/Senior Dev
 
 - (Don't git clone)
-- Run this: `setup_or_copy=setup eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`
+- Run this: `setup_or_copy=setup branch=master eval "$(curl -fsSL git.io/JE2Zm || wget -qO- git.io/JE2Zm)"`
 - If you're on Windows, run it inside WSL (Ubuntu 20.04 preferably)
 - If you're a responsible human being and therefore don't want run a sketchy internet script, props to you 👍. Take a look at the "What is that `eval` command doing?" section at the bottom and you'll be able to run the commands yourself.
 
