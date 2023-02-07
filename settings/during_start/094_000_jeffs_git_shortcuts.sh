@@ -35,9 +35,10 @@ git_checkout_pr () {
         echo "whats the PR number?"
         read pr_number
     fi
-    git_delete_branch '@__temp__/pull_request' 2>/dev/null
-    git fetch origin "pull/$pr_number/head:@__temp__/pull_request"
-    git checkout '@__temp__/pull_request'
+    temp_pr_name='@__temp__/pull_request'
+    git_delete_branch "$temp_pr_name"
+    git fetch origin "pull/$pr_number/head:$temp_pr_name"
+    git checkout "$temp_pr_name"
 }
 
 git_commit_hashes () {
