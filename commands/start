@@ -55,6 +55,7 @@ then
             # the installer will have the instructions/error messages
             exit
         fi
+        unset install_repo
     fi
 fi
 
