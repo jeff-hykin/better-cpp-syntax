@@ -217,7 +217,7 @@ else
                 if [ -z "$(command -v "curl")" ]; then
                     # if apt-get exists
                     if [ -n "$(command -v "apt-get")" ]; then
-                        sudo apt-get update && sudo apt-get install curl
+                        sudo apt-get update && sudo apt-get install -y curl
                     else
                         echo "it looks like you don't have curl, please install curl then re-run this script" 1>&2
                         echo "alternatively, to get nix, manually run the commands inside https://releases.nixos.org/nix/nix-$nix_version/install" 1>&2
