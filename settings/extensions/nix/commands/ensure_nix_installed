@@ -22,7 +22,7 @@ if [ -n "$(command -v "trap")" ]; then
 fi
 
 # 
-# if nix command doesnt exist
+# if nix command doesnt exist, check the path
 # 
 if [ -z "$(command -v "nix")" ]; then
     # 
@@ -34,9 +34,13 @@ if [ -z "$(command -v "nix")" ]; then
     if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
         . "$HOME/.nix-profile/etc/profile.d/nix.sh"
     fi
-    export PATH="$PATH:/nix/var/nix/profiles/default/bin/"
-    
-    
+    export PATH="$PATH:/nix/var/nix/profiles/default/bin/:/nix/var/nix/profiles/per-user/$(whoami)/profile/bin/"
+    export NIXPKGS_ALLOW_UNFREE=1
+
+fi
+
+# if adding the path didnt fix it
+if [ -z "$(command -v "nix")" ]; then
     # 
     # if nix store doesn't exist
     # 
