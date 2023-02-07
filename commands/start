@@ -3,9 +3,60 @@
 # 
 # summary
 # 
-#     find fornix, make sure nix exists
+#     make sure nix exists
+#     find fornix
 #     with no arguments, this simply starts the shell
 #     with an argument, it refreshes the project connections, then runs `$commands_folder/project/$the_arguments`
+
+# if nix doesnt exist
+if [ -z "$(command -v "nix-shell")" ]
+then
+    echo runinng installer_helper
+    # 
+    # find the settings/extensions/nix/installer_helper
+    # 
+    path_to_installer_helper=""
+    file_name="settings/extensions/nix/installer_helper"
+    folder_to_look_in="$PWD"
+    while :
+    do
+        # check if file exists
+        if [ -f "$folder_to_look_in/$file_name" ]
+        then
+            path_to_installer_helper="$folder_to_look_in/$file_name"
+            break
+        else
+            if [ "$folder_to_look_in" = "/" ]
+            then
+                break
+            else
+                folder_to_look_in="$(dirname "$folder_to_look_in")"
+            fi
+        fi
+    done
+    # couldn't find it
+    if [ -z "$path_to_installer_helper" ]
+    then
+        #
+        # what to do if file never found
+        #
+        echo "I'm a script running with a pwd of:$PWD"
+        echo "I'm looking for $file_name in a parent folder"
+        echo "I'm exiting now because I wasnt able to find it"
+        echo "thats all the information I have"
+        exit
+    # 
+    # found it
+    # 
+    else 
+        # if wasnt able to install, then exit
+        export install_repo="false" # we only need nix
+        if ! . "$path_to_installer_helper"; then
+            # the installer will have the instructions/error messages
+            exit
+        fi
+    fi
+fi
 
 # 
 # find the fornix_core
@@ -197,8 +248,6 @@ then
         cd "$pwd_before"
     fi
 fi
-
-. "$FORNIX_FOLDER/settings/extensions/nix/commands/ensure_nix_installed"
 
 # just start the shell with no arguments (arguments might be supported in the future)
 "$FORNIX_COMMANDS_FOLDER/shell"
