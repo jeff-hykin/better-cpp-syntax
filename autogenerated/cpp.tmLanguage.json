@@ -87,7 +87,8 @@
                     "endCaptures": { },
                     "patterns": [
                         { "include": "#attributes_context" },
-                        { "include": "#string_context" }
+                        { "include": "#string_context" },
+                        { "include": "#ever_present_context" }
                     ]
                 },
                 {
@@ -113,7 +114,8 @@
                     "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
                     "name": "entity.other.attribute.$0.cpp"
                 },
-                { "include": "#number_literal" }
+                { "include": "#number_literal" },
+                { "include": "#ever_present_context" }
             ]
         },
         "alignas_operator": {
@@ -1068,7 +1070,8 @@
                     "endCaptures": { },
                     "patterns": [
                         { "include": "#attributes_context" },
-                        { "include": "#string_context" }
+                        { "include": "#string_context" },
+                        { "include": "#ever_present_context" }
                     ]
                 },
                 {
@@ -1094,7 +1097,8 @@
                     "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
                     "name": "entity.other.attribute.$0.cpp"
                 },
-                { "include": "#number_literal" }
+                { "include": "#number_literal" },
+                { "include": "#ever_present_context" }
             ]
         },
         "curly_initializer": {
@@ -2640,7 +2644,8 @@
                     "endCaptures": { },
                     "patterns": [
                         { "include": "#attributes_context" },
-                        { "include": "#string_context" }
+                        { "include": "#string_context" },
+                        { "include": "#ever_present_context" }
                     ]
                 },
                 {
@@ -2666,7 +2671,8 @@
                     "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
                     "name": "entity.other.attribute.$0.cpp"
                 },
-                { "include": "#number_literal" }
+                { "include": "#number_literal" },
+                { "include": "#ever_present_context" }
             ]
         },
         "goto_statement": {
@@ -3285,7 +3291,8 @@
                     "endCaptures": { },
                     "patterns": [
                         { "include": "#attributes_context" },
-                        { "include": "#string_context" }
+                        { "include": "#string_context" },
+                        { "include": "#ever_present_context" }
                     ]
                 },
                 {
@@ -3311,7 +3318,8 @@
                     "match": "(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)",
                     "name": "entity.other.attribute.$0.cpp"
                 },
-                { "include": "#number_literal" }
+                { "include": "#number_literal" },
+                { "include": "#ever_present_context" }
             ]
         },
         "namespace_alias": {
@@ -4641,7 +4649,8 @@
                         "7": { "name": "comment.block.cpp" },
                         "8": { "name": "comment.block.cpp punctuation.definition.comment.end.cpp" }
                     }
-                }
+                },
+                { "include": "#ever_present_context" }
             ]
         },
         "parameter_class": {
@@ -5032,7 +5041,8 @@
                         "8": { "name": "comment.block.cpp punctuation.definition.comment.end.cpp" }
                     }
                 },
-                { "include": "#evaluation_context" }
+                { "include": "#evaluation_context" },
+                { "include": "#ever_present_context" }
             ]
         },
         "parameter_struct": {

@@ -591,6 +591,7 @@ grammar = Grammar.new(
                     includes: [
                         :attributes_context,
                         :string_context,
+                        :ever_present_context,
                     ],
                 ),
                 Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
@@ -605,6 +606,7 @@ grammar = Grammar.new(
                 ),
                 Pattern.new(match: variable_name, tag_as: "entity.other.attribute.$match"),
                 :number_literal,
+                :ever_present_context,
             ]
         )
     end
@@ -1780,7 +1782,8 @@ grammar = Grammar.new(
             :template_call_range,
             # # tag the reference and dereference operator
             ref_deref[],
-            :evaluation_context # this is part of the #282 workaround
+            :evaluation_context, # this is part of the #282 workaround
+            :ever_present_context,
         ]
     )
     grammar[:parameter] = PatternRange.new(
@@ -1880,6 +1883,7 @@ grammar = Grammar.new(
             :template_call_range,
             # tag the reference and dereference operator
             ref_deref[],
+            :ever_present_context,
         ]
     )
 #
