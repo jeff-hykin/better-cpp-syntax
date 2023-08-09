@@ -411,7 +411,7 @@ identifier = grammar[:identifier]
     grammar[:preprocessor_conditional_standalone] = Pattern.new(
         tag_as: "keyword.control.directive.$reference(conditional_name)",
         match: directive_start.then(
-            match: wordBounds(/(?:endif|else|elif)/),
+            match: wordBounds(/(?:endif|else|elif|elifdef|elifndef)/),
             reference: "conditional_name"
         )
     )
