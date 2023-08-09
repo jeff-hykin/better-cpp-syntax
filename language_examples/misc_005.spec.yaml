@@ -2978,9 +2978,12 @@
     - storage.modifier.specifier.static
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' used '
+- source: used
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -2993,15 +2996,29 @@
 - source: static
   scopes:
     - storage.modifier.specifier.static
-- source: ' storage'
-- source: <
+- source: storage
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: Callable
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' a_storage_of_callable'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: a_storage_of_callable
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3630,6 +3647,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -3669,6 +3688,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3862,15 +3883,24 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        ANYTYPE element_holder'
+- source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: element_holder
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -4130,17 +4160,30 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                        vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' vec3 '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: vec3
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4207,11 +4250,21 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: ' ANYTYPE each '
+- source: ANYTYPE
+  scopesBegin:
+    - meta.parens.control.for
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' vec2 '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -4355,17 +4408,30 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                        vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' vec2 '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: vec2
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4511,17 +4577,30 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                        vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' vec2 '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: vec2
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4870,23 +4949,43 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: ' pair'
-- source: <
+- source: pair
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: ' ANYTYPE'
+    - punctuation.separator.delimiter.comma.template.argument
+- source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' each '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input_map '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -5050,17 +5149,32 @@
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_colon'
+- source: should_always_be_a_colon
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    ANYTYPE first_value'
+- source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: first_value
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    ANYSECONDTYPE second_value'
+- source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: second_value
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5252,27 +5366,47 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    pair'
-- source: <
+- source: pair
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' pair_holder'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: pair_holder
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5548,9 +5682,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream a_stream'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: a_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5564,13 +5704,22 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a_char'
+- source: a_char
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string output_string '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5747,9 +5896,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    string output '
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5822,9 +5977,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                string output '
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5920,9 +6081,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' local_debug '
+- source: local_debug
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5969,13 +6133,22 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' char_holder'
+- source: char_holder
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string unindented_stuff '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: unindented_stuff
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6479,7 +6652,13 @@
 - source: ' put the whole line into a string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string next_line '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: next_line
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6937,11 +7116,14 @@
 - source: struct
   scopesBegin:
     - meta.body.function.definition
+    - meta.qualified_type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: timeval
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: a_time
   scopes:
     - variable.other.object.declare
@@ -7066,9 +7248,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' seconds       '
+- source: seconds
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7098,9 +7283,12 @@
     - punctuation.terminator.statement
 - source: long
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' micro_seconds '
+- source: micro_seconds
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7481,9 +7669,12 @@
     - comment.line.double-slash
 - source: time_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: '     now '
+- source: now
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7503,11 +7694,15 @@
   scopes:
     - punctuation.terminator.statement
 - source: struct
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: tm
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: tstruct
   scopes:
     - variable.other.object.declare
@@ -7779,7 +7974,13 @@
 - source: '         #include <limits>'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        streamsize num_of_chars_discarded '
+- source: streamsize
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: num_of_chars_discarded
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -8188,9 +8389,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        string input_data'
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_data
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -8348,9 +8555,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        string input_string'
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -8639,6 +8852,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -8664,6 +8879,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -8850,6 +9067,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -8875,6 +9094,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -9048,17 +9269,26 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        stringstream output'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each_char'
+- source: each_char
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -9099,7 +9329,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        string output_str '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_str
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9168,9 +9404,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        string output'
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -9884,9 +10126,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' char_'
+- source: char_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -9930,6 +10175,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -9955,6 +10202,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -10151,13 +10400,22 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' char_'
+- source: char_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                       string output'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10286,13 +10544,22 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' char_'
+- source: char_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                       string output'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10435,12 +10702,15 @@
     - storage.modifier.specifier.const
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' conv_my_str '
+    - storage.modifier.pointer
+- source: conv_my_str
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10798,9 +11068,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                    string result'
+- source: string
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10813,6 +11089,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -10838,6 +11116,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -10927,9 +11207,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                    string result'
+- source: string
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10942,6 +11228,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -10967,6 +11255,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11281,9 +11571,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' swap '
+- source: swap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11489,9 +11782,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    string result'
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -11504,6 +11803,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -11549,6 +11850,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11784,9 +12087,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11796,7 +12102,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string current'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: current
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -12600,9 +12912,12 @@
     - meta.block
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' num_front '
+- source: num_front
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12663,9 +12978,12 @@
     - meta.block
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' num_end '
+- source: num_end
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12815,9 +13133,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    string output '
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12843,14 +13167,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -13010,9 +13341,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    string output '
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13031,9 +13368,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_of_char_to_ignore '
+- source: number_of_char_to_ignore
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13052,14 +13392,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -13263,17 +13610,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' chunks'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: chunks
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13328,9 +13688,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' char_index '
+- source: char_index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13345,9 +13708,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' chunk_index '
+- source: chunk_index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13359,9 +13725,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' prev_char_was_splitter '
+- source: prev_char_was_splitter
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13413,9 +13782,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' current_character '
+- source: current_character
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13699,7 +14071,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13711,7 +14089,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13741,7 +14125,13 @@
 - source: ' convert base to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream2'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream2
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13753,7 +14143,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string base '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: base
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13777,9 +14173,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14013,7 +14412,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14025,7 +14430,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14055,7 +14466,13 @@
 - source: ' convert base to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream2'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream2
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14067,7 +14484,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string base '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: base
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14091,9 +14514,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14326,7 +14752,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14338,7 +14770,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14360,26 +14798,40 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' indices'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: indices
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14611,7 +15063,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14623,7 +15081,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14762,7 +15226,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14774,7 +15244,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14985,7 +15461,13 @@
 - source: ' convert target to string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ostringstream stream1'
+- source: ostringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: stream1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14997,7 +15479,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string target '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: target
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15211,9 +15699,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    string input_as_string '
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_as_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15319,7 +15813,13 @@
 - source: ' allows a period only for file extentions'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        regex is_not_obnoxious '
+- source: regex
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: is_not_obnoxious
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15415,13 +15915,22 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each_char'
+- source: each_char
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    stringstream char_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: char_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15433,15 +15942,24 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string output'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' space_counter '
+- source: space_counter
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15453,9 +15971,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' newline_counter '
+- source: newline_counter
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16226,9 +16747,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream output'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -16240,7 +16767,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string output_str '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_str
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16357,6 +16890,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -16382,6 +16917,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16606,14 +17143,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input_string'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16878,25 +17422,41 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' arguments'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: arguments
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16906,15 +17466,29 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' char_context_stack '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: char_context_stack
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16941,7 +17515,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string previous_char_as_string '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: previous_char_as_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16967,14 +17547,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' content'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16992,7 +17579,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                            string context '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: context
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17239,9 +17832,12 @@
     - comment.line.double-slash
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' is_first_arg '
+- source: is_first_arg
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17282,9 +17878,12 @@
     - comment.line.double-slash
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' is_new_arg '
+- source: is_new_arg
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17584,14 +18183,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each_pair '
+- source: each_pair
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' encapsulating_pairs'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18382,20 +18988,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' result'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -18433,6 +19049,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -18457,6 +19075,8 @@
   scopes:
     - keyword.operator.assignment.compound
 - source: ' increment'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18513,6 +19133,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -18537,6 +19159,8 @@
   scopes:
     - keyword.operator.assignment.compound
 - source: ' increment'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19350,7 +19974,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19887,7 +20517,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string char_content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: char_content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20434,7 +21070,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20510,7 +21152,13 @@
 - source: ' try to input data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            stringstream content_as_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content_as_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -20524,9 +21172,12 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -20740,7 +21391,13 @@
 - source: ' make sure and get all the decimals '
   scopesEnd:
     - comment.line.double-slash
-- source: '                        stringstream output'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -20974,7 +21631,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -21050,7 +21713,13 @@
 - source: ' try to input data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            stringstream content_as_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content_as_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -21064,9 +21733,12 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -21284,7 +21956,13 @@
 - source: ' make sure and get all the decimals '
   scopesEnd:
     - comment.line.double-slash
-- source: '                        stringstream output'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -21522,7 +22200,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -21598,7 +22282,13 @@
 - source: ' try to input data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            stringstream content_as_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content_as_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -21612,9 +22302,12 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -22011,7 +22704,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -22750,7 +23449,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -22913,7 +23618,13 @@
 - source: ' store data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            stringstream transfer_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: transfer_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -23109,9 +23820,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        stringstream data_stream'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -23177,7 +23894,13 @@
 - source: ' get the content'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -23323,9 +24046,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        stringstream data_stream'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -23354,7 +24083,13 @@
 - source: ' get the name of the datatype'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        string name '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: name
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -23530,9 +24265,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream out'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -23614,9 +24355,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        string output'
+- source: string
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -23993,9 +24740,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        stringstream output'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -24300,7 +25053,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string Answer '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: Answer
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -24431,7 +25190,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string answer_ '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: answer_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -24690,7 +25455,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string answer_ '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: answer_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -24909,9 +25680,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' integer_             '
+- source: integer_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -24928,7 +25702,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        string internal_question '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: internal_question
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25184,9 +25964,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_             '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25203,7 +25986,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        string internal_question '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: internal_question
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25466,7 +26255,13 @@
 - source: ' FIXME use regex here instead'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            string answer_ '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: answer_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25841,7 +26636,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                string file_name '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: file_name
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25992,7 +26793,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                string name_ '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: name_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -26821,10 +27628,16 @@
 - source: ' void* and call the function object.'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    function'
-- source: <
+- source: function
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: void
   scopes:
     - storage.type.primitive
@@ -26832,23 +27645,19 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+- source: ()
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' func '
+    - storage.modifier.reference
+- source: func
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -30617,9 +31426,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' local_debug '
+- source: local_debug
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -30679,7 +31491,13 @@
 - source: ' each data member in_ class'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    stringstream all_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: all_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -30691,11 +31509,21 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: ' ANYTYPE each '
+- source: ANYTYPE
+  scopesBegin:
+    - meta.parens.control.for
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input_vector '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -30893,7 +31721,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string all_members_str '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: all_members_str
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -31050,9 +31884,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' local_debug '
+- source: local_debug
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -31175,7 +32012,13 @@
 - source: ' unindent everything'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    string vector_content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: vector_content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -31378,11 +32221,23 @@
 - source: ' try to input data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    ANYTYPE data_member'
+- source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_member
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    stringstream vector_content_as_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: vector_content_as_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -31396,9 +32251,12 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -31711,9 +32569,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream output'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -31725,11 +32589,21 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: ' ANYTYPE each '
+- source: ANYTYPE
+  scopesBegin:
+    - meta.parens.control.for
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -32039,14 +32913,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input_vector'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -32226,6 +33107,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -32251,6 +33134,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -32477,6 +33362,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -32502,6 +33389,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -32702,9 +33591,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' element_number '
+- source: element_number
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -32852,9 +33744,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_of_matches'
+- source: number_of_matches
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -32898,6 +33793,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -32923,6 +33820,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -33109,17 +34008,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' search_vector'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: search_vector
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -33163,6 +34075,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -33188,6 +34102,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -33418,9 +34334,12 @@
     - comment.line.double-slash
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' largest_string '
+- source: largest_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -33439,14 +34358,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -33518,10 +34444,16 @@
 - source: ' create a vector of c-strings'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: char
   scopes:
     - storage.type.primitive
@@ -33531,8 +34463,13 @@
     - keyword.operator.arithmetic
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' vector_of_c_strings'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: vector_of_c_strings
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -33545,14 +34482,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -33565,12 +34509,15 @@
     - punctuation.section.block.begin.bracket.curly
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' new_string '
+    - storage.modifier.pointer
+- source: new_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -33704,15 +34651,18 @@
     - comment.line.double-slash
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopesBegin:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: '*'
   scopesEnd:
-    - keyword.operator.arithmetic
-- source: ' output '
+    - storage.modifier.pointer
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -33919,17 +34869,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' result'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -34164,9 +35127,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' swap '
+- source: swap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -34204,6 +35170,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -34227,6 +35195,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -34536,17 +35506,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' result'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -34724,6 +35707,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -34749,6 +35734,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -34795,6 +35782,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -34834,6 +35823,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -34880,6 +35871,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -34921,6 +35914,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -35073,17 +36068,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' empty'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: empty
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -35355,9 +36363,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -35553,9 +36564,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -35755,28 +36769,41 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    vector'
+- source: vector
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' indices'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: indices
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index '
+- source: index
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -36146,9 +37173,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' local_debug '
+- source: local_debug
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -36200,7 +37230,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        stringstream all_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: all_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -36385,7 +37421,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        string all_members_str '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: all_members_str
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -36643,7 +37685,13 @@
 - source: ' unindent members'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -36808,13 +37856,22 @@
     - comment.line.double-slash
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                stringstream transfer_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: transfer_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -36883,11 +37940,23 @@
 - source: ' create empty versions of all data members '
   scopesEnd:
     - comment.line.double-slash
-- source: '                        ANYTYPE  datamember1'
+- source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: datamember1
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        ANYSECONDTYPE datamember2'
+- source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: datamember2
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -37226,7 +38295,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                stringstream data_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -37246,23 +38321,43 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: ' pair'
-- source: <
+- source: pair
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' each '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' input_ '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -37573,7 +38668,13 @@
 - source: ' unindent members'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -37738,13 +38839,22 @@
     - comment.line.double-slash
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                stringstream transfer_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: transfer_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -37858,35 +38968,69 @@
 - source: ' try to input data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        pair'
-- source: <
+- source: pair
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' data_member'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: data_member
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        map'
-- source: <
+- source: map
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANYTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: '  data_member_holder'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: data_member_holder
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -38396,6 +39540,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -38405,11 +39551,9 @@
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' each '
-- source: ':'
-  scopes:
-    - punctuation.separator.colon.range-based
-- source: ' input_map '
+- source: ' each : input_map '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -38595,6 +39739,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -38604,11 +39750,9 @@
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' each '
-- source: ':'
-  scopes:
-    - punctuation.separator.colon.range-based
-- source: ' input_map '
+- source: ' each : input_map '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -38675,7 +39819,13 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '                    ANYSECONDTYPE null_'
+- source: ANYSECONDTYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: null_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -39299,28 +40449,40 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream output'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' status'
+- source: status
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' demangled '
+    - storage.modifier.pointer
+- source: demangled
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -40046,6 +41208,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -40071,6 +41235,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -40286,17 +41452,30 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                            List'
+- source: List
   scopesBegin:
     - meta.body.function.definition
-- source: <
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ITEM
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' output_list'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: output_list
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -40346,6 +41525,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -40371,6 +41552,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -40775,7 +41958,13 @@
 - source: ' if its not a string then it can''t be a name '
   scopesEnd:
     - comment.line.double-slash
-- source: '                                ITEM input_as_item '
+- source: ITEM
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_as_item
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -41437,9 +42626,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' largest_size '
+- source: largest_size
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -41458,6 +42650,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -41467,11 +42661,9 @@
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' each '
-- source: ':'
-  scopes:
-    - punctuation.separator.colon.range-based
-- source: ' names '
+- source: ' each : names '
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -41659,13 +42851,17 @@
     - punctuation.terminator.statement
 - source: short
   scopesBegin:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: int
   scopesEnd:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' first_few '
+- source: first_few
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -41727,7 +42923,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                            string output_string '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -41770,6 +42972,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -41795,6 +42999,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -41939,9 +43145,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' is_in_bounds '
+- source: is_in_bounds
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -41988,9 +43197,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' is_negative  '
+- source: is_negative
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -42304,9 +43516,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' missing_items '
+- source: missing_items
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -42358,6 +43573,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -42383,6 +43600,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -42623,7 +43842,13 @@
 - source: ' unindent members'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                    string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -42788,13 +44013,22 @@
     - comment.line.double-slash
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                    stringstream transfer_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: transfer_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -43174,13 +44408,17 @@
     - comment.line.double-slash
 - source: long
   scopesBegin:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: int
   scopesEnd:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' index_ '
+- source: index_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -43535,6 +44773,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -43560,6 +44800,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -43917,7 +45159,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                    stringstream data_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -44443,7 +45691,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                        stringstream named_values_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: named_values_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -44499,6 +45753,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -44524,6 +45780,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -44945,7 +46203,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                        stringstream output_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -45001,6 +46265,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -45026,6 +46292,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -45815,7 +47083,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                            stringstream input_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -45932,7 +47206,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                stringstream data_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -46051,7 +47331,13 @@
 - source: ' get the content'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -46542,7 +47828,13 @@
 - source: ' unindent members'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                    string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -46707,13 +47999,22 @@
     - comment.line.double-slash
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                    stringstream transfer_method'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: transfer_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -47393,9 +48694,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                            stringstream input_method'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -47532,9 +48839,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                            stringstream input_method'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: input_method
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -47689,9 +49002,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                            stringstream data_stream'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48061,7 +49380,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                            stringstream data_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48343,9 +49668,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    stringstream out'
+- source: stringstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48395,7 +49726,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    stringstream data_members'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_members
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48731,7 +50068,13 @@
 - source: ' create a blank list '
   scopesEnd:
     - comment.line.double-slash
-- source: '                                    List blank_list'
+- source: List
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: blank_list
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48743,7 +50086,13 @@
 - source: ' put the data into a stream'
   scopesEnd:
     - comment.line.double-slash
-- source: '                                    stringstream data_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -48766,9 +50115,12 @@
     - punctuation.terminator.statement
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' should_always_be_a_newline'
+- source: should_always_be_a_newline
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -49009,9 +50361,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '                            string result'
+- source: string
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: result
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -49024,6 +50382,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -49049,6 +50409,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -52633,9 +53995,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -52758,7 +54123,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -52788,6 +54159,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -52813,6 +54186,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -53023,9 +54398,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -53149,7 +54527,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -53179,6 +54563,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -53204,6 +54590,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -53526,9 +54914,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -53652,7 +55043,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -53682,6 +55079,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -53707,6 +55106,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -54125,9 +55526,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -54251,7 +55655,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -54281,6 +55691,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -54306,6 +55718,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -54628,9 +56042,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -54754,7 +56171,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -54784,6 +56207,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -54809,6 +56234,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -55208,9 +56635,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' number_ '
+- source: number_
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -55333,7 +56763,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                                    string output_string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -55363,6 +56799,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -55388,6 +56826,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -61351,9 +62791,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                            Item holder '
+- source: Item
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: holder
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -62136,9 +63582,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' charaters_till_newline '
+- source: charaters_till_newline
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -62188,6 +63637,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -62213,6 +63664,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -62481,14 +63934,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' content'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -62663,14 +64123,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each '
+- source: each
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' content'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -63015,7 +64482,13 @@
 - source: ' put the value into the string stream '
   scopesEnd:
     - comment.line.double-slash
-- source: '                    stringstream converter_to_string'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: converter_to_string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -63035,7 +64508,13 @@
 - source: ' get the output as a string'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    string content_being_output '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content_being_output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -63090,14 +64569,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' each_char '
+- source: each_char
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' content_being_output'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -63310,7 +64796,13 @@
 - source: ' add the line to __PutLinesOutputFixerStream'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    stringstream out_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -63507,7 +64999,13 @@
 - source: ' add the line to __LogOutputFixerStream'
   scopesEnd:
     - comment.line.double-slash
-- source: '                            stringstream out_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -63755,7 +65253,13 @@
 - source: ' then just keep going like normal'
   scopesEnd:
     - comment.line.double-slash
-- source: '                    stringstream out_stream'
+- source: stringstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out_stream
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

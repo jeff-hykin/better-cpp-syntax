@@ -68,6 +68,17 @@ grammar = Grammar.new(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
     )
+    assignment_operators = oneOf([
+        Pattern.new(
+            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
+            tag_as: "keyword.operator.assignment.compound"
+        ),
+        Pattern.new(
+            match: /&=|\^=|<<=|>>=|\|=/,
+            tag_as: "keyword.operator.assignment.compound.bitwise"
+        ),
+        assignment_operator,
+    ])
     array_brackets = Pattern.new(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square"
@@ -222,6 +233,9 @@ grammar = Grammar.new(
             # this shouldn't be in $initial_context (it will eventually be removed), and it shouldn't really be in function body either
             :evaluation_context,
         ) + [
+            :over_qualified_types,
+            :normal_variable_assignment,
+            :normal_variable_declaration,
             # functions can exclusively contain theses:
             # TODO: fill out all of the statements here, variable declares, assignment, etc
             # control flow
@@ -325,6 +339,7 @@ grammar = Grammar.new(
         *doxygen(variable_name),
         *grammar[:comments]
     ]
+    
 #
 # Constants
 #
@@ -546,7 +561,7 @@ grammar = Grammar.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
-            includes: [ :evaluation_context, ]
+            includes: [ :range_for_inner, :evaluation_context, ]
         )
     grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
@@ -1017,6 +1032,29 @@ grammar = Grammar.new(
             ),
         ],
     )
+    normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
+    # normal variable assignment
+    grammar[:normal_variable_assignment] = Pattern.new(
+        Pattern.new(/^/).then(std_space).then(
+            normal_type_pattern
+        ).then(std_space).then(
+            tag_as: "variable.other.assignment",
+            match: identifier,
+        ).then(std_space).then(
+            assignment_operators
+        )
+    )
+    # normal variable declaration
+    grammar[:normal_variable_declaration] = Pattern.new(
+        Pattern.new(/^/).then(std_space).then(
+            normal_type_pattern
+        ).then(std_space).then(
+            tag_as: "variable.other.object.declare",
+            match: identifier,
+        ).then(std_space).then(
+            @semicolon
+        )
+    )
     # TODO: create a :type that includes inline function-pointer types and array types
     grammar[:simple_type] = qualified_type.maybe(ref_deref[])
     grammar[:type_alias] = Pattern.new(
@@ -1319,6 +1357,22 @@ grammar = Grammar.new(
             tag_as: "punctuation.section.arguments.end.bracket.curly.initializer",
         ),
         includes: [
+            PatternRange.new(
+                tag_as: "meta.initialization.parameter",
+                start_pattern: Pattern.new(
+                    Pattern.new(
+                        tag_as: "punctuation.accessor.initializer variable.parameter.initializer",
+                        match: ".",
+                    ).then(
+                        tag_as: "variable.parameter.initializer",
+                        match: identifier,
+                    )
+                ),
+                end_pattern: grammar[:comma].or(lookAheadFor(/\}/)),
+                includes: [
+                    :evaluation_context,
+                ],
+            ),
             :evaluation_context,
             :comma
         ]
@@ -1605,14 +1659,6 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.increment"
         ),
         Pattern.new(
-            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
-            tag_as: "keyword.operator.assignment.compound"
-        ),
-        Pattern.new(
-            match: /&=|\^=|<<=|>>=|\|=/,
-            tag_as: "keyword.operator.assignment.compound.bitwise"
-        ),
-        Pattern.new(
             match: /<<|>>/,
             tag_as: "keyword.operator.bitwise.shift"
         ),
@@ -1628,7 +1674,7 @@ grammar = Grammar.new(
             match: /&|\||\^|~/,
             tag_as: "keyword.operator.bitwise"
         ),
-        :assignment_operator,
+        assignment_operators,
         Pattern.new(
             match: /%|\*|\/|-|\+/,
             tag_as: "keyword.operator.arithmetic"
@@ -2407,6 +2453,58 @@ grammar = Grammar.new(
 #
     grammar[:assembly] = assembly_pattern(std_space, identifier)
     grammar[:backslash_escapes] = backslash_escapes()
+    grammar[:range_for_inner] =  PatternRange.new(
+            tag_as: "meta.parens.control.for",
+            start_pattern: Pattern.new(
+                lookBehindFor(/\Wfor \(|^for \(|\Wfor\(|^for\(/), # lookbehinds must be a fixed length otherwise \s* would've been used
+            ),
+            end_pattern: lookAheadFor(/\)/),
+            includes: [
+                # normal ranged for loop
+                Pattern.new(
+                    Pattern.new(
+                        tag_as: "meta.type",
+                        match: normal_type_pattern,
+                    ).then(std_space).then(
+                        match: identifier,
+                        tag_as: "variable.other.object.declare.for",
+                    ).then(std_space).then(
+                        match: /:/,
+                        tag_as: "punctuation.separator.colon.range-based"
+                    ).lookAheadToAvoid(/:/),
+                ),
+                # tuple ranged for loop
+                Pattern.new(
+                    tag_as: "meta.binding",
+                    match: Pattern.new(
+                        Pattern.new(
+                            tag_as: "meta.type",
+                            match: normal_type_pattern,
+                        ).then(std_space).then(
+                            match: '[',
+                            tag_as: "punctuation.definition.begin.bracket.square.binding",
+                        ).then(std_space).then(
+                            Pattern.new(
+                                match: identifier,
+                                tag_as: "variable.other.for",
+                            ).zeroOrMoreOf(
+                                std_space.then(grammar[:comma]).then(std_space).then(
+                                    match: identifier,
+                                    tag_as: "variable.other.for",
+                                )
+                            )
+                        ).then(std_space).then(
+                            match: ']',
+                            tag_as: "punctuation.definition.end.bracket.square.binding",
+                        ).then(std_space).then(
+                            match: /:/,
+                            tag_as: "punctuation.separator.colon.range-based"
+                        ).lookAheadToAvoid(/:/),
+                    )
+                ),
+                :evaluation_context,
+            ],
+        )
 #
 # Misc Legacy
 #
@@ -2527,7 +2625,9 @@ grammar = Grammar.new(
             match: /}/,
             tag_as: "punctuation.section.block.end.bracket.curly"
         ),
-        includes: [:function_body_context]
+        includes: [
+            :function_body_context
+        ]
     )
     grammar[:line_continuation_character] = Pattern.new(
         match: /\\\n/,
@@ -2544,6 +2644,7 @@ grammar = Grammar.new(
             tag_as: "punctuation.section.parens.end.bracket.round"
         ),
         includes: [
+            :range_for_inner,
             # TODO: for typecasting (eventually this should be replaced)
             :over_qualified_types,
             # TODO: for range-based for loops (eventually this should be replaced)

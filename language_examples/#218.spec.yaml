@@ -112,9 +112,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  a a'
+- source: a
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: a
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -194,14 +200,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' a'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -214,12 +227,15 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: 'a '
+    - storage.modifier.reference
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -237,9 +253,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -630,13 +649,25 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  a a'
+- source: a
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: a
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  a a '
+- source: a
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -801,14 +832,21 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.object.declare.for
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
 - source: ' a'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

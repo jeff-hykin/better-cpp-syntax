@@ -269,9 +269,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  Rectangle rect'
+- source: Rectangle
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: rect
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

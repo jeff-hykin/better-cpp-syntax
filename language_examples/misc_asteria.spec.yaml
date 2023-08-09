@@ -734,9 +734,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -750,9 +752,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' ich '
+- source: ich
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -2563,9 +2568,12 @@
     - comment.line.double-slash
 - source: char32_t
   scopes:
+    - meta.qualified_type
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
-- source: ' cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -2782,9 +2790,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' u8len '
+- source: u8len
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3013,9 +3024,12 @@
   scopesEnd:
     - comment.line.double-slash
 - source: '        cpnt '
-- source: '&='
+- source: '&'
   scopes:
-    - keyword.operator.assignment.compound.bitwise
+    - keyword.operator.bitwise
+- source: '='
+  scopes:
+    - keyword.operator.assignment
 - source: UINT32_C
   scopes:
     - entity.name.function.call
@@ -3055,6 +3069,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: std
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -3087,6 +3103,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3099,9 +3117,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: char32_t
   scopes:
+    - meta.qualified_type
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
-- source: ' next '
+- source: next
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3444,9 +3465,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' mlen '
+- source: mlen
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4562,9 +4586,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4699,9 +4726,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' eptr '
+- source: eptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4729,9 +4759,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tptr '
+- source: tptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4861,9 +4894,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tlen '
+- source: tlen
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6253,9 +6289,12 @@
     - keyword.control.directive.endif
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' range '
+- source: range
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6356,9 +6395,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -6433,12 +6474,15 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' cur '
+    - storage.modifier.reference
+- source: cur
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6631,13 +6675,22 @@
   scopesEnd:
     - comment.line.double-slash
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_keyword xtoken '
+- source: S_keyword
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6744,13 +6797,22 @@
   scopesEnd:
     - meta.block
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_identifier xtoken '
+- source: S_identifier
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6930,9 +6992,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9243,9 +9308,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' range '
+- source: range
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9346,9 +9414,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -9415,12 +9485,15 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' cur '
+    - storage.modifier.reference
+- source: cur
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9454,9 +9527,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tlen '
+- source: tlen
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9642,13 +9718,22 @@
   scopesEnd:
     - comment.line.double-slash
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_punctuator xtoken '
+- source: S_punctuator
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9927,9 +10012,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10012,6 +10100,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -10022,7 +10112,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' tlen '
+  scopesEnd:
+    - meta.qualified_type
+- source: tlen
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10032,7 +10126,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        Cow_String value'
+- source: Cow_String
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: value
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10073,9 +10173,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -10089,9 +10191,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' qavail '
+- source: qavail
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10194,9 +10299,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' next '
+- source: next
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10452,9 +10560,12 @@
     - punctuation.terminator.statement
 - source: unsigned
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' xcnt '
+- source: xcnt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11523,9 +11634,12 @@
     - meta.block
 - source: char32_t
   scopes:
+    - meta.qualified_type
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
-- source: ' cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11544,6 +11658,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -11571,6 +11687,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11611,9 +11729,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dptr '
+- source: dptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11749,9 +11870,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dvalue '
+- source: dvalue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12081,9 +12205,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' encode_one '
+- source: encode_one
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12686,9 +12813,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tptr '
+- source: tptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12932,13 +13062,22 @@
   scopesEnd:
     - meta.block
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_string_literal xtoken '
+- source: S_string_literal
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13153,9 +13292,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' qstok '
+- source: qstok
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13593,12 +13735,15 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' pt '
+    - storage.modifier.reference
+- source: pt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13698,12 +13843,15 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' alt '
+    - storage.modifier.reference
+- source: alt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13753,9 +13901,12 @@
     - comment.line.double-slash
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' mergeable '
+- source: mergeable
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13929,12 +14080,15 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' alt '
+    - storage.modifier.reference
+- source: alt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13984,9 +14138,12 @@
     - comment.line.double-slash
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' mergeable '
+- source: mergeable
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14467,9 +14624,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14596,9 +14756,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' eptr '
+- source: eptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14650,9 +14813,12 @@
     - comment.line.double-slash
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' radix '
+- source: radix
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14663,6 +14829,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -14673,7 +14841,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' int_begin '
+  scopesEnd:
+    - meta.qualified_type
+- source: int_begin
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14694,6 +14866,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -14704,7 +14878,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' frac_begin '
+  scopesEnd:
+    - meta.qualified_type
+- source: frac_begin
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14726,9 +14904,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14740,9 +14921,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' exp_sign '
+- source: exp_sign
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14753,6 +14937,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -14763,7 +14949,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' exp_begin '
+  scopesEnd:
+    - meta.qualified_type
+- source: exp_begin
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14839,9 +15029,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' next '
+- source: next
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15032,9 +15225,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' max_digits '
+- source: max_digits
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15089,9 +15285,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tptr '
+- source: tptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15377,9 +15576,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' next '
+- source: next
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16505,9 +16707,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tlen '
+- source: tlen
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16619,9 +16824,12 @@
     - comment.line.double-slash
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' exp '
+- source: exp
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16640,6 +16848,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -16663,6 +16873,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16675,9 +16887,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dptr '
+- source: dptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16782,9 +16997,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dvalue '
+- source: dvalue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16838,9 +17056,12 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bound '
+- source: bound
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17115,6 +17336,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -17125,7 +17348,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' value '
+  scopesEnd:
+    - meta.qualified_type
+- source: value
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17144,6 +17371,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -17167,6 +17396,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17179,9 +17410,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dptr '
+- source: dptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17284,9 +17518,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dvalue '
+- source: dvalue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17346,6 +17583,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -17356,7 +17595,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' bound '
+  scopesEnd:
+    - meta.qualified_type
+- source: bound
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17579,6 +17822,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -17604,6 +17849,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17615,6 +17862,8 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -17625,7 +17874,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' bound '
+  scopesEnd:
+    - meta.qualified_type
+- source: bound
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17799,9 +18052,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' qstok '
+- source: qstok
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17823,6 +18079,8 @@
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -17833,7 +18091,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' smask '
+  scopesEnd:
+    - meta.qualified_type
+- source: smask
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18180,13 +18442,22 @@
   scopesEnd:
     - comment.line.double-slash
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_integer_literal xtoken '
+- source: S_integer_literal
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18322,9 +18593,12 @@
     - comment.line.double-slash
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18336,9 +18610,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' zero '
+- source: zero
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18357,6 +18634,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -18380,6 +18659,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18392,9 +18673,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dptr '
+- source: dptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18497,9 +18781,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dvalue '
+- source: dvalue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18568,9 +18855,12 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          zero '
-- source: '|='
+- source: '|'
   scopes:
-    - keyword.operator.assignment.compound.bitwise
+    - keyword.operator.bitwise
+- source: '='
+  scopes:
+    - keyword.operator.assignment
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -18590,9 +18880,12 @@
     - comment.line.double-slash
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' frac '
+- source: frac
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18611,6 +18904,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -18646,6 +18941,8 @@
   scopes:
     - keyword.operator.decrement
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18658,9 +18955,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dptr '
+- source: dptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18763,9 +19063,12 @@
     - meta.block
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dvalue '
+- source: dvalue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18844,9 +19147,12 @@
   scopes:
     - punctuation.terminator.statement
 - source: '          zero '
-- source: '|='
+- source: '|'
   scopes:
-    - keyword.operator.assignment.compound.bitwise
+    - keyword.operator.bitwise
+- source: '='
+  scopes:
+    - keyword.operator.assignment
 - source: ' dvalue'
 - source: ;
   scopes:
@@ -19073,9 +19379,12 @@
     - comment.line.double-slash
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' fpc '
+- source: fpc
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19244,9 +19553,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' qstok '
+- source: qstok
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19269,9 +19581,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' fmask '
+- source: fmask
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19499,13 +19814,22 @@
   scopesEnd:
     - comment.line.double-slash
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'S_real_literal xtoken '
+- source: S_real_literal
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: xtoken
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19737,15 +20061,29 @@
 - source: ' We will have to reverse this sequence before storing it into `*this` if it is accepted.'
   scopesEnd:
     - comment.line.double-slash
-- source: '    Cow_Vector'
-- source: <
+- source: Cow_Vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: Token
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' seq'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: seq
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -19757,7 +20095,13 @@
 - source: ' Save the position of an unterminated block comment.'
   scopesEnd:
     - comment.line.double-slash
-- source: '    Tack bcomm'
+- source: Tack
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: bcomm
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -20273,9 +20617,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20299,9 +20646,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' eptr '
+- source: eptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20329,9 +20679,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' tptr '
+- source: tptr
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20559,9 +20912,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' head '
+- source: head
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20750,9 +21106,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' next '
+- source: next
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20967,9 +21326,12 @@
     - meta.block
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' token_got '
+- source: token_got
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -22631,12 +22993,15 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' alt '
+    - storage.modifier.reference
+- source: alt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -23013,12 +23378,15 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' alt '
+    - storage.modifier.reference
+- source: alt
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -36,11 +36,14 @@
 - source: enum
   scopesBegin:
     - meta.body.function.definition
+    - meta.qualified_type
   scopes:
-    - storage.type.enum.declare
+    - storage.type.enum
 - source: bar
   scopes:
-    - entity.name.type.enum
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: b
   scopes:
     - variable.other.object.declare

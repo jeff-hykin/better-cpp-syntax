@@ -32,34 +32,42 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: const
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.binding
   scopes:
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
+    - storage.modifier.reference
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.definition.begin.bracket.square.binding
 - source: a
+  scopes:
+    - variable.other.for
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.for
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - punctuation.definition.end.bracket.square.binding
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
+  scopesEnd:
+    - meta.binding
 - source: ' c'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -101,31 +109,39 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: const
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.binding
   scopes:
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.definition.begin.bracket.square.binding
 - source: a
+  scopes:
+    - variable.other.for
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.for
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - punctuation.definition.end.bracket.square.binding
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
+  scopesEnd:
+    - meta.binding
 - source: ' c'
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

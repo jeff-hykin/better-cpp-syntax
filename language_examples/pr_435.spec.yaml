@@ -78,9 +78,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -94,9 +96,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' n '
+- source: 'n'
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
