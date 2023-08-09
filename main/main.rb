@@ -1182,6 +1182,12 @@ grammar = Grammar.new(
                 match: /operator/,
                 tag_as: "keyword.other.operator.overload",
             # find any scope resolutions
+            ).maybe(
+                std_space.then(
+                    tag_as: "storage.modifier.const",
+                    match: variableBounds[ /const/ ],
+                )
+            # find any scope resolutions
             ).then(std_space).then(
                 inline_scope_resolution[".operator-overload"]
             # find the actual operator/type
