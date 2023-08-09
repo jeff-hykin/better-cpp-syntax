@@ -30,9 +30,15 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  T t'
+- source: T
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: t
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

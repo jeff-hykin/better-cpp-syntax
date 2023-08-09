@@ -558,13 +558,25 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  stop action'
+- source: stop
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: action
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  milliseconds timeout'
+- source: milliseconds
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: timeout
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -587,17 +599,35 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  stop_action first'
+- source: stop_action
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: first
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  stop_action second'
+- source: stop_action
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: second
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  stop_action third'
+- source: stop_action
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: third
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -634,11 +664,15 @@
   scopesEnd:
     - comment.block.documentation
 - source: class
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: environment
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: environment
   scopes:
     - variable.other.object.declare
@@ -650,12 +684,15 @@
     - storage.modifier.specifier.const
 - source: char
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'working_directory '
+    - storage.modifier.pointer
+- source: working_directory
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -676,17 +713,35 @@
     - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
     - meta.head.struct
-- source: '    redirect in'
+- source: redirect
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: in
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    redirect out'
+- source: redirect
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: out
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    redirect err'
+- source: redirect
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: err
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -718,14 +773,18 @@
   scopesEnd:
     - meta.block.struct
 - source: struct
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: stop_actions
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: stop
   scopes:
-    - variable.other.object.declare
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -743,13 +802,22 @@
   scopes:
     - punctuation.terminator.statement
 - source: reproc
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'milliseconds timeout '
+- source: milliseconds
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: timeout
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -776,13 +844,22 @@
   scopes:
     - punctuation.terminator.statement
 - source: reproc
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'milliseconds deadline '
+- source: milliseconds
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: deadline
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -810,9 +887,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' inherit '
+- source: inherit
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -824,9 +904,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' discard '
+- source: discard
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -849,11 +932,15 @@
   scopesEnd:
     - comment.block.documentation
 - source: class
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: input
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: input
   scopes:
     - variable.other.object.declare
@@ -1715,6 +1802,8 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1722,51 +1811,46 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unique_ptr
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: reproc_t
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: void
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: ' ('
 - source: '*'
   scopes:
-    - punctuation.definition.function.pointer.dereference
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.function.pointer
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round.function.pointer
+    - keyword.operator.arithmetic
+- source: )(
 - source: reproc_t
-  scopesBegin:
-    - meta.parameter
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: '*'
   scopes:
-    - storage.modifier.pointer
-  scopesEnd:
-    - meta.parameter
+    - keyword.operator.arithmetic
 - source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' process_'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: process_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1925,9 +2009,15 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  process process'
+- source: process
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: process
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -1034,26 +1034,49 @@ grammar = Grammar.new(
     )
     normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
     # normal variable assignment
-    grammar[:normal_variable_assignment] = Pattern.new(
-        Pattern.new(/^/).then(std_space).then(
-            normal_type_pattern
-        ).then(std_space).then(
+    grammar[:variable_assignment] =  Pattern.new(
+        normal_type_pattern.then(std_space).then(
             tag_as: "variable.other.assignment",
             match: identifier,
         ).then(std_space).then(
             assignment_operators
         )
     )
-    # normal variable declaration
-    grammar[:normal_variable_declaration] = Pattern.new(
-        Pattern.new(/^/).then(std_space).then(
-            normal_type_pattern
-        ).then(std_space).then(
+    grammar[:variable_declare] = Pattern.new(
+        normal_type_pattern.then(std_space).then(
             tag_as: "variable.other.object.declare",
             match: identifier,
-        ).then(std_space).then(
-            @semicolon
-        )
+        ).then(std_space).lookAheadFor(/;|,/)
+    )
+    grammar[:normal_variable_assignment] = PatternRange.new(
+        start_pattern: Pattern.new(
+            Pattern.new(/^/).then(std_space).then(
+                grammar[:variable_assignment]
+            )
+        ),
+        end_pattern: lookAheadFor(/;/),
+        includes: [
+            :normal_variable_assignment,
+            :variable_assignment,
+            :$initial_context,
+        ],
+    )
+    # TODO:
+        # missing binding assignments
+        # missing array declarations
+        # missing initalizer forms ( Thing somthin(); Thing somethin{};)
+    grammar[:normal_variable_declaration] = PatternRange.new(
+        start_pattern: Pattern.new(
+            Pattern.new(/^/).then(std_space).then(
+                grammar[:variable_declare]
+            )
+        ),
+        end_pattern: lookAheadFor(/;/),
+        includes: [
+            :normal_variable_assignment,
+            :variable_assignment,
+            :$initial_context,
+        ],
     )
     # TODO: create a :type that includes inline function-pointer types and array types
     grammar[:simple_type] = qualified_type.maybe(ref_deref[])
@@ -2059,6 +2082,8 @@ grammar = Grammar.new(
         head_includes: [
             :ever_present_context,
             :attributes_context,
+            :normal_variable_assignment,
+            :normal_variable_declaration,
             grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.namespace",
@@ -2353,7 +2378,7 @@ grammar = Grammar.new(
                 :inheritance_context,
                 :template_call_range,
             ],
-            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :$initial_context ],
+            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :operator_overload, :normal_variable_declaration, :normal_variable_assignment, :$initial_context ],
             tail_includes: tail_includes
         )
     end

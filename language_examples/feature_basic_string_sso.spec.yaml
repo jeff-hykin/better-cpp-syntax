@@ -315,29 +315,40 @@
   scopes:
     - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
-- source: "\t\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.class
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: d
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1165,9 +1176,12 @@
     - storage.modifier.specifier.static
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' _SSO_Cap '
+- source: _SSO_Cap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1204,9 +1218,12 @@
     - storage.modifier.specifier.static
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' _size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1299,29 +1316,40 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: "\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: data
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' capacity'
+- source: capacity
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' size'
+- source: size
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1364,7 +1392,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t_UCharT remain"
+- source: _UCharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: remain
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1432,13 +1466,25 @@
   scopes:
     - meta.head.union
     - punctuation.section.block.begin.bracket.curly.union
-- source: "\t\t\t_long _l"
+- source: _long
   scopesBegin:
     - meta.body.union
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: _l
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t_short _s"
+- source: _short
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: _s
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1461,6 +1507,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1468,18 +1516,33 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: tuple
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: _rep
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: ' Allocator'
+    - punctuation.separator.delimiter.comma.template.argument
+- source: Allocator
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' __string'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: __string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

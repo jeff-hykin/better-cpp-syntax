@@ -193,17 +193,25 @@
   scopes:
     - storage.modifier.specifier.const
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'string '
+- source: string
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' s'
+    - storage.modifier.pointer
+- source: s
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -607,9 +615,12 @@
     - storage.type.modifier.access.control.private
 - source: uint32_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' id'
+- source: id
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1015,6 +1026,8 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1022,56 +1035,83 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unordered_map
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: string_view
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: pair
-- source: <
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: const
   scopes:
     - storage.modifier.specifier.const
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
-- source: 'string '
+    - punctuation.separator.scope-resolution.template.call
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: uint32_t
   scopes:
     - storage.type
     - storage.type.built-in
-- source: '>>'
+- source: '>'
   scopes:
-    - keyword.operator.bitwise.shift
-- source: ' symbols'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: symbols
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

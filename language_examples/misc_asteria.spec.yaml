@@ -159,6 +159,8 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -166,33 +168,59 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: reference_wrapper
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: streambuf
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' m_cbuf'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: m_cbuf
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        Cow_String m_file'
+- source: Cow_String
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: m_file
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        Cow_String m_str'
+- source: Cow_String
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: m_str
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -203,11 +231,17 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' m_line'
+  scopesEnd:
+    - meta.qualified_type
+- source: m_line
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -218,7 +252,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' m_offset'
+  scopesEnd:
+    - meta.qualified_type
+- source: m_offset
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1890,6 +1928,8 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1900,11 +1940,17 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' m_line'
+  scopesEnd:
+    - meta.qualified_type
+- source: m_line
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1915,11 +1961,17 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' m_offset'
+  scopesEnd:
+    - meta.qualified_type
+- source: m_offset
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1930,7 +1982,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' m_length'
+  scopesEnd:
+    - meta.qualified_type
+- source: m_length
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5011,13 +5067,22 @@
   scopes:
     - punctuation.terminator.statement
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: Keyword second
+- source: Keyword
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: second
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -7206,13 +7271,22 @@
   scopes:
     - punctuation.terminator.statement
 - source: Token
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: Punctuator second
+- source: Punctuator
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: second
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

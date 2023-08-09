@@ -489,19 +489,27 @@
     - punctuation.separator.colon.access.control
   scopesEnd:
     - storage.type.modifier.access.control.private
-- source: '  T '
+- source: T
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: container
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' size'
+- source: size
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

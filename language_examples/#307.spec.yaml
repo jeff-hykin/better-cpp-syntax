@@ -130,9 +130,12 @@
     - meta.function.definition.special.constructor
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' m_one'
+- source: m_one
+  scopes:
+    - variable.other.object.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -369,41 +372,56 @@
     - meta.body.function.definition.special.constructor
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' someMember'
+- source: someMember
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' anotherOne'
+- source: anotherOne
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' quiteALotOfMembers'
+- source: quiteALotOfMembers
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' soManyThatTheConstructorIsLong'
+- source: soManyThatTheConstructorIsLong
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' iMeanReallyLong'
+- source: iMeanReallyLong
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

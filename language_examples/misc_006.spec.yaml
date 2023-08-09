@@ -5431,9 +5431,12 @@
     - storage.type.modifier.access.control.protected
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5527,9 +5530,12 @@
     - storage.type.modifier.access.control.protected
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -1650,9 +1650,12 @@
     - comment.line.double-slash
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' checkForPureEval '
+- source: checkForPureEval
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9687,13 +9690,18 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '    EvalState '
+- source: EvalState
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' state'
+    - storage.modifier.reference
+- source: state
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -52379,7 +52387,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    ValueVector right'
+- source: ValueVector
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: right
+  scopes:
+    - variable.other.object.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -61004,6 +61018,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -61011,36 +61027,53 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unordered_map
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: string_view
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: regex
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' cache'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: cache
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -61048,21 +61081,33 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: list
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' keys'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: keys
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

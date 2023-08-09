@@ -2399,9 +2399,15 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '                string info'
+- source: string
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: info
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2828,17 +2834,29 @@
   scopesEnd:
     - meta.function.definition.special.constructor
 - source: decay_t
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: <
+  scopesBegin:
+    - meta.template.call
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.begin.template.call
 - source: Callable
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' callable'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: callable
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -27900,9 +27918,12 @@
     - comment.line.double-slash
 - source: pthread_t
   scopes:
+    - meta.qualified_type
     - support.type.posix-reserved.pthread
     - support.type.built-in.posix-reserved.pthread
-- source: ' thread'
+- source: thread
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -27941,31 +27962,52 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        function'
-- source: <
+- source: function
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANY_OUTPUT_TYPE
   scopes:
-    - entity.name.function.call
+    - meta.qualified_type
+    - entity.name.type
 - source: (
-  scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
-- source: ANY_INPUT_TYPE argument
+- source: ANY_INPUT_TYPE
+  scopesBegin:
+    - meta.qualified_type
+    - entity.name.type
+- source: argument
+  scopesEnd:
+    - meta.qualified_type
+    - entity.name.type
 - source: )
-  scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' lambda_thread_function'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: lambda_thread_function
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        function'
-- source: <
+- source: function
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: void
   scopes:
     - storage.type.primitive
@@ -27973,36 +28015,47 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: (
-  scopesBegin:
-    - meta.parens
-  scopes:
-    - punctuation.section.parens.begin.bracket.round
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+- source: ()
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' functional_wrapper'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: functional_wrapper
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        ANY_OUTPUT_TYPE output'
+- source: ANY_OUTPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: output
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        ANY_INPUT_TYPE arguments'
+- source: ANY_INPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: arguments
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' use_lambda '
+- source: use_lambda
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -28014,9 +28067,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' has_been_waited_on '
+- source: has_been_waited_on
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -29003,55 +29059,98 @@
 - source: static
   scopes:
     - storage.modifier.specifier.static
-- source: ' map'
-- source: <
+- source: map
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: TaskClass
-- source: <
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANY_OUTPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: ' ANY_INPUT_TYPE'
+    - punctuation.separator.delimiter.comma.template.argument
+- source: ANY_INPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: int
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' links_to'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: links_to
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                        TaskClass'
-- source: <
+- source: TaskClass
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ANY_OUTPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: ' ANY_INPUT_TYPE'
+    - punctuation.separator.delimiter.comma.template.argument
+- source: ANY_INPUT_TYPE
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' ptr_to_original '
+    - storage.modifier.pointer
+- source: ptr_to_original
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -29063,12 +29162,15 @@
     - punctuation.terminator.statement
 - source: pthread_t
   scopes:
+    - meta.qualified_type
     - support.type.posix-reserved.pthread
     - support.type.built-in.posix-reserved.pthread
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
-- source: ' thread'
+    - storage.modifier.reference
+- source: thread
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -30765,10 +30867,16 @@
 - source: ' data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        map'
-- source: <
+- source: map
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: void
   scopes:
     - storage.type.primitive
@@ -30778,15 +30886,20 @@
     - keyword.operator.arithmetic
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: pthread_mutex_t
   scopes:
     - support.type.posix-reserved.pthread
     - support.type.built-in.posix-reserved.pthread
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' map_of_locks'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: map_of_locks
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -40689,39 +40802,81 @@
 - source: ' data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ITEM
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: '    vector_ '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: vector_
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: ITEM
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: '    values  '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: values
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                vector'
-- source: <
+- source: vector
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: '  names   '
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: names
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -46869,7 +47024,13 @@
 - source: ' data'
   scopesEnd:
     - comment.line.double-slash
-- source: '                string data'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: data
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -46881,7 +47042,13 @@
 - source: ' later turn both of these into some kind of binary'
   scopesEnd:
     - comment.line.double-slash
-- source: '                string type'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: type
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -63251,9 +63418,12 @@
     - comment.line.double-slash
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' length_of_last_line '
+- source: length_of_last_line
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -63265,9 +63435,12 @@
     - punctuation.terminator.statement
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' dont_go_up_a_line '
+- source: dont_go_up_a_line
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -63277,7 +63450,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string what_was_just_output '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: what_was_just_output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -63294,7 +63473,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string content '
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

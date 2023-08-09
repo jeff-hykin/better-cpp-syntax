@@ -61,9 +61,12 @@
   scopesBegin:
     - meta.body.class
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' width'
+- source: width
+  scopes:
+    - variable.other.object.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
