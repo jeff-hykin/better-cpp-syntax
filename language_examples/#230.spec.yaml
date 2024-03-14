@@ -24,11 +24,14 @@
 - source: class
   scopesBegin:
     - meta.body.function.definition
+    - meta.qualified_type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: var
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -37,7 +40,7 @@
     - storage.modifier.pointer
 - source: thing
   scopes:
-    - variable.other.object.declare
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -84,11 +87,15 @@
   scopesEnd:
     - comment.line.double-slash
 - source: struct
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: var
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -97,7 +104,7 @@
     - storage.modifier.pointer
 - source: thing
   scopes:
-    - variable.other.object.declare
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -144,11 +151,15 @@
   scopesEnd:
     - comment.line.double-slash
 - source: enum
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.enum.declare
+    - storage.type.enum
 - source: var
   scopes:
-    - entity.name.type.enum
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -157,7 +168,7 @@
     - storage.modifier.pointer
 - source: thing
   scopes:
-    - variable.other.object.declare
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -204,11 +215,15 @@
   scopesEnd:
     - comment.line.double-slash
 - source: union
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - storage.type.union.declare
+    - storage.type.union
 - source: var
   scopes:
-    - entity.name.type.union
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -217,7 +232,7 @@
     - storage.modifier.pointer
 - source: thing
   scopes:
-    - variable.other.object.declare
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

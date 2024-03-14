@@ -119,9 +119,12 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' isPoint '
+- source: isPoint
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -632,9 +635,12 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' isPoint '
+- source: isPoint
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -696,9 +702,12 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -760,9 +769,12 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

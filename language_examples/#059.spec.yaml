@@ -25,9 +25,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' postWakeup '
+- source: postWakeup
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

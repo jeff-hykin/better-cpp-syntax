@@ -25,9 +25,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -97,9 +100,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -173,9 +179,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -246,9 +255,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -271,9 +283,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -184,9 +184,15 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  T content'
+- source: T
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: content
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

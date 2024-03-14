@@ -1,0 +1,190 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: iostream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: argc
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: argv
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: '#'
+  scopesBegin:
+    - meta.body.function.definition
+    - keyword.control.directive.conditional.ifdef
+  scopes:
+    - punctuation.definition.directive
+- source: ifdef
+  scopesEnd:
+    - keyword.control.directive.conditional.ifdef
+- source: _WIN32
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.other.preprocessor.macro.predefined._WIN32
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Hello World Windows
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.elifdef
+  scopes:
+    - punctuation.definition.directive
+- source: elifdef
+  scopesEnd:
+    - keyword.control.directive.elifdef
+- source: ' __linux__'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Hello World Linux
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

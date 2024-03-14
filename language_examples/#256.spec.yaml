@@ -353,13 +353,18 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -385,6 +390,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: size_t
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type
     - storage.type.built-in
@@ -410,6 +417,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

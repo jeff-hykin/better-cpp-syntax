@@ -175,6 +175,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -200,6 +202,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1166,6 +1170,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1209,6 +1214,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1288,6 +1294,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1331,6 +1338,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1426,6 +1434,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1469,6 +1478,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1548,6 +1558,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1591,6 +1602,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:

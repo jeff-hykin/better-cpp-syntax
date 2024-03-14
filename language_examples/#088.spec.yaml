@@ -62,9 +62,12 @@
   scopesBegin:
     - meta.body.struct
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' Brightness'
+- source: Brightness
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

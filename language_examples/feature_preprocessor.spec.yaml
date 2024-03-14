@@ -476,9 +476,12 @@
     - constant.character.escape.line-continuation
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' data'
+- source: data
+  scopes:
+    - variable.other.object.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -491,9 +494,12 @@
     - constant.character.escape.line-continuation
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' other'
+- source: other
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -638,9 +644,12 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' isPoint '
+- source: isPoint
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
