@@ -57,12 +57,13 @@ def getRawStringPatterns()
     )
     regex = generateTaggedRawString("regex", Pattern.new(/_r/).or(/re/).or(/regex/), "source.regexp.python")
     # sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql", tag_as_meta: true)
+    # ^disabled until a bailout-pattern is made for sql because of bugs like this: https://github.com/jeff-hykin/better-cpp-syntax/issues/636
     glsl = generateTaggedRawString("glsl", Pattern.new(/glsl/).or(/GLSL/), "source.glsl", tag_as_meta: true)
     plain = generateTaggedRawString(nil, Pattern.new(//), "", tag_as_meta: false)
     return [
         regex,
         glsl,
-        sql,
+        # sql,
         plain,
         default,
     ]

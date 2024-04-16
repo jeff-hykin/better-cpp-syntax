@@ -14315,29 +14315,6 @@
           ]
         },
         {
-          "begin": "((?:[uUL]8?)?R)\\\"(?:[pP]?(?:sql|SQL)|d[dm]l)\\(",
-          "end": "\\)(?:[pP]?(?:sql|SQL)|d[dm]l)\\\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cpp"
-            },
-            "1": {
-              "name": "meta.encoding.cpp"
-            }
-          },
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cpp"
-            }
-          },
-          "name": "meta.string.quoted.double.raw.sql.cpp",
-          "patterns": [
-            {
-              "include": "source.sql"
-            }
-          ]
-        },
-        {
           "begin": "((?:[uUL]8?)?R)\\\"\\(",
           "end": "\\)\\\"",
           "beginCaptures": {
