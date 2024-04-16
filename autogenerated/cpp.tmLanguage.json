@@ -14338,10 +14338,32 @@
           ]
         },
         {
+          "begin": "((?:[uUL]8?)?R)\\\"\\(",
+          "end": "\\)\\\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cpp"
+            },
+            "1": {
+              "name": "meta.encoding.cpp"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cpp"
+            }
+          },
+          "name": "string.quoted.double.raw.cpp",
+          "patterns": [
+            {
+            }
+          ]
+        },
+        {
           "begin": "((?:u|u8|U|L)?R)\"(?:([^ ()\\\\\\t]{0,16})|([^ ()\\\\\\t]*))\\(",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.string.begin"
+              "name": "punctuation.definition.string.$2.begin"
             },
             "1": {
               "name": "meta.encoding"
@@ -14350,22 +14372,22 @@
               "name": "invalid.illegal.delimiter-too-long"
             }
           },
-          "end": "(\\)\\2(\\3)\")(?:((?:[a-zA-Z]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|(_(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))?",
+          "end": "(\\)(\\2)(\\3)\")(?:((?:[a-zA-Z]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*)|(_(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*))?",
           "endCaptures": {
             "1": {
-              "name": "punctuation.definition.string.end"
-            },
-            "2": {
-              "name": "invalid.illegal.delimiter-too-long"
+              "name": "punctuation.definition.string.$2.end"
             },
             "3": {
-              "name": "keyword.other.suffix.literal.user-defined.reserved.string.cpp"
+              "name": "invalid.illegal.delimiter-too-long"
             },
             "4": {
+              "name": "keyword.other.suffix.literal.user-defined.reserved.string.cpp"
+            },
+            "5": {
               "name": "keyword.other.suffix.literal.user-defined.string.cpp"
             }
           },
-          "name": "string.quoted.double.raw"
+          "name": "string.quoted.double.raw.$2"
         }
       ]
     },

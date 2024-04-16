@@ -62545,13 +62545,13 @@
     - keyword.operator.assignment
 - source: R
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.s
+    - punctuation.definition.string.s.begin
   scopes:
     - meta.encoding
 - source: '"s('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.s.begin
 - source: '      Returns a list if the [extended POSIX regular'
 - source: '      expression](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_04)'
 - source: '      *regex* matches *str* precisely, otherwise returns `null`. Each item'
@@ -62574,9 +62574,9 @@
 - source: '      Evaluates to `[ "FOO" ]`.'
 - source: )s"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.s.end
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -64293,13 +64293,13 @@
     - keyword.operator.assignment
 - source: R
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.s
+    - punctuation.definition.string.s.begin
   scopes:
     - meta.encoding
 - source: '"s('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.s.begin
 - source: '      Returns a list composed of non matched strings interleaved with the'
 - source: '      lists of the [extended POSIX regular'
 - source: '      expression](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html#tag_09_04)'
@@ -64323,9 +64323,9 @@
 - source: '      Evaluates to `[ " " [ "FOO" ] " " ]`.'
 - source: )s"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.s.end
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
