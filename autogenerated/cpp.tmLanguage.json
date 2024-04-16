@@ -2461,263 +2461,6 @@
       },
       "name": "meta.preprocessor.import.cpp"
     },
-    "d9bc4796b0b_preprocessor_number_literal": {
-      "match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])*",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "begin": "(?=.)",
-              "end": "$",
-              "beginCaptures": {
-              },
-              "endCaptures": {
-              },
-              "patterns": [
-                {
-                  "match": "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?(?:(?<!')([pP])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?([lLfF](?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "keyword.other.unit.hexadecimal.cpp"
-                    },
-                    "2": {
-                      "name": "constant.numeric.hexadecimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "3": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "4": {
-                      "name": "constant.numeric.hexadecimal.cpp"
-                    },
-                    "5": {
-                      "name": "constant.numeric.hexadecimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "6": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "7": {
-                      "name": "keyword.other.unit.exponent.hexadecimal.cpp"
-                    },
-                    "8": {
-                      "name": "keyword.operator.plus.exponent.hexadecimal.cpp"
-                    },
-                    "9": {
-                      "name": "keyword.operator.minus.exponent.hexadecimal.cpp"
-                    },
-                    "10": {
-                      "name": "constant.numeric.exponent.hexadecimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "11": {
-                      "name": "keyword.other.suffix.literal.built-in.floating-point.cpp keyword.other.unit.suffix.floating-point.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "\\G(?=[0-9.])(?!0[xXbB])([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?(?:(?<!')([eE])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?([lLfF](?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "constant.numeric.decimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "2": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "3": {
-                      "name": "constant.numeric.decimal.point.cpp"
-                    },
-                    "4": {
-                      "name": "constant.numeric.decimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "5": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "6": {
-                      "name": "keyword.other.unit.exponent.decimal.cpp"
-                    },
-                    "7": {
-                      "name": "keyword.operator.plus.exponent.decimal.cpp"
-                    },
-                    "8": {
-                      "name": "keyword.operator.minus.exponent.decimal.cpp"
-                    },
-                    "9": {
-                      "name": "constant.numeric.exponent.decimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "10": {
-                      "name": "keyword.other.suffix.literal.built-in.floating-point.cpp keyword.other.unit.suffix.floating-point.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "keyword.other.unit.binary.cpp"
-                    },
-                    "2": {
-                      "name": "constant.numeric.binary.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "3": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "4": {
-                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "keyword.other.unit.octal.cpp"
-                    },
-                    "2": {
-                      "name": "constant.numeric.octal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "3": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "4": {
-                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:(?<!')([pP])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "keyword.other.unit.hexadecimal.cpp"
-                    },
-                    "2": {
-                      "name": "constant.numeric.hexadecimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "3": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "4": {
-                      "name": "keyword.other.unit.exponent.hexadecimal.cpp"
-                    },
-                    "5": {
-                      "name": "keyword.operator.plus.exponent.hexadecimal.cpp"
-                    },
-                    "6": {
-                      "name": "keyword.operator.minus.exponent.hexadecimal.cpp"
-                    },
-                    "7": {
-                      "name": "constant.numeric.exponent.hexadecimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "8": {
-                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "\\G(?=[0-9.])(?!0[xXbB])([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:(?<!')([eE])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
-                  "captures": {
-                    "1": {
-                      "name": "constant.numeric.decimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "2": {
-                      "name": "punctuation.separator.constant.numeric.cpp"
-                    },
-                    "3": {
-                      "name": "keyword.other.unit.exponent.decimal.cpp"
-                    },
-                    "4": {
-                      "name": "keyword.operator.plus.exponent.decimal.cpp"
-                    },
-                    "5": {
-                      "name": "keyword.operator.minus.exponent.decimal.cpp"
-                    },
-                    "6": {
-                      "name": "constant.numeric.exponent.decimal.cpp",
-                      "patterns": [
-                        {
-                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
-                          "name": "punctuation.separator.constant.numeric.cpp"
-                        }
-                      ]
-                    },
-                    "7": {
-                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
-                    }
-                  }
-                },
-                {
-                  "match": "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+",
-                  "name": "invalid.illegal.constant.numeric.cpp"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    },
     "decltype": {
       "begin": "((?<!\\w)decltype(?!\\w))((?:(?:(?:\\s*+(\\/\\*)((?:[^\\*]++|\\*+(?!\\/))*+(\\*\\/))\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|\\A|\\Z))(\\()",
       "end": "\\)",
@@ -11351,7 +11094,7 @@
           "include": "#string_context"
         },
         {
-          "include": "#d9bc4796b0b_preprocessor_number_literal"
+          "include": "#preprocessor_number_literal"
         },
         {
           "include": "#operators"
@@ -11512,6 +11255,263 @@
           "include": "#macro_argument"
         }
       ]
+    },
+    "preprocessor_number_literal": {
+      "match": "(?<!\\w)\\.?\\d(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])*",
+      "captures": {
+        "0": {
+          "patterns": [
+            {
+              "begin": "(?=.)",
+              "end": "$",
+              "beginCaptures": {
+              },
+              "endCaptures": {
+              },
+              "patterns": [
+                {
+                  "match": "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9a-fA-F])\\.|\\.(?=[0-9a-fA-F])))([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?(?:(?<!')([pP])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?([lLfF](?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.other.unit.hexadecimal.cpp"
+                    },
+                    "2": {
+                      "name": "constant.numeric.hexadecimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "3": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "4": {
+                      "name": "constant.numeric.hexadecimal.cpp"
+                    },
+                    "5": {
+                      "name": "constant.numeric.hexadecimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "6": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "7": {
+                      "name": "keyword.other.unit.exponent.hexadecimal.cpp"
+                    },
+                    "8": {
+                      "name": "keyword.operator.plus.exponent.hexadecimal.cpp"
+                    },
+                    "9": {
+                      "name": "keyword.operator.minus.exponent.hexadecimal.cpp"
+                    },
+                    "10": {
+                      "name": "constant.numeric.exponent.hexadecimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "11": {
+                      "name": "keyword.other.suffix.literal.built-in.floating-point.cpp keyword.other.unit.suffix.floating-point.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "\\G(?=[0-9.])(?!0[xXbB])([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?((?:(?<=[0-9])\\.|\\.(?=[0-9])))([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)?(?:(?<!')([eE])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?([lLfF](?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.decimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "2": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "3": {
+                      "name": "constant.numeric.decimal.point.cpp"
+                    },
+                    "4": {
+                      "name": "constant.numeric.decimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "5": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "6": {
+                      "name": "keyword.other.unit.exponent.decimal.cpp"
+                    },
+                    "7": {
+                      "name": "keyword.operator.plus.exponent.decimal.cpp"
+                    },
+                    "8": {
+                      "name": "keyword.operator.minus.exponent.decimal.cpp"
+                    },
+                    "9": {
+                      "name": "constant.numeric.exponent.decimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "10": {
+                      "name": "keyword.other.suffix.literal.built-in.floating-point.cpp keyword.other.unit.suffix.floating-point.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "(\\G0[bB])([01](?:[01]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.other.unit.binary.cpp"
+                    },
+                    "2": {
+                      "name": "constant.numeric.binary.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "3": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "4": {
+                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "(\\G0)((?:[0-7]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))+)((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.other.unit.octal.cpp"
+                    },
+                    "2": {
+                      "name": "constant.numeric.octal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "3": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "4": {
+                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "(\\G0[xX])([0-9a-fA-F](?:[0-9a-fA-F]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:(?<!')([pP])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "keyword.other.unit.hexadecimal.cpp"
+                    },
+                    "2": {
+                      "name": "constant.numeric.hexadecimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "3": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "4": {
+                      "name": "keyword.other.unit.exponent.hexadecimal.cpp"
+                    },
+                    "5": {
+                      "name": "keyword.operator.plus.exponent.hexadecimal.cpp"
+                    },
+                    "6": {
+                      "name": "keyword.operator.minus.exponent.hexadecimal.cpp"
+                    },
+                    "7": {
+                      "name": "constant.numeric.exponent.hexadecimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "8": {
+                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "\\G(?=[0-9.])(?!0[xXbB])([0-9](?:[0-9]|((?<=[0-9a-fA-F])'(?=[0-9a-fA-F])))*)(?:(?<!')([eE])(\\+?)(\\-?)([0-9](?:[0-9]|(?<=[0-9a-fA-F])'(?=[0-9a-fA-F]))*))?((?:[uU]|(?:[uU]ll?)|(?:[uU]LL?)|(?:ll?[uU]?)|(?:LL?[uU]?)|[fF])(?!\\w))?$",
+                  "captures": {
+                    "1": {
+                      "name": "constant.numeric.decimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "2": {
+                      "name": "punctuation.separator.constant.numeric.cpp"
+                    },
+                    "3": {
+                      "name": "keyword.other.unit.exponent.decimal.cpp"
+                    },
+                    "4": {
+                      "name": "keyword.operator.plus.exponent.decimal.cpp"
+                    },
+                    "5": {
+                      "name": "keyword.operator.minus.exponent.decimal.cpp"
+                    },
+                    "6": {
+                      "name": "constant.numeric.exponent.decimal.cpp",
+                      "patterns": [
+                        {
+                          "match": "(?<=[0-9a-fA-F])'(?=[0-9a-fA-F])",
+                          "name": "punctuation.separator.constant.numeric.cpp"
+                        }
+                      ]
+                    },
+                    "7": {
+                      "name": "keyword.other.suffix.literal.built-in.integer.cpp keyword.other.unit.suffix.integer.cpp"
+                    }
+                  }
+                },
+                {
+                  "match": "(?:(?:[0-9a-zA-Z_\\.]|')|(?<=[eEpP])[+-])+",
+                  "name": "invalid.illegal.constant.numeric.cpp"
+                }
+              ]
+            }
+          ]
+        }
+      }
     },
     "qualified_type": {
       "match": "\\s*+((?:(?:(?:\\[\\[.*?\\]\\]|__attribute(?:__)?\\s*\\(\\s*\\(.*?\\)\\s*\\))|__declspec\\(.*?\\))|alignas\\(.*?\\))(?!\\)))?((?:((?:\\s*+\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|\\A|\\Z))(?:(?:(?:(?:unsigned)|(?:signed)|(?:short)|(?:long))|(?:(?:struct)|(?:class)|(?:union)|(?:enum)))((?:((?:\\s*+\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|\\A|\\Z)))*(?:((?:::)?(?:(?!\\b(?:__has_cpp_attribute|reinterpret_cast|atomic_noexcept|atomic_commit|atomic_cancel|__has_include|thread_local|dynamic_cast|synchronized|static_cast|const_cast|consteval|co_return|protected|constinit|constexpr|co_return|consteval|namespace|constexpr|constexpr|co_await|explicit|volatile|noexcept|co_yield|noexcept|noexcept|requires|typename|decltype|operator|template|continue|co_await|co_yield|volatile|register|restrict|reflexpr|mutable|alignof|include|private|defined|typedef|_Pragma|__asm__|concept|mutable|warning|default|virtual|alignas|public|sizeof|delete|not_eq|bitand|and_eq|xor_eq|typeid|switch|return|struct|static|extern|inline|friend|ifndef|define|pragma|export|import|module|catch|throw|const|or_eq|compl|while|ifdef|const|bitor|union|class|undef|error|break|using|endif|goto|line|enum|this|case|else|elif|else|not|try|for|asm|and|xor|new|do|if|or|if)\\b)(?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w)\\s*+(((?<!<)<(?!<)(?:(?:\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/)|(?:\"(?:[^\"]*|\\\\\")\")|(?:'(?:[^']*|\\\\')')|\\g<11>|(?:(?:[^'\"<>\\/]|\\/[^*])++))*>)\\s*+)?::)*+)((?:((?:\\s*+\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|\\A|\\Z)))?(?!(?:(?:transaction_safe_dynamic)|(?:__has_cpp_attribute)|(?:reinterpret_cast)|(?:transaction_safe)|(?:atomic_noexcept)|(?:atomic_commit)|(?:__has_include)|(?:atomic_cancel)|(?:synchronized)|(?:thread_local)|(?:dynamic_cast)|(?:static_cast)|(?:const_cast)|(?:constexpr)|(?:co_return)|(?:constinit)|(?:namespace)|(?:protected)|(?:consteval)|(?:constexpr)|(?:constexpr)|(?:co_return)|(?:consteval)|(?:co_await)|(?:continue)|(?:template)|(?:reflexpr)|(?:volatile)|(?:register)|(?:co_await)|(?:co_yield)|(?:restrict)|(?:noexcept)|(?:volatile)|(?:override)|(?:explicit)|(?:decltype)|(?:operator)|(?:noexcept)|(?:noexcept)|(?:typename)|(?:requires)|(?:co_yield)|(?:nullptr)|(?:alignof)|(?:alignas)|(?:default)|(?:mutable)|(?:virtual)|(?:mutable)|(?:private)|(?:include)|(?:warning)|(?:_Pragma)|(?:defined)|(?:typedef)|(?:__asm__)|(?:concept)|(?:define)|(?:module)|(?:sizeof)|(?:switch)|(?:delete)|(?:pragma)|(?:and_eq)|(?:inline)|(?:xor_eq)|(?:typeid)|(?:import)|(?:extern)|(?:public)|(?:bitand)|(?:static)|(?:export)|(?:return)|(?:friend)|(?:ifndef)|(?:not_eq)|(?:false)|(?:final)|(?:break)|(?:const)|(?:catch)|(?:endif)|(?:ifdef)|(?:undef)|(?:error)|(?:audit)|(?:while)|(?:using)|(?:axiom)|(?:or_eq)|(?:compl)|(?:throw)|(?:bitor)|(?:const)|(?:line)|(?:case)|(?:else)|(?:this)|(?:true)|(?:goto)|(?:else)|(?:NULL)|(?:elif)|(?:new)|(?:asm)|(?:xor)|(?:and)|(?:try)|(?:not)|(?:for)|(?:do)|(?:if)|(?:or)|(?:if))\\b)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*\\b((?<!<)<(?!<)(?:(?:\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/)|(?:\"(?:[^\"]*|\\\\\")\")|(?:'(?:[^']*|\\\\')')|\\g<11>|(?:(?:[^'\"<>\\/]|\\/[^*])++))*>)?(?![\\w<:.])",
