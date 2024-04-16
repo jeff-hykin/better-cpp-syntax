@@ -519,7 +519,7 @@ grammar = Grammar.new(
             ).then(
                 match: /:/,
                 tag_as: "punctuation.separator.label",
-            )
+            ).lookAheadToAvoid(/:/)
         )
     grammar[:default_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
