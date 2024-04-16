@@ -9735,7 +9735,7 @@
           "include": "#scope_resolution_parameter_inner_generated"
         },
         {
-          "match": "(?:(?:struct)|(?:class)|(?:union)|(?:enum))",
+          "match": "(?<!\\w)(?:(?:struct)|(?:class)|(?:union)|(?:enum))(?!\\w)",
           "name": "storage.type.$0.cpp"
         },
         {
@@ -10537,7 +10537,7 @@
           "include": "#scope_resolution_parameter_inner_generated"
         },
         {
-          "match": "(?:(?:struct)|(?:class)|(?:union)|(?:enum))",
+          "match": "(?<!\\w)(?:(?:struct)|(?:class)|(?:union)|(?:enum))(?!\\w)",
           "name": "storage.type.$0.cpp"
         },
         {

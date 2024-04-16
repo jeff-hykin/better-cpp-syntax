@@ -1800,7 +1800,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: variableBounds[@cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment
@@ -1901,7 +1901,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: variableBounds[@cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment
