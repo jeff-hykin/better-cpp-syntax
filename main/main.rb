@@ -2478,6 +2478,7 @@ grammar = Grammar.new(
 #
     grammar[:assembly] = assembly_pattern(std_space, identifier)
     grammar[:backslash_escapes] = backslash_escapes()
+    grammar[:string_escaped_char] = grammar[:backslash_escapes]
     grammar[:range_for_inner] =  PatternRange.new(
             tag_as: "meta.parens.control.for",
             start_pattern: Pattern.new(
