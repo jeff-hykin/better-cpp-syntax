@@ -294,7 +294,7 @@ grammar = Grammar.new(
         ]
     grammar[:template_call_context] = [
             :ever_present_context,
-            :template_call_range,
+            :template_call_range_helper,
             :storage_types,
             :language_constants,
             :scope_resolution_template_call_inner_generated,
@@ -698,20 +698,36 @@ grammar = Grammar.new(
         tag_as: 'meta.template.call',
         # to match the characters in the middle of a template call
         match: some_number_of_angle_brackets.zeroOrMoreOf(match: /\s/, dont_back_track?: true),
-        includes: [ :template_call_range ]
+        includes: [ :template_call_range_helper ]
     )
     grammar[:template_call_range] = PatternRange.new(
-            tag_as: 'meta.template.call',
-            start_pattern: Pattern.new(
-                match: /</,
-                tag_as: "punctuation.section.angle-brackets.begin.template.call"
+        tag_as: 'meta.template.call',
+        start_pattern: Pattern.new(
+            match: /</,
+            tag_as: "punctuation.section.angle-brackets.begin.template.call"
+        ),
+        end_pattern: Pattern.new(
+            match: />/,
+            tag_as: "punctuation.section.angle-brackets.end.template.call"
+        ),
+        includes: [:template_call_context]
+    )
+    # What does this helper do? it prevents template_call_range from incorrectly matching " 1 << 2" as a template call by having a pattern that matches the "1 <<" part first
+    grammar[:template_call_range_helper] = [
+        Pattern.new(
+            @word_boundary.then(grammar[:number_literal]).then(std_space).then(
+                match:/<</,
+                tag_as: "keyword.operator.bitwise.shift",
             ),
-            end_pattern: Pattern.new(
-                match: />/,
-                tag_as: "punctuation.section.angle-brackets.end.template.call"
+        ),
+        Pattern.new(
+            @word_boundary.then(grammar[:number_literal]).then(std_space).then(
+                match:/</,
+                tag_as: "keyword.operator.comparison",
             ),
-            includes: [:template_call_context]
-        )
+        ),
+        :template_call_range,
+    ]
     template_start = lookBehindToAvoid(@standard_character).then(
             match: /template/,
             tag_as: "storage.type.template"
@@ -887,7 +903,7 @@ grammar = Grammar.new(
                     match: variableBounds[identifier],
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ),
-                :template_call_range
+                :template_call_range_helper
             ]
         )
     end
@@ -1025,7 +1041,7 @@ grammar = Grammar.new(
             :string_context,
             :comma,
             :scope_resolution_inner_generated,
-            grammar[:template_call_range],
+            :template_call_range_helper,
             Pattern.new(
                 match: identifier,
                 tag_as: "entity.name.type",
@@ -1284,7 +1300,7 @@ grammar = Grammar.new(
         ),
         head_includes:[
             :ever_present_context, # comments and macros
-            :template_call_range,
+            :template_call_range_helper,
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters.special.operator-overload",
                 start_pattern: Pattern.new(
@@ -1854,7 +1870,7 @@ grammar = Grammar.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
-            :template_call_range,
+            :template_call_range_helper,
             # # tag the reference and dereference operator
             ref_deref[],
             :evaluation_context, # this is part of the #282 workaround
@@ -1955,7 +1971,7 @@ grammar = Grammar.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
-            :template_call_range,
+            :template_call_range_helper,
             # tag the reference and dereference operator
             ref_deref[],
             :ever_present_context,
@@ -2376,7 +2392,7 @@ grammar = Grammar.new(
             head_includes: [
                 :ever_present_context, # directives and comments
                 :inheritance_context,
-                :template_call_range,
+                :template_call_range_helper,
             ],
             body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :operator_overload, :normal_variable_declaration, :normal_variable_assignment, :$initial_context ],
             tail_includes: tail_includes
