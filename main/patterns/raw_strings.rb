@@ -56,7 +56,7 @@ def getRawStringPatterns()
         name: "string.quoted.double.raw.$2"
     )
     regex = generateTaggedRawString("regex", Pattern.new(/_r/).or(/re/).or(/regex/), "source.regexp.python")
-    sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql", tag_as_meta: true)
+    # sql = generateTaggedRawString("sql", Pattern.new(/[pP]?(?:sql|SQL)/).or(/d[dm]l/), "source.sql", tag_as_meta: true)
     glsl = generateTaggedRawString("glsl", Pattern.new(/glsl/).or(/GLSL/), "source.glsl", tag_as_meta: true)
     plain = generateTaggedRawString(nil, Pattern.new(//), "", tag_as_meta: false)
     return [
