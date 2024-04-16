@@ -32,6 +32,7 @@ grammar.exports = [
     :preprocessor_conditional_parentheses,
     :preprocessor_conditional_standalone,
     :preprocessor_context,
+    :preprocessor_number_literal, # NOTE: this shouldn't need to be exported, but there's a bug in ruby_grammar_builder (see https://github.com/jeff-hykin/better-cpp-syntax/issues/653)
 ]
 
 std_space = grammar[:std_space]
@@ -411,7 +412,7 @@ identifier = grammar[:identifier]
     grammar[:preprocessor_conditional_standalone] = Pattern.new(
         tag_as: "keyword.control.directive.$reference(conditional_name)",
         match: directive_start.then(
-            match: wordBounds(/(?:endif|else|elif)/),
+            match: wordBounds(/(?:endif|else|elif|elifdef|elifndef)/),
             reference: "conditional_name"
         )
     )

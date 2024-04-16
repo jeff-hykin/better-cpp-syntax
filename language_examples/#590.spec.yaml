@@ -166,7 +166,13 @@
     - meta.body.function.definition
   scopes:
     - constant.character.escape.line-continuation
-- source: '            der v'
+- source: der
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: v
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

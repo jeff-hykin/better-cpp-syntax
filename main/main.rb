@@ -68,6 +68,17 @@ grammar = Grammar.new(
         match: /\=/,
         tag_as: "keyword.operator.assignment",
     )
+    assignment_operators = oneOf([
+        Pattern.new(
+            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
+            tag_as: "keyword.operator.assignment.compound"
+        ),
+        Pattern.new(
+            match: /&=|\^=|<<=|>>=|\|=/,
+            tag_as: "keyword.operator.assignment.compound.bitwise"
+        ),
+        assignment_operator,
+    ])
     array_brackets = Pattern.new(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square"
@@ -222,6 +233,9 @@ grammar = Grammar.new(
             # this shouldn't be in $initial_context (it will eventually be removed), and it shouldn't really be in function body either
             :evaluation_context,
         ) + [
+            :over_qualified_types,
+            :normal_variable_assignment,
+            :normal_variable_declaration,
             # functions can exclusively contain theses:
             # TODO: fill out all of the statements here, variable declares, assignment, etc
             # control flow
@@ -280,7 +294,7 @@ grammar = Grammar.new(
         ]
     grammar[:template_call_context] = [
             :ever_present_context,
-            :template_call_range,
+            :template_call_range_helper,
             :storage_types,
             :language_constants,
             :scope_resolution_template_call_inner_generated,
@@ -325,6 +339,7 @@ grammar = Grammar.new(
         *doxygen(variable_name),
         *grammar[:comments]
     ]
+    
 #
 # Constants
 #
@@ -504,7 +519,7 @@ grammar = Grammar.new(
             ).then(
                 match: /:/,
                 tag_as: "punctuation.separator.label",
-            )
+            ).lookAheadToAvoid(/:/)
         )
     grammar[:default_statement] = PatternRange.new(
             tag_as: "meta.conditional.case",
@@ -546,7 +561,7 @@ grammar = Grammar.new(
                 match: /\)/,
                 tag_as: 'punctuation.section.parens.end.bracket.round.conditional.switch'
             ),
-            includes: [ :evaluation_context, ]
+            includes: [ :range_for_inner, :evaluation_context, ]
         )
     grammar[:switch_statement] = generateBlockFinder(
             name: "switch",
@@ -591,6 +606,7 @@ grammar = Grammar.new(
                     includes: [
                         :attributes_context,
                         :string_context,
+                        :ever_present_context,
                     ],
                 ),
                 Pattern.new(match: /using/, tag_as: "keyword.other.using.directive").then(@spaces).then(
@@ -605,6 +621,7 @@ grammar = Grammar.new(
                 ),
                 Pattern.new(match: variable_name, tag_as: "entity.other.attribute.$match"),
                 :number_literal,
+                :ever_present_context,
             ]
         )
     end
@@ -681,20 +698,36 @@ grammar = Grammar.new(
         tag_as: 'meta.template.call',
         # to match the characters in the middle of a template call
         match: some_number_of_angle_brackets.zeroOrMoreOf(match: /\s/, dont_back_track?: true),
-        includes: [ :template_call_range ]
+        includes: [ :template_call_range_helper ]
     )
     grammar[:template_call_range] = PatternRange.new(
-            tag_as: 'meta.template.call',
-            start_pattern: Pattern.new(
-                match: /</,
-                tag_as: "punctuation.section.angle-brackets.begin.template.call"
+        tag_as: 'meta.template.call',
+        start_pattern: Pattern.new(
+            match: /</,
+            tag_as: "punctuation.section.angle-brackets.begin.template.call"
+        ),
+        end_pattern: Pattern.new(
+            match: />/,
+            tag_as: "punctuation.section.angle-brackets.end.template.call"
+        ),
+        includes: [:template_call_context]
+    )
+    # What does this helper do? it prevents template_call_range from incorrectly matching " 1 << 2" as a template call by having a pattern that matches the "1 <<" part first
+    grammar[:template_call_range_helper] = [
+        Pattern.new(
+            @word_boundary.then(grammar[:number_literal]).then(std_space).then(
+                match:/<</,
+                tag_as: "keyword.operator.bitwise.shift",
             ),
-            end_pattern: Pattern.new(
-                match: />/,
-                tag_as: "punctuation.section.angle-brackets.end.template.call"
+        ),
+        Pattern.new(
+            @word_boundary.then(grammar[:number_literal]).then(std_space).then(
+                match:/</,
+                tag_as: "keyword.operator.comparison",
             ),
-            includes: [:template_call_context]
-        )
+        ),
+        :template_call_range,
+    ]
     template_start = lookBehindToAvoid(@standard_character).then(
             match: /template/,
             tag_as: "storage.type.template"
@@ -870,7 +903,7 @@ grammar = Grammar.new(
                     match: variableBounds[identifier],
                     tag_as: "entity.name.scope-resolution"+tag_extension
                 ),
-                :template_call_range
+                :template_call_range_helper
             ]
         )
     end
@@ -1008,11 +1041,57 @@ grammar = Grammar.new(
             :string_context,
             :comma,
             :scope_resolution_inner_generated,
-            grammar[:template_call_range],
+            :template_call_range_helper,
             Pattern.new(
                 match: identifier,
                 tag_as: "entity.name.type",
             ),
+        ],
+    )
+    normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
+    # normal variable assignment
+    grammar[:variable_assignment] =  Pattern.new(
+        normal_type_pattern.then(std_space).then(
+            tag_as: "variable.other.assignment",
+            match: identifier,
+        ).then(std_space).then(
+            assignment_operators
+        )
+    )
+    grammar[:variable_declare] = Pattern.new(
+        normal_type_pattern.then(std_space).then(
+            tag_as: "variable.other.object.declare",
+            match: identifier,
+        ).then(std_space).lookAheadFor(/;|,/)
+    )
+    grammar[:normal_variable_assignment] = PatternRange.new(
+        start_pattern: Pattern.new(
+            Pattern.new(/^/).then(std_space).then(
+                grammar[:variable_assignment]
+            )
+        ),
+        end_pattern: lookAheadFor(/;/),
+        includes: [
+            :normal_variable_assignment,
+            :variable_assignment,
+            :$initial_context,
+        ],
+    )
+    # TODO:
+        # missing binding assignments
+        # missing array declarations
+        # missing initalizer forms ( Thing somthin(); Thing somethin{};)
+    grammar[:normal_variable_declaration] = PatternRange.new(
+        start_pattern: Pattern.new(
+            Pattern.new(/^/).then(std_space).then(
+                grammar[:variable_declare]
+            )
+        ),
+        end_pattern: lookAheadFor(/;/),
+        includes: [
+            :normal_variable_assignment,
+            :variable_assignment,
+            :$initial_context,
         ],
     )
     # TODO: create a :type that includes inline function-pointer types and array types
@@ -1070,7 +1149,7 @@ grammar = Grammar.new(
 #
 # Functions, Operator Overload
 #
-    optional_calling_convention = std_space.maybe(
+    optional_calling_convention = maybe(
             match: /__cdecl|__clrcall|__stdcall|__fastcall|__thiscall|__vectorcall/,
             tag_as: "storage.type.modifier.calling-convention"
         ).then(std_space)
@@ -1172,13 +1251,19 @@ grammar = Grammar.new(
         tag_as:"meta.function.definition.special.operator-overload",
         start_pattern: Pattern.new(
             # find the return type (if there is one)
-            maybe(grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
+            std_space.maybe(grammar[:simple_type].then(std_space)).then(optional_calling_convention).then(
                 std_space
             ).then(
                 inline_scope_resolution[".operator"]
             ).then(
                 match: /operator/,
                 tag_as: "keyword.other.operator.overload",
+            # find any scope resolutions
+            ).maybe(
+                std_space.then(
+                    tag_as: "storage.modifier.const",
+                    match: variableBounds[ /const/ ],
+                )
             # find any scope resolutions
             ).then(std_space).then(
                 inline_scope_resolution[".operator-overload"]
@@ -1215,7 +1300,7 @@ grammar = Grammar.new(
         ),
         head_includes:[
             :ever_present_context, # comments and macros
-            :template_call_range,
+            :template_call_range_helper,
             PatternRange.new(
                 tag_content_as: "meta.function.definition.parameters.special.operator-overload",
                 start_pattern: Pattern.new(
@@ -1311,6 +1396,22 @@ grammar = Grammar.new(
             tag_as: "punctuation.section.arguments.end.bracket.curly.initializer",
         ),
         includes: [
+            PatternRange.new(
+                tag_as: "meta.initialization.parameter",
+                start_pattern: Pattern.new(
+                    Pattern.new(
+                        tag_as: "punctuation.accessor.initializer variable.parameter.initializer",
+                        match: ".",
+                    ).then(
+                        tag_as: "variable.parameter.initializer",
+                        match: identifier,
+                    )
+                ),
+                end_pattern: grammar[:comma].or(lookAheadFor(/\}/)),
+                includes: [
+                    :evaluation_context,
+                ],
+            ),
             :evaluation_context,
             :comma
         ]
@@ -1511,7 +1612,7 @@ grammar = Grammar.new(
         )
     ]
     grammar[:destructor_root] = destructor[
-        optional_calling_convention.then(
+        std_space.then(optional_calling_convention).then(
             inline_scope_resolution[".destructor"]
         ).then(
             match: Pattern.new(
@@ -1597,14 +1698,6 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.increment"
         ),
         Pattern.new(
-            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
-            tag_as: "keyword.operator.assignment.compound"
-        ),
-        Pattern.new(
-            match: /&=|\^=|<<=|>>=|\|=/,
-            tag_as: "keyword.operator.assignment.compound.bitwise"
-        ),
-        Pattern.new(
             match: /<<|>>/,
             tag_as: "keyword.operator.bitwise.shift"
         ),
@@ -1620,7 +1713,7 @@ grammar = Grammar.new(
             match: /&|\||\^|~/,
             tag_as: "keyword.operator.bitwise"
         ),
-        :assignment_operator,
+        assignment_operators,
         Pattern.new(
             match: /%|\*|\/|-|\+/,
             tag_as: "keyword.operator.arithmetic"
@@ -1630,7 +1723,7 @@ grammar = Grammar.new(
 #
 # function pointer
 #
-    after_declaration = std_space.lookAheadFor(/[{=,);>]|\n/).lookAheadToAvoid(/\(/)
+    after_declaration = std_space.maybe(grammar[:qualifiers_and_specifiers_post_parameters].then(std_space)).lookAheadFor(/[{=,);>]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
             start_pattern: grammar[:simple_type].then(std_space).then(
@@ -1723,7 +1816,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: variableBounds[@cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment
@@ -1777,10 +1870,11 @@ grammar = Grammar.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
-            :template_call_range,
+            :template_call_range_helper,
             # # tag the reference and dereference operator
             ref_deref[],
-            :evaluation_context # this is part of the #282 workaround
+            :evaluation_context, # this is part of the #282 workaround
+            :ever_present_context,
         ]
     )
     grammar[:parameter] = PatternRange.new(
@@ -1823,7 +1917,7 @@ grammar = Grammar.new(
             :scope_resolution_parameter_inner_generated,
             # match the class/struct/enum/union keywords
             Pattern.new(
-                match: @cpp_tokens.that(:isTypeCreator),
+                match: variableBounds[@cpp_tokens.that(:isTypeCreator)],
                 tag_as: "storage.type.$match"
             ),
             # This is a range for when there is a variable-default assignment
@@ -1877,9 +1971,10 @@ grammar = Grammar.new(
                 match: identifier.then(@cpp_tokens.lookBehindToAvoidWordsThat(:isTypeCreator)),
                 tag_as: "entity.name.type.parameter"
             ),
-            :template_call_range,
+            :template_call_range_helper,
             # tag the reference and dereference operator
             ref_deref[],
+            :ever_present_context,
         ]
     )
 #
@@ -2003,6 +2098,8 @@ grammar = Grammar.new(
         head_includes: [
             :ever_present_context,
             :attributes_context,
+            :normal_variable_assignment,
+            :normal_variable_declaration,
             grammar[:scope_resolution_namespace_block].maybe(@spaces).then(
                     match: variable_name,
                     tag_as: "entity.name.namespace",
@@ -2056,11 +2153,12 @@ grammar = Grammar.new(
                 should_partial_match: [ "[]", "[=](", "[&]{", "[x,y,x]", "[x, y, &z, w = 1 + 1] (", "[ a = blah[1324], b, c ] {" ],
                 should_not_partial_match: [ "delete[]", "thing[]", "thing []", "thing     []", "thing[0][0] = 0" ],
                 match: Pattern.new(
-                    match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
-                        match: Pattern.new(/\[/).lookAheadToAvoid(/\[| *+"| *+\d/),
-                        tag_as: "punctuation.definition.capture.begin.lambda",
-                    )
-                ).then(
+                    Pattern.new(
+                        match: lookBehindFor(/[^\s]|^/).lookBehindToAvoid(/[\w\]\)\[\*&">]/).or(lookBehindFor(non_variable_name)).maybe(@spaces).then(
+                            match: Pattern.new(/\[/).lookAheadToAvoid(/\[| *+"| *+\d/),
+                            tag_as: "punctuation.definition.capture.begin.lambda",
+                        )
+                    ).then(
                         match: zeroOrMoreOf(
                             match: Pattern.new(/[^\[\]]/).or(only_balanced_square_bracke),
                             dont_back_track?: true,
@@ -2083,9 +2181,10 @@ grammar = Grammar.new(
                             :evaluation_context
                         ],
                     ).then(
-                        match: Pattern.new(/\]/).lookAheadToAvoid(std_space.then(/[\[\];]/)),
+                        match: Pattern.new(/\]/).lookAheadToAvoid(std_space.then(/[\[\];=]/)),
                         tag_as: "punctuation.definition.capture.end.lambda",
                     )
+                )
             ),
         end_pattern: Pattern.new(
                 match: lookBehindFor(/[;}]/),
@@ -2293,9 +2392,9 @@ grammar = Grammar.new(
             head_includes: [
                 :ever_present_context, # directives and comments
                 :inheritance_context,
-                :template_call_range,
+                :template_call_range_helper,
             ],
-            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :$initial_context ],
+            body_includes: [ :function_pointer, :static_assert, :constructor_inline, :destructor_inline, :operator_overload, :normal_variable_declaration, :normal_variable_assignment, :$initial_context ],
             tail_includes: tail_includes
         )
     end
@@ -2395,6 +2494,59 @@ grammar = Grammar.new(
 #
     grammar[:assembly] = assembly_pattern(std_space, identifier)
     grammar[:backslash_escapes] = backslash_escapes()
+    grammar[:string_escaped_char] = grammar[:backslash_escapes]
+    grammar[:range_for_inner] =  PatternRange.new(
+            tag_as: "meta.parens.control.for",
+            start_pattern: Pattern.new(
+                lookBehindFor(/\Wfor \(|^for \(|\Wfor\(|^for\(/), # lookbehinds must be a fixed length otherwise \s* would've been used
+            ),
+            end_pattern: lookAheadFor(/\)/),
+            includes: [
+                # normal ranged for loop
+                Pattern.new(
+                    Pattern.new(
+                        tag_as: "meta.type",
+                        match: normal_type_pattern,
+                    ).then(std_space).then(
+                        match: identifier,
+                        tag_as: "variable.other.object.declare.for",
+                    ).then(std_space).then(
+                        match: /:/,
+                        tag_as: "punctuation.separator.colon.range-based"
+                    ).lookAheadToAvoid(/:/),
+                ),
+                # tuple ranged for loop
+                Pattern.new(
+                    tag_as: "meta.binding",
+                    match: Pattern.new(
+                        Pattern.new(
+                            tag_as: "meta.type",
+                            match: normal_type_pattern,
+                        ).then(std_space).then(
+                            match: '[',
+                            tag_as: "punctuation.definition.begin.bracket.square.binding",
+                        ).then(std_space).then(
+                            Pattern.new(
+                                match: identifier,
+                                tag_as: "variable.other.for",
+                            ).zeroOrMoreOf(
+                                std_space.then(grammar[:comma]).then(std_space).then(
+                                    match: identifier,
+                                    tag_as: "variable.other.for",
+                                )
+                            )
+                        ).then(std_space).then(
+                            match: ']',
+                            tag_as: "punctuation.definition.end.bracket.square.binding",
+                        ).then(std_space).then(
+                            match: /:/,
+                            tag_as: "punctuation.separator.colon.range-based"
+                        ).lookAheadToAvoid(/:/),
+                    )
+                ),
+                :evaluation_context,
+            ],
+        )
 #
 # Misc Legacy
 #
@@ -2515,7 +2667,9 @@ grammar = Grammar.new(
             match: /}/,
             tag_as: "punctuation.section.block.end.bracket.curly"
         ),
-        includes: [:function_body_context]
+        includes: [
+            :function_body_context
+        ]
     )
     grammar[:line_continuation_character] = Pattern.new(
         match: /\\\n/,
@@ -2532,6 +2686,7 @@ grammar = Grammar.new(
             tag_as: "punctuation.section.parens.end.bracket.round"
         ),
         includes: [
+            :range_for_inner,
             # TODO: for typecasting (eventually this should be replaced)
             :over_qualified_types,
             # TODO: for range-based for loops (eventually this should be replaced)

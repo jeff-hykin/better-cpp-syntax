@@ -315,29 +315,40 @@
   scopes:
     - meta.head.class
     - punctuation.section.block.begin.bracket.curly.class
-- source: "\t\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.class
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: d
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1165,9 +1176,12 @@
     - storage.modifier.specifier.static
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' _SSO_Cap '
+- source: _SSO_Cap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1204,9 +1218,12 @@
     - storage.modifier.specifier.static
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' _size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1220,6 +1237,7 @@
     - constant.numeric.decimal
 - source: ULL
   scopes:
+    - keyword.other.suffix.literal.built-in.integer
     - keyword.other.unit.suffix.integer
 - source: '<<'
   scopes:
@@ -1298,29 +1316,40 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: "\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: data
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' capacity'
+- source: capacity
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' size'
+- source: size
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1363,7 +1392,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t_UCharT remain"
+- source: _UCharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: remain
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1431,13 +1466,25 @@
   scopes:
     - meta.head.union
     - punctuation.section.block.begin.bracket.curly.union
-- source: "\t\t\t_long _l"
+- source: _long
   scopesBegin:
     - meta.body.union
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: _l
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t_short _s"
+- source: _short
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: _s
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1460,6 +1507,8 @@
   scopesEnd:
     - comment.line.double-slash
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1467,18 +1516,33 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: tuple
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: _rep
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
-- source: ' Allocator'
+    - punctuation.separator.delimiter.comma.template.argument
+- source: Allocator
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' __string'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
+- source: __string
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2223,9 +2287,12 @@
     - meta.block
 - source: size_t
   scopes:
+    - meta.qualified_type
     - storage.type
     - storage.type.built-in
-- source: ' remain '
+- source: remain
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -2586,9 +2653,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' small '
+- source: small
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -2859,7 +2929,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: "\t\t\t\tsize_type capacity "
+- source: size_type
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: capacity
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3654,9 +3730,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' buf '
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3909,9 +3988,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' size '
+- source: size
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3960,9 +4042,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' buf '
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4108,9 +4193,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' old_cap '
+- source: old_cap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4136,9 +4224,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' new_cap '
+- source: new_cap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4316,9 +4407,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4348,9 +4442,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' buf '
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4673,9 +4770,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4705,9 +4805,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' old_buf '
+- source: old_buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4737,9 +4840,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' new_cap '
+- source: new_cap
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -4770,9 +4876,12 @@
     - punctuation.terminator.statement
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' new_buf '
+- source: new_buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5270,9 +5379,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5838,13 +5950,18 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5870,6 +5987,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: size_t
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type
     - storage.type.built-in
@@ -5895,6 +6014,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -6092,9 +6213,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\t\tsize_type count "
+- source: size_type
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6942,9 +7069,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' count '
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6972,11 +7102,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7367,9 +7502,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\t\tsize_type count "
+- source: size_type
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7391,11 +7532,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7676,7 +7822,13 @@
 - source: ' perform new alloc then copy'
   scopesEnd:
     - comment.line.double-slash
-- source: "\t\t\t\tsize_type count "
+- source: size_type
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7698,11 +7850,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -8186,9 +8343,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\t\t_Sv cv "
+- source: _Sv
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: cv
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -8196,7 +8359,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tsize_type count "
+- source: size_type
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9010,7 +9179,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: "\t\t\t\tsize_type count "
+- source: size_type
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9215,9 +9390,15 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: "\t\t\tsize_type count "
+- source: size_type
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9397,11 +9578,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9585,13 +9771,18 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: "\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10031,7 +10222,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t_Sv cv "
+- source: _Sv
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: cv
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10039,7 +10236,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tsize_type count "
+- source: size_type
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10061,11 +10264,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10180,11 +10388,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10210,6 +10423,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: size_t
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type
     - storage.type.built-in
@@ -10235,6 +10450,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11017,9 +11234,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' count '
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11047,11 +11267,16 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t\tCharT "
+- source: CharT
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'buf '
+    - storage.modifier.pointer
+- source: buf
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13946,9 +14171,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14863,9 +15091,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' indx '
+- source: indx
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14910,9 +15141,12 @@
     - punctuation.section.block.begin.bracket.curly
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' ch '
+- source: ch
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15382,9 +15616,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: "\t\t\t_Sv sv "
+- source: _Sv
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: sv
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15688,9 +15928,15 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: "\t\t\t_Sv sv "
+- source: _Sv
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: sv
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

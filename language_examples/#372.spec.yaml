@@ -43,9 +43,12 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' count '
+- source: count
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

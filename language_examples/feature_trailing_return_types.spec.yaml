@@ -218,6 +218,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -241,6 +243,8 @@
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -628,9 +632,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itemIndex '
+- source: itemIndex
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -640,9 +647,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itemRelativeRank '
+- source: itemRelativeRank
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -652,9 +662,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' totalNumberOfItems '
+- source: totalNumberOfItems
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -664,9 +677,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' nextItemIndex '
+- source: nextItemIndex
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -682,9 +698,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' numberOfRemainingItems '
+- source: numberOfRemainingItems
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -698,9 +717,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' probabilityOfBeingBetterThanCurrentItem '
+- source: probabilityOfBeingBetterThanCurrentItem
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -724,9 +746,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' numberOfSeenItemsThatAreBetterThanCurrentItem '
+- source: numberOfSeenItemsThatAreBetterThanCurrentItem
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -742,9 +767,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' expectedAverageRank '
+- source: expectedAverageRank
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -810,9 +838,12 @@
     - meta.block
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' expectedValue '
+- source: expectedValue
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -907,9 +938,12 @@
     - comment.line.double-slash
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itemIndex '
+- source: itemIndex
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -919,9 +953,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itemRelativeRank '
+- source: itemRelativeRank
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -931,9 +968,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' totalNumberOfItems '
+- source: totalNumberOfItems
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -943,9 +983,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' nextItemIndex '
+- source: nextItemIndex
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -961,9 +1004,12 @@
     - punctuation.terminator.statement
 - source: double
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' output '
+- source: output
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1500,9 +1546,12 @@
 - source: ' _To_ MAX_N_SIZE _Times'
 - source: short
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' row '
+- source: row
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1523,9 +1572,12 @@
 - source: ' _To_ MAX_N_SIZE _Times'
 - source: short
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' cell '
+- source: cell
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment

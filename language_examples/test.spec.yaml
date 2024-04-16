@@ -54,6 +54,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
@@ -79,6 +81,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -287,7 +291,13 @@
 - source: ' everything from this point on is interpeted as a string literal...'
   scopesEnd:
     - comment.line.double-slash
-- source: '    O x'
+- source: O
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: x
+  scopes:
+    - variable.other.object.declare
 - source: ;
   scopes:
     - punctuation.terminator.statement

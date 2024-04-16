@@ -1,0 +1,481 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: MyAwesomeDatabaseLibrary.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: string
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: iostream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: int
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: argc
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopesBegin:
+    - storage.modifier.pointer
+- source: '*'
+  scopesEnd:
+    - storage.modifier.pointer
+- source: argv
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: std
+  scopesBegin:
+    - meta.body.function.definition
+    - meta.qualified_type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: string
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
+- source: plate
+  scopes:
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: argv
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: AwesomeDBConnection
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: conn
+  scopes:
+    - variable.other.object.declare
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: conn
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: Open
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: myconnectionstring
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: query
+  scopes:
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: conn
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: Execute
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: R
+  scopesBegin:
+    - string.quoted.double.raw.sql
+    - punctuation.definition.string.sql.begin
+  scopes:
+    - meta.encoding
+- source: '"sql('
+  scopesEnd:
+    - punctuation.definition.string.sql.begin
+- source: '        SELECT uid, part_name, install_date FROM CarParts'
+- source: '         WHERE plate = '''
+- source: )sql"
+  scopes:
+    - punctuation.definition.string.sql.end
+  scopesEnd:
+    - string.quoted.double.raw.sql
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: ' plate '
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ''' ORDER BY install_date'
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.parens.control.for
+  scopes:
+    - storage.modifier.specifier.const
+- source: auto
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: entry
+  scopes:
+    - variable.other.object.declare.for
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.range-based
+- source: ' query'
+  scopesEnd:
+    - meta.parens.control.for
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: entry
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: uid
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ': '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: entry
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: part_name
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: ', '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: 'cout '
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: entry
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: install_date
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: conn
+  scopes:
+    - variable.other.object.access
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: Close
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

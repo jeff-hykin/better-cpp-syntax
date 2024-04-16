@@ -38,13 +38,13 @@
     - punctuation.section.block.begin.bracket.curly
 - source: R
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.glsl
+    - punctuation.definition.string.glsl.begin
   scopes:
     - meta.encoding
 - source: '"glsl('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.glsl.begin
 - source: '        precision highp float;'
 - source: '        attribute vec2 vPosition;'
 - source: '        attribute vec3 textureCoord;'
@@ -56,9 +56,9 @@
 - source: '        }'
 - source: )glsl"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.glsl.end
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.glsl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -82,19 +82,19 @@
     - punctuation.section.block.begin.bracket.curly
 - source: R
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.sql
+    - punctuation.definition.string.sql.begin
   scopes:
     - meta.encoding
 - source: '"sql('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.sql.begin
 - source: '        select a, b, c from someTable where a > 10 order by a asc'
 - source: )sql"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.sql.end
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.sql
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -118,19 +118,19 @@
     - punctuation.section.block.begin.bracket.curly
 - source: R
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.re
+    - punctuation.definition.string.re.begin
   scopes:
     - meta.encoding
 - source: '"re('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.re.begin
 - source: '        ((?:[uUL]8?)?R)\\\"(?:(?:_r|re)|regex)\\()'
 - source: )re"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.re.end
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.re
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly

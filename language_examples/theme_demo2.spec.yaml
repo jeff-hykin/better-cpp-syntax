@@ -1250,9 +1250,12 @@
     - comment.line.double-slash
 - source: auto
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing '
+- source: thing
+  scopes:
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
