@@ -23,7 +23,7 @@ grammar.exports = [
     :line,
     :diagnostic,
     :undef,
-    :single_line_macro,
+    # :single_line_macro,
     :macro,
     :macro_argument,
     :preprocessor_conditional_range,
@@ -268,14 +268,14 @@ identifier = grammar[:identifier]
 #
 # #define
 #
-    grammar[:single_line_macro] = Pattern.new(
-        should_fully_match: ['#define EXTERN_C extern "C"'],
-        match: Pattern.new(/^/).then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
-        includes: [
-            :macro,
-            :comments,
-        ]
-    )
+    # grammar[:single_line_macro] = Pattern.new(
+    #     should_fully_match: ['#define EXTERN_C extern "C"'],
+    #     match: Pattern.new(/^/).then(std_space).then(/#define/).then(/.*/).lookBehindToAvoid(/[\\]/).then(@end_of_line),
+    #     includes: [
+    #         :macro,
+    #         :comments,
+    #     ]
+    # )
     grammar[:macro] = PatternRange.new(
         tag_as: "meta.preprocessor.macro",
         start_pattern: Pattern.new(
@@ -425,7 +425,7 @@ grammar[:preprocessor_context] = [
     :diagnostic,
     :undef,
     :preprocessor_conditional_range,
-    :single_line_macro,
+    # :single_line_macro,
     :macro,
     :preprocessor_conditional_standalone,
     :macro_argument,

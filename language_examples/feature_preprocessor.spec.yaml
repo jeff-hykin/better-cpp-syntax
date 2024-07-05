@@ -396,10 +396,10 @@
 - source: Stuff
   scopes:
     - entity.name.type.struct
-  scopesEnd:
-    - meta.block.struct
 - source: '#'
   scopesBegin:
+    - meta.head.struct
+    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -427,6 +427,9 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
+    - meta.block.struct
+    - meta.head.struct
+    - meta.preprocessor.macro
     - meta.block.struct
     - meta.head.struct
 - source: '#'
@@ -787,18 +790,17 @@
   scopes:
     - entity.name.function.preprocessor
 - source: /*
-  scopes:
+  scopesBegin:
     - comment.block
-    - punctuation.definition.comment.begin
-  scopesEnd:
-    - meta.preprocessor.macro
-- source: this
   scopes:
-    - variable.language.this
-- source: ' should be a comment'
+    - punctuation.definition.comment.begin
+- source: '    this should be a comment'
 - source: '*/'
   scopes:
-    - invalid.illegal.unexpected.punctuation.definition.comment.end
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - meta.preprocessor.macro
+    - comment.block
 - source: '#'
   scopesBegin:
     - keyword.control.directive.conditional.if

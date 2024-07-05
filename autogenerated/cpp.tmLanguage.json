@@ -3577,9 +3577,6 @@
           "include": "#preprocessor_conditional_range"
         },
         {
-          "include": "#single_line_macro"
-        },
-        {
           "include": "#macro"
         },
         {
@@ -11166,9 +11163,6 @@
           "include": "#preprocessor_conditional_range"
         },
         {
-          "include": "#single_line_macro"
-        },
-        {
           "include": "#macro"
         },
         {
@@ -13171,46 +13165,6 @@
           ]
         },
         "17": {
-          "patterns": [
-            {
-              "match": "\\s*+(\\/\\*)((?:[^\\*]++|\\*+(?!\\/))*+(\\*\\/))\\s*+",
-              "captures": {
-                "1": {
-                  "name": "comment.block.cpp punctuation.definition.comment.begin.cpp"
-                },
-                "2": {
-                  "name": "comment.block.cpp"
-                },
-                "3": {
-                  "name": "comment.block.cpp punctuation.definition.comment.end.cpp"
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
-    "single_line_macro": {
-      "match": "^((?:((?:\\s*+\\/\\*(?:[^\\*]++|\\*+(?!\\/))*+\\*\\/\\s*+)+)|(?:\\s++)|(?<=\\W)|(?=\\W)|^|(?:\\n?$)|\\A|\\Z))#define.*(?<![\\\\])(?:\\n|$)",
-      "captures": {
-        "0": {
-          "patterns": [
-            {
-              "include": "#macro"
-            },
-            {
-              "include": "#comments"
-            }
-          ]
-        },
-        "1": {
-          "patterns": [
-            {
-              "include": "#inline_comment"
-            }
-          ]
-        },
-        "2": {
           "patterns": [
             {
               "match": "\\s*+(\\/\\*)((?:[^\\*]++|\\*+(?!\\/))*+(\\*\\/))\\s*+",
