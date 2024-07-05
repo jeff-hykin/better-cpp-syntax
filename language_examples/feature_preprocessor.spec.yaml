@@ -772,3 +772,52 @@
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.block.struct
+    - meta.head.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: thing
+  scopes:
+    - entity.name.function.preprocessor
+- source: /*
+  scopes:
+    - comment.block
+    - punctuation.definition.comment.begin
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: this
+  scopes:
+    - variable.language.this
+- source: ' should be a comment'
+- source: '*/'
+  scopes:
+    - invalid.illegal.unexpected.punctuation.definition.comment.end
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: thing
+  scopesBegin:
+    - meta.preprocessor.conditional
+  scopes:
+    - entity.name.function.preprocessor
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '    this should be a comment'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end

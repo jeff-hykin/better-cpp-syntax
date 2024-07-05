@@ -53,3 +53,10 @@ int other;
         {
             
 
+#define thing /*
+    this should be a comment
+*/
+
+#if thing /*
+    this should be a comment
+*/

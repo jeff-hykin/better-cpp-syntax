@@ -25824,7 +25824,8 @@
 - source: ' We don’t check the path right now, because we don’t want to'
 - source: '      throw if the path isn’t allowed, but just return false (and we'
 - source: '      can’t just catch the exception here because we still want to'
-- source: '      throw if something in the evaluation of `*args[0]` tries to'
+- source: '      throw if something in the evaluation of `*'
+- source: 'args[0]` tries to'
 - source: '      access an unauthorized path). '
 - source: '*/'
   scopes:
@@ -59193,7 +59194,8 @@
     - comment.block
   scopes:
     - punctuation.definition.comment.begin
-- source: ' Convert the argument to a string.  Paths are *not* copied to the'
+- source: ' Convert the argument to a string.  Paths are *not*'
+- source: ' copied to the'
 - source: '   store, so `toString /foo/bar'' yields `"/foo/bar"'', not'
 - source: '   `"/nix/store/whatever..."''. '
 - source: '*/'
