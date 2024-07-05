@@ -95,13 +95,14 @@
     - keyword.operator.and
 - source: requires
   scopes:
+    - keyword.other.functionlike
     - keyword.other.requires
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.requires
 - source: From
+  scopesBegin:
+    - meta.arguments.requires
   scopes:
     - entity.name.function.call
 - source: (
@@ -123,12 +124,11 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.arguments.requires
     - meta.parens
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.arguments.end.bracket.round.requires
 - source: '{'
   scopesBegin:
     - meta.block

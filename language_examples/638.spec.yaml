@@ -1,0 +1,179 @@
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: int
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.int
+- source: 'n'
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: S
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: int
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: requires
+  scopes:
+    - keyword.other.functionlike
+    - keyword.other.requires
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.requires
+- source: 'n '
+  scopesBegin:
+    - meta.arguments.requires
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.arguments.requires
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.requires
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: int
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: requires
+  scopes:
+    - keyword.other.functionlike
+    - keyword.other.requires
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.requires
+- source: 'n '
+  scopesBegin:
+    - meta.arguments.requires
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.arguments.requires
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.requires
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: private
+  scopesBegin:
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: int
+  scopes:
+    - meta.qualified_type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: b
+  scopes:
+    - variable.other.object.declare
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

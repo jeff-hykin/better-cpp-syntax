@@ -388,7 +388,7 @@ grammar = Grammar.new(
         match: variableBounds[ @cpp_tokens.that(:isFunctionSpecifier) ],
         tag_as: "storage.modifier.specifier.functional.pre-parameters.$match"
     )
-    grammar[:qualifiers_and_specifiers_post_parameters] = Pattern.new(
+    grammar[:qualifiers_and_specifiers_post_parameters_inline] = Pattern.new(
         should_partially_match: ["final override;", "const noexcept {"],
         match: oneOrMoreOf(std_space.then(
             Pattern.new(
@@ -396,7 +396,7 @@ grammar = Grammar.new(
                 should_not_fully_match: ["const noexcept"],
                 should_not_partial_match: ["return"],
                 tag_as: "storage.modifier.specifier.functional.post-parameters.$match",
-                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody) ],
+                match: variableBounds[ @cpp_tokens.that(:canAppearAfterParametersBeforeBody, not(:isFunctionLike)) ],
             )
         )).lookAheadFor(
             Pattern.new(/\s*/).then(
@@ -410,6 +410,16 @@ grammar = Grammar.new(
             )
         )
     )
+    grammar[:qualifiers_and_specifiers_post_parameters] = [
+        functionCallGenerator[
+            repository_name: "requires_keyword",
+            match_name: variableBounds[/requires/],
+            tag_name_as: "keyword.other.functionlike keyword.other.requires",
+            tag_content_as: "arguments.requires",
+            tag_parenthese_as: "requires"
+        ],
+        grammar[:qualifiers_and_specifiers_post_parameters_inline],
+    ]
     grammar[:storage_specifiers] = storage_specifier = Pattern.new(
         std_space.then(
             match: variableBounds[ @cpp_tokens.that(:isStorageSpecifier) ],
@@ -1655,7 +1665,7 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.wordlike keyword.operator.$match",
         ),
     ]
-    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
+    array_of_function_like_operators = @cpp_tokens.tokens.select { |each| each[:isOperator] && each[:isFunctionLike] && each[:isWord] && !each[:isSpecifier] }
     for each in array_of_function_like_operators
         name = each[:name]
         grammar[:operators].push(functionCallGenerator[
@@ -1723,7 +1733,7 @@ grammar = Grammar.new(
 #
 # function pointer
 #
-    after_declaration = std_space.maybe(grammar[:qualifiers_and_specifiers_post_parameters].then(std_space)).lookAheadFor(/[{=,);>]|\n/).lookAheadToAvoid(/\(/)
+    after_declaration = std_space.maybe(grammar[:qualifiers_and_specifiers_post_parameters_inline].then(std_space)).lookAheadFor(/[{=,);>]|\n/).lookAheadToAvoid(/\(/)
     functionPointerGenerator = ->(identifier_tag) do
         return PatternRange.new(
             start_pattern: grammar[:simple_type].then(std_space).then(

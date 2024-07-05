@@ -132,11 +132,13 @@ keyword.other.default.function.cpp
 keyword.other.delete.constructor.cpp
 keyword.other.delete.destructor.cpp
 keyword.other.delete.function.cpp
+keyword.other.functionlike.cpp
 keyword.other.namespace.alias.cpp
 keyword.other.namespace.definition.cpp
 keyword.other.namespace.directive.cpp
 keyword.other.operator.overload.cpp
 keyword.other.parameter.direction.$0.cpp
+keyword.other.requires.cpp
 keyword.other.static_assert.cpp
 keyword.other.suffix.literal.built-in.floating-point.cpp
 keyword.other.suffix.literal.built-in.integer.cpp
@@ -166,6 +168,7 @@ meta.arguments.operator.noexcept
 meta.arguments.operator.sizeof
 meta.arguments.operator.sizeof.variadic
 meta.arguments.operator.typeid
+meta.arguments.requires
 meta.asm.cpp
 meta.banner.character.cpp
 meta.binding.cpp
@@ -308,6 +311,7 @@ punctuation.section.arguments.begin.bracket.round.operator.noexcept.cpp
 punctuation.section.arguments.begin.bracket.round.operator.sizeof.cpp
 punctuation.section.arguments.begin.bracket.round.operator.sizeof.variadic.cpp
 punctuation.section.arguments.begin.bracket.round.operator.typeid.cpp
+punctuation.section.arguments.begin.bracket.round.requires.cpp
 punctuation.section.arguments.begin.bracket.round.static_assert.cpp
 punctuation.section.arguments.end.bracket.curly.initializer.cpp
 punctuation.section.arguments.end.bracket.round.decltype.cpp
@@ -321,6 +325,7 @@ punctuation.section.arguments.end.bracket.round.operator.noexcept.cpp
 punctuation.section.arguments.end.bracket.round.operator.sizeof.cpp
 punctuation.section.arguments.end.bracket.round.operator.sizeof.variadic.cpp
 punctuation.section.arguments.end.bracket.round.operator.typeid.cpp
+punctuation.section.arguments.end.bracket.round.requires.cpp
 punctuation.section.arguments.end.bracket.round.static_assert.cpp
 punctuation.section.attribute.begin.cpp
 punctuation.section.attribute.end.cpp
