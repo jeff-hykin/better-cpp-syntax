@@ -142,7 +142,13 @@ class TokenHelper
     end
 
     def that(*adjectives)
-        return oneOf(representationsThat(*adjectives))
+        representations = representationsThat(*adjectives)
+        regex_internals = representations.map do |each|
+             Regexp.escape(each)
+        end.join('|')
+        return Pattern.new(/(?:#{regex_internals})/)
+        # oneOf has problems (as of 2024-07)
+        # return oneOf(representationsThat(*adjectives))
     end
 end
 

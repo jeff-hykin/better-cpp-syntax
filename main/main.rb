@@ -1296,7 +1296,7 @@ grammar = Grammar.new(
                     )
                 )
             # lookahead for the start of a template type or the start of the function parameters
-            ).then(std_space).lookAheadFor(/\<|\(/)
+            ).then(std_space).lookAheadFor(/;|\<|\(/)
         ),
         head_includes:[
             :ever_present_context, # comments and macros
