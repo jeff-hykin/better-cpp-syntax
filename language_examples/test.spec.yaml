@@ -309,13 +309,25 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unique_ptr
-- source: <
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: O
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: o
   scopes:
     - entity.name.function.call

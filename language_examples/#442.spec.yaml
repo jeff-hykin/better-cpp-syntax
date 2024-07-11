@@ -1198,6 +1198,8 @@
     - comment.block.documentation
 - source: '  REPROCXX_EXPORT'
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1205,6 +1207,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: start
   scopes:
     - entity.name.function.call
@@ -1342,6 +1348,8 @@
     - comment.block.documentation
 - source: '  REPROCXX_EXPORT'
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1349,24 +1357,37 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: stream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: error_code
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: poll
   scopes:
     - entity.name.function.call
@@ -1572,6 +1593,8 @@
     - punctuation.terminator.statement
 - source: '  REPROCXX_EXPORT'
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1579,6 +1602,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: close
   scopes:
     - entity.name.function.call
@@ -1672,6 +1699,8 @@
     - punctuation.terminator.statement
 - source: '  REPROCXX_EXPORT'
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1679,6 +1708,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: terminate
   scopes:
     - entity.name.function.call
@@ -1696,6 +1729,8 @@
     - punctuation.terminator.statement
 - source: '  REPROCXX_EXPORT'
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1703,6 +1738,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified_type
 - source: kill
   scopes:
     - entity.name.function.call

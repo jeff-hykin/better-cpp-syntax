@@ -8843,7 +8843,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_digits[] '
+- source: s_digits
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment

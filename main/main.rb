@@ -189,6 +189,7 @@ grammar = Grammar.new(
             :constructor_root,
             :destructor_root,
             :function_definition,
+            :simple_array_assignment,
             :operator_overload,
             :using_namespace,
             :type_alias,
@@ -265,6 +266,9 @@ grammar = Grammar.new(
             :the_this_keyword,
             :language_constants,
             # types, modifiers, and specifiers
+            :constructor_bracket_call,
+            :simple_constructor_call,
+            :simple_array_assignment,
             :builtin_storage_type_initilizer, # needs to be above storage types
             :qualifiers_and_specifiers_post_parameters, # TODO this needs to be integrated into the function definition pattern
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
@@ -279,6 +283,7 @@ grammar = Grammar.new(
             # :empty_square_brackets, (see https://github.com/jeff-hykin/better-cpp-syntax/pull/380#issuecomment-542491824)
             :semicolon,
             :comma,
+            # :unknown_variable,
         ]
     grammar[:function_parameter_context] = [
             :ever_present_context, # comments and macros
@@ -1058,6 +1063,42 @@ grammar = Grammar.new(
             ),
         ],
     )
+    constructor_call_base = lookAheadToAvoid(/class|struct|union|enum|explicit|new|delete|operator|template|throw|decltype|typename|override|final/).then(/\b/).then(
+        qualified_type
+    )
+    grammar[:constructor_bracket_call] = Pattern.new(
+        constructor_call_base.then(std_space).then(
+            match: variable_name,
+            tag_as: "entity.name.function.call.constructor",
+        ).then(std_space).lookAheadFor(/\{/)
+    )
+    grammar[:simple_constructor_call] = Pattern.new(
+        constructor_call_base.lookAheadFor(
+            std_space.lookAheadFor(variable_name.lookAheadFor(std_space.lookAheadFor(/(?:\{|\()/)))
+        )
+    )
+    grammar[:simple_array_assignment] = Pattern.new(
+        Pattern.new(
+            tag_as: "variable.other.assignment",
+            match: variable_name,
+        ).then(
+            match: /\[/,
+            tag_as: "punctuation.definition.begin.bracket.square.array.type",
+        ).then(
+            match: / */,
+        ).then(
+            match: /\]/,
+            tag_as: "punctuation.definition.end.bracket.square.array.type",
+        ).then(std_space).then(
+            assignment_operators
+        )
+    )
+    # grammar[:unknown_variable] = Pattern.new(
+    #     Pattern.new(
+    #         tag_as: "variable.other.unknown.$match",
+    #         match: variable_name,
+    #     )
+    # )
     normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
     # normal variable assignment
     grammar[:variable_assignment] =  Pattern.new(

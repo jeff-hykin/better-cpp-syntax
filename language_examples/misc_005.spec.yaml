@@ -10798,7 +10798,10 @@
 - source: ' save a success log'
   scopesEnd:
     - comment.line.double-slash
-- source: '                        ofstream'
+- source: ofstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file_stream
   scopes:
     - entity.name.function.call
@@ -25180,7 +25183,10 @@
   scopesEnd:
     - meta.toc-list.banner.double-slash
     - comment.line.double-slash
-- source: '                    regex'
+- source: regex
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: is_it_an_int
   scopes:
     - entity.name.function.call
@@ -25433,7 +25439,10 @@
   scopesEnd:
     - meta.toc-list.banner.double-slash
     - comment.line.double-slash
-- source: '                    regex'
+- source: regex
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: is_it_a_number
   scopes:
     - entity.name.function.call
@@ -26834,7 +26843,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                                fstream'
+- source: fstream
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file
   scopes:
     - entity.name.function.call
@@ -27006,9 +27018,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        ofstream'
+- source: ofstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file_stream
   scopes:
     - entity.name.function.call
@@ -27129,9 +27144,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                        ifstream'
+- source: ifstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file_stream
   scopes:
     - entity.name.function.call
@@ -27227,9 +27245,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    ofstream'
+- source: ofstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file_stream
   scopes:
     - entity.name.function.call
@@ -27306,9 +27327,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    ifstream'
+- source: ifstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file
   scopes:
     - entity.name.function.call
@@ -27322,7 +27346,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                    string'
+- source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: content
   scopes:
     - entity.name.function.call
@@ -27461,9 +27488,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '                    fstream'
+- source: fstream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: the_file
   scopes:
     - entity.name.function.call

@@ -27,6 +27,8 @@
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: std
+  scopesBegin:
+    - meta.qualified_type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -37,7 +39,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' highlight'
+  scopesEnd:
+    - meta.qualified_type
+- source: highlight
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -55,6 +61,11 @@
   scopes:
     - storage.modifier.specifier.const
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -66,7 +77,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' highlight2'
+  scopesEnd:
+    - meta.qualified_type
+- source: highlight2
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -142,6 +157,11 @@
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: '::'
+  scopesBegin:
+    - meta.qualified_type
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -153,7 +173,11 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' no_highlight'
+  scopesEnd:
+    - meta.qualified_type
+- source: no_highlight
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block

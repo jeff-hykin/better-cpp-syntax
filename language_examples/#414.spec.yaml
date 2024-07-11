@@ -1,4 +1,8 @@
-- source: L_API ALenum AL_APIENTRY
+- source: L_API ALenum
+- source: AL_APIENTRY
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: alGetError
   scopes:
     - entity.name.function.call
@@ -18,7 +22,13 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    ContextRef context'
+- source: ContextRef
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: context
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -65,7 +75,13 @@
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: ' ALenum deferror'
+- source: ALenum
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: deferror
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block

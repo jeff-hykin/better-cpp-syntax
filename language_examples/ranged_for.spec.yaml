@@ -2621,9 +2621,10 @@
     - storage.modifier.specifier.static
 - source: void
   scopes:
+    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' import'
+- source: import
 - source: (
   scopesBegin:
     - meta.parens
@@ -5209,6 +5210,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: sym
   scopes:
     - entity.name.function.call
@@ -11980,16 +11984,25 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: set
-- source: <
+  scopesBegin:
+    - meta.qualified_type
   scopes:
-    - keyword.operator.comparison
-- source: 'Value '
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: Value
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: decltype
   scopes:
     - keyword.operator.functionlike
@@ -12006,7 +12019,10 @@
     - punctuation.section.arguments.end.bracket.round.decltype
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified_type
+    - meta.template.call
 - source: doneKeys
   scopes:
     - entity.name.function.call
@@ -15756,6 +15772,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: name
   scopes:
     - entity.name.function.call
@@ -30901,6 +30920,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: name
   scopes:
     - entity.name.function.call
@@ -30959,6 +30981,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: string
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: contents
   scopes:
     - entity.name.function.call
@@ -51849,7 +51874,15 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' vs[] '
+- source: vs
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -58963,7 +58996,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    CompareValues comp'
+- source: CompareValues
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
+- source: comp
+  scopes:
+    - entity.name.function.call.constructor
 - source: '{'
   scopesBegin:
     - meta.block
@@ -66744,7 +66783,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    DrvName'
+- source: DrvName
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: parsed
   scopes:
     - entity.name.function.call
@@ -69726,7 +69768,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' code[] '
+- source: code
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -4622,7 +4622,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_name_chars[] '
+- source: s_name_chars
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5117,7 +5125,15 @@
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: ' s_keywords[] '
+- source: s_keywords
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7037,7 +7053,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_punct_chars[] '
+- source: s_punct_chars
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7321,7 +7345,15 @@
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: ' s_punctuators[] '
+- source: s_punctuators
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -11783,7 +11815,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_digits[] '
+- source: s_digits
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14678,7 +14718,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_digits[] '
+- source: s_digits
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16629,7 +16677,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' s_suffix_chars[] '
+- source: s_suffix_chars
+  scopes:
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -20187,7 +20243,10 @@
 - source: ' Read source code line by line.'
   scopesEnd:
     - comment.line.double-slash
-- source: '    Line_Reader'
+- source: Line_Reader
+  scopes:
+    - meta.qualified_type
+    - entity.name.type
 - source: reader
   scopes:
     - entity.name.function.call
