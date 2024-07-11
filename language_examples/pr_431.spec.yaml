@@ -8,7 +8,9 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: 'octal_escape_test '
+- source: octal_escape_test
+  scopes:
+    - variable.other.unknown.octal_escape_test
 - source: '='
   scopes:
     - keyword.operator.assignment

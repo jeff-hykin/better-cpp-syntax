@@ -74,17 +74,23 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: loop
+  scopes:
+    - variable.other.unknown.loop
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    m_postMessageWakeup'
+- source: m_postMessageWakeup
+  scopes:
+    - variable.other.unknown.m_postMessageWakeup
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' postWakeup'
+- source: postWakeup
+  scopes:
+    - variable.other.unknown.postWakeup
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -125,7 +131,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' pipe '
+- source: pipe
+  scopes:
+    - variable.other.unknown.pipe
 - source: '='
   scopes:
     - keyword.operator.assignment

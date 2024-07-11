@@ -42,6 +42,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_signed_v
+  scopes:
+    - variable.other.unknown.is_signed_v
 - source: <
   scopes:
     - keyword.operator.comparison

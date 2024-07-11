@@ -304,6 +304,8 @@
 - source: REPROCXX_EXPORT
   scopesBegin:
     - meta.body.namespace
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
@@ -314,11 +316,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' kill'
+- source: kill
+  scopes:
+    - variable.other.unknown.kill
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
@@ -329,7 +335,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' terminate'
+- source: terminate
+  scopes:
+    - variable.other.unknown.terminate
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -416,35 +424,56 @@
   scopesEnd:
     - meta.declaration.type.alias
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds infinite'
+- source: milliseconds
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: infinite
+  scopes:
+    - variable.other.unknown.infinite
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds deadline'
+- source: milliseconds
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: deadline
+  scopes:
+    - variable.other.unknown.deadline
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds nonblocking'
+- source: milliseconds
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: nonblocking
+  scopes:
+    - variable.other.unknown.nonblocking
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -750,9 +779,11 @@
     - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
     - meta.body.struct
-- source: 'redirect '
+- source: redirect
   scopesBegin:
     - meta.tail.struct
+  scopes:
+    - variable.other.unknown.redirect
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1061,7 +1092,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT '
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: '~'
   scopes:
     - keyword.operator.bitwise
@@ -1132,7 +1165,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: process
   scopesBegin:
     - meta.function.definition.special.operator-overload
@@ -1196,7 +1231,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopesBegin:
     - meta.qualified_type
@@ -1220,22 +1257,30 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' arguments '
+- source: arguments
+  scopes:
+    - variable.other.unknown.arguments
 - source: '&'
   scopes:
     - keyword.operator.bitwise
 - source: arguments
+  scopes:
+    - variable.other.unknown.arguments
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' options '
+- source: options
+  scopes:
+    - variable.other.unknown.options
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: 'options '
+- source: options
+  scopes:
+    - variable.other.unknown.options
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1261,7 +1306,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1270,6 +1317,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1288,6 +1337,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1346,7 +1397,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopesBegin:
     - meta.qualified_type
@@ -1394,7 +1447,12 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: stream set
+- source: stream
+  scopes:
+    - variable.other.unknown.stream
+- source: set
+  scopes:
+    - variable.other.unknown.set
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1412,7 +1470,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1421,6 +1481,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1439,6 +1501,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1510,7 +1574,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1519,6 +1585,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1537,6 +1605,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1591,7 +1661,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopesBegin:
     - meta.qualified_type
@@ -1612,7 +1684,12 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: stream stream
+- source: stream
+  scopesBegin:
+    - variable.other.unknown.stream
+- source: stream
+  scopesEnd:
+    - variable.other.unknown.stream
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1633,7 +1710,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1642,6 +1721,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1660,6 +1741,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1697,7 +1780,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopesBegin:
     - meta.qualified_type
@@ -1727,7 +1812,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopesBegin:
     - meta.qualified_type
@@ -1768,7 +1855,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1777,6 +1866,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1795,6 +1886,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison

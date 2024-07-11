@@ -21,7 +21,9 @@
 - source: a
   scopes:
     - entity.name.function.preprocessor
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

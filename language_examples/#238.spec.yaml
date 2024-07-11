@@ -63,6 +63,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: expr
+  scopes:
+    - variable.other.unknown.expr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

@@ -103,7 +103,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' view '
+- source: view
+  scopes:
+    - variable.other.unknown.view
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -131,7 +133,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' owned '
+- source: owned
+  scopes:
+    - variable.other.unknown.owned
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -313,10 +317,14 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -344,7 +352,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' wide_string '
+- source: wide_string
+  scopes:
+    - variable.other.unknown.wide_string
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -376,7 +386,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' raw_wide_string '
+- source: raw_wide_string
+  scopes:
+    - variable.other.unknown.raw_wide_string
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -473,6 +485,8 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: c
+  scopes:
+    - variable.other.unknown.c
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -495,7 +509,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' character '
+- source: character
+  scopes:
+    - variable.other.unknown.character
 - source: '='
   scopes:
     - keyword.operator.assignment

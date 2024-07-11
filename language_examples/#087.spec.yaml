@@ -57,7 +57,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' common'
+- source: common
+  scopes:
+    - variable.other.unknown.common
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -119,7 +121,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' common'
+- source: common
+  scopes:
+    - variable.other.unknown.common
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma

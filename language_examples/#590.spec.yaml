@@ -216,14 +216,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: DOCTEST_EMPTY
+  scopes:
+    - variable.other.unknown.DOCTEST_EMPTY
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' func'
+- source: func
+  scopes:
+    - variable.other.unknown.func
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' decorators'
+- source: decorators
+  scopes:
+    - variable.other.unknown.decorators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -242,7 +248,9 @@
 - source: inline
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.inline
-- source: ' DOCTEST_NOINLINE'
+- source: DOCTEST_NOINLINE
+  scopes:
+    - variable.other.unknown.DOCTEST_NOINLINE
 - source: void
   scopes:
     - storage.type.primitive

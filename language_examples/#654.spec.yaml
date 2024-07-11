@@ -118,7 +118,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -128,7 +130,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -154,7 +158,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i'
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ++
   scopes:
     - keyword.operator.increment
@@ -179,6 +185,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -187,7 +195,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' i'
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ;
   scopes:
     - punctuation.terminator.statement

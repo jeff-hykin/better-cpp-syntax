@@ -61,17 +61,23 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )
@@ -161,17 +167,23 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )
@@ -277,17 +289,23 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )

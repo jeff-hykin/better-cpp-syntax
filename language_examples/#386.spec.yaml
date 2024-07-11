@@ -113,6 +113,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -135,6 +137,7 @@
 - source: s
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.s
 - source: '}'
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -168,7 +171,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -178,11 +183,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -190,6 +199,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -206,6 +217,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -266,7 +279,9 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-- source: ' elem'
+- source: elem
+  scopes:
+    - variable.other.unknown.elem
 - source: ;
   scopes:
     - punctuation.terminator.statement

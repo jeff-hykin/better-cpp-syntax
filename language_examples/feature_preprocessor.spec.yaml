@@ -50,7 +50,9 @@
 - source: a
   scopes:
     - entity.name.function.preprocessor
-- source: ' thing '
+- source: thing
+  scopes:
+    - variable.other.unknown.thing
 - source: '{'
   scopesBegin:
     - meta.block
@@ -91,7 +93,12 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' arg1 arg2'
+- source: arg1
+  scopes:
+    - variable.other.unknown.arg1
+- source: arg2
+  scopes:
+    - variable.other.unknown.arg2
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -488,7 +495,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' members'
+- source: members
+  scopes:
+    - variable.other.unknown.members
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -702,6 +711,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
+  scopes:
+    - variable.other.unknown.T
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -838,7 +849,9 @@
 - source: test
   scopes:
     - entity.name.function.preprocessor
-- source: ' test2'
+- source: test2
+  scopes:
+    - variable.other.unknown.test2
 - source: /*
   scopesBegin:
     - comment.block
@@ -911,6 +924,7 @@
 - source: BB
   scopes:
     - meta.tail.enum
+    - variable.other.unknown.BB
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -56,11 +56,15 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' operator'
+- source: operator
+  scopes:
+    - variable.other.unknown.operator
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -77,6 +81,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma

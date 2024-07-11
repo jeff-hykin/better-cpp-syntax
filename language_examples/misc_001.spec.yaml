@@ -82,6 +82,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: move
+  scopes:
+    - variable.other.unknown.move
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -96,6 +98,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: vector
+  scopes:
+    - variable.other.unknown.vector
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -110,6 +114,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: hash_combine
+  scopes:
+    - variable.other.unknown.hash_combine
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -129,11 +135,15 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' Rule '
+- source: Rule
+  scopes:
+    - variable.other.unknown.Rule
 - source: '&'
   scopes:
     - keyword.operator.bitwise
 - source: other
+  scopes:
+    - variable.other.unknown.other
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -144,7 +154,10 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'Blank{}'
+- source: Blank
+  scopes:
+    - variable.other.unknown.Blank
+- source: '{}'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -158,6 +171,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: BlankType
+  scopes:
+    - variable.other.unknown.BlankType
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -175,7 +190,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' other'
+- source: other
+  scopes:
+    - variable.other.unknown.other
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -270,6 +287,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: BlankType
+  scopes:
+    - variable.other.unknown.BlankType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -386,7 +405,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    type '
+- source: type
+  scopes:
+    - variable.other.unknown.type
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -414,6 +435,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: type
+  scopes:
+    - variable.other.unknown.type
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -430,7 +453,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' BlankType'
+- source: BlankType
+  scopes:
+    - variable.other.unknown.BlankType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -449,6 +474,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: blank_
+  scopes:
+    - variable.other.unknown.blank_
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -486,7 +513,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' CharacterSetType'
+- source: CharacterSetType
+  scopes:
+    - variable.other.unknown.CharacterSetType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -505,6 +534,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: charater_set_
+  scopes:
+    - variable.other.unknown.charater_set_
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

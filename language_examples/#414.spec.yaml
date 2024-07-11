@@ -1,4 +1,9 @@
-- source: L_API ALenum
+- source: L_API
+  scopes:
+    - variable.other.unknown.L_API
+- source: ALenum
+  scopes:
+    - variable.other.unknown.ALenum
 - source: AL_APIENTRY
   scopes:
     - meta.qualified_type
@@ -17,6 +22,8 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: START_API_FUNC
+  scopes:
+    - variable.other.unknown.START_API_FUNC
 - source: '{'
   scopesBegin:
     - meta.block
@@ -64,6 +71,8 @@
   scopes:
     - keyword.operator.logical
 - source: context
+  scopes:
+    - variable.other.unknown.context
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -88,6 +97,8 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: AL_INVALID_OPERATION
+  scopes:
+    - variable.other.unknown.AL_INVALID_OPERATION
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -123,7 +134,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' deferror'
+- source: deferror
+  scopes:
+    - variable.other.unknown.deferror
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -139,6 +152,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: TrapALError
+  scopes:
+    - variable.other.unknown.TrapALError
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -210,6 +225,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: SIGTRAP
+  scopes:
+    - variable.other.unknown.SIGTRAP
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -220,6 +237,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: SIGTRAP
+  scopes:
+    - variable.other.unknown.SIGTRAP
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -242,7 +261,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' deferror'
+- source: deferror
+  scopes:
+    - variable.other.unknown.deferror
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -273,6 +294,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: AL_NO_ERROR
+  scopes:
+    - variable.other.unknown.AL_NO_ERROR
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -285,3 +308,5 @@
   scopesEnd:
     - meta.block
 - source: END_API_FUNC
+  scopes:
+    - variable.other.unknown.END_API_FUNC

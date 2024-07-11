@@ -34,7 +34,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -57,7 +59,9 @@
     - punctuation.definition.comment.end
   scopesEnd:
     - comment.block
-- source: '  b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

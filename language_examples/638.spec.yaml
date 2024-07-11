@@ -56,9 +56,11 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.requires
-- source: 'n '
+- source: 'n'
   scopesBegin:
     - meta.arguments.requires
+  scopes:
+    - variable.other.unknown.n
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -114,9 +116,11 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.requires
-- source: 'n '
+- source: 'n'
   scopesBegin:
     - meta.arguments.requires
+  scopes:
+    - variable.other.unknown.n
 - source: <
   scopes:
     - keyword.operator.comparison

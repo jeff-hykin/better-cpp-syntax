@@ -42,6 +42,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: addr
+  scopes:
+    - variable.other.unknown.addr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -50,11 +52,15 @@
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' UPGRADE_BASE_ADDR '
+- source: UPGRADE_BASE_ADDR
+  scopes:
+    - variable.other.unknown.UPGRADE_BASE_ADDR
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' UPGRADE_SPACE_SIZE'
+- source: UPGRADE_SPACE_SIZE
+  scopes:
+    - variable.other.unknown.UPGRADE_SPACE_SIZE
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

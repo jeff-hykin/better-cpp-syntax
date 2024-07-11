@@ -61,7 +61,9 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype
-- source: ' B '
+- source: B
+  scopes:
+    - variable.other.unknown.B
 - source: '='
   scopes:
     - keyword.operator.assignment

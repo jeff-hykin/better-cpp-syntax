@@ -33,6 +33,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: name
+  scopes:
+    - variable.other.unknown.name
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member

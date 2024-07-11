@@ -135,14 +135,20 @@
   scopesEnd:
     - comment.line.double-slash
 - source: B
+  scopes:
+    - variable.other.unknown.B
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: A
+  scopes:
+    - variable.other.unknown.A
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ;
   scopes:
     - punctuation.terminator.statement

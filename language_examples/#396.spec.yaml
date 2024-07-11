@@ -1,19 +1,27 @@
 - source: module
   scopes:
     - keyword.other.module
-- source: ' example'
+- source: example
+  scopes:
+    - variable.other.unknown.example
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: 'import '
+- source: import
+  scopes:
+    - variable.other.unknown.import
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: vector
+  scopes:
+    - variable.other.unknown.vector
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: 'import '
+- source: import
+  scopes:
+    - variable.other.unknown.import
 - source: some
   scopes:
     - variable.other.object.access
@@ -66,7 +74,9 @@
 - source: concept
   scopes:
     - keyword.other.concept
-- source: ' convertible_to '
+- source: convertible_to
+  scopes:
+    - variable.other.unknown.convertible_to
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -78,14 +88,20 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_convertible_v
+  scopes:
+    - variable.other.unknown.is_convertible_v
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: From
+  scopes:
+    - variable.other.unknown.From
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' To'
+- source: To
+  scopes:
+    - variable.other.unknown.To
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -112,6 +128,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -142,6 +160,8 @@
   scopes:
     - keyword.operator.comparison
 - source: To
+  scopes:
+    - variable.other.unknown.To
 - source: '>'
   scopes:
     - keyword.operator.comparison

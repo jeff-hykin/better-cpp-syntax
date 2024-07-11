@@ -64,7 +64,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' Type'
+- source: Type
+  scopes:
+    - variable.other.unknown.Type
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -72,7 +74,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -231,7 +235,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' fn_ptr2'
+- source: fn_ptr2
+  scopes:
+    - variable.other.unknown.fn_ptr2
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -306,7 +312,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' fn_ptr'
+- source: fn_ptr
+  scopes:
+    - variable.other.unknown.fn_ptr
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -497,7 +505,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -542,7 +552,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -740,7 +752,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' fn_ptr2'
+- source: fn_ptr2
+  scopes:
+    - variable.other.unknown.fn_ptr2
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -815,7 +829,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' fn_ptr'
+- source: fn_ptr
+  scopes:
+    - variable.other.unknown.fn_ptr
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -1006,7 +1022,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -1051,7 +1069,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -2373,7 +2393,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

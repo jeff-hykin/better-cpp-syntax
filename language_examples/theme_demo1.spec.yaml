@@ -169,9 +169,11 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '    cout '
+- source: cout
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -282,7 +284,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -323,7 +327,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'c '
+- source: c
+  scopes:
+    - variable.other.unknown.c
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -340,7 +346,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -391,7 +399,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'c '
+- source: c
+  scopes:
+    - variable.other.unknown.c
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -408,7 +418,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

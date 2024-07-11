@@ -17,6 +17,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -38,7 +40,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' num_candidate'
+- source: num_candidate
+  scopes:
+    - variable.other.unknown.num_candidate
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -59,7 +63,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i'
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -70,10 +76,14 @@
   scopes:
     - punctuation.terminator.statement
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: num_candidate
+  scopes:
+    - variable.other.unknown.num_candidate
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -81,6 +91,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -95,6 +107,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -124,6 +138,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -142,6 +158,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -236,7 +254,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'obj '
+- source: obj
+  scopes:
+    - variable.other.unknown.obj
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -338,7 +358,9 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: ' O'
+- source: O
+  scopes:
+    - variable.other.unknown.O
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -360,6 +382,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: options
+  scopes:
+    - variable.other.unknown.options
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma

@@ -96,6 +96,7 @@
 - source: argOne
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.argOne
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -112,6 +113,7 @@
 - source: argOther
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.argOther
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -139,7 +141,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' m_other'
+- source: m_other
+  scopes:
+    - variable.other.unknown.m_other
 - source: ;
   scopes:
     - punctuation.terminator.statement

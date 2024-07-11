@@ -94,7 +94,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -120,6 +122,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -131,7 +135,9 @@
 - source: elifdef
   scopesEnd:
     - keyword.control.directive.elifdef
-- source: ' __linux__'
+- source: __linux__
+  scopes:
+    - variable.other.unknown.__linux__
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -139,7 +145,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -165,6 +173,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement

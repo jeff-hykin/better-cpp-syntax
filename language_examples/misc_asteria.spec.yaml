@@ -331,6 +331,7 @@
 - source: xcbuf
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.xcbuf
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -347,6 +348,7 @@
 - source: xfile
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.xfile
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -843,7 +845,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'ich '
+- source: ich
+  scopes:
+    - variable.other.unknown.ich
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -976,7 +980,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'ich '
+- source: ich
+  scopes:
+    - variable.other.unknown.ich
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -1052,6 +1058,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: ich
+  scopes:
+    - variable.other.unknown.ich
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1472,7 +1480,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'add '
+- source: add
+  scopes:
+    - variable.other.unknown.add
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1539,6 +1549,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: add
+  scopes:
+    - variable.other.unknown.add
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1603,7 +1615,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'add '
+- source: add
+  scopes:
+    - variable.other.unknown.add
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1672,7 +1686,9 @@
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
-- source: ' add'
+- source: add
+  scopes:
+    - variable.other.unknown.add
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1745,7 +1761,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' xoffset'
+- source: xoffset
+  scopes:
+    - variable.other.unknown.xoffset
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1888,11 +1906,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' length'
+- source: length
+  scopes:
+    - variable.other.unknown.length
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' code'
+- source: code
+  scopes:
+    - variable.other.unknown.code
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2480,7 +2502,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' xlength'
+- source: xlength
+  scopes:
+    - variable.other.unknown.xlength
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2668,7 +2692,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -2720,7 +2746,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2742,7 +2770,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -2774,7 +2804,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2808,6 +2840,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -2825,6 +2859,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_utf8_sequence_invalid
+  scopes:
+    - variable.other.unknown.code_utf8_sequence_invalid
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2892,7 +2928,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -2915,7 +2953,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -2944,7 +2984,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'u8len '
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -2963,7 +3005,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'u8len '
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: <=
   scopes:
     - keyword.operator.comparison
@@ -2984,7 +3028,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'u8len '
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -3031,6 +3077,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3060,6 +3108,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_utf8_sequence_incomplete
+  scopes:
+    - variable.other.unknown.code_utf8_sequence_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3079,7 +3129,9 @@
 - source: ' Unset bits that are not part of the payload.'
   scopesEnd:
     - comment.line.double-slash
-- source: '        cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '&'
   scopes:
     - keyword.operator.bitwise
@@ -3104,7 +3156,9 @@
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' u8len'
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3137,7 +3191,9 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3147,11 +3203,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' u8len'
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3159,6 +3219,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -3195,6 +3257,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -3223,7 +3287,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -3255,7 +3321,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' next'
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3289,10 +3357,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -3310,6 +3382,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_utf8_sequence_invalid
+  scopes:
+    - variable.other.unknown.code_utf8_sequence_invalid
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3321,7 +3395,9 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '          cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3330,7 +3406,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -3350,7 +3428,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '&'
   scopes:
     - keyword.operator.bitwise
@@ -3400,7 +3480,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3414,7 +3496,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -3451,7 +3535,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3485,10 +3571,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' u8len'
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3500,6 +3590,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_utf_code_point_invalid
+  scopes:
+    - variable.other.unknown.code_utf_code_point_invalid
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3567,7 +3659,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -3590,7 +3684,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -3613,7 +3709,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -3644,11 +3742,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'mlen '
+- source: mlen
+  scopes:
+    - variable.other.unknown.mlen
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' u8len'
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -3677,10 +3779,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' u8len'
+- source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3692,6 +3798,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_utf8_sequence_invalid
+  scopes:
+    - variable.other.unknown.code_utf8_sequence_invalid
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3716,6 +3824,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: u8len
+  scopes:
+    - variable.other.unknown.u8len
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -3725,7 +3835,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3918,7 +4030,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' length'
+- source: length
+  scopes:
+    - variable.other.unknown.length
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3952,6 +4066,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3974,6 +4090,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: length
+  scopes:
+    - variable.other.unknown.length
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -4316,6 +4434,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: lhs
+  scopes:
+    - variable.other.unknown.lhs
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4501,7 +4621,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' rhs'
+- source: rhs
+  scopes:
+    - variable.other.unknown.rhs
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4722,6 +4844,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_name_chars
+  scopes:
+    - variable.other.unknown.s_name_chars
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4799,7 +4923,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4846,10 +4972,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4929,6 +5059,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_name_chars
+  scopes:
+    - variable.other.unknown.s_name_chars
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4938,7 +5070,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4993,11 +5127,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -5018,6 +5156,8 @@
   scopes:
     - keyword.operator.logical
 - source: keyword_as_identifier
+  scopes:
+    - variable.other.unknown.keyword_as_identifier
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -5168,7 +5308,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_and       '
+- source: keyword_and
+  scopes:
+    - variable.other.unknown.keyword_and
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5203,7 +5345,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_assert    '
+- source: keyword_assert
+  scopes:
+    - variable.other.unknown.keyword_assert
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5238,7 +5382,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_break     '
+- source: keyword_break
+  scopes:
+    - variable.other.unknown.keyword_break
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5273,7 +5419,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_case      '
+- source: keyword_case
+  scopes:
+    - variable.other.unknown.keyword_case
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5308,7 +5456,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_catch     '
+- source: keyword_catch
+  scopes:
+    - variable.other.unknown.keyword_catch
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5343,7 +5493,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_const     '
+- source: keyword_const
+  scopes:
+    - variable.other.unknown.keyword_const
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5378,7 +5530,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_continue  '
+- source: keyword_continue
+  scopes:
+    - variable.other.unknown.keyword_continue
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5413,7 +5567,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_default   '
+- source: keyword_default
+  scopes:
+    - variable.other.unknown.keyword_default
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5448,7 +5604,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_defer     '
+- source: keyword_defer
+  scopes:
+    - variable.other.unknown.keyword_defer
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5483,7 +5641,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_do        '
+- source: keyword_do
+  scopes:
+    - variable.other.unknown.keyword_do
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5518,7 +5678,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_each      '
+- source: keyword_each
+  scopes:
+    - variable.other.unknown.keyword_each
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5553,7 +5715,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_else      '
+- source: keyword_else
+  scopes:
+    - variable.other.unknown.keyword_else
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5588,7 +5752,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_false     '
+- source: keyword_false
+  scopes:
+    - variable.other.unknown.keyword_false
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5623,7 +5789,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_for       '
+- source: keyword_for
+  scopes:
+    - variable.other.unknown.keyword_for
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5658,7 +5826,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_func      '
+- source: keyword_func
+  scopes:
+    - variable.other.unknown.keyword_func
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5693,7 +5863,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_if        '
+- source: keyword_if
+  scopes:
+    - variable.other.unknown.keyword_if
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5728,7 +5900,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_infinity  '
+- source: keyword_infinity
+  scopes:
+    - variable.other.unknown.keyword_infinity
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5763,7 +5937,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_lengthof  '
+- source: keyword_lengthof
+  scopes:
+    - variable.other.unknown.keyword_lengthof
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5798,7 +5974,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_nan       '
+- source: keyword_nan
+  scopes:
+    - variable.other.unknown.keyword_nan
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5833,7 +6011,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_not       '
+- source: keyword_not
+  scopes:
+    - variable.other.unknown.keyword_not
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5868,7 +6048,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_null      '
+- source: keyword_null
+  scopes:
+    - variable.other.unknown.keyword_null
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5903,7 +6085,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_or        '
+- source: keyword_or
+  scopes:
+    - variable.other.unknown.keyword_or
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5938,7 +6122,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_return    '
+- source: keyword_return
+  scopes:
+    - variable.other.unknown.keyword_return
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -5973,7 +6159,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_switch    '
+- source: keyword_switch
+  scopes:
+    - variable.other.unknown.keyword_switch
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6008,7 +6196,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_this      '
+- source: keyword_this
+  scopes:
+    - variable.other.unknown.keyword_this
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6043,7 +6233,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_throw     '
+- source: keyword_throw
+  scopes:
+    - variable.other.unknown.keyword_throw
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6078,7 +6270,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_true      '
+- source: keyword_true
+  scopes:
+    - variable.other.unknown.keyword_true
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6113,7 +6307,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_try       '
+- source: keyword_try
+  scopes:
+    - variable.other.unknown.keyword_try
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6148,7 +6344,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_typeof    '
+- source: keyword_typeof
+  scopes:
+    - variable.other.unknown.keyword_typeof
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6183,7 +6381,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_unset     '
+- source: keyword_unset
+  scopes:
+    - variable.other.unknown.keyword_unset
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6218,7 +6418,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_var       '
+- source: keyword_var
+  scopes:
+    - variable.other.unknown.keyword_var
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6253,7 +6455,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_while     '
+- source: keyword_while
+  scopes:
+    - variable.other.unknown.keyword_while
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -6318,6 +6522,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_keywords
+  scopes:
+    - variable.other.unknown.s_keywords
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6338,6 +6544,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_keywords
+  scopes:
+    - variable.other.unknown.s_keywords
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6406,6 +6614,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_keywords
+  scopes:
+    - variable.other.unknown.s_keywords
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6426,6 +6636,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_keywords
+  scopes:
+    - variable.other.unknown.s_keywords
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6656,7 +6868,9 @@
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -6707,6 +6921,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -6722,7 +6938,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6804,14 +7022,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -6829,6 +7053,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6909,10 +7135,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6931,14 +7161,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -6956,6 +7192,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7153,6 +7391,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punct_chars
+  scopes:
+    - variable.other.unknown.s_punct_chars
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7193,6 +7433,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punct_chars
+  scopes:
+    - variable.other.unknown.s_punct_chars
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7388,7 +7630,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_notl        '
+- source: punctuator_notl
+  scopes:
+    - variable.other.unknown.punctuator_notl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7423,7 +7667,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_ne      '
+- source: punctuator_cmp_ne
+  scopes:
+    - variable.other.unknown.punctuator_cmp_ne
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7458,7 +7704,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_mod         '
+- source: punctuator_mod
+  scopes:
+    - variable.other.unknown.punctuator_mod
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7493,7 +7741,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_mod_eq      '
+- source: punctuator_mod_eq
+  scopes:
+    - variable.other.unknown.punctuator_mod_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7528,7 +7778,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_andb        '
+- source: punctuator_andb
+  scopes:
+    - variable.other.unknown.punctuator_andb
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7563,7 +7815,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_andl        '
+- source: punctuator_andl
+  scopes:
+    - variable.other.unknown.punctuator_andl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7598,7 +7852,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_andl_eq     '
+- source: punctuator_andl_eq
+  scopes:
+    - variable.other.unknown.punctuator_andl_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7633,7 +7889,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_andb_eq     '
+- source: punctuator_andb_eq
+  scopes:
+    - variable.other.unknown.punctuator_andb_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7668,7 +7926,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_parenth_op  '
+- source: punctuator_parenth_op
+  scopes:
+    - variable.other.unknown.punctuator_parenth_op
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7703,7 +7963,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_parenth_cl  '
+- source: punctuator_parenth_cl
+  scopes:
+    - variable.other.unknown.punctuator_parenth_cl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7738,7 +8000,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_mul         '
+- source: punctuator_mul
+  scopes:
+    - variable.other.unknown.punctuator_mul
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7773,7 +8037,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_mul_eq      '
+- source: punctuator_mul_eq
+  scopes:
+    - variable.other.unknown.punctuator_mul_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7808,7 +8074,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_add         '
+- source: punctuator_add
+  scopes:
+    - variable.other.unknown.punctuator_add
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7843,7 +8111,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_inc         '
+- source: punctuator_inc
+  scopes:
+    - variable.other.unknown.punctuator_inc
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7878,7 +8148,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_add_eq      '
+- source: punctuator_add_eq
+  scopes:
+    - variable.other.unknown.punctuator_add_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7913,7 +8185,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_comma       '
+- source: punctuator_comma
+  scopes:
+    - variable.other.unknown.punctuator_comma
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7948,7 +8222,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sub         '
+- source: punctuator_sub
+  scopes:
+    - variable.other.unknown.punctuator_sub
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7983,7 +8259,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_dec         '
+- source: punctuator_dec
+  scopes:
+    - variable.other.unknown.punctuator_dec
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8018,7 +8296,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sub_eq      '
+- source: punctuator_sub_eq
+  scopes:
+    - variable.other.unknown.punctuator_sub_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8053,7 +8333,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_dot         '
+- source: punctuator_dot
+  scopes:
+    - variable.other.unknown.punctuator_dot
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8088,7 +8370,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_ellipsis    '
+- source: punctuator_ellipsis
+  scopes:
+    - variable.other.unknown.punctuator_ellipsis
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8123,7 +8407,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_div         '
+- source: punctuator_div
+  scopes:
+    - variable.other.unknown.punctuator_div
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8158,7 +8444,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_div_eq      '
+- source: punctuator_div_eq
+  scopes:
+    - variable.other.unknown.punctuator_div_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8193,7 +8481,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_colon       '
+- source: punctuator_colon
+  scopes:
+    - variable.other.unknown.punctuator_colon
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8228,7 +8518,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_semicol     '
+- source: punctuator_semicol
+  scopes:
+    - variable.other.unknown.punctuator_semicol
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8263,7 +8555,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_lt      '
+- source: punctuator_cmp_lt
+  scopes:
+    - variable.other.unknown.punctuator_cmp_lt
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8298,7 +8592,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sla         '
+- source: punctuator_sla
+  scopes:
+    - variable.other.unknown.punctuator_sla
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8333,7 +8629,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sll         '
+- source: punctuator_sll
+  scopes:
+    - variable.other.unknown.punctuator_sll
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8368,7 +8666,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sll_eq      '
+- source: punctuator_sll_eq
+  scopes:
+    - variable.other.unknown.punctuator_sll_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8403,7 +8703,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sla_eq      '
+- source: punctuator_sla_eq
+  scopes:
+    - variable.other.unknown.punctuator_sla_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8438,7 +8740,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_lte     '
+- source: punctuator_cmp_lte
+  scopes:
+    - variable.other.unknown.punctuator_cmp_lte
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8473,7 +8777,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_spaceship   '
+- source: punctuator_spaceship
+  scopes:
+    - variable.other.unknown.punctuator_spaceship
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8508,7 +8814,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_assign      '
+- source: punctuator_assign
+  scopes:
+    - variable.other.unknown.punctuator_assign
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8543,7 +8851,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_eq      '
+- source: punctuator_cmp_eq
+  scopes:
+    - variable.other.unknown.punctuator_cmp_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8578,7 +8888,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_gt      '
+- source: punctuator_cmp_gt
+  scopes:
+    - variable.other.unknown.punctuator_cmp_gt
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8613,7 +8925,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_cmp_gte     '
+- source: punctuator_cmp_gte
+  scopes:
+    - variable.other.unknown.punctuator_cmp_gte
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8648,7 +8962,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sra         '
+- source: punctuator_sra
+  scopes:
+    - variable.other.unknown.punctuator_sra
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8683,7 +8999,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sra_eq      '
+- source: punctuator_sra_eq
+  scopes:
+    - variable.other.unknown.punctuator_sra_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8718,7 +9036,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_srl         '
+- source: punctuator_srl
+  scopes:
+    - variable.other.unknown.punctuator_srl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8753,7 +9073,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_srl_eq      '
+- source: punctuator_srl_eq
+  scopes:
+    - variable.other.unknown.punctuator_srl_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8788,7 +9110,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_quest       '
+- source: punctuator_quest
+  scopes:
+    - variable.other.unknown.punctuator_quest
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8823,7 +9147,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_quest_eq    '
+- source: punctuator_quest_eq
+  scopes:
+    - variable.other.unknown.punctuator_quest_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8861,7 +9187,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_coales      '
+- source: punctuator_coales
+  scopes:
+    - variable.other.unknown.punctuator_coales
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8900,7 +9228,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_coales_eq   '
+- source: punctuator_coales_eq
+  scopes:
+    - variable.other.unknown.punctuator_coales_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8935,7 +9265,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_bracket_op  '
+- source: punctuator_bracket_op
+  scopes:
+    - variable.other.unknown.punctuator_bracket_op
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -8970,7 +9302,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_bracket_cl  '
+- source: punctuator_bracket_cl
+  scopes:
+    - variable.other.unknown.punctuator_bracket_cl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9005,7 +9339,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_xorb        '
+- source: punctuator_xorb
+  scopes:
+    - variable.other.unknown.punctuator_xorb
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9040,7 +9376,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_xorb_eq     '
+- source: punctuator_xorb_eq
+  scopes:
+    - variable.other.unknown.punctuator_xorb_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9075,7 +9413,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_brace_op    '
+- source: punctuator_brace_op
+  scopes:
+    - variable.other.unknown.punctuator_brace_op
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9110,7 +9450,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_orb         '
+- source: punctuator_orb
+  scopes:
+    - variable.other.unknown.punctuator_orb
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9145,7 +9487,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_orb_eq      '
+- source: punctuator_orb_eq
+  scopes:
+    - variable.other.unknown.punctuator_orb_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9180,7 +9524,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_orl         '
+- source: punctuator_orl
+  scopes:
+    - variable.other.unknown.punctuator_orl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9215,7 +9561,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_orl_eq      '
+- source: punctuator_orl_eq
+  scopes:
+    - variable.other.unknown.punctuator_orl_eq
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9250,7 +9598,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_brace_cl    '
+- source: punctuator_brace_cl
+  scopes:
+    - variable.other.unknown.punctuator_brace_cl
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9285,7 +9635,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_notb        '
+- source: punctuator_notb
+  scopes:
+    - variable.other.unknown.punctuator_notb
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -9350,6 +9702,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punctuators
+  scopes:
+    - variable.other.unknown.s_punctuators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9370,6 +9724,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punctuators
+  scopes:
+    - variable.other.unknown.s_punctuators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9450,6 +9806,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punctuators
+  scopes:
+    - variable.other.unknown.s_punctuators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9470,6 +9828,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_punctuators
+  scopes:
+    - variable.other.unknown.s_punctuators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9706,7 +10066,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: <=
   scopes:
     - keyword.operator.comparison
@@ -9775,6 +10137,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -9790,7 +10154,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9872,14 +10238,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -9897,6 +10269,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10172,7 +10546,9 @@
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' head'
+- source: head
+  scopes:
+    - variable.other.unknown.head
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -10251,6 +10627,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: escapable
+  scopes:
+    - variable.other.unknown.escapable
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -10324,7 +10702,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10336,7 +10716,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'qavail '
+- source: qavail
+  scopes:
+    - variable.other.unknown.qavail
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -10363,6 +10745,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -10392,6 +10776,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_string_literal_unclosed
+  scopes:
+    - variable.other.unknown.code_string_literal_unclosed
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10423,6 +10809,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -10435,6 +10823,8 @@
   scopes:
     - keyword.operator.increment
 - source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10446,11 +10836,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' head'
+- source: head
+  scopes:
+    - variable.other.unknown.head
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -10488,7 +10882,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -10536,6 +10932,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -10569,7 +10967,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'qavail '
+- source: qavail
+  scopes:
+    - variable.other.unknown.qavail
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -10596,6 +10996,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -10625,6 +11027,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_escape_sequence_incomplete
+  scopes:
+    - variable.other.unknown.code_escape_sequence_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10636,7 +11040,9 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '            next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10649,6 +11055,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -10661,6 +11069,8 @@
   scopes:
     - keyword.operator.increment
 - source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10693,6 +11103,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -10800,6 +11212,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -11523,7 +11937,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                xcnt '
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -11580,7 +11996,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                xcnt '
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -11637,7 +12055,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '                xcnt '
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -11667,11 +12087,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'qavail '
+- source: qavail
+  scopes:
+    - variable.other.unknown.qavail
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' xcnt '
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -11698,6 +12122,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -11727,6 +12153,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_escape_sequence_incomplete
+  scopes:
+    - variable.other.unknown.code_escape_sequence_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11769,23 +12197,33 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' xcnt'
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -11793,6 +12231,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -11889,6 +12329,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -11907,6 +12349,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -11930,6 +12374,8 @@
   scopes:
     - keyword.operator.logical
 - source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11950,10 +12396,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -11971,6 +12421,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_escape_sequence_invalid_hex
+  scopes:
+    - variable.other.unknown.code_escape_sequence_invalid_hex
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -12017,11 +12469,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'dptr '
+- source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' s_digits'
+- source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12041,11 +12497,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '                  cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -12055,7 +12515,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -12072,7 +12534,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -12137,6 +12601,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12194,7 +12660,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12208,7 +12676,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -12245,7 +12715,9 @@
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' cpnt'
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12279,14 +12751,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' xcnt'
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -12298,6 +12776,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_escape_utf_code_point_invalid
+  scopes:
+    - variable.other.unknown.code_escape_utf_code_point_invalid
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -12413,7 +12893,9 @@
 - source: '~'
   scopes:
     - keyword.operator.bitwise
-- source: 'mask '
+- source: mask
+  scopes:
+    - variable.other.unknown.mask
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -12438,11 +12920,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' shift'
+- source: shift
+  scopes:
+    - variable.other.unknown.shift
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12451,7 +12937,9 @@
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' mask'
+- source: mask
+  scopes:
+    - variable.other.unknown.mask
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -12484,7 +12972,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -12547,7 +13037,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -12634,7 +13126,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'cpnt '
+- source: cpnt
+  scopes:
+    - variable.other.unknown.cpnt
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -12864,10 +13358,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -12879,6 +13377,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_escape_sequence_unknown
+  scopes:
+    - variable.other.unknown.code_escape_sequence_unknown
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -12891,11 +13391,15 @@
   scopesEnd:
     - meta.block.switch
     - meta.body.switch
-- source: '            tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
-- source: ' xcnt'
+- source: xcnt
+  scopes:
+    - variable.other.unknown.xcnt
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -12972,7 +13476,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -13006,7 +13512,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' head'
+- source: head
+  scopes:
+    - variable.other.unknown.head
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13025,6 +13533,8 @@
   scopes:
     - keyword.operator.logical
 - source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -13045,6 +13555,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -13074,6 +13586,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_string_literal_unclosed
+  scopes:
+    - variable.other.unknown.code_string_literal_unclosed
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13089,6 +13603,8 @@
   scopes:
     - keyword.operator.increment
 - source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -13104,7 +13620,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -13114,7 +13632,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -13127,7 +13647,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -13157,11 +13679,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -13214,6 +13740,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13232,14 +13760,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -13257,6 +13791,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13647,6 +14183,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_punctuator
+  scopes:
+    - variable.other.unknown.index_punctuator
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -13720,6 +14258,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: S_punctuator
+  scopes:
+    - variable.other.unknown.S_punctuator
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -13751,6 +14291,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_add
+  scopes:
+    - variable.other.unknown.punctuator_add
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -13761,7 +14303,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_sub }'
+- source: punctuator_sub
+  scopes:
+    - variable.other.unknown.punctuator_sub
+- source: ' }'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13942,6 +14487,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_keyword
+  scopes:
+    - variable.other.unknown.index_keyword
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -13989,6 +14536,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: S_keyword
+  scopes:
+    - variable.other.unknown.S_keyword
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -14058,6 +14607,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: keyword_null
+  scopes:
+    - variable.other.unknown.keyword_null
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14069,6 +14620,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: keyword_true
+  scopes:
+    - variable.other.unknown.keyword_true
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14080,6 +14633,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: keyword_false
+  scopes:
+    - variable.other.unknown.keyword_false
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14091,6 +14646,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: keyword_nan
+  scopes:
+    - variable.other.unknown.keyword_nan
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14102,6 +14659,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: keyword_infinity
+  scopes:
+    - variable.other.unknown.keyword_infinity
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14112,7 +14671,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'keyword_this }'
+- source: keyword_this
+  scopes:
+    - variable.other.unknown.keyword_this
+- source: ' }'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14131,6 +14693,8 @@
   scopes:
     - keyword.operator.logical
 - source: mergeable
+  scopes:
+    - variable.other.unknown.mergeable
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -14179,6 +14743,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_punctuator
+  scopes:
+    - variable.other.unknown.index_punctuator
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -14226,6 +14792,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: S_punctuator
+  scopes:
+    - variable.other.unknown.S_punctuator
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -14295,6 +14863,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_inc
+  scopes:
+    - variable.other.unknown.punctuator_inc
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14306,6 +14876,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_dec
+  scopes:
+    - variable.other.unknown.punctuator_dec
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14317,6 +14889,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_parenth_cl
+  scopes:
+    - variable.other.unknown.punctuator_parenth_cl
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14328,6 +14902,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_bracket_cl
+  scopes:
+    - variable.other.unknown.punctuator_bracket_cl
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14338,7 +14914,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'punctuator_brace_cl }'
+- source: punctuator_brace_cl
+  scopes:
+    - variable.other.unknown.punctuator_brace_cl
+- source: ' }'
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14357,6 +14936,8 @@
   scopes:
     - keyword.operator.logical
 - source: mergeable
+  scopes:
+    - variable.other.unknown.mergeable
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -14405,6 +14986,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_identifier
+  scopes:
+    - variable.other.unknown.index_identifier
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -14419,6 +15002,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_integer_literal
+  scopes:
+    - variable.other.unknown.index_integer_literal
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -14433,6 +15018,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_real_literal
+  scopes:
+    - variable.other.unknown.index_real_literal
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -14447,6 +15034,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: index_string_literal
+  scopes:
+    - variable.other.unknown.index_string_literal
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -14566,7 +15155,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' qstok'
+- source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -14818,6 +15409,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14887,7 +15480,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -14977,7 +15572,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' int_end '
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15014,7 +15611,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' frac_end '
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15085,7 +15684,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' exp_end '
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15120,6 +15721,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -15168,7 +15771,9 @@
 - source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
-- source: 'int_begin '
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -15195,6 +15800,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -15244,7 +15851,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '            radix '
+- source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15254,7 +15863,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '            int_begin '
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -15308,7 +15919,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '            radix '
+- source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15318,7 +15931,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '            int_begin '
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -15382,7 +15997,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'radix '
+- source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -15429,15 +16046,21 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' int_begin'
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15485,7 +16108,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'ch '
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -15545,14 +16170,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' max_digits'
+- source: max_digits
+  scopes:
+    - variable.other.unknown.max_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15570,7 +16201,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        int_end '
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15600,11 +16233,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15621,11 +16258,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'int_end '
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' int_begin'
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15646,10 +16287,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' int_end'
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15661,6 +16306,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_numeric_literal_incomplete
+  scopes:
+    - variable.other.unknown.code_numeric_literal_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15680,19 +16327,27 @@
 - source: ' Look for the fractional part.'
   scopesEnd:
     - comment.line.double-slash
-- source: '        frac_begin '
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' int_end'
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        frac_end '
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' frac_begin'
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15716,6 +16371,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -15732,7 +16389,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -15761,10 +16420,14 @@
   scopes:
     - keyword.operator.increment
 - source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15781,15 +16444,21 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' frac_begin'
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15837,7 +16506,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'ch '
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -15897,14 +16568,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' max_digits'
+- source: max_digits
+  scopes:
+    - variable.other.unknown.max_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15922,7 +16599,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          frac_end '
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -15952,11 +16631,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15973,11 +16656,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'frac_end '
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' frac_begin'
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15998,10 +16685,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' frac_end'
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16013,6 +16704,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_numeric_literal_incomplete
+  scopes:
+    - variable.other.unknown.code_numeric_literal_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16037,23 +16730,33 @@
 - source: ' Look for the exponent.'
   scopesEnd:
     - comment.line.double-slash
-- source: '        exp_begin '
+- source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' frac_end'
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        exp_end '
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' exp_begin'
+- source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16066,6 +16769,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -16086,6 +16791,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -16135,7 +16842,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '          exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16149,6 +16858,8 @@
   scopes:
     - keyword.operator.increment
 - source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -16196,7 +16907,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '          exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16210,6 +16923,8 @@
   scopes:
     - keyword.operator.increment
 - source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -16233,7 +16948,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -16250,7 +16967,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '          next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16263,6 +16982,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -16283,6 +17004,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: next
+  scopes:
+    - variable.other.unknown.next
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -16315,7 +17038,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '            exp_sign '
+- source: exp_sign
+  scopes:
+    - variable.other.unknown.exp_sign
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16329,6 +17054,8 @@
   scopes:
     - keyword.operator.increment
 - source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -16359,7 +17086,9 @@
     - punctuation.separator.colon.case
   scopesEnd:
     - meta.conditional.case
-- source: '            exp_sign '
+- source: exp_sign
+  scopes:
+    - variable.other.unknown.exp_sign
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16373,6 +17102,8 @@
   scopes:
     - keyword.operator.increment
 - source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -16388,7 +17119,9 @@
   scopesEnd:
     - meta.block.switch
     - meta.body.switch
-- source: '          tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16405,15 +17138,21 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' exp_begin'
+- source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16461,7 +17200,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'ch '
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -16521,6 +17262,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16530,7 +17273,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16548,7 +17293,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          exp_end '
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16578,11 +17325,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16599,11 +17350,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp_end '
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' exp_begin'
+- source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16624,10 +17379,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' exp_end'
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16639,6 +17398,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_numeric_literal_incomplete
+  scopes:
+    - variable.other.unknown.code_numeric_literal_incomplete
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16703,7 +17464,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '        tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16720,15 +17483,21 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' exp_end'
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16808,6 +17577,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_suffix_chars
+  scopes:
+    - variable.other.unknown.s_suffix_chars
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16817,7 +17588,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16872,11 +17645,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16893,11 +17670,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' exp_end'
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -16918,10 +17699,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16933,6 +17718,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_numeric_literal_suffix_disallowed
+  scopes:
+    - variable.other.unknown.code_numeric_literal_suffix_disallowed
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16983,19 +17770,27 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' exp_begin'
+- source: exp_begin
+  scopes:
+    - variable.other.unknown.exp_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' exp_end'
+- source: exp_end
+  scopes:
+    - variable.other.unknown.exp_end
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17003,6 +17798,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -17063,6 +17860,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -17081,6 +17880,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -17104,6 +17905,8 @@
   scopes:
     - keyword.operator.logical
 - source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17160,11 +17963,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'dptr '
+- source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' s_digits'
+- source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17200,11 +18007,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'INT_MAX '
+- source: INT_MAX
+  scopes:
+    - variable.other.unknown.INT_MAX
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17227,11 +18038,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp '
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' bound'
+- source: bound
+  scopes:
+    - variable.other.unknown.bound
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17252,10 +18067,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -17267,6 +18086,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_numeric_literal_exponent_overflow
+  scopes:
+    - variable.other.unknown.code_numeric_literal_exponent_overflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -17278,11 +18099,15 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '          exp '
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' exp '
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -17292,7 +18117,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17310,6 +18137,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: exp_sign
+  scopes:
+    - variable.other.unknown.exp_sign
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17320,7 +18149,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '          exp '
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17328,6 +18159,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17355,7 +18188,9 @@
 - source: '!'
   scopes:
     - keyword.operator.logical
-- source: 'integer_as_real '
+- source: integer_as_real
+  scopes:
+    - variable.other.unknown.integer_as_real
 - source: '&&'
   scopes:
     - keyword.operator.logical
@@ -17364,11 +18199,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'frac_begin '
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' int_end'
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17404,7 +18243,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp '
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -17431,10 +18272,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -17446,6 +18291,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_integer_literal_exponent_negative
+  scopes:
+    - variable.other.unknown.code_integer_literal_exponent_negative
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -17506,19 +18353,27 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' int_begin'
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' int_end'
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17526,6 +18381,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -17586,10 +18443,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' max_digits'
+- source: max_digits
+  scopes:
+    - variable.other.unknown.max_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -17602,6 +18463,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -17625,6 +18488,8 @@
   scopes:
     - keyword.operator.logical
 - source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17688,11 +18553,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'dptr '
+- source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' s_digits'
+- source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17769,7 +18638,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17798,6 +18669,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17814,11 +18687,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' bound'
+- source: bound
+  scopes:
+    - variable.other.unknown.bound
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17839,10 +18716,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -17854,6 +18735,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_integer_literal_overflow
+  scopes:
+    - variable.other.unknown.code_integer_literal_overflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -17865,11 +18748,15 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '            value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -17893,6 +18780,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -17901,7 +18790,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17926,7 +18817,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -17957,7 +18850,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -17967,11 +18862,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' exp'
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -17979,6 +18878,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -18063,6 +18964,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18079,11 +18982,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' bound'
+- source: bound
+  scopes:
+    - variable.other.unknown.bound
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18104,10 +19011,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -18119,6 +19030,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_integer_literal_overflow
+  scopes:
+    - variable.other.unknown.code_integer_literal_overflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -18130,7 +19043,9 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '              value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '*='
   scopes:
     - keyword.operator.assignment.compound
@@ -18154,6 +19069,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18198,10 +19115,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -18234,7 +19155,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'qstok '
+- source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: '&&'
   scopes:
     - keyword.operator.logical
@@ -18258,6 +19181,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: S_punctuator
+  scopes:
+    - variable.other.unknown.S_punctuator
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -18288,6 +19213,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_sub
+  scopes:
+    - variable.other.unknown.punctuator_sub
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18296,7 +19223,9 @@
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' UINT64_MAX '
+- source: UINT64_MAX
+  scopes:
+    - variable.other.unknown.UINT64_MAX
 - source: ':'
   scopes:
     - keyword.operator.ternary
@@ -18327,7 +19256,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -18372,7 +19303,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'smask '
+- source: smask
+  scopes:
+    - variable.other.unknown.smask
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -18404,10 +19337,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -18419,6 +19356,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_integer_literal_overflow
+  scopes:
+    - variable.other.unknown.code_integer_literal_overflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -18439,6 +19378,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18457,7 +19398,9 @@
 - source: ' Overwrite the previous token.'
   scopesEnd:
     - comment.line.double-slash
-- source: '            tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -18530,7 +19473,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '            qstok '
+- source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -18627,11 +19572,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ^
   scopes:
     - keyword.operator.bitwise
-- source: ' smask'
+- source: smask
+  scopes:
+    - variable.other.unknown.smask
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18640,7 +19589,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' smask'
+- source: smask
+  scopes:
+    - variable.other.unknown.smask
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18661,14 +19612,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -18686,6 +19643,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -18769,19 +19728,27 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' int_begin'
+- source: int_begin
+  scopes:
+    - variable.other.unknown.int_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' int_end'
+- source: int_end
+  scopes:
+    - variable.other.unknown.int_end
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -18789,6 +19756,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -18849,10 +19818,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' max_digits'
+- source: max_digits
+  scopes:
+    - variable.other.unknown.max_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -18865,6 +19838,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -18888,6 +19863,8 @@
   scopes:
     - keyword.operator.logical
 - source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18944,11 +19921,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'dptr '
+- source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' s_digits'
+- source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -18968,30 +19949,42 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' radix '
+- source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          zero '
+- source: zero
+  scopes:
+    - variable.other.unknown.zero
 - source: '|'
   scopes:
     - keyword.operator.bitwise
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -19039,11 +20032,15 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' frac_end '
+- source: frac_end
+  scopes:
+    - variable.other.unknown.frac_end
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -19053,7 +20050,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -19063,7 +20062,9 @@
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' frac_begin'
+- source: frac_begin
+  scopes:
+    - variable.other.unknown.frac_begin
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -19071,6 +20072,8 @@
   scopes:
     - keyword.operator.decrement
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -19131,10 +20134,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' max_digits'
+- source: max_digits
+  scopes:
+    - variable.other.unknown.max_digits
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -19147,6 +20154,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -19170,6 +20179,8 @@
   scopes:
     - keyword.operator.logical
 - source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19226,11 +20237,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'dptr '
+- source: dptr
+  scopes:
+    - variable.other.unknown.dptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' s_digits'
+- source: s_digits
+  scopes:
+    - variable.other.unknown.s_digits
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19250,7 +20265,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          frac '
+- source: frac
+  scopes:
+    - variable.other.unknown.frac
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19259,11 +20276,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'frac '
+- source: frac
+  scopes:
+    - variable.other.unknown.frac
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19272,18 +20293,24 @@
 - source: /
   scopes:
     - keyword.operator.arithmetic
-- source: ' radix'
+- source: radix
+  scopes:
+    - variable.other.unknown.radix
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          zero '
+- source: zero
+  scopes:
+    - variable.other.unknown.zero
 - source: '|'
   scopes:
     - keyword.operator.bitwise
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' dvalue'
+- source: dvalue
+  scopes:
+    - variable.other.unknown.dvalue
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -19292,11 +20319,15 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '        value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
-- source: ' frac'
+- source: frac
+  scopes:
+    - variable.other.unknown.frac
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -19316,11 +20347,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' FLT_RADIX'
+- source: FLT_RADIX
+  scopes:
+    - variable.other.unknown.FLT_RADIX
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19331,7 +20366,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '          value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19349,10 +20386,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' exp'
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19396,7 +20437,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'exp_base '
+- source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -19413,7 +20456,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '          value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19431,10 +20476,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' exp'
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19462,11 +20511,15 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '          value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -19484,10 +20537,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: exp_base
+  scopes:
+    - variable.other.unknown.exp_base
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' exp'
+- source: exp
+  scopes:
+    - variable.other.unknown.exp
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19532,6 +20589,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19546,11 +20605,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'fpc '
+- source: fpc
+  scopes:
+    - variable.other.unknown.fpc
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' FP_INFINITE'
+- source: FP_INFINITE
+  scopes:
+    - variable.other.unknown.FP_INFINITE
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19571,10 +20634,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -19586,6 +20653,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_real_literal_overflow
+  scopes:
+    - variable.other.unknown.code_real_literal_overflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19610,11 +20679,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'fpc '
+- source: fpc
+  scopes:
+    - variable.other.unknown.fpc
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' FP_ZERO'
+- source: FP_ZERO
+  scopes:
+    - variable.other.unknown.FP_ZERO
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19627,6 +20700,8 @@
   scopesEnd:
     - keyword.operator.logical
 - source: zero
+  scopes:
+    - variable.other.unknown.zero
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19647,10 +20722,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -19662,6 +20741,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_real_literal_underflow
+  scopes:
+    - variable.other.unknown.code_real_literal_underflow
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19699,10 +20780,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -19725,7 +20810,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'qstok '
+- source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: '&&'
   scopes:
     - keyword.operator.logical
@@ -19749,6 +20836,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: S_punctuator
+  scopes:
+    - variable.other.unknown.S_punctuator
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -19779,6 +20868,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: punctuator_sub
+  scopes:
+    - variable.other.unknown.punctuator_sub
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19811,6 +20902,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -19829,7 +20922,9 @@
 - source: ' Overwrite the previous token.'
   scopesEnd:
     - comment.line.double-slash
-- source: '          tlen '
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -19902,7 +20997,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '          qstok '
+- source: qstok
+  scopes:
+    - variable.other.unknown.qstok
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -19982,10 +21079,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' fmask'
+- source: fmask
+  scopes:
+    - variable.other.unknown.fmask
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -20004,14 +21105,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tlen'
+- source: tlen
+  scopes:
+    - variable.other.unknown.tlen
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -20029,6 +21136,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: xtoken
+  scopes:
+    - variable.other.unknown.xtoken
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -20254,10 +21363,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: cbuf
+  scopes:
+    - variable.other.unknown.cbuf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' file'
+- source: file
+  scopes:
+    - variable.other.unknown.file
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -20558,6 +21671,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -20663,6 +21778,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: bcomm
+  scopes:
+    - variable.other.unknown.bcomm
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -20788,7 +21905,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' bptr '
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -20835,18 +21954,26 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s_bcomm_term'
+- source: s_bcomm_term
+  scopes:
+    - variable.other.unknown.s_bcomm_term
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s_bcomm_term '
+- source: s_bcomm_term
+  scopes:
+    - variable.other.unknown.s_bcomm_term
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -20867,11 +21994,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '=='
   scopes:
     - keyword.operator.comparison
-- source: ' eptr'
+- source: eptr
+  scopes:
+    - variable.other.unknown.eptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -20934,7 +22065,9 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: '          tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
@@ -21008,11 +22141,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'tptr '
+- source: tptr
+  scopes:
+    - variable.other.unknown.tptr
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' bptr'
+- source: bptr
+  scopes:
+    - variable.other.unknown.bptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -21144,7 +22281,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' head'
+- source: head
+  scopes:
+    - variable.other.unknown.head
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -21212,7 +22351,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'head '
+- source: head
+  scopes:
+    - variable.other.unknown.head
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -21277,7 +22418,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -21362,7 +22505,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'next '
+- source: next
+  scopes:
+    - variable.other.unknown.next
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -21408,6 +22553,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21475,10 +22622,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21504,10 +22655,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -21521,10 +22676,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21560,10 +22719,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21605,10 +22768,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' reader'
+- source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21639,6 +22806,8 @@
   scopes:
     - keyword.operator.logical
 - source: token_got
+  scopes:
+    - variable.other.unknown.token_got
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -21700,6 +22869,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: reader
+  scopes:
+    - variable.other.unknown.reader
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -21717,6 +22888,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_token_character_unrecognized
+  scopes:
+    - variable.other.unknown.code_token_character_unrecognized
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -21765,6 +22938,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: bcomm
+  scopes:
+    - variable.other.unknown.bcomm
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -21854,6 +23029,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_block_comment_unclosed
+  scopes:
+    - variable.other.unknown.code_block_comment_unclosed
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -21959,6 +23136,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: seq
+  scopes:
+    - variable.other.unknown.seq
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -21989,10 +23168,14 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: Parser_Error
+  scopes:
+    - variable.other.unknown.Parser_Error
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' err'
+- source: err
+  scopes:
+    - variable.other.unknown.err
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -22255,6 +23438,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: err
+  scopes:
+    - variable.other.unknown.err
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -22409,7 +23594,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_empty'
+- source: state_empty
+  scopes:
+    - variable.other.unknown.state_empty
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22455,6 +23642,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_no_data_loaded
+  scopes:
+    - variable.other.unknown.code_no_data_loaded
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -22471,7 +23660,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_error'
+- source: state_error
+  scopes:
+    - variable.other.unknown.state_error
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22504,6 +23695,8 @@
   scopes:
     - keyword.operator.comparison
 - source: Parser_Error
+  scopes:
+    - variable.other.unknown.Parser_Error
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -22530,7 +23723,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_success'
+- source: state_success
+  scopes:
+    - variable.other.unknown.state_success
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22576,6 +23771,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: code_success
+  scopes:
+    - variable.other.unknown.code_success
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -22740,7 +23937,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_empty'
+- source: state_empty
+  scopes:
+    - variable.other.unknown.state_empty
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22770,7 +23969,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_error'
+- source: state_error
+  scopes:
+    - variable.other.unknown.state_error
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22800,7 +24001,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_success'
+- source: state_success
+  scopes:
+    - variable.other.unknown.state_success
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -22833,10 +24036,14 @@
   scopes:
     - keyword.operator.comparison
 - source: Cow_Vector
+  scopes:
+    - variable.other.unknown.Cow_Vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: Token
+  scopes:
+    - variable.other.unknown.Token
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -23025,7 +24232,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_empty'
+- source: state_empty
+  scopes:
+    - variable.other.unknown.state_empty
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23069,7 +24278,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_error'
+- source: state_error
+  scopes:
+    - variable.other.unknown.state_error
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23113,7 +24324,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_success'
+- source: state_success
+  scopes:
+    - variable.other.unknown.state_success
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23157,10 +24370,14 @@
   scopes:
     - keyword.operator.comparison
 - source: Cow_Vector
+  scopes:
+    - variable.other.unknown.Cow_Vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: Token
+  scopes:
+    - variable.other.unknown.Token
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -23410,7 +24627,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_empty'
+- source: state_empty
+  scopes:
+    - variable.other.unknown.state_empty
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23454,7 +24673,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_error'
+- source: state_error
+  scopes:
+    - variable.other.unknown.state_error
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23498,7 +24719,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' state_success'
+- source: state_success
+  scopes:
+    - variable.other.unknown.state_success
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -23542,10 +24765,14 @@
   scopes:
     - keyword.operator.comparison
 - source: Cow_Vector
+  scopes:
+    - variable.other.unknown.Cow_Vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: Token
+  scopes:
+    - variable.other.unknown.Token
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift

@@ -2,7 +2,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bar '
+- source: bar
+  scopes:
+    - variable.other.unknown.bar
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -54,11 +54,15 @@
     - meta.body.function.definition
   scopes:
     - keyword.control.return
-- source: ' n '
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -109,11 +113,15 @@
     - meta.body.function.definition
   scopes:
     - keyword.control.return
-- source: ' n '
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: ;
   scopes:
     - punctuation.terminator.statement

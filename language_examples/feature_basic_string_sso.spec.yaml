@@ -287,7 +287,9 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' SSO_size '
+- source: SSO_size
+  scopes:
+    - variable.other.unknown.SSO_size
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -375,6 +377,7 @@
 - source: __long_layout
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown.__long_layout
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -391,6 +394,7 @@
 - source: CharT
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown.CharT
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -924,7 +928,9 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' npos '
+- source: npos
+  scopes:
+    - variable.other.unknown.npos
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -959,10 +965,14 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_same_v
+  scopes:
+    - variable.other.unknown.is_same_v
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: value_type
+  scopes:
+    - variable.other.unknown.value_type
 - source: ','
   scopesBegin:
     - meta.static_assert.message
@@ -1001,10 +1011,14 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_trivial_v
+  scopes:
+    - variable.other.unknown.is_trivial_v
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: value_type
+  scopes:
+    - variable.other.unknown.value_type
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1200,10 +1214,14 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: SSO_size
+  scopes:
+    - variable.other.unknown.SSO_size
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: CharT
+  scopes:
+    - variable.other.unknown.CharT
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1277,7 +1295,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'digits '
+- source: digits
+  scopes:
+    - variable.other.unknown.digits
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -1372,9 +1392,11 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: "\t\t\tCharT "
+- source: CharT
   scopesBegin:
     - meta.body.struct
+  scopes:
+    - variable.other.unknown.CharT
 - source: buf
   scopesBegin:
     - meta.bracket.square.access
@@ -1384,6 +1406,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1428,6 +1452,7 @@
 - source: _long
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown._long
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -1444,6 +1469,7 @@
 - source: _short
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown._short
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -1628,6 +1654,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1692,7 +1720,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'digits '
+- source: digits
+  scopes:
+    - variable.other.unknown.digits
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -1800,6 +1830,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1860,6 +1892,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1971,6 +2005,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2031,6 +2067,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2143,6 +2181,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2161,7 +2201,9 @@
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2258,6 +2300,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2276,7 +2320,9 @@
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: ' _size_mask'
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2325,6 +2371,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2346,11 +2394,15 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' _SSO_Cap '
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' remain'
+- source: remain
+  scopes:
+    - variable.other.unknown.remain
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2427,6 +2479,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2445,7 +2499,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' size '
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: '|'
   scopes:
     - keyword.operator.bitwise
@@ -2454,7 +2510,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: '_size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -2542,6 +2600,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2560,11 +2620,15 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' _SSO_Cap '
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' size'
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2662,7 +2726,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' preserve '
+- source: preserve
+  scopes:
+    - variable.other.unknown.preserve
 - source: '?'
   scopes:
     - keyword.operator.ternary
@@ -2681,11 +2747,15 @@
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' size '
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2698,6 +2768,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: small
+  scopes:
+    - variable.other.unknown.small
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2715,6 +2787,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2741,6 +2815,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2823,11 +2899,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'count '
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2841,7 +2921,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -2853,7 +2935,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' count '
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: '|'
   scopes:
     - keyword.operator.bitwise
@@ -2914,11 +2998,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'count '
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -2946,6 +3034,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -2981,6 +3071,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3040,13 +3132,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' capacity '
+- source: capacity
+  scopes:
+    - variable.other.unknown.capacity
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -3059,11 +3155,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' capacity'
+- source: capacity
+  scopes:
+    - variable.other.unknown.capacity
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: "\t\t\t\t    count "
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: '|'
   scopes:
     - keyword.operator.bitwise
@@ -3072,7 +3172,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: '_size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -3146,6 +3248,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3164,11 +3268,15 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' _SSO_Cap '
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -3289,6 +3397,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3453,7 +3563,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: 'buf '
+- source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -3497,14 +3609,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' contents'
+- source: contents
+  scopes:
+    - variable.other.unknown.contents
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3533,6 +3651,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -3563,6 +3683,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3648,11 +3770,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' contents'
+- source: contents
+  scopes:
+    - variable.other.unknown.contents
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3709,9 +3835,11 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: "\t\t\tnew_cap "
+- source: new_cap
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.new_cap
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -3722,6 +3850,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3781,13 +3911,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' new_cap '
+- source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -3807,6 +3941,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3884,6 +4020,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -3902,10 +4040,14 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' new_cap'
+- source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -3926,7 +4068,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: '_size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4017,7 +4161,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'size '
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -4085,6 +4231,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -4093,7 +4241,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' elem'
+- source: elem
+  scopes:
+    - variable.other.unknown.elem
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4121,7 +4271,9 @@
 - source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
-- source: 'size '
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4157,7 +4309,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'size '
+- source: size
+  scopes:
+    - variable.other.unknown.size
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4233,7 +4387,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' old_cap '
+- source: old_cap
+  scopes:
+    - variable.other.unknown.old_cap
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4242,7 +4398,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'old_cap '
+- source: old_cap
+  scopes:
+    - variable.other.unknown.old_cap
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -4262,7 +4420,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'old_cap '
+- source: old_cap
+  scopes:
+    - variable.other.unknown.old_cap
 - source: '&'
   scopes:
     - keyword.operator.bitwise
@@ -4284,6 +4444,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4297,6 +4459,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: elem
+  scopes:
+    - variable.other.unknown.elem
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4430,10 +4594,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4476,23 +4644,33 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'buf '
+- source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' buf '
+- source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4508,7 +4686,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4523,11 +4703,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -4560,6 +4744,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -4572,6 +4758,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4582,6 +4770,8 @@
   scopes:
     - keyword.operator.increment
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -4589,6 +4779,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -4615,7 +4807,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4793,10 +4987,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4867,7 +5065,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4927,13 +5127,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' new_cap '
+- source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -4968,14 +5172,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: new_buf
+  scopes:
+    - variable.other.unknown.new_buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' old_buf'
+- source: old_buf
+  scopes:
+    - variable.other.unknown.old_buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -4990,11 +5200,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -5027,6 +5241,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -5039,6 +5255,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5049,6 +5267,8 @@
   scopes:
     - keyword.operator.increment
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -5056,6 +5276,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -5085,23 +5307,33 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'new_buf '
+- source: new_buf
+  scopes:
+    - variable.other.unknown.new_buf
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' old_buf '
+- source: old_buf
+  scopes:
+    - variable.other.unknown.old_buf
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -5117,7 +5349,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5165,6 +5399,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5183,10 +5419,14 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: new_buf
+  scopes:
+    - variable.other.unknown.new_buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' new_cap'
+- source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -5202,7 +5442,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: '|'
   scopes:
     - keyword.operator.bitwise
@@ -5211,7 +5453,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: '_size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -5402,10 +5646,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5432,7 +5680,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance '
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -5462,14 +5712,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' first'
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5496,14 +5752,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' first'
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5588,6 +5850,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5740,9 +6004,12 @@
   scopes:
     - >-
       punctuation.section.arguments.begin.bracket.round.function.call.initializer
-- source: '{._s '
+- source: '{.'
   scopesBegin:
     - meta.parameter.initialization
+- source: _s
+  scopes:
+    - variable.other.unknown._s
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -5750,11 +6017,16 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' _SSO_Cap}}'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
+- source: '}}'
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -5938,7 +6210,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -5972,6 +6246,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -5992,7 +6268,9 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6002,15 +6280,21 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ++
   scopes:
     - keyword.operator.increment
@@ -6048,6 +6332,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -6056,7 +6342,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6090,6 +6378,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -6201,7 +6491,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -6243,7 +6535,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -6254,6 +6548,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6284,11 +6580,15 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6392,7 +6692,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -6404,9 +6706,11 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: "\t\t\tcount "
+- source: count
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - variable.other.unknown.count
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -6441,11 +6745,15 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6459,6 +6767,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6489,11 +6799,15 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' pos'
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6588,7 +6902,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -6609,6 +6925,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6622,10 +6940,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -6787,6 +7109,8 @@
 - source: s
   scopesBegin:
     - meta.parameter.initialization
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -6804,13 +7128,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -7001,7 +7329,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -7057,6 +7387,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -7092,10 +7424,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7122,6 +7458,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7136,11 +7474,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -7168,6 +7510,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7175,6 +7519,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7185,6 +7531,8 @@
   scopes:
     - keyword.operator.increment
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7206,6 +7554,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -7236,6 +7586,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -7270,7 +7622,9 @@
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
     - meta.block
-- source: "\t\t\t__string "
+- source: __string
+  scopes:
+    - variable.other.unknown.__string
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7292,7 +7646,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -7309,11 +7665,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -7334,6 +7694,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7344,6 +7706,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -7401,6 +7765,8 @@
 - source: other
   scopesBegin:
     - meta.parameter.initialization
+  scopes:
+    - variable.other.unknown.other
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7490,7 +7856,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -7552,6 +7920,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7572,6 +7942,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7593,7 +7965,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7665,6 +8039,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: other
+  scopes:
+    - variable.other.unknown.other
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7763,7 +8139,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -7785,7 +8163,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'alloc '
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
 - source: '!='
   scopes:
     - keyword.operator.comparison
@@ -7870,6 +8250,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7890,6 +8272,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7911,7 +8295,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -7955,6 +8341,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: other
+  scopes:
+    - variable.other.unknown.other
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -7968,6 +8356,7 @@
 - source: basic_string
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown.basic_string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -8010,6 +8399,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -8147,7 +8538,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' alloc'
+- source: alloc
+  scopes:
+    - variable.other.unknown.alloc
   scopesEnd:
     - meta.parameter.initialization
 - source: )
@@ -8355,7 +8748,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' t'
+- source: t
+  scopes:
+    - variable.other.unknown.t
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -8394,6 +8789,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -8424,7 +8821,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -8638,6 +9037,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: t
+  scopes:
+    - variable.other.unknown.t
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -8651,10 +9052,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -8788,6 +9193,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: str
+  scopes:
+    - variable.other.unknown.str
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -9036,7 +9443,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '||'
   scopes:
     - keyword.operator.logical
@@ -9055,6 +9464,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value
+  scopes:
+    - variable.other.unknown.value
   scopesEnd:
     - meta.arguments.operator.noexcept
 - source: )
@@ -9086,6 +9497,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: other
+  scopes:
+    - variable.other.unknown.other
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -9169,6 +9582,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -9214,6 +9629,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9244,7 +9661,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9280,6 +9699,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: other
+  scopes:
+    - variable.other.unknown.other
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -9293,6 +9714,7 @@
 - source: basic_string
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.other.unknown.basic_string
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -9315,6 +9737,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -9416,6 +9840,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9448,7 +9874,9 @@
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -9478,6 +9906,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9496,10 +9926,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9638,7 +10072,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9861,7 +10297,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\t\t\t\tbuf "
+- source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -9872,6 +10310,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -9897,6 +10337,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -9961,6 +10403,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -10232,7 +10676,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' t'
+- source: t
+  scopes:
+    - variable.other.unknown.t
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10284,6 +10730,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10314,7 +10762,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10408,6 +10858,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10428,7 +10880,9 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -10438,15 +10892,21 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ++
   scopes:
     - keyword.operator.increment
@@ -10484,6 +10944,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -10492,7 +10954,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10526,6 +10990,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -10621,7 +11087,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' str'
+- source: str
+  scopes:
+    - variable.other.unknown.str
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -10681,7 +11149,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' npos'
+- source: npos
+  scopes:
+    - variable.other.unknown.npos
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -10717,10 +11187,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -10794,7 +11268,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'value '
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: '||'
   scopes:
     - keyword.operator.logical
@@ -10813,6 +11289,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value
+  scopes:
+    - variable.other.unknown.value
   scopesEnd:
     - meta.arguments.operator.noexcept
 - source: )
@@ -10851,6 +11329,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: str
+  scopes:
+    - variable.other.unknown.str
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10924,14 +11404,20 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -10996,6 +11482,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -11013,6 +11501,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11222,6 +11712,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: value
+  scopes:
+    - variable.other.unknown.value
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11257,10 +11749,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11287,6 +11783,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11301,11 +11799,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11333,6 +11835,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -11340,6 +11844,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11350,6 +11856,8 @@
   scopes:
     - keyword.operator.increment
 - source: buf
+  scopes:
+    - variable.other.unknown.buf
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -11371,6 +11879,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -11419,11 +11929,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -11444,6 +11958,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11454,6 +11970,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -11865,6 +12383,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: t
+  scopes:
+    - variable.other.unknown.t
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -11878,10 +12398,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -11938,7 +12462,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -12017,6 +12543,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -12075,7 +12603,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '>='
   scopes:
     - keyword.operator.comparison
@@ -12154,6 +12684,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -12227,6 +12759,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -12301,6 +12835,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -13672,7 +14208,9 @@
     - meta.body.function.definition
   scopes:
     - keyword.control.return
-- source: ' _size_mask '
+- source: _size_mask
+  scopes:
+    - variable.other.unknown._size_mask
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -13730,7 +14268,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'new_cap '
+- source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -13760,6 +14300,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: new_cap
+  scopes:
+    - variable.other.unknown.new_cap
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -13911,7 +14453,9 @@
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' _SSO_Cap'
+- source: _SSO_Cap
+  scopes:
+    - variable.other.unknown._SSO_Cap
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -14064,6 +14608,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14074,6 +14620,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14087,10 +14635,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14194,6 +14746,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: s
+  scopes:
+    - variable.other.unknown.s
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14207,18 +14761,26 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' distance'
+- source: distance
+  scopes:
+    - variable.other.unknown.distance
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14310,18 +14872,26 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s'
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' s '
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14404,6 +14974,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14523,7 +15095,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' npos'
+- source: npos
+  scopes:
+    - variable.other.unknown.npos
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -14535,9 +15109,11 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: "\t\t\tcount "
+- source: count
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.count
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -14555,6 +15131,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14576,7 +15154,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' index_str'
+- source: index_str
+  scopes:
+    - variable.other.unknown.index_str
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14590,6 +15170,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14611,7 +15193,9 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' index_str'
+- source: index_str
+  scopes:
+    - variable.other.unknown.index_str
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14633,11 +15217,15 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' index_str '
+- source: index_str
+  scopes:
+    - variable.other.unknown.index_str
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -14713,7 +15301,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -14729,7 +15319,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -14808,7 +15400,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -14824,11 +15418,15 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' ch'
+- source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15002,7 +15600,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -15033,11 +15633,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15058,6 +15662,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15068,6 +15674,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15100,7 +15708,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -15124,11 +15734,15 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'first '
+- source: first
+  scopes:
+    - variable.other.unknown.first
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' last'
+- source: last
+  scopes:
+    - variable.other.unknown.last
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -15154,6 +15768,8 @@
   scopes:
     - keyword.operator.arithmetic
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15164,6 +15780,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: indx
+  scopes:
+    - variable.other.unknown.indx
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15174,6 +15792,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15187,6 +15807,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: ch
+  scopes:
+    - variable.other.unknown.ch
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15206,6 +15828,8 @@
   scopes:
     - keyword.operator.increment
 - source: first
+  scopes:
+    - variable.other.unknown.first
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15227,6 +15851,8 @@
   scopes:
     - keyword.operator.increment
 - source: indx
+  scopes:
+    - variable.other.unknown.indx
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15327,7 +15953,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'pos '
+- source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
@@ -15628,7 +16256,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' t'
+- source: t
+  scopes:
+    - variable.other.unknown.t
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15642,6 +16272,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: pos
+  scopes:
+    - variable.other.unknown.pos
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -15916,7 +16548,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' npos'
+- source: npos
+  scopes:
+    - variable.other.unknown.npos
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -15947,6 +16581,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: t
+  scopes:
+    - variable.other.unknown.t
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -15960,10 +16596,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: index_str
+  scopes:
+    - variable.other.unknown.index_str
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' count'
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -15980,6 +16620,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: index
+  scopes:
+    - variable.other.unknown.index
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16069,7 +16711,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' npos'
+- source: npos
+  scopes:
+    - variable.other.unknown.npos
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -16081,9 +16725,11 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: "\t\t\tcount "
+- source: count
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.count
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -16101,6 +16747,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: count
+  scopes:
+    - variable.other.unknown.count
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -16116,7 +16764,9 @@
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
-- source: ' index'
+- source: index
+  scopes:
+    - variable.other.unknown.index
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -16131,7 +16781,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'count '
+- source: count
+  scopes:
+    - variable.other.unknown.count
 - source: '=='
   scopes:
     - keyword.operator.comparison

@@ -71,15 +71,21 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' b '
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: '*'
   scopes:
     - keyword.operator.arithmetic

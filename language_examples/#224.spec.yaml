@@ -65,7 +65,9 @@
     - punctuation.separator.colon.range-based
   scopesEnd:
     - meta.binding
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.unknown.c
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -86,6 +88,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
+  scopes:
+    - variable.other.unknown.bug
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -139,7 +143,9 @@
     - punctuation.separator.colon.range-based
   scopesEnd:
     - meta.binding
-- source: ' c'
+- source: c
+  scopes:
+    - variable.other.unknown.c
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -160,6 +166,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
+  scopes:
+    - variable.other.unknown.bug
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member

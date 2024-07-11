@@ -34,6 +34,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: test
+  scopes:
+    - variable.other.unknown.test
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch

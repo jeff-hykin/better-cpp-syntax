@@ -74,6 +74,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.definition
 - source: vector
+  scopes:
+    - variable.other.unknown.vector
 - source: <
   scopesBegin:
     - meta.template.call

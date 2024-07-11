@@ -70,7 +70,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' height'
+- source: height
+  scopes:
+    - variable.other.unknown.height
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -151,11 +153,15 @@
     - meta.body.function.definition
   scopes:
     - keyword.control.return
-- source: ' width'
+- source: width
+  scopes:
+    - variable.other.unknown.width
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: height
+  scopes:
+    - variable.other.unknown.height
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -228,21 +234,29 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  width '
+- source: width
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.width
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' x'
+- source: x
+  scopes:
+    - variable.other.unknown.x
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  height '
+- source: height
+  scopes:
+    - variable.other.unknown.height
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' y'
+- source: 'y'
+  scopes:
+    - variable.other.unknown.y
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -311,7 +325,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

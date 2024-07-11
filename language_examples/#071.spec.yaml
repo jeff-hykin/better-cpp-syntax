@@ -219,7 +219,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -227,11 +229,18 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: usertype user_value
+- source: usertype
+  scopes:
+    - variable.other.unknown.usertype
+- source: user_value
+  scopes:
+    - variable.other.unknown.user_value
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -274,14 +283,20 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: templated
+  scopes:
+    - variable.other.unknown.templated
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: type
+  scopes:
+    - variable.other.unknown.type
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: ' value'
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -324,7 +339,12 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: type value
+- source: type
+  scopes:
+    - variable.other.unknown.type
+- source: value
+  scopes:
+    - variable.other.unknown.value
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -388,7 +408,12 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' usertype user_value'
+- source: usertype
+  scopes:
+    - variable.other.unknown.usertype
+- source: user_value
+  scopes:
+    - variable.other.unknown.user_value
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -628,7 +653,12 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' usertype user_value'
+- source: usertype
+  scopes:
+    - variable.other.unknown.usertype
+- source: user_value
+  scopes:
+    - variable.other.unknown.user_value
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

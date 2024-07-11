@@ -8,7 +8,12 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: Stats aStats
+- source: Stats
+  scopes:
+    - variable.other.unknown.Stats
+- source: aStats
+  scopes:
+    - variable.other.unknown.aStats
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -25,7 +30,12 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: '    Stats aStats'
+- source: Stats
+  scopes:
+    - variable.other.unknown.Stats
+- source: aStats
+  scopes:
+    - variable.other.unknown.aStats
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -42,7 +52,12 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: '    Stats aStats'
+- source: Stats
+  scopes:
+    - variable.other.unknown.Stats
+- source: aStats
+  scopes:
+    - variable.other.unknown.aStats
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -70,12 +85,19 @@
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: FillStats
+  scopes:
+    - variable.other.unknown.FillStats
 - source: (
   scopesBegin:
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: '    Stats aStats'
+- source: Stats
+  scopes:
+    - variable.other.unknown.Stats
+- source: aStats
+  scopes:
+    - variable.other.unknown.aStats
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

@@ -66,7 +66,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'classname '
+- source: classname
+  scopes:
+    - variable.other.unknown.classname
 - source: '=='
   scopes:
     - keyword.operator.comparison
@@ -93,7 +95,9 @@
 - source: '&&'
   scopes:
     - keyword.operator.logical
-- source: ' object '
+- source: object
+  scopes:
+    - variable.other.unknown.object
 - source: '&&'
   scopes:
     - keyword.operator.logical
@@ -137,7 +141,9 @@
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: 'QWidget '
+- source: QWidget
+  scopes:
+    - variable.other.unknown.QWidget
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -150,6 +156,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: object
+  scopes:
+    - variable.other.unknown.object
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

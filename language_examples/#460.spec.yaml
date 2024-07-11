@@ -277,4 +277,9 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: type dnode
+- source: type
+  scopes:
+    - variable.other.unknown.type
+- source: dnode
+  scopes:
+    - variable.other.unknown.dnode

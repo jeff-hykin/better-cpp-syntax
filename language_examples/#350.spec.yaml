@@ -51,6 +51,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: x
+  scopes:
+    - variable.other.unknown.x
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -113,6 +115,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: x
+  scopes:
+    - variable.other.unknown.x
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -248,7 +252,18 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: clang diagnostic ignored w
+- source: clang
+  scopes:
+    - variable.other.unknown.clang
+- source: diagnostic
+  scopes:
+    - variable.other.unknown.diagnostic
+- source: ignored
+  scopes:
+    - variable.other.unknown.ignored
+- source: w
+  scopes:
+    - variable.other.unknown.w
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -448,7 +463,9 @@
 - source: elif
   scopesEnd:
     - keyword.control.directive.elif
-- source: ' DOCTEST_GCC'
+- source: DOCTEST_GCC
+  scopes:
+    - variable.other.unknown.DOCTEST_GCC
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -691,7 +708,18 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: GCC diagnostic ignored w
+- source: GCC
+  scopes:
+    - variable.other.unknown.GCC
+- source: diagnostic
+  scopes:
+    - variable.other.unknown.diagnostic
+- source: ignored
+  scopes:
+    - variable.other.unknown.ignored
+- source: w
+  scopes:
+    - variable.other.unknown.w
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -934,7 +962,9 @@
 - source: elif
   scopesEnd:
     - keyword.control.directive.elif
-- source: ' DOCTEST_MSVC'
+- source: DOCTEST_MSVC
+  scopes:
+    - variable.other.unknown.DOCTEST_MSVC
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -992,6 +1022,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: push
+  scopes:
+    - variable.other.unknown.push
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1063,7 +1095,13 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'disable : w'
+- source: disable
+  scopes:
+    - variable.other.unknown.disable
+- source: ' : '
+- source: w
+  scopes:
+    - variable.other.unknown.w
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1126,6 +1164,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: pop
+  scopes:
+    - variable.other.unknown.pop
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call

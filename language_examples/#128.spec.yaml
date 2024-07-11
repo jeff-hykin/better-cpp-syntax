@@ -22,7 +22,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: "\tentries "
+- source: entries
+  scopes:
+    - variable.other.unknown.entries
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -30,7 +32,9 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: ' symbolTableEntry '
+- source: symbolTableEntry
+  scopes:
+    - variable.other.unknown.symbolTableEntry
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -40,6 +44,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: entriesCount
+  scopes:
+    - variable.other.unknown.entriesCount
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square

@@ -70,7 +70,9 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' bar'
+- source: bar
+  scopes:
+    - variable.other.unknown.bar
 - source: ;
   scopes:
     - punctuation.terminator.statement

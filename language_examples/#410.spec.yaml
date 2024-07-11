@@ -81,6 +81,7 @@
 - source: size
   scopes:
     - meta.parameter.initialization
+    - variable.other.unknown.size
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -90,9 +91,11 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
   scopesEnd:
     - meta.head.function.definition.special.constructor
-- source: '    container'
+- source: container
   scopesBegin:
     - meta.body.function.definition.special.constructor
+  scopes:
+    - variable.other.unknown.container
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -109,6 +112,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -155,7 +160,9 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-- source: ' container'
+- source: container
+  scopes:
+    - variable.other.unknown.container
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -225,7 +232,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itr'
+- source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -236,14 +245,20 @@
   scopes:
     - punctuation.terminator.statement
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -251,6 +266,8 @@
   scopes:
     - keyword.operator.increment
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -272,6 +289,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -289,10 +308,14 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -381,7 +404,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' itr'
+- source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -392,14 +417,20 @@
   scopes:
     - punctuation.terminator.statement
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: size
+  scopes:
+    - variable.other.unknown.size
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -407,6 +438,8 @@
   scopes:
     - keyword.operator.increment
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -428,6 +461,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -445,10 +480,14 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: itr
+  scopes:
+    - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
+  scopes:
+    - variable.other.unknown.n
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square

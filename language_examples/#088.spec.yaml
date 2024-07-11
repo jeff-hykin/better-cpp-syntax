@@ -18,7 +18,12 @@
   scopes:
     - meta.preprocessor.conditional
     - entity.name.function.preprocessor
-- source: cbuffer  testCB
+- source: cbuffer
+  scopes:
+    - variable.other.unknown.cbuffer
+- source: testCB
+  scopes:
+    - variable.other.unknown.testCB
 - source: '#'
   scopesBegin:
     - keyword.control.directive.else

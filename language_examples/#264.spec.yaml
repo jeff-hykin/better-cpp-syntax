@@ -48,7 +48,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -69,7 +71,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -79,11 +83,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -91,6 +99,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -163,10 +173,14 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -193,7 +207,9 @@
 - source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
-- source: 'N '
+- source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -222,7 +238,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -232,11 +250,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -244,6 +266,8 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
 - source: )
@@ -260,6 +284,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -268,7 +294,9 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' i'
+- source: i
+  scopes:
+    - variable.other.unknown.i
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -285,7 +313,9 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'perm '
+- source: perm
+  scopes:
+    - variable.other.unknown.perm
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -295,7 +325,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' perm '
+- source: perm
+  scopes:
+    - variable.other.unknown.perm
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -305,11 +337,15 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.other.unknown.N
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' gen'
+- source: gen
+  scopes:
+    - variable.other.unknown.gen
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

@@ -20,7 +20,9 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -860,7 +862,9 @@
     - meta.function.definition.body.lambda
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
-- source: '            cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -928,6 +932,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: arguments
+  scopes:
+    - variable.other.unknown.arguments
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

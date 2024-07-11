@@ -1,4 +1,6 @@
-- source: 'a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: '*'
   scopesBegin:
     - keyword.operator.arithmetic
@@ -11,7 +13,9 @@
 - source: '*'
   scopesEnd:
     - keyword.operator.arithmetic
-- source: 'a '
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: '&&'
   scopesBegin:
     - keyword.operator.logical
@@ -39,7 +43,9 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' string '
+- source: string
+  scopes:
+    - variable.other.unknown.string
 - source: '='
   scopes:
     - keyword.operator.assignment

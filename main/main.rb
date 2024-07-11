@@ -283,7 +283,7 @@ grammar = Grammar.new(
             # :empty_square_brackets, (see https://github.com/jeff-hykin/better-cpp-syntax/pull/380#issuecomment-542491824)
             :semicolon,
             :comma,
-            # :unknown_variable,
+            :unknown_variable,
         ]
     grammar[:function_parameter_context] = [
             :ever_present_context, # comments and macros
@@ -1093,12 +1093,12 @@ grammar = Grammar.new(
             assignment_operators
         )
     )
-    # grammar[:unknown_variable] = Pattern.new(
-    #     Pattern.new(
-    #         tag_as: "variable.other.unknown.$match",
-    #         match: variable_name,
-    #     )
-    # )
+    grammar[:unknown_variable] = Pattern.new(
+        Pattern.new(
+            tag_as: "variable.other.unknown.$match",
+            match: variable_name,
+        )
+    )
     normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
     # normal variable assignment
     grammar[:variable_assignment] =  Pattern.new(

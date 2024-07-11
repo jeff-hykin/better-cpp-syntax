@@ -110,7 +110,9 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' highlight3'
+- source: highlight3
+  scopes:
+    - variable.other.unknown.highlight3
 - source: '{'
   scopesBegin:
     - meta.block
@@ -139,7 +141,9 @@
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: ' highlight4'
+- source: highlight4
+  scopes:
+    - variable.other.unknown.highlight4
 - source: '{'
   scopesBegin:
     - meta.block

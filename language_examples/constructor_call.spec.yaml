@@ -118,9 +118,11 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '    A'
+- source: A
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.A
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -195,6 +197,8 @@
   scopes:
     - keyword.operator.logical
 - source: input_file1
+  scopes:
+    - variable.other.unknown.input_file1
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -205,7 +209,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -285,6 +291,8 @@
   scopes:
     - keyword.operator.logical
 - source: input_file2
+  scopes:
+    - variable.other.unknown.input_file2
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -295,7 +303,9 @@
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -354,11 +364,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  input_file1 '
+- source: input_file1
+  scopes:
+    - variable.other.unknown.input_file1
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c1'
+- source: c1
+  scopes:
+    - variable.other.unknown.c1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -372,11 +386,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  input_file2 '
+- source: input_file2
+  scopes:
+    - variable.other.unknown.input_file2
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c2'
+- source: c2
+  scopes:
+    - variable.other.unknown.c2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -400,11 +418,15 @@
 - source: print collections
   scopesEnd:
     - comment.line.double-slash
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -443,11 +465,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -486,11 +512,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -511,21 +541,29 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c1
+  scopes:
+    - variable.other.unknown.c1
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' c2'
+- source: c2
+  scopes:
+    - variable.other.unknown.c2
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -546,19 +584,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -594,11 +640,15 @@
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -636,17 +686,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: small
+  scopes:
+    - variable.other.unknown.small
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -684,17 +740,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: medium
+  scopes:
+    - variable.other.unknown.medium
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -732,17 +794,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: large
+  scopes:
+    - variable.other.unknown.large
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -780,13 +848,17 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: red
+  scopes:
+    - variable.other.unknown.red
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -808,6 +880,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: green
+  scopes:
+    - variable.other.unknown.green
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -819,6 +893,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: small
+  scopes:
+    - variable.other.unknown.small
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -846,6 +922,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -854,7 +932,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -878,7 +958,9 @@
 - source: else
   scopes:
     - keyword.control.else
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -899,7 +981,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -944,6 +1028,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -965,13 +1051,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1007,7 +1097,9 @@
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1032,6 +1124,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -1040,7 +1134,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1064,7 +1160,9 @@
 - source: else
   scopes:
     - keyword.control.else
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1085,7 +1183,9 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1119,6 +1219,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -1146,6 +1248,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
+  scopes:
+    - variable.other.unknown.sb
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -1154,7 +1258,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1178,7 +1284,9 @@
 - source: else
   scopes:
     - keyword.control.else
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1210,6 +1318,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1231,6 +1341,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -1242,17 +1354,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: bubble_sort
+  scopes:
+    - variable.other.unknown.bubble_sort
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1273,19 +1391,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3'
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' c4'
+- source: c4
+  scopes:
+    - variable.other.unknown.c4
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1296,6 +1422,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -1307,17 +1435,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: quick_sort
+  scopes:
+    - variable.other.unknown.quick_sort
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1338,23 +1472,33 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' c4'
+- source: c4
+  scopes:
+    - variable.other.unknown.c4
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1365,6 +1509,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -1376,17 +1522,23 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: merge_sort
+  scopes:
+    - variable.other.unknown.merge_sort
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1407,19 +1559,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1486,7 +1646,9 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1507,11 +1669,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1532,19 +1698,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1565,19 +1739,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' c1'
+- source: c1
+  scopes:
+    - variable.other.unknown.c1
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1598,19 +1780,27 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1638,21 +1828,29 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c2
+  scopes:
+    - variable.other.unknown.c2
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' c3'
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl '
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -1673,15 +1871,21 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' c3 '
+- source: c3
+  scopes:
+    - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' endl'
+- source: endl
+  scopes:
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement

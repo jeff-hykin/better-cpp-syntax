@@ -3769,6 +3769,9 @@
         },
         {
           "include": "#comma"
+        },
+        {
+          "include": "#unknown_variable"
         }
       ]
     },
@@ -16471,6 +16474,9 @@
         },
         {
           "include": "#comma"
+        },
+        {
+          "include": "#unknown_variable"
         }
       ],
       "applyEndPatternLast": 1
@@ -18990,6 +18996,14 @@
               }
             }
           ]
+        }
+      }
+    },
+    "unknown_variable": {
+      "match": "((?<!\\w)(?:[a-zA-Z_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))(?:[a-zA-Z0-9_]|(?:\\\\u[0-9a-fA-F]{4}|\\\\U[0-9a-fA-F]{8}))*(?!\\w))",
+      "captures": {
+        "1": {
+          "name": "variable.other.unknown.$1.cpp"
         }
       }
     },

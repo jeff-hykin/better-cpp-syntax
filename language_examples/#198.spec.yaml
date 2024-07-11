@@ -26,7 +26,12 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'string s '
+- source: string
+  scopes:
+    - variable.other.unknown.string
+- source: s
+  scopes:
+    - variable.other.unknown.s
 - source: '='
   scopes:
     - keyword.operator.assignment

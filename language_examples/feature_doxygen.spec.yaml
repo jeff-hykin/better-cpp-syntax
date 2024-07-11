@@ -198,7 +198,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' var'
+- source: var
+  scopes:
+    - variable.other.unknown.var
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -638,7 +640,9 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' enumPtr'
+- source: enumPtr
+  scopes:
+    - variable.other.unknown.enumPtr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -661,7 +665,9 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: "\t    enumVar"
+- source: enumVar
+  scopes:
+    - variable.other.unknown.enumVar
   scopesEnd:
     - meta.tail.enum
 - source: ;

@@ -2,7 +2,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' re_pattern '
+- source: re_pattern
+  scopes:
+    - variable.other.unknown.re_pattern
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -28,7 +30,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' re_pattern '
+- source: re_pattern
+  scopes:
+    - variable.other.unknown.re_pattern
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -54,7 +58,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' re_pattern '
+- source: re_pattern
+  scopes:
+    - variable.other.unknown.re_pattern
 - source: '='
   scopes:
     - keyword.operator.assignment

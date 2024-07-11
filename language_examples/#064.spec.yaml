@@ -301,7 +301,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -343,7 +345,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -386,7 +390,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -429,7 +435,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -473,7 +481,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -521,7 +531,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -570,7 +582,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -623,7 +637,9 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' f'
+- source: f
+  scopes:
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -652,7 +668,9 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.delete
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -660,7 +678,9 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.delete
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -675,7 +695,9 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -689,7 +711,9 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-- source: ' a'
+- source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -704,6 +728,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -722,6 +748,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -747,6 +775,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -771,6 +801,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -790,10 +822,14 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -812,10 +848,14 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -841,10 +881,14 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -869,10 +913,14 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

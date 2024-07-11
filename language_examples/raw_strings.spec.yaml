@@ -30,7 +30,9 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' vertexShader'
+- source: vertexShader
+  scopes:
+    - variable.other.unknown.vertexShader
 - source: '{'
   scopesBegin:
     - meta.block
@@ -74,7 +76,9 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' sqlQuery'
+- source: sqlQuery
+  scopes:
+    - variable.other.unknown.sqlQuery
 - source: '{'
   scopesBegin:
     - meta.block
@@ -110,7 +114,9 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' regexExpression'
+- source: regexExpression
+  scopes:
+    - variable.other.unknown.regexExpression
 - source: '{'
   scopesBegin:
     - meta.block

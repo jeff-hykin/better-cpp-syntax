@@ -21,9 +21,11 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: 'stream '
+- source: stream
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.other.unknown.stream
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -46,7 +48,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -80,7 +84,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -114,7 +120,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -148,7 +156,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -182,7 +192,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -216,7 +228,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -250,7 +264,9 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'val '
+- source: val
+  scopes:
+    - variable.other.unknown.val
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
@@ -285,6 +301,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: val
+  scopes:
+    - variable.other.unknown.val
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

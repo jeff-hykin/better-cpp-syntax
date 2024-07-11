@@ -94,6 +94,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: f
+  scopes:
+    - variable.other.unknown.f
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -108,6 +110,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: g
+  scopes:
+    - variable.other.unknown.g
 - source: ;
   scopes:
     - punctuation.terminator.statement

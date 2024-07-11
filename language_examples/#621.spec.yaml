@@ -11,7 +11,13 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'string led_paths[] '
+- source: string
+  scopes:
+    - variable.other.unknown.string
+- source: led_paths
+  scopes:
+    - variable.other.unknown.led_paths
+- source: '[] '
 - source: '{'
   scopesBegin:
     - meta.block
@@ -23,6 +29,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RED
+  scopes:
+    - variable.other.unknown.RED
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -60,6 +68,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: GREEN
+  scopes:
+    - variable.other.unknown.GREEN
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -97,6 +107,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: BLUE
+  scopes:
+    - variable.other.unknown.BLUE
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -134,6 +146,8 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: WHITE
+  scopes:
+    - variable.other.unknown.WHITE
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square

@@ -20,7 +20,9 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -969,7 +971,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -980,7 +984,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1016,7 +1022,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1027,7 +1035,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1063,7 +1073,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1074,7 +1086,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1112,7 +1126,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1123,7 +1139,9 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1282,6 +1300,8 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: arguments
+  scopes:
+    - variable.other.unknown.arguments
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
