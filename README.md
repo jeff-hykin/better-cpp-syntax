@@ -1,14 +1,14 @@
 <p align="center">
     <img height="90" alt="Screen Shot 2022-02-11 at 12 01 19 PM" src="https://user-images.githubusercontent.com/17692058/153645502-f106a481-faaf-450f-9f5e-10da3981d8dc.png">
 </p>
-<!-- <p align="center">
+<p align="center">
     <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
         <img src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" />
     </a>
     <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
         <img src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
     </a>
-</p> -->
+</p>
 
 # Sponsors
 
