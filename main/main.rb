@@ -70,11 +70,11 @@ grammar = Grammar.new(
     )
     assignment_operators = oneOf([
         Pattern.new(
-            match: /%=|\+=|-=|\*=|(?<!\()\/=/,
+            match: /(?:%=|\+=|-=|\*=|(?<!\()\/=)/,
             tag_as: "keyword.operator.assignment.compound"
         ),
         Pattern.new(
-            match: /&=|\^=|<<=|>>=|\|=/,
+            match: /(?:&=|\^=|<<=|>>=|\|=)/,
             tag_as: "keyword.operator.assignment.compound.bitwise"
         ),
         assignment_operator,
@@ -1708,24 +1708,24 @@ grammar = Grammar.new(
             tag_as: "keyword.operator.increment"
         ),
         Pattern.new(
-            match: /<<|>>/,
+            match: /(?:<<|>>)/,
             tag_as: "keyword.operator.bitwise.shift"
         ),
         Pattern.new(
-            match: /!=|<=|>=|==|<|>/,
+            match: /(?:!=|<=|>=|==|<|>)/,
             tag_as: "keyword.operator.comparison"
         ),
         Pattern.new(
-            match: /&&|!|\|\|/,
+            match: /(?:&&|!|\|\|)/,
             tag_as: "keyword.operator.logical"
         ),
         Pattern.new(
-            match: /&|\||\^|~/,
+            match: /(?:&|\||\^|~)/,
             tag_as: "keyword.operator.bitwise"
         ),
         assignment_operators,
         Pattern.new(
-            match: /%|\*|\/|-|\+/,
+            match: /(?:%|\*|\/|-|\+)/,
             tag_as: "keyword.operator.arithmetic"
         ),
         :ternary_operator,
