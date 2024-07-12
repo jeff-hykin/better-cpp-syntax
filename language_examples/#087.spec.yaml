@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -34,7 +34,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: string
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -47,7 +47,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: cn
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.cn
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -57,7 +58,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' common'
+- source: common
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.common
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -96,7 +100,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: string
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -109,7 +113,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: cn
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.cn
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -119,7 +124,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' common'
+- source: common
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.common
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma

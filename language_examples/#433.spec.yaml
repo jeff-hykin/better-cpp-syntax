@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: test
@@ -52,7 +52,7 @@
     - meta.body.function.definition
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: test
@@ -146,7 +146,8 @@
     - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: prevTile
   scopes:
-    - variable.other.object.access
+    - variable.camel-case
+    - variable.other.object.access.prevTile
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -193,7 +194,8 @@
     - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: prevTile
   scopes:
-    - variable.other.object.access
+    - variable.camel-case
+    - variable.other.object.access.prevTile
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -241,6 +243,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: curpal0
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.curpal0
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly.inner
@@ -267,6 +272,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.assembly.inner
 - source: curpal1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.curpal1
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.assembly.inner
@@ -407,16 +415,28 @@
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' test '
+- source: test
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -462,7 +482,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main

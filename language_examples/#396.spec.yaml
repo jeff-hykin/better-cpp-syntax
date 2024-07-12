@@ -1,27 +1,43 @@
 - source: module
   scopes:
     - keyword.other.module
-- source: ' example'
+- source: example
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.example
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: 'import '
+- source: import
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.import
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: vector
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.vector
 - source: '>'
   scopes:
     - keyword.operator.comparison
-- source: 'import '
+- source: import
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.import
 - source: some
   scopes:
-    - variable.other.object.access
+    - variable.other.object.access.some
+  scopesEnd:
+    - variable.lower-case
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: other
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -66,7 +82,10 @@
 - source: concept
   scopes:
     - keyword.other.concept
-- source: ' convertible_to '
+- source: convertible_to
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.convertible_to
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -78,14 +97,20 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_convertible_v
+  scopes:
+    - variable.other.unknown.is_convertible_v
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: From
+  scopes:
+    - variable.other.unknown.From
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' To'
+- source: To
+  scopes:
+    - variable.other.unknown.To
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -95,13 +120,14 @@
     - keyword.operator.and
 - source: requires
   scopes:
+    - keyword.other.functionlike
     - keyword.other.requires
 - source: (
-  scopesBegin:
-    - meta.parens
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - punctuation.section.arguments.begin.bracket.round.requires
 - source: From
+  scopesBegin:
+    - meta.arguments.requires
   scopes:
     - entity.name.function.call
 - source: (
@@ -111,6 +137,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: f
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.f
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -123,12 +152,11 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.arguments.requires
     - meta.parens
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.arguments.end.bracket.round.requires
 - source: '{'
   scopesBegin:
     - meta.block
@@ -142,6 +170,8 @@
   scopes:
     - keyword.operator.comparison
 - source: To
+  scopes:
+    - variable.other.unknown.To
 - source: '>'
   scopes:
     - keyword.operator.comparison

@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -24,13 +24,22 @@
 - source: auto
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' postWakeup '
+- source: postWakeup
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.camel-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: wpi
   scopes:
     - entity.name.scope-resolution
@@ -71,28 +80,41 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: loop
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.loop
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    m_postMessageWakeup'
+- source: m_postMessageWakeup
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.m_postMessageWakeup
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' postWakeup'
+- source: postWakeup
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.postWakeup
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: postWakeup
   scopes:
-    - variable.other.object.access
+    - variable.camel-case
+    - variable.other.object.access.postWakeup
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: wakeup
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -119,16 +141,27 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' pipe '
+- source: pipe
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: m_pipe
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.m_pipe
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -141,6 +174,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

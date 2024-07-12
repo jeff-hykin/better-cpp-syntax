@@ -1,0 +1,2174 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.pragma
+    - keyword.control.directive.pragma
+  scopes:
+    - punctuation.definition.directive
+- source: pragma
+  scopesEnd:
+    - keyword.control.directive.pragma
+- source: once
+  scopes:
+    - entity.other.attribute-name.pragma.preprocessor
+  scopesEnd:
+    - meta.preprocessor.pragma
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: list
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: map
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: unordered_map
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: types.hh
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: chunked-vector.hh
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.double.include
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: nix
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: /*
+  scopesBegin:
+    - meta.body.namespace
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' Symbol table used by the parser and evaluator to represent and look'
+- source: '   up identifiers and attributes efficiently.  SymbolTable::create()'
+- source: '   converts a string into a symbol.  Symbols have the property that'
+- source: '   they can be compared efficiently (using an equality test),'
+- source: '   because the symbol table stores only one copy of each string. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+- source: /*
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' This class mainly exists to give us an operator<< for ostreams. We could also'
+- source: '   return plain strings from SymbolTable, but then we''d have to wrap every'
+- source: '   instance of a symbol that is fmt()ed, which is inconvenient and error-prone. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: SymbolStr
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: friend
+  scopesBegin:
+    - meta.body.class
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.friend
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: SymbolTable
+  scopes:
+    - entity.name.type.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: private
+  scopesBegin:
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: const
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - storage.modifier.specifier.const
+- source: std
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: string
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: s
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: explicit
+  scopesBegin:
+    - meta.function.definition.special.constructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: SymbolStr
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: std
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: string
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: symbol
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: s
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: '&'
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - keyword.operator.bitwise
+- source: symbol
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.symbol
+  scopesEnd:
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: public
+  scopesBegin:
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: bool
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '=='
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: std
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: string_view
+  scopes:
+    - entity.name.type.parameter
+- source: s2
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: s2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s2
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.body.function.definition.special.operator-overload
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: const
+  scopes:
+    - storage.modifier.const
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: string
+  scopes:
+    - meta.head.function.definition.special.operator-overload
+    - entity.name.operator.type
+- source: '&'
+  scopes:
+    - entity.name.operator.type.reference
+- source: (
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.body.function.definition.special.operator-overload
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: const
+  scopes:
+    - storage.modifier.const
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: std
+  scopes:
+    - entity.name.scope-resolution.operator-overload
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.operator-overload
+- source: string_view
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
+- source: friend
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.friend
+- source: std
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: ostream
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '<<'
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: std
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: ostream
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: os
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: SymbolStr
+  scopes:
+    - entity.name.type.parameter
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: symbol
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: Symbol
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: friend
+  scopesBegin:
+    - meta.body.class
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.friend
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: SymbolTable
+  scopes:
+    - entity.name.type.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: private
+  scopesBegin:
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: uint32_t
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - storage.type
+    - storage.type.built-in
+- source: id
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: explicit
+  scopesBegin:
+    - meta.function.definition.special.constructor
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: Symbol
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: uint32_t
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: id
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: id
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: id
+  scopes:
+    - meta.parameter.initialization
+    - variable.lower-case
+    - variable.other.unknown.id
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: public
+  scopesBegin:
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: Symbol
+  scopesBegin:
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: id
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: '0'
+  scopes:
+    - meta.parameter.initialization
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: explicit
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.explicit
+- source: operator
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: bool
+  scopes:
+    - entity.name.operator.type
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: id
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.id
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.body.function.definition.special.operator-overload
+- source: bool
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: <
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Symbol
+  scopes:
+    - entity.name.type.parameter
+- source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: id
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.id
+- source: <
+  scopes:
+    - keyword.operator.comparison
+- source: other
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.other
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.body.function.definition.special.operator-overload
+- source: bool
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '=='
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Symbol
+  scopes:
+    - entity.name.type.parameter
+- source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: id
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.id
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: other
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.other
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.body.function.definition.special.operator-overload
+- source: bool
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '!='
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: Symbol
+  scopes:
+    - entity.name.type.parameter
+- source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: return
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.return
+- source: id
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.id
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: other
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.other
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: SymbolTable
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: private
+  scopesBegin:
+    - meta.body.class
+    - storage.type.modifier.access.control.private
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.private
+- source: std
+  scopesBegin:
+    - meta.declaration
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: unordered_map
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: string_view
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: pair
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: string
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: uint32_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: symbols
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: ChunkedVector
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: string
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: '8192'
+  scopes:
+    - constant.numeric.decimal
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: store
+  scopes:
+    - variable.lower-case
+    - variable.other.object.construction
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '16'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: public
+  scopesBegin:
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: Symbol
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: create
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: std
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: string_view
+  scopes:
+    - entity.name.type.parameter
+- source: s
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: //
+  scopesBegin:
+    - meta.body.function.definition
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Most symbols are looked up more than once, so we trade off insertion performance'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' for lookup performance.'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' TODO: could probably be done more efficiently with transparent Hash and Equals'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' on the original implementation using unordered_set'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: ' FIXME: make this thread-safe.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: it
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: symbols
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.symbols
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: find
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: it
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.it
+- source: '!='
+  scopes:
+    - keyword.operator.comparison
+- source: symbols
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.symbols
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: end
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: return
+  scopes:
+    - keyword.control.return
+- source: Symbol
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: it
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.it
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: second
+  scopes:
+    - variable.lower-case
+    - variable.other.object.property
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: second
+  scopes:
+    - variable.other.property
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: rawSym
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rawSym
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: idx
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.idx
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: store
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.store
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: add
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: std
+  scopes:
+    - entity.name.scope-resolution.function.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.function.call
+- source: string
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: symbols
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.symbols
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: emplace
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: rawSym
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rawSym
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: make_pair
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '&'
+  scopes:
+    - keyword.operator.bitwise
+- source: rawSym
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rawSym
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: idx
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.idx
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: Symbol
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: idx
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.idx
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: std
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: vector
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: SymbolStr
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: resolve
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: const
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - storage.modifier.specifier.const
+- source: std
+  scopes:
+    - entity.name.scope-resolution.parameter
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.parameter
+- source: vector
+  scopes:
+    - entity.name.type.parameter
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: Symbol
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.template.call
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: symbols
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: std
+  scopesBegin:
+    - meta.body.function.definition
+    - meta.declaration
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: vector
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: SymbolStr
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: result
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: result
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.result
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: reserve
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: symbols
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.symbols
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: size
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: for
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: auto
+  scopesBegin:
+    - meta.parens.control.for
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: sym
+  scopes:
+    - variable.other.object.declare.for
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.range-based
+- source: symbols
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.symbols
+  scopesEnd:
+    - meta.parens.control.for
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: result
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.result
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: push_back
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '*'
+  scopes:
+    - keyword.operator.arithmetic
+- source: this
+  scopes:
+    - variable.language.this
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: sym
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sym
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: result
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.result
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: SymbolStr
+  scopesBegin:
+    - meta.function.definition.special.operator-overload
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: operator
+  scopesBegin:
+    - meta.head.function.definition.special.operator-overload
+  scopes:
+    - keyword.other.operator.overload
+- source: '[]'
+  scopes:
+    - entity.name.operator
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.operator-overload
+- source: Symbol
+  scopesBegin:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: s
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.operator-overload
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.operator-overload
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.head.function.definition.special.operator-overload
+- source: if
+  scopesBegin:
+    - meta.body.function.definition.special.operator-overload
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.s
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: '=='
+  scopes:
+    - keyword.operator.comparison
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: '||'
+  scopes:
+    - keyword.operator.logical
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.s
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: '>'
+  scopes:
+    - keyword.operator.comparison
+- source: store
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.store
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: size
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: abort
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: SymbolStr
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: store
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - variable.other.object
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.s
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: id
+  scopes:
+    - variable.other.property
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.operator-overload
+  scopesEnd:
+    - meta.function.definition.special.operator-overload
+    - meta.body.function.definition.special.operator-overload
+- source: size_t
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type
+    - storage.type.built-in
+- source: size
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: store
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.store
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: size
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.body.function.definition
+- source: size_t
+  scopes:
+    - meta.qualified-type
+    - storage.type
+    - storage.type.built-in
+- source: totalSize
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: dump
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: T
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: callback
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: const
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.const
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: store
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.store
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: forEach
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: callback
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.callback
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace

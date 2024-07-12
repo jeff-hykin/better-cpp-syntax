@@ -82,7 +82,7 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
             /LL?[uU]?/,
             /[fF]/, # TODO: this is actually a decimal point-less floating point number
         ]).lookAheadToAvoid(/\w/),
-        tag_as: "keyword.other.unit.suffix.integer",
+        tag_as: "keyword.other.suffix.literal.built-in.integer keyword.other.unit.suffix.integer",
         )
 
     # see https://en.cppreference.com/w/cpp/language/floating_literal
@@ -136,7 +136,7 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
         should_fully_match: ["f","l","L","F"],
         should_not_fully_match: ["lLu","uU","lug","fan"],
         match: Pattern.new(/[lLfF]/).lookAheadToAvoid(/\w/),
-        tag_as: "keyword.other.unit.suffix.floating-point"
+        tag_as: "keyword.other.suffix.literal.built-in.floating-point keyword.other.unit.suffix.floating-point"
         )
 
 
@@ -147,15 +147,15 @@ def numeric_constant(allow_user_defined_literals: false, separator:"'")
 
     decimal_user_defined_literal_pattern = Pattern.new(
             match: maybe(Pattern.new(/\w/).lookBehindToAvoid(/[0-9eE]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
+            tag_as: "keyword.other.suffix.literal.user-defined.integer keyword.other.unit.user-defined"
         )
     hex_user_defined_literal_pattern = Pattern.new(
             match: maybe(Pattern.new(/\w/).lookBehindToAvoid(/[0-9a-fA-FpP]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
+            tag_as: "keyword.other.suffix.literal.user-defined.integer keyword.other.unit.user-defined"
         )
     normal_user_defined_literal_pattern = Pattern.new(
             match: maybe(Pattern.new(/\w/).lookBehindToAvoid(/[0-9]/).then(/\w*/)).then(end_pattern),
-            tag_as: "keyword.other.unit.user-defined"
+            tag_as: "keyword.other.suffix.literal.user-defined.integer keyword.other.unit.user-defined"
         )
 
     if allow_user_defined_literals

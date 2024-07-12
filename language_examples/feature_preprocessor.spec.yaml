@@ -50,7 +50,10 @@
 - source: a
   scopes:
     - entity.name.function.preprocessor
-- source: ' thing '
+- source: thing
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing
 - source: '{'
   scopesBegin:
     - meta.block
@@ -91,7 +94,16 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' arg1 arg2'
+- source: arg1
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.arg1
+- source: arg2
+  scopes:
+    - variable.other.unknown.arg2
+  scopesEnd:
+    - variable.lower-case
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -396,10 +408,10 @@
 - source: Stuff
   scopes:
     - entity.name.type.struct
-  scopesEnd:
-    - meta.block.struct
 - source: '#'
   scopesBegin:
+    - meta.head.struct
+    - meta.preprocessor.macro
     - keyword.control.directive.define
   scopes:
     - punctuation.definition.directive
@@ -427,6 +439,9 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
+    - meta.block.struct
+    - meta.head.struct
+    - meta.preprocessor.macro
     - meta.block.struct
     - meta.head.struct
 - source: '#'
@@ -475,14 +490,26 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' data'
+- source: data
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' members'
+- source: members
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.members
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -490,10 +517,19 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' other'
+- source: other
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -610,7 +646,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: __VA_ARGS__
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -631,6 +667,8 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: static
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -638,15 +676,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' isPoint '
+- source: isPoint
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.camel-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'true'
   scopes:
     - constant.language.true
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -690,6 +738,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.T
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -732,7 +783,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -745,7 +796,7 @@
     - storage.type.modifier.access.public
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -756,10 +807,154 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.struct
+  scopesEnd:
+    - meta.block.struct
+    - meta.head.struct
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: thing
+  scopes:
+    - entity.name.function.preprocessor
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '    this should be a comment'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - meta.preprocessor.macro
+    - comment.block
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: thing
+  scopesBegin:
+    - meta.preprocessor.conditional
+  scopes:
+    - entity.name.function.preprocessor
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: '    this should be a comment'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - meta.preprocessor.conditional
+    - comment.block
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: test
+  scopes:
+    - entity.name.function.preprocessor
+- source: test2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.test2
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' line 1'
+- source: '          The timeout is set to 5x to ensure we don''t timeout too early. '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - meta.preprocessor.macro
+    - comment.block
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' test comment '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+- source: typedef
+  scopes:
+    - keyword.other.typedef
+- source: enum
+  scopesBegin:
+    - meta.block.enum
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: A
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: B
+  scopes:
+    - variable.other.enummember
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.enum.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: BB
+  scopes:
+    - meta.tail.enum
+    - variable.upper-case
+    - variable.other.unknown.BB
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

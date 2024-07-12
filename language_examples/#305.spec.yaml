@@ -140,42 +140,87 @@
   scopesEnd:
     - meta.function.definition.special.constructor
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' someMember'
+- source: someMember
+  scopes:
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' anotherOne'
+- source: anotherOne
+  scopes:
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' quiteALotOfMembers'
+- source: quiteALotOfMembers
+  scopes:
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' soManyThatTheConstructorIsLong'
+- source: soManyThatTheConstructorIsLong
+  scopes:
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' iMeanReallyLong'
+- source: iMeanReallyLong
+  scopes:
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement

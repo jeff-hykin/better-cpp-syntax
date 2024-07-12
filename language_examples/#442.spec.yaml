@@ -269,7 +269,7 @@
     - keyword.operator.assignment
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -280,7 +280,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -304,6 +304,9 @@
 - source: REPROCXX_EXPORT
   scopesBegin:
     - meta.body.namespace
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
@@ -314,11 +317,17 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' kill'
+- source: kill
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.kill
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
@@ -329,7 +338,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' terminate'
+- source: terminate
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.terminate
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -364,7 +376,7 @@
     - keyword.operator.assignment
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -402,13 +414,13 @@
     - punctuation.separator.scope-resolution.template.call
 - source: milli
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: ;
   scopes:
@@ -416,35 +428,71 @@
   scopesEnd:
     - meta.declaration.type.alias
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds infinite'
+- source: milliseconds
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: infinite
+  scopes:
+    - variable.other.unknown.infinite
+  scopesEnd:
+    - variable.lower-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds deadline'
+- source: milliseconds
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: deadline
+  scopes:
+    - variable.other.unknown.deadline
+  scopesEnd:
+    - variable.lower-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: extern
   scopes:
     - storage.modifier.specifier.extern
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' milliseconds nonblocking'
+- source: milliseconds
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.milliseconds
+- source: nonblocking
+  scopes:
+    - variable.other.unknown.nonblocking
+  scopesEnd:
+    - variable.lower-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -558,13 +606,36 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  stop action'
+- source: stop
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: action
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  milliseconds timeout'
+- source: milliseconds
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: timeout
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -587,17 +658,52 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  stop_action first'
+- source: stop_action
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: first
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  stop_action second'
+- source: stop_action
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: second
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  stop_action third'
+- source: stop_action
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: third
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -634,34 +740,55 @@
   scopesEnd:
     - comment.block.documentation
 - source: class
+  scopesBegin:
+    - meta.declaration
+    - meta.qualified-type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: environment
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: environment
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: const
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.const
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: 'working_directory '
+    - storage.modifier.pointer
+- source: working_directory
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.snake-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: nullptr
   scopes:
     - constant.language.nullptr
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -676,17 +803,52 @@
     - punctuation.section.block.begin.bracket.curly.struct
   scopesEnd:
     - meta.head.struct
-- source: '    redirect in'
+- source: redirect
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: in
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    redirect out'
+- source: redirect
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: out
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    redirect err'
+- source: redirect
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: err
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -695,9 +857,12 @@
     - punctuation.section.block.end.bracket.curly.struct
   scopesEnd:
     - meta.body.struct
-- source: 'redirect '
+- source: redirect
   scopesBegin:
     - meta.tail.struct
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.redirect
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -718,17 +883,27 @@
   scopesEnd:
     - meta.block.struct
 - source: struct
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: stop_actions
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: stop
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - variable.other.object.declare
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '{'
   scopesBegin:
     - meta.block
@@ -738,21 +913,37 @@
   scopes:
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
+    - meta.assignment
     - meta.block
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: reproc
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'milliseconds timeout '
+- source: milliseconds
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
+- source: timeout
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: reproc
   scopes:
     - entity.name.scope-resolution
@@ -772,20 +963,37 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: reproc
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'milliseconds deadline '
+- source: milliseconds
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
+- source: deadline
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: reproc
   scopes:
     - entity.name.scope-resolution
@@ -805,34 +1013,60 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' inherit '
+- source: inherit
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'false'
   scopes:
     - constant.language.false
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' discard '
+- source: discard
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'false'
   scopes:
     - constant.language.false
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -849,14 +1083,23 @@
   scopesEnd:
     - comment.block.documentation
 - source: class
+  scopesBegin:
+    - meta.declaration
+    - meta.qualified-type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: input
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: input
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -955,7 +1198,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: process
   scopesBegin:
@@ -974,7 +1217,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT '
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: '~'
   scopes:
     - keyword.operator.bitwise
@@ -1005,7 +1251,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: process
   scopesBegin:
@@ -1045,12 +1291,15 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: process
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '&'
   scopes:
@@ -1109,8 +1358,13 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
+  scopesBegin:
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1118,6 +1372,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: start
   scopes:
     - entity.name.function.call
@@ -1127,22 +1385,34 @@
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' arguments '
+- source: arguments
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.arguments
 - source: '&'
   scopes:
     - keyword.operator.bitwise
 - source: arguments
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.arguments
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: const
   scopes:
     - storage.modifier.specifier.const
-- source: ' options '
+- source: options
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.options
 - source: '&'
   scopes:
     - keyword.operator.bitwise
-- source: 'options '
+- source: options
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.options
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -1168,7 +1438,10 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1177,6 +1450,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1195,6 +1471,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1253,8 +1532,13 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
+  scopesBegin:
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1262,31 +1546,53 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: stream
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: std
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.template.call
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.template.call
 - source: error_code
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
 - source: poll
   scopes:
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: stream set
+- source: stream
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.stream
+- source: set
+  scopes:
+    - variable.other.unknown.set
+  scopesEnd:
+    - variable.lower-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1304,7 +1610,10 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1313,6 +1622,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1331,6 +1643,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1402,7 +1717,10 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1411,6 +1729,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1429,6 +1750,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1483,8 +1807,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
+  scopesBegin:
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1492,13 +1821,24 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: close
   scopes:
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: stream stream
+- source: stream
+  scopesBegin:
+    - variable.lower-case
+    - variable.other.unknown.stream
+- source: stream
+  scopesEnd:
+    - variable.lower-case
+    - variable.other.unknown.stream
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1519,7 +1859,10 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1528,6 +1871,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1546,6 +1892,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1583,8 +1932,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
+  scopesBegin:
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1592,6 +1946,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: terminate
   scopes:
     - entity.name.function.call
@@ -1607,8 +1965,13 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
+  scopesBegin:
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1616,6 +1979,10 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: kill
   scopes:
     - entity.name.function.call
@@ -1642,7 +2009,10 @@
     - punctuation.definition.comment.end.documentation
   scopesEnd:
     - comment.block.documentation
-- source: '  REPROCXX_EXPORT'
+- source: REPROCXX_EXPORT
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.REPROCXX_EXPORT
 - source: std
   scopes:
     - entity.name.scope-resolution
@@ -1651,6 +2021,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -1669,6 +2042,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: error_code
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.error_code
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -1715,6 +2091,9 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: std
+  scopesBegin:
+    - meta.declaration
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -1722,51 +2101,50 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unique_ptr
-- source: <
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: reproc_t
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: ','
   scopes:
-    - punctuation.separator.delimiter.comma
+    - punctuation.separator.delimiter.comma.template.argument
 - source: void
   scopes:
-    - meta.qualified_type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: (
-  scopes:
-    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: ' ('
 - source: '*'
   scopes:
-    - punctuation.definition.function.pointer.dereference
-- source: )
-  scopes:
-    - punctuation.section.parens.end.bracket.round.function.pointer
-- source: (
-  scopes:
-    - punctuation.section.parameters.begin.bracket.round.function.pointer
+    - keyword.operator.arithmetic
+- source: )(
 - source: reproc_t
-  scopesBegin:
-    - meta.parameter
   scopes:
     - support.type.posix-reserved
     - support.type.built-in.posix-reserved
 - source: '*'
   scopes:
-    - storage.modifier.pointer
-  scopesEnd:
-    - meta.parameter
+    - keyword.operator.arithmetic
 - source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.function.pointer
 - source: '>'
   scopes:
-    - keyword.operator.comparison
-- source: ' process_'
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: process_
+  scopes:
+    - meta.declaration
+    - variable.snake-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1925,9 +2303,20 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  process process'
+- source: process
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: process
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -9,7 +9,10 @@
   scopes:
     - storage.type
     - storage.type.built-in
-- source: ' size'
+- source: size
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.size
 - source: ;
   scopes:
     - punctuation.terminator.statement

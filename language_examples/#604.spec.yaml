@@ -2,7 +2,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' compare '
+- source: compare
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.compare
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -90,7 +93,8 @@
     - keyword.control.return
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -102,7 +106,8 @@
     - keyword.operator.comparison
 - source: b
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.b
 - source: .
   scopes:
     - punctuation.separator.dot-access

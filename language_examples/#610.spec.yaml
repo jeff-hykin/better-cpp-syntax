@@ -103,7 +103,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' view '
+- source: view
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.view
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -131,7 +134,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' owned '
+- source: owned
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.owned
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -184,9 +190,20 @@
   scopes:
     - meta.head.struct
     - punctuation.section.block.begin.bracket.curly.struct
-- source: '  T content'
+- source: T
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: content
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -206,7 +223,7 @@
 - source: Wrapper
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -223,13 +240,13 @@
     - punctuation.separator.scope-resolution.template.call
 - source: wstring
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: operator
   scopesBegin:
@@ -307,10 +324,16 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.n
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -338,7 +361,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' wide_string '
+- source: wide_string
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.wide_string
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -370,28 +396,30 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' raw_wide_string '
+- source: raw_wide_string
+  scopes:
+    - variable.other.unknown.raw_wide_string
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: LR
   scopesBegin:
-    - string.quoted.double.raw
-    - punctuation.definition.string.begin
+    - string.quoted.double.raw.--
+    - punctuation.definition.string.--.begin
   scopes:
     - meta.encoding
 - source: '"--('
   scopesEnd:
-    - punctuation.definition.string.begin
+    - punctuation.definition.string.--.begin
 - source: rws
 - source: )--"
   scopes:
-    - punctuation.definition.string.end
+    - punctuation.definition.string.--.end
 - source: _wrap
   scopes:
     - keyword.other.suffix.literal.user-defined.string
   scopesEnd:
-    - string.quoted.double.raw
+    - string.quoted.double.raw.--
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -401,7 +429,7 @@
 - source: Wrapper
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -417,7 +445,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: operator
   scopesBegin:
@@ -467,6 +495,9 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -489,7 +520,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' character '
+- source: character
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.character
 - source: '='
   scopes:
     - keyword.operator.assignment

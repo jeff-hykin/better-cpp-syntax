@@ -1,4 +1,14 @@
-- source: L_API ALenum AL_APIENTRY
+- source: L_API
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.L_API
+- source: ALenum
+  scopes:
+    - variable.other.unknown.ALenum
+- source: AL_APIENTRY
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
 - source: alGetError
   scopes:
     - entity.name.function.call
@@ -13,12 +23,22 @@
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: START_API_FUNC
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.START_API_FUNC
 - source: '{'
   scopesBegin:
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
-- source: '    ContextRef context'
+- source: ContextRef
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: context
+  scopes:
+    - variable.lower-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -46,17 +66,23 @@
     - keyword.control.if
 - source: UNLIKELY
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '!'
   scopes:
     - keyword.operator.logical
 - source: context
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.context
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '{'
   scopesBegin:
     - meta.block
@@ -65,13 +91,23 @@
 - source: constexpr
   scopes:
     - storage.modifier.specifier.functional.pre-parameters.constexpr
-- source: ' ALenum deferror'
+- source: ALenum
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: deferror
+  scopes:
+    - variable.lower-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: AL_INVALID_OPERATION
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.AL_INVALID_OPERATION
 - source: '}'
   scopes:
     - punctuation.section.block.end.bracket.curly
@@ -82,10 +118,12 @@
     - punctuation.terminator.statement
 - source: WARN
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -107,10 +145,14 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' deferror'
+- source: deferror
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.deferror
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -123,6 +165,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: TrapALError
+  scopes:
+    - variable.other.unknown.TrapALError
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -194,6 +238,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: SIGTRAP
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.SIGTRAP
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -204,6 +251,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: SIGTRAP
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.SIGTRAP
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -226,7 +276,10 @@
 - source: return
   scopes:
     - keyword.control.return
-- source: ' deferror'
+- source: deferror
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.deferror
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -240,12 +293,14 @@
     - keyword.control.return
 - source: context
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.context
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: mLastError
   scopes:
+    - variable.camel-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -257,6 +312,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: AL_NO_ERROR
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.AL_NO_ERROR
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -269,3 +327,6 @@
   scopesEnd:
     - meta.block
 - source: END_API_FUNC
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.END_API_FUNC

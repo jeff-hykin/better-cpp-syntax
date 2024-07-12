@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -50,7 +50,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: audio_spec
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.audio_spec
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -85,6 +86,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: tgt_fps
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.tgt_fps
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

@@ -20,7 +20,10 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -101,7 +104,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: func1
   scopesBegin:
@@ -166,7 +169,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: func2
   scopesBegin:
@@ -231,7 +234,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: func3
   scopesBegin:
@@ -296,7 +299,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: func4
   scopesBegin:
@@ -361,7 +364,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -432,7 +435,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -503,7 +506,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -574,7 +577,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -645,7 +648,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -694,12 +697,14 @@
     - comment.line.double-slash
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: '->*'
   scopes:
@@ -712,12 +717,14 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .*
   scopes:
     - punctuation.separator.dot-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: '->'
   scopes:
@@ -730,7 +737,8 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -748,7 +756,8 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -883,7 +892,7 @@
     - storage.modifier.inline
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -969,7 +978,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -980,7 +992,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1016,7 +1031,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1027,7 +1045,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1063,7 +1084,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1074,7 +1098,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1112,7 +1139,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing1'
+- source: thing1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing1
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1123,7 +1153,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing2'
+- source: thing2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.thing2
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1140,7 +1173,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -1249,13 +1282,23 @@
   scopesEnd:
     - comment.line.double-slash
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing '
+- source: thing
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: aFunction
   scopes:
     - entity.name.function.call
@@ -1279,9 +1322,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: arguments
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.arguments
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

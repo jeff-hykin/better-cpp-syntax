@@ -1,14 +1,6 @@
 <p align="center">
     <img height="90" alt="Screen Shot 2022-02-11 at 12 01 19 PM" src="https://user-images.githubusercontent.com/17692058/153645502-f106a481-faaf-450f-9f5e-10da3981d8dc.png">
 </p>
-<p align="center">
-    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
-        <img src="https://vsmarketplacebadge.apphb.com/downloads-short/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=5DDB61&colorB=4BC74F&label=DOWNLOADS" />
-    </a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax">
-        <img src="https://vsmarketplacebadge.apphb.com/rating-star/jeff-hykin.better-cpp-syntax.svg?style=for-the-badge&colorA=FBBD30&colorB=F2AA08" />
-    </a>
-</p>
 
 # Sponsors
 
@@ -49,13 +41,17 @@ NOTE: The default VS Code theme does not color much. Switch to the Dark+ theme (
 - [Syntax Highlight Theme](https://marketplace.visualstudio.com/items?itemName=peaceshi.syntax-highlight)
 - [Default Theme Enhanced](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-themes)
 
-## How do I use it?
+## How do I use the extension?
 Just install the VS Code extension and the changes will automatically be applied to all relevant files.
 <br>Link: https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-cpp-syntax
 
 # Comparison (Material Theme)
 <img width="2794" alt="compare" src="https://user-images.githubusercontent.com/17692058/153653793-3685ffd5-cf96-43c3-a883-da79ba33d037.png">
 
+## How do I use the grammar? (as an upstream for my non-vs code editor)
+
+1. Watch the the "Major Changes" thread [here](https://github.com/jeff-hykin/better-cpp-syntax/issues/64) to know when I change licenses, the codebase structure, or just major highlighting changes.
+2. I support non-VS Code usecases. E.g. yes, you are welcome to open issues [like this one](https://github.com/jeff-hykin/better-cpp-syntax/issues/653) that don't affect VS Code.
 
 ## What is different from atom/language-c?
 It fixes:

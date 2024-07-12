@@ -17,6 +17,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -38,7 +41,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' num_candidate'
+- source: num_candidate
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.num_candidate
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -54,10 +60,15 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i'
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -68,10 +79,16 @@
   scopes:
     - punctuation.terminator.statement
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: num_candidate
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.num_candidate
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -79,6 +96,11 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -91,6 +113,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -120,6 +145,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -138,6 +166,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: stderr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.stderr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -170,7 +201,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -205,10 +236,12 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -223,16 +256,22 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: LOG_INFO
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'obj '
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
+- source: obj
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.obj
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -252,7 +291,8 @@
     - keyword.operator.bitwise.shift
 - source: obj
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.obj
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -276,6 +316,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -287,7 +328,19 @@
 - source: ' everything from this point on is interpeted as a string literal...'
   scopesEnd:
     - comment.line.double-slash
-- source: '    O x'
+- source: O
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: x
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -299,13 +352,25 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: unique_ptr
-- source: <
+  scopesBegin:
+    - meta.qualified-type
   scopes:
-    - keyword.operator.comparison
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
 - source: O
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
 - source: '>'
   scopes:
-    - keyword.operator.comparison
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
 - source: o
   scopes:
     - entity.name.function.call
@@ -316,7 +381,10 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: ' O'
+- source: O
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.O
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -338,6 +406,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: options
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.options
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -376,7 +447,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main2

@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -30,7 +30,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -57,10 +60,16 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -75,6 +84,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -85,7 +97,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -96,10 +111,16 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -114,6 +135,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement

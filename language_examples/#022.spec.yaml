@@ -5,6 +5,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: user_input
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.user_input
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -33,10 +36,16 @@
   scopes:
     - keyword.operator.bitwise
 - source: arg0
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.arg0
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' arg_str'
+- source: arg_str
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.arg_str
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -55,7 +64,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: test
@@ -74,9 +83,12 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '    t '
+- source: t
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.t
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -95,7 +107,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    tmp '
+- source: tmp
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.tmp
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -109,6 +124,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: t
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.t
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -122,6 +140,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: timestr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.timestr
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -135,6 +156,8 @@
 - source: timestr
   scopes:
     - meta.arguments.operator.sizeof
+    - variable.lower-case
+    - variable.other.unknown.timestr
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof
@@ -162,7 +185,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' tmp'
+- source: tmp
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.tmp
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

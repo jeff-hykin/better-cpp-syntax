@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -27,7 +27,9 @@
   scopes:
     - keyword.operator.wordlike
     - keyword.operator.new
-- source: ' Foo'
+- source: Foo
+  scopes:
+    - variable.other.unknown.Foo
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -41,6 +43,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: Foo
+  scopes:
+    - variable.other.unknown.Foo
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -59,12 +63,17 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: fooptr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.fooptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' Foo'
+- source: Foo
+  scopes:
+    - variable.other.unknown.Foo
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -78,6 +87,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: fooptr
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.fooptr
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -85,6 +97,8 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: Foo
+  scopes:
+    - variable.other.unknown.Foo
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round

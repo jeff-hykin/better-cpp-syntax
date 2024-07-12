@@ -74,6 +74,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution.template.definition
 - source: vector
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.vector
 - source: <
   scopesBegin:
     - meta.template.call
@@ -98,7 +101,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -165,7 +168,7 @@
     - meta.body.struct
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
