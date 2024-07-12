@@ -8276,15 +8276,20 @@
   scopes:
     - punctuation.terminator.statement
 - source: char
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: buf
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: '80'
@@ -8294,6 +8299,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:

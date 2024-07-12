@@ -141,16 +141,23 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: pipe
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.lower-case
-    - variable.other.unknown.pipe
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: m_pipe
   scopes:
     - variable.snake-case
@@ -167,6 +174,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

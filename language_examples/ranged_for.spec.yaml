@@ -3175,16 +3175,23 @@
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: storePath
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.camel-case
-    - variable.other.unknown.storePath
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: state
   scopes:
     - variable.lower-case
@@ -3212,6 +3219,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15270,26 +15279,39 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: PathSet
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.PathSet
+    - meta.qualified-type
+    - entity.name.type
 - source: context
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.context
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.lower-case
-    - variable.other.unknown.s
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: state
   scopes:
     - variable.lower-case
@@ -15351,6 +15373,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -15598,26 +15622,39 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: PathSet
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.PathSet
+    - meta.qualified-type
+    - entity.name.type
 - source: context
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.context
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.lower-case
-    - variable.other.unknown.s
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: state
   scopes:
     - variable.lower-case
@@ -15679,6 +15716,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -35966,16 +36005,23 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: st
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.lower-case
-    - variable.other.unknown.st
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: lstat
   scopes:
     - entity.name.function.call
@@ -35989,6 +36035,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -36005,12 +36053,18 @@
   scopesEnd:
     - comment.block
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: arg1
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.arg1
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -36038,12 +36092,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: arg2
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.arg2
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -36206,16 +36266,20 @@
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: args
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.args
-- source: ' []'
+    - variable.other.declare
+- source: '[]'
 - source: '{'
   scopesBegin:
     - meta.block
@@ -36242,17 +36306,24 @@
   scopes:
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
+    - meta.declaration
     - meta.block
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: res
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.res
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -40821,6 +40892,9 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
 - source: std
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -40829,15 +40903,20 @@
     - punctuation.separator.scope-resolution
 - source: string_view
   scopes:
-    - variable.snake-case
-    - variable.other.unknown.string_view
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: s1
+  scopesBegin:
+    - meta.assignment
   scopes:
     - variable.lower-case
-    - variable.other.unknown.s1
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: state
   scopes:
     - variable.lower-case
@@ -40959,6 +41038,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.assignment
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -45899,17 +45979,22 @@
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: res
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: args
@@ -45944,6 +46029,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -52448,17 +52534,22 @@
   scopesEnd:
     - comment.line.double-slash
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: vs
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: args
@@ -52493,6 +52584,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -54707,16 +54799,20 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: vs
   scopes:
+    - meta.declaration
     - variable.lower-case
-    - variable.other.unknown.vs
-- source: ' []'
+    - variable.other.declare
+- source: '[]'
 - source: '{'
   scopesBegin:
     - meta.block
@@ -54737,6 +54833,7 @@
   scopes:
     - punctuation.section.block.end.bracket.curly
   scopesEnd:
+    - meta.declaration
     - meta.block
 - source: ;
   scopes:
@@ -57615,10 +57712,11 @@
     - punctuation.terminator.statement
 - source: Value
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
+    - storage.modifier.pointer
 - source: vs
   scopes:
     - variable.lower-case
@@ -57657,12 +57755,18 @@
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: vBool
   scopes:
+    - meta.declaration
     - variable.camel-case
-    - variable.other.unknown.vBool
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -60468,14 +60572,19 @@
   scopes:
     - punctuation.terminator.statement
 - source: Value
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - variable.other.unknown.Value
+    - meta.qualified-type
+    - entity.name.type
 - source: lists
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: nrLists
@@ -60486,6 +60595,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -77625,6 +77735,7 @@
     - comment.block
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: code

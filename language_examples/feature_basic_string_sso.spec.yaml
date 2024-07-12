@@ -1451,14 +1451,18 @@
 - source: CharT
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
-    - variable.other.unknown.CharT
+    - meta.qualified-type
+    - entity.name.type
 - source: buf
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: _SSO_Cap
@@ -1468,6 +1472,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:

@@ -4925,6 +4925,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s_name_chars
@@ -5418,15 +5419,19 @@
 - source: char
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: first
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: '12'
@@ -5436,6 +5441,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -5499,13 +5505,8 @@
 - source: s_keywords
   scopes:
     - variable.snake-case
-    - variable.other.assignment
-- source: '['
-  scopes:
-    - punctuation.definition.begin.bracket.square.array.type
-- source: ']'
-  scopes:
-    - punctuation.definition.end.bracket.square.array.type
+    - variable.other.unknown.s_keywords
+- source: '[] '
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -7611,6 +7612,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s_punct_chars
@@ -7846,15 +7848,19 @@
 - source: char
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: first
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: '6'
@@ -7864,6 +7870,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -7927,13 +7934,8 @@
 - source: s_punctuators
   scopes:
     - variable.snake-case
-    - variable.other.assignment
-- source: '['
-  scopes:
-    - punctuation.definition.begin.bracket.square.array.type
-- source: ']'
-  scopes:
-    - punctuation.definition.end.bracket.square.array.type
+    - variable.other.unknown.s_punctuators
+- source: '[] '
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -12781,6 +12783,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s_digits
@@ -16017,6 +16020,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s_digits
@@ -18333,6 +18337,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: s_suffix_chars

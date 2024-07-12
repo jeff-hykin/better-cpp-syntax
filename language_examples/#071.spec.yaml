@@ -96,6 +96,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -391,6 +392,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -495,6 +497,9 @@
     - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
 - source: a
   scopes:
     - meta.declaration
@@ -523,18 +528,126 @@
   scopes:
     - punctuation.terminator.statement
 - source: usertype
-  scopesBegin:
-    - meta.declaration
   scopes:
     - meta.qualified-type
     - entity.name.type
 - source: user_value
   scopes:
+    - variable.snake-case
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: usertype
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: user_value
+  scopes:
+    - variable.snake-case
+    - variable.other.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.begin.bracket.square.array.type
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square.array.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: usertype
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: user_value
+  scopes:
     - meta.declaration
     - variable.snake-case
     - variable.other.declare
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
   scopesEnd:
     - meta.declaration
+    - meta.bracket.square.access
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -667,6 +780,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a

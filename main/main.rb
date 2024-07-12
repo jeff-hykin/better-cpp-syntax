@@ -1095,7 +1095,7 @@ grammar = Grammar.new(
         )
     )
     grammar[:simple_array_assignment] = Pattern.new(
-        Pattern.new(
+        qualified_type.maybe(ref_deref[]).then(std_space).then(
             generateVariableVariations["variable.other.assignment"],
         ).then(
             match: /\[/,
@@ -1128,7 +1128,7 @@ grammar = Grammar.new(
         match: Pattern.new(
             normal_type_pattern.then(std_space).then(
                 generateVariableVariations["variable.other.declare"],
-            ).then(std_space).lookAheadFor(/;|,/)
+            ).then(std_space).lookAheadFor(/;|,|\[/).lookAheadToAvoid(/[^=]++=/)
         )
     )
     grammar[:normal_variable_assignment] = PatternRange.new(
@@ -2325,7 +2325,7 @@ grammar = Grammar.new(
                         match: /\}/,
                         tag_as:  "punctuation.section.block.end.bracket.curly.lambda",
                     ),
-                includes: [ :$initial_context ]
+                includes: [ :function_body_context ]
             ),
         ]
     )
