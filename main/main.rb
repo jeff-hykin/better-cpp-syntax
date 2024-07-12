@@ -1026,7 +1026,7 @@ grammar = Grammar.new(
             "bore"
         ],
         should_not_partial_match: ["return", "static const"],
-        tag_as: "meta.qualified_type",
+        tag_as: "meta.qualified-type",
         match: Pattern.new(
             leading_space.maybe(
                 inline_attribute
@@ -1383,15 +1383,15 @@ grammar = Grammar.new(
         start_pattern: Pattern.new(
             std_space.then(
                 match: variableBounds[/static_assert|_Static_assert/],
-                tag_as: "keyword.other.static_assert",
+                tag_as: "keyword.other.static-assert",
             ).then(std_space).then(
                 match: /\(/,
-                tag_as: "punctuation.section.arguments.begin.bracket.round.static_assert",
+                tag_as: "punctuation.section.arguments.begin.bracket.round.static-assert",
             )
         ),
         end_pattern: Pattern.new(
             match: /\)/,
-            tag_as: "punctuation.section.arguments.end.bracket.round.static_assert",
+            tag_as: "punctuation.section.arguments.end.bracket.round.static-assert",
         ),
         includes: [
             # special handling for the assert message
@@ -1401,7 +1401,7 @@ grammar = Grammar.new(
                     tag_as: "punctuation.separator.delimiter.comma",
                 ).maybe(@spaces).lookAheadFor(maybe(Pattern.new(/L|u8|u|U/).maybe(@spaces).then(/\"/))),
                 end_pattern: lookAheadFor(/\)/),
-                tag_as: "meta.static_assert.message",
+                tag_as: "meta.static-assert.message",
                 includes: [
                     :string_context,
                 ]
